@@ -49,8 +49,9 @@ abstract contract TestSetup is Test {
         // 4. Grant Governor PROPOSER_ROLE on Timelock
         timelock.grantRole(timelock.PROPOSER_ROLE(), address(governor));
 
-        // 5. Grant board CANCELLER_ROLE on Timelock
+        // 5. Grant CANCELLER_ROLE on Timelock to both board and governor
         timelock.grantRole(timelock.CANCELLER_ROLE(), boardMultisig);
+        timelock.grantRole(timelock.CANCELLER_ROLE(), address(governor));
 
         // 6. DocumentRegistry
         docRegistry = new DocumentRegistry();
