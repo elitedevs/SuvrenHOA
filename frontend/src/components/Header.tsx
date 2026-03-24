@@ -59,6 +59,7 @@ export function Header() {
           {/* Wallet */}
           <div className="shrink-0">
             <ConnectButton
+              label="Sign In"
               showBalance={false}
               chainStatus="icon"
               accountStatus="avatar"

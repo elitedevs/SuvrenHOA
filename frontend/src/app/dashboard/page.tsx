@@ -12,8 +12,8 @@ export default function DashboardPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-gray-400 mb-4">Connect your wallet to view your property</p>
-        <ConnectButton />
+        <p className="text-gray-400 mb-4">Sign in to view your property</p>
+        <ConnectButton label="Sign In" />
       </div>
     );
   }

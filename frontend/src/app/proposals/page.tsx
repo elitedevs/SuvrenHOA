@@ -42,8 +42,8 @@ export default function ProposalsPage() {
 
       {!isConnected ? (
         <div className="flex flex-col items-center justify-center py-16">
-          <p className="text-gray-400 mb-4">Connect your wallet to participate in governance</p>
-          <ConnectButton />
+          <p className="text-gray-400 mb-4">Sign in to participate in governance</p>
+          <ConnectButton label="Sign In" />
         </div>
       ) : showCreate ? (
         <CreateProposal onClose={() => setShowCreate(false)} />

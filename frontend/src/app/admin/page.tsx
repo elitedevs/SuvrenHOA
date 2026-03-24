@@ -12,8 +12,8 @@ export default function AdminPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-gray-400 mb-4">Connect board wallet to access admin</p>
-        <ConnectButton />
+        <p className="text-gray-400 mb-4">Sign in with board wallet to access admin</p>
+        <ConnectButton label="Sign In" />
       </div>
     );
   }

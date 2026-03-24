@@ -40,7 +40,7 @@ function Landing() {
         </p>
 
         <div className="mb-12">
-          <ConnectButton />
+          <ConnectButton label="Sign In" />
         </div>
 
         {/* Stats */}
@@ -82,7 +82,11 @@ function Landing() {
             },
           ].map(({ icon, title, desc, color }) => (
             <div key={title} className="glass-card rounded-xl p-6 text-left group">
-              <div className={`w-12 h-12 rounded-xl bg-${color}-500/10 border border-${color}-500/20 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform`}>
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform ${
+                color === 'purple' ? 'bg-purple-500/10 border border-purple-500/20' :
+                color === 'green' ? 'bg-green-500/10 border border-green-500/20' :
+                'bg-blue-500/10 border border-blue-500/20'
+              }`}>
                 {icon}
               </div>
               <h3 className="font-semibold text-base mb-2">{title}</h3>
@@ -96,7 +100,7 @@ function Landing() {
           <h2 className="text-xl font-bold mb-6 gradient-text">How It Works</h2>
           <div className="space-y-4">
             {[
-              { step: '1', title: 'Connect Wallet', desc: 'Sign in with Coinbase Smart Wallet — just your email, no crypto knowledge needed' },
+              { step: '1', title: 'Sign In', desc: 'Use your email or Coinbase account — no crypto knowledge needed, no apps to install' },
               { step: '2', title: 'View Your Property', desc: 'See your lot, voting power, and dues status on your personal dashboard' },
               { step: '3', title: 'Participate', desc: 'Vote on proposals, pay dues in USDC, and verify community documents' },
               { step: '4', title: 'Full Transparency', desc: 'Every vote, every dollar, every document — permanently recorded and publicly verifiable' },
@@ -119,7 +123,7 @@ function Landing() {
           <p className="text-sm text-gray-300 mb-3">
             No management company needed. No monthly fees. Just transparent governance.
           </p>
-          <ConnectButton />
+          <ConnectButton label="Sign In" />
         </div>
       </div>
     </div>
