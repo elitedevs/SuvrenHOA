@@ -7,29 +7,7 @@ import Link from 'next/link';
 export default function Home() {
   const { isConnected } = useAccount();
 
-  return (
-    <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="border-b border-gray-800 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center font-bold text-sm">
-            F
-          </div>
-          <span className="text-lg font-semibold">SuvrenHOA</span>
-        </div>
-        <ConnectButton />
-      </header>
-
-      {/* Main */}
-      <main className="flex-1">
-        {isConnected ? (
-          <Dashboard />
-        ) : (
-          <Landing />
-        )}
-      </main>
-    </div>
-  );
+  return isConnected ? <Dashboard /> : <Landing />;
 }
 
 function Landing() {

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
+import { Header } from '@/components/Header';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -15,7 +16,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="dark">
       <body className={`${inter.variable} font-sans antialiased bg-gray-950 text-gray-100`}>
         <Providers>
-          {children}
+          <Header />
+          <main className="min-h-[calc(100vh-4rem)]">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>
