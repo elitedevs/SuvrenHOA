@@ -1,0 +1,9 @@
+services:
+  suvren-hoa:
+    build: .
+    container_name: suvren-hoa
+    restart: unless-stopped
+    ports:
+      - "3300:3000"
+    environment:
+      - NODE_ENV=production
