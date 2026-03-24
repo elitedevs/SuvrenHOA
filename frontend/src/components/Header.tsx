@@ -7,10 +7,13 @@ import { useAccount } from 'wagmi';
 
 const navItems = [
   { href: '/dashboard', label: 'My Property', icon: '🏠' },
+  { href: '/community', label: 'Community', icon: '💬' },
+  { href: '/announcements', label: 'News', icon: '📢' },
+  { href: '/maintenance', label: 'Maintenance', icon: '🔧' },
   { href: '/proposals', label: 'Proposals', icon: '🗳️' },
   { href: '/treasury', label: 'Treasury', icon: '💰' },
-  { href: '/documents', label: 'Documents', icon: '📄' },
-  { href: '/dues', label: 'Pay Dues', icon: '💳' },
+  { href: '/documents', label: 'Docs', icon: '📄' },
+  { href: '/dues', label: 'Dues', icon: '💳' },
   { href: '/admin', label: 'Admin', icon: '⚙️' },
 ];
 
