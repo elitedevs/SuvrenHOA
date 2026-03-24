@@ -19,36 +19,41 @@ export function Header() {
   const { isConnected } = useAccount();
 
   return (
-    <header className="glass border-b border-purple-500/5 sticky top-0 z-50">
+    <header className="glass border-b border-[rgba(139,92,246,0.08)] sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-14">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center font-bold text-xs text-white group-hover:shadow-[0_0_12px_rgba(139,92,246,0.4)] transition-shadow">
+          <Link
+            href="/"
+            className="flex items-center gap-3 shrink-0 group min-h-[44px]"
+            aria-label="SuvrenHOA home"
+          >
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-400 to-purple-700 flex items-center justify-center font-bold text-sm text-white group-hover:shadow-[0_0_16px_rgba(139,92,246,0.5)] transition-all duration-300 group-hover:scale-105">
               S
             </div>
-            <span className="text-base font-semibold hidden sm:block">
-              <span className="gradient-text">Suvren</span>
-              <span className="text-gray-400">HOA</span>
+            <span className="text-[15px] font-700 hidden sm:block tracking-tight">
+              <span className="gradient-text font-bold">Suvren</span>
+              <span className="text-gray-400 font-semibold">HOA</span>
             </span>
           </Link>
 
           {/* Desktop Nav */}
           {isConnected && (
-            <nav className="hidden md:flex items-center gap-0.5 mx-4">
+            <nav className="hidden md:flex items-center gap-1 mx-6" role="navigation" aria-label="Main navigation">
               {navItems.map(({ href, label, icon }) => {
                 const active = pathname === href || (href !== '/' && pathname.startsWith(href));
                 return (
                   <Link
                     key={href}
                     href={href}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
+                    className={`relative px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
                       active
-                        ? 'bg-purple-600/15 text-purple-400 shadow-[0_0_8px_rgba(139,92,246,0.1)]'
-                        : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.03]'
+                        ? 'nav-active text-purple-300 bg-purple-500/10'
+                        : 'text-gray-500 hover:text-gray-200 hover:bg-white/[0.04]'
                     }`}
+                    aria-current={active ? 'page' : undefined}
                   >
-                    <span className="text-[11px]">{icon}</span>
+                    <span className="text-[12px] opacity-80">{icon}</span>
                     {label}
                   </Link>
                 );
@@ -70,26 +75,31 @@ export function Header() {
 
       {/* Mobile Nav */}
       {isConnected && (
-        <div className="md:hidden border-t border-white/[0.03] overflow-x-auto scrollbar-none">
-          <div className="flex items-center gap-0.5 px-3 py-1.5 min-w-max">
+        <div className="md:hidden border-t border-[rgba(255,255,255,0.04)] overflow-x-auto scrollbar-none">
+          <nav
+            className="flex items-center gap-1 px-3 py-2 min-w-max"
+            role="navigation"
+            aria-label="Mobile navigation"
+          >
             {navItems.map(({ href, label, icon }) => {
               const active = pathname === href || (href !== '/' && pathname.startsWith(href));
               return (
                 <Link
                   key={href}
                   href={href}
-                  className={`px-2.5 py-1.5 rounded-lg text-[11px] font-medium whitespace-nowrap transition-all flex items-center gap-1 ${
+                  className={`relative px-3 py-2 rounded-lg text-[12px] font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
                     active
-                      ? 'bg-purple-600/15 text-purple-400'
+                      ? 'nav-active text-purple-300 bg-purple-500/10'
                       : 'text-gray-500 hover:text-gray-300'
                   }`}
+                  aria-current={active ? 'page' : undefined}
                 >
                   <span>{icon}</span>
                   {label}
                 </Link>
               );
             })}
-          </div>
+          </nav>
         </div>
       )}
     </header>

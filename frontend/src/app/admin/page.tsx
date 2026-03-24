@@ -11,26 +11,34 @@ export default function AdminPage() {
 
   if (!isConnected) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-gray-400 mb-4">Sign in with board wallet to access admin</p>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+        <div className="text-5xl mb-2">⚙️</div>
+        <p className="text-gray-400 text-base font-medium">Sign in with board wallet to access admin</p>
         <ConnectButton label="Sign In" />
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold">Board Administration</h1>
-        <p className="text-sm text-gray-400 mt-1">
-          Mint properties, manage roles, and register documents
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 page-enter">
+      {/* Header */}
+      <div className="mb-10">
+        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Board Access</p>
+        <h1 className="text-3xl font-extrabold tracking-tight">Administration</h1>
+        <p className="text-base text-gray-400 mt-2 font-medium">
+          Mint properties, manage roles, and register documents on-chain
         </p>
       </div>
 
-      <div className="space-y-6">
+      {/* Stats first */}
+      <CommunityStats />
+
+      <div className="h-8" />
+
+      {/* Admin tools */}
+      <div className="space-y-8">
         <MintPropertyCard />
         <RegisterDocumentCard />
-        <CommunityStats />
       </div>
     </div>
   );
@@ -61,78 +69,106 @@ function MintPropertyCard() {
   };
 
   return (
-    <div className="p-6 rounded-xl border border-gray-800 bg-gray-900/50">
-      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        🏠 Mint Property NFT
-      </h2>
+    <div className="glass-card rounded-2xl overflow-hidden border-l-2 border-l-purple-500/50">
+      {/* Section header */}
+      <div className="px-8 py-5 border-b border-gray-800/60 bg-purple-500/5">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-xl">
+            🏠
+          </div>
+          <div>
+            <h2 className="text-base font-bold text-gray-100">Mint Property NFT</h2>
+            <p className="text-xs text-gray-500 mt-0.5">Assign a soulbound property token to a homeowner wallet</p>
+          </div>
+        </div>
+      </div>
 
-      {isSuccess ? (
-        <div className="p-4 rounded-lg bg-green-950/20 border border-green-900/50 text-center">
-          <p className="text-green-400 font-medium">✅ Property #{lotNumber} minted!</p>
-          {hash && (
-            <a href={`https://sepolia.basescan.org/tx/${hash}`} target="_blank" rel="noopener noreferrer"
-              className="text-xs text-purple-400 hover:underline font-mono mt-2 block">
-              View transaction →
-            </a>
-          )}
-        </div>
-      ) : (
-        <div className="space-y-3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="text-xs text-gray-400 mb-1 block">Owner Wallet Address</label>
-              <input
-                type="text"
-                value={owner}
-                onChange={(e) => setOwner(e.target.value)}
-                placeholder="0x..."
-                className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label className="text-xs text-gray-400 mb-1 block">Lot Number</label>
-              <input
-                type="number"
-                value={lotNumber}
-                onChange={(e) => setLotNumber(e.target.value)}
-                placeholder="1-150"
-                className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none"
-              />
-            </div>
+      <div className="px-8 py-7">
+        {isSuccess ? (
+          <div className="glass-card-success rounded-xl p-6 text-center border-l-2 border-l-green-500/50">
+            <div className="text-3xl mb-3">✅</div>
+            <p className="text-green-400 font-bold text-base mb-1">Property #{lotNumber} Minted!</p>
+            {hash && (
+              <a
+                href={`https://sepolia.basescan.org/tx/${hash}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-purple-400 hover:underline font-mono"
+              >
+                View transaction →
+              </a>
+            )}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="text-xs text-gray-400 mb-1 block">Street Address</label>
-              <input
-                type="text"
-                value={streetAddress}
-                onChange={(e) => setStreetAddress(e.target.value)}
-                placeholder="123 Faircroft Dr"
-                className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none"
-              />
+        ) : (
+          <div className="space-y-5">
+            {/* Row 1 */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                  Owner Wallet Address
+                </label>
+                <input
+                  type="text"
+                  value={owner}
+                  onChange={(e) => setOwner(e.target.value)}
+                  placeholder="0x..."
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-200 min-h-[52px]"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                  Lot Number
+                </label>
+                <input
+                  type="number"
+                  value={lotNumber}
+                  onChange={(e) => setLotNumber(e.target.value)}
+                  placeholder="1–150"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100 min-h-[52px]"
+                />
+              </div>
             </div>
-            <div>
-              <label className="text-xs text-gray-400 mb-1 block">Square Footage</label>
-              <input
-                type="number"
-                value={sqft}
-                onChange={(e) => setSqft(e.target.value)}
-                placeholder="2500"
-                className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none"
-              />
+
+            {/* Row 2 */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                  Street Address
+                </label>
+                <input
+                  type="text"
+                  value={streetAddress}
+                  onChange={(e) => setStreetAddress(e.target.value)}
+                  placeholder="123 Faircroft Dr"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100 min-h-[52px]"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                  Square Footage
+                </label>
+                <input
+                  type="number"
+                  value={sqft}
+                  onChange={(e) => setSqft(e.target.value)}
+                  placeholder="2500"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100 min-h-[52px]"
+                />
+              </div>
             </div>
+
+            <button
+              onClick={handleMint}
+              disabled={isPending || isConfirming || !owner || !lotNumber || !streetAddress}
+              className="w-full py-4 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(139,92,246,0.15)] hover:shadow-[0_0_28px_rgba(139,92,246,0.28)] min-h-[52px]"
+            >
+              {isPending ? '⏳ Confirm in Wallet...' :
+               isConfirming ? '⛓️ Minting...' :
+               '🏠 Mint Property NFT'}
+            </button>
           </div>
-          <button
-            onClick={handleMint}
-            disabled={isPending || isConfirming || !owner || !lotNumber || !streetAddress}
-            className="w-full py-2.5 rounded-lg bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-colors"
-          >
-            {isPending ? '⏳ Confirm in Wallet...' :
-             isConfirming ? '⛓️ Minting...' :
-             'Mint Property'}
-          </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
@@ -171,97 +207,126 @@ function RegisterDocumentCard() {
         ipfsCid,
         docType,
         title,
-        BigInt(0), // supersedes: none
+        BigInt(0),
       ],
     });
   };
 
   return (
-    <div className="p-6 rounded-xl border border-gray-800 bg-gray-900/50">
-      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        📄 Register Document
-      </h2>
-
-      {isSuccess ? (
-        <div className="p-4 rounded-lg bg-green-950/20 border border-green-900/50 text-center">
-          <p className="text-green-400 font-medium">✅ Document registered on-chain!</p>
-          {hash && (
-            <a href={`https://sepolia.basescan.org/tx/${hash}`} target="_blank" rel="noopener noreferrer"
-              className="text-xs text-purple-400 hover:underline font-mono mt-2 block">
-              View transaction →
-            </a>
-          )}
-        </div>
-      ) : (
-        <div className="space-y-3">
+    <div className="glass-card rounded-2xl overflow-hidden border-l-2 border-l-blue-500/50">
+      {/* Section header */}
+      <div className="px-8 py-5 border-b border-gray-800/60 bg-blue-500/5">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-xl">
+            📄
+          </div>
           <div>
-            <label className="text-xs text-gray-400 mb-1 block">Document File (computes SHA-256 hash)</label>
-            <input
-              type="file"
-              onChange={handleFileSelect}
-              className="w-full text-sm text-gray-400 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gray-800 file:text-gray-300 file:text-sm hover:file:bg-gray-700 file:cursor-pointer"
-            />
-            {fileHash && (
-              <p className="text-[10px] font-mono text-gray-500 mt-1 break-all">Hash: {fileHash}</p>
+            <h2 className="text-base font-bold text-gray-100">Register Document</h2>
+            <p className="text-xs text-gray-500 mt-0.5">Record an immutable document hash on-chain</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-8 py-7">
+        {isSuccess ? (
+          <div className="glass-card-success rounded-xl p-6 text-center border-l-2 border-l-green-500/50">
+            <div className="text-3xl mb-3">✅</div>
+            <p className="text-green-400 font-bold text-base mb-1">Document Registered On-Chain!</p>
+            {hash && (
+              <a
+                href={`https://sepolia.basescan.org/tx/${hash}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-purple-400 hover:underline font-mono"
+              >
+                View transaction →
+              </a>
             )}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        ) : (
+          <div className="space-y-5">
+            {/* File upload */}
             <div>
-              <label className="text-xs text-gray-400 mb-1 block">Document Title</label>
+              <label className="block text-sm font-semibold text-gray-300 mb-2">
+                Document File <span className="text-gray-500 font-normal">(computes SHA-256 hash locally)</span>
+              </label>
               <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Faircroft CC&Rs 2026"
-                className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none"
+                type="file"
+                onChange={handleFileSelect}
+                className="w-full text-sm text-gray-400 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:bg-gray-800 file:text-gray-300 file:text-sm file:font-semibold hover:file:bg-gray-700 file:cursor-pointer file:transition-colors"
               />
+              {fileHash && (
+                <div className="mt-2 px-3 py-2 rounded-lg bg-green-500/5 border border-green-500/15">
+                  <p className="text-[10px] text-green-400 font-semibold uppercase tracking-wide mb-0.5">Hash computed ✓</p>
+                  <p className="text-[10px] font-mono text-gray-500 break-all">{fileHash}</p>
+                </div>
+              )}
             </div>
-            <div>
-              <label className="text-xs text-gray-400 mb-1 block">Type</label>
-              <select
-                value={docType}
-                onChange={(e) => setDocType(Number(e.target.value))}
-                className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none"
-              >
-                {docTypes.map((t, i) => (
-                  <option key={i} value={i}>{t}</option>
-                ))}
-              </select>
+
+            {/* Title + Type */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">Document Title</label>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Faircroft CC&Rs 2026"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100 min-h-[52px]"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">Document Type</label>
+                <select
+                  value={docType}
+                  onChange={(e) => setDocType(Number(e.target.value))}
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100 min-h-[52px] appearance-none"
+                >
+                  {docTypes.map((t, i) => (
+                    <option key={i} value={i}>{t}</option>
+                  ))}
+                </select>
+              </div>
             </div>
+
+            {/* Arweave + IPFS */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">Arweave TX ID</label>
+                <input
+                  type="text"
+                  value={arweaveTxId}
+                  onChange={(e) => setArweaveTxId(e.target.value)}
+                  placeholder="arweave-transaction-id"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-200 min-h-[52px]"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-300 mb-2">
+                  IPFS CID <span className="text-gray-600 font-normal">(optional)</span>
+                </label>
+                <input
+                  type="text"
+                  value={ipfsCid}
+                  onChange={(e) => setIpfsCid(e.target.value)}
+                  placeholder="bafybei..."
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-200 min-h-[52px]"
+                />
+              </div>
+            </div>
+
+            <button
+              onClick={handleRegister}
+              disabled={isPending || isConfirming || !fileHash || !arweaveTxId || !title}
+              className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_28px_rgba(59,130,246,0.25)] min-h-[52px]"
+            >
+              {isPending ? '⏳ Confirm in Wallet...' :
+               isConfirming ? '⛓️ Registering...' :
+               '📄 Register Document On-Chain'}
+            </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="text-xs text-gray-400 mb-1 block">Arweave TX ID</label>
-              <input
-                type="text"
-                value={arweaveTxId}
-                onChange={(e) => setArweaveTxId(e.target.value)}
-                placeholder="arweave-transaction-id"
-                className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label className="text-xs text-gray-400 mb-1 block">IPFS CID (optional)</label>
-              <input
-                type="text"
-                value={ipfsCid}
-                onChange={(e) => setIpfsCid(e.target.value)}
-                placeholder="bafybei..."
-                className="w-full px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none"
-              />
-            </div>
-          </div>
-          <button
-            onClick={handleRegister}
-            disabled={isPending || isConfirming || !fileHash || !arweaveTxId || !title}
-            className="w-full py-2.5 rounded-lg bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-colors"
-          >
-            {isPending ? '⏳ Confirm in Wallet...' :
-             isConfirming ? '⛓️ Registering...' :
-             'Register Document On-Chain'}
-          </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
@@ -269,27 +334,56 @@ function RegisterDocumentCard() {
 function CommunityStats() {
   const { totalSupply } = useProperty();
 
+  const stats = [
+    { value: totalSupply, label: 'Properties Minted', color: 'text-purple-400', icon: '🏠' },
+    { value: 150, label: 'Max Lots', color: 'text-blue-400', icon: '📍' },
+    { value: totalSupply, label: 'Total Votes', color: 'text-green-400', icon: '🗳️' },
+    { value: 150 - totalSupply, label: 'Lots Remaining', color: 'text-amber-400', icon: '🔓' },
+  ];
+
+  // Progress bar
+  const fillPct = totalSupply > 0 ? (totalSupply / 150) * 100 : 0;
+
   return (
-    <div className="p-6 rounded-xl border border-gray-800 bg-gray-900/50">
-      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        📊 Community Overview
-      </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-3 rounded-lg bg-gray-800/50 text-center">
-          <p className="text-xl font-bold text-purple-400">{totalSupply}</p>
-          <p className="text-[10px] text-gray-500">Properties Minted</p>
+    <div className="glass-card rounded-2xl overflow-hidden border-l-2 border-l-amber-500/50">
+      {/* Section header */}
+      <div className="px-8 py-5 border-b border-gray-800/60 bg-amber-500/5">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xl">
+            📊
+          </div>
+          <div>
+            <h2 className="text-base font-bold text-gray-100">Community Overview</h2>
+            <p className="text-xs text-gray-500 mt-0.5">Real-time stats from the PropertyNFT contract</p>
+          </div>
         </div>
-        <div className="p-3 rounded-lg bg-gray-800/50 text-center">
-          <p className="text-xl font-bold text-blue-400">150</p>
-          <p className="text-[10px] text-gray-500">Max Lots</p>
+      </div>
+
+      <div className="px-8 py-7">
+        {/* Stats grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+          {stats.map(({ value, label, color, icon }) => (
+            <div key={label} className="glass-card rounded-xl p-5 text-center">
+              <p className="text-xl mb-2">{icon}</p>
+              <p className={`text-2xl font-extrabold ${color} mb-1`}>{value}</p>
+              <p className="text-[11px] text-gray-500 font-semibold uppercase tracking-wide">{label}</p>
+            </div>
+          ))}
         </div>
-        <div className="p-3 rounded-lg bg-gray-800/50 text-center">
-          <p className="text-xl font-bold text-green-400">{totalSupply}</p>
-          <p className="text-[10px] text-gray-500">Total Votes</p>
-        </div>
-        <div className="p-3 rounded-lg bg-gray-800/50 text-center">
-          <p className="text-xl font-bold text-amber-400">{150 - totalSupply}</p>
-          <p className="text-[10px] text-gray-500">Lots Remaining</p>
+
+        {/* Fill gauge */}
+        <div>
+          <div className="flex justify-between text-xs text-gray-500 font-medium mb-2">
+            <span>Community Filled</span>
+            <span className="text-amber-400 font-bold">{fillPct.toFixed(0)}%</span>
+          </div>
+          <div className="progress-bar-track">
+            <div
+              className="progress-bar-fill bg-gradient-to-r from-amber-600 to-amber-400"
+              style={{ width: `${fillPct}%` }}
+            />
+          </div>
+          <p className="text-xs text-gray-600 mt-1">{totalSupply} of 150 lots minted</p>
         </div>
       </div>
     </div>

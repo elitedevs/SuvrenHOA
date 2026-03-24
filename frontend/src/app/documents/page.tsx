@@ -26,21 +26,22 @@ export default function DocumentsPage() {
   }, []);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
-          <h1 className="text-2xl font-bold">Documents</h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Community Records</p>
+          <h1 className="text-3xl font-extrabold tracking-tight">Documents</h1>
+          <p className="text-base text-gray-400 mt-2 font-medium">
             Immutable community records — verified on-chain, stored permanently on Arweave
           </p>
         </div>
         <button
           onClick={() => setVerifyMode(!verifyMode)}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all shrink-0 ${
+          className={`px-5 py-3 rounded-xl text-sm font-bold transition-all duration-200 shrink-0 min-h-[44px] ${
             verifyMode
-              ? 'bg-purple-600 text-white'
-              : 'border border-gray-700 text-gray-300 hover:border-purple-500/50 hover:text-white'
+              ? 'bg-purple-600 text-white shadow-[0_0_20px_rgba(139,92,246,0.25)]'
+              : 'border border-gray-700/60 text-gray-300 hover:border-purple-500/40 hover:text-white hover:bg-white/[0.03]'
           }`}
         >
           {verifyMode ? '← Back to Documents' : '🔍 Verify Document'}
@@ -58,53 +59,48 @@ export default function DocumentsPage() {
       ) : (
         <>
           {/* Stats Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-            <div className="p-4 rounded-xl border border-gray-800 bg-gray-900/50">
-              <p className="text-2xl font-bold text-purple-400">{documentCount}</p>
-              <p className="text-xs text-gray-500">Total Documents</p>
-            </div>
-            <div className="p-4 rounded-xl border border-gray-800 bg-gray-900/50">
-              <p className="text-2xl font-bold text-green-400">✓</p>
-              <p className="text-xs text-gray-500">All Verified</p>
-            </div>
-            <div className="p-4 rounded-xl border border-gray-800 bg-gray-900/50">
-              <p className="text-2xl font-bold text-blue-400">∞</p>
-              <p className="text-xs text-gray-500">Permanent Storage</p>
-            </div>
-            <div className="p-4 rounded-xl border border-gray-800 bg-gray-900/50">
-              <p className="text-2xl font-bold text-amber-400">0</p>
-              <p className="text-xs text-gray-500">Can Be Altered</p>
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 page-enter page-enter-delay-1">
+            {[
+              { value: documentCount, label: 'Total Documents', color: 'text-purple-400' },
+              { value: '✓', label: 'All Verified', color: 'text-green-400' },
+              { value: '∞', label: 'Permanent Storage', color: 'text-blue-400' },
+              { value: '0', label: 'Can Be Altered', color: 'text-amber-400' },
+            ].map(({ value, label, color }) => (
+              <div key={label} className="glass-card rounded-2xl p-6">
+                <p className={`text-3xl font-extrabold ${color} mb-1`}>{value}</p>
+                <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide">{label}</p>
+              </div>
+            ))}
           </div>
 
           {/* Filters */}
-          <div className="flex flex-col sm:flex-row gap-3 mb-4">
+          <div className="flex flex-col sm:flex-row gap-3 mb-6 page-enter page-enter-delay-2">
             <input
               type="text"
               placeholder="Search documents..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-800 text-sm placeholder-gray-500 focus:border-purple-500/50 focus:outline-none transition-colors"
+              className="flex-1 px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100"
             />
             <div className="flex gap-2 overflow-x-auto pb-1">
               <button
                 onClick={() => setSelectedType(null)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+                className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all min-h-[44px] ${
                   selectedType === null
                     ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30'
-                    : 'text-gray-400 border border-gray-800 hover:border-gray-700'
+                    : 'text-gray-400 border border-gray-700/60 hover:border-gray-600/60 hover:text-gray-300'
                 }`}
               >
-                All
+                All Types
               </button>
               {Object.entries(DOC_TYPE_LABELS).map(([key, label]) => (
                 <button
                   key={key}
                   onClick={() => setSelectedType(Number(key))}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+                  className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all min-h-[44px] ${
                     selectedType === Number(key)
                       ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30'
-                      : 'text-gray-400 border border-gray-800 hover:border-gray-700'
+                      : 'text-gray-400 border border-gray-700/60 hover:border-gray-600/60 hover:text-gray-300'
                   }`}
                 >
                   {label}
@@ -115,24 +111,32 @@ export default function DocumentsPage() {
 
           {/* Document List */}
           {documentCount === 0 ? (
-            <div className="p-12 rounded-xl border border-gray-800 bg-gray-900/50 text-center">
-              <div className="text-5xl mb-4">📄</div>
-              <h3 className="text-lg font-medium mb-2">No documents registered yet</h3>
-              <p className="text-sm text-gray-400 max-w-md mx-auto">
+            <div className="glass-card rounded-2xl p-14 text-center page-enter page-enter-delay-3">
+              <div className="w-20 h-20 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-4xl mx-auto mb-6">
+                📄
+              </div>
+              <h3 className="text-xl font-bold mb-3">No documents registered yet</h3>
+              <p className="text-sm text-gray-400 max-w-md mx-auto leading-relaxed mb-6">
                 CC&Rs, meeting minutes, budgets, and all governing documents will appear here
                 once registered on-chain. Every document is permanently stored and verifiable.
               </p>
-              <div className="mt-6 p-4 rounded-lg bg-purple-950/20 border border-purple-900/30 max-w-sm mx-auto">
-                <p className="text-xs text-purple-400">
+              <div className="glass-card rounded-xl p-5 max-w-sm mx-auto border-l-2 border-l-purple-500/40 bg-purple-950/10">
+                <p className="text-xs text-purple-300 leading-relaxed">
                   🔒 Unlike traditional HOA software, documents stored here cannot be altered,
-                  deleted, or selectively shared by anyone — not even the board.
+                  deleted, or selectively shared — not even by the board.
                 </p>
               </div>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-3 page-enter page-enter-delay-3">
               {Array.from({ length: documentCount }, (_, i) => (
-                <DocumentCard key={i} docId={i} getTypeLabel={getTypeLabel} getTypeColor={getTypeColor} getTypeIcon={getTypeIcon} />
+                <DocumentCard
+                  key={i}
+                  docId={i}
+                  getTypeLabel={getTypeLabel}
+                  getTypeColor={getTypeColor}
+                  getTypeIcon={getTypeIcon}
+                />
               ))}
             </div>
           )}
@@ -141,6 +145,16 @@ export default function DocumentsPage() {
     </div>
   );
 }
+
+const TYPE_LEFT_BORDERS: Record<string, string> = {
+  purple: 'border-l-purple-500/60',
+  green: 'border-l-green-500/60',
+  blue: 'border-l-blue-500/60',
+  amber: 'border-l-amber-500/60',
+  red: 'border-l-red-500/60',
+  cyan: 'border-l-cyan-500/60',
+  pink: 'border-l-pink-500/60',
+};
 
 function DocumentCard({
   docId,
@@ -158,71 +172,81 @@ function DocumentCard({
 
   if (isLoading || !doc) {
     return (
-      <div className="p-4 rounded-xl border border-gray-800 bg-gray-900/50 animate-pulse">
-        <div className="h-5 bg-gray-800 rounded w-1/3 mb-2" />
-        <div className="h-3 bg-gray-800 rounded w-1/2" />
+      <div className="glass-card rounded-2xl p-6">
+        <div className="flex items-center gap-4">
+          <div className="skeleton w-12 h-12 rounded-xl" />
+          <div className="flex-1 space-y-2">
+            <div className="skeleton h-4 rounded w-1/3" />
+            <div className="skeleton h-3 rounded w-1/2" />
+          </div>
+        </div>
       </div>
     );
   }
 
   const color = getTypeColor(doc.docType);
+  const leftBorder = TYPE_LEFT_BORDERS[color] || 'border-l-purple-500/60';
   const date = new Date(doc.timestamp * 1000);
 
   return (
     <div
-      className="p-4 rounded-xl border border-gray-800 bg-gray-900/50 hover:border-gray-700 transition-all cursor-pointer"
+      className={`glass-card rounded-2xl p-6 cursor-pointer border-l-2 ${leftBorder}`}
       onClick={() => setExpanded(!expanded)}
     >
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-4">
         {/* Type Icon */}
-        <div className={`w-10 h-10 rounded-lg bg-${color}-500/10 border border-${color}-500/20 flex items-center justify-center text-lg shrink-0`}>
+        <div className={`w-12 h-12 rounded-xl bg-${color}-500/10 border border-${color}-500/20 flex items-center justify-center text-xl shrink-0`}>
           {getTypeIcon(doc.docType)}
         </div>
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="font-medium text-sm">{doc.title}</h3>
-            <span className={`text-[10px] px-1.5 py-0.5 rounded bg-${color}-500/10 text-${color}-400 border border-${color}-500/20`}>
+          <div className="flex items-center gap-2 flex-wrap mb-1">
+            <h3 className="font-bold text-base text-gray-100">{doc.title}</h3>
+            <span className={`text-[11px] px-2 py-0.5 rounded-lg bg-${color}-500/10 text-${color}-400 border border-${color}-500/20 font-semibold`}>
               {getTypeLabel(doc.docType)}
             </span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-green-500/10 text-green-400 border border-green-500/20">
+            <span className="text-[11px] px-2 py-0.5 rounded-lg bg-green-500/10 text-green-400 border border-green-500/20 font-semibold">
               ✓ Verified
             </span>
             {doc.supersedes > 0 && (
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400">
+              <span className="text-[11px] px-2 py-0.5 rounded-lg bg-amber-500/10 text-amber-400 font-semibold">
                 Supersedes #{doc.supersedes}
               </span>
             )}
           </div>
-          <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
-            <span>{date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-            <span>•</span>
+          <div className="flex items-center gap-3 text-xs text-gray-500">
+            <span className="font-medium">
+              {date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </span>
+            <span className="text-gray-700">·</span>
             <span className="font-mono">{doc.uploadedBy.slice(0, 6)}...{doc.uploadedBy.slice(-4)}</span>
           </div>
         </div>
 
         {/* Expand indicator */}
-        <span className={`text-gray-500 transition-transform ${expanded ? 'rotate-180' : ''}`}>
+        <span className={`text-gray-500 transition-transform duration-200 text-sm shrink-0 ${expanded ? 'rotate-180' : ''}`}>
           ▾
         </span>
       </div>
 
       {/* Expanded details */}
       {expanded && (
-        <div className="mt-4 pt-4 border-t border-gray-800 space-y-3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="mt-5 pt-5 border-t border-gray-800/60 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Content Hash (SHA-256)</p>
-              <p className="text-xs font-mono text-gray-300 break-all bg-gray-800/50 p-2 rounded">{doc.contentHash}</p>
+              <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mb-2">Content Hash (SHA-256)</p>
+              <p className="text-xs font-mono text-gray-300 break-all bg-gray-800/50 p-3 rounded-xl border border-gray-700/40">
+                {doc.contentHash}
+              </p>
             </div>
             <div>
-              <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Arweave TX</p>
+              <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mb-2">Arweave TX</p>
               <a
                 href={`https://arweave.net/${doc.arweaveTxId}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-mono text-purple-400 hover:underline break-all"
+                className="text-xs font-mono text-purple-400 hover:text-purple-300 hover:underline break-all"
                 onClick={(e) => e.stopPropagation()}
               >
                 {doc.arweaveTxId || '—'}
@@ -231,16 +255,16 @@ function DocumentCard({
           </div>
           {doc.ipfsCid && (
             <div>
-              <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">IPFS CID</p>
+              <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mb-2">IPFS CID</p>
               <p className="text-xs font-mono text-gray-300 break-all">{doc.ipfsCid}</p>
             </div>
           )}
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <a
               href={`https://arweave.net/${doc.arweaveTxId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-lg bg-purple-600/10 border border-purple-500/20 text-xs text-purple-400 hover:bg-purple-600/20 transition-colors"
+              className="px-4 py-2.5 rounded-xl bg-purple-600/10 border border-purple-500/20 text-xs text-purple-400 hover:bg-purple-600/20 transition-colors font-semibold min-h-[44px] flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
               📥 Download from Arweave
@@ -249,7 +273,7 @@ function DocumentCard({
               href={`https://sepolia.basescan.org/address/${doc.uploadedBy}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-lg bg-gray-800 border border-gray-700 text-xs text-gray-400 hover:text-gray-300 transition-colors"
+              className="px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 text-xs text-gray-400 hover:text-gray-300 transition-colors font-semibold min-h-[44px] flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
               🔗 View on Basescan
@@ -275,55 +299,76 @@ function VerifyPanel({
   setDragOver: (v: boolean) => void;
 }) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 page-enter">
       {/* Drop Zone */}
       <div
         onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
         onDragLeave={() => setDragOver(false)}
         onDrop={onDrop}
-        className={`p-12 rounded-xl border-2 border-dashed text-center transition-all ${
+        className={`p-14 rounded-2xl border-2 border-dashed text-center transition-all duration-300 cursor-pointer ${
           dragOver
-            ? 'border-purple-500 bg-purple-950/20'
-            : 'border-gray-700 bg-gray-900/50 hover:border-gray-600'
+            ? 'border-purple-400 bg-purple-950/30 shadow-[0_0_40px_rgba(139,92,246,0.2)]'
+            : 'drop-zone-idle border-gray-600/40 bg-gray-900/30 hover:border-purple-500/40 hover:bg-purple-950/10'
         }`}
       >
-        <div className="text-4xl mb-3">📄</div>
-        <h3 className="text-lg font-medium mb-2">Drop a file to verify</h3>
-        <p className="text-sm text-gray-400">
+        <div className={`w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-3xl mx-auto mb-5 transition-transform duration-300 ${dragOver ? 'scale-110' : ''}`}>
+          📄
+        </div>
+        <h3 className="text-xl font-bold mb-2 text-gray-100">Drop a file to verify</h3>
+        <p className="text-sm text-gray-400 max-w-sm mx-auto leading-relaxed">
           We&apos;ll compute the SHA-256 hash and check it against the on-chain registry.
-          The file never leaves your device.
+          <br />
+          <span className="text-gray-500">The file never leaves your device.</span>
         </p>
       </div>
 
-      {/* Or paste hash */}
-      <div className="text-center text-xs text-gray-500">— or paste a SHA-256 hash —</div>
+      {/* Divider */}
+      <div className="flex items-center gap-4">
+        <div className="flex-1 h-px bg-gray-800" />
+        <span className="text-xs text-gray-500 font-medium">or paste a hash</span>
+        <div className="flex-1 h-px bg-gray-800" />
+      </div>
 
+      {/* Hash input */}
       <input
         type="text"
         placeholder="0x..."
         value={hash}
         onChange={(e) => setHash(e.target.value)}
-        className="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none transition-colors"
+        className="w-full px-4 py-4 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-200"
       />
 
+      {/* Hash result placeholder */}
       {hash && (
-        <div className="p-6 rounded-xl border border-gray-800 bg-gray-900/50">
-          <p className="text-xs text-gray-500 mb-2">Hash to verify:</p>
-          <p className="text-xs font-mono text-gray-300 break-all mb-4">{hash}</p>
-          {/* TODO: Call verifyDocument on-chain */}
-          <p className="text-sm text-gray-400">Checking on-chain registry...</p>
+        <div className="glass-card rounded-2xl p-6">
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Hash to verify</p>
+          <p className="text-xs font-mono text-gray-300 break-all bg-gray-800/50 p-3 rounded-xl border border-gray-700/40 mb-4">{hash}</p>
+          <div className="flex items-center gap-2 text-sm text-gray-400">
+            <div className="w-4 h-4 border-2 border-purple-500/40 border-t-purple-500 rounded-full animate-spin" />
+            Checking on-chain registry...
+          </div>
         </div>
       )}
 
-      <div className="p-4 rounded-lg bg-purple-950/20 border border-purple-900/30">
-        <h4 className="text-sm font-medium text-purple-400 mb-1">How verification works</h4>
-        <ol className="text-xs text-gray-400 space-y-1 list-decimal list-inside">
-          <li>Drop the document file (PDF, spreadsheet, etc.)</li>
-          <li>Your browser computes the SHA-256 hash locally</li>
-          <li>We check if that hash exists in the on-chain DocumentRegistry</li>
-          <li>If it matches → the document is authentic and unaltered</li>
-          <li>If it doesn&apos;t match → the file has been modified or isn&apos;t registered</li>
-        </ol>
+      {/* How it works */}
+      <div className="glass-card rounded-2xl p-6 border-l-2 border-l-purple-500/40 bg-purple-950/10">
+        <h4 className="text-sm font-bold text-purple-300 mb-3">How verification works</h4>
+        <div className="space-y-3">
+          {[
+            { n: 1, text: 'Drop the document file (PDF, spreadsheet, etc.)' },
+            { n: 2, text: 'Your browser computes the SHA-256 hash locally' },
+            { n: 3, text: 'We check if that hash exists in the on-chain DocumentRegistry' },
+            { n: 4, text: 'If it matches → the document is authentic and unaltered ✓' },
+            { n: 5, text: "If it doesn't match → the file has been modified or isn't registered" },
+          ].map(({ n, text }) => (
+            <div key={n} className="flex gap-3 items-start">
+              <div className="w-5 h-5 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-[10px] font-bold text-purple-400 shrink-0 mt-0.5">
+                {n}
+              </div>
+              <p className="text-xs text-gray-400 leading-relaxed">{text}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

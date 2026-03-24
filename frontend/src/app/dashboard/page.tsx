@@ -11,8 +11,9 @@ export default function DashboardPage() {
 
   if (!isConnected) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-gray-400 mb-4">Sign in to view your property</p>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+        <div className="text-5xl mb-2">🏠</div>
+        <p className="text-gray-400 text-base font-medium">Sign in to view your property</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -36,113 +37,184 @@ function PropertyDashboard() {
 
   if (!hasProperty) {
     return (
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        <h1 className="text-2xl font-bold mb-6">My Property</h1>
-        <div className="p-8 rounded-xl border border-gray-800 bg-gray-900/50 text-center">
-          <p className="text-4xl mb-4">🏠</p>
-          <h3 className="text-lg font-medium mb-2">No Property Found</h3>
-          <p className="text-gray-400 text-sm max-w-md mx-auto">
+      <div className="max-w-4xl mx-auto px-6 py-12 page-enter">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">My Property</p>
+            <h1 className="text-3xl font-extrabold">Property Not Found</h1>
+          </div>
+        </div>
+
+        {/* Empty state */}
+        <div className="glass-card rounded-2xl p-12 text-center border-l-2 border-l-amber-500/40">
+          <div className="w-20 h-20 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-4xl mx-auto mb-6">
+            🏠
+          </div>
+          <h3 className="text-xl font-bold mb-3 text-gray-100">No Property NFT Detected</h3>
+          <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed mb-6">
             Your wallet doesn&apos;t hold a Faircroft Property NFT.
             If you&apos;re a homeowner, contact the board to have your property minted.
           </p>
-          <p className="text-xs text-gray-500 mt-4 font-mono">{address}</p>
+          <div className="inline-block px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60">
+            <p className="text-xs text-gray-500 font-mono">{address}</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-8">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">My Property</h1>
-        <span className="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">
-          Lot #{tokenId}
-        </span>
+    <div className="max-w-4xl mx-auto px-6 py-10 page-enter">
+      {/* Page header */}
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">My Property</p>
+          <h1 className="text-3xl font-extrabold tracking-tight">
+            Property Profile
+          </h1>
+        </div>
+        <div className="px-4 py-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
+          <span className="text-sm font-bold text-purple-300">Lot #{tokenId}</span>
+        </div>
       </div>
 
-      {/* Property Info */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <div className="p-6 rounded-xl border border-gray-800 bg-gray-900/50">
-          <h3 className="text-sm text-gray-400 mb-1">Address</h3>
-          <p className="text-lg font-medium">
-            {propertyInfo?.streetAddress || 'Loading...'}
+      {/* Property Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+
+        {/* Address Card */}
+        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-purple-500/50 page-enter page-enter-delay-1">
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Property Address</p>
+          <p className="text-2xl font-bold text-gray-100 leading-snug mb-2">
+            {propertyInfo?.streetAddress || (
+              <span className="skeleton inline-block w-40 h-6 rounded-lg" />
+            )}
           </p>
           {propertyInfo?.squareFootage && (
-            <p className="text-xs text-gray-500 mt-1">
-              {Number(propertyInfo.squareFootage).toLocaleString()} sq ft
-            </p>
+            <div className="flex items-center gap-2 mt-3">
+              <span className="text-xs text-gray-500">📐</span>
+              <p className="text-sm text-gray-500 font-medium">
+                {Number(propertyInfo.squareFootage).toLocaleString()} sq ft
+              </p>
+            </div>
           )}
         </div>
 
-        <div className="p-6 rounded-xl border border-gray-800 bg-gray-900/50">
-          <h3 className="text-sm text-gray-400 mb-1">Voting Power</h3>
-          <p className="text-3xl font-bold text-purple-400">{votes}</p>
-          <p className="text-xs text-gray-500 mt-1">
-            of {totalSupply} total votes in community
-          </p>
+        {/* Voting Power — BIG number */}
+        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-blue-500/50 page-enter page-enter-delay-1">
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Voting Power</p>
+          <div className="flex items-end gap-3 mb-2">
+            <p className="text-6xl font-black text-purple-400 leading-none">{votes}</p>
+            <p className="text-sm text-gray-500 font-medium mb-2">vote{Number(votes) !== 1 ? 's' : ''}</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="progress-bar-track flex-1">
+              <div
+                className="progress-bar-fill bg-gradient-to-r from-purple-600 to-purple-400"
+                style={{ width: totalSupply > 0 ? `${(Number(votes) / Number(totalSupply)) * 100}%` : '0%' }}
+              />
+            </div>
+            <span className="text-[11px] text-gray-600 font-medium">of {totalSupply}</span>
+          </div>
         </div>
 
-        <div className={`p-6 rounded-xl border ${
-          isCurrent === undefined ? 'border-gray-800 bg-gray-900/50' :
-          isCurrent ? 'border-green-900/50 bg-green-950/20' : 'border-red-900/50 bg-red-950/20'
+        {/* Dues Status */}
+        <div className={`rounded-2xl p-7 border-l-2 page-enter page-enter-delay-2 ${
+          isCurrent === undefined
+            ? 'glass-card border-l-gray-500/40'
+            : isCurrent
+            ? 'glass-card-success border-l-green-500/50'
+            : 'glass-card-danger border-l-red-500/50'
         }`}>
-          <h3 className="text-sm text-gray-400 mb-1">Dues Status</h3>
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Dues Status</p>
+
           {isCurrent === undefined ? (
-            <p className="text-lg font-medium text-gray-500">Loading...</p>
+            <div className="space-y-2">
+              <div className="skeleton h-7 w-24 rounded-lg" />
+              <div className="skeleton h-4 w-36 rounded" />
+            </div>
           ) : isCurrent ? (
-            <>
-              <p className="text-lg font-medium text-green-400">✓ Current</p>
-              <p className="text-xs text-gray-500 mt-1">Your dues are paid up</p>
-            </>
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-6 h-6 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center">
+                  <span className="text-xs text-green-400">✓</span>
+                </div>
+                <p className="text-xl font-bold text-green-400">Current</p>
+              </div>
+              <p className="text-sm text-gray-500">Your dues are fully paid up.</p>
+            </div>
           ) : (
-            <>
-              <p className="text-lg font-medium text-red-400">Past Due</p>
-              <p className="text-xs text-gray-500 mt-1">
-                {quartersOwed} quarter{quartersOwed !== 1 ? 's' : ''} owed — ${amountOwed}
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-6 h-6 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center">
+                  <span className="text-xs text-red-400">!</span>
+                </div>
+                <p className="text-xl font-bold text-red-400">Past Due</p>
+              </div>
+              <p className="text-sm text-gray-400 mb-1">
+                {quartersOwed} quarter{quartersOwed !== 1 ? 's' : ''} owed
               </p>
+              <p className="text-lg font-bold text-red-300">${amountOwed}</p>
               <Link
                 href="/dues"
-                className="inline-block mt-2 text-xs px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 transition-colors"
+                className="inline-flex items-center gap-1.5 mt-4 px-4 py-2.5 rounded-xl bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 text-sm font-semibold text-red-300 transition-all duration-200 min-h-[44px]"
               >
-                Pay Now
+                💳 Pay Now
               </Link>
-            </>
+            </div>
           )}
         </div>
 
-        <div className="p-6 rounded-xl border border-gray-800 bg-gray-900/50">
-          <h3 className="text-sm text-gray-400 mb-1">Delegation</h3>
+        {/* Delegation */}
+        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-amber-500/50 page-enter page-enter-delay-2">
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Vote Delegation</p>
+
           {delegatee === address ? (
-            <p className="text-sm text-gray-300">Self-delegated (voting directly)</p>
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-6 h-6 rounded-full bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xs">
+                  👤
+                </div>
+                <p className="text-base font-semibold text-gray-200">Self-delegated</p>
+              </div>
+              <p className="text-sm text-gray-500">You vote directly on all proposals.</p>
+            </div>
           ) : (
-            <p className="text-sm text-gray-300">
-              Delegated to{' '}
-              <span className="font-mono text-xs">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-6 h-6 rounded-full bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-xs">
+                  🔁
+                </div>
+                <p className="text-base font-semibold text-gray-200">Delegated</p>
+              </div>
+              <p className="text-sm text-gray-500 mb-1">Votes delegated to:</p>
+              <p className="text-sm font-mono text-gray-300 bg-gray-800/50 px-3 py-1.5 rounded-lg inline-block">
                 {delegatee?.slice(0, 6)}...{delegatee?.slice(-4)}
-              </span>
-            </p>
+              </p>
+            </div>
           )}
         </div>
       </div>
 
       {/* Quick Actions */}
-      <h2 className="text-lg font-semibold mb-3">Quick Actions</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {[
-          { href: '/proposals', icon: '📋', label: 'Proposals' },
-          { href: '/treasury', icon: '💰', label: 'Treasury' },
-          { href: '/documents', icon: '📄', label: 'Documents' },
-          { href: '/dues', icon: '💳', label: 'Pay Dues' },
-        ].map(({ href, icon, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className="p-4 rounded-xl border border-gray-800 bg-gray-900/50 hover:border-purple-500/30 transition-all text-center"
-          >
-            <span className="text-2xl">{icon}</span>
-            <p className="text-sm mt-1">{label}</p>
-          </Link>
-        ))}
+      <div className="page-enter page-enter-delay-3">
+        <h2 className="text-lg font-bold mb-4 text-gray-200">Quick Actions</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {[
+            { href: '/proposals', icon: '📋', label: 'Proposals', color: 'blue' },
+            { href: '/treasury', icon: '💰', label: 'Treasury', color: 'green' },
+            { href: '/documents', icon: '📄', label: 'Documents', color: 'amber' },
+            { href: '/dues', icon: '💳', label: 'Pay Dues', color: 'purple' },
+          ].map(({ href, icon, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="glass-card rounded-xl p-4 text-center group min-h-[80px] flex flex-col items-center justify-center gap-2 hover:border-purple-500/25"
+            >
+              <span className="text-2xl group-hover:scale-110 transition-transform duration-200">{icon}</span>
+              <p className="text-sm font-semibold text-gray-300 group-hover:text-purple-300 transition-colors duration-200">{label}</p>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
