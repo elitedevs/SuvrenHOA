@@ -11,6 +11,7 @@ const navItems = [
   { href: '/treasury', label: 'Treasury' },
   { href: '/documents', label: 'Documents' },
   { href: '/dues', label: 'Pay Dues' },
+  { href: '/admin', label: 'Admin' },
 ];
 
 export function Header() {
