@@ -45,11 +45,12 @@ contract Deploy is Script {
         proposers[0] = address(0); // placeholder — updated after Governor
         executors[0] = address(0); // open execution (anyone can trigger after delay)
 
+        address deployerAddr = vm.addr(deployerKey);
         TimelockController timelock = new TimelockController(
             2 days,     // minDelay
             proposers,
             executors,
-            msg.sender  // temporary admin (transferred later)
+            deployerAddr  // temporary admin (transferred later)
         );
         console.log("TimelockController:", address(timelock));
 
@@ -96,19 +97,19 @@ contract Deploy is Script {
 
         // PropertyNFT
         propertyNFT.grantRole(adminRole, address(timelock));
-        propertyNFT.renounceRole(adminRole, msg.sender);
+        propertyNFT.renounceRole(adminRole, deployerAddr);
 
         // DocumentRegistry
         docRegistry.grantRole(adminRole, address(timelock));
-        docRegistry.renounceRole(adminRole, msg.sender);
+        docRegistry.renounceRole(adminRole, deployerAddr);
 
         // Treasury
         treasury.grantRole(adminRole, address(timelock));
-        treasury.renounceRole(adminRole, msg.sender);
+        treasury.renounceRole(adminRole, deployerAddr);
 
         // Timelock itself
         timelock.grantRole(adminRole, address(timelock));
-        timelock.renounceRole(adminRole, msg.sender);
+        timelock.renounceRole(adminRole, deployerAddr);
 
         vm.stopBroadcast();
 
