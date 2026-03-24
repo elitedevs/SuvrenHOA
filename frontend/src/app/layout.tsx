@@ -6,7 +6,7 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'FaircroftDAO',
+  title: 'SuvrenHOA',
   description: 'Transparent. Immutable. Democratic. Blockchain-powered HOA governance.',
 };
 

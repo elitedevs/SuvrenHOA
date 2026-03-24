@@ -15,7 +15,7 @@ export default function Home() {
           <div className="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center font-bold text-sm">
             F
           </div>
-          <span className="text-lg font-semibold">FaircroftDAO</span>
+          <span className="text-lg font-semibold">SuvrenHOA</span>
         </div>
         <ConnectButton />
       </header>
@@ -39,7 +39,7 @@ function Landing() {
         <span className="text-3xl font-bold text-purple-400">F</span>
       </div>
       <h1 className="text-4xl font-bold mb-3">
-        Welcome to <span className="text-purple-400">FaircroftDAO</span>
+        Welcome to <span className="text-purple-400">SuvrenHOA</span>
       </h1>
       <p className="text-gray-400 text-lg max-w-xl mb-8">
         Transparent, immutable, democratic HOA governance on the blockchain.
