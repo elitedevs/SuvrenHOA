@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
+import { ThemeToggle } from './ThemeToggle';
 
 const navItems = [
   { href: '/dashboard', label: 'My Property', icon: '🏠' },
@@ -66,8 +67,9 @@ export function Header() {
             </nav>
           )}
 
-          {/* Wallet */}
-          <div className="shrink-0">
+          {/* Theme + Wallet */}
+          <div className="flex items-center gap-2 shrink-0">
+            <ThemeToggle />
             <ConnectButton
               label="Sign In"
               showBalance={false}

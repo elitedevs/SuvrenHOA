@@ -405,3 +405,84 @@ select:focus-visible {
   background: rgba(139, 92, 246, 0.25);
   color: white;
 }
+
+/* ── Light Mode ───────────────────────────────────────────────────────────── */
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  background: #f8f9fc;
+  color: #1a1a2e;
+}
+
+html.light .glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  border-color: rgba(139, 92, 246, 0.1);
+}
+
+html.light .glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border-color: rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+html.light .glass-card:hover {
+  border-color: rgba(139, 92, 246, 0.2);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+html.light .gradient-text {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #5b21b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.light .bg-grid {
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+}
+
+html.light .bg-radial-glow {
+  background: radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, 0.06) 0%, transparent 60%);
+}
+
+/* Light mode text overrides */
+html.light .text-gray-400 { color: #6b7280; }
+html.light .text-gray-500 { color: #9ca3af; }
+html.light .text-gray-600 { color: #4b5563; }
+html.light .text-gray-300 { color: #374151; }
+html.light .text-gray-100 { color: #1f2937; }
+
+/* Light mode backgrounds */
+html.light .bg-gray-950 { background: #f8f9fc; }
+html.light .bg-gray-900\/50 { background: rgba(255, 255, 255, 0.5); }
+html.light .bg-gray-800 { background: #e5e7eb; }
+html.light .bg-gray-800\/80 { background: rgba(229, 231, 235, 0.8); }
+html.light .bg-gray-800\/50 { background: rgba(229, 231, 235, 0.5); }
+html.light .bg-gray-800\/30 { background: rgba(229, 231, 235, 0.3); }
+
+/* Light mode borders */
+html.light .border-gray-800 { border-color: #e5e7eb; }
+html.light .border-gray-700 { border-color: #d1d5db; }
+html.light .border-white\/5 { border-color: rgba(0, 0, 0, 0.05); }
+html.light .border-white\/\[0\.03\] { border-color: rgba(0, 0, 0, 0.03); }
+
+/* Light mode inputs */
+html.light input, html.light textarea, html.light select {
+  color: #1a1a2e;
+}
+html.light input::placeholder, html.light textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* Light mode scrollbar */
+html.light ::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.15);
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.3);
+}
