@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   SuvrenHOA Design System
+   Purple-dominant dark theme with glass morphism + subtle glow effects
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --purple-glow: rgba(139, 92, 246, 0.15);
+  --green-glow: rgba(34, 197, 94, 0.15);
+  --blue-glow: rgba(59, 130, 246, 0.15);
+  --red-glow: rgba(239, 68, 68, 0.15);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Glass morphism ───────────────────────────────────────────────────────── */
+.glass {
+  background: rgba(15, 15, 25, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.glass-card {
+  background: rgba(15, 15, 25, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 20px var(--purple-glow), 0 4px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ── Glow effects ─────────────────────────────────────────────────────────── */
+.glow-purple {
+  box-shadow: 0 0 20px var(--purple-glow), 0 0 40px rgba(139, 92, 246, 0.05);
+}
+
+.glow-green {
+  box-shadow: 0 0 20px var(--green-glow);
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px var(--blue-glow);
+}
+
+.glow-red {
+  box-shadow: 0 0 20px var(--red-glow);
+}
+
+/* ── Gradient text ────────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-green {
+  background: linear-gradient(135deg, #86efac 0%, #22c55e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animated backgrounds ─────────────────────────────────────────────────── */
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-radial-glow {
+  background: radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
+}
+
+/* ── Pulse animation ──────────────────────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px var(--purple-glow); }
+  50% { box-shadow: 0 0 20px var(--purple-glow), 0 0 40px rgba(139, 92, 246, 0.08); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ── Status dots ──────────────────────────────────────────────────────────── */
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.status-dot {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* ── Smooth scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.4);
+}
+
+/* ── Mobile optimizations ─────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .glass-card:hover {
+    transform: none; /* No hover lift on mobile */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Loading shimmer ──────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, 
+    rgba(139, 92, 246, 0.05) 25%, 
+    rgba(139, 92, 246, 0.1) 50%, 
+    rgba(139, 92, 246, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ── Rainbow Kit overrides ────────────────────────────────────────────────── */
+[data-rk] {
+  --rk-colors-accentColor: #8b5cf6 !important;
 }
