@@ -270,8 +270,13 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
             delete pendingTransfers[tokenId];
         }
 
-        // Execute the actual transfer/mint
+        // Execute the actual transfer/mint (ERC721Enumerable._update)
         address previousOwner = super._update(to, tokenId, auth);
+
+        // Track voting units for Votes checkpointing
+        // This is what ERC721Votes does internally — we must call it manually
+        // since we inherit Votes directly instead of ERC721Votes
+        _transferVotingUnits(from, to, 1);
 
         // Auto-delegate new owner AFTER transfer completes (not on mint — handled in mintProperty)
         if (from != address(0) && to != address(0) && autoDelegateOnMint) {
