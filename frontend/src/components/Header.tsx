@@ -13,6 +13,7 @@ const navItems = [
   { href: '/announcements', label: 'News', icon: '📢' },
   { href: '/maintenance', label: 'Maintenance', icon: '🔧' },
   { href: '/violations', label: 'Violations', icon: '🚨' },
+  { href: '/architectural', label: 'Arch Review', icon: '🏗️' },
   { href: '/proposals', label: 'Proposals', icon: '🗳️' },
   { href: '/treasury', label: 'Treasury', icon: '💰' },
   { href: '/documents', label: 'Docs', icon: '📄' },
