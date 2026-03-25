@@ -2,86 +2,15 @@
 
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useQuery } from '@tanstack/react-query';
 
-interface BoardMember {
-  name: string;
-  role: string;
-  lotNumber: number;
-  email?: string;
-  phone?: string;
-  since: string;
-  bio: string;
-}
 
-interface Committee {
-  name: string;
-  icon: string;
-  chair: string;
-  members: string[];
-  description: string;
-  meetingSchedule: string;
-}
 
-const BOARD_MEMBERS: BoardMember[] = [
-  {
-    name: 'Rick Morang', role: 'President', lotNumber: 12,
-    email: 'president@faircrofthoa.com', since: '2024',
-    bio: 'Rick has served on the board for 3 years. He led the lake restoration project and initiated the move to transparent blockchain governance.',
-  },
-  {
-    name: 'Nicole Tyburski', role: 'Secretary', lotNumber: 45,
-    email: 'secretary@faircrofthoa.com', since: '2025',
-    bio: 'Nicole manages all community records and meeting minutes. She championed the digital document registry for tamper-proof record keeping.',
-  },
-  {
-    name: 'David Chen', role: 'Treasurer', lotNumber: 78,
-    email: 'treasurer@faircrofthoa.com', since: '2024',
-    bio: 'David oversees the community finances and pushed for full treasury transparency through on-chain accounting.',
-  },
-  {
-    name: 'Maria Santos', role: 'Vice President', lotNumber: 33,
-    email: 'vp@faircrofthoa.com', since: '2025',
-    bio: 'Maria focuses on community engagement and events. She organized the first annual Faircroft block party.',
-  },
-  {
-    name: 'James Wright', role: 'Member at Large', lotNumber: 91,
-    since: '2026',
-    bio: 'James is a new board member passionate about infrastructure improvements and sustainable landscaping.',
-  },
-];
 
-const COMMITTEES: Committee[] = [
-  {
-    name: 'Architectural Review', icon: '🏗️', chair: 'Tom Baker (Lot 56)',
-    members: ['Sarah Kim (Lot 23)', 'Paul Rivera (Lot 110)', 'Lisa Chen (Lot 78)'],
-    description: 'Reviews and approves exterior modifications, new construction, and landscaping changes.',
-    meetingSchedule: '1st Tuesday of each month, 6:30pm',
-  },
-  {
-    name: 'Grounds & Landscaping', icon: '🌿', chair: 'Maria Santos (Lot 33)',
-    members: ['Jim O\'Brien (Lot 7)', 'Karen White (Lot 99)', 'Ahmed Hassan (Lot 142)'],
-    description: 'Oversees common area maintenance, seasonal landscaping, and tree management.',
-    meetingSchedule: '2nd Wednesday of each month, 7pm',
-  },
-  {
-    name: 'Social Events', icon: '🎉', chair: 'Ashley Park (Lot 67)',
-    members: ['Mike Johnson (Lot 15)', 'Dana Cruz (Lot 88)', 'Rachel Green (Lot 51)', 'Steve Lee (Lot 120)'],
-    description: 'Plans community events, holiday activities, and neighborhood gatherings.',
-    meetingSchedule: 'As needed, typically monthly',
-  },
-  {
-    name: 'Safety & Security', icon: '🛡️', chair: 'Robert Turner (Lot 4)',
-    members: ['Linda Walsh (Lot 30)', 'Chris Morgan (Lot 72)'],
-    description: 'Manages community safety initiatives, camera systems, and neighborhood watch coordination.',
-    meetingSchedule: 'Quarterly, or as needed',
-  },
-  {
-    name: 'Pool & Recreation', icon: '🏊', chair: 'Nicole Tyburski (Lot 45)',
-    members: ['Jennifer Adams (Lot 61)', 'Kevin Brown (Lot 133)'],
-    description: 'Manages pool operations, recreation facilities, and seasonal schedules.',
-    meetingSchedule: 'Monthly during pool season (Apr-Sep)',
-  },
-];
+
+
+
+
 
 const COMMUNITY_INFO = {
   name: 'Faircroft HOA',
@@ -104,6 +33,22 @@ export default function DirectoryPage() {
       </div>
     );
   }
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['directory'],
+    queryFn: async () => {
+      const res = await fetch('/api/directory');
+      if (!res.ok) throw new Error('Failed');
+      return res.json();
+    },
+    staleTime: 60_000,
+  });
+
+  const BOARD_MEMBERS = data?.board || [];
+  const COMMITTEES = (data?.committees || []).map((c: any) => ({
+    ...c,
+    members: (c.hoa_committee_members || []).map((m: any) => m.name),
+  }));
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
@@ -150,11 +95,11 @@ export default function DirectoryPage() {
         <span className="text-xl">👥</span> Board of Directors
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        {BOARD_MEMBERS.map(member => (
+        {BOARD_MEMBERS.map((member: any) => (
           <div key={member.name} className="glass-card rounded-xl p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-12 h-12 rounded-full bg-purple-600/20 border border-purple-500/20 flex items-center justify-center text-lg font-bold text-purple-400">
-                {member.name.split(' ').map(n => n[0]).join('')}
+                {(member.name || '').split(' ').map((n: string) => n[0]).join('')}
               </div>
               <div>
                 <h3 className="font-semibold text-sm">{member.name}</h3>
@@ -180,7 +125,7 @@ export default function DirectoryPage() {
         <span className="text-xl">🏛️</span> Committees
       </h2>
       <div className="space-y-4">
-        {COMMITTEES.map(committee => (
+        {COMMITTEES.map((committee: any) => (
           <div key={committee.name} className="glass-card rounded-xl p-5">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">{committee.icon}</span>
@@ -191,7 +136,7 @@ export default function DirectoryPage() {
             </div>
             <p className="text-xs text-gray-400 mb-3">{committee.description}</p>
             <div className="flex items-center gap-2 flex-wrap mb-2">
-              {committee.members.map(m => (
+              {committee.members.map((m: any) => (
                 <span key={m} className="text-[10px] px-2 py-1 rounded-lg bg-gray-800/50 text-gray-400">{m}</span>
               ))}
             </div>

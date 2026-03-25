@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useReservations, useCreateReservation } from '@/hooks/useReservations';
+import { useProperty } from '@/hooks/useProperty';
 
 interface Amenity {
   id: string;
@@ -16,14 +18,7 @@ interface Amenity {
   image?: string;
 }
 
-interface Reservation {
-  id: string;
-  amenityId: string;
-  date: string;
-  timeSlot: string;
-  lotNumber: number;
-  status: 'confirmed' | 'pending' | 'cancelled';
-}
+
 
 const AMENITIES: Amenity[] = [
   {
@@ -64,12 +59,7 @@ const AMENITIES: Amenity[] = [
   },
 ];
 
-const DEMO_RESERVATIONS: Reservation[] = [
-  { id: '1', amenityId: 'pool', date: '2026-03-28', timeSlot: '2pm — 4pm', lotNumber: 42, status: 'confirmed' },
-  { id: '2', amenityId: 'clubhouse', date: '2026-04-05', timeSlot: 'All Day', lotNumber: 15, status: 'confirmed' },
-  { id: '3', amenityId: 'tennis', date: '2026-03-26', timeSlot: '6pm — 7pm', lotNumber: 87, status: 'confirmed' },
-  { id: '4', amenityId: 'pavilion', date: '2026-04-12', timeSlot: '11am — 3pm', lotNumber: 67, status: 'pending' },
-];
+
 
 export default function ReservationsPage() {
   const { isConnected } = useAccount();
@@ -85,6 +75,7 @@ export default function ReservationsPage() {
     );
   }
 
+  const { data: reservations } = useReservations(selectedAmenity);
   const selected = AMENITIES.find(a => a.id === selectedAmenity);
 
   return (
@@ -166,18 +157,18 @@ export default function ReservationsPage() {
               {/* Upcoming reservations for this amenity */}
               <div>
                 <h4 className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-2">Upcoming Reservations</h4>
-                {DEMO_RESERVATIONS.filter(r => r.amenityId === selected.id).length === 0 ? (
+                {(reservations || []).filter((r: any) => r.amenity_id === selected.id).length === 0 ? (
                   <p className="text-xs text-gray-500">No upcoming reservations</p>
                 ) : (
                   <div className="space-y-2">
-                    {DEMO_RESERVATIONS.filter(r => r.amenityId === selected.id).map(res => (
+                    {(reservations || []).filter((r: any) => r.amenity_id === selected.id).map(res => (
                       <div key={res.id} className="flex items-center justify-between p-3 rounded-lg bg-gray-800/30">
                         <div className="text-xs">
                           <span className="font-medium">{res.date}</span>
-                          <span className="text-gray-500 ml-2">{res.timeSlot}</span>
+                          <span className="text-gray-500 ml-2">{res.time_slot}</span>
                         </div>
                         <div className="flex items-center gap-2 text-[10px]">
-                          <span className="text-gray-500">Lot #{res.lotNumber}</span>
+                          <span className="text-gray-500">Lot #{res.lot_number}</span>
                           <span className={`px-1.5 py-0.5 rounded ${
                             res.status === 'confirmed' ? 'bg-green-500/10 text-green-400' : 'bg-yellow-500/10 text-yellow-400'
                           }`}>
@@ -198,6 +189,9 @@ export default function ReservationsPage() {
 }
 
 function ReserveForm({ amenity, onClose }: { amenity: Amenity; onClose: () => void }) {
+  const { address } = useAccount();
+  const { tokenId } = useProperty();
+  const createReservation = useCreateReservation();
   const [date, setDate] = useState('');
   const [timeSlot, setTimeSlot] = useState('');
 
@@ -225,7 +219,18 @@ function ReserveForm({ amenity, onClose }: { amenity: Amenity; onClose: () => vo
       </div>
       <div className="flex gap-3">
         <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
-        <button disabled={!date || !timeSlot} className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all">Confirm Reservation</button>
+        <button 
+            disabled={!date || !timeSlot || createReservation.isPending}
+            onClick={() => {
+              if (!address) return;
+              createReservation.mutate(
+                { amenity_id: amenity.id, wallet_address: address, lot_number: tokenId, date, time_slot: timeSlot },
+                { onSuccess: () => onClose() }
+              );
+            }}
+            className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all">
+            {createReservation.isPending ? '⏳ Booking...' : 'Confirm Reservation'}
+          </button>
       </div>
     </div>
   );
