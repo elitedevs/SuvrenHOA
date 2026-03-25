@@ -6,18 +6,6 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { usePosts, useCreatePost, type Post as PostType } from '@/hooks/usePosts';
 import { useProperty } from '@/hooks/useProperty';
 
-interface Post {
-  id: string;
-  author: string;
-  authorLot: number;
-  title: string;
-  content: string;
-  category: string;
-  timestamp: Date;
-  replies: number;
-  likes: number;
-  pinned?: boolean;
-}
 
 const CATEGORIES = [
   { id: 'general', label: 'General', icon: '💬', color: 'purple' },
@@ -31,38 +19,7 @@ const CATEGORIES = [
 ];
 
 // Demo data for presentation
-const DEMO_POSTS: Post[] = [
-  {
-    id: '1', author: '0x48B8...37c78', authorLot: 1, title: 'Pool hours changing for summer',
-    content: 'The board has approved extended pool hours starting May 1st. New hours will be 7am-9pm daily. Lifeguard on duty 10am-7pm.',
-    category: 'events', timestamp: new Date('2026-03-24'), replies: 8, likes: 23, pinned: true,
-  },
-  {
-    id: '2', author: '0x7A3F...9e2d1', authorLot: 42, title: 'Suspicious activity near the lake trail',
-    content: 'Saw an unfamiliar vehicle parked near the lake access around 11pm last night. License plate was partially visible. Has anyone else noticed this?',
-    category: 'safety', timestamp: new Date('2026-03-23'), replies: 15, likes: 31,
-  },
-  {
-    id: '3', author: '0x2B91...c4f82', authorLot: 87, title: 'Great electrician recommendation',
-    content: 'Just had Mike\'s Electric do our panel upgrade. $2,800 for a full 200A panel swap. Clean work, licensed, and he was on time. Highly recommend.',
-    category: 'recommendations', timestamp: new Date('2026-03-22'), replies: 4, likes: 12,
-  },
-  {
-    id: '4', author: '0x5C2D...1a9b3', authorLot: 15, title: 'Lost gray cat - Whiskers',
-    content: 'Our gray tabby Whiskers got out last night near lot 15 (Faircroft Dr). He\'s friendly, has a blue collar with tag. Please call or message if you see him!',
-    category: 'lost-found', timestamp: new Date('2026-03-22'), replies: 7, likes: 18,
-  },
-  {
-    id: '5', author: '0x8F1E...3d7a6', authorLot: 103, title: 'Sprinkler system flooding sidewalk on Oak Lane',
-    content: 'The sprinkler head near lot 103 has been spraying directly onto the sidewalk for the past 3 days. Creating an icy patch in the mornings. Who should I contact?',
-    category: 'maintenance', timestamp: new Date('2026-03-21'), replies: 3, likes: 9,
-  },
-  {
-    id: '6', author: '0x3E7B...8c5d2', authorLot: 67, title: 'Community yard sale - April 12th',
-    content: 'Organizing a community-wide yard sale for April 12th! Sign up here if you want to participate. We\'ll have signs at the entrance.',
-    category: 'events', timestamp: new Date('2026-03-20'), replies: 22, likes: 45,
-  },
-];
+
 
 export default function CommunityPage() {
   const { isConnected } = useAccount();
@@ -160,7 +117,7 @@ export default function CommunityPage() {
 
 function PostCard({ post }: { post: any }) {
   const cat = CATEGORIES.find(c => c.id === post.category);
-  const timeAgo = getTimeAgo(post.timestamp);
+  const timeAgo = getTimeAgo(new Date(post.created_at));
 
   return (
     <div className="glass-card rounded-xl p-5 cursor-pointer group">
@@ -225,6 +182,9 @@ function PostCard({ post }: { post: any }) {
 }
 
 function NewPostForm({ onClose }: { onClose: () => void }) {
+  const { address } = useAccount();
+  const { tokenId } = useProperty();
+  const createPost = useCreatePost();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('general');
@@ -282,10 +242,17 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
           Cancel
         </button>
         <button
-          disabled={!title.trim() || !content.trim()}
+          disabled={!title.trim() || !content.trim() || createPost.isPending}
+          onClick={() => {
+            if (!address) return;
+            createPost.mutate(
+              { wallet_address: address, lot_number: tokenId, title, content, category },
+              { onSuccess: () => onClose() }
+            );
+          }}
           className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(139,92,246,0.3)]"
         >
-          Post to Community
+          {createPost.isPending ? '⏳ Posting...' : 'Post to Community'}
         </button>
       </div>
     </div>

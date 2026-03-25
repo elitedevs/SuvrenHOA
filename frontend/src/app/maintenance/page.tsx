@@ -3,22 +3,9 @@
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useMaintenanceRequests, useCreateMaintenanceRequest } from '@/hooks/useMaintenance';
+import { useProperty } from '@/hooks/useProperty';
 
-interface MaintenanceRequest {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  location: string;
-  status: 'open' | 'in-progress' | 'scheduled' | 'resolved';
-  priority: 'low' | 'medium' | 'high' | 'urgent';
-  submittedBy: number; // lot number
-  submittedAt: Date;
-  updatedAt: Date;
-  assignedTo?: string;
-  estimatedCompletion?: string;
-  updates: { date: Date; text: string; by: string }[];
-}
 
 const STATUS_STYLES = {
   open: { color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', label: '🟡 Open' },
@@ -34,71 +21,7 @@ const PRIORITY_STYLES = {
   urgent: 'text-red-400',
 };
 
-const DEMO_REQUESTS: MaintenanceRequest[] = [
-  {
-    id: 'MR-2026-047',
-    title: 'Broken sprinkler head flooding sidewalk',
-    description: 'Sprinkler head near lot 103 on Oak Lane is broken and spraying water across the sidewalk. Creating a hazard, especially in the mornings.',
-    category: 'Irrigation',
-    location: 'Oak Lane, near Lot 103',
-    status: 'in-progress',
-    priority: 'high',
-    submittedBy: 103,
-    submittedAt: new Date('2026-03-21'),
-    updatedAt: new Date('2026-03-23'),
-    assignedTo: 'Green Thumb Landscaping',
-    estimatedCompletion: 'March 26, 2026',
-    updates: [
-      { date: new Date('2026-03-23'), text: 'Vendor dispatched. Replacement head ordered — arriving March 25.', by: 'Board' },
-      { date: new Date('2026-03-22'), text: 'Inspected. Confirmed broken rotor head, needs replacement.', by: 'Grounds Committee' },
-    ],
-  },
-  {
-    id: 'MR-2026-046',
-    title: 'Street light out on Faircroft Dr',
-    description: 'The street light between lots 22 and 24 on Faircroft Dr has been out for a week. Very dark area at night.',
-    category: 'Lighting',
-    location: 'Faircroft Dr, between Lots 22-24',
-    status: 'scheduled',
-    priority: 'medium',
-    submittedBy: 22,
-    submittedAt: new Date('2026-03-19'),
-    updatedAt: new Date('2026-03-22'),
-    assignedTo: 'Duke Energy',
-    estimatedCompletion: 'April 2, 2026',
-    updates: [
-      { date: new Date('2026-03-22'), text: 'Reported to Duke Energy. Service ticket #DE-892741. Scheduled for April 2.', by: 'Board' },
-    ],
-  },
-  {
-    id: 'MR-2026-045',
-    title: 'Pothole on community entrance road',
-    description: 'Growing pothole right at the main entrance, driver side. About 8 inches wide. Getting worse with rain.',
-    category: 'Roads',
-    location: 'Main entrance road',
-    status: 'open',
-    priority: 'urgent',
-    submittedBy: 1,
-    submittedAt: new Date('2026-03-24'),
-    updatedAt: new Date('2026-03-24'),
-    updates: [],
-  },
-  {
-    id: 'MR-2026-044',
-    title: 'Clubhouse bathroom faucet leaking',
-    description: 'The left sink faucet in the men\'s bathroom at the clubhouse has a slow drip. Wasting water.',
-    category: 'Plumbing',
-    location: 'Clubhouse',
-    status: 'resolved',
-    priority: 'low',
-    submittedBy: 87,
-    submittedAt: new Date('2026-03-15'),
-    updatedAt: new Date('2026-03-18'),
-    updates: [
-      { date: new Date('2026-03-18'), text: 'Fixed. Replaced washer and cartridge. No more leak.', by: 'Mike\'s Plumbing' },
-    ],
-  },
-];
+
 
 export default function MaintenancePage() {
   const { isConnected } = useAccount();
@@ -114,7 +37,8 @@ export default function MaintenancePage() {
     );
   }
 
-  const filtered = filter === 'all' ? DEMO_REQUESTS : DEMO_REQUESTS.filter(r => r.status === filter);
+  const { data: apiRequests, isLoading } = useMaintenanceRequests(filter !== 'all' ? filter : null);
+  const filtered = apiRequests || [];
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
@@ -137,7 +61,7 @@ export default function MaintenancePage() {
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         {Object.entries(STATUS_STYLES).map(([status, style]) => {
-          const count = DEMO_REQUESTS.filter(r => r.status === status).length;
+          const count = (apiRequests || []).filter((r: any) => r.status === status).length;
           return (
             <button
               key={status}
@@ -164,10 +88,10 @@ export default function MaintenancePage() {
   );
 }
 
-function RequestCard({ request }: { request: MaintenanceRequest }) {
+function RequestCard({ request }: { request: any }) {
   const [expanded, setExpanded] = useState(false);
-  const style = STATUS_STYLES[request.status];
-  const timeAgo = getTimeAgo(request.submittedAt);
+  const style = (STATUS_STYLES as any)[request.status] || STATUS_STYLES.open;
+  const timeAgo = getTimeAgo(new Date(request.created_at));
 
   return (
     <div className="glass-card rounded-xl overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
@@ -179,14 +103,14 @@ function RequestCard({ request }: { request: MaintenanceRequest }) {
               <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${style.bg} ${style.color} ${style.border}`}>
                 {style.label}
               </span>
-              <span className={`text-[10px] font-medium ${PRIORITY_STYLES[request.priority]}`}>
+              <span className={`text-[10px] font-medium ${(PRIORITY_STYLES as any)[request.priority] || 'text-gray-400'}`}>
                 {request.priority.toUpperCase()}
               </span>
             </div>
             <h3 className="font-semibold text-sm mb-1">{request.title}</h3>
             <div className="flex items-center gap-3 text-[11px] text-gray-500">
               <span>📍 {request.location}</span>
-              <span>Lot #{request.submittedBy}</span>
+              <span>Lot #{request.lot_number || 0}</span>
               <span>{timeAgo}</span>
             </div>
           </div>
@@ -210,14 +134,14 @@ function RequestCard({ request }: { request: MaintenanceRequest }) {
               </div>
             )}
 
-            {request.updates.length > 0 && (
+            {request.hoa_maintenance_updates || [].length > 0 && (
               <div className="space-y-2">
                 <p className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold">Updates</p>
-                {request.updates.map((update, i) => (
+                {(request.hoa_maintenance_updates || []).map((update: any, i: number) => (
                   <div key={i} className="pl-4 border-l-2 border-purple-500/20">
                     <p className="text-xs text-gray-400">{update.text}</p>
                     <p className="text-[10px] text-gray-600 mt-1">
-                      {update.by} · {update.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      {update.updated_by} · {new Date(update.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                     </p>
                   </div>
                 ))}
@@ -231,6 +155,9 @@ function RequestCard({ request }: { request: MaintenanceRequest }) {
 }
 
 function NewRequestForm({ onClose }: { onClose: () => void }) {
+  const { address } = useAccount();
+  const { tokenId } = useProperty();
+  const createRequest = useCreateMaintenanceRequest();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
@@ -295,9 +222,17 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
           className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">
           Cancel
         </button>
-        <button disabled={!title.trim() || !description.trim()}
+        <button 
+          disabled={!title.trim() || !description.trim() || !location.trim() || createRequest.isPending}
+          onClick={() => {
+            if (!address) return;
+            createRequest.mutate(
+              { wallet_address: address, lot_number: tokenId, title, description, category, location, priority },
+              { onSuccess: () => onClose() }
+            );
+          }}
           className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all">
-          Submit Request
+          {createRequest.isPending ? '⏳ Submitting...' : 'Submit Request'}
         </button>
       </div>
     </div>
