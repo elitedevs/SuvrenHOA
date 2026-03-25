@@ -19,6 +19,7 @@ const navItems = [
   { href: '/reservations', label: 'Amenities', icon: '🏊' },
   { href: '/directory', label: 'Directory', icon: '👥' },
   { href: '/dues', label: 'Dues', icon: '💳' },
+  { href: '/profile', label: 'Profile', icon: '👤' },
   { href: '/admin', label: 'Admin', icon: '⚙️' },
 ];
 
