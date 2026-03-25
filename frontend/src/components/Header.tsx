@@ -21,6 +21,9 @@ const navItems = [
   { href: '/reservations', label: 'Amenities', icon: '🏊' },
   { href: '/directory', label: 'Directory', icon: '👥' },
   { href: '/dues', label: 'Dues', icon: '💳' },
+  { href: '/calendar', label: 'Calendar', icon: '📅' },
+  { href: '/pets', label: 'Pets', icon: '🐕' },
+  { href: '/vehicles', label: 'Vehicles', icon: '🚗' },
   { href: '/profile', label: 'Profile', icon: '👤' },
   { href: '/admin', label: 'Admin', icon: '⚙️' },
 ];
