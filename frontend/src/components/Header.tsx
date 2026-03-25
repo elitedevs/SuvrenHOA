@@ -6,12 +6,15 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 import { ThemeToggle } from './ThemeToggle';
 import { NotificationBell } from './NotificationBell';
+import { useMessages } from '@/hooks/useMessages';
 
 const navItems = [
   { href: '/dashboard', label: 'My Property', icon: '🏠' },
   { href: '/health', label: 'Health', icon: '❤️' },
-  { href: '/community', label: 'Community', icon: '💬' },
+  { href: '/messages', label: 'Messages', icon: '💬' },
+  { href: '/community', label: 'Community', icon: '🗣️' },
   { href: '/community/leaderboard', label: 'Leaderboard', icon: '🏆' },
+  { href: '/alerts', label: 'Alerts', icon: '🚨' },
   { href: '/announcements', label: 'News', icon: '📢' },
   { href: '/maintenance', label: 'Maintenance', icon: '🔧' },
   { href: '/violations', label: 'Violations', icon: '🚨' },
@@ -28,7 +31,44 @@ const navItems = [
   { href: '/vehicles', label: 'Vehicles', icon: '🚗' },
   { href: '/profile', label: 'Profile', icon: '👤' },
   { href: '/admin', label: 'Admin', icon: '⚙️' },
+  { href: '/checkout', label: 'Move Out', icon: '📦' },
 ];
+
+function MessagesNavLink({
+  href,
+  label,
+  icon,
+  active,
+  mobile,
+}: {
+  href: string;
+  label: string;
+  icon: string;
+  active: boolean;
+  mobile?: boolean;
+}) {
+  const { totalUnread } = useMessages();
+
+  return (
+    <Link
+      href={href}
+      className={`relative px-3 py-2 rounded-lg ${mobile ? 'text-[12px]' : 'text-[13px]'} font-semibold ${mobile ? 'whitespace-nowrap' : ''} transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
+        active
+          ? 'nav-active text-purple-300 bg-purple-500/10'
+          : 'text-gray-500 hover:text-gray-200 hover:bg-white/[0.04]'
+      }`}
+      aria-current={active ? 'page' : undefined}
+    >
+      <span className={`${mobile ? '' : 'text-[12px] opacity-80'}`}>{icon}</span>
+      {label}
+      {totalUnread > 0 && (
+        <span className="ml-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-purple-600 text-white text-[10px] font-bold flex items-center justify-center">
+          {totalUnread > 9 ? '9+' : totalUnread}
+        </span>
+      )}
+    </Link>
+  );
+}
 
 export function Header() {
   const pathname = usePathname();
@@ -75,11 +115,23 @@ export function Header() {
             {/* Connected-only nav */}
             {isConnected &&
               navItems.map(({ href, label, icon }) => {
-                // For /community/leaderboard, avoid matching /community prefix incorrectly
                 const active =
                   pathname === href ||
                   (href !== '/' && href.length > 10 && pathname.startsWith(href)) ||
                   (href.length <= 10 && href !== '/' && pathname === href);
+
+                if (href === '/messages') {
+                  return (
+                    <MessagesNavLink
+                      key={href}
+                      href={href}
+                      label={label}
+                      icon={icon}
+                      active={active}
+                    />
+                  );
+                }
+
                 return (
                   <Link
                     key={href}
@@ -139,6 +191,20 @@ export function Header() {
                 pathname === href ||
                 (href !== '/' && href.length > 10 && pathname.startsWith(href)) ||
                 (href.length <= 10 && href !== '/' && pathname === href);
+
+              if (href === '/messages') {
+                return (
+                  <MessagesNavLink
+                    key={href}
+                    href={href}
+                    label={label}
+                    icon={icon}
+                    active={active}
+                    mobile
+                  />
+                );
+              }
+
               return (
                 <Link
                   key={href}

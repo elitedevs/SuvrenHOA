@@ -10,6 +10,7 @@ import { useDocuments } from '@/hooks/useDocuments';
 import { ActivityTicker } from '@/components/ActivityTicker';
 import { HealthScoreWidget } from '@/components/HealthScoreWidget';
 import { DuesReminder } from '@/components/DuesReminder';
+import { useAlerts } from '@/hooks/useAlerts';
 
 export default function Home() {
   const { isConnected } = useAccount();
@@ -158,6 +159,8 @@ function Landing() {
 
 function Dashboard() {
   const { hasProperty, votes, totalSupply, tokenId, propertyInfo } = useProperty();
+  const { getActiveAlerts } = useAlerts();
+  const activeAlertCount = getActiveAlerts().length;
   const { totalBalance, operatingBalance, reserveBalance } = useTreasury();
   const { activeProposalCount } = useGovernorSettings();
   const { documentCount } = useDocuments();
@@ -294,6 +297,26 @@ function Dashboard() {
             </Link>
           ))}
         </div>
+
+        {/* Alerts Quick Link */}
+        {activeAlertCount > 0 && (
+          <div className="mt-6 page-enter page-enter-delay-2">
+            <Link href="/alerts" className="glass-card rounded-2xl p-5 group block border-l-2 border-l-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.15)] hover:shadow-[0_0_30px_rgba(239,68,68,0.25)] transition-all duration-200">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl group-hover:scale-110 transition-transform duration-200 inline-block">🚨</span>
+                  <div>
+                    <h3 className="font-bold text-base text-red-300 group-hover:text-red-200 transition-colors">Active Community Alerts</h3>
+                    <p className="text-sm text-gray-400">There {activeAlertCount === 1 ? "is" : "are"} {activeAlertCount} active alert{activeAlertCount !== 1 ? "s" : ""} requiring attention</p>
+                  </div>
+                </div>
+                <span className="min-w-[28px] h-7 px-2 rounded-full bg-red-600 text-white text-sm font-bold flex items-center justify-center animate-pulse">
+                  {activeAlertCount}
+                </span>
+              </div>
+            </Link>
+          </div>
+        )}
 
         {/* Blockchain Trust Banner */}
         <div className="mt-10 glass-card rounded-2xl p-7 glow-purple border-l-2 border-l-purple-500/50 page-enter page-enter-delay-3">
