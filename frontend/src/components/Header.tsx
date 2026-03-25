@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 import { ThemeToggle } from './ThemeToggle';
+import { NotificationBell } from './NotificationBell';
 
 const navItems = [
   { href: '/dashboard', label: 'My Property', icon: '🏠' },
@@ -14,6 +15,7 @@ const navItems = [
   { href: '/proposals', label: 'Proposals', icon: '🗳️' },
   { href: '/treasury', label: 'Treasury', icon: '💰' },
   { href: '/documents', label: 'Docs', icon: '📄' },
+  { href: '/surveys', label: 'Surveys', icon: '📊' },
   { href: '/reservations', label: 'Amenities', icon: '🏊' },
   { href: '/directory', label: 'Directory', icon: '👥' },
   { href: '/dues', label: 'Dues', icon: '💳' },
@@ -69,6 +71,7 @@ export function Header() {
 
           {/* Theme + Wallet */}
           <div className="flex items-center gap-2 shrink-0">
+            {isConnected && <NotificationBell />}
             <ThemeToggle />
             <ConnectButton
               label="Sign In"

@@ -216,3 +216,44 @@ CREATE POLICY "Anyone can read reservations" ON hoa_reservations FOR SELECT USIN
 CREATE POLICY "Anyone can read profiles" ON hoa_profiles FOR SELECT USING (true);
 
 -- Service role handles all writes via API routes
+
+-- ── Surveys / Polls ──────────────────────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS hoa_surveys (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT,
+    created_by TEXT NOT NULL, -- wallet_address or 'board'
+    type TEXT NOT NULL DEFAULT 'poll' CHECK (type IN ('poll', 'survey', 'rsvp')),
+    status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'closed', 'draft')),
+    allow_multiple BOOLEAN DEFAULT FALSE,
+    anonymous BOOLEAN DEFAULT FALSE,
+    closes_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS hoa_survey_options (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    survey_id UUID REFERENCES hoa_surveys(id) ON DELETE CASCADE,
+    label TEXT NOT NULL,
+    sort_order INTEGER DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS hoa_survey_responses (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    survey_id UUID REFERENCES hoa_surveys(id) ON DELETE CASCADE,
+    option_id UUID REFERENCES hoa_survey_options(id) ON DELETE CASCADE,
+    wallet_address TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE(survey_id, wallet_address, option_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_surveys_status ON hoa_surveys(status);
+CREATE INDEX IF NOT EXISTS idx_survey_responses_survey ON hoa_survey_responses(survey_id);
+
+ALTER TABLE hoa_surveys ENABLE ROW LEVEL SECURITY;
+ALTER TABLE hoa_survey_options ENABLE ROW LEVEL SECURITY;
+ALTER TABLE hoa_survey_responses ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Anyone can read surveys" ON hoa_surveys FOR SELECT USING (true);
+CREATE POLICY "Anyone can read survey options" ON hoa_survey_options FOR SELECT USING (true);
+CREATE POLICY "Anyone can read survey responses" ON hoa_survey_responses FOR SELECT USING (true);
