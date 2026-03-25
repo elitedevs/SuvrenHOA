@@ -1,0 +1,226 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useAccount } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useMessages } from '@/hooks/useMessages';
+import {
+  Home, Building2, PawPrint, Car, Vote, Landmark, FileText,
+  AlertTriangle, Users, Megaphone, Trophy, Calendar, BookOpen,
+  CreditCard, Hammer, CalendarCheck, PenTool, BarChart3,
+  Eye, Map, Heart, MessageCircle, Bell, Bot, Settings,
+  User, ChevronLeft, ChevronRight, Menu, X, LogOut,
+} from 'lucide-react';
+
+const NAV_SECTIONS = [
+  {
+    label: 'Overview',
+    items: [
+      { href: '/', label: 'Dashboard', icon: Home },
+    ],
+  },
+  {
+    label: 'Property',
+    items: [
+      { href: '/dashboard', label: 'My Lots', icon: Building2 },
+      { href: '/pets', label: 'Pets', icon: PawPrint },
+      { href: '/vehicles', label: 'Vehicles', icon: Car },
+    ],
+  },
+  {
+    label: 'Governance',
+    items: [
+      { href: '/proposals', label: 'Proposals', icon: Vote },
+      { href: '/treasury', label: 'Treasury', icon: Landmark },
+      { href: '/documents', label: 'Documents', icon: FileText },
+      { href: '/violations', label: 'Violations', icon: AlertTriangle },
+    ],
+  },
+  {
+    label: 'Community',
+    items: [
+      { href: '/community', label: 'Forum', icon: Users },
+      { href: '/announcements', label: 'Announcements', icon: Megaphone },
+      { href: '/community/leaderboard', label: 'Leaderboard', icon: Trophy },
+      { href: '/calendar', label: 'Calendar', icon: Calendar },
+      { href: '/directory', label: 'Directory', icon: BookOpen },
+    ],
+  },
+  {
+    label: 'Services',
+    items: [
+      { href: '/dues', label: 'Pay Dues', icon: CreditCard },
+      { href: '/maintenance', label: 'Maintenance', icon: Hammer },
+      { href: '/reservations', label: 'Amenities', icon: CalendarCheck },
+      { href: '/architectural', label: 'Arch Review', icon: PenTool },
+      { href: '/surveys', label: 'Surveys', icon: BarChart3 },
+    ],
+  },
+  {
+    label: 'Public',
+    items: [
+      { href: '/transparency', label: 'Transparency', icon: Eye },
+      { href: '/map', label: 'Map', icon: Map },
+      { href: '/health', label: 'Health Score', icon: Heart },
+    ],
+  },
+];
+
+const UTILITY_ITEMS = [
+  { href: '/messages', label: 'Messages', icon: MessageCircle, badge: 'messages' as const },
+  { href: '/alerts', label: 'Alerts', icon: Bell },
+  { href: '/assistant', label: 'AI Assistant', icon: Bot },
+  { href: '/admin', label: 'Admin', icon: Settings },
+  { href: '/profile', label: 'Profile', icon: User },
+];
+
+function NavItem({
+  href, label, icon: Icon, active, collapsed, badge,
+}: {
+  href: string; label: string; icon: React.ElementType; active: boolean; collapsed: boolean; badge?: number;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`group flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 relative ${
+        active
+          ? 'bg-[oklch(0.18_0.01_60)] text-[oklch(0.75_0.12_85)] border-l-[3px] border-[oklch(0.75_0.12_85)] -ml-px'
+          : 'text-[oklch(0.55_0.01_60)] hover:text-[oklch(0.80_0.01_60)] hover:bg-[oklch(0.14_0.005_60)]'
+      }`}
+      title={collapsed ? label : undefined}
+    >
+      <Icon className={`w-[18px] h-[18px] shrink-0 ${active ? 'text-[oklch(0.75_0.12_85)]' : 'text-[oklch(0.45_0.01_60)] group-hover:text-[oklch(0.65_0.01_60)]'}`} />
+      {!collapsed && <span className="truncate">{label}</span>}
+      {badge !== undefined && badge > 0 && (
+        <span className={`${collapsed ? 'absolute -top-1 -right-1' : 'ml-auto'} min-w-[18px] h-[18px] px-1 rounded-full bg-[oklch(0.58_0.22_275)] text-white text-[10px] font-bold flex items-center justify-center`}>
+          {badge > 9 ? '9+' : badge}
+        </span>
+      )}
+    </Link>
+  );
+}
+
+export function Sidebar() {
+  const pathname = usePathname();
+  const { isConnected } = useAccount();
+  const { totalUnread } = useMessages();
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Close mobile sidebar on navigation
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
+
+  if (!isConnected) return null;
+
+  const sidebarContent = (
+    <div className={`flex flex-col h-full ${collapsed ? 'w-16' : 'w-60'} transition-all duration-200`}>
+      {/* Logo area */}
+      <div className="flex items-center justify-between px-4 h-14 border-b border-[oklch(0.18_0.005_60)]">
+        {!collapsed && (
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[oklch(0.75_0.12_85)] to-[oklch(0.58_0.14_80)] flex items-center justify-center text-[11px] font-bold text-[oklch(0.10_0.005_60)]">
+              S
+            </div>
+            <span className="text-[14px] font-semibold tracking-tight text-[oklch(0.85_0.01_60)]">
+              Suvren<span className="text-[oklch(0.50_0.01_60)]">HOA</span>
+            </span>
+          </Link>
+        )}
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="p-1.5 rounded-md text-[oklch(0.45_0.01_60)] hover:text-[oklch(0.70_0.01_60)] hover:bg-[oklch(0.14_0.005_60)] transition-colors hidden lg:flex"
+        >
+          {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+        </button>
+      </div>
+
+      {/* Nav sections */}
+      <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-6">
+        {NAV_SECTIONS.map((section) => (
+          <div key={section.label}>
+            {!collapsed && (
+              <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-[0.08em] text-[oklch(0.38_0.01_60)]">
+                {section.label}
+              </p>
+            )}
+            <div className="space-y-0.5">
+              {section.items.map((item) => {
+                const active = pathname === item.href || 
+                  (item.href !== '/' && pathname.startsWith(item.href));
+                return (
+                  <NavItem
+                    key={item.href}
+                    href={item.href}
+                    label={item.label}
+                    icon={item.icon}
+                    active={active}
+                    collapsed={collapsed}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </nav>
+
+      {/* Utility items */}
+      <div className="border-t border-[oklch(0.18_0.005_60)] py-3 px-3 space-y-0.5">
+        {UTILITY_ITEMS.map((item) => {
+          const active = pathname === item.href || pathname.startsWith(item.href);
+          return (
+            <NavItem
+              key={item.href}
+              href={item.href}
+              label={item.label}
+              icon={item.icon}
+              active={active}
+              collapsed={collapsed}
+              badge={item.badge === 'messages' ? totalUnread : undefined}
+            />
+          );
+        })}
+      </div>
+
+      {/* Wallet */}
+      <div className="border-t border-[oklch(0.18_0.005_60)] p-3">
+        <div className={collapsed ? 'scale-75' : ''}>
+          <ConnectButton label="Connect" showBalance={false} chainStatus="none" accountStatus={collapsed ? 'avatar' : 'address'} />
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Desktop sidebar */}
+      <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40 bg-[oklch(0.08_0.005_60)] border-r border-[oklch(0.18_0.005_60)]">
+        {sidebarContent}
+      </aside>
+
+      {/* Mobile hamburger */}
+      <button
+        className="lg:hidden fixed top-3 left-3 z-50 p-2 rounded-lg bg-[oklch(0.12_0.005_60)] border border-[oklch(0.20_0.005_60)] text-[oklch(0.65_0.01_60)]"
+        onClick={() => setMobileOpen(true)}
+      >
+        <Menu className="w-5 h-5" />
+      </button>
+
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div className="lg:hidden fixed inset-0 z-50">
+          <div className="absolute inset-0 bg-black/60" onClick={() => setMobileOpen(false)} />
+          <aside className="absolute left-0 top-0 bottom-0 bg-[oklch(0.08_0.005_60)] border-r border-[oklch(0.18_0.005_60)] shadow-2xl">
+            <div className="absolute top-3 right-3">
+              <button onClick={() => setMobileOpen(false)} className="p-2 rounded-lg text-[oklch(0.50_0.01_60)] hover:text-[oklch(0.80_0.01_60)]">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            {sidebarContent}
+          </aside>
+        </div>
+      )}
+    </>
+  );
+}
