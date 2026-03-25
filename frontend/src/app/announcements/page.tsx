@@ -2,76 +2,11 @@
 
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAnnouncements } from '@/hooks/useAnnouncements';
 
-interface Announcement {
-  id: string;
-  title: string;
-  content: string;
-  author: string;
-  authorRole: string;
-  timestamp: Date;
-  priority: 'urgent' | 'important' | 'info';
-  readBy: number;
-  totalResidents: number;
-}
+// Using Announcement type from useAnnouncements hook
 
-const DEMO_ANNOUNCEMENTS: Announcement[] = [
-  {
-    id: '1',
-    title: '🚨 Water Main Repair — Expect Low Pressure March 25-26',
-    content: 'The city will be performing water main repairs on Faircroft Dr between lots 40-60. Expect low water pressure or intermittent outages between 8am-5pm both days. Please fill containers in advance if needed.',
-    author: 'Board of Directors',
-    authorRole: 'Board',
-    timestamp: new Date('2026-03-24'),
-    priority: 'urgent',
-    readBy: 67,
-    totalResidents: 150,
-  },
-  {
-    id: '2',
-    title: '📋 Q2 Board Meeting — April 8th at 7pm',
-    content: 'The quarterly board meeting will be held at the Faircroft Clubhouse on April 8th at 7pm. Virtual attendance available via Zoom (link will be emailed). Agenda includes: pool renovation proposal, 2026 budget review, and the new landscaping contract.\n\nAll homeowners are encouraged to attend. Written questions can be submitted in advance via the Community forum.',
-    author: 'Rick Morang',
-    authorRole: 'President',
-    timestamp: new Date('2026-03-22'),
-    priority: 'important',
-    readBy: 43,
-    totalResidents: 150,
-  },
-  {
-    id: '3',
-    title: '🌿 Spring Landscaping Schedule',
-    content: 'Spring landscaping begins April 1st. Crews will work Monday-Friday, 7am-4pm. Schedule:\n• Week 1 (Apr 1-5): Common areas, entrance\n• Week 2 (Apr 8-12): Lots 1-50\n• Week 3 (Apr 15-19): Lots 51-100\n• Week 4 (Apr 22-26): Lots 101-150\n\nPlease remove items from front yards before your scheduled week.',
-    author: 'Grounds Committee',
-    authorRole: 'Committee',
-    timestamp: new Date('2026-03-20'),
-    priority: 'info',
-    readBy: 89,
-    totalResidents: 150,
-  },
-  {
-    id: '4',
-    title: '🏊 Pool Opening Day — May 1st',
-    content: 'The community pool opens May 1st! New this year:\n• Extended hours: 7am-9pm (was 9am-8pm)\n• New pool furniture arriving April 15\n• Updated key fob access — pick up your new fob at the clubhouse April 25-30\n\nPool rules and key form available in Documents.',
-    author: 'Nicole Tyburski',
-    authorRole: 'Secretary',
-    timestamp: new Date('2026-03-18'),
-    priority: 'info',
-    readBy: 112,
-    totalResidents: 150,
-  },
-  {
-    id: '5',
-    title: '💰 Q1 Financial Summary Available',
-    content: 'The Q1 2026 financial summary has been posted to the Documents section. Key highlights:\n• Total dues collected: $28,400 (94.7% collection rate)\n• Operating expenses: $18,200\n• Reserve contribution: $7,100\n• Current reserve balance: $89,450\n\nFull details in the Treasury dashboard.',
-    author: 'Board of Directors',
-    authorRole: 'Board',
-    timestamp: new Date('2026-03-15'),
-    priority: 'important',
-    readBy: 78,
-    totalResidents: 150,
-  },
-];
+
 
 const PRIORITY_STYLES = {
   urgent: {
@@ -106,6 +41,9 @@ export default function AnnouncementsPage() {
     );
   }
 
+  const { data: announcements, isLoading } = useAnnouncements();
+  const items = announcements || [];
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
@@ -117,23 +55,33 @@ export default function AnnouncementsPage() {
         </div>
         <div className="flex items-center gap-2 text-xs text-gray-500">
           <span className="w-2 h-2 rounded-full bg-green-500 status-dot" />
-          {DEMO_ANNOUNCEMENTS.length} announcements
+          {items.length} announcements
         </div>
       </div>
 
-      <div className="space-y-4">
-        {DEMO_ANNOUNCEMENTS.map(announcement => (
-          <AnnouncementCard key={announcement.id} announcement={announcement} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="text-center py-12 text-gray-500">Loading announcements...</div>
+      ) : items.length === 0 ? (
+        <div className="glass-card rounded-xl p-12 text-center">
+          <p className="text-4xl mb-3">📢</p>
+          <h3 className="font-medium mb-1">No announcements yet</h3>
+          <p className="text-sm text-gray-400">Board announcements will appear here</p>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {items.map((announcement: any) => (
+            <AnnouncementCard key={announcement.id} announcement={announcement} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
-function AnnouncementCard({ announcement }: { announcement: Announcement }) {
-  const style = PRIORITY_STYLES[announcement.priority];
-  const timeAgo = getTimeAgo(announcement.timestamp);
-  const readPercent = Math.round((announcement.readBy / announcement.totalResidents) * 100);
+function AnnouncementCard({ announcement }: { announcement: any }) {
+  const style = PRIORITY_STYLES[announcement.priority as keyof typeof PRIORITY_STYLES] || PRIORITY_STYLES.info;
+  const timeAgo = getTimeAgo(new Date(announcement.created_at));
+  const readPercent = Math.round((announcement.read_by || 0 / announcement.total_residents || 150) * 100);
 
   return (
     <div className={`glass-card rounded-xl border-l-4 ${style.border} overflow-hidden`}>
@@ -160,11 +108,11 @@ function AnnouncementCard({ announcement }: { announcement: Announcement }) {
         <div className="flex items-center justify-between pt-3 border-t border-white/5">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-full bg-purple-600/20 flex items-center justify-center text-[10px] font-bold text-purple-400">
-              {announcement.author[0]}
+              {announcement.author_name[0]}
             </div>
             <div>
-              <p className="text-xs font-medium">{announcement.author}</p>
-              <p className="text-[10px] text-gray-500">{announcement.authorRole}</p>
+              <p className="text-xs font-medium">{announcement.author_name}</p>
+              <p className="text-[10px] text-gray-500">{announcement.author_role}</p>
             </div>
           </div>
           <div className="text-right">

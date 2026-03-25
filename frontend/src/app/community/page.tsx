@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { usePosts, useCreatePost, type Post as PostType } from '@/hooks/usePosts';
+import { useProperty } from '@/hooks/useProperty';
 
 interface Post {
   id: string;
@@ -76,12 +78,11 @@ export default function CommunityPage() {
     );
   }
 
-  const filteredPosts = selectedCategory
-    ? DEMO_POSTS.filter(p => p.category === selectedCategory)
-    : DEMO_POSTS;
+  const { data: apiPosts, isLoading } = usePosts(selectedCategory);
+  const posts = apiPosts || [];
 
-  const pinnedPosts = filteredPosts.filter(p => p.pinned);
-  const regularPosts = filteredPosts.filter(p => !p.pinned);
+  const pinnedPosts = posts.filter((p: any) => p.pinned);
+  const regularPosts = posts.filter((p: any) => !p.pinned);
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
@@ -157,7 +158,7 @@ export default function CommunityPage() {
   );
 }
 
-function PostCard({ post }: { post: Post }) {
+function PostCard({ post }: { post: any }) {
   const cat = CATEGORIES.find(c => c.id === post.category);
   const timeAgo = getTimeAgo(post.timestamp);
 
@@ -166,7 +167,7 @@ function PostCard({ post }: { post: Post }) {
       <div className="flex items-start gap-4">
         {/* Author avatar */}
         <div className="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/20 flex items-center justify-center text-xs font-bold text-purple-400 shrink-0">
-          #{post.authorLot}
+          #{post.lot_number || 0}
         </div>
 
         <div className="flex-1 min-w-0">
@@ -196,7 +197,7 @@ function PostCard({ post }: { post: Post }) {
             }`}>
               {cat?.icon} {cat?.label}
             </span>
-            <span>Lot #{post.authorLot}</span>
+            <span>Lot #{post.lot_number || 0}</span>
             <span>{timeAgo}</span>
           </div>
 
@@ -208,10 +209,10 @@ function PostCard({ post }: { post: Post }) {
           {/* Engagement */}
           <div className="flex items-center gap-4 mt-3">
             <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-purple-400 transition-colors">
-              ❤️ {post.likes}
+              ❤️ {post.likes_count || 0}
             </button>
             <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-purple-400 transition-colors">
-              💬 {post.replies} replies
+              💬 {post.replies_count || 0} replies
             </button>
             <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-purple-400 transition-colors ml-auto">
               🔗 Share
