@@ -1,0 +1,187 @@
+'use client';
+
+import { useState, useCallback } from 'react';
+import { useProperty } from './useProperty';
+import { useTreasury, useDuesStatus } from './useTreasury';
+import { useHealthScore } from './useHealthScore';
+import { usePublicStats } from './usePublicData';
+
+export type ChatMessage = {
+  id: string;
+  role: 'user' | 'bot';
+  text: string;
+  timestamp: Date;
+};
+
+function nextQuarterDate(): string {
+  const now = new Date();
+  const month = now.getMonth(); // 0-indexed
+  const quarterStarts = [0, 3, 6, 9];
+  const nextQ = quarterStarts.find((m) => m > month) ?? 0;
+  const year = nextQ === 0 ? now.getFullYear() + 1 : now.getFullYear();
+  const date = new Date(year, nextQ, 1);
+  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+export function useAIAssistant() {
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      id: 'welcome',
+      role: 'bot',
+      text: "Hi! I'm your SuvrenHOA assistant 🤖 I can help with dues, treasury, proposals, health scores, and more. What would you like to know?",
+      timestamp: new Date(),
+    },
+  ]);
+  const [isTyping, setIsTyping] = useState(false);
+
+  const property = useProperty();
+  const treasury = useTreasury();
+  const health = useHealthScore();
+  const { activeProposals, totalProperties } = usePublicStats();
+  const dues = useDuesStatus(property.tokenId);
+
+  const processQuery = useCallback(
+    async (text: string): Promise<string> => {
+      const q = text.toLowerCase().trim();
+
+      // ── Dues queries ────────────────────────────────────────
+      if (/my dues|how much do i owe|dues status|am i current|paid up/.test(q)) {
+        if (!property.hasProperty) {
+          return "I don't see a property linked to your wallet. Connect a wallet that holds a SuvrenHOA property token to check your dues status.";
+        }
+        if (dues.isCurrent === true) {
+          return `✅ You're all paid up! Your dues are current. Next dues are due at the start of next quarter (${nextQuarterDate()}).`;
+        }
+        if (dues.isCurrent === false) {
+          return `⚠️ You have **${dues.quartersOwed} quarter${dues.quartersOwed !== 1 ? 's' : ''}** of dues outstanding — **$${dues.amountOwed} USDC** total. Head to [Pay Dues](/dues) to get current.`;
+        }
+        return "Loading your dues status... Please try again in a moment.";
+      }
+
+      // ── When are dues due ───────────────────────────────────
+      if (/when.*dues|dues.*due|next.*quarter|quarter.*start/.test(q)) {
+        return `📅 Dues are collected **quarterly**. The next quarter starts **${nextQuarterDate()}**. You can pay annually for a ${treasury.annualDiscount}% discount! Visit [/dues](/dues) to pay.`;
+      }
+
+      // ── How to pay dues ─────────────────────────────────────
+      if (/how.*pay|pay.*dues|pay.*my|payment/.test(q)) {
+        return `💳 To pay your dues:\n1. Connect your wallet\n2. Go to [Dues page](/dues)\n3. Choose quarterly ($${treasury.quarterlyDues} USDC) or annual ($${treasury.annualAmount} USDC — saves ${treasury.annualDiscount}%)\n4. Approve USDC and confirm the transaction`;
+      }
+
+      // ── Treasury ────────────────────────────────────────────
+      if (/treasury|how much.*fund|fund.*balance|operating|reserve|budget/.test(q)) {
+        return `💰 **Treasury Snapshot:**\n• Total Balance: **$${treasury.totalBalance} USDC**\n• Operating Fund: $${treasury.operatingBalance} USDC\n• Reserve Fund: $${treasury.reserveBalance} USDC\n\nSee the full breakdown at [/treasury](/treasury).`;
+      }
+
+      // ── Properties / community size ─────────────────────────
+      if (/how many.*prop|properties|community size|total.*home|home.*total|lots|units/.test(q)) {
+        const count = property.totalSupply || Number(totalProperties) || 0;
+        return `🏠 There are currently **${count} properties** registered in the SuvrenHOA community.`;
+      }
+
+      // ── Proposals ───────────────────────────────────────────
+      if (/proposal|active.*vote|vote.*active|governance|pending.*proposal/.test(q)) {
+        const count = Number(activeProposals) || 0;
+        if (count === 0) {
+          return `🗳️ There are currently **no active proposals**. Check [/proposals](/proposals) to see past proposals or create a new one.`;
+        }
+        return `🗳️ There are **${count} active proposal${count !== 1 ? 's' : ''}** open for voting right now! Head to [/proposals](/proposals) to review and cast your vote.`;
+      }
+
+      // ── How to vote ─────────────────────────────────────────
+      if (/how.*vote|voting.*process|cast.*vote|vote.*how/.test(q)) {
+        return `🗳️ **How to Vote:**\n1. Connect your wallet (must hold a property NFT)\n2. Go to [Proposals](/proposals)\n3. Select an active proposal\n4. Choose For, Against, or Abstain\n5. Confirm the transaction\n\nVoting power = 1 vote per property. You can also delegate your vote.`;
+      }
+
+      // ── Health score ────────────────────────────────────────
+      if (/health.*score|score|community.*health|hoa.*score/.test(q)) {
+        if (health.loading) {
+          return "⏳ Calculating the community health score... try again in a moment!";
+        }
+        const factorLines = health.factors.map((f) => `• ${f.icon} ${f.name}: ${f.score}/${f.max}`).join('\n');
+        return `❤️ **Community Health Score: ${health.score}/100 (Grade ${health.grade})**\n\nKey factors:\n${factorLines}\n\nSee the full breakdown at [/health](/health).`;
+      }
+
+      // ── CC&Rs / Rules ───────────────────────────────────────
+      if (/cc&r|ccr|rules|bylaws|covenant|regulation|restriction/.test(q)) {
+        return `📄 **CC&Rs (Covenants, Conditions & Restrictions)** are the governing rules of your HOA. They cover architectural standards, pet policies, parking, and more.\n\nAll official documents are stored on-chain for transparency. Browse them at [/documents](/documents).`;
+      }
+
+      // ── Documents ───────────────────────────────────────────
+      if (/document|docs|files|upload.*doc/.test(q)) {
+        return `📄 All HOA documents (CC&Rs, bylaws, meeting minutes) are stored on-chain. View them at [/documents](/documents).`;
+      }
+
+      // ── Contact board ───────────────────────────────────────
+      if (/contact|board|who.*manage|reach out|email|phone|president|secretary|treasurer/.test(q)) {
+        return `📬 **Board Contact Info:**\n• President: board@suvren.hoa\n• General inquiries: contact@suvren.hoa\n• Emergency maintenance: Use the [Maintenance portal](/maintenance)\n\nYou can also send a direct message via [/messages](/messages).`;
+      }
+
+      // ── Maintenance ─────────────────────────────────────────
+      if (/maintenance|repair|fix|broken|submit.*request|request.*maintenance|issue/.test(q)) {
+        return `🔧 To submit a maintenance request:\n1. Go to [Maintenance](/maintenance)\n2. Describe the issue\n3. Add photos if helpful\n4. Submit — the board will follow up\n\nYou can track the status of your requests there too.`;
+      }
+
+      // ── Pool / amenities ────────────────────────────────────
+      if (/pool.*hour|pool.*time|pool.*open|pool.*close/.test(q)) {
+        return `🏊 **Pool Hours:**\n• Monday–Friday: 6 AM – 10 PM\n• Saturday–Sunday: 7 AM – 10 PM\n• Holidays: 8 AM – 8 PM\n\nReserve the pool for private events at [/reservations](/reservations).`;
+      }
+
+      if (/amenity|amenities|clubhouse|gym|fitness|tennis|facilities|rules.*amenity|amenity.*rules/.test(q)) {
+        return `🏊 **Amenity Guidelines:**\n• Residents may bring up to 3 guests\n• No glass containers in pool area\n• Quiet hours after 9 PM\n• Reservations required for private events\n\nBook at [/reservations](/reservations).`;
+      }
+
+      // ── Reservations ────────────────────────────────────────
+      if (/reserv|book.*space|book.*room|clubhouse.*book/.test(q)) {
+        return `📅 Book community spaces (pool, clubhouse, etc.) at [/reservations](/reservations). Reserve up to 90 days in advance.`;
+      }
+
+      // ── Directory ───────────────────────────────────────────
+      if (/directory|neighbor|who.*live|resident.*list/.test(q)) {
+        return `👥 The resident directory is available at [/directory](/directory) — connect your wallet to see your neighbors.`;
+      }
+
+      // ── Help / what can you do ──────────────────────────────
+      if (/help|what can you|what do you know|commands|topics|about you|who are you/.test(q)) {
+        return `🤖 I can answer questions about:\n• **Dues** — status, how to pay, deadlines\n• **Treasury** — balances and funds\n• **Proposals** — active votes and governance\n• **Health Score** — community metrics\n• **Documents** — CC&Rs and bylaws\n• **Maintenance** — how to submit requests\n• **Amenities** — pool hours and rules\n• **Contact** — how to reach the board\n\nJust ask naturally!`;
+      }
+
+      // ── Fallback ────────────────────────────────────────────
+      return `🤷 I don't have info on that yet. Try asking about:\n• Dues ("What are my dues?")\n• Treasury ("How much is in the treasury?")\n• Proposals ("Are there active proposals?")\n• Health score, amenities, or documents`;
+    },
+    [property, dues, treasury, health, activeProposals, totalProperties]
+  );
+
+  const sendMessage = useCallback(
+    async (text: string) => {
+      if (!text.trim()) return;
+
+      const userMsg: ChatMessage = {
+        id: `user-${Date.now()}`,
+        role: 'user',
+        text: text.trim(),
+        timestamp: new Date(),
+      };
+
+      setMessages((prev) => [...prev, userMsg]);
+      setIsTyping(true);
+
+      await new Promise((res) => setTimeout(res, 500 + Math.random() * 300));
+
+      const response = await processQuery(text);
+
+      const botMsg: ChatMessage = {
+        id: `bot-${Date.now()}`,
+        role: 'bot',
+        text: response,
+        timestamp: new Date(),
+      };
+
+      setIsTyping(false);
+      setMessages((prev) => [...prev, botMsg]);
+    },
+    [processQuery]
+  );
+
+  return { messages, sendMessage, isTyping };
+}

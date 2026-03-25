@@ -4,6 +4,7 @@ import './globals.css';
 import { Providers } from './providers';
 import { Header } from '@/components/Header';
 import { AlertBanner } from '@/components/AlertBanner';
+import { AIChatWidget } from '@/components/AIChatWidget';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="min-h-[calc(100vh-4rem)]">
             {children}
           </main>
+          <AIChatWidget />
         </Providers>
       </body>
     </html>
