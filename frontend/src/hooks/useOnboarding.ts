@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useAccount } from "wagmi";
+import { useProperty } from "@/hooks/useProperty";
 
 export interface PetEntry {
   id: string;
@@ -49,10 +50,10 @@ function storageKey(address: string) {
 
 export function useOnboarding() {
   const { address } = useAccount();
+  const { tokenId } = useProperty();
   const [data, setData] = useState<OnboardingData>(DEFAULT_DATA);
   const [loaded, setLoaded] = useState(false);
 
-  // Load from localStorage when address changes
   useEffect(() => {
     if (!address) {
       setData(DEFAULT_DATA);
@@ -86,9 +87,58 @@ export function useOnboarding() {
     [address]
   );
 
-  const complete = useCallback(() => {
+  const complete = useCallback(async () => {
+    if (!address) return;
+
+    // Sync pets to Supabase
+    for (const pet of data.pets) {
+      if (!pet.name) continue;
+      try {
+        await fetch('/api/pets', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            wallet_address: address.toLowerCase(),
+            lot_number: tokenId ? Number(tokenId) : null,
+            name: pet.name,
+            species: pet.type || 'other',
+            breed: pet.breed || null,
+            color: null,
+            weight: pet.weight || null,
+            age: null,
+            vaccinated: false,
+            microchipped: false,
+          }),
+        });
+      } catch (e) {
+        console.error('[onboarding] Failed to sync pet:', e);
+      }
+    }
+
+    // Sync vehicles to Supabase
+    for (const v of data.vehicles) {
+      if (!v.make) continue;
+      try {
+        await fetch('/api/vehicles', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            wallet_address: address.toLowerCase(),
+            lot_number: tokenId ? Number(tokenId) : null,
+            make: v.make,
+            model: v.model || null,
+            year: v.year ? parseInt(v.year) : null,
+            color: v.color || null,
+            license_plate: v.plate || null,
+          }),
+        });
+      } catch (e) {
+        console.error('[onboarding] Failed to sync vehicle:', e);
+      }
+    }
+
     save({ completedAt: new Date().toISOString() });
-  }, [save]);
+  }, [save, data.pets, data.vehicles, address, tokenId]);
 
   const reset = useCallback(() => {
     if (!address) return;

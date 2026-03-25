@@ -526,3 +526,141 @@ html.light ::-webkit-scrollbar-thumb:hover {
 .animate-fade-in {
   animation: fade-in 300ms ease-out both;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SuvrenHOA Design System v3 — Futuristic Enhancement Layer
+   Added: Premium hover effects, refined glass, smooth animations
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Enhanced Glass Cards ──────────────────────────────────────────────── */
+.glass-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 32px var(--glow-purple),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ── Hover Lift Utility ──────────────────────────────────────────────── */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 24px var(--glow-purple);
+}
+
+/* ── Text Glow ──────────────────────────────────────────────────────── */
+.text-glow {
+  text-shadow: 0 0 40px rgba(139, 92, 246, 0.3), 0 0 80px rgba(139, 92, 246, 0.1);
+}
+.text-glow-cyan {
+  text-shadow: 0 0 40px rgba(34, 211, 238, 0.3), 0 0 80px rgba(34, 211, 238, 0.1);
+}
+
+/* ── Gradient Border ──────────────────────────────────────────────── */
+.gradient-border {
+  position: relative;
+  background: var(--surface-1);
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(34, 211, 238, 0.15), rgba(139, 92, 246, 0.1));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* ── Animated Background Orbs ──────────────────────────────────────── */
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+.bg-orb {
+  animation: float-orb 20s ease-in-out infinite;
+  pointer-events: none;
+}
+.bg-orb-slow {
+  animation: float-orb 30s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+/* ── Smooth Fade Animations ──────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-scale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+.animate-delay-4 { animation-delay: 0.4s; }
+
+/* ── Pulsing Glow for Live Indicators ──────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--glow-purple); }
+  50% { box-shadow: 0 0 20px var(--glow-purple-md), 0 0 40px var(--glow-purple); }
+}
+.glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* ── Refined Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.4);
+}
+
+/* ── Button Polish ──────────────────────────────────────────── */
+button, a {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Input Focus States ──────────────────────────────────────────── */
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15), 0 0 16px rgba(139, 92, 246, 0.1);
+}
+
+/* ── Smooth Page Transitions ──────────────────────────────────────── */
+.page-transition {
+  animation: fade-up 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ── Premium Number Display ──────────────────────────────────────── */
+.stat-number {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
