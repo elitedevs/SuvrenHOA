@@ -94,7 +94,7 @@ function NewMessageModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="glass-card rounded-2xl w-full max-w-md p-6 border border-purple-500/20">
+      <div className="glass-card rounded-2xl hover-lift w-full max-w-md p-6 border border-purple-500/20">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-gray-100">New Message</h2>
           <button
@@ -359,7 +359,7 @@ function MessagingCenter({ address }: { address: string }) {
       )}
 
       {/* Main Layout */}
-      <div className="glass-card rounded-2xl overflow-hidden border border-gray-700/50" style={{ height: '70vh', minHeight: '500px' }}>
+      <div className="glass-card rounded-2xl hover-lift overflow-hidden border border-gray-700/50" style={{ height: '70vh', minHeight: '500px' }}>
         <div className="flex h-full">
           {/* Sidebar — conversation list */}
           <div

@@ -69,7 +69,7 @@ export default function ViolationsPage() {
       </div>
 
       {/* Process Explainer */}
-      <div className="glass-card rounded-xl p-5 mb-6">
+      <div className="glass-card rounded-xl hover-lift p-5 mb-6">
         <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-3">How Violations Work</h3>
         <div className="flex items-center gap-1 overflow-x-auto pb-2 scrollbar-none">
           {['Report', 'Review', 'Notice', 'Cure', 'Hearing', 'Ruling', 'Appeal'].map((step, i) => (
@@ -142,7 +142,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
       {isLoading ? (
         <div className="text-center py-12 text-gray-500">Loading violations...</div>
       ) : !violations || violations.length === 0 ? (
-        <div className="glass-card rounded-xl p-12 text-center">
+        <div className="glass-card rounded-xl hover-lift p-12 text-center">
           <p className="text-5xl mb-4">✅</p>
           <h3 className="text-lg font-medium mb-2">No violations</h3>
           <p className="text-sm text-gray-400">
@@ -176,7 +176,7 @@ function ViolationCard({ violation }: { violation: any }) {
     'text-gray-400 bg-gray-500/10 border-gray-500/20';
 
   return (
-    <div className="glass-card rounded-xl overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
+    <div className="glass-card rounded-xl hover-lift overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -306,7 +306,7 @@ function ReportForm({ onClose }: { onClose: () => void }) {
   });
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5">
+    <div className="glass-card rounded-xl hover-lift p-6 space-y-5">
       <h2 className="text-lg font-semibold">Report a Violation</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

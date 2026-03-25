@@ -24,6 +24,8 @@ function Landing() {
       <div className="absolute inset-0 bg-grid opacity-60" />
       <div className="absolute inset-0 bg-radial-glow-strong" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-purple-600/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-20 right-[20%] w-[400px] h-[400px] bg-cyan-500/[0.03] blur-[150px] rounded-full bg-orb pointer-events-none" />
+      <div className="absolute bottom-20 left-[10%] w-[300px] h-[300px] bg-purple-500/[0.04] blur-[100px] rounded-full bg-orb-slow pointer-events-none" />
 
       {/* Hero */}
       <section className="relative flex flex-col items-center justify-center min-h-[88vh] px-6 text-center">
@@ -37,9 +39,9 @@ function Landing() {
 
         {/* Headline — 2x+ type jumps */}
         <div className="page-enter page-enter-delay-1">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-5 tracking-tight leading-[1.05]">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-5 tracking-tight leading-[1.05] text-glow">
             Welcome to{' '}
-            <span className="gradient-text">SuvrenHOA</span>
+            <span className="gradient-text text-glow">SuvrenHOA</span>
           </h1>
           <p className="text-gray-400 text-xl sm:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
             Transparent, immutable, democratic HOA governance on the blockchain.
@@ -177,7 +179,7 @@ function Dashboard() {
             {hasProperty ? (
               <>
                 Welcome back,{' '}
-                <span className="gradient-text">Lot #{tokenId}</span>
+                <span className="gradient-text text-glow">Lot #{tokenId}</span>
               </>
             ) : (
               <>
@@ -287,7 +289,7 @@ function Dashboard() {
             <Link
               key={href}
               href={href}
-              className={`glass-card rounded-2xl p-7 group block border-l-2 ${borderColor}`}
+              className={`glass-card rounded-2xl p-7 group block border-l-2 hover-lift ${borderColor}`}
             >
               <span className="text-3xl block mb-4 group-hover:scale-110 transition-transform duration-200 inline-block">{icon}</span>
               <h3 className="font-bold text-base mb-2 group-hover:text-purple-300 transition-colors duration-200 text-gray-100">

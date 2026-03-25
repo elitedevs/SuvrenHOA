@@ -120,7 +120,7 @@ function StatCard({
   const c = colorMap[color];
 
   return (
-    <div className="glass-card rounded-2xl p-5 flex flex-col gap-3">
+    <div className="glass-card rounded-2xl p-5 flex flex-col gap-3 hover-lift">
       <div className="flex items-center justify-between">
         <span className="text-[13px] font-semibold text-gray-400 uppercase tracking-wider">
           {label}
@@ -200,6 +200,13 @@ export function TransparencyDashboard() {
                 'radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%)',
             }}
           />
+          <div
+            className="absolute bottom-0 left-[20%] w-[350px] h-[350px] rounded-full opacity-10 bg-orb-slow"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(139,92,246,0.5) 0%, transparent 70%)',
+            }}
+          />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28 text-center">
@@ -211,7 +218,7 @@ export function TransparencyDashboard() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-            <span className="gradient-text">Full Transparency.</span>
+            <span className="gradient-text text-glow">Full Transparency.</span>
             <br />
             <span className="text-white">Zero Trust Required.</span>
           </h1>
@@ -256,7 +263,7 @@ export function TransparencyDashboard() {
         <section>
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-xl font-bold text-white">Live On-Chain Stats</h2>
+              <h2 className="text-xl font-bold text-white text-glow">Live On-Chain Stats</h2>
               <p className="text-[13px] text-gray-500 mt-1">
                 Reads directly from smart contracts — no backend, no caching
               </p>

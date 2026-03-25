@@ -136,7 +136,7 @@ export default function HealthPage() {
               const factorColorClass = pct >= 71 ? 'text-green-400' : pct >= 41 ? 'text-amber-400' : 'text-red-400';
 
               return (
-                <div key={factor.name} className="glass-card rounded-2xl p-6">
+                <div key={factor.name} className="glass-card rounded-2xl hover-lift p-6">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="flex items-center gap-3">
                       <span className="text-2xl">{factor.icon}</span>
@@ -172,7 +172,7 @@ export default function HealthPage() {
 
         {/* What can we improve */}
         {!loading && !error && suggestions.length > 0 && (
-          <div className="glass-card rounded-2xl p-6 mb-8 page-enter page-enter-delay-3 border-l-2 border-l-purple-500/50">
+          <div className="glass-card rounded-2xl hover-lift p-6 mb-8 page-enter page-enter-delay-3 border-l-2 border-l-purple-500/50">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-xl bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-lg shrink-0">
                 🎯

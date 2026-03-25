@@ -30,7 +30,7 @@ export default function TreasuryPage() {
       </div>
 
       {/* Hero Balance */}
-      <div className="glass-card rounded-2xl p-10 text-center glow-purple mb-6 border-l-2 border-l-purple-500/50 page-enter page-enter-delay-1">
+      <div className="glass-card rounded-2xl hover-lift p-10 text-center glow-purple mb-6 border-l-2 border-l-purple-500/50 page-enter page-enter-delay-1">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Total Community Balance</p>
         <div className="flex items-baseline justify-center gap-3 mb-2">
           <span className="text-6xl sm:text-7xl font-black gradient-text">${totalBalance}</span>
@@ -97,7 +97,7 @@ export default function TreasuryPage() {
       </div>
 
       {/* Balance allocation visual bar */}
-      <div className="glass-card rounded-2xl p-6 mb-8 page-enter page-enter-delay-2">
+      <div className="glass-card rounded-2xl hover-lift p-6 mb-8 page-enter page-enter-delay-2">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-4">Allocation Overview</p>
         <div className="h-3 rounded-full overflow-hidden flex">
           <div
@@ -131,7 +131,7 @@ export default function TreasuryPage() {
         </div>
 
         {expenditureCount === 0 ? (
-          <div className="glass-card rounded-2xl p-12 text-center">
+          <div className="glass-card rounded-2xl hover-lift p-12 text-center">
             {/* Chart placeholder */}
             <div className="w-full h-32 rounded-xl bg-gray-800/30 border border-gray-700/30 flex items-center justify-center mb-6">
               <div className="flex items-end gap-2 h-16">
@@ -164,7 +164,7 @@ export default function TreasuryPage() {
       </div>
 
       {/* On-chain banner */}
-      <div className="mt-8 glass-card rounded-2xl p-6 border-l-2 border-l-purple-500/40 bg-purple-950/10 page-enter page-enter-delay-4">
+      <div className="mt-8 glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-purple-500/40 bg-purple-950/10 page-enter page-enter-delay-4">
         <div className="flex items-start gap-3">
           <span className="text-xl">🔗</span>
           <div>

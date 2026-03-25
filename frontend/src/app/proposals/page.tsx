@@ -64,7 +64,7 @@ function ProposalsDashboard() {
           { value: `${Math.round(votingPeriod / 86400)}d`, label: 'Voting Period', color: 'text-green-400' },
           { value: '4', label: 'Categories', color: 'text-amber-400' },
         ].map(({ value, label, color }) => (
-          <div key={label} className="glass-card rounded-2xl p-6">
+          <div key={label} className="glass-card rounded-2xl hover-lift p-6">
             <p className={`text-3xl font-extrabold ${color} mb-1`}>{value}</p>
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide">{label}</p>
           </div>
@@ -91,7 +91,7 @@ function ProposalsDashboard() {
             return (
               <div
                 key={cat.value}
-                className={`glass-card rounded-2xl p-6 border-l-2 ${borderColors[i % 4]} ${bgColors[i % 4]}`}
+                className={`glass-card rounded-2xl hover-lift p-6 border-l-2 ${borderColors[i % 4]} ${bgColors[i % 4]}`}
               >
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-xl">{cat.icon}</span>
@@ -112,7 +112,7 @@ function ProposalsDashboard() {
       </div>
 
       {/* Proposals Empty State */}
-      <div className="glass-card rounded-2xl p-14 text-center page-enter page-enter-delay-3">
+      <div className="glass-card rounded-2xl hover-lift p-14 text-center page-enter page-enter-delay-3">
         <div className="w-20 h-20 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-4xl mx-auto mb-6">
           🗳️
         </div>
@@ -177,7 +177,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
 
   if (!hasProperty) {
     return (
-      <div className="glass-card rounded-2xl p-12 text-center border-l-2 border-l-amber-500/40">
+      <div className="glass-card rounded-2xl hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
         <div className="text-5xl mb-4">🏠</div>
         <h3 className="text-xl font-bold mb-3">Property Required</h3>
         <p className="text-sm text-gray-400 max-w-sm mx-auto">
@@ -233,7 +233,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
   return (
     <div className="space-y-6 page-enter">
       {/* Form */}
-      <div className="glass-card rounded-2xl p-8 space-y-6">
+      <div className="glass-card rounded-2xl hover-lift p-8 space-y-6">
         {/* Title */}
         <div>
           <label className="block text-sm font-semibold text-gray-300 mb-2">
@@ -320,7 +320,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
       </button>
 
       {/* Info */}
-      <div className="glass-card rounded-2xl p-6 border-l-2 border-l-purple-500/40 bg-purple-950/20">
+      <div className="glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-purple-500/40 bg-purple-950/20">
         <h4 className="text-sm font-bold text-purple-300 mb-3">What happens next?</h4>
         <ol className="text-xs text-gray-400 space-y-2 list-decimal list-inside leading-relaxed">
           <li>Proposal enters <strong className="text-gray-300">Pending</strong> state (1-day review period)</li>

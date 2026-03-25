@@ -39,7 +39,7 @@ function CommunityDuesStatus() {
 
   if (loading) {
     return (
-      <div className="glass-card rounded-2xl p-6 mb-6">
+      <div className="glass-card rounded-2xl hover-lift p-6 mb-6">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">Community Dues Status</p>
         <div className="skeleton h-4 w-full rounded-lg mb-3" />
         <div className="skeleton h-2 w-full rounded-full" />
@@ -50,7 +50,7 @@ function CommunityDuesStatus() {
   if (totalProperties === 0) return null;
 
   return (
-    <div className="glass-card rounded-2xl p-6 mb-6 page-enter page-enter-delay-1">
+    <div className="glass-card rounded-2xl hover-lift p-6 mb-6 page-enter page-enter-delay-1">
       <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Community Dues Status</p>
 
       {/* Progress bar */}
@@ -102,7 +102,7 @@ function DuesPanel() {
   if (!hasProperty) {
     return (
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12 page-enter">
-        <div className="glass-card rounded-2xl p-12 text-center border-l-2 border-l-amber-500/40">
+        <div className="glass-card rounded-2xl hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
           <div className="text-5xl mb-4">🏠</div>
           <h2 className="text-xl font-bold mb-3">No Property Found</h2>
           <p className="text-gray-400 text-sm">You need a Property NFT to pay dues.</p>
@@ -214,7 +214,7 @@ function DuesPanel() {
 
       {/* USDC Balance + Status */}
       <div className="grid grid-cols-2 gap-4 mb-6 page-enter page-enter-delay-1">
-        <div className="glass-card rounded-2xl p-5">
+        <div className="glass-card rounded-2xl hover-lift p-5">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-2">USDC Balance</p>
           <p className="text-2xl font-extrabold text-gray-100">${usdcBalance.toFixed(2)}</p>
           <p className="text-[11px] text-gray-600 mt-1">on Base network</p>

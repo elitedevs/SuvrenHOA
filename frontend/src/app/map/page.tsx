@@ -43,7 +43,7 @@ function LotCard({ lot, onClick }: { lot: LotData; onClick: () => void }) {
     <button
       onClick={onClick}
       className={[
-        'relative glass-card rounded-xl p-4 text-left cursor-pointer',
+        'relative glass-card rounded-xl hover-lift p-4 text-left cursor-pointer',
         'border-l-4',
         borderClass,
         'hover:bg-white/[0.06]',
@@ -142,7 +142,7 @@ function DetailPanel({
           </div>
 
           {/* Address */}
-          <div className="glass-card rounded-xl p-4 space-y-3">
+          <div className="glass-card rounded-xl hover-lift p-4 space-y-3">
             <h3 className="text-[11px] text-gray-500 uppercase tracking-wider font-semibold">Location</h3>
             <p className="text-gray-200 font-medium">{lot.streetAddress}</p>
             {lot.sqft > 0 && (
@@ -151,7 +151,7 @@ function DetailPanel({
           </div>
 
           {/* Token info */}
-          <div className="glass-card rounded-xl p-4 space-y-3">
+          <div className="glass-card rounded-xl hover-lift p-4 space-y-3">
             <h3 className="text-[11px] text-gray-500 uppercase tracking-wider font-semibold">NFT Details</h3>
             <div className="flex justify-between text-sm">
               <span className="text-gray-500">Token ID</span>
@@ -165,12 +165,12 @@ function DetailPanel({
 
           {/* Owner — board only */}
           {isBoard ? (
-            <div className="glass-card rounded-xl p-4 space-y-3">
+            <div className="glass-card rounded-xl hover-lift p-4 space-y-3">
               <h3 className="text-[11px] text-gray-500 uppercase tracking-wider font-semibold">Owner</h3>
               <p className="text-gray-200 font-mono text-sm break-all">{lot.owner}</p>
             </div>
           ) : (
-            <div className="glass-card rounded-xl p-4">
+            <div className="glass-card rounded-xl hover-lift p-4">
               <p className="text-gray-500 text-sm italic">
                 🔒 Owner details visible to board members only
               </p>
@@ -204,7 +204,7 @@ function StatsBar({ lots }: { lots: LotData[] }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
       {stats.map(({ label, value, color }) => (
-        <div key={label} className="glass-card rounded-xl p-4 text-center">
+        <div key={label} className="glass-card rounded-xl hover-lift p-4 text-center">
           <div className={'text-xl font-bold ' + color}>{value}</div>
           <div className="text-[11px] text-gray-500 uppercase tracking-wider mt-1">{label}</div>
         </div>
@@ -311,7 +311,7 @@ export default function MapPage() {
 
         {/* Error */}
         {error && (
-          <div className="glass-card rounded-xl p-6 border border-red-500/20 bg-red-500/5 mb-6">
+          <div className="glass-card rounded-xl hover-lift p-6 border border-red-500/20 bg-red-500/5 mb-6">
             <p className="text-red-400 font-semibold">⚠ Failed to load map data</p>
             <p className="text-red-400/70 text-sm mt-1">{error}</p>
           </div>
@@ -323,7 +323,7 @@ export default function MapPage() {
             {Array.from({ length: 12 }).map((_, i) => (
               <div
                 key={i}
-                className="glass-card rounded-xl p-4 border-l-4 border-l-gray-700 animate-pulse"
+                className="glass-card rounded-xl hover-lift p-4 border-l-4 border-l-gray-700 animate-pulse"
               >
                 <div className="h-3 w-12 bg-white/[0.07] rounded mb-3" />
                 <div className="h-6 w-16 bg-white/[0.07] rounded mb-4" />

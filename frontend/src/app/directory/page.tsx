@@ -60,7 +60,7 @@ export default function DirectoryPage() {
       </div>
 
       {/* Community Info */}
-      <div className="glass-card rounded-xl p-6 mb-8">
+      <div className="glass-card rounded-xl hover-lift p-6 mb-8">
         <div className="flex items-center gap-4 mb-4">
           <div className="w-14 h-14 rounded-xl bg-purple-600/20 border border-purple-500/20 flex items-center justify-center text-2xl">
             🏘️
@@ -96,7 +96,7 @@ export default function DirectoryPage() {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
         {BOARD_MEMBERS.map((member: any) => (
-          <div key={member.name} className="glass-card rounded-xl p-5">
+          <div key={member.name} className="glass-card rounded-xl hover-lift p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-12 h-12 rounded-full bg-purple-600/20 border border-purple-500/20 flex items-center justify-center text-lg font-bold text-purple-400">
                 {(member.name || '').split(' ').map((n: string) => n[0]).join('')}
@@ -126,7 +126,7 @@ export default function DirectoryPage() {
       </h2>
       <div className="space-y-4">
         {COMMITTEES.map((committee: any) => (
-          <div key={committee.name} className="glass-card rounded-xl p-5">
+          <div key={committee.name} className="glass-card rounded-xl hover-lift p-5">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">{committee.icon}</span>
               <div>
@@ -146,7 +146,7 @@ export default function DirectoryPage() {
       </div>
 
       {/* Contact */}
-      <div className="mt-8 glass-card rounded-xl p-6 glow-purple">
+      <div className="mt-8 glass-card rounded-xl hover-lift p-6 glow-purple">
         <h3 className="font-medium text-sm text-purple-400 mb-2">📞 Need to reach the board?</h3>
         <p className="text-xs text-gray-400">
           Email <a href="mailto:board@faircrofthoa.com" className="text-purple-400 hover:underline">board@faircrofthoa.com</a> or

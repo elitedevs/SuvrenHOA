@@ -62,7 +62,7 @@ export default function AnnouncementsPage() {
       {isLoading ? (
         <div className="text-center py-12 text-gray-500">Loading announcements...</div>
       ) : items.length === 0 ? (
-        <div className="glass-card rounded-xl p-12 text-center">
+        <div className="glass-card rounded-xl hover-lift p-12 text-center">
           <p className="text-4xl mb-3">📢</p>
           <h3 className="font-medium mb-1">No announcements yet</h3>
           <p className="text-sm text-gray-400">Board announcements will appear here</p>
@@ -84,7 +84,7 @@ function AnnouncementCard({ announcement }: { announcement: any }) {
   const readPercent = Math.round((announcement.read_by || 0 / announcement.total_residents || 150) * 100);
 
   return (
-    <div className={`glass-card rounded-xl border-l-4 ${style.border} overflow-hidden`}>
+    <div className={`glass-card rounded-xl hover-lift border-l-4 ${style.border} overflow-hidden`}>
       <div className={`p-6 ${style.bg}`}>
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-3">

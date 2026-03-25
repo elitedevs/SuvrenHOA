@@ -48,7 +48,7 @@ export default function PetsPage() {
       <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-6">
         {['all', 'dog', 'cat', 'bird', 'fish', 'reptile'].map(s => (
           <button key={s} onClick={() => setFilter(s)}
-            className={`glass-card rounded-xl p-3 text-center transition-all ${filter === s ? 'ring-1 ring-purple-500/30' : ''}`}>
+            className={`glass-card rounded-xl hover-lift p-3 text-center transition-all ${filter === s ? 'ring-1 ring-purple-500/30' : ''}`}>
             <p className="text-lg">{s === 'all' ? '🐾' : SPECIES_ICONS[s]}</p>
             <p className="text-[10px] text-gray-500 capitalize">{s === 'all' ? `All (${(pets || []).length})` : `${s}s (${(pets || []).filter((p: any) => p.species === s).length})`}</p>
           </button>
@@ -60,7 +60,7 @@ export default function PetsPage() {
       ) : isLoading ? (
         <div className="text-center py-12 text-gray-500">Loading pets...</div>
       ) : filtered.length === 0 ? (
-        <div className="glass-card rounded-xl p-12 text-center">
+        <div className="glass-card rounded-xl hover-lift p-12 text-center">
           <p className="text-5xl mb-4">🐾</p>
           <h3 className="text-lg font-medium mb-2">No pets registered yet</h3>
           <p className="text-sm text-gray-400">Register your pets so neighbors know who's who on walks!</p>
@@ -68,7 +68,7 @@ export default function PetsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((pet: any) => (
-            <div key={pet.id} className="glass-card rounded-xl p-5">
+            <div key={pet.id} className="glass-card rounded-xl hover-lift p-5">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-12 h-12 rounded-full bg-purple-600/10 border border-purple-500/20 flex items-center justify-center text-2xl">
                   {SPECIES_ICONS[pet.species] || '🐾'}
@@ -121,7 +121,7 @@ function RegisterPet({ onClose }: { onClose: () => void }) {
   });
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5">
+    <div className="glass-card rounded-xl hover-lift p-6 space-y-5">
       <h2 className="text-lg font-semibold">Register Your Pet</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>

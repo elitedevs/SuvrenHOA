@@ -66,7 +66,7 @@ export default function DocumentsPage() {
               { value: '∞', label: 'Permanent Storage', color: 'text-blue-400' },
               { value: '0', label: 'Can Be Altered', color: 'text-amber-400' },
             ].map(({ value, label, color }) => (
-              <div key={label} className="glass-card rounded-2xl p-6">
+              <div key={label} className="glass-card rounded-2xl hover-lift p-6">
                 <p className={`text-3xl font-extrabold ${color} mb-1`}>{value}</p>
                 <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide">{label}</p>
               </div>
@@ -111,7 +111,7 @@ export default function DocumentsPage() {
 
           {/* Document List */}
           {documentCount === 0 ? (
-            <div className="glass-card rounded-2xl p-14 text-center page-enter page-enter-delay-3">
+            <div className="glass-card rounded-2xl hover-lift p-14 text-center page-enter page-enter-delay-3">
               <div className="w-20 h-20 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-4xl mx-auto mb-6">
                 📄
               </div>
@@ -120,7 +120,7 @@ export default function DocumentsPage() {
                 CC&Rs, meeting minutes, budgets, and all governing documents will appear here
                 once registered on-chain. Every document is permanently stored and verifiable.
               </p>
-              <div className="glass-card rounded-xl p-5 max-w-sm mx-auto border-l-2 border-l-purple-500/40 bg-purple-950/10">
+              <div className="glass-card rounded-xl hover-lift p-5 max-w-sm mx-auto border-l-2 border-l-purple-500/40 bg-purple-950/10">
                 <p className="text-xs text-purple-300 leading-relaxed">
                   🔒 Unlike traditional HOA software, documents stored here cannot be altered,
                   deleted, or selectively shared — not even by the board.
@@ -172,7 +172,7 @@ function DocumentCard({
 
   if (isLoading || !doc) {
     return (
-      <div className="glass-card rounded-2xl p-6">
+      <div className="glass-card rounded-2xl hover-lift p-6">
         <div className="flex items-center gap-4">
           <div className="skeleton w-12 h-12 rounded-xl" />
           <div className="flex-1 space-y-2">
@@ -190,7 +190,7 @@ function DocumentCard({
 
   return (
     <div
-      className={`glass-card rounded-2xl p-6 cursor-pointer border-l-2 ${leftBorder}`}
+      className={`glass-card rounded-2xl hover-lift p-6 cursor-pointer border-l-2 ${leftBorder}`}
       onClick={() => setExpanded(!expanded)}
     >
       <div className="flex items-start gap-4">
@@ -340,7 +340,7 @@ function VerifyPanel({
 
       {/* Hash result placeholder */}
       {hash && (
-        <div className="glass-card rounded-2xl p-6">
+        <div className="glass-card rounded-2xl hover-lift p-6">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Hash to verify</p>
           <p className="text-xs font-mono text-gray-300 break-all bg-gray-800/50 p-3 rounded-xl border border-gray-700/40 mb-4">{hash}</p>
           <div className="flex items-center gap-2 text-sm text-gray-400">
@@ -351,7 +351,7 @@ function VerifyPanel({
       )}
 
       {/* How it works */}
-      <div className="glass-card rounded-2xl p-6 border-l-2 border-l-purple-500/40 bg-purple-950/10">
+      <div className="glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-purple-500/40 bg-purple-950/10">
         <h4 className="text-sm font-bold text-purple-300 mb-3">How verification works</h4>
         <div className="space-y-3">
           {[

@@ -52,15 +52,15 @@ export default function VehiclesPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="glass-card rounded-xl p-4 text-center">
+        <div className="glass-card rounded-xl hover-lift p-4 text-center">
           <p className="text-2xl font-bold text-purple-400">{residentVehicles.length}</p>
           <p className="text-[10px] text-gray-500">Registered Vehicles</p>
         </div>
-        <div className="glass-card rounded-xl p-4 text-center">
+        <div className="glass-card rounded-xl hover-lift p-4 text-center">
           <p className="text-2xl font-bold text-amber-400">{guestPasses.length}</p>
           <p className="text-[10px] text-gray-500">Active Guest Passes</p>
         </div>
-        <div className="glass-card rounded-xl p-4 text-center">
+        <div className="glass-card rounded-xl hover-lift p-4 text-center">
           <p className="text-2xl font-bold text-blue-400">{myVehicles.length}</p>
           <p className="text-[10px] text-gray-500">My Vehicles</p>
         </div>
@@ -71,7 +71,7 @@ export default function VehiclesPage() {
       ) : isLoading ? (
         <div className="text-center py-12 text-gray-500">Loading vehicles...</div>
       ) : (vehicles || []).length === 0 ? (
-        <div className="glass-card rounded-xl p-12 text-center">
+        <div className="glass-card rounded-xl hover-lift p-12 text-center">
           <p className="text-5xl mb-4">🚗</p>
           <h3 className="text-lg font-medium mb-2">No vehicles registered</h3>
           <p className="text-sm text-gray-400">Register your vehicles for parking management and security</p>
@@ -79,7 +79,7 @@ export default function VehiclesPage() {
       ) : (
         <div className="space-y-3">
           {(vehicles || []).map((v: any) => (
-            <div key={v.id} className={`glass-card rounded-xl p-4 flex items-center gap-4 ${v.is_guest ? 'border-l-4 border-l-amber-500' : ''}`}>
+            <div key={v.id} className={`glass-card rounded-xl hover-lift p-4 flex items-center gap-4 ${v.is_guest ? 'border-l-4 border-l-amber-500' : ''}`}>
               <div className="w-10 h-10 rounded-lg bg-purple-600/10 flex items-center justify-center text-lg">
                 {v.vehicle_type === 'motorcycle' ? '🏍️' : v.vehicle_type === 'truck' ? '🛻' : v.vehicle_type === 'suv' ? '🚙' : '🚗'}
               </div>
@@ -135,7 +135,7 @@ function VehicleForm({ isGuest, onClose }: { isGuest: boolean; onClose: () => vo
   });
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5">
+    <div className="glass-card rounded-xl hover-lift p-6 space-y-5">
       <h2 className="text-lg font-semibold">{isGuest ? '🎫 Issue Guest Pass' : '🚗 Register Vehicle'}</h2>
 
       {isGuest && (

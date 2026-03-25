@@ -66,7 +66,7 @@ export default function MaintenancePage() {
             <button
               key={status}
               onClick={() => setFilter(filter === status ? 'all' : status)}
-              className={`glass-card rounded-xl p-4 text-center transition-all ${filter === status ? 'ring-1 ring-purple-500/30' : ''}`}
+              className={`glass-card rounded-xl hover-lift p-4 text-center transition-all ${filter === status ? 'ring-1 ring-purple-500/30' : ''}`}
             >
               <p className={`text-2xl font-bold ${style.color}`}>{count}</p>
               <p className="text-[10px] text-gray-500">{style.label}</p>
@@ -94,7 +94,7 @@ function RequestCard({ request }: { request: any }) {
   const timeAgo = getTimeAgo(new Date(request.created_at));
 
   return (
-    <div className="glass-card rounded-xl overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
+    <div className="glass-card rounded-xl hover-lift overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -167,7 +167,7 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
   const categories = ['Irrigation', 'Lighting', 'Roads', 'Plumbing', 'Landscaping', 'Fencing', 'Clubhouse', 'Pool', 'Other'];
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5">
+    <div className="glass-card rounded-xl hover-lift p-6 space-y-5">
       <h2 className="text-lg font-semibold">Report an Issue</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

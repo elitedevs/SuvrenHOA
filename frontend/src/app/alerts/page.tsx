@@ -94,7 +94,7 @@ function AlertCard({
 
   return (
     <div
-      className={`glass-card rounded-2xl p-5 border-l-4 ${s.border} ${s.glow}`}
+      className={`glass-card rounded-2xl hover-lift p-5 border-l-4 ${s.border} ${s.glow}`}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 min-w-0">
@@ -170,7 +170,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
   }
 
   return (
-    <div className="glass-card rounded-2xl overflow-hidden mb-8">
+    <div className="glass-card rounded-2xl hover-lift overflow-hidden mb-8">
       <button
         onClick={() => setOpen(!open)}
         className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/[0.02] transition-colors"
@@ -348,7 +348,7 @@ export default function AlertsPage() {
 
         {/* Not connected nudge */}
         {!isConnected && (
-          <div className="glass-card rounded-2xl p-6 mb-8 flex flex-col items-center gap-4 text-center">
+          <div className="glass-card rounded-2xl hover-lift p-6 mb-8 flex flex-col items-center gap-4 text-center">
             <Info className="w-8 h-8 text-blue-400" />
             <div>
               <p className="font-semibold text-gray-200 mb-1">Connect to dismiss alerts</p>
@@ -371,7 +371,7 @@ export default function AlertsPage() {
           </h2>
 
           {sortedActive.length === 0 ? (
-            <div className="glass-card rounded-2xl p-8 text-center">
+            <div className="glass-card rounded-2xl hover-lift p-8 text-center">
               <div className="w-12 h-12 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">✅</span>
               </div>
@@ -400,7 +400,7 @@ export default function AlertsPage() {
           </h2>
 
           {historyAlerts.length === 0 ? (
-            <div className="glass-card rounded-2xl p-6 text-center">
+            <div className="glass-card rounded-2xl hover-lift p-6 text-center">
               <p className="text-sm text-gray-600">No past alerts yet.</p>
             </div>
           ) : (
