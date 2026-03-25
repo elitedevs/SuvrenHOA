@@ -7,6 +7,9 @@ import { useProperty } from '@/hooks/useProperty';
 import { useTreasury } from '@/hooks/useTreasury';
 import { useGovernorSettings } from '@/hooks/useProposals';
 import { useDocuments } from '@/hooks/useDocuments';
+import { ActivityTicker } from '@/components/ActivityTicker';
+import { HealthScoreWidget } from '@/components/HealthScoreWidget';
+import { DuesReminder } from '@/components/DuesReminder';
 
 export default function Home() {
   const { isConnected } = useAccount();
@@ -190,7 +193,7 @@ function Dashboard() {
         </div>
 
         {/* Primary Stats — pops more with varied card colors */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 page-enter page-enter-delay-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-6 page-enter page-enter-delay-1">
           <div className="glass-card rounded-2xl p-6">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Voting Power</p>
             <p className="text-4xl font-extrabold text-purple-400 leading-none mb-1">{votes}</p>
@@ -214,7 +217,17 @@ function Dashboard() {
             <p className="text-4xl font-extrabold text-amber-400 leading-none mb-1">{documentCount}</p>
             <p className="text-[11px] text-gray-600 font-medium">on-chain records</p>
           </div>
+
+          {/* HOA Health Score Widget */}
+          <HealthScoreWidget />
         </div>
+
+        {/* Smart Dues Reminder — only shows when connected and has a property */}
+        {hasProperty && (
+          <div className="mb-8 page-enter page-enter-delay-2">
+            <DuesReminder compact />
+          </div>
+        )}
 
         {/* Navigation Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 page-enter page-enter-delay-2">
@@ -296,6 +309,11 @@ function Dashboard() {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Live Activity Ticker */}
+        <div className="mt-10 page-enter page-enter-delay-4">
+          <ActivityTicker />
         </div>
       </div>
     </div>

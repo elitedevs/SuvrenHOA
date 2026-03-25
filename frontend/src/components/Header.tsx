@@ -9,7 +9,9 @@ import { NotificationBell } from './NotificationBell';
 
 const navItems = [
   { href: '/dashboard', label: 'My Property', icon: '🏠' },
+  { href: '/health', label: 'Health', icon: '❤️' },
   { href: '/community', label: 'Community', icon: '💬' },
+  { href: '/community/leaderboard', label: 'Leaderboard', icon: '🏆' },
   { href: '/announcements', label: 'News', icon: '📢' },
   { href: '/maintenance', label: 'Maintenance', icon: '🔧' },
   { href: '/violations', label: 'Violations', icon: '🚨' },
@@ -32,6 +34,9 @@ export function Header() {
   const pathname = usePathname();
   const { isConnected } = useAccount();
 
+  const isTransparency =
+    pathname === '/transparency' || pathname.startsWith('/transparency');
+
   return (
     <header className="glass border-b border-[rgba(139,92,246,0.08)] sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -52,10 +57,29 @@ export function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          {isConnected && (
-            <nav className="hidden md:flex items-center gap-1 mx-6" role="navigation" aria-label="Main navigation">
-              {navItems.map(({ href, label, icon }) => {
-                const active = pathname === href || (href !== '/' && pathname.startsWith(href));
+          <nav className="hidden md:flex items-center gap-1 mx-6" role="navigation" aria-label="Main navigation">
+            {/* Transparency — always visible, public page */}
+            <Link
+              href="/transparency"
+              className={`relative px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
+                isTransparency
+                  ? 'nav-active text-purple-300 bg-purple-500/10'
+                  : 'text-gray-500 hover:text-gray-200 hover:bg-white/[0.04]'
+              }`}
+              aria-current={isTransparency ? 'page' : undefined}
+            >
+              <span className="text-[12px] opacity-80">🔍</span>
+              Transparency
+            </Link>
+
+            {/* Connected-only nav */}
+            {isConnected &&
+              navItems.map(({ href, label, icon }) => {
+                // For /community/leaderboard, avoid matching /community prefix incorrectly
+                const active =
+                  pathname === href ||
+                  (href !== '/' && href.length > 10 && pathname.startsWith(href)) ||
+                  (href.length <= 10 && href !== '/' && pathname === href);
                 return (
                   <Link
                     key={href}
@@ -72,8 +96,7 @@ export function Header() {
                   </Link>
                 );
               })}
-            </nav>
-          )}
+          </nav>
 
           {/* Theme + Wallet */}
           <div className="flex items-center gap-2 shrink-0">
@@ -90,15 +113,32 @@ export function Header() {
       </div>
 
       {/* Mobile Nav */}
-      {isConnected && (
-        <div className="md:hidden border-t border-[rgba(255,255,255,0.04)] overflow-x-auto scrollbar-none">
-          <nav
-            className="flex items-center gap-1 px-3 py-2 min-w-max"
-            role="navigation"
-            aria-label="Mobile navigation"
+      <div className="md:hidden border-t border-[rgba(255,255,255,0.04)] overflow-x-auto scrollbar-none">
+        <nav
+          className="flex items-center gap-1 px-3 py-2 min-w-max"
+          role="navigation"
+          aria-label="Mobile navigation"
+        >
+          {/* Transparency always visible on mobile too */}
+          <Link
+            href="/transparency"
+            className={`relative px-3 py-2 rounded-lg text-[12px] font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
+              isTransparency
+                ? 'nav-active text-purple-300 bg-purple-500/10'
+                : 'text-gray-500 hover:text-gray-300'
+            }`}
+            aria-current={isTransparency ? 'page' : undefined}
           >
-            {navItems.map(({ href, label, icon }) => {
-              const active = pathname === href || (href !== '/' && pathname.startsWith(href));
+            <span>🔍</span>
+            Transparency
+          </Link>
+
+          {isConnected &&
+            navItems.map(({ href, label, icon }) => {
+              const active =
+                pathname === href ||
+                (href !== '/' && href.length > 10 && pathname.startsWith(href)) ||
+                (href.length <= 10 && href !== '/' && pathname === href);
               return (
                 <Link
                   key={href}
@@ -115,9 +155,8 @@ export function Header() {
                 </Link>
               );
             })}
-          </nav>
-        </div>
-      )}
+        </nav>
+      </div>
     </header>
   );
 }

@@ -6,6 +6,8 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useProperty } from '@/hooks/useProperty';
 import { useTreasury, useDuesStatus } from '@/hooks/useTreasury';
 import { usePayDues, useUSDCBalance, useUSDCAllowance } from '@/hooks/usePayDues';
+import { DuesReminder } from '@/components/DuesReminder';
+import { useDuesSocialProof } from '@/hooks/useDuesSocialProof';
 
 export default function DuesPage() {
   const { isConnected } = useAccount();
@@ -31,6 +33,60 @@ const STEPS: { id: Step; label: string; short: string }[] = [
   { id: 'pay', label: 'Submit Payment', short: 'Pay' },
   { id: 'done', label: 'Complete', short: 'Done' },
 ];
+
+function CommunityDuesStatus() {
+  const { totalProperties, paidCount, unpaidCount, paidPercentage, loading } = useDuesSocialProof();
+
+  if (loading) {
+    return (
+      <div className="glass-card rounded-2xl p-6 mb-6">
+        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">Community Dues Status</p>
+        <div className="skeleton h-4 w-full rounded-lg mb-3" />
+        <div className="skeleton h-2 w-full rounded-full" />
+      </div>
+    );
+  }
+
+  if (totalProperties === 0) return null;
+
+  return (
+    <div className="glass-card rounded-2xl p-6 mb-6 page-enter page-enter-delay-1">
+      <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Community Dues Status</p>
+
+      {/* Progress bar */}
+      <div className="mb-4">
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-sm font-bold text-gray-200">
+            {paidCount} of {totalProperties} properties current
+          </p>
+          <span className="text-sm font-extrabold text-green-400">{paidPercentage}%</span>
+        </div>
+        <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full transition-all duration-700"
+            style={{ width: `${paidPercentage}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Anonymous breakdown */}
+      <div className="grid grid-cols-2 gap-3">
+        <div className="rounded-xl bg-green-500/5 border border-green-500/20 p-4 text-center">
+          <p className="text-2xl font-extrabold text-green-400">{paidCount}</p>
+          <p className="text-xs text-gray-500 mt-1 font-semibold">Paid This Quarter</p>
+        </div>
+        <div className="rounded-xl bg-red-500/5 border border-red-500/20 p-4 text-center">
+          <p className="text-2xl font-extrabold text-red-400">{unpaidCount}</p>
+          <p className="text-xs text-gray-500 mt-1 font-semibold">Still Outstanding</p>
+        </div>
+      </div>
+
+      <p className="text-[11px] text-gray-600 mt-3 text-center">
+        Community data is anonymous — no names, just numbers.
+      </p>
+    </div>
+  );
+}
 
 function DuesPanel() {
   const { address, hasProperty, tokenId } = useProperty();
@@ -104,6 +160,14 @@ function DuesPanel() {
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Payments</p>
         <h1 className="text-3xl font-extrabold tracking-tight">Pay Dues</h1>
       </div>
+
+      {/* Smart Dues Reminder */}
+      <div className="mb-6 page-enter page-enter-delay-1">
+        <DuesReminder />
+      </div>
+
+      {/* Community Dues Status */}
+      <CommunityDuesStatus />
 
       {/* Step Progression */}
       {step !== 'done' && (
