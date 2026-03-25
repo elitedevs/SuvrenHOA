@@ -22,7 +22,7 @@ export interface ActivityItem {
 
 
 const CHAIN_ID = 84532;
-const BLOCK_SCAN_RANGE = BigInt(5000); // ~14 hours on Base (~2s blocks)
+const BLOCK_SCAN_RANGE = BigInt(2000); // ~14 hours on Base (~2s blocks)
 const MAX_EVENTS = 20;
 const BASESCAN = 'https://sepolia.basescan.org/tx';
 

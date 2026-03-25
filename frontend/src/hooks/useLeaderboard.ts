@@ -9,7 +9,7 @@ import FaircroftTreasuryAbi from '@/config/abis/FaircroftTreasury.json';
 import DocumentRegistryAbi from '@/config/abis/DocumentRegistry.json';
 
 const CHAIN_ID = 84532;
-const BLOCK_SCAN_RANGE = BigInt(50_000); // ~27 hours on Base (~2s blocks)
+const BLOCK_SCAN_RANGE = BigInt(2000); // ~1.1 hours on Base (~2s blocks)
 const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
 export interface LeaderboardEntry {

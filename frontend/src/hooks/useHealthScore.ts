@@ -103,7 +103,7 @@ export function useHealthScore(): HealthScoreData {
       let executedProposals = 0;
       try {
         const latestBlock = await publicClient.getBlockNumber();
-        const fromBlock = latestBlock > BigInt(50000) ? latestBlock - BigInt(50000) : BigInt(0);
+        const fromBlock = latestBlock > BigInt(2000) ? latestBlock - BigInt(2000) : BigInt(0);
         const logs = await publicClient.getLogs({
           address: contracts.governor,
           event: {

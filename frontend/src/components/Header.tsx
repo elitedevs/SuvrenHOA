@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
@@ -7,252 +8,370 @@ import { useAccount } from 'wagmi';
 import { ThemeToggle } from './ThemeToggle';
 import { NotificationBell } from './NotificationBell';
 import { useMessages } from '@/hooks/useMessages';
+import {
+  Home, Building2, Scale, Users, Wrench, Map, Eye,
+  Heart, Bell, MessageCircle, Bot, Menu, X, ChevronDown,
+  PawPrint, Car, User, Settings, PackageOpen,
+  Vote, Landmark, FileText, AlertTriangle,
+  Megaphone, Trophy, BookOpen, Calendar,
+  CreditCard, Hammer, CalendarCheck, PenTool, BarChart3,
+} from 'lucide-react';
 
-const navItems = [
-  { href: '/assistant', label: 'Assistant', icon: '🤖' },
-  { href: '/dashboard', label: 'My Property', icon: '🏠' },
-  { href: '/health', label: 'Health', icon: '❤️' },
-  { href: '/messages', label: 'Messages', icon: '💬' },
-  { href: '/community', label: 'Community', icon: '🗣️' },
-  { href: '/community/leaderboard', label: 'Leaderboard', icon: '🏆' },
-  { href: '/alerts', label: 'Alerts', icon: '🚨' },
-  { href: '/announcements', label: 'News', icon: '📢' },
-  { href: '/maintenance', label: 'Maintenance', icon: '🔧' },
-  { href: '/violations', label: 'Violations', icon: '🚨' },
-  { href: '/architectural', label: 'Arch Review', icon: '🏗️' },
-  { href: '/proposals', label: 'Proposals', icon: '🗳️' },
-  { href: '/treasury', label: 'Treasury', icon: '💰' },
-  { href: '/documents', label: 'Docs', icon: '📄' },
-  { href: '/surveys', label: 'Surveys', icon: '📊' },
-  { href: '/reservations', label: 'Amenities', icon: '🏊' },
-  { href: '/directory', label: 'Directory', icon: '👥' },
-  { href: '/dues', label: 'Dues', icon: '💳' },
-  { href: '/calendar', label: 'Calendar', icon: '📅' },
-  { href: '/pets', label: 'Pets', icon: '🐕' },
-  { href: '/vehicles', label: 'Vehicles', icon: '🚗' },
-  { href: '/profile', label: 'Profile', icon: '👤' },
-  { href: '/admin', label: 'Admin', icon: '⚙️' },
-  { href: '/checkout', label: 'Move Out', icon: '📦' },
+// ── Navigation Structure ──────────────────────────────────────────────────────
+const navGroups = [
+  {
+    label: 'Property',
+    icon: Building2,
+    items: [
+      { href: '/dashboard', label: 'My Property', icon: Home },
+      { href: '/pets', label: 'Pets', icon: PawPrint },
+      { href: '/vehicles', label: 'Vehicles', icon: Car },
+      { href: '/profile', label: 'Profile', icon: User },
+    ],
+  },
+  {
+    label: 'Governance',
+    icon: Scale,
+    items: [
+      { href: '/proposals', label: 'Proposals', icon: Vote },
+      { href: '/treasury', label: 'Treasury', icon: Landmark },
+      { href: '/documents', label: 'Documents', icon: FileText },
+      { href: '/violations', label: 'Violations', icon: AlertTriangle },
+    ],
+  },
+  {
+    label: 'Community',
+    icon: Users,
+    items: [
+      { href: '/community', label: 'Forum', icon: Users },
+      { href: '/announcements', label: 'Announcements', icon: Megaphone },
+      { href: '/community/leaderboard', label: 'Leaderboard', icon: Trophy },
+      { href: '/directory', label: 'Directory', icon: BookOpen },
+      { href: '/calendar', label: 'Calendar', icon: Calendar },
+    ],
+  },
+  {
+    label: 'Services',
+    icon: Wrench,
+    items: [
+      { href: '/dues', label: 'Pay Dues', icon: CreditCard },
+      { href: '/maintenance', label: 'Maintenance', icon: Hammer },
+      { href: '/reservations', label: 'Amenities', icon: CalendarCheck },
+      { href: '/architectural', label: 'Arch Review', icon: PenTool },
+      { href: '/surveys', label: 'Surveys', icon: BarChart3 },
+    ],
+  },
 ];
 
-function MessagesNavLink({
-  href,
+// ── Dropdown Component ────────────────────────────────────────────────────────
+function NavDropdown({
   label,
-  icon,
-  active,
-  mobile,
+  icon: Icon,
+  items,
+  pathname,
 }: {
-  href: string;
   label: string;
-  icon: string;
-  active: boolean;
-  mobile?: boolean;
+  icon: React.ElementType;
+  items: { href: string; label: string; icon: React.ElementType }[];
+  pathname: string;
 }) {
-  const { totalUnread } = useMessages();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const timeout = useRef<NodeJS.Timeout | null>(null);
+
+  const hasActive = items.some(
+    (item) => pathname === item.href || pathname.startsWith(item.href + '/')
+  );
+
+  const handleEnter = () => {
+    if (timeout.current) clearTimeout(timeout.current);
+    setOpen(true);
+  };
+  const handleLeave = () => {
+    timeout.current = setTimeout(() => setOpen(false), 150);
+  };
+
+  useEffect(() => {
+    return () => { if (timeout.current) clearTimeout(timeout.current); };
+  }, []);
 
   return (
-    <Link
-      href={href}
-      className={`relative px-3 py-2 rounded-lg ${mobile ? 'text-[12px]' : 'text-[13px]'} font-semibold ${mobile ? 'whitespace-nowrap' : ''} transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
-        active
-          ? 'nav-active text-purple-300 bg-purple-500/10'
-          : 'text-gray-500 hover:text-gray-200 hover:bg-white/[0.04]'
-      }`}
-      aria-current={active ? 'page' : undefined}
+    <div
+      ref={ref}
+      className="relative"
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
     >
-      <span className={`${mobile ? '' : 'text-[12px] opacity-80'}`}>{icon}</span>
-      {label}
-      {totalUnread > 0 && (
-        <span className="ml-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-purple-600 text-white text-[10px] font-bold flex items-center justify-center">
-          {totalUnread > 9 ? '9+' : totalUnread}
-        </span>
+      <button
+        className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
+          hasActive
+            ? 'text-purple-300 bg-purple-500/10'
+            : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+        }`}
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        <Icon className="w-4 h-4" />
+        {label}
+        <ChevronDown
+          className={`w-3 h-3 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        />
+      </button>
+
+      {open && (
+        <div className="absolute top-full left-0 mt-1 w-52 py-2 rounded-xl border border-white/[0.06] bg-[rgba(15,15,20,0.95)] backdrop-blur-xl shadow-2xl shadow-purple-900/10 z-50 animate-fade-in">
+          {items.map((item) => {
+            const ItemIcon = item.icon;
+            const active = pathname === item.href || pathname.startsWith(item.href + '/');
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={`flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium transition-colors duration-150 ${
+                  active
+                    ? 'text-purple-300 bg-purple-500/10'
+                    : 'text-gray-400 hover:text-gray-100 hover:bg-white/[0.04]'
+                }`}
+              >
+                <ItemIcon className="w-4 h-4 opacity-70" />
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
       )}
-    </Link>
+    </div>
   );
 }
 
+// ── Mobile Nav ────────────────────────────────────────────────────────────────
+function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => void }) {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  return (
+    <div className="fixed inset-0 z-[100] bg-[rgba(0,0,0,0.6)] backdrop-blur-sm" onClick={onClose}>
+      <div
+        className="absolute right-0 top-0 bottom-0 w-[280px] bg-[rgba(15,15,20,0.98)] backdrop-blur-xl border-l border-white/[0.06] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close */}
+        <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
+          <span className="text-[15px] font-bold gradient-text">SuvrenHOA</span>
+          <button onClick={onClose} className="p-2 rounded-lg hover:bg-white/[0.06] text-gray-400">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Public links */}
+        <div className="p-3 border-b border-white/[0.06]">
+          <p className="text-[10px] uppercase tracking-widest text-gray-600 font-bold px-3 mb-2">Public</p>
+          {[
+            { href: '/transparency', label: 'Transparency', icon: Eye },
+            { href: '/map', label: 'Map', icon: Map },
+            { href: '/health', label: 'Health Score', icon: Heart },
+          ].map((item) => {
+            const ItemIcon = item.icon;
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={onClose}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium transition-colors ${
+                  active ? 'text-purple-300 bg-purple-500/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+                }`}
+              >
+                <ItemIcon className="w-4 h-4" />
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Grouped sections */}
+        {navGroups.map((group) => {
+          const GroupIcon = group.icon;
+          const isExpanded = expanded === group.label;
+          return (
+            <div key={group.label} className="border-b border-white/[0.06]">
+              <button
+                onClick={() => setExpanded(isExpanded ? null : group.label)}
+                className="flex items-center justify-between w-full px-6 py-3 text-[13px] font-semibold text-gray-300 hover:text-white transition-colors"
+              >
+                <span className="flex items-center gap-2">
+                  <GroupIcon className="w-4 h-4 text-purple-400/70" />
+                  {group.label}
+                </span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+              </button>
+              {isExpanded && (
+                <div className="pb-2 px-3">
+                  {group.items.map((item) => {
+                    const ItemIcon = item.icon;
+                    const active = pathname === item.href || pathname.startsWith(item.href + '/');
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={onClose}
+                        className={`flex items-center gap-3 px-6 py-2 rounded-lg text-[13px] font-medium transition-colors ${
+                          active ? 'text-purple-300 bg-purple-500/10' : 'text-gray-500 hover:text-gray-200 hover:bg-white/[0.04]'
+                        }`}
+                      >
+                        <ItemIcon className="w-3.5 h-3.5 opacity-60" />
+                        {item.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {/* Utility links */}
+        <div className="p-3">
+          <p className="text-[10px] uppercase tracking-widest text-gray-600 font-bold px-3 mb-2">Account</p>
+          {[
+            { href: '/admin', label: 'Admin', icon: Settings },
+            { href: '/onboarding', label: 'Setup Wizard', icon: PackageOpen },
+            { href: '/checkout', label: 'Move Out', icon: PackageOpen },
+          ].map((item) => {
+            const ItemIcon = item.icon;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={onClose}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium text-gray-500 hover:text-gray-200 hover:bg-white/[0.04] transition-colors"
+              >
+                <ItemIcon className="w-4 h-4" />
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Main Header ───────────────────────────────────────────────────────────────
 export function Header() {
   const pathname = usePathname();
   const { isConnected } = useAccount();
-
-  const isTransparency =
-    pathname === '/transparency' || pathname.startsWith('/transparency');
-  const isMap = pathname === '/map' || pathname.startsWith('/map');
+  const { totalUnread } = useMessages();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="glass border-b border-[rgba(139,92,246,0.08)] sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-3 shrink-0 group min-h-[44px]"
-            aria-label="SuvrenHOA home"
-          >
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-400 to-purple-700 flex items-center justify-center font-bold text-sm text-white group-hover:shadow-[0_0_16px_rgba(139,92,246,0.5)] transition-all duration-300 group-hover:scale-105">
-              S
-            </div>
-            <span className="text-[15px] font-700 hidden sm:block tracking-tight">
-              <span className="gradient-text font-bold">Suvren</span>
-              <span className="text-gray-400 font-semibold">HOA</span>
-            </span>
-          </Link>
-
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-1 mx-6" role="navigation" aria-label="Main navigation">
-            {/* Transparency — always visible, public page */}
-            <Link
-              href="/transparency"
-              className={`relative px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
-                isTransparency
-                  ? 'nav-active text-purple-300 bg-purple-500/10'
-                  : 'text-gray-500 hover:text-gray-200 hover:bg-white/[0.04]'
-              }`}
-              aria-current={isTransparency ? 'page' : undefined}
-            >
-              <span className="text-[12px] opacity-80">🔍</span>
-              Transparency
+    <>
+      <header className="glass border-b border-[rgba(139,92,246,0.08)] sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-14">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-400 to-purple-700 flex items-center justify-center font-bold text-sm text-white group-hover:shadow-[0_0_16px_rgba(139,92,246,0.5)] transition-all duration-300 group-hover:scale-105">
+                S
+              </div>
+              <span className="text-[15px] font-bold hidden sm:block tracking-tight">
+                <span className="gradient-text">Suvren</span>
+                <span className="text-gray-500">HOA</span>
+              </span>
             </Link>
 
-            {/* Map — always visible, public page */}
-            <Link
-              href="/map"
-              className={`relative px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
-                isMap
-                  ? 'nav-active text-purple-300 bg-purple-500/10'
-                  : 'text-gray-500 hover:text-gray-200 hover:bg-white/[0.04]'
-              }`}
-              aria-current={isMap ? 'page' : undefined}
-            >
-              <span className="text-[12px] opacity-80">🗺️</span>
-              Map
-            </Link>
+            {/* Desktop Nav */}
+            <nav className="hidden lg:flex items-center gap-0.5 mx-4">
+              {/* Public links */}
+              <Link
+                href="/transparency"
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
+                  pathname.startsWith('/transparency') ? 'text-purple-300 bg-purple-500/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+                }`}
+              >
+                <Eye className="w-4 h-4" />
+                Transparency
+              </Link>
+              <Link
+                href="/map"
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
+                  pathname.startsWith('/map') ? 'text-purple-300 bg-purple-500/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+                }`}
+              >
+                <Map className="w-4 h-4" />
+                Map
+              </Link>
 
-            {/* Connected-only nav */}
-            {isConnected &&
-              navItems.map(({ href, label, icon }) => {
-                const active =
-                  pathname === href ||
-                  (href !== '/' && href.length > 10 && pathname.startsWith(href)) ||
-                  (href.length <= 10 && href !== '/' && pathname === href);
+              {/* Dropdowns (connected only) */}
+              {isConnected && navGroups.map((group) => (
+                <NavDropdown
+                  key={group.label}
+                  label={group.label}
+                  icon={group.icon}
+                  items={group.items}
+                  pathname={pathname}
+                />
+              ))}
+            </nav>
 
-                if (href === '/messages') {
-                  return (
-                    <MessagesNavLink
-                      key={href}
-                      href={href}
-                      label={label}
-                      icon={icon}
-                      active={active}
-                    />
-                  );
-                }
-
-                return (
+            {/* Right side utilities */}
+            <div className="flex items-center gap-1.5 shrink-0">
+              {isConnected && (
+                <>
                   <Link
-                    key={href}
-                    href={href}
-                    className={`relative px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
-                      active
-                        ? 'nav-active text-purple-300 bg-purple-500/10'
-                        : 'text-gray-500 hover:text-gray-200 hover:bg-white/[0.04]'
-                    }`}
-                    aria-current={active ? 'page' : undefined}
+                    href="/health"
+                    className={`p-2 rounded-lg transition-colors ${pathname === '/health' ? 'text-green-400 bg-green-500/10' : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04]'}`}
+                    title="Health Score"
                   >
-                    <span className="text-[12px] opacity-80">{icon}</span>
-                    {label}
+                    <Heart className="w-4 h-4" />
                   </Link>
-                );
-              })}
-          </nav>
-
-          {/* Theme + Wallet */}
-          <div className="flex items-center gap-2 shrink-0">
-            {isConnected && <NotificationBell />}
-            <ThemeToggle />
-            <ConnectButton
-              label="Sign In"
-              showBalance={false}
-              chainStatus="icon"
-              accountStatus="avatar"
-            />
+                  <Link
+                    href="/alerts"
+                    className={`p-2 rounded-lg transition-colors ${pathname === '/alerts' ? 'text-red-400 bg-red-500/10' : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04]'}`}
+                    title="Alerts"
+                  >
+                    <Bell className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href="/messages"
+                    className={`relative p-2 rounded-lg transition-colors ${pathname === '/messages' ? 'text-purple-400 bg-purple-500/10' : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04]'}`}
+                    title="Messages"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    {totalUnread > 0 && (
+                      <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-[16px] px-1 rounded-full bg-purple-600 text-white text-[9px] font-bold flex items-center justify-center">
+                        {totalUnread > 9 ? '9+' : totalUnread}
+                      </span>
+                    )}
+                  </Link>
+                  <Link
+                    href="/assistant"
+                    className={`p-2 rounded-lg transition-colors ${pathname === '/assistant' ? 'text-blue-400 bg-blue-500/10' : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04]'}`}
+                    title="AI Assistant"
+                  >
+                    <Bot className="w-4 h-4" />
+                  </Link>
+                </>
+              )}
+              <div className="hidden sm:block">
+                <ThemeToggle />
+              </div>
+              <ConnectButton label="Sign In" showBalance={false} chainStatus="icon" accountStatus="avatar" />
+              {/* Mobile hamburger */}
+              <button
+                className="lg:hidden p-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-white/[0.04] transition-colors"
+                onClick={() => setMobileOpen(true)}
+                aria-label="Open menu"
+              >
+                <Menu className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile Nav */}
-      <div className="md:hidden border-t border-[rgba(255,255,255,0.04)] overflow-x-auto scrollbar-none">
-        <nav
-          className="flex items-center gap-1 px-3 py-2 min-w-max"
-          role="navigation"
-          aria-label="Mobile navigation"
-        >
-          {/* Transparency always visible on mobile too */}
-          <Link
-            href="/transparency"
-            className={`relative px-3 py-2 rounded-lg text-[12px] font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
-              isTransparency
-                ? 'nav-active text-purple-300 bg-purple-500/10'
-                : 'text-gray-500 hover:text-gray-300'
-            }`}
-            aria-current={isTransparency ? 'page' : undefined}
-          >
-            <span>🔍</span>
-            Transparency
-          </Link>
-
-          {/* Map always visible on mobile too */}
-          <Link
-            href="/map"
-            className={`relative px-3 py-2 rounded-lg text-[12px] font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
-              isMap
-                ? 'nav-active text-purple-300 bg-purple-500/10'
-                : 'text-gray-500 hover:text-gray-300'
-            }`}
-            aria-current={isMap ? 'page' : undefined}
-          >
-            <span>🗺️</span>
-            Map
-          </Link>
-
-          {isConnected &&
-            navItems.map(({ href, label, icon }) => {
-              const active =
-                pathname === href ||
-                (href !== '/' && href.length > 10 && pathname.startsWith(href)) ||
-                (href.length <= 10 && href !== '/' && pathname === href);
-
-              if (href === '/messages') {
-                return (
-                  <MessagesNavLink
-                    key={href}
-                    href={href}
-                    label={label}
-                    icon={icon}
-                    active={active}
-                    mobile
-                  />
-                );
-              }
-
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  className={`relative px-3 py-2 rounded-lg text-[12px] font-semibold whitespace-nowrap transition-all duration-200 flex items-center gap-1.5 min-h-[44px] ${
-                    active
-                      ? 'nav-active text-purple-300 bg-purple-500/10'
-                      : 'text-gray-500 hover:text-gray-300'
-                  }`}
-                  aria-current={active ? 'page' : undefined}
-                >
-                  <span>{icon}</span>
-                  {label}
-                </Link>
-              );
-            })}
-        </nav>
-      </div>
-    </header>
+      {/* Mobile overlay */}
+      {mobileOpen && <MobileNav pathname={pathname} onClose={() => setMobileOpen(false)} />}
+    </>
   );
 }
