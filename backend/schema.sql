@@ -257,3 +257,96 @@ ALTER TABLE hoa_survey_responses ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Anyone can read surveys" ON hoa_surveys FOR SELECT USING (true);
 CREATE POLICY "Anyone can read survey options" ON hoa_survey_options FOR SELECT USING (true);
 CREATE POLICY "Anyone can read survey responses" ON hoa_survey_responses FOR SELECT USING (true);
+
+-- ── Violations System ────────────────────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS hoa_violations (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    violation_number TEXT UNIQUE NOT NULL, -- VIO-2026-001
+    reported_by TEXT NOT NULL, -- wallet_address (or 'anonymous')
+    reported_by_lot INTEGER,
+    accused_lot INTEGER NOT NULL,
+    accused_wallet TEXT,
+    category TEXT NOT NULL CHECK (category IN ('architectural','landscaping','noise','parking','pet','trash','maintenance','other')),
+    ccr_section TEXT, -- Which CC&R section was violated
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    photo_urls TEXT[], -- Evidence photos
+    location TEXT,
+    anonymous_report BOOLEAN DEFAULT FALSE,
+    
+    -- Status lifecycle
+    status TEXT NOT NULL DEFAULT 'reported' CHECK (status IN (
+        'reported',      -- Initial report
+        'under-review',  -- Board is reviewing
+        'dismissed',     -- Board dismissed (not a violation)
+        'notice-issued', -- Formal notice sent to homeowner
+        'cure-period',   -- Homeowner has time to fix
+        'cured',         -- Homeowner fixed it
+        'disputed',      -- Homeowner disputes the violation  
+        'hearing',       -- Hearing scheduled/in progress
+        'ruling-upheld', -- Board upheld after hearing
+        'ruling-modified', -- Board modified ruling
+        'ruling-dismissed', -- Board dismissed after hearing
+        'fined',         -- Fine issued
+        'appealed',      -- Community appeal (governance proposal created)
+        'appeal-upheld', -- Community upheld the ruling
+        'appeal-overturned', -- Community overturned (violation dismissed)
+        'resolved',      -- Fully resolved
+        'closed'         -- Administratively closed
+    )),
+    
+    severity TEXT DEFAULT 'minor' CHECK (severity IN ('minor','moderate','major','critical')),
+    offense_number INTEGER DEFAULT 1, -- 1st, 2nd, 3rd offense
+    
+    -- Fine tracking
+    fine_amount INTEGER DEFAULT 0, -- In cents (USDC * 100)
+    fine_paid BOOLEAN DEFAULT FALSE,
+    fine_proposal_id TEXT, -- On-chain governance proposal ID (for appeals)
+    
+    -- Dates
+    cure_deadline TIMESTAMPTZ,
+    hearing_date TIMESTAMPTZ,
+    
+    -- Board actions
+    reviewed_by TEXT, -- Board member wallet
+    review_notes TEXT,
+    ruling_notes TEXT,
+    
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS hoa_violation_updates (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    violation_id UUID REFERENCES hoa_violations(id) ON DELETE CASCADE,
+    action TEXT NOT NULL, -- 'status_change', 'note', 'evidence_added', 'fine_issued', 'appeal_created'
+    old_status TEXT,
+    new_status TEXT,
+    text TEXT NOT NULL,
+    updated_by TEXT NOT NULL, -- wallet_address or 'system'
+    photo_urls TEXT[],
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS hoa_violation_evidence (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    violation_id UUID REFERENCES hoa_violations(id) ON DELETE CASCADE,
+    submitted_by TEXT NOT NULL,
+    type TEXT DEFAULT 'photo' CHECK (type IN ('photo','document','video','statement')),
+    url TEXT,
+    description TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_violations_status ON hoa_violations(status);
+CREATE INDEX IF NOT EXISTS idx_violations_lot ON hoa_violations(accused_lot);
+CREATE INDEX IF NOT EXISTS idx_violations_created ON hoa_violations(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_violation_updates ON hoa_violation_updates(violation_id);
+
+ALTER TABLE hoa_violations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE hoa_violation_updates ENABLE ROW LEVEL SECURITY;
+ALTER TABLE hoa_violation_evidence ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Anyone can read violations" ON hoa_violations FOR SELECT USING (true);
+CREATE POLICY "Anyone can read violation updates" ON hoa_violation_updates FOR SELECT USING (true);
+CREATE POLICY "Anyone can read violation evidence" ON hoa_violation_evidence FOR SELECT USING (true);
