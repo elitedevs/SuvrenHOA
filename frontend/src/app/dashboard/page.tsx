@@ -6,6 +6,7 @@ import { useProperty } from '@/hooks/useProperty';
 import { useDuesStatus } from '@/hooks/useTreasury';
 import { useMessages } from '@/hooks/useMessages';
 import { useOnboarding } from '@/hooks/useOnboarding';
+import { PropertySelector } from '@/components/PropertySelector';
 import Link from 'next/link';
 
 export default function DashboardPage() {
@@ -33,6 +34,10 @@ function PropertyDashboard() {
     totalSupply,
     tokenId,
     propertyInfo,
+    properties,
+    selectedPropertyIndex,
+    setSelectedPropertyIndex,
+    hasMultipleProperties,
   } = useProperty();
 
   const { isCurrent, quartersOwed, amountOwed } = useDuesStatus(tokenId);
@@ -78,9 +83,23 @@ function PropertyDashboard() {
           </h1>
         </div>
         <div className="px-4 py-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
-          <span className="text-sm font-bold text-purple-300">Lot #{tokenId}</span>
+          <span className="text-sm font-bold text-purple-300">
+            Lot #{tokenId}
+            {hasMultipleProperties && (
+              <span className="ml-1 text-xs text-purple-400/60">
+                ({properties.length} properties)
+              </span>
+            )}
+          </span>
         </div>
       </div>
+
+      {/* Property Selector — only shows when wallet owns multiple lots */}
+      <PropertySelector
+        properties={properties}
+        selectedIndex={selectedPropertyIndex}
+        onSelect={setSelectedPropertyIndex}
+      />
 
       {/* Property Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
