@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import type { Map as LeafletMap, CircleMarker, Marker } from 'leaflet';
 import type { LotData } from '@/hooks/useNeighborhoodMap';
 import type { Incident } from '@/hooks/useIncidents';
 import { geocodeAddress, NEIGHBORHOOD_CENTER, DEFAULT_ZOOM } from '@/utils/geocoding';
@@ -21,7 +20,7 @@ interface NeighborhoodMapProps {
 }
 
 // ─────────────────────────────────────────
-// Incident type helpers
+// Incident type helpers (exported for page.tsx)
 // ─────────────────────────────────────────
 export const INCIDENT_COLORS: Record<Incident['type'], string> = {
   crime: '#ef4444',
@@ -53,17 +52,77 @@ export const INCIDENT_LABELS: Record<Incident['type'], string> = {
   other: 'Other',
 };
 
-function incidentDivIcon(L: typeof import('leaflet'), incident: Incident) {
+// ─────────────────────────────────────────
+// Dark map style matching luxury palette
+// ─────────────────────────────────────────
+const DARK_MAP_STYLES: google.maps.MapTypeStyle[] = [
+  { elementType: 'geometry', stylers: [{ color: '#1a1a1a' }] },
+  { elementType: 'labels.text.fill', stylers: [{ color: '#8a8a8a' }] },
+  { elementType: 'labels.text.stroke', stylers: [{ color: '#1a1a1a' }] },
+  { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#2d2d2d' }] },
+  { featureType: 'road', elementType: 'labels.text.fill', stylers: [{ color: '#6b6b6b' }] },
+  { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0d0d0d' }] },
+  { featureType: 'poi', stylers: [{ visibility: 'off' }] },
+  { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+  { featureType: 'administrative', elementType: 'geometry', stylers: [{ color: '#2a2a2a' }] },
+  { featureType: 'administrative', elementType: 'labels.text.fill', stylers: [{ color: '#636363' }] },
+  { featureType: 'landscape', elementType: 'geometry', stylers: [{ color: '#1a1a1a' }] },
+];
+
+// ─────────────────────────────────────────
+// Lot marker color helpers
+// ─────────────────────────────────────────
+function markerColor(lot: LotData): string {
+  if (lot.isDuesCurrent === null) return '#6b7280';
+  return lot.isDuesCurrent ? '#22c55e' : '#ef4444';
+}
+
+function statusLabel(lot: LotData): string {
+  if (lot.isDuesCurrent === null) return 'Unknown';
+  return lot.isDuesCurrent ? '✓ Current' : '✗ Overdue';
+}
+
+// ─────────────────────────────────────────
+// SVG circle marker for lots
+// ─────────────────────────────────────────
+function lotMarkerSVG(color: string, selected = false): string {
+  const radius = selected ? 13 : 10;
+  const glowOpacity = selected ? 0.5 : 0.35;
+  const strokeColor = selected ? '#c9a96e' : color;
+  const strokeWidth = selected ? 4 : 3;
+
+  return `
+    <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <circle cx="18" cy="18" r="16" fill="${color}" fill-opacity="${glowOpacity * 0.6}" />
+      <circle cx="18" cy="18" r="${radius}" fill="${color}" fill-opacity="0.92"
+        stroke="${strokeColor}" stroke-width="${strokeWidth}"
+        filter="url(#glow)"
+      />
+    </svg>
+  `.trim();
+}
+
+// ─────────────────────────────────────────
+// SVG triangle marker for incidents
+// ─────────────────────────────────────────
+function incidentMarkerSVG(incident: Incident): string {
   const color = INCIDENT_COLORS[incident.type];
   const isActive = incident.status === 'active';
-  const pulseStyle = isActive
-    ? `animation: incidentPulse 2s infinite; box-shadow: 0 0 0 0 ${color}80;`
-    : '';
+  const opacity = isActive ? '0.92' : '0.55';
 
-  const svg = `
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  return `
+    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <filter id="glow-${incident.id}" x="-50%" y="-50%" width="200%" height="200%">
+        <filter id="iglow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
           <feMerge>
             <feMergeNode in="coloredBlur"/>
@@ -71,32 +130,62 @@ function incidentDivIcon(L: typeof import('leaflet'), incident: Incident) {
           </feMerge>
         </filter>
       </defs>
-      ${isActive
-        ? `<circle cx="14" cy="14" r="13" fill="${color}22" stroke="${color}60" stroke-width="1"/>`
-        : ''
-      }
+      ${isActive ? `<circle cx="16" cy="16" r="15" fill="${color}" fill-opacity="0.15" stroke="${color}" stroke-opacity="0.4" stroke-width="1"/>` : ''}
       <polygon
-        points="14,3 25,22 3,22"
+        points="16,3 29,26 3,26"
         fill="${color}"
-        fill-opacity="${isActive ? '0.92' : '0.55'}"
+        fill-opacity="${opacity}"
         stroke="${color}"
         stroke-width="1.5"
         stroke-linejoin="round"
-        filter="url(#glow-${incident.id})"
+        filter="url(#iglow)"
       />
-      <text x="14" y="17.5" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif" font-weight="700">!</text>
+      <text x="16" y="20" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif" font-weight="700">!</text>
     </svg>
-  `;
-
-  return L.divIcon({
-    html: `<div style="width:28px;height:28px;${pulseStyle}">${svg}</div>`,
-    className: 'incident-marker',
-    iconSize: [28, 28],
-    iconAnchor: [14, 22],
-    popupAnchor: [0, -24],
-  });
+  `.trim();
 }
 
+// ─────────────────────────────────────────
+// Popup HTML for lots
+// ─────────────────────────────────────────
+function buildLotPopupHTML(lot: LotData, isBoard: boolean): string {
+  const color = markerColor(lot);
+  const status = statusLabel(lot);
+  const statusBg =
+    lot.isDuesCurrent === true ? 'rgba(34,197,94,0.15)' :
+    lot.isDuesCurrent === false ? 'rgba(239,68,68,0.15)' : 'rgba(107,114,128,0.15)';
+  const statusBorder =
+    lot.isDuesCurrent === true ? 'rgba(34,197,94,0.4)' :
+    lot.isDuesCurrent === false ? 'rgba(239,68,68,0.4)' : 'rgba(107,114,128,0.4)';
+
+  const ownerRow = isBoard
+    ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.07);">
+        <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;">Owner</div>
+        <div style="font-family:monospace;font-size:11px;color:#9ca3af;word-break:break-all;">${lot.owner}</div>
+       </div>`
+    : `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.07);">
+        <div style="font-size:11px;color:#4b5563;font-style:italic;">🔒 Owner visible to board only</div>
+       </div>`;
+
+  return `
+    <div style="min-width:210px;max-width:250px;font-family:'Plus Jakarta Sans',sans-serif;color:#e5e7eb;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;">
+        <div>
+          <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;">Lot</div>
+          <div style="font-size:20px;font-weight:700;background:linear-gradient(135deg,#c9a96e,#e8d5a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">#${lot.lotNumber}</div>
+        </div>
+        <div style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${color};white-space:nowrap;margin-top:2px;">${status}</div>
+      </div>
+      <div style="font-size:12px;color:#d1d5db;font-weight:500;margin-bottom:4px;">${lot.streetAddress}</div>
+      ${lot.sqft > 0 ? `<div style="font-size:11px;color:#6b7280;">${lot.sqft.toLocaleString()} sq ft</div>` : ''}
+      ${ownerRow}
+    </div>
+  `;
+}
+
+// ─────────────────────────────────────────
+// Popup HTML for incidents
+// ─────────────────────────────────────────
 function buildIncidentPopupHTML(incident: Incident): string {
   const color = INCIDENT_COLORS[incident.type];
   const icon = INCIDENT_ICONS[incident.type];
@@ -112,21 +201,21 @@ function buildIncidentPopupHTML(incident: Incident): string {
     : incident.description;
 
   return `
-    <div style="min-width:210px;font-family:'Plus Jakarta Sans',sans-serif;color:#e5e7eb;">
+    <div style="min-width:210px;max-width:260px;font-family:'Plus Jakarta Sans',sans-serif;color:#e5e7eb;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
         <span style="font-size:16px;">${icon}</span>
-        <div>
+        <div style="flex:1;min-width:0;">
           <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;">${label}</div>
-          <div style="font-size:14px;font-weight:700;color:#e5e7eb;line-height:1.2;">${incident.title}</div>
+          <div style="font-size:13px;font-weight:700;color:#e5e7eb;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${incident.title}</div>
         </div>
-        <div style="margin-left:auto;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${statusColor};white-space:nowrap;">${statusText}</div>
+        <div style="padding:2px 7px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${statusColor};white-space:nowrap;flex-shrink:0;">${statusText}</div>
       </div>
       <div style="font-size:11px;color:#9ca3af;margin-bottom:6px;">${truncated}</div>
       <div style="display:flex;align-items:center;gap:8px;font-size:10px;color:#6b7280;">
         <span>📍 ${incident.location}</span>
         <span style="margin-left:auto;">${incident.date}</span>
       </div>
-      <div style="margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,0.06);">
+      <div style="margin-top:8px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.06);">
         <div style="width:100%;height:2px;border-radius:1px;background:linear-gradient(90deg,${color}60,transparent);"></div>
       </div>
     </div>
@@ -134,81 +223,96 @@ function buildIncidentPopupHTML(incident: Incident): string {
 }
 
 // ─────────────────────────────────────────
-// Lot marker color helpers
+// Google Maps loader (singleton)
 // ─────────────────────────────────────────
-function markerColor(lot: LotData): string {
-  if (lot.isDuesCurrent === null) return '#6b7280';
-  return lot.isDuesCurrent ? '#22c55e' : '#ef4444';
+declare global {
+  interface Window {
+    google: typeof google;
+    _gmapsLoading?: Promise<void>;
+  }
 }
 
-function markerGlowColor(lot: LotData): string {
-  if (lot.isDuesCurrent === null) return 'rgba(107, 114, 128, 0.35)';
-  return lot.isDuesCurrent
-    ? 'rgba(34, 197, 94, 0.35)'
-    : 'rgba(239, 68, 68, 0.35)';
+function loadGoogleMaps(): Promise<void> {
+  if (typeof window === 'undefined') return Promise.resolve();
+  if (window.google?.maps) return Promise.resolve();
+  if (window._gmapsLoading) return window._gmapsLoading;
+
+  window._gmapsLoading = new Promise<void>((resolve, reject) => {
+    const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || '';
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
+    script.async = true;
+    script.defer = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Failed to load Google Maps'));
+    document.head.appendChild(script);
+  });
+
+  return window._gmapsLoading;
 }
 
-function statusLabel(lot: LotData): string {
-  if (lot.isDuesCurrent === null) return 'Unknown';
-  return lot.isDuesCurrent ? '✓ Current' : '✗ Overdue';
-}
-
-function buildPopupHTML(lot: LotData, isBoard: boolean): string {
-  const color = markerColor(lot);
-  const status = statusLabel(lot);
-  const statusBg =
-    lot.isDuesCurrent === true
-      ? 'rgba(34,197,94,0.15)'
-      : lot.isDuesCurrent === false
-      ? 'rgba(239,68,68,0.15)'
-      : 'rgba(107,114,128,0.15)';
-  const statusBorder =
-    lot.isDuesCurrent === true
-      ? 'rgba(34,197,94,0.4)'
-      : lot.isDuesCurrent === false
-      ? 'rgba(239,68,68,0.4)'
-      : 'rgba(107,114,128,0.4)';
-
-  const ownerRow = isBoard
-    ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);">
-        <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;">Owner</div>
-        <div style="font-family:monospace;font-size:11px;color:#9ca3af;word-break:break-all;">${lot.owner}</div>
-       </div>`
-    : `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);">
-        <div style="font-size:11px;color:#4b5563;font-style:italic;">🔒 Owner visible to board only</div>
-       </div>`;
-
-  return `
-    <div style="min-width:200px;font-family:'Plus Jakarta Sans',sans-serif;color:#e5e7eb;">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;">
-        <div>
-          <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;">Lot</div>
-          <div style="font-size:20px;font-weight:700;background:linear-gradient(135deg,#c9a96e,#e8d5a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
-            #${lot.lotNumber}
-          </div>
-        </div>
-        <div style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${color};white-space:nowrap;">${status}</div>
-      </div>
-      <div style="font-size:12px;color:#d1d5db;font-weight:500;margin-bottom:4px;">${lot.streetAddress}</div>
-      ${lot.sqft > 0 ? `<div style="font-size:11px;color:#6b7280;">${lot.sqft.toLocaleString()} sq ft</div>` : ''}
-      ${ownerRow}
-    </div>
+// ─────────────────────────────────────────
+// Inline InfoWindow popup styles (injected once)
+// ─────────────────────────────────────────
+let popupStylesInjected = false;
+function injectPopupStyles() {
+  if (popupStylesInjected || typeof document === 'undefined') return;
+  popupStylesInjected = true;
+  const style = document.createElement('style');
+  style.textContent = `
+    /* Google Maps InfoWindow — luxury dark theme */
+    .gm-style .gm-style-iw-c {
+      background: rgba(13,11,20,0.97) !important;
+      border: 1px solid rgba(201,169,110,0.2) !important;
+      border-radius: 14px !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04) !important;
+      padding: 0 !important;
+      backdrop-filter: blur(16px);
+    }
+    .gm-style .gm-style-iw-d {
+      overflow: hidden !important;
+      padding: 14px 16px !important;
+    }
+    .gm-style .gm-style-iw-t::after {
+      display: none !important;
+    }
+    .gm-style .gm-style-iw-tc {
+      display: none !important;
+    }
+    .gm-ui-hover-effect {
+      opacity: 0.6 !important;
+      filter: invert(1) !important;
+      top: 4px !important;
+      right: 4px !important;
+    }
+    .gm-ui-hover-effect:hover {
+      opacity: 1 !important;
+    }
+    /* Zoom controls */
+    .gm-bundled-control .gmnoprint,
+    .gm-bundled-control-on-bottom .gmnoprint {
+      background: rgba(13,11,20,0.92) !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      border-radius: 10px !important;
+      overflow: hidden;
+    }
+    .gm-control-active {
+      background: rgba(13,11,20,0.92) !important;
+      color: #9ca3af !important;
+    }
+    .gm-control-active:hover {
+      background: rgba(201,169,110,0.12) !important;
+    }
+    /* Attribution */
+    .gm-style-cc {
+      opacity: 0.5;
+    }
+    a[href^="https://maps.google.com"],
+    a[href^="https://www.google.com/maps"] {
+      color: #6b7280 !important;
+    }
   `;
-}
-
-// ─────────────────────────────────────────
-// Leaflet CSS injection (once)
-// ─────────────────────────────────────────
-let cssInjected = false;
-function injectLeafletCSS() {
-  if (cssInjected || typeof document === 'undefined') return;
-  cssInjected = true;
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-  link.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
-  link.crossOrigin = '';
-  document.head.appendChild(link);
+  document.head.appendChild(style);
 }
 
 // ─────────────────────────────────────────
@@ -224,263 +328,209 @@ export default function NeighborhoodMap({
   showLots = true,
   showIncidents = true,
 }: NeighborhoodMapProps) {
-  const mapRef = useRef<LeafletMap | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const markersRef = useRef<Map<number, CircleMarker>>(new Map());
-  const incidentMarkersRef = useRef<Map<string, Marker>>(new Map());
+  const mapRef = useRef<google.maps.Map | null>(null);
+  const infoWindowRef = useRef<google.maps.InfoWindow | null>(null);
+  const lotMarkersRef = useRef<Map<number, google.maps.Marker>>(new Map());
+  const incidentMarkersRef = useRef<Map<string, google.maps.Marker>>(new Map());
 
-  // ── Initialize map (once) ──
+  // ── Initialize map once ──
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (mapRef.current) return;
-    if (!containerRef.current) return;
 
-    injectLeafletCSS();
+    injectPopupStyles();
 
-    import('leaflet').then((L) => {
+    loadGoogleMaps().then(() => {
       if (mapRef.current || !containerRef.current) return;
 
-      const map = L.map(containerRef.current, {
-        center: [NEIGHBORHOOD_CENTER.lat, NEIGHBORHOOD_CENTER.lng],
+      const map = new window.google.maps.Map(containerRef.current, {
+        center: { lat: NEIGHBORHOOD_CENTER.lat, lng: NEIGHBORHOOD_CENTER.lng },
         zoom: DEFAULT_ZOOM,
+        styles: DARK_MAP_STYLES,
+        disableDefaultUI: false,
         zoomControl: true,
-        attributionControl: true,
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: true,
+        gestureHandling: 'greedy',
       });
 
-      L.tileLayer(
-        'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-        {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          subdomains: 'abcd',
-          maxZoom: 20,
-        }
-      ).addTo(map);
-
-      const attrControl = map.attributionControl.getContainer();
-      if (attrControl) {
-        attrControl.style.background = 'rgba(10,10,15,0.85)';
-        attrControl.style.color = '#6b7280';
-        attrControl.style.border = '1px solid rgba(255,255,255,0.06)';
-        attrControl.style.borderRadius = '8px';
-        attrControl.style.fontSize = '10px';
-      }
+      const infoWindow = new window.google.maps.InfoWindow({
+        maxWidth: 280,
+      });
 
       mapRef.current = map;
+      infoWindowRef.current = infoWindow;
     });
 
     return () => {
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-        markersRef.current.clear();
-        incidentMarkersRef.current.clear();
-      }
+      // Cleanup markers on unmount
+      lotMarkersRef.current.forEach((m) => m.setMap(null));
+      incidentMarkersRef.current.forEach((m) => m.setMap(null));
+      lotMarkersRef.current.clear();
+      incidentMarkersRef.current.clear();
+      // Note: Google Maps doesn't expose a map.destroy() — we just null the ref
+      mapRef.current = null;
+      infoWindowRef.current = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // ── Update property lot markers ──
+  // ── Update lot markers ──
   useEffect(() => {
-    if (!mapRef.current) return;
-    if (typeof window === 'undefined') return;
+    const map = mapRef.current;
+    if (!map || typeof window === 'undefined' || !window.google?.maps) return;
 
-    import('leaflet').then((L) => {
-      const map = mapRef.current;
-      if (!map) return;
-
-      // Remove markers not in list or when hidden
-      const currentIds = new Set(lots.map((l) => l.tokenId));
-      markersRef.current.forEach((marker, tokenId) => {
-        if (!currentIds.has(tokenId) || !showLots) {
-          marker.remove();
-          markersRef.current.delete(tokenId);
-        }
-      });
-
-      if (!showLots) return;
-
-      lots.forEach((lot, i) => {
-        const { lat, lng } = geocodeAddress(lot.streetAddress, i, lots.length);
-        const color = markerColor(lot);
-        const glowColor = markerGlowColor(lot);
-
-        const existing = markersRef.current.get(lot.tokenId);
-        if (existing) {
-          existing.setLatLng([lat, lng]);
-          existing.setStyle({ color, fillColor: color });
-          existing.setPopupContent(buildPopupHTML(lot, isBoard));
-          return;
-        }
-
-        const marker = L.circleMarker([lat, lng], {
-          radius: 10,
-          fillColor: color,
-          color: glowColor,
-          weight: 6,
-          opacity: 0.85,
-          fillOpacity: 0.92,
-          className: 'faircroft-marker',
-        });
-
-        const popup = L.popup({
-          className: 'faircroft-popup',
-          maxWidth: 260,
-          closeButton: true,
-          autoPan: true,
-        }).setContent(buildPopupHTML(lot, isBoard));
-
-        marker.bindPopup(popup);
-        marker.on('click', () => onSelectLot(lot));
-        marker.on('mouseover', function (this: CircleMarker) {
-          this.setStyle({ radius: 13, weight: 8 } as never);
-        });
-        marker.on('mouseout', function (this: CircleMarker) {
-          this.setStyle({ radius: 10, weight: 6 } as never);
-        });
-
-        marker.addTo(map);
-        markersRef.current.set(lot.tokenId, marker);
-      });
+    // Remove stale markers
+    const currentIds = new Set(lots.map((l) => l.tokenId));
+    lotMarkersRef.current.forEach((marker, tokenId) => {
+      if (!currentIds.has(tokenId) || !showLots) {
+        marker.setMap(null);
+        lotMarkersRef.current.delete(tokenId);
+      }
     });
-  }, [lots, isBoard, onSelectLot, showLots]);
+
+    if (!showLots) return;
+
+    lots.forEach((lot, i) => {
+      const { lat, lng } = geocodeAddress(lot.streetAddress, i, lots.length);
+      const isSelected = selectedLot?.tokenId === lot.tokenId;
+      const color = markerColor(lot);
+      const svg = lotMarkerSVG(color, isSelected);
+
+      const existing = lotMarkersRef.current.get(lot.tokenId);
+      if (existing) {
+        // Update icon if selection changed
+        existing.setIcon({
+          url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
+          scaledSize: new window.google.maps.Size(36, 36),
+          anchor: new window.google.maps.Point(18, 18),
+        });
+        existing.setPosition({ lat, lng });
+        return;
+      }
+
+      const marker = new window.google.maps.Marker({
+        position: { lat, lng },
+        map,
+        icon: {
+          url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
+          scaledSize: new window.google.maps.Size(36, 36),
+          anchor: new window.google.maps.Point(18, 18),
+        },
+        title: `Lot #${lot.lotNumber}`,
+        cursor: 'pointer',
+        zIndex: isSelected ? 100 : 10,
+      });
+
+      marker.addListener('click', () => {
+        if (!infoWindowRef.current) return;
+        infoWindowRef.current.setContent(buildLotPopupHTML(lot, isBoard));
+        infoWindowRef.current.open(map, marker);
+        onSelectLot(lot);
+      });
+
+      marker.addListener('mouseover', () => {
+        const hoveredSvg = lotMarkerSVG(color, true);
+        marker.setIcon({
+          url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(hoveredSvg)}`,
+          scaledSize: new window.google.maps.Size(40, 40),
+          anchor: new window.google.maps.Point(20, 20),
+        });
+      });
+
+      marker.addListener('mouseout', () => {
+        const sel = selectedLot?.tokenId === lot.tokenId;
+        const normalSvg = lotMarkerSVG(color, sel);
+        marker.setIcon({
+          url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(normalSvg)}`,
+          scaledSize: new window.google.maps.Size(36, 36),
+          anchor: new window.google.maps.Point(18, 18),
+        });
+      });
+
+      lotMarkersRef.current.set(lot.tokenId, marker);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lots, isBoard, showLots]);
 
   // ── Update incident markers ──
   useEffect(() => {
-    if (!mapRef.current) return;
-    if (typeof window === 'undefined') return;
+    const map = mapRef.current;
+    if (!map || typeof window === 'undefined' || !window.google?.maps) return;
 
-    import('leaflet').then((L) => {
-      const map = mapRef.current;
-      if (!map) return;
+    // Remove all and re-render
+    incidentMarkersRef.current.forEach((m) => m.setMap(null));
+    incidentMarkersRef.current.clear();
 
-      // Remove all incident markers first (re-render on each update)
-      incidentMarkersRef.current.forEach((marker) => marker.remove());
-      incidentMarkersRef.current.clear();
+    if (!showIncidents) return;
 
-      if (!showIncidents) return;
+    incidents.forEach((incident) => {
+      const svg = incidentMarkerSVG(incident);
 
-      incidents.forEach((incident) => {
-        const icon = incidentDivIcon(L, incident);
-
-        const marker = L.marker([incident.lat, incident.lng], { icon });
-
-        const popup = L.popup({
-          className: 'faircroft-popup',
-          maxWidth: 280,
-          closeButton: true,
-          autoPan: true,
-        }).setContent(buildIncidentPopupHTML(incident));
-
-        marker.bindPopup(popup);
-        marker.on('click', () => {
-          if (onSelectIncident) onSelectIncident(incident);
-        });
-
-        marker.addTo(map);
-        incidentMarkersRef.current.set(incident.id, marker);
+      const marker = new window.google.maps.Marker({
+        position: { lat: incident.lat, lng: incident.lng },
+        map,
+        icon: {
+          url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
+          scaledSize: new window.google.maps.Size(32, 32),
+          anchor: new window.google.maps.Point(16, 26),
+        },
+        title: incident.title,
+        cursor: 'pointer',
+        zIndex: 20,
       });
+
+      marker.addListener('click', () => {
+        if (!infoWindowRef.current) return;
+        infoWindowRef.current.setContent(buildIncidentPopupHTML(incident));
+        infoWindowRef.current.open(map, marker);
+        if (onSelectIncident) onSelectIncident(incident);
+      });
+
+      incidentMarkersRef.current.set(incident.id, marker);
     });
-  }, [incidents, showIncidents, onSelectIncident]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [incidents, showIncidents]);
 
   // ── Highlight selected lot ──
   useEffect(() => {
-    if (!mapRef.current) return;
-    import('leaflet').then(() => {
-      markersRef.current.forEach((marker, tokenId) => {
-        const lot = lots.find((l) => l.tokenId === tokenId);
-        if (!lot) return;
-        const isSelected = selectedLot?.tokenId === tokenId;
-        const color = markerColor(lot);
-        marker.setStyle({
-          radius: isSelected ? 14 : 10,
-          weight: isSelected ? 10 : 6,
-          color: isSelected ? '#c9a96e' : markerGlowColor(lot),
-          fillColor: color,
-        } as never);
+    const map = mapRef.current;
+    if (!map || typeof window === 'undefined' || !window.google?.maps) return;
 
-        if (isSelected) {
-          marker.openPopup();
-          const { lat, lng } = geocodeAddress(lot.streetAddress, lots.indexOf(lot), lots.length);
-          mapRef.current?.panTo([lat, lng], { animate: true });
-        }
+    lotMarkersRef.current.forEach((marker, tokenId) => {
+      const lot = lots.find((l) => l.tokenId === tokenId);
+      if (!lot) return;
+      const isSelected = selectedLot?.tokenId === tokenId;
+      const color = markerColor(lot);
+      const svg = lotMarkerSVG(color, isSelected);
+
+      marker.setIcon({
+        url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
+        scaledSize: new window.google.maps.Size(isSelected ? 40 : 36, isSelected ? 40 : 36),
+        anchor: new window.google.maps.Point(isSelected ? 20 : 18, isSelected ? 20 : 18),
       });
+      marker.setZIndex(isSelected ? 100 : 10);
+
+      if (isSelected) {
+        const { lat, lng } = geocodeAddress(lot.streetAddress, lots.indexOf(lot), lots.length);
+        map.panTo({ lat, lng });
+        if (infoWindowRef.current) {
+          infoWindowRef.current.setContent(buildLotPopupHTML(lot, isBoard));
+          infoWindowRef.current.open(map, marker);
+        }
+      }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLot, lots]);
 
   return (
-    <>
-      <style>{`
-        .faircroft-popup .leaflet-popup-content-wrapper {
-          background: rgba(13, 11, 20, 0.96);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(201, 169, 110, 0.18);
-          border-radius: 14px;
-          box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
-          padding: 0;
-        }
-        .faircroft-popup .leaflet-popup-content {
-          margin: 14px 16px;
-          color: #e5e7eb;
-        }
-        .faircroft-popup .leaflet-popup-tip-container {
-          display: none;
-        }
-        .faircroft-popup .leaflet-popup-close-button {
-          color: #6b7280 !important;
-          font-size: 16px !important;
-          top: 6px !important;
-          right: 8px !important;
-          padding: 0 !important;
-          width: 20px !important;
-          height: 20px !important;
-        }
-        .faircroft-popup .leaflet-popup-close-button:hover {
-          color: #c9a96e !important;
-          background: none !important;
-        }
-        .faircroft-marker {
-          cursor: pointer;
-          transition: all 0.15s ease;
-        }
-        .incident-marker {
-          cursor: pointer;
-          background: transparent !important;
-          border: none !important;
-        }
-        @keyframes incidentPulse {
-          0% { box-shadow: 0 0 0 0 currentColor; }
-          70% { box-shadow: 0 0 0 8px transparent; }
-          100% { box-shadow: 0 0 0 0 transparent; }
-        }
-        .leaflet-control-zoom {
-          border: 1px solid rgba(255,255,255,0.08) !important;
-          border-radius: 10px !important;
-          overflow: hidden;
-        }
-        .leaflet-control-zoom a {
-          background: rgba(13,11,20,0.9) !important;
-          color: #9ca3af !important;
-          border-bottom: 1px solid rgba(255,255,255,0.06) !important;
-        }
-        .leaflet-control-zoom a:hover {
-          background: rgba(201,169,110,0.12) !important;
-          color: #c9a96e !important;
-        }
-        .leaflet-control-attribution a {
-          color: #6b7280 !important;
-        }
-        .leaflet-control-attribution a:hover {
-          color: #c9a96e !important;
-        }
-      `}</style>
-
-      <div
-        ref={containerRef}
-        style={{ minHeight: 520, width: '100%', borderRadius: '16px', overflow: 'hidden' }}
-        className="border border-white/[0.08]"
-        aria-label="Neighborhood property and incident map"
-      />
-    </>
+    <div
+      ref={containerRef}
+      style={{ minHeight: 520, width: '100%', borderRadius: '16px', overflow: 'hidden' }}
+      className="border border-white/[0.08]"
+      aria-label="Neighborhood property and incident map"
+    />
   );
 }

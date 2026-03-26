@@ -14,36 +14,36 @@ export interface LatLng {
 }
 
 // Default center: Faircroft neighborhood near Raleigh, NC
-export const NEIGHBORHOOD_CENTER: LatLng = { lat: 35.7796, lng: -78.6382 };
+export const NEIGHBORHOOD_CENTER: LatLng = { lat: 35.84, lng: -78.64 };
 export const DEFAULT_ZOOM = 16;
 
 /**
  * Static lookup table for known Faircroft addresses.
- * These represent a realistic grid-style neighborhood near Raleigh, NC.
+ * These represent a realistic grid-style neighborhood near Raleigh, NC (35.84, -78.64).
  * Addresses loosely follow a cul-de-sac + two streets pattern.
  */
 const ADDRESS_LOOKUP: Record<string, LatLng> = {
   // ── Faircroft Drive ──
-  '100 faircroft dr':    { lat: 35.7810, lng: -78.6390 },
-  '102 faircroft dr':    { lat: 35.7808, lng: -78.6388 },
-  '104 faircroft dr':    { lat: 35.7806, lng: -78.6386 },
-  '106 faircroft dr':    { lat: 35.7804, lng: -78.6384 },
-  '108 faircroft dr':    { lat: 35.7802, lng: -78.6382 },
-  '110 faircroft dr':    { lat: 35.7800, lng: -78.6380 },
-  '112 faircroft dr':    { lat: 35.7798, lng: -78.6378 },
-  '114 faircroft dr':    { lat: 35.7796, lng: -78.6376 },
+  '100 faircroft dr':    { lat: 35.8410, lng: -78.6410 },
+  '102 faircroft dr':    { lat: 35.8408, lng: -78.6408 },
+  '104 faircroft dr':    { lat: 35.8406, lng: -78.6406 },
+  '106 faircroft dr':    { lat: 35.8404, lng: -78.6404 },
+  '108 faircroft dr':    { lat: 35.8402, lng: -78.6402 },
+  '110 faircroft dr':    { lat: 35.8400, lng: -78.6400 },
+  '112 faircroft dr':    { lat: 35.8398, lng: -78.6398 },
+  '114 faircroft dr':    { lat: 35.8396, lng: -78.6396 },
 
   // ── Faircroft Lane ──
-  '200 faircroft ln':    { lat: 35.7818, lng: -78.6370 },
-  '202 faircroft ln':    { lat: 35.7816, lng: -78.6368 },
-  '204 faircroft ln':    { lat: 35.7814, lng: -78.6366 },
-  '206 faircroft ln':    { lat: 35.7812, lng: -78.6364 },
+  '200 faircroft ln':    { lat: 35.8418, lng: -78.6388 },
+  '202 faircroft ln':    { lat: 35.8416, lng: -78.6386 },
+  '204 faircroft ln':    { lat: 35.8414, lng: -78.6384 },
+  '206 faircroft ln':    { lat: 35.8412, lng: -78.6382 },
 
   // ── Faircroft Court (cul-de-sac) ──
-  '300 faircroft ct':    { lat: 35.7820, lng: -78.6394 },
-  '302 faircroft ct':    { lat: 35.7822, lng: -78.6396 },
-  '304 faircroft ct':    { lat: 35.7824, lng: -78.6392 },
-  '306 faircroft ct':    { lat: 35.7822, lng: -78.6388 },
+  '300 faircroft ct':    { lat: 35.8420, lng: -78.6414 },
+  '302 faircroft ct':    { lat: 35.8422, lng: -78.6416 },
+  '304 faircroft ct':    { lat: 35.8424, lng: -78.6412 },
+  '306 faircroft ct':    { lat: 35.8422, lng: -78.6408 },
 };
 
 /**
