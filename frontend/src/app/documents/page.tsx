@@ -56,7 +56,7 @@ export default function DocumentsPage() {
                   : 'border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/10'
               }`}
             >
-              {showUpload ? '✕ Close Upload' : '📤 Upload Document'}
+              {showUpload ? ' Close Upload' : ' Upload Document'}
             </button>
           )}
           <button
@@ -67,7 +67,7 @@ export default function DocumentsPage() {
                 : 'border border-gray-700/60 text-gray-300 hover:border-[#c9a96e]/40 hover:text-white hover:bg-white/[0.03]'
             }`}
           >
-            {verifyMode ? '← Back to Documents' : '🔍 Verify Document'}
+            {verifyMode ? '← Back to Documents' : ' Verify Document'}
           </button>
         </div>
       </div>
@@ -90,7 +90,7 @@ export default function DocumentsPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 page-enter page-enter-delay-1">
             {[
               { value: documentCount, label: 'Total Documents', color: 'text-[#c9a96e]' },
-              { value: '✓', label: 'All Verified', color: 'text-green-400' },
+              { value: '', label: 'All Verified', color: 'text-green-400' },
               { value: '∞', label: 'Permanent Storage', color: 'text-blue-400' },
               { value: '0', label: 'Can Be Altered', color: 'text-amber-400' },
             ].map(({ value, label, color }) => (
@@ -141,7 +141,7 @@ export default function DocumentsPage() {
           {documentCount === 0 ? (
             <div className="glass-card rounded-2xl hover-lift p-14 text-center page-enter page-enter-delay-3">
               <div className="w-20 h-20 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-4xl mx-auto mb-6">
-                📄
+                
               </div>
               <h3 className="text-xl font-bold mb-3">No documents registered yet</h3>
               <p className="text-sm text-gray-400 max-w-md mx-auto leading-relaxed mb-6">
@@ -150,7 +150,7 @@ export default function DocumentsPage() {
               </p>
               <div className="glass-card rounded-xl hover-lift p-5 max-w-sm mx-auto border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30">
                 <p className="text-xs text-[#e8d5a3] leading-relaxed">
-                  🔒 Unlike traditional HOA software, documents stored here cannot be altered,
+                   Unlike traditional HOA software, documents stored here cannot be altered,
                   deleted, or selectively shared — not even by the board.
                 </p>
               </div>
@@ -251,7 +251,7 @@ function DocumentCard({
               {getTypeLabel(doc.docType)}
             </span>
             <span className="text-[11px] px-2 py-0.5 rounded-lg bg-green-500/10 text-green-400 border border-green-500/20 font-semibold">
-              ✓ Verified
+               Verified
             </span>
             {doc.supersedes > 0 && (
               <span className="text-[11px] px-2 py-0.5 rounded-lg bg-amber-500/10 text-amber-400 font-semibold">
@@ -311,7 +311,7 @@ function DocumentCard({
               className="px-4 py-2.5 rounded-xl bg-[#c9a96e]/8 border border-[#c9a96e]/20 text-xs text-[#c9a96e] hover:bg-[#c9a96e]/15 transition-colors font-semibold min-h-[44px] flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
-              📥 Download from Arweave
+               Download from Arweave
             </a>
             <a
               href={`https://sepolia.basescan.org/address/${doc.uploadedBy}`}
@@ -320,7 +320,7 @@ function DocumentCard({
               className="px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 text-xs text-gray-400 hover:text-gray-300 transition-colors font-semibold min-h-[44px] flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
-              🔗 View on Basescan
+               View on Basescan
             </a>
           </div>
         </div>
@@ -356,7 +356,7 @@ function VerifyPanel({
         }`}
       >
         <div className={`w-16 h-16 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-3xl mx-auto mb-5 transition-transform duration-300 ${dragOver ? 'scale-110' : ''}`}>
-          📄
+          
         </div>
         <h3 className="text-xl font-bold mb-2 text-gray-100">Drop a file to verify</h3>
         <p className="text-sm text-gray-400 max-w-sm mx-auto leading-relaxed">
@@ -402,7 +402,7 @@ function VerifyPanel({
             { n: 1, text: 'Drop the document file (PDF, spreadsheet, etc.)' },
             { n: 2, text: 'Your browser computes the SHA-256 hash locally' },
             { n: 3, text: 'We check if that hash exists in the on-chain DocumentRegistry' },
-            { n: 4, text: 'If it matches → the document is authentic and unaltered ✓' },
+            { n: 4, text: 'If it matches → the document is authentic and unaltered ' },
             { n: 5, text: "If it doesn't match → the file has been modified or isn't registered" },
           ].map(({ n, text }) => (
             <div key={n} className="flex gap-3 items-start">
@@ -451,7 +451,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
           <p className="text-xs text-gray-500 mt-0.5">Board members only · Arweave upload handled server-side</p>
         </div>
         <span className="text-[10px] px-2 py-1 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20 font-bold">
-          🔒 Board Access
+           Board Access
         </span>
       </div>
 
@@ -510,7 +510,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
               onChange={e => { const f = e.target.files?.[0]; if (f) handleFileSelect(f); }}
             />
             <div className={`text-4xl mb-3 transition-transform ${dragOver ? 'scale-110' : ''}`}>
-              {fileName ? '📄' : '📁'}
+              {fileName ? '' : ''}
             </div>
             {fileName ? (
               <>

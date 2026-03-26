@@ -134,9 +134,9 @@ function CheckoutWizard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {isCurrent !== false ? (
-                  <span className="text-green-400 text-lg">✅</span>
+                  <span className="text-green-400 text-lg"></span>
                 ) : (
-                  <span className="text-red-400 text-lg">❌</span>
+                  <span className="text-red-400 text-lg"></span>
                 )}
                 <div>
                   <p className="text-sm font-semibold text-gray-200">HOA Dues</p>
@@ -238,7 +238,7 @@ function CheckoutWizard() {
                   href="/dues"
                   className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 text-sm font-semibold text-red-300 transition-all"
                 >
-                  💳 Pay Outstanding Balance
+                   Pay Outstanding Balance
                 </Link>
               </div>
             ) : (
@@ -299,7 +299,7 @@ function CheckoutWizard() {
           </p>
           <div className="bg-blue-500/8 border border-blue-500/20 rounded-xl p-4 mb-8 text-left">
             <p className="text-xs text-blue-300 font-semibold uppercase tracking-wide mb-1">
-              ℹ️ On-Chain Transfer
+              ℹ On-Chain Transfer
             </p>
             <p className="text-xs text-gray-400 leading-relaxed">
               Property ownership transfer happens on-chain when the Property NFT
@@ -325,7 +325,7 @@ export default function CheckoutPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">📦</div>
+        <div className="text-5xl mb-2"></div>
         <h2 className="text-xl font-bold">Move-Out Wizard</h2>
         <p className="text-gray-400 text-sm">Connect your wallet to begin</p>
         <ConnectButton label="Connect Wallet" />

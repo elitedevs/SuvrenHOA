@@ -5,28 +5,28 @@ import { Zap, Sun, Leaf, TrendingDown, Calculator } from 'lucide-react';
 
 const TIPS_BY_SEASON: Record<string, { tip: string; savings: string; icon: string }[]> = {
   Summer: [
-    { tip: 'Set AC to 78°F when home, 85°F when away', savings: 'Save ~$40/mo', icon: '❄️' },
-    { tip: 'Use ceiling fans to feel 4°F cooler', savings: 'Save ~$15/mo', icon: '🌀' },
-    { tip: 'Close blinds during peak sun hours (10am–4pm)', savings: 'Save ~$20/mo', icon: '🪟' },
-    { tip: 'Run dishwasher/laundry after 9pm', savings: 'Save ~$12/mo', icon: '🌙' },
+    { tip: 'Set AC to 78°F when home, 85°F when away', savings: 'Save ~$40/mo', icon: '' },
+    { tip: 'Use ceiling fans to feel 4°F cooler', savings: 'Save ~$15/mo', icon: '' },
+    { tip: 'Close blinds during peak sun hours (10am–4pm)', savings: 'Save ~$20/mo', icon: '' },
+    { tip: 'Run dishwasher/laundry after 9pm', savings: 'Save ~$12/mo', icon: '' },
   ],
   Winter: [
-    { tip: 'Set heat to 68°F when home, 60°F when away', savings: 'Save ~$35/mo', icon: '🔥' },
-    { tip: 'Seal drafts around doors and windows', savings: 'Save ~$25/mo', icon: '🚪' },
-    { tip: 'Use a programmable thermostat', savings: 'Save ~$50/mo', icon: '🌡️' },
-    { tip: 'Wash clothes in cold water', savings: 'Save ~$10/mo', icon: '👕' },
+    { tip: 'Set heat to 68°F when home, 60°F when away', savings: 'Save ~$35/mo', icon: '' },
+    { tip: 'Seal drafts around doors and windows', savings: 'Save ~$25/mo', icon: '' },
+    { tip: 'Use a programmable thermostat', savings: 'Save ~$50/mo', icon: '' },
+    { tip: 'Wash clothes in cold water', savings: 'Save ~$10/mo', icon: '' },
   ],
   Spring: [
-    { tip: 'Open windows instead of running AC', savings: 'Save ~$60/mo', icon: '🌿' },
-    { tip: 'Service your HVAC before summer', savings: 'Save ~$80/season', icon: '🔧' },
-    { tip: 'Install LED bulbs throughout home', savings: 'Save ~$20/mo', icon: '💡' },
-    { tip: 'Add insulation to your attic', savings: 'Save ~$150/yr', icon: '🏠' },
+    { tip: 'Open windows instead of running AC', savings: 'Save ~$60/mo', icon: '' },
+    { tip: 'Service your HVAC before summer', savings: 'Save ~$80/season', icon: '' },
+    { tip: 'Install LED bulbs throughout home', savings: 'Save ~$20/mo', icon: '' },
+    { tip: 'Add insulation to your attic', savings: 'Save ~$150/yr', icon: '' },
   ],
   Fall: [
-    { tip: 'Take advantage of mild temps — open windows', savings: 'Save ~$45/mo', icon: '🍂' },
-    { tip: 'Check weatherstripping before winter', savings: 'Save ~$30/season', icon: '🔍' },
-    { tip: 'Reverse ceiling fan direction for heat', savings: 'Save ~$18/mo', icon: '🔄' },
-    { tip: 'Unplug electronics when not in use', savings: 'Save ~$8/mo', icon: '🔌' },
+    { tip: 'Take advantage of mild temps — open windows', savings: 'Save ~$45/mo', icon: '' },
+    { tip: 'Check weatherstripping before winter', savings: 'Save ~$30/season', icon: '' },
+    { tip: 'Reverse ceiling fan direction for heat', savings: 'Save ~$18/mo', icon: '' },
+    { tip: 'Unplug electronics when not in use', savings: 'Save ~$8/mo', icon: '' },
   ],
 };
 

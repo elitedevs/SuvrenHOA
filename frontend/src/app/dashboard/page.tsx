@@ -198,7 +198,7 @@ function PropertyDashboard() {
           </p>
           {propertyInfo?.squareFootage && (
             <div className="flex items-center gap-2 mt-3">
-              <span className="text-xs text-gray-500">📐</span>
+              <span className="text-xs text-gray-500"></span>
               <p className="text-sm text-gray-500 font-medium">
                 {Number(propertyInfo.squareFootage).toLocaleString()} sq ft
               </p>
@@ -243,7 +243,7 @@ function PropertyDashboard() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center">
-                  <span className="text-xs text-green-400">✓</span>
+                  <span className="text-xs text-green-400"></span>
                 </div>
                 <p className="text-xl font-bold text-green-400">Current</p>
               </div>
@@ -265,7 +265,7 @@ function PropertyDashboard() {
                 href="/dues"
                 className="inline-flex items-center gap-1.5 mt-4 px-4 py-2.5 rounded-xl bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 text-sm font-semibold text-red-300 transition-all duration-200 min-h-[44px]"
               >
-                💳 Pay Now
+                 Pay Now
               </Link>
             </div>
           )}
@@ -279,7 +279,7 @@ function PropertyDashboard() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-full bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xs">
-                  👤
+                  
                 </div>
                 <p className="text-base font-semibold text-gray-200">Self-delegated</p>
               </div>
@@ -289,7 +289,7 @@ function PropertyDashboard() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-full bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-xs">
-                  🔁
+                  
                 </div>
                 <p className="text-base font-semibold text-gray-200">Delegated</p>
               </div>

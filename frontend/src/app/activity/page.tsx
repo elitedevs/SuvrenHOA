@@ -7,11 +7,11 @@ import { ClipboardList } from 'lucide-react';
 const PAGE_SIZE = 10;
 
 const EVENT_FILTERS = [
-  { label: 'All Events', icon: '📋', match: null },
-  { label: 'Properties', icon: '🏠', match: ['🏠'] },
-  { label: 'Votes', icon: '🗳️', match: ['🗳️', '✅', '❌', '🤷'] },
-  { label: 'Treasury', icon: '💰', match: ['💰', '📤'] },
-  { label: 'Documents', icon: '📄', match: ['📄'] },
+  { label: 'All Events', icon: '', match: null },
+  { label: 'Properties', icon: '', match: [''] },
+  { label: 'Votes', icon: '', match: ['', '', '', ''] },
+  { label: 'Treasury', icon: '', match: ['', ''] },
+  { label: 'Documents', icon: '', match: [''] },
 ];
 
 function timeAgo(timestamp: number): string {
@@ -134,12 +134,12 @@ export default function ActivityPage() {
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Event Types</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {[
-            { icon: '🏠', label: 'Property mint / transfer' },
-            { icon: '🗳️', label: 'Proposal created' },
-            { icon: '✅❌🤷', label: 'Vote cast' },
-            { icon: '💰', label: 'Dues payment' },
-            { icon: '📤', label: 'Treasury expenditure' },
-            { icon: '📄', label: 'Document registered' },
+            { icon: '', label: 'Property mint / transfer' },
+            { icon: '', label: 'Proposal created' },
+            { icon: '', label: 'Vote cast' },
+            { icon: '', label: 'Dues payment' },
+            { icon: '', label: 'Treasury expenditure' },
+            { icon: '', label: 'Document registered' },
           ].map(({ icon, label }) => (
             <div key={label} className="flex items-center gap-2 text-xs text-gray-500">
               <span>{icon}</span>

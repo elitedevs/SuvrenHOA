@@ -100,7 +100,7 @@ function CompactReminder({
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-lg shrink-0">
-              ✅
+              
             </div>
             <div>
               <p className="text-sm font-bold text-green-400">Dues Current</p>
@@ -126,7 +126,7 @@ function CompactReminder({
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-red-500/15 border border-red-500/25 flex items-center justify-center text-lg shrink-0">
-              ⚠️
+              
             </div>
             <div>
               <p className="text-sm font-bold text-red-400">
@@ -192,11 +192,11 @@ function FullReminder({
       <div className="rounded-2xl p-6 border border-green-500/20 bg-green-500/5 border-l-2 border-l-green-500/50 transition-all duration-300">
         <div className="flex items-start gap-4 mb-4">
           <div className="w-10 h-10 rounded-xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-xl shrink-0">
-            ✅
+            
           </div>
           <div className="flex-1">
             <h3 className="text-base font-bold text-green-400 mb-1">
-              You&apos;re all paid up! 🎉
+              You&apos;re all paid up! 
             </h3>
             <p className="text-sm text-gray-400">
               Lot #{tokenId} is current on dues. Next quarter coming up — stay ahead with annual payments.
@@ -234,7 +234,7 @@ function FullReminder({
       <div className="rounded-2xl p-6 border border-red-500/20 bg-red-500/5 border-l-2 border-l-red-500/50 transition-all duration-300">
         <div className="flex items-start gap-4 mb-4">
           <div className="w-10 h-10 rounded-xl bg-red-500/15 border border-red-500/25 flex items-center justify-center text-xl shrink-0">
-            ⚠️
+            
           </div>
           <div className="flex-1">
             <h3 className="text-base font-bold text-red-400 mb-1">

@@ -194,7 +194,7 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
                       </div>
                     </div>
                     {freq === 'annual' && (
-                      <div className="mt-1.5 text-[10px] text-green-400 font-semibold">💰 Save 5% vs quarterly</div>
+                      <div className="mt-1.5 text-[10px] text-green-400 font-semibold"> Save 5% vs quarterly</div>
                     )}
                   </div>
                 ))}
@@ -217,7 +217,7 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
             </div>
 
             <div className="p-2.5 rounded-lg bg-yellow-400/8 border border-yellow-400/15 mb-4">
-              <p className="text-[11px] text-yellow-400">⚠️ Note: Auto-pay scheduling requires smart contract support. This saves your preference — actual automation coming in a future update.</p>
+              <p className="text-[11px] text-yellow-400"> Note: Auto-pay scheduling requires smart contract support. This saves your preference — actual automation coming in a future update.</p>
             </div>
 
             <div className="flex gap-3">

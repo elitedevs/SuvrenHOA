@@ -93,7 +93,7 @@ export default function VisitorsPage() {
         {newPass && (
           <div className="mb-6 p-5 rounded-xl border border-green-600/40 bg-green-950/20 flex items-center justify-between">
             <div>
-              <p className="text-green-400 font-semibold text-sm mb-1">✓ Visitor Registered — Pass Code Generated</p>
+              <p className="text-green-400 font-semibold text-sm mb-1"> Visitor Registered — Pass Code Generated</p>
               <p className="font-mono text-3xl text-[#e8d5a3] font-bold tracking-widest">{newPass}</p>
               <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">Share this code with your visitor for gate entry</p>
             </div>

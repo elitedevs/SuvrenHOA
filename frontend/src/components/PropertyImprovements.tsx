@@ -19,11 +19,11 @@ interface Improvement {
 const STORAGE_KEY = 'hoa_improvements';
 
 const CATEGORY_ICONS: Record<ImprovementCategory, string> = {
-  Kitchen: '🍳',
-  Bath: '🛁',
-  Exterior: '🏠',
-  Landscape: '🌿',
-  Other: '🔧',
+  Kitchen: '',
+  Bath: '',
+  Exterior: '',
+  Landscape: '',
+  Other: '',
 };
 
 const SAMPLE_IMPROVEMENTS: Improvement[] = [
@@ -176,7 +176,7 @@ export function PropertyImprovements() {
     const summary = improvements.map(i =>
       `• ${i.project} (${new Date(i.date).getFullYear()}): $${i.cost.toLocaleString()}`
     ).join('\n');
-    const text = `🏠 Home Improvement Log\nTotal Invested: $${totalInvested.toLocaleString()}\n\n${summary}\n\n#SuvrenHOA`;
+    const text = ` Home Improvement Log\nTotal Invested: $${totalInvested.toLocaleString()}\n\n${summary}\n\n#SuvrenHOA`;
     navigator.clipboard?.writeText(text).catch(() => {});
   };
 
@@ -253,7 +253,7 @@ export function PropertyImprovements() {
         ))}
         {improvements.length === 0 && (
           <div className="text-center py-8 text-gray-500">
-            <p className="text-2xl mb-2">🔧</p>
+            <p className="text-2xl mb-2"></p>
             <p className="text-xs">No improvements logged yet</p>
           </div>
         )}

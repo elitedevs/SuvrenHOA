@@ -17,14 +17,14 @@ const STAGES: Stage[] = [
   {
     id: 'created',
     label: 'Created',
-    icon: '📝',
+    icon: '',
     activeStates: ['Pending'],
     doneStates: ['Active', 'Succeeded', 'Defeated', 'Queued', 'Executed', 'Canceled', 'Expired'],
   },
   {
     id: 'voting',
     label: 'Voting',
-    icon: '🗳️',
+    icon: '',
     activeStates: ['Active'],
     doneStates: ['Succeeded', 'Defeated', 'Queued', 'Executed'],
     failStates: ['Canceled'],
@@ -32,7 +32,7 @@ const STAGES: Stage[] = [
   {
     id: 'result',
     label: 'Result',
-    icon: '⚖️',
+    icon: '',
     activeStates: ['Succeeded', 'Defeated'],
     doneStates: ['Queued', 'Executed'],
     failStates: ['Defeated'],
@@ -40,7 +40,7 @@ const STAGES: Stage[] = [
   {
     id: 'queued',
     label: 'Queued',
-    icon: '⏱️',
+    icon: '⏱',
     activeStates: ['Queued'],
     doneStates: ['Executed'],
     failStates: ['Expired'],
@@ -48,7 +48,7 @@ const STAGES: Stage[] = [
   {
     id: 'executed',
     label: 'Executed',
-    icon: '✅',
+    icon: '',
     activeStates: ['Executed'],
     doneStates: [],
   },
@@ -108,7 +108,7 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
                     }
                   `}
                 >
-                  {isDone ? '✓' : isFail && (defeated || canceled || expired) ? '✗' : stage.icon}
+                  {isDone ? '' : isFail && (defeated || canceled || expired) ? '' : stage.icon}
                 </div>
 
                 {/* Label */}
@@ -133,12 +133,12 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
       <div className="mt-4 pt-4 border-t border-white/5">
         <p className="text-xs text-gray-500 text-center">
           {currentState === 'Pending' && '⏳ Waiting for voting to open (1-day delay)'}
-          {currentState === 'Active' && '🗳️ Voting is open — cast your vote now'}
-          {currentState === 'Succeeded' && '✅ Proposal passed! Waiting to be queued for execution'}
-          {currentState === 'Defeated' && '❌ This proposal did not receive enough votes to pass'}
-          {currentState === 'Queued' && '⏱️ In timelock — will be executable after the delay period'}
-          {currentState === 'Executed' && '🎉 This proposal has been executed on-chain!'}
-          {currentState === 'Canceled' && '🚫 This proposal was canceled by the board'}
+          {currentState === 'Active' && ' Voting is open — cast your vote now'}
+          {currentState === 'Succeeded' && ' Proposal passed! Waiting to be queued for execution'}
+          {currentState === 'Defeated' && ' This proposal did not receive enough votes to pass'}
+          {currentState === 'Queued' && '⏱ In timelock — will be executable after the delay period'}
+          {currentState === 'Executed' && ' This proposal has been executed on-chain!'}
+          {currentState === 'Canceled' && ' This proposal was canceled by the board'}
           {currentState === 'Expired' && '⏰ This proposal expired without execution'}
         </p>
       </div>

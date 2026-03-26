@@ -41,7 +41,7 @@ export default function MeetingsPage() {
             onClick={() => setShowCreate(!showCreate)}
             className="px-4 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all"
           >
-            {showCreate ? '✕ Cancel' : '+ Schedule Meeting'}
+            {showCreate ? ' Cancel' : '+ Schedule Meeting'}
           </button>
         </div>
       </div>
@@ -101,10 +101,10 @@ export default function MeetingsPage() {
                     </div>
 
                     <div className="flex flex-wrap gap-3 text-xs text-gray-500 mb-3">
-                      <span>📅 {dt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                      <span>🕐 {dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</span>
-                      {meeting.location && <span>📍 {meeting.location}</span>}
-                      {attendingCount > 0 && <span>👥 {attendingCount} attending{maybeCount > 0 ? `, ${maybeCount} maybe` : ''}</span>}
+                      <span> {dt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                      <span> {dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</span>
+                      {meeting.location && <span> {meeting.location}</span>}
+                      {attendingCount > 0 && <span> {attendingCount} attending{maybeCount > 0 ? `, ${maybeCount} maybe` : ''}</span>}
                     </div>
 
                     {meeting.agenda && (
@@ -119,7 +119,7 @@ export default function MeetingsPage() {
                       <div className="flex gap-2">
                         {(['attending', 'maybe', 'decline'] as RSVPStatus[]).map(status => {
                           const isSelected = myRsvp?.status === status;
-                          const label = status === 'attending' ? '✅ Attending' : status === 'maybe' ? '🤔 Maybe' : '❌ Decline';
+                          const label = status === 'attending' ? ' Attending' : status === 'maybe' ? ' Maybe' : ' Decline';
                           return (
                             <button
                               key={status}

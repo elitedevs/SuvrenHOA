@@ -12,15 +12,15 @@ interface WeatherData {
 
 function getWeatherEmoji(code: string): string {
   const n = parseInt(code, 10);
-  if (n === 113) return '☀️';
-  if (n === 116) return '⛅';
-  if (n === 119 || n === 122) return '☁️';
-  if ([143, 248, 260].includes(n)) return '🌫️';
-  if ([176, 293, 296, 299, 302, 305, 308].includes(n)) return '🌧️';
-  if ([179, 323, 326, 329, 332, 335, 338, 371, 374, 377].includes(n)) return '🌨️';
-  if ([200, 386, 389, 392, 395].includes(n)) return '⛈️';
-  if ([227, 230].includes(n)) return '❄️';
-  return '🌡️';
+  if (n === 113) return '';
+  if (n === 116) return '';
+  if (n === 119 || n === 122) return '';
+  if ([143, 248, 260].includes(n)) return '';
+  if ([176, 293, 296, 299, 302, 305, 308].includes(n)) return '';
+  if ([179, 323, 326, 329, 332, 335, 338, 371, 374, 377].includes(n)) return '';
+  if ([200, 386, 389, 392, 395].includes(n)) return '';
+  if ([227, 230].includes(n)) return '';
+  return '';
 }
 
 const CACHE_KEY = 'suvren_weather_cache';
@@ -92,7 +92,7 @@ export function WeatherWidget() {
   if (error || !weather) {
     return (
       <div className="glass-card rounded-2xl p-4 border border-[#c9a96e]/10">
-        <p className="text-xs text-gray-500">🌡️ Raleigh, NC</p>
+        <p className="text-xs text-gray-500"> Raleigh, NC</p>
         <p className="text-xs text-gray-600 mt-1">Weather unavailable</p>
       </div>
     );
@@ -114,8 +114,8 @@ export function WeatherWidget() {
       </div>
       <p className="text-xs text-gray-400 mb-3">{weather.weatherDesc}</p>
       <div className="flex gap-3 text-xs text-gray-500">
-        <span>💧 {weather.humidity}%</span>
-        <span>💨 {weather.windspeedMiles} mph</span>
+        <span> {weather.humidity}%</span>
+        <span> {weather.windspeedMiles} mph</span>
       </div>
     </div>
   );

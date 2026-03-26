@@ -137,7 +137,7 @@ export default function BoardDashboardPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-6">
         <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-3xl mb-4">
-          🔒
+          
         </div>
         <h2 className="text-xl font-bold text-gray-200 mb-2">Board Members Only</h2>
         <p className="text-sm text-gray-500 max-w-sm mb-6">
@@ -283,12 +283,12 @@ export default function BoardDashboardPage() {
               <h2 className="text-sm font-bold text-[#e8d5a3]">Quick Actions</h2>
             </div>
             <div className="p-4 space-y-2">
-              <QuickActionButton href="/violations" emoji="⚠️" label="Review Violations" desc="3 pending response" urgent />
-              <QuickActionButton href="/maintenance" emoji="🔧" label="Maintenance Queue" desc="Assign open requests" />
-              <QuickActionButton href="/proposals" emoji="🗳️" label="Proposals" desc="Monitor active votes" />
-              <QuickActionButton href="/treasury/budget" emoji="📊" label="Budget Planner" desc="FY 2026 planning" />
-              <QuickActionButton href="/documents" emoji="📄" label="Upload Minutes" desc="Board meeting records" />
-              <QuickActionButton href="/announcements" emoji="📢" label="Post Announcement" desc="Notify residents" />
+              <QuickActionButton href="/violations" emoji="" label="Review Violations" desc="3 pending response" urgent />
+              <QuickActionButton href="/maintenance" emoji="" label="Maintenance Queue" desc="Assign open requests" />
+              <QuickActionButton href="/proposals" emoji="" label="Proposals" desc="Monitor active votes" />
+              <QuickActionButton href="/treasury/budget" emoji="" label="Budget Planner" desc="FY 2026 planning" />
+              <QuickActionButton href="/documents" emoji="" label="Upload Minutes" desc="Board meeting records" />
+              <QuickActionButton href="/announcements" emoji="" label="Post Announcement" desc="Notify residents" />
             </div>
           </div>
 

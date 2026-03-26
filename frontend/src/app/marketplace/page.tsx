@@ -9,17 +9,17 @@ import { Plus, X, Tag, ShoppingBag, Megaphone } from 'lucide-react';
 
 const CATEGORIES: MarketplaceCategory[] = ['Furniture', 'Electronics', 'Garden', 'Kids', 'Other'];
 const TYPES: { value: MarketplaceType; label: string; emoji: string }[] = [
-  { value: 'sale', label: 'For Sale', emoji: '🏷️' },
-  { value: 'free', label: 'Free', emoji: '🎁' },
-  { value: 'wanted', label: 'Wanted', emoji: '🔍' },
+  { value: 'sale', label: 'For Sale', emoji: '' },
+  { value: 'free', label: 'Free', emoji: '' },
+  { value: 'wanted', label: 'Wanted', emoji: '' },
 ];
 
 const CATEGORY_EMOJI: Record<MarketplaceCategory, string> = {
-  Furniture: '🪑',
-  Electronics: '📱',
-  Garden: '🌱',
-  Kids: '🧸',
-  Other: '📦',
+  Furniture: '',
+  Electronics: '',
+  Garden: '',
+  Kids: '',
+  Other: '',
 };
 
 function TypeBadge({ type }: { type: MarketplaceType }) {
@@ -29,9 +29,9 @@ function TypeBadge({ type }: { type: MarketplaceType }) {
     wanted: 'bg-blue-500/15 text-blue-400 border-blue-500/25',
   };
   const labels: Record<MarketplaceType, string> = {
-    sale: '🏷️ For Sale',
-    free: '🎁 Free',
-    wanted: '🔍 Wanted',
+    sale: ' For Sale',
+    free: ' Free',
+    wanted: ' Wanted',
   };
   return (
     <span className={`inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full border ${styles[type]}`}>

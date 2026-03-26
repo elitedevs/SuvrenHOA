@@ -117,7 +117,7 @@ export default function AnnualReportPage() {
           onClick={() => window.print()}
           className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all"
         >
-          🖨️ Export / Print
+           Export / Print
         </button>
       </div>
 
@@ -144,7 +144,7 @@ export default function AnnualReportPage() {
       </div>
 
       {/* Financial Summary */}
-      <Section title="💰 Financial Summary" subtitle="Revenue, expenses, and reserve fund status">
+      <Section title=" Financial Summary" subtitle="Revenue, expenses, and reserve fund status">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div className="space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500">Revenue</h4>
@@ -212,7 +212,7 @@ export default function AnnualReportPage() {
       </Section>
 
       {/* Governance */}
-      <Section title="🏛️ Governance" subtitle="Board activity, proposals, and resident participation">
+      <Section title=" Governance" subtitle="Board activity, proposals, and resident participation">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
           <MetricCard label="Proposals" value={d.proposalsSubmitted} />
           <MetricCard label="Passed" value={d.proposalsPassed} color="green" />
@@ -228,7 +228,7 @@ export default function AnnualReportPage() {
       </Section>
 
       {/* Operations */}
-      <Section title="🔧 Operations & Maintenance" subtitle="Service requests, response times, and amenity usage">
+      <Section title=" Operations & Maintenance" subtitle="Service requests, response times, and amenity usage">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
           <MetricCard label="Requests Filed" value={d.maintenanceRequests} />
           <MetricCard label="Completed" value={d.maintenanceCompleted} color="green" />
@@ -252,7 +252,7 @@ export default function AnnualReportPage() {
       </Section>
 
       {/* Violations */}
-      <Section title="⚖️ Violations & Enforcement" subtitle="Community standards enforcement summary">
+      <Section title=" Violations & Enforcement" subtitle="Community standards enforcement summary">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <MetricCard label="Reported" value={d.violationsReported} />
           <MetricCard label="Resolved" value={d.violationsResolved} color="green" />

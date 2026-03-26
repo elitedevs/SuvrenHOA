@@ -18,13 +18,13 @@ interface ReimbursementRequest {
 }
 
 const CATEGORIES = [
-  { id: 'supplies', label: 'Office / Supplies', icon: '📦' },
-  { id: 'landscaping', label: 'Landscaping Materials', icon: '🌿' },
-  { id: 'maintenance', label: 'Maintenance Supplies', icon: '🔧' },
-  { id: 'events', label: 'Community Events', icon: '🎉' },
-  { id: 'printing', label: 'Printing / Postage', icon: '📮' },
-  { id: 'emergency', label: 'Emergency Repairs', icon: '🚨' },
-  { id: 'other', label: 'Other (Pre-Approved)', icon: '📋' },
+  { id: 'supplies', label: 'Office / Supplies', icon: '' },
+  { id: 'landscaping', label: 'Landscaping Materials', icon: '' },
+  { id: 'maintenance', label: 'Maintenance Supplies', icon: '' },
+  { id: 'events', label: 'Community Events', icon: '' },
+  { id: 'printing', label: 'Printing / Postage', icon: '' },
+  { id: 'emergency', label: 'Emergency Repairs', icon: '' },
+  { id: 'other', label: 'Other (Pre-Approved)', icon: '' },
 ];
 
 const STATUS_STYLES = {
@@ -97,7 +97,7 @@ export default function ReimbursementPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">💰 Expense Reimbursement</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold"> Expense Reimbursement</h1>
           <p className="text-sm text-gray-400 mt-1">Submit and track expense reimbursement requests</p>
         </div>
         <button
@@ -143,14 +143,14 @@ export default function ReimbursementPage() {
           {/* Policy note */}
           <div className="p-3 rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/15 mb-5">
             <p className="text-[11px] text-gray-400">
-              <span className="text-[#c9a96e] font-medium">📋 Policy:</span>{' '}
+              <span className="text-[#c9a96e] font-medium"> Policy:</span>{' '}
               Reimbursements require pre-approval for expenses over $150. Keep original receipts for 3 years. Requests must be submitted within 60 days of purchase. For emergency expenses, notify the board within 24 hours.
             </p>
           </div>
 
           {displayRequests.length === 0 ? (
             <div className="glass-card rounded-xl p-12 text-center">
-              <p className="text-4xl mb-3">📋</p>
+              <p className="text-4xl mb-3"></p>
               <h3 className="font-medium mb-1">No requests yet</h3>
               <p className="text-sm text-gray-400">Submit your first reimbursement request above</p>
             </div>
@@ -261,7 +261,7 @@ function ReimbursementForm({ onSubmit, onCancel }: {
 
       {parseFloat(amountStr) > 150 && (
         <div className="p-3 rounded-xl bg-amber-500/5 border border-amber-500/20 text-xs text-amber-400">
-          ⚠️ Expenses over $150 require prior board approval. If this was not pre-approved, your request may be rejected.
+           Expenses over $150 require prior board approval. If this was not pre-approved, your request may be rejected.
         </div>
       )}
 

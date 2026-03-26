@@ -17,7 +17,7 @@ function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
       <div className="w-12 h-12 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-2xl mb-4">
-        🔗
+        
       </div>
       <p className="text-sm text-gray-500 font-medium">No recent on-chain activity</p>
       <p className="text-xs text-gray-600 mt-1">Events will appear here as they happen</p>

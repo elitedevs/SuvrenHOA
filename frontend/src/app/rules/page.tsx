@@ -21,7 +21,7 @@ interface Section {
 const SECTIONS: Section[] = [
   {
     id: 'parking',
-    icon: '🚗',
+    icon: '',
     title: 'Parking',
     description: 'Rules governing parking in driveways, streets, and common areas.',
     rules: [
@@ -34,7 +34,7 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'pets',
-    icon: '🐾',
+    icon: '',
     title: 'Pets',
     description: 'Guidelines for pet ownership, leashing, and community spaces.',
     rules: [
@@ -47,7 +47,7 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'noise',
-    icon: '🔊',
+    icon: '',
     title: 'Noise',
     description: 'Quiet hours and acceptable noise levels in the community.',
     rules: [
@@ -59,7 +59,7 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'architectural',
-    icon: '🏗️',
+    icon: '',
     title: 'Architectural Changes',
     description: 'Requirements for home modifications, additions, and exterior changes.',
     rules: [
@@ -72,7 +72,7 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'landscaping',
-    icon: '🌿',
+    icon: '',
     title: 'Landscaping',
     description: 'Standards for lawn maintenance, plantings, and curb appeal.',
     rules: [
@@ -84,7 +84,7 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'rentals',
-    icon: '🏠',
+    icon: '',
     title: 'Rentals',
     description: 'Policies for renting your home within the community.',
     rules: [
@@ -96,7 +96,7 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'common-areas',
-    icon: '🏡',
+    icon: '',
     title: 'Common Areas',
     description: 'Use guidelines for shared spaces including pool, clubhouse, and parks.',
     rules: [
@@ -163,7 +163,7 @@ export default function RulesPage() {
 
       {/* Search */}
       <div className="relative mb-6">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">🔍</span>
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></span>
         <input
           type="text"
           value={search}
@@ -174,7 +174,7 @@ export default function RulesPage() {
         {search && (
           <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
             <span className="text-[10px] text-gray-500">{totalResults} result{totalResults !== 1 ? 's' : ''}</span>
-            <button onClick={() => setSearch('')} className="text-gray-500 hover:text-gray-300 text-xs">✕</button>
+            <button onClick={() => setSearch('')} className="text-gray-500 hover:text-gray-300 text-xs"></button>
           </div>
         )}
       </div>
@@ -249,7 +249,7 @@ export default function RulesPage() {
 
       {filteredSections.length === 0 && (
         <div className="glass-card rounded-xl p-12 text-center">
-          <p className="text-4xl mb-3">🔍</p>
+          <p className="text-4xl mb-3"></p>
           <h3 className="font-medium mb-1">No results found</h3>
           <p className="text-sm text-gray-400">Try different keywords or browse by section above</p>
         </div>
@@ -257,7 +257,7 @@ export default function RulesPage() {
 
       <div className="mt-8 p-4 rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/15">
         <p className="text-xs text-gray-400">
-          <span className="text-[#c9a96e] font-medium">📜 Official Document:</span>{' '}
+          <span className="text-[#c9a96e] font-medium"> Official Document:</span>{' '}
           These FAQs summarize the Faircroft CC&Rs and HOA Rules & Regulations. In case of discrepancy, the official recorded documents in the Documents section govern. Contact the board with any questions.
         </p>
       </div>

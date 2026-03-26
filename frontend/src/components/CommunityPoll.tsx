@@ -18,7 +18,7 @@ export function CommunityPoll() {
   return (
     <div className="glass-card rounded-2xl p-5">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-base font-semibold">📊 Community Polls</h2>
+        <h2 className="text-base font-semibold"> Community Polls</h2>
         <div className="flex gap-2">
           <button onClick={() => setShowArchive(!showArchive)}
             className="text-xs text-gray-400 hover:text-[#c9a96e] transition-colors">
@@ -40,7 +40,7 @@ export function CommunityPoll() {
               <input value={opt} onChange={e => { const o = [...newOptions]; o[i] = e.target.value; setNewOptions(o); }}
                 placeholder={`Option ${i + 1}`} className="flex-1 px-3 py-2 rounded-lg bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
               {newOptions.length > 2 && (
-                <button onClick={() => setNewOptions(newOptions.filter((_, idx) => idx !== i))} className="text-gray-500 hover:text-red-400">✕</button>
+                <button onClick={() => setNewOptions(newOptions.filter((_, idx) => idx !== i))} className="text-gray-500 hover:text-red-400"></button>
               )}
             </div>
           ))}
@@ -73,7 +73,7 @@ export function CommunityPoll() {
               <div key={poll.id} className="space-y-2">
                 <div className="flex items-start justify-between gap-2">
                   <p className="text-sm font-medium leading-tight">
-                    {poll.pinned && <span className="text-[#c9a96e] mr-1">📌</span>}
+                    {poll.pinned && <span className="text-[#c9a96e] mr-1"></span>}
                     {poll.question}
                   </p>
                   {!showArchive && !isExpired && address && (

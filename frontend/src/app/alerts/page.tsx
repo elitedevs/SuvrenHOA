@@ -21,9 +21,9 @@ import type { Alert, AlertType } from '@/hooks/useAlerts';
 // ─── Styling maps ─────────────────────────────────────────────────────────────
 
 const TYPE_LABELS: Record<AlertType, string> = {
-  emergency: '🔴 Emergency',
-  urgent: '🟠 Urgent',
-  info: '🔵 Info',
+  emergency: ' Emergency',
+  urgent: ' Urgent',
+  info: ' Info',
 };
 
 const TYPE_STYLE: Record<

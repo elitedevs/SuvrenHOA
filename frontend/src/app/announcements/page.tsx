@@ -11,35 +11,35 @@ const PRIORITY_STYLES = {
     border: 'border-l-red-500',
     bg: 'bg-red-500/5',
     badge: 'bg-red-500/15 text-red-400 border-red-500/30',
-    label: '🚨 Critical',
+    label: ' Critical',
     dot: 'bg-red-500',
   },
   urgent: {
     border: 'border-l-red-500',
     bg: 'bg-red-500/5',
     badge: 'bg-red-500/15 text-red-400 border-red-500/30',
-    label: '🚨 Urgent',
+    label: ' Urgent',
     dot: 'bg-red-500',
   },
   important: {
     border: 'border-l-[#c9a96e]',
     bg: 'bg-[#c9a96e]/5',
     badge: 'bg-[#c9a96e]/15 text-[#c9a96e] border-[#c9a96e]/30',
-    label: '⚡ Important',
+    label: ' Important',
     dot: 'bg-[#c9a96e]',
   },
   info: {
     border: 'border-l-blue-500',
     bg: 'bg-blue-500/5',
     badge: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
-    label: 'ℹ️ Info',
+    label: 'ℹ Info',
     dot: 'bg-blue-500',
   },
   fyi: {
     border: 'border-l-gray-500',
     bg: 'bg-gray-500/5',
     badge: 'bg-gray-500/15 text-gray-400 border-gray-500/30',
-    label: '💬 FYI',
+    label: ' FYI',
     dot: 'bg-gray-500',
   },
 };
@@ -131,7 +131,7 @@ export default function AnnouncementsPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">📢 Announcements</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold"> Announcements</h1>
           <p className="text-sm text-gray-400 mt-1">Official updates from the board and committees</p>
         </div>
         <div className="flex items-center gap-3">
@@ -171,7 +171,7 @@ export default function AnnouncementsPage() {
         </button>
         <button onClick={() => setActiveTab('archive')}
           className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'archive' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
-          📦 Archive ({archiveItems.length})
+           Archive ({archiveItems.length})
         </button>
       </div>
 
@@ -181,7 +181,7 @@ export default function AnnouncementsPage() {
         <ArchiveList items={archiveItems} readSet={readSet} />
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-xl hover-lift p-12 text-center">
-          <p className="text-4xl mb-3">📢</p>
+          <p className="text-4xl mb-3"></p>
           <h3 className="font-medium mb-1">No announcements</h3>
           <p className="text-sm text-gray-400">Board announcements will appear here</p>
         </div>
@@ -224,7 +224,7 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
         {/* Pin indicator */}
         {isPinned && (
           <div className="flex items-center gap-1.5 text-[10px] text-[#c9a96e] font-medium mb-2">
-            📌 Pinned
+             Pinned
           </div>
         )}
 
@@ -246,7 +246,7 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
               className={`p-1.5 rounded-lg transition-colors ${isPinned ? 'text-[#c9a96e] bg-[#c9a96e]/10' : 'text-gray-600 hover:text-gray-400'}`}
               title={isPinned ? 'Unpin' : 'Pin to top'}
             >
-              📌
+              
             </button>
             {!isRead && (
               <button
@@ -294,7 +294,7 @@ function ArchiveList({ items, readSet }: { items: any[]; readSet: Set<string> })
   if (items.length === 0) {
     return (
       <div className="glass-card rounded-xl p-12 text-center">
-        <p className="text-4xl mb-3">📦</p>
+        <p className="text-4xl mb-3"></p>
         <h3 className="font-medium mb-1">No archived announcements</h3>
         <p className="text-sm text-gray-400">Announcements older than 60 days appear here</p>
       </div>

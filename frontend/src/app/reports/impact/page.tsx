@@ -62,7 +62,7 @@ export default function ImpactPage() {
   const [activeTab, setActiveTab] = useState<'metrics' | 'timeline'>('metrics');
 
   const share = () => {
-    const text = `🏠 Faircroft HOA Blockchain Impact Report:\n• 16 homeowner NFTs — fully on-chain governance\n• 6 documents permanently stored on Base\n• 100% treasury transparency score\n• 100% paper-free HOA operations\n\nPowered by SuvrenHOA — the future of community governance. #BlockchainHOA #SuvrenHOA`;
+    const text = ` Faircroft HOA Blockchain Impact Report:\n• 16 homeowner NFTs — fully on-chain governance\n• 6 documents permanently stored on Base\n• 100% treasury transparency score\n• 100% paper-free HOA operations\n\nPowered by SuvrenHOA — the future of community governance. #BlockchainHOA #SuvrenHOA`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -86,7 +86,7 @@ export default function ImpactPage() {
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[#b8942e]/50 text-[#c9a96e] hover:bg-[#b8942e]/10 transition-colors font-medium"
           >
             <Share2 className="w-4 h-4" />
-            {copied ? '✓ Copied!' : 'Share Report'}
+            {copied ? ' Copied!' : 'Share Report'}
           </button>
         </div>
 

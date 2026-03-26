@@ -36,8 +36,8 @@ const STATUS_CONFIG = {
 
 const ZONE_GRID = [
   ['Zone A', 'Zone B', 'Zone C'],
-  ['Zone F', '🏊', 'Zone D'],
-  ['Zone E', '🏛️', ''],
+  ['Zone F', '', 'Zone D'],
+  ['Zone E', '', ''],
 ];
 
 export default function IrrigationPage() {
@@ -155,10 +155,10 @@ export default function IrrigationPage() {
               {ZONE_GRID.map((row, ri) =>
                 row.map((cell, ci) => {
                   if (!cell) return <div key={`${ri}-${ci}`} />;
-                  if (cell === '🏊' || cell === '🏛️') {
+                  if (cell === '' || cell === '') {
                     return (
                       <div key={`${ri}-${ci}`} className="aspect-square rounded-lg bg-[#1a1a1a]/60 border border-white/5 flex items-center justify-center">
-                        <span className="text-xl">{cell === '🏊' ? '🏊' : '🏛️'}</span>
+                        <span className="text-xl">{cell === '' ? '' : ''}</span>
                       </div>
                     );
                   }

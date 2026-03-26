@@ -8,7 +8,7 @@ const VOTING_TIERS = [
   {
     tier: 1,
     name: 'Founder',
-    emoji: '👑',
+    emoji: '',
     votes: 4,
     color: 'text-[#c9a96e]',
     bg: 'bg-[#c9a96e]/10',
@@ -21,7 +21,7 @@ const VOTING_TIERS = [
   {
     tier: 2,
     name: 'Elder',
-    emoji: '🏛️',
+    emoji: '',
     votes: 3,
     color: 'text-blue-400',
     bg: 'bg-blue-500/10',
@@ -34,7 +34,7 @@ const VOTING_TIERS = [
   {
     tier: 3,
     name: 'Resident',
-    emoji: '🏠',
+    emoji: '',
     votes: 2,
     color: 'text-green-400',
     bg: 'bg-green-500/10',
@@ -47,7 +47,7 @@ const VOTING_TIERS = [
   {
     tier: 4,
     name: 'New Owner',
-    emoji: '🌱',
+    emoji: '',
     votes: 1,
     color: 'text-amber-400',
     bg: 'bg-amber-500/10',
@@ -165,7 +165,7 @@ export default function VotingPowerPage() {
 
       {/* Info Card */}
       <div className="glass-card rounded-2xl p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30">
-        <h4 className="text-sm font-bold text-[#e8d5a3] mb-3">📖 How Tier Advancement Works</h4>
+        <h4 className="text-sm font-bold text-[#e8d5a3] mb-3"> How Tier Advancement Works</h4>
         <div className="space-y-2 text-xs text-gray-400 leading-relaxed">
           <p>• Voting power is determined automatically by your on-chain property NFT attributes.</p>
           <p>• Paying dues on time and holding your property longer increases your tier.</p>

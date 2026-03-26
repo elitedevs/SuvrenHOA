@@ -16,50 +16,50 @@ const PREFS: NotifPref[] = [
     id: 'emergency_alerts',
     label: 'Emergency Alerts',
     description: 'Critical community alerts, safety notices, and urgent HOA communications',
-    icon: '🚨',
+    icon: '',
     urgent: true,
   },
   {
     id: 'proposal_updates',
     label: 'Proposal Updates',
     description: 'New proposals, voting opened/closed, and results',
-    icon: '🗳️',
+    icon: '',
   },
   {
     id: 'dues_reminders',
     label: 'Dues Reminders',
     description: 'Payment reminders, overdue notices, and confirmation receipts',
-    icon: '💳',
+    icon: '',
   },
   {
     id: 'community_messages',
     label: 'Community Messages',
     description: 'Direct messages and mentions from neighbors',
-    icon: '💬',
+    icon: '',
   },
   {
     id: 'maintenance_updates',
     label: 'Maintenance Updates',
     description: 'Status changes on your maintenance requests',
-    icon: '🔧',
+    icon: '',
   },
   {
     id: 'announcements',
     label: 'Announcements',
     description: 'HOA board announcements and community news',
-    icon: '📢',
+    icon: '',
   },
   {
     id: 'violation_notices',
     label: 'Violation Notices',
     description: 'Violation reports filed against your property',
-    icon: '⚠️',
+    icon: '',
   },
   {
     id: 'meeting_reminders',
     label: 'Meeting Reminders',
     description: 'Board meeting and community event reminders',
-    icon: '📅',
+    icon: '',
   },
 ];
 
@@ -198,7 +198,7 @@ export default function NotificationPrefsPage() {
         onClick={handleSave}
         className="w-full py-3.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_20px_rgba(201,169,110,0.2)]"
       >
-        {saved ? '✅ Preferences Saved!' : 'Save Preferences'}
+        {saved ? ' Preferences Saved!' : 'Save Preferences'}
       </button>
 
       <p className="text-[11px] text-gray-600 text-center mt-4">

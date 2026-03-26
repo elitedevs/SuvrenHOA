@@ -44,7 +44,7 @@ export default function AmenitiesPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">🏊 Amenity Booking</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold"> Amenity Booking</h1>
           <p className="text-sm text-gray-400 mt-1">Reserve community facilities — pool, clubhouse, courts & more</p>
         </div>
         {selectedAmenity && (
@@ -79,7 +79,7 @@ function AmenityGrid({ onSelect, walletAddress }: { onSelect: (a: Amenity) => vo
     <>
       {myBookings.length > 0 && (
         <div className="mb-8 glass-card rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-[#c9a96e] mb-3">📅 Your Upcoming Bookings</h3>
+          <h3 className="text-sm font-semibold text-[#c9a96e] mb-3"> Your Upcoming Bookings</h3>
           <div className="space-y-2">
             {myBookings
               .filter(b => b.date >= new Date().toISOString().split('T')[0])
@@ -110,7 +110,7 @@ function AmenityGrid({ onSelect, walletAddress }: { onSelect: (a: Amenity) => vo
             <h3 className="font-semibold text-base mb-1">{amenity.name}</h3>
             <p className="text-xs text-gray-400 mb-3 leading-relaxed">{amenity.description}</p>
             <div className="flex items-center justify-between">
-              <span className="text-[10px] text-gray-500">👥 Capacity: {amenity.capacity}</span>
+              <span className="text-[10px] text-gray-500"> Capacity: {amenity.capacity}</span>
               <span className="text-[10px] text-[#c9a96e] opacity-0 group-hover:opacity-100 transition-opacity">
                 Book → 
               </span>
@@ -226,7 +226,7 @@ function AmenityBookingView({
                           : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50'
                       }`}
                     >
-                      {mine ? '📍' : booked ? '✕' : ''}{slot}
+                      {mine ? '' : booked ? '' : ''}{slot}
                     </button>
                   );
                 })}
@@ -272,7 +272,7 @@ function AmenityBookingView({
           <div className="glass-card rounded-xl p-5 space-y-4">
             {success && (
               <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 text-xs text-green-400">
-                ✅ Booking confirmed!
+                 Booking confirmed!
               </div>
             )}
 

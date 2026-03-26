@@ -60,7 +60,7 @@ export function NotificationBell() {
         className="w-8 h-8 rounded-lg flex items-center justify-center text-sm hover:bg-white/5 transition-colors relative"
         aria-label={`${unreadCount} unread notifications`}
       >
-        🔔
+        
         {unreadCount > 0 && (
           <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-red-500 text-[9px] font-bold flex items-center justify-center text-white">
             {unreadCount > 9 ? '9+' : unreadCount}

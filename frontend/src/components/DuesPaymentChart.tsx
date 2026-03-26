@@ -89,7 +89,7 @@ export function DuesPaymentChart({ paidMonths = [], quarterlyAmount = 450 }: Due
               {/* Tooltip */}
               <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                 {shortMonth}: <span className={status === 'paid' ? 'text-green-400' : status === 'missed' ? 'text-red-400' : 'text-gray-500'}>
-                  {status === 'paid' ? '✓ Paid' : status === 'missed' ? '✗ Missed' : '— Pending'}
+                  {status === 'paid' ? ' Paid' : status === 'missed' ? ' Missed' : '— Pending'}
                 </span>
               </div>
 
@@ -133,7 +133,7 @@ export function DuesPaymentChart({ paidMonths = [], quarterlyAmount = 450 }: Due
           </span>
         )}
         {missedCount === 0 && paidCount > 0 && (
-          <span className="text-green-400 font-medium">✓ All clear!</span>
+          <span className="text-green-400 font-medium"> All clear!</span>
         )}
       </div>
     </div>

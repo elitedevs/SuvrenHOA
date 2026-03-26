@@ -220,7 +220,7 @@ export function TreasuryProjections() {
                   <td className="text-right py-1.5 pr-3 text-red-400">${(p.expenses / 1000).toFixed(1)}K</td>
                   <td className={`text-right py-1.5 font-bold ${p.isBelowThreshold ? 'text-red-400' : 'text-[#c9a96e]'}`}>
                     ${(p.balance / 1000).toFixed(1)}K
-                    {p.isBelowThreshold && ' ⚠️'}
+                    {p.isBelowThreshold && ' '}
                   </td>
                 </tr>
               ))}

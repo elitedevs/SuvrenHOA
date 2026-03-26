@@ -102,7 +102,7 @@ function PetCard({
     <div className="glass-card rounded-xl p-4 border border-[#c9a96e]/10 mb-3">
       <div className="flex justify-between items-start mb-3">
         <span className="text-sm font-semibold text-[#e8d5a3]">
-          🐾 Pet
+           Pet
         </span>
         <button
           onClick={onRemove}
@@ -125,9 +125,9 @@ function PetCard({
             onUpdate({ ...pet, type: e.target.value as PetEntry["type"] })
           }
         >
-          <option value="dog">🐕 Dog</option>
-          <option value="cat">🐈 Cat</option>
-          <option value="other">🐾 Other</option>
+          <option value="dog"> Dog</option>
+          <option value="cat"> Cat</option>
+          <option value="other"> Other</option>
         </select>
         <input
           className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
@@ -574,7 +574,7 @@ function OnboardingWizard() {
               <div className="flex justify-between">
                 <span className="text-xs text-gray-500">Messaging</span>
                 <span className="text-xs text-gray-300">
-                  {profile.messagingOptIn ? "✅ Opted in" : "❌ Opted out"}
+                  {profile.messagingOptIn ? " Opted in" : " Opted out"}
                 </span>
               </div>
               {!profile.displayName && !profile.email && !profile.phone && (
@@ -659,7 +659,7 @@ function OnboardingWizard() {
               disabled={!ccrAck}
               className="flex-1 py-3 rounded-xl bg-green-600 hover:bg-green-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
             >
-              Complete Setup ✓
+              Complete Setup 
             </button>
           </div>
         </div>
@@ -668,7 +668,7 @@ function OnboardingWizard() {
       {/* ── Step 6: All Done ── */}
       {step === 6 && (
         <div className="glass-card rounded-2xl p-10 text-center animate-fade-in border-l-2 border-l-green-500/50">
-          <div className="text-6xl mb-5">🎉</div>
+          <div className="text-6xl mb-5"></div>
           <h2 className="text-2xl font-extrabold mb-2">You&apos;re all set!</h2>
           <p className="text-gray-400 text-sm mb-8">
             Welcome to the Faircroft community. Your setup is complete.
@@ -770,7 +770,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
         <div className="flex items-center justify-between mb-3">
           <div>
             <h3 className="font-semibold text-[#e8d5a3]">
-              {mode === 'move-in' ? <span className="flex items-center gap-1.5"><Home className="w-4 h-4" /> Move-In Checklist</span> : '📦 Move-Out Checklist'}
+              {mode === 'move-in' ? <span className="flex items-center gap-1.5"><Home className="w-4 h-4" /> Move-In Checklist</span> : ' Move-Out Checklist'}
             </h3>
             <p className="text-xs text-gray-400">{completedRequired} of {totalRequired} required tasks complete</p>
           </div>
@@ -791,7 +791,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
           />
         </div>
         {pct === 100 && (
-          <p className="text-xs text-green-400 mt-2">🎉 All required tasks complete!</p>
+          <p className="text-xs text-green-400 mt-2"> All required tasks complete!</p>
         )}
       </div>
 
@@ -830,7 +830,7 @@ function ChecklistRow({ item, checked, onToggle }: { item: ChecklistItem; checke
             checked ? 'bg-[#c9a96e] border-[#c9a96e] text-[#1a1a1a]' : 'border-gray-600 hover:border-[#c9a96e]/50'
           }`}
         >
-          {checked && <span className="text-[10px] font-bold">✓</span>}
+          {checked && <span className="text-[10px] font-bold"></span>}
         </button>
         <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setExpanded(!expanded)}>
           <div className="flex items-center gap-2">
@@ -875,7 +875,7 @@ export default function OnboardingPage() {
         <div className="flex gap-2 mb-6">
           <button onClick={() => setView('wizard')}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
-            🧭 Setup Wizard
+             Setup Wizard
           </button>
           <button onClick={() => setView('checklist-in')}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
@@ -883,7 +883,7 @@ export default function OnboardingPage() {
           </button>
           <button onClick={() => setView('checklist-out')}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
-            📦 Move-Out Checklist
+             Move-Out Checklist
           </button>
         </div>
       </div>

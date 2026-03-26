@@ -50,7 +50,7 @@ export function MessageBubble({ message, myLotId }: MessageBubbleProps) {
         <span className="text-[10px] text-gray-600">{formatTime(message.timestamp)}</span>
         {isSent && (
           <span className={`text-[10px] ${message.read ? 'text-[#c9a96e]' : 'text-gray-600'}`}>
-            {message.read ? '✓✓' : '✓'}
+            {message.read ? '' : ''}
           </span>
         )}
       </div>

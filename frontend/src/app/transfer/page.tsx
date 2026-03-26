@@ -139,10 +139,10 @@ export default function TransferPage() {
               <div className="p-4 rounded-xl bg-[oklch(0.14_0.005_60)] border border-[oklch(0.22_0.005_60)]">
                 <p className="text-xs text-[oklch(0.45_0.01_60)] font-medium mb-2">What the buyer receives:</p>
                 <ul className="space-y-1 text-xs text-[oklch(0.55_0.01_60)]">
-                  <li>✓ HOA membership NFT (Token ID: #47)</li>
-                  <li>✓ Voting rights in community governance</li>
-                  <li>✓ Access to all community amenities</li>
-                  <li>✓ Resident portal access</li>
+                  <li> HOA membership NFT (Token ID: #47)</li>
+                  <li> Voting rights in community governance</li>
+                  <li> Access to all community amenities</li>
+                  <li> Resident portal access</li>
                 </ul>
               </div>
               <div className="flex gap-3">
@@ -177,7 +177,7 @@ export default function TransferPage() {
                 ))}
               </div>
               <div className="p-4 rounded-xl border border-red-700/40 bg-red-950/20">
-                <p className="text-red-400 text-xs font-semibold mb-1">⚠ Final Warning</p>
+                <p className="text-red-400 text-xs font-semibold mb-1"> Final Warning</p>
                 <p className="text-red-400/70 text-xs">This transfer requires board approval. You will lose all access immediately upon board confirmation. There is no undo.</p>
               </div>
               <div className="flex gap-3">
@@ -205,7 +205,7 @@ export default function TransferPage() {
                 {['Verify purchase agreement on file', 'Confirm buyer identity', 'Check outstanding dues/violations', 'Board vote (3/5 required)'].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs text-[oklch(0.55_0.01_60)]">
                     <div className={`w-4 h-4 rounded-full border flex items-center justify-center text-[8px] ${i === 0 ? 'border-[#c9a96e] bg-[#b8942e]/20 text-[#c9a96e]' : 'border-[oklch(0.25_0.01_60)]'}`}>
-                      {i === 0 ? '✓' : ''}
+                      {i === 0 ? '' : ''}
                     </div>
                     {item}
                   </div>
@@ -244,7 +244,7 @@ export default function TransferPage() {
                   <h2 className="text-2xl font-bold text-[#e8d5a3]">Transfer Complete!</h2>
                   <p className="text-[oklch(0.55_0.01_60)] text-sm">NFT Token #47 has been transferred to {buyerWallet.slice(0, 10)}...{buyerWallet.slice(-8)}. Your resident access has been revoked. Thank you for being part of Faircroft HOA.</p>
                   <div className="p-4 rounded-xl bg-[oklch(0.14_0.005_60)] text-left">
-                    <p className="text-xs text-[oklch(0.45_0.01_60)] font-mono">Tx: 0xf9a8b2c...4e7d1 ✓ Confirmed</p>
+                    <p className="text-xs text-[oklch(0.45_0.01_60)] font-mono">Tx: 0xf9a8b2c...4e7d1  Confirmed</p>
                     <p className="text-xs text-[oklch(0.45_0.01_60)] font-mono mt-1">Block: 19,847,203</p>
                   </div>
                 </>

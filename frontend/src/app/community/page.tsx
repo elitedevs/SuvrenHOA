@@ -8,14 +8,14 @@ import { useProperty } from '@/hooks/useProperty';
 
 
 const CATEGORIES = [
-  { id: 'general', label: 'General', icon: '💬', color: 'gold' },
-  { id: 'maintenance', label: 'Maintenance', icon: '🔧', color: 'amber' },
-  { id: 'safety', label: 'Safety & Security', icon: '🛡️', color: 'red' },
-  { id: 'events', label: 'Events', icon: '🎉', color: 'green' },
-  { id: 'landscaping', label: 'Landscaping', icon: '🌿', color: 'emerald' },
-  { id: 'pets', label: 'Pets & Animals', icon: '🐕', color: 'blue' },
+  { id: 'general', label: 'General', icon: '', color: 'gold' },
+  { id: 'maintenance', label: 'Maintenance', icon: '', color: 'amber' },
+  { id: 'safety', label: 'Safety & Security', icon: '', color: 'red' },
+  { id: 'events', label: 'Events', icon: '', color: 'green' },
+  { id: 'landscaping', label: 'Landscaping', icon: '', color: 'emerald' },
+  { id: 'pets', label: 'Pets & Animals', icon: '', color: 'blue' },
   { id: 'recommendations', label: 'Recommendations', icon: '⭐', color: 'yellow' },
-  { id: 'lost-found', label: 'Lost & Found', icon: '🔍', color: 'cyan' },
+  { id: 'lost-found', label: 'Lost & Found', icon: '', color: 'cyan' },
 ];
 
 // Demo data for presentation
@@ -55,7 +55,7 @@ export default function CommunityPage() {
           onClick={() => setShowNewPost(!showNewPost)}
           className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)] shrink-0"
         >
-          {showNewPost ? '← Back' : '✏️ New Post'}
+          {showNewPost ? '← Back' : ' New Post'}
         </button>
       </div>
 
@@ -95,7 +95,7 @@ export default function CommunityPage() {
           {pinnedPosts.length > 0 && (
             <div className="mb-6">
               <p className="text-[10px] uppercase tracking-wider text-[#c9a96e] font-semibold mb-3 flex items-center gap-1.5">
-                📌 Pinned
+                 Pinned
               </p>
               {pinnedPosts.map(post => (
                 <PostCard key={post.id} post={post} />
@@ -135,7 +135,7 @@ function PostCard({ post }: { post: any }) {
             </h3>
             {post.pinned && (
               <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20">
-                📌 Pinned
+                 Pinned
               </span>
             )}
           </div>
@@ -166,13 +166,13 @@ function PostCard({ post }: { post: any }) {
           {/* Engagement */}
           <div className="flex items-center gap-4 mt-3">
             <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#c9a96e] transition-colors">
-              ❤️ {post.likes_count || 0}
+               {post.likes_count || 0}
             </button>
             <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#c9a96e] transition-colors">
-              💬 {post.replies_count || 0} replies
+               {post.replies_count || 0} replies
             </button>
             <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#c9a96e] transition-colors ml-auto">
-              🔗 Share
+               Share
             </button>
           </div>
         </div>

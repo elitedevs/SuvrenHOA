@@ -119,7 +119,7 @@ export default function RidesharePage() {
                     disabled={ride.seatsLeft === 0 || ride.riders.includes('You (Lot 12)')}
                     className="px-4 py-2 rounded-lg bg-[#b8942e] text-[#1a1a1a] font-semibold text-sm disabled:opacity-40 hover:bg-[#c9a96e] transition-colors"
                   >
-                    {ride.riders.includes('You (Lot 12)') ? '✓ Joined' : ride.seatsLeft === 0 ? 'Full' : 'Request Seat'}
+                    {ride.riders.includes('You (Lot 12)') ? ' Joined' : ride.seatsLeft === 0 ? 'Full' : 'Request Seat'}
                   </button>
                   <button
                     onClick={() => setMsgRide(ride)}

@@ -102,7 +102,7 @@ function NewMessageModal({
             onClick={onClose}
             className="text-gray-500 hover:text-gray-300 text-xl leading-none p-1"
           >
-            ✕
+            
           </button>
         </div>
 
@@ -355,7 +355,7 @@ function MessagingCenter({ address }: { address: string }) {
       {/* Opt-in info banner */}
       {!optIn && (
         <div className="mb-4 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-sm text-amber-300 font-medium">
-          💡 Messaging is opt-in. Enable the toggle above so neighbors can message you.
+           Messaging is opt-in. Enable the toggle above so neighbors can message you.
         </div>
       )}
 
@@ -375,7 +375,7 @@ function MessagingCenter({ address }: { address: string }) {
                 onClick={() => setShowNewModal(true)}
                 className="text-xs font-semibold text-[#c9a96e] hover:text-[#e8d5a3] px-3 py-1.5 rounded-lg hover:bg-[#c9a96e]/10 transition-all duration-150 flex items-center gap-1"
               >
-                <span>✏️</span> New
+                <span></span> New
               </button>
             </div>
 
@@ -389,7 +389,7 @@ function MessagingCenter({ address }: { address: string }) {
                 </div>
               ) : conversations.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-4 py-8">
-                  <div className="text-4xl">✉️</div>
+                  <div className="text-4xl"></div>
                   <p className="text-gray-500 text-sm font-medium">
                     No messages yet — reach out to a neighbor!
                   </p>
@@ -435,7 +435,7 @@ function MessagingCenter({ address }: { address: string }) {
                   onClick={() => setShowNewModal(true)}
                   className="mt-2 px-5 py-2.5 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/20 text-sm font-semibold text-[#e8d5a3] transition-all duration-200"
                 >
-                  ✏️ New Message
+                   New Message
                 </button>
               </div>
             )}

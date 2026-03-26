@@ -211,7 +211,7 @@ export default function VendorPaymentsPage() {
                   <td className="px-4 py-3 text-gray-400 text-xs">{p.date}</td>
                   <td className="px-4 py-3">
                     <span className={`text-[10px] px-2 py-0.5 rounded-full border ${statusColor(p.status)}`}>
-                      {p.status === 'paid' ? '✅ Paid' : p.status === 'overdue' ? '⚠️ Overdue' : '⏳ Pending'}
+                      {p.status === 'paid' ? ' Paid' : p.status === 'overdue' ? ' Overdue' : '⏳ Pending'}
                     </span>
                   </td>
                   {isBoard && (

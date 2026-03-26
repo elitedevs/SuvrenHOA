@@ -55,7 +55,7 @@ function PropertyNFTCard({ address, basescanBase }: { address: string; basescanB
   return (
     <ContractCard
       name="PropertyNFT"
-      emoji="🏠"
+      emoji=""
       description="Soulbound NFT representing lot ownership. 1 lot = 1 vote. Non-transferable."
       address={address}
       basescanUrl={`${basescanBase}/address/${address}`}
@@ -78,7 +78,7 @@ function GovernorCard({ address, basescanBase }: { address: string; basescanBase
   return (
     <ContractCard
       name="FaircroftGovernor"
-      emoji="🗳️"
+      emoji=""
       description="On-chain governance contract. Manages proposals, voting, and execution via timelock."
       address={address}
       basescanUrl={`${basescanBase}/address/${address}`}
@@ -103,7 +103,7 @@ function TreasuryCard({ address, basescanBase }: { address: string; basescanBase
   return (
     <ContractCard
       name="FaircroftTreasury"
-      emoji="💰"
+      emoji=""
       description="Manages HOA dues, expenditures, and reserves. 80/20 operating/reserve split."
       address={address}
       basescanUrl={`${basescanBase}/address/${address}`}
@@ -126,7 +126,7 @@ function DocumentRegistryCard({ address, basescanBase }: { address: string; base
   return (
     <ContractCard
       name="DocumentRegistry"
-      emoji="📄"
+      emoji=""
       description="Immutable document registry. Stores content hashes on-chain for tamper-proof records."
       address={address}
       basescanUrl={`${basescanBase}/address/${address}`}
@@ -246,7 +246,7 @@ export default function ContractsPage() {
 
       {/* Info */}
       <div className="mt-8 glass-card rounded-2xl p-6 border border-[#c9a96e]/10">
-        <p className="text-xs font-bold text-[#e8d5a3] mb-2">🔍 Read-Only Explorer</p>
+        <p className="text-xs font-bold text-[#e8d5a3] mb-2"> Read-Only Explorer</p>
         <p className="text-xs text-gray-400 leading-relaxed">
           This explorer shows live on-chain data from deployed contracts. All data is fetched directly
           from the blockchain via RPC calls — no intermediary servers. Contract state updates automatically

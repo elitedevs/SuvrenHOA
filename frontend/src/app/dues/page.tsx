@@ -192,7 +192,7 @@ function DuesPanel() {
                         ? 'bg-[#c9a96e]/20 border border-[#c9a96e]/50 text-[#e8d5a3] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
                         : 'bg-gray-800/60 border border-gray-700/40 text-gray-600'
                     }`}>
-                      {isDone ? '✓' : i + 1}
+                      {isDone ? '' : i + 1}
                     </div>
                     <span className={`text-[11px] font-semibold whitespace-nowrap ${
                       isActive ? 'text-[#e8d5a3]' : isDone ? 'text-green-400' : 'text-gray-600'
@@ -250,7 +250,7 @@ function DuesPanel() {
       {step === 'done' ? (
         <div className="glass-card-success rounded-2xl p-12 text-center border-l-2 border-l-green-500/50 pulse-glow-green page-enter">
           <div className="w-20 h-20 rounded-full bg-green-500/15 border-2 border-green-500/30 flex items-center justify-center text-4xl mx-auto mb-6">
-            ✅
+            
           </div>
           <h3 className="text-2xl font-extrabold text-green-400 mb-3">Payment Successful!</h3>
           <p className="text-sm text-gray-400 mb-2 max-w-sm mx-auto">
@@ -338,7 +338,7 @@ function DuesPanel() {
             className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-base font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] active:scale-[0.98] min-h-[56px]"
           >
             {isApproving ? '⏳ Approving USDC...' :
-             isPaying ? '⛓️ Processing Payment...' :
+             isPaying ? ' Processing Payment...' :
              selectedOption ? `Pay $${selectedOption.amount.toFixed(2)} USDC` :
              'Select a payment option'}
           </button>
@@ -348,7 +348,7 @@ function DuesPanel() {
             <p>Paid in USDC on Base. 80% → operating fund · 20% → reserve fund.</p>
             {selectedOption && usdcBalance < selectedOption.amount && (
               <p className="text-red-400 font-medium">
-                ⚠️ Insufficient balance. You need ${selectedOption.amount.toFixed(2)} but have ${usdcBalance.toFixed(2)}.
+                 Insufficient balance. You need ${selectedOption.amount.toFixed(2)} but have ${usdcBalance.toFixed(2)}.
               </p>
             )}
           </div>

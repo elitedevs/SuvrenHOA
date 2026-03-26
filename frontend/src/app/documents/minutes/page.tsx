@@ -91,7 +91,7 @@ function ActionItemRow({ item, onChange }: { item: ActionItem; onChange: (update
           item.done ? 'bg-[#c9a96e] border-[#c9a96e]' : 'border-gray-600 hover:border-[#c9a96e]'
         }`}
       >
-        {item.done && <span className="text-[#1a1a1a] text-[10px] font-bold flex items-center justify-center h-full">✓</span>}
+        {item.done && <span className="text-[#1a1a1a] text-[10px] font-bold flex items-center justify-center h-full"></span>}
       </button>
       <div className="flex-1 min-w-0">
         <span className={`text-sm ${item.done ? 'line-through text-gray-500' : 'text-gray-300'}`}>{item.task}</span>
@@ -135,7 +135,7 @@ function MinutesCard({ entry, isBoard, onUpdate }: { entry: MinutesEntry; isBoar
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-base font-bold text-gray-100">{entry.title}</span>
               {entry.quorum && (
-                <span className="text-[10px] font-bold bg-green-500/15 text-green-400 border border-green-500/25 px-2 py-0.5 rounded-full">Quorum ✓</span>
+                <span className="text-[10px] font-bold bg-green-500/15 text-green-400 border border-green-500/25 px-2 py-0.5 rounded-full">Quorum </span>
               )}
             </div>
             <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
@@ -337,9 +337,9 @@ export default function MeetingMinutesPage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3 mb-8">
         {[
-          { label: 'Total Meetings', value: sorted.length, icon: '📋' },
-          { label: 'Action Items', value: sorted.reduce((acc, m) => acc + m.actionItems.length, 0), icon: '✅' },
-          { label: 'Completed', value: sorted.reduce((acc, m) => acc + m.actionItems.filter(a => a.done).length, 0), icon: '🏁' },
+          { label: 'Total Meetings', value: sorted.length, icon: '' },
+          { label: 'Action Items', value: sorted.reduce((acc, m) => acc + m.actionItems.length, 0), icon: '' },
+          { label: 'Completed', value: sorted.reduce((acc, m) => acc + m.actionItems.filter(a => a.done).length, 0), icon: '' },
         ].map((stat, i) => (
           <div key={i} className="glass-card rounded-xl p-4 text-center border border-white/[0.04]">
             <div className="text-xl mb-1">{stat.icon}</div>

@@ -242,7 +242,7 @@ export default function ElectionsPage() {
               <div key={i} className="flex gap-4">
                 <div className="flex flex-col items-center">
                   <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${done ? 'bg-[#b8942e] text-[#1a1a1a]' : 'border-2 border-[oklch(0.25_0.005_60)] text-[oklch(0.40_0.01_60)]'}`}>
-                    {done ? '✓' : i + 1}
+                    {done ? '' : i + 1}
                   </div>
                   {i < 4 && <div className="w-0.5 h-8 bg-[oklch(0.18_0.005_60)] mt-1" />}
                 </div>

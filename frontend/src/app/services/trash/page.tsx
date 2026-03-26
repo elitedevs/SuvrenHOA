@@ -11,9 +11,9 @@ interface PickupDay {
 }
 
 const TYPE_CONFIG: Record<PickupType, { color: string; bg: string; border: string; emoji: string; label: string }> = {
-  trash:     { color: 'text-green-400',  bg: 'bg-green-400/20',  border: 'border-green-400/30',  emoji: '🗑️', label: 'Trash' },
-  recycling: { color: 'text-blue-400',   bg: 'bg-blue-400/20',   border: 'border-blue-400/30',   emoji: '♻️', label: 'Recycling' },
-  yard:      { color: 'text-[#c9a96e]',  bg: 'bg-[#c9a96e]/20', border: 'border-[#c9a96e]/30',  emoji: '🌿', label: 'Yard Waste' },
+  trash:     { color: 'text-green-400',  bg: 'bg-green-400/20',  border: 'border-green-400/30',  emoji: '', label: 'Trash' },
+  recycling: { color: 'text-blue-400',   bg: 'bg-blue-400/20',   border: 'border-blue-400/30',   emoji: '', label: 'Recycling' },
+  yard:      { color: 'text-[#c9a96e]',  bg: 'bg-[#c9a96e]/20', border: 'border-[#c9a96e]/30',  emoji: '', label: 'Yard Waste' },
 };
 
 // Pickup schedule: 0=Sun,1=Mon,...,6=Sat
@@ -141,14 +141,14 @@ export default function TrashSchedulePage() {
           </div>
         ))}
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-red-400/10 border border-red-400/20">
-          <span className="text-sm">🚫</span>
+          <span className="text-sm"></span>
           <span className="text-xs font-semibold text-red-400">Holiday (delayed +1 day)</span>
         </div>
       </div>
 
       {/* Next Pickups Countdown */}
       <div className="glass rounded-2xl p-5 border border-white/[0.04] mb-6">
-        <h2 className="text-sm font-bold text-gray-300 mb-4">📅 Upcoming Pickups</h2>
+        <h2 className="text-sm font-bold text-gray-300 mb-4"> Upcoming Pickups</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {nextPickups.map((pickup, i) => {
             const daysUntil = getDaysUntil(pickup.date);
@@ -216,7 +216,7 @@ export default function TrashSchedulePage() {
                     );
                   })}
                   {holiday && dayPickups.length > 0 && (
-                    <div className="text-[9px] text-center rounded px-0.5 bg-red-400/15 text-red-400 font-semibold leading-tight py-0.5">🚫</div>
+                    <div className="text-[9px] text-center rounded px-0.5 bg-red-400/15 text-red-400 font-semibold leading-tight py-0.5"></div>
                   )}
                 </div>
               </div>
@@ -230,9 +230,9 @@ export default function TrashSchedulePage() {
         <h2 className="text-sm font-bold text-gray-300 mb-3 flex items-center gap-2"><ClipboardList className="w-4 h-4 text-[#c9a96e]" /> Weekly Schedule</h2>
         <div className="space-y-2">
           {[
-            { day: 'Monday', pickups: ['🗑️ Trash', '🌿 Yard Waste (bi-weekly)'] },
-            { day: 'Wednesday', pickups: ['♻️ Recycling'] },
-            { day: 'Thursday', pickups: ['🗑️ Trash'] },
+            { day: 'Monday', pickups: [' Trash', ' Yard Waste (bi-weekly)'] },
+            { day: 'Wednesday', pickups: [' Recycling'] },
+            { day: 'Thursday', pickups: [' Trash'] },
           ].map((row, i) => (
             <div key={i} className="flex items-center gap-4 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
               <span className="text-sm font-semibold text-gray-300 w-24">{row.day}</span>

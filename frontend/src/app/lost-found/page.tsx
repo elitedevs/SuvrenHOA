@@ -106,7 +106,7 @@ export default function LostFoundPage() {
         </div>
         <button onClick={() => setShowForm(!showForm)}
           className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
-          {showForm ? '← Back' : '📋 Post Item'}
+          {showForm ? '← Back' : ' Post Item'}
         </button>
       </div>
 
@@ -121,7 +121,7 @@ export default function LostFoundPage() {
                     ? t === 'lost' ? 'bg-red-500/15 text-red-400 border-red-500/30' : 'bg-green-500/15 text-green-400 border-green-500/30'
                     : 'glass-card text-gray-400'
                 }`}>
-                {t === 'lost' ? '😢 Lost Item' : '🎉 Found Item'}
+                {t === 'lost' ? ' Lost Item' : ' Found Item'}
               </button>
             ))}
           </div>
@@ -194,7 +194,7 @@ export default function LostFoundPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filtered.length === 0 ? (
           <div className="col-span-full glass-card rounded-xl p-12 text-center">
-            <p className="text-4xl mb-3">🔍</p>
+            <p className="text-4xl mb-3"></p>
             <p className="text-gray-400">No items in this category</p>
           </div>
         ) : filtered.map(item => (
@@ -203,8 +203,8 @@ export default function LostFoundPage() {
             <div className={`h-32 flex items-center justify-center text-4xl ${
               item.type === 'lost' ? 'bg-red-500/10' : 'bg-green-500/10'
             }`}>
-              {item.category === 'Pets' ? '🐾' : item.category === 'Keys' ? '🔑' : item.category === 'Bikes' ? '🚲' :
-               item.category === 'Electronics' ? '📱' : item.category === 'Jewelry' ? '💍' : '📦'}
+              {item.category === 'Pets' ? '' : item.category === 'Keys' ? '' : item.category === 'Bikes' ? '' :
+               item.category === 'Electronics' ? '' : item.category === 'Jewelry' ? '' : ''}
             </div>
             <div className="p-4">
               <div className="flex items-center gap-2 mb-2">
@@ -212,21 +212,21 @@ export default function LostFoundPage() {
                   item.status === 'claimed' ? 'bg-gray-500/10 text-gray-400 border-gray-500/20' :
                   item.type === 'lost' ? 'bg-red-500/10 text-red-400 border-red-500/20' : 'bg-green-500/10 text-green-400 border-green-500/20'
                 }`}>
-                  {item.status === 'claimed' ? '✅ Claimed' : item.type === 'lost' ? '😢 Lost' : '🎉 Found'}
+                  {item.status === 'claimed' ? ' Claimed' : item.type === 'lost' ? ' Lost' : ' Found'}
                 </span>
                 <span className="text-[10px] text-gray-500">{item.category}</span>
               </div>
               <h3 className="font-semibold text-sm mb-1">{item.title}</h3>
               <p className="text-xs text-gray-400 mb-3 leading-relaxed">{item.description}</p>
               <div className="space-y-1 text-[11px] text-gray-500">
-                <p>📍 {item.location}</p>
-                {item.date && <p>📅 {item.date}</p>}
-                <p>📞 Contact Lot #{item.contactLot}</p>
+                <p> {item.location}</p>
+                {item.date && <p> {item.date}</p>}
+                <p> Contact Lot #{item.contactLot}</p>
               </div>
               {item.status === 'active' && (
                 <button onClick={() => markClaimed(item.id)}
                   className="mt-3 w-full py-2 rounded-xl border border-green-500/30 text-green-400 text-xs font-medium hover:bg-green-500/10 transition-colors">
-                  Mark as Claimed ✓
+                  Mark as Claimed 
                 </button>
               )}
             </div>

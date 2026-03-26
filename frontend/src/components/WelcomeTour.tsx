@@ -16,19 +16,19 @@ const STEPS: TourStep[] = [
   {
     title: 'Welcome to SuvrenHOA',
     description: 'Your blockchain-powered HOA platform. Transparent governance, immutable records, and democratic decision-making — all on-chain.',
-    icon: '🏠',
+    icon: '',
     hint: 'No management companies. No hidden spending.',
   },
   {
     title: 'Your Dashboard',
     description: 'View your property NFT, voting power, dues status, and quick-access links to everything you need as a homeowner.',
-    icon: '📊',
+    icon: '',
     hint: 'Your lot = your vote. 1 property, 1 vote.',
   },
   {
     title: 'Get Involved',
     description: 'Vote on proposals, pay dues in USDC, participate in community discussions, and verify any document is authentic.',
-    icon: '🗳️',
+    icon: '',
     hint: 'Every vote, every dollar is permanently recorded on Base.',
   },
 ];
@@ -158,7 +158,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
               onClick={next}
               className="flex-1 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_16px_rgba(201,169,110,0.25)]"
             >
-              {step < STEPS.length - 1 ? 'Next →' : "Let's Go! 🚀"}
+              {step < STEPS.length - 1 ? 'Next →' : "Let's Go! "}
             </button>
           </div>
 

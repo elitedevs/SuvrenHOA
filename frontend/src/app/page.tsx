@@ -90,21 +90,21 @@ function Landing() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl w-full page-enter page-enter-delay-3">
           {[
             {
-              icon: '🏠',
+              icon: '',
               title: '1 Lot = 1 Vote',
               desc: 'Every property gets equal representation through a soulbound NFT. No proxy manipulation, no whale voting.',
               accent: 'gold',
               borderColor: 'border-l-[#c9a96e]/50',
             },
             {
-              icon: '💰',
+              icon: '',
               title: 'Transparent Treasury',
               desc: 'Every dollar in and out is recorded on-chain. Real-time balances, automatic 80/20 operating/reserve split.',
               accent: 'green',
               borderColor: 'border-l-green-500/50',
             },
             {
-              icon: '📄',
+              icon: '',
               title: 'Permanent Records',
               desc: "CC&Rs, minutes, and budgets stored on Arweave. Drag-drop any file to verify it hasn't been altered.",
               accent: 'blue',

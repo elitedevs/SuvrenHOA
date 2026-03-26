@@ -116,7 +116,7 @@ function ProposalsDashboard() {
       {/* Proposals Empty State */}
       <div className="glass-card rounded-2xl hover-lift p-14 text-center page-enter page-enter-delay-3">
         <div className="w-20 h-20 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-4xl mx-auto mb-6">
-          🗳️
+          
         </div>
         <h3 className="text-xl font-bold mb-3">No proposals yet</h3>
         <p className="text-sm text-gray-400 max-w-md mx-auto leading-relaxed mb-8">
@@ -153,13 +153,13 @@ function ProposalsDashboard() {
           {/* Voting options */}
           <div className="flex items-center justify-center gap-3 mt-8">
             <span className="text-xs px-3 py-1.5 rounded-lg bg-green-500/10 text-green-400 border border-green-500/20 font-semibold">
-              👍 For
+               For
             </span>
             <span className="text-xs px-3 py-1.5 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 font-semibold">
-              👎 Against
+               Against
             </span>
             <span className="text-xs px-3 py-1.5 rounded-lg bg-gray-500/10 text-gray-400 border border-gray-500/20 font-semibold">
-              🤷 Abstain
+               Abstain
             </span>
           </div>
         </div>
@@ -206,7 +206,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
     return (
       <div className="glass-card-success rounded-2xl p-12 text-center border-l-2 border-l-green-500/50 pulse-glow-green">
         <div className="w-16 h-16 rounded-2xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-3xl mx-auto mb-6">
-          ✅
+          
         </div>
         <h3 className="text-2xl font-extrabold text-green-400 mb-3">Proposal Submitted!</h3>
         <p className="text-sm text-gray-400 mb-6 max-w-sm mx-auto">
@@ -304,7 +304,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
                     <span className="text-base">{cat.icon}</span>
                     <span className="text-sm font-bold text-gray-100">{cat.label}</span>
                     {category === cat.value && (
-                      <span className="ml-auto text-xs text-green-400">✓</span>
+                      <span className="ml-auto text-xs text-green-400"></span>
                     )}
                   </div>
                   <p className="text-[11px] text-gray-500">
@@ -324,7 +324,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
         className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] min-h-[52px]"
       >
         {isPending ? '⏳ Confirm in Wallet...' :
-         isConfirming ? '⛓️ Submitting On-Chain...' :
+         isConfirming ? ' Submitting On-Chain...' :
          'Submit Proposal'}
       </button>
 

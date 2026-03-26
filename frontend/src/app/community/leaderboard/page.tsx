@@ -11,25 +11,25 @@ function truncateAddr(addr: string): string {
 }
 
 const RANK_STYLES: Record<number, { bg: string; text: string; border: string; medal: string }> = {
-  1: { bg: 'bg-[#FFD700]/10', text: 'text-[#FFD700]', border: 'border-[#FFD700]/30', medal: '🏆' },
-  2: { bg: 'bg-[#C0C0C0]/10', text: 'text-[#C0C0C0]', border: 'border-[#C0C0C0]/30', medal: '🥈' },
-  3: { bg: 'bg-[#CD7F32]/10', text: 'text-[#CD7F32]', border: 'border-[#CD7F32]/30', medal: '🥉' },
+  1: { bg: 'bg-[#FFD700]/10', text: 'text-[#FFD700]', border: 'border-[#FFD700]/30', medal: '' },
+  2: { bg: 'bg-[#C0C0C0]/10', text: 'text-[#C0C0C0]', border: 'border-[#C0C0C0]/30', medal: '' },
+  3: { bg: 'bg-[#CD7F32]/10', text: 'text-[#CD7F32]', border: 'border-[#CD7F32]/30', medal: '' },
 };
 
 const TABS = [
-  { id: 'governance', label: 'Governance Champions', icon: '🗳️', statLabel: 'Votes' },
-  { id: 'payers', label: 'Prompt Payers', icon: '💳', statLabel: 'Payments' },
-  { id: 'contributors', label: 'Community Contributors', icon: '💡', statLabel: 'Proposals' },
-  { id: 'documents', label: 'Document Champions', icon: '📄', statLabel: 'Uploads' },
+  { id: 'governance', label: 'Governance Champions', icon: '', statLabel: 'Votes' },
+  { id: 'payers', label: 'Prompt Payers', icon: '', statLabel: 'Payments' },
+  { id: 'contributors', label: 'Community Contributors', icon: '', statLabel: 'Proposals' },
+  { id: 'documents', label: 'Document Champions', icon: '', statLabel: 'Uploads' },
 ] as const;
 
 type TabId = (typeof TABS)[number]['id'];
 
 const HALL_OF_FAME = [
-  { month: 'February 2026', winner: '0xaBcD...1234', category: 'Governance', streak: 3, medal: '🏆' },
-  { month: 'January 2026', winner: '0x9F2e...5678', category: 'Prompt Payer', streak: 5, medal: '🥇' },
-  { month: 'December 2025', winner: '0x3A4b...9012', category: 'Community Contributor', streak: 2, medal: '🎖️' },
-  { month: 'November 2025', winner: '0xaBcD...1234', category: 'Good Neighbor', streak: 1, medal: '🌟' },
+  { month: 'February 2026', winner: '0xaBcD...1234', category: 'Governance', streak: 3, medal: '' },
+  { month: 'January 2026', winner: '0x9F2e...5678', category: 'Prompt Payer', streak: 5, medal: '' },
+  { month: 'December 2025', winner: '0x3A4b...9012', category: 'Community Contributor', streak: 2, medal: '' },
+  { month: 'November 2025', winner: '0xaBcD...1234', category: 'Good Neighbor', streak: 1, medal: '' },
 ];
 
 function SkeletonRow() {
@@ -90,13 +90,13 @@ function LeaderboardRow({ entry, statLabel, connectedAddress, prevRank }: {
         </div>
         <button
           onClick={() => {
-            const text = `🏆 Rank #${entry.rank} on SuvrenHOA Leaderboard — ${entry.score} ${statLabel}! #SuvrenHOA #Community`;
+            const text = ` Rank #${entry.rank} on SuvrenHOA Leaderboard — ${entry.score} ${statLabel}! #SuvrenHOA #Community`;
             navigator.clipboard?.writeText(text).catch(() => {});
           }}
           className="text-gray-600 hover:text-[#c9a96e] transition-colors text-sm cursor-pointer"
           title="Share achievement"
         >
-          🔗
+          
         </button>
       </div>
     </div>
@@ -154,7 +154,7 @@ export default function LeaderboardPage() {
                   : 'text-gray-500 hover:text-gray-300'
               }`}
             >
-              {range === 'monthly' ? '📅 This Month' : '⭐ All Time'}
+              {range === 'monthly' ? ' This Month' : '⭐ All Time'}
             </button>
           ))}
         </div>
@@ -166,7 +166,7 @@ export default function LeaderboardPage() {
               : 'glass text-gray-400 border-white/[0.04] hover:text-[#FFD700]'
           }`}
         >
-          🏛️ Hall of Fame
+           Hall of Fame
         </button>
       </div>
 
@@ -174,7 +174,7 @@ export default function LeaderboardPage() {
       {showHallOfFame && (
         <div className="glass rounded-2xl p-6 border border-[#FFD700]/20">
           <h2 className="text-base font-bold text-[#FFD700] mb-4 flex items-center gap-2">
-            🏛️ Hall of Fame — Past Winners
+             Hall of Fame — Past Winners
           </h2>
           <div className="space-y-3">
             {HALL_OF_FAME.map((item, i) => (
@@ -186,7 +186,7 @@ export default function LeaderboardPage() {
                 </div>
                 <div className="text-right">
                   <div className="text-xs font-mono text-gray-400">{item.winner}</div>
-                  <div className="text-[10px] text-[#c9a96e] mt-0.5">🔥 {item.streak}mo streak</div>
+                  <div className="text-[10px] text-[#c9a96e] mt-0.5"> {item.streak}mo streak</div>
                 </div>
               </div>
             ))}
@@ -196,7 +196,7 @@ export default function LeaderboardPage() {
 
       {/* Error State */}
       {error && (
-        <div className="glass rounded-xl p-4 border border-red-500/20 text-red-400 text-sm text-center">⚠️ {error}</div>
+        <div className="glass rounded-xl p-4 border border-red-500/20 text-red-400 text-sm text-center"> {error}</div>
       )}
 
       {/* Good Neighbor Spotlight */}
@@ -225,17 +225,17 @@ export default function LeaderboardPage() {
                     Combined score: <span className="text-[#FFD700] font-bold">{goodNeighborScore}</span>
                   </div>
                   <div className="text-xs text-[#c9a96e] mt-1">
-                    🔥 {getStreak(goodNeighbor)} consecutive months of excellence
+                     {getStreak(goodNeighbor)} consecutive months of excellence
                   </div>
                 </div>
                 <button
                   onClick={() => {
-                    const text = `🌟 Good Neighbor of the Month on SuvrenHOA! #SuvrenHOA #Community #GoodNeighbor`;
+                    const text = ` Good Neighbor of the Month on SuvrenHOA! #SuvrenHOA #Community #GoodNeighbor`;
                     navigator.clipboard?.writeText(text).catch(() => {});
                   }}
                   className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#FFD700]/20 text-[#FFD700] border border-[#FFD700]/30 hover:bg-[#FFD700]/30 transition-all cursor-pointer"
                 >
-                  Share 🔗
+                  Share 
                 </button>
               </div>
             ) : (
@@ -279,7 +279,7 @@ export default function LeaderboardPage() {
           </div>
         ) : entriesMap[activeTab].length === 0 ? (
           <div className="text-center py-16 text-gray-500">
-            <div className="text-4xl mb-3">🌱</div>
+            <div className="text-4xl mb-3"></div>
             <p className="text-sm font-medium">No activity yet — be the first to participate!</p>
           </div>
         ) : (
@@ -299,7 +299,7 @@ export default function LeaderboardPage() {
 
       {/* Streak Tracker */}
       <div className="glass rounded-2xl p-6 border border-white/[0.04]">
-        <h2 className="text-base font-bold text-gray-100 mb-1">🔥 Streak Tracker</h2>
+        <h2 className="text-base font-bold text-gray-100 mb-1"> Streak Tracker</h2>
         <p className="text-xs text-gray-500 mb-4">Consecutive months of on-time dues payment</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {(promptPayers.slice(0, 6).length > 0 ? promptPayers.slice(0, 6) : [
@@ -310,7 +310,7 @@ export default function LeaderboardPage() {
             const streak = getStreak(entry.address);
             return (
               <div key={idx} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] text-center">
-                <div className="text-2xl mb-1">{'🔥'.repeat(Math.min(streak, 3))}</div>
+                <div className="text-2xl mb-1">{''.repeat(Math.min(streak, 3))}</div>
                 <div className="text-sm font-bold text-[#c9a96e]">{streak} {streak === 1 ? 'month' : 'months'}</div>
                 <div className="text-[10px] text-gray-500 font-mono mt-0.5 truncate">{truncateAddr(entry.address)}</div>
               </div>

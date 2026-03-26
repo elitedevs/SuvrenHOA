@@ -37,10 +37,10 @@ const KIT_CHECKLIST: Omit<ChecklistItem, 'checked'>[] = [
 ];
 
 const EMERGENCY_CONTACTS = [
-  { name: 'HOA Emergency Line', number: '555-HOA-HELP', available: '24/7', icon: '🏠' },
-  { name: 'Board President', number: '555-234-5678', available: 'Emergencies only', icon: '👤' },
-  { name: 'Security Patrol', number: '555-345-6789', available: '24/7', icon: '🔒' },
-  { name: 'County Emergency Mgmt', number: '555-456-7890', available: 'Business hours', icon: '🏛️' },
+  { name: 'HOA Emergency Line', number: '555-HOA-HELP', available: '24/7', icon: '' },
+  { name: 'Board President', number: '555-234-5678', available: 'Emergencies only', icon: '' },
+  { name: 'Security Patrol', number: '555-345-6789', available: '24/7', icon: '' },
+  { name: 'County Emergency Mgmt', number: '555-456-7890', available: 'Business hours', icon: '' },
 ];
 
 const EVACUATION_ROUTES = [
@@ -49,31 +49,31 @@ const EVACUATION_ROUTES = [
     name: 'Primary Route — North Exit',
     description: 'Exit via Faircroft Drive North → turn right on Oak Avenue → proceed to Community Center (2.1 miles). This is the preferred route for most emergencies.',
     landmark: 'Community Center at 123 Oak Avenue',
-    emoji: '🟢',
+    emoji: '',
   },
   {
     id: 'route2',
     name: 'Secondary Route — South Exit',
     description: 'Exit via Elm Street South → merge onto Highway 45 → proceed to Westside High School (3.4 miles). Use when North Exit is blocked.',
     landmark: 'Westside High School at 456 Highway 45',
-    emoji: '🟡',
+    emoji: '',
   },
   {
     id: 'route3',
     name: 'Emergency Route — West Gate',
     description: 'Access via maintenance gate on Cedar Lane (board has key code). Connects to County Road 12. Use only when all primary routes are blocked.',
     landmark: 'Cedar Lane maintenance gate (code: posted on all emergency boards)',
-    emoji: '🔴',
+    emoji: '',
   },
 ];
 
 const FIRST_AID_TIPS = [
-  { title: 'Call 911', icon: '📱', tip: 'Always call 911 first in life-threatening emergencies. Do not delay.' },
-  { title: 'CPR', icon: '❤️', tip: '30 chest compressions, 2 breaths. Push hard, push fast (100-120/min). Use AED if available.' },
-  { title: 'Bleeding', icon: '🩹', tip: 'Apply firm pressure with clean cloth. Elevate if possible. Do not remove cloth — add more on top.' },
-  { title: 'Burns', icon: '🔥', tip: 'Cool with running water for 20 minutes. Do NOT use ice or butter. Cover loosely with plastic wrap.' },
-  { title: 'Choking', icon: '😮', tip: '5 back blows + 5 abdominal thrusts (Heimlich). Call 911 if unconscious.' },
-  { title: 'Stroke (FAST)', icon: '🧠', tip: 'Face drooping, Arm weakness, Speech difficulty, Time to call 911. Note when symptoms started.' },
+  { title: 'Call 911', icon: '', tip: 'Always call 911 first in life-threatening emergencies. Do not delay.' },
+  { title: 'CPR', icon: '', tip: '30 chest compressions, 2 breaths. Push hard, push fast (100-120/min). Use AED if available.' },
+  { title: 'Bleeding', icon: '', tip: 'Apply firm pressure with clean cloth. Elevate if possible. Do not remove cloth — add more on top.' },
+  { title: 'Burns', icon: '', tip: 'Cool with running water for 20 minutes. Do NOT use ice or butter. Cover loosely with plastic wrap.' },
+  { title: 'Choking', icon: '', tip: '5 back blows + 5 abdominal thrusts (Heimlich). Call 911 if unconscious.' },
+  { title: 'Stroke (FAST)', icon: '', tip: 'Face drooping, Arm weakness, Speech difficulty, Time to call 911. Note when symptoms started.' },
 ];
 
 const STORAGE_KEY = 'hoa_emergency_checklist';
@@ -129,17 +129,17 @@ export default function PreparednessPage() {
   }, {} as Record<string, string[]>);
 
   const TABS = [
-    { id: 'checklist' as const, label: 'Kit Checklist', icon: '🎒' },
-    { id: 'routes' as const, label: 'Evacuation', icon: '🗺️' },
-    { id: 'contacts' as const, label: 'Contacts', icon: '📞' },
-    { id: 'firstaid' as const, label: 'First Aid', icon: '❤️' },
+    { id: 'checklist' as const, label: 'Kit Checklist', icon: '' },
+    { id: 'routes' as const, label: 'Evacuation', icon: '' },
+    { id: 'contacts' as const, label: 'Contacts', icon: '' },
+    { id: 'firstaid' as const, label: 'First Aid', icon: '' },
   ];
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
       <div>
         <h1 className="text-3xl font-bold gradient-text">Emergency Preparedness</h1>
-        <p className="text-gray-400 text-sm mt-1">Stay ready. Stay safe. 🛡️</p>
+        <p className="text-gray-400 text-sm mt-1">Stay ready. Stay safe. </p>
       </div>
 
       {/* Readiness Score */}
@@ -154,7 +154,7 @@ export default function PreparednessPage() {
               {readinessPct}%
             </div>
             <div className="text-xs text-gray-500">
-              {readinessPct >= 80 ? '✅ Well Prepared' : readinessPct >= 50 ? '⚠️ Partially Ready' : '🚨 Needs Attention'}
+              {readinessPct >= 80 ? ' Well Prepared' : readinessPct >= 50 ? ' Partially Ready' : ' Needs Attention'}
             </div>
           </div>
         </div>
@@ -207,7 +207,7 @@ export default function PreparednessPage() {
       {activeTab === 'checklist' && (
         <div className="glass rounded-2xl p-6 border border-white/[0.04]">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-base font-bold text-gray-100">🎒 Emergency Kit Checklist</h2>
+            <h2 className="text-base font-bold text-gray-100"> Emergency Kit Checklist</h2>
             <button onClick={resetChecklist} className="text-xs text-gray-500 hover:text-gray-300 cursor-pointer">Reset</button>
           </div>
           <div className="space-y-6">
@@ -234,7 +234,7 @@ export default function PreparednessPage() {
                         <div className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-all ${
                           item.checked ? 'bg-[#c9a96e] border-[#c9a96e]' : 'border-gray-600'
                         }`}>
-                          {item.checked && <span className="text-[#1a1a1a] text-[11px] font-bold">✓</span>}
+                          {item.checked && <span className="text-[#1a1a1a] text-[11px] font-bold"></span>}
                         </div>
                         <span className={`text-sm ${item.checked ? 'line-through text-gray-500' : 'text-gray-300'}`}>{item.label}</span>
                       </div>
@@ -266,7 +266,7 @@ export default function PreparednessPage() {
           ))}
           <div className="p-4 rounded-xl bg-yellow-400/10 border border-yellow-400/20">
             <p className="text-xs text-yellow-400">
-              ⚠️ <strong>Important:</strong> Know your route before an emergency. Walk or drive all routes at least once. Keep your gas tank at least half full.
+               <strong>Important:</strong> Know your route before an emergency. Walk or drive all routes at least once. Keep your gas tank at least half full.
             </p>
           </div>
         </div>
@@ -274,7 +274,7 @@ export default function PreparednessPage() {
 
       {activeTab === 'contacts' && (
         <div className="glass rounded-2xl p-6 border border-white/[0.04]">
-          <h2 className="text-base font-bold text-gray-100 mb-4">📞 Emergency Contacts</h2>
+          <h2 className="text-base font-bold text-gray-100 mb-4"> Emergency Contacts</h2>
           <div className="space-y-3 mb-6">
             {EMERGENCY_CONTACTS.map((c, i) => (
               <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.04]">
@@ -293,14 +293,14 @@ export default function PreparednessPage() {
             ))}
           </div>
           <div className="p-4 rounded-xl bg-red-400/10 border border-red-400/20">
-            <p className="text-xs text-red-400 font-semibold">🚨 In immediate danger: Call 911 first, always.</p>
+            <p className="text-xs text-red-400 font-semibold"> In immediate danger: Call 911 first, always.</p>
           </div>
         </div>
       )}
 
       {activeTab === 'firstaid' && (
         <div className="glass rounded-2xl p-6 border border-white/[0.04]">
-          <h2 className="text-base font-bold text-gray-100 mb-4">❤️ First Aid Quick Reference</h2>
+          <h2 className="text-base font-bold text-gray-100 mb-4"> First Aid Quick Reference</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {FIRST_AID_TIPS.map((tip, i) => (
               <div key={i} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
@@ -314,7 +314,7 @@ export default function PreparednessPage() {
           </div>
           <div className="mt-4 p-4 rounded-xl bg-blue-400/10 border border-blue-400/20">
             <p className="text-xs text-blue-400">
-              💡 <strong>Tip:</strong> Consider taking a certified CPR/First Aid course. Check with your HOA about community training events.
+               <strong>Tip:</strong> Consider taking a certified CPR/First Aid course. Check with your HOA about community training events.
             </p>
           </div>
         </div>

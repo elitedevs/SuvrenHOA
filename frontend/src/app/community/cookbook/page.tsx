@@ -30,7 +30,7 @@ const SAMPLE_RECIPES: Recipe[] = [
     prepTime: 480,
     submittedBy: 'Lot 4',
     description: 'Award-winning BBQ brisket perfect for neighborhood cookouts',
-    emoji: '🥩',
+    emoji: '',
     ingredients: [
       '5 lbs beef brisket',
       '2 tbsp brown sugar',
@@ -59,7 +59,7 @@ const SAMPLE_RECIPES: Recipe[] = [
     prepTime: 45,
     submittedBy: 'Lot 12',
     description: 'Light and fresh — great for summer gatherings',
-    emoji: '🍋',
+    emoji: '',
     ingredients: [
       '4 chicken breasts',
       '3 lemons (juice and zest)',
@@ -85,7 +85,7 @@ const SAMPLE_RECIPES: Recipe[] = [
     prepTime: 60,
     submittedBy: 'Lot 7',
     description: 'Feeds a crowd! Perfect for block parties',
-    emoji: '🍝',
+    emoji: '',
     ingredients: [
       '2 lbs penne pasta',
       '2 lbs Italian sausage',
@@ -114,7 +114,7 @@ const SAMPLE_RECIPES: Recipe[] = [
     prepTime: 90,
     submittedBy: 'Lot 22',
     description: 'Classic comfort food for community dessert tables',
-    emoji: '🥧',
+    emoji: '',
     ingredients: [
       '2 pre-made pie crusts',
       '6 Granny Smith apples, peeled and sliced',
@@ -228,7 +228,7 @@ function RecipeModal({ recipe, onClose }: { recipe: Recipe; onClose: () => void 
 function AddRecipeModal({ onAdd, onClose }: { onAdd: (r: Recipe) => void; onClose: () => void }) {
   const [form, setForm] = useState({
     title: '', cuisine: '', difficulty: 'Easy' as Difficulty, prepTime: '',
-    submittedBy: '', description: '', emoji: '🍽️', ingredients: '', steps: '',
+    submittedBy: '', description: '', emoji: '', ingredients: '', steps: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -242,7 +242,7 @@ function AddRecipeModal({ onAdd, onClose }: { onAdd: (r: Recipe) => void; onClos
       prepTime: parseInt(form.prepTime) || 30,
       submittedBy: form.submittedBy || 'Anonymous',
       description: form.description,
-      emoji: form.emoji || '🍽️',
+      emoji: form.emoji || '',
       ingredients: form.ingredients.split('\n').filter(l => l.trim()),
       steps: form.steps.split('\n').filter(l => l.trim()),
       createdAt: new Date().toISOString(),
@@ -265,7 +265,7 @@ function AddRecipeModal({ onAdd, onClose }: { onAdd: (r: Recipe) => void; onClos
             </div>
             <div>
               <label className="text-xs font-semibold text-gray-400 mb-1 block">Emoji</label>
-              <input value={form.emoji} onChange={e => setForm({...form, emoji: e.target.value})} placeholder="🍽️"
+              <input value={form.emoji} onChange={e => setForm({...form, emoji: e.target.value})} placeholder=""
                 className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-gray-200 focus:outline-none focus:border-[#c9a96e]/50" />
             </div>
           </div>
@@ -357,7 +357,7 @@ export default function CookbookPage() {
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
           <h1 className="text-3xl font-bold gradient-text">Community Cookbook</h1>
-          <p className="text-gray-400 text-sm mt-1">Recipes shared by your neighbors 🍽️</p>
+          <p className="text-gray-400 text-sm mt-1">Recipes shared by your neighbors </p>
         </div>
         <button onClick={() => setShowAdd(true)}
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-semibold transition-all cursor-pointer shrink-0">
@@ -368,9 +368,9 @@ export default function CookbookPage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3 mb-6">
         {[
-          { label: 'Recipes', value: recipes.length, icon: '📖' },
-          { label: 'Cuisines', value: new Set(recipes.map(r => r.cuisine)).size, icon: '🌍' },
-          { label: 'Contributors', value: new Set(recipes.map(r => r.submittedBy)).size, icon: '👩‍🍳' },
+          { label: 'Recipes', value: recipes.length, icon: '' },
+          { label: 'Cuisines', value: new Set(recipes.map(r => r.cuisine)).size, icon: '' },
+          { label: 'Contributors', value: new Set(recipes.map(r => r.submittedBy)).size, icon: '' },
         ].map((s, i) => (
           <div key={i} className="glass-card rounded-xl p-4 text-center border border-white/[0.04]">
             <div className="text-xl mb-1">{s.icon}</div>
@@ -406,7 +406,7 @@ export default function CookbookPage() {
         ))}
         {filtered.length === 0 && (
           <div className="col-span-3 text-center py-16 text-gray-500">
-            <div className="text-4xl mb-3">🍳</div>
+            <div className="text-4xl mb-3"></div>
             <p className="text-sm">No recipes found. Be the first to share!</p>
           </div>
         )}

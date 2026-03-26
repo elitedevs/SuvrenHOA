@@ -292,7 +292,7 @@ export default function SkillsExchangePage() {
                       onClick={() => setForm((f) => ({ ...f, type: t }))}
                       className={`py-2 rounded-lg text-sm font-medium transition-colors ${form.type === t ? 'bg-[#c9a96e] text-[#1a1a1a]' : 'glass-card text-gray-400 hover:text-white'}`}
                     >
-                      {t === 'offer' ? '🤝 Offer Help' : '🙋 Request Help'}
+                      {t === 'offer' ? ' Offer Help' : ' Request Help'}
                     </button>
                   ))}
                 </div>

@@ -26,7 +26,7 @@ const GALLERY_CATEGORIES: GalleryCategory[] = [
   {
     id: 'fences',
     name: 'Fence Styles',
-    emoji: '🪵',
+    emoji: '',
     items: [
       {
         id: 'fence-1',
@@ -68,7 +68,7 @@ const GALLERY_CATEGORIES: GalleryCategory[] = [
   {
     id: 'paint',
     name: 'Paint Colors',
-    emoji: '🎨',
+    emoji: '',
     items: [
       {
         id: 'paint-1',
@@ -107,7 +107,7 @@ const GALLERY_CATEGORIES: GalleryCategory[] = [
   {
     id: 'landscaping',
     name: 'Landscaping',
-    emoji: '🌿',
+    emoji: '',
     items: [
       {
         id: 'land-1',
@@ -149,7 +149,7 @@ const GALLERY_CATEGORIES: GalleryCategory[] = [
   {
     id: 'structures',
     name: 'Structures',
-    emoji: '🏗️',
+    emoji: '',
     items: [
       {
         id: 'struct-1',
@@ -203,7 +203,7 @@ function GalleryCard({ item, onClick }: { item: GalleryItem; onClick: () => void
             ? 'bg-green-500/15 text-green-400 border border-green-500/25'
             : 'bg-red-500/15 text-red-400 border border-red-500/25'
         }`}>
-          {item.approved ? '✓ Approved' : '✗ Not Approved'}
+          {item.approved ? ' Approved' : ' Not Approved'}
         </span>
       </div>
       <p className="text-xs text-gray-500 leading-relaxed mb-3">{item.description}</p>
@@ -216,7 +216,7 @@ function GalleryCard({ item, onClick }: { item: GalleryItem; onClick: () => void
         <div className={`h-16 rounded-lg flex items-center justify-center text-2xl ${
           item.approved ? 'bg-[#c9a96e]/5 border border-[#c9a96e]/10' : 'bg-red-500/5 border border-red-500/10'
         }`}>
-          {item.approved ? '✅' : '❌'}
+          {item.approved ? '' : ''}
         </div>
       )}
     </button>
@@ -242,7 +242,7 @@ function ItemDetailModal({ item, onClose }: { item: GalleryItem; onClose: () => 
             ? 'bg-green-500/15 text-green-400 border border-green-500/25'
             : 'bg-red-500/15 text-red-400 border border-red-500/25'
         }`}>
-          {item.approved ? '✓ Board Approved' : '✗ Requires Board Variance'}
+          {item.approved ? ' Board Approved' : ' Requires Board Variance'}
         </div>
 
         {item.colors && (

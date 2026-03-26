@@ -26,7 +26,7 @@ const CURRENT_CHALLENGE: FitnessChallenge = {
   id: 'c1',
   title: 'Community Step Challenge',
   description: 'Walk 1,000,000 steps as a neighborhood this month! Every step counts toward our collective goal.',
-  emoji: '👟',
+  emoji: '',
   unit: 'steps',
   goal: 1000000,
   startDate: '2026-03-01',
@@ -39,7 +39,7 @@ const PAST_CHALLENGES: FitnessChallenge[] = [
     id: 'c_prev1',
     title: 'February Hydration Challenge',
     description: '8 glasses of water per day, every day in February',
-    emoji: '💧',
+    emoji: '',
     unit: 'oz',
     goal: 500000,
     startDate: '2026-02-01',
@@ -50,7 +50,7 @@ const PAST_CHALLENGES: FitnessChallenge[] = [
     id: 'c_prev2',
     title: 'January Push-Up Challenge',
     description: '50,000 push-ups as a community',
-    emoji: '💪',
+    emoji: '',
     unit: 'push-ups',
     goal: 50000,
     startDate: '2026-01-01',
@@ -140,7 +140,7 @@ export default function FitnessPage() {
     <main className="max-w-4xl mx-auto px-4 py-8 space-y-8">
       <div>
         <h1 className="text-3xl font-bold gradient-text">Community Fitness</h1>
-        <p className="text-gray-400 text-sm mt-1">Move together, thrive together 🏃</p>
+        <p className="text-gray-400 text-sm mt-1">Move together, thrive together </p>
       </div>
 
       {/* Current Challenge */}
@@ -179,13 +179,13 @@ export default function FitnessPage() {
           </div>
 
           <div className="flex items-center gap-4 text-xs text-gray-500 mb-5">
-            <span>🏁 Ends {new Date(CURRENT_CHALLENGE.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-            <span>👥 {leaderboard.length} participants</span>
+            <span> Ends {new Date(CURRENT_CHALLENGE.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+            <span> {leaderboard.length} participants</span>
           </div>
 
           {/* Check In Form */}
           <div className="p-4 rounded-xl bg-white/[0.04] border border-white/[0.06]">
-            <h3 className="text-sm font-bold text-gray-200 mb-3">📝 Log Your Activity</h3>
+            <h3 className="text-sm font-bold text-gray-200 mb-3"> Log Your Activity</h3>
             <div className="flex flex-col sm:flex-row gap-3">
               <input
                 value={myLot}
@@ -205,12 +205,12 @@ export default function FitnessPage() {
                 disabled={!checkInAmount || !myLot}
                 className="px-5 py-2 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-semibold transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Check In ✓
+                Check In 
               </button>
             </div>
             {showSuccess && (
               <div className="mt-3 text-sm text-green-400 font-semibold animate-pulse">
-                ✅ Logged! Keep it up!
+                 Logged! Keep it up!
               </div>
             )}
           </div>
@@ -219,14 +219,14 @@ export default function FitnessPage() {
 
       {/* Leaderboard */}
       <div className="glass rounded-2xl p-6 border border-white/[0.04]">
-        <h2 className="text-base font-bold text-gray-100 mb-4">🏆 Participant Leaderboard</h2>
+        <h2 className="text-base font-bold text-gray-100 mb-4"> Participant Leaderboard</h2>
         {leaderboard.length === 0 ? (
           <p className="text-gray-500 text-sm text-center py-8">No check-ins yet. Be the first!</p>
         ) : (
           <div className="space-y-2">
             {leaderboard.map((entry, idx) => {
               const pct = (entry.total / totalProgress) * 100;
-              const medals = ['🥇', '🥈', '🥉'];
+              const medals = ['', '', ''];
               return (
                 <div key={entry.lot} className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
                   <span className="text-lg w-8 text-center">{medals[idx] || `#${idx + 1}`}</span>
@@ -249,7 +249,7 @@ export default function FitnessPage() {
 
       {/* Past Challenges */}
       <div className="glass rounded-2xl p-6 border border-white/[0.04]">
-        <h2 className="text-base font-bold text-gray-100 mb-4">📚 Past Challenges</h2>
+        <h2 className="text-base font-bold text-gray-100 mb-4"> Past Challenges</h2>
         <div className="space-y-3">
           {pastResults.map(ch => {
             const pct = Math.min(100, (ch.achieved / ch.goal) * 100);
@@ -265,7 +265,7 @@ export default function FitnessPage() {
                   </div>
                   <div className="text-right">
                     <span className={`text-sm font-bold ${pct >= 100 ? 'text-green-400' : 'text-[#c9a96e]'}`}>{pct.toFixed(0)}%</span>
-                    {pct >= 100 && <span className="ml-1 text-xs">🎉</span>}
+                    {pct >= 100 && <span className="ml-1 text-xs"></span>}
                   </div>
                 </div>
                 <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">

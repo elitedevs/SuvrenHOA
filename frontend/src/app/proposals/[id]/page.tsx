@@ -119,9 +119,9 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
         {/* Vote bars */}
         <div className="space-y-4 mb-6">
-          <VoteBar label="For" count={forVotes} percent={forPercent} color="green" icon="👍" />
-          <VoteBar label="Against" count={against} percent={againstPercent} color="red" icon="👎" />
-          <VoteBar label="Abstain" count={abstain} percent={abstainPercent} color="gray" icon="🤷" />
+          <VoteBar label="For" count={forVotes} percent={forPercent} color="green" icon="" />
+          <VoteBar label="Against" count={against} percent={againstPercent} color="red" icon="" />
+          <VoteBar label="Abstain" count={abstain} percent={abstainPercent} color="gray" icon="" />
         </div>
 
         {/* Quorum progress */}
@@ -152,7 +152,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
           {isSuccess ? (
             <div className="p-4 rounded-xl bg-green-950/20 border border-green-900/50 text-center">
-              <p className="text-green-400 font-medium">✅ Vote submitted!</p>
+              <p className="text-green-400 font-medium"> Vote submitted!</p>
               {hash && (
                 <a href={`https://sepolia.basescan.org/tx/${hash}`} target="_blank" rel="noopener noreferrer"
                   className="text-xs text-[#c9a96e] hover:underline font-mono mt-2 block">
@@ -164,9 +164,9 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
             <>
               <div className="grid grid-cols-3 gap-3 mb-4">
                 {[
-                  { value: 1, label: 'For', icon: '👍', color: 'green' },
-                  { value: 0, label: 'Against', icon: '👎', color: 'red' },
-                  { value: 2, label: 'Abstain', icon: '🤷', color: 'gray' },
+                  { value: 1, label: 'For', icon: '', color: 'green' },
+                  { value: 0, label: 'Against', icon: '', color: 'red' },
+                  { value: 2, label: 'Abstain', icon: '', color: 'gray' },
                 ].map(({ value, label, icon, color }) => (
                   <button
                     key={value}
@@ -189,7 +189,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
                 className="w-full py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
               >
                 {isPending ? '⏳ Confirm in Wallet...' :
-                 isConfirming ? '⛓️ Submitting Vote...' :
+                 isConfirming ? ' Submitting Vote...' :
                  selectedVote === null ? 'Select your vote above' :
                  `Submit Vote: ${['Against', 'For', 'Abstain'][selectedVote]}`}
               </button>
@@ -203,11 +203,11 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
         <div className="glass-card rounded-xl p-6 mb-6 text-center">
           <p className="text-gray-400">
             {stateLabel === 'Pending' && '⏳ Voting opens after the 1-day delay period'}
-            {stateLabel === 'Succeeded' && '✅ This proposal passed! Waiting to be queued.'}
-            {stateLabel === 'Queued' && '⏱️ In timelock — will be executable after the delay period'}
-            {stateLabel === 'Executed' && '🎉 This proposal has been executed!'}
-            {stateLabel === 'Defeated' && '❌ This proposal was defeated'}
-            {stateLabel === 'Canceled' && '🚫 This proposal was canceled by the board'}
+            {stateLabel === 'Succeeded' && ' This proposal passed! Waiting to be queued.'}
+            {stateLabel === 'Queued' && '⏱ In timelock — will be executable after the delay period'}
+            {stateLabel === 'Executed' && ' This proposal has been executed!'}
+            {stateLabel === 'Defeated' && ' This proposal was defeated'}
+            {stateLabel === 'Canceled' && ' This proposal was canceled by the board'}
             {stateLabel === 'Expired' && '⏰ This proposal expired without execution'}
           </p>
         </div>
@@ -244,7 +244,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
           />
           <TimelineItem
             label="Execution"
-            value={stateLabel === 'Executed' ? '✅ Done' : 'Pending'}
+            value={stateLabel === 'Executed' ? ' Done' : 'Pending'}
             description="After timelock delay (2-7 days based on category)"
             active={stateLabel === 'Executed'}
           />

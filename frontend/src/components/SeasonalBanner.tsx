@@ -16,7 +16,7 @@ function getSeasonInfo(): SeasonInfo {
   const day = new Date().getDate();
   if (month === 12 && day >= 20) {
     return {
-      emoji: '🎄',
+      emoji: '',
       message: 'Happy Holidays from Faircroft!',
       gradient: 'from-green-900/30 to-red-900/20',
       textColor: 'text-green-300',
@@ -24,7 +24,7 @@ function getSeasonInfo(): SeasonInfo {
   }
   if (month === 10 && day >= 25) {
     return {
-      emoji: '🎃',
+      emoji: '',
       message: 'Happy Halloween, Faircroft!',
       gradient: 'from-orange-900/30 to-gray-900/20',
       textColor: 'text-orange-300',
@@ -34,7 +34,7 @@ function getSeasonInfo(): SeasonInfo {
   // Seasons
   if (month >= 3 && month <= 5) {
     return {
-      emoji: '🌸',
+      emoji: '',
       message: 'Spring at Faircroft — enjoy the blooms!',
       gradient: 'from-pink-900/20 to-purple-900/10',
       textColor: 'text-pink-300',
@@ -42,7 +42,7 @@ function getSeasonInfo(): SeasonInfo {
   }
   if (month >= 6 && month <= 8) {
     return {
-      emoji: '☀️',
+      emoji: '',
       message: 'Summer in Faircroft — pool hours extended!',
       gradient: 'from-yellow-900/20 to-amber-900/10',
       textColor: 'text-yellow-300',
@@ -50,7 +50,7 @@ function getSeasonInfo(): SeasonInfo {
   }
   if (month >= 9 && month <= 11) {
     return {
-      emoji: '🍂',
+      emoji: '',
       message: 'Fall at Faircroft — leaf collection begins soon.',
       gradient: 'from-amber-900/25 to-orange-900/15',
       textColor: 'text-amber-300',
@@ -58,7 +58,7 @@ function getSeasonInfo(): SeasonInfo {
   }
   // Winter (Dec 1-19, Jan, Feb)
   return {
-    emoji: '❄️',
+    emoji: '',
     message: 'Winter at Faircroft — stay warm and safe.',
     gradient: 'from-blue-900/20 to-slate-900/10',
     textColor: 'text-blue-300',
@@ -104,7 +104,7 @@ export function SeasonalBanner() {
           className="text-gray-500 hover:text-gray-300 transition-colors text-sm shrink-0 ml-2 leading-none"
           aria-label="Dismiss"
         >
-          ✕
+          
         </button>
       </div>
     </div>

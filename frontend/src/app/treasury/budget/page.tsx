@@ -15,13 +15,13 @@ interface BudgetCategory {
 }
 
 const DEFAULT_BUDGET: BudgetCategory[] = [
-  { name: 'Maintenance', emoji: '🔧', thisYear: 35000, lastYear: 32000, color: '#c9a96e' },
-  { name: 'Landscaping', emoji: '🌿', thisYear: 18000, lastYear: 16500, color: '#4ade80' },
-  { name: 'Insurance', emoji: '🛡️', thisYear: 22000, lastYear: 21000, color: '#60a5fa' },
-  { name: 'Reserves', emoji: '🏦', thisYear: 24000, lastYear: 24000, color: '#a78bfa' },
-  { name: 'Legal', emoji: '⚖️', thisYear: 8000, lastYear: 5000, color: '#fb923c' },
-  { name: 'Admin', emoji: '📋', thisYear: 6000, lastYear: 5500, color: '#f472b6' },
-  { name: 'Events', emoji: '🎉', thisYear: 7000, lastYear: 6000, color: '#34d399' },
+  { name: 'Maintenance', emoji: '', thisYear: 35000, lastYear: 32000, color: '#c9a96e' },
+  { name: 'Landscaping', emoji: '', thisYear: 18000, lastYear: 16500, color: '#4ade80' },
+  { name: 'Insurance', emoji: '', thisYear: 22000, lastYear: 21000, color: '#60a5fa' },
+  { name: 'Reserves', emoji: '', thisYear: 24000, lastYear: 24000, color: '#a78bfa' },
+  { name: 'Legal', emoji: '', thisYear: 8000, lastYear: 5000, color: '#fb923c' },
+  { name: 'Admin', emoji: '', thisYear: 6000, lastYear: 5500, color: '#f472b6' },
+  { name: 'Events', emoji: '', thisYear: 7000, lastYear: 6000, color: '#34d399' },
 ];
 
 const LS_KEY = 'suvren_budget_2026';
@@ -196,7 +196,7 @@ export default function BudgetPlannerPage() {
                 onClick={() => setEditing(true)}
                 className="text-xs px-3 py-1.5 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/20 text-[#c9a96e] hover:bg-[#c9a96e]/20 transition-colors"
               >
-                ✏️ Edit (Board Only)
+                 Edit (Board Only)
               </button>
             )}
           </div>
@@ -246,7 +246,7 @@ export default function BudgetPlannerPage() {
 
       {saved && (
         <div className="fixed bottom-6 right-6 bg-[#c9a96e] text-[#1a1a1a] px-4 py-2.5 rounded-xl text-sm font-bold shadow-lg">
-          ✅ Budget saved!
+           Budget saved!
         </div>
       )}
     </div>

@@ -42,11 +42,11 @@ function generateSampleData(): UtilityMonth[] {
 }
 
 const UTIL_CONFIG = [
-  { key: 'water', label: 'Water', icon: '💧', color: '#3b82f6' },
-  { key: 'electric', label: 'Electric', icon: '⚡', color: '#eab308' },
-  { key: 'gas', label: 'Gas', icon: '🔥', color: '#f97316' },
-  { key: 'internet', label: 'Internet', icon: '📡', color: '#8b5cf6' },
-  { key: 'waste', label: 'Waste', icon: '♻️', color: '#22c55e' },
+  { key: 'water', label: 'Water', icon: '', color: '#3b82f6' },
+  { key: 'electric', label: 'Electric', icon: '', color: '#eab308' },
+  { key: 'gas', label: 'Gas', icon: '', color: '#f97316' },
+  { key: 'internet', label: 'Internet', icon: '', color: '#8b5cf6' },
+  { key: 'waste', label: 'Waste', icon: '', color: '#22c55e' },
 ];
 
 const TOTAL_UNITS = 50;

@@ -151,7 +151,7 @@ function ProfileForm() {
               <div className="min-w-0">
                 <p className={`text-sm font-semibold truncate ${badge.earned ? 'text-[#e8d5a3]' : 'text-gray-500'}`}>
                   {badge.name}
-                  {badge.earned && <span className="ml-1.5 text-[10px] text-[#c9a96e]">✓ Earned</span>}
+                  {badge.earned && <span className="ml-1.5 text-[10px] text-[#c9a96e]"> Earned</span>}
                 </p>
                 <p className="text-[10px] text-gray-500 leading-tight">{badge.description}</p>
               </div>
@@ -215,13 +215,13 @@ function ProfileForm() {
           disabled={updateProfile.isPending}
           className="w-full py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
         >
-          {updateProfile.isPending ? '⏳ Saving...' : saved ? '✅ Saved!' : 'Save Profile'}
+          {updateProfile.isPending ? '⏳ Saving...' : saved ? ' Saved!' : 'Save Profile'}
         </button>
       </div>
 
       {/* Privacy note */}
       <div className="mt-6 p-4 rounded-xl glass-card">
-        <h4 className="text-xs font-medium text-[#c9a96e] mb-1">🔒 Privacy</h4>
+        <h4 className="text-xs font-medium text-[#c9a96e] mb-1"> Privacy</h4>
         <p className="text-[10px] text-gray-400">
           Your email and phone are never shared publicly. They&apos;re only used for notifications you opt into.
           Your display name and lot number are visible to the community. Your wallet address is always on-chain.

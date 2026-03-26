@@ -174,7 +174,7 @@ export default function GardenPage() {
               <ul className="space-y-2">
                 {SEASONAL_TIPS[season].map((tip, i) => (
                   <li key={i} className="flex items-start gap-2 text-xs text-[oklch(0.55_0.01_60)]">
-                    <span className="text-green-400 shrink-0">🌱</span> {tip}
+                    <span className="text-green-400 shrink-0"></span> {tip}
                   </li>
                 ))}
               </ul>

@@ -94,7 +94,7 @@ export function OnboardingChecklist() {
       <div className="flex items-center justify-between px-6 py-4 border-b border-[oklch(0.18_0.005_60)]">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-base">
-            🚀
+            
           </div>
           <div>
             <p className="text-sm font-bold text-[#e8d5a3]">Getting Started</p>
@@ -173,7 +173,7 @@ export function OnboardingChecklist() {
 
           {allDone && (
             <div className="mt-3 text-center py-3 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20">
-              <p className="text-sm font-bold text-[#e8d5a3]">🎉 You're all set!</p>
+              <p className="text-sm font-bold text-[#e8d5a3]"> You're all set!</p>
               <p className="text-xs text-gray-500 mt-1">Welcome to Faircroft HOA</p>
             </div>
           )}

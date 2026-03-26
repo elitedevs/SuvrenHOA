@@ -44,14 +44,14 @@ export default function TreasuryPage() {
             href="/treasury/budget"
             className="no-print w-full sm:w-auto shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 hover:border-[#c9a96e]/40 text-sm font-medium text-[#c9a96e] hover:text-[#e8d5a3] transition-all"
           >
-            📊 Budget Planner
+             Budget Planner
           </Link>
           <button
             onClick={exportTreasuryPDF}
             className="no-print w-full sm:w-auto shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
             title="Export as PDF"
           >
-            📄 Export PDF
+             Export PDF
           </button>
         </div>
       </div>
@@ -77,7 +77,7 @@ export default function TreasuryPage() {
               <p className="text-xs text-gray-500 mt-1">USDC · Day-to-day expenses</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-xl">
-              🏗️
+              
             </div>
           </div>
 
@@ -104,7 +104,7 @@ export default function TreasuryPage() {
               <p className="text-xs text-gray-500 mt-1">USDC · Long-term reserves</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-xl">
-              🏦
+              
             </div>
           </div>
 
@@ -160,7 +160,7 @@ export default function TreasuryPage() {
         {expenditureCount === 0 ? (
           <div className="glass-card rounded-2xl hover-lift p-8 text-center">
             <div className="w-14 h-14 rounded-2xl bg-gray-800/50 border border-gray-700/30 flex items-center justify-center text-2xl mx-auto mb-4">
-              💰
+              
             </div>
             <h3 className="text-lg font-bold mb-2 text-gray-200">No Expenditures Yet</h3>
             <p className="text-sm text-gray-400 max-w-md mx-auto">
@@ -186,7 +186,7 @@ export default function TreasuryPage() {
       {/* On-chain banner */}
       <div className="mt-8 glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30 page-enter page-enter-delay-4">
         <div className="flex items-start gap-3">
-          <span className="text-xl">🔗</span>
+          <span className="text-xl"></span>
           <div>
             <h3 className="text-sm font-bold text-[#e8d5a3] mb-1">On-Chain Transparency</h3>
             <p className="text-xs text-gray-400 leading-relaxed">

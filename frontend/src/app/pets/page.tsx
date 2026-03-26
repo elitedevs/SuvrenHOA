@@ -8,9 +8,9 @@ import { useProperty } from '@/hooks/useProperty';
 import { usePetPlaydates, type PetPlaydate } from '@/hooks/usePetPlaydates';
 import { X, Plus, Calendar, MapPin, Users, PawPrint, CheckCircle } from 'lucide-react';
 
-const SPECIES_ICONS: Record<string, string> = { dog: '🐕', cat: '🐱', bird: '🐦', fish: '🐟', reptile: '🦎', other: '🐾' };
+const SPECIES_ICONS: Record<string, string> = { dog: '', cat: '', bird: '', fish: '', reptile: '', other: '' };
 
-const LOCATION_ICONS: Record<string, string> = { Park: '🌳', Yard: '🏡', 'Common Area': '🏛️' };
+const LOCATION_ICONS: Record<string, string> = { Park: '', Yard: '', 'Common Area': '' };
 
 function formatDate(dateStr: string) {
   return new Date(dateStr + 'T00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
@@ -54,7 +54,7 @@ function PlaydatesTab() {
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-base font-bold text-gray-100">🐾 Upcoming Playdates</h2>
+          <h2 className="text-base font-bold text-gray-100"> Upcoming Playdates</h2>
           <p className="text-xs text-gray-500 mt-0.5">Schedule hangouts for your furry friends</p>
         </div>
         <button
@@ -117,7 +117,7 @@ function PlaydatesTab() {
               <button type="button" onClick={() => setShowAdd(false)}
                 className="flex-1 py-2.5 rounded-xl border border-gray-700 text-sm text-gray-400 hover:text-gray-200 cursor-pointer">Cancel</button>
               <button type="submit"
-                className="flex-1 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-semibold cursor-pointer">Schedule 🐾</button>
+                className="flex-1 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-semibold cursor-pointer">Schedule </button>
             </div>
           </form>
         </div>
@@ -135,7 +135,7 @@ function PlaydatesTab() {
       {/* Playdate Cards */}
       {upcomingPlaydates.length === 0 ? (
         <div className="glass-card rounded-xl p-12 text-center">
-          <div className="text-4xl mb-3">🐾</div>
+          <div className="text-4xl mb-3"></div>
           <p className="text-gray-400 text-sm">No upcoming playdates. Schedule one!</p>
         </div>
       ) : (
@@ -165,7 +165,7 @@ function PlaydatesTab() {
                 <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
                   <span>By {pd.organizer}</span>
                   {pd.petsInvited.length > 0 && (
-                    <span>🐾 {pd.petsInvited.join(', ')}</span>
+                    <span> {pd.petsInvited.join(', ')}</span>
                   )}
                   <span className="flex items-center gap-1"><CheckCircle className="w-3 h-3 text-green-400" /> {yesCount} going</span>
                 </div>
@@ -185,7 +185,7 @@ function PlaydatesTab() {
                           : 'bg-white/[0.03] text-gray-500 border-white/[0.06] hover:text-gray-300'
                       }`}
                     >
-                      {status === 'yes' ? '✅ Going' : status === 'maybe' ? '🤔 Maybe' : '❌ Can\'t'}
+                      {status === 'yes' ? ' Going' : status === 'maybe' ? ' Maybe' : ' Can\'t'}
                     </button>
                   ))}
                 </div>
@@ -239,7 +239,7 @@ export default function PetsPage() {
         {activeTab === 'registry' && (
           <button onClick={() => setShowRegister(!showRegister)}
             className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0 cursor-pointer">
-            {showRegister ? '← Back' : '🐾 Register Pet'}
+            {showRegister ? '← Back' : ' Register Pet'}
           </button>
         )}
       </div>
@@ -254,7 +254,7 @@ export default function PetsPage() {
               : 'glass text-gray-400 border border-white/[0.04] hover:text-gray-200'
           }`}
         >
-          🐾 Registry
+           Registry
         </button>
         <button
           onClick={() => setActiveTab('playdates')}
@@ -264,7 +264,7 @@ export default function PetsPage() {
               : 'glass text-gray-400 border border-white/[0.04] hover:text-gray-200'
           }`}
         >
-          📅 Playdates
+           Playdates
         </button>
       </div>
 
@@ -277,7 +277,7 @@ export default function PetsPage() {
             {['all', 'dog', 'cat', 'bird', 'fish', 'reptile'].map(s => (
               <button key={s} onClick={() => setFilter(s)}
                 className={`glass-card rounded-xl hover-lift p-3 text-center transition-all cursor-pointer ${filter === s ? 'ring-1 ring-[#c9a96e]/30' : ''}`}>
-                <p className="text-lg">{s === 'all' ? '🐾' : SPECIES_ICONS[s]}</p>
+                <p className="text-lg">{s === 'all' ? '' : SPECIES_ICONS[s]}</p>
                 <p className="text-[10px] text-gray-500 capitalize">{s === 'all' ? `All (${(pets || []).length})` : `${s === 'fish' ? 'Fish' : s + 's'} (${(pets || []).filter((p: any) => p.species === s).length})`}</p>
               </button>
             ))}
@@ -289,12 +289,12 @@ export default function PetsPage() {
             return (
               <div className="glass-card rounded-2xl p-5 mb-6 border border-[#c9a96e]/20 bg-gradient-to-br from-[#c9a96e]/5 to-transparent">
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-lg">🏆</span>
+                  <span className="text-lg"></span>
                   <p className="text-xs font-bold text-[#c9a96e] uppercase tracking-widest">Pet of the Month</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-3xl shadow-[0_0_16px_rgba(201,169,110,0.2)]">
-                    {SPECIES_ICONS[potm.species] || '🐾'}
+                    {SPECIES_ICONS[potm.species] || ''}
                   </div>
                   <div>
                     <p className="text-xl font-extrabold text-[#e8d5a3]">{potm.name}</p>
@@ -312,7 +312,7 @@ export default function PetsPage() {
             <div className="text-center py-12 text-gray-500">Loading pets...</div>
           ) : filtered.length === 0 ? (
             <div className="glass-card rounded-xl hover-lift p-12 text-center">
-              <p className="text-5xl mb-4">🐾</p>
+              <p className="text-5xl mb-4"></p>
               <h3 className="text-lg font-medium mb-2">No pets registered yet</h3>
               <p className="text-sm text-gray-400">Register your pets so neighbors know who's who on walks!</p>
             </div>
@@ -326,7 +326,7 @@ export default function PetsPage() {
                   <div key={pet.id} className="glass-card rounded-xl hover-lift p-5">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="w-12 h-12 rounded-full bg-[#c9a96e]/8 border border-[#c9a96e]/20 flex items-center justify-center text-2xl">
-                        {SPECIES_ICONS[pet.species] || '🐾'}
+                        {SPECIES_ICONS[pet.species] || ''}
                       </div>
                       <div>
                         <h3 className="font-semibold text-sm">{pet.name}</h3>
@@ -340,7 +340,7 @@ export default function PetsPage() {
                     </div>
                     <div className="flex gap-2 mt-3">
                       {pet.vaccinated && <span className="text-[9px] px-1.5 py-0.5 rounded bg-green-500/10 text-green-400 flex items-center gap-0.5"><CheckCircle className="w-2.5 h-2.5" /> Vaccinated</span>}
-                      {pet.microchipped && <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400">📍 Microchipped</span>}
+                      {pet.microchipped && <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400"> Microchipped</span>}
                     </div>
                   </div>
                 ))}
@@ -427,7 +427,7 @@ function RegisterPet({ onClose }: { onClose: () => void }) {
         <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors cursor-pointer">Cancel</button>
         <button disabled={!name.trim() || register.isPending} onClick={() => register.mutate()}
           className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all cursor-pointer">
-          {register.isPending ? '⏳ Registering...' : '🐾 Register Pet'}
+          {register.isPending ? '⏳ Registering...' : ' Register Pet'}
         </button>
       </div>
     </div>

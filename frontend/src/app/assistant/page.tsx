@@ -5,14 +5,14 @@ import Link from 'next/link';
 import { useAIAssistant } from '@/hooks/useAIAssistant';
 
 const QUICK_ACTIONS = [
-  { label: '💳 My Dues', query: 'What are my dues?' },
-  { label: '💰 Treasury', query: 'How much is in the treasury?' },
-  { label: '🗳️ Proposals', query: 'Are there active proposals?' },
-  { label: '❤️ Health Score', query: "What's the community health score?" },
-  { label: '📄 CC&Rs', query: 'What are the CC&Rs?' },
-  { label: '🔧 Maintenance', query: 'How do I submit a maintenance request?' },
-  { label: '🏊 Pool Hours', query: 'What are the pool hours?' },
-  { label: '📬 Contact', query: 'How do I contact the board?' },
+  { label: ' My Dues', query: 'What are my dues?' },
+  { label: ' Treasury', query: 'How much is in the treasury?' },
+  { label: ' Proposals', query: 'Are there active proposals?' },
+  { label: ' Health Score', query: "What's the community health score?" },
+  { label: ' CC&Rs', query: 'What are the CC&Rs?' },
+  { label: ' Maintenance', query: 'How do I submit a maintenance request?' },
+  { label: ' Pool Hours', query: 'What are the pool hours?' },
+  { label: ' Contact', query: 'How do I contact the board?' },
 ];
 
 function MessageText({ text }: { text: string }) {
@@ -48,7 +48,7 @@ function MessageText({ text }: { text: string }) {
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-3 mb-4">
-      <div className="w-9 h-9 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-lg shrink-0">🤖</div>
+      <div className="w-9 h-9 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-lg shrink-0"></div>
       <div className="bg-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 1, 2].map((i) => (
           <span key={i} className="w-2 h-2 rounded-full bg-gray-400 inline-block animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
@@ -88,7 +88,7 @@ export default function AssistantPage() {
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center text-xl">
-              🤖
+              
             </div>
             <div>
               <h1 className="text-lg font-bold text-gray-100">HOA Assistant</h1>
@@ -111,7 +111,7 @@ export default function AssistantPage() {
             >
               {msg.role === 'bot' && (
                 <div className="w-9 h-9 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-lg shrink-0">
-                  🤖
+                  
                 </div>
               )}
               <div

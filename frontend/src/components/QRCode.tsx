@@ -146,7 +146,7 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
             onClick={onClose}
             className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-500 hover:text-gray-300 hover:bg-white/5 transition-colors text-sm"
           >
-            ✕
+            
           </button>
         </div>
 
@@ -168,7 +168,7 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
           }}
           className="w-full py-2.5 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#e8d5a3] text-sm font-medium hover:bg-[#c9a96e]/25 transition-colors"
         >
-          📋 Copy Link
+           Copy Link
         </button>
       </div>
     </div>

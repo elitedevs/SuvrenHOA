@@ -19,7 +19,7 @@ const SAMPLE_NOTIFICATIONS: Notification[] = [
   {
     id: 'n1',
     category: 'Governance',
-    icon: '🗳️',
+    icon: '',
     title: 'New Proposal: Park Renovation',
     description: 'A new proposal to renovate the community park has been submitted. Voting ends in 5 days.',
     time: new Date(Date.now() - 1000 * 60 * 25),
@@ -28,7 +28,7 @@ const SAMPLE_NOTIFICATIONS: Notification[] = [
   {
     id: 'n2',
     category: 'Dues',
-    icon: '💳',
+    icon: '',
     title: 'Dues Reminder',
     description: 'Your monthly dues of $150 are due in 3 days. Auto-pay is not enabled.',
     time: new Date(Date.now() - 1000 * 60 * 60 * 2),
@@ -37,7 +37,7 @@ const SAMPLE_NOTIFICATIONS: Notification[] = [
   {
     id: 'n3',
     category: 'Community',
-    icon: '🎉',
+    icon: '',
     title: 'Community BBQ This Saturday!',
     description: 'Join us at the common area for our quarterly neighborhood BBQ. RSVP by Friday.',
     time: new Date(Date.now() - 1000 * 60 * 60 * 5),
@@ -46,7 +46,7 @@ const SAMPLE_NOTIFICATIONS: Notification[] = [
   {
     id: 'n4',
     category: 'Safety',
-    icon: '🚨',
+    icon: '',
     title: 'Safety Alert: Suspicious Activity',
     description: 'A resident reported suspicious activity near lot 45. Please stay alert and report anything unusual.',
     time: new Date(Date.now() - 1000 * 60 * 60 * 23),
@@ -55,7 +55,7 @@ const SAMPLE_NOTIFICATIONS: Notification[] = [
   {
     id: 'n5',
     category: 'Governance',
-    icon: '📋',
+    icon: '',
     title: 'Meeting Minutes Posted',
     description: 'Minutes from the March 20 board meeting have been posted to the documents section.',
     time: new Date(Date.now() - 1000 * 60 * 60 * 26),
@@ -64,7 +64,7 @@ const SAMPLE_NOTIFICATIONS: Notification[] = [
   {
     id: 'n6',
     category: 'Community',
-    icon: '🏆',
+    icon: '',
     title: 'You made the Leaderboard!',
     description: 'Congratulations! You ranked #3 in Governance Champions this month.',
     time: new Date(Date.now() - 1000 * 60 * 60 * 48),
@@ -73,7 +73,7 @@ const SAMPLE_NOTIFICATIONS: Notification[] = [
   {
     id: 'n7',
     category: 'Dues',
-    icon: '✅',
+    icon: '',
     title: 'Payment Confirmed',
     description: 'Your dues payment of $150 has been confirmed on-chain. Transaction: 0xab12...cd34',
     time: new Date(Date.now() - 1000 * 60 * 60 * 72),
@@ -228,7 +228,7 @@ export function NotificationBell() {
             <div className="flex-1 overflow-y-auto">
               {filtered.length === 0 ? (
                 <div className="text-center py-16 text-gray-500">
-                  <div className="text-4xl mb-3">🔔</div>
+                  <div className="text-4xl mb-3"></div>
                   <p className="text-sm">No notifications</p>
                 </div>
               ) : (

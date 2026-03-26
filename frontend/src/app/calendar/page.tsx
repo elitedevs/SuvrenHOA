@@ -7,13 +7,13 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { CalendarDays } from 'lucide-react';
 
 const EVENT_TYPES = [
-  { id: 'community', label: 'Community', icon: '🏘️', color: 'gold' },
-  { id: 'board-meeting', label: 'Board Meeting', icon: '📋', color: 'blue' },
-  { id: 'committee', label: 'Committee', icon: '👥', color: 'cyan' },
+  { id: 'community', label: 'Community', icon: '', color: 'gold' },
+  { id: 'board-meeting', label: 'Board Meeting', icon: '', color: 'blue' },
+  { id: 'committee', label: 'Committee', icon: '', color: 'cyan' },
   { id: 'deadline', label: 'Deadline', icon: '⏰', color: 'red' },
-  { id: 'holiday', label: 'Holiday', icon: '🎄', color: 'green' },
-  { id: 'social', label: 'Social', icon: '🎉', color: 'amber' },
-  { id: 'maintenance', label: 'Maintenance', icon: '🔧', color: 'orange' },
+  { id: 'holiday', label: 'Holiday', icon: '', color: 'green' },
+  { id: 'social', label: 'Social', icon: '', color: 'amber' },
+  { id: 'maintenance', label: 'Maintenance', icon: '', color: 'orange' },
 ];
 
 export default function CalendarPage() {
@@ -62,13 +62,13 @@ export default function CalendarPage() {
             href="/calendar/meetings"
             className="px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
           >
-            📋 Board Meetings
+             Board Meetings
           </a>
           <button
             onClick={() => setShowCreate(!showCreate)}
             className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all"
           >
-            {showCreate ? '← Back' : '📅 Add Event'}
+            {showCreate ? '← Back' : ' Add Event'}
           </button>
         </div>
       </div>
@@ -159,8 +159,8 @@ function EventCard({ event, walletAddress }: { event: any; walletAddress?: strin
                 {event.all_day ? 'All Day' :
                   `${startTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}${endTime ? ' — ' + endTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : ''}`}
               </span>
-              {event.location && <span>📍 {event.location}</span>}
-              {goingCount > 0 && <span>👥 {goingCount} going</span>}
+              {event.location && <span> {event.location}</span>}
+              {goingCount > 0 && <span> {goingCount} going</span>}
             </div>
             {event.description && (
               <p className="text-xs text-gray-400 line-clamp-2">{event.description}</p>
@@ -182,7 +182,7 @@ function EventCard({ event, walletAddress }: { event: any; walletAddress?: strin
                       : 'bg-gray-800/50 text-gray-500 hover:text-gray-300'
                   }`}
                 >
-                  {status === 'going' ? '✅' : status === 'maybe' ? '🤔' : '❌'}
+                  {status === 'going' ? '' : status === 'maybe' ? '' : ''}
                 </button>
               ))}
             </div>

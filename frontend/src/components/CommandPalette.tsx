@@ -14,30 +14,30 @@ interface SearchItem {
 
 const SEARCH_ITEMS: SearchItem[] = [
   // Pages
-  { id: 'home', title: 'Home', subtitle: 'Landing page', icon: '🏠', href: '/', category: 'Pages' },
-  { id: 'dashboard', title: 'Dashboard', subtitle: 'My property & voting power', icon: '📊', href: '/dashboard', category: 'Pages' },
-  { id: 'proposals', title: 'Proposals', subtitle: 'Vote on governance proposals', icon: '🗳️', href: '/proposals', category: 'Pages' },
-  { id: 'treasury', title: 'Treasury', subtitle: 'Community funds & balances', icon: '💰', href: '/treasury', category: 'Pages' },
-  { id: 'dues', title: 'Pay Dues', subtitle: 'Quarterly & annual payments', icon: '💳', href: '/dues', category: 'Pages' },
-  { id: 'messages', title: 'Messages', subtitle: 'Community inbox', icon: '💬', href: '/messages', category: 'Pages' },
-  { id: 'documents', title: 'Documents', subtitle: 'On-chain document registry', icon: '📄', href: '/documents', category: 'Pages' },
-  { id: 'calendar', title: 'Calendar', subtitle: 'Events & deadlines', icon: '📅', href: '/calendar', category: 'Pages' },
-  { id: 'meetings', title: 'Board Meetings', subtitle: 'Schedule & RSVP to meetings', icon: '📋', href: '/calendar/meetings', category: 'Pages' },
-  { id: 'alerts', title: 'Alerts', subtitle: 'Community alerts & notices', icon: '🚨', href: '/alerts', category: 'Pages' },
-  { id: 'directory', title: 'Directory', subtitle: 'Homeowner directory', icon: '📒', href: '/directory', category: 'Pages' },
-  { id: 'announcements', title: 'Announcements', subtitle: 'Community news', icon: '📢', href: '/announcements', category: 'Pages' },
-  { id: 'maintenance', title: 'Maintenance', subtitle: 'Submit & track requests', icon: '🔧', href: '/maintenance', category: 'Pages' },
-  { id: 'violations', title: 'Violations', subtitle: 'HOA violations tracker', icon: '⚠️', href: '/violations', category: 'Pages' },
-  { id: 'community', title: 'Community', subtitle: 'Posts & discussions', icon: '🏘️', href: '/community', category: 'Pages' },
-  { id: 'profile', title: 'Profile', subtitle: 'Your homeowner profile', icon: '👤', href: '/profile', category: 'Pages' },
-  { id: 'reservations', title: 'Reservations', subtitle: 'Book amenities', icon: '🎾', href: '/reservations', category: 'Pages' },
-  { id: 'surveys', title: 'Surveys', subtitle: 'Community surveys', icon: '📊', href: '/surveys', category: 'Pages' },
-  { id: 'transparency', title: 'Transparency', subtitle: 'On-chain data explorer', icon: '🔍', href: '/transparency', category: 'Pages' },
-  { id: 'admin', title: 'Admin', subtitle: 'Board administration tools', icon: '⚙️', href: '/admin', category: 'Pages' },
-  { id: 'vehicles', title: 'Vehicles', subtitle: 'Register vehicles', icon: '🚗', href: '/vehicles', category: 'Pages' },
-  { id: 'pets', title: 'Pets', subtitle: 'Register pets', icon: '🐾', href: '/pets', category: 'Pages' },
-  { id: 'map', title: 'Neighborhood Map', subtitle: 'Property map view', icon: '🗺️', href: '/map', category: 'Pages' },
-  { id: 'assistant', title: 'AI Assistant', subtitle: 'HOA AI helper', icon: '🤖', href: '/assistant', category: 'Pages' },
+  { id: 'home', title: 'Home', subtitle: 'Landing page', icon: '', href: '/', category: 'Pages' },
+  { id: 'dashboard', title: 'Dashboard', subtitle: 'My property & voting power', icon: '', href: '/dashboard', category: 'Pages' },
+  { id: 'proposals', title: 'Proposals', subtitle: 'Vote on governance proposals', icon: '', href: '/proposals', category: 'Pages' },
+  { id: 'treasury', title: 'Treasury', subtitle: 'Community funds & balances', icon: '', href: '/treasury', category: 'Pages' },
+  { id: 'dues', title: 'Pay Dues', subtitle: 'Quarterly & annual payments', icon: '', href: '/dues', category: 'Pages' },
+  { id: 'messages', title: 'Messages', subtitle: 'Community inbox', icon: '', href: '/messages', category: 'Pages' },
+  { id: 'documents', title: 'Documents', subtitle: 'On-chain document registry', icon: '', href: '/documents', category: 'Pages' },
+  { id: 'calendar', title: 'Calendar', subtitle: 'Events & deadlines', icon: '', href: '/calendar', category: 'Pages' },
+  { id: 'meetings', title: 'Board Meetings', subtitle: 'Schedule & RSVP to meetings', icon: '', href: '/calendar/meetings', category: 'Pages' },
+  { id: 'alerts', title: 'Alerts', subtitle: 'Community alerts & notices', icon: '', href: '/alerts', category: 'Pages' },
+  { id: 'directory', title: 'Directory', subtitle: 'Homeowner directory', icon: '', href: '/directory', category: 'Pages' },
+  { id: 'announcements', title: 'Announcements', subtitle: 'Community news', icon: '', href: '/announcements', category: 'Pages' },
+  { id: 'maintenance', title: 'Maintenance', subtitle: 'Submit & track requests', icon: '', href: '/maintenance', category: 'Pages' },
+  { id: 'violations', title: 'Violations', subtitle: 'HOA violations tracker', icon: '', href: '/violations', category: 'Pages' },
+  { id: 'community', title: 'Community', subtitle: 'Posts & discussions', icon: '', href: '/community', category: 'Pages' },
+  { id: 'profile', title: 'Profile', subtitle: 'Your homeowner profile', icon: '', href: '/profile', category: 'Pages' },
+  { id: 'reservations', title: 'Reservations', subtitle: 'Book amenities', icon: '', href: '/reservations', category: 'Pages' },
+  { id: 'surveys', title: 'Surveys', subtitle: 'Community surveys', icon: '', href: '/surveys', category: 'Pages' },
+  { id: 'transparency', title: 'Transparency', subtitle: 'On-chain data explorer', icon: '', href: '/transparency', category: 'Pages' },
+  { id: 'admin', title: 'Admin', subtitle: 'Board administration tools', icon: '', href: '/admin', category: 'Pages' },
+  { id: 'vehicles', title: 'Vehicles', subtitle: 'Register vehicles', icon: '', href: '/vehicles', category: 'Pages' },
+  { id: 'pets', title: 'Pets', subtitle: 'Register pets', icon: '', href: '/pets', category: 'Pages' },
+  { id: 'map', title: 'Neighborhood Map', subtitle: 'Property map view', icon: '', href: '/map', category: 'Pages' },
+  { id: 'assistant', title: 'AI Assistant', subtitle: 'HOA AI helper', icon: '', href: '/assistant', category: 'Pages' },
 ];
 
 function fuzzyMatch(query: string, item: SearchItem): boolean {
@@ -151,7 +151,7 @@ export function CommandPalette() {
       >
         {/* Search input */}
         <div className="flex items-center gap-3 px-4 py-4 border-b border-white/5">
-          <span className="text-gray-500 text-lg">🔍</span>
+          <span className="text-gray-500 text-lg"></span>
           <input
             ref={inputRef}
             type="text"

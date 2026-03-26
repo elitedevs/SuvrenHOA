@@ -281,7 +281,7 @@ export function TransparencyDashboard() {
           {stats.error && (
             <div className="mb-4 px-4 py-3 rounded-xl text-sm text-amber-300"
                  style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
-              ⚠ {stats.error} — showing cached values
+               {stats.error} — showing cached values
             </div>
           )}
 
