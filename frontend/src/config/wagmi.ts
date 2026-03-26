@@ -1,33 +1,10 @@
-import { http, createConfig } from 'wagmi';
+import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { baseSepolia, base } from 'wagmi/chains';
-import { connectorsForWallets } from '@rainbow-me/rainbowkit';
-import {
-  metaMaskWallet,
-  coinbaseWallet,
-  walletConnectWallet,
-  injectedWallet,
-} from '@rainbow-me/rainbowkit/wallets';
+import { http } from 'wagmi';
 
-const connectors = connectorsForWallets(
-  [
-    {
-      groupName: 'Recommended',
-      wallets: [
-        injectedWallet,
-        metaMaskWallet,
-        coinbaseWallet,
-        walletConnectWallet,
-      ],
-    },
-  ],
-  {
-    appName: 'SuvrenHOA',
-    projectId: 'e1cad1c55aa4718ec1872d9e315bd23a',
-  }
-);
-
-export const config = createConfig({
-  connectors,
+export const config = getDefaultConfig({
+  appName: 'SuvrenHOA',
+  projectId: 'e1cad1c55aa4718ec1872d9e315bd23a',
   chains: [baseSepolia, base],
   transports: {
     [baseSepolia.id]: http('https://sepolia.base.org'),
