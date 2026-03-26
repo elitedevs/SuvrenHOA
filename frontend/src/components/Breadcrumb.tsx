@@ -18,7 +18,7 @@ const LABEL_MAP: Record<string, string> = {
   directory: 'Directory',
   dues: 'Pay Dues',
   maintenance: 'Maintenance',
-  reservations: 'Amenities',
+  reservations: 'Reservations',
   architectural: 'Arch Review',
   surveys: 'Surveys',
   transparency: 'Transparency',
@@ -33,10 +33,16 @@ const LABEL_MAP: Record<string, string> = {
   vehicles: 'Vehicles',
   governance: 'Governance',
   'voting-power': 'Voting Power',
+  'lost-found': 'Lost & Found',
   activity: 'Activity Log',
   onboarding: 'Onboarding',
   checkout: 'Checkout',
   verify: 'Verify',
+};
+
+// Full-path overrides for segments that mean different things by context
+const PATH_LABEL_MAP: Record<string, string> = {
+  '/admin/dashboard': 'Board Dashboard',
 };
 
 function getLabel(segment: string): string {
@@ -56,10 +62,12 @@ export function Breadcrumb() {
 
   const crumbs = [
     { label: 'Home', href: '/' },
-    ...segments.map((seg, i) => ({
-      label: getLabel(seg),
-      href: '/' + segments.slice(0, i + 1).join('/'),
-    })),
+    ...segments.map((seg, i) => {
+      const href = '/' + segments.slice(0, i + 1).join('/');
+      // Check full-path override first, then segment label
+      const label = PATH_LABEL_MAP[href] ?? getLabel(seg);
+      return { label, href };
+    }),
   ];
 
   if (crumbs.length <= 1) return null;

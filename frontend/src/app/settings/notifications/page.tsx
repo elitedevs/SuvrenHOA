@@ -173,14 +173,18 @@ export default function NotificationPrefsPage() {
                 {/* Toggle switch */}
                 <button
                   onClick={() => toggle(pref.id)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors shrink-0 ${
-                    prefs[pref.id] ? 'bg-[#c9a96e]' : 'bg-gray-600'
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 shrink-0 ${
+                    prefs[pref.id]
+                      ? 'bg-[#c9a96e] shadow-[0_0_8px_rgba(201,169,110,0.5)]'
+                      : 'bg-gray-700'
                   }`}
                   aria-label={`Toggle ${pref.label}`}
                 >
                   <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
-                      prefs[pref.id] ? 'translate-x-6' : 'translate-x-1'
+                    className={`inline-block h-4 w-4 transform rounded-full shadow transition-transform duration-200 ${
+                      prefs[pref.id]
+                        ? 'translate-x-6 bg-white'
+                        : 'translate-x-1 bg-gray-400'
                     }`}
                   />
                 </button>

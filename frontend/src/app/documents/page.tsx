@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { useDocuments, useDocument, DOC_TYPE_LABELS } from '@/hooks/useDocuments';
 import { CheckCircle } from 'lucide-react';
@@ -197,8 +197,16 @@ function DocumentCard({
 }) {
   const { document: doc, isLoading } = useDocument(docId);
   const [expanded, setExpanded] = useState(false);
+  const [timedOut, setTimedOut] = useState(false);
 
-  if (isLoading || !doc) {
+  // Prevent infinite skeleton — if loading for > 8s and no doc, show empty state
+  useEffect(() => {
+    if (!isLoading) return;
+    const t = setTimeout(() => setTimedOut(true), 8000);
+    return () => clearTimeout(t);
+  }, [isLoading]);
+
+  if (isLoading && !timedOut) {
     return (
       <div className="glass-card rounded-2xl hover-lift p-6">
         <div className="flex items-center gap-4">
@@ -208,6 +216,14 @@ function DocumentCard({
             <div className="skeleton h-3 rounded w-1/2" />
           </div>
         </div>
+      </div>
+    );
+  }
+
+  if (!doc) {
+    return (
+      <div className="glass-card rounded-2xl hover-lift p-4 border border-gray-800/60 opacity-50">
+        <p className="text-xs text-gray-500 italic">Document #{docId} could not be loaded</p>
       </div>
     );
   }

@@ -278,7 +278,7 @@ export default function PetsPage() {
               <button key={s} onClick={() => setFilter(s)}
                 className={`glass-card rounded-xl hover-lift p-3 text-center transition-all cursor-pointer ${filter === s ? 'ring-1 ring-[#c9a96e]/30' : ''}`}>
                 <p className="text-lg">{s === 'all' ? '🐾' : SPECIES_ICONS[s]}</p>
-                <p className="text-[10px] text-gray-500 capitalize">{s === 'all' ? `All (${(pets || []).length})` : `${s}s (${(pets || []).filter((p: any) => p.species === s).length})`}</p>
+                <p className="text-[10px] text-gray-500 capitalize">{s === 'all' ? `All (${(pets || []).length})` : `${s === 'fish' ? 'Fish' : s + 's'} (${(pets || []).filter((p: any) => p.species === s).length})`}</p>
               </button>
             ))}
           </div>

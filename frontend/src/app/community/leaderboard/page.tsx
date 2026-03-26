@@ -311,7 +311,7 @@ export default function LeaderboardPage() {
             return (
               <div key={idx} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] text-center">
                 <div className="text-2xl mb-1">{'🔥'.repeat(Math.min(streak, 3))}</div>
-                <div className="text-sm font-bold text-[#c9a96e]">{streak} months</div>
+                <div className="text-sm font-bold text-[#c9a96e]">{streak} {streak === 1 ? 'month' : 'months'}</div>
                 <div className="text-[10px] text-gray-500 font-mono mt-0.5 truncate">{truncateAddr(entry.address)}</div>
               </div>
             );

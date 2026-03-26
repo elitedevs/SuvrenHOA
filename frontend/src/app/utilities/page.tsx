@@ -125,14 +125,22 @@ export default function UtilitiesPage() {
                 const actual = (latest as any)[u.key];
                 const budget = BUDGET[u.key];
                 const pct = Math.min(100, (actual / budget) * 100);
+                const over = actual > budget;
                 return (
                   <div key={u.key}>
                     <div className="flex justify-between text-xs mb-1">
-                      <span className="text-gray-400">{u.icon} {u.label}</span>
-                      <span className={pct > 100 ? 'text-red-400' : 'text-gray-300'}>${actual.toLocaleString()} / ${budget.toLocaleString()}</span>
+                      <span className="text-gray-400 flex items-center gap-1">
+                        {u.icon} {u.label}
+                        {over && (
+                          <span className="ml-1 text-[9px] px-1.5 py-0.5 rounded-full bg-red-500/15 text-red-400 border border-red-500/30 font-bold">
+                            OVER BUDGET
+                          </span>
+                        )}
+                      </span>
+                      <span className={over ? 'text-red-400 font-semibold' : 'text-gray-300'}>${actual.toLocaleString()} / ${budget.toLocaleString()}</span>
                     </div>
-                    <div className="h-2 rounded-full bg-gray-800">
-                      <div className="h-2 rounded-full transition-all" style={{ width: `${Math.min(pct, 100)}%`, backgroundColor: pct > 100 ? '#ef4444' : u.color }} />
+                    <div className={`h-2 rounded-full bg-gray-800 ${over ? 'ring-1 ring-red-500/50' : ''}`}>
+                      <div className="h-2 rounded-full transition-all" style={{ width: `${Math.min(pct, 100)}%`, backgroundColor: over ? '#ef4444' : u.color }} />
                     </div>
                   </div>
                 );

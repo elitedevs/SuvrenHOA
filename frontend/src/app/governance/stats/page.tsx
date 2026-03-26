@@ -44,10 +44,10 @@ export default function GovernanceStatsPage() {
       {/* Stat Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: 'Total Proposals', value: MOCK_STATS.totalProposals, icon: <FileText className="w-5 h-5 text-[#c9a96e]" /> },
-          { label: 'Pass Rate', value: `${MOCK_STATS.passRate}%`, icon: <CheckCircle className="w-5 h-5 text-[#c9a96e]" /> },
-          { label: 'Avg Turnout', value: `${MOCK_STATS.avgTurnout}%`, icon: <Users className="w-5 h-5 text-[#c9a96e]" /> },
-          { label: 'Avg Voting Period', value: `${MOCK_STATS.avgVotingPeriodDays}d`, icon: <Clock className="w-5 h-5 text-[#c9a96e]" /> },
+          { label: 'Total Proposals', value: MOCK_STATS.totalProposals ?? 0, icon: <FileText className="w-5 h-5 text-[#c9a96e]" /> },
+          { label: 'Pass Rate', value: `${MOCK_STATS.passRate ?? 0}%`, icon: <CheckCircle className="w-5 h-5 text-[#c9a96e]" /> },
+          { label: 'Avg Turnout', value: `${MOCK_STATS.avgTurnout ?? 0}%`, icon: <Users className="w-5 h-5 text-[#c9a96e]" /> },
+          { label: 'Avg Voting Period', value: `${MOCK_STATS.avgVotingPeriodDays ?? 0}d`, icon: <Clock className="w-5 h-5 text-[#c9a96e]" /> },
         ].map(stat => (
           <div key={stat.label} className="glass-card rounded-2xl hover-lift p-5">
             <div className="flex items-start justify-between mb-3">

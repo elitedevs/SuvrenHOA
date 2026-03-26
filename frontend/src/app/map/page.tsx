@@ -731,9 +731,9 @@ export default function MapPage() {
           </button>
         </div>
 
-        {/* Stats */}
-        {!loading && !error && (
-          <StatsBar lots={lots} incidents={incidents} layerMode={layerMode} />
+        {/* Stats — show empty state when error */}
+        {!loading && (
+          <StatsBar lots={error ? [] : lots} incidents={incidents} layerMode={layerMode} />
         )}
 
         {/* Controls */}
@@ -773,7 +773,7 @@ export default function MapPage() {
         </div>
 
         {/* View/layer toggles + legend */}
-        {!loading && !error && lots.length > 0 && (
+        {!loading && !error && lots.length > 0 && ( 
           <div className="flex flex-col gap-3 mb-5">
             <div className="flex items-center gap-3 flex-wrap">
               <ViewToggle view={viewMode} onChange={setViewMode} />
@@ -830,16 +830,16 @@ export default function MapPage() {
           </div>
         )}
 
-        {/* ── Map View ── */}
+        {/* ── Map View ── always render map even if lot data failed; incidents still work */}
         {!loading && viewMode === 'map' && (
           <NeighborhoodMap
-            lots={showLots ? filteredLots : []}
+            lots={showLots && !error ? filteredLots : []}
             selectedLot={selectedLot}
             isBoard={isBoard}
             onSelectLot={handleSelectLot}
             incidents={showIncidents ? incidents : []}
             onSelectIncident={handleSelectIncident}
-            showLots={showLots}
+            showLots={showLots && !error}
             showIncidents={showIncidents}
           />
         )}
