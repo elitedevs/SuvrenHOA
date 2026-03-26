@@ -74,7 +74,56 @@ export default function ArchitecturalPage() {
   );
 }
 
+const PIPELINE_STAGES = [
+  { key: 'submitted', label: 'Submitted', icon: '📋', color: 'text-yellow-400', bg: 'bg-yellow-500/10 border-yellow-500/20' },
+  { key: 'under-review', label: 'Under Review', icon: '🔍', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+  { key: 'info-requested', label: 'Info Needed', icon: '❓', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
+  { key: 'approved', label: 'Approved', icon: '✅', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
+  { key: 'denied', label: 'Denied', icon: '❌', color: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20' },
+];
+
+function ReviewPipeline({ requests, setFilter }: { requests: any[]; setFilter: (f: string) => void }) {
+  const counts: Record<string, number> = {};
+  if (requests) {
+    requests.forEach((r: any) => {
+      counts[r.status] = (counts[r.status] || 0) + 1;
+    });
+  }
+  return (
+    <div className="glass-card rounded-xl p-4 mb-6">
+      <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-3">Review Pipeline</p>
+      <div className="flex items-center gap-1 overflow-x-auto pb-1">
+        {PIPELINE_STAGES.map((stage, i) => (
+          <div key={stage.key} className="flex items-center gap-1 min-w-0">
+            <button
+              onClick={() => setFilter(stage.key)}
+              className={`flex flex-col items-center px-3 py-2.5 rounded-xl border transition-all cursor-pointer hover:scale-105 shrink-0 ${stage.bg}`}
+            >
+              <span className="text-lg">{stage.icon}</span>
+              <span className={`text-[10px] font-medium mt-1 ${stage.color}`}>{stage.label}</span>
+              <span className={`text-lg font-bold ${stage.color}`}>{counts[stage.key] || 0}</span>
+            </button>
+            {i < PIPELINE_STAGES.length - 1 && (
+              <span className="text-gray-700 text-sm shrink-0">→</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function RequestList({ filter, setFilter }: { filter: string; setFilter: (f: string) => void }) {
+  const { data: allRequests } = useQuery({
+    queryKey: ['architectural', 'all'],
+    queryFn: async () => {
+      const res = await fetch('/api/architectural');
+      if (!res.ok) return [];
+      return res.json();
+    },
+    staleTime: 30_000,
+  });
+
   const { data: requests, isLoading } = useQuery({
     queryKey: ['architectural', filter],
     queryFn: async () => {
@@ -90,6 +139,7 @@ function RequestList({ filter, setFilter }: { filter: string; setFilter: (f: str
 
   return (
     <>
+      <ReviewPipeline requests={allRequests || []} setFilter={setFilter} />
       <div className="flex gap-2 mb-6 overflow-x-auto pb-1">
         {statuses.map(s => (
           <button

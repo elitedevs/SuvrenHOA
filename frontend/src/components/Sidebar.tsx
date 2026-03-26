@@ -13,6 +13,7 @@ import {
   Eye, Map, Heart, MessageCircle, Bell, Bot, Settings,
   User, ChevronLeft, ChevronRight, Menu, X, LogOut,
   Waves, Wrench, Shield, BookMarked, Receipt, FileBarChart2, ClipboardList,
+  ParkingCircle, Volume2, Image, Newspaper, Zap, Search, DollarSign,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -72,6 +73,19 @@ const NAV_SECTIONS = [
       { href: '/safety', label: 'Safety Watch', icon: Shield },
       { href: '/rules', label: 'Rules & FAQ', icon: BookMarked },
       { href: '/reports/annual', label: 'Annual Report', icon: FileBarChart2 },
+      { href: '/newsletter', label: 'Newsletter', icon: Newspaper },
+      { href: '/gallery', label: 'Photo Gallery', icon: Image },
+      { href: '/lost-found', label: 'Lost & Found', icon: Search },
+    ],
+  },
+  {
+    label: 'Services+',
+    items: [
+      { href: '/parking', label: 'Parking', icon: ParkingCircle },
+      { href: '/complaints/noise', label: 'Noise Complaints', icon: Volume2 },
+      { href: '/utilities', label: 'Utilities', icon: Zap },
+      { href: '/surveys/builder', label: 'Survey Builder', icon: ClipboardList },
+      { href: '/treasury/vendors', label: 'Vendor Payments', icon: DollarSign },
     ],
   },
   {
