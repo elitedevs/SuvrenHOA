@@ -16,7 +16,7 @@ import {
   ParkingCircle, Volume2, Image, Newspaper, Zap, Search, DollarSign,
   ShoppingBag, Code2, LayoutDashboard, ArrowRightLeft, Calculator,
   Sprout, Package, UserCheck, GitCompare, CarFront, Battery,
-  BarChart2, TrendingUp,
+  BarChart2, TrendingUp, Wifi, Droplets, Sparkles, Handshake, ClipboardCheck,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -126,6 +126,20 @@ const NAV_SECTIONS = [
       { href: '/visitors', label: 'Visitor Passes', icon: UserCheck },
       { href: '/services/packages', label: 'Package Log', icon: Package },
       { href: '/energy', label: 'Energy Dashboard', icon: Battery },
+    ],
+  },
+  {
+    label: 'New Features',
+    items: [
+      { href: '/insurance', label: 'Insurance Tracker', icon: Shield },
+      { href: '/inspections', label: 'Inspections', icon: ClipboardCheck },
+      { href: '/seasonal-decor', label: 'Seasonal Decor', icon: Sparkles },
+      { href: '/services/carpool', label: 'Carpool', icon: CarFront },
+      { href: '/services/irrigation', label: 'Irrigation', icon: Droplets },
+      { href: '/services/wifi', label: 'Guest WiFi', icon: Wifi },
+      { href: '/community/bookclub', label: 'Book Club', icon: BookOpen },
+      { href: '/community/skills', label: 'Skills Exchange', icon: Handshake },
+      { href: '/community/awards', label: 'Awards', icon: Trophy },
     ],
   },
 ];

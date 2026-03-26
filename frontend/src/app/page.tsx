@@ -20,6 +20,7 @@ import {
   Wrench, MessageSquare, ClipboardList, Zap, Link2,
   AlertTriangle,
 } from 'lucide-react';
+import { ResidentSpotlight } from '@/components/ResidentSpotlight';
 
 export default function Home() {
   const { isConnected } = useAccount();
@@ -276,6 +277,11 @@ function Dashboard() {
             <DuesReminder compact />
           </div>
         )}
+
+        {/* Resident Spotlight */}
+        <div className="mb-8 page-enter page-enter-delay-2">
+          <ResidentSpotlight />
+        </div>
 
         {/* Navigation Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 page-enter page-enter-delay-2">
