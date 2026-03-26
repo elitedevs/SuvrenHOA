@@ -55,6 +55,29 @@ export default function PetsPage() {
         ))}
       </div>
 
+      {/* Pet of the Month highlight */}
+      {!showRegister && (pets || []).length > 0 && (() => {
+        const potm = (pets || [])[0];
+        return (
+          <div className="glass-card rounded-2xl p-5 mb-6 border border-[#c9a96e]/20 bg-gradient-to-br from-[#c9a96e]/5 to-transparent">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-lg">🏆</span>
+              <p className="text-xs font-bold text-[#c9a96e] uppercase tracking-widest">Pet of the Month</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-3xl shadow-[0_0_16px_rgba(201,169,110,0.2)]">
+                {SPECIES_ICONS[potm.species] || '🐾'}
+              </div>
+              <div>
+                <p className="text-xl font-extrabold text-[#e8d5a3]">{potm.name}</p>
+                <p className="text-xs text-gray-400 capitalize">{potm.breed || potm.species} · Lot #{potm.lot_number}</p>
+                <p className="text-[10px] text-[#c9a96e] mt-1">⭐ Community favorite this month</p>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       {showRegister ? (
         <RegisterPet onClose={() => setShowRegister(false)} />
       ) : isLoading ? (
@@ -66,7 +89,11 @@ export default function PetsPage() {
           <p className="text-sm text-gray-400">Register your pets so neighbors know who's who on walks!</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <>
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">
+            Community Gallery · {filtered.length} pet{filtered.length !== 1 ? 's' : ''}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((pet: any) => (
             <div key={pet.id} className="glass-card rounded-xl hover-lift p-5">
               <div className="flex items-center gap-3 mb-3">
@@ -90,6 +117,7 @@ export default function PetsPage() {
             </div>
           ))}
         </div>
+        </>
       )}
     </div>
   );

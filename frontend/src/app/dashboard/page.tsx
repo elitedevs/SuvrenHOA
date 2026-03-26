@@ -11,6 +11,65 @@ import { PropertySelector } from '@/components/PropertySelector';
 import { QRModal } from '@/components/QRCode';
 import Link from 'next/link';
 
+// ── Property Insights (inline component) ──
+const SPARKLINE = [100, 105, 102, 108, 112, 110, 117, 119, 123, 128, 132, 138];
+const NEIGH_AVG = 425000;
+const CURRENT_EST = 447000;
+const YOY_CHANGE = 5.2;
+
+function PropertyInsights() {
+  const maxV = Math.max(...SPARKLINE);
+  const minV = Math.min(...SPARKLINE);
+  const range = maxV - minV || 1;
+  const width = 200;
+  const height = 40;
+  const pts = SPARKLINE.map((v, i) => {
+    const x = (i / (SPARKLINE.length - 1)) * width;
+    const y = height - ((v - minV) / range) * height;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+
+  return (
+    <div className="glass-card rounded-2xl p-6 mb-6 page-enter page-enter-delay-3">
+      <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Property Insights</p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div>
+          <p className="text-[10px] text-gray-500 mb-1">Estimated Value</p>
+          <p className="text-2xl font-extrabold text-[#c9a96e]">${CURRENT_EST.toLocaleString()}</p>
+          <p className="text-[11px] text-green-400 font-semibold mt-0.5">+{YOY_CHANGE}% YoY ↑</p>
+        </div>
+        <div>
+          <p className="text-[10px] text-gray-500 mb-1">Neighborhood Avg</p>
+          <p className="text-xl font-bold text-gray-200">${NEIGH_AVG.toLocaleString()}</p>
+          <p className="text-[11px] text-[#c9a96e] font-semibold mt-0.5">
+            +${(CURRENT_EST - NEIGH_AVG).toLocaleString()} above avg
+          </p>
+        </div>
+        <div>
+          <p className="text-[10px] text-gray-500 mb-2">12-Month Trend</p>
+          <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
+            <defs>
+              <linearGradient id="spark-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#c9a96e" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#c9a96e" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <polyline
+              points={pts}
+              fill="none"
+              stroke="#c9a96e"
+              strokeWidth="2"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+      </div>
+      <p className="text-[10px] text-gray-600 mt-3">Estimates are illustrative. Consult an appraiser for a formal valuation.</p>
+    </div>
+  );
+}
+
 export default function DashboardPage() {
   const { isConnected } = useAccount();
 
@@ -235,6 +294,9 @@ function PropertyDashboard() {
         </div>
       </div>
 
+
+      {/* Property Insights */}
+      <PropertyInsights />
 
       {/* Onboarding Banner */}
       {hasProperty && !isCompleted && (

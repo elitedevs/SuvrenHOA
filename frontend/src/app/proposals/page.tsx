@@ -11,6 +11,7 @@ import {
   CATEGORIES,
   STATE_COLORS,
 } from '@/hooks/useProposals';
+import { ProposalTemplates } from '@/components/ProposalTemplates';
 
 export default function ProposalsPage() {
   const { isConnected } = useAccount();
@@ -232,6 +233,13 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="space-y-6 page-enter">
+      {/* Templates */}
+      <ProposalTemplates onUseTemplate={({ title: t, description: d, category: c }) => {
+        setTitle(t);
+        setDescription(d);
+        setCategory(c);
+      }} />
+
       {/* Form */}
       <div className="glass-card rounded-2xl hover-lift p-8 space-y-6">
         {/* Title */}

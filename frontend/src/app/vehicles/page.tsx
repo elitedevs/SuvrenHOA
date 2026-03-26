@@ -66,6 +66,46 @@ export default function VehiclesPage() {
         </div>
       </div>
 
+      {/* Community Vehicle Overview */}
+      {!showRegister && !showGuest && !isLoading && (vehicles || []).length > 0 && (
+        <div className="glass-card rounded-2xl p-5 mb-5">
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Community Vehicle Overview</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+            {[
+              { type: 'car', label: 'Cars', icon: '🚗', color: 'blue' },
+              { type: 'truck', label: 'Trucks', icon: '🛻', color: 'amber' },
+              { type: 'motorcycle', label: 'Motorcycles', icon: '🏍️', color: 'purple' },
+              { type: 'other', label: 'Other', icon: '🚙', color: 'gray' },
+            ].map(({ type, label, icon, color }) => {
+              const count = residentVehicles.filter((v: any) => (v.vehicle_type || 'car') === type).length;
+              return (
+                <div key={type} className="rounded-xl bg-gray-800/40 border border-gray-700/40 p-3 text-center">
+                  <p className="text-xl mb-1">{icon}</p>
+                  <p className="text-lg font-bold text-[#c9a96e]">{count}</p>
+                  <p className="text-[10px] text-gray-500">{label}</p>
+                </div>
+              );
+            })}
+          </div>
+          {/* Parking utilization bar */}
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <p className="text-[11px] text-gray-400">Parking Utilization</p>
+              <p className="text-[11px] text-[#c9a96e] font-semibold">
+                {Math.min(Math.round((residentVehicles.length / Math.max(residentVehicles.length * 1.5, 1)) * 100), 100)}%
+              </p>
+            </div>
+            <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-[#b8942e] to-[#c9a96e] rounded-full transition-all duration-700"
+                style={{ width: `${Math.min(Math.round((residentVehicles.length / Math.max(residentVehicles.length * 1.5, 1)) * 100), 100)}%` }}
+              />
+            </div>
+            <p className="text-[10px] text-gray-600 mt-1">{residentVehicles.length} registered of estimated {Math.ceil(residentVehicles.length * 1.5)} capacity</p>
+          </div>
+        </div>
+      )}
+
       {(showRegister || showGuest) ? (
         <VehicleForm isGuest={showGuest} onClose={() => { setShowRegister(false); setShowGuest(false); }} />
       ) : isLoading ? (

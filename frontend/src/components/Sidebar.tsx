@@ -34,6 +34,7 @@ const NAV_SECTIONS = [
     label: 'Governance',
     items: [
       { href: '/proposals', label: 'Proposals', icon: Vote },
+      { href: '/governance/stats', label: 'Gov Stats', icon: BarChart3 },
       { href: '/treasury', label: 'Treasury', icon: Landmark },
       { href: '/documents', label: 'Documents', icon: FileText },
       { href: '/violations', label: 'Violations', icon: AlertTriangle },
@@ -42,11 +43,13 @@ const NAV_SECTIONS = [
   {
     label: 'Community',
     items: [
-      { href: '/community', label: 'Forum', icon: Users },
+      { href: '/community', label: 'Community', icon: Users },
+      { href: '/community/forum', label: 'Forum', icon: MessageCircle },
       { href: '/announcements', label: 'Announcements', icon: Megaphone },
       { href: '/community/leaderboard', label: 'Leaderboard', icon: Trophy },
       { href: '/calendar', label: 'Calendar', icon: Calendar },
       { href: '/directory', label: 'Directory', icon: BookOpen },
+      { href: '/emergency', label: 'Emergency', icon: AlertTriangle },
     ],
   },
   {
@@ -75,6 +78,7 @@ const UTILITY_ITEMS = [
   { href: '/alerts', label: 'Alerts', icon: Bell },
   { href: '/assistant', label: 'AI Assistant', icon: Bot },
   { href: '/admin', label: 'Admin', icon: Settings },
+  { href: '/settings/notifications', label: 'Notifications', icon: Bell },
   { href: '/profile', label: 'Profile', icon: User },
 ];
 

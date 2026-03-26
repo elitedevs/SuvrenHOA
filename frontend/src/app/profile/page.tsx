@@ -5,9 +5,11 @@ import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useProfile, useUpdateProfile } from '@/hooks/useProfile';
 import { useProperty } from '@/hooks/useProperty';
+import { useBadges } from '@/hooks/useBadges';
+import { useDuesStatus } from '@/hooks/useTreasury';
 
 export default function ProfilePage() {
-  const { isConnected, address } = useAccount();
+  const { isConnected } = useAccount();
 
   if (!isConnected) {
     return (
@@ -26,6 +28,7 @@ function ProfileForm() {
   const { profile, isLoading } = useProfile();
   const { tokenId, propertyInfo, votes } = useProperty();
   const updateProfile = useUpdateProfile();
+  const { isCurrent } = useDuesStatus(tokenId);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -33,7 +36,25 @@ function ProfileForm() {
   const [bio, setBio] = useState('');
   const [saved, setSaved] = useState(false);
 
-  // Populate from existing profile
+  // Badge inputs from localStorage
+  const voteCount = typeof window !== 'undefined'
+    ? parseInt(localStorage.getItem('voteCount') || '0', 10)
+    : 0;
+  const messageCount = typeof window !== 'undefined'
+    ? parseInt(localStorage.getItem('messageCount') || '0', 10)
+    : 0;
+  const documentCount = typeof window !== 'undefined'
+    ? parseInt(localStorage.getItem('documentCount') || '0', 10)
+    : 0;
+
+  const badges = useBadges({
+    tokenId: tokenId ?? undefined,
+    duesCurrents: isCurrent,
+    voteCount,
+    messageCount,
+    documentCount,
+  });
+
   useEffect(() => {
     if (profile) {
       setName(profile.display_name || '');
@@ -67,6 +88,8 @@ function ProfileForm() {
     return <div className="text-center py-12 text-gray-500">Loading profile...</div>;
   }
 
+  const earnedCount = badges.filter(b => b.earned).length;
+
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <h1 className="text-2xl sm:text-3xl font-bold mb-2">Your Profile</h1>
@@ -94,6 +117,46 @@ function ProfileForm() {
             <p className="text-[10px] text-gray-500">Voting Power</p>
             <p className="text-xs text-[#c9a96e] font-bold">{votes} vote{votes !== 1 ? 's' : ''}</p>
           </div>
+        </div>
+      </div>
+
+      {/* ── Achievements / Badges ── */}
+      <div className="glass-card rounded-2xl p-6 mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Resident Achievements</h3>
+            <p className="text-[10px] text-gray-500 mt-0.5">{earnedCount} of {badges.length} earned</p>
+          </div>
+          <div className="px-3 py-1 rounded-full bg-[#c9a96e]/10 border border-[#c9a96e]/20">
+            <span className="text-xs font-bold text-[#c9a96e]">{earnedCount}/{badges.length}</span>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {badges.map(badge => (
+            <div
+              key={badge.id}
+              className={`flex items-center gap-3 rounded-xl p-3 transition-all ${
+                badge.earned
+                  ? 'bg-[#c9a96e]/10 border border-[#c9a96e]/30 shadow-[0_0_12px_rgba(201,169,110,0.15)]'
+                  : 'bg-gray-800/40 border border-gray-700/40 opacity-40'
+              }`}
+            >
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0 ${
+                badge.earned
+                  ? 'bg-[#c9a96e]/20 shadow-[0_0_8px_rgba(201,169,110,0.3)]'
+                  : 'bg-gray-700/40'
+              }`}>
+                {badge.icon}
+              </div>
+              <div className="min-w-0">
+                <p className={`text-sm font-semibold truncate ${badge.earned ? 'text-[#e8d5a3]' : 'text-gray-500'}`}>
+                  {badge.name}
+                  {badge.earned && <span className="ml-1.5 text-[10px] text-[#c9a96e]">✓ Earned</span>}
+                </p>
+                <p className="text-[10px] text-gray-500 leading-tight">{badge.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
