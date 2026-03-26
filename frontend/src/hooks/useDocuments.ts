@@ -73,20 +73,28 @@ export function useDocument(docId: number) {
     query: { enabled: docId >= 0 },
   });
 
-  const doc = data as [string, bigint, bigint, number, string, string, string, string] | undefined;
+  let parsed: OnChainDocument | undefined;
+  try {
+    if (data && Array.isArray(data) && data.length >= 8) {
+      const doc = data as [string, bigint, bigint, number, string, string, string, string];
+      parsed = {
+        contentHash: doc[0] ?? '',
+        timestamp: Number(doc[1] ?? 0),
+        supersedes: Number(doc[2] ?? 0),
+        docType: Number(doc[3] ?? 0),
+        uploadedBy: doc[4] ?? '0x0',
+        arweaveTxId: doc[5] ?? '',
+        ipfsCid: doc[6] ?? '',
+        title: doc[7] ?? 'Untitled',
+      };
+    }
+  } catch {
+    parsed = undefined;
+  }
 
   return {
     isLoading,
-    document: doc ? {
-      contentHash: doc[0],
-      timestamp: Number(doc[1]),
-      supersedes: Number(doc[2]),
-      docType: doc[3],
-      uploadedBy: doc[4],
-      arweaveTxId: doc[5],
-      ipfsCid: doc[6],
-      title: doc[7],
-    } as OnChainDocument : undefined,
+    document: parsed,
   };
 }
 
