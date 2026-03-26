@@ -708,8 +708,153 @@ function OnboardingWizard() {
   );
 }
 
+// ── Move-In/Move-Out Checklist ─────────────────────────────────────────────
+
+interface ChecklistItem {
+  id: string;
+  label: string;
+  description: string;
+  category: 'move-in' | 'move-out' | 'both';
+  required: boolean;
+}
+
+const CHECKLIST_ITEMS: ChecklistItem[] = [
+  { id: 'keys', label: 'Key Pickup', description: 'Collect property keys, mailbox key, and community access fobs from prior owner or management.', category: 'move-in', required: true },
+  { id: 'parking', label: 'Parking Assignment', description: 'Register your assigned parking spot(s) with the HOA management office. Update vehicle registration.', category: 'move-in', required: true },
+  { id: 'pets', label: 'Pet Registration', description: 'Register all pets in the HOA portal. Provide vaccination records and photos.', category: 'both', required: false },
+  { id: 'vehicles', label: 'Vehicle Registration', description: 'Register all vehicles (make, model, plate) in the HOA portal for parking enforcement.', category: 'both', required: true },
+  { id: 'emergency', label: 'Emergency Contacts', description: 'Add emergency contact information to your profile — at least two contacts with phone numbers.', category: 'both', required: true },
+  { id: 'utilities', label: 'Utility Transfers', description: 'Transfer electric, gas, water, and internet accounts to your name. Contact utility providers.', category: 'move-in', required: true },
+  { id: 'mailbox', label: 'Mailbox Setup', description: 'Obtain mailbox number and key. Set up mail forwarding if moving from previous address.', category: 'move-in', required: true },
+  { id: 'rules', label: 'Community Rules Acknowledgment', description: 'Read and acknowledge receipt of CC&Rs, HOA Rules & Regulations, and Welcome Packet.', category: 'move-in', required: true },
+  { id: 'insurance', label: 'Homeowner\'s Insurance', description: 'Provide proof of homeowner\'s insurance to management. Minimum coverage requirements apply.', category: 'both', required: true },
+  { id: 'directory', label: 'Community Directory', description: 'Add yourself to the community directory. Set display preferences for contact sharing.', category: 'move-in', required: false },
+  { id: 'inspection', label: 'Move-Out Inspection', description: 'Schedule and complete a move-out inspection with property management at least 7 days prior to departure.', category: 'move-out', required: true },
+  { id: 'dues', label: 'Dues Balance Clearance', description: 'Ensure all HOA dues, assessments, and fines are paid in full before transfer of title.', category: 'move-out', required: true },
+  { id: 'access-return', label: 'Return Access Credentials', description: 'Return all keys, fobs, and access cards to HOA management. Security codes will be reset.', category: 'move-out', required: true },
+];
+
+const LS_CHECKLIST = 'suvren_checklist_completed';
+
+function loadChecked(): Set<string> {
+  if (typeof window === 'undefined') return new Set();
+  try { return new Set(JSON.parse(localStorage.getItem(LS_CHECKLIST) || '[]')); }
+  catch { return new Set(); }
+}
+
+function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
+  const [checked, setChecked] = useState<Set<string>>(new Set());
+
+  useEffect(() => { setChecked(loadChecked()); }, []);
+
+  const toggle = (id: string) => {
+    const next = new Set(checked);
+    next.has(id) ? next.delete(id) : next.add(id);
+    localStorage.setItem(LS_CHECKLIST, JSON.stringify([...next]));
+    setChecked(next);
+  };
+
+  const filtered = CHECKLIST_ITEMS.filter(i => i.category === mode || i.category === 'both');
+  const required = filtered.filter(i => i.required);
+  const optional = filtered.filter(i => !i.required);
+  const completedRequired = required.filter(i => checked.has(i.id)).length;
+  const totalRequired = required.length;
+  const pct = totalRequired > 0 ? Math.round((completedRequired / totalRequired) * 100) : 0;
+  const totalDone = filtered.filter(i => checked.has(i.id)).length;
+
+  return (
+    <div className="space-y-6">
+      {/* Progress */}
+      <div className="glass-card rounded-xl p-5">
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <h3 className="font-semibold text-[#e8d5a3]">
+              {mode === 'move-in' ? '🏡 Move-In Checklist' : '📦 Move-Out Checklist'}
+            </h3>
+            <p className="text-xs text-gray-400">{completedRequired} of {totalRequired} required tasks complete</p>
+          </div>
+          <div className="text-right">
+            <div className={`text-2xl font-bold ${pct === 100 ? 'text-green-400' : pct >= 60 ? 'text-[#c9a96e]' : 'text-gray-300'}`}>
+              {pct}%
+            </div>
+            <div className="text-[10px] text-gray-500">Complete</div>
+          </div>
+        </div>
+        <div className="h-2.5 rounded-full bg-gray-800 overflow-hidden">
+          <div
+            className="h-full rounded-full transition-all duration-500"
+            style={{
+              width: `${pct}%`,
+              background: pct === 100 ? '#22c55e' : 'linear-gradient(90deg, #b8942e, #c9a96e)',
+            }}
+          />
+        </div>
+        {pct === 100 && (
+          <p className="text-xs text-green-400 mt-2">🎉 All required tasks complete!</p>
+        )}
+      </div>
+
+      {/* Required tasks */}
+      <div>
+        <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">Required ({completedRequired}/{totalRequired})</h4>
+        <div className="space-y-2">
+          {required.map(item => (
+            <ChecklistRow key={item.id} item={item} checked={checked.has(item.id)} onToggle={() => toggle(item.id)} />
+          ))}
+        </div>
+      </div>
+
+      {optional.length > 0 && (
+        <div>
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">Optional</h4>
+          <div className="space-y-2">
+            {optional.map(item => (
+              <ChecklistRow key={item.id} item={item} checked={checked.has(item.id)} onToggle={() => toggle(item.id)} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ChecklistRow({ item, checked, onToggle }: { item: ChecklistItem; checked: boolean; onToggle: () => void }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className={`glass-card rounded-xl overflow-hidden transition-all ${checked ? 'opacity-60' : ''}`}>
+      <div className="p-4 flex items-start gap-3">
+        <button
+          onClick={onToggle}
+          className={`mt-0.5 w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-all ${
+            checked ? 'bg-[#c9a96e] border-[#c9a96e] text-[#1a1a1a]' : 'border-gray-600 hover:border-[#c9a96e]/50'
+          }`}
+        >
+          {checked && <span className="text-[10px] font-bold">✓</span>}
+        </button>
+        <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setExpanded(!expanded)}>
+          <div className="flex items-center gap-2">
+            <span className={`text-sm font-medium ${checked ? 'line-through text-gray-500' : 'text-gray-200'}`}>
+              {item.label}
+            </span>
+            {item.required && !checked && (
+              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20">Required</span>
+            )}
+          </div>
+          {expanded && (
+            <p className="text-xs text-gray-400 mt-2 leading-relaxed">{item.description}</p>
+          )}
+        </div>
+        <button onClick={() => setExpanded(!expanded)} className="text-gray-600 text-xs shrink-0">
+          {expanded ? '▲' : '▾'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function OnboardingPage() {
   const { isConnected } = useAccount();
+  const [view, setView] = useState<'wizard' | 'checklist-in' | 'checklist-out'>('wizard');
 
   if (!isConnected) {
     return (
@@ -722,5 +867,37 @@ export default function OnboardingPage() {
     );
   }
 
-  return <OnboardingWizard />;
+  return (
+    <div>
+      {/* View switcher */}
+      <div className="max-w-3xl mx-auto px-4 pt-6 sm:pt-8">
+        <div className="flex gap-2 mb-6">
+          <button onClick={() => setView('wizard')}
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+            🧭 Setup Wizard
+          </button>
+          <button onClick={() => setView('checklist-in')}
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+            🏡 Move-In Checklist
+          </button>
+          <button onClick={() => setView('checklist-out')}
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+            📦 Move-Out Checklist
+          </button>
+        </div>
+      </div>
+
+      {view === 'wizard' ? (
+        <OnboardingWizard />
+      ) : view === 'checklist-in' ? (
+        <div className="max-w-3xl mx-auto px-4 pb-8">
+          <MoveChecklist mode="move-in" />
+        </div>
+      ) : (
+        <div className="max-w-3xl mx-auto px-4 pb-8">
+          <MoveChecklist mode="move-out" />
+        </div>
+      )}
+    </div>
+  );
 }

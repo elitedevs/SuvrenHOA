@@ -12,6 +12,7 @@ import {
   CreditCard, Hammer, CalendarCheck, PenTool, BarChart3,
   Eye, Map, Heart, MessageCircle, Bell, Bot, Settings,
   User, ChevronLeft, ChevronRight, Menu, X, LogOut,
+  Waves, Wrench, Shield, BookMarked, Receipt, FileBarChart2, ClipboardList,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -57,9 +58,20 @@ const NAV_SECTIONS = [
     items: [
       { href: '/dues', label: 'Pay Dues', icon: CreditCard },
       { href: '/maintenance', label: 'Maintenance', icon: Hammer },
-      { href: '/reservations', label: 'Amenities', icon: CalendarCheck },
+      { href: '/amenities', label: 'Amenity Booking', icon: Waves },
+      { href: '/reservations', label: 'Reservations', icon: CalendarCheck },
+      { href: '/contractors', label: 'Contractors', icon: Wrench },
       { href: '/architectural', label: 'Arch Review', icon: PenTool },
       { href: '/surveys', label: 'Surveys', icon: BarChart3 },
+      { href: '/treasury/reimbursement', label: 'Reimbursement', icon: Receipt },
+    ],
+  },
+  {
+    label: 'Community+',
+    items: [
+      { href: '/safety', label: 'Safety Watch', icon: Shield },
+      { href: '/rules', label: 'Rules & FAQ', icon: BookMarked },
+      { href: '/reports/annual', label: 'Annual Report', icon: FileBarChart2 },
     ],
   },
   {

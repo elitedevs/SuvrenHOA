@@ -1,10 +1,143 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useProperty } from '@/hooks/useProperty';
+
+// ── Appeal System ─────────────────────────────────────────────────────────────
+interface AppealRecord {
+  id: string;
+  violationId: string;
+  reason: string;
+  evidence: string;
+  desiredResolution: string;
+  submittedAt: string;
+  status: 'submitted' | 'under-review' | 'approved' | 'denied';
+}
+
+const APPEALS_LS_KEY = 'suvren_violation_appeals';
+
+function loadAppeals(): AppealRecord[] {
+  if (typeof window === 'undefined') return [];
+  try { return JSON.parse(localStorage.getItem(APPEALS_LS_KEY) || '[]'); }
+  catch { return []; }
+}
+
+function saveAppeals(appeals: AppealRecord[]) {
+  localStorage.setItem(APPEALS_LS_KEY, JSON.stringify(appeals));
+}
+
+function AppealModal({ violation, onClose }: { violation: any; onClose: () => void }) {
+  const [reason, setReason] = useState('');
+  const [evidence, setEvidence] = useState('');
+  const [desiredResolution, setDesiredResolution] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [existingAppeal, setExistingAppeal] = useState<AppealRecord | null>(null);
+
+  useEffect(() => {
+    const appeals = loadAppeals();
+    const existing = appeals.find(a => a.violationId === violation.id);
+    if (existing) setExistingAppeal(existing);
+  }, [violation.id]);
+
+  const APPEAL_STATUS_STYLES = {
+    submitted: 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20',
+    'under-review': 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+    approved: 'text-green-400 bg-green-500/10 border-green-500/20',
+    denied: 'text-red-400 bg-red-500/10 border-red-500/20',
+  };
+
+  const handleSubmit = () => {
+    if (!reason.trim() || !desiredResolution.trim()) return;
+    const appeal: AppealRecord = {
+      id: crypto.randomUUID(),
+      violationId: violation.id,
+      reason,
+      evidence,
+      desiredResolution,
+      submittedAt: new Date().toISOString(),
+      status: 'submitted',
+    };
+    const updated = [...loadAppeals(), appeal];
+    saveAppeals(updated);
+    setExistingAppeal(appeal);
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative glass-card rounded-2xl p-6 w-full max-w-lg space-y-4 shadow-2xl border border-[#c9a96e]/20">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">⚖️ Appeal Violation</h2>
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-300 text-xl">✕</button>
+        </div>
+
+        <div className="p-3 rounded-xl bg-gray-800/40 text-xs text-gray-400 space-y-1">
+          <p className="font-medium text-gray-200">{violation.title}</p>
+          <p className="font-mono text-gray-500">{violation.violation_number}</p>
+        </div>
+
+        {existingAppeal ? (
+          <div className="space-y-3">
+            <div className={`inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border font-medium ${APPEAL_STATUS_STYLES[existingAppeal.status]}`}>
+              {existingAppeal.status === 'submitted' ? '📋 Appeal Submitted' :
+               existingAppeal.status === 'under-review' ? '🔍 Under Review' :
+               existingAppeal.status === 'approved' ? '✅ Appeal Approved' : '❌ Appeal Denied'}
+            </div>
+            <p className="text-xs text-gray-400">Submitted {new Date(existingAppeal.submittedAt).toLocaleDateString()}</p>
+            <div className="space-y-2 text-xs text-gray-400">
+              <div><span className="text-gray-300 font-medium">Reason:</span> {existingAppeal.reason}</div>
+              {existingAppeal.evidence && <div><span className="text-gray-300 font-medium">Evidence:</span> {existingAppeal.evidence}</div>}
+              <div><span className="text-gray-300 font-medium">Desired Resolution:</span> {existingAppeal.desiredResolution}</div>
+            </div>
+            <button onClick={onClose} className="w-full py-2.5 rounded-xl bg-gray-800 text-sm font-medium hover:bg-gray-700 transition-colors">Close</button>
+          </div>
+        ) : submitted ? (
+          <div className="text-center py-6 space-y-3">
+            <div className="text-4xl">✅</div>
+            <h3 className="font-semibold">Appeal Submitted</h3>
+            <p className="text-sm text-gray-400">Your appeal has been logged. The board will review within 5 business days.</p>
+            <button onClick={onClose} className="px-6 py-2.5 rounded-xl bg-[#c9a96e] text-[#1a1a1a] text-sm font-medium">Done</button>
+          </div>
+        ) : (
+          <>
+            <div>
+              <label className="block text-sm text-gray-400 mb-2">Reason for Appeal *</label>
+              <textarea value={reason} onChange={e => setReason(e.target.value)}
+                placeholder="Explain why you believe this violation was issued in error or should be dismissed..."
+                rows={3} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
+            </div>
+
+            <div>
+              <label className="block text-sm text-gray-400 mb-2">Supporting Evidence (optional)</label>
+              <textarea value={evidence} onChange={e => setEvidence(e.target.value)}
+                placeholder="Describe any photos, documents, timestamps, or witness accounts that support your appeal..."
+                rows={3} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
+            </div>
+
+            <div>
+              <label className="block text-sm text-gray-400 mb-2">Desired Resolution *</label>
+              <textarea value={desiredResolution} onChange={e => setDesiredResolution(e.target.value)}
+                placeholder="What outcome are you seeking? (e.g., dismissal of violation, removal of fine, extended cure period...)"
+                rows={2} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
+            </div>
+
+            <div className="flex gap-3 pt-1">
+              <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+              <button onClick={handleSubmit} disabled={!reason.trim() || !desiredResolution.trim()}
+                className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+                Submit Appeal
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
 
 const CATEGORIES = [
   { id: 'architectural', label: 'Architectural', icon: '🏗️' },
@@ -162,6 +295,10 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
 
 function ViolationCard({ violation }: { violation: any }) {
   const [expanded, setExpanded] = useState(false);
+  const [showAppeal, setShowAppeal] = useState(false);
+  const appeals = typeof window !== 'undefined' ? loadAppeals() : [];
+  const hasAppeal = appeals.some(a => a.violationId === violation.id);
+  const appealRecord = appeals.find(a => a.violationId === violation.id);
   const statusInfo = STATUS_FLOW[violation.status as keyof typeof STATUS_FLOW] || { color: 'gray', label: violation.status };
   const cat = CATEGORIES.find(c => c.id === violation.category);
   const updates = violation.hoa_violation_updates || [];
@@ -259,9 +396,32 @@ function ViolationCard({ violation }: { violation: any }) {
                 🗳️ Appeal to Community
               </button>
             )}
+
+            {/* Appeal button - always available for active violations */}
+            {!['dismissed', 'resolved', 'closed', 'appeal-upheld', 'appeal-overturned'].includes(violation.status) && (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={(e) => { e.stopPropagation(); setShowAppeal(true); }}
+                  className="px-3 py-1.5 rounded-lg bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-xs text-[#c9a96e] hover:bg-[#c9a96e]/20"
+                >
+                  ⚖️ File Appeal
+                </button>
+                {hasAppeal && (
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
+                    appealRecord?.status === 'approved' ? 'text-green-400 bg-green-500/10 border-green-500/20' :
+                    appealRecord?.status === 'denied' ? 'text-red-400 bg-red-500/10 border-red-500/20' :
+                    appealRecord?.status === 'under-review' ? 'text-blue-400 bg-blue-500/10 border-blue-500/20' :
+                    'text-yellow-400 bg-yellow-500/10 border-yellow-500/20'
+                  }`}>
+                    Appeal: {appealRecord?.status}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>
+      {showAppeal && <AppealModal violation={violation} onClose={() => setShowAppeal(false)} />}
     </div>
   );
 }
