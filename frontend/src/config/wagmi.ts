@@ -8,24 +8,12 @@ export const config = getDefaultConfig({
   chains: [baseSepolia, base],
   transports: {
     [baseSepolia.id]: fallback([
-      http('https://sepolia.base.org', {
-        batch: { batchSize: 50, wait: 50 },
-        retryCount: 3,
-        retryDelay: 1000,
-      }),
-      http('https://base-sepolia-rpc.publicnode.com', {
-        batch: { batchSize: 50, wait: 50 },
-        retryCount: 3,
-        retryDelay: 1000,
-      }),
+      http('https://base-sepolia-rpc.publicnode.com'),
+      http('https://sepolia.base.org'),
     ]),
     [base.id]: fallback([
-      http('https://mainnet.base.org', {
-        batch: { batchSize: 50, wait: 50 },
-      }),
-      http('https://base-rpc.publicnode.com', {
-        batch: { batchSize: 50, wait: 50 },
-      }),
+      http('https://base-rpc.publicnode.com'),
+      http('https://mainnet.base.org'),
     ]),
   },
   ssr: true,
