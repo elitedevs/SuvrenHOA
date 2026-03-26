@@ -30,7 +30,7 @@ const STATE_STYLES: Record<string, { color: string; bg: string; border: string }
 
 export default function ProposalDetailPage() {
   const params = useParams();
-  const proposalId = params.id ? BigInt(params.id as string) : undefined;
+  const proposalId = params.id && /^\d+$/.test(params.id as string) ? BigInt(params.id as string) : undefined;
   const { isConnected } = useAccount();
 
   if (!isConnected) {

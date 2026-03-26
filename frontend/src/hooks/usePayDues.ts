@@ -46,7 +46,7 @@ export function usePayDues() {
     writePayDues({
       ...treasury,
       functionName: 'payDues',
-      args: [BigInt(tokenId), BigInt(quarters)],
+      args: [BigInt(tokenId ?? 0), BigInt(quarters ?? 0)],
     });
   };
 

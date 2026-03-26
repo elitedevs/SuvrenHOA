@@ -67,7 +67,7 @@ function MintPropertyCard() {
       functionName: 'mintProperty',
       args: [
         owner as `0x${string}`,
-        BigInt(lotNumber),
+        BigInt(lotNumber || 0),
         streetAddress,
         BigInt(sqft || '0'),
       ],
@@ -389,7 +389,7 @@ function CommunityStats() {
               style={{ width: `${fillPct}%` }}
             />
           </div>
-          <p className="text-xs text-gray-600 mt-1">{totalSupply} of 150 lots minted</p>
+          <p className="text-xs text-gray-600 mt-1">{totalSupply} lots minted on-chain</p>
         </div>
       </div>
     </div>

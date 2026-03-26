@@ -54,7 +54,7 @@ ARTICLE IV — USE RESTRICTIONS
 
 ARTICLE II — MEMBERSHIP
 2.1 Every Owner of a Lot shall be a Member of the Association.
-2.2 Membership shall be represented by a non-transferable NFT on the Polygon blockchain.
+2.2 Membership shall be represented by a non-transferable NFT on the Base blockchain.
 2.3 Annual dues shall be assessed at $2,100 per Lot per year.
 2.4 Dues are due on January 1st of each calendar year.
 2.5 All votes shall be conducted via on-chain governance mechanisms.

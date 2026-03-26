@@ -32,12 +32,12 @@ const RESULT_CONFIG: Record<InspectionResult, { label: string; icon: React.Eleme
 const TYPE_LABELS = { annual: 'Annual', quarterly: 'Quarterly', 'follow-up': 'Follow-Up' };
 
 const DEMO_INSPECTIONS: Inspection[] = [
-  { id: '1', lot: '42', address: '42 Maple Drive', scheduledDate: '2026-04-15', type: 'annual', result: 'pending', notes: '', inspector: 'Board Committee', completedAt: undefined },
-  { id: '2', lot: '42', address: '42 Maple Drive', scheduledDate: '2025-10-10', type: 'annual', result: 'pass', notes: 'Property in excellent condition. Lawn well-maintained, no exterior issues noted.', inspector: 'Board Committee', completedAt: '2025-10-10' },
+  { id: '1', lot: '8', address: '8 Maple Drive', scheduledDate: '2026-04-15', type: 'annual', result: 'pending', notes: '', inspector: 'Board Committee', completedAt: undefined },
+  { id: '2', lot: '8', address: '8 Maple Drive', scheduledDate: '2025-10-10', type: 'annual', result: 'pass', notes: 'Property in excellent condition. Lawn well-maintained, no exterior issues noted.', inspector: 'Board Committee', completedAt: '2025-10-10' },
   { id: '3', lot: '17', address: '17 Oak Avenue', scheduledDate: '2026-04-15', type: 'annual', result: 'pending', notes: '', inspector: 'Board Committee' },
   { id: '4', lot: '17', address: '17 Oak Avenue', scheduledDate: '2025-10-10', type: 'annual', result: 'needs-attention', notes: 'Paint peeling on south fence. Please remedy within 60 days.', inspector: 'Board Committee', completedAt: '2025-10-10' },
-  { id: '5', lot: '88', address: '88 South Gate Rd', scheduledDate: '2026-01-15', type: 'quarterly', result: 'violation', notes: 'Unauthorized shed constructed without architectural approval. Removal or retroactive approval required.', inspector: 'Board Committee', completedAt: '2026-01-15' },
-  { id: '6', lot: '34', address: '34 North Creek Dr', scheduledDate: '2026-04-15', type: 'annual', result: 'pending', notes: '', inspector: 'Board Committee' },
+  { id: '5', lot: '15', address: '15 South Gate Rd', scheduledDate: '2026-01-15', type: 'quarterly', result: 'violation', notes: 'Unauthorized shed constructed without architectural approval. Removal or retroactive approval required.', inspector: 'Board Committee', completedAt: '2026-01-15' },
+  { id: '6', lot: '6', address: '6 North Creek Dr', scheduledDate: '2026-04-15', type: 'annual', result: 'pending', notes: '', inspector: 'Board Committee' },
 ];
 
 const MY_LOT = '42';

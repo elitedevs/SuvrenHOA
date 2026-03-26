@@ -47,7 +47,7 @@ const PRIORITY_STYLES = {
 // LocalStorage for read state and pinned
 const LS_READ = 'suvren_read_announcements';
 const LS_PINNED = 'suvren_pinned_announcements';
-const TOTAL_RESIDENTS = 150;
+const TOTAL_RESIDENTS = 16;
 
 function getReadSet(): Set<string> {
   if (typeof window === 'undefined') return new Set();

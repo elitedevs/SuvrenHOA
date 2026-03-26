@@ -1,649 +1,450 @@
 # SuvrenHOA — 100 Frequently Asked Questions
 
-> **A friendly guide for skeptical homeowners.** These answers are written for real people, not developers. If something is still unclear after reading, bring it up at the next community meeting — that's exactly why we have them.
+> **Last updated:** March 2026  
+> SuvrenHOA is blockchain-powered HOA governance built on Base (an Ethereum Layer 2 network). It uses soulbound NFTs to represent property ownership, a 4-tier voting system, a smart contract treasury, permanent document storage on Arweave, and USDC for dues payments — all while staying compliant with NCGS Chapter 47F (North Carolina's Planned Community Act). Transaction fees are typically less than $0.01.
 
 ---
 
-## 🔒 Trust & Security (Questions 1–10)
+## 🔐 Trust & Security
+
+**1. Who controls the smart contracts?**
+
+No single person does — that's the whole point. The smart contracts that run SuvrenHOA are deployed on the Base blockchain, and once deployed, they execute exactly as written without anyone being able to override them secretly. The board can interact with them only within the rules baked into the code, like submitting proposals or executing approved treasury payments. Any change to the rules requires a homeowner vote, not a board decision. Think of it like bylaws that enforce themselves.
+
+**2. If I lose wallet access, do I lose everything?**
+
+Losing your wallet is serious, but it's not the end of the world — we built recovery into the system. Your property NFT is tied to your wallet address, but the HOA can verify your identity and work with you through an on-chain recovery process if you lose access. The most important thing you can do right now is back up your seed phrase (the 12 or 24 words MetaMask gave you when you set up your wallet) somewhere safe and offline — a piece of paper in a fireproof box works great. Never store it in a photo, text message, or email. If you're ever worried, contact the board before disaster strikes so we can document your ownership separately.
+
+**3. What if someone hacks the contracts?**
+
+Blockchain smart contracts can't be "hacked" the same way a website or database can — there's no server to break into. The code lives on thousands of computers simultaneously. That said, bugs in the contract code are a real risk, which is why audits matter (see Q4). If a critical vulnerability were discovered, the multi-sig governance structure (see Q6) would allow the board to pause certain functions while the community votes on a fix. No system is 100% bulletproof, but blockchain contracts are among the most scrutinized and transparent codebases out there.
+
+**4. Are contracts audited?**
+
+Yes. Before going live on mainnet, all SuvrenHOA smart contracts are audited by an independent third-party security firm. Audit reports are publicly available and stored permanently on Arweave (our document storage system) so anyone can verify them. The audit checks for common vulnerabilities like re-entrancy attacks, integer overflows, and unauthorized access patterns. We also ran extensive testing on Base Sepolia (the testnet) before touching real funds. Security isn't a checkbox for us — it's ongoing.
+
+**5. Can the board mint fake NFTs?**
+
+No. The smart contract is programmed so that only one property NFT can exist per lot, and it can only be minted when linked to a verified property record. The board doesn't have a magic "create NFT" button they can press anytime — the minting process requires specific inputs that are checked on-chain. Every NFT creation is visible to everyone on the blockchain, so any attempt to create unauthorized ones would be immediately obvious and publicly recorded forever.
+
+**6. What stops the board from draining the treasury?**
+
+Math and code, not just trust. The treasury is controlled by a multi-signature wallet, meaning multiple board members must approve any transaction — no single person can move funds alone. Beyond that, the smart contract enforces spending limits: routine payments within the approved budget can go through with standard approval, but anything above a threshold requires a full homeowner vote. Every transaction is recorded on the public blockchain, so every dollar in and out is visible to every resident. There's no back door.
+
+**7. Is my wallet address public on the blockchain?**
+
+Yes, wallet addresses are public on the blockchain — but your address doesn't automatically reveal your name or where you live. It's more like a pseudonym: "0x1a2b3c..." is visible, but connecting that to "Jane Smith at 123 Maple Lane" requires additional information. Within SuvrenHOA, your property NFT does link your address to your lot number, so neighbors who know how to read the blockchain could make that connection. We keep personal details like your full name and mailing address off-chain in a private HOA database that's not publicly accessible.
+
+**8. Can neighbors see my votes?**
+
+It depends on the vote type. Blockchain votes are by default pseudonymous — your wallet address is recorded, but not your name. Most homeowners won't take the time to connect wallet addresses to property owners. For highly sensitive votes, the system can be configured to use commit-reveal schemes where votes are sealed during the voting period and only revealed after it closes, preventing any last-minute bandwagon effect. The board can see aggregated results in real-time, but individual vote attribution requires deliberate effort to trace.
+
+**9. What if a hacker gets my private key?**
+
+If someone gets your private key or seed phrase, they have full access to your wallet — full stop. This is the biggest individual security risk in any crypto system. You should treat your seed phrase like cash: don't share it, don't type it into websites, don't store it digitally. If you suspect your wallet is compromised, contact the HOA immediately so we can flag your property NFT and initiate the recovery/transfer process before the attacker can do anything irreversible. Going forward, consider using a hardware wallet (like a Ledger) which keeps your private key offline even when you're interacting with the internet.
+
+**10. Is there insurance for stolen funds?**
+
+HOA treasury funds held in USDC in the smart contract are not FDIC insured (that's for bank accounts). However, we carry a separate crime/fidelity bond and directors & officers (D&O) insurance that covers certain losses, including theft by board members. Smart contract exploits are a newer category and coverage varies by policy — we'll always publish our current insurance coverage in the HOA documents on Arweave so you know exactly what's protected. We're also evaluating on-chain insurance protocols (like Nexus Mutual) as the technology matures.
 
 ---
 
-**1. Who controls the smart contracts? Can the board change the rules without my consent?**
+## 💰 Cost & Value
 
-That's one of the most important questions to ask — and the answer is designed to protect you. The governance rules are written directly into the smart contracts, and changing them requires a community vote that meets quorum. The board cannot unilaterally rewrite the rules; major changes go through the same proposal and voting process that every homeowner participates in. Think of the smart contracts like a Constitution that can only be amended by the community itself, not by a handful of board members in a closed meeting.
+**11. The dues are $0.35/month — what about gas fees?**
 
----
+Gas fees on Base (our blockchain network) are extremely low — typically less than $0.01 per transaction. So when you pay your monthly dues, you're paying $0.35 to the HOA treasury plus a fraction of a cent in gas to process the transaction. Compare that to traditional HOA management companies that charge $15–$50 per month per home in management fees, plus wire fees, check processing fees, and so on. The $0.35 is the actual community operating cost — not a management company's margin.
 
-**2. If I lose access to my wallet, do I lose my voting rights and property record?**
+**12. Who pays the gas fees?**
 
-Your concern is completely valid — wallet recovery is one of the trickiest parts of any blockchain system. The good news: we have a wallet recovery process tied to your verified property ownership. If you lose access, the board can initiate a reassignment process that links a new wallet to your property record. Your property NFT (the digital proof of ownership) doesn't disappear; it gets reconnected to your new wallet after identity verification, similar to how a bank reissues a lost debit card.
+For routine transactions like voting and viewing documents, the HOA subsidizes gas through a fee relay system — you don't pay anything extra. For dues payments, the gas fee comes out of your USDC balance and is so small (sub-penny) that it's essentially invisible. We built it this way intentionally because we didn't want the blockchain to feel like a toll booth. The total gas cost for all community transactions for a full year is less than what a traditional management company would charge in a single month.
 
----
+**13. What if gas fees spike?**
 
-**3. What happens if someone hacks the smart contracts?**
+Base is an Ethereum Layer 2 network, which means it's specifically designed to keep fees low — usually under a cent even during high-demand periods. During extreme Ethereum mainnet congestion, Base fees can tick up slightly, but we're talking pennies at most, not the $50+ gas fees you sometimes see on Ethereum mainnet. The smart contracts are also optimized to minimize gas consumption. If fees ever became a real burden, the community could vote to temporarily subsidize all transactions from the treasury.
 
-Smart contract security is taken seriously, which is why the contracts are designed with multiple safeguards: multi-signature treasury controls, time-locked large transactions, and community governance over any major changes. If a vulnerability were discovered, the multi-sig signers can pause treasury operations while a fix is developed. We'd be honest with you — no system is 100% unhackable, but the architecture is designed so that even a partial compromise can't silently drain everything without triggering alarms and requiring multiple party approvals.
+**14. Why should I trust crypto when Bitcoin crashes all the time?**
 
----
+SuvrenHOA doesn't use Bitcoin — we use USDC, which is a stablecoin. USDC is always worth exactly $1.00 because it's backed 1:1 by US dollars held in regulated financial institutions and audited monthly by major accounting firms. Your dues are $0.35 in USDC, which means $0.35, not "whatever crypto is doing today." The blockchain is just the infrastructure — like saying "why trust email when Twitter goes down?" They're different things. USDC stability is one of the core reasons we chose it over volatile crypto assets.
 
-**4. Are the contracts audited by a third party?**
+**15. What if Base (the blockchain) shuts down?**
 
-Currently, SuvrenHOA is deployed on Base Sepolia (the test network), so we're in the pre-production phase. Before mainnet launch, a third-party smart contract audit is planned — this is a non-negotiable step before real funds are managed on-chain. The audit reports will be made publicly available to the community so any homeowner can review the findings. We'll post those documents directly in the platform's document registry when they're complete.
+Base is maintained by Coinbase, one of the largest and most regulated crypto companies in the US, with billions in funding and a public company with regulatory obligations. It's also built on Ethereum, the world's most established smart contract platform, so even in a worst case scenario, the data and contracts could be migrated. More importantly, SuvrenHOA's documents are stored on Arweave (separately from Base), and all financial records are also maintained in traditional off-chain backups. If Base ever shut down, the community would have ample time and resources to migrate to another system.
 
----
+**16. How does the cost compare to hiring a management company?**
 
-**5. Can the board mint fake property NFTs and stuff ballot boxes?**
+A traditional HOA management company in the Raleigh area typically charges $15–$50 per home per month, plus additional fees for things like annual audits, meeting management, and document preparation. For a 50-home community, that's $9,000–$30,000 per year just in management fees. SuvrenHOA's infrastructure costs are a tiny fraction of that — most of the dues go directly to community operating expenses, not administrative overhead. The technology does the administration automatically.
 
-Great question, and the answer is no — by design. Each property NFT is tied to a unique lot in the community, and the minting process requires both a verified property record and multi-signature approval. You can't create a property NFT for 100 Fake Lane because there is no 100 Fake Lane in the registry. The total supply of property tokens is capped at the number of actual lots in Faircroft, and that list is publicly verifiable on-chain by anyone.
+**17. How much would it cost to switch back to traditional management?**
 
----
+Switching back is always an option — the community can vote to do so. The off-boarding cost would primarily be data migration (exporting records from Arweave and the blockchain into traditional formats) and whatever onboarding fee the new management company charges. There's no penalty or exit fee built into SuvrenHOA's contracts. The documents stored on Arweave are permanent and accessible forever, so you'd never lose historical records even after switching. We believe in making it easy to leave because we're confident you won't want to.
 
-**6. What stops a board member from draining the treasury?**
+**18. Do I need to buy cryptocurrency to participate?**
 
-The treasury is protected by a multi-signature requirement — meaning multiple authorized signers must approve any transaction above a threshold. No single board member has unilateral access to move funds. On top of that, large expenditures are subject to a time-lock (a waiting period before execution), giving the community a window to notice and challenge suspicious transactions. Every single transaction is also permanently recorded on-chain and visible to any homeowner at any time — there's no hiding it.
+For most things — voting, viewing documents, submitting requests — no, you don't need to hold any crypto. To pay dues, you'll need USDC (a dollar-pegged stablecoin), which you can get by converting regular dollars through a simple on-ramp within the app. We've integrated user-friendly options so you can fund your account with a bank transfer or debit card without having to visit a crypto exchange. Think of it like loading a prepaid card — you put dollars in and it converts automatically.
 
----
+**19. What's the actual total cost of ownership (TCO)?**
 
-**7. Is my home address publicly visible on the blockchain?**
+For a 50-home community over 5 years: traditional management runs approximately $45,000–$150,000 in management fees alone. SuvrenHOA's infrastructure, including initial setup, ongoing hosting, and all transaction fees, runs significantly less — the bulk of your dues actually fund community projects and reserves, not administrative overhead. We publish a full cost breakdown annually in the HOA documents so you can see exactly where every dollar goes. The savings compound over time as the community grows and the fixed infrastructure costs stay flat.
 
-Your lot number and property NFT are on the blockchain, but your full street address is not stored on-chain by default. The platform maps lot numbers to addresses internally, and that mapping is kept in the platform's database rather than published publicly on the blockchain. Anyone looking at the raw blockchain data would see "Lot #7" not "123 Main Street, Raleigh, NC." Full address details are only accessible to authenticated community members and board administrators.
+**20. Why not just use a spreadsheet and Google Drive?**
 
----
-
-**8. Can my neighbors see how I voted?**
-
-No — votes are recorded on-chain in a way that preserves your privacy. What's publicly visible is the final tally (how many votes for, how many against), not who voted which way. Your wallet address is associated with your vote in the contract, but since your wallet address isn't publicly connected to your name or address (see Q7), your individual vote stays private to all practical purposes. Think of it like a paper ballot — counted publicly, cast privately.
+Spreadsheets and Google Drive are controlled by whoever has the login credentials — meaning records can be edited, deleted, or lost without any trail. A fired board member could delete three years of financial records in seconds. With SuvrenHOA, every document and transaction is permanently and publicly recorded on the blockchain and Arweave in a way that nobody — not even the board — can retroactively alter. It's also not just storage: the voting, dues collection, and governance all happen automatically through the contracts, eliminating the human error and politics that plague traditionally managed HOAs.
 
 ---
 
-**9. What if a hacker gets my private key — can they vote on my behalf?**
+## 🖥️ Usability
 
-Unfortunately, yes — this is the core risk of any crypto wallet, and we don't want to sugarcoat it. If someone has your private key, they control your wallet. This is exactly why we strongly recommend using a hardware wallet (like a Ledger) for your property NFT, enabling two-factor authentication on any associated accounts, and never sharing your seed phrase with anyone. We also recommend reporting any suspected compromise to the board immediately so the property NFT can be flagged and a reassignment process initiated before any damage is done.
+**21. My 70-year-old neighbor can barely use email — how is this supposed to work?**
 
----
+Fair concern, and we thought about this a lot. The SuvrenHOA app is designed to look and feel like a normal website — you log in, you see your property info, you can pay dues and vote with a few clicks. The blockchain stuff happens in the background. For residents who genuinely can't or don't want to engage with the tech, we have a paper-based accommodation process where a designated HOA representative can assist them. Nobody gets disenfranchised because of a technology gap — that would defeat the whole purpose.
 
-**10. Is there insurance if funds are stolen from the treasury?**
+**22. What's a wallet?**
 
-Traditional FDIC insurance doesn't apply to crypto wallets — that's a real limitation we want to be upfront about. The treasury's protections are structural (multi-sig, time-locks, on-chain transparency) rather than insurance-based. As the platform matures, we'll explore whether crypto-native insurance products (like those offered by Nexus Mutual or similar DeFi protocols) make sense for the community. This is an active area of development in the broader blockchain space, and we'll keep the community informed as options become available.
+A wallet is basically your account on the blockchain — it's software (like the MetaMask browser extension) that holds a cryptographic key unique to you. That key proves you're you without needing a username or password that a company stores. Think of it as a digital identity badge that you control completely, rather than one that lives on Facebook's servers. You use it to sign transactions — like a digital signature on a check — and it never leaves your device. The wallet doesn't actually "hold" your money the way a physical wallet does; your assets live on the blockchain and your wallet is just the key to access them.
 
----
+**23. What does "Base Sepolia" mean?**
 
-## 💰 Cost & Value (Questions 11–20)
+Base Sepolia is the test version of the Base blockchain — "Sepolia" is the name of the test network (testnet), and "Base" is the main network we run on. It's like a sandbox where developers can test things with fake money before using real money on the actual network. If you're seeing "Base Sepolia" in the app, it means you might be on the wrong network — you should be on "Base Mainnet" for real transactions. It's an easy fix: MetaMask will prompt you to switch networks and it takes one click.
 
----
+**24. MetaMask asked me to switch networks and I panicked — what should I do?**
 
-**11. You say $0.35/month — what about gas fees when I actually DO something?**
+Don't worry — that's actually normal and expected! When you first connect to SuvrenHOA, MetaMask will ask permission to switch your browser to the Base network. This is safe to approve. MetaMask is designed to ask permission before changing networks so you're never switched without consent. Just click "Switch Network" when prompted. If you're ever unsure whether a prompt is legitimate, you can close it, go directly to the SuvrenHOA website by typing the URL yourself, and reconnect from there.
 
-The $0.35/month figure reflects the infrastructure and storage costs, but you're right that on-chain actions (like submitting a vote or uploading a document) also have gas fees. On Base L2, those fees are typically less than $0.01 per transaction — often fractions of a cent. So even if you vote on 10 proposals in a month, you're probably spending a nickel total in gas. We're also exploring gas sponsorship models (called "meta-transactions") where the community treasury subsidizes those tiny fees entirely so residents never see them.
+**25. My MetaMask shows 0 ETH — do I need to buy Ethereum?**
 
----
+For most interactions on SuvrenHOA, no — you don't need ETH. Gas fees on Base are so low that the HOA covers them through a fee relay for things like voting. For paying dues, you need USDC (not ETH), which you can acquire through the in-app on-ramp using a bank account or debit card. Some small amount of ETH (literally fractions of a cent's worth) might technically be needed for certain transactions, but we've designed the system so this is handled for you. If you hit an error, contact the board before assuming you need to buy anything.
 
-**12. Who pays the gas for proposals, voting, document uploads?**
+**26. I registered my pet but nothing happened — is it broken?**
 
-Right now, the person initiating the action pays the (very small) gas fee from their wallet. For voting, that's you. For board-initiated proposals and official document uploads, that's the board's operational wallet, funded from the community budget. As we roll out gas sponsorship, the goal is that everyday residents will never need to hold ETH — the community treasury will cover routine transaction fees on your behalf, and you'll interact with the system just like a regular website.
+Pet registrations are recorded on-chain, which means they're confirmed when the transaction is processed on the blockchain — usually within a few seconds. If you submitted the registration and got a transaction confirmation, it worked — even if the app UI didn't refresh dramatically. Try refreshing the page or checking the "My Registrations" section. If you didn't get a transaction confirmation popup, the submission may not have gone through — try again. If issues persist, reach out to the board with your wallet address and we'll look up the transaction directly.
 
----
+**27. No documents are registered yet — where are the CC&Rs?**
 
-**13. What if ETH gas prices spike — does my $0.35 become $50?**
+We're in the process of migrating all existing HOA documents to Arweave (our permanent storage system). During this transition period, all governing documents (CC&Rs, bylaws, rules) are available through the traditional method — contact the board or check the existing shared folder link. Once documents are uploaded to Arweave, they'll appear in the Documents section of the app with a permanent, verifiable link. We're prioritizing the most frequently referenced documents first and will announce each upload in the community forum.
 
-This is a fair concern for Ethereum mainnet, but Base L2 specifically exists to solve this problem. Base uses Ethereum for security but processes transactions on a separate layer that's dramatically cheaper and more stable. Even during the biggest Ethereum gas spikes in history, Base transactions remained under a few cents. The architecture is specifically designed so that gas volatility on the main Ethereum network doesn't blow up your HOA fees.
+**28. I'm getting an "insufficient gas" error when paying dues — help!**
 
----
+This usually means your wallet doesn't have enough ETH to cover the tiny gas fee for the transaction. On Base, this is literally fractions of a penny — so if your ETH balance is zero, even that fraction matters. The easiest fix: use the in-app "top up gas" feature, which will add a tiny amount of ETH to your wallet (we're talking $0.10 worth) to cover fees. Alternatively, the board can switch you to the gasless payment route where dues are processed without requiring you to hold ETH. Just reach out and we'll get it sorted.
 
-**14. Why would I trust crypto for my HOA when Bitcoin crashes 50% randomly?**
+**29. My "Health Score" shows an F — what does that mean?**
 
-This is probably the most common misconception worth addressing directly: SuvrenHOA doesn't use Bitcoin, and your dues aren't invested in volatile crypto. Dues are paid and held in USDC, which is a stablecoin pegged 1:1 to the US dollar. $100 in USDC is worth $100 today, tomorrow, and next year — it doesn't fluctuate with the crypto market. The blockchain is just the infrastructure for governance and record-keeping, not an investment vehicle.
+The Health Score is a dashboard indicator that shows how complete and up-to-date your property profile is. An F usually means several things are missing — wallet not connected, dues not paid, no emergency contact on file, pet/vehicle not registered, etc. Click on the Health Score to see a checklist of exactly what's missing. It's not a judgment — it's just a nudge to make sure your record is complete so you don't miss anything important. Work through the checklist items one by one and it'll climb to an A quickly.
 
----
+**30. The app shows Lot #2 but that's not my address — is there a bug?**
 
-**15. We're on Base — what if Base shuts down or gets hacked?**
-
-Base is built and maintained by Coinbase, one of the largest and most regulated crypto companies in the US, and it's secured by the Ethereum network underneath it. A complete shutdown is extremely unlikely — but even in a worst-case scenario, all your data (votes, documents, property records) is permanent on Arweave and the Ethereum base layer. We'd have a full data export and migration path to another system. We don't have all our eggs in one basket, and your community records aren't locked away where only Base can see them.
+Lot numbers and street addresses are two different things — the blockchain uses lot numbers (from your property deed) as the unique identifier, while your mailing address is stored separately. The app should show both, but if there's a mismatch or your address is wrong, it's likely a data entry issue during onboarding. Send the board your correct mailing address and lot number (check your deed or property tax records if you're not sure) and we'll update the off-chain record. The lot number is the authoritative identifier on-chain, so that one takes priority.
 
 ---
 
-**16. How much did it cost to BUILD this system vs just hiring a management company?**
+## 🗳️ Governance
 
-That's a fair comparison to make, and the honest answer is that upfront development costs are higher than simply hiring a property manager. However, traditional HOA management companies typically charge 10–15% of collected dues annually, every year, forever. SuvrenHOA's model aims to reduce that recurring cost significantly by automating the tedious parts (dues collection, document storage, vote tallying) while keeping humans in the loop for judgment calls. The break-even point for most communities is within 2–3 years.
+**31. What's a "soulbound" NFT?**
 
----
+A soulbound NFT is a digital token that can't be sold, transferred, or given away — it's permanently attached to ("bound to the soul of") a specific wallet address. Your property NFT in SuvrenHOA is soulbound to you as the current property owner, which means nobody can buy your voting rights or transfer them without a formal ownership change process. Regular NFTs can be freely traded (think digital art), but soulbound ones are designed specifically for things that represent identity or status — like HOA membership — where transferability would be a problem.
 
-**17. If we hate it, how much does it cost to switch back to traditional?**
+**32. What happens to my property NFT when I sell my house?**
 
-All your data is exportable — votes, documents, financial history, property records. Nothing is locked in a proprietary format that only SuvrenHOA can read. If the community voted to return to traditional management, you'd have a complete, auditable record to hand to a new management company. The switching cost is primarily the time to set up a new system, not a data ransom. We'd never want to keep a community on-platform against their will.
+When you sell, the soulbound NFT is burned (destroyed) from your wallet and a new one is minted to the new owner's wallet. This happens as part of the ownership transfer process coordinated between the HOA, the title company, and the new owner. You won't lose your NFT mid-sale — it's tied to the closing process just like recording the deed. The new owner gets their own NFT linked to their wallet, and your old one is gone permanently. The blockchain records this transfer publicly and permanently for full transparency.
 
----
+**33. Can I delegate my vote to someone else?**
 
-**18. Do I need to buy crypto to use this?**
+Yes, delegation is built into the governance system. If you trust another homeowner (or want an advocate to vote on your behalf during an extended absence), you can delegate your voting rights to their wallet address through the app. You can revoke delegation at any time and take your votes back. Delegation doesn't mean they get to do anything else with your property or account — just vote on proposals during the delegation period. This is especially useful for snowbirds or homeowners who travel frequently.
 
-For basic participation — viewing proposals, reading documents, checking community updates — no, you don't need to hold any crypto. To vote or pay dues, you'll need a small amount of USDC (for dues) and potentially a tiny amount of ETH for gas fees (fractions of a cent). As we roll out gas sponsorship, even that ETH requirement goes away. Our goal is that for 90% of residents, this feels like using a regular website, not managing a crypto portfolio.
+**34. What's a quorum and why does it matter?**
 
----
+A quorum is the minimum number of voters required for a vote to be officially valid. In SuvrenHOA, quorum requirements vary by vote type (see Q38 on the 4 tiers) — a routine spending vote might need 10% of homeowners, while an amendment to the CC&Rs might need 67%. If a vote doesn't reach quorum, it fails even if everyone who voted said yes — this prevents a tiny minority from making big decisions when most homeowners weren't paying attention. The app shows live quorum progress during active votes so you can see how close you are.
 
-**19. What's the actual TCO including hosting, maintenance, and developer costs?**
+**35. Is there a way to fast-track emergency proposals?**
 
-Fair question, and we try to be transparent about it. There are three cost buckets: infrastructure (~$50–100/month for servers and Arweave storage at community scale), smart contract gas (pennies per transaction on Base), and developer/maintenance costs for ongoing improvements. Compare that to a traditional management company at $200–500/month for a small community, plus manual bookkeeping, legal storage of paper documents, and zero transparency into how decisions are made. We believe the math favors SuvrenHOA within the first year.
+Yes. There's an emergency governance tier for situations requiring immediate action — like a burst pipe flooding common areas or a security threat. Emergency proposals have a shortened voting window (24–48 hours instead of the standard 7 days) and lower quorum requirements, but they're limited in scope: only the board can initiate them, they require multi-sig board approval to even submit, and they can only authorize spending within pre-defined emergency categories. Non-emergency proposals can't be disguised as emergencies — the contract enforces the categories.
 
----
+**36. What if someone submits a malicious or harmful proposal?**
 
-**20. Why not just use a spreadsheet and shared Google Drive?**
+Proposals on SuvrenHOA require a submission deposit (a small amount of USDC) which is returned if the proposal reaches quorum, but forfeited if it's flagged as malicious and rejected by the board before going to a vote. The board has a limited window to review and reject proposals that clearly violate governing documents or applicable law before they go live. If a malicious proposal somehow makes it to a vote and passes, any homeowner can challenge the outcome in court (see Q47). The system has multiple layers: smart contract rules, board review, and legal remedies.
 
-We get it — if it ain't broke. But consider what Google Docs and spreadsheets can't give you: tamper-proof vote records (a spreadsheet can be edited silently), permanent document storage that doesn't disappear if someone cancels a Google account, automatic dues collection that doesn't require a treasurer to chase people down, and a governance system where everyone can verify the rules haven't been changed behind their backs. SuvrenHOA is for communities that want to eliminate "trust me, I updated the spreadsheet" from their governance.
+**37. How do I submit a proposal?**
 
----
+Go to the Governance section of the app, click "New Proposal," and fill out the form — you'll describe what you want, why it matters, and which spending category or rule change is involved. Depending on the proposal type, you may need to put up a small deposit. Once submitted, the board has a review window before it goes live for community voting. You'll get notifications as your proposal progresses. First-time proposers: we recommend chatting with the board informally before submitting, especially for anything that involves budget changes — it smooths the process considerably.
 
-## 🖥️ Usability (Questions 21–30)
+**38. What are the 4 voting tiers?**
 
----
+The four tiers are based on significance and impact: **Tier 1** covers routine operational decisions (spending within approved budgets, minor rule clarifications) — board can approve with simple majority. **Tier 2** covers moderate community matters (new spending categories, minor bylaw tweaks) — requires a homeowner vote with standard quorum. **Tier 3** covers major decisions (significant budget changes, major rule amendments) — requires a supermajority of homeowners. **Tier 4** covers foundational changes (amending the CC&Rs, dissolving the HOA) — requires the highest quorum and supermajority thresholds mandated by NCGS Chapter 47F. Each tier has different voting windows and quorum requirements encoded directly into the smart contracts.
 
-**21. My 70-year-old neighbor can barely use email — how will she vote?**
+**39. Can the board override a vote outcome?**
 
-This is probably our most important usability challenge, and we take it seriously. The platform is designed with a simple web interface that works like any other website — no crypto knowledge required for basic voting. We're also building a proxy voting feature so tech-savvy neighbors or family members can assist. In the meantime, the board can facilitate assisted voting sessions where residents vote together in a community space, just like traditional in-person meetings. No one gets left behind.
+No — that's one of the core guarantees of the system. Once a vote closes and the quorum is met, the smart contract executes the outcome automatically. The board can't say "we don't like this result, we're overriding it." They can submit a counter-proposal to reverse a decision, which then goes through the normal voting process. The only exception is emergency safety situations where the board can pause a specific action (not reverse a vote) pending legal review — and even that requires multi-sig board approval and is recorded publicly.
 
----
+**40. What if the blockchain goes down during an active vote?**
 
-**22. What's a "wallet"? Why do I need one for my HOA?**
-
-Think of a wallet as your HOA membership card, but digital. It's a secure account that holds your property token (proof you own your home) and lets you sign votes, like putting your signature on a paper ballot. Unlike a bank account, no company controls it — you control it. Apps like MetaMask (for computers) or Coinbase Wallet (very user-friendly on phones) make it as simple as creating any other app account. We have step-by-step setup guides available in the Help section.
+Base (our blockchain network) has extremely high uptime — it runs on thousands of nodes globally. But if there were ever an extended outage during a vote, the voting period is automatically extended. Votes aren't counted until the contract confirms them on-chain, so there's no risk of a partial count. If an outage lasted long enough to make the vote meaningless, the board could use the emergency governance tier to extend the voting period and notify homeowners. We also recommend homeowners vote early rather than waiting until the deadline for exactly this reason.
 
 ---
 
-**23. What does "Base Sepolia" mean? Why isn't this just a website?**
+## ⚖️ Legal
 
-It IS a website — you access SuvrenHOA through your regular browser like any other site. "Base Sepolia" just refers to which blockchain network your actions are recorded on. Think of it like this: when you use online banking, you don't think about which data center your bank uses — you just use the website. Base Sepolia is our current test network (like a practice environment), and we'll be moving to Base mainnet (the live, real version) for full production launch. The "Sepolia" part just means "we're still testing" — it's not something you need to manage.
+**41. Is any of this legally binding in North Carolina?**
 
----
+Yes, with the right structure. North Carolina's Planned Community Act (NCGS Chapter 47F) governs HOAs and allows for electronic voting, electronic records, and electronic transactions when properly authorized in the community's governing documents. SuvrenHOA's CC&Rs and bylaws explicitly incorporate blockchain-based governance as a valid mechanism. Smart contract outcomes are treated as the functional equivalent of recorded votes, and USDC transactions as valid payment. We've worked with NC-licensed HOA attorneys to make sure we're compliant.
 
-**24. I clicked "Connect Wallet" and MetaMask asked me to switch networks — I panicked and closed it**
+**42. Can our HOA be sued because of the blockchain system?**
 
-That's completely understandable! MetaMask is just asking to connect to the Base Sepolia network instead of Ethereum mainnet — it's a normal prompt, not a security risk. You can safely click "Switch Network" (or "Approve") and it won't spend any money or change anything about your existing accounts. Think of it like your phone asking to connect to a different Wi-Fi network. Next time you see that prompt, you can confidently click approve, and you'll land right in the platform. Check our Help guide for screenshots of exactly what to expect.
+Any HOA can be sued — that's just the reality of governing a community. But SuvrenHOA's structure actually reduces liability compared to traditional HOAs because everything is transparent, auditable, and rule-based. The board can't be accused of secretly redirecting funds or manipulating votes because the blockchain prevents that. D&O (Directors & Officers) insurance covers the board members for decisions made in good faith. If anything, the auditability of blockchain governance makes it *harder* for plaintiffs to allege impropriety.
 
----
+**43. How do you ensure NCGS Chapter 47F compliance?**
 
-**25. Why does it say my balance is "0 ETH"? Do I need money to participate?**
+Chapter 47F governs everything from meeting requirements to voting procedures to financial reporting for planned communities in NC. SuvrenHOA's smart contracts are designed around those requirements — voting periods, quorum thresholds, required notices, and financial transparency all align with or exceed what Chapter 47F mandates. We also maintain off-chain records and can produce paper-based equivalents of everything if legally required. Our HOA attorney reviews any major governance changes before they're implemented to ensure ongoing compliance.
 
-A zero ETH balance is totally normal for new users and doesn't prevent you from viewing the platform or participating in most activities. ETH is only needed for tiny transaction fees (gas) when you vote or submit documents — we're talking fractions of a cent on Base. If you do need some, the board maintains a small "gas faucet" for community members — just reach out and we can send you a tiny amount to get started. Eventually, gas sponsorship will make even that unnecessary.
+**44. What if a court orders a vote outcome to be changed?**
 
----
+Court orders are real-world legal instruments and the HOA board is obligated to comply with them — that hasn't changed. If a court ordered a reversal, the board would initiate an on-chain corrective action (a new vote, a contract parameter change, etc.) following the emergency governance process. The blockchain records would still show the original vote and the court-ordered correction, creating a permanent, transparent audit trail. The system doesn't put the HOA above the law — it makes the HOA's actions transparent and accountable to the law.
 
-**26. I registered my pet but nothing happened — is it on the blockchain?**
+**45. Who's liable if a smart contract malfunctions and causes a financial loss?**
 
-Pet and vehicle registrations are currently stored in the platform's database rather than on the blockchain itself — that's intentional, since putting every piece of routine community data on-chain would be expensive and unnecessary. Your registration is saved and visible to authorized board members and community managers. If you don't see a confirmation screen or email after registering, try refreshing the page or checking your profile. If the record still doesn't appear, that's worth reporting to the board as a bug.
+This is an evolving area of law. The HOA carries insurance that covers certain technology-related losses, and the service agreement with EliteDevs (our development partner) includes warranties and liability provisions for contract defects. In practice, the audit process and extensive testing are designed to prevent malfunctions before they happen. If a bug caused a financial loss despite reasonable precautions, the HOA would work with insurance, legal counsel, and the development team to make homeowners whole. We're transparent about this risk — no technology is perfect — but we've taken substantial steps to minimize it.
 
----
+**46. Do we still need to hold in-person meetings?**
 
-**27. The page says "No documents registered yet" — where are our CC&Rs?**
+Under NCGS Chapter 47F, certain meetings (particularly the annual meeting) may still be required, though NC law allows electronic meetings when authorized in governing documents. SuvrenHOA holds a hybrid annual meeting — available in-person and via video call — and all governance actions between meetings happen on-chain. The blockchain voting is treated as equivalent to a membership vote, so you don't need to come to a meeting to vote on proposals. Meeting minutes are recorded, approved, and stored permanently on Arweave.
 
-That message just means official documents haven't been uploaded to the on-chain document registry yet — it's not saying your CC&Rs don't exist! Your community's governing documents are still valid and enforceable wherever they currently live (usually with the county recorder or your HOA attorney). Uploading them to SuvrenHOA's permanent Arweave storage is on the board's task list. Once uploaded, they'll appear there permanently and be verifiable by any homeowner.
+**47. Can a homeowner challenge a vote outcome in court?**
 
----
+Absolutely — blockchain or not, any HOA member can challenge a governance decision in court if they believe it violated the governing documents or applicable law. The blockchain actually makes this *easier* because the vote record is permanent, public, and tamper-proof — there's no "he said/she said" about what the vote count was. A challenger would have a clear, irrefutable record to bring to court. Courts in NC have authority to order remedies, and the HOA board is bound to comply (see Q44).
 
-**28. I tried to pay dues but got an error about "insufficient gas"**
+**48. Is a multi-sig wallet legally valid for holding HOA funds?**
 
-This error means your wallet doesn't have enough ETH to cover the (very small) transaction fee — not that you can't afford your dues. Even $1–2 worth of ETH is enough gas for hundreds of transactions on Base. You can get a tiny amount of ETH from a crypto exchange like Coinbase, or ask the board about our community gas faucet. The actual dues payment in USDC is a separate thing from the gas fee — you need a sliver of ETH just to "stamp the envelope," so to speak.
+Yes. A multi-signature smart contract wallet functions like a jointly-controlled account where multiple authorized signers must approve transactions — which is essentially what traditional HOA bank accounts with dual-signature requirements do, just in code. NC law recognizes electronic signatures and electronic funds transfers as legally valid. The HOA's governing documents formally designate the multi-sig wallet as the official treasury mechanism, which gives it the same legal standing as a traditional bank account under the HOA's authority.
 
----
+**49. What about GDPR or CCPA privacy compliance?**
 
-**29. Why does the Health Score say "F"? Is our community failing?**
+CCPA (California Consumer Privacy Act) applies to California residents, and GDPR applies to EU residents — neither directly governs a North Carolina HOA's dealings with NC residents. That said, we follow the spirit of these regulations: we collect only the data we need, we store personal information off-chain (not on the public blockchain), homeowners can request their data and correct inaccuracies, and we never sell personal information. Your wallet address being on a public blockchain is inherent to how the technology works, but we don't publish personally identifying information alongside it.
 
-Don't panic — the Health Score is calculated from platform adoption metrics like connected wallets, uploaded documents, and completed votes. An "F" right now just means we're early in the onboarding process and the system hasn't been fully populated yet. As more residents connect their wallets, the board uploads official documents, and the first votes are completed, that score will climb quickly. Think of it like a new gym member's fitness score — it starts low because you haven't done anything in the app yet, not because you're unhealthy.
+**50. Who owns the intellectual property — the code, the contracts, the platform?**
 
----
-
-**30. I see "Lot #2" but my actual address is 456 Faircroft Drive — where's my address?**
-
-The platform currently uses lot numbers as the primary identifier because they're the official legal reference in property records and the county database. Your street address is associated with your lot number in the system — it's just displayed by lot for consistency. We're working on adding a "display as address" option so residents see their familiar street address rather than the lot number. In the meantime, the board can confirm which lot number corresponds to which address in the community map.
+The smart contracts deployed on Base are open-source and their bytecode is publicly visible on the blockchain — that's the nature of public blockchains. The SuvrenHOA platform code developed by EliteDevs is owned by the HOA under the terms of the development agreement, meaning the community owns its governance infrastructure. Arweave-stored documents are owned by the HOA and its members as always. Individual homeowners own their own data. No third party has a proprietary lock on the community's operations.
 
 ---
 
-## 🗳️ Governance (Questions 31–40)
+## 📄 Documents
 
----
+**51. What if we need to delete something that was permanently stored?**
 
-**31. What's a "soulbound NFT" and why can't I sell my property token?**
+You can't delete it from Arweave — that's what "permanent" means, and it's a feature, not a bug. If something was uploaded in error (wrong version, wrong document), you upload the correct version and mark the old one as superseded. The old version stays in the archive, but the new one becomes the official current document. This creates a complete, auditable document history — which is actually a legal advantage. The only scenario where this is genuinely problematic is if personal information was exposed (see Q52).
 
-A "soulbound" token is just a digital token that's tied to you and can't be transferred to someone else. Your property NFT works like a membership card — it proves you're a Faircroft homeowner, and it wouldn't make sense for you to sell that proof of membership separately from your actual house. When you sell your home, the property NFT gets retired and a new one is issued to the buyer. It can't be sold on OpenSea or traded like a speculative asset — it's purely a governance credential, not an investment.
+**52. What if someone accidentally uploads a document with personal information in it?**
 
----
+If personally identifying information (like Social Security numbers or financial account details) is uploaded to Arweave by mistake, it can't be deleted from Arweave itself. However, we can immediately remove the link from the SuvrenHOA app so it's no longer accessible through the platform, notify affected individuals, and document the incident. The risk is managed by having strict upload permissions (see Q60) and a pre-upload review step for sensitive documents. This is a serious enough risk that we train whoever has upload access on document hygiene before granting them permissions.
 
-**32. What happens to my NFT when I sell my house?**
+**53. How do I verify that a document is authentic?**
 
-When your home sale closes, the property transfer process includes an NFT handoff as part of onboarding the new owner. Your old NFT is burned (permanently deactivated), and a new one is minted for the buyer. Neither you nor the buyer needs to be a crypto expert — the title company or HOA administrator initiates the process, similar to how they'd handle the transfer of any membership documentation. The blockchain record of ownership stays accurate automatically.
+Every document stored on Arweave gets a unique transaction ID — a long string of letters and numbers that's essentially a cryptographic fingerprint. You can take that ID and look it up directly on Arweave's network (arweave.net) to confirm the document exists and hasn't been altered. The SuvrenHOA app also displays verification badges for each document. If someone sends you a document claiming to be the official CC&Rs, you can check its Arweave transaction ID against the one listed in the app to confirm it's the real thing.
 
----
+**54. Can documents be updated or revised?**
 
-**33. Can I delegate my vote if I'm on vacation?**
+Yes — the old version stays on Arweave permanently, and the new version is uploaded as a separate document with its own Arweave transaction ID. The app maintains a version history so you can see all past versions of a document and when they changed. Official current versions are clearly marked. This versioning approach means you always have the complete amendment history of the governing documents, which is genuinely useful for legal disputes or understanding why a rule exists.
 
-Yes — vote delegation is a supported feature. You can assign your voting power to a trusted neighbor, family member, or even a board member for a specific proposal or a defined time period. This is actually more flexible than most traditional HOA systems, where missing a meeting means your voice simply isn't heard. Delegation is revocable at any time, so if you come back from vacation and want to vote yourself, you can pull back the delegation before the proposal closes.
+**55. Where are the documents physically stored?**
 
----
-
-**34. What's a quorum? What if not enough people vote?**
-
-A quorum is the minimum percentage of homeowners who need to participate for a vote to be valid — it prevents a tiny minority from making decisions on behalf of everyone. SuvrenHOA's quorum requirements are set to match NC HOA law (NCGS Chapter 47F). If quorum isn't met, the proposal doesn't pass by default and can be re-submitted with more outreach and time. The platform sends reminders as voting deadlines approach to help maximize participation.
-
----
-
-**35. Can proposals be emergency-fast-tracked?**
-
-Yes, for genuine emergencies (roof collapse, urgent repairs, legal deadlines), the board can submit a proposal with a shortened voting window. Emergency proposals still require quorum and a majority vote — they just have accelerated timelines. The emergency designation is logged on-chain, so the community can see exactly when and why an accelerated process was used, preventing abuse of the emergency label. Routine matters can't be laundered as emergencies just to avoid scrutiny.
-
----
-
-**36. What if someone submits a malicious proposal?**
-
-Any homeowner can flag a proposal as potentially harmful, and the board has the ability to remove proposals that violate community rules or applicable law before they go to a vote. More importantly, even if a malicious proposal somehow passed, it still couldn't automatically execute anything illegal — the smart contracts are programmed to reject actions that violate their own governance rules. Think of it as having both a democratic check (voting it down) and a constitutional check (contracts that refuse illegal instructions).
-
----
-
-**37. How do I propose something? The "Create Proposal" button is confusing**
-
-The Create Proposal flow walks you through it step by step: you give your proposal a title, write a description of what you want to change or do, set a voting window, and submit. If it involves treasury spending, you'll add the amount and destination. After submission, it goes into a brief review period before opening for community voting. If you're unsure about any step, reach out to the board or a neighbor with more platform experience — we want more homeowners proposing things, not fewer.
-
----
-
-**38. What are the 4 voting tiers? Why does my neighbor have more power?**
-
-The four tiers reflect property size and community engagement, not wealth or status. A homeowner with a larger lot has a proportionally larger stake in decisions about landscaping, drainage, and shared spaces — similar to how some HOAs weight votes by square footage. Engagement tiers reward homeowners who participate consistently in community governance. The tiers are transparent and visible in your profile — you can see exactly which tier you're in and what it would take to move up. No tier has veto power; it's weighted, not winner-take-all.
-
----
-
-**39. Can the board override a community vote?**
-
-No — and this is one of the core promises of the platform. Once a proposal passes (or fails) through a legitimate community vote that meets quorum, the outcome is recorded on-chain and the board cannot reverse it unilaterally. The board's role is to implement what the community decides, not override it. If the board disagrees with a vote outcome, they can submit a counter-proposal through the same process everyone else uses. No backroom reversals.
-
----
-
-**40. What happens to votes if the blockchain goes down during voting?**
-
-"The blockchain going down" in the way a website crashes is extremely unlikely for Base — it's a globally distributed network with no single point of failure. However, if the SuvrenHOA website itself were temporarily unavailable, votes already cast are permanently recorded on-chain and can't be lost. Any votes not yet submitted would need to be cast once the site is back up. For critical votes near their deadline, the board can extend the voting window if a documented outage affected participation.
-
----
-
-## ⚖️ Legal (Questions 41–50)
-
----
-
-**41. Is a blockchain vote legally binding in North Carolina?**
-
-North Carolina's Uniform Electronic Transactions Act (NCGS Chapter 66, Article 40) recognizes electronic records and signatures as legally valid, which provides a strong foundation for blockchain-based governance. SuvrenHOA is designed to meet the voting requirements of NCGS Chapter 47F (the NC Planned Community Act), including proper notice, quorum, and record-keeping. We're working with legal counsel to ensure full compliance, and we'd always recommend the HOA maintain its relationship with an HOA attorney for any legally sensitive decisions.
-
----
-
-**42. Can we be sued for using blockchain governance?**
-
-Any HOA governance method carries theoretical legal risk — traditional paper-ballot HOAs get sued too. The key is following proper procedures, maintaining accurate records, and complying with NC HOA statutes, all of which SuvrenHOA is designed to facilitate. In some ways, blockchain governance reduces legal risk by creating an immutable, timestamped record of every vote and decision that can't be retroactively altered. "The records were changed" is a common HOA lawsuit claim that becomes much harder to make when records are on-chain.
-
----
-
-**43. Does this comply with NC HOA statutes (NCGS Chapter 47F)?**
-
-SuvrenHOA is designed with NCGS Chapter 47F compliance as a foundational requirement. This includes proper notice periods for votes, quorum requirements, record-keeping obligations, and homeowner rights to inspect records. The platform automates compliance with these requirements rather than relying on a treasurer or secretary to remember them. That said, we recommend the community maintain a relationship with an HOA attorney who can review specific decisions and flag any edge cases where manual compliance steps are needed.
-
----
-
-**44. What if a court orders us to change a vote outcome?**
-
-Courts have authority over HOAs regardless of what governance technology they use. If a court ordered a vote to be invalidated or a decision reversed, the board would comply — a smart contract doesn't prevent legal compliance. The multi-sig controllers can execute whatever actions a court order requires, including reversals, refunds, or record corrections. Blockchain governance doesn't put the HOA above the law; it just makes the record-keeping more transparent and tamper-resistant.
-
----
-
-**45. Who's liable if the smart contracts malfunction?**
-
-This is an evolving area of law, and we want to be honest that clear legal precedent doesn't exist for every scenario. The HOA, as the operating entity, retains ultimate legal responsibility for community governance regardless of the technology used. EliteDevs, as the platform developer, carries responsibility for software defects under the terms of the development agreement. The platform carries errors & omissions coverage, and the smart contracts are designed with safeguards to minimize malfunction risk. Before mainnet launch, a full legal review of liability allocation will be completed.
-
----
-
-**46. Are we still required to hold in-person annual meetings?**
-
-Yes — NC HOA law requires annual meetings, and SuvrenHOA doesn't replace that requirement. What it does is make those meetings more productive. Instead of spending an hour counting paper ballots, the annual meeting becomes a time for community discussion about the results of governance that's already happened on-chain, planning for the coming year, and addressing questions that didn't fit neatly into a proposal format. The platform supplements in-person governance; it doesn't eliminate the human connection that community is built on.
-
----
-
-**47. Can a homeowner challenge a blockchain vote in court?**
-
-Absolutely — any homeowner retains all their legal rights regardless of the platform. If a homeowner believes a vote was improper (insufficient notice, fraudulent participation, procedural violation), they can challenge it in court just as they would with any HOA vote. The blockchain record actually benefits honest challenges because every vote, timestamp, and notice is permanently documented and can be subpoenaed and verified. If the process was followed correctly, the on-chain record is your best defense. If it wasn't, that record helps the challenger too.
-
----
-
-**48. Is our treasury classification as a multi-sig legal for HOA funds?**
-
-NC HOA law requires fiduciary management of community funds but doesn't prescribe the specific banking or custody mechanism in detail. Multi-signature wallets are a custody structure, like requiring two signatories on a check — a practice that's widely accepted in traditional HOA governance. We're working with legal counsel to ensure the multi-sig structure satisfies fiduciary requirements and recommend the community also maintain a traditional bank account for any situations where on-chain funds are legally required to be held in FDIC-insured accounts.
-
----
-
-**49. What about data privacy — GDPR, CCPA?**
-
-Most Faircroft homeowners are in North Carolina, so CCPA (California) doesn't directly apply, but SuvrenHOA is designed with strong privacy principles regardless. Personal data like your name, address, and contact information is stored in the platform's private database, not on the public blockchain. What's on-chain is minimal: lot numbers, vote tallies, and document hashes (fingerprints that verify authenticity without revealing content). Residents can request a full export or deletion of their off-chain personal data at any time.
-
----
-
-**50. Who owns the intellectual property — EliteDevs or the HOA?**
-
-The HOA's data — your votes, your documents, your community records — belongs to the HOA. EliteDevs owns the platform software and infrastructure. This distinction matters: if EliteDevs ever ceased to exist, your community data would still be yours and accessible on the blockchain and Arweave. The development agreement explicitly addresses data ownership and portability rights. We'd never design a system where your community's governance history was held hostage by a vendor relationship.
-
----
-
-## 📄 Documents & Records (Questions 51–60)
-
----
-
-**51. You say documents are "permanent on Arweave" — what if we NEED to delete something?**
-
-Permanence on Arweave means a document can't be erased from history — which is actually the point for official governance records. However, "can't delete" doesn't mean "stuck with bad info." You can supersede a document by uploading a corrected or updated version and marking the old one as deprecated in the DocumentRegistry. The old version still exists in the archive (good for legal transparency), but the current, authoritative version is clearly flagged as the one in force. Think of it like how laws get amended — the old text stays in the record, the new text governs.
-
----
-
-**52. What if someone uploads a document with personal info by mistake?**
-
-This is a real risk to manage carefully. Documents on Arweave cannot be deleted, so prevention is essential. The platform requires board-level approval before any document is officially registered on-chain, giving an administrator a chance to review the content first. If a document with sensitive personal information were mistakenly registered, the next step would be: marking it deprecated, uploading a redacted version as the authoritative document, and notifying affected parties. It's not a perfect solution, but it's why we require review before registration.
-
----
-
-**53. How do I verify a document is authentic?**
-
-Every document registered on-chain has a cryptographic hash — a unique digital fingerprint. If you have the document (downloaded from the platform) and want to verify it hasn't been tampered with, you can compare its hash against the one stored in the DocumentRegistry smart contract. It's like a wax seal on an envelope: if the fingerprints match, the document is genuine. This verification process will be built into the platform's UI so you won't need to be technical to use it — a simple "Verify" button will do the check automatically.
-
----
-
-**54. Can documents be updated or do we have to upload a new version every time?**
-
-New version every time — but that's by design, not a limitation. Every change to an official document creates a permanent, timestamped record of what changed and when. This is actually better than editing a PDF on Google Drive, where changes can be made silently without anyone knowing. The DocumentRegistry keeps a version history so you can see the current document, the previous version, and when each was adopted. For routine updates (like meeting minutes), uploading a new version is quick and keeps the record clean.
-
----
-
-**55. Where are the documents physically stored? What country?**
-
-Arweave is a decentralized storage network, which means your documents aren't stored in any single data center or country — they're replicated across thousands of nodes around the world. This is actually more resilient than storing them on a US server that could be seized, flooded, or shut down. The data itself is encrypted in transit and the content is publicly retrievable by anyone with the document hash, which is why you should never upload documents containing sensitive personal information (see Q52).
-
----
+Documents are stored on the Arweave network, which is a decentralized storage protocol. Unlike cloud storage (Google Drive, Dropbox), there's no single data center. Files are distributed across hundreds of nodes operated by independent storage providers around the world who are paid in Arweave tokens to store data permanently. The files themselves live on physical hard drives across this global network. You can access any document through any Arweave gateway without going through the SuvrenHOA app.
 
 **56. What if Arweave goes out of business?**
 
-Arweave's business model is specifically designed to make this scenario unlikely: storage fees are paid upfront in a way that's designed to fund storage for 200+ years through an endowment model. But even if Arweave somehow ceased to operate, the data is replicated widely enough across independent nodes that it would persist beyond the company. Additionally, SuvrenHOA maintains off-chain backups of all registered documents. Losing documents because Arweave "went out of business" is one of the lower risks in the system — far lower than a management company losing paper records in a flood.
+Arweave's economics are designed for permanence — uploaders pay a one-time fee based on current storage costs that funds a perpetual endowment for ongoing storage. Even if the Arweave company ceased to exist, the protocol is open-source and the network of storage nodes would continue operating as long as it's economically viable (which the endowment model ensures). Additionally, we maintain traditional backups of all HOA documents in separate cloud storage and on local drives. If Arweave ever failed, we wouldn't lose a single document.
+
+**57. How long is "permanent"?**
+
+Arweave's model is designed to store data for a minimum of 200 years — that's not marketing, it's the math behind their endowment model. The one-time upload fee is calculated to cover storage costs for 200 years even accounting for inflation. In practical terms, HOA documents need to be accessible for decades (for property disputes, historical records, etc.), and Arweave far exceeds that requirement. No digital storage system can guarantee literal forever, but 200 years is more than sufficient for any realistic HOA document retention need.
+
+**58. Can I download my documents?**
+
+Yes, any document stored on Arweave is publicly accessible and downloadable by anyone — no login required. From the SuvrenHOA app, you can click any document to view it in your browser or download it. You can also use the Arweave transaction ID to download it directly from the Arweave network through any gateway. We encourage homeowners to keep their own copies of important documents (CC&Rs, bylaws, meeting minutes) so they always have access regardless of the app's status.
+
+**59. Are the documents encrypted?**
+
+Most HOA governing documents (CC&Rs, bylaws, budgets, meeting minutes) are stored unencrypted because they're meant to be public — transparency is the point. Documents containing personal information (like individual homeowner payment records) are stored off-chain in a private, encrypted database rather than on Arweave. If we ever need to store a semi-private document on Arweave (accessible to residents but not the general public), we use encryption where only wallets with verified membership can decrypt it. We think about privacy case-by-case rather than applying one blanket approach.
+
+**60. Who can upload documents to Arweave?**
+
+Currently, upload permissions are restricted to authorized board members and designated HOA administrators. This prevents random documents (or malicious content) from being linked to the HOA's official document registry. Upload requests from committees or homeowners go through the board. We're considering a proposal-based upload system where committees could upload their own reports after board approval. Every upload is logged on-chain so there's always a record of who uploaded what and when.
 
 ---
 
-**57. How long is "permanent" really?**
+## 💵 Treasury
 
-Arweave's design targets 200+ years of storage through its endowment model. For context, your HOA's CC&Rs are probably 20–30 years old. We're talking about storage that outlasts your house, your grandchildren, and probably the HOA itself. "Permanent" in the crypto context means "as long as the network exists and the economic incentive to store it holds," which is substantially more durable than a filing cabinet, a hard drive, or a cloud account that someone could forget to renew. It's the most durable document storage option available to an HOA today.
+**61. How do I know the treasury balance is real?**
 
----
+The treasury balance is visible in real-time on the public blockchain — you don't have to take anyone's word for it. Go to the Treasury section of the app and you'll see a live balance pulled directly from the blockchain. You can also take the treasury wallet address and look it up independently on Base's block explorer (like basescan.org) to see the exact balance and complete transaction history. No reports to wait for, no auditor to hire — it's just publicly visible at all times.
 
-**58. Can I download documents or only view them online?**
+**62. Can I see every transaction that's ever happened?**
 
-You can download documents — that's a core feature, not an afterthought. Since documents are stored on Arweave, they have a public URL you can access directly, and the platform provides a download button on every registered document. You can save local copies of your CC&Rs, bylaws, meeting minutes, and financial reports. We'd actually encourage it — having a local copy is good practice, and it means you're never dependent on the platform being online to access your governing documents.
-
----
-
-**59. Are uploaded documents encrypted?**
-
-Community governance documents like CC&Rs, bylaws, and meeting minutes are stored unencrypted on Arweave — this is intentional, because community governance should be transparent and publicly verifiable. Documents containing sensitive information (like a financial audit with individual payment details) should be uploaded in redacted form, or stored in the platform's private database rather than the public document registry. The board has guidance on what's appropriate for public vs. private storage, and we're building clearer UI distinctions between the two.
-
----
-
-**60. Who can upload documents? Just the board?**
-
-Currently, official document registration to the on-chain DocumentRegistry is restricted to board members and authorized administrators — this maintains the integrity of the official record. However, community members can submit documents for board consideration through the platform, and the board can then register them officially. For future versions, we're exploring a proposal-based document submission process where the community could vote to officially register important documents submitted by any homeowner.
-
----
-
-## 🏦 Treasury (Questions 61–70)
-
----
-
-**61. How do I know the treasury balance is real and not faked?**
-
-The treasury is a smart contract on the public Base blockchain — you can verify the balance yourself at any time using a free blockchain explorer like Basescan. No one, including the board, can display a fake balance on the platform because the balance comes directly from the blockchain, not from a database the platform controls. It's like being able to walk into a bank vault and count the money yourself, except you can do it from your phone in 30 seconds.
-
----
-
-**62. Can I see every single transaction? Where?**
-
-Yes — every transaction in and out of the FaircroftTreasury contract is permanently recorded on the blockchain and publicly viewable. The SuvrenHOA dashboard displays transaction history in a readable format, and for the technically curious, the raw transaction history is available on Basescan by searching the treasury contract address. Every dues payment, vendor payment, and budget transfer has a timestamp, amount, destination, and authorization record. No more "trust me, the books are clean."
-
----
+Yes — every single one, going back to the treasury's creation. Block explorers like basescan.org let you view the complete, permanent history of every deposit and withdrawal from the treasury wallet. The SuvrenHOA app presents this in a more readable format with categories and descriptions, but the raw blockchain data is always there as the ground truth. This is a fundamentally different level of financial transparency than any traditional HOA offers.
 
 **63. What prevents the board from creating secret wallets?**
 
-Nothing prevents anyone from creating a new crypto wallet — that's a feature of blockchain, not a bug. What matters is that the *official* FaircroftTreasury smart contract is the designated custodian of HOA funds, and dues payments route there automatically. Any board member using personal or shadow wallets for HOA funds would be violating their fiduciary duty and potentially committing fraud, just as they would with a traditional bank account. The transparent treasury makes it much easier to audit whether all dues collected match treasury inflows, which is an additional safeguard.
+The board can't secretly route HOA funds through unauthorized wallets because all dues payments go directly to the on-chain treasury smart contract — not to a board member's personal wallet. The smart contract only releases funds through the approved, auditable spending functions. A board member could, theoretically, create a separate personal wallet — but they can't access the HOA treasury funds through it. Any spending from the treasury goes through the multi-sig process and is recorded publicly. If money is missing, you'd see it immediately.
 
----
+**64. How does the auto-split work for dues?**
 
-**64. How does the auto-split work? Can percentages be changed?**
+When you pay your monthly dues, the smart contract automatically routes the funds into predefined categories: a percentage to operating expenses, a percentage to the reserve fund, a percentage to a maintenance fund, and so on. The split ratios are set by community vote and encoded in the contract — no human has to manually move money around and no one can redirect funds to a different bucket without a governance vote changing the contract parameters. You can see the current split ratios and real-time balances for each category in the Treasury section of the app.
 
-When dues come in, the smart contract automatically allocates them to pre-set budget categories (like maintenance, reserves, and operations) without requiring a manual transfer. The percentage splits are set by community governance — meaning a proposal and vote are required to change them. No board member can quietly reshuffle the budget ratios; any change requires community approval and is permanently recorded. You can see the current split ratios on the Treasury page at any time.
+**65. What if there's an emergency payment that wasn't in the budget?**
 
----
-
-**65. What if we need to make an emergency payment not in the budget?**
-
-Emergency expenditures outside the approved budget can be authorized through an emergency proposal (see Q35) with an accelerated voting window. For genuine life-safety emergencies (like a broken fire suppression system), the multi-sig controllers can approve an emergency payment immediately and then seek ratification from the community retroactively within a defined window. This mirrors how most HOAs handle true emergencies — act first, document and seek approval as quickly as possible.
-
----
+Emergency spending is handled through the Tier 1 emergency governance path (see Q35). The board can authorize emergency expenditures up to a predefined limit without a full homeowner vote — think burst pipe, emergency tree removal, that kind of thing. Above that limit, even emergencies go to a fast-tracked homeowner vote. Every emergency expenditure is logged publicly and the board must provide documentation justifying the emergency classification. This balances the need for quick action with accountability.
 
 **66. Can residents request a financial audit?**
 
-Yes — and under NC HOA law, residents already have this right. SuvrenHOA makes it easier to exercise that right because the transaction history is publicly available on-chain without requiring a formal records request. For a full CPA-level audit, residents can petition the board through a formal proposal, and if it passes, the board is required to commission one. The on-chain transparency means an auditor's job is significantly easier — the records are complete, timestamped, and tamper-proof.
+Yes — any homeowner can request a formal audit at any time, and the community can vote to hire an independent auditor. But here's the thing: the blockchain is already a real-time public audit. Every transaction is permanently recorded and independently verifiable. A formal audit by a CPA is still valuable for attesting to accounting practices and categorization, and we do one annually — but you don't have to wait for an audit to know the treasury balance. It's always there, live, on-chain.
+
+**67. Are the funds FDIC insured?**
+
+USDC held in a blockchain smart contract is not FDIC insured — FDIC insurance is for bank deposits, not on-chain assets. This is a genuine difference from traditional HOA bank accounts. USDC is backed 1:1 by US dollars held in regulated bank accounts by Circle (the company that issues USDC), and those underlying dollars are themselves in FDIC-insured banks — but the FDIC insurance doesn't extend to you as a USDC holder directly. We mitigate this risk with on-chain insurance coverage and by maintaining the HOA's crime/fidelity bond.
+
+**68. What happens to the treasury if the HOA dissolves?**
+
+HOA dissolution is governed by NCGS Chapter 47F and the community's CC&Rs, which specify how assets are distributed. In SuvrenHOA, dissolution would require a Tier 4 vote (the highest threshold) and would trigger a smart contract function that distributes remaining USDC to registered property NFT holders according to their proportional share. The distribution is automatic and transparent — no one can redirect the funds during wind-down. The process mirrors traditional HOA dissolution law while making the actual fund distribution faster and tamper-proof.
+
+**69. Can the HOA earn interest on treasury funds?**
+
+We're exploring on-chain yield options — there are DeFi protocols that allow USDC to earn interest (similar to a savings account but on-chain). This requires a community vote to authorize, as it introduces additional smart contract risk. Currently, the treasury holds USDC in a non-yielding smart contract for maximum safety during our initial operating period. Once the system is proven and the community is comfortable, we'll put a proposal forward to earn modest yield on reserve funds. Even conservative on-chain yields can meaningfully offset operating costs at scale.
+
+**70. Why USDC instead of regular dollars?**
+
+Two reasons: automation and transparency. Smart contracts can't natively interact with traditional bank accounts — they work with on-chain assets. USDC is the best bridge because it's always worth exactly $1 (no volatility), it's regulated and audited, and it can flow through smart contracts automatically without human intermediaries. Using USDC means dues collection, auto-splitting, and payments to vendors all happen programmatically — no one has to manually move money, there's no float, and there's no opportunity for it to go missing. Traditional dollars would require a bank account that a human controls.
 
 ---
 
-**67. Is the treasury insured by FDIC or equivalent?**
+## 🔧 Technical
 
-No — FDIC insurance applies to USD held in FDIC-member bank accounts, not to USDC in a smart contract. This is a real difference from traditional HOA treasury management, and we're honest about it. The structural protections (multi-sig, time-locks, transparent on-chain records) are designed to compensate for the lack of deposit insurance, but they're not the same thing. We recommend the HOA maintain a traditional operating account for funds that benefit from FDIC protection, using the on-chain treasury for governance-controlled funds.
+**71. What if a bug is discovered in the contract after it's deployed?**
 
----
+Deployed smart contracts can't be edited directly — that's by design (immutability = trustworthiness). But we've built in upgrade pathways using a proxy contract pattern, where the logic can be updated while the data and address stay the same, subject to a governance vote. For critical security bugs that can't wait for a vote, the board multi-sig can trigger a pause function to halt vulnerable operations while an emergency community vote is called. All of this is disclosed in the technical documentation — we don't pretend bugs can't happen.
 
-**68. What happens to the treasury if we dissolve the HOA?**
+**72. Can the contracts be upgraded?**
 
-HOA dissolution is governed by NC law and the community's governing documents, regardless of where the funds are held. The dissolution process would include a community vote on how to distribute treasury funds — the same governance process used for any major financial decision. The smart contract can execute distributions according to whatever plan the community votes to approve. Dissolution of the HOA doesn't mean the funds are stuck or lost; the multi-sig controllers can execute whatever legally required distribution the process demands.
+Yes, through the proxy upgrade pattern mentioned above. However, upgrades require a Tier 3 governance vote (supermajority of homeowners) for routine improvements, or an emergency fast-track vote for critical security issues. The upgrade mechanism itself is transparent — all proposed code changes are published on-chain before any vote, so homeowners (or anyone they ask to review it) can see exactly what would change. No silent upgrades, ever.
 
----
+**73. What's the difference between Base Sepolia and Base Mainnet?**
 
-**69. Can we earn interest or yield on treasury funds?**
+Base Mainnet is the live production network where real USDC and real governance actions happen. Base Sepolia is the test network (testnet) that uses fake tokens with no real value — developers use it to test new features before deploying to mainnet. If you're interacting with the real SuvrenHOA system, you should be on Base Mainnet. If MetaMask says Sepolia, you're in test mode and your actions won't affect anything real. The app will warn you if you're on the wrong network.
 
-This is possible — USDC held in certain DeFi protocols can earn modest, relatively stable yields (think 3–5% APY from lending protocols). Whether to do so is a governance decision the community would need to vote on, because yield-generating strategies carry some additional risk compared to just holding USDC. For now, the treasury is designed to be conservative (hold USDC, don't speculate). If the community wants to explore yield generation, it can be proposed, debated, and voted on through normal governance channels.
+**74. Why are you testing on real data?**
 
----
+We're not — all testing happens on Base Sepolia with synthetic data. Real homeowner data and real funds never touch the testnet. When new features are developed, they go through: local development testing, Sepolia testnet with dummy data, security audit, and then mainnet deployment with a governance vote. The appearance of "real data in testing" would be a bug and should be reported immediately to the board.
 
-**70. Why USDC and not regular dollars?**
+**75. What's the disaster recovery plan?**
 
-USDC is a stablecoin pegged to the US dollar — $1 USDC = $1 USD, always. Using USDC lets the platform automate dues collection, budget splits, and vendor payments through smart contracts without the delay and cost of traditional bank transfers. It's not "crypto" in the scary speculative sense; it's more like a digital dollar that can be programmed. When you pay dues in USDC, there's no exchange rate risk, no volatility, no "my dues payment lost 30% of its value overnight." It's just dollars, with automation superpowers.
+Multiple layers: First, blockchain data is inherently distributed — there's no single server to lose. Second, all documents are on Arweave with traditional backups. Third, the app's front-end code is version-controlled and can be redeployed in hours. Fourth, all homeowner off-chain data (names, contact info, etc.) is backed up daily to encrypted off-site storage. In the absolute worst case scenario where everything needed to be rebuilt, the authoritative record on the blockchain would still exist and we could reconstruct the system from that.
 
----
+**76. What if EliteDevs (the development company) disappears?**
 
-## 🔧 Technical (Questions 71–80)
+The smart contracts, once deployed, run on the blockchain independently — EliteDevs going dark wouldn't affect their operation. The HOA owns the front-end application code under the development agreement. The community can hire any competent blockchain developer to maintain or improve the system, or even switch to self-hosted open-source governance tools. We specifically chose to avoid vendor lock-in: no proprietary databases, no secret sauce. Everything is documented and the code is readable on the blockchain.
 
----
+**77. Is there an uptime guarantee?**
 
-**71. What if there's a bug in the smart contract after deployment?**
+The blockchain itself (Base) has no single point of failure and is effectively always on — Coinbase and the Base network have historically maintained 99.9%+ uptime. The SuvrenHOA web app front-end has standard cloud hosting with uptime monitoring and automatic failover. We target 99.5% uptime for the app interface, and any planned maintenance is announced at least 48 hours in advance in the community forum. If the app is down, critical actions (like dues payment deadlines) are automatically extended.
 
-Smart contract bugs are a real risk, which is why the contracts are being audited before mainnet launch and why the testnet phase exists — to find bugs before real money is involved. If a bug were discovered post-launch, the multi-sig controllers can pause affected functions (like treasury disbursements) while a fix is developed. The platform also maintains an emergency pause function for exactly this scenario. No software is bug-free, but the layered safeguards mean a bug doesn't have to become a catastrophe.
+**78. Can this system scale to 5,000 homes?**
 
----
+Yes. The smart contracts are designed for thousands of participants — Base processes thousands of transactions per second at low cost. The voting and treasury mechanisms have no fundamental scaling limits. The front-end app is built on scalable cloud infrastructure. In fact, the per-home cost of the blockchain infrastructure actually *decreases* as the community grows, because fixed costs are spread across more homes. We've load-tested the system with simulated large communities during development.
 
-**72. Can contracts be upgraded?**
+**79. What external APIs or services does the system depend on?**
 
-The core governance contracts use an upgradeable proxy pattern, which means the logic can be updated without losing the stored data (votes, records, balances). Any upgrade requires multi-sig approval and, for significant changes, a community governance vote. This is different from most traditional software where a vendor can silently push updates — SuvrenHOA upgrades require documented authorization and community visibility. The upgrade process itself is logged on-chain so there's a permanent record of every version change.
-
----
-
-**73. What's the difference between Base Sepolia and Base mainnet?**
-
-Think of it like a training simulation vs. the real game. Base Sepolia is a test network where everything works exactly like the real thing, but the money is fake (test tokens that have no real value). It's where we build, test, and make mistakes safely before going live. Base mainnet is the real network where real USDC and real governance decisions live. SuvrenHOA is currently on Sepolia while we complete testing and audits. Mainnet launch is the milestone where it becomes fully "real."
-
----
-
-**74. Is this a testnet? Why are we testing on real community data?**
-
-Yes, currently on Base Sepolia testnet — and that's actually the right approach. Using real community data (with test money, not real money) lets us find friction points in the user experience before the stakes are high. No real funds are at risk during the testnet phase. Think of it like a fire drill: you're using the real building, the real evacuation routes, the real people — but there's no actual fire. The community data helps surface real-world usability issues that a purely synthetic test wouldn't catch.
-
----
-
-**75. What's our disaster recovery plan?**
-
-The architecture is inherently distributed, which means there's no single server to recover from. Smart contract data lives on the blockchain (globally replicated), documents live on Arweave (globally replicated), and the website is hosted with standard cloud infrastructure. The disaster recovery plan covers: website frontend outage (redeploy from backup in <1 hour), blockchain disruption (data is preserved; front-end reconnects when network stabilizes), and full scenario planning for rare worst-case events. Full DR documentation is maintained and will be available in the document registry.
-
----
-
-**76. Who maintains the website? What if EliteDevs disappears?**
-
-EliteDevs currently maintains the platform, but SuvrenHOA is designed to survive EliteDevs. The smart contracts are autonomous — they keep running on the blockchain whether EliteDevs exists or not. The frontend code is version-controlled and the community has rights to the codebase. If EliteDevs ceased to exist, another developer could redeploy the frontend and reconnect it to the same contracts. Your governance history, property records, and treasury are not locked inside EliteDevs' servers.
-
----
-
-**77. What's the uptime guarantee?**
-
-The smart contracts (the core of the system) have the uptime of the Base network, which targets 99.9%+ availability. The website frontend is hosted on standard cloud infrastructure with similar SLA targets. In practice, if the SuvrenHOA website were down, homeowners could still interact directly with the smart contracts via other tools (like Etherscan or MetaMask's built-in interface) for critical actions like voting. We'll publish a formal SLA and incident notification process before mainnet launch.
-
----
-
-**78. Can this handle 500 homes? 5,000?**
-
-Absolutely — the architecture is designed to scale well beyond Faircroft's current size. Base L2 can process hundreds of transactions per second at low cost, and the platform's infrastructure is cloud-hosted with horizontal scaling capability. A community of 5,000 homes voting simultaneously would be well within design parameters. The Arweave storage is also limitless in practical terms. If SuvrenHOA expands to serve multiple HOAs, each community gets its own isolated set of contracts and data — they don't share governance.
-
----
-
-**79. What APIs does this depend on? What if they go down?**
-
-The platform depends on: a Base RPC provider (for blockchain reads/writes), an Arweave gateway (for document access), and standard web hosting. For each dependency, we maintain fallback providers — if the primary Base RPC goes down, the platform switches to a backup. Arweave content is replicated widely enough that gateway outages are transparent to users. The critical blockchain data itself (votes, treasury, property records) doesn't disappear when an API goes down; it's just temporarily inaccessible until the connection is restored.
-
----
+The core governance (voting, treasury, ownership) runs on-chain and has no external API dependencies — it works as long as Base works. The front-end app integrates with: MetaMask and WalletConnect for wallet connections, Circle's USDC APIs for the on-ramp (converting dollars to USDC), Arweave gateways for document access, and standard cloud services for the web hosting. We've implemented fallbacks for each integration so that a single API failure doesn't take down the whole system.
 
 **80. Is there a mobile app?**
 
-The platform is currently a responsive web application, which means it works well on mobile browsers (Chrome, Safari, Brave on iOS and Android) without requiring an app download. Mobile wallet apps like MetaMask Mobile and Coinbase Wallet can connect seamlessly to the web app. A dedicated native mobile app is on the roadmap for a future version, but the web experience on phones is designed to be fully functional in the meantime. You won't need to go to a desktop computer to vote or check the treasury.
+The SuvrenHOA web app is fully mobile-responsive — it works in your phone's browser without needing to install anything. For voting and dues payments, mobile MetaMask or Coinbase Wallet work seamlessly with the web app. A dedicated native mobile app (iOS and Android) is on the roadmap and will be put to a community vote for prioritization. Until then, the browser experience on mobile is solid for all the features most homeowners use regularly.
 
 ---
 
-## 🏘️ Community (Questions 81–90)
+## 🏘️ Community
 
----
+**81. What if a neighbor sends harassing messages through the platform?**
 
-**81. What if my neighbor sends me harassing messages through the platform?**
+Harassment is taken seriously and there are consequences. Any resident can report a message to the board with one click — the report includes a permanent, uneditable record of exactly what was sent (blockchain messages can't be retroactively deleted). The board reviews reports and can suspend messaging privileges for the offending account. Severe cases are referred to law enforcement with the immutable message record as evidence. The platform also has block functionality (see Q83) so you can stop receiving messages from someone while a complaint is being investigated.
 
-Harassment through community platforms is a real issue that HOAs have always had to manage. SuvrenHOA has message reporting and blocking features, and the board has moderation tools to remove abusive users' communication privileges. Reports of harassment are logged and can be used in the formal HOA enforcement process just like any other documented code violation. The platform doesn't give harassers any special protection — it actually creates a clearer paper trail for addressing the behavior than informal verbal altercations would.
+**82. Can board members read private messages?**
 
----
-
-**82. Can the board see my private messages?**
-
-Direct messages between community members are private and not accessible to the board through normal platform functions. Board administrators have limited access to flagged/reported messages for moderation purposes only — not routine surveillance. The community messaging system is designed for neighbor-to-neighbor communication, not board oversight of private conversations. If you have concerns about communication privacy, you're always free to communicate with neighbors through channels outside the platform.
-
----
+No. Direct messages between residents are end-to-end encrypted — only the sender and recipient can read them. The board can see reports filed against specific messages (which the reporting resident shares) but cannot browse private conversations. Community forum posts are visible to all residents and board members, but those aren't private by design. We believe board members shouldn't have access to private resident communications — that's a creepy overreach that traditional HOA management doesn't have either.
 
 **83. How do I block someone?**
 
-You can block any community member from contacting you through the platform directly from their profile or from any message they've sent you. A blocked user can't send you direct messages, but can still participate in community-wide discussions (which you'd still see). Blocking is private — the blocked person isn't notified. The block list is managed in your account settings and can be modified at any time.
-
----
+Go to the resident's profile and click the block button. Blocking prevents them from sending you direct messages and hides their forum posts from your view. It doesn't prevent them from participating in governance votes or viewing community documents. Blocks are private — the blocked person isn't notified. You can manage your block list in account settings and unblock someone at any time. If someone is being persistently disruptive to the whole community (not just you), filing a formal conduct report is the appropriate next step.
 
 **84. Is the community forum moderated?**
 
-Yes — board members and designated community moderators can remove posts that violate community guidelines. The moderation policy mirrors the community's existing rules of conduct, the same standards that apply to behavior at in-person meetings. We're working on a community-drafted set of forum guidelines that will be adopted through a governance vote. Moderation actions are logged (though not necessarily public) to prevent arbitrary or retaliatory removals.
+Yes, by the board and designated community moderators. Moderation guidelines cover obvious things: no harassment, no spam, no personal attacks, no illegal content. Moderators can remove posts that violate the rules, but — importantly — the removal is logged on-chain (the post itself is removed from view but the record that it existed and was removed is permanent). This prevents moderators from secretly scrubbing inconvenient criticism. Appeals to moderation decisions go to the full board.
 
----
+**85. What about inappropriate content — who decides what's inappropriate?**
 
-**85. What if someone posts inappropriate content?**
+The community's conduct guidelines define inappropriate content, and those guidelines are themselves a governed document that residents can vote to change. The board doesn't have unilateral authority to define "inappropriate" however they like — it's bound by the approved conduct guidelines. Borderline cases are reviewed by at least two board members before action is taken. Residents can appeal any moderation decision. We're going for consistent enforcement of agreed-upon rules, not censorship of dissent.
 
-Report it using the flag/report button on any post — it goes directly to board moderators for review. Clearly inappropriate content (explicit material, threats, doxxing) will be removed quickly. For borderline cases, the moderation team reviews against community guidelines before acting. Repeat offenders can have their forum access restricted or removed by the board through the standard enforcement process. The goal is a forum where neighbors can discuss community matters frankly without it becoming a free-for-all.
+**86. Can I opt out of receiving community messages?**
 
----
+Yes. In your notification settings, you can configure which types of messages you receive: direct messages, forum notifications, governance alerts, and announcements. You can turn off forum notifications and non-urgent messages while keeping governance and dues alerts on. We strongly recommend keeping governance notifications on so you don't miss important votes. You can never fully opt out of official HOA notices (like board decisions, meeting announcements, etc.) because those are legally required communications under NCGS Chapter 47F.
 
-**86. Can I opt out of the messaging system?**
+**87. Who can see my pet and vehicle registrations?**
 
-Yes — you can set your messaging preferences to decline direct messages from anyone other than board administrators. You can also set notifications to off entirely if you prefer not to receive platform alerts. The governance functions (voting, proposals, document access) remain fully available regardless of your messaging preferences. You don't have to participate in the social layer to be a full participant in community governance.
+Pet and vehicle registrations are visible to all residents and board members — this is intentional. If there's a loose dog or an unidentified vehicle parked in a reserved spot, neighbors and the board need to be able to look up registration information. Your name is tied to your lot number (which is semi-public within the community), but the registration data isn't published on the public internet — it's only accessible to logged-in, verified residents. We don't share this information with third parties.
 
----
+**88. Can I make an anonymous safety report?**
 
-**87. Who sees my pet and vehicle registrations?**
-
-Pet and vehicle registrations are visible to board members and community administrators — they're operational information used for parking enforcement, gate access, and neighborhood safety. Other residents don't have access to your registration details. Your information is used for community management purposes only and isn't shared outside the HOA. NC HOA law actually requires communities to maintain resident vehicle records for certain enforcement purposes, and the platform handles that requirement while keeping the data appropriately restricted.
-
----
-
-**88. Can I be anonymous in the neighborhood watch reports?**
-
-You can submit neighborhood watch reports with a "request anonymity" flag, which masks your identity from other residents viewing the report. Board members can see the submitter for follow-up purposes, but the identity isn't shared publicly. This is similar to how anonymous tips work with local police — you can report without your name being attached, but the system maintains some traceability for legitimate follow-up. Full anonymous submissions where even the board doesn't know who submitted are available for safety-critical reports.
-
----
+Yes. The safety reporting system allows you to submit concerns anonymously — your wallet address is not disclosed to the board when you choose the anonymous option. However, anonymous reports carry less weight than identified ones, and we can't follow up with you for more information. For non-emergency safety concerns, anonymous reporting is available. For emergencies, please call 911 first, then file a report. Tip: even "anonymous" on a blockchain isn't perfectly anonymous to a determined investigator — if you have a sensitive matter, consider a phone call to the board instead.
 
 **89. Is my voting history public?**
 
-Your vote on any specific proposal is associated with your wallet address on-chain, but since your wallet address isn't publicly linked to your name (unless you've chosen to publish that link somewhere), your individual votes are practically private. The only people who could connect your wallet to your votes are those who already know your wallet address. Aggregate voting data (total votes for/against) is always public — that's the point of transparent governance. Individual ballot privacy is maintained as a default.
+Your voting record is on the public blockchain, associated with your wallet address. How identifiable that is depends on whether someone can connect your wallet address to your identity (see Q7). The vote results — how the community voted overall — are always public. For sensitive personal votes, we use a commit-reveal scheme where your vote is sealed until after the voting period closes, so no one can see how you voted and potentially pressure you during the vote window. After reveal, the record is permanent.
+
+**90. Could someone figure out my wallet address from my community activity?**
+
+Potentially, with effort. Your wallet address is linked to your property NFT, and your property is linked to your lot number, which is semi-public within the community. A determined resident could look up your lot number and trace it to your wallet address. This is a known trade-off of blockchain-based systems. We keep sensitive personal information (full name, email, contact details) off-chain in a private database to limit exposure. If privacy is a major concern for you, using a dedicated wallet only for SuvrenHOA (separate from any personal crypto holdings) is good practice.
 
 ---
 
-**90. Can someone figure out which wallet is mine?**
+## 🔑 Practical
 
-It requires effort and isn't available through the platform UI. On a technical level, if someone knew your wallet address (which you might share when setting up your account), they could see your on-chain activity. The platform doesn't publish a directory linking wallet addresses to names or addresses. We'd recommend using a fresh wallet specifically for your HOA activities rather than a wallet you use for other crypto transactions, which further separates your identity. This is standard privacy hygiene for any blockchain application.
+**91. What if I forget to vote on a proposal?**
 
----
+You miss the vote — but that's okay, it's your right to abstain. Proposals are designed to succeed or fail based on active participation, so abstentions count as... nothing. They neither help nor hurt a proposal. The system is designed so that quorum requirements protect against low-turnout decisions on major issues — if not enough people vote, the proposal doesn't pass regardless of the yes/no split. Set up governance notifications (see Q92) so you at least know when proposals are live.
 
-## 📅 Practical / Day-to-Day (Questions 91–100)
+**92. Will I get notifications about new proposals?**
 
----
-
-**91. What happens if I forget to vote on a proposal?**
-
-Life happens — and the platform is designed for that reality. If a proposal closes without your vote, the outcome stands based on those who did participate (as long as quorum was met). Your non-participation doesn't count as a "no" — proposals require active votes to pass or fail. The platform sends reminder notifications as proposal deadlines approach to give you the best chance of participating. For ongoing issues you care about, you can set up alerts so important proposals never sneak by.
-
----
-
-**92. How do I get notified about new proposals?**
-
-Notification settings are in your account profile — you can opt into email alerts, in-app notifications, and (in future versions) SMS or push notifications for new proposals, upcoming vote deadlines, and treasury activity. The platform also sends mandatory notice for any proposal that meets a significance threshold (as required by NC HOA law), ensuring you always get formal notice for major decisions. You'll never find out after the fact that a significant vote happened without you being notified.
-
----
+Yes — you can opt in to notifications through the app for email, SMS, or push notifications (if using the mobile browser experience) whenever a new proposal is submitted or when a vote is nearing its deadline. We also post weekly governance summaries in the community forum. The board sends out announcement messages for significant proposals. The more engaged residents are with notifications, the better the community's quorum numbers tend to be — so we actively encourage everyone to turn them on.
 
 **93. Can I use this on my phone?**
 
-Yes — the platform is fully functional on mobile browsers. On iOS, Safari or Chrome work well with MetaMask Mobile or Coinbase Wallet for signing transactions. On Android, Chrome with MetaMask Mobile is the most common setup. The interface automatically adjusts for smaller screens, and all core functions (voting, viewing proposals, checking treasury, reading documents) are accessible on mobile. The experience isn't identical to desktop but it's fully functional for everything you'd need to do day-to-day.
+Yes. The SuvrenHOA web app works on any modern smartphone browser — Chrome and Safari on iOS work well. For transactions (paying dues, voting), you'll need a mobile-compatible wallet app. MetaMask has a mobile app with a built-in browser, and Coinbase Wallet also works seamlessly. If you open the SuvrenHOA site inside the MetaMask mobile browser, everything connects automatically. It's not as slick as a native app yet, but all the core functionality is there.
 
----
+**94. What if the website is down when my dues are due?**
 
-**94. What if the website is down when dues are due?**
-
-The website being temporarily down doesn't invalidate your payment obligation, but you also shouldn't be penalized for a platform outage. We're building in a grace period that automatically extends if a documented platform outage occurs near a dues deadline. Additionally, the board will always maintain an alternative payment method (traditional bank transfer or check) as a backup for exactly these situations. Platform outages are announced via email and through community channels so you know to use the backup method.
-
----
+Dues deadlines are automatically extended during any documented system outage — the smart contract tracks deadlines and the board can push them back through an emergency governance action. You can also pay dues directly through the blockchain without using the SuvrenHOA website — if you have MetaMask and know the contract address, you can interact with it directly. And if all else fails, contact the board and document your attempt to pay — that documentation protects you from late fees.
 
 **95. Can I pay dues with a credit card?**
 
-Currently, dues are paid in USDC (digital dollars) through your crypto wallet. A credit card on-ramp is on the roadmap — services like Coinbase Pay allow you to buy USDC directly with a credit or debit card without needing a full crypto exchange account. In a future version, we aim to make the dues payment experience feel as simple as any online bill payment, with credit card support built in. Until then, the board can assist new residents with setting up USDC funding.
+Not directly — the system uses USDC, which requires converting dollars first. However, the in-app on-ramp lets you buy USDC with a debit card or bank transfer in a few minutes, and then immediately pay your dues. Some on-ramp providers do support credit cards (though they often add a small fee). Think of it like buying a gift card with your credit card and then using the gift card — an extra step, but not prohibitively complicated. We're working on integrating a smoother credit card to USDC to dues flow in a future update.
+
+**96. Is there a grace period for late dues?**
+
+Yes — the smart contract implements a 15-day grace period after the monthly due date before any late fee is assessed. Late fees are calculated automatically and added to the following month's payment. After 60 days of delinquency, the board's standard collections process kicks in per the CC&Rs. The blockchain timing is based on block timestamps, which are accurate to within a few seconds — no disputes about what time you paid. If you're going through financial hardship, contact the board before the due date; there's a hardship accommodation process.
+
+**97. What if the information on my property NFT is wrong?**
+
+Contact the board with the correct information and documentation (property deed, title, etc.). Off-chain information (your name, address, contact info) can be updated easily by board administrators. On-chain information (lot number, property classification) requires a board-initiated NFT update, which is logged publicly. If the wrong property NFT was issued entirely, that requires a burn-and-reissue process. Always check your property record during onboarding and flag any errors early — it's much easier to correct before any governance actions reference the incorrect data.
+
+**98. How do I transfer the property NFT to a spouse or trust?**
+
+Transfers for legitimate purposes (adding a spouse, moving to a living trust, estate planning) go through a board-assisted transfer process: you submit documentation proving the transfer (trust documents, marriage certificate, etc.), the board verifies and initiates the on-chain transfer, and the NFT moves from the current wallet to the new one. This isn't something you can do unilaterally — transfers require board involvement to prevent unauthorized sales or transfers. There's no fee for legitimate ownership-related transfers.
+
+**99. What if there's a power outage — can I still access records?**
+
+If your power is out, you're not accessing anything from home regardless of the system. But HOA records being on Arweave and the blockchain means they're accessible from anywhere in the world with internet access — a phone with cellular data, a library, a neighbor's house. The records aren't stored on a local server that goes down with your power. For critical documents you might need during emergencies (insurance info, emergency contacts, contractor lists), we recommend downloading local copies and keeping them somewhere accessible even without power.
+
+**100. This all sounds great — why isn't every HOA doing this?**
+
+Honestly, a few reasons: blockchain technology is still relatively new and most HOA management companies have zero incentive to recommend it (they'd be automating themselves out of a job), there's a learning curve that scares off decision-makers, and early implementations in other communities weren't as user-friendly as SuvrenHOA aims to be. The regulatory clarity for blockchain governance is also still catching up, though NC is actually ahead of many states. Early adopters always face friction — but communities that get this right early will have a massive advantage in transparency, efficiency, and resident trust. You're part of that first wave, and that's worth something.
 
 ---
 
-**96. Is there a grace period for late dues payments?**
+*Have a question not answered here? Post it in the community forum or contact the board through the app. If it's a good one, it'll end up in the next version of this document.*
 
-Yes — the grace period policy is set by the community's governing documents and matches whatever period your CC&Rs specify (typically 15–30 days). The smart contract enforces this automatically: dues become "late" after the deadline, but the late fee applies only after the grace period expires. Everything is transparent and automated — no one gets a surprise late fee because a treasurer forgot to update a spreadsheet. Grace period parameters are visible in the governance settings and can only be changed by community vote.
-
----
-
-**97. What if my property NFT has wrong info (wrong sqft, wrong address)?**
-
-Contact the board or submit a correction request through the platform. Property NFT metadata corrections require board-level authorization and a verified property record (like your deed) to update. The correction is logged on-chain with a timestamp showing what was changed and when — there's a transparent audit trail for every modification. We'd rather have accurate records and a correction history than silently wrong data. Corrections can typically be processed within a few business days.
-
----
-
-**98. Can I transfer my property to my spouse or trust?**
-
-Yes — property transfers to spouses or trusts are a supported use case. This is a structured process: you'd submit a transfer request with the relevant legal documentation (deed transfer, trust documents), the board verifies the legal transfer, and the property NFT is burned and reissued to the new wallet address associated with the spouse or trust. This mirrors how you'd notify a traditional HOA of a deed change. We've specifically designed the process to accommodate estate planning scenarios, which are common in established neighborhoods.
-
----
-
-**99. What happens during a power outage — can I still access my records?**
-
-Your blockchain records don't go anywhere during a power outage — they're on a globally distributed network, not your local power grid. Once power is restored and you have internet access, all your governance records, documents, and transaction history are right where you left them. For people on battery backup or using mobile data, the platform remains accessible during local outages. The only thing a local power outage affects is your ability to access the internet — the data itself is as safe as the internet is.
-
----
-
-**100. If this is so great, why isn't every HOA using it?**
-
-That's a fair challenge, and the honest answer is: we're early. Blockchain-based HOA governance is genuinely new technology, and most of the 370,000 HOAs in the United States are still using 1990s-era paper and email processes. SuvrenHOA is part of a small wave of communities willing to try something better while the technology matures. The barriers are real — learning curve, regulatory uncertainty, and the inertia of "we've always done it this way." But the same was true of online banking in 2000, and now it's unremarkable. Faircroft has the opportunity to be ahead of that curve, not chasing it.
-
----
-
-*Last updated: March 2026 | SuvrenHOA Platform — Faircroft Community, Raleigh, NC*
-
-*Questions not covered here? Submit a community question through the platform or bring it to the next board meeting.*
+*SuvrenHOA is governed by Raleigh, NC homeowners under NCGS Chapter 47F on Base (Ethereum L2). Built by EliteDevs.*

@@ -18,7 +18,7 @@ function generatePlots(): Plot[] {
   const plots: Plot[] = [];
   const statuses: Plot['status'][] = ['available', 'planted', 'planted', 'reserved'];
   const plants = ['Tomatoes', 'Basil', 'Zucchini', 'Peppers', 'Herbs', 'Lettuce', 'Strawberries', 'Carrots'];
-  const lots = ['12', '7', '23', '4', '31', '18', '9', '44'];
+  const lots = ['12', '7', '9', '4', '14', '16', '5', '11'];
   let idx = 0;
   for (let r = 0; r < 8; r++) {
     for (let c = 0; c < 8; c++) {

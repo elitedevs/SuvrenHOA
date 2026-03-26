@@ -34,7 +34,7 @@ const DEMO_ROUTES: CarpoolRoute[] = [
     id: '1',
     name: 'Lincoln Elementary Morning Run',
     destination: 'Lincoln Elementary School',
-    pickupPoints: ['Lot 12 (Maple Dr)', 'Lot 34 (Oak Ave)', 'Lot 67 (Main Gate)'],
+    pickupPoints: ['Lot 12 (Maple Dr)', 'Lot 34 (Oak Ave)', 'Lot 13 (Main Gate)'],
     departureTime: '07:45',
     returnTime: '15:30',
     days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
@@ -42,7 +42,7 @@ const DEMO_ROUTES: CarpoolRoute[] = [
     driverName: 'Sarah K.',
     riders: [
       { lot: '12', name: 'Tom R.', pickup: 'Lot 12 (Maple Dr)' },
-      { lot: '67', name: 'Amir P.', pickup: 'Lot 67 (Main Gate)' },
+      { lot: '13', name: 'Amir P.', pickup: 'Lot 13 (Main Gate)' },
     ],
     maxRiders: 4,
     type: 'school',

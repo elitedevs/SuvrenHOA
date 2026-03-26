@@ -39,16 +39,16 @@ export default function TreasuryPage() {
             Every dollar publicly recorded and verifiable on the blockchain
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/treasury/budget"
-            className="no-print shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 hover:border-[#c9a96e]/40 text-sm font-medium text-[#c9a96e] hover:text-[#e8d5a3] transition-all"
+            className="no-print w-full sm:w-auto shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 hover:border-[#c9a96e]/40 text-sm font-medium text-[#c9a96e] hover:text-[#e8d5a3] transition-all"
           >
             📊 Budget Planner
           </Link>
           <button
             onClick={exportTreasuryPDF}
-            className="no-print shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
+            className="no-print w-full sm:w-auto shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
             title="Export as PDF"
           >
             📄 Export PDF
@@ -158,22 +158,7 @@ export default function TreasuryPage() {
         </div>
 
         {expenditureCount === 0 ? (
-          <div className="glass-card rounded-2xl hover-lift p-12 text-center">
-            {/* Chart placeholder */}
-            <div className="w-full h-32 rounded-xl bg-gray-800/30 border border-gray-700/30 flex items-center justify-center mb-6">
-              <div className="flex items-end gap-2 h-16">
-                {[40, 65, 30, 80, 55, 45, 70].map((h, i) => (
-                  <div
-                    key={i}
-                    className="w-6 rounded-t bg-[#c9a96e]/12 border-t border-[#c9a96e]/30"
-                    style={{ height: `${h}%` }}
-                  />
-                ))}
-              </div>
-            </div>
-            <p className="text-xs text-gray-600 font-medium uppercase tracking-wide mb-4">
-              Expenditure chart — coming soon
-            </p>
+          <div className="glass-card rounded-2xl hover-lift p-8 text-center">
             <div className="w-14 h-14 rounded-2xl bg-gray-800/50 border border-gray-700/30 flex items-center justify-center text-2xl mx-auto mb-4">
               💰
             </div>

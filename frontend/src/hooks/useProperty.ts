@@ -137,9 +137,9 @@ export function useProperty() {
     tokenId: selectedProperty?.tokenId,
     propertyInfo: selectedProperty
       ? {
-          lotNumber: BigInt(selectedProperty.lotNumber),
-          squareFootage: BigInt(selectedProperty.squareFootage),
-          lastDuesTimestamp: BigInt(selectedProperty.lastDuesTimestamp),
+          lotNumber: BigInt(selectedProperty.lotNumber ?? 0),
+          squareFootage: BigInt(selectedProperty.squareFootage ?? 0),
+          lastDuesTimestamp: BigInt(selectedProperty.lastDuesTimestamp ?? 0),
           streetAddress: selectedProperty.streetAddress,
         }
       : undefined,

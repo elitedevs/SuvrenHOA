@@ -38,14 +38,14 @@ const ICON_MAP: Record<string, React.ElementType> = {
 };
 
 const DEMO_NOMINATIONS: Nomination[] = [
-  { id: '1', awardId: 'best-lawn', year: 2026, lot: '17', name: 'Eleanor Whitfield', reason: 'Eleanor\'s native plant garden is a showstopper every season — 12 varieties of native flowers and zero pesticides.', votes: ['12', '34', '42', '56', '88'], isWinner: false },
-  { id: '2', awardId: 'best-lawn', year: 2026, lot: '42', name: 'Ryan Martinez', reason: 'Perfectly edged lawn, healthy turf, and those incredible seasonal annuals along the front walk.', votes: ['20', '67', '7'], isWinner: false },
-  { id: '3', awardId: 'most-helpful', year: 2026, lot: '88', name: 'Carlos Bautista', reason: 'Fixed three neighbors\' plumbing issues this winter, no charge. Always the first to volunteer for events.', votes: ['12', '17', '34', '42', '56', '67', '20'], isWinner: false },
-  { id: '4', awardId: 'spirit', year: 2026, lot: '42', name: 'Martinez Family', reason: 'Organized block party, book club launch, and holiday lighting contest — the heartbeat of our community.', votes: ['17', '20', '88'], isWinner: false },
+  { id: '1', awardId: 'best-lawn', year: 2026, lot: '17', name: 'Eleanor Whitfield', reason: 'Eleanor\'s native plant garden is a showstopper every season — 12 varieties of native flowers and zero pesticides.', votes: ['12', '6', '8', '11', '15'], isWinner: false },
+  { id: '2', awardId: 'best-lawn', year: 2026, lot: '8', name: 'Ryan Martinez', reason: 'Perfectly edged lawn, healthy turf, and those incredible seasonal annuals along the front walk.', votes: ['2', '13', '7'], isWinner: false },
+  { id: '3', awardId: 'most-helpful', year: 2026, lot: '15', name: 'Carlos Bautista', reason: 'Fixed three neighbors\' plumbing issues this winter, no charge. Always the first to volunteer for events.', votes: ['12', '17', '6', '8', '11', '13', '2'], isWinner: false },
+  { id: '4', awardId: 'spirit', year: 2026, lot: '8', name: 'Martinez Family', reason: 'Organized block party, book club launch, and holiday lighting contest — the heartbeat of our community.', votes: ['17', '2', '15'], isWinner: false },
   // 2025 winners
-  { id: '5', awardId: 'best-lawn', year: 2025, lot: '34', name: 'Sarah Kang', reason: 'Impeccable Japanese garden design transformed their front yard into a neighborhood landmark.', votes: [], isWinner: true },
+  { id: '5', awardId: 'best-lawn', year: 2025, lot: '6', name: 'Sarah Kang', reason: 'Impeccable Japanese garden design transformed their front yard into a neighborhood landmark.', votes: [], isWinner: true },
   { id: '6', awardId: 'most-helpful', year: 2025, lot: '12', name: 'Jennifer Liu', reason: 'Organized the community pet-sitting network and coordinated the welcome committee for 5 new families.', votes: [], isWinner: true },
-  { id: '7', awardId: 'greenest', year: 2025, lot: '56', name: 'The Osei Family', reason: 'Full solar install, rainwater harvesting, and started the community compost program.', votes: [], isWinner: true },
+  { id: '7', awardId: 'greenest', year: 2025, lot: '11', name: 'The Osei Family', reason: 'Full solar install, rainwater harvesting, and started the community compost program.', votes: [], isWinner: true },
 ];
 
 const CURRENT_YEAR = 2026;

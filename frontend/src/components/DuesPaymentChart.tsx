@@ -35,13 +35,16 @@ export function DuesPaymentChart({ paidMonths = [], quarterlyAmount = 450 }: Due
     const last12 = getLast12Months();
     const now = new Date();
 
+    const hasAnyData = paidMonths.length > 0;
+
     return last12.map(({ year, month }) => {
       const key = `${year}-${String(month + 1).padStart(2, '0')}`;
       const isPaid = paidMonths.some(p => p.startsWith(key));
       const isFuture = new Date(year, month, 1) > now;
 
+      // If no payment data exists at all, don't mark months as missed — show as pending/unknown
       let status: PaymentStatus = 'missed';
-      if (isFuture) status = 'pending';
+      if (isFuture || !hasAnyData) status = 'pending';
       else if (isPaid) status = 'paid';
 
       return {

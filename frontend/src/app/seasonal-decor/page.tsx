@@ -120,7 +120,7 @@ const GUIDELINES: Guideline[] = [
 ];
 
 const DEMO_SUBMISSIONS: Submission[] = [
-  { id: '1', lot: '42', description: 'Hanging spring flower baskets on porch columns (4 total)', submittedAt: '2026-03-20T10:00:00Z', status: 'approved' },
+  { id: '1', lot: '8', description: 'Hanging spring flower baskets on porch columns (4 total)', submittedAt: '2026-03-20T10:00:00Z', status: 'approved' },
   { id: '2', lot: '17', description: 'Large Easter bunny inflatable (~5 ft) in front yard', submittedAt: '2026-03-22T14:00:00Z', status: 'pending' },
 ];
 

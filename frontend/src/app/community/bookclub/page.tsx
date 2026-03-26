@@ -45,9 +45,9 @@ const DEMO_BOOKS: Book[] = [
 ];
 
 const DEMO_THREADS: Thread[] = [
-  { id: '1', bookId: '1', author: 'Eleanor W.', lot: '17', content: 'The characters feel so real! Towles has such a gift for voice. Who else is rooting for Emmett?', timestamp: '2026-03-24T14:30:00Z', likes: 5 },
-  { id: '2', bookId: '1', author: 'Marcus B.', lot: '20', content: 'The structure with the 10 days is genius. Each day reveals a new layer. Finished it in 3 sittings!', timestamp: '2026-03-23T19:00:00Z', likes: 3 },
-  { id: '3', bookId: '2', author: 'Sarah K.', lot: '34', content: 'One of the best books I\'ve read in years. The friendship felt so authentic.', timestamp: '2026-02-28T20:00:00Z', likes: 7 },
+  { id: '1', bookId: '1', author: 'Eleanor W.', lot: '3', content: 'The characters feel so real! Towles has such a gift for voice. Who else is rooting for Emmett?', timestamp: '2026-03-24T14:30:00Z', likes: 5 },
+  { id: '2', bookId: '1', author: 'Marcus B.', lot: '2', content: 'The structure with the 10 days is genius. Each day reveals a new layer. Finished it in 3 sittings!', timestamp: '2026-03-23T19:00:00Z', likes: 3 },
+  { id: '3', bookId: '2', author: 'Sarah K.', lot: '6', content: 'One of the best books I\'ve read in years. The friendship felt so authentic.', timestamp: '2026-02-28T20:00:00Z', likes: 7 },
 ];
 
 const DEMO_NOMINATIONS: Nomination[] = [

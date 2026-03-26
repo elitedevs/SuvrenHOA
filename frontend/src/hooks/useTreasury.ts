@@ -40,7 +40,7 @@ export function useTreasury() {
   const discount = annualDiscount ? Number(annualDiscount) / 100 : 5;
 
   const annualAmount = quarterlyDues
-    ? formatUSDC((quarterlyDues as bigint) * BigInt(4) * BigInt(10000 - Number(annualDiscount)) / BigInt(10000))
+    ? formatUSDC((quarterlyDues as bigint) * BigInt(4) * BigInt(10000 - Number(annualDiscount ?? 0)) / BigInt(10000))
     : '760.00';
 
   return {

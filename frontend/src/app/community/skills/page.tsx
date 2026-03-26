@@ -32,13 +32,13 @@ const CATEGORIES: { id: Category; icon: React.ElementType; color: string; bg: st
 ];
 
 const DEMO_LISTINGS: SkillListing[] = [
-  { id: '1', type: 'offer', category: 'Tech', skill: 'Smart Home Setup', description: 'Can help set up smart devices, home automation, and network troubleshooting', lot: '42', name: 'Ryan M.', createdAt: '2026-03-20T10:00:00Z' },
+  { id: '1', type: 'offer', category: 'Tech', skill: 'Smart Home Setup', description: 'Can help set up smart devices, home automation, and network troubleshooting', lot: '8', name: 'Ryan M.', createdAt: '2026-03-20T10:00:00Z' },
   { id: '2', type: 'offer', category: 'Garden', skill: 'Vegetable Garden Planning', description: 'Expert in raised bed gardens, companion planting, and seasonal scheduling', lot: '17', name: 'Eleanor W.', createdAt: '2026-03-18T09:00:00Z' },
-  { id: '3', type: 'request', category: 'Tech', skill: 'WiFi & Router Help', description: 'Need help extending WiFi coverage to garage and backyard', lot: '56', name: 'Tom R.', createdAt: '2026-03-22T14:00:00Z' },
-  { id: '4', type: 'offer', category: 'Home Repair', skill: 'Basic Plumbing', description: 'Can fix leaky faucets, running toilets, and basic pipe issues', lot: '88', name: 'Carlos B.', createdAt: '2026-03-15T11:00:00Z' },
-  { id: '5', type: 'request', category: 'Garden', skill: 'Lawn Aeration Advice', description: 'Looking for help with soil aeration and overseeding schedule', lot: '34', name: 'Sarah K.', createdAt: '2026-03-21T16:00:00Z' },
-  { id: '6', type: 'offer', category: 'Cooking', skill: 'Meal Prep Coaching', description: 'Can teach batch cooking and healthy meal planning for families', lot: '23', name: 'Aisha P.', createdAt: '2026-03-19T12:00:00Z' },
-  { id: '7', type: 'request', category: 'Pets', skill: 'Dog Walking Coverage', description: 'Need occasional dog walking help during work travel', lot: '67', name: 'Mark V.', createdAt: '2026-03-23T08:00:00Z' },
+  { id: '3', type: 'request', category: 'Tech', skill: 'WiFi & Router Help', description: 'Need help extending WiFi coverage to garage and backyard', lot: '11', name: 'Tom R.', createdAt: '2026-03-22T14:00:00Z' },
+  { id: '4', type: 'offer', category: 'Home Repair', skill: 'Basic Plumbing', description: 'Can fix leaky faucets, running toilets, and basic pipe issues', lot: '15', name: 'Carlos B.', createdAt: '2026-03-15T11:00:00Z' },
+  { id: '5', type: 'request', category: 'Garden', skill: 'Lawn Aeration Advice', description: 'Looking for help with soil aeration and overseeding schedule', lot: '6', name: 'Sarah K.', createdAt: '2026-03-21T16:00:00Z' },
+  { id: '6', type: 'offer', category: 'Cooking', skill: 'Meal Prep Coaching', description: 'Can teach batch cooking and healthy meal planning for families', lot: '9', name: 'Aisha P.', createdAt: '2026-03-19T12:00:00Z' },
+  { id: '7', type: 'request', category: 'Pets', skill: 'Dog Walking Coverage', description: 'Need occasional dog walking help during work travel', lot: '13', name: 'Mark V.', createdAt: '2026-03-23T08:00:00Z' },
   { id: '8', type: 'offer', category: 'Pets', skill: 'Pet Sitting', description: 'Happy to watch dogs, cats, or small animals while neighbors travel', lot: '12', name: 'Jenny L.', createdAt: '2026-03-17T15:00:00Z' },
 ];
 

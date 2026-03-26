@@ -6,6 +6,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery } from '@tanstack/react-query';
 import { DirectoryMapView } from '@/components/DirectoryMapView';
 import { Map, List } from 'lucide-react';
+import { usePublicStats } from '@/hooks/usePublicData';
 
 
 
@@ -19,7 +20,6 @@ const COMMUNITY_INFO = {
   name: 'Faircroft HOA',
   location: 'Raleigh, NC',
   established: '2008',
-  totalLots: 150,
   managedBy: 'Self-managed (SuvrenHOA)',
   annualBudget: '$120,000',
   website: 'faircrofthoa.com',
@@ -37,6 +37,7 @@ export default function DirectoryPage() {
     );
   }
 
+  const { totalProperties } = usePublicStats();
   const { data, isLoading } = useQuery({
     queryKey: ['directory'],
     queryFn: async () => {
@@ -110,7 +111,7 @@ export default function DirectoryPage() {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="p-3 rounded-lg bg-gray-800/30">
-            <p className="text-lg font-bold text-[#c9a96e]">{COMMUNITY_INFO.totalLots}</p>
+            <p className="text-lg font-bold text-[#c9a96e]">{totalProperties || '—'}</p>
             <p className="text-[10px] text-gray-500">Total Lots</p>
           </div>
           <div className="p-3 rounded-lg bg-gray-800/30">
@@ -217,7 +218,7 @@ function ResidentProfileCard({ member, isBoard = false }: { member: any; isBoard
         <div className="space-y-2 mb-4">
           <div className="flex items-center gap-2 text-[11px]">
             <span className="text-gray-500 w-14 shrink-0">Lot</span>
-            <span className="font-mono font-semibold text-gray-200">#{member.lotNumber || '—'}</span>
+            <span className="font-mono font-semibold text-gray-200">{member.lotNumber ? `#${member.lotNumber}` : 'Not assigned'}</span>
           </div>
           {member.address && (
             <div className="flex items-center gap-2 text-[11px]">

@@ -181,7 +181,7 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
                 Vacant / no data
               </div>
               <p className="text-[10px] text-gray-600 mt-2 leading-relaxed">
-                {residents.length} of 150 lots have registered residents.
+                {residents.length} lots have registered residents.
               </p>
             </div>
           )}

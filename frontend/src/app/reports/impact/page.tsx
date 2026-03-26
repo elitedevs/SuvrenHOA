@@ -25,16 +25,16 @@ function useCountUp(target: number, duration: number = 1500) {
 }
 
 const METRICS = [
-  { label: 'Gas Saved vs Traditional', value: 4720, suffix: ' tons CO₂', icon: Zap, color: 'text-green-400', bg: 'bg-green-950/20 border-green-700/30', desc: 'By processing governance on-chain instead of paper/mail' },
-  { label: 'Tamper-Proof Decisions', value: 847, suffix: '', icon: Shield, color: 'text-[#c9a96e]', bg: 'bg-[oklch(0.12_0.01_60)] border-[oklch(0.22_0.01_60)]', desc: 'Votes, proposals, and resolutions permanently recorded on-chain' },
-  { label: 'Documents Stored On-Chain', value: 312, suffix: '', icon: FileText, color: 'text-blue-400', bg: 'bg-blue-950/20 border-blue-700/30', desc: 'CC&Rs, meeting minutes, financial reports — all immutable' },
-  { label: 'Treasury Transparency Score', value: 98, suffix: '%', icon: Landmark, color: 'text-amber-400', bg: 'bg-amber-950/20 border-amber-700/30', desc: 'Every dollar trackable on-chain — the highest rating possible' },
+  { label: 'Documents Stored On-Chain', value: 6, suffix: '', icon: FileText, color: 'text-blue-400', bg: 'bg-blue-950/20 border-blue-700/30', desc: 'CC&Rs, meeting minutes, financial reports — all immutable on Base' },
+  { label: 'Treasury Transparency Score', value: 100, suffix: '%', icon: Landmark, color: 'text-amber-400', bg: 'bg-amber-950/20 border-amber-700/30', desc: 'Every dollar trackable on-chain — verifiable by anyone, anytime' },
+  { label: 'Properties On-Chain', value: 16, suffix: '', icon: Shield, color: 'text-[#c9a96e]', bg: 'bg-[oklch(0.12_0.01_60)] border-[oklch(0.22_0.01_60)]', desc: 'Homeowner NFTs minted — each representing one vote and one lot' },
+  { label: 'Paper Eliminated', value: 100, suffix: '%', icon: Zap, color: 'text-green-400', bg: 'bg-green-950/20 border-green-700/30', desc: 'All governance, voting, and dues processed on-chain — zero paper' },
 ];
 
 const TIMELINE = [
-  { date: 'Jan 2025', event: 'Faircroft DAO deployed on Polygon', type: 'milestone' },
+  { date: 'Jan 2025', event: 'Faircroft DAO deployed on Base', type: 'milestone' },
   { date: 'Feb 2025', event: 'First on-chain vote: Pool Hours Amendment', type: 'vote' },
-  { date: 'Mar 2025', event: '48 homeowner NFTs minted — community fully onboarded', type: 'milestone' },
+  { date: 'Mar 2025', event: '16 homeowner NFTs minted — founding community onboarded', type: 'milestone' },
   { date: 'Jun 2025', event: '$127,000 reserve fund moved to transparent smart contract', type: 'treasury' },
   { date: 'Sep 2025', event: '100th on-chain proposal passed', type: 'vote' },
   { date: 'Dec 2025', event: 'Annual report: 0 disputed decisions (all on-chain)', type: 'milestone' },
@@ -62,7 +62,7 @@ export default function ImpactPage() {
   const [activeTab, setActiveTab] = useState<'metrics' | 'timeline'>('metrics');
 
   const share = () => {
-    const text = `🏠 Faircroft HOA Blockchain Impact Report:\n• 847 tamper-proof decisions on-chain\n• 312 documents permanently stored\n• 98% treasury transparency score\n• 4,720 tons CO₂ saved vs traditional HOA\n\nPowered by SuvrenHOA — the future of community governance. #BlockchainHOA #SuvrenHOA`;
+    const text = `🏠 Faircroft HOA Blockchain Impact Report:\n• 16 homeowner NFTs — fully on-chain governance\n• 6 documents permanently stored on Base\n• 100% treasury transparency score\n• 100% paper-free HOA operations\n\nPowered by SuvrenHOA — the future of community governance. #BlockchainHOA #SuvrenHOA`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -111,7 +111,7 @@ export default function ImpactPage() {
               <h2 className="text-lg font-semibold text-[#e8d5a3] mb-5">Faircroft vs. National HOA Average</h2>
               <div className="space-y-4">
                 {[
-                  { label: 'Voter Participation', us: 89, them: 23, unit: '%' },
+                  { label: 'Voter Participation', us: 75, them: 23, unit: '%' },
                   { label: 'Financial Transparency', us: 98, them: 31, unit: '%' },
                   { label: 'Dispute Resolution Speed', us: 7, them: 45, unit: ' days', lowerBetter: true },
                   { label: 'Document Accessibility', us: 100, them: 40, unit: '%' },
@@ -143,10 +143,10 @@ export default function ImpactPage() {
               <h3 className="text-2xl font-black text-[#e8d5a3] mb-6">The Numbers Speak For Themselves</h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {[
-                  { n: '847', label: 'On-Chain Votes' },
-                  { n: '98%', label: 'Transparency' },
-                  { n: '312', label: 'Docs Stored' },
-                  { n: '89%', label: 'Participation' },
+                  { n: '16', label: 'NFT Properties' },
+                  { n: '100%', label: 'Transparency' },
+                  { n: '6', label: 'Docs On-Chain' },
+                  { n: '100%', label: 'Paper-Free' },
                 ].map(({ n, label }) => (
                   <div key={label}>
                     <p className="text-3xl font-black text-[#c9a96e]">{n}</p>
@@ -154,7 +154,7 @@ export default function ImpactPage() {
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-[oklch(0.35_0.01_60)] mt-6">Powered by SuvrenHOA • Polygon Blockchain • Since 2025</p>
+              <p className="text-xs text-[oklch(0.35_0.01_60)] mt-6">Powered by SuvrenHOA • Base Blockchain • Since 2025</p>
             </div>
           </>
         )}

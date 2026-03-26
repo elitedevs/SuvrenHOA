@@ -61,7 +61,7 @@ export default function EnergyPage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           {[
             { label: 'Avg Monthly Bill', val: '$163', sub: 'Community average', icon: TrendingDown, color: 'text-[#c9a96e]' },
-            { label: 'Solar Homes', val: '14', sub: 'Out of 48 homes', icon: Sun, color: 'text-amber-400' },
+            { label: 'Solar Homes', val: '14', sub: 'Out of 16 homes', icon: Sun, color: 'text-amber-400' },
             { label: 'CO₂ Reduced', val: '47t', sub: 'This year', icon: Leaf, color: 'text-green-400' },
             { label: 'Green Score', val: '72/100', sub: 'Community rating', icon: Zap, color: 'text-[#c9a96e]' },
           ].map(({ label, val, sub, icon: Icon, color }) => (

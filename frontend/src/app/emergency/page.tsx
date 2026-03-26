@@ -15,9 +15,9 @@ interface Contact {
 
 const CONTACTS: Contact[] = [
   // HOA Board
-  { id: 'board-president', category: 'HOA Board', name: 'Board President', phone: '(555) 201-0001', note: 'On-chain: 0x1234...5678', icon: '🏛️', urgent: false },
-  { id: 'board-treasurer', category: 'HOA Board', name: 'Board Treasurer', phone: '(555) 201-0002', note: 'On-chain: 0xABCD...EF01', icon: '💼', urgent: false },
-  { id: 'board-secretary', category: 'HOA Board', name: 'Board Secretary', phone: '(555) 201-0003', note: 'On-chain: 0x9876...4321', icon: '📋', urgent: false },
+  { id: 'board-president', category: 'HOA Board', name: 'Board President', phone: '(555) 201-0001', note: 'Contact for HOA matters and urgent property issues', icon: '🏛️', urgent: false },
+  { id: 'board-treasurer', category: 'HOA Board', name: 'Board Treasurer', phone: '(555) 201-0002', note: 'Contact for financial and dues questions', icon: '💼', urgent: false },
+  { id: 'board-secretary', category: 'HOA Board', name: 'Board Secretary', phone: '(555) 201-0003', note: 'Contact for meeting minutes and records', icon: '📋', urgent: false },
   // Emergency Services
   { id: 'police', category: 'Emergency Services', name: 'Police Non-Emergency', phone: '(555) 911-0001', note: 'For non-life-threatening issues', icon: '👮', urgent: false },
   { id: 'fire', category: 'Emergency Services', name: 'Fire Department', phone: '911', note: 'For emergencies — always call 911 first', icon: '🚒', urgent: true },

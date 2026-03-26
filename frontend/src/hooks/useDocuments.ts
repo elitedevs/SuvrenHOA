@@ -69,7 +69,7 @@ export function useDocument(docId: number) {
   const { data, isLoading } = useReadContract({
     ...documentRegistry,
     functionName: 'getDocument',
-    args: [BigInt(docId)],
+    args: [BigInt(docId ?? 0)],
     query: { enabled: docId >= 0 },
   });
 

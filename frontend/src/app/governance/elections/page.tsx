@@ -34,8 +34,8 @@ const ELECTIONS: Election[] = [
     status: 'upcoming',
     candidates: [
       { id: 'c1', name: 'Patricia Holloway', lot: '7', statement: 'I\'ve lived in Faircroft for 8 years and served on the architectural committee. My priority is improving our community\'s green spaces and bringing transparent financial reporting to every resident.', votes: 0, nominated: '12' },
-      { id: 'c2', name: 'David Nguyen', lot: '23', statement: 'As a software engineer and blockchain enthusiast, I\'m passionate about the decentralized future of HOA governance. I\'ll push for more on-chain transparency and lower fees.', votes: 0, nominated: '4' },
-      { id: 'c3', name: 'Maria Santos', lot: '31', statement: 'Retired property manager with 20+ years of experience. I understand both the business and community sides of HOA management.', votes: 0, nominated: '31' },
+      { id: 'c2', name: 'David Nguyen', lot: '9', statement: 'As a software engineer and blockchain enthusiast, I\'m passionate about the decentralized future of HOA governance. I\'ll push for more on-chain transparency and lower fees.', votes: 0, nominated: '4' },
+      { id: 'c3', name: 'Maria Santos', lot: '14', statement: 'Retired property manager with 20+ years of experience. I understand both the business and community sides of HOA management.', votes: 0, nominated: '14' },
     ],
     totalVotes: 0,
   },
@@ -47,10 +47,10 @@ const ELECTIONS: Election[] = [
     endDate: '2026-03-24',
     status: 'completed',
     candidates: [
-      { id: 'c4', name: 'Approve Renovation', lot: 'Board', statement: 'Full pool resurfacing, new pump system, and accessibility ramp installation.', votes: 31, nominated: 'Board' },
-      { id: 'c5', name: 'Reject / Defer', lot: 'Board', statement: 'Wait until next fiscal year and solicit additional bids.', votes: 9, nominated: 'Board' },
+      { id: 'c4', name: 'Approve Renovation', lot: 'Board', statement: 'Full pool resurfacing, new pump system, and accessibility ramp installation.', votes: 11, nominated: 'Board' },
+      { id: 'c5', name: 'Reject / Defer', lot: 'Board', statement: 'Wait until next fiscal year and solicit additional bids.', votes: 3, nominated: 'Board' },
     ],
-    totalVotes: 40,
+    totalVotes: 14,
   },
 ];
 

@@ -2,6 +2,7 @@
 
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { usePublicStats } from '@/hooks/usePublicData';
 
 const YEAR = 2025;
 
@@ -83,6 +84,7 @@ const fmtK = (n: number) => n >= 1000000 ? `$${(n / 1000000).toFixed(2)}M` : n >
 
 export default function AnnualReportPage() {
   const { isConnected } = useAccount();
+  const { totalProperties, totalTreasuryNum, documentsOnChain } = usePublicStats();
 
   if (!isConnected) {
     return (
@@ -93,7 +95,17 @@ export default function AnnualReportPage() {
     );
   }
 
-  const d = ANNUAL_DATA;
+  // Use real on-chain data where available; keep mock for operational metrics not yet on-chain
+  const liveUnits = totalProperties > 0 ? totalProperties : ANNUAL_DATA.totalUnits;
+  const liveTreasury = totalTreasuryNum > 0 ? totalTreasuryNum : ANNUAL_DATA.treasuryBalance;
+  const liveOccupancy = totalProperties > 0 ? Math.round((totalProperties / totalProperties) * 100) : Math.round(ANNUAL_DATA.occupiedUnits / ANNUAL_DATA.totalUnits * 100);
+
+  const d = {
+    ...ANNUAL_DATA,
+    totalUnits: liveUnits,
+    occupiedUnits: liveUnits, // on-chain minted = occupied
+    treasuryBalance: liveTreasury,
+  };
   const maxBalance = Math.max(...d.monthlyTreasury.map(m => m.balance));
   const minBalance = Math.min(...d.monthlyTreasury.map(m => m.balance));
 

@@ -38,11 +38,15 @@ const LABEL_MAP: Record<string, string> = {
   onboarding: 'Onboarding',
   checkout: 'Checkout',
   verify: 'Verify',
+  builder: 'Survey Builder',
+  'seasonal-decor': 'Seasonal Decor',
+  bookclub: 'Book Club',
 };
 
 // Full-path overrides for segments that mean different things by context
 const PATH_LABEL_MAP: Record<string, string> = {
   '/admin/dashboard': 'Board Dashboard',
+  '/surveys/builder': 'Survey Builder',
 };
 
 function getLabel(segment: string): string {
