@@ -73,7 +73,7 @@ function StatCard({ icon: Icon, label, value, sub, color, href }: {
         <Icon className="w-5 h-5 text-gray-500 group-hover:text-gray-400 transition-colors" />
         {href && <ArrowRight className="w-4 h-4 text-gray-700 group-hover:text-gray-500 transition-colors" />}
       </div>
-      <p className="text-2xl font-black text-gray-100 mb-1">{value}</p>
+      <p className="text-2xl font-normal text-gray-100 mb-1">{value}</p>
       <p className="text-xs font-semibold text-gray-400">{label}</p>
       {sub && <p className="text-[10px] text-gray-600 mt-0.5">{sub}</p>}
     </div>
@@ -95,12 +95,12 @@ function QuickActionButton({ href, emoji, label, desc, urgent }: {
       className={`flex items-center gap-3 p-4 rounded-xl border transition-all group ${
         urgent
           ? 'bg-red-500/5 border-red-500/20 hover:border-red-500/40'
-          : 'bg-white/3 border-gray-700/40 hover:border-[#c9a96e]/30'
+          : 'bg-white/3 border-gray-700/40 hover:border-[#B09B71]/30'
       }`}
     >
       <span className="text-xl group-hover:scale-110 transition-transform inline-block">{emoji}</span>
       <div>
-        <p className={`text-xs font-bold leading-tight ${urgent ? 'text-red-400' : 'text-[#c9a96e]'}`}>{label}</p>
+        <p className={`text-xs font-bold leading-tight ${urgent ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>{label}</p>
         <p className="text-[10px] text-gray-600 mt-0.5">{desc}</p>
       </div>
     </Link>
@@ -128,7 +128,7 @@ export default function BoardDashboardPage() {
   if (!checked) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-6 h-6 border-2 border-[#c9a96e] border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-[#B09B71] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -178,10 +178,10 @@ export default function BoardDashboardPage() {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-1">
-          <Shield className="w-4 h-4 text-[#c9a96e]" />
-          <p className="text-xs text-[#c9a96e] font-semibold uppercase tracking-widest">Board Member Portal</p>
+          <Shield className="w-4 h-4 text-[#B09B71]" />
+          <p className="text-xs text-[#B09B71] font-semibold uppercase tracking-widest">Board Member Portal</p>
         </div>
-        <h1 className="text-3xl font-extrabold tracking-tight">Board Dashboard</h1>
+        <h1 className="text-3xl font-normal">Board Dashboard</h1>
         <p className="text-gray-400 text-sm mt-2">HOA operations overview — real-time status</p>
       </div>
 
@@ -243,7 +243,7 @@ export default function BoardDashboardPage() {
             label="Monthly Activity"
             value={activity.length}
             sub="recent events"
-            color="border-l-[#c9a96e]/50"
+            color="border-l-[#B09B71]/50"
           />
         </div>
       </div>
@@ -253,7 +253,7 @@ export default function BoardDashboardPage() {
         <div className="lg:col-span-2 glass-card rounded-2xl overflow-hidden">
           <div className="px-6 py-4 border-b border-[oklch(0.18_0.005_60)] flex items-center justify-between">
             <h2 className="text-sm font-bold text-[#e8d5a3]">Recent Activity</h2>
-            <Link href="/activity" className="text-xs text-[#c9a96e] hover:text-[#e8d5a3] transition-colors">
+            <Link href="/activity" className="text-xs text-[#B09B71] hover:text-[#e8d5a3] transition-colors">
               View all →
             </Link>
           </div>
@@ -297,8 +297,8 @@ export default function BoardDashboardPage() {
             <h2 className="text-sm font-bold text-[#e8d5a3] mb-3">Upcoming</h2>
             <div className="space-y-3">
               {[
-                { date: 'Apr 1', label: 'Q2 Dues Due', color: 'text-[#c9a96e]' },
-                { date: 'Apr 8', label: 'Board Meeting', color: 'text-blue-400' },
+                { date: 'Apr 1', label: 'Q2 Dues Due', color: 'text-[#B09B71]' },
+                { date: 'Apr 8', label: 'Board Meeting', color: 'text-[#5A7A9A]' },
                 { date: 'Apr 15', label: 'Budget Review', color: 'text-purple-400' },
               ].map(item => (
                 <div key={item.label} className="flex items-center gap-3">

@@ -31,23 +31,23 @@ const TYPE_STYLE: Record<
   { border: string; text: string; badge: string; glow: string; icon: React.ReactNode }
 > = {
   emergency: {
-    border: 'border-red-500/40',
-    text: 'text-red-300',
-    badge: 'bg-red-600/20 text-red-300 border border-red-500/30',
+    border: 'border-[rgba(107,58,58,0.30)]',
+    text: 'text-[#8B5A5A]',
+    badge: 'bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] border border-[rgba(107,58,58,0.25)]',
     glow: 'shadow-[0_0_20px_rgba(239,68,68,0.15)]',
     icon: <AlertTriangle className="w-5 h-5" />,
   },
   urgent: {
     border: 'border-orange-500/40',
-    text: 'text-orange-300',
-    badge: 'bg-orange-600/20 text-orange-300 border border-orange-500/30',
+    text: 'text-[#B09B71]',
+    badge: 'bg-orange-600/20 text-[#B09B71] border border-orange-500/30',
     glow: 'shadow-[0_0_20px_rgba(249,115,22,0.15)]',
     icon: <AlertCircle className="w-5 h-5" />,
   },
   info: {
-    border: 'border-blue-500/40',
-    text: 'text-blue-300',
-    badge: 'bg-blue-600/20 text-blue-300 border border-blue-500/30',
+    border: 'border-[rgba(90,122,154,0.30)]',
+    text: 'text-[#5A7A9A]',
+    badge: 'bg-[rgba(90,122,154,0.15)] text-[#5A7A9A] border border-[rgba(90,122,154,0.25)]',
     glow: '',
     icon: <Info className="w-5 h-5" />,
   },
@@ -75,8 +75,8 @@ function Countdown({ expiresAt }: { expiresAt: string | null }) {
     return () => clearInterval(id);
   }, [expiresAt]);
 
-  if (!expiresAt) return <span className="text-gray-500 text-xs">No expiry</span>;
-  return <span className="text-gray-400 text-xs font-mono">{text}</span>;
+  if (!expiresAt) return <span className="text-[rgba(245,240,232,0.35)] text-xs">No expiry</span>;
+  return <span className="text-[rgba(245,240,232,0.50)] text-xs font-mono">{text}</span>;
 }
 
 // ─── Alert Card ───────────────────────────────────────────────────────────────
@@ -107,11 +107,11 @@ function AlertCard({
               </span>
               <Countdown expiresAt={alert.expiresAt} />
             </div>
-            <h3 className="font-bold text-base text-gray-100 mb-1">{alert.title}</h3>
+            <h3 className="font-bold text-base text-[rgba(245,240,232,0.90)] mb-1">{alert.title}</h3>
             {alert.description && (
-              <p className="text-sm text-gray-400 leading-relaxed">{alert.description}</p>
+              <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed">{alert.description}</p>
             )}
-            <p className="text-[11px] text-gray-600 mt-2">
+            <p className="text-[11px] text-[rgba(245,240,232,0.25)] mt-2">
               {createdDate.toLocaleDateString()} {createdDate.toLocaleTimeString()} ·{' '}
               {alert.createdBy.slice(0, 6)}…{alert.createdBy.slice(-4)}
             </p>
@@ -120,7 +120,7 @@ function AlertCard({
         {isBoardMember && onDelete && (
           <button
             onClick={() => onDelete(alert.id)}
-            className="text-gray-600 hover:text-red-400 transition-colors p-1 rounded shrink-0"
+            className="text-[rgba(245,240,232,0.25)] hover:text-[#8B5A5A] transition-colors p-1 rounded shrink-0"
             title="Delete alert"
           >
             <Trash2 className="w-4 h-4" />
@@ -177,13 +177,13 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
         className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/[0.02] transition-colors"
       >
         <div className="flex items-center gap-2">
-          <Plus className="w-5 h-5 text-[#c9a96e]" />
-          <span className="font-bold text-gray-100">Create Emergency Alert</span>
+          <Plus className="w-5 h-5 text-[#B09B71]" />
+          <span className="font-bold text-[rgba(245,240,232,0.90)]">Create Emergency Alert</span>
         </div>
         {open ? (
-          <ChevronUp className="w-4 h-4 text-gray-500" />
+          <ChevronUp className="w-4 h-4 text-[rgba(245,240,232,0.35)]" />
         ) : (
-          <ChevronDown className="w-4 h-4 text-gray-500" />
+          <ChevronDown className="w-4 h-4 text-[rgba(245,240,232,0.35)]" />
         )}
       </button>
 
@@ -192,7 +192,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
           <div className="pt-5 space-y-4">
             {/* Type selector */}
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
+              <label className="block text-xs font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wide mb-2">
                 Alert Type
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -206,7 +206,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                       className={`px-3 py-2 rounded-xl text-sm font-semibold border transition-all ${
                         type === t
                           ? `${s.badge} ${s.glow}`
-                          : 'border-white/10 text-gray-500 hover:border-white/20'
+                          : 'border-white/10 text-[rgba(245,240,232,0.35)] hover:border-white/20'
                       }`}
                     >
                       {label}
@@ -218,7 +218,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
 
             {/* Title */}
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
+              <label className="block text-xs font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wide mb-2">
                 Title *
               </label>
               <input
@@ -227,13 +227,13 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Gas leak at Building C — evacuate now"
                 maxLength={120}
-                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-[#c9a96e]/50 focus:ring-1 focus:ring-[#c9a96e]/30 transition"
+                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[rgba(245,240,232,0.90)] placeholder-gray-600 focus:outline-none focus:border-[#B09B71]/50 focus:ring-1 focus:ring-[#B09B71]/30 transition"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
+              <label className="block text-xs font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wide mb-2">
                 Description
               </label>
               <textarea
@@ -242,13 +242,13 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                 placeholder="Optional additional details..."
                 rows={3}
                 maxLength={500}
-                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-[#c9a96e]/50 focus:ring-1 focus:ring-[#c9a96e]/30 transition resize-none"
+                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[rgba(245,240,232,0.90)] placeholder-gray-600 focus:outline-none focus:border-[#B09B71]/50 focus:ring-1 focus:ring-[#B09B71]/30 transition resize-none"
               />
             </div>
 
             {/* Expiry */}
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
+              <label className="block text-xs font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wide mb-2">
                 Auto-Expire
               </label>
               <div className="grid grid-cols-4 gap-2">
@@ -259,8 +259,8 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                     onClick={() => setExpiresInHours(value)}
                     className={`px-3 py-2 rounded-xl text-sm font-semibold border transition-all ${
                       expiresInHours === value
-                        ? 'border-[#c9a96e]/50 bg-[#c9a96e]/10 text-[#e8d5a3]'
-                        : 'border-white/10 text-gray-500 hover:border-white/20'
+                        ? 'border-[#B09B71]/50 bg-[#B09B71]/10 text-[#D4C4A0]'
+                        : 'border-white/10 text-[rgba(245,240,232,0.35)] hover:border-white/20'
                     }`}
                   >
                     {label}
@@ -270,7 +270,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
             </div>
 
             {error && (
-              <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2">
+              <p className="text-sm text-[#8B5A5A] bg-[rgba(107,58,58,0.10)] border border-[rgba(107,58,58,0.20)] rounded-xl px-4 py-2">
                 {error}
               </p>
             )}
@@ -278,7 +278,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
             <button
               type="submit"
               disabled={loading || !title.trim()}
-              className="w-full py-3 rounded-xl font-bold text-sm bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed text-white transition-all duration-200"
+              className="w-full py-3 rounded-xl font-bold text-sm bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed text-white transition-all duration-200"
             >
               {loading ? 'Broadcasting…' : `Broadcast ${TYPE_LABELS[type]}`}
             </button>
@@ -328,16 +328,16 @@ export default function AlertsPage() {
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
         {/* Header */}
         <div className="mb-10">
-          <p className="text-sm text-gray-500 font-medium uppercase tracking-widest mb-2">
+          <p className="text-sm text-[rgba(245,240,232,0.35)] font-medium uppercase tracking-widest mb-2">
             Community
           </p>
           <div className="flex items-center gap-3 mb-2">
-            <Bell className="w-7 h-7 text-[#c9a96e]" />
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight gradient-text">
+            <Bell className="w-7 h-7 text-[#B09B71]" />
+            <h1 className="text-3xl sm:text-4xl font-normal tracking-tight gradient-text">
               Emergency Alerts
             </h1>
           </div>
-          <p className="text-gray-400 text-base">
+          <p className="text-[rgba(245,240,232,0.50)] text-base">
             Urgent community broadcasts — stay informed and safe.
           </p>
         </div>
@@ -350,10 +350,10 @@ export default function AlertsPage() {
         {/* Not connected nudge */}
         {!isConnected && (
           <div className="glass-card rounded-2xl hover-lift p-6 mb-8 flex flex-col items-center gap-4 text-center">
-            <Info className="w-8 h-8 text-blue-400" />
+            <Info className="w-8 h-8 text-[#5A7A9A]" />
             <div>
-              <p className="font-semibold text-gray-200 mb-1">Connect to dismiss alerts</p>
-              <p className="text-sm text-gray-500">You can view alerts without signing in.</p>
+              <p className="font-semibold text-[rgba(245,240,232,0.80)] mb-1">Connect to dismiss alerts</p>
+              <p className="text-sm text-[rgba(245,240,232,0.35)]">You can view alerts without signing in.</p>
             </div>
             <ConnectButton label="Sign In" showBalance={false} />
           </div>
@@ -361,11 +361,11 @@ export default function AlertsPage() {
 
         {/* Active Alerts */}
         <section className="mb-10">
-          <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-red-500 inline-block animate-pulse" />
+          <h2 className="text-sm font-bold text-[rgba(245,240,232,0.50)] uppercase tracking-widest mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#8B5A5A] inline-block animate-pulse" />
             Active Alerts
             {sortedActive.length > 0 && (
-              <span className="ml-1 px-2 py-0.5 rounded-full bg-red-600/20 text-red-400 text-xs font-bold border border-red-500/20">
+              <span className="ml-1 px-2 py-0.5 rounded-full bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] text-xs font-bold border border-[rgba(107,58,58,0.20)]">
                 {sortedActive.length}
               </span>
             )}
@@ -373,11 +373,11 @@ export default function AlertsPage() {
 
           {sortedActive.length === 0 ? (
             <div className="glass-card rounded-2xl hover-lift p-8 text-center">
-              <div className="w-12 h-12 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-6 h-6 text-green-400" />
+              <div className="w-12 h-12 rounded-2xl bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)] flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-6 h-6 text-[#3A7D6F]" />
               </div>
-              <p className="font-semibold text-gray-300 mb-1">All clear</p>
-              <p className="text-sm text-gray-500">No active alerts for your community.</p>
+              <p className="font-semibold text-[rgba(245,240,232,0.65)] mb-1">All clear</p>
+              <p className="text-sm text-[rgba(245,240,232,0.35)]">No active alerts for your community.</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -395,14 +395,14 @@ export default function AlertsPage() {
 
         {/* History */}
         <section>
-          <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+          <h2 className="text-sm font-bold text-[rgba(245,240,232,0.50)] uppercase tracking-widest mb-4 flex items-center gap-2">
             <Clock className="w-4 h-4" />
             Alert History
           </h2>
 
           {historyAlerts.length === 0 ? (
             <div className="glass-card rounded-2xl hover-lift p-6 text-center">
-              <p className="text-sm text-gray-600">No past alerts yet.</p>
+              <p className="text-sm text-[rgba(245,240,232,0.25)]">No past alerts yet.</p>
             </div>
           ) : (
             <div className="space-y-3">

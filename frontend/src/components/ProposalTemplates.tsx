@@ -168,8 +168,8 @@ export function ProposalTemplates({ onUseTemplate }: Props) {
       <div className="flex items-center gap-2 mb-5">
         <span className="text-xl"></span>
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest">Quick Start</p>
-          <h3 className="text-base font-bold text-gray-100">Create from Template</h3>
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)]">Quick Start</p>
+          <h3 className="text-base font-bold text-[rgba(245,240,232,0.90)]">Create from Template</h3>
         </div>
       </div>
 
@@ -184,14 +184,14 @@ export function ProposalTemplates({ onUseTemplate }: Props) {
                 description: t.descriptionTemplate,
                 category: t.category,
               })}
-              className="text-left rounded-xl p-4 border border-gray-700/50 bg-gray-800/30 hover:border-[#c9a96e]/30 hover:bg-[#c9a96e]/5 transition-all group"
+              className="text-left rounded-xl p-4 border border-gray-700/50 bg-gray-800/30 hover:border-[#B09B71]/30 hover:bg-[#B09B71]/5 transition-all group"
             >
               <div className="flex items-start gap-3">
                 <span className="text-2xl">{t.icon}</span>
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-gray-100 group-hover:text-[#e8d5a3] transition-colors">{t.name}</p>
+                  <p className="text-sm font-semibold text-[rgba(245,240,232,0.90)] group-hover:text-[#D4C4A0] transition-colors">{t.name}</p>
                   <p className={`text-[10px] mt-0.5 text-${color}-400`}>{t.categoryLabel}</p>
-                  <p className="text-[10px] text-gray-500 mt-1">~{t.suggestedVotingDays}d voting · {t.suggestedQuorum} quorum</p>
+                  <p className="text-[10px] text-[rgba(245,240,232,0.35)] mt-1">~{t.suggestedVotingDays}d voting · {t.suggestedQuorum} quorum</p>
                 </div>
               </div>
             </button>
@@ -199,7 +199,7 @@ export function ProposalTemplates({ onUseTemplate }: Props) {
         })}
       </div>
 
-      <p className="text-[10px] text-gray-600 mt-4">
+      <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-4">
         Templates pre-fill the proposal form with structured sections. You can edit everything before submitting.
       </p>
     </div>

@@ -51,8 +51,8 @@ export default function EnergyPage() {
     <div className="min-h-screen bg-[oklch(0.06_0.005_60)] p-6 lg:p-10">
       <div className="max-w-5xl mx-auto">
         <div className="mb-10">
-          <h1 className="text-3xl font-bold text-[#e8d5a3] mb-2 flex items-center gap-3">
-            <Zap className="w-8 h-8 text-[#c9a96e]" /> Home Energy Dashboard
+          <h1 className="text-3xl font-bold text-[#D4C4A0] mb-2 flex items-center gap-3">
+            <Zap className="w-8 h-8 text-[#B09B71]" /> Home Energy Dashboard
           </h1>
           <p className="text-[oklch(0.50_0.01_60)]">Energy tips, solar potential, and green improvement ROI for your home</p>
         </div>
@@ -60,10 +60,10 @@ export default function EnergyPage() {
         {/* Community Totals */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           {[
-            { label: 'Avg Monthly Bill', val: '$163', sub: 'Community average', icon: TrendingDown, color: 'text-[#c9a96e]' },
-            { label: 'Solar Homes', val: '14', sub: 'Out of 16 homes', icon: Sun, color: 'text-amber-400' },
-            { label: 'CO₂ Reduced', val: '47t', sub: 'This year', icon: Leaf, color: 'text-green-400' },
-            { label: 'Green Score', val: '72/100', sub: 'Community rating', icon: Zap, color: 'text-[#c9a96e]' },
+            { label: 'Avg Monthly Bill', val: '$163', sub: 'Community average', icon: TrendingDown, color: 'text-[#B09B71]' },
+            { label: 'Solar Homes', val: '14', sub: 'Out of 16 homes', icon: Sun, color: 'text-[#B09B71]' },
+            { label: 'CO₂ Reduced', val: '47t', sub: 'This year', icon: Leaf, color: 'text-[#3A7D6F]' },
+            { label: 'Green Score', val: '72/100', sub: 'Community rating', icon: Zap, color: 'text-[#B09B71]' },
           ].map(({ label, val, sub, icon: Icon, color }) => (
             <div key={label} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-4">
               <Icon className={`w-5 h-5 ${color} mb-2`} />
@@ -77,10 +77,10 @@ export default function EnergyPage() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
           {/* Seasonal Tips */}
           <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl p-6">
-            <h2 className="text-lg font-semibold text-[#e8d5a3] mb-4">Seasonal Energy Tips</h2>
+            <h2 className="text-lg font-semibold text-[#D4C4A0] mb-4">Seasonal Energy Tips</h2>
             <div className="flex gap-1.5 mb-5 p-1 bg-[oklch(0.08_0.005_60)] rounded-xl">
               {(['Summer', 'Winter', 'Spring', 'Fall'] as const).map(s => (
-                <button key={s} onClick={() => setSeason(s)} className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors ${season === s ? 'bg-[#b8942e] text-[#1a1a1a]' : 'text-[oklch(0.50_0.01_60)] hover:text-[#e8d5a3]'}`}>{s}</button>
+                <button key={s} onClick={() => setSeason(s)} className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors ${season === s ? 'bg-[#b8942e] text-[#1a1a1a]' : 'text-[oklch(0.50_0.01_60)] hover:text-[#D4C4A0]'}`}>{s}</button>
               ))}
             </div>
             <div className="space-y-3">
@@ -88,8 +88,8 @@ export default function EnergyPage() {
                 <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-[oklch(0.13_0.005_60)]">
                   <span className="text-xl shrink-0">{tip.icon}</span>
                   <div>
-                    <p className="text-sm text-[#e8d5a3]">{tip.tip}</p>
-                    <p className="text-xs text-green-400 mt-0.5 font-medium">{tip.savings}</p>
+                    <p className="text-sm text-[#D4C4A0]">{tip.tip}</p>
+                    <p className="text-xs text-[#3A7D6F] mt-0.5 font-medium">{tip.savings}</p>
                   </div>
                 </div>
               ))}
@@ -98,38 +98,38 @@ export default function EnergyPage() {
 
           {/* Solar Calculator */}
           <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl p-6">
-            <h2 className="text-lg font-semibold text-[#e8d5a3] mb-4 flex items-center gap-2">
-              <Calculator className="w-5 h-5 text-amber-400" /> Solar Potential Calculator
+            <h2 className="text-lg font-semibold text-[#D4C4A0] mb-4 flex items-center gap-2">
+              <Calculator className="w-5 h-5 text-[#B09B71]" /> Solar Potential Calculator
             </h2>
             <div className="space-y-4">
               <div>
                 <label className="flex justify-between text-xs text-[oklch(0.50_0.01_60)] mb-1.5">
-                  <span>Home Size (sqft)</span><span className="text-[#c9a96e] font-medium">{lotSqft.toLocaleString()} sqft</span>
+                  <span>Home Size (sqft)</span><span className="text-[#B09B71] font-medium">{lotSqft.toLocaleString()} sqft</span>
                 </label>
-                <input type="range" min={1000} max={6000} step={100} value={lotSqft} onChange={e => setLotSqft(Number(e.target.value))} className="w-full accent-[#c9a96e]" />
+                <input type="range" min={1000} max={6000} step={100} value={lotSqft} onChange={e => setLotSqft(Number(e.target.value))} className="w-full accent-[#B09B71]" />
               </div>
               <div>
                 <label className="flex justify-between text-xs text-[oklch(0.50_0.01_60)] mb-1.5">
-                  <span>Current Monthly Bill</span><span className="text-[#c9a96e] font-medium">${currentBill}</span>
+                  <span>Current Monthly Bill</span><span className="text-[#B09B71] font-medium">${currentBill}</span>
                 </label>
-                <input type="range" min={80} max={500} step={10} value={currentBill} onChange={e => setCurrentBill(Number(e.target.value))} className="w-full accent-[#c9a96e]" />
+                <input type="range" min={80} max={500} step={10} value={currentBill} onChange={e => setCurrentBill(Number(e.target.value))} className="w-full accent-[#B09B71]" />
               </div>
 
               <div className="mt-4 space-y-3 p-4 bg-[oklch(0.13_0.005_60)] rounded-xl">
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-[oklch(0.45_0.01_60)]">Solar Generation Potential</span>
-                  <span className="text-sm font-bold text-amber-400">{solarPotentialKwh.toLocaleString()} kWh/yr</span>
+                  <span className="text-sm font-bold text-[#B09B71]">{solarPotentialKwh.toLocaleString()} kWh/yr</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-[oklch(0.45_0.01_60)]">Estimated Annual Savings</span>
-                  <span className="text-sm font-bold text-green-400">${solarSavings.toLocaleString()}/yr</span>
+                  <span className="text-sm font-bold text-[#3A7D6F]">${solarSavings.toLocaleString()}/yr</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-[oklch(0.45_0.01_60)]">Bill Offset</span>
-                  <span className="text-sm font-bold text-[#c9a96e]">{solarPercent}%</span>
+                  <span className="text-sm font-bold text-[#B09B71]">{solarPercent}%</span>
                 </div>
                 <div className="w-full bg-[oklch(0.18_0.005_60)] rounded-full h-2 mt-1">
-                  <div className="bg-gradient-to-r from-amber-600 to-amber-400 h-2 rounded-full transition-all duration-500" style={{ width: `${solarPercent}%` }} />
+                  <div className="bg-gradient-to-r from-[#8A7550] to-[#B09B71] h-2 rounded-full transition-all duration-500" style={{ width: `${solarPercent}%` }} />
                 </div>
               </div>
             </div>
@@ -139,8 +139,8 @@ export default function EnergyPage() {
         {/* Green Improvements Table */}
         <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl overflow-hidden">
           <div className="px-6 py-4 border-b border-[oklch(0.15_0.005_60)]">
-            <h2 className="text-lg font-semibold text-[#e8d5a3] flex items-center gap-2">
-              <Leaf className="w-5 h-5 text-green-400" /> Green Improvements & ROI
+            <h2 className="text-lg font-semibold text-[#D4C4A0] flex items-center gap-2">
+              <Leaf className="w-5 h-5 text-[#3A7D6F]" /> Green Improvements & ROI
             </h2>
           </div>
           <div className="overflow-x-auto">
@@ -155,14 +155,14 @@ export default function EnergyPage() {
               <tbody>
                 {GREEN_IMPROVEMENTS.map((item, i) => (
                   <tr key={i} className={`text-sm ${i % 2 === 0 ? '' : 'bg-[oklch(0.08_0.005_60)]'}`}>
-                    <td className="px-4 py-3 text-[#e8d5a3] font-medium">{item.name}</td>
+                    <td className="px-4 py-3 text-[#D4C4A0] font-medium">{item.name}</td>
                     <td className="px-4 py-3 text-[oklch(0.55_0.01_60)]">${item.cost.toLocaleString()}</td>
-                    <td className="px-4 py-3 text-green-400 font-medium">${item.annualSavings}/yr</td>
+                    <td className="px-4 py-3 text-[#3A7D6F] font-medium">${item.annualSavings}/yr</td>
                     <td className="px-4 py-3">
-                      <span className={`font-bold ${item.roi > 50 ? 'text-green-400' : item.roi > 20 ? 'text-[#c9a96e]' : 'text-[oklch(0.55_0.01_60)]'}`}>{item.roi}%</span>
+                      <span className={`font-bold ${item.roi > 50 ? 'text-[#3A7D6F]' : item.roi > 20 ? 'text-[#B09B71]' : 'text-[oklch(0.55_0.01_60)]'}`}>{item.roi}%</span>
                     </td>
                     <td className="px-4 py-3 text-[oklch(0.55_0.01_60)]">{item.payback}</td>
-                    <td className="px-4 py-3 text-green-400 text-xs">{item.co2}</td>
+                    <td className="px-4 py-3 text-[#3A7D6F] text-xs">{item.co2}</td>
                   </tr>
                 ))}
               </tbody>

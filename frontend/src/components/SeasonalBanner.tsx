@@ -19,7 +19,7 @@ function getSeasonInfo(): SeasonInfo {
       emoji: '',
       message: 'Happy Holidays from Faircroft!',
       gradient: 'from-green-900/30 to-red-900/20',
-      textColor: 'text-green-300',
+      textColor: 'text-[#3A7D6F]',
     };
   }
   if (month === 10 && day >= 25) {
@@ -27,7 +27,7 @@ function getSeasonInfo(): SeasonInfo {
       emoji: '',
       message: 'Happy Halloween, Faircroft!',
       gradient: 'from-orange-900/30 to-gray-900/20',
-      textColor: 'text-orange-300',
+      textColor: 'text-[#B09B71]',
     };
   }
 
@@ -45,7 +45,7 @@ function getSeasonInfo(): SeasonInfo {
       emoji: '',
       message: 'Summer in Faircroft — pool hours extended!',
       gradient: 'from-yellow-900/20 to-amber-900/10',
-      textColor: 'text-yellow-300',
+      textColor: 'text-[#B09B71]',
     };
   }
   if (month >= 9 && month <= 11) {
@@ -53,7 +53,7 @@ function getSeasonInfo(): SeasonInfo {
       emoji: '',
       message: 'Fall at Faircroft — leaf collection begins soon.',
       gradient: 'from-amber-900/25 to-orange-900/15',
-      textColor: 'text-amber-300',
+      textColor: 'text-[#B09B71]',
     };
   }
   // Winter (Dec 1-19, Jan, Feb)
@@ -61,7 +61,7 @@ function getSeasonInfo(): SeasonInfo {
     emoji: '',
     message: 'Winter at Faircroft — stay warm and safe.',
     gradient: 'from-blue-900/20 to-slate-900/10',
-    textColor: 'text-blue-300',
+    textColor: 'text-[#5A7A9A]',
   };
 }
 
@@ -101,7 +101,7 @@ export function SeasonalBanner() {
         </p>
         <button
           onClick={dismiss}
-          className="text-gray-500 hover:text-gray-300 transition-colors text-sm shrink-0 ml-2 leading-none"
+          className="text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] transition-colors text-sm shrink-0 ml-2 leading-none"
           aria-label="Dismiss"
         >
           

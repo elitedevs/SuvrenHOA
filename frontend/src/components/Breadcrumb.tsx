@@ -77,7 +77,7 @@ export function Breadcrumb() {
   if (crumbs.length <= 1) return null;
 
   return (
-    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-gray-500 mb-6 flex-wrap">
+    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-[rgba(245,240,232,0.35)] mb-6 flex-wrap">
       {crumbs.map((crumb, i) => {
         const isLast = i === crumbs.length - 1;
         return (
@@ -86,11 +86,11 @@ export function Breadcrumb() {
               <span className="text-gray-700 select-none">›</span>
             )}
             {isLast ? (
-              <span className="text-[#c9a96e] font-semibold">{crumb.label}</span>
+              <span className="text-[#B09B71] font-semibold">{crumb.label}</span>
             ) : (
               <Link
                 href={crumb.href}
-                className="hover:text-gray-300 transition-colors duration-150 font-medium"
+                className="hover:text-[rgba(245,240,232,0.65)] transition-colors duration-150 font-medium"
               >
                 {crumb.label}
               </Link>

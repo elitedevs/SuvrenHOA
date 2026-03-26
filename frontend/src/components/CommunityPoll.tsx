@@ -21,11 +21,11 @@ export function CommunityPoll() {
         <h2 className="text-base font-semibold"> Community Polls</h2>
         <div className="flex gap-2">
           <button onClick={() => setShowArchive(!showArchive)}
-            className="text-xs text-gray-400 hover:text-[#c9a96e] transition-colors">
+            className="text-xs text-[rgba(245,240,232,0.50)] hover:text-[#B09B71] transition-colors">
             {showArchive ? 'Active' : `Archive (${archivedPolls.length})`}
           </button>
           <button onClick={() => setShowCreate(!showCreate)}
-            className="text-xs text-[#c9a96e] hover:text-[#e8d5a3] transition-colors">
+            className="text-xs text-[#B09B71] hover:text-[#D4C4A0] transition-colors">
             {showCreate ? 'Cancel' : '+ New'}
           </button>
         </div>
@@ -34,18 +34,18 @@ export function CommunityPoll() {
       {showCreate && (
         <div className="mb-4 p-4 rounded-xl bg-gray-800/30 border border-gray-700 space-y-3">
           <input value={newQuestion} onChange={e => setNewQuestion(e.target.value)}
-            placeholder="Poll question..." className="w-full px-3 py-2 rounded-lg bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+            placeholder="Poll question..." className="w-full px-3 py-2 rounded-lg bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
           {newOptions.map((opt, i) => (
             <div key={i} className="flex gap-2">
               <input value={opt} onChange={e => { const o = [...newOptions]; o[i] = e.target.value; setNewOptions(o); }}
-                placeholder={`Option ${i + 1}`} className="flex-1 px-3 py-2 rounded-lg bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+                placeholder={`Option ${i + 1}`} className="flex-1 px-3 py-2 rounded-lg bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
               {newOptions.length > 2 && (
-                <button onClick={() => setNewOptions(newOptions.filter((_, idx) => idx !== i))} className="text-gray-500 hover:text-red-400"></button>
+                <button onClick={() => setNewOptions(newOptions.filter((_, idx) => idx !== i))} className="text-[rgba(245,240,232,0.35)] hover:text-[#8B5A5A]"></button>
               )}
             </div>
           ))}
           <div className="flex gap-2">
-            <button onClick={() => setNewOptions([...newOptions, ''])} className="text-xs text-[#c9a96e] hover:underline">+ Option</button>
+            <button onClick={() => setNewOptions([...newOptions, ''])} className="text-xs text-[#B09B71] hover:underline">+ Option</button>
             <button onClick={() => {
               if (newQuestion && newOptions.filter(o => o.trim()).length >= 2 && address) {
                 createPoll(newQuestion, newOptions.filter(o => o.trim()), address);
@@ -53,7 +53,7 @@ export function CommunityPoll() {
                 setNewOptions(['', '']);
                 setShowCreate(false);
               }
-            }} className="ml-auto px-4 py-1.5 rounded-lg bg-[#c9a96e] text-[#1a1a1a] text-xs font-medium">
+            }} className="ml-auto px-4 py-1.5 rounded-lg bg-[#B09B71] text-[#1a1a1a] text-xs font-medium">
               Create Poll
             </button>
           </div>
@@ -61,7 +61,7 @@ export function CommunityPoll() {
       )}
 
       {pinnedFirst.length === 0 ? (
-        <p className="text-sm text-gray-500 text-center py-4">{showArchive ? 'No archived polls' : 'No active polls'}</p>
+        <p className="text-sm text-[rgba(245,240,232,0.35)] text-center py-4">{showArchive ? 'No archived polls' : 'No active polls'}</p>
       ) : (
         <div className="space-y-4">
           {pinnedFirst.map(poll => {
@@ -73,11 +73,11 @@ export function CommunityPoll() {
               <div key={poll.id} className="space-y-2">
                 <div className="flex items-start justify-between gap-2">
                   <p className="text-sm font-medium leading-tight">
-                    {poll.pinned && <span className="text-[#c9a96e] mr-1"></span>}
+                    {poll.pinned && <span className="text-[#B09B71] mr-1"></span>}
                     {poll.question}
                   </p>
                   {!showArchive && !isExpired && address && (
-                    <button onClick={() => archivePoll(poll.id)} className="text-[10px] text-gray-600 hover:text-gray-400 shrink-0">archive</button>
+                    <button onClick={() => archivePoll(poll.id)} className="text-[10px] text-[rgba(245,240,232,0.25)] hover:text-[rgba(245,240,232,0.50)] shrink-0">archive</button>
                   )}
                 </div>
                 <div className="space-y-1.5">
@@ -88,23 +88,23 @@ export function CommunityPoll() {
                       <button key={option.id} onClick={() => canVote && vote(poll.id, option.id, address!)}
                         disabled={!canVote}
                         className={`w-full text-left relative overflow-hidden rounded-lg transition-all ${
-                          canVote ? 'hover:border-[#c9a96e]/30 cursor-pointer' : 'cursor-default'
+                          canVote ? 'hover:border-[#B09B71]/30 cursor-pointer' : 'cursor-default'
                         } border border-gray-800 bg-gray-900/50`}>
-                        <div className="absolute inset-y-0 left-0 bg-[#c9a96e]/10 transition-all duration-700 rounded-lg"
+                        <div className="absolute inset-y-0 left-0 bg-[#B09B71]/10 transition-all duration-700 rounded-lg"
                           style={{ width: `${pct}%` }} />
                         <div className="relative flex items-center justify-between px-3 py-2">
-                          <span className="text-xs text-gray-300">{option.label}</span>
+                          <span className="text-xs text-[rgba(245,240,232,0.65)]">{option.label}</span>
                           {(hasVoted || isExpired || showArchive) && (
-                            <span className="text-[10px] text-gray-400">{option.votes.length} · {pct.toFixed(0)}%</span>
+                            <span className="text-[10px] text-[rgba(245,240,232,0.50)]">{option.votes.length} · {pct.toFixed(0)}%</span>
                           )}
                         </div>
                       </button>
                     );
                   })}
                 </div>
-                <p className="text-[10px] text-gray-500">
+                <p className="text-[10px] text-[rgba(245,240,232,0.35)]">
                   {totalVotes} vote{totalVotes !== 1 ? 's' : ''}
-                  {hasVoted && <span className="text-[#c9a96e] ml-2">· You voted</span>}
+                  {hasVoted && <span className="text-[#B09B71] ml-2">· You voted</span>}
                   {poll.expiresAt && <span className="ml-2">· {isExpired ? 'Closed' : `Closes ${new Date(poll.expiresAt).toLocaleDateString()}`}</span>}
                 </p>
               </div>

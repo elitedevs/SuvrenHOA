@@ -600,6 +600,72 @@ select:focus {
   animation: fade-in 280ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
+/* ── Staggered list items ── */
+@keyframes list-item-in {
+  from { opacity: 0; transform: translateX(-4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.list-item-enter {
+  animation: list-item-in 250ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* ── Number count-up feel (CSS only) ── */
+@keyframes number-reveal {
+  from { opacity: 0; transform: translateY(6px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.number-reveal {
+  animation: number-reveal 400ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  animation-delay: 200ms;
+}
+
+/* ── Underline slide (for active nav/tabs) ── */
+@keyframes underline-slide {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.underline-slide {
+  transform-origin: left;
+  animation: underline-slide 300ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* ── Subtle card entrance with scale ── */
+@keyframes card-enter {
+  from { opacity: 0; transform: translateY(6px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.card-enter {
+  animation: card-enter 300ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.card-enter-delay-1 { animation-delay: 50ms; }
+.card-enter-delay-2 { animation-delay: 100ms; }
+.card-enter-delay-3 { animation-delay: 150ms; }
+.card-enter-delay-4 { animation-delay: 200ms; }
+
+/* ── Button hover glow (subtle, replaces shadow) ── */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(245,240,232,0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.btn-primary:hover::after {
+  opacity: 1;
+}
+
 /* ── Light Mode ───────────────────────────────────────────────────────────── */
 html.light {
   color-scheme: light;

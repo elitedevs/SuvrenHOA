@@ -55,11 +55,11 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
     <div className="glass-card rounded-2xl overflow-hidden">
       <div className="px-5 py-4 border-b border-[oklch(0.18_0.005_60)] flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-[#e8d5a3]">Neighborhood Map View</h3>
-          <p className="text-xs text-gray-500 mt-0.5">Click a lot to see resident info</p>
+          <h3 className="text-sm font-bold text-[#D4C4A0]">Neighborhood Map View</h3>
+          <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">Click a lot to see resident info</p>
         </div>
         {onClose && (
-          <button onClick={onClose} className="p-1.5 text-gray-500 hover:text-gray-300 rounded-lg hover:bg-white/5 transition-colors">
+          <button onClick={onClose} className="p-1.5 text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] rounded-lg hover:bg-white/5 transition-colors">
             <X className="w-4 h-4" />
           </button>
         )}
@@ -82,10 +82,10 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
           {/* Grid overlay */}
           <svg className="absolute inset-0 w-full h-full opacity-5" viewBox="0 0 100 100" preserveAspectRatio="none">
             {Array.from({ length: 16 }, (_, i) => (
-              <line key={`v${i}`} x1={i * 6.5} y1={0} x2={i * 6.5} y2={100} stroke="#c9a96e" strokeWidth={0.3} />
+              <line key={`v${i}`} x1={i * 6.5} y1={0} x2={i * 6.5} y2={100} stroke="#B09B71" strokeWidth={0.3} />
             ))}
             {Array.from({ length: 11 }, (_, i) => (
-              <line key={`h${i}`} x1={0} y1={i * 10} x2={100} y2={i * 10} stroke="#c9a96e" strokeWidth={0.3} />
+              <line key={`h${i}`} x1={0} y1={i * 10} x2={100} y2={i * 10} stroke="#B09B71" strokeWidth={0.3} />
             ))}
           </svg>
 
@@ -113,10 +113,10 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
                   left: `${pos.x}%`,
                   top: `${pos.y}%`,
                   background: isSelected
-                    ? '#e8d5a3'
+                    ? '#D4C4A0'
                     : hasResident
                       ? resident?.board_role
-                        ? '#c9a96e'
+                        ? '#B09B71'
                         : 'rgba(201,169,110,0.6)'
                       : 'rgba(255,255,255,0.1)',
                   border: hasResident ? 'none' : '1px solid rgba(255,255,255,0.1)',
@@ -129,7 +129,7 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
           {/* Tooltip */}
           {tooltip && (
             <div
-              className="absolute z-30 pointer-events-none bg-[#1a1a1a] border border-[#c9a96e]/30 rounded-lg px-2 py-1 text-[10px] text-gray-300"
+              className="absolute z-30 pointer-events-none bg-[#1a1a1a] border border-[#B09B71]/30 rounded-lg px-2 py-1 text-[10px] text-[rgba(245,240,232,0.65)]"
               style={{
                 left: `${Math.min(tooltip.x + 3, 80)}%`,
                 top: `${Math.max(tooltip.y - 8, 5)}%`,
@@ -146,41 +146,41 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
         {/* Sidebar: selected or legend */}
         <div className="w-full lg:w-56 space-y-3">
           {selected ? (
-            <div className="glass-card rounded-xl p-4 border border-[#c9a96e]/20">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center text-sm font-black text-[#1a1a1a] mb-3">
+            <div className="glass-card rounded-xl p-4 border border-[#B09B71]/20">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#B09B71] to-[#b8942e] flex items-center justify-center text-sm font-normal text-[#1a1a1a] mb-3">
                 {selected.display_name?.charAt(0) || '?'}
               </div>
-              <p className="text-sm font-bold text-[#e8d5a3]">{selected.display_name || 'Anonymous'}</p>
-              <p className="text-xs text-gray-500 mt-0.5">Lot #{selected.lot_number}</p>
+              <p className="text-sm font-bold text-[#D4C4A0]">{selected.display_name || 'Anonymous'}</p>
+              <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">Lot #{selected.lot_number}</p>
               {selected.board_role && (
-                <p className="text-xs text-[#c9a96e] font-semibold mt-1">{selected.board_role}</p>
+                <p className="text-xs text-[#B09B71] font-semibold mt-1">{selected.board_role}</p>
               )}
               {selected.years_in_community && (
-                <p className="text-xs text-gray-600 mt-2">{selected.years_in_community} years in community</p>
+                <p className="text-xs text-[rgba(245,240,232,0.25)] mt-2">{selected.years_in_community} years in community</p>
               )}
               <button
                 onClick={() => setSelected(null)}
-                className="mt-3 text-xs text-gray-600 hover:text-gray-400 transition-colors"
+                className="mt-3 text-xs text-[rgba(245,240,232,0.25)] hover:text-[rgba(245,240,232,0.50)] transition-colors"
               >
                 ← Back to map
               </button>
             </div>
           ) : (
             <div className="space-y-2">
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Legend</p>
-              <div className="flex items-center gap-2 text-xs text-gray-400">
-                <div className="w-3 h-3 rounded-full bg-[#c9a96e]" />
+              <p className="text-xs font-semibold text-[rgba(245,240,232,0.35)] uppercase tracking-wide">Legend</p>
+              <div className="flex items-center gap-2 text-xs text-[rgba(245,240,232,0.50)]">
+                <div className="w-3 h-3 rounded-full bg-[#B09B71]" />
                 Board member
               </div>
-              <div className="flex items-center gap-2 text-xs text-gray-400">
+              <div className="flex items-center gap-2 text-xs text-[rgba(245,240,232,0.50)]">
                 <div className="w-3 h-3 rounded-full bg-[rgba(201,169,110,0.6)]" />
                 Registered resident
               </div>
-              <div className="flex items-center gap-2 text-xs text-gray-400">
+              <div className="flex items-center gap-2 text-xs text-[rgba(245,240,232,0.50)]">
                 <div className="w-3 h-3 rounded-full bg-[rgba(255,255,255,0.1)] border border-white/10" />
                 Vacant / no data
               </div>
-              <p className="text-[10px] text-gray-600 mt-2 leading-relaxed">
+              <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-2 leading-relaxed">
                 {residents.length} lots have registered residents.
               </p>
             </div>

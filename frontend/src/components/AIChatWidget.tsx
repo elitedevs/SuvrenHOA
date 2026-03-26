@@ -31,7 +31,7 @@ function MessageText({ text }: { text: string }) {
             tokens.push(<strong key={key++} className="font-semibold">{match[1]}</strong>);
           } else if (match[2] && match[3]) {
             tokens.push(
-              <Link key={key++} href={match[3]} className="underline text-[#c9a96e] hover:text-[#e8d5a3]">
+              <Link key={key++} href={match[3]} className="underline text-[#B09B71] hover:text-[#D4C4A0]">
                 {match[2]}
               </Link>
             );
@@ -53,7 +53,7 @@ function MessageText({ text }: { text: string }) {
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-2 mb-3">
-      <div className="w-7 h-7 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-sm shrink-0">
+      <div className="w-7 h-7 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-sm shrink-0">
         
       </div>
       <div className="bg-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1">
@@ -118,9 +118,9 @@ export function AIChatWidget() {
             <div className="flex items-center gap-2">
               <span className="text-xl"></span>
               <div>
-                <p className="text-sm font-semibold text-gray-100">HOA Assistant</p>
-                <p className="text-[11px] text-green-400 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
+                <p className="text-sm font-semibold text-[rgba(245,240,232,0.90)]">HOA Assistant</p>
+                <p className="text-[11px] text-[#3A7D6F] flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#3A7D6F] inline-block" />
                   Online
                 </p>
               </div>
@@ -128,14 +128,14 @@ export function AIChatWidget() {
             <div className="flex items-center gap-2">
               <Link
                 href="/assistant"
-                className="text-[11px] text-gray-400 hover:text-gray-200 transition-colors px-2 py-1 rounded-lg hover:bg-white/[0.06]"
+                className="text-[11px] text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] transition-colors px-2 py-1 rounded-lg hover:bg-white/[0.06]"
                 title="Open full page"
               >
                 ↗ Full page
               </Link>
               <button
                 onClick={() => setIsOpen(false)}
-                className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/10 text-gray-400 hover:text-gray-200 transition-colors"
+                className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/10 text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] transition-colors"
                 aria-label="Close assistant"
               >
                 
@@ -151,15 +151,15 @@ export function AIChatWidget() {
                 className={`flex items-end gap-2 mb-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
               >
                 {msg.role === 'bot' && (
-                  <div className="w-7 h-7 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-sm shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-sm shrink-0">
                     
                   </div>
                 )}
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                     msg.role === 'user'
-                      ? 'bg-gradient-to-br from-[#c9a96e] to-[#b8942e] text-white rounded-br-sm'
-                      : 'bg-white/[0.06] text-gray-200 rounded-bl-sm'
+                      ? 'bg-gradient-to-br from-[#B09B71] to-[#b8942e] text-white rounded-br-sm'
+                      : 'bg-white/[0.06] text-[rgba(245,240,232,0.80)] rounded-bl-sm'
                   }`}
                 >
                   <MessageText text={msg.text} />
@@ -177,7 +177,7 @@ export function AIChatWidget() {
                 key={a.label}
                 onClick={() => sendMessage(a.query)}
                 disabled={isTyping}
-                className="text-[11px] font-medium px-2.5 py-1.5 rounded-full bg-[#c9a96e]/15 text-[#e8d5a3] hover:bg-[#c9a96e]/20 hover:text-[#e8d5a3] transition-colors disabled:opacity-40 border border-[#c9a96e]/20"
+                className="text-[11px] font-medium px-2.5 py-1.5 rounded-full bg-[#B09B71]/15 text-[#D4C4A0] hover:bg-[#B09B71]/20 hover:text-[#D4C4A0] transition-colors disabled:opacity-40 border border-[#B09B71]/20"
               >
                 {a.label}
               </button>
@@ -194,12 +194,12 @@ export function AIChatWidget() {
               onKeyDown={handleKeyDown}
               placeholder="Ask about dues, treasury, proposals..."
               disabled={isTyping}
-              className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-xl px-3 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/50 disabled:opacity-50 transition-colors"
+              className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-xl px-3 py-2 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/50 disabled:opacity-50 transition-colors"
             />
             <button
               onClick={handleSend}
               disabled={!input.trim() || isTyping}
-              className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0"
+              className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0"
               aria-label="Send message"
             >
               <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -213,7 +213,7 @@ export function AIChatWidget() {
       {/* Floating Trigger Button */}
       <button
         onClick={() => setIsOpen((v) => !v)}
-        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#c9a96e] to-[#b8942e] shadow-lg shadow-[#1a1a1a]/50 flex items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-[#c9a96e]/20 ${
+        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#B09B71] to-[#b8942e] shadow-lg shadow-[#1a1a1a]/50 flex items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-[#B09B71]/20 ${
           isOpen ? 'rotate-180' : ''
         }`}
         style={!isOpen ? { animation: 'chatPulse 2.5s ease-in-out infinite' } : undefined}

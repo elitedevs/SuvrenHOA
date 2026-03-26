@@ -88,56 +88,56 @@ function AddImprovementModal({ onAdd, onClose }: { onAdd: (i: Improvement) => vo
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
       <div className="glass w-full max-w-md rounded-2xl border border-white/[0.08] max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-5 border-b border-white/[0.06]">
-          <h2 className="text-base font-bold text-gray-100">Log Improvement</h2>
-          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-white/[0.06] text-gray-400 cursor-pointer"><X className="w-4 h-4" /></button>
+          <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)]">Log Improvement</h2>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-white/[0.06] text-[rgba(245,240,232,0.50)] cursor-pointer"><X className="w-4 h-4" /></button>
         </div>
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           <div>
-            <label className="text-xs font-semibold text-gray-400 mb-1 block">Project Name *</label>
+            <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Project Name *</label>
             <input value={form.project} onChange={e => setForm({...form, project: e.target.value})} placeholder="Kitchen Renovation" required
-              className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-gray-200 focus:outline-none focus:border-[#c9a96e]/50" />
+              className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-gray-400 mb-1 block">Date</label>
+              <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-gray-200 focus:outline-none focus:border-[#c9a96e]/50" />
+                className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50" />
             </div>
             <div>
-              <label className="text-xs font-semibold text-gray-400 mb-1 block">Cost ($)</label>
+              <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Cost ($)</label>
               <input type="number" value={form.cost} onChange={e => setForm({...form, cost: e.target.value})} placeholder="5000"
-                className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-gray-200 focus:outline-none focus:border-[#c9a96e]/50" />
+                className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50" />
             </div>
           </div>
           <div>
-            <label className="text-xs font-semibold text-gray-400 mb-1 block">Category</label>
+            <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Category</label>
             <div className="grid grid-cols-5 gap-1.5">
               {(Object.entries(CATEGORY_ICONS) as [ImprovementCategory, string][]).map(([cat, icon]) => (
                 <button key={cat} type="button" onClick={() => setForm({...form, category: cat})}
                   className={`p-2 rounded-xl text-center transition-all cursor-pointer ${
-                    form.category === cat ? 'bg-[#c9a96e]/15 border border-[#c9a96e]/30' : 'bg-white/[0.02] border border-white/[0.04]'
+                    form.category === cat ? 'bg-[#B09B71]/15 border border-[#B09B71]/30' : 'bg-white/[0.02] border border-white/[0.04]'
                   }`}>
                   <div className="text-lg">{icon}</div>
-                  <div className={`text-[9px] mt-0.5 ${form.category === cat ? 'text-[#c9a96e]' : 'text-gray-600'}`}>{cat}</div>
+                  <div className={`text-[9px] mt-0.5 ${form.category === cat ? 'text-[#B09B71]' : 'text-[rgba(245,240,232,0.25)]'}`}>{cat}</div>
                 </button>
               ))}
             </div>
           </div>
           <div>
-            <label className="text-xs font-semibold text-gray-400 mb-1 block">Before Description</label>
+            <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Before Description</label>
             <textarea rows={2} value={form.beforeDesc} onChange={e => setForm({...form, beforeDesc: e.target.value})} placeholder="Original condition..."
-              className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-gray-200 focus:outline-none focus:border-[#c9a96e]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
           </div>
           <div>
-            <label className="text-xs font-semibold text-gray-400 mb-1 block">After Description</label>
+            <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">After Description</label>
             <textarea rows={2} value={form.afterDesc} onChange={e => setForm({...form, afterDesc: e.target.value})} placeholder="Improvements made..."
-              className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-gray-200 focus:outline-none focus:border-[#c9a96e]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
           </div>
           <div className="flex gap-3">
             <button type="button" onClick={onClose}
-              className="flex-1 py-2.5 rounded-xl border border-white/[0.08] text-sm text-gray-400 cursor-pointer">Cancel</button>
+              className="flex-1 py-2.5 rounded-xl border border-white/[0.08] text-sm text-[rgba(245,240,232,0.50)] cursor-pointer">Cancel</button>
             <button type="submit"
-              className="flex-1 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-semibold cursor-pointer">Add Project</button>
+              className="flex-1 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold cursor-pointer">Add Project</button>
           </div>
         </form>
       </div>
@@ -184,35 +184,35 @@ export function PropertyImprovements() {
     <div className="glass-card rounded-2xl p-6 border border-white/[0.04]">
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/15 flex items-center justify-center">
-            <Hammer className="w-5 h-5 text-[#c9a96e]" />
+          <div className="w-10 h-10 rounded-xl bg-[#B09B71]/15 flex items-center justify-center">
+            <Hammer className="w-5 h-5 text-[#B09B71]" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-gray-100">Property Improvements</h3>
-            <p className="text-xs text-gray-500">Track your home investments</p>
+            <h3 className="text-sm font-bold text-[rgba(245,240,232,0.90)]">Property Improvements</h3>
+            <p className="text-xs text-[rgba(245,240,232,0.35)]">Track your home investments</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <button onClick={handleShare} className="p-2 rounded-lg hover:bg-white/[0.06] text-gray-500 hover:text-[#c9a96e] cursor-pointer" title="Share log">
+          <button onClick={handleShare} className="p-2 rounded-lg hover:bg-white/[0.06] text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] cursor-pointer" title="Share log">
             <Share2 className="w-4 h-4" />
           </button>
           <button onClick={() => setShowAdd(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#c9a96e]/15 text-[#c9a96e] text-xs font-semibold border border-[#c9a96e]/25 hover:bg-[#c9a96e]/25 transition-all cursor-pointer">
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#B09B71]/15 text-[#B09B71] text-xs font-semibold border border-[#B09B71]/25 hover:bg-[#B09B71]/25 transition-all cursor-pointer">
             <Plus className="w-3.5 h-3.5" /> Add
           </button>
         </div>
       </div>
 
       {/* Total Invested */}
-      <div className="flex items-center gap-3 p-4 rounded-xl bg-[#c9a96e]/[0.06] border border-[#c9a96e]/15 mb-4">
-        <TrendingUp className="w-5 h-5 text-[#c9a96e]" />
+      <div className="flex items-center gap-3 p-4 rounded-xl bg-[#B09B71]/[0.06] border border-[#B09B71]/15 mb-4">
+        <TrendingUp className="w-5 h-5 text-[#B09B71]" />
         <div>
-          <div className="text-xs text-gray-500">Total Invested</div>
-          <div className="text-xl font-bold text-[#c9a96e]">${totalInvested.toLocaleString()}</div>
+          <div className="text-xs text-[rgba(245,240,232,0.35)]">Total Invested</div>
+          <div className="text-xl font-bold text-[#B09B71]">${totalInvested.toLocaleString()}</div>
         </div>
         <div className="ml-auto text-right">
-          <div className="text-xs text-gray-500">{improvements.length} projects</div>
-          <div className="text-xs text-green-400">Est. +{((totalInvested * 0.7 / 447000) * 100).toFixed(1)}% value</div>
+          <div className="text-xs text-[rgba(245,240,232,0.35)]">{improvements.length} projects</div>
+          <div className="text-xs text-[#3A7D6F]">Est. +{((totalInvested * 0.7 / 447000) * 100).toFixed(1)}% value</div>
         </div>
       </div>
 
@@ -226,25 +226,25 @@ export function PropertyImprovements() {
             >
               <span className="text-lg">{CATEGORY_ICONS[item.category]}</span>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-semibold text-gray-200 truncate">{item.project}</div>
-                <div className="text-[11px] text-gray-500">
+                <div className="text-sm font-semibold text-[rgba(245,240,232,0.80)] truncate">{item.project}</div>
+                <div className="text-[11px] text-[rgba(245,240,232,0.35)]">
                   {new Date(item.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} · {item.category}
                 </div>
               </div>
-              <span className="text-sm font-bold text-[#c9a96e] shrink-0">${item.cost.toLocaleString()}</span>
+              <span className="text-sm font-bold text-[#B09B71] shrink-0">${item.cost.toLocaleString()}</span>
             </button>
             {expanded === item.id && (
               <div className="px-4 pb-4 space-y-2 border-t border-white/[0.04]">
                 {item.beforeDesc && (
                   <div className="pt-3">
-                    <span className="text-[10px] font-bold text-gray-600 uppercase">Before</span>
-                    <p className="text-xs text-gray-400 mt-0.5">{item.beforeDesc}</p>
+                    <span className="text-[10px] font-bold text-[rgba(245,240,232,0.25)] uppercase">Before</span>
+                    <p className="text-xs text-[rgba(245,240,232,0.50)] mt-0.5">{item.beforeDesc}</p>
                   </div>
                 )}
                 {item.afterDesc && (
                   <div>
-                    <span className="text-[10px] font-bold text-[#c9a96e] uppercase">After</span>
-                    <p className="text-xs text-gray-400 mt-0.5">{item.afterDesc}</p>
+                    <span className="text-[10px] font-bold text-[#B09B71] uppercase">After</span>
+                    <p className="text-xs text-[rgba(245,240,232,0.50)] mt-0.5">{item.afterDesc}</p>
                   </div>
                 )}
               </div>
@@ -252,7 +252,7 @@ export function PropertyImprovements() {
           </div>
         ))}
         {improvements.length === 0 && (
-          <div className="text-center py-8 text-gray-500">
+          <div className="text-center py-8 text-[rgba(245,240,232,0.35)]">
             <p className="text-2xl mb-2"></p>
             <p className="text-xs">No improvements logged yet</p>
           </div>

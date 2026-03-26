@@ -16,8 +16,8 @@ export default function MeetingsPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <ClipboardList className="w-8 h-8 text-gray-400 mb-2" />
-        <p className="text-gray-400 text-base font-medium">Sign in to view board meetings</p>
+        <ClipboardList className="w-8 h-8 text-[rgba(245,240,232,0.50)] mb-2" />
+        <p className="text-[rgba(245,240,232,0.50)] text-base font-medium">Sign in to view board meetings</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -30,22 +30,22 @@ export default function MeetingsPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-2">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Board</p>
-          <h1 className="text-3xl font-extrabold tracking-tight">Meeting Scheduler</h1>
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Board</p>
+          <h1 className="text-3xl font-normal tracking-tight">Meeting Scheduler</h1>
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/calendar" className="text-xs text-gray-500 hover:text-[#c9a96e] transition-colors">
+          <Link href="/calendar" className="text-xs text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] transition-colors">
             ← Calendar
           </Link>
           <button
             onClick={() => setShowCreate(!showCreate)}
-            className="px-4 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all"
+            className="px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-bold transition-all"
           >
             {showCreate ? ' Cancel' : '+ Schedule Meeting'}
           </button>
         </div>
       </div>
-      <p className="text-gray-500 text-sm mb-8">Schedule and RSVP to board meetings</p>
+      <p className="text-[rgba(245,240,232,0.35)] text-sm mb-8">Schedule and RSVP to board meetings</p>
 
       {/* Create Form */}
       {showCreate && (
@@ -64,8 +64,8 @@ export default function MeetingsPage() {
             onClick={() => setTab(t)}
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
               tab === t
-                ? 'bg-[#c9a96e]/15 text-[#e8d5a3] border border-[#c9a96e]/30'
-                : 'text-gray-400 hover:text-gray-300'
+                ? 'bg-[#B09B71]/15 text-[#D4C4A0] border border-[#B09B71]/30'
+                : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.65)]'
             }`}
           >
             {t === 'upcoming' ? `Upcoming (${upcomingMeetings.length})` : `All (${meetings.length})`}
@@ -76,9 +76,9 @@ export default function MeetingsPage() {
       {/* Meeting List */}
       {displayedMeetings.length === 0 ? (
         <div className="glass-card rounded-2xl p-12 text-center">
-          <ClipboardList className="w-8 h-8 text-gray-400 mx-auto mb-4" />
+          <ClipboardList className="w-8 h-8 text-[rgba(245,240,232,0.50)] mx-auto mb-4" />
           <h3 className="text-lg font-bold mb-2">No Meetings Scheduled</h3>
-          <p className="text-sm text-gray-400">Board meetings will appear here once scheduled.</p>
+          <p className="text-sm text-[rgba(245,240,232,0.50)]">Board meetings will appear here once scheduled.</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -90,17 +90,17 @@ export default function MeetingsPage() {
             const maybeCount = meeting.rsvps.filter(r => r.status === 'maybe').length;
 
             return (
-              <div key={meeting.id} className={`glass-card rounded-2xl p-6 border-l-2 border-l-[#c9a96e]/40 ${isPast ? 'opacity-60' : ''}`}>
+              <div key={meeting.id} className={`glass-card rounded-2xl p-6 ${isPast ? 'opacity-60' : ''}`}>
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-bold text-gray-100">{meeting.title}</h3>
+                      <h3 className="font-bold text-[rgba(245,240,232,0.90)]">{meeting.title}</h3>
                       {isPast && (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-gray-700 text-gray-400">Past</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-gray-700 text-[rgba(245,240,232,0.50)]">Past</span>
                       )}
                     </div>
 
-                    <div className="flex flex-wrap gap-3 text-xs text-gray-500 mb-3">
+                    <div className="flex flex-wrap gap-3 text-xs text-[rgba(245,240,232,0.35)] mb-3">
                       <span> {dt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</span>
                       <span> {dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</span>
                       {meeting.location && <span> {meeting.location}</span>}
@@ -108,8 +108,8 @@ export default function MeetingsPage() {
                     </div>
 
                     {meeting.agenda && (
-                      <div className="text-xs text-gray-500 bg-gray-800/40 rounded-lg p-3 mb-3">
-                        <p className="font-medium text-gray-400 mb-1">Agenda:</p>
+                      <div className="text-xs text-[rgba(245,240,232,0.35)] bg-gray-800/40 rounded-lg p-3 mb-3">
+                        <p className="font-medium text-[rgba(245,240,232,0.50)] mb-1">Agenda:</p>
                         <p className="leading-relaxed whitespace-pre-line">{meeting.agenda}</p>
                       </div>
                     )}
@@ -127,11 +127,11 @@ export default function MeetingsPage() {
                               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                                 isSelected
                                   ? status === 'attending'
-                                    ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                                    ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)]'
                                     : status === 'maybe'
-                                    ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                                    : 'bg-red-500/20 text-red-400 border border-red-500/30'
-                                  : 'bg-gray-800/50 text-gray-500 hover:text-gray-300 border border-gray-700/50'
+                                    ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.25)]'
+                                    : 'bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] border border-[rgba(107,58,58,0.25)]'
+                                  : 'bg-gray-800/50 text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] border border-gray-700/50'
                               }`}
                             >
                               {label}
@@ -178,62 +178,62 @@ function CreateMeetingForm({
   };
 
   return (
-    <div className="glass-card rounded-2xl p-6 mb-6 border border-[#c9a96e]/20">
-      <h2 className="text-base font-bold text-[#e8d5a3] mb-5">Schedule New Meeting</h2>
+    <div className="glass-card rounded-2xl p-6 mb-6 border border-[#B09B71]/20">
+      <h2 className="text-base font-bold text-[#D4C4A0] mb-5">Schedule New Meeting</h2>
 
       <div className="space-y-4">
         <div>
-          <label className="block text-xs text-gray-500 font-semibold uppercase tracking-wide mb-2">Meeting Title *</label>
+          <label className="block text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">Meeting Title *</label>
           <input
             type="text"
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Q2 2026 Board Meeting"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs text-gray-500 font-semibold uppercase tracking-wide mb-2">Date *</label>
+            <label className="block text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">Date *</label>
             <input
               type="date"
               value={date}
               onChange={e => setDate(e.target.value)}
               min={new Date().toISOString().split('T')[0]}
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none"
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 font-semibold uppercase tracking-wide mb-2">Time *</label>
+            <label className="block text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">Time *</label>
             <input
               type="time"
               value={time}
               onChange={e => setTime(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs text-gray-500 font-semibold uppercase tracking-wide mb-2">Location</label>
+          <label className="block text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">Location</label>
           <input
             type="text"
             value={location}
             onChange={e => setLocation(e.target.value)}
             placeholder="Faircroft Clubhouse, Room A"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-xs text-gray-500 font-semibold uppercase tracking-wide mb-2">Agenda</label>
+          <label className="block text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">Agenda</label>
           <textarea
             value={agenda}
             onChange={e => setAgenda(e.target.value)}
             placeholder="1. Call to order&#10;2. Review minutes&#10;3. Financial report..."
             rows={4}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none"
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none"
           />
         </div>
 
@@ -247,7 +247,7 @@ function CreateMeetingForm({
           <button
             onClick={handleSubmit}
             disabled={!title.trim() || !date || saving}
-            className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-bold transition-all"
+            className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-bold transition-all"
           >
             {saving ? <span className="flex items-center justify-center gap-1.5"><CalendarDays className="w-4 h-4 animate-pulse" /> Saving...</span> : <span className="flex items-center justify-center gap-1.5"><CalendarDays className="w-4 h-4" /> Schedule Meeting</span>}
           </button>

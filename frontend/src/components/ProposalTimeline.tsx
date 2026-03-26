@@ -99,12 +99,12 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
                   className={`
                     relative w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all
                     ${isActive
-                      ? 'border-[#c9a96e] bg-[#c9a96e]/15 text-[#e8d5a3] shadow-[0_0_12px_rgba(201,169,110,0.4)] animate-pulse-gold'
+                      ? 'border-[#B09B71] bg-[#B09B71]/15 text-[#D4C4A0] shadow-[0_0_12px_rgba(201,169,110,0.4)] animate-pulse-gold'
                       : isDone
-                      ? 'border-green-500/60 bg-green-500/10 text-green-400'
+                      ? 'border-green-500/60 bg-[rgba(42,93,79,0.10)] text-[#3A7D6F]'
                       : isFail
-                      ? 'border-red-500/50 bg-red-500/10 text-red-400'
-                      : 'border-gray-700/60 bg-gray-800/40 text-gray-600'
+                      ? 'border-red-500/50 bg-[rgba(107,58,58,0.10)] text-[#8B5A5A]'
+                      : 'border-gray-700/60 bg-gray-800/40 text-[rgba(245,240,232,0.25)]'
                     }
                   `}
                 >
@@ -114,7 +114,7 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
                 {/* Label */}
                 <span
                   className={`text-[11px] font-medium text-center leading-tight
-                    ${isActive ? 'text-[#e8d5a3]' : isDone ? 'text-green-400' : isFail ? 'text-red-400' : 'text-gray-600'}
+                    ${isActive ? 'text-[#D4C4A0]' : isDone ? 'text-[#3A7D6F]' : isFail ? 'text-[#8B5A5A]' : 'text-[rgba(245,240,232,0.25)]'}
                   `}
                 >
                   {stage.id === 'result' && defeated ? 'Defeated' :
@@ -131,7 +131,7 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
 
       {/* Status description */}
       <div className="mt-4 pt-4 border-t border-white/5">
-        <p className="text-xs text-gray-500 text-center">
+        <p className="text-xs text-[rgba(245,240,232,0.35)] text-center">
           {currentState === 'Pending' && '⏳ Waiting for voting to open (1-day delay)'}
           {currentState === 'Active' && ' Voting is open — cast your vote now'}
           {currentState === 'Succeeded' && ' Proposal passed! Waiting to be queued for execution'}

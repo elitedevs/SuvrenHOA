@@ -96,22 +96,22 @@ function CompactReminder({
 }: ReminderProps) {
   if (isCurrent) {
     return (
-      <div className="glass-card rounded-2xl p-5 border-l-2 border-l-green-500/50 transition-all duration-300">
+      <div className="glass-card rounded-2xl p-5 transition-all duration-300">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-lg shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-[rgba(42,93,79,0.15)] border border-green-500/25 flex items-center justify-center text-lg shrink-0">
               
             </div>
             <div>
-              <p className="text-sm font-bold text-green-400">Dues Current</p>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-sm font-bold text-[#3A7D6F]">Dues Current</p>
+              <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">
                 Save ${annualSavings} with annual plan ({annualDiscount}% off)
               </p>
             </div>
           </div>
           <Link
             href="/dues"
-            className="text-xs text-[#c9a96e] hover:text-[#e8d5a3] font-semibold whitespace-nowrap transition-colors"
+            className="text-xs text-[#B09B71] hover:text-[#D4C4A0] font-semibold whitespace-nowrap transition-colors"
           >
             Pay Annual →
           </Link>
@@ -122,24 +122,24 @@ function CompactReminder({
 
   if (isOverdue) {
     return (
-      <div className="glass-card rounded-2xl p-5 border-l-2 border-l-red-500/50 transition-all duration-300">
+      <div className="glass-card rounded-2xl p-5 transition-all duration-300">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-red-500/15 border border-red-500/25 flex items-center justify-center text-lg shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-[rgba(107,58,58,0.12)] border border-red-500/25 flex items-center justify-center text-lg shrink-0">
               
             </div>
             <div>
-              <p className="text-sm font-bold text-red-400">
+              <p className="text-sm font-bold text-[#8B5A5A]">
                 {quartersOwed} quarter{quartersOwed > 1 ? 's' : ''} overdue
               </p>
-              <p className="text-xs text-gray-500 mt-0.5">${amountOwed.toFixed(2)} USDC owed</p>
+              <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">${amountOwed.toFixed(2)} USDC owed</p>
             </div>
           </div>
           <Link
             href="/dues"
-            className="text-xs px-3 py-1.5 rounded-lg bg-red-600/20 border border-red-500/30 text-red-400 hover:bg-red-600/30 font-semibold whitespace-nowrap transition-all"
+            className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(107,58,58,0.15)] border border-[rgba(107,58,58,0.25)] text-[#8B5A5A] hover:bg-red-600/30 font-semibold whitespace-nowrap transition-all"
           >
-            Pay Now →
+            Settle Balance →
           </Link>
         </div>
       </div>
@@ -148,22 +148,22 @@ function CompactReminder({
 
   // Upcoming / near-due state
   return (
-    <div className="glass-card rounded-2xl p-5 border-l-2 border-l-amber-500/50 transition-all duration-300">
+    <div className="glass-card rounded-2xl p-5 transition-all duration-300">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-lg shrink-0">
+          <div className="w-8 h-8 rounded-xl bg-[rgba(176,155,113,0.12)] border border-amber-500/25 flex items-center justify-center text-lg shrink-0">
             ⏰
           </div>
           <div>
-            <p className="text-sm font-bold text-amber-400">
+            <p className="text-sm font-bold text-[#B09B71]">
               Dues due soon — ${quarterlyNum.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-500 mt-0.5">Save ${annualSavings} with annual plan</p>
+            <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">Save ${annualSavings} with annual plan</p>
           </div>
         </div>
         <Link
           href="/dues"
-          className="text-xs px-3 py-1.5 rounded-lg bg-amber-600/20 border border-amber-500/30 text-amber-400 hover:bg-amber-600/30 font-semibold whitespace-nowrap transition-all"
+          className="text-xs px-3 py-1.5 rounded-lg bg-amber-600/20 border border-[rgba(176,155,113,0.25)] text-[#B09B71] hover:bg-amber-600/30 font-semibold whitespace-nowrap transition-all"
         >
           Pay Dues →
         </Link>
@@ -189,30 +189,30 @@ function FullReminder({
 }: ReminderProps) {
   if (isCurrent) {
     return (
-      <div className="rounded-2xl p-6 border border-green-500/20 bg-green-500/5 border-l-2 border-l-green-500/50 transition-all duration-300">
+      <div className="rounded-2xl p-6 border border-[rgba(42,93,79,0.20)] bg-[#3A7D6F]/5 transition-all duration-300">
         <div className="flex items-start gap-4 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-xl shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-[rgba(42,93,79,0.15)] border border-green-500/25 flex items-center justify-center text-xl shrink-0">
             
           </div>
           <div className="flex-1">
-            <h3 className="text-base font-bold text-green-400 mb-1">
+            <h3 className="text-base font-bold text-[#3A7D6F] mb-1">
               You&apos;re all paid up! 
             </h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-[rgba(245,240,232,0.50)]">
               Lot #{tokenId} is current on dues. Next quarter coming up — stay ahead with annual payments.
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-green-500/5 border border-green-500/15">
+        <div className="flex items-center gap-4 p-4 rounded-xl bg-[#3A7D6F]/5 border border-green-500/15">
           <div className="flex-1">
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1">Annual Plan Savings</p>
-            <p className="text-xl font-extrabold text-green-400">${annualSavings}</p>
-            <p className="text-xs text-gray-600 mt-0.5">vs paying quarterly ({annualDiscount}% discount)</p>
+            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Annual Plan Savings</p>
+            <p className="text-xl font-normal text-[#3A7D6F]">${annualSavings}</p>
+            <p className="text-xs text-[rgba(245,240,232,0.25)] mt-0.5">vs paying quarterly ({annualDiscount}% discount)</p>
           </div>
           <Link
             href="/dues"
-            className="px-5 py-2.5 rounded-xl bg-green-600/20 border border-green-500/30 text-green-400 hover:bg-green-600/30 text-sm font-bold transition-all whitespace-nowrap"
+            className="px-5 py-2.5 rounded-xl bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)] text-[#3A7D6F] hover:bg-green-600/30 text-sm font-bold transition-all whitespace-nowrap"
           >
             Switch to Annual →
           </Link>
@@ -231,37 +231,37 @@ function FullReminder({
 
   if (isOverdue) {
     return (
-      <div className="rounded-2xl p-6 border border-red-500/20 bg-red-500/5 border-l-2 border-l-red-500/50 transition-all duration-300">
+      <div className="rounded-2xl p-6 border border-[rgba(107,58,58,0.20)] bg-[#8B5A5A]/5 transition-all duration-300">
         <div className="flex items-start gap-4 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-red-500/15 border border-red-500/25 flex items-center justify-center text-xl shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-[rgba(107,58,58,0.12)] border border-red-500/25 flex items-center justify-center text-xl shrink-0">
             
           </div>
           <div className="flex-1">
-            <h3 className="text-base font-bold text-red-400 mb-1">
-              {quartersOwed} Quarter{quartersOwed > 1 ? 's' : ''} Past Due
+            <h3 className="text-base font-bold text-[#8B5A5A] mb-1">
+              {quartersOwed} Quarter{quartersOwed > 1 ? 's' : ''} Payment Reminder
             </h3>
-            <p className="text-sm text-gray-400">
-              Total owed: <span className="text-red-300 font-bold">${amountOwed.toFixed(2)} USDC</span>
+            <p className="text-sm text-[rgba(245,240,232,0.50)]">
+              Total owed: <span className="text-[#8B5A5A] font-bold">${amountOwed.toFixed(2)} USDC</span>
               {!socialLoading && unpaidCount !== undefined && unpaidCount > 0 && (
-                <> · Your lot is <span className="text-red-300 font-semibold">1 of only {unpaidCount}</span> remaining unpaid</>
+                <> · Your lot is <span className="text-[#8B5A5A] font-semibold">1 of only {unpaidCount}</span> remaining unpaid</>
               )}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-red-500/5 border border-red-500/15 mb-4">
+        <div className="flex items-center gap-4 p-4 rounded-xl bg-[#8B5A5A]/5 border border-red-500/15 mb-4">
           <div className="flex-1">
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1">Amount Owed</p>
-            <p className="text-xl font-extrabold text-red-400">${amountOwed.toFixed(2)} USDC</p>
-            <p className="text-xs text-gray-600 mt-0.5">
+            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Amount Owed</p>
+            <p className="text-xl font-normal text-[#8B5A5A]">${amountOwed.toFixed(2)} USDC</p>
+            <p className="text-xs text-[rgba(245,240,232,0.25)] mt-0.5">
               {quartersOwed} × ${quarterlyNum.toFixed(2)} quarterly
             </p>
           </div>
           <Link
             href="/dues"
-            className="px-5 py-2.5 rounded-xl bg-red-600/20 border border-red-500/30 text-red-400 hover:bg-red-600/30 text-sm font-bold transition-all whitespace-nowrap"
+            className="px-5 py-2.5 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(107,58,58,0.25)] text-[#8B5A5A] hover:bg-red-600/30 text-sm font-bold transition-all whitespace-nowrap"
           >
-            Pay Now →
+            Settle Balance →
           </Link>
         </div>
 
@@ -278,36 +278,36 @@ function FullReminder({
 
   // Upcoming / near-due state
   return (
-    <div className="rounded-2xl p-6 border border-amber-500/20 bg-amber-500/5 border-l-2 border-l-amber-500/50 transition-all duration-300">
+    <div className="rounded-2xl p-6 border border-[rgba(176,155,113,0.20)] bg-[#B09B71]/5 transition-all duration-300">
       <div className="flex items-start gap-4 mb-4">
-        <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xl shrink-0">
+        <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.12)] border border-amber-500/25 flex items-center justify-center text-xl shrink-0">
           ⏰
         </div>
         <div className="flex-1">
-          <h3 className="text-base font-bold text-amber-400 mb-1">
+          <h3 className="text-base font-bold text-[#B09B71] mb-1">
             Dues Coming Up — ${quarterlyNum.toFixed(2)}
           </h3>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-[rgba(245,240,232,0.50)]">
             Your quarterly dues are due soon. Pay annual now and save ${annualSavings} ({annualDiscount}% discount).
             {!socialLoading && paidCount > 0 && (
               <>
                 {' '}
-                <span className="text-amber-300 font-semibold">{paidCount} of {totalProperties} neighbors</span> have already paid this quarter.
+                <span className="text-[#B09B71] font-semibold">{paidCount} of {totalProperties} neighbors</span> have already paid this quarter.
               </>
             )}
           </p>
         </div>
       </div>
 
-      <div className="flex items-center gap-4 p-4 rounded-xl bg-amber-500/5 border border-amber-500/15 mb-4">
+      <div className="flex items-center gap-4 p-4 rounded-xl bg-[#B09B71]/5 border border-amber-500/15 mb-4">
         <div className="flex-1">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1">Annual Savings</p>
-          <p className="text-xl font-extrabold text-amber-400">Save ${annualSavings}</p>
-          <p className="text-xs text-gray-600 mt-0.5">pay 4 quarters at {annualDiscount}% off</p>
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Annual Savings</p>
+          <p className="text-xl font-normal text-[#B09B71]">Save ${annualSavings}</p>
+          <p className="text-xs text-[rgba(245,240,232,0.25)] mt-0.5">pay 4 quarters at {annualDiscount}% off</p>
         </div>
         <Link
           href="/dues"
-          className="px-5 py-2.5 rounded-xl bg-amber-600/20 border border-amber-500/30 text-amber-400 hover:bg-amber-600/30 text-sm font-bold transition-all whitespace-nowrap"
+          className="px-5 py-2.5 rounded-xl bg-amber-600/20 border border-[rgba(176,155,113,0.25)] text-[#B09B71] hover:bg-amber-600/30 text-sm font-bold transition-all whitespace-nowrap"
         >
           Pay Dues →
         </Link>
@@ -336,18 +336,18 @@ function SocialProofBar({
   return (
     <div className="mt-3 pt-3 border-t border-gray-800/50">
       <div className="flex items-center justify-between mb-2">
-        <p className="text-xs text-gray-500 font-semibold">Community Payment Status</p>
-        <p className="text-xs text-gray-400 font-bold">
+        <p className="text-xs text-[rgba(245,240,232,0.35)] font-semibold">Community Payment Status</p>
+        <p className="text-xs text-[rgba(245,240,232,0.50)] font-bold">
           {paidCount}/{totalProperties} current
         </p>
       </div>
       <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full transition-all duration-700"
+          className="h-full bg-gradient-to-r from-[#2A5D4F] to-[#3A7D6F] rounded-full transition-all duration-700"
           style={{ width: `${paidPercentage}%` }}
         />
       </div>
-      <p className="text-[11px] text-gray-600 mt-1">{paidPercentage}% of properties paid this quarter</p>
+      <p className="text-[11px] text-[rgba(245,240,232,0.25)] mt-1">{paidPercentage}% of properties paid this quarter</p>
     </div>
   );
 }

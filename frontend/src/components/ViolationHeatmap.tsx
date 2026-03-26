@@ -65,11 +65,11 @@ export function ViolationHeatmap({ data = SAMPLE_DATA }: ViolationHeatmapProps) 
     <div className="glass-card rounded-2xl p-6">
       <div className="flex items-start justify-between mb-6">
         <div>
-          <h2 className="text-sm font-bold text-[#e8d5a3]">Violation Heatmap</h2>
-          <p className="text-xs text-gray-500 mt-1">Density by type and month — darker = more violations</p>
+          <h2 className="text-sm font-bold text-[#D4C4A0]">Violation Heatmap</h2>
+          <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1">Density by type and month — darker = more violations</p>
         </div>
         {/* Legend */}
-        <div className="flex items-center gap-1 text-[10px] text-gray-600">
+        <div className="flex items-center gap-1 text-[10px] text-[rgba(245,240,232,0.25)]">
           <span>Low</span>
           {[0.15, 0.30, 0.50, 0.70, 0.90].map(a => (
             <div
@@ -88,21 +88,21 @@ export function ViolationHeatmap({ data = SAMPLE_DATA }: ViolationHeatmapProps) 
           <div className="grid mb-1" style={{ gridTemplateColumns: '48px repeat(7, 1fr) 40px' }}>
             <div />
             {VIOLATION_TYPES.map(type => (
-              <div key={type} className="text-[9px] text-gray-500 font-medium text-center px-0.5 leading-tight">
+              <div key={type} className="text-[9px] text-[rgba(245,240,232,0.35)] font-medium text-center px-0.5 leading-tight">
                 {type}
               </div>
             ))}
-            <div className="text-[9px] text-gray-600 text-center">Total</div>
+            <div className="text-[9px] text-[rgba(245,240,232,0.25)] text-center">Total</div>
           </div>
 
           {/* Data rows */}
           {MONTHS.map((month, mi) => (
             <div
               key={month}
-              className={`grid gap-1 mb-1 items-center ${mi === currentMonth ? 'ring-1 ring-[#c9a96e]/30 rounded-lg' : ''}`}
+              className={`grid gap-1 mb-1 items-center ${mi === currentMonth ? 'ring-1 ring-[#B09B71]/30 rounded-lg' : ''}`}
               style={{ gridTemplateColumns: '48px repeat(7, 1fr) 40px' }}
             >
-              <div className={`text-[10px] font-medium pr-2 text-right ${mi === currentMonth ? 'text-[#c9a96e]' : 'text-gray-500'}`}>
+              <div className={`text-[10px] font-medium pr-2 text-right ${mi === currentMonth ? 'text-[#B09B71]' : 'text-[rgba(245,240,232,0.35)]'}`}>
                 {month}
               </div>
               {VIOLATION_TYPES.map((_, ti) => {
@@ -118,7 +118,7 @@ export function ViolationHeatmap({ data = SAMPLE_DATA }: ViolationHeatmapProps) 
                   </div>
                 );
               })}
-              <div className="text-[10px] text-gray-500 text-center font-medium">
+              <div className="text-[10px] text-[rgba(245,240,232,0.35)] text-center font-medium">
                 {monthTotals[mi]}
               </div>
             </div>
@@ -126,18 +126,18 @@ export function ViolationHeatmap({ data = SAMPLE_DATA }: ViolationHeatmapProps) 
 
           {/* Footer: column totals */}
           <div className="grid mt-2 pt-2 border-t border-[oklch(0.15_0.005_60)]" style={{ gridTemplateColumns: '48px repeat(7, 1fr) 40px' }}>
-            <div className="text-[9px] text-gray-600 text-right pr-2 font-semibold">Total</div>
+            <div className="text-[9px] text-[rgba(245,240,232,0.25)] text-right pr-2 font-semibold">Total</div>
             {typeTotals.map((t, i) => (
-              <div key={i} className="text-[10px] text-[#c9a96e] text-center font-bold">{t}</div>
+              <div key={i} className="text-[10px] text-[#B09B71] text-center font-bold">{t}</div>
             ))}
-            <div className="text-[10px] text-gray-400 text-center font-bold">
+            <div className="text-[10px] text-[rgba(245,240,232,0.50)] text-center font-bold">
               {typeTotals.reduce((a, b) => a + b, 0)}
             </div>
           </div>
         </div>
       </div>
 
-      <p className="text-[10px] text-gray-600 mt-4">
+      <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-4">
         * Highlighted row = current month. Data reflects {new Date().getFullYear()} violations.
       </p>
     </div>

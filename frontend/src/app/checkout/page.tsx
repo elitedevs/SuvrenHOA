@@ -13,10 +13,10 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs text-gray-500 font-semibold uppercase tracking-widest">
+        <span className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)]">
           Step {current} of {total}
         </span>
-        <span className="text-xs text-amber-400 font-semibold">
+        <span className="text-xs text-[#B09B71] font-semibold">
           {Math.round((current / total) * 100)}%
         </span>
       </div>
@@ -28,7 +28,7 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
             style={{
               background:
                 i < current
-                  ? 'linear-gradient(90deg, #c9a96e, #b8942e)'
+                  ? 'linear-gradient(90deg, #B09B71, #b8942e)'
                   : 'rgba(255,255,255,0.08)',
             }}
           />
@@ -56,7 +56,7 @@ function CheckRow({
     <label
       className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
         checked
-          ? 'border-green-500/30 bg-green-500/5'
+          ? 'border-[rgba(42,93,79,0.25)] bg-[#3A7D6F]/5'
           : 'border-gray-700/40 bg-gray-800/30'
       } ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`}
     >
@@ -68,8 +68,8 @@ function CheckRow({
         className="mt-0.5 w-4 h-4 rounded accent-green-500"
       />
       <div>
-        <p className="text-sm font-semibold text-gray-200">{label}</p>
-        {sublabel && <p className="text-xs text-gray-500 mt-0.5">{sublabel}</p>}
+        <p className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{label}</p>
+        {sublabel && <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">{sublabel}</p>}
       </div>
     </label>
   );
@@ -104,10 +104,10 @@ function CheckoutWizard() {
     <div className="max-w-lg mx-auto px-4 py-10 page-enter">
       {step < TOTAL_STEPS && (
         <div className="mb-6">
-          <h1 className="text-2xl font-extrabold text-gray-100 mb-1">
+          <h1 className="text-2xl font-normal text-[rgba(245,240,232,0.90)] mb-1">
             Move-Out Checklist
           </h1>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-[rgba(245,240,232,0.35)]">
             Faircroft HOA · Property #{tokenId ?? '—'}
           </p>
         </div>
@@ -117,9 +117,9 @@ function CheckoutWizard() {
 
       {/* ── Step 1: Checklist ── */}
       {step === 1 && (
-        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-amber-500/50 animate-fade-in">
+        <div className="glass-card rounded-2xl p-7 animate-fade-in">
           <h2 className="text-xl font-bold mb-1">Pre-Move Checklist</h2>
-          <p className="text-sm text-gray-500 mb-6">
+          <p className="text-sm text-[rgba(245,240,232,0.35)] mb-6">
             Complete all items before proceeding.
           </p>
 
@@ -127,20 +127,20 @@ function CheckoutWizard() {
           <div
             className={`p-4 rounded-xl border mb-4 ${
               isCurrent === false
-                ? 'border-red-500/30 bg-red-500/5'
-                : 'border-green-500/30 bg-green-500/5'
+                ? 'border-[rgba(107,58,58,0.25)] bg-[#8B5A5A]/5'
+                : 'border-[rgba(42,93,79,0.25)] bg-[#3A7D6F]/5'
             }`}
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {isCurrent !== false ? (
-                  <span className="text-green-400 text-lg"></span>
+                  <span className="text-[#3A7D6F] text-lg"></span>
                 ) : (
-                  <span className="text-red-400 text-lg"></span>
+                  <span className="text-[#8B5A5A] text-lg"></span>
                 )}
                 <div>
-                  <p className="text-sm font-semibold text-gray-200">HOA Dues</p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">HOA Dues</p>
+                  <p className="text-xs text-[rgba(245,240,232,0.35)]">
                     {isCurrent === undefined
                       ? 'Checking...'
                       : isCurrent
@@ -152,7 +152,7 @@ function CheckoutWizard() {
               {isCurrent === false && (
                 <Link
                   href="/dues"
-                  className="text-xs text-red-400 hover:text-red-300 underline"
+                  className="text-xs text-[#8B5A5A] hover:text-[#8B5A5A] underline"
                 >
                   Pay now →
                 </Link>
@@ -176,11 +176,11 @@ function CheckoutWizard() {
           </div>
 
           <div className="mb-7">
-            <label className="text-xs text-gray-500 font-semibold uppercase tracking-wide block mb-1.5">
+            <label className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] block mb-1.5">
               Forwarding Address
             </label>
             <input
-              className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-amber-500/50"
+              className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-amber-500/50"
               placeholder="Where should we send final correspondence?"
               value={forwardingAddress}
               onChange={(e) => setForwardingAddress(e.target.value)}
@@ -190,17 +190,17 @@ function CheckoutWizard() {
           <button
             onClick={goNext}
             disabled={!step1Valid || isCurrent === false}
-            className="w-full py-3.5 rounded-xl bg-amber-600 hover:bg-amber-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
+            className="w-full py-3.5 rounded-xl bg-amber-600 hover:bg-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
           >
             Continue →
           </button>
           {isCurrent === false && (
-            <p className="text-xs text-red-400 text-center mt-3">
+            <p className="text-xs text-[#8B5A5A] text-center mt-3">
               Outstanding dues must be paid before proceeding.
             </p>
           )}
           {isCurrent !== false && !step1Valid && (
-            <p className="text-xs text-gray-500 text-center mt-3">
+            <p className="text-xs text-[rgba(245,240,232,0.35)] text-center mt-3">
               Complete all checklist items to continue.
             </p>
           )}
@@ -211,7 +211,7 @@ function CheckoutWizard() {
       {step === 2 && (
         <div className="glass-card rounded-2xl p-7 animate-fade-in">
           <h2 className="text-xl font-bold mb-1">Final Settlement</h2>
-          <p className="text-sm text-gray-500 mb-6">
+          <p className="text-sm text-[rgba(245,240,232,0.35)] mb-6">
             Confirm all financial obligations are met.
           </p>
 
@@ -219,32 +219,32 @@ function CheckoutWizard() {
           <div
             className={`p-5 rounded-xl border mb-6 ${
               isCurrent === false
-                ? 'border-red-500/30 bg-red-500/8'
-                : 'border-green-500/30 bg-green-500/5'
+                ? 'border-[rgba(107,58,58,0.25)] bg-[#8B5A5A]/8'
+                : 'border-[rgba(42,93,79,0.25)] bg-[#3A7D6F]/5'
             }`}
           >
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">
+            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">
               Outstanding Balance
             </p>
             {isCurrent === false ? (
               <div>
-                <p className="text-2xl font-extrabold text-red-300 mb-1">
+                <p className="text-2xl font-normal text-[#8B5A5A] mb-1">
                   ${amountOwed}
                 </p>
-                <p className="text-sm text-gray-400 mb-4">
+                <p className="text-sm text-[rgba(245,240,232,0.50)] mb-4">
                   {quartersOwed} quarter{quartersOwed !== 1 ? 's' : ''} past due
                 </p>
                 <Link
                   href="/dues"
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 text-sm font-semibold text-red-300 transition-all"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(107,58,58,0.25)] hover:bg-red-600/30 text-sm font-semibold text-[#8B5A5A] transition-all"
                 >
                    Pay Outstanding Balance
                 </Link>
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-6 h-6 text-green-400" />
-                <p className="text-lg font-bold text-green-300">
+                <CheckCircle className="w-6 h-6 text-[#3A7D6F]" />
+                <p className="text-lg font-bold text-[#3A7D6F]">
                   No outstanding balance
                 </p>
               </div>
@@ -252,7 +252,7 @@ function CheckoutWizard() {
           </div>
 
           {/* Confirmation */}
-          <div className="border border-amber-500/20 rounded-xl p-4 mb-7 bg-amber-500/5">
+          <div className="border border-[rgba(176,155,113,0.20)] rounded-xl p-4 mb-7 bg-[#B09B71]/5">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
@@ -261,7 +261,7 @@ function CheckoutWizard() {
                 disabled={isCurrent === false}
                 className="mt-0.5 w-4 h-4 rounded accent-amber-500"
               />
-              <span className="text-sm text-gray-300">
+              <span className="text-sm text-[rgba(245,240,232,0.65)]">
                 I confirm all HOA obligations have been met and I am ready to
                 transfer ownership of this property.
               </span>
@@ -271,14 +271,14 @@ function CheckoutWizard() {
           <div className="flex gap-3">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-gray-400 hover:text-gray-200 font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] font-semibold text-sm transition-all"
             >
               ← Back
             </button>
             <button
               onClick={goNext}
               disabled={!step2Valid}
-              className="flex-1 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-amber-600 hover:bg-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
             >
               Confirm →
             </button>
@@ -288,20 +288,20 @@ function CheckoutWizard() {
 
       {/* ── Step 3: Confirmation ── */}
       {step === 3 && (
-        <div className="glass-card rounded-2xl p-10 text-center animate-fade-in border-l-2 border-l-amber-500/50">
-          <div className="flex justify-center mb-5"><Home className="w-12 h-12 text-[#c9a96e]" /></div>
-          <h2 className="text-2xl font-extrabold mb-2">
+        <div className="glass-card rounded-2xl p-10 text-center animate-fade-in">
+          <div className="flex justify-center mb-5"><Home className="w-12 h-12 text-[#B09B71]" /></div>
+          <h2 className="text-2xl font-normal mb-2">
             Thank You, Neighbor
           </h2>
-          <p className="text-gray-400 text-sm mb-3 max-w-sm mx-auto">
+          <p className="text-[rgba(245,240,232,0.50)] text-sm mb-3 max-w-sm mx-auto">
             Thank you for being part of the Faircroft community. We wish you
             all the best in your new home.
           </p>
-          <div className="bg-blue-500/8 border border-blue-500/20 rounded-xl p-4 mb-8 text-left">
-            <p className="text-xs text-blue-300 font-semibold uppercase tracking-wide mb-1">
+          <div className="bg-[#5A7A9A]/8 border border-[rgba(90,122,154,0.20)] rounded-xl p-4 mb-8 text-left">
+            <p className="text-xs text-[#5A7A9A] font-semibold uppercase tracking-wide mb-1">
               ℹ On-Chain Transfer
             </p>
-            <p className="text-xs text-gray-400 leading-relaxed">
+            <p className="text-xs text-[rgba(245,240,232,0.50)] leading-relaxed">
               Property ownership transfer happens on-chain when the Property NFT
               is transferred to the new owner&apos;s wallet. The board will
               coordinate this step with you and the buyer.
@@ -309,7 +309,7 @@ function CheckoutWizard() {
           </div>
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-gray-300 hover:text-white font-semibold text-sm transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-[rgba(245,240,232,0.65)] hover:text-white font-semibold text-sm transition-all"
           >
             ← Return to Dashboard
           </Link>
@@ -327,7 +327,7 @@ export default function CheckoutPage() {
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
         <div className="text-5xl mb-2"></div>
         <h2 className="text-xl font-bold">Move-Out Wizard</h2>
-        <p className="text-gray-400 text-sm">Connect your wallet to begin</p>
+        <p className="text-[rgba(245,240,232,0.50)] text-sm">Connect your wallet to begin</p>
         <ConnectButton label="Connect Wallet" />
       </div>
     );

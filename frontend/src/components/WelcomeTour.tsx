@@ -97,11 +97,11 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
 
       {/* Tour card */}
       <div
-        className="relative z-10 w-full max-w-sm rounded-2xl border border-[#c9a96e]/40 bg-[#0d0d0d] shadow-[0_0_60px_rgba(201,169,110,0.15)] overflow-hidden"
+        className="relative z-10 w-full max-w-sm rounded-2xl border border-[#B09B71]/40 bg-[#0d0d0d] shadow-[0_0_60px_rgba(201,169,110,0.15)] overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* Gold accent bar */}
-        <div className="h-0.5 bg-gradient-to-r from-transparent via-[#c9a96e] to-transparent" />
+        <div className="h-0.5 bg-gradient-to-r from-transparent via-[#B09B71] to-transparent" />
 
         {/* Content */}
         <div className="p-8 text-center">
@@ -112,9 +112,9 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
                 key={i}
                 className={`transition-all duration-300 rounded-full ${
                   i === step
-                    ? 'w-6 h-2 bg-[#c9a96e]'
+                    ? 'w-6 h-2 bg-[#B09B71]'
                     : i < step
-                    ? 'w-2 h-2 bg-[#c9a96e]/50'
+                    ? 'w-2 h-2 bg-[#B09B71]/50'
                     : 'w-2 h-2 bg-gray-700'
                 }`}
               />
@@ -122,17 +122,17 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
           </div>
 
           {/* Icon */}
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#c9a96e]/20 to-[#b8942e]/10 border border-[#c9a96e]/30 flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg">
+          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#B09B71]/20 to-[#b8942e]/10 border border-[#B09B71]/30 flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg">
             {current.icon}
           </div>
 
           {/* Text */}
-          <h2 className="text-xl font-extrabold text-[#e8d5a3] mb-3">{current.title}</h2>
-          <p className="text-sm text-gray-400 leading-relaxed mb-4">{current.description}</p>
+          <h2 className="text-xl font-normal text-[#D4C4A0] mb-3">{current.title}</h2>
+          <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed mb-4">{current.description}</p>
 
           {current.hint && (
-            <div className="px-4 py-3 rounded-xl bg-[#c9a96e]/8 border border-[#c9a96e]/20 mb-6">
-              <p className="text-xs text-[#c9a96e] font-medium">{current.hint}</p>
+            <div className="px-4 py-3 rounded-xl bg-[#B09B71]/8 border border-[#B09B71]/20 mb-6">
+              <p className="text-xs text-[#B09B71] font-medium">{current.hint}</p>
             </div>
           )}
 
@@ -141,14 +141,14 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
             {step > 0 ? (
               <button
                 onClick={prev}
-                className="flex-1 py-2.5 rounded-xl border border-gray-700 text-sm font-medium text-gray-400 hover:text-gray-300 hover:bg-white/5 transition-colors"
+                className="flex-1 py-2.5 rounded-xl border border-gray-700 text-sm font-medium text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/5 transition-colors"
               >
                 ← Back
               </button>
             ) : (
               <button
                 onClick={dismiss}
-                className="flex-1 py-2.5 rounded-xl border border-gray-700 text-sm font-medium text-gray-400 hover:text-gray-300 hover:bg-white/5 transition-colors"
+                className="flex-1 py-2.5 rounded-xl border border-gray-700 text-sm font-medium text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/5 transition-colors"
               >
                 Skip Tour
               </button>
@@ -156,14 +156,14 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
 
             <button
               onClick={next}
-              className="flex-1 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_16px_rgba(201,169,110,0.25)]"
+              className="flex-1 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_16px_rgba(201,169,110,0.25)]"
             >
               {step < STEPS.length - 1 ? 'Next →' : "Let's Go! "}
             </button>
           </div>
 
           {/* Step text */}
-          <p className="text-[10px] text-gray-600 mt-4">
+          <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-4">
             Step {step + 1} of {STEPS.length}
           </p>
         </div>

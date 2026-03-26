@@ -146,21 +146,21 @@ export function CommandPalette() {
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       <div
-        className="relative z-10 w-full max-w-lg rounded-2xl border border-[#c9a96e]/30 bg-[#0d0d0d] shadow-2xl overflow-hidden"
+        className="relative z-10 w-full max-w-lg rounded-2xl border border-[#B09B71]/30 bg-[#0d0d0d] shadow-2xl overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* Search input */}
         <div className="flex items-center gap-3 px-4 py-4 border-b border-white/5">
-          <span className="text-gray-500 text-lg"></span>
+          <span className="text-[rgba(245,240,232,0.35)] text-lg"></span>
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search pages, proposals, documents..."
-            className="flex-1 bg-transparent text-gray-100 placeholder-gray-600 text-sm outline-none"
+            className="flex-1 bg-transparent text-[rgba(245,240,232,0.90)] placeholder-gray-600 text-sm outline-none"
           />
-          <kbd className="text-[10px] text-gray-600 bg-gray-800 px-1.5 py-0.5 rounded border border-gray-700 font-mono">
+          <kbd className="text-[10px] text-[rgba(245,240,232,0.25)] bg-gray-800 px-1.5 py-0.5 rounded border border-gray-700 font-mono">
             ESC
           </kbd>
         </div>
@@ -169,12 +169,12 @@ export function CommandPalette() {
         <div className="max-h-80 overflow-y-auto">
           {filteredItems.length === 0 ? (
             <div className="px-4 py-8 text-center">
-              <p className="text-sm text-gray-500">No results for &ldquo;{query}&rdquo;</p>
+              <p className="text-sm text-[rgba(245,240,232,0.35)]">No results for &ldquo;{query}&rdquo;</p>
             </div>
           ) : (
             <div className="py-2">
               {!query && (
-                <p className="px-4 py-1.5 text-[10px] text-gray-600 font-semibold uppercase tracking-widest">
+                <p className="px-4 py-1.5 text-[10px] text-[rgba(245,240,232,0.25)] font-semibold uppercase tracking-widest">
                   Quick Navigation
                 </p>
               )}
@@ -184,20 +184,20 @@ export function CommandPalette() {
                   onClick={() => navigate(item.href)}
                   onMouseEnter={() => setSelectedIndex(i)}
                   className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
-                    selectedIndex === i ? 'bg-[#c9a96e]/10' : 'hover:bg-white/[0.03]'
+                    selectedIndex === i ? 'bg-[#B09B71]/10' : 'hover:bg-white/[0.03]'
                   }`}
                 >
                   <span className="text-lg w-7 flex-shrink-0 text-center">{item.icon}</span>
                   <div className="flex-1 min-w-0">
-                    <p className={`text-sm font-medium ${selectedIndex === i ? 'text-[#e8d5a3]' : 'text-gray-200'}`}>
+                    <p className={`text-sm font-medium ${selectedIndex === i ? 'text-[#D4C4A0]' : 'text-[rgba(245,240,232,0.80)]'}`}>
                       {item.title}
                     </p>
                     {item.subtitle && (
-                      <p className="text-[11px] text-gray-500 truncate">{item.subtitle}</p>
+                      <p className="text-[11px] text-[rgba(245,240,232,0.35)] truncate">{item.subtitle}</p>
                     )}
                   </div>
                   {selectedIndex === i && (
-                    <span className="text-[10px] text-gray-600 font-mono shrink-0">↵ enter</span>
+                    <span className="text-[10px] text-[rgba(245,240,232,0.25)] font-mono shrink-0">↵ enter</span>
                   )}
                 </button>
               ))}
@@ -207,12 +207,12 @@ export function CommandPalette() {
 
         {/* Footer */}
         <div className="px-4 py-2.5 border-t border-white/5 flex items-center justify-between">
-          <div className="flex items-center gap-3 text-[10px] text-gray-600">
+          <div className="flex items-center gap-3 text-[10px] text-[rgba(245,240,232,0.25)]">
             <span>↑↓ navigate</span>
             <span>↵ select</span>
             <span>esc close</span>
           </div>
-          <span className="text-[10px] text-gray-600">⌘K to open</span>
+          <span className="text-[10px] text-[rgba(245,240,232,0.25)]">⌘K to open</span>
         </div>
       </div>
     </div>

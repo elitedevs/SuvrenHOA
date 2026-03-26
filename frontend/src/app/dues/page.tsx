@@ -19,8 +19,8 @@ export default function DuesPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <CreditCard className="w-8 h-8 text-gray-400 mb-2" />
-        <p className="text-gray-400 text-base font-medium">Sign in to pay dues</p>
+        <CreditCard className="w-8 h-8 text-[rgba(245,240,232,0.50)] mb-2" />
+        <p className="text-[rgba(245,240,232,0.50)] text-base font-medium">Sign in to pay dues</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -44,7 +44,7 @@ function CommunityDuesStatus() {
   if (loading) {
     return (
       <div className="glass-card rounded-2xl hover-lift p-6 mb-6">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">Community Dues Status</p>
+        <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">Community Dues Status</p>
         <div className="skeleton h-4 w-full rounded-lg mb-3" />
         <div className="skeleton h-2 w-full rounded-full" />
       </div>
@@ -54,20 +54,20 @@ function CommunityDuesStatus() {
   if (totalProperties === 0) return null;
 
   return (
-    <div className="glass-card rounded-2xl hover-lift p-6 mb-6 page-enter page-enter-delay-1">
-      <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Community Dues Status</p>
+    <div className="glass-card rounded-2xl hover-lift p-6 mb-6 card-enter card-enter-delay-1">
+      <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-4">Community Dues Status</p>
 
       {/* Progress bar */}
       <div className="mb-4">
         <div className="flex items-center justify-between mb-2">
-          <p className="text-sm font-bold text-gray-200">
+          <p className="text-sm font-bold text-[rgba(245,240,232,0.80)]">
             {paidCount} of {totalProperties} properties current
           </p>
-          <span className="text-sm font-extrabold text-green-400">{paidPercentage}%</span>
+          <span className="text-sm font-medium text-[#3A7D6F]">{paidPercentage}%</span>
         </div>
         <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full transition-all duration-700"
+            className="h-full bg-gradient-to-r from-[#2A5D4F] to-[#3A7D6F] rounded-full transition-all duration-700"
             style={{ width: `${paidPercentage}%` }}
           />
         </div>
@@ -75,17 +75,17 @@ function CommunityDuesStatus() {
 
       {/* Anonymous breakdown */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="rounded-xl bg-green-500/5 border border-green-500/20 p-4 text-center">
-          <p className="text-2xl font-extrabold text-green-400">{paidCount}</p>
-          <p className="text-xs text-gray-500 mt-1 font-semibold">Paid This Quarter</p>
+        <div className="rounded-xl bg-[#3A7D6F]/5 border border-[rgba(42,93,79,0.20)] p-4 text-center">
+          <p className="text-2xl font-normal text-[#3A7D6F]">{paidCount}</p>
+          <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1 font-semibold">Paid This Quarter</p>
         </div>
-        <div className="rounded-xl bg-red-500/5 border border-red-500/20 p-4 text-center">
-          <p className="text-2xl font-extrabold text-red-400">{unpaidCount}</p>
-          <p className="text-xs text-gray-500 mt-1 font-semibold">Still Outstanding</p>
+        <div className="rounded-xl bg-[#8B5A5A]/5 border border-[rgba(107,58,58,0.20)] p-4 text-center">
+          <p className="text-2xl font-normal text-[#8B5A5A]">{unpaidCount}</p>
+          <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1 font-semibold">Still Outstanding</p>
         </div>
       </div>
 
-      <p className="text-[11px] text-gray-600 mt-3 text-center">
+      <p className="text-[11px] text-[rgba(245,240,232,0.25)] mt-3 text-center">
         Community data is anonymous — no names, just numbers.
       </p>
     </div>
@@ -106,10 +106,10 @@ function DuesPanel() {
   if (!hasProperty) {
     return (
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12 page-enter">
-        <div className="glass-card rounded-2xl hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
-          <Home className="w-8 h-8 text-amber-400 mx-auto mb-4" />
+        <div className="glass-card rounded-2xl hover-lift p-12 text-center">
+          <Home className="w-8 h-8 text-[#B09B71] mx-auto mb-4" />
           <h2 className="text-xl font-bold mb-3">No Property Found</h2>
-          <p className="text-gray-400 text-sm">You need a Property NFT to pay dues.</p>
+          <p className="text-[rgba(245,240,232,0.50)] text-sm">You need a Property NFT to pay dues.</p>
         </div>
       </div>
     );
@@ -161,12 +161,12 @@ function DuesPanel() {
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10 page-enter">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Payments</p>
-        <h1 className="text-3xl font-extrabold tracking-tight">Pay Dues</h1>
+        <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Payments</p>
+        <h1 className="text-3xl font-normal tracking-tight">Pay Dues</h1>
       </div>
 
       {/* Smart Dues Reminder */}
-      <div className="mb-6 page-enter page-enter-delay-1">
+      <div className="mb-6 card-enter card-enter-delay-1">
         <DuesReminder />
       </div>
 
@@ -175,7 +175,7 @@ function DuesPanel() {
 
       {/* Step Progression */}
       {step !== 'done' && (
-        <div className="mb-8 page-enter page-enter-delay-1">
+        <div className="mb-8 card-enter card-enter-delay-1">
           <div className="flex items-center justify-between">
             {STEPS.slice(0, 3).map((s, i) => {
               const isActive = s.id === step;
@@ -187,15 +187,15 @@ function DuesPanel() {
                   <div className="flex flex-col items-center gap-1.5">
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
                       isDone
-                        ? 'bg-green-500/20 border border-green-500/40 text-green-400'
+                        ? 'bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.30)] text-[#3A7D6F]'
                         : isActive
-                        ? 'bg-[#c9a96e]/20 border border-[#c9a96e]/50 text-[#e8d5a3] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
-                        : 'bg-gray-800/60 border border-gray-700/40 text-gray-600'
+                        ? 'bg-[#B09B71]/20 border border-[#B09B71]/50 text-[#D4C4A0] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
+                        : 'bg-gray-800/60 border border-gray-700/40 text-[rgba(245,240,232,0.25)]'
                     }`}>
                       {isDone ? '' : i + 1}
                     </div>
                     <span className={`text-[11px] font-semibold whitespace-nowrap ${
-                      isActive ? 'text-[#e8d5a3]' : isDone ? 'text-green-400' : 'text-gray-600'
+                      isActive ? 'text-[#D4C4A0]' : isDone ? 'text-[#3A7D6F]' : 'text-[rgba(245,240,232,0.25)]'
                     }`}>
                       {s.short}
                     </span>
@@ -205,7 +205,7 @@ function DuesPanel() {
                   {i < 2 && (
                     <div className={`flex-1 h-px mx-3 mb-4 transition-all duration-500 ${
                       STEPS.findIndex(x => x.id === step) > i
-                        ? 'bg-gradient-to-r from-green-500/50 to-[#c9a96e]/20'
+                        ? 'bg-gradient-to-r from-green-500/50 to-[#B09B71]/20'
                         : 'bg-gray-800'
                     }`} />
                   )}
@@ -217,11 +217,11 @@ function DuesPanel() {
       )}
 
       {/* USDC Balance + Status */}
-      <div className="grid grid-cols-2 gap-4 mb-6 page-enter page-enter-delay-1">
+      <div className="grid grid-cols-2 gap-4 mb-6 card-enter card-enter-delay-1">
         <div className="glass-card rounded-2xl hover-lift p-5">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-2">USDC Balance</p>
-          <p className="text-2xl font-extrabold text-gray-100">${usdcBalance.toFixed(2)}</p>
-          <p className="text-[11px] text-gray-600 mt-1">on Base network</p>
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">USDC Balance</p>
+          <p className="text-2xl font-normal text-[rgba(245,240,232,0.90)]">${usdcBalance.toFixed(2)}</p>
+          <p className="text-[11px] text-[rgba(245,240,232,0.25)] mt-1">on Base network</p>
         </div>
         <div className={`rounded-2xl p-5 ${
           isCurrent === undefined
@@ -230,17 +230,17 @@ function DuesPanel() {
             ? 'glass-card-success'
             : 'glass-card-danger'
         }`}>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-2">
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">
             Lot #{tokenId} Status
           </p>
           {isCurrent === undefined ? (
             <div className="skeleton h-7 w-20 rounded-lg" />
           ) : isCurrent ? (
-            <p className="text-2xl font-extrabold text-green-400">Current</p>
+            <p className="text-2xl font-normal text-[#3A7D6F]">Current</p>
           ) : (
             <>
-              <p className="text-2xl font-extrabold text-red-400">Past Due</p>
-              <p className="text-xs text-red-300/70 mt-1">${amountOwed} owed</p>
+              <p className="text-2xl font-normal text-[#8B5A5A]">Payment Reminder</p>
+              <p className="text-xs text-[#8B5A5A]/70 mt-1">${amountOwed} owed</p>
             </>
           )}
         </div>
@@ -248,12 +248,12 @@ function DuesPanel() {
 
       {/* Done State */}
       {step === 'done' ? (
-        <div className="glass-card-success rounded-2xl p-12 text-center border-l-2 border-l-green-500/50 pulse-glow-green page-enter">
-          <div className="w-20 h-20 rounded-full bg-green-500/15 border-2 border-green-500/30 flex items-center justify-center text-4xl mx-auto mb-6">
+        <div className="glass-card-success rounded-2xl p-12 text-center pulse-glow-green page-enter">
+          <div className="w-20 h-20 rounded-full bg-[rgba(42,93,79,0.15)] border-2 border-[rgba(42,93,79,0.25)] flex items-center justify-center text-4xl mx-auto mb-6">
             
           </div>
-          <h3 className="text-2xl font-extrabold text-green-400 mb-3">Payment Successful!</h3>
-          <p className="text-sm text-gray-400 mb-2 max-w-sm mx-auto">
+          <h3 className="text-2xl font-normal text-[#3A7D6F] mb-3">Payment Successful!</h3>
+          <p className="text-sm text-[rgba(245,240,232,0.50)] mb-2 max-w-sm mx-auto">
             Your dues have been paid. The treasury has been updated on-chain.
           </p>
           {payHash && (
@@ -261,7 +261,7 @@ function DuesPanel() {
               href={`https://sepolia.basescan.org/tx/${payHash}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-[#c9a96e] hover:underline font-mono"
+              className="text-xs text-[#B09B71] hover:underline font-mono"
             >
               View transaction →
             </a>
@@ -276,8 +276,8 @@ function DuesPanel() {
       ) : (
         <>
           {/* Payment Options — radio-style */}
-          <div className="mb-6 page-enter page-enter-delay-2">
-            <h2 className="text-base font-bold text-gray-200 mb-3">Select Payment Amount</h2>
+          <div className="mb-6 card-enter card-enter-delay-2">
+            <h2 className="text-base font-bold text-[rgba(245,240,232,0.80)] mb-3">Select Payment Amount</h2>
             <div className="space-y-3">
               {paymentOptions.map(({ quarters, label, amount, recommended, savings, discount }) => {
                 const isSelected = selectedQuarters === quarters;
@@ -287,16 +287,16 @@ function DuesPanel() {
                     onClick={() => setSelectedQuarters(quarters)}
                     className={`w-full p-5 rounded-2xl border text-left flex items-center gap-4 transition-all duration-200 min-h-[72px] ${
                       isSelected
-                        ? 'border-[#c9a96e]/60 bg-[#1a1a1a]/50 shadow-[0_0_16px_rgba(201,169,110,0.12)]'
+                        ? 'border-[#B09B71]/60 bg-[#1a1a1a]/50 shadow-[0_0_16px_rgba(201,169,110,0.12)]'
                         : recommended
-                        ? 'border-[#c9a96e]/20 bg-[#1a1a1a]/30 hover:border-[#c9a96e]/40'
+                        ? 'border-[#B09B71]/20 bg-[#1a1a1a]/30 hover:border-[#B09B71]/40'
                         : 'border-gray-700/60 bg-gray-900/30 hover:border-gray-600/60'
                     }`}
                   >
                     {/* Radio indicator */}
                     <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${
                       isSelected
-                        ? 'border-[#c9a96e] bg-[#c9a96e]'
+                        ? 'border-[#B09B71] bg-[#B09B71]'
                         : 'border-gray-600'
                     }`}>
                       {isSelected && (
@@ -307,22 +307,22 @@ function DuesPanel() {
                     {/* Labels */}
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <p className="font-bold text-sm text-gray-100">{label}</p>
+                        <p className="font-bold text-sm text-[rgba(245,240,232,0.90)]">{label}</p>
                         {recommended && (
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#e8d5a3] font-bold">
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/30 text-[#D4C4A0] font-bold">
                             {discount}% off
                           </span>
                         )}
                       </div>
                       {recommended && savings && (
-                        <p className="text-xs text-[#c9a96e] font-medium mt-0.5">
+                        <p className="text-xs text-[#B09B71] font-medium mt-0.5">
                           Save ${savings} vs quarterly
                         </p>
                       )}
                     </div>
 
                     {/* Amount */}
-                    <span className="text-xl font-extrabold text-gray-100">
+                    <span className="text-xl font-normal text-[rgba(245,240,232,0.90)]">
                       ${amount.toFixed(2)}
                     </span>
                   </button>
@@ -335,7 +335,7 @@ function DuesPanel() {
           <button
             onClick={handlePay}
             disabled={!selectedQuarters || isApproving || isPaying}
-            className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-base font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] active:scale-[0.98] min-h-[56px]"
+            className="w-full py-4 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-base font-bold transition-all duration-200 active:scale-[0.98] min-h-[56px]"
           >
             {isApproving ? '⏳ Approving USDC...' :
              isPaying ? ' Processing Payment...' :
@@ -344,10 +344,10 @@ function DuesPanel() {
           </button>
 
           {/* Info */}
-          <div className="mt-4 text-xs text-gray-500 text-center space-y-1">
+          <div className="mt-4 text-xs text-[rgba(245,240,232,0.35)] text-center space-y-1">
             <p>Paid in USDC on Base. 80% → operating fund · 20% → reserve fund.</p>
             {selectedOption && usdcBalance < selectedOption.amount && (
-              <p className="text-red-400 font-medium">
+              <p className="text-[#8B5A5A] font-medium">
                  Insufficient balance. You need ${selectedOption.amount.toFixed(2)} but have ${usdcBalance.toFixed(2)}.
               </p>
             )}
@@ -356,19 +356,19 @@ function DuesPanel() {
       )}
 
       {/* Payment History Chart */}
-      <div className="mt-8 page-enter page-enter-delay-3">
+      <div className="mt-8 card-enter card-enter-delay-3">
         <DuesPaymentChart
           quarterlyAmount={parseFloat(quarterlyDues.replace(/,/g, '')) || 450}
         />
       </div>
 
       {/* Dues Calculator */}
-      <div className="mt-8 page-enter page-enter-delay-3">
+      <div className="mt-8 card-enter card-enter-delay-3">
         <DuesCalculator baseQuarterlyRate={parseFloat(quarterlyDues.replace(/,/g, '')) || 450} />
       </div>
 
       {/* Auto-Pay */}
-      <div className="mt-8 page-enter page-enter-delay-3">
+      <div className="mt-8 card-enter card-enter-delay-3">
         <DuesAutoPay walletAddress={address} />
       </div>
     </div>

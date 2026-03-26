@@ -9,36 +9,36 @@ import { useAnnouncements } from '@/hooks/useAnnouncements';
 const PRIORITY_STYLES = {
   critical: {
     border: 'border-l-red-500',
-    bg: 'bg-red-500/5',
-    badge: 'bg-red-500/15 text-red-400 border-red-500/30',
+    bg: 'bg-[#8B5A5A]/5',
+    badge: 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border-[rgba(107,58,58,0.25)]',
     label: ' Critical',
-    dot: 'bg-red-500',
+    dot: 'bg-[#8B5A5A]',
   },
   urgent: {
     border: 'border-l-red-500',
-    bg: 'bg-red-500/5',
-    badge: 'bg-red-500/15 text-red-400 border-red-500/30',
+    bg: 'bg-[#8B5A5A]/5',
+    badge: 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border-[rgba(107,58,58,0.25)]',
     label: ' Urgent',
-    dot: 'bg-red-500',
+    dot: 'bg-[#8B5A5A]',
   },
   important: {
-    border: 'border-l-[#c9a96e]',
-    bg: 'bg-[#c9a96e]/5',
-    badge: 'bg-[#c9a96e]/15 text-[#c9a96e] border-[#c9a96e]/30',
+    border: 'border-l-[#B09B71]',
+    bg: 'bg-[#B09B71]/5',
+    badge: 'bg-[#B09B71]/15 text-[#B09B71] border-[#B09B71]/30',
     label: ' Important',
-    dot: 'bg-[#c9a96e]',
+    dot: 'bg-[#B09B71]',
   },
   info: {
     border: 'border-l-blue-500',
-    bg: 'bg-blue-500/5',
-    badge: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
+    bg: 'bg-[#5A7A9A]/5',
+    badge: 'bg-[rgba(90,122,154,0.12)] text-[#5A7A9A] border-[rgba(90,122,154,0.25)]',
     label: 'ℹ Info',
-    dot: 'bg-blue-500',
+    dot: 'bg-[#5A7A9A]',
   },
   fyi: {
     border: 'border-l-gray-500',
     bg: 'bg-gray-500/5',
-    badge: 'bg-gray-500/15 text-gray-400 border-gray-500/30',
+    badge: 'bg-gray-500/15 text-[rgba(245,240,232,0.50)] border-gray-500/30',
     label: ' FYI',
     dot: 'bg-gray-500',
   },
@@ -86,7 +86,7 @@ export default function AnnouncementsPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-gray-400 mb-4">Sign in to see announcements</p>
+        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to see announcements</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -132,16 +132,16 @@ export default function AnnouncementsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold"> Announcements</h1>
-          <p className="text-sm text-gray-400 mt-1">Official updates from the board and committees</p>
+          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Official updates from the board and committees</p>
         </div>
         <div className="flex items-center gap-3">
           {unread > 0 && (
-            <span className="px-3 py-1 rounded-full bg-[#c9a96e]/10 border border-[#c9a96e]/20 text-[#c9a96e] text-xs font-medium">
+            <span className="px-3 py-1 rounded-full bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#B09B71] text-xs font-medium">
               {unread} unread
             </span>
           )}
-          <div className="flex items-center gap-1.5 text-xs text-gray-500">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          <div className="flex items-center gap-1.5 text-xs text-[rgba(245,240,232,0.35)]">
+            <span className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
             {activeItems.length} active
           </div>
         </div>
@@ -154,7 +154,7 @@ export default function AnnouncementsPage() {
           return (
             <button key={p} onClick={() => setPriorityFilter(p)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
-                priorityFilter === p ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
+                priorityFilter === p ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'
               }`}>
               {style && <span className={`w-2 h-2 rounded-full ${style.dot}`} />}
               {p === 'all' ? 'All' : PRIORITY_STYLES[p as keyof typeof PRIORITY_STYLES]?.label}
@@ -166,24 +166,24 @@ export default function AnnouncementsPage() {
       {/* Tab */}
       <div className="flex gap-2 mb-6">
         <button onClick={() => setActiveTab('active')}
-          className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'active' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+          className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'active' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'}`}>
           Active ({activeItems.length})
         </button>
         <button onClick={() => setActiveTab('archive')}
-          className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'archive' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+          className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'archive' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'}`}>
            Archive ({archiveItems.length})
         </button>
       </div>
 
       {isLoading ? (
-        <div className="text-center py-12 text-gray-500">Loading announcements...</div>
+        <div className="text-center py-12 text-[rgba(245,240,232,0.35)]">Loading announcements...</div>
       ) : activeTab === 'archive' ? (
         <ArchiveList items={archiveItems} readSet={readSet} />
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-xl hover-lift p-12 text-center">
           <p className="text-4xl mb-3"></p>
           <h3 className="font-medium mb-1">No announcements</h3>
-          <p className="text-sm text-gray-400">Board announcements will appear here</p>
+          <p className="text-sm text-[rgba(245,240,232,0.50)]">Board announcements will appear here</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -223,7 +223,7 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
       <div className={`p-6 ${style.bg}`}>
         {/* Pin indicator */}
         {isPinned && (
-          <div className="flex items-center gap-1.5 text-[10px] text-[#c9a96e] font-medium mb-2">
+          <div className="flex items-center gap-1.5 text-[10px] text-[#B09B71] font-medium mb-2">
              Pinned
           </div>
         )}
@@ -235,15 +235,15 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
               <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${style.badge}`}>
                 {style.label}
               </span>
-              <span className="text-[10px] text-gray-500">{timeAgo}</span>
-              {!isRead && <span className="w-1.5 h-1.5 rounded-full bg-[#c9a96e] shrink-0" title="Unread" />}
+              <span className="text-[10px] text-[rgba(245,240,232,0.35)]">{timeAgo}</span>
+              {!isRead && <span className="w-1.5 h-1.5 rounded-full bg-[#B09B71] shrink-0" title="Unread" />}
             </div>
             <h3 className="font-semibold text-base leading-snug">{announcement.title}</h3>
           </div>
           <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={onPin}
-              className={`p-1.5 rounded-lg transition-colors ${isPinned ? 'text-[#c9a96e] bg-[#c9a96e]/10' : 'text-gray-600 hover:text-gray-400'}`}
+              className={`p-1.5 rounded-lg transition-colors ${isPinned ? 'text-[#B09B71] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.25)] hover:text-[rgba(245,240,232,0.50)]'}`}
               title={isPinned ? 'Unpin' : 'Pin to top'}
             >
               
@@ -251,7 +251,7 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
             {!isRead && (
               <button
                 onClick={onRead}
-                className="text-[10px] px-2 py-1 rounded-lg bg-gray-800/50 text-gray-400 hover:text-gray-200 transition-colors"
+                className="text-[10px] px-2 py-1 rounded-lg bg-gray-800/50 text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] transition-colors"
               >
                 Mark read
               </button>
@@ -260,28 +260,28 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
         </div>
 
         {/* Content */}
-        <div className="text-sm text-gray-400 leading-relaxed whitespace-pre-line mb-4">
+        <div className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed whitespace-pre-line mb-4">
           {announcement.content}
         </div>
 
         {/* Footer */}
         <div className="flex items-center justify-between pt-3 border-t border-white/5">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-[10px] font-bold text-[#c9a96e]">
+            <div className="w-6 h-6 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-[10px] font-bold text-[#B09B71]">
               {announcement.author_name?.[0] || 'H'}
             </div>
             <div>
               <p className="text-xs font-medium">{announcement.author_name || 'HOA Board'}</p>
-              <p className="text-[10px] text-gray-500">{announcement.author_role || 'Board'}</p>
+              <p className="text-[10px] text-[rgba(245,240,232,0.35)]">{announcement.author_role || 'Board'}</p>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-[10px] text-gray-500">Read by {readCount} of {TOTAL_RESIDENTS}</p>
+            <p className="text-[10px] text-[rgba(245,240,232,0.35)]">Read by {readCount} of {TOTAL_RESIDENTS}</p>
             <div className="flex items-center gap-2 mt-0.5">
               <div className="w-16 h-1.5 rounded-full bg-gray-800 overflow-hidden">
-                <div className="h-full rounded-full bg-[#c9a96e]/60" style={{ width: `${readPct}%` }} />
+                <div className="h-full rounded-full bg-[#B09B71]/60" style={{ width: `${readPct}%` }} />
               </div>
-              <span className="text-[10px] text-gray-400">{readPct}%</span>
+              <span className="text-[10px] text-[rgba(245,240,232,0.50)]">{readPct}%</span>
             </div>
           </div>
         </div>
@@ -296,14 +296,14 @@ function ArchiveList({ items, readSet }: { items: any[]; readSet: Set<string> })
       <div className="glass-card rounded-xl p-12 text-center">
         <p className="text-4xl mb-3"></p>
         <h3 className="font-medium mb-1">No archived announcements</h3>
-        <p className="text-sm text-gray-400">Announcements older than 60 days appear here</p>
+        <p className="text-sm text-[rgba(245,240,232,0.50)]">Announcements older than 60 days appear here</p>
       </div>
     );
   }
 
   return (
     <div className="space-y-3">
-      <p className="text-xs text-gray-500">Announcements older than 60 days</p>
+      <p className="text-xs text-[rgba(245,240,232,0.35)]">Announcements older than 60 days</p>
       {items.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map(a => {
         const priority = a.priority as keyof typeof PRIORITY_STYLES;
         const style = PRIORITY_STYLES[priority] || PRIORITY_STYLES.info;
@@ -311,10 +311,10 @@ function ArchiveList({ items, readSet }: { items: any[]; readSet: Set<string> })
           <div key={a.id} className={`glass-card rounded-xl border-l-4 ${style.border} p-4 opacity-70`}>
             <div className="flex items-center gap-2 flex-wrap mb-1">
               <span className={`text-[10px] px-2 py-0.5 rounded-full border ${style.badge}`}>{style.label}</span>
-              <span className="text-[10px] text-gray-600">{new Date(a.created_at).toLocaleDateString()}</span>
+              <span className="text-[10px] text-[rgba(245,240,232,0.25)]">{new Date(a.created_at).toLocaleDateString()}</span>
             </div>
-            <h4 className="text-sm font-medium text-gray-300">{a.title}</h4>
-            <p className="text-xs text-gray-500 mt-1 line-clamp-2">{a.content}</p>
+            <h4 className="text-sm font-medium text-[rgba(245,240,232,0.65)]">{a.title}</h4>
+            <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1 line-clamp-2">{a.content}</p>
           </div>
         );
       })}

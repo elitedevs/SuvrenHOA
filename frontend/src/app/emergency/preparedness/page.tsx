@@ -139,21 +139,21 @@ export default function PreparednessPage() {
     <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
       <div>
         <h1 className="text-3xl font-bold gradient-text">Emergency Preparedness</h1>
-        <p className="text-gray-400 text-sm mt-1">Stay ready. Stay safe. </p>
+        <p className="text-[rgba(245,240,232,0.50)] text-sm mt-1">Stay ready. Stay safe. </p>
       </div>
 
       {/* Readiness Score */}
       <div className="glass rounded-2xl p-6 border border-white/[0.04]">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-base font-bold text-gray-100">Your Preparedness Score</h2>
-            <p className="text-xs text-gray-500">{checkedCount} of {totalCount} kit items ready</p>
+            <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)]">Your Preparedness Score</h2>
+            <p className="text-xs text-[rgba(245,240,232,0.35)]">{checkedCount} of {totalCount} kit items ready</p>
           </div>
           <div className="text-right">
-            <div className={`text-3xl font-bold ${readinessPct >= 80 ? 'text-green-400' : readinessPct >= 50 ? 'text-yellow-400' : 'text-red-400'}`}>
+            <div className={`text-3xl font-bold ${readinessPct >= 80 ? 'text-[#3A7D6F]' : readinessPct >= 50 ? 'text-[#B09B71]' : 'text-[#8B5A5A]'}`}>
               {readinessPct}%
             </div>
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-[rgba(245,240,232,0.35)]">
               {readinessPct >= 80 ? ' Well Prepared' : readinessPct >= 50 ? ' Partially Ready' : ' Needs Attention'}
             </div>
           </div>
@@ -172,15 +172,15 @@ export default function PreparednessPage() {
       {/* Weather Alerts Toggle */}
       <div className="glass rounded-xl p-4 border border-white/[0.04] flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Bell className="w-5 h-5 text-[#c9a96e]" />
+          <Bell className="w-5 h-5 text-[#B09B71]" />
           <div>
-            <div className="text-sm font-semibold text-gray-200">Weather Alerts</div>
-            <div className="text-xs text-gray-500">Receive HOA weather notifications</div>
+            <div className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">Weather Alerts</div>
+            <div className="text-xs text-[rgba(245,240,232,0.35)]">Receive HOA weather notifications</div>
           </div>
         </div>
         <button
           onClick={toggleWeatherAlerts}
-          className={`relative w-12 h-6 rounded-full transition-colors cursor-pointer ${weatherAlerts ? 'bg-[#c9a96e]' : 'bg-white/10'}`}
+          className={`relative w-12 h-6 rounded-full transition-colors cursor-pointer ${weatherAlerts ? 'bg-[#B09B71]' : 'bg-white/10'}`}
         >
           <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${weatherAlerts ? 'left-6' : 'left-0.5'}`} />
         </button>
@@ -194,8 +194,8 @@ export default function PreparednessPage() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
               activeTab === tab.id
-                ? 'bg-[#c9a96e]/15 text-[#e8d5a3] border border-[#c9a96e]/25'
-                : 'glass text-gray-400 border border-white/[0.04] hover:text-gray-200'
+                ? 'bg-[#B09B71]/15 text-[#D4C4A0] border border-[#B09B71]/25'
+                : 'glass text-[rgba(245,240,232,0.50)] border border-white/[0.04] hover:text-[rgba(245,240,232,0.80)]'
             }`}
           >
             {tab.icon} {tab.label}
@@ -207,8 +207,8 @@ export default function PreparednessPage() {
       {activeTab === 'checklist' && (
         <div className="glass rounded-2xl p-6 border border-white/[0.04]">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-base font-bold text-gray-100"> Emergency Kit Checklist</h2>
-            <button onClick={resetChecklist} className="text-xs text-gray-500 hover:text-gray-300 cursor-pointer">Reset</button>
+            <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)]"> Emergency Kit Checklist</h2>
+            <button onClick={resetChecklist} className="text-xs text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] cursor-pointer">Reset</button>
           </div>
           <div className="space-y-6">
             {Object.entries(grouped).map(([category, ids]) => {
@@ -217,8 +217,8 @@ export default function PreparednessPage() {
               return (
                 <div key={category}>
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xs font-bold text-[#c9a96e] uppercase tracking-widest">{category}</h3>
-                    <span className="text-xs text-gray-600">{catChecked}/{items.length}</span>
+                    <h3 className="text-xs font-bold text-[#B09B71] uppercase tracking-widest">{category}</h3>
+                    <span className="text-xs text-[rgba(245,240,232,0.25)]">{catChecked}/{items.length}</span>
                   </div>
                   <div className="space-y-2">
                     {items.map(item => (
@@ -227,16 +227,16 @@ export default function PreparednessPage() {
                         onClick={() => toggleItem(item.id)}
                         className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all border ${
                           item.checked
-                            ? 'bg-[#c9a96e]/[0.06] border-[#c9a96e]/15 opacity-70'
+                            ? 'bg-[#B09B71]/[0.06] border-[#B09B71]/15 opacity-70'
                             : 'bg-white/[0.02] border-white/[0.04] hover:bg-white/[0.04]'
                         }`}
                       >
                         <div className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-all ${
-                          item.checked ? 'bg-[#c9a96e] border-[#c9a96e]' : 'border-gray-600'
+                          item.checked ? 'bg-[#B09B71] border-[#B09B71]' : 'border-gray-600'
                         }`}>
                           {item.checked && <span className="text-[#1a1a1a] text-[11px] font-bold"></span>}
                         </div>
-                        <span className={`text-sm ${item.checked ? 'line-through text-gray-500' : 'text-gray-300'}`}>{item.label}</span>
+                        <span className={`text-sm ${item.checked ? 'line-through text-[rgba(245,240,232,0.35)]' : 'text-[rgba(245,240,232,0.65)]'}`}>{item.label}</span>
                       </div>
                     ))}
                   </div>
@@ -254,9 +254,9 @@ export default function PreparednessPage() {
               <div className="flex items-start gap-3">
                 <span className="text-2xl">{route.emoji}</span>
                 <div className="flex-1">
-                  <h3 className="text-base font-bold text-gray-100 mb-1">{route.name}</h3>
-                  <p className="text-sm text-gray-400 mb-3">{route.description}</p>
-                  <div className="flex items-center gap-2 text-xs text-[#c9a96e]">
+                  <h3 className="text-base font-bold text-[rgba(245,240,232,0.90)] mb-1">{route.name}</h3>
+                  <p className="text-sm text-[rgba(245,240,232,0.50)] mb-3">{route.description}</p>
+                  <div className="flex items-center gap-2 text-xs text-[#B09B71]">
                     <MapPin className="w-3 h-3" />
                     <span>{route.landmark}</span>
                   </div>
@@ -265,7 +265,7 @@ export default function PreparednessPage() {
             </div>
           ))}
           <div className="p-4 rounded-xl bg-yellow-400/10 border border-yellow-400/20">
-            <p className="text-xs text-yellow-400">
+            <p className="text-xs text-[#B09B71]">
                <strong>Important:</strong> Know your route before an emergency. Walk or drive all routes at least once. Keep your gas tank at least half full.
             </p>
           </div>
@@ -274,46 +274,46 @@ export default function PreparednessPage() {
 
       {activeTab === 'contacts' && (
         <div className="glass rounded-2xl p-6 border border-white/[0.04]">
-          <h2 className="text-base font-bold text-gray-100 mb-4"> Emergency Contacts</h2>
+          <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)] mb-4"> Emergency Contacts</h2>
           <div className="space-y-3 mb-6">
             {EMERGENCY_CONTACTS.map((c, i) => (
               <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.04]">
                 <span className="text-2xl">{c.icon}</span>
                 <div className="flex-1">
-                  <div className="text-sm font-semibold text-gray-200">{c.name}</div>
-                  <div className="text-xs text-gray-500 mt-0.5">{c.available}</div>
+                  <div className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{c.name}</div>
+                  <div className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">{c.available}</div>
                 </div>
                 <a
                   href={`tel:${c.number.replace(/-/g, '')}`}
-                  className="px-3 py-1.5 rounded-lg bg-[#c9a96e]/15 text-[#c9a96e] text-sm font-semibold border border-[#c9a96e]/20 hover:bg-[#c9a96e]/25 transition-all"
+                  className="px-3 py-1.5 rounded-lg bg-[#B09B71]/15 text-[#B09B71] text-sm font-semibold border border-[#B09B71]/20 hover:bg-[#B09B71]/25 transition-all"
                 >
                   {c.number}
                 </a>
               </div>
             ))}
           </div>
-          <div className="p-4 rounded-xl bg-red-400/10 border border-red-400/20">
-            <p className="text-xs text-red-400 font-semibold"> In immediate danger: Call 911 first, always.</p>
+          <div className="p-4 rounded-xl bg-[#8B5A5A]/10 border border-red-400/20">
+            <p className="text-xs text-[#8B5A5A] font-semibold"> In immediate danger: Call 911 first, always.</p>
           </div>
         </div>
       )}
 
       {activeTab === 'firstaid' && (
         <div className="glass rounded-2xl p-6 border border-white/[0.04]">
-          <h2 className="text-base font-bold text-gray-100 mb-4"> First Aid Quick Reference</h2>
+          <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)] mb-4"> First Aid Quick Reference</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {FIRST_AID_TIPS.map((tip, i) => (
               <div key={i} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-xl">{tip.icon}</span>
-                  <span className="text-sm font-bold text-gray-200">{tip.title}</span>
+                  <span className="text-sm font-bold text-[rgba(245,240,232,0.80)]">{tip.title}</span>
                 </div>
-                <p className="text-xs text-gray-400">{tip.tip}</p>
+                <p className="text-xs text-[rgba(245,240,232,0.50)]">{tip.tip}</p>
               </div>
             ))}
           </div>
-          <div className="mt-4 p-4 rounded-xl bg-blue-400/10 border border-blue-400/20">
-            <p className="text-xs text-blue-400">
+          <div className="mt-4 p-4 rounded-xl bg-[#5A7A9A]/10 border border-blue-400/20">
+            <p className="text-xs text-[#5A7A9A]">
                <strong>Tip:</strong> Consider taking a certified CPR/First Aid course. Check with your HOA about community training events.
             </p>
           </div>

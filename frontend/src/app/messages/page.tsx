@@ -44,27 +44,27 @@ function ConversationItem({
       onClick={onClick}
       className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-150 flex items-center gap-3 group ${
         isActive
-          ? 'bg-[#c9a96e]/10 border border-[#c9a96e]/25'
+          ? 'bg-[#B09B71]/10 border border-[#B09B71]/25'
           : 'hover:bg-white/[0.04] border border-transparent'
       }`}
     >
       {/* Avatar */}
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#c9a96e]/20 to-[#b8942e]/20 border border-[#c9a96e]/20 flex items-center justify-center shrink-0">
-        <span className="text-xs font-bold text-[#e8d5a3]">#{convo.lotId}</span>
+      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#B09B71]/20 to-[#b8942e]/20 border border-[#B09B71]/20 flex items-center justify-center shrink-0">
+        <span className="text-xs font-bold text-[#D4C4A0]">#{convo.lotId}</span>
       </div>
 
       {/* Content */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-0.5">
-          <span className="text-sm font-semibold text-gray-200 truncate">Lot #{convo.lotId}</span>
-          <span className="text-[10px] text-gray-600 shrink-0 ml-2">{lastTime}</span>
+          <span className="text-sm font-semibold text-[rgba(245,240,232,0.80)] truncate">Lot #{convo.lotId}</span>
+          <span className="text-[10px] text-[rgba(245,240,232,0.25)] shrink-0 ml-2">{lastTime}</span>
         </div>
-        <p className="text-xs text-gray-500 truncate">{lastText}</p>
+        <p className="text-xs text-[rgba(245,240,232,0.35)] truncate">{lastText}</p>
       </div>
 
       {/* Unread badge */}
       {convo.unreadCount > 0 && (
-        <div className="w-5 h-5 rounded-full bg-[#c9a96e] flex items-center justify-center shrink-0">
+        <div className="w-5 h-5 rounded-full bg-[#B09B71] flex items-center justify-center shrink-0">
           <span className="text-[10px] font-bold text-white">
             {convo.unreadCount > 9 ? '9+' : convo.unreadCount}
           </span>
@@ -95,12 +95,12 @@ function NewMessageModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="glass-card rounded-2xl hover-lift w-full max-w-md p-6 border border-[#c9a96e]/20">
+      <div className="glass-card rounded-2xl hover-lift w-full max-w-md p-6 border border-[#B09B71]/20">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-gray-100">New Message</h2>
+          <h2 className="text-lg font-bold text-[rgba(245,240,232,0.90)]">New Message</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-300 text-xl leading-none p-1"
+            className="text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] text-xl leading-none p-1"
           >
             
           </button>
@@ -111,15 +111,15 @@ function NewMessageModal({
           placeholder="Search lot number..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-[#c9a96e]/50 mb-4"
+          className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-2.5 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-600 outline-none focus:border-[#B09B71]/50 mb-4"
           autoFocus
         />
 
         {loading ? (
-          <div className="text-center py-8 text-gray-500 text-sm">Loading neighbors...</div>
+          <div className="text-center py-8 text-[rgba(245,240,232,0.35)] text-sm">Loading neighbors...</div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-8">
-            <p className="text-gray-500 text-sm">
+            <p className="text-[rgba(245,240,232,0.35)] text-sm">
               {search
                 ? 'No neighbors match your search.'
                 : 'No neighbors have enabled messaging yet.'}
@@ -134,14 +134,14 @@ function NewMessageModal({
                   onSelect(lot.lotId);
                   onClose();
                 }}
-                className="w-full text-left px-4 py-3 rounded-xl hover:bg-[#c9a96e]/10 border border-transparent hover:border-[#c9a96e]/20 transition-all duration-150 flex items-center gap-3"
+                className="w-full text-left px-4 py-3 rounded-xl hover:bg-[#B09B71]/10 border border-transparent hover:border-[#B09B71]/20 transition-all duration-150 flex items-center gap-3"
               >
-                <div className="w-9 h-9 rounded-full bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center">
-                  <span className="text-xs font-bold text-[#c9a96e]">#{lot.lotId}</span>
+                <div className="w-9 h-9 rounded-full bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center">
+                  <span className="text-xs font-bold text-[#B09B71]">#{lot.lotId}</span>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-200">Lot #{lot.lotId}</p>
-                  <p className="text-xs text-gray-600">{lot.ownerShort}</p>
+                  <p className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">Lot #{lot.lotId}</p>
+                  <p className="text-xs text-[rgba(245,240,232,0.25)]">{lot.ownerShort}</p>
                 </div>
               </button>
             ))}
@@ -195,17 +195,17 @@ function ChatPanel({
       <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-700/50">
         <button
           onClick={onBack}
-          className="md:hidden text-gray-400 hover:text-gray-200 mr-1 text-lg"
+          className="md:hidden text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] mr-1 text-lg"
           aria-label="Back"
         >
           ←
         </button>
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#c9a96e]/20 to-[#b8942e]/20 border border-[#c9a96e]/20 flex items-center justify-center">
-          <span className="text-xs font-bold text-[#e8d5a3]">#{lotId}</span>
+        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#B09B71]/20 to-[#b8942e]/20 border border-[#B09B71]/20 flex items-center justify-center">
+          <span className="text-xs font-bold text-[#D4C4A0]">#{lotId}</span>
         </div>
         <div>
-          <p className="text-sm font-bold text-gray-200">Lot #{lotId}</p>
-          <p className="text-xs text-gray-600">Neighbor</p>
+          <p className="text-sm font-bold text-[rgba(245,240,232,0.80)]">Lot #{lotId}</p>
+          <p className="text-xs text-[rgba(245,240,232,0.25)]">Neighbor</p>
         </div>
       </div>
 
@@ -213,8 +213,8 @@ function ChatPanel({
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-1">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
-            <MessageSquare className="w-6 h-6 text-gray-400 mx-auto" />
-            <p className="text-gray-400 text-sm font-medium">
+            <MessageSquare className="w-6 h-6 text-[rgba(245,240,232,0.50)] mx-auto" />
+            <p className="text-[rgba(245,240,232,0.50)] text-sm font-medium">
               No messages yet — say hello to Lot #{lotId}!
             </p>
           </div>
@@ -235,12 +235,12 @@ function ChatPanel({
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={`Message Lot #${lotId}...`}
-            className="flex-1 bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-[#c9a96e]/50 min-h-[44px]"
+            className="flex-1 bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-2.5 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-600 outline-none focus:border-[#B09B71]/50 min-h-[44px]"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim()}
-            className="w-11 h-11 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shrink-0"
+            className="w-11 h-11 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shrink-0"
             aria-label="Send message"
           >
             <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -260,8 +260,8 @@ export default function MessagesPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <MessageSquare className="w-8 h-8 text-gray-400 mb-2" />
-        <p className="text-gray-400 text-base font-medium">Sign in to use messaging</p>
+        <MessageSquare className="w-8 h-8 text-[rgba(245,240,232,0.50)] mb-2" />
+        <p className="text-[rgba(245,240,232,0.50)] text-base font-medium">Sign in to use messaging</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -303,9 +303,9 @@ function MessagingCenter({ address }: { address: string }) {
   if (!hasProperty) {
     return (
       <div className="max-w-2xl mx-auto px-6 py-12 text-center">
-        <Home className="w-8 h-8 text-gray-400 mx-auto mb-4" />
+        <Home className="w-8 h-8 text-[rgba(245,240,232,0.50)] mx-auto mb-4" />
         <h2 className="text-xl font-bold mb-2">No Property NFT Found</h2>
-        <p className="text-gray-400 text-sm">You need a Faircroft Property NFT to use messaging.</p>
+        <p className="text-[rgba(245,240,232,0.50)] text-sm">You need a Faircroft Property NFT to use messaging.</p>
       </div>
     );
   }
@@ -315,13 +315,13 @@ function MessagingCenter({ address }: { address: string }) {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">
             Messages
           </p>
-          <h1 className="text-2xl font-extrabold tracking-tight flex items-center gap-2">
+          <h1 className="text-2xl font-normal tracking-tight flex items-center gap-2">
             Neighbor Messaging
             {totalUnread > 0 && (
-              <span className="text-sm font-bold px-2 py-0.5 rounded-full bg-[#c9a96e] text-white">
+              <span className="text-sm font-bold px-2 py-0.5 rounded-full bg-[#B09B71] text-white">
                 {totalUnread}
               </span>
             )}
@@ -330,13 +330,13 @@ function MessagingCenter({ address }: { address: string }) {
 
         {/* Opt-in toggle */}
         <label className="flex items-center gap-2.5 cursor-pointer select-none">
-          <span className="text-xs text-gray-500 font-semibold hidden sm:block">
+          <span className="text-xs text-[rgba(245,240,232,0.35)] font-semibold hidden sm:block">
             Allow neighbors to message me
           </span>
           <div
             onClick={() => handleOptInToggle(!optIn)}
             className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${
-              optIn ? 'bg-[#c9a96e]' : 'bg-gray-700'
+              optIn ? 'bg-[#B09B71]' : 'bg-gray-700'
             }`}
             role="switch"
             aria-checked={optIn}
@@ -354,7 +354,7 @@ function MessagingCenter({ address }: { address: string }) {
 
       {/* Opt-in info banner */}
       {!optIn && (
-        <div className="mb-4 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-sm text-amber-300 font-medium">
+        <div className="mb-4 px-4 py-3 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-sm text-[#B09B71] font-medium">
            Messaging is opt-in. Enable the toggle above so neighbors can message you.
         </div>
       )}
@@ -370,10 +370,10 @@ function MessagingCenter({ address }: { address: string }) {
           >
             {/* Sidebar header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700/50">
-              <span className="text-sm font-bold text-gray-300">Conversations</span>
+              <span className="text-sm font-bold text-[rgba(245,240,232,0.65)]">Conversations</span>
               <button
                 onClick={() => setShowNewModal(true)}
-                className="text-xs font-semibold text-[#c9a96e] hover:text-[#e8d5a3] px-3 py-1.5 rounded-lg hover:bg-[#c9a96e]/10 transition-all duration-150 flex items-center gap-1"
+                className="text-xs font-semibold text-[#B09B71] hover:text-[#D4C4A0] px-3 py-1.5 rounded-lg hover:bg-[#B09B71]/10 transition-all duration-150 flex items-center gap-1"
               >
                 <span></span> New
               </button>
@@ -390,12 +390,12 @@ function MessagingCenter({ address }: { address: string }) {
               ) : conversations.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-4 py-8">
                   <div className="text-4xl"></div>
-                  <p className="text-gray-500 text-sm font-medium">
+                  <p className="text-[rgba(245,240,232,0.35)] text-sm font-medium">
                     No messages yet — reach out to a neighbor!
                   </p>
                   <button
                     onClick={() => setShowNewModal(true)}
-                    className="text-sm font-semibold text-[#c9a96e] hover:text-[#e8d5a3] px-4 py-2 rounded-xl hover:bg-[#c9a96e]/10 transition-all duration-150"
+                    className="text-sm font-semibold text-[#B09B71] hover:text-[#D4C4A0] px-4 py-2 rounded-xl hover:bg-[#B09B71]/10 transition-all duration-150"
                   >
                     Start a conversation →
                   </button>
@@ -427,13 +427,13 @@ function MessagingCenter({ address }: { address: string }) {
               />
             ) : (
               <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-8">
-                <MessageSquare className="w-8 h-8 text-gray-400 mx-auto" />
-                <p className="text-gray-400 text-base font-medium">
+                <MessageSquare className="w-8 h-8 text-[rgba(245,240,232,0.50)] mx-auto" />
+                <p className="text-[rgba(245,240,232,0.50)] text-base font-medium">
                   Select a conversation or start a new one
                 </p>
                 <button
                   onClick={() => setShowNewModal(true)}
-                  className="mt-2 px-5 py-2.5 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/20 text-sm font-semibold text-[#e8d5a3] transition-all duration-200"
+                  className="mt-2 px-5 py-2.5 rounded-xl bg-[#B09B71]/15 border border-[#B09B71]/30 hover:bg-[#B09B71]/20 text-sm font-semibold text-[#D4C4A0] transition-all duration-200"
                 >
                    New Message
                 </button>

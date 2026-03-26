@@ -61,41 +61,41 @@ export default function EmergencyPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Community</p>
-        <h1 className="text-3xl font-extrabold tracking-tight flex items-center gap-3">
+        <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Community</p>
+        <h1 className="text-3xl font-normal tracking-tight flex items-center gap-3">
            Emergency Contacts
         </h1>
-        <p className="text-base text-gray-400 mt-2">Important contacts for the Faircroft community</p>
+        <p className="text-base text-[rgba(245,240,232,0.50)] mt-2">Important contacts for the Faircroft community</p>
       </div>
 
       {/* 911 Banner */}
-      <div className="rounded-2xl bg-red-500/10 border border-red-500/30 p-4 mb-6 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center text-xl shrink-0"></div>
+      <div className="rounded-2xl bg-[rgba(107,58,58,0.10)] border border-[rgba(107,58,58,0.25)] p-4 mb-6 flex items-center gap-3">
+        <div className="w-10 h-10 rounded-xl bg-[rgba(107,58,58,0.15)] flex items-center justify-center text-xl shrink-0"></div>
         <div>
-          <p className="text-sm font-bold text-red-400">Life-threatening emergency? Call 911 immediately.</p>
-          <p className="text-[11px] text-gray-400">All other contacts on this page are for non-emergency situations.</p>
+          <p className="text-sm font-bold text-[#8B5A5A]">Life-threatening emergency? Call 911 immediately.</p>
+          <p className="text-[11px] text-[rgba(245,240,232,0.50)]">All other contacts on this page are for non-emergency situations.</p>
         </div>
       </div>
 
       {/* Search */}
       <div className="relative mb-6">
-        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></span>
+        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[rgba(245,240,232,0.35)] text-sm"></span>
         <input
           type="text"
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search contacts..."
-          className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
+          className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none"
         />
       </div>
 
       {byCategory.length === 0 ? (
-        <div className="text-center py-12 text-gray-500">No contacts matching "{search}"</div>
+        <div className="text-center py-12 text-[rgba(245,240,232,0.35)]">No contacts matching "{search}"</div>
       ) : (
         <div className="space-y-6">
           {byCategory.map(group => (
             <div key={group.category}>
-              <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3 flex items-center gap-2">
+              <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3 flex items-center gap-2">
                 <span className="h-px flex-1 bg-gray-800" />
                 {group.category}
                 <span className="h-px flex-1 bg-gray-800" />
@@ -106,25 +106,25 @@ export default function EmergencyPage() {
                     key={contact.id}
                     className={`glass-card rounded-2xl hover-lift p-4 border transition-all ${
                       contact.urgent
-                        ? 'border-red-500/20 bg-red-500/5'
-                        : 'border-[#c9a96e]/10'
+                        ? 'border-[rgba(107,58,58,0.20)] bg-[#8B5A5A]/5'
+                        : 'border-[#B09B71]/10'
                     }`}
                   >
                     <div className="flex items-start gap-3">
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0 ${
-                        contact.urgent ? 'bg-red-500/15' : 'bg-[#c9a96e]/10'
+                        contact.urgent ? 'bg-[rgba(107,58,58,0.12)]' : 'bg-[#B09B71]/10'
                       }`}>
                         {contact.icon}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-100 truncate">{contact.name}</p>
+                        <p className="text-sm font-semibold text-[rgba(245,240,232,0.90)] truncate">{contact.name}</p>
                         {contact.note && (
-                          <p className="text-[10px] text-gray-500 truncate">{contact.note}</p>
+                          <p className="text-[10px] text-[rgba(245,240,232,0.35)] truncate">{contact.note}</p>
                         )}
                         <button
                           onClick={() => copyPhone(contact.id, contact.phone)}
                           className={`mt-2 flex items-center gap-1.5 text-sm font-bold transition-all group ${
-                            contact.urgent ? 'text-red-400 hover:text-red-300' : 'text-[#c9a96e] hover:text-[#e8d5a3]'
+                            contact.urgent ? 'text-[#8B5A5A] hover:text-[#8B5A5A]' : 'text-[#B09B71] hover:text-[#D4C4A0]'
                           }`}
                         >
                           <span>{contact.phone}</span>
@@ -142,7 +142,7 @@ export default function EmergencyPage() {
         </div>
       )}
 
-      <p className="text-[11px] text-gray-600 text-center mt-8">
+      <p className="text-[11px] text-[rgba(245,240,232,0.25)] text-center mt-8">
         Contact information is maintained by the HOA Board. Report inaccuracies to the board.
       </p>
     </div>

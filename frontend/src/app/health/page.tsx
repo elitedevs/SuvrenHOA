@@ -29,21 +29,21 @@ export default function HealthPage() {
         {/* Header */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-2">
-            <Link href="/" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">
+            <Link href="/" className="text-sm text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] transition-colors">
               ← Dashboard
             </Link>
           </div>
-          <p className="text-sm text-gray-500 font-medium uppercase tracking-widest mb-2">Community Health</p>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          <p className="text-sm text-[rgba(245,240,232,0.35)] font-medium uppercase tracking-widest mb-2">Community Health</p>
+          <h1 className="text-3xl sm:text-4xl font-normal tracking-tight">
             HOA <span className="gradient-text">Health Score</span>
           </h1>
-          <p className="text-gray-400 text-base mt-2 font-medium">
+          <p className="text-[rgba(245,240,232,0.50)] text-base mt-2 font-medium">
             A composite snapshot of your community's financial, governance, and compliance health.
           </p>
         </div>
 
         {/* Big ring + score */}
-        <div className="glass-card rounded-3xl p-8 sm:p-12 mb-8 page-enter page-enter-delay-1 flex flex-col items-center">
+        <div className="glass-card rounded-3xl p-8 sm:p-12 mb-8 card-enter card-enter-delay-1 flex flex-col items-center">
           <div className="relative mb-6">
             <svg
               width={radius * 2 + strokeWidth * 2}
@@ -82,17 +82,17 @@ export default function HealthPage() {
             {/* Center content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               {loading ? (
-                <div className="w-10 h-10 border-4 border-[#c9a96e]/30 border-t-[#c9a96e] rounded-full animate-spin" />
+                <div className="w-10 h-10 border-4 border-[#B09B71]/30 border-t-[#B09B71] rounded-full animate-spin" />
               ) : error ? (
                 <div className="text-center">
-                  <p className="text-red-400 text-sm">Error loading</p>
+                  <p className="text-[#8B5A5A] text-sm">Error loading</p>
                 </div>
               ) : (
                 <div className="text-center">
-                  <p className={`text-6xl sm:text-7xl font-extrabold leading-none mb-1 ${colorClass}`}>
+                  <p className={`text-6xl sm:text-7xl font-normal leading-none mb-1 ${colorClass}`}>
                     {score}
                   </p>
-                  <p className="text-gray-500 text-sm font-semibold uppercase tracking-wider">out of 100</p>
+                  <p className="text-[rgba(245,240,232,0.35)] text-sm font-semibold uppercase tracking-wider">out of 100</p>
                 </div>
               )}
             </div>
@@ -107,33 +107,33 @@ export default function HealthPage() {
                   background: `${color}10`,
                 }}
               >
-                <span className={`text-5xl font-extrabold ${colorClass}`}>{grade}</span>
+                <span className={`text-5xl font-normal ${colorClass}`}>{grade}</span>
                 <div className="text-left">
-                  <p className="text-sm font-semibold text-gray-200">
+                  <p className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">
                     {grade === 'A' && 'Excellent Community'}
                     {grade === 'B' && 'Very Good Community'}
                     {grade === 'C' && 'Average Community'}
                     {grade === 'D' && 'Needs Improvement'}
                     {grade === 'F' && 'Critical Attention Needed'}
                   </p>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">
                     {score >= 71 ? 'Community is thriving' : score >= 41 ? 'Room for improvement' : 'Immediate action recommended'}
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-gray-600 mt-4">Auto-refreshes every 60 seconds</p>
+              <p className="text-xs text-[rgba(245,240,232,0.25)] mt-4">Auto-refreshes every 60 seconds</p>
             </div>
           )}
         </div>
 
         {/* Factor breakdown */}
         {!loading && !error && factors.length > 0 && (
-          <div className="space-y-4 mb-8 page-enter page-enter-delay-2">
-            <h2 className="text-xl font-bold text-gray-200">Score Breakdown</h2>
+          <div className="space-y-4 mb-8 card-enter card-enter-delay-2">
+            <h2 className="text-xl font-bold text-[rgba(245,240,232,0.80)]">Score Breakdown</h2>
             {factors.map((factor) => {
               const pct = (factor.score / factor.max) * 100;
               const factorColor = pct >= 71 ? '#22c55e' : pct >= 41 ? '#f59e0b' : '#ef4444';
-              const factorColorClass = pct >= 71 ? 'text-green-400' : pct >= 41 ? 'text-amber-400' : 'text-red-400';
+              const factorColorClass = pct >= 71 ? 'text-[#3A7D6F]' : pct >= 41 ? 'text-[#B09B71]' : 'text-[#8B5A5A]';
 
               return (
                 <div key={factor.name} className="glass-card rounded-2xl hover-lift p-6">
@@ -141,13 +141,13 @@ export default function HealthPage() {
                     <div className="flex items-center gap-3">
                       <span className="text-2xl">{factor.icon}</span>
                       <div>
-                        <h3 className="font-bold text-gray-100 text-base">{factor.name}</h3>
-                        <p className="text-xs text-gray-500 mt-0.5">{factor.description}</p>
+                        <h3 className="font-bold text-[rgba(245,240,232,0.90)] text-base">{factor.name}</h3>
+                        <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">{factor.description}</p>
                       </div>
                     </div>
                     <div className="text-right shrink-0">
-                      <span className={`text-2xl font-extrabold ${factorColorClass}`}>{factor.score}</span>
-                      <span className="text-gray-600 text-sm font-medium">/{factor.max}</span>
+                      <span className={`text-2xl font-normal ${factorColorClass}`}>{factor.score}</span>
+                      <span className="text-[rgba(245,240,232,0.25)] text-sm font-medium">/{factor.max}</span>
                     </div>
                   </div>
 
@@ -163,7 +163,7 @@ export default function HealthPage() {
                     />
                   </div>
 
-                  <p className="text-xs text-gray-500 leading-relaxed">{factor.improvement}</p>
+                  <p className="text-xs text-[rgba(245,240,232,0.35)] leading-relaxed">{factor.improvement}</p>
                 </div>
               );
             })}
@@ -172,27 +172,27 @@ export default function HealthPage() {
 
         {/* What can we improve */}
         {!loading && !error && suggestions.length > 0 && (
-          <div className="glass-card rounded-2xl hover-lift p-6 mb-8 page-enter page-enter-delay-3 border-l-2 border-l-[#c9a96e]/50">
+          <div className="glass-card rounded-2xl hover-lift p-6 mb-8 card-enter card-enter-delay-3">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-lg shrink-0">
+              <div className="w-9 h-9 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center text-lg shrink-0">
                 
               </div>
-              <h2 className="text-xl font-bold text-gray-200">What Can We Improve?</h2>
+              <h2 className="text-xl font-bold text-[rgba(245,240,232,0.80)]">What Can We Improve?</h2>
             </div>
             <div className="space-y-4">
               {suggestions.map((s, i) => (
                 <div key={s.name} className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-[#c9a96e]/15 border border-[#c9a96e]/40 flex items-center justify-center text-xs font-bold text-[#c9a96e] shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/40 flex items-center justify-center text-xs font-bold text-[#B09B71] shrink-0 mt-0.5">
                     {i + 1}
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-semibold text-gray-200">{s.name}</span>
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-white/5 text-gray-500">
+                      <span className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{s.name}</span>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-white/5 text-[rgba(245,240,232,0.35)]">
                         {s.score}/{s.max} pts
                       </span>
                     </div>
-                    <p className="text-sm text-gray-400 leading-relaxed">{s.improvement}</p>
+                    <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed">{s.improvement}</p>
                   </div>
                 </div>
               ))}
@@ -202,16 +202,16 @@ export default function HealthPage() {
 
         {/* Perfect score message */}
         {!loading && !error && suggestions.length === 0 && (
-          <div className="glass-card-success rounded-2xl p-6 mb-8 page-enter page-enter-delay-3 text-center">
+          <div className="glass-card-success rounded-2xl p-6 mb-8 card-enter card-enter-delay-3 text-center">
             <p className="text-3xl mb-3"></p>
-            <h3 className="font-bold text-green-300 text-lg mb-1">Perfect Score!</h3>
-            <p className="text-sm text-gray-400">Your community has achieved the maximum health score across all categories.</p>
+            <h3 className="font-bold text-[#3A7D6F] text-lg mb-1">Perfect Score!</h3>
+            <p className="text-sm text-[rgba(245,240,232,0.50)]">Your community has achieved the maximum health score across all categories.</p>
           </div>
         )}
 
         {/* Footer: back to transparency */}
-        <div className="text-center text-sm text-gray-600 page-enter page-enter-delay-4">
-          <Link href="/transparency" className="hover:text-gray-400 transition-colors">
+        <div className="text-center text-sm text-[rgba(245,240,232,0.25)] card-enter card-enter-delay-4">
+          <Link href="/transparency" className="hover:text-[rgba(245,240,232,0.50)] transition-colors">
             View full Transparency Dashboard →
           </Link>
         </div>

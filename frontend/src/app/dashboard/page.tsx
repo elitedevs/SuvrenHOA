@@ -14,7 +14,7 @@ import { PropertyImprovements } from '@/components/PropertyImprovements';
 import Link from 'next/link';
 import {
   Home, MessageSquare, ClipboardList, DollarSign, FileText, CreditCard,
-  Smartphone, Share2,
+  Smartphone, TrendingUp, Check, AlertCircle, ChevronRight,
 } from 'lucide-react';
 
 // ── Property Insights (inline component) ──
@@ -36,34 +36,36 @@ function PropertyInsights() {
   }).join(' ');
 
   return (
-    <div className="glass-card rounded-2xl p-6 mb-6 page-enter page-enter-delay-3">
-      <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Property Insights</p>
+    <div className="glass-card rounded-2xl p-6 mb-6 card-enter card-enter-delay-3">
+      <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-4">Property Insights</p>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         <div>
-          <p className="text-[10px] text-gray-500 mb-1">Estimated Value</p>
-          <p className="text-2xl font-extrabold text-[#c9a96e]">${CURRENT_EST.toLocaleString()}</p>
-          <p className="text-[11px] text-green-400 font-semibold mt-0.5">+{YOY_CHANGE}% YoY ↑</p>
+          <p className="text-[10px] text-[rgba(245,240,232,0.35)] mb-1">Estimated Value</p>
+          <p className="text-2xl font-normal text-[#B09B71] number-reveal">${CURRENT_EST.toLocaleString()}</p>
+          <p className="text-[11px] text-[#3A7D6F] mt-0.5 flex items-center gap-1">
+            <TrendingUp className="w-3 h-3" />+{YOY_CHANGE}% YoY
+          </p>
         </div>
         <div>
-          <p className="text-[10px] text-gray-500 mb-1">Neighborhood Avg</p>
-          <p className="text-xl font-bold text-gray-200">${NEIGH_AVG.toLocaleString()}</p>
-          <p className="text-[11px] text-[#c9a96e] font-semibold mt-0.5">
+          <p className="text-[10px] text-[rgba(245,240,232,0.35)] mb-1">Neighborhood Avg</p>
+          <p className="text-xl font-normal text-[rgba(245,240,232,0.65)]">${NEIGH_AVG.toLocaleString()}</p>
+          <p className="text-[11px] text-[#B09B71] mt-0.5">
             +${(CURRENT_EST - NEIGH_AVG).toLocaleString()} above avg
           </p>
         </div>
         <div>
-          <p className="text-[10px] text-gray-500 mb-2">12-Month Trend</p>
+          <p className="text-[10px] text-[rgba(245,240,232,0.35)] mb-2">12-Month Trend</p>
           <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="overflow-visible">
             <defs>
               <linearGradient id="spark-grad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#c9a96e" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="#c9a96e" stopOpacity="0" />
+                <stop offset="0%" stopColor="#B09B71" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#B09B71" stopOpacity="0" />
               </linearGradient>
             </defs>
             <polyline
               points={pts}
               fill="none"
-              stroke="#c9a96e"
+              stroke="#B09B71"
               strokeWidth="2"
               strokeLinejoin="round"
               strokeLinecap="round"
@@ -71,7 +73,7 @@ function PropertyInsights() {
           </svg>
         </div>
       </div>
-      <p className="text-[10px] text-gray-600 mt-3">Estimates are illustrative. Consult an appraiser for a formal valuation.</p>
+      <p className="text-[10px] text-[rgba(245,240,232,0.20)] mt-3">Estimates are illustrative. Consult an appraiser for a formal valuation.</p>
     </div>
   );
 }
@@ -82,8 +84,8 @@ export default function DashboardPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <Home className="w-8 h-8 text-gray-400 mb-2" />
-        <p className="text-gray-400 text-base font-medium">Sign in to view your property</p>
+        <Home className="w-8 h-8 opacity-30 mb-2" />
+        <p className="text-[rgba(245,240,232,0.35)] text-base">Sign in to view your property</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -111,7 +113,6 @@ function PropertyDashboard() {
   const { totalUnread } = useMessages();
   const { isCompleted } = useOnboarding();
   const { profile } = useProfile();
-  const displayName = profile?.display_name || (tokenId !== undefined ? `Lot #${tokenId}` : `Lot #${tokenId}`);
   const [showQR, setShowQR] = useState(false);
 
   if (!hasProperty) {
@@ -119,23 +120,22 @@ function PropertyDashboard() {
       <div className="max-w-4xl mx-auto px-6 py-12 page-enter">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">My Property</p>
-            <h1 className="text-3xl font-extrabold">Property Not Found</h1>
+            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">My Property</p>
+            <h1 className="text-3xl font-normal">Property Not Found</h1>
           </div>
         </div>
 
-        {/* Empty state */}
-        <div className="glass-card rounded-2xl p-12 text-center border-l-2 border-l-amber-500/40">
-          <div className="w-20 h-20 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mx-auto mb-6">
-            <Home className="w-8 h-8 text-amber-400" />
+        <div className="glass-card rounded-2xl p-12 text-center">
+          <div className="w-20 h-20 rounded-2xl bg-[rgba(176,155,113,0.08)] flex items-center justify-center mx-auto mb-6">
+            <Home className="w-8 h-8 text-[#B09B71] opacity-60" />
           </div>
-          <h3 className="text-xl font-bold mb-3 text-gray-100">No Property NFT Detected</h3>
-          <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed mb-6">
+          <h3 className="text-xl font-normal mb-3">No Property NFT Detected</h3>
+          <p className="text-[rgba(245,240,232,0.50)] text-sm max-w-md mx-auto leading-relaxed mb-6">
             Your wallet doesn&apos;t hold a Faircroft Property NFT.
             If you&apos;re a homeowner, contact the board to have your property minted.
           </p>
-          <div className="inline-block px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60">
-            <p className="text-xs text-gray-500 font-mono">{address}</p>
+          <div className="inline-block px-4 py-2.5 rounded-xl bg-[rgba(245,240,232,0.04)]">
+            <p className="text-xs text-[rgba(245,240,232,0.35)] font-mono">{address}</p>
           </div>
         </div>
       </div>
@@ -147,17 +147,17 @@ function PropertyDashboard() {
       {/* Page header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">My Property</p>
-          <h1 className="text-3xl font-extrabold tracking-tight">
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">My Property</p>
+          <h1 className="text-3xl font-normal">
             Property Profile
           </h1>
         </div>
         <div className="flex items-center gap-3">
-          <div className="px-4 py-2 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20">
-            <span className="text-sm font-bold text-[#e8d5a3]">
+          <div className="px-4 py-2 rounded-xl bg-[rgba(176,155,113,0.08)]">
+            <span className="text-sm text-[#B09B71]">
               Lot #{tokenId}
               {hasMultipleProperties && (
-                <span className="ml-1 text-xs text-[#c9a96e]/60">
+                <span className="ml-1 text-xs text-[rgba(176,155,113,0.50)]">
                   ({properties.length} properties)
                 </span>
               )}
@@ -166,7 +166,7 @@ function PropertyDashboard() {
           {tokenId !== undefined && (
             <button
               onClick={() => setShowQR(true)}
-              className="px-3 py-2 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-xs font-medium text-gray-400 hover:text-[#e8d5a3] transition-all flex items-center gap-1.5"
+              className="px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] hover:bg-[rgba(176,155,113,0.08)] text-xs text-[rgba(245,240,232,0.50)] hover:text-[#B09B71] transition-all flex items-center gap-1.5"
               title="Share Property QR Code"
             >
               <Smartphone className="w-3.5 h-3.5" /> Share
@@ -185,179 +185,139 @@ function PropertyDashboard() {
         onSelect={setSelectedPropertyIndex}
       />
 
-      {/* Property Cards */}
+      {/* Top block: Address + Dues Status — ONE combined section above fold */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
 
-        {/* Address Card */}
-        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-[#c9a96e]/50 page-enter page-enter-delay-1">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Property Address</p>
-          <p className="text-2xl font-bold text-gray-100 leading-snug mb-2">
+        {/* Address + Dues combined */}
+        <div className="glass-card rounded-2xl p-7 card-enter card-enter-delay-1">
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">Property Address</p>
+          <p className="text-2xl font-normal leading-snug mb-4">
             {propertyInfo?.streetAddress || (
               <span className="skeleton inline-block w-40 h-6 rounded-lg" />
             )}
           </p>
           {propertyInfo?.squareFootage && (
-            <div className="flex items-center gap-2 mt-3">
-              <span className="text-xs text-gray-500"></span>
-              <p className="text-sm text-gray-500 font-medium">
-                {Number(propertyInfo.squareFootage).toLocaleString()} sq ft
-              </p>
-            </div>
+            <p className="text-sm text-[rgba(245,240,232,0.35)]">
+              {Number(propertyInfo.squareFootage).toLocaleString()} sq ft
+            </p>
           )}
+
+          {/* Dues inline */}
+          <div className="mt-5 pt-5 border-t border-[rgba(245,240,232,0.06)]">
+            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">Dues Status</p>
+            {isCurrent === undefined ? (
+              <div className="skeleton h-5 w-24 rounded" />
+            ) : isCurrent ? (
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[#3A7D6F]" />
+                <span className="text-sm text-[rgba(245,240,232,0.65)]">Fully paid</span>
+              </div>
+            ) : (
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <AlertCircle className="w-4 h-4 text-[#8B5A5A] opacity-70" />
+                  <span className="text-sm text-[rgba(245,240,232,0.65)]">Payment Reminder — {quartersOwed} quarter{quartersOwed !== 1 ? 's' : ''} outstanding</span>
+                </div>
+                <p className="text-base font-normal text-[#8B5A5A] mb-3">${amountOwed}</p>
+                <Link
+                  href="/dues"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[rgba(107,58,58,0.12)] hover:bg-[rgba(107,58,58,0.20)] text-sm text-[#8B5A5A] transition-all duration-200"
+                >
+                  Settle Balance <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Voting Power — BIG number */}
-        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-blue-500/50 page-enter page-enter-delay-1">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Voting Power</p>
-          <div className="flex items-end gap-3 mb-2">
-            <p className="text-6xl font-black text-[#c9a96e] leading-none">{votes}</p>
-            <p className="text-sm text-gray-500 font-medium mb-2">vote{Number(votes) !== 1 ? 's' : ''}</p>
+        {/* Voting Power */}
+        <div className="glass-card rounded-2xl p-7 card-enter card-enter-delay-2">
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">Voting Power</p>
+          <div className="flex items-end gap-3 mb-4">
+            <p className="text-6xl font-normal text-[#B09B71] leading-none number-reveal">{votes}</p>
+            <p className="text-sm text-[rgba(245,240,232,0.35)] mb-2">vote{Number(votes) !== 1 ? 's' : ''}</p>
           </div>
           <div className="flex items-center gap-2">
             <div className="progress-bar-track flex-1">
               <div
-                className="progress-bar-fill bg-gradient-to-r from-[#c9a96e] to-[#e8d5a3]"
+                className="progress-bar-fill bg-gradient-to-r from-[#8A7550] to-[#B09B71]"
                 style={{ width: totalSupply > 0 ? `${(Number(votes) / Number(totalSupply)) * 100}%` : '0%' }}
               />
             </div>
-            <span className="text-[11px] text-gray-600 font-medium">of {totalSupply}</span>
+            <span className="text-[11px] text-[rgba(245,240,232,0.25)]">of {totalSupply}</span>
+          </div>
+
+          {/* Delegation inline */}
+          <div className="mt-5 pt-5 border-t border-[rgba(245,240,232,0.06)]">
+            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">Delegation</p>
+            {delegatee === address ? (
+              <p className="text-sm text-[rgba(245,240,232,0.50)]">Voting directly — self-delegated</p>
+            ) : (
+              <div>
+                <p className="text-sm text-[rgba(245,240,232,0.50)] mb-1">Delegated to:</p>
+                <p className="text-sm font-mono text-[rgba(245,240,232,0.35)] bg-[rgba(245,240,232,0.04)] px-3 py-1.5 rounded-lg inline-block">
+                  {delegatee?.slice(0, 6)}...{delegatee?.slice(-4)}
+                </p>
+              </div>
+            )}
           </div>
         </div>
-
-        {/* Dues Status */}
-        <div className={`rounded-2xl p-7 border-l-2 page-enter page-enter-delay-2 ${
-          isCurrent === undefined
-            ? 'glass-card border-l-gray-500/40'
-            : isCurrent
-            ? 'glass-card-success border-l-green-500/50'
-            : 'glass-card-danger border-l-red-500/50'
-        }`}>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Dues Status</p>
-
-          {isCurrent === undefined ? (
-            <div className="space-y-2">
-              <div className="skeleton h-7 w-24 rounded-lg" />
-              <div className="skeleton h-4 w-36 rounded" />
-            </div>
-          ) : isCurrent ? (
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center">
-                  <span className="text-xs text-green-400"></span>
-                </div>
-                <p className="text-xl font-bold text-green-400">Current</p>
-              </div>
-              <p className="text-sm text-gray-500">Your dues are fully paid up.</p>
-            </div>
-          ) : (
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center">
-                  <span className="text-xs text-red-400">!</span>
-                </div>
-                <p className="text-xl font-bold text-red-400">Past Due</p>
-              </div>
-              <p className="text-sm text-gray-400 mb-1">
-                {quartersOwed} quarter{quartersOwed !== 1 ? 's' : ''} owed
-              </p>
-              <p className="text-lg font-bold text-red-300">${amountOwed}</p>
-              <Link
-                href="/dues"
-                className="inline-flex items-center gap-1.5 mt-4 px-4 py-2.5 rounded-xl bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 text-sm font-semibold text-red-300 transition-all duration-200 min-h-[44px]"
-              >
-                 Pay Now
-              </Link>
-            </div>
-          )}
-        </div>
-
-        {/* Delegation */}
-        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-amber-500/50 page-enter page-enter-delay-2">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Vote Delegation</p>
-
-          {delegatee === address ? (
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-full bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xs">
-                  
-                </div>
-                <p className="text-base font-semibold text-gray-200">Self-delegated</p>
-              </div>
-              <p className="text-sm text-gray-500">You vote directly on all proposals.</p>
-            </div>
-          ) : (
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-full bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-xs">
-                  
-                </div>
-                <p className="text-base font-semibold text-gray-200">Delegated</p>
-              </div>
-              <p className="text-sm text-gray-500 mb-1">Votes delegated to:</p>
-              <p className="text-sm font-mono text-gray-300 bg-gray-800/50 px-3 py-1.5 rounded-lg inline-block">
-                {delegatee?.slice(0, 6)}...{delegatee?.slice(-4)}
-              </p>
-            </div>
-          )}
-        </div>
       </div>
-
 
       {/* Property Insights */}
       <PropertyInsights />
 
-      {/* Onboarding Banner */}
+      {/* Banners */}
       {hasProperty && !isCompleted && (
-        <a href="/onboarding" className="flex items-center justify-between px-4 py-3.5 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/15 transition-all duration-200 mb-4 cursor-pointer no-underline group">
+        <a href="/onboarding" className="flex items-center justify-between px-4 py-3.5 rounded-xl bg-[rgba(176,155,113,0.06)] hover:bg-[rgba(176,155,113,0.10)] transition-all duration-200 mb-4 cursor-pointer no-underline group card-enter card-enter-delay-3">
           <div className="flex items-center gap-3">
-            <Home className="w-5 h-5 text-[#c9a96e]" />
+            <Home className="w-5 h-5 text-[#B09B71] opacity-60" />
             <div>
-              <p className="text-sm font-semibold text-[#e8d5a3] group-hover:text-[#e8d5a3]">
+              <p className="text-sm text-[rgba(245,240,232,0.80)] group-hover:text-[#F5F0E8]">
                 Complete Your Setup
               </p>
-              <p className="text-xs text-gray-500">Finish your move-in onboarding — takes 2 minutes</p>
+              <p className="text-xs text-[rgba(245,240,232,0.35)]">Finish your move-in onboarding — takes 2 minutes</p>
             </div>
           </div>
-          <span className="text-gray-500 text-sm group-hover:text-[#c9a96e] transition-colors">→</span>
+          <ChevronRight className="w-4 h-4 text-[rgba(245,240,232,0.25)] group-hover:text-[#B09B71] transition-colors" />
         </a>
       )}
 
-      {/* Unread Messages Banner */}
       {totalUnread > 0 && (
-        <a href="/messages" className="flex items-center justify-between px-4 py-3 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 hover:bg-[#c9a96e]/10 transition-all duration-200 mb-4 cursor-pointer no-underline">
+        <a href="/messages" className="flex items-center justify-between px-4 py-3 rounded-xl bg-[rgba(176,155,113,0.06)] hover:bg-[rgba(176,155,113,0.10)] transition-all duration-200 mb-4 cursor-pointer no-underline card-enter card-enter-delay-3">
           <div className="flex items-center gap-3">
-            <MessageSquare className="w-5 h-5 text-[#c9a96e]" />
+            <MessageSquare className="w-5 h-5 text-[#B09B71] opacity-60" />
             <div>
-              <p className="text-sm font-semibold text-[#e8d5a3]">
+              <p className="text-sm text-[rgba(245,240,232,0.80)]">
                 {totalUnread} unread message{totalUnread !== 1 ? 's' : ''}
               </p>
-              <p className="text-xs text-gray-500">Tap to open Messages</p>
+              <p className="text-xs text-[rgba(245,240,232,0.35)]">Tap to open Messages</p>
             </div>
           </div>
-          <span className="text-gray-500 text-sm">→</span>
+          <ChevronRight className="w-4 h-4 text-[rgba(245,240,232,0.25)]" />
         </a>
       )}
 
-      {/* Quick Actions */}
-      <div className="page-enter page-enter-delay-3">
-        <h2 className="text-lg font-bold mb-4 text-gray-200">Quick Actions</h2>
+      {/* Quick Actions — below fold */}
+      <div className="card-enter card-enter-delay-4">
+        <h2 className="text-lg font-normal mb-4 text-[rgba(245,240,232,0.65)]">Quick Actions</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { href: '/messages', icon: <MessageSquare className="w-6 h-6 text-[#c9a96e]" />, label: 'Messages', color: 'gold' },
-            { href: '/proposals', icon: <ClipboardList className="w-6 h-6 text-blue-400" />, label: 'Proposals', color: 'blue' },
-            { href: '/treasury', icon: <DollarSign className="w-6 h-6 text-green-400" />, label: 'Treasury', color: 'green' },
-            { href: '/documents', icon: <FileText className="w-6 h-6 text-amber-400" />, label: 'Documents', color: 'amber' },
-            { href: '/dues', icon: <CreditCard className="w-6 h-6 text-[#c9a96e]" />, label: 'Pay Dues', color: 'gold' },
+            { href: '/messages', icon: <MessageSquare className="w-5 h-5 text-[#B09B71] opacity-70" />, label: 'Messages' },
+            { href: '/proposals', icon: <ClipboardList className="w-5 h-5 text-[#B09B71] opacity-70" />, label: 'Proposals' },
+            { href: '/treasury', icon: <DollarSign className="w-5 h-5 text-[#B09B71] opacity-70" />, label: 'Treasury' },
+            { href: '/documents', icon: <FileText className="w-5 h-5 text-[#B09B71] opacity-70" />, label: 'Documents' },
+            { href: '/dues', icon: <CreditCard className="w-5 h-5 text-[#B09B71] opacity-70" />, label: 'Dues' },
           ].map(({ href, icon, label }) => (
             <Link
               key={href}
               href={href}
-              className="glass-card rounded-xl p-4 text-center group min-h-[80px] flex flex-col items-center justify-center gap-2 hover:border-[#c9a96e]/25 relative"
+              className="glass-card rounded-xl p-4 text-center group min-h-[80px] flex flex-col items-center justify-center gap-2 relative transition-all duration-200"
             >
-              <span className="group-hover:scale-110 transition-transform duration-200">{icon}</span>
-              <p className="text-sm font-semibold text-gray-300 group-hover:text-[#e8d5a3] transition-colors duration-200">{label}</p>
+              <span className="group-hover:scale-105 transition-transform duration-200">{icon}</span>
+              <p className="text-sm text-[rgba(245,240,232,0.50)] group-hover:text-[rgba(245,240,232,0.80)] transition-colors duration-200">{label}</p>
               {href === '/messages' && totalUnread > 0 && (
-                <span className="absolute top-2 right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-[#c9a96e] text-white text-[10px] font-bold flex items-center justify-center">
+                <span className="absolute top-2 right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-[#B09B71] text-[#0C0C0E] text-[10px] font-medium flex items-center justify-center">
                   {totalUnread > 9 ? '9+' : totalUnread}
                 </span>
               )}
@@ -367,7 +327,7 @@ function PropertyDashboard() {
       </div>
 
       {/* Property Improvements */}
-      <div className="mt-6 page-enter page-enter-delay-3">
+      <div className="mt-6 card-enter card-enter-delay-4">
         <PropertyImprovements />
       </div>
     </div>

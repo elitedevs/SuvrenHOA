@@ -31,7 +31,7 @@ function MessageText({ text }: { text: string }) {
             tokens.push(<strong key={key++} className="font-semibold">{match[1]}</strong>);
           } else if (match[2] && match[3]) {
             tokens.push(
-              <Link key={key++} href={match[3]} className="underline text-[#c9a96e] hover:text-[#e8d5a3]">
+              <Link key={key++} href={match[3]} className="underline text-[#B09B71] hover:text-[#D4C4A0]">
                 {match[2]}
               </Link>
             );
@@ -48,7 +48,7 @@ function MessageText({ text }: { text: string }) {
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-3 mb-4">
-      <div className="w-9 h-9 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-lg shrink-0"></div>
+      <div className="w-9 h-9 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-lg shrink-0"></div>
       <div className="bg-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 1, 2].map((i) => (
           <span key={i} className="w-2 h-2 rounded-full bg-gray-400 inline-block animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
@@ -87,13 +87,13 @@ export default function AssistantPage() {
       <div className="bg-gradient-to-r from-[#1a1a1a]/80 to-[#2d2d2d]/80 border-b border-white/[0.06] px-6 py-4 shrink-0">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center text-xl">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#B09B71] to-[#b8942e] flex items-center justify-center text-xl">
               
             </div>
             <div>
-              <h1 className="text-lg font-bold text-gray-100">HOA Assistant</h1>
-              <p className="text-xs text-green-400 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
+              <h1 className="text-lg font-bold text-[rgba(245,240,232,0.90)]">HOA Assistant</h1>
+              <p className="text-xs text-[#3A7D6F] flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#3A7D6F] inline-block" />
                 Online — answers HOA questions using live on-chain data
               </p>
             </div>
@@ -110,15 +110,15 @@ export default function AssistantPage() {
               className={`flex items-end gap-3 mb-4 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
             >
               {msg.role === 'bot' && (
-                <div className="w-9 h-9 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-lg shrink-0">
+                <div className="w-9 h-9 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-lg shrink-0">
                   
                 </div>
               )}
               <div
                 className={`max-w-[80%] rounded-2xl px-5 py-3 text-sm leading-relaxed ${
                   msg.role === 'user'
-                    ? 'bg-gradient-to-br from-[#c9a96e] to-[#b8942e] text-white rounded-br-sm'
-                    : 'bg-white/[0.06] text-gray-200 rounded-bl-sm'
+                    ? 'bg-gradient-to-br from-[#B09B71] to-[#b8942e] text-white rounded-br-sm'
+                    : 'bg-white/[0.06] text-[rgba(245,240,232,0.80)] rounded-bl-sm'
                 }`}
               >
                 <MessageText text={msg.text} />
@@ -136,14 +136,14 @@ export default function AssistantPage() {
       {/* Quick Actions */}
       <div className="border-t border-white/[0.04] px-4 py-3 shrink-0">
         <div className="max-w-2xl mx-auto">
-          <p className="text-[11px] text-gray-500 mb-2">Quick questions</p>
+          <p className="text-[11px] text-[rgba(245,240,232,0.35)] mb-2">Quick questions</p>
           <div className="flex flex-wrap gap-2">
             {QUICK_ACTIONS.map((a) => (
               <button
                 key={a.label}
                 onClick={() => sendMessage(a.query)}
                 disabled={isTyping}
-                className="text-xs font-medium px-3 py-1.5 rounded-full bg-[#c9a96e]/15 text-[#e8d5a3] hover:bg-[#c9a96e]/20 hover:text-[#e8d5a3] transition-colors disabled:opacity-40 border border-[#c9a96e]/20"
+                className="text-xs font-medium px-3 py-1.5 rounded-full bg-[#B09B71]/15 text-[#D4C4A0] hover:bg-[#B09B71]/20 hover:text-[#D4C4A0] transition-colors disabled:opacity-40 border border-[#B09B71]/20"
               >
                 {a.label}
               </button>
@@ -164,12 +164,12 @@ export default function AssistantPage() {
             placeholder="Ask about dues, treasury, proposals, amenities..."
             disabled={isTyping}
             autoFocus
-            className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-2xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#c9a96e]/50 disabled:opacity-50 transition-colors"
+            className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-2xl px-4 py-3 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#B09B71]/50 disabled:opacity-50 transition-colors"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim() || isTyping}
-            className="w-11 h-11 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#c9a96e] to-[#b8942e] hover:from-[#e8d5a3] hover:to-[#c9a96e] disabled:opacity-40 disabled:cursor-not-allowed transition-all shrink-0 shadow-lg shadow-[#1a1a1a]/50"
+            className="w-11 h-11 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#B09B71] to-[#b8942e] hover:from-[#D4C4A0] hover:to-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed transition-all shrink-0 shadow-lg shadow-[#1a1a1a]/50"
             aria-label="Send message"
           >
             <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

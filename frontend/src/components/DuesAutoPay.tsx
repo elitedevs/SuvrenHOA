@@ -84,20 +84,20 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
     <div className="glass-card rounded-2xl hover-lift p-6 border border-white/[0.04]">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/15 flex items-center justify-center">
-            <RefreshCw className="w-5 h-5 text-[#c9a96e]" />
+          <div className="w-10 h-10 rounded-xl bg-[#B09B71]/15 flex items-center justify-center">
+            <RefreshCw className="w-5 h-5 text-[#B09B71]" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-gray-100">Auto-Pay</h3>
-            <p className="text-xs text-gray-500">Recurring dues payments</p>
+            <h3 className="text-sm font-bold text-[rgba(245,240,232,0.90)]">Auto-Pay</h3>
+            <p className="text-xs text-[rgba(245,240,232,0.35)]">Recurring dues payments</p>
           </div>
         </div>
         <button
           onClick={toggleAutoPay}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border transition-all cursor-pointer ${
             settings.enabled
-              ? 'bg-green-500/15 text-green-400 border-green-500/25'
-              : 'bg-white/[0.04] text-gray-400 border-white/[0.08] hover:border-[#c9a96e]/30 hover:text-[#c9a96e]'
+              ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border-green-500/25'
+              : 'bg-white/[0.04] text-[rgba(245,240,232,0.50)] border-white/[0.08] hover:border-[#B09B71]/30 hover:text-[#B09B71]'
           }`}
         >
           {settings.enabled ? (
@@ -111,53 +111,53 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
       {settings.enabled ? (
         <div className="space-y-3">
           {/* Active Status */}
-          <div className="p-4 rounded-xl bg-green-500/[0.07] border border-green-500/20">
+          <div className="p-4 rounded-xl bg-[#3A7D6F]/[0.07] border border-[rgba(42,93,79,0.20)]">
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-xs font-bold text-green-400">Auto-Pay Active</span>
+              <span className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
+              <span className="text-xs font-bold text-[#3A7D6F]">Auto-Pay Active</span>
             </div>
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div>
-                <span className="text-gray-500">Frequency:</span>
-                <span className="text-gray-200 ml-1 font-semibold">{config.label}</span>
+                <span className="text-[rgba(245,240,232,0.35)]">Frequency:</span>
+                <span className="text-[rgba(245,240,232,0.80)] ml-1 font-semibold">{config.label}</span>
               </div>
               <div>
-                <span className="text-gray-500">Amount:</span>
-                <span className="text-[#c9a96e] ml-1 font-bold">${config.amount} USDC</span>
+                <span className="text-[rgba(245,240,232,0.35)]">Amount:</span>
+                <span className="text-[#B09B71] ml-1 font-bold">${config.amount} USDC</span>
               </div>
               <div className="col-span-2">
-                <span className="text-gray-500">Next payment:</span>
-                <span className="text-gray-200 ml-1 font-semibold">{getNextPaymentDate(settings.frequency)}</span>
+                <span className="text-[rgba(245,240,232,0.35)]">Next payment:</span>
+                <span className="text-[rgba(245,240,232,0.80)] ml-1 font-semibold">{getNextPaymentDate(settings.frequency)}</span>
               </div>
             </div>
           </div>
 
           {/* Payment method */}
           <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-            <CreditCard className="w-4 h-4 text-[#c9a96e]" />
+            <CreditCard className="w-4 h-4 text-[#B09B71]" />
             <div className="flex-1 min-w-0">
-              <div className="text-xs font-semibold text-gray-300">Payment Wallet</div>
-              <div className="text-[11px] text-gray-500 font-mono truncate">
+              <div className="text-xs font-semibold text-[rgba(245,240,232,0.65)]">Payment Wallet</div>
+              <div className="text-[11px] text-[rgba(245,240,232,0.35)] font-mono truncate">
                 {settings.walletAddress ? `${settings.walletAddress.slice(0, 10)}...${settings.walletAddress.slice(-6)}` : 'Connected wallet'}
               </div>
             </div>
             <div className="text-right">
-              <div className="text-[10px] text-gray-600">Est. gas</div>
-              <div className="text-xs text-[#c9a96e]">~$0.05</div>
+              <div className="text-[10px] text-[rgba(245,240,232,0.25)]">Est. gas</div>
+              <div className="text-xs text-[#B09B71]">~$0.05</div>
             </div>
           </div>
 
           <button
             onClick={() => saveSettings({ ...settings, enabled: false })}
-            className="w-full py-2 rounded-xl border border-red-500/20 text-xs text-red-400 hover:bg-red-500/10 transition-all cursor-pointer"
+            className="w-full py-2 rounded-xl border border-[rgba(107,58,58,0.20)] text-xs text-[#8B5A5A] hover:bg-[rgba(107,58,58,0.10)] transition-all cursor-pointer"
           >
             Cancel Auto-Pay
           </button>
         </div>
       ) : (
         <div className="text-center py-4">
-          <p className="text-xs text-gray-500 mb-2">Set up automatic dues payments from your connected wallet</p>
-          <div className="flex items-center gap-1 justify-center text-[11px] text-gray-600">
+          <p className="text-xs text-[rgba(245,240,232,0.35)] mb-2">Set up automatic dues payments from your connected wallet</p>
+          <div className="flex items-center gap-1 justify-center text-[11px] text-[rgba(245,240,232,0.25)]">
             <Zap className="w-3 h-3" />
             <span>Smart contract integration coming soon</span>
           </div>
@@ -168,10 +168,10 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
       {showSetup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
           <div className="glass w-full max-w-sm rounded-2xl border border-white/[0.08] p-5">
-            <h3 className="text-base font-bold text-gray-100 mb-4">Set Up Auto-Pay</h3>
+            <h3 className="text-base font-bold text-[rgba(245,240,232,0.90)] mb-4">Set Up Auto-Pay</h3>
             
             <div className="mb-4">
-              <label className="text-xs font-semibold text-gray-400 mb-2 block">Payment Frequency</label>
+              <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-2 block">Payment Frequency</label>
               <div className="space-y-2">
                 {(Object.entries(FREQUENCY_CONFIG) as [Frequency, typeof FREQUENCY_CONFIG[Frequency]][]).map(([freq, cfg]) => (
                   <div
@@ -179,22 +179,22 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
                     onClick={() => setSettings(prev => ({ ...prev, frequency: freq }))}
                     className={`p-3 rounded-xl cursor-pointer border transition-all ${
                       settings.frequency === freq
-                        ? 'bg-[#c9a96e]/10 border-[#c9a96e]/30'
-                        : 'bg-white/[0.02] border-white/[0.04] hover:border-[#c9a96e]/15'
+                        ? 'bg-[#B09B71]/10 border-[#B09B71]/30'
+                        : 'bg-white/[0.02] border-white/[0.04] hover:border-[#B09B71]/15'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="text-sm font-semibold text-gray-200">{cfg.label}</div>
-                        <div className="text-[11px] text-gray-500">{cfg.description}</div>
+                        <div className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{cfg.label}</div>
+                        <div className="text-[11px] text-[rgba(245,240,232,0.35)]">{cfg.description}</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-bold text-[#c9a96e]">${cfg.amount}</div>
-                        <div className="text-[10px] text-gray-600">USDC</div>
+                        <div className="text-sm font-bold text-[#B09B71]">${cfg.amount}</div>
+                        <div className="text-[10px] text-[rgba(245,240,232,0.25)]">USDC</div>
                       </div>
                     </div>
                     {freq === 'annual' && (
-                      <div className="mt-1.5 text-[10px] text-green-400 font-semibold"> Save 5% vs quarterly</div>
+                      <div className="mt-1.5 text-[10px] text-[#3A7D6F] font-semibold"> Save 5% vs quarterly</div>
                     )}
                   </div>
                 ))}
@@ -203,27 +203,27 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
 
             <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] mb-4">
               <div className="flex items-center gap-2 text-xs">
-                <Calendar className="w-3.5 h-3.5 text-[#c9a96e]" />
-                <span className="text-gray-400">Next payment: <span className="text-gray-200 font-semibold">{getNextPaymentDate(settings.frequency)}</span></span>
+                <Calendar className="w-3.5 h-3.5 text-[#B09B71]" />
+                <span className="text-[rgba(245,240,232,0.50)]">Next payment: <span className="text-[rgba(245,240,232,0.80)] font-semibold">{getNextPaymentDate(settings.frequency)}</span></span>
               </div>
               <div className="flex items-center gap-2 text-xs mt-1.5">
-                <CreditCard className="w-3.5 h-3.5 text-[#c9a96e]" />
-                <span className="text-gray-400">From: <span className="text-gray-200 font-mono text-[11px]">{walletAddress ? `${walletAddress.slice(0, 10)}...${walletAddress.slice(-4)}` : 'Connected wallet'}</span></span>
+                <CreditCard className="w-3.5 h-3.5 text-[#B09B71]" />
+                <span className="text-[rgba(245,240,232,0.50)]">From: <span className="text-[rgba(245,240,232,0.80)] font-mono text-[11px]">{walletAddress ? `${walletAddress.slice(0, 10)}...${walletAddress.slice(-4)}` : 'Connected wallet'}</span></span>
               </div>
               <div className="flex items-center gap-2 text-xs mt-1.5">
-                <Zap className="w-3.5 h-3.5 text-[#c9a96e]" />
-                <span className="text-gray-400">Est. gas per tx: <span className="text-[#c9a96e] font-semibold">~$0.05</span></span>
+                <Zap className="w-3.5 h-3.5 text-[#B09B71]" />
+                <span className="text-[rgba(245,240,232,0.50)]">Est. gas per tx: <span className="text-[#B09B71] font-semibold">~$0.05</span></span>
               </div>
             </div>
 
             <div className="p-2.5 rounded-lg bg-yellow-400/8 border border-yellow-400/15 mb-4">
-              <p className="text-[11px] text-yellow-400"> Note: Auto-pay scheduling requires smart contract support. This saves your preference — actual automation coming in a future update.</p>
+              <p className="text-[11px] text-[#B09B71]"> Note: Auto-pay scheduling requires smart contract support. This saves your preference — actual automation coming in a future update.</p>
             </div>
 
             <div className="flex gap-3">
               <button
                 onClick={() => setShowSetup(false)}
-                className="flex-1 py-2.5 rounded-xl border border-white/[0.08] text-sm text-gray-400 cursor-pointer"
+                className="flex-1 py-2.5 rounded-xl border border-white/[0.08] text-sm text-[rgba(245,240,232,0.50)] cursor-pointer"
               >
                 Cancel
               </button>
@@ -232,7 +232,7 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
                   saveSettings({ ...settings, enabled: true, setupDate: new Date().toISOString() });
                   setShowSetup(false);
                 }}
-                className="flex-1 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-semibold cursor-pointer"
+                className="flex-1 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold cursor-pointer"
               >
                 Enable Auto-Pay
               </button>

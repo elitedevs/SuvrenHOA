@@ -91,9 +91,9 @@ export function WeatherWidget() {
 
   if (error || !weather) {
     return (
-      <div className="glass-card rounded-2xl p-4 border border-[#c9a96e]/10">
-        <p className="text-xs text-gray-500"> Raleigh, NC</p>
-        <p className="text-xs text-gray-600 mt-1">Weather unavailable</p>
+      <div className="glass-card rounded-2xl p-4 border border-[#B09B71]/10">
+        <p className="text-xs text-[rgba(245,240,232,0.35)]"> Raleigh, NC</p>
+        <p className="text-xs text-[rgba(245,240,232,0.25)] mt-1">Weather unavailable</p>
       </div>
     );
   }
@@ -101,19 +101,19 @@ export function WeatherWidget() {
   const emoji = getWeatherEmoji(weather.weatherCode);
 
   return (
-    <div className="glass-card rounded-2xl p-5 border border-[#c9a96e]/15">
+    <div className="glass-card rounded-2xl p-5 border border-[#B09B71]/15">
       <div className="flex items-start justify-between mb-2">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide">Raleigh, NC</p>
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)]">Raleigh, NC</p>
           <div className="flex items-baseline gap-2 mt-1">
-            <span className="text-3xl font-black text-[#e8d5a3]">{weather.temp_F}°</span>
-            <span className="text-xs text-gray-500">F</span>
+            <span className="text-3xl font-normal text-[#D4C4A0]">{weather.temp_F}°</span>
+            <span className="text-xs text-[rgba(245,240,232,0.35)]">F</span>
           </div>
         </div>
         <span className="text-3xl">{emoji}</span>
       </div>
-      <p className="text-xs text-gray-400 mb-3">{weather.weatherDesc}</p>
-      <div className="flex gap-3 text-xs text-gray-500">
+      <p className="text-xs text-[rgba(245,240,232,0.50)] mb-3">{weather.weatherDesc}</p>
+      <div className="flex gap-3 text-xs text-[rgba(245,240,232,0.35)]">
         <span> {weather.humidity}%</span>
         <span> {weather.windspeedMiles} mph</span>
       </div>

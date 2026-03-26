@@ -16,11 +16,11 @@ function timeAgo(unix: number): string {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
-      <div className="w-12 h-12 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-2xl mb-4">
+      <div className="w-12 h-12 rounded-2xl bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center text-2xl mb-4">
         
       </div>
-      <p className="text-sm text-gray-500 font-medium">No recent on-chain activity</p>
-      <p className="text-xs text-gray-600 mt-1">Events will appear here as they happen</p>
+      <p className="text-sm text-[rgba(245,240,232,0.35)] font-medium">No recent on-chain activity</p>
+      <p className="text-xs text-[rgba(245,240,232,0.25)] mt-1">Events will appear here as they happen</p>
     </div>
   );
 }
@@ -54,10 +54,10 @@ function EventRow({ item, isNew }: EventRowProps) {
       className={[
         'w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl',
         'transition-all duration-300 group cursor-pointer',
-        'hover:bg-white/5 hover:border-[#c9a96e]/20',
+        'hover:bg-white/5 hover:border-[#B09B71]/20',
         'border border-transparent',
         isNew
-          ? 'bg-[#c9a96e]/10 border-[#c9a96e]/25 shadow-[0_0_12px_rgba(201,169,110,0.12)] activity-ticker-slide-in'
+          ? 'bg-[#B09B71]/10 border-[#B09B71]/25 shadow-[0_0_12px_rgba(201,169,110,0.12)] activity-ticker-slide-in'
           : 'activity-ticker-slide-in',
       ].join(' ')}
       style={{ animationFillMode: 'both' }}
@@ -67,7 +67,7 @@ function EventRow({ item, isNew }: EventRowProps) {
       <div className={[
         'w-8 h-8 rounded-lg flex items-center justify-center text-base shrink-0',
         'transition-transform duration-200 group-hover:scale-110',
-        isNew ? 'bg-[#c9a96e]/12 border border-[#c9a96e]/30' : 'bg-white/5 border border-white/10',
+        isNew ? 'bg-[#B09B71]/12 border border-[#B09B71]/30' : 'bg-white/5 border border-white/10',
       ].join(' ')}>
         {item.icon}
       </div>
@@ -76,23 +76,23 @@ function EventRow({ item, isNew }: EventRowProps) {
       <div className="flex-1 min-w-0">
         <p className={[
           'text-xs font-medium leading-snug truncate',
-          isNew ? 'text-[#e8d5a3]' : 'text-gray-300 group-hover:text-gray-100',
+          isNew ? 'text-[#D4C4A0]' : 'text-[rgba(245,240,232,0.65)] group-hover:text-[rgba(245,240,232,0.90)]',
           'transition-colors duration-200',
         ].join(' ')}>
           {item.description}
         </p>
-        <p className="text-[10px] text-gray-600 mt-0.5 truncate">
+        <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-0.5 truncate">
           Tx: {item.txHash.slice(0, 10)}...{item.txHash.slice(-6)}
         </p>
       </div>
 
       {/* Timestamp */}
       <div className="shrink-0 flex flex-col items-end gap-1">
-        <span className="text-[10px] text-gray-500 whitespace-nowrap">
+        <span className="text-[10px] text-[rgba(245,240,232,0.35)] whitespace-nowrap">
           {timeAgo(item.timestamp)}
         </span>
         {isNew && (
-          <span className="text-[9px] font-semibold text-[#c9a96e] uppercase tracking-wider">New</span>
+          <span className="text-[9px] font-semibold text-[#B09B71] uppercase tracking-wider">New</span>
         )}
       </div>
     </button>
@@ -114,22 +114,22 @@ export function ActivityTicker({ className = '', maxHeight = '480px' }: Activity
         <div className="flex items-center gap-2.5">
           {/* Pulsing live dot */}
           <div className="relative flex items-center justify-center">
-            <span className="absolute inline-flex w-3 h-3 rounded-full bg-green-400/30 animate-ping" />
-            <span className="relative inline-flex w-2 h-2 rounded-full bg-green-400" />
+            <span className="absolute inline-flex w-3 h-3 rounded-full bg-[#3A7D6F]/30 animate-ping" />
+            <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3A7D6F]" />
           </div>
-          <h3 className="text-sm font-bold text-gray-200 tracking-wide">Live Activity</h3>
-          <span className="text-[10px] font-medium text-gray-600 bg-white/5 px-2 py-0.5 rounded-full border border-white/8">
+          <h3 className="text-sm font-bold text-[rgba(245,240,232,0.80)] tracking-wide">Live Activity</h3>
+          <span className="text-[10px] font-medium text-[rgba(245,240,232,0.25)] bg-white/5 px-2 py-0.5 rounded-full border border-white/8">
             Base Sepolia
           </span>
         </div>
 
         <div className="flex items-center gap-2">
           {lastFetched && (
-            <span className="text-[10px] text-gray-600 hidden sm:block">
+            <span className="text-[10px] text-[rgba(245,240,232,0.25)] hidden sm:block">
               Updated {timeAgo(Math.floor(lastFetched.getTime() / 1000))}
             </span>
           )}
-          <span className="text-[10px] text-gray-600 bg-white/5 px-2 py-0.5 rounded-full border border-white/8">
+          <span className="text-[10px] text-[rgba(245,240,232,0.25)] bg-white/5 px-2 py-0.5 rounded-full border border-white/8">
             {events.length} events
           </span>
         </div>
@@ -158,14 +158,14 @@ export function ActivityTicker({ className = '', maxHeight = '480px' }: Activity
       {/* Footer */}
       {!isLoading && events.length > 0 && (
         <div className="px-5 py-3 border-t border-white/8 flex items-center justify-between">
-          <span className="text-[10px] text-gray-600">
+          <span className="text-[10px] text-[rgba(245,240,232,0.25)]">
             Showing last {events.length} events · Auto-refreshes every 30s
           </span>
           <a
             href="https://sepolia.basescan.org"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] text-[#c9a96e]/70 hover:text-[#c9a96e] transition-colors duration-150"
+            className="text-[10px] text-[#B09B71]/70 hover:text-[#B09B71] transition-colors duration-150"
           >
             View all on BaseScan →
           </a>

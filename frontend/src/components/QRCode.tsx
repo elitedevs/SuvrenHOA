@@ -137,14 +137,14 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
       <div
-        className="relative z-10 w-full max-w-xs rounded-2xl border border-[#c9a96e]/30 bg-[#0d0d0d] shadow-2xl p-6 text-center"
+        className="relative z-10 w-full max-w-xs rounded-2xl border border-[#B09B71]/30 bg-[#0d0d0d] shadow-2xl p-6 text-center"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-base font-bold text-[#e8d5a3]">Share Property</h2>
+          <h2 className="text-base font-bold text-[#D4C4A0]">Share Property</h2>
           <button
             onClick={onClose}
-            className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-500 hover:text-gray-300 hover:bg-white/5 transition-colors text-sm"
+            className="w-7 h-7 rounded-lg flex items-center justify-center text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/5 transition-colors text-sm"
           >
             
           </button>
@@ -156,17 +156,17 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
           </div>
         </div>
 
-        <p className="text-xs text-gray-500 mb-3">Scan to view property #{tokenId}</p>
+        <p className="text-xs text-[rgba(245,240,232,0.35)] mb-3">Scan to view property #{tokenId}</p>
 
         <div className="px-3 py-2 rounded-lg bg-gray-800/60 border border-gray-700 mb-4">
-          <p className="text-[11px] font-mono text-gray-400 break-all">{url}</p>
+          <p className="text-[11px] font-mono text-[rgba(245,240,232,0.50)] break-all">{url}</p>
         </div>
 
         <button
           onClick={() => {
             navigator.clipboard?.writeText(url);
           }}
-          className="w-full py-2.5 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#e8d5a3] text-sm font-medium hover:bg-[#c9a96e]/25 transition-colors"
+          className="w-full py-2.5 rounded-xl bg-[#B09B71]/15 border border-[#B09B71]/30 text-[#D4C4A0] text-sm font-medium hover:bg-[#B09B71]/25 transition-colors"
         >
            Copy Link
         </button>

@@ -151,9 +151,9 @@ function NavItem({
       <div>
         <button
           onClick={() => onToggle(section.label)}
-          className="w-full flex items-center gap-3 px-3 py-2 text-[13px] transition-colors duration-150 relative"
+          className="w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-colors duration-150 relative"
           style={{
-            color: highlighted ? '#F5F0E8' : 'rgba(245,240,232,0.40)',
+            color: highlighted ? '#F5F0E8' : 'rgba(245,240,232,0.60)',
           }}
         >
           {highlighted && (
@@ -165,7 +165,7 @@ function NavItem({
           <Icon
             size={18}
             className="shrink-0"
-            style={{ opacity: highlighted ? 0.7 : 0.4 }}
+            style={{ opacity: highlighted ? 0.85 : 0.55 }}
           />
           <span className="flex-1 text-left">{section.label}</span>
           <ChevronDown
@@ -197,11 +197,11 @@ function NavItem({
                 <Link
                   key={child.href}
                   href={child.href}
-                  className="block py-1.5 px-2 text-[12px] rounded transition-colors duration-150 relative"
+                  className="block py-1.5 px-2 text-[13px] rounded transition-colors duration-150 relative"
                   style={{
                     color: childActive
                       ? '#F5F0E8'
-                      : 'rgba(245,240,232,0.35)',
+                      : 'rgba(245,240,232,0.50)',
                   }}
                 >
                   {childActive && (
@@ -223,9 +223,9 @@ function NavItem({
   return (
     <Link
       href={section.href}
-      className="flex items-center gap-3 px-3 py-2 text-[13px] transition-colors duration-150 relative"
+      className="flex items-center gap-3 px-3 py-2.5 text-sm transition-colors duration-150 relative"
       style={{
-        color: highlighted ? '#F5F0E8' : 'rgba(245,240,232,0.40)',
+        color: highlighted ? '#F5F0E8' : 'rgba(245,240,232,0.60)',
       }}
       title={collapsed ? section.label : undefined}
     >
@@ -238,7 +238,7 @@ function NavItem({
       <Icon
         size={18}
         className="shrink-0"
-        style={{ opacity: highlighted ? 0.7 : 0.4 }}
+        style={{ opacity: highlighted ? 0.85 : 0.55 }}
       />
       {!collapsed && <span className="truncate">{section.label}</span>}
     </Link>
@@ -291,12 +291,20 @@ export function Sidebar() {
         className="flex items-center justify-between px-4 h-14"
         style={{ borderBottom: '1px solid rgba(245,240,232,0.06)' }}
       >
-        {!collapsed && (
+        {collapsed ? (
+          <Link href="/" className="flex items-center justify-center mx-auto">
+            <img
+              src="/logo-icon.svg"
+              alt="SuvrenHOA"
+              className="h-7 w-7 object-contain"
+            />
+          </Link>
+        ) : (
           <Link href="/" className="flex items-center gap-2">
             <img
-              src="/logo-full.png"
+              src="/logo-full.svg"
               alt="SuvrenHOA"
-              className="h-8 w-auto max-w-[140px] object-contain"
+              className="h-7 w-auto max-w-[160px] object-contain"
             />
           </Link>
         )}
@@ -331,8 +339,8 @@ export function Sidebar() {
         {!collapsed && (
           <div className="flex items-center justify-between px-1 py-1">
             <span
-              className="text-[11px] font-medium"
-              style={{ color: 'rgba(245,240,232,0.25)' }}
+              className="text-xs font-medium"
+              style={{ color: 'rgba(245,240,232,0.40)' }}
             >
               Theme
             </span>
@@ -362,8 +370,8 @@ export function Sidebar() {
       <aside
         className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40"
         style={{
-          background: '#0C0C0E',
-          borderRight: '1px solid rgba(245,240,232,0.05)',
+          background: '#111114',
+          borderRight: '1px solid rgba(245,240,232,0.06)',
         }}
       >
         {sidebarContent}
@@ -373,7 +381,7 @@ export function Sidebar() {
       <button
         className="lg:hidden fixed top-3 left-3 z-50 p-2 rounded-lg"
         style={{
-          background: '#141416',
+          background: '#111114',
           color: 'rgba(245,240,232,0.50)',
         }}
         onClick={() => setMobileOpen(true)}
@@ -391,8 +399,8 @@ export function Sidebar() {
           <aside
             className="absolute left-0 top-0 bottom-0 shadow-2xl"
             style={{
-              background: '#0C0C0E',
-              borderRight: '1px solid rgba(245,240,232,0.05)',
+              background: '#111114',
+              borderRight: '1px solid rgba(245,240,232,0.06)',
             }}
           >
             <div className="absolute top-3 right-3">

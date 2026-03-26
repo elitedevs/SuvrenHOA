@@ -76,24 +76,24 @@ export function ResidentSpotlight() {
   const next = () => setCurrentIdx((i) => (i + 1) % spotlights.length);
 
   return (
-    <div className="glass-card rounded-2xl p-5 border border-[#c9a96e]/20 relative overflow-hidden">
+    <div className="glass-card rounded-2xl p-5 border border-[#B09B71]/20 relative overflow-hidden">
       {/* Glow accent */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-[#c9a96e]/5 blur-2xl rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-[#B09B71]/5 blur-2xl rounded-full pointer-events-none" />
 
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-[#c9a96e]/15">
-            <Star className="w-4 h-4 text-[#c9a96e]" />
+          <div className="p-1.5 rounded-lg bg-[#B09B71]/15">
+            <Star className="w-4 h-4 text-[#B09B71]" />
           </div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#c9a96e]">Resident Spotlight</span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#B09B71]">Resident Spotlight</span>
         </div>
         {spotlights.length > 1 && (
           <div className="flex items-center gap-1">
-            <button onClick={prev} className="p-1 rounded-md text-gray-500 hover:text-[#c9a96e] transition-colors">
+            <button onClick={prev} className="p-1 rounded-md text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] transition-colors">
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="text-xs text-gray-500">{currentIdx + 1}/{spotlights.length}</span>
-            <button onClick={next} className="p-1 rounded-md text-gray-500 hover:text-[#c9a96e] transition-colors">
+            <span className="text-xs text-[rgba(245,240,232,0.35)]">{currentIdx + 1}/{spotlights.length}</span>
+            <button onClick={next} className="p-1 rounded-md text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] transition-colors">
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
@@ -101,20 +101,20 @@ export function ResidentSpotlight() {
       </div>
 
       <div className="flex items-start gap-3">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#c9a96e]/30 to-[#b8942e]/20 border border-[#c9a96e]/30 flex items-center justify-center shrink-0">
-          <Users className="w-6 h-6 text-[#c9a96e]" />
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#B09B71]/30 to-[#b8942e]/20 border border-[#B09B71]/30 flex items-center justify-center shrink-0">
+          <Users className="w-6 h-6 text-[#B09B71]" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <h3 className="font-semibold text-white text-sm">{current.name}</h3>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-[#c9a96e]/15 text-[#c9a96e] font-medium border border-[#c9a96e]/20">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-[#B09B71]/15 text-[#B09B71] font-medium border border-[#B09B71]/20">
               Lot #{current.lot}
             </span>
           </div>
-          <p className="text-xs text-gray-400 mt-1 italic">"{current.funFact}"</p>
-          <div className="mt-2 p-2.5 rounded-lg bg-[#1a1a1a]/60 border border-[#c9a96e]/10">
-            <p className="text-xs text-gray-300">
-              <span className="text-[#c9a96e] font-medium">Community contribution: </span>
+          <p className="text-xs text-[rgba(245,240,232,0.50)] mt-1 italic">"{current.funFact}"</p>
+          <div className="mt-2 p-2.5 rounded-lg bg-[#1a1a1a]/60 border border-[#B09B71]/10">
+            <p className="text-xs text-[rgba(245,240,232,0.65)]">
+              <span className="text-[#B09B71] font-medium">Community contribution: </span>
               {current.contribution}
             </p>
           </div>
@@ -126,7 +126,7 @@ export function ResidentSpotlight() {
           <button
             key={i}
             onClick={() => setCurrentIdx(i)}
-            className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentIdx ? 'bg-[#c9a96e] w-4' : 'bg-gray-600 hover:bg-gray-400'}`}
+            className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentIdx ? 'bg-[#B09B71] w-4' : 'bg-gray-600 hover:bg-gray-400'}`}
           />
         ))}
       </div>

@@ -62,7 +62,7 @@ export function NotificationBell() {
       >
         
         {unreadCount > 0 && (
-          <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-red-500 text-[9px] font-bold flex items-center justify-center text-white">
+          <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#8B5A5A] text-[9px] font-bold flex items-center justify-center text-white">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
@@ -73,12 +73,12 @@ export function NotificationBell() {
           <div className="p-3 border-b border-white/5 flex items-center justify-between">
             <span className="text-sm font-semibold">Notifications</span>
             {unreadCount > 0 && (
-              <span className="text-[10px] text-[#c9a96e]">{unreadCount} new</span>
+              <span className="text-[10px] text-[#B09B71]">{unreadCount} new</span>
             )}
           </div>
 
           {notifications.length === 0 ? (
-            <div className="p-6 text-center text-sm text-gray-500">
+            <div className="p-6 text-center text-sm text-[rgba(245,240,232,0.35)]">
               No notifications yet
             </div>
           ) : (
@@ -86,7 +86,7 @@ export function NotificationBell() {
               {notifications.slice(0, 20).map((n: Notification) => (
                 <div
                   key={n.id}
-                  className={`p-3 hover:bg-white/[0.02] transition-colors cursor-pointer ${!n.read ? 'bg-[#c9a96e]/5' : ''}`}
+                  className={`p-3 hover:bg-white/[0.02] transition-colors cursor-pointer ${!n.read ? 'bg-[#B09B71]/5' : ''}`}
                   onClick={() => {
                     if (!n.read) markRead.mutate(n.id);
                     if (n.link) window.location.href = n.link;
@@ -95,14 +95,14 @@ export function NotificationBell() {
                 >
                   <div className="flex items-start gap-2">
                     {!n.read && (
-                      <span className="w-2 h-2 rounded-full bg-[#c9a96e]/80 mt-1.5 shrink-0" />
+                      <span className="w-2 h-2 rounded-full bg-[#B09B71]/80 mt-1.5 shrink-0" />
                     )}
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-medium leading-snug">{n.title}</p>
                       {n.message && (
-                        <p className="text-[10px] text-gray-500 mt-0.5 line-clamp-2">{n.message}</p>
+                        <p className="text-[10px] text-[rgba(245,240,232,0.35)] mt-0.5 line-clamp-2">{n.message}</p>
                       )}
-                      <p className="text-[9px] text-gray-600 mt-1">
+                      <p className="text-[9px] text-[rgba(245,240,232,0.25)] mt-1">
                         {getTimeAgo(new Date(n.created_at))}
                       </p>
                     </div>

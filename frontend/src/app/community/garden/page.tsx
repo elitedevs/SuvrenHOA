@@ -74,8 +74,8 @@ export default function GardenPage() {
   };
 
   const plotColor = (status: Plot['status']) => {
-    if (status === 'planted') return 'bg-green-700 hover:bg-green-600 border-green-600';
-    if (status === 'reserved') return 'bg-[#b8942e] hover:bg-[#c9a96e] border-[#a07828]';
+    if (status === 'planted') return 'bg-green-700 hover:bg-green-600 border-[rgba(42,93,79,0.30)]';
+    if (status === 'reserved') return 'bg-[#b8942e] hover:bg-[#B09B71] border-[#a07828]';
     return 'bg-[oklch(0.20_0.04_50)] hover:bg-[oklch(0.25_0.04_50)] border-[oklch(0.28_0.04_50)]';
   };
 
@@ -92,8 +92,8 @@ export default function GardenPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-8 flex items-start justify-between flex-wrap gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-[#e8d5a3] mb-2 flex items-center gap-3">
-              <Sprout className="w-8 h-8 text-green-400" /> Community Garden
+            <h1 className="text-3xl font-bold text-[#D4C4A0] mb-2 flex items-center gap-3">
+              <Sprout className="w-8 h-8 text-[#3A7D6F]" /> Community Garden
             </h1>
             <p className="text-[oklch(0.50_0.01_60)]">8×8 shared garden — click a plot to view details or reserve</p>
           </div>
@@ -135,24 +135,24 @@ export default function GardenPage() {
             {selected ? (
               <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-semibold text-[#e8d5a3]">
+                  <h3 className="font-semibold text-[#D4C4A0]">
                     Plot {String.fromCharCode(65 + selected.row)}{selected.col + 1}
                   </h3>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                    selected.status === 'planted' ? 'bg-green-900/40 text-green-400'
-                    : selected.status === 'reserved' ? 'bg-[#b8942e]/20 text-[#c9a96e]'
+                    selected.status === 'planted' ? 'bg-green-900/40 text-[#3A7D6F]'
+                    : selected.status === 'reserved' ? 'bg-[#b8942e]/20 text-[#B09B71]'
                     : 'bg-[oklch(0.18_0.005_60)] text-[oklch(0.55_0.01_60)]'
                   }`}>{selected.status}</span>
                 </div>
                 <div className="space-y-2 text-sm">
-                  {selected.owner && <div className="flex justify-between"><span className="text-[oklch(0.45_0.01_60)]">Owner</span><span className="text-[#e8d5a3]">{selected.owner}</span></div>}
-                  {selected.planted && <div className="flex justify-between"><span className="text-[oklch(0.45_0.01_60)]">Growing</span><span className="text-[#e8d5a3]">{selected.planted}</span></div>}
-                  {selected.nextHarvest && <div className="flex justify-between"><span className="text-[oklch(0.45_0.01_60)]">Next Harvest</span><span className="text-[#e8d5a3]">{selected.nextHarvest}</span></div>}
+                  {selected.owner && <div className="flex justify-between"><span className="text-[oklch(0.45_0.01_60)]">Owner</span><span className="text-[#D4C4A0]">{selected.owner}</span></div>}
+                  {selected.planted && <div className="flex justify-between"><span className="text-[oklch(0.45_0.01_60)]">Growing</span><span className="text-[#D4C4A0]">{selected.planted}</span></div>}
+                  {selected.nextHarvest && <div className="flex justify-between"><span className="text-[oklch(0.45_0.01_60)]">Next Harvest</span><span className="text-[#D4C4A0]">{selected.nextHarvest}</span></div>}
                   {selected.notes && <p className="text-xs text-[oklch(0.50_0.01_60)] italic mt-2">{selected.notes}</p>}
                   {selected.status === 'available' && (
                     <button
                       onClick={() => setShowReserve(true)}
-                      className="mt-3 w-full flex items-center justify-center gap-2 py-2 rounded-lg bg-[#b8942e] text-[#1a1a1a] font-semibold text-sm hover:bg-[#c9a96e] transition-colors"
+                      className="mt-3 w-full flex items-center justify-center gap-2 py-2 rounded-lg bg-[#b8942e] text-[#1a1a1a] font-semibold text-sm hover:bg-[#B09B71] transition-colors"
                     >
                       <Plus className="w-4 h-4" /> Reserve This Plot
                     </button>
@@ -168,13 +168,13 @@ export default function GardenPage() {
 
             {/* Seasonal calendar */}
             <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl p-5">
-              <h3 className="font-semibold text-[#e8d5a3] mb-3 flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-[#c9a96e]" /> {season} Planting Tips
+              <h3 className="font-semibold text-[#D4C4A0] mb-3 flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-[#B09B71]" /> {season} Planting Tips
               </h3>
               <ul className="space-y-2">
                 {SEASONAL_TIPS[season].map((tip, i) => (
                   <li key={i} className="flex items-start gap-2 text-xs text-[oklch(0.55_0.01_60)]">
-                    <span className="text-green-400 shrink-0"></span> {tip}
+                    <span className="text-[#3A7D6F] shrink-0"></span> {tip}
                   </li>
                 ))}
               </ul>
@@ -188,19 +188,19 @@ export default function GardenPage() {
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
           <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-2xl p-6 max-w-sm w-full">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-[#e8d5a3]">Reserve Plot {String.fromCharCode(65 + selected.row)}{selected.col + 1}</h3>
+              <h3 className="font-semibold text-[#D4C4A0]">Reserve Plot {String.fromCharCode(65 + selected.row)}{selected.col + 1}</h3>
               <button onClick={() => setShowReserve(false)}><X className="w-4 h-4 text-[oklch(0.45_0.01_60)]" /></button>
             </div>
             <div className="space-y-3">
               <div>
                 <label className="block text-xs text-[oklch(0.45_0.01_60)] mb-1">Your Name</label>
-                <input value={reserveName} onChange={e => setReserveName(e.target.value)} placeholder="Jane Smith" className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#e8d5a3] focus:outline-none focus:border-[#c9a96e]" />
+                <input value={reserveName} onChange={e => setReserveName(e.target.value)} placeholder="Jane Smith" className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71]" />
               </div>
               <div>
                 <label className="block text-xs text-[oklch(0.45_0.01_60)] mb-1">Lot Number *</label>
-                <input value={reserveLot} onChange={e => setReserveLot(e.target.value)} placeholder="12" className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#e8d5a3] focus:outline-none focus:border-[#c9a96e]" />
+                <input value={reserveLot} onChange={e => setReserveLot(e.target.value)} placeholder="12" className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71]" />
               </div>
-              <button onClick={handleReserve} disabled={!reserveLot} className="w-full py-2.5 rounded-xl bg-[#b8942e] text-[#1a1a1a] font-semibold disabled:opacity-40 hover:bg-[#c9a96e] transition-colors">
+              <button onClick={handleReserve} disabled={!reserveLot} className="w-full py-2.5 rounded-xl bg-[#b8942e] text-[#1a1a1a] font-semibold disabled:opacity-40 hover:bg-[#B09B71] transition-colors">
                 Submit Reservation
               </button>
             </div>

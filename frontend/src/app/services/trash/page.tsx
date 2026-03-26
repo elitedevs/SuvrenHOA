@@ -11,9 +11,9 @@ interface PickupDay {
 }
 
 const TYPE_CONFIG: Record<PickupType, { color: string; bg: string; border: string; emoji: string; label: string }> = {
-  trash:     { color: 'text-green-400',  bg: 'bg-green-400/20',  border: 'border-green-400/30',  emoji: '', label: 'Trash' },
-  recycling: { color: 'text-blue-400',   bg: 'bg-blue-400/20',   border: 'border-blue-400/30',   emoji: '', label: 'Recycling' },
-  yard:      { color: 'text-[#c9a96e]',  bg: 'bg-[#c9a96e]/20', border: 'border-[#c9a96e]/30',  emoji: '', label: 'Yard Waste' },
+  trash:     { color: 'text-[#3A7D6F]',  bg: 'bg-[#3A7D6F]/20',  border: 'border-green-400/30',  emoji: '', label: 'Trash' },
+  recycling: { color: 'text-[#5A7A9A]',   bg: 'bg-[#5A7A9A]/20',   border: 'border-blue-400/30',   emoji: '', label: 'Recycling' },
+  yard:      { color: 'text-[#B09B71]',  bg: 'bg-[#B09B71]/20', border: 'border-[#B09B71]/30',  emoji: '', label: 'Yard Waste' },
 };
 
 // Pickup schedule: 0=Sun,1=Mon,...,6=Sat
@@ -122,11 +122,11 @@ export default function TrashSchedulePage() {
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
           <h1 className="text-3xl font-bold gradient-text">Trash & Recycling</h1>
-          <p className="text-gray-400 text-sm mt-1">Pickup schedule for Faircroft HOA</p>
+          <p className="text-[rgba(245,240,232,0.50)] text-sm mt-1">Pickup schedule for Faircroft HOA</p>
         </div>
         <button
           onClick={() => window.print()}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl glass border border-white/[0.08] text-sm text-gray-300 hover:text-gray-100 transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl glass border border-white/[0.08] text-sm text-[rgba(245,240,232,0.65)] hover:text-[rgba(245,240,232,0.90)] transition-all cursor-pointer"
         >
           <Printer className="w-4 h-4" /> Print
         </button>
@@ -140,15 +140,15 @@ export default function TrashSchedulePage() {
             <span className={`text-xs font-semibold ${cfg.color}`}>{cfg.label}</span>
           </div>
         ))}
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-red-400/10 border border-red-400/20">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#8B5A5A]/10 border border-red-400/20">
           <span className="text-sm"></span>
-          <span className="text-xs font-semibold text-red-400">Holiday (delayed +1 day)</span>
+          <span className="text-xs font-semibold text-[#8B5A5A]">Holiday (delayed +1 day)</span>
         </div>
       </div>
 
       {/* Next Pickups Countdown */}
       <div className="glass rounded-2xl p-5 border border-white/[0.04] mb-6">
-        <h2 className="text-sm font-bold text-gray-300 mb-4"> Upcoming Pickups</h2>
+        <h2 className="text-sm font-bold text-[rgba(245,240,232,0.65)] mb-4"> Upcoming Pickups</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {nextPickups.map((pickup, i) => {
             const daysUntil = getDaysUntil(pickup.date);
@@ -157,10 +157,10 @@ export default function TrashSchedulePage() {
               <div key={i} className={`p-3 rounded-xl ${cfg.bg} border ${cfg.border} text-center`}>
                 <div className="text-xl mb-1">{cfg.emoji}</div>
                 <div className={`text-sm font-bold ${cfg.color}`}>{cfg.label}</div>
-                <div className="text-xs text-gray-400 mt-1">
+                <div className="text-xs text-[rgba(245,240,232,0.50)] mt-1">
                   {pickup.date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
                 </div>
-                <div className={`text-xs font-bold mt-1 ${daysUntil === 0 ? 'text-yellow-400' : cfg.color}`}>
+                <div className={`text-xs font-bold mt-1 ${daysUntil === 0 ? 'text-[#B09B71]' : cfg.color}`}>
                   {daysUntil === 0 ? 'Today!' : daysUntil === 1 ? 'Tomorrow!' : `${daysUntil} days`}
                 </div>
               </div>
@@ -173,15 +173,15 @@ export default function TrashSchedulePage() {
       <div className="glass rounded-2xl p-5 border border-white/[0.04]">
         {/* Month Nav */}
         <div className="flex items-center justify-between mb-4">
-          <button onClick={prevMonth} className="p-2 rounded-lg hover:bg-white/[0.06] text-gray-400 cursor-pointer">‹</button>
-          <h2 className="text-base font-bold text-gray-100">{MONTH_NAMES[viewMonth]} {viewYear}</h2>
-          <button onClick={nextMonth} className="p-2 rounded-lg hover:bg-white/[0.06] text-gray-400 cursor-pointer">›</button>
+          <button onClick={prevMonth} className="p-2 rounded-lg hover:bg-white/[0.06] text-[rgba(245,240,232,0.50)] cursor-pointer">‹</button>
+          <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)]">{MONTH_NAMES[viewMonth]} {viewYear}</h2>
+          <button onClick={nextMonth} className="p-2 rounded-lg hover:bg-white/[0.06] text-[rgba(245,240,232,0.50)] cursor-pointer">›</button>
         </div>
 
         {/* Day headers */}
         <div className="grid grid-cols-7 mb-2">
           {DAY_NAMES.map(d => (
-            <div key={d} className="text-center text-[10px] font-bold text-gray-600 py-1">{d}</div>
+            <div key={d} className="text-center text-[10px] font-bold text-[rgba(245,240,232,0.25)] py-1">{d}</div>
           ))}
         </div>
 
@@ -202,10 +202,10 @@ export default function TrashSchedulePage() {
               <div
                 key={day}
                 className={`relative rounded-lg p-1 min-h-[52px] flex flex-col items-center ${
-                  isToday ? 'ring-1 ring-[#c9a96e]/50 bg-[#c9a96e]/5' : ''
+                  isToday ? 'ring-1 ring-[#B09B71]/50 bg-[#B09B71]/5' : ''
                 }`}
               >
-                <span className={`text-[11px] font-semibold mb-1 ${isToday ? 'text-[#c9a96e]' : 'text-gray-500'}`}>{day}</span>
+                <span className={`text-[11px] font-semibold mb-1 ${isToday ? 'text-[#B09B71]' : 'text-[rgba(245,240,232,0.35)]'}`}>{day}</span>
                 <div className="flex flex-col gap-0.5 w-full">
                   {dayPickups.map((type, ti) => {
                     const cfg = TYPE_CONFIG[type];
@@ -216,7 +216,7 @@ export default function TrashSchedulePage() {
                     );
                   })}
                   {holiday && dayPickups.length > 0 && (
-                    <div className="text-[9px] text-center rounded px-0.5 bg-red-400/15 text-red-400 font-semibold leading-tight py-0.5"></div>
+                    <div className="text-[9px] text-center rounded px-0.5 bg-[#8B5A5A]/15 text-[#8B5A5A] font-semibold leading-tight py-0.5"></div>
                   )}
                 </div>
               </div>
@@ -227,7 +227,7 @@ export default function TrashSchedulePage() {
 
       {/* Schedule Summary */}
       <div className="glass rounded-2xl p-5 border border-white/[0.04] mt-6">
-        <h2 className="text-sm font-bold text-gray-300 mb-3 flex items-center gap-2"><ClipboardList className="w-4 h-4 text-[#c9a96e]" /> Weekly Schedule</h2>
+        <h2 className="text-sm font-bold text-[rgba(245,240,232,0.65)] mb-3 flex items-center gap-2"><ClipboardList className="w-4 h-4 text-[#B09B71]" /> Weekly Schedule</h2>
         <div className="space-y-2">
           {[
             { day: 'Monday', pickups: [' Trash', ' Yard Waste (bi-weekly)'] },
@@ -235,14 +235,14 @@ export default function TrashSchedulePage() {
             { day: 'Thursday', pickups: [' Trash'] },
           ].map((row, i) => (
             <div key={i} className="flex items-center gap-4 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-              <span className="text-sm font-semibold text-gray-300 w-24">{row.day}</span>
+              <span className="text-sm font-semibold text-[rgba(245,240,232,0.65)] w-24">{row.day}</span>
               <div className="flex gap-2 flex-wrap">
-                {row.pickups.map((p, j) => <span key={j} className="text-xs text-gray-400">{p}</span>)}
+                {row.pickups.map((p, j) => <span key={j} className="text-xs text-[rgba(245,240,232,0.50)]">{p}</span>)}
               </div>
             </div>
           ))}
         </div>
-        <p className="text-[11px] text-gray-600 mt-3">
+        <p className="text-[11px] text-[rgba(245,240,232,0.25)] mt-3">
           * Holiday schedule: If a holiday falls on or before your pickup day, pickup is delayed by 1 business day.
         </p>
       </div>

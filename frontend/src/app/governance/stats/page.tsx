@@ -33,30 +33,30 @@ export default function GovernanceStatsPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       {/* Header */}
       <div className="flex items-center gap-3 mb-2">
-        <Link href="/proposals" className="text-gray-500 hover:text-[#c9a96e] text-sm transition-colors">← Proposals</Link>
+        <Link href="/proposals" className="text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] text-sm transition-colors">← Proposals</Link>
       </div>
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Governance</p>
-        <h1 className="text-3xl font-extrabold tracking-tight">Stats Dashboard</h1>
-        <p className="text-base text-gray-400 mt-2">Aggregate metrics for community governance</p>
+        <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Governance</p>
+        <h1 className="text-3xl font-normal tracking-tight">Stats Dashboard</h1>
+        <p className="text-base text-[rgba(245,240,232,0.50)] mt-2">Aggregate metrics for community governance</p>
       </div>
 
       {/* Stat Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: 'Total Proposals', value: MOCK_STATS.totalProposals ?? 0, icon: <FileText className="w-5 h-5 text-[#c9a96e]" /> },
-          { label: 'Pass Rate', value: `${MOCK_STATS.passRate ?? 0}%`, icon: <CheckCircle className="w-5 h-5 text-[#c9a96e]" /> },
-          { label: 'Avg Turnout', value: `${MOCK_STATS.avgTurnout ?? 0}%`, icon: <Users className="w-5 h-5 text-[#c9a96e]" /> },
-          { label: 'Avg Voting Period', value: `${MOCK_STATS.avgVotingPeriodDays ?? 0}d`, icon: <Clock className="w-5 h-5 text-[#c9a96e]" /> },
+          { label: 'Total Proposals', value: MOCK_STATS.totalProposals ?? 0, icon: <FileText className="w-5 h-5 text-[#B09B71]" /> },
+          { label: 'Pass Rate', value: `${MOCK_STATS.passRate ?? 0}%`, icon: <CheckCircle className="w-5 h-5 text-[#B09B71]" /> },
+          { label: 'Avg Turnout', value: `${MOCK_STATS.avgTurnout ?? 0}%`, icon: <Users className="w-5 h-5 text-[#B09B71]" /> },
+          { label: 'Avg Voting Period', value: `${MOCK_STATS.avgVotingPeriodDays ?? 0}d`, icon: <Clock className="w-5 h-5 text-[#B09B71]" /> },
         ].map(stat => (
           <div key={stat.label} className="glass-card rounded-2xl hover-lift p-5">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-9 h-9 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center">
+              <div className="w-9 h-9 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center">
                 {stat.icon}
               </div>
             </div>
-            <p className="text-2xl sm:text-3xl font-extrabold text-[#c9a96e]">{stat.value}</p>
-            <p className="text-[10px] text-gray-500 mt-1 font-semibold uppercase tracking-wider">{stat.label}</p>
+            <p className="text-2xl sm:text-3xl font-normal text-[#B09B71] number-reveal">{stat.value}</p>
+            <p className="text-[10px] text-[rgba(245,240,232,0.35)] mt-1 font-semibold uppercase tracking-wider">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -64,18 +64,18 @@ export default function GovernanceStatsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Monthly Proposal Bar Chart */}
         <div className="glass-card rounded-2xl p-6">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-5">Monthly Proposal Volume</p>
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-5">Monthly Proposal Volume</p>
           <div className="flex items-end gap-2 h-36">
             {MOCK_STATS.monthlyProposals.map(m => {
               const heightPct = maxBarCount > 0 ? (m.count / maxBarCount) * 100 : 0;
               return (
                 <div key={m.month} className="flex-1 flex flex-col items-center gap-1">
-                  <span className="text-[10px] text-[#c9a96e] font-bold">{m.count}</span>
+                  <span className="text-[10px] text-[#B09B71] font-bold">{m.count}</span>
                   <div
-                    className="w-full rounded-t-lg bg-gradient-to-t from-[#b8942e] to-[#c9a96e] transition-all duration-700"
+                    className="w-full rounded-t-lg bg-gradient-to-t from-[#b8942e] to-[#B09B71] transition-all duration-700"
                     style={{ height: `${Math.max(heightPct, 8)}%`, minHeight: '6px' }}
                   />
-                  <span className="text-[10px] text-gray-500">{m.month}</span>
+                  <span className="text-[10px] text-[rgba(245,240,232,0.35)]">{m.month}</span>
                 </div>
               );
             })}
@@ -84,29 +84,29 @@ export default function GovernanceStatsPage() {
 
         {/* Most Active Voters */}
         <div className="glass-card rounded-2xl p-6">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Most Active Voters</p>
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-4">Most Active Voters</p>
           <div className="space-y-3">
             {MOCK_STATS.mostActiveVoters.map((voter, i) => (
               <div key={voter.address} className="flex items-center gap-3">
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
-                  i === 0 ? 'bg-[#c9a96e]/20 text-[#c9a96e] border border-[#c9a96e]/30' :
-                  i === 1 ? 'bg-gray-600/30 text-gray-300 border border-gray-600/30' :
-                  'bg-gray-800/40 text-gray-500 border border-gray-700/30'
+                  i === 0 ? 'bg-[#B09B71]/20 text-[#B09B71] border border-[#B09B71]/30' :
+                  i === 1 ? 'bg-gray-600/30 text-[rgba(245,240,232,0.65)] border border-gray-600/30' :
+                  'bg-gray-800/40 text-[rgba(245,240,232,0.35)] border border-gray-700/30'
                 }`}>
                   {i + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-gray-200 truncate">{voter.address}</p>
-                  <p className="text-[10px] text-gray-500">Lot #{voter.lot}</p>
+                  <p className="text-xs font-medium text-[rgba(245,240,232,0.80)] truncate">{voter.address}</p>
+                  <p className="text-[10px] text-[rgba(245,240,232,0.35)]">Lot #{voter.lot}</p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-sm font-bold text-[#c9a96e]">{voter.votes}</p>
-                  <p className="text-[10px] text-gray-500">votes</p>
+                  <p className="text-sm font-bold text-[#B09B71]">{voter.votes}</p>
+                  <p className="text-[10px] text-[rgba(245,240,232,0.35)]">votes</p>
                 </div>
                 {/* Bar */}
                 <div className="w-16 h-1.5 bg-gray-800 rounded-full overflow-hidden shrink-0">
                   <div
-                    className="h-full bg-gradient-to-r from-[#b8942e] to-[#c9a96e] rounded-full"
+                    className="h-full bg-gradient-to-r from-[#b8942e] to-[#B09B71] rounded-full"
                     style={{ width: `${(voter.votes / MOCK_STATS.mostActiveVoters[0].votes) * 100}%` }}
                   />
                 </div>
@@ -118,28 +118,28 @@ export default function GovernanceStatsPage() {
 
       {/* Pass/Fail breakdown */}
       <div className="glass-card rounded-2xl p-6">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Pass / Fail Breakdown</p>
+        <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-4">Pass / Fail Breakdown</p>
         <div className="flex items-center gap-4 mb-3">
           <div className="flex-1 h-4 bg-gray-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full transition-all duration-700"
+              className="h-full bg-gradient-to-r from-[#2A5D4F] to-[#3A7D6F] rounded-full transition-all duration-700"
               style={{ width: `${MOCK_STATS.passRate}%` }}
             />
           </div>
-          <span className="text-sm font-bold text-green-400 shrink-0">{MOCK_STATS.passRate}%</span>
+          <span className="text-sm font-bold text-[#3A7D6F] shrink-0">{MOCK_STATS.passRate}%</span>
         </div>
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center">
-            <p className="text-xl font-bold text-green-400">{Math.round(MOCK_STATS.totalProposals * MOCK_STATS.passRate / 100)}</p>
-            <p className="text-[10px] text-gray-500">Passed</p>
+            <p className="text-xl font-bold text-[#3A7D6F]">{Math.round(MOCK_STATS.totalProposals * MOCK_STATS.passRate / 100)}</p>
+            <p className="text-[10px] text-[rgba(245,240,232,0.35)]">Passed</p>
           </div>
           <div className="text-center">
-            <p className="text-xl font-bold text-red-400">{Math.round(MOCK_STATS.totalProposals * (1 - MOCK_STATS.passRate / 100))}</p>
-            <p className="text-[10px] text-gray-500">Failed/Defeated</p>
+            <p className="text-xl font-bold text-[#8B5A5A]">{Math.round(MOCK_STATS.totalProposals * (1 - MOCK_STATS.passRate / 100))}</p>
+            <p className="text-[10px] text-[rgba(245,240,232,0.35)]">Failed/Defeated</p>
           </div>
           <div className="text-center">
-            <p className="text-xl font-bold text-[#c9a96e]">{MOCK_STATS.totalProposals}</p>
-            <p className="text-[10px] text-gray-500">Total</p>
+            <p className="text-xl font-bold text-[#B09B71]">{MOCK_STATS.totalProposals}</p>
+            <p className="text-[10px] text-[rgba(245,240,232,0.35)]">Total</p>
           </div>
         </div>
       </div>

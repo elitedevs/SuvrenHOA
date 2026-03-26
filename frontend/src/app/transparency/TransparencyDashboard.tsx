@@ -112,17 +112,17 @@ function StatCard({
   loading?: boolean;
 }) {
   const colorMap = {
-    gold: { icon: 'text-[#c9a96e]', glow: 'var(--glow-gold)', bg: 'rgba(201,169,110,0.08)' },
-    green:  { icon: 'text-green-400',  glow: 'var(--glow-green)',  bg: 'rgba(34,197,94,0.08)' },
-    blue:   { icon: 'text-blue-400',   glow: 'var(--glow-blue)',   bg: 'rgba(59,130,246,0.08)' },
-    amber:  { icon: 'text-amber-400',  glow: 'var(--glow-amber)',  bg: 'rgba(245,158,11,0.08)' },
+    gold: { icon: 'text-[#B09B71]', glow: 'var(--glow-gold)', bg: 'rgba(201,169,110,0.08)' },
+    green:  { icon: 'text-[#3A7D6F]',  glow: 'var(--glow-green)',  bg: 'rgba(34,197,94,0.08)' },
+    blue:   { icon: 'text-[#5A7A9A]',   glow: 'var(--glow-blue)',   bg: 'rgba(59,130,246,0.08)' },
+    amber:  { icon: 'text-[#B09B71]',  glow: 'var(--glow-amber)',  bg: 'rgba(245,158,11,0.08)' },
   };
   const c = colorMap[color];
 
   return (
     <div className="glass-card rounded-2xl p-5 flex flex-col gap-3 hover-lift">
       <div className="flex items-center justify-between">
-        <span className="text-[13px] font-semibold text-gray-400 uppercase tracking-wider">
+        <span className="text-[13px] font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wider">
           {label}
         </span>
         <div
@@ -136,7 +136,7 @@ function StatCard({
       {loading ? (
         <div className="h-8 w-24 rounded-lg animate-pulse bg-white/[0.06]" />
       ) : (
-        <div className="text-3xl font-bold tracking-tight text-white">
+        <div className="text-3xl font-normal text-white">
           <AnimatedCounter
             value={value}
             prefix={prefix}
@@ -147,7 +147,7 @@ function StatCard({
       )}
 
       {subtext && (
-        <p className="text-[12px] text-gray-500 font-medium">{subtext}</p>
+        <p className="text-[12px] text-[rgba(245,240,232,0.35)] font-medium">{subtext}</p>
       )}
     </div>
   );
@@ -213,19 +213,19 @@ export function TransparencyDashboard() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-[13px] font-semibold"
                style={{ background: 'rgba(201,169,110,0.10)', border: '1px solid rgba(201,169,110,0.2)', color: 'rgba(201,169,110,1)' }}>
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
             Live on Base Sepolia
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-[1.1]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight mb-6 leading-[1.1]">
             <span className="gradient-text text-glow">Full Transparency.</span>
             <br />
             <span className="text-white">Zero Trust Required.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg sm:text-xl text-[rgba(245,240,232,0.50)] max-w-2xl mx-auto mb-10 leading-relaxed">
             Every dollar, every vote, every document —{' '}
-            <span className="text-gray-200 font-semibold">publicly verifiable on the blockchain.</span>
+            <span className="text-[rgba(245,240,232,0.80)] font-semibold">publicly verifiable on the blockchain.</span>
             {' '}No sign-in. No middleman. Just math.
           </p>
 
@@ -234,23 +234,23 @@ export function TransparencyDashboard() {
             <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-3 px-6 py-3 rounded-2xl mx-auto"
                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
               <div className="flex items-center gap-2 text-sm">
-                <Shield className="w-4 h-4 text-green-400" />
-                <span className="text-gray-400">{stats.totalProperties} properties</span>
+                <Shield className="w-4 h-4 text-[#3A7D6F]" />
+                <span className="text-[rgba(245,240,232,0.50)]">{stats.totalProperties} properties</span>
               </div>
               <div className="w-px h-4 bg-white/10 hidden sm:block" />
               <div className="flex items-center gap-2 text-sm">
-                <DollarSign className="w-4 h-4 text-[#c9a96e]" />
-                <span className="text-gray-400">${stats.totalTreasuryStr} USDC treasury</span>
+                <DollarSign className="w-4 h-4 text-[#B09B71]" />
+                <span className="text-[rgba(245,240,232,0.50)]">${stats.totalTreasuryStr} USDC treasury</span>
               </div>
               <div className="w-px h-4 bg-white/10 hidden sm:block" />
               <div className="flex items-center gap-2 text-sm">
-                <Activity className="w-4 h-4 text-blue-400" />
-                <span className="text-gray-400">{stats.activeProposals} active proposals</span>
+                <Activity className="w-4 h-4 text-[#5A7A9A]" />
+                <span className="text-[rgba(245,240,232,0.50)]">{stats.activeProposals} active proposals</span>
               </div>
               <div className="w-px h-4 bg-white/10 hidden sm:block" />
               <div className="flex items-center gap-2 text-sm">
-                <FileText className="w-4 h-4 text-amber-400" />
-                <span className="text-gray-400">{stats.documentsOnChain} docs on-chain</span>
+                <FileText className="w-4 h-4 text-[#B09B71]" />
+                <span className="text-[rgba(245,240,232,0.50)]">{stats.documentsOnChain} docs on-chain</span>
               </div>
             </div>
           )}
@@ -264,22 +264,22 @@ export function TransparencyDashboard() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-xl font-bold text-white text-glow">Live On-Chain Stats</h2>
-              <p className="text-[13px] text-gray-500 mt-1">
+              <p className="text-[13px] text-[rgba(245,240,232,0.35)] mt-1">
                 Reads directly from smart contracts — no backend, no caching
               </p>
             </div>
-            <div className="flex items-center gap-2 text-[12px] text-gray-500">
+            <div className="flex items-center gap-2 text-[12px] text-[rgba(245,240,232,0.35)]">
               {stats.loading ? (
-                <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#c9a96e]" />
+                <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#B09B71]" />
               ) : (
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
               )}
               {stats.loading ? 'Loading…' : 'Auto-refreshes every 30s'}
             </div>
           </div>
 
           {stats.error && (
-            <div className="mb-4 px-4 py-3 rounded-xl text-sm text-amber-300"
+            <div className="mb-4 px-4 py-3 rounded-xl text-sm text-[#B09B71]"
                  style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
                {stats.error} — showing cached values
             </div>
@@ -287,8 +287,8 @@ export function TransparencyDashboard() {
 
           {/* Treasury row */}
           <div className="mb-3">
-            <p className="text-[11px] uppercase tracking-widest text-gray-600 font-semibold mb-3 flex items-center gap-2">
-              <span className="inline-block w-3 h-px bg-[#c9a96e]/50" />
+            <p className="text-[11px] uppercase tracking-widest text-[rgba(245,240,232,0.25)] font-semibold mb-3 flex items-center gap-2">
+              <span className="inline-block w-3 h-px bg-[#B09B71]/50" />
               Treasury
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -338,8 +338,8 @@ export function TransparencyDashboard() {
 
           {/* Community row */}
           <div className="mt-6">
-            <p className="text-[11px] uppercase tracking-widest text-gray-600 font-semibold mb-3 flex items-center gap-2">
-              <span className="inline-block w-3 h-px bg-blue-500/50" />
+            <p className="text-[11px] uppercase tracking-widest text-[rgba(245,240,232,0.25)] font-semibold mb-3 flex items-center gap-2">
+              <span className="inline-block w-3 h-px bg-[#5A7A9A]/50" />
               Community
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -387,10 +387,10 @@ export function TransparencyDashboard() {
           <section className="lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <Zap className="w-5 h-5 text-[#c9a96e]" />
+                <Zap className="w-5 h-5 text-[#B09B71]" />
                 Recent Activity
               </h2>
-              <span className="text-[12px] text-gray-500">Last 8 hours on-chain</span>
+              <span className="text-[12px] text-[rgba(245,240,232,0.35)]">Last 8 hours on-chain</span>
             </div>
 
             <div className="glass-card rounded-2xl overflow-hidden">
@@ -409,8 +409,8 @@ export function TransparencyDashboard() {
               ) : events.length === 0 ? (
                 <div className="p-10 text-center">
                   <Activity className="w-10 h-10 text-gray-700 mx-auto mb-3" />
-                  <p className="text-gray-500 text-sm">No activity in the last 8 hours</p>
-                  <p className="text-gray-600 text-xs mt-1">
+                  <p className="text-[rgba(245,240,232,0.35)] text-sm">No activity in the last 8 hours</p>
+                  <p className="text-[rgba(245,240,232,0.25)] text-xs mt-1">
                     Transactions will appear here as they happen on-chain
                   </p>
                 </div>
@@ -428,11 +428,11 @@ export function TransparencyDashboard() {
                           {event.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-[13px] text-gray-200 font-medium leading-snug">
+                          <p className="text-[13px] text-[rgba(245,240,232,0.80)] font-medium leading-snug">
                             {event.description}
                           </p>
                           <div className="flex items-center gap-3 mt-1">
-                            <span className="text-[11px] text-gray-500">
+                            <span className="text-[11px] text-[rgba(245,240,232,0.35)]">
                               {relativeTime(event.timestamp * 1000)}
                             </span>
                             {event.txHash && (
@@ -440,7 +440,7 @@ export function TransparencyDashboard() {
                                 href={BASESCAN_BASE + '/tx/' + event.txHash}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-[11px] text-[#c9a96e]/70 hover:text-[#e8d5a3] flex items-center gap-1 transition-colors"
+                                className="text-[11px] text-[#B09B71]/70 hover:text-[#D4C4A0] flex items-center gap-1 transition-colors"
                               >
                                 View tx
                                 <ExternalLink className="w-3 h-3" />
@@ -461,7 +461,7 @@ export function TransparencyDashboard() {
             {/* Trust indicators */}
             <section>
               <h2 className="text-xl font-bold text-white flex items-center gap-2 mb-4">
-                <Shield className="w-5 h-5 text-green-400" />
+                <Shield className="w-5 h-5 text-[#3A7D6F]" />
                 Why Trust This?
               </h2>
 
@@ -471,28 +471,28 @@ export function TransparencyDashboard() {
                     icon: Globe,
                     title: 'Arweave Permanent Storage',
                     desc: 'All documents are stored on Arweave — permanent, immutable, censorship-resistant.',
-                    color: 'text-amber-400',
+                    color: 'text-[#B09B71]',
                     bg: 'rgba(245,158,11,0.1)',
                   },
                   {
                     icon: CheckCircle2,
                     title: 'Verified Smart Contracts',
                     desc: 'All contracts are open-source and verified on BaseScan. Read the code yourself.',
-                    color: 'text-green-400',
+                    color: 'text-[#3A7D6F]',
                     bg: 'rgba(34,197,94,0.1)',
                   },
                   {
                     icon: Lock,
                     title: 'Multi-Sig Treasury',
                     desc: 'No single party controls the treasury. All spending requires governance approval.',
-                    color: 'text-blue-400',
+                    color: 'text-[#5A7A9A]',
                     bg: 'rgba(59,130,246,0.1)',
                   },
                   {
                     icon: Shield,
                     title: 'On-Chain Voting Records',
                     desc: 'Every vote is a blockchain transaction. Results cannot be changed after the fact.',
-                    color: 'text-[#c9a96e]',
+                    color: 'text-[#B09B71]',
                     bg: 'rgba(201,169,110,0.08)',
                   },
                 ].map((item) => {
@@ -509,8 +509,8 @@ export function TransparencyDashboard() {
                         <TrustIcon className={'w-4 h-4 ' + item.color} />
                       </div>
                       <div>
-                        <p className="text-[13px] font-semibold text-gray-200">{item.title}</p>
-                        <p className="text-[12px] text-gray-500 mt-0.5 leading-relaxed">{item.desc}</p>
+                        <p className="text-[13px] font-semibold text-[rgba(245,240,232,0.80)]">{item.title}</p>
+                        <p className="text-[12px] text-[rgba(245,240,232,0.35)] mt-0.5 leading-relaxed">{item.desc}</p>
                       </div>
                     </div>
                   );
@@ -520,7 +520,7 @@ export function TransparencyDashboard() {
 
             {/* Contract addresses */}
             <section>
-              <h2 className="text-[13px] font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+              <h2 className="text-[13px] font-bold text-[rgba(245,240,232,0.50)] uppercase tracking-wider mb-3 flex items-center gap-2">
                 <ExternalLink className="w-3.5 h-3.5" />
                 Verify the Contracts
               </h2>
@@ -543,12 +543,12 @@ export function TransparencyDashboard() {
                     }
                   >
                     <div>
-                      <p className="text-[12px] font-semibold text-gray-300">{c.label}</p>
-                      <p className="text-[11px] text-gray-600 font-mono truncate max-w-[160px]">
+                      <p className="text-[12px] font-semibold text-[rgba(245,240,232,0.65)]">{c.label}</p>
+                      <p className="text-[11px] text-[rgba(245,240,232,0.25)] font-mono truncate max-w-[160px]">
                         {c.addr}
                       </p>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-gray-600 group-hover:text-[#c9a96e] transition-colors shrink-0" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[rgba(245,240,232,0.25)] group-hover:text-[#B09B71] transition-colors shrink-0" />
                   </a>
                 ))}
               </div>
@@ -580,13 +580,13 @@ export function TransparencyDashboard() {
                 className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5 mx-auto"
                 style={{ background: 'rgba(201,169,110,0.12)', border: '1px solid rgba(201,169,110,0.25)' }}
               >
-                <Shield className="w-7 h-7 text-[#c9a96e]" />
+                <Shield className="w-7 h-7 text-[#B09B71]" />
               </div>
 
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
                 Ready to Participate?
               </h2>
-              <p className="text-gray-400 max-w-lg mx-auto mb-7 text-base">
+              <p className="text-[rgba(245,240,232,0.50)] max-w-lg mx-auto mb-7 text-base">
                 Connect your wallet to vote on proposals, pay dues, manage your property,
                 and submit architectural review requests — all on-chain, all transparent.
               </p>
@@ -608,7 +608,7 @@ export function TransparencyDashboard() {
                   href={BASESCAN_BASE + '/address/' + contracts.governor}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-gray-300 hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-[rgba(245,240,232,0.65)] hover:text-white transition-colors"
                   style={{
                     background: 'rgba(255,255,255,0.04)',
                     border: '1px solid rgba(255,255,255,0.08)',

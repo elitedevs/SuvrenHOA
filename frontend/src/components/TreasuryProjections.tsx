@@ -89,14 +89,14 @@ function MiniLineChart({ data, threshold }: { data: Projection[]; threshold: num
       )}
 
       {/* Line */}
-      <path d={linePath} fill="none" stroke="#c9a96e" strokeWidth={2} strokeLinejoin="round" />
+      <path d={linePath} fill="none" stroke="#B09B71" strokeWidth={2} strokeLinejoin="round" />
 
       {/* Dots */}
       {points.map((p, i) => (
         <circle
           key={i}
           cx={p.x} cy={p.y} r={3}
-          fill={p.isBelowThreshold ? '#ef4444' : '#c9a96e'}
+          fill={p.isBelowThreshold ? '#ef4444' : '#B09B71'}
           stroke={p.isBelowThreshold ? '#7f1d1d' : '#1a1a1a'}
           strokeWidth={1.5}
         />
@@ -122,8 +122,8 @@ function MiniLineChart({ data, threshold }: { data: Projection[]; threshold: num
 
       <defs>
         <linearGradient id="projGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#c9a96e" />
-          <stop offset="100%" stopColor="#c9a96e" stopOpacity={0} />
+          <stop offset="0%" stopColor="#B09B71" />
+          <stop offset="100%" stopColor="#B09B71" stopOpacity={0} />
         </linearGradient>
       </defs>
     </svg>
@@ -144,13 +144,13 @@ export function TreasuryProjections() {
     <div className="glass-card rounded-2xl p-6">
       <div className="flex items-start justify-between mb-5">
         <div>
-          <h2 className="text-sm font-bold text-[#e8d5a3]">12-Month Projections</h2>
-          <p className="text-xs text-gray-500 mt-1">Based on current income/expense trends</p>
+          <h2 className="text-sm font-bold text-[#D4C4A0]">12-Month Projections</h2>
+          <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1">Based on current income/expense trends</p>
         </div>
         <div className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full ${
           change >= 0
-            ? 'bg-green-500/10 text-green-400 border border-green-500/20'
-            : 'bg-red-500/10 text-red-400 border border-red-500/20'
+            ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border border-[rgba(42,93,79,0.20)]'
+            : 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border border-[rgba(107,58,58,0.20)]'
         }`}>
           {change >= 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
           {change >= 0 ? '+' : ''}${Math.abs(change / 1000).toFixed(1)}K projected
@@ -159,11 +159,11 @@ export function TreasuryProjections() {
 
       {/* Warning */}
       {warningMonths.length > 0 && (
-        <div className="flex items-start gap-3 p-3 rounded-xl bg-red-500/5 border border-red-500/20 mb-5">
-          <AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+        <div className="flex items-start gap-3 p-3 rounded-xl bg-[#8B5A5A]/5 border border-[rgba(107,58,58,0.20)] mb-5">
+          <AlertTriangle className="w-4 h-4 text-[#8B5A5A] shrink-0 mt-0.5" />
           <div>
-            <p className="text-xs font-bold text-red-400">Reserve Warning</p>
-            <p className="text-xs text-red-300/70 mt-0.5">
+            <p className="text-xs font-bold text-[#8B5A5A]">Reserve Warning</p>
+            <p className="text-xs text-[#8B5A5A]/70 mt-0.5">
               Balance projected below ${RESERVE_THRESHOLD.toLocaleString()} minimum in{' '}
               {warningMonths.map(m => m.month).join(', ')}
             </p>
@@ -179,18 +179,18 @@ export function TreasuryProjections() {
       {/* Summary stats */}
       <div className="grid grid-cols-3 gap-3 mb-5">
         <div className="bg-white/3 rounded-xl p-3">
-          <p className="text-[10px] text-gray-600 uppercase tracking-wide font-semibold mb-1">Current</p>
-          <p className="text-sm font-black text-gray-200">${(currentBalance / 1000).toFixed(1)}K</p>
+          <p className="text-[10px] text-[rgba(245,240,232,0.25)] uppercase tracking-wide font-semibold mb-1">Current</p>
+          <p className="text-sm font-normal text-[rgba(245,240,232,0.80)]">${(currentBalance / 1000).toFixed(1)}K</p>
         </div>
         <div className="bg-white/3 rounded-xl p-3">
-          <p className="text-[10px] text-gray-600 uppercase tracking-wide font-semibold mb-1">Projected End</p>
-          <p className={`text-sm font-black ${endBalance < RESERVE_THRESHOLD ? 'text-red-400' : 'text-green-400'}`}>
+          <p className="text-[10px] text-[rgba(245,240,232,0.25)] uppercase tracking-wide font-semibold mb-1">Projected End</p>
+          <p className={`text-sm font-normal ${endBalance < RESERVE_THRESHOLD ? 'text-[#8B5A5A]' : 'text-[#3A7D6F]'}`}>
             ${(endBalance / 1000).toFixed(1)}K
           </p>
         </div>
         <div className="bg-white/3 rounded-xl p-3">
-          <p className="text-[10px] text-gray-600 uppercase tracking-wide font-semibold mb-1">Min Balance</p>
-          <p className={`text-sm font-black ${minBalance < RESERVE_THRESHOLD ? 'text-red-400' : 'text-[#c9a96e]'}`}>
+          <p className="text-[10px] text-[rgba(245,240,232,0.25)] uppercase tracking-wide font-semibold mb-1">Min Balance</p>
+          <p className={`text-sm font-normal ${minBalance < RESERVE_THRESHOLD ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>
             ${(minBalance / 1000).toFixed(1)}K
           </p>
         </div>
@@ -198,14 +198,14 @@ export function TreasuryProjections() {
 
       {/* Monthly table (collapsed by default) */}
       <details className="group">
-        <summary className="text-xs text-gray-500 hover:text-[#c9a96e] cursor-pointer transition-colors list-none flex items-center gap-1">
+        <summary className="text-xs text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] cursor-pointer transition-colors list-none flex items-center gap-1">
           <span className="group-open:rotate-90 inline-block transition-transform">▶</span>
           Monthly breakdown
         </summary>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
-              <tr className="text-gray-600 border-b border-[oklch(0.15_0.005_60)]">
+              <tr className="text-[rgba(245,240,232,0.25)] border-b border-[oklch(0.15_0.005_60)]">
                 <th className="text-left py-1 pr-3">Month</th>
                 <th className="text-right py-1 pr-3">Income</th>
                 <th className="text-right py-1 pr-3">Expenses</th>
@@ -214,11 +214,11 @@ export function TreasuryProjections() {
             </thead>
             <tbody>
               {projections.map((p, i) => (
-                <tr key={i} className={`border-b border-[oklch(0.12_0.005_60)] ${p.isBelowThreshold ? 'bg-red-500/5' : ''}`}>
-                  <td className={`py-1.5 pr-3 font-medium ${p.isBelowThreshold ? 'text-red-400' : 'text-gray-400'}`}>{p.month}</td>
-                  <td className="text-right py-1.5 pr-3 text-green-400">${(p.income / 1000).toFixed(1)}K</td>
-                  <td className="text-right py-1.5 pr-3 text-red-400">${(p.expenses / 1000).toFixed(1)}K</td>
-                  <td className={`text-right py-1.5 font-bold ${p.isBelowThreshold ? 'text-red-400' : 'text-[#c9a96e]'}`}>
+                <tr key={i} className={`border-b border-[oklch(0.12_0.005_60)] ${p.isBelowThreshold ? 'bg-[#8B5A5A]/5' : ''}`}>
+                  <td className={`py-1.5 pr-3 font-medium ${p.isBelowThreshold ? 'text-[#8B5A5A]' : 'text-[rgba(245,240,232,0.50)]'}`}>{p.month}</td>
+                  <td className="text-right py-1.5 pr-3 text-[#3A7D6F]">${(p.income / 1000).toFixed(1)}K</td>
+                  <td className="text-right py-1.5 pr-3 text-[#8B5A5A]">${(p.expenses / 1000).toFixed(1)}K</td>
+                  <td className={`text-right py-1.5 font-bold ${p.isBelowThreshold ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>
                     ${(p.balance / 1000).toFixed(1)}K
                     {p.isBelowThreshold && ' '}
                   </td>
@@ -229,7 +229,7 @@ export function TreasuryProjections() {
         </div>
       </details>
 
-      <p className="text-[10px] text-gray-600 mt-3">
+      <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-3">
         * Projections based on avg dues collection rates and historical expense patterns. Actual results may vary.
       </p>
     </div>

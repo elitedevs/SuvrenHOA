@@ -39,12 +39,12 @@ export default function ActivityPage() {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 page-enter">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">On-Chain Events</p>
-        <h1 className="text-3xl font-extrabold tracking-tight">Activity Log</h1>
-        <p className="text-sm text-gray-400 mt-2">
+        <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">On-Chain Events</p>
+        <h1 className="text-3xl font-normal tracking-tight">Activity Log</h1>
+        <p className="text-sm text-[rgba(245,240,232,0.50)] mt-2">
           Unified feed of all on-chain events — newest first
           {lastFetched && (
-            <span className="ml-2 text-gray-600">· Updated {timeAgo(Math.floor(lastFetched.getTime() / 1000))}</span>
+            <span className="ml-2 text-[rgba(245,240,232,0.25)]">· Updated {timeAgo(Math.floor(lastFetched.getTime() / 1000))}</span>
           )}
         </p>
       </div>
@@ -59,8 +59,8 @@ export default function ActivityPage() {
               onClick={() => { setActiveFilter(f.match); setPage(1); }}
               className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all border ${
                 isActive
-                  ? 'bg-[#c9a96e]/15 text-[#c9a96e] border-[#c9a96e]/30'
-                  : 'text-gray-400 border-gray-700/60 hover:border-gray-600/60 hover:text-gray-300'
+                  ? 'bg-[#B09B71]/15 text-[#B09B71] border-[#B09B71]/30'
+                  : 'text-[rgba(245,240,232,0.50)] border-gray-700/60 hover:border-gray-600/60 hover:text-[rgba(245,240,232,0.65)]'
               }`}
             >
               {f.icon} {f.label}
@@ -84,9 +84,9 @@ export default function ActivityPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-2xl p-12 text-center">
-          <ClipboardList className="w-8 h-8 text-gray-400 mx-auto mb-4" />
+          <ClipboardList className="w-8 h-8 text-[rgba(245,240,232,0.50)] mx-auto mb-4" />
           <h3 className="text-lg font-bold mb-2">No events found</h3>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-[rgba(245,240,232,0.50)]">
             {activeFilter ? 'Try a different filter' : 'No on-chain events in the last ~14 hours'}
           </p>
         </div>
@@ -98,21 +98,21 @@ export default function ActivityPage() {
               href={`https://sepolia.basescan.org/tx/${event.txHash}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-card rounded-xl p-4 flex items-start gap-4 hover:border-[#c9a96e]/20 border border-transparent transition-all group block"
+              className="glass-card rounded-xl p-4 flex items-start gap-4 hover:border-[#B09B71]/20 border border-transparent transition-all group block"
               style={{ animationDelay: `${i * 30}ms` }}
             >
               <div className="w-10 h-10 rounded-xl bg-gray-800/60 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition-transform">
                 {event.icon}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-gray-200 leading-snug">{event.description}</p>
-                <div className="flex items-center gap-3 mt-1 text-[11px] text-gray-500">
+                <p className="text-sm text-[rgba(245,240,232,0.80)] leading-snug">{event.description}</p>
+                <div className="flex items-center gap-3 mt-1 text-[11px] text-[rgba(245,240,232,0.35)]">
                   <span>{timeAgo(event.timestamp)}</span>
                   <span className="text-gray-700">·</span>
-                  <span className="font-mono text-gray-600">
+                  <span className="font-mono text-[rgba(245,240,232,0.25)]">
                     Block #{Number(event.blockNumber).toLocaleString()}
                   </span>
-                  <span className="text-[#c9a96e]/60 group-hover:text-[#c9a96e] transition-colors">↗ Basescan</span>
+                  <span className="text-[#B09B71]/60 group-hover:text-[#B09B71] transition-colors">↗ Basescan</span>
                 </div>
               </div>
             </a>
@@ -121,7 +121,7 @@ export default function ActivityPage() {
           {hasMore && (
             <button
               onClick={() => setPage(p => p + 1)}
-              className="w-full py-3 rounded-xl border border-gray-700/60 text-sm text-gray-400 hover:text-gray-300 hover:border-[#c9a96e]/30 transition-all font-medium"
+              className="w-full py-3 rounded-xl border border-gray-700/60 text-sm text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.65)] hover:border-[#B09B71]/30 transition-all font-medium"
             >
               Load more ({filtered.length - paginated.length} remaining)
             </button>
@@ -130,8 +130,8 @@ export default function ActivityPage() {
       )}
 
       {/* Legend */}
-      <div className="mt-8 glass-card rounded-xl p-4 border-l-2 border-l-[#c9a96e]/40">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Event Types</p>
+      <div className="mt-8 glass-card rounded-xl p-4">
+        <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">Event Types</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {[
             { icon: '', label: 'Property mint / transfer' },
@@ -141,7 +141,7 @@ export default function ActivityPage() {
             { icon: '', label: 'Treasury expenditure' },
             { icon: '', label: 'Document registered' },
           ].map(({ icon, label }) => (
-            <div key={label} className="flex items-center gap-2 text-xs text-gray-500">
+            <div key={label} className="flex items-center gap-2 text-xs text-[rgba(245,240,232,0.35)]">
               <span>{icon}</span>
               <span>{label}</span>
             </div>

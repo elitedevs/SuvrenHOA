@@ -64,12 +64,12 @@ export default function UtilitiesPage() {
 
   if (!isConnected) return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
-      <p className="text-gray-400 mb-4">Sign in to view utility data</p>
+      <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view utility data</p>
       <ConnectButton label="Sign In" />
     </div>
   );
 
-  if (data.length === 0) return <div className="text-center py-12 text-gray-500">Loading...</div>;
+  if (data.length === 0) return <div className="text-center py-12 text-[rgba(245,240,232,0.35)]">Loading...</div>;
 
   const latest = data[data.length - 1];
   const prevYear = data.slice(0, 12);
@@ -84,12 +84,12 @@ export default function UtilitiesPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold">Utility Dashboard</h1>
-          <p className="text-sm text-gray-400 mt-1">Community-wide utility cost tracking</p>
+          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Community-wide utility cost tracking</p>
         </div>
         <div className="flex gap-2">
           {(['overview', 'trend', 'breakdown'] as const).map(v => (
             <button key={v} onClick={() => setView(v)}
-              className={`px-3 py-2 rounded-xl text-xs font-medium capitalize transition-all ${view === v ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+              className={`px-3 py-2 rounded-xl text-xs font-medium capitalize transition-all ${view === v ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'}`}>
               {v}
             </button>
           ))}
@@ -104,11 +104,11 @@ export default function UtilitiesPage() {
           const over = actual > budget;
           return (
             <button key={u.key} onClick={() => { setSelectedUtil(u.key); setView('trend'); }}
-              className={`glass-card rounded-xl p-4 text-left transition-all ${selectedUtil === u.key ? 'border-[#c9a96e]/30 bg-[#c9a96e]/5' : 'hover:border-gray-600'}`}>
+              className={`glass-card rounded-xl p-4 text-left transition-all ${selectedUtil === u.key ? 'border-[#B09B71]/30 bg-[#B09B71]/5' : 'hover:border-gray-600'}`}>
               <p className="text-lg mb-1">{u.icon}</p>
-              <p className="text-[10px] text-gray-400">{u.label}</p>
+              <p className="text-[10px] text-[rgba(245,240,232,0.50)]">{u.label}</p>
               <p className="text-base font-bold" style={{ color: u.color }}>${actual.toLocaleString()}</p>
-              <p className={`text-[10px] ${over ? 'text-red-400' : 'text-green-400'}`}>
+              <p className={`text-[10px] ${over ? 'text-[#8B5A5A]' : 'text-[#3A7D6F]'}`}>
                 {over ? '↑' : '↓'} vs ${budget.toLocaleString()} budget
               </p>
             </button>
@@ -129,15 +129,15 @@ export default function UtilitiesPage() {
                 return (
                   <div key={u.key}>
                     <div className="flex justify-between text-xs mb-1">
-                      <span className="text-gray-400 flex items-center gap-1">
+                      <span className="text-[rgba(245,240,232,0.50)] flex items-center gap-1">
                         {u.icon} {u.label}
                         {over && (
-                          <span className="ml-1 text-[9px] px-1.5 py-0.5 rounded-full bg-red-500/15 text-red-400 border border-red-500/30 font-bold">
+                          <span className="ml-1 text-[9px] px-1.5 py-0.5 rounded-full bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-[rgba(107,58,58,0.25)] font-bold">
                             OVER BUDGET
                           </span>
                         )}
                       </span>
-                      <span className={over ? 'text-red-400 font-semibold' : 'text-gray-300'}>${actual.toLocaleString()} / ${budget.toLocaleString()}</span>
+                      <span className={over ? 'text-[#8B5A5A] font-semibold' : 'text-[rgba(245,240,232,0.65)]'}>${actual.toLocaleString()} / ${budget.toLocaleString()}</span>
                     </div>
                     <div className={`h-2 rounded-full bg-gray-800 ${over ? 'ring-1 ring-red-500/50' : ''}`}>
                       <div className="h-2 rounded-full transition-all" style={{ width: `${Math.min(pct, 100)}%`, backgroundColor: over ? '#ef4444' : u.color }} />
@@ -150,7 +150,7 @@ export default function UtilitiesPage() {
 
           <div className="glass-card rounded-xl p-5">
             <h3 className="text-sm font-semibold mb-1">Year-over-Year Comparison</h3>
-            <p className="text-xs text-gray-500 mb-4">Total community spend</p>
+            <p className="text-xs text-[rgba(245,240,232,0.35)] mb-4">Total community spend</p>
             <div className="grid grid-cols-2 gap-4">
               {UTIL_CONFIG.map(u => {
                 const thisTotal = thisYear.reduce((s, d) => s + (d as any)[u.key], 0);
@@ -158,9 +158,9 @@ export default function UtilitiesPage() {
                 const delta = prevTotal > 0 ? ((thisTotal - prevTotal) / prevTotal) * 100 : 0;
                 return (
                   <div key={u.key} className="p-3 rounded-xl bg-gray-800/30">
-                    <p className="text-xs text-gray-400">{u.icon} {u.label}</p>
+                    <p className="text-xs text-[rgba(245,240,232,0.50)]">{u.icon} {u.label}</p>
                     <p className="text-sm font-semibold mt-1">${thisTotal.toLocaleString()}</p>
-                    <p className={`text-[10px] ${delta < 0 ? 'text-green-400' : 'text-red-400'}`}>
+                    <p className={`text-[10px] ${delta < 0 ? 'text-[#3A7D6F]' : 'text-[#8B5A5A]'}`}>
                       {delta > 0 ? '+' : ''}{delta.toFixed(1)}% vs last year
                     </p>
                   </div>
@@ -178,7 +178,7 @@ export default function UtilitiesPage() {
             <div className="flex gap-1">
               {UTIL_CONFIG.map(u => (
                 <button key={u.key} onClick={() => setSelectedUtil(u.key)}
-                  className={`px-2 py-1 rounded text-[10px] transition-all ${selectedUtil === u.key ? 'text-white' : 'text-gray-500'}`}
+                  className={`px-2 py-1 rounded text-[10px] transition-all ${selectedUtil === u.key ? 'text-white' : 'text-[rgba(245,240,232,0.35)]'}`}
                   style={selectedUtil === u.key ? { backgroundColor: u.color + '33', color: u.color } : {}}>
                   {u.icon}
                 </button>
@@ -200,12 +200,12 @@ export default function UtilitiesPage() {
                       ${val.toLocaleString()}
                     </div>
                   </div>
-                  <span className="text-[9px] text-gray-500">{monthNames[parseInt(label) - 1]}</span>
+                  <span className="text-[9px] text-[rgba(245,240,232,0.35)]">{monthNames[parseInt(label) - 1]}</span>
                 </div>
               );
             })}
           </div>
-          <div className="flex justify-between text-[10px] text-gray-500 mt-4 pt-4 border-t border-gray-800">
+          <div className="flex justify-between text-[10px] text-[rgba(245,240,232,0.35)] mt-4 pt-4 border-t border-gray-800">
             <span>Budget: ${BUDGET[selectedUtil].toLocaleString()}/mo</span>
             <span>Avg: ${Math.round(data.reduce((s,d) => s+(d as any)[selectedUtil],0)/data.length).toLocaleString()}/mo</span>
             <span>Latest: ${(latest as any)[selectedUtil].toLocaleString()}</span>
@@ -216,7 +216,7 @@ export default function UtilitiesPage() {
       {view === 'breakdown' && (
         <div className="glass-card rounded-xl p-5">
           <h3 className="text-sm font-semibold mb-4">Per-Unit Breakdown — {latest.month}</h3>
-          <p className="text-xs text-gray-500 mb-4">{TOTAL_UNITS} occupied units</p>
+          <p className="text-xs text-[rgba(245,240,232,0.35)] mb-4">{TOTAL_UNITS} occupied units</p>
           <div className="space-y-4">
             {UTIL_CONFIG.map(u => {
               const total = (latest as any)[u.key];
@@ -226,18 +226,18 @@ export default function UtilitiesPage() {
                   <span className="text-2xl">{u.icon}</span>
                   <div className="flex-1">
                     <p className="text-sm font-medium">{u.label}</p>
-                    <p className="text-xs text-gray-500">Community total: ${total.toLocaleString()}</p>
+                    <p className="text-xs text-[rgba(245,240,232,0.35)]">Community total: ${total.toLocaleString()}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-bold" style={{ color: u.color }}>${perUnit.toFixed(2)}</p>
-                    <p className="text-[10px] text-gray-500">per unit</p>
+                    <p className="text-[10px] text-[rgba(245,240,232,0.35)]">per unit</p>
                   </div>
                 </div>
               );
             })}
           </div>
-          <div className="mt-4 p-3 rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/10">
-            <p className="text-xs text-[#c9a96e] font-medium">Total per unit this month</p>
+          <div className="mt-4 p-3 rounded-xl bg-[#B09B71]/5 border border-[#B09B71]/10">
+            <p className="text-xs text-[#B09B71] font-medium">Total per unit this month</p>
             <p className="text-xl font-bold text-white">${(totalLatest / TOTAL_UNITS).toFixed(2)}</p>
           </div>
         </div>

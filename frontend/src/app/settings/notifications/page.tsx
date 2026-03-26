@@ -106,20 +106,20 @@ export default function NotificationPrefsPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Settings</p>
-        <h1 className="text-3xl font-extrabold tracking-tight flex items-center gap-2"><Bell className="w-7 h-7 text-[#c9a96e]" /> Notifications</h1>
-        <p className="text-base text-gray-400 mt-2">Choose which updates you want to receive</p>
+        <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Settings</p>
+        <h1 className="text-3xl font-normal tracking-tight flex items-center gap-2"><Bell className="w-7 h-7 text-[#B09B71]" /> Notifications</h1>
+        <p className="text-base text-[rgba(245,240,232,0.50)] mt-2">Choose which updates you want to receive</p>
       </div>
 
       <div className="glass-card rounded-2xl p-6 mb-4">
         <div className="flex items-center justify-between mb-5">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest">
+          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)]">
             {enabledCount} of {PREFS.length} enabled
           </p>
           <div className="flex gap-2">
             <button
               onClick={() => setPrefs(Object.fromEntries(PREFS.map(p => [p.id, true])))}
-              className="text-xs px-2.5 py-1 rounded-lg border border-gray-700 text-gray-400 hover:border-[#c9a96e]/30 hover:text-[#c9a96e] transition-all"
+              className="text-xs px-2.5 py-1 rounded-lg border border-gray-700 text-[rgba(245,240,232,0.50)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-all"
             >
               All on
             </button>
@@ -128,7 +128,7 @@ export default function NotificationPrefsPage() {
                 const urgentOnly = Object.fromEntries(PREFS.map(p => [p.id, !!p.urgent]));
                 setPrefs(urgentOnly);
               }}
-              className="text-xs px-2.5 py-1 rounded-lg border border-gray-700 text-gray-400 hover:border-[#c9a96e]/30 hover:text-[#c9a96e] transition-all"
+              className="text-xs px-2.5 py-1 rounded-lg border border-gray-700 text-[rgba(245,240,232,0.50)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-all"
             >
               Urgent only
             </button>
@@ -148,34 +148,34 @@ export default function NotificationPrefsPage() {
                 key={pref.id}
                 className={`flex items-center gap-4 rounded-xl p-4 transition-all ${
                   prefs[pref.id]
-                    ? 'bg-[#c9a96e]/5 border border-[#c9a96e]/15'
+                    ? 'bg-[#B09B71]/5 border border-[#B09B71]/15'
                     : 'bg-gray-800/30 border border-gray-700/30'
                 }`}
               >
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0 ${
-                  prefs[pref.id] ? 'bg-[#c9a96e]/15' : 'bg-gray-700/30'
+                  prefs[pref.id] ? 'bg-[#B09B71]/15' : 'bg-gray-700/30'
                 }`}>
                   {pref.icon}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className={`text-sm font-semibold ${prefs[pref.id] ? 'text-gray-100' : 'text-gray-400'}`}>
+                    <p className={`text-sm font-semibold ${prefs[pref.id] ? 'text-[rgba(245,240,232,0.90)]' : 'text-[rgba(245,240,232,0.50)]'}`}>
                       {pref.label}
                     </p>
                     {pref.urgent && (
-                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-red-500/15 text-red-400 border border-red-500/20 font-bold">
+                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-[rgba(107,58,58,0.20)] font-bold">
                         CRITICAL
                       </span>
                     )}
                   </div>
-                  <p className="text-[11px] text-gray-500 leading-tight">{pref.description}</p>
+                  <p className="text-[11px] text-[rgba(245,240,232,0.35)] leading-tight">{pref.description}</p>
                 </div>
                 {/* Toggle switch */}
                 <button
                   onClick={() => toggle(pref.id)}
                   className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all duration-200 shrink-0 ${
                     prefs[pref.id]
-                      ? 'bg-[#c9a96e] shadow-[0_0_8px_rgba(201,169,110,0.5)]'
+                      ? 'bg-[#B09B71] shadow-[0_0_8px_rgba(201,169,110,0.5)]'
                       : 'bg-gray-700'
                   }`}
                   aria-label={`Toggle ${pref.label}`}
@@ -196,12 +196,12 @@ export default function NotificationPrefsPage() {
 
       <button
         onClick={handleSave}
-        className="w-full py-3.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_20px_rgba(201,169,110,0.2)]"
+        className="w-full py-3.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_20px_rgba(201,169,110,0.2)]"
       >
         {saved ? ' Preferences Saved!' : 'Save Preferences'}
       </button>
 
-      <p className="text-[11px] text-gray-600 text-center mt-4">
+      <p className="text-[11px] text-[rgba(245,240,232,0.25)] text-center mt-4">
         Preferences are stored locally on your device. Email notifications require a verified email in your profile.
       </p>
     </div>

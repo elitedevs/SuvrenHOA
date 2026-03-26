@@ -50,10 +50,10 @@ function RankBadge({ rank, prevRank }: { rank: number; prevRank?: number }) {
       {style ? (
         <span className="text-xl">{style.medal}</span>
       ) : (
-        <span className="text-sm font-bold text-gray-500 w-8 text-center tabular-nums">#{rank}</span>
+        <span className="text-sm font-bold text-[rgba(245,240,232,0.35)] w-8 text-center tabular-nums">#{rank}</span>
       )}
-      {change > 0 && <span className="text-[10px] text-green-400 font-bold">▲{change}</span>}
-      {change < 0 && <span className="text-[10px] text-red-400 font-bold">▼{Math.abs(change)}</span>}
+      {change > 0 && <span className="text-[10px] text-[#3A7D6F] font-bold">▲{change}</span>}
+      {change < 0 && <span className="text-[10px] text-[#8B5A5A] font-bold">▼{Math.abs(change)}</span>}
     </div>
   );
 }
@@ -64,7 +64,7 @@ function LeaderboardRow({ entry, statLabel, connectedAddress, prevRank }: {
   const isYou = connectedAddress && entry.address.toLowerCase() === connectedAddress.toLowerCase();
   const rankStyle = RANK_STYLES[entry.rank];
   const rowBg = isYou
-    ? 'bg-[#c9a96e]/10 border-[#c9a96e]/30'
+    ? 'bg-[#B09B71]/10 border-[#B09B71]/30'
     : rankStyle ? `${rankStyle.bg} ${rankStyle.border}` : 'bg-white/[0.02] border-white/[0.04]';
 
   return (
@@ -74,26 +74,26 @@ function LeaderboardRow({ entry, statLabel, connectedAddress, prevRank }: {
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <span className={`text-sm font-semibold font-mono truncate ${isYou ? 'text-[#e8d5a3]' : rankStyle ? rankStyle.text : 'text-gray-200'}`}>
+          <span className={`text-sm font-semibold font-mono truncate ${isYou ? 'text-[#D4C4A0]' : rankStyle ? rankStyle.text : 'text-[rgba(245,240,232,0.80)]'}`}>
             {isYou ? '⭐ You' : truncateAddr(entry.address)}
           </span>
-          {isYou && <span className="text-[10px] font-bold bg-[#c9a96e]/12 text-[#e8d5a3] px-1.5 py-0.5 rounded-full">YOU</span>}
+          {isYou && <span className="text-[10px] font-bold bg-[#B09B71]/12 text-[#D4C4A0] px-1.5 py-0.5 rounded-full">YOU</span>}
         </div>
-        {entry.badge && <div className="text-[11px] text-gray-500 mt-0.5 truncate">{entry.badge}</div>}
+        {entry.badge && <div className="text-[11px] text-[rgba(245,240,232,0.35)] mt-0.5 truncate">{entry.badge}</div>}
       </div>
       <div className="shrink-0 text-right flex items-center gap-3">
         <div>
-          <div className={`text-base font-bold tabular-nums ${isYou ? 'text-[#e8d5a3]' : rankStyle ? rankStyle.text : 'text-gray-300'}`}>
+          <div className={`text-base font-bold tabular-nums ${isYou ? 'text-[#D4C4A0]' : rankStyle ? rankStyle.text : 'text-[rgba(245,240,232,0.65)]'}`}>
             {entry.score.toLocaleString()}
           </div>
-          <div className="text-[10px] text-gray-600 uppercase tracking-wide">{statLabel}</div>
+          <div className="text-[10px] text-[rgba(245,240,232,0.25)] uppercase tracking-wide">{statLabel}</div>
         </div>
         <button
           onClick={() => {
             const text = ` Rank #${entry.rank} on SuvrenHOA Leaderboard — ${entry.score} ${statLabel}! #SuvrenHOA #Community`;
             navigator.clipboard?.writeText(text).catch(() => {});
           }}
-          className="text-gray-600 hover:text-[#c9a96e] transition-colors text-sm cursor-pointer"
+          className="text-[rgba(245,240,232,0.25)] hover:text-[#B09B71] transition-colors text-sm cursor-pointer"
           title="Share achievement"
         >
           
@@ -135,9 +135,9 @@ export default function LeaderboardPage() {
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold gradient-text">Community Leaderboard</h1>
-        <p className="text-gray-400 text-sm">Celebrating active community members</p>
+        <p className="text-[rgba(245,240,232,0.50)] text-sm">Celebrating active community members</p>
         {lastFetched && (
-          <p className="text-gray-600 text-xs">Last updated: {lastFetched.toLocaleTimeString()}</p>
+          <p className="text-[rgba(245,240,232,0.25)] text-xs">Last updated: {lastFetched.toLocaleTimeString()}</p>
         )}
       </div>
 
@@ -150,8 +150,8 @@ export default function LeaderboardPage() {
               onClick={() => setTimeRange(range)}
               className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 timeRange === range
-                  ? 'bg-[#c9a96e]/20 text-[#e8d5a3] border border-[#c9a96e]/30'
-                  : 'text-gray-500 hover:text-gray-300'
+                  ? 'bg-[#B09B71]/20 text-[#D4C4A0] border border-[#B09B71]/30'
+                  : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)]'
               }`}
             >
               {range === 'monthly' ? ' This Month' : '⭐ All Time'}
@@ -163,7 +163,7 @@ export default function LeaderboardPage() {
           className={`px-4 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
             showHallOfFame
               ? 'bg-[#FFD700]/20 text-[#FFD700] border-[#FFD700]/30'
-              : 'glass text-gray-400 border-white/[0.04] hover:text-[#FFD700]'
+              : 'glass text-[rgba(245,240,232,0.50)] border-white/[0.04] hover:text-[#FFD700]'
           }`}
         >
            Hall of Fame
@@ -181,12 +181,12 @@ export default function LeaderboardPage() {
               <div key={i} className="flex items-center gap-4 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
                 <span className="text-2xl">{item.medal}</span>
                 <div className="flex-1 min-w-0">
-                  <div className="text-sm font-semibold text-gray-200">{item.month}</div>
-                  <div className="text-xs text-gray-500">{item.category}</div>
+                  <div className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{item.month}</div>
+                  <div className="text-xs text-[rgba(245,240,232,0.35)]">{item.category}</div>
                 </div>
                 <div className="text-right">
-                  <div className="text-xs font-mono text-gray-400">{item.winner}</div>
-                  <div className="text-[10px] text-[#c9a96e] mt-0.5"> {item.streak}mo streak</div>
+                  <div className="text-xs font-mono text-[rgba(245,240,232,0.50)]">{item.winner}</div>
+                  <div className="text-[10px] text-[#B09B71] mt-0.5"> {item.streak}mo streak</div>
                 </div>
               </div>
             ))}
@@ -196,7 +196,7 @@ export default function LeaderboardPage() {
 
       {/* Error State */}
       {error && (
-        <div className="glass rounded-xl p-4 border border-red-500/20 text-red-400 text-sm text-center"> {error}</div>
+        <div className="glass rounded-xl p-4 border border-[rgba(107,58,58,0.20)] text-[#8B5A5A] text-sm text-center"> {error}</div>
       )}
 
       {/* Good Neighbor Spotlight */}
@@ -208,7 +208,7 @@ export default function LeaderboardPage() {
               <Trophy className="w-6 h-6 text-[#FFD700]" />
               <h2 className="text-base font-bold text-[#FFD700]">Good Neighbor of the Month</h2>
             </div>
-            <p className="text-xs text-gray-500 mb-4">Based on combined activity across all categories</p>
+            <p className="text-xs text-[rgba(245,240,232,0.35)] mb-4">Based on combined activity across all categories</p>
             {isLoading ? (
               <div className="animate-pulse space-y-2">
                 <div className="h-6 w-48 bg-white/5 rounded" />
@@ -221,10 +221,10 @@ export default function LeaderboardPage() {
                   <div className="text-lg font-bold font-mono text-[#FFD700]">
                     {isGoodNeighborYou ? '⭐ You' : truncateAddr(goodNeighbor)}
                   </div>
-                  <div className="text-sm text-gray-400 mt-0.5">
+                  <div className="text-sm text-[rgba(245,240,232,0.50)] mt-0.5">
                     Combined score: <span className="text-[#FFD700] font-bold">{goodNeighborScore}</span>
                   </div>
-                  <div className="text-xs text-[#c9a96e] mt-1">
+                  <div className="text-xs text-[#B09B71] mt-1">
                      {getStreak(goodNeighbor)} consecutive months of excellence
                   </div>
                 </div>
@@ -239,7 +239,7 @@ export default function LeaderboardPage() {
                 </button>
               </div>
             ) : (
-              <p className="text-gray-500 text-sm">No activity yet — be the first!</p>
+              <p className="text-[rgba(245,240,232,0.35)] text-sm">No activity yet — be the first!</p>
             )}
           </div>
         </div>
@@ -254,8 +254,8 @@ export default function LeaderboardPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer ${
                 activeTab === tab.id
-                  ? 'bg-[#c9a96e]/12 text-[#e8d5a3] border border-[#c9a96e]/30'
-                  : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04] border border-transparent'
+                  ? 'bg-[#B09B71]/12 text-[#D4C4A0] border border-[#B09B71]/30'
+                  : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/[0.04] border border-transparent'
               }`}
             >
               <span>{tab.icon}</span>
@@ -267,8 +267,8 @@ export default function LeaderboardPage() {
 
         <div className="flex items-center gap-2 mb-4">
           <span className="text-xl">{currentTab.icon}</span>
-          <h2 className="text-lg font-bold text-gray-100">{currentTab.label}</h2>
-          <span className="text-xs text-gray-600 ml-auto bg-white/[0.03] px-2 py-0.5 rounded-full">
+          <h2 className="text-lg font-bold text-[rgba(245,240,232,0.90)]">{currentTab.label}</h2>
+          <span className="text-xs text-[rgba(245,240,232,0.25)] ml-auto bg-white/[0.03] px-2 py-0.5 rounded-full">
             {timeRange === 'monthly' ? 'This Month' : 'All Time'}
           </span>
         </div>
@@ -278,7 +278,7 @@ export default function LeaderboardPage() {
             {[...Array(5)].map((_, i) => <SkeletonRow key={i} />)}
           </div>
         ) : entriesMap[activeTab].length === 0 ? (
-          <div className="text-center py-16 text-gray-500">
+          <div className="text-center py-16 text-[rgba(245,240,232,0.35)]">
             <div className="text-4xl mb-3"></div>
             <p className="text-sm font-medium">No activity yet — be the first to participate!</p>
           </div>
@@ -299,8 +299,8 @@ export default function LeaderboardPage() {
 
       {/* Streak Tracker */}
       <div className="glass rounded-2xl p-6 border border-white/[0.04]">
-        <h2 className="text-base font-bold text-gray-100 mb-1"> Streak Tracker</h2>
-        <p className="text-xs text-gray-500 mb-4">Consecutive months of on-time dues payment</p>
+        <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)] mb-1"> Streak Tracker</h2>
+        <p className="text-xs text-[rgba(245,240,232,0.35)] mb-4">Consecutive months of on-time dues payment</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {(promptPayers.slice(0, 6).length > 0 ? promptPayers.slice(0, 6) : [
             { address: '0xaBcD...1234', rank: 1, score: 12, badge: 'Perfect Payer' },
@@ -311,15 +311,15 @@ export default function LeaderboardPage() {
             return (
               <div key={idx} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] text-center">
                 <div className="text-2xl mb-1">{''.repeat(Math.min(streak, 3))}</div>
-                <div className="text-sm font-bold text-[#c9a96e]">{streak} {streak === 1 ? 'month' : 'months'}</div>
-                <div className="text-[10px] text-gray-500 font-mono mt-0.5 truncate">{truncateAddr(entry.address)}</div>
+                <div className="text-sm font-bold text-[#B09B71]">{streak} {streak === 1 ? 'month' : 'months'}</div>
+                <div className="text-[10px] text-[rgba(245,240,232,0.35)] font-mono mt-0.5 truncate">{truncateAddr(entry.address)}</div>
               </div>
             );
           })}
         </div>
       </div>
 
-      <div className="text-center text-xs text-gray-600 space-y-1">
+      <div className="text-center text-xs text-[rgba(245,240,232,0.25)] space-y-1">
         <p>Data sourced from on-chain events · Last ~50,000 blocks (~27 hours)</p>
         <p>Auto-refreshes every 5 minutes</p>
       </div>

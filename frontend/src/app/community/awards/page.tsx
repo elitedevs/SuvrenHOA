@@ -63,14 +63,14 @@ function AwardCard({ award, nominations, myLot, onNominate, onVote }: {
   const leader = [...currentNoms].sort((a, b) => b.votes.length - a.votes.length)[0];
 
   return (
-    <div className="glass-card rounded-xl p-5 border border-[#c9a96e]/10">
+    <div className="glass-card rounded-xl p-5 border border-[#B09B71]/10">
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2.5 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/20">
-          <Icon className="w-5 h-5 text-[#c9a96e]" />
+        <div className="p-2.5 rounded-xl bg-[#B09B71]/15 border border-[#B09B71]/20">
+          <Icon className="w-5 h-5 text-[#B09B71]" />
         </div>
         <div>
           <h3 className="font-semibold text-white">{award.category}</h3>
-          <p className="text-xs text-gray-500">{award.description}</p>
+          <p className="text-xs text-[rgba(245,240,232,0.35)]">{award.description}</p>
         </div>
       </div>
 
@@ -79,21 +79,21 @@ function AwardCard({ award, nominations, myLot, onNominate, onVote }: {
           const hasVoted = nom.votes.includes(myLot);
           const isLeading = nom.id === leader?.id;
           return (
-            <div key={nom.id} className={`p-3 rounded-lg border ${isLeading ? 'border-[#c9a96e]/30 bg-[#c9a96e]/5' : 'border-white/5 bg-[#1a1a1a]/40'}`}>
+            <div key={nom.id} className={`p-3 rounded-lg border ${isLeading ? 'border-[#B09B71]/30 bg-[#B09B71]/5' : 'border-white/5 bg-[#1a1a1a]/40'}`}>
               <div className="flex items-start justify-between gap-2">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    {isLeading && <Crown className="w-3 h-3 text-[#c9a96e] shrink-0" />}
+                    {isLeading && <Crown className="w-3 h-3 text-[#B09B71] shrink-0" />}
                     <p className="text-sm font-medium text-white truncate">{nom.name}</p>
-                    <span className="text-xs text-gray-500">Lot #{nom.lot}</span>
+                    <span className="text-xs text-[rgba(245,240,232,0.35)]">Lot #{nom.lot}</span>
                   </div>
-                  <p className="text-xs text-gray-400 mt-0.5 line-clamp-2">{nom.reason}</p>
+                  <p className="text-xs text-[rgba(245,240,232,0.50)] mt-0.5 line-clamp-2">{nom.reason}</p>
                 </div>
                 {VOTING_OPEN && (
                   <button
                     onClick={() => onVote(nom.id)}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all shrink-0 ${
-                      hasVoted ? 'bg-[#c9a96e] text-[#1a1a1a]' : 'border border-white/10 text-gray-400 hover:border-[#c9a96e]/30 hover:text-[#c9a96e]'
+                      hasVoted ? 'bg-[#B09B71] text-[#1a1a1a]' : 'border border-white/10 text-[rgba(245,240,232,0.50)] hover:border-[#B09B71]/30 hover:text-[#B09B71]'
                     }`}
                   >
                     <ThumbsUp className="w-3 h-3" />
@@ -106,14 +106,14 @@ function AwardCard({ award, nominations, myLot, onNominate, onVote }: {
         })}
         {currentNoms.length === 0 && (
           <div className="p-3 rounded-lg border border-white/5 text-center">
-            <p className="text-xs text-gray-500">No nominations yet — be the first!</p>
+            <p className="text-xs text-[rgba(245,240,232,0.35)]">No nominations yet — be the first!</p>
           </div>
         )}
       </div>
 
       <button
         onClick={() => onNominate(award.id)}
-        className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-[#c9a96e]/20 text-xs font-medium text-[#c9a96e] hover:bg-[#c9a96e]/10 transition-colors"
+        className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-[#B09B71]/20 text-xs font-medium text-[#B09B71] hover:bg-[#B09B71]/10 transition-colors"
       >
         <Plus className="w-3.5 h-3.5" />
         Nominate Someone
@@ -170,7 +170,7 @@ export default function AwardsPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-gray-400 mb-4">Sign in to participate in Community Awards</p>
+        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to participate in Community Awards</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -180,19 +180,19 @@ export default function AwardsPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
-          <Trophy className="w-7 h-7 text-[#c9a96e]" />
+          <Trophy className="w-7 h-7 text-[#B09B71]" />
           Community Awards {CURRENT_YEAR}
         </h1>
-        <p className="text-sm text-gray-400 mt-1">Annual awards celebrating Faircroft's outstanding residents</p>
+        <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Annual awards celebrating Faircroft's outstanding residents</p>
       </div>
 
       {/* Status Banner */}
       {VOTING_OPEN && (
-        <div className="mb-8 p-4 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center gap-3">
-          <Vote className="w-5 h-5 text-[#c9a96e] shrink-0" />
+        <div className="mb-8 p-4 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center gap-3">
+          <Vote className="w-5 h-5 text-[#B09B71] shrink-0" />
           <div>
-            <p className="text-sm font-semibold text-[#c9a96e]">Voting is Open!</p>
-            <p className="text-xs text-gray-400">Nominate neighbors and vote for your favorites. Winners announced April 30, 2026.</p>
+            <p className="text-sm font-semibold text-[#B09B71]">Voting is Open!</p>
+            <p className="text-xs text-[rgba(245,240,232,0.50)]">Nominate neighbors and vote for your favorites. Winners announced April 30, 2026.</p>
           </div>
         </div>
       )}
@@ -206,7 +206,7 @@ export default function AwardsPage() {
           <button
             key={id}
             onClick={() => setTab(id as any)}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all ${tab === id ? 'bg-[#c9a96e] text-[#1a1a1a]' : 'text-gray-400 hover:text-white'}`}
+            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all ${tab === id ? 'bg-[#B09B71] text-[#1a1a1a]' : 'text-[rgba(245,240,232,0.50)] hover:text-white'}`}
           >
             <Icon className="w-4 h-4" />
             {label}
@@ -233,7 +233,7 @@ export default function AwardsPage() {
         <div className="space-y-8">
           {pastYears.map((year) => (
             <div key={year}>
-              <h2 className="text-lg font-bold text-[#c9a96e] mb-4 flex items-center gap-2">
+              <h2 className="text-lg font-bold text-[#B09B71] mb-4 flex items-center gap-2">
                 <Crown className="w-5 h-5" />
                 {year} Winners
               </h2>
@@ -243,19 +243,19 @@ export default function AwardsPage() {
                   if (!award) return null;
                   const Icon = ICON_MAP[award.icon] ?? Trophy;
                   return (
-                    <div key={nom.id} className="glass-card rounded-xl p-4 border border-[#c9a96e]/20">
+                    <div key={nom.id} className="glass-card rounded-xl p-4 border border-[#B09B71]/20">
                       <div className="flex items-center gap-2 mb-3">
-                        <div className="p-1.5 rounded-lg bg-[#c9a96e]/15 border border-[#c9a96e]/20">
-                          <Icon className="w-4 h-4 text-[#c9a96e]" />
+                        <div className="p-1.5 rounded-lg bg-[#B09B71]/15 border border-[#B09B71]/20">
+                          <Icon className="w-4 h-4 text-[#B09B71]" />
                         </div>
-                        <p className="text-xs font-semibold text-[#c9a96e] uppercase tracking-wider">{award.category}</p>
+                        <p className="text-xs font-semibold text-[#B09B71] uppercase tracking-wider">{award.category}</p>
                       </div>
                       <div className="flex items-center gap-2 mb-1">
-                        <Crown className="w-4 h-4 text-[#c9a96e]" />
+                        <Crown className="w-4 h-4 text-[#B09B71]" />
                         <p className="font-bold text-white">{nom.name}</p>
-                        <span className="text-xs text-gray-500">Lot #{nom.lot}</span>
+                        <span className="text-xs text-[rgba(245,240,232,0.35)]">Lot #{nom.lot}</span>
                       </div>
-                      <p className="text-xs text-gray-400">{nom.reason}</p>
+                      <p className="text-xs text-[rgba(245,240,232,0.50)]">{nom.reason}</p>
                     </div>
                   );
                 })}
@@ -264,8 +264,8 @@ export default function AwardsPage() {
           ))}
           {pastYears.length === 0 && (
             <div className="glass-card rounded-xl p-8 text-center">
-              <Archive className="w-10 h-10 text-gray-600 mx-auto mb-3" />
-              <p className="text-gray-400">No past winners recorded yet</p>
+              <Archive className="w-10 h-10 text-[rgba(245,240,232,0.25)] mx-auto mb-3" />
+              <p className="text-[rgba(245,240,232,0.50)]">No past winners recorded yet</p>
             </div>
           )}
         </div>
@@ -274,48 +274,48 @@ export default function AwardsPage() {
       {/* Nominate Modal */}
       {nominatingFor && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className="glass-card rounded-2xl p-6 w-full max-w-md border border-[#c9a96e]/20">
+          <div className="glass-card rounded-2xl p-6 w-full max-w-md border border-[#B09B71]/20">
             <div className="flex items-center justify-between mb-5">
               <h2 className="font-semibold">Nominate for {AWARDS.find((a) => a.id === nominatingFor)?.category}</h2>
-              <button onClick={() => setNominatingFor(null)} className="p-1 rounded text-gray-500 hover:text-white">
+              <button onClick={() => setNominatingFor(null)} className="p-1 rounded text-[rgba(245,240,232,0.35)] hover:text-white">
                 <X className="w-4 h-4" />
               </button>
             </div>
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-gray-400 mb-1 block">Lot #</label>
+                  <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Lot #</label>
                   <input
                     value={nomForm.lot}
                     onChange={(e) => setNomForm((f) => ({ ...f, lot: e.target.value }))}
                     placeholder="42"
-                    className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-gray-400 mb-1 block">Name</label>
+                  <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Name</label>
                   <input
                     value={nomForm.name}
                     onChange={(e) => setNomForm((f) => ({ ...f, name: e.target.value }))}
                     placeholder="Jane Smith"
-                    className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
                   />
                 </div>
               </div>
               <div>
-                <label className="text-xs text-gray-400 mb-1 block">Why do they deserve this award?</label>
+                <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Why do they deserve this award?</label>
                 <textarea
                   value={nomForm.reason}
                   onChange={(e) => setNomForm((f) => ({ ...f, reason: e.target.value }))}
                   placeholder="Tell us why this neighbor deserves to win..."
                   rows={3}
-                  className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none resize-none"
                 />
               </div>
             </div>
             <div className="flex gap-3 mt-5">
-              <button onClick={() => setNominatingFor(null)} className="flex-1 px-4 py-2 rounded-lg border border-white/10 text-sm text-gray-400 hover:text-white transition-colors">Cancel</button>
-              <button onClick={nominate} className="flex-1 px-4 py-2 rounded-lg bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-semibold transition-colors">Nominate</button>
+              <button onClick={() => setNominatingFor(null)} className="flex-1 px-4 py-2 rounded-lg border border-white/10 text-sm text-[rgba(245,240,232,0.50)] hover:text-white transition-colors">Cancel</button>
+              <button onClick={nominate} className="flex-1 px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors">Nominate</button>
             </div>
           </div>
         </div>

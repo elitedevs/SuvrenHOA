@@ -65,15 +65,15 @@ export default function ComparePage() {
     <div className="min-h-screen bg-[oklch(0.06_0.005_60)] p-6 lg:p-10">
       <div className="max-w-5xl mx-auto">
         <div className="mb-10">
-          <h1 className="text-3xl font-bold text-[#e8d5a3] mb-2">HOA Cost Comparison</h1>
+          <h1 className="text-3xl font-bold text-[#D4C4A0] mb-2">HOA Cost Comparison</h1>
           <p className="text-[oklch(0.50_0.01_60)]">See exactly how SuvrenHOA stacks up against traditional HOA management</p>
         </div>
 
         {/* Units slider */}
         <div className="mb-8 p-6 bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl">
           <div className="flex items-center justify-between mb-3">
-            <label className="text-sm font-medium text-[#e8d5a3]">Community Size</label>
-            <span className="text-2xl font-bold text-[#c9a96e]">{units} homes</span>
+            <label className="text-sm font-medium text-[#D4C4A0]">Community Size</label>
+            <span className="text-2xl font-bold text-[#B09B71]">{units} homes</span>
           </div>
           <input
             type="range"
@@ -81,7 +81,7 @@ export default function ComparePage() {
             max={500}
             value={units}
             onChange={(e) => setUnits(Number(e.target.value))}
-            className="w-full accent-[#c9a96e]"
+            className="w-full accent-[#B09B71]"
           />
           <div className="flex justify-between text-xs text-[oklch(0.40_0.01_60)] mt-1">
             <span>10</span><span>500</span>
@@ -91,9 +91,9 @@ export default function ComparePage() {
         {/* Savings cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {[
-            { label: 'Annual Community Savings', value: annualSavings, prefix: '$', icon: TrendingDown, color: 'text-green-400', bg: 'bg-green-950/20 border-green-700/30' },
-            { label: 'Per Home Per Year', value: perHome, prefix: '$', icon: TrendingDown, color: 'text-[#c9a96e]', bg: 'bg-[oklch(0.14_0.01_60)] border-[oklch(0.22_0.01_60)]' },
-            { label: 'Transparency Score', value: 100, suffix: '%', icon: CheckCircle, color: 'text-[#c9a96e]', bg: 'bg-[oklch(0.14_0.01_60)] border-[oklch(0.22_0.01_60)]' },
+            { label: 'Annual Community Savings', value: annualSavings, prefix: '$', icon: TrendingDown, color: 'text-[#3A7D6F]', bg: 'bg-green-950/20 border-green-700/30' },
+            { label: 'Per Home Per Year', value: perHome, prefix: '$', icon: TrendingDown, color: 'text-[#B09B71]', bg: 'bg-[oklch(0.14_0.01_60)] border-[oklch(0.22_0.01_60)]' },
+            { label: 'Transparency Score', value: 100, suffix: '%', icon: CheckCircle, color: 'text-[#B09B71]', bg: 'bg-[oklch(0.14_0.01_60)] border-[oklch(0.22_0.01_60)]' },
           ].map(({ label, value, prefix, suffix, icon: Icon, color, bg }) => (
             <div key={label} className={`p-5 rounded-xl border ${bg}`}>
               <Icon className={`w-5 h-5 ${color} mb-2`} />
@@ -110,7 +110,7 @@ export default function ComparePage() {
           <div className="grid grid-cols-3 bg-[oklch(0.14_0.005_60)] px-6 py-4 text-xs font-semibold uppercase tracking-widest text-[oklch(0.45_0.01_60)]">
             <div>Category</div>
             <div className="text-center">Traditional HOA</div>
-            <div className="text-center text-[#c9a96e]">SuvrenHOA</div>
+            <div className="text-center text-[#B09B71]">SuvrenHOA</div>
           </div>
           {BASE_ROWS.map((row, i) => {
             const tradVal = row.unit === '$' ? Math.round(row.traditionalVal * multiplier) : row.traditionalVal;
@@ -119,12 +119,12 @@ export default function ComparePage() {
             const suvBetter = row.higherIsBetter ? suvVal > tradVal : suvVal < tradVal;
             return (
               <div key={i} className={`grid grid-cols-3 px-6 py-4 items-center ${i % 2 === 0 ? '' : 'bg-[oklch(0.08_0.005_60)]'}`}>
-                <div className="text-sm text-[#e8d5a3]">{row.category}</div>
-                <div className={`text-center font-mono text-sm font-semibold ${tradBetter ? 'text-green-400' : suvBetter ? 'text-red-400' : 'text-[oklch(0.55_0.01_60)]'}`}>
+                <div className="text-sm text-[#D4C4A0]">{row.category}</div>
+                <div className={`text-center font-mono text-sm font-semibold ${tradBetter ? 'text-[#3A7D6F]' : suvBetter ? 'text-[#8B5A5A]' : 'text-[oklch(0.55_0.01_60)]'}`}>
                   {row.unit === '$' ? `$${tradVal.toLocaleString()}` : `${tradVal}${row.unit}`}
                   {tradBetter ? <CheckCircle className="inline w-3.5 h-3.5 ml-1.5" /> : suvBetter ? <XCircle className="inline w-3.5 h-3.5 ml-1.5" /> : <Minus className="inline w-3.5 h-3.5 ml-1.5" />}
                 </div>
-                <div className={`text-center font-mono text-sm font-bold ${suvBetter ? 'text-[#c9a96e]' : tradBetter ? 'text-red-400' : 'text-[oklch(0.55_0.01_60)]'}`}>
+                <div className={`text-center font-mono text-sm font-bold ${suvBetter ? 'text-[#B09B71]' : tradBetter ? 'text-[#8B5A5A]' : 'text-[oklch(0.55_0.01_60)]'}`}>
                   {row.unit === '$' ? `$${suvVal.toLocaleString()}` : `${suvVal}${row.unit}`}
                   {suvBetter ? <CheckCircle className="inline w-3.5 h-3.5 ml-1.5 text-[#b8942e]" /> : tradBetter ? <XCircle className="inline w-3.5 h-3.5 ml-1.5" /> : <Minus className="inline w-3.5 h-3.5 ml-1.5" />}
                 </div>
@@ -140,11 +140,11 @@ export default function ComparePage() {
             { title: 'SuvrenHOA', items: ['100% on-chain treasury transparency', 'No management company fees', 'Digital voting accessible 24/7', 'Smart contract dispute resolution', 'Immutable document storage on blockchain'], bad: false },
           ].map(({ title, items, bad }) => (
             <div key={title} className={`p-6 rounded-xl border ${bad ? 'border-red-700/30 bg-red-950/10' : 'border-[#b8942e]/30 bg-[oklch(0.12_0.01_60)]'}`}>
-              <h3 className={`font-semibold mb-4 ${bad ? 'text-red-400' : 'text-[#c9a96e]'}`}>{title}</h3>
+              <h3 className={`font-semibold mb-4 ${bad ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>{title}</h3>
               <ul className="space-y-2">
                 {items.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm">
-                    {bad ? <XCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" /> : <CheckCircle className="w-4 h-4 text-green-400 shrink-0 mt-0.5" />}
+                    {bad ? <XCircle className="w-4 h-4 text-[#6B3A3A] shrink-0 mt-0.5" /> : <CheckCircle className="w-4 h-4 text-[#3A7D6F] shrink-0 mt-0.5" />}
                     <span className={bad ? 'text-[oklch(0.55_0.01_60)]' : 'text-[oklch(0.70_0.01_60)]'}>{item}</span>
                   </li>
                 ))}
@@ -157,7 +157,7 @@ export default function ComparePage() {
         <div className="flex justify-end">
           <button
             onClick={handleShare}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[#b8942e]/50 text-[#c9a96e] hover:bg-[#b8942e]/10 transition-colors font-medium"
+            className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[#b8942e]/50 text-[#B09B71] hover:bg-[#b8942e]/10 transition-colors font-medium"
           >
             <Share2 className="w-4 h-4" />
             {copied ? 'Copied to clipboard!' : 'Share Results'}

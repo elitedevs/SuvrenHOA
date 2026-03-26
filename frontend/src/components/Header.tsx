@@ -105,8 +105,8 @@ function NavDropdown({
       <button
         className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
           hasActive
-            ? 'text-[#e8d5a3] bg-[#c9a96e]/10'
-            : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+            ? 'text-[#D4C4A0] bg-[#B09B71]/10'
+            : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04]'
         }`}
         onClick={() => setOpen(!open)}
         aria-expanded={open}
@@ -130,8 +130,8 @@ function NavDropdown({
                 onClick={() => setOpen(false)}
                 className={`flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium transition-colors duration-150 ${
                   active
-                    ? 'text-[#e8d5a3] bg-[#c9a96e]/10'
-                    : 'text-gray-400 hover:text-gray-100 hover:bg-white/[0.04]'
+                    ? 'text-[#D4C4A0] bg-[#B09B71]/10'
+                    : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.90)] hover:bg-white/[0.04]'
                 }`}
               >
                 <ItemIcon className="w-4 h-4 opacity-70" />
@@ -158,14 +158,14 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
         {/* Close */}
         <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
           <span className="text-[15px] font-bold gradient-text">SuvrenHOA</span>
-          <button onClick={onClose} className="p-2 rounded-lg hover:bg-white/[0.06] text-gray-400">
+          <button onClick={onClose} className="p-2 rounded-lg hover:bg-white/[0.06] text-[rgba(245,240,232,0.50)]">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Public links */}
         <div className="p-3 border-b border-white/[0.06]">
-          <p className="text-[10px] uppercase tracking-widest text-gray-600 font-bold px-3 mb-2">Public</p>
+          <p className="text-[10px] uppercase tracking-widest text-[rgba(245,240,232,0.25)] font-bold px-3 mb-2">Public</p>
           {[
             { href: '/transparency', label: 'Transparency', icon: Eye },
             { href: '/map', label: 'Map', icon: Map },
@@ -179,7 +179,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                 href={item.href}
                 onClick={onClose}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium transition-colors ${
-                  active ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+                  active ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04]'
                 }`}
               >
                 <ItemIcon className="w-4 h-4" />
@@ -197,10 +197,10 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
             <div key={group.label} className="border-b border-white/[0.06]">
               <button
                 onClick={() => setExpanded(isExpanded ? null : group.label)}
-                className="flex items-center justify-between w-full px-6 py-3 text-[13px] font-semibold text-gray-300 hover:text-white transition-colors"
+                className="flex items-center justify-between w-full px-6 py-3 text-[13px] font-semibold text-[rgba(245,240,232,0.65)] hover:text-white transition-colors"
               >
                 <span className="flex items-center gap-2">
-                  <GroupIcon className="w-4 h-4 text-[#c9a96e]/70" />
+                  <GroupIcon className="w-4 h-4 text-[#B09B71]/70" />
                   {group.label}
                 </span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
@@ -216,7 +216,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                         href={item.href}
                         onClick={onClose}
                         className={`flex items-center gap-3 px-6 py-2 rounded-lg text-[13px] font-medium transition-colors ${
-                          active ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-500 hover:text-gray-200 hover:bg-white/[0.04]'
+                          active ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04]'
                         }`}
                       >
                         <ItemIcon className="w-3.5 h-3.5 opacity-60" />
@@ -232,7 +232,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
 
         {/* Utility links */}
         <div className="p-3">
-          <p className="text-[10px] uppercase tracking-widest text-gray-600 font-bold px-3 mb-2">Account</p>
+          <p className="text-[10px] uppercase tracking-widest text-[rgba(245,240,232,0.25)] font-bold px-3 mb-2">Account</p>
           {[
             { href: '/admin', label: 'Admin', icon: Settings },
             { href: '/onboarding', label: 'Setup Wizard', icon: PackageOpen },
@@ -244,7 +244,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                 key={item.href}
                 href={item.href}
                 onClick={onClose}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium text-gray-500 hover:text-gray-200 hover:bg-white/[0.04] transition-colors"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04] transition-colors"
               >
                 <ItemIcon className="w-4 h-4" />
                 {item.label}
@@ -271,12 +271,12 @@ export function Header() {
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center font-bold text-sm text-white group-hover:shadow-[0_0_16px_rgba(201,169,110,0.4)] transition-all duration-300 group-hover:scale-105">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#B09B71] to-[#b8942e] flex items-center justify-center font-bold text-sm text-white group-hover:shadow-[0_0_16px_rgba(201,169,110,0.4)] transition-all duration-300 group-hover:scale-105">
                 S
               </div>
               <span className="text-[15px] font-bold hidden sm:block tracking-tight">
                 <span className="gradient-text">Suvren</span>
-                <span className="text-gray-500">HOA</span>
+                <span className="text-[rgba(245,240,232,0.35)]">HOA</span>
               </span>
             </Link>
 
@@ -286,7 +286,7 @@ export function Header() {
               <Link
                 href="/transparency"
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
-                  pathname.startsWith('/transparency') ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+                  pathname.startsWith('/transparency') ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04]'
                 }`}
               >
                 <Eye className="w-4 h-4" />
@@ -295,7 +295,7 @@ export function Header() {
               <Link
                 href="/map"
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
-                  pathname.startsWith('/map') ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+                  pathname.startsWith('/map') ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04]'
                 }`}
               >
                 <Map className="w-4 h-4" />
@@ -320,33 +320,33 @@ export function Header() {
                 <>
                   <Link
                     href="/health"
-                    className={`p-2 rounded-lg transition-colors ${pathname === '/health' ? 'text-green-400 bg-green-500/10' : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04]'}`}
+                    className={`p-2 rounded-lg transition-colors ${pathname === '/health' ? 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)]' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/[0.04]'}`}
                     title="Health Score"
                   >
                     <Heart className="w-4 h-4" />
                   </Link>
                   <Link
                     href="/alerts"
-                    className={`p-2 rounded-lg transition-colors ${pathname === '/alerts' ? 'text-red-400 bg-red-500/10' : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04]'}`}
+                    className={`p-2 rounded-lg transition-colors ${pathname === '/alerts' ? 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)]' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/[0.04]'}`}
                     title="Alerts"
                   >
                     <Bell className="w-4 h-4" />
                   </Link>
                   <Link
                     href="/messages"
-                    className={`relative p-2 rounded-lg transition-colors ${pathname === '/messages' ? 'text-[#c9a96e] bg-[#c9a96e]/10' : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04]'}`}
+                    className={`relative p-2 rounded-lg transition-colors ${pathname === '/messages' ? 'text-[#B09B71] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/[0.04]'}`}
                     title="Messages"
                   >
                     <MessageCircle className="w-4 h-4" />
                     {totalUnread > 0 && (
-                      <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-[16px] px-1 rounded-full bg-[#c9a96e] text-white text-[9px] font-bold flex items-center justify-center">
+                      <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-[16px] px-1 rounded-full bg-[#B09B71] text-white text-[9px] font-bold flex items-center justify-center">
                         {totalUnread > 9 ? '9+' : totalUnread}
                       </span>
                     )}
                   </Link>
                   <Link
                     href="/assistant"
-                    className={`p-2 rounded-lg transition-colors ${pathname === '/assistant' ? 'text-blue-400 bg-blue-500/10' : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04]'}`}
+                    className={`p-2 rounded-lg transition-colors ${pathname === '/assistant' ? 'text-[#5A7A9A] bg-[rgba(90,122,154,0.10)]' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/[0.04]'}`}
                     title="AI Assistant"
                   >
                     <Bot className="w-4 h-4" />
@@ -359,7 +359,7 @@ export function Header() {
               <ConnectButton label="Sign In" showBalance={false} chainStatus="icon" accountStatus="avatar" />
               {/* Mobile hamburger */}
               <button
-                className="lg:hidden p-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-white/[0.04] transition-colors"
+                className="lg:hidden p-2 rounded-lg text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04] transition-colors"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
               >

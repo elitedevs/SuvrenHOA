@@ -136,7 +136,7 @@ export default function BookClubPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-gray-400 mb-4">Sign in to join the book club</p>
+        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to join the book club</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -153,10 +153,10 @@ export default function BookClubPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
-          <BookOpen className="w-7 h-7 text-[#c9a96e]" />
+          <BookOpen className="w-7 h-7 text-[#B09B71]" />
           Community Book Club
         </h1>
-        <p className="text-sm text-gray-400 mt-1">Monthly reads, discussions, and what's next</p>
+        <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Monthly reads, discussions, and what's next</p>
       </div>
 
       {/* Tabs */}
@@ -166,7 +166,7 @@ export default function BookClubPage() {
             key={id}
             onClick={() => setTab(id)}
             className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
-              tab === id ? 'bg-[#c9a96e] text-[#1a1a1a]' : 'text-gray-400 hover:text-white'
+              tab === id ? 'bg-[#B09B71] text-[#1a1a1a]' : 'text-[rgba(245,240,232,0.50)] hover:text-white'
             }`}
           >
             <Icon className="w-3.5 h-3.5" />
@@ -177,23 +177,23 @@ export default function BookClubPage() {
 
       {tab === 'current' && currentBook && (
         <div className="space-y-6">
-          <div className="glass-card rounded-2xl p-6 border border-[#c9a96e]/20">
+          <div className="glass-card rounded-2xl p-6 border border-[#B09B71]/20">
             <div className="flex gap-5">
               <div className={`w-24 h-32 rounded-xl bg-gradient-to-b ${currentBook.coverColor} border border-white/10 shrink-0 flex items-center justify-center`}>
                 <BookOpen className="w-8 h-8 text-white/50" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-[#c9a96e]/15 text-[#c9a96e] font-medium border border-[#c9a96e]/20">
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-[#B09B71]/15 text-[#B09B71] font-medium border border-[#B09B71]/20">
                     {currentBook.month} {currentBook.year}
                   </span>
-                  <Star className="w-4 h-4 text-[#c9a96e] fill-[#c9a96e]" />
-                  <span className="text-xs text-[#c9a96e] font-medium">This Month's Pick</span>
+                  <Star className="w-4 h-4 text-[#B09B71] fill-[#B09B71]" />
+                  <span className="text-xs text-[#B09B71] font-medium">This Month's Pick</span>
                 </div>
                 <h2 className="text-xl font-bold text-white">{currentBook.title}</h2>
-                <p className="text-sm text-gray-400 mt-0.5">by {currentBook.author}</p>
-                <p className="text-sm text-gray-300 mt-3 leading-relaxed">{currentBook.synopsis}</p>
-                <p className="text-xs text-gray-500 mt-2">{currentBook.pages} pages</p>
+                <p className="text-sm text-[rgba(245,240,232,0.50)] mt-0.5">by {currentBook.author}</p>
+                <p className="text-sm text-[rgba(245,240,232,0.65)] mt-3 leading-relaxed">{currentBook.synopsis}</p>
+                <p className="text-xs text-[rgba(245,240,232,0.35)] mt-2">{currentBook.pages} pages</p>
               </div>
             </div>
           </div>
@@ -213,7 +213,7 @@ export default function BookClubPage() {
             <div className="flex justify-end mt-2">
               <button
                 onClick={postComment}
-                className="px-4 py-1.5 rounded-lg bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-xs font-semibold transition-colors"
+                className="px-4 py-1.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-xs font-semibold transition-colors"
               >
                 Post
               </button>
@@ -222,11 +222,11 @@ export default function BookClubPage() {
           {currentThreads.map((thread) => (
             <div key={thread.id} className="glass-card rounded-xl p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-[#c9a96e]">{thread.author}</span>
-                <span className="text-xs text-gray-500">{new Date(thread.timestamp).toLocaleDateString()}</span>
+                <span className="text-xs font-medium text-[#B09B71]">{thread.author}</span>
+                <span className="text-xs text-[rgba(245,240,232,0.35)]">{new Date(thread.timestamp).toLocaleDateString()}</span>
               </div>
-              <p className="text-sm text-gray-300">{thread.content}</p>
-              <button onClick={() => likeThread(thread.id)} className="flex items-center gap-1.5 mt-2 text-xs text-gray-500 hover:text-[#c9a96e] transition-colors">
+              <p className="text-sm text-[rgba(245,240,232,0.65)]">{thread.content}</p>
+              <button onClick={() => likeThread(thread.id)} className="flex items-center gap-1.5 mt-2 text-xs text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] transition-colors">
                 <ThumbsUp className="w-3.5 h-3.5" />
                 {thread.likes}
               </button>
@@ -234,8 +234,8 @@ export default function BookClubPage() {
           ))}
           {currentThreads.length === 0 && (
             <div className="glass-card rounded-xl p-8 text-center">
-              <MessageSquare className="w-8 h-8 text-gray-600 mx-auto mb-2" />
-              <p className="text-sm text-gray-400">No discussion yet — start the conversation!</p>
+              <MessageSquare className="w-8 h-8 text-[rgba(245,240,232,0.25)] mx-auto mb-2" />
+              <p className="text-sm text-[rgba(245,240,232,0.50)]">No discussion yet — start the conversation!</p>
             </div>
           )}
         </div>
@@ -243,43 +243,43 @@ export default function BookClubPage() {
 
       {tab === 'nominate' && (
         <div className="space-y-4">
-          <div className="glass-card rounded-xl p-4 border border-[#c9a96e]/20">
+          <div className="glass-card rounded-xl p-4 border border-[#B09B71]/20">
             <h3 className="text-sm font-semibold text-white mb-3">Nominate a Book</h3>
             <div className="grid grid-cols-2 gap-3">
               <input
                 value={newNomTitle}
                 onChange={(e) => setNewNomTitle(e.target.value)}
                 placeholder="Book title"
-                className="px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none"
+                className="px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
               />
               <input
                 value={newNomAuthor}
                 onChange={(e) => setNewNomAuthor(e.target.value)}
                 placeholder="Author"
-                className="px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none"
+                className="px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
               />
             </div>
             <button
               onClick={addNomination}
-              className="mt-3 w-full px-4 py-2 rounded-lg bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-semibold transition-colors"
+              className="mt-3 w-full px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors"
             >
               Nominate
             </button>
           </div>
 
-          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Nominations — Vote for Next Month</h3>
+          <h3 className="text-sm font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wider">Nominations — Vote for Next Month</h3>
           {nominations.sort((a, b) => b.votes.length - a.votes.length).map((nom) => {
             const hasVoted = nom.votes.includes(myLot);
             return (
               <div key={nom.id} className="glass-card rounded-xl p-4 flex items-center gap-4">
                 <div className="flex-1">
                   <p className="font-semibold text-white text-sm">{nom.title}</p>
-                  <p className="text-xs text-gray-400">by {nom.author} · nominated by {nom.nominatedBy}</p>
+                  <p className="text-xs text-[rgba(245,240,232,0.50)]">by {nom.author} · nominated by {nom.nominatedBy}</p>
                 </div>
                 <button
                   onClick={() => vote(nom.id)}
                   className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    hasVoted ? 'bg-[#c9a96e] text-[#1a1a1a]' : 'border border-white/10 text-gray-400 hover:border-[#c9a96e]/30 hover:text-[#c9a96e]'
+                    hasVoted ? 'bg-[#B09B71] text-[#1a1a1a]' : 'border border-white/10 text-[rgba(245,240,232,0.50)] hover:border-[#B09B71]/30 hover:text-[#B09B71]'
                   }`}
                 >
                   <ThumbsUp className="w-3.5 h-3.5" />
@@ -300,8 +300,8 @@ export default function BookClubPage() {
               </div>
               <div>
                 <p className="font-semibold text-white text-sm">{book.title}</p>
-                <p className="text-xs text-gray-400">by {book.author}</p>
-                <p className="text-xs text-gray-500 mt-1">{book.month} {book.year} · {book.pages} pages</p>
+                <p className="text-xs text-[rgba(245,240,232,0.50)]">by {book.author}</p>
+                <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1">{book.month} {book.year} · {book.pages} pages</p>
               </div>
             </div>
           ))}

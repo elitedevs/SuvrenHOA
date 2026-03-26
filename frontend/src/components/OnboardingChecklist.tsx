@@ -89,35 +89,35 @@ export function OnboardingChecklist() {
   }
 
   return (
-    <div className="glass-card rounded-2xl border border-[#c9a96e]/20 overflow-hidden mb-6 page-enter">
+    <div className="glass-card rounded-2xl border border-[#B09B71]/20 overflow-hidden mb-6 page-enter">
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-[oklch(0.18_0.005_60)]">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-base">
+          <div className="w-8 h-8 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center text-base">
             
           </div>
           <div>
-            <p className="text-sm font-bold text-[#e8d5a3]">Getting Started</p>
-            <p className="text-xs text-gray-500">{completedCount} of {STEPS.length} steps completed</p>
+            <p className="text-sm font-bold text-[#D4C4A0]">Getting Started</p>
+            <p className="text-xs text-[rgba(245,240,232,0.35)]">{completedCount} of {STEPS.length} steps completed</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           {allDone && (
             <button
               onClick={dismiss}
-              className="text-xs text-gray-500 hover:text-gray-300 px-3 py-1 rounded-lg hover:bg-white/5 transition-colors"
+              className="text-xs text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] px-3 py-1 rounded-lg hover:bg-white/5 transition-colors"
             >
               Dismiss
             </button>
           )}
           <button
             onClick={() => setExpanded(!expanded)}
-            className="p-1.5 rounded-lg text-gray-500 hover:text-gray-300 hover:bg-white/5 transition-colors"
+            className="p-1.5 rounded-lg text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/5 transition-colors"
           >
             {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
           {!allDone && (
-            <button onClick={dismiss} className="p-1.5 rounded-lg text-gray-600 hover:text-gray-400 hover:bg-white/5 transition-colors">
+            <button onClick={dismiss} className="p-1.5 rounded-lg text-[rgba(245,240,232,0.25)] hover:text-[rgba(245,240,232,0.50)] hover:bg-white/5 transition-colors">
               <X className="w-4 h-4" />
             </button>
           )}
@@ -126,13 +126,13 @@ export function OnboardingChecklist() {
 
       {/* Progress bar */}
       <div className="px-6 pt-3 pb-1">
-        <div className="flex items-center justify-between text-xs text-gray-500 mb-1.5">
+        <div className="flex items-center justify-between text-xs text-[rgba(245,240,232,0.35)] mb-1.5">
           <span>Onboarding Progress</span>
-          <span className="text-[#c9a96e] font-bold">{pct}%</span>
+          <span className="text-[#B09B71] font-bold">{pct}%</span>
         </div>
         <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-[#b8942e] to-[#e8d5a3] transition-all duration-500"
+            className="h-full rounded-full bg-gradient-to-r from-[#b8942e] to-[#D4C4A0] transition-all duration-500"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -144,25 +144,25 @@ export function OnboardingChecklist() {
           {STEPS.map((step) => {
             const done = completedSet.has(step.id);
             return (
-              <div key={step.id} className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${done ? 'bg-[#c9a96e]/5' : 'hover:bg-white/3'}`}>
+              <div key={step.id} className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${done ? 'bg-[#B09B71]/5' : 'hover:bg-white/3'}`}>
                 <button
                   onClick={() => toggleStep(step.id)}
-                  className={`shrink-0 transition-colors ${done ? 'text-[#c9a96e]' : 'text-gray-600 hover:text-gray-400'}`}
+                  className={`shrink-0 transition-colors ${done ? 'text-[#B09B71]' : 'text-[rgba(245,240,232,0.25)] hover:text-[rgba(245,240,232,0.50)]'}`}
                 >
                   {done ? <CheckCircle className="w-5 h-5" /> : <Circle className="w-5 h-5" />}
                 </button>
                 <div className="flex-1 min-w-0">
-                  <p className={`text-sm font-medium ${done ? 'text-gray-400 line-through' : 'text-gray-200'}`}>
+                  <p className={`text-sm font-medium ${done ? 'text-[rgba(245,240,232,0.50)] line-through' : 'text-[rgba(245,240,232,0.80)]'}`}>
                     {step.label}
                   </p>
                   {!done && (
-                    <p className="text-xs text-gray-500 truncate">{step.description}</p>
+                    <p className="text-xs text-[rgba(245,240,232,0.35)] truncate">{step.description}</p>
                   )}
                 </div>
                 {!done && (
                   <Link
                     href={step.href}
-                    className="shrink-0 text-xs text-[#c9a96e] hover:text-[#e8d5a3] font-medium transition-colors"
+                    className="shrink-0 text-xs text-[#B09B71] hover:text-[#D4C4A0] font-medium transition-colors"
                   >
                     Go →
                   </Link>
@@ -172,9 +172,9 @@ export function OnboardingChecklist() {
           })}
 
           {allDone && (
-            <div className="mt-3 text-center py-3 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20">
-              <p className="text-sm font-bold text-[#e8d5a3]"> You're all set!</p>
-              <p className="text-xs text-gray-500 mt-1">Welcome to Faircroft HOA</p>
+            <div className="mt-3 text-center py-3 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/20">
+              <p className="text-sm font-bold text-[#D4C4A0]"> You're all set!</p>
+              <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1">Welcome to Faircroft HOA</p>
             </div>
           )}
         </div>
