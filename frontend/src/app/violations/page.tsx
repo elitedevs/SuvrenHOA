@@ -162,7 +162,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
 
 function ViolationCard({ violation }: { violation: any }) {
   const [expanded, setExpanded] = useState(false);
-  const statusInfo = (STATUS_FLOW as any)[violation.status] || { color: 'gray', label: violation.status };
+  const statusInfo = STATUS_FLOW[violation.status as keyof typeof STATUS_FLOW] || { color: 'gray', label: violation.status };
   const cat = CATEGORIES.find(c => c.id === violation.category);
   const updates = violation.hoa_violation_updates || [];
 

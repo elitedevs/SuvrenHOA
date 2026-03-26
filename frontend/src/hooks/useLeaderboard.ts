@@ -64,9 +64,12 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
   }
   const fromBlock = toBlock > BLOCK_SCAN_RANGE ? toBlock - BLOCK_SCAN_RANGE : BigInt(0);
 
-  const safeGetLogs = async (params: Parameters<typeof publicClient.getContractEvents>[0]) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type AnyLog = any;
+  const safeGetLogs = async (params: Parameters<typeof publicClient.getContractEvents>[0]): Promise<AnyLog[]> => {
     try {
-      return await publicClient.getContractEvents(params as any);
+      // Cast required: viem's strict overloads don't infer args without literal ABI
+      return await publicClient.getContractEvents(params as Parameters<typeof publicClient.getContractEvents>[0]) as AnyLog[];
     } catch {
       return [];
     }
@@ -75,14 +78,14 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
   // --- 1. Governance Champions: VoteCast events ---
   const voteLogs = await safeGetLogs({
     address: contracts.governor,
-    abi: FaircroftGovernorAbi as any,
+    abi: FaircroftGovernorAbi as readonly unknown[],
     eventName: 'VoteCast',
     fromBlock,
     toBlock,
   });
 
   const voteMap = new Map<string, number>();
-  for (const log of voteLogs as any[]) {
+  for (const log of voteLogs) {
     const addr = safeAddr(log.args?.voter);
     if (!addr) continue;
     voteMap.set(addr, (voteMap.get(addr) ?? 0) + 1);
@@ -91,7 +94,7 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
   // Also track total proposals to calculate participation rate
   const proposalCreatedLogs = await safeGetLogs({
     address: contracts.governor,
-    abi: FaircroftGovernorAbi as any,
+    abi: FaircroftGovernorAbi as readonly unknown[],
     eventName: 'ProposalCreated',
     fromBlock,
     toBlock,
@@ -107,7 +110,7 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
   // --- 2. Prompt Payers: DuesPaid events ---
   const duesPaidLogs = await safeGetLogs({
     address: contracts.treasury,
-    abi: FaircroftTreasuryAbi as any,
+    abi: FaircroftTreasuryAbi as readonly unknown[],
     eventName: 'DuesPaid',
     fromBlock,
     toBlock,
@@ -115,7 +118,7 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
 
   // Track: count per payer + earliest payment (for "first to pay" badge)
   const payerMap = new Map<string, { count: number; firstBlock: bigint }>();
-  for (const log of duesPaidLogs as any[]) {
+  for (const log of duesPaidLogs) {
     const addr = safeAddr(log.args?.payer);
     if (!addr) continue;
     const blockNum = log.blockNumber as bigint;
@@ -153,7 +156,7 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
 
   // --- 3. Community Contributors: ProposalCreated events ---
   const proposerMap = new Map<string, number>();
-  for (const log of proposalCreatedLogs as any[]) {
+  for (const log of proposalCreatedLogs) {
     const addr = safeAddr(log.args?.proposer);
     if (!addr) continue;
     proposerMap.set(addr, (proposerMap.get(addr) ?? 0) + 1);
@@ -167,14 +170,14 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
   // --- 4. Document Champions: DocumentRegistered events ---
   const docLogs = await safeGetLogs({
     address: contracts.documentRegistry,
-    abi: DocumentRegistryAbi as any,
+    abi: DocumentRegistryAbi as readonly unknown[],
     eventName: 'DocumentRegistered',
     fromBlock,
     toBlock,
   });
 
   const docMap = new Map<string, number>();
-  for (const log of docLogs as any[]) {
+  for (const log of docLogs) {
     const addr = safeAddr(log.args?.uploadedBy);
     if (!addr) continue;
     docMap.set(addr, (docMap.get(addr) ?? 0) + 1);

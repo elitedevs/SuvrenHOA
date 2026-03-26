@@ -49,9 +49,12 @@ async function fetchEvents(): Promise<ActivityItem[]> {
 
   const items: ActivityItem[] = [];
 
-  const safeGetLogs = async (params: Parameters<typeof publicClient.getContractEvents>[0]) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type AnyLog = any;
+  const safeGetLogs = async (params: Parameters<typeof publicClient.getContractEvents>[0]): Promise<AnyLog[]> => {
     try {
-      return await publicClient.getContractEvents(params as any);
+      // Cast required: viem's strict overloads don't infer args without literal ABI
+      return await publicClient.getContractEvents(params as Parameters<typeof publicClient.getContractEvents>[0]) as AnyLog[];
     } catch {
       return [];
     }
@@ -60,12 +63,12 @@ async function fetchEvents(): Promise<ActivityItem[]> {
   // 1. PropertyNFT — PropertyMinted (new property)
   const mintedLogs = await safeGetLogs({
     address: contracts.propertyNFT,
-    abi: PropertyNFTAbi as any,
+    abi: PropertyNFTAbi as readonly unknown[],
     eventName: 'PropertyMinted',
     fromBlock,
     toBlock,
   });
-  for (const log of mintedLogs as any[]) {
+  for (const log of mintedLogs) {
     const { tokenId, owner, lotNumber, streetAddress } = log.args ?? {};
     const lotNum = lotNumber !== undefined ? `Lot #${Number(lotNumber)}` : `Property #${tokenId}`;
     const ownerStr = owner ? truncateAddr(owner) : '?';
@@ -82,12 +85,12 @@ async function fetchEvents(): Promise<ActivityItem[]> {
   // 2. PropertyNFT — Transfer (non-mint transfers)
   const transferLogs = await safeGetLogs({
     address: contracts.propertyNFT,
-    abi: PropertyNFTAbi as any,
+    abi: PropertyNFTAbi as readonly unknown[],
     eventName: 'Transfer',
     fromBlock,
     toBlock,
   });
-  for (const log of transferLogs as any[]) {
+  for (const log of transferLogs) {
     const { from, to, tokenId } = log.args ?? {};
     // Skip mint events (from === address zero) — covered by PropertyMinted
     if (from === '0x0000000000000000000000000000000000000000') continue;
@@ -106,12 +109,12 @@ async function fetchEvents(): Promise<ActivityItem[]> {
   // 3. FaircroftGovernor — ProposalCreated
   const proposalLogs = await safeGetLogs({
     address: contracts.governor,
-    abi: FaircroftGovernorAbi as any,
+    abi: FaircroftGovernorAbi as readonly unknown[],
     eventName: 'ProposalCreated',
     fromBlock,
     toBlock,
   });
-  for (const log of proposalLogs as any[]) {
+  for (const log of proposalLogs) {
     const { description } = log.args ?? {};
     // Description may have "# Title\n..." format — grab first line
     const title = description
@@ -130,12 +133,12 @@ async function fetchEvents(): Promise<ActivityItem[]> {
   // 4. FaircroftGovernor — VoteCast
   const voteLogs = await safeGetLogs({
     address: contracts.governor,
-    abi: FaircroftGovernorAbi as any,
+    abi: FaircroftGovernorAbi as readonly unknown[],
     eventName: 'VoteCast',
     fromBlock,
     toBlock,
   });
-  for (const log of voteLogs as any[]) {
+  for (const log of voteLogs) {
     const { voter, support, reason } = log.args ?? {};
     const supportLabel = support === 0 ? 'AGAINST' : support === 1 ? 'FOR' : 'ABSTAIN';
     const voterStr = voter ? truncateAddr(voter) : '?';
@@ -153,12 +156,12 @@ async function fetchEvents(): Promise<ActivityItem[]> {
   // 5. FaircroftTreasury — DuesPaid
   const duesPaidLogs = await safeGetLogs({
     address: contracts.treasury,
-    abi: FaircroftTreasuryAbi as any,
+    abi: FaircroftTreasuryAbi as readonly unknown[],
     eventName: 'DuesPaid',
     fromBlock,
     toBlock,
   });
-  for (const log of duesPaidLogs as any[]) {
+  for (const log of duesPaidLogs) {
     const { tokenId, payer, amount } = log.args ?? {};
     const payerStr = payer ? truncateAddr(payer) : '?';
     const amountStr = amount !== undefined ? usdcAmount(BigInt(amount)) : '?';
@@ -175,12 +178,12 @@ async function fetchEvents(): Promise<ActivityItem[]> {
   // 6. FaircroftTreasury — ExpenditureMade
   const expenditureLogs = await safeGetLogs({
     address: contracts.treasury,
-    abi: FaircroftTreasuryAbi as any,
+    abi: FaircroftTreasuryAbi as readonly unknown[],
     eventName: 'ExpenditureMade',
     fromBlock,
     toBlock,
   });
-  for (const log of expenditureLogs as any[]) {
+  for (const log of expenditureLogs) {
     const { amount, description } = log.args ?? {};
     const amountStr = amount !== undefined ? usdcAmount(BigInt(amount)) : '?';
     const descStr = description ? description.trim().slice(0, 50) : 'Expenditure';
@@ -197,12 +200,12 @@ async function fetchEvents(): Promise<ActivityItem[]> {
   // 7. DocumentRegistry — DocumentRegistered
   const docLogs = await safeGetLogs({
     address: contracts.documentRegistry,
-    abi: DocumentRegistryAbi as any,
+    abi: DocumentRegistryAbi as readonly unknown[],
     eventName: 'DocumentRegistered',
     fromBlock,
     toBlock,
   });
-  for (const log of docLogs as any[]) {
+  for (const log of docLogs) {
     const { title } = log.args ?? {};
     const titleStr = title ? title.slice(0, 60) : 'New Document';
     items.push({

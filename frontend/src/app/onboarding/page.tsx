@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useCallback } from "react";
-import { useAccount } from "wagmi";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { useProperty } from "@/hooks/useProperty";
+import { useState, useEffect, useCallback } from 'react';
+import { useAccount } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useProperty } from '@/hooks/useProperty';
 import {
   useOnboarding,
   PetEntry,
   VehicleEntry,
-} from "@/hooks/useOnboarding";
+} from '@/hooks/useOnboarding';
 
 // ── Confetti ─────────────────────────────────────────────────────────────────
 function Confetti() {
   const pieces = Array.from({ length: 60 }, (_, i) => i);
   const colors = [
-    "#c9a96e", "#e8d5a3", "#b8942e", "#22c55e", "#f59e0b",
-    "#ec4899", "#06b6d4", "#f97316",
+    '#c9a96e', '#e8d5a3', '#b8942e', '#22c55e', '#f59e0b',
+    '#ec4899', '#06b6d4', '#f97316',
   ];
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden z-50">
@@ -77,8 +77,8 @@ function StepIndicator({
             style={{
               background:
                 i < current
-                  ? "linear-gradient(90deg, #c9a96e, #b8942e)"
-                  : "rgba(255,255,255,0.08)",
+                  ? 'linear-gradient(90deg, #c9a96e, #b8942e)'
+                  : 'rgba(255,255,255,0.08)',
             }}
           />
         ))}
@@ -303,7 +303,7 @@ function OnboardingWizard() {
           </p>
 
           {hasProperty && propertyInfo ? (
-            <div className="bg-[#c9a96e]/80/8 border border-[#c9a96e]/20 rounded-xl p-5 mb-7">
+            <div className="bg-[#c9a96e]/10 border border-[#c9a96e]/20 rounded-xl p-5 mb-7">
               <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">
                 Your Property
               </p>

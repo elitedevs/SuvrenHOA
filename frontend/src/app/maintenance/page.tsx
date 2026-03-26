@@ -90,7 +90,7 @@ export default function MaintenancePage() {
 
 function RequestCard({ request }: { request: any }) {
   const [expanded, setExpanded] = useState(false);
-  const style = (STATUS_STYLES as any)[request.status] || STATUS_STYLES.open;
+  const style = STATUS_STYLES[request.status as keyof typeof STATUS_STYLES] || STATUS_STYLES.open;
   const timeAgo = getTimeAgo(new Date(request.created_at));
 
   return (
@@ -103,7 +103,7 @@ function RequestCard({ request }: { request: any }) {
               <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${style.bg} ${style.color} ${style.border}`}>
                 {style.label}
               </span>
-              <span className={`text-[10px] font-medium ${(PRIORITY_STYLES as any)[request.priority] || 'text-gray-400'}`}>
+              <span className={`text-[10px] font-medium ${PRIORITY_STYLES[request.priority as keyof typeof PRIORITY_STYLES] || 'text-gray-400'}`}>
                 {request.priority.toUpperCase()}
               </span>
             </div>

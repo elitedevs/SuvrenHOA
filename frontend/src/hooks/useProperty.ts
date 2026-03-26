@@ -59,7 +59,7 @@ export function useProperty() {
     if (!address || balanceNum === 0) return [];
     return Array.from({ length: balanceNum }, (_, i) => ({
       address: propertyNFT.address,
-      abi: propertyNFT.abi as readonly unknown[] as any,
+      abi: propertyNFT.abi as readonly unknown[],
       functionName: 'tokenOfOwnerByIndex',
       args: [address, BigInt(i)],
     }));
@@ -83,7 +83,7 @@ export function useProperty() {
     if (tokenIds.length === 0) return [];
     return tokenIds.map((id) => ({
       address: propertyNFT.address,
-      abi: propertyNFT.abi as readonly unknown[] as any,
+      abi: propertyNFT.abi as readonly unknown[],
       functionName: 'getProperty',
       args: [BigInt(id)],
     }));

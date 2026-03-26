@@ -120,7 +120,7 @@ function AnnouncementCard({ announcement }: { announcement: any }) {
             <div className="flex items-center gap-2">
               <div className="w-16 h-1.5 rounded-full bg-gray-800 overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-[#c9a96e]/80/60"
+                  className="h-full rounded-full bg-[#c9a96e]/60"
                   style={{ width: `${readPercent}%` }}
                 />
               </div>

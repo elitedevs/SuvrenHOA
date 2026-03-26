@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useState } from "react";
-import { useAccount } from "wagmi";
-import { useProperty } from "@/hooks/useProperty";
+import { useCallback, useEffect, useState } from 'react';
+import { useAccount } from 'wagmi';
+import { useProperty } from '@/hooks/useProperty';
 
 export interface PetEntry {
   id: string;

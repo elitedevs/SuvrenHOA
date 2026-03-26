@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState, useCallback } from "react";
-import { useAccount } from "wagmi";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import Link from "next/link";
-import { useProperty } from "@/hooks/useProperty";
-import { useDuesStatus } from "@/hooks/useTreasury";
+import { useState, useCallback } from 'react';
+import { useAccount } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Link from 'next/link';
+import { useProperty } from '@/hooks/useProperty';
+import { useDuesStatus } from '@/hooks/useTreasury';
 
 // ── Step Indicator ────────────────────────────────────────────────────────────
 function StepIndicator({ current, total }: { current: number; total: number }) {
@@ -27,8 +27,8 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
             style={{
               background:
                 i < current
-                  ? "linear-gradient(90deg, #f59e0b, #f97316)"
-                  : "rgba(255,255,255,0.08)",
+                  ? 'linear-gradient(90deg, #c9a96e, #b8942e)'
+                  : 'rgba(255,255,255,0.08)',
             }}
           />
         ))}
@@ -55,9 +55,9 @@ function CheckRow({
     <label
       className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
         checked
-          ? "border-green-500/30 bg-green-500/5"
-          : "border-gray-700/40 bg-gray-800/30"
-      } ${disabled ? "opacity-60 cursor-not-allowed" : ""}`}
+          ? 'border-green-500/30 bg-green-500/5'
+          : 'border-gray-700/40 bg-gray-800/30'
+      } ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`}
     >
       <input
         type="checkbox"
@@ -83,7 +83,7 @@ function CheckoutWizard() {
   // Step 1 state
   const [keyFobReturned, setKeyFobReturned] = useState(false);
   const [poolKeyReturned, setPoolKeyReturned] = useState(false);
-  const [forwardingAddress, setForwardingAddress] = useState("");
+  const [forwardingAddress, setForwardingAddress] = useState('');
 
   // Step 2 state
   const [obligationsConfirmed, setObligationsConfirmed] = useState(false);
@@ -107,7 +107,7 @@ function CheckoutWizard() {
             Move-Out Checklist
           </h1>
           <p className="text-sm text-gray-500">
-            Faircroft HOA · Property #{tokenId ?? "—"}
+            Faircroft HOA · Property #{tokenId ?? '—'}
           </p>
         </div>
       )}
@@ -126,8 +126,8 @@ function CheckoutWizard() {
           <div
             className={`p-4 rounded-xl border mb-4 ${
               isCurrent === false
-                ? "border-red-500/30 bg-red-500/5"
-                : "border-green-500/30 bg-green-500/5"
+                ? 'border-red-500/30 bg-red-500/5'
+                : 'border-green-500/30 bg-green-500/5'
             }`}
           >
             <div className="flex items-center justify-between">
@@ -141,9 +141,9 @@ function CheckoutWizard() {
                   <p className="text-sm font-semibold text-gray-200">HOA Dues</p>
                   <p className="text-xs text-gray-500">
                     {isCurrent === undefined
-                      ? "Checking..."
+                      ? 'Checking...'
                       : isCurrent
-                      ? "All dues are current"
+                      ? 'All dues are current'
                       : `${quartersOwed} quarters owed · $${amountOwed}`}
                   </p>
                 </div>
@@ -218,8 +218,8 @@ function CheckoutWizard() {
           <div
             className={`p-5 rounded-xl border mb-6 ${
               isCurrent === false
-                ? "border-red-500/30 bg-red-500/8"
-                : "border-green-500/30 bg-green-500/5"
+                ? 'border-red-500/30 bg-red-500/8'
+                : 'border-green-500/30 bg-green-500/5'
             }`}
           >
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">
@@ -231,7 +231,7 @@ function CheckoutWizard() {
                   ${amountOwed}
                 </p>
                 <p className="text-sm text-gray-400 mb-4">
-                  {quartersOwed} quarter{quartersOwed !== 1 ? "s" : ""} past due
+                  {quartersOwed} quarter{quartersOwed !== 1 ? 's' : ''} past due
                 </p>
                 <Link
                   href="/dues"

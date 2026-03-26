@@ -52,7 +52,7 @@ export function NotificationBell() {
               {notifications.slice(0, 20).map((n: Notification) => (
                 <div
                   key={n.id}
-                  className={`p-3 hover:bg-white/[0.02] transition-colors cursor-pointer ${!n.read ? 'bg-[#c9a96e]/80/[0.03]' : ''}`}
+                  className={`p-3 hover:bg-white/[0.02] transition-colors cursor-pointer ${!n.read ? 'bg-[#c9a96e]/5' : ''}`}
                   onClick={() => {
                     if (!n.read) markRead.mutate(n.id);
                     if (n.link) window.location.href = n.link;

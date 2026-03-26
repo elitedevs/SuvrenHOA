@@ -39,17 +39,17 @@ export function useDuesSocialProof(): DuesSocialProof {
         const [totalSupplyRaw, quarterlyRaw, discountRaw] = await Promise.all([
           publicClient.readContract({
             address: contracts.propertyNFT,
-            abi: PropertyNFTAbi as never[],
+            abi: PropertyNFTAbi as readonly unknown[],
             functionName: 'totalSupply',
           }),
           publicClient.readContract({
             address: contracts.treasury,
-            abi: FaircroftTreasuryAbi as never[],
+            abi: FaircroftTreasuryAbi as readonly unknown[],
             functionName: 'quarterlyDuesAmount',
           }),
           publicClient.readContract({
             address: contracts.treasury,
-            abi: FaircroftTreasuryAbi as never[],
+            abi: FaircroftTreasuryAbi as readonly unknown[],
             functionName: 'annualDuesDiscount',
           }),
         ]);
@@ -76,12 +76,12 @@ export function useDuesSocialProof(): DuesSocialProof {
 
         // Get all token IDs via tokenByIndex (multicall)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const indexCalls = Array.from({ length: total }, (_, i) => ({
+        const indexCalls: any[] = Array.from({ length: total }, (_, i) => ({
           address: contracts.propertyNFT as `0x${string}`,
           abi: PropertyNFTAbi,
           functionName: 'tokenByIndex',
           args: [BigInt(i)],
-        })) as any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+        }));
 
         const tokenIdResults = await publicClient.multicall({ contracts: indexCalls });
         const tokenIds = tokenIdResults
@@ -89,12 +89,13 @@ export function useDuesSocialProof(): DuesSocialProof {
           .map((r) => r.result as bigint);
 
         // Batch-check isDuesCurrent for each token
-        const dueCalls = tokenIds.map((id) => ({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const dueCalls: any[] = tokenIds.map((id) => ({
           address: contracts.treasury as `0x${string}`,
           abi: FaircroftTreasuryAbi,
           functionName: 'isDuesCurrent',
           args: [id],
-        })) as any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+        }));
 
         const dueResults = await publicClient.multicall({ contracts: dueCalls });
         const paidCount = dueResults.filter(

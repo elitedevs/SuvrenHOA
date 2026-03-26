@@ -88,7 +88,7 @@ export async function PATCH(request: Request) {
     .eq('id', id)
     .single();
 
-  const updates: Record<string, any> = { status, updated_at: new Date().toISOString() };
+  const updates: Record<string, unknown> = { status, updated_at: new Date().toISOString() };
   if (notes) updates.review_notes = notes;
   if (fine_amount !== undefined) updates.fine_amount = fine_amount;
   if (cure_days) {
