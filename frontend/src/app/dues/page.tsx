@@ -10,6 +10,7 @@ import { DuesReminder } from '@/components/DuesReminder';
 import { useDuesSocialProof } from '@/hooks/useDuesSocialProof';
 import { DuesPaymentChart } from '@/components/DuesPaymentChart';
 import { DuesCalculator } from '@/components/DuesCalculator';
+import { DuesAutoPay } from '@/components/DuesAutoPay';
 
 export default function DuesPage() {
   const { isConnected } = useAccount();
@@ -363,6 +364,11 @@ function DuesPanel() {
       {/* Dues Calculator */}
       <div className="mt-8 page-enter page-enter-delay-3">
         <DuesCalculator baseQuarterlyRate={parseFloat(quarterlyDues.replace(/,/g, '')) || 450} />
+      </div>
+
+      {/* Auto-Pay */}
+      <div className="mt-8 page-enter page-enter-delay-3">
+        <DuesAutoPay walletAddress={address} />
       </div>
     </div>
   );

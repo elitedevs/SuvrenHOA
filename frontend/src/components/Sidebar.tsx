@@ -50,9 +50,12 @@ const NAV_SECTIONS = [
       { href: '/community/forum', label: 'Forum', icon: MessageCircle },
       { href: '/announcements', label: 'Announcements', icon: Megaphone },
       { href: '/community/leaderboard', label: 'Leaderboard', icon: Trophy },
+      { href: '/community/cookbook', label: 'Cookbook', icon: BookOpen },
+      { href: '/community/fitness', label: 'Fitness', icon: Heart },
       { href: '/calendar', label: 'Calendar', icon: Calendar },
       { href: '/directory', label: 'Directory', icon: BookOpen },
       { href: '/emergency', label: 'Emergency', icon: AlertTriangle },
+      { href: '/emergency/preparedness', label: 'Preparedness', icon: Shield },
     ],
   },
   {
@@ -89,6 +92,8 @@ const NAV_SECTIONS = [
       { href: '/utilities', label: 'Utilities', icon: Zap },
       { href: '/surveys/builder', label: 'Survey Builder', icon: ClipboardList },
       { href: '/treasury/vendors', label: 'Vendor Payments', icon: DollarSign },
+      { href: '/services/trash', label: 'Trash Schedule', icon: Wrench },
+      { href: '/documents/minutes', label: 'Meeting Minutes', icon: FileText },
     ],
   },
   {

@@ -9,6 +9,7 @@ import { useMessages } from '@/hooks/useMessages';
 import { useOnboarding } from '@/hooks/useOnboarding';
 import { PropertySelector } from '@/components/PropertySelector';
 import { QRModal } from '@/components/QRCode';
+import { PropertyImprovements } from '@/components/PropertyImprovements';
 import Link from 'next/link';
 
 // ── Property Insights (inline component) ──
@@ -356,6 +357,11 @@ function PropertyDashboard() {
             </Link>
           ))}
         </div>
+      </div>
+
+      {/* Property Improvements */}
+      <div className="mt-6 page-enter page-enter-delay-3">
+        <PropertyImprovements />
       </div>
     </div>
   );
