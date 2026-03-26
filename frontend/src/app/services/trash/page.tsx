@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Printer } from 'lucide-react';
+import { Printer, ClipboardList } from 'lucide-react';
 
 type PickupType = 'trash' | 'recycling' | 'yard';
 
@@ -227,7 +227,7 @@ export default function TrashSchedulePage() {
 
       {/* Schedule Summary */}
       <div className="glass rounded-2xl p-5 border border-white/[0.04] mt-6">
-        <h2 className="text-sm font-bold text-gray-300 mb-3">📋 Weekly Schedule</h2>
+        <h2 className="text-sm font-bold text-gray-300 mb-3 flex items-center gap-2"><ClipboardList className="w-4 h-4 text-[#c9a96e]" /> Weekly Schedule</h2>
         <div className="space-y-2">
           {[
             { day: 'Monday', pickups: ['🗑️ Trash', '🌿 Yard Waste (bi-weekly)'] },

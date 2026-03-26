@@ -11,6 +11,7 @@ import {
   PetEntry,
   VehicleEntry,
 } from '@/hooks/useOnboarding';
+import { Home, CreditCard, MessageSquare, FileText, Car } from 'lucide-react';
 
 // ── Confetti ─────────────────────────────────────────────────────────────────
 function Confetti() {
@@ -158,7 +159,7 @@ function VehicleCard({
   return (
     <div className="glass-card rounded-xl p-4 border border-blue-500/10 mb-3">
       <div className="flex justify-between items-start mb-3">
-        <span className="text-sm font-semibold text-blue-300">🚗 Vehicle</span>
+        <span className="text-sm font-semibold text-blue-300 flex items-center gap-1.5"><Car className="w-4 h-4" /> Vehicle</span>
         <button
           onClick={onRemove}
           className="text-xs text-red-400 hover:text-red-300 transition-colors"
@@ -294,7 +295,7 @@ function OnboardingWizard() {
       {/* ── Step 1: Welcome ── */}
       {step === 1 && (
         <div className="glass-card rounded-2xl p-8 border-l-2 border-l-[#c9a96e]/50 animate-fade-in">
-          <div className="text-5xl mb-5 text-center">🏡</div>
+          <div className="flex justify-center mb-5"><Home className="w-10 h-10 text-[#c9a96e]" /></div>
           <h2 className="text-2xl font-extrabold text-center mb-2">
             Welcome to Faircroft!
           </h2>
@@ -677,28 +678,28 @@ function OnboardingWizard() {
               href="/dashboard"
               className="glass-card rounded-xl p-4 text-center hover:border-[#c9a96e]/25 transition-all"
             >
-              <div className="text-2xl mb-1">🏠</div>
+              <Home className="w-6 h-6 text-[#c9a96e] mx-auto mb-1" />
               <p className="text-sm font-semibold text-gray-300">Dashboard</p>
             </Link>
             <Link
               href="/dues"
               className="glass-card rounded-xl p-4 text-center hover:border-green-500/25 transition-all"
             >
-              <div className="text-2xl mb-1">💳</div>
+              <CreditCard className="w-6 h-6 text-green-400 mx-auto mb-1" />
               <p className="text-sm font-semibold text-gray-300">Pay Dues</p>
             </Link>
             <Link
               href="/community"
               className="glass-card rounded-xl p-4 text-center hover:border-blue-500/25 transition-all"
             >
-              <div className="text-2xl mb-1">💬</div>
+              <MessageSquare className="w-6 h-6 text-blue-400 mx-auto mb-1" />
               <p className="text-sm font-semibold text-gray-300">Community</p>
             </Link>
             <Link
               href="/documents"
               className="glass-card rounded-xl p-4 text-center hover:border-amber-500/25 transition-all"
             >
-              <div className="text-2xl mb-1">📄</div>
+              <FileText className="w-6 h-6 text-amber-400 mx-auto mb-1" />
               <p className="text-sm font-semibold text-gray-300">Documents</p>
             </Link>
           </div>
@@ -769,7 +770,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
         <div className="flex items-center justify-between mb-3">
           <div>
             <h3 className="font-semibold text-[#e8d5a3]">
-              {mode === 'move-in' ? '🏡 Move-In Checklist' : '📦 Move-Out Checklist'}
+              {mode === 'move-in' ? <span className="flex items-center gap-1.5"><Home className="w-4 h-4" /> Move-In Checklist</span> : '📦 Move-Out Checklist'}
             </h3>
             <p className="text-xs text-gray-400">{completedRequired} of {totalRequired} required tasks complete</p>
           </div>
@@ -859,7 +860,7 @@ export default function OnboardingPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">🏡</div>
+        <Home className="w-10 h-10 text-[#c9a96e] mb-2" />
         <h2 className="text-xl font-bold">Move-In Setup</h2>
         <p className="text-gray-400 text-sm">Connect your wallet to begin</p>
         <ConnectButton label="Connect Wallet" />
@@ -878,7 +879,7 @@ export default function OnboardingPage() {
           </button>
           <button onClick={() => setView('checklist-in')}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
-            🏡 Move-In Checklist
+            <span className="flex items-center gap-1.5"><Home className="w-3.5 h-3.5" /> Move-In Checklist</span>
           </button>
           <button onClick={() => setView('checklist-out')}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { useLeaderboard, type LeaderboardEntry } from '@/hooks/useLeaderboard';
+import { Trophy } from 'lucide-react';
 
 function truncateAddr(addr: string): string {
   if (!addr || addr.length < 12) return addr;
@@ -204,7 +205,7 @@ export default function LeaderboardPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/5 to-transparent pointer-events-none" />
           <div className="relative">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-2xl">🌟</span>
+              <Trophy className="w-6 h-6 text-[#FFD700]" />
               <h2 className="text-base font-bold text-[#FFD700]">Good Neighbor of the Month</h2>
             </div>
             <p className="text-xs text-gray-500 mb-4">Based on combined activity across all categories</p>
@@ -215,7 +216,7 @@ export default function LeaderboardPage() {
               </div>
             ) : goodNeighbor ? (
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#FFD700]/20 flex items-center justify-center text-2xl shrink-0">🏆</div>
+                <div className="w-12 h-12 rounded-full bg-[#FFD700]/20 flex items-center justify-center shrink-0"><Trophy className="w-6 h-6 text-[#FFD700]" /></div>
                 <div className="flex-1">
                   <div className="text-lg font-bold font-mono text-[#FFD700]">
                     {isGoodNeighborYou ? '⭐ You' : truncateAddr(goodNeighbor)}

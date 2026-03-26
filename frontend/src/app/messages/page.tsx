@@ -7,6 +7,7 @@ import { useMessages, Conversation } from '@/hooks/useMessages';
 import { useDirectory } from '@/hooks/useDirectory';
 import { useProperty } from '@/hooks/useProperty';
 import { MessageBubble } from '@/components/MessageBubble';
+import { MessageSquare, Home } from 'lucide-react';
 
 // ── Opt-in registry helper ───────────────────────────────────────────────────
 function setGlobalOptIn(address: string, value: boolean) {
@@ -212,7 +213,7 @@ function ChatPanel({
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-1">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
-            <div className="text-4xl">💬</div>
+            <MessageSquare className="w-6 h-6 text-gray-400 mx-auto" />
             <p className="text-gray-400 text-sm font-medium">
               No messages yet — say hello to Lot #{lotId}!
             </p>
@@ -259,7 +260,7 @@ export default function MessagesPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">💬</div>
+        <MessageSquare className="w-8 h-8 text-gray-400 mb-2" />
         <p className="text-gray-400 text-base font-medium">Sign in to use messaging</p>
         <ConnectButton label="Sign In" />
       </div>
@@ -302,7 +303,7 @@ function MessagingCenter({ address }: { address: string }) {
   if (!hasProperty) {
     return (
       <div className="max-w-2xl mx-auto px-6 py-12 text-center">
-        <div className="text-5xl mb-4">🏠</div>
+        <Home className="w-8 h-8 text-gray-400 mx-auto mb-4" />
         <h2 className="text-xl font-bold mb-2">No Property NFT Found</h2>
         <p className="text-gray-400 text-sm">You need a Faircroft Property NFT to use messaging.</p>
       </div>
@@ -426,7 +427,7 @@ function MessagingCenter({ address }: { address: string }) {
               />
             ) : (
               <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-8">
-                <div className="text-5xl">💬</div>
+                <MessageSquare className="w-8 h-8 text-gray-400 mx-auto" />
                 <p className="text-gray-400 text-base font-medium">
                   Select a conversation or start a new one
                 </p>

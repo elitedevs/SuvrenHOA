@@ -8,6 +8,7 @@ import { useTreasury, useDuesStatus } from '@/hooks/useTreasury';
 import { usePayDues, useUSDCBalance, useUSDCAllowance } from '@/hooks/usePayDues';
 import { DuesReminder } from '@/components/DuesReminder';
 import { useDuesSocialProof } from '@/hooks/useDuesSocialProof';
+import { CreditCard, Home } from 'lucide-react';
 import { DuesPaymentChart } from '@/components/DuesPaymentChart';
 import { DuesCalculator } from '@/components/DuesCalculator';
 import { DuesAutoPay } from '@/components/DuesAutoPay';
@@ -18,7 +19,7 @@ export default function DuesPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">💳</div>
+        <CreditCard className="w-8 h-8 text-gray-400 mb-2" />
         <p className="text-gray-400 text-base font-medium">Sign in to pay dues</p>
         <ConnectButton label="Sign In" />
       </div>
@@ -106,7 +107,7 @@ function DuesPanel() {
     return (
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12 page-enter">
         <div className="glass-card rounded-2xl hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
-          <div className="text-5xl mb-4">🏠</div>
+          <Home className="w-8 h-8 text-amber-400 mx-auto mb-4" />
           <h2 className="text-xl font-bold mb-3">No Property Found</h2>
           <p className="text-gray-400 text-sm">You need a Property NFT to pay dues.</p>
         </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
+import { ClipboardList } from 'lucide-react';
 
 type QuestionType = 'text' | 'multiple_choice' | 'rating';
 
@@ -171,7 +172,7 @@ export default function SurveyBuilderPage() {
         <div className="space-y-4">
           {surveys.length === 0 ? (
             <div className="glass-card rounded-xl p-12 text-center">
-              <p className="text-4xl mb-3">📋</p>
+              <ClipboardList className="w-8 h-8 text-gray-400 mx-auto mb-3" />
               <p className="text-gray-400">No surveys yet. Create your first one!</p>
             </div>
           ) : surveys.map(s => (

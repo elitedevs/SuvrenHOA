@@ -5,6 +5,7 @@ import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useMeetings, type RSVPStatus } from '@/hooks/useMeetings';
 import Link from 'next/link';
+import { CalendarDays, ClipboardList } from 'lucide-react';
 
 export default function MeetingsPage() {
   const { isConnected, address } = useAccount();
@@ -15,7 +16,7 @@ export default function MeetingsPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">📋</div>
+        <ClipboardList className="w-8 h-8 text-gray-400 mb-2" />
         <p className="text-gray-400 text-base font-medium">Sign in to view board meetings</p>
         <ConnectButton label="Sign In" />
       </div>
@@ -75,7 +76,7 @@ export default function MeetingsPage() {
       {/* Meeting List */}
       {displayedMeetings.length === 0 ? (
         <div className="glass-card rounded-2xl p-12 text-center">
-          <p className="text-5xl mb-4">📋</p>
+          <ClipboardList className="w-8 h-8 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-bold mb-2">No Meetings Scheduled</h3>
           <p className="text-sm text-gray-400">Board meetings will appear here once scheduled.</p>
         </div>
@@ -248,7 +249,7 @@ function CreateMeetingForm({
             disabled={!title.trim() || !date || saving}
             className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-bold transition-all"
           >
-            {saving ? '⏳ Saving...' : '📋 Schedule Meeting'}
+            {saving ? <span className="flex items-center justify-center gap-1.5"><CalendarDays className="w-4 h-4 animate-pulse" /> Saving...</span> : <span className="flex items-center justify-center gap-1.5"><CalendarDays className="w-4 h-4" /> Schedule Meeting</span>}
           </button>
         </div>
       </div>

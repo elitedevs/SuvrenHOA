@@ -12,6 +12,7 @@ import {
   STATE_COLORS,
 } from '@/hooks/useProposals';
 import { ProposalTemplates } from '@/components/ProposalTemplates';
+import { Vote as VoteIcon } from 'lucide-react';
 
 export default function ProposalsPage() {
   const { isConnected } = useAccount();
@@ -39,7 +40,7 @@ export default function ProposalsPage() {
 
       {!isConnected ? (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
-          <div className="text-5xl mb-2">🗳️</div>
+          <VoteIcon className="w-8 h-8 text-gray-400 mb-2" />
           <p className="text-gray-400 text-base font-medium">Sign in to participate in governance</p>
           <ConnectButton label="Sign In" />
         </div>
@@ -179,7 +180,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
   if (!hasProperty) {
     return (
       <div className="glass-card rounded-2xl hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
-        <div className="text-5xl mb-4">🏠</div>
+        <VoteIcon className="w-8 h-8 text-amber-400 mx-auto mb-4" />
         <h3 className="text-xl font-bold mb-3">Property Required</h3>
         <p className="text-sm text-gray-400 max-w-sm mx-auto">
           You need a Property NFT (at least 1 vote) to create proposals.

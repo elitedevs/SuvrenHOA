@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { FileText, CheckCircle, Users, Clock } from 'lucide-react';
 
 // Mock governance stats — replace with real on-chain aggregation as needed
 const MOCK_STATS = {
@@ -43,14 +44,14 @@ export default function GovernanceStatsPage() {
       {/* Stat Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: 'Total Proposals', value: MOCK_STATS.totalProposals, icon: '📋', color: 'blue' },
-          { label: 'Pass Rate', value: `${MOCK_STATS.passRate}%`, icon: '✅', color: 'green' },
-          { label: 'Avg Turnout', value: `${MOCK_STATS.avgTurnout}%`, icon: '🗳️', color: 'amber' },
-          { label: 'Avg Voting Period', value: `${MOCK_STATS.avgVotingPeriodDays}d`, icon: '⏱️', color: 'purple' },
+          { label: 'Total Proposals', value: MOCK_STATS.totalProposals, icon: <FileText className="w-5 h-5 text-[#c9a96e]" /> },
+          { label: 'Pass Rate', value: `${MOCK_STATS.passRate}%`, icon: <CheckCircle className="w-5 h-5 text-[#c9a96e]" /> },
+          { label: 'Avg Turnout', value: `${MOCK_STATS.avgTurnout}%`, icon: <Users className="w-5 h-5 text-[#c9a96e]" /> },
+          { label: 'Avg Voting Period', value: `${MOCK_STATS.avgVotingPeriodDays}d`, icon: <Clock className="w-5 h-5 text-[#c9a96e]" /> },
         ].map(stat => (
           <div key={stat.label} className="glass-card rounded-2xl hover-lift p-5">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-9 h-9 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-lg">
+              <div className="w-9 h-9 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center">
                 {stat.icon}
               </div>
             </div>

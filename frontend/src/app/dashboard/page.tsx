@@ -7,10 +7,15 @@ import { useProperty } from '@/hooks/useProperty';
 import { useDuesStatus } from '@/hooks/useTreasury';
 import { useMessages } from '@/hooks/useMessages';
 import { useOnboarding } from '@/hooks/useOnboarding';
+import { useProfile } from '@/hooks/useProfile';
 import { PropertySelector } from '@/components/PropertySelector';
 import { QRModal } from '@/components/QRCode';
 import { PropertyImprovements } from '@/components/PropertyImprovements';
 import Link from 'next/link';
+import {
+  Home, MessageSquare, ClipboardList, DollarSign, FileText, CreditCard,
+  Smartphone, Share2,
+} from 'lucide-react';
 
 // ── Property Insights (inline component) ──
 const SPARKLINE = [100, 105, 102, 108, 112, 110, 117, 119, 123, 128, 132, 138];
@@ -77,7 +82,7 @@ export default function DashboardPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">🏠</div>
+        <Home className="w-8 h-8 text-gray-400 mb-2" />
         <p className="text-gray-400 text-base font-medium">Sign in to view your property</p>
         <ConnectButton label="Sign In" />
       </div>
@@ -105,6 +110,8 @@ function PropertyDashboard() {
   const { isCurrent, quartersOwed, amountOwed } = useDuesStatus(tokenId);
   const { totalUnread } = useMessages();
   const { isCompleted } = useOnboarding();
+  const { profile } = useProfile();
+  const displayName = profile?.display_name || (tokenId !== undefined ? `Lot #${tokenId}` : `Lot #${tokenId}`);
   const [showQR, setShowQR] = useState(false);
 
   if (!hasProperty) {
@@ -119,8 +126,8 @@ function PropertyDashboard() {
 
         {/* Empty state */}
         <div className="glass-card rounded-2xl p-12 text-center border-l-2 border-l-amber-500/40">
-          <div className="w-20 h-20 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-4xl mx-auto mb-6">
-            🏠
+          <div className="w-20 h-20 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mx-auto mb-6">
+            <Home className="w-8 h-8 text-amber-400" />
           </div>
           <h3 className="text-xl font-bold mb-3 text-gray-100">No Property NFT Detected</h3>
           <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed mb-6">
@@ -159,10 +166,10 @@ function PropertyDashboard() {
           {tokenId !== undefined && (
             <button
               onClick={() => setShowQR(true)}
-              className="px-3 py-2 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-xs font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
+              className="px-3 py-2 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-xs font-medium text-gray-400 hover:text-[#e8d5a3] transition-all flex items-center gap-1.5"
               title="Share Property QR Code"
             >
-              📱 Share
+              <Smartphone className="w-3.5 h-3.5" /> Share
             </button>
           )}
         </div>
@@ -303,7 +310,7 @@ function PropertyDashboard() {
       {hasProperty && !isCompleted && (
         <a href="/onboarding" className="flex items-center justify-between px-4 py-3.5 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/15 transition-all duration-200 mb-4 cursor-pointer no-underline group">
           <div className="flex items-center gap-3">
-            <span className="text-xl">🏡</span>
+            <Home className="w-5 h-5 text-[#c9a96e]" />
             <div>
               <p className="text-sm font-semibold text-[#e8d5a3] group-hover:text-[#e8d5a3]">
                 Complete Your Setup
@@ -319,7 +326,7 @@ function PropertyDashboard() {
       {totalUnread > 0 && (
         <a href="/messages" className="flex items-center justify-between px-4 py-3 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 hover:bg-[#c9a96e]/10 transition-all duration-200 mb-4 cursor-pointer no-underline">
           <div className="flex items-center gap-3">
-            <span className="text-xl">💬</span>
+            <MessageSquare className="w-5 h-5 text-[#c9a96e]" />
             <div>
               <p className="text-sm font-semibold text-[#e8d5a3]">
                 {totalUnread} unread message{totalUnread !== 1 ? 's' : ''}
@@ -336,18 +343,18 @@ function PropertyDashboard() {
         <h2 className="text-lg font-bold mb-4 text-gray-200">Quick Actions</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { href: '/messages', icon: '💬', label: 'Messages', color: 'gold' },
-            { href: '/proposals', icon: '📋', label: 'Proposals', color: 'blue' },
-            { href: '/treasury', icon: '💰', label: 'Treasury', color: 'green' },
-            { href: '/documents', icon: '📄', label: 'Documents', color: 'amber' },
-            { href: '/dues', icon: '💳', label: 'Pay Dues', color: 'gold' },
+            { href: '/messages', icon: <MessageSquare className="w-6 h-6 text-[#c9a96e]" />, label: 'Messages', color: 'gold' },
+            { href: '/proposals', icon: <ClipboardList className="w-6 h-6 text-blue-400" />, label: 'Proposals', color: 'blue' },
+            { href: '/treasury', icon: <DollarSign className="w-6 h-6 text-green-400" />, label: 'Treasury', color: 'green' },
+            { href: '/documents', icon: <FileText className="w-6 h-6 text-amber-400" />, label: 'Documents', color: 'amber' },
+            { href: '/dues', icon: <CreditCard className="w-6 h-6 text-[#c9a96e]" />, label: 'Pay Dues', color: 'gold' },
           ].map(({ href, icon, label }) => (
             <Link
               key={href}
               href={href}
               className="glass-card rounded-xl p-4 text-center group min-h-[80px] flex flex-col items-center justify-center gap-2 hover:border-[#c9a96e]/25 relative"
             >
-              <span className="text-2xl group-hover:scale-110 transition-transform duration-200">{icon}</span>
+              <span className="group-hover:scale-110 transition-transform duration-200">{icon}</span>
               <p className="text-sm font-semibold text-gray-300 group-hover:text-[#e8d5a3] transition-colors duration-200">{label}</p>
               {href === '/messages' && totalUnread > 0 && (
                 <span className="absolute top-2 right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-[#c9a96e] text-white text-[10px] font-bold flex items-center justify-center">

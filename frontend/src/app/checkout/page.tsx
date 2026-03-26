@@ -6,6 +6,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
 import { useProperty } from '@/hooks/useProperty';
 import { useDuesStatus } from '@/hooks/useTreasury';
+import { CheckCircle, Home } from 'lucide-react';
 
 // ── Step Indicator ────────────────────────────────────────────────────────────
 function StepIndicator({ current, total }: { current: number; total: number }) {
@@ -242,7 +243,7 @@ function CheckoutWizard() {
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <span className="text-2xl text-green-400">✅</span>
+                <CheckCircle className="w-6 h-6 text-green-400" />
                 <p className="text-lg font-bold text-green-300">
                   No outstanding balance
                 </p>
@@ -288,7 +289,7 @@ function CheckoutWizard() {
       {/* ── Step 3: Confirmation ── */}
       {step === 3 && (
         <div className="glass-card rounded-2xl p-10 text-center animate-fade-in border-l-2 border-l-amber-500/50">
-          <div className="text-6xl mb-5">🏡</div>
+          <div className="flex justify-center mb-5"><Home className="w-12 h-12 text-[#c9a96e]" /></div>
           <h2 className="text-2xl font-extrabold mb-2">
             Thank You, Neighbor
           </h2>

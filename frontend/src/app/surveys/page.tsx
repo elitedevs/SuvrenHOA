@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { BarChart3 } from 'lucide-react';
 
 export default function SurveysPage() {
   const { isConnected } = useAccount();
@@ -60,7 +61,7 @@ function SurveyList() {
   if (!surveys || surveys.length === 0) {
     return (
       <div className="glass-card rounded-xl p-12 text-center">
-        <p className="text-5xl mb-4">📊</p>
+        <BarChart3 className="w-8 h-8 text-gray-400 mx-auto mb-4" />
         <h3 className="text-lg font-medium mb-2">No surveys yet</h3>
         <p className="text-sm text-gray-400 max-w-md mx-auto">
           Surveys let the board gather community input on everything from pool hours to

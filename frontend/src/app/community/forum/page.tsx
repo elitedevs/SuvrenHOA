@@ -7,6 +7,7 @@ import { useForumPosts, ForumTopic } from '@/hooks/useForumPosts';
 import { useProfile } from '@/hooks/useProfile';
 import { useProperty } from '@/hooks/useProperty';
 import Link from 'next/link';
+import { MessageSquare } from 'lucide-react';
 
 const CATEGORIES = ['All', 'Announcements', 'Amenities', 'Maintenance', 'Governance', 'General', 'Events'];
 
@@ -165,7 +166,7 @@ export default function ForumPage() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Community</p>
-          <h1 className="text-3xl font-extrabold tracking-tight">💬 Discussion Forum</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight flex items-center gap-2"><MessageSquare className="w-7 h-7 text-[#c9a96e]" /> Discussion Forum</h1>
           <p className="text-base text-gray-400 mt-2">Community discussions, questions, and announcements</p>
         </div>
         {isConnected && (
@@ -257,7 +258,7 @@ export default function ForumPage() {
         <div className="text-center py-12 text-gray-500">Loading discussions...</div>
       ) : sorted.length === 0 ? (
         <div className="glass-card rounded-2xl p-12 text-center">
-          <p className="text-4xl mb-3">💬</p>
+          <MessageSquare className="w-8 h-8 text-gray-400 mx-auto mb-3" />
           <p className="text-gray-400">No topics yet. Start the conversation!</p>
         </div>
       ) : (

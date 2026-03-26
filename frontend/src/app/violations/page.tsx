@@ -6,6 +6,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useProperty } from '@/hooks/useProperty';
 import { ViolationHeatmap } from '@/components/ViolationHeatmap';
+import { CheckCircle, AlertTriangle, Loader2, Lock } from 'lucide-react';
 
 // ── Appeal System ─────────────────────────────────────────────────────────────
 interface AppealRecord {
@@ -98,7 +99,7 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
           </div>
         ) : submitted ? (
           <div className="text-center py-6 space-y-3">
-            <div className="text-4xl">✅</div>
+            <CheckCircle className="w-8 h-8 text-green-400 mx-auto" />
             <h3 className="font-semibold">Appeal Submitted</h3>
             <p className="text-sm text-gray-400">Your appeal has been logged. The board will review within 5 business days.</p>
             <button onClick={onClose} className="px-6 py-2.5 rounded-xl bg-[#c9a96e] text-[#1a1a1a] text-sm font-medium">Done</button>
@@ -282,7 +283,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
         <div className="text-center py-12 text-gray-500">Loading violations...</div>
       ) : !violations || violations.length === 0 ? (
         <div className="glass-card rounded-xl hover-lift p-12 text-center">
-          <p className="text-5xl mb-4">✅</p>
+          <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium mb-2">No violations</h3>
           <p className="text-sm text-gray-400">
             The community is in good standing. Violations will appear here when reported.
@@ -541,7 +542,7 @@ function ReportForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div className="p-4 rounded-xl glass-card">
-        <h4 className="text-xs font-medium text-[#c9a96e] mb-1">🔒 What happens next?</h4>
+        <h4 className="text-xs font-medium text-[#c9a96e] mb-1 flex items-center gap-1.5"><Lock className="w-3.5 h-3.5" /> What happens next?</h4>
         <p className="text-[10px] text-gray-400">
           The board reviews your report within 48 hours. If valid, a notice is issued and the homeowner has 14-30 days to correct the issue.
           They can dispute it, and if the ruling stands, they can appeal to the entire community for a democratic vote.

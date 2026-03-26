@@ -5,6 +5,7 @@ import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useProperty } from '@/hooks/useProperty';
+import { Building2 } from 'lucide-react';
 
 const MOD_TYPES = [
   { id: 'paint', label: 'Exterior Paint', icon: '🎨' },
@@ -158,7 +159,7 @@ function RequestList({ filter, setFilter }: { filter: string; setFilter: (f: str
         <div className="text-center py-12 text-gray-500">Loading requests...</div>
       ) : !requests || requests.length === 0 ? (
         <div className="glass-card rounded-xl p-12 text-center">
-          <p className="text-5xl mb-4">🏗️</p>
+          <Building2 className="w-8 h-8 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium mb-2">No architectural requests</h3>
           <p className="text-sm text-gray-400 max-w-md mx-auto">
             Planning to paint, build a fence, add a deck, or install solar panels?

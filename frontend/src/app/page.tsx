@@ -14,6 +14,12 @@ import { useAlerts } from '@/hooks/useAlerts';
 import { AnimatedNumber } from '@/components/AnimatedNumber';
 import { OnboardingChecklist } from '@/components/OnboardingChecklist';
 import { WeatherWidget } from '@/components/WeatherWidget';
+import { useProfile } from '@/hooks/useProfile';
+import {
+  Home as HomeIcon, Vote, DollarSign, FileText, CreditCard, Settings,
+  Wrench, MessageSquare, ClipboardList, Zap, Link2,
+  AlertTriangle,
+} from 'lucide-react';
 
 export default function Home() {
   const { isConnected } = useAccount();
@@ -150,8 +156,8 @@ function Landing() {
 
         {/* Bottom CTA */}
         <div className="mt-20 glass-card rounded-2xl p-8 max-w-lg w-full text-center glow-gold page-enter page-enter-delay-4">
-          <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-xl mx-auto mb-4">
-            🔗
+          <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center mx-auto mb-4">
+            <Link2 className="w-5 h-5 text-[#c9a96e]" />
           </div>
           <p className="text-base font-semibold text-gray-200 mb-2">
             No management company needed.
@@ -175,6 +181,8 @@ function Dashboard() {
   const { totalBalance, operatingBalance, reserveBalance } = useTreasury();
   const { activeProposalCount } = useGovernorSettings();
   const { documentCount } = useDocuments();
+  const { profile } = useProfile();
+  const displayName = profile?.display_name || (tokenId !== undefined ? `Lot #${tokenId}` : null);
 
   return (
     <div className="relative">
@@ -188,7 +196,7 @@ function Dashboard() {
             {hasProperty ? (
               <>
                 Welcome back,{' '}
-                <span className="gradient-text text-glow">Lot #{tokenId}</span>
+                <span className="gradient-text text-glow">{displayName}</span>
               </>
             ) : (
               <>
@@ -274,50 +282,44 @@ function Dashboard() {
           {[
             {
               href: '/dashboard',
-              icon: '🏠',
+              icon: <HomeIcon className="w-6 h-6 text-[#c9a96e]" />,
               title: 'My Property',
               desc: 'Lot details, voting power, and dues status',
-              accent: 'gold',
               borderColor: 'border-l-[#c9a96e]/50',
             },
             {
               href: '/proposals',
-              icon: '🗳️',
+              icon: <Vote className="w-6 h-6 text-blue-400" />,
               title: 'Proposals',
               desc: 'Vote on active proposals or create a new one',
-              accent: 'blue',
               borderColor: 'border-l-blue-500/50',
             },
             {
               href: '/treasury',
-              icon: '💰',
+              icon: <DollarSign className="w-6 h-6 text-green-400" />,
               title: 'Treasury',
               desc: `$${totalBalance} in community funds — fully transparent`,
-              accent: 'green',
               borderColor: 'border-l-green-500/50',
             },
             {
               href: '/documents',
-              icon: '📄',
+              icon: <FileText className="w-6 h-6 text-amber-400" />,
               title: 'Documents',
               desc: `${documentCount} immutable records — verify any document`,
-              accent: 'amber',
               borderColor: 'border-l-amber-500/50',
             },
             {
               href: '/dues',
-              icon: '💳',
+              icon: <CreditCard className="w-6 h-6 text-cyan-400" />,
               title: 'Pay Dues',
               desc: 'Quarterly or annual payments in USDC',
-              accent: 'cyan',
               borderColor: 'border-l-cyan-500/50',
             },
             {
               href: '/admin',
-              icon: '⚙️',
+              icon: <Settings className="w-6 h-6 text-gray-400" />,
               title: 'Admin',
               desc: 'Board tools: mint properties, register documents',
-              accent: 'gray',
               borderColor: 'border-l-gray-500/50',
             },
           ].map(({ href, icon, title, desc, borderColor }) => (
@@ -326,7 +328,7 @@ function Dashboard() {
               href={href}
               className={`glass-card rounded-2xl p-7 group block border-l-2 hover-lift ${borderColor}`}
             >
-              <span className="text-3xl block mb-4 group-hover:scale-110 transition-transform duration-200 inline-block">{icon}</span>
+              <span className="block mb-4 group-hover:scale-110 transition-transform duration-200 inline-block">{icon}</span>
               <h3 className="font-bold text-base mb-2 group-hover:text-[#e8d5a3] transition-colors duration-200 text-gray-100">
                 {title}
               </h3>
@@ -341,7 +343,7 @@ function Dashboard() {
             <Link href="/alerts" className="glass-card rounded-2xl p-5 group block border-l-2 border-l-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.15)] hover:shadow-[0_0_30px_rgba(239,68,68,0.25)] transition-all duration-200">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl group-hover:scale-110 transition-transform duration-200 inline-block">🚨</span>
+                  <AlertTriangle className="w-6 h-6 text-red-400 group-hover:scale-110 transition-transform duration-200" />
                   <div>
                     <h3 className="font-bold text-base text-red-300 group-hover:text-red-200 transition-colors">Active Community Alerts</h3>
                     <p className="text-sm text-gray-400">There {activeAlertCount === 1 ? "is" : "are"} {activeAlertCount} active alert{activeAlertCount !== 1 ? "s" : ""} requiring attention</p>
@@ -358,8 +360,8 @@ function Dashboard() {
         {/* Blockchain Trust Banner */}
         <div className="mt-10 glass-card rounded-2xl p-7 glow-gold border-l-2 border-l-[#c9a96e]/50 page-enter page-enter-delay-3">
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-xl shrink-0">
-              🔗
+            <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center shrink-0">
+              <Link2 className="w-5 h-5 text-[#c9a96e]" />
             </div>
             <div>
               <h3 className="font-bold text-sm text-[#e8d5a3] mb-1">Powered by Base Blockchain</h3>
@@ -386,19 +388,19 @@ function Dashboard() {
 }
 
 const QUICK_ACTIONS = [
-  { href: '/dues', icon: '💳', label: 'Pay Dues', desc: 'USDC payment', color: 'text-[#c9a96e]', bg: 'bg-[#c9a96e]/10 hover:bg-[#c9a96e]/20 border-[#c9a96e]/20 hover:border-[#c9a96e]/40' },
-  { href: '/maintenance', icon: '🔧', label: 'Submit Request', desc: 'Maintenance', color: 'text-blue-400', bg: 'bg-blue-500/10 hover:bg-blue-500/20 border-blue-500/20 hover:border-blue-500/40' },
-  { href: '/documents', icon: '📄', label: 'Documents', desc: 'View records', color: 'text-amber-400', bg: 'bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/20 hover:border-amber-500/40' },
-  { href: '/messages', icon: '💬', label: 'Message Neighbor', desc: 'Community chat', color: 'text-green-400', bg: 'bg-green-500/10 hover:bg-green-500/20 border-green-500/20 hover:border-green-500/40' },
-  { href: '/proposals', icon: '🗳️', label: 'Vote on Proposal', desc: 'Governance', color: 'text-purple-400', bg: 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/20 hover:border-purple-500/40' },
-  { href: '/activity', icon: '📋', label: 'Activity Log', desc: 'On-chain events', color: 'text-cyan-400', bg: 'bg-cyan-500/10 hover:bg-cyan-500/20 border-cyan-500/20 hover:border-cyan-500/40' },
+  { href: '/dues', icon: <CreditCard className="w-5 h-5 text-[#c9a96e]" />, label: 'Pay Dues', desc: 'USDC payment', color: 'text-[#c9a96e]', bg: 'bg-[#c9a96e]/10 hover:bg-[#c9a96e]/20 border-[#c9a96e]/20 hover:border-[#c9a96e]/40' },
+  { href: '/maintenance', icon: <Wrench className="w-5 h-5 text-blue-400" />, label: 'Submit Request', desc: 'Maintenance', color: 'text-blue-400', bg: 'bg-blue-500/10 hover:bg-blue-500/20 border-blue-500/20 hover:border-blue-500/40' },
+  { href: '/documents', icon: <FileText className="w-5 h-5 text-amber-400" />, label: 'Documents', desc: 'View records', color: 'text-amber-400', bg: 'bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/20 hover:border-amber-500/40' },
+  { href: '/messages', icon: <MessageSquare className="w-5 h-5 text-green-400" />, label: 'Message Neighbor', desc: 'Community chat', color: 'text-green-400', bg: 'bg-green-500/10 hover:bg-green-500/20 border-green-500/20 hover:border-green-500/40' },
+  { href: '/proposals', icon: <Vote className="w-5 h-5 text-purple-400" />, label: 'Vote on Proposal', desc: 'Governance', color: 'text-purple-400', bg: 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/20 hover:border-purple-500/40' },
+  { href: '/activity', icon: <ClipboardList className="w-5 h-5 text-cyan-400" />, label: 'Activity Log', desc: 'On-chain events', color: 'text-cyan-400', bg: 'bg-cyan-500/10 hover:bg-cyan-500/20 border-cyan-500/20 hover:border-cyan-500/40' },
 ];
 
 function QuickActions() {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-base font-bold text-gray-200">⚡ Quick Actions</h2>
+        <h2 className="text-base font-bold text-gray-200 flex items-center gap-2"><Zap className="w-4 h-4 text-[#c9a96e]" /> Quick Actions</h2>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {QUICK_ACTIONS.map(({ href, icon, label, desc, color, bg }) => (
@@ -407,7 +409,7 @@ function QuickActions() {
             href={href}
             className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-200 group ${bg}`}
           >
-            <span className={`text-2xl group-hover:scale-110 transition-transform duration-200 inline-block`}>{icon}</span>
+            <span className="group-hover:scale-110 transition-transform duration-200 inline-block shrink-0">{icon}</span>
             <div className="min-w-0">
               <p className={`text-xs font-bold ${color} leading-tight`}>{label}</p>
               <p className="text-[10px] text-gray-500 mt-0.5 truncate">{desc}</p>

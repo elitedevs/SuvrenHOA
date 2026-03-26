@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useParking, ParkingSpot } from '@/hooks/useParking';
+import { TicketCheck } from 'lucide-react';
 
 export default function ParkingPage() {
   const { isConnected } = useAccount();
@@ -197,7 +198,7 @@ function ParkingContent() {
         <div className="space-y-3">
           {activePasses.length === 0 ? (
             <div className="glass-card rounded-xl p-12 text-center">
-              <p className="text-4xl mb-3">🎫</p>
+              <TicketCheck className="w-8 h-8 text-gray-400 mx-auto mb-3" />
               <p className="text-gray-400">No active visitor passes</p>
             </div>
           ) : activePasses.map(pass => {

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ShieldCheck } from 'lucide-react';
 
 interface SafetyEntry {
   id: string;
@@ -106,7 +107,7 @@ export default function SafetyPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">🔒 Neighborhood Watch</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2"><ShieldCheck className="w-7 h-7 text-[#c9a96e]" /> Neighborhood Watch</h1>
           <p className="text-sm text-gray-400 mt-1">Report and track community safety observations</p>
         </div>
         <button

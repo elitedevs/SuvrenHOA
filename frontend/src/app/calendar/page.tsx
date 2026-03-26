@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { CalendarDays } from 'lucide-react';
 
 const EVENT_TYPES = [
   { id: 'community', label: 'Community', icon: '🏘️', color: 'gold' },
@@ -51,7 +52,7 @@ export default function CalendarPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">📅 Community Calendar</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2"><CalendarDays className="w-7 h-7 text-[#c9a96e]" /> Community Calendar</h1>
           <p className="text-sm text-gray-400 mt-1">
             Events, meetings, deadlines, and community gatherings
           </p>
@@ -87,7 +88,7 @@ export default function CalendarPage() {
         <div className="text-center py-12 text-gray-500">Loading events...</div>
       ) : Object.keys(eventsByDate).length === 0 ? (
         <div className="glass-card rounded-xl p-12 text-center">
-          <p className="text-5xl mb-4">📅</p>
+          <CalendarDays className="w-8 h-8 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium mb-2">No upcoming events</h3>
           <p className="text-sm text-gray-400">Board meetings, community events, and deadlines will appear here</p>
         </div>

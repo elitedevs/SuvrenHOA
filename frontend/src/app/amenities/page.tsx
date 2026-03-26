@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAmenities, AMENITIES, TimeSlot, Amenity } from '@/hooks/useAmenities';
+import { ClipboardList } from 'lucide-react';
 
 function getWeekDates(startOffset = 0): { date: string; label: string; dayName: string }[] {
   const days = [];
@@ -238,7 +239,7 @@ function AmenityBookingView({
 
         {/* Rules */}
         <div className="glass-card rounded-xl p-4">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">📋 Rules & Requirements</h4>
+          <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2 flex items-center gap-1.5"><ClipboardList className="w-3.5 h-3.5 text-[#c9a96e]" /> Rules &amp; Requirements</h4>
           <ul className="space-y-1">
             {amenity.rules.map((rule, i) => (
               <li key={i} className="text-xs text-gray-400 flex items-start gap-2">

@@ -6,7 +6,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useProperty } from '@/hooks/useProperty';
 import { usePetPlaydates, type PetPlaydate } from '@/hooks/usePetPlaydates';
-import { X, Plus, Calendar, MapPin, Users } from 'lucide-react';
+import { X, Plus, Calendar, MapPin, Users, PawPrint, CheckCircle } from 'lucide-react';
 
 const SPECIES_ICONS: Record<string, string> = { dog: '🐕', cat: '🐱', bird: '🐦', fish: '🐟', reptile: '🦎', other: '🐾' };
 
@@ -167,7 +167,7 @@ function PlaydatesTab() {
                   {pd.petsInvited.length > 0 && (
                     <span>🐾 {pd.petsInvited.join(', ')}</span>
                   )}
-                  <span>✅ {yesCount} going</span>
+                  <span className="flex items-center gap-1"><CheckCircle className="w-3 h-3 text-green-400" /> {yesCount} going</span>
                 </div>
 
                 {/* RSVP buttons */}
@@ -233,7 +233,7 @@ export default function PetsPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">🐕 Pet Registry</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2"><PawPrint className="w-7 h-7 text-[#c9a96e]" /> Pet Registry</h1>
           <p className="text-sm text-gray-400 mt-1">Register pets and schedule playdates</p>
         </div>
         {activeTab === 'registry' && (
@@ -339,7 +339,7 @@ export default function PetsPage() {
                       {pet.age && <div><span className="text-gray-500">Age:</span> <span className="text-gray-300">{pet.age}</span></div>}
                     </div>
                     <div className="flex gap-2 mt-3">
-                      {pet.vaccinated && <span className="text-[9px] px-1.5 py-0.5 rounded bg-green-500/10 text-green-400">✅ Vaccinated</span>}
+                      {pet.vaccinated && <span className="text-[9px] px-1.5 py-0.5 rounded bg-green-500/10 text-green-400 flex items-center gap-0.5"><CheckCircle className="w-2.5 h-2.5" /> Vaccinated</span>}
                       {pet.microchipped && <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400">📍 Microchipped</span>}
                     </div>
                   </div>

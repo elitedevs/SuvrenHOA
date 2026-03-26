@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ClipboardList } from 'lucide-react';
 
 interface Rule {
   question: string;
@@ -156,7 +157,7 @@ export default function RulesPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-1">📋 Community Rules & FAQ</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-1 flex items-center gap-2"><ClipboardList className="w-7 h-7 text-[#c9a96e]" /> Community Rules &amp; FAQ</h1>
         <p className="text-sm text-gray-400">Official Faircroft HOA guidelines, organized and searchable</p>
       </div>
 

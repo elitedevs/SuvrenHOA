@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useActivityFeed, ActivityItem } from '@/hooks/useActivityFeed';
+import { ClipboardList } from 'lucide-react';
 
 const PAGE_SIZE = 10;
 
@@ -83,7 +84,7 @@ export default function ActivityPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-2xl p-12 text-center">
-          <div className="text-4xl mb-4">📋</div>
+          <ClipboardList className="w-8 h-8 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-bold mb-2">No events found</h3>
           <p className="text-sm text-gray-400">
             {activeFilter ? 'Try a different filter' : 'No on-chain events in the last ~14 hours'}

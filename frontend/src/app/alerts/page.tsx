@@ -13,6 +13,7 @@ import {
   Trash2,
   ChevronDown,
   ChevronUp,
+  CheckCircle,
 } from 'lucide-react';
 import { useAlerts } from '@/hooks/useAlerts';
 import type { Alert, AlertType } from '@/hooks/useAlerts';
@@ -373,7 +374,7 @@ export default function AlertsPage() {
           {sortedActive.length === 0 ? (
             <div className="glass-card rounded-2xl hover-lift p-8 text-center">
               <div className="w-12 h-12 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">✅</span>
+                <CheckCircle className="w-6 h-6 text-green-400" />
               </div>
               <p className="font-semibold text-gray-300 mb-1">All clear</p>
               <p className="text-sm text-gray-500">No active alerts for your community.</p>

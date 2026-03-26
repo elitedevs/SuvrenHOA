@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import { useAccount } from 'wagmi';
 import { useDocuments, useDocument, DOC_TYPE_LABELS } from '@/hooks/useDocuments';
+import { CheckCircle } from 'lucide-react';
 
 // Board member addresses (demo — in production derive from contract)
 const BOARD_ADDRESSES = [
@@ -440,7 +441,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
 
       {submitted ? (
         <div className="text-center py-8">
-          <div className="text-4xl mb-3">✅</div>
+          <CheckCircle className="w-8 h-8 text-green-400 mx-auto mb-3" />
           <p className="text-green-400 font-semibold">Upload queued successfully!</p>
           <p className="text-xs text-gray-500 mt-1">Arweave transaction will be processed shortly.</p>
         </div>

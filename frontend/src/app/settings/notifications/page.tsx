@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Bell } from 'lucide-react';
 
 interface NotifPref {
   id: string;
@@ -106,7 +107,7 @@ export default function NotificationPrefsPage() {
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       <div className="mb-8">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Settings</p>
-        <h1 className="text-3xl font-extrabold tracking-tight">🔔 Notifications</h1>
+        <h1 className="text-3xl font-extrabold tracking-tight flex items-center gap-2"><Bell className="w-7 h-7 text-[#c9a96e]" /> Notifications</h1>
         <p className="text-base text-gray-400 mt-2">Choose which updates you want to receive</p>
       </div>
 
