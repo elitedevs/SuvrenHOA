@@ -12,6 +12,8 @@ import { HealthScoreWidget } from '@/components/HealthScoreWidget';
 import { DuesReminder } from '@/components/DuesReminder';
 import { useAlerts } from '@/hooks/useAlerts';
 import { AnimatedNumber } from '@/components/AnimatedNumber';
+import { OnboardingChecklist } from '@/components/OnboardingChecklist';
+import { WeatherWidget } from '@/components/WeatherWidget';
 
 export default function Home() {
   const { isConnected } = useAccount();
@@ -207,7 +209,7 @@ function Dashboard() {
         </div>
 
         {/* Primary Stats — pops more with varied card colors */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-6 page-enter page-enter-delay-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6 page-enter page-enter-delay-1">
           <div className="glass-card rounded-2xl p-6">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Voting Power</p>
             <AnimatedNumber
@@ -252,6 +254,14 @@ function Dashboard() {
 
           {/* HOA Health Score Widget */}
           <HealthScoreWidget />
+
+          {/* Weather Widget */}
+          <WeatherWidget />
+        </div>
+
+        {/* Onboarding checklist for new residents */}
+        <div className="page-enter page-enter-delay-2">
+          <OnboardingChecklist />
         </div>
 
         {/* Smart Dues Reminder — only shows when connected and has a property */}

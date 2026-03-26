@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useContracts } from '@/hooks/useContracts';
 import { useProperty } from '@/hooks/useProperty';
+import Link from 'next/link';
 
 export default function AdminPage() {
   const { isConnected } = useAccount();
@@ -34,6 +35,11 @@ export default function AdminPage() {
       <CommunityStats />
 
       <div className="h-8" />
+
+      {/* Board Access */}
+      <div className="mb-8">
+        <BoardAccessCard />
+      </div>
 
       {/* Admin tools */}
       <div className="space-y-8">
@@ -386,6 +392,48 @@ function CommunityStats() {
           <p className="text-xs text-gray-600 mt-1">{totalSupply} of 150 lots minted</p>
         </div>
       </div>
+    </div>
+  );
+}
+
+function BoardAccessCard() {
+  const { address } = useAccount();
+  const [isBoard, setIsBoard] = useState(false);
+
+  useEffect(() => {
+    if (!address) return;
+    setIsBoard(localStorage.getItem(`suvren_board_${address.toLowerCase()}`) === 'true');
+  }, [address]);
+
+  function toggle() {
+    if (!address) return;
+    const next = !isBoard;
+    localStorage.setItem(`suvren_board_${address.toLowerCase()}`, next ? 'true' : 'false');
+    setIsBoard(next);
+  }
+
+  return (
+    <div className="glass-card rounded-2xl p-6 border border-[#c9a96e]/15">
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <h3 className="text-sm font-bold text-[#e8d5a3]">Board Member Access</h3>
+          <p className="text-xs text-gray-500 mt-1">Enable board dashboard for your wallet</p>
+        </div>
+        <button
+          onClick={toggle}
+          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isBoard ? 'bg-[#c9a96e]' : 'bg-gray-700'}`}
+        >
+          <span className={`inline-block h-4 w-4 rounded-full bg-white shadow-md transform transition-transform ${isBoard ? 'translate-x-6' : 'translate-x-1'}`} />
+        </button>
+      </div>
+      {isBoard && (
+        <Link
+          href="/admin/dashboard"
+          className="inline-flex items-center gap-2 text-xs text-[#c9a96e] hover:text-[#e8d5a3] transition-colors"
+        >
+          → Go to Board Dashboard
+        </Link>
+      )}
     </div>
   );
 }

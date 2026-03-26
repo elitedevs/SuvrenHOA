@@ -1,6 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { useTreasury } from '@/hooks/useTreasury';
+import { TreasuryProjections } from '@/components/TreasuryProjections';
+import Link from 'next/link';
 
 function exportTreasuryPDF() {
   // Add print-specific class to body so @media print styles kick in
@@ -36,13 +39,21 @@ export default function TreasuryPage() {
             Every dollar publicly recorded and verifiable on the blockchain
           </p>
         </div>
-        <button
-          onClick={exportTreasuryPDF}
-          className="no-print shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
-          title="Export as PDF"
-        >
-          📄 Export PDF
-        </button>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/treasury/budget"
+            className="no-print shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 hover:border-[#c9a96e]/40 text-sm font-medium text-[#c9a96e] hover:text-[#e8d5a3] transition-all"
+          >
+            📊 Budget Planner
+          </Link>
+          <button
+            onClick={exportTreasuryPDF}
+            className="no-print shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
+            title="Export as PDF"
+          >
+            📄 Export PDF
+          </button>
+        </div>
       </div>
 
       {/* Hero Balance */}
@@ -177,6 +188,11 @@ export default function TreasuryPage() {
             <p className="text-sm text-gray-500">Loading expenditures...</p>
           </div>
         )}
+      </div>
+
+      {/* Financial Projections */}
+      <div className="mb-8 page-enter page-enter-delay-3">
+        <TreasuryProjections />
       </div>
 
       {/* Spending Breakdown */}

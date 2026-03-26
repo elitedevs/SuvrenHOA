@@ -5,6 +5,7 @@ import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useProperty } from '@/hooks/useProperty';
+import { ViolationHeatmap } from '@/components/ViolationHeatmap';
 
 // ── Appeal System ─────────────────────────────────────────────────────────────
 interface AppealRecord {
@@ -222,7 +223,12 @@ export default function ViolationsPage() {
       {showReport ? (
         <ReportForm onClose={() => setShowReport(false)} />
       ) : (
-        <ViolationsList filter={filter} setFilter={setFilter} />
+        <>
+          <div className="mb-8">
+            <ViolationHeatmap />
+          </div>
+          <ViolationsList filter={filter} setFilter={setFilter} />
+        </>
       )}
     </div>
   );

@@ -1,8 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery } from '@tanstack/react-query';
+import { DirectoryMapView } from '@/components/DirectoryMapView';
+import { Map, List } from 'lucide-react';
 
 
 
@@ -50,14 +53,49 @@ export default function DirectoryPage() {
     members: (c.hoa_committee_members || []).map((m: any) => m.name),
   }));
 
+  const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
+
+  // Build residents array for map view from board data + committees
+  const mapResidents = [
+    ...BOARD_MEMBERS.map((m: any) => ({
+      id: m.name,
+      lot_number: m.lotNumber || 0,
+      display_name: m.name,
+      board_role: m.role,
+    })),
+  ].filter(r => r.lot_number > 0);
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
-      <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold">Community Directory</h1>
-        <p className="text-sm text-gray-400 mt-1">
-          Board members, committees, and community information
-        </p>
+      <div className="mb-8 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold">Community Directory</h1>
+          <p className="text-sm text-gray-400 mt-1">
+            Board members, committees, and community information
+          </p>
+        </div>
+        <div className="flex items-center bg-white/5 rounded-xl p-1 border border-gray-700/50 shrink-0">
+          <button
+            onClick={() => setViewMode('list')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${viewMode === 'list' ? 'bg-[#c9a96e]/20 text-[#e8d5a3]' : 'text-gray-500 hover:text-gray-300'}`}
+          >
+            <List className="w-3.5 h-3.5" /> List
+          </button>
+          <button
+            onClick={() => setViewMode('map')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${viewMode === 'map' ? 'bg-[#c9a96e]/20 text-[#e8d5a3]' : 'text-gray-500 hover:text-gray-300'}`}
+          >
+            <Map className="w-3.5 h-3.5" /> Map
+          </button>
+        </div>
       </div>
+
+      {/* Map View */}
+      {viewMode === 'map' && (
+        <div className="mb-8">
+          <DirectoryMapView residents={mapResidents} onClose={() => setViewMode('list')} />
+        </div>
+      )}
 
       {/* Community Info */}
       <div className="glass-card rounded-xl hover-lift p-6 mb-8">

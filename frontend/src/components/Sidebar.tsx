@@ -14,6 +14,7 @@ import {
   User, ChevronLeft, ChevronRight, Menu, X, LogOut,
   Waves, Wrench, Shield, BookMarked, Receipt, FileBarChart2, ClipboardList,
   ParkingCircle, Volume2, Image, Newspaper, Zap, Search, DollarSign,
+  ShoppingBag, Code2, LayoutDashboard,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -76,6 +77,8 @@ const NAV_SECTIONS = [
       { href: '/newsletter', label: 'Newsletter', icon: Newspaper },
       { href: '/gallery', label: 'Photo Gallery', icon: Image },
       { href: '/lost-found', label: 'Lost & Found', icon: Search },
+      { href: '/marketplace', label: 'Marketplace', icon: ShoppingBag },
+      { href: '/architectural/gallery', label: 'Arch Gallery', icon: PenTool },
     ],
   },
   {
@@ -89,8 +92,9 @@ const NAV_SECTIONS = [
     ],
   },
   {
-    label: 'Public',
+    label: 'Blockchain',
     items: [
+      { href: '/contracts', label: 'Contract Explorer', icon: Code2 },
       { href: '/transparency', label: 'Transparency', icon: Eye },
       { href: '/map', label: 'Map', icon: Map },
       { href: '/health', label: 'Health Score', icon: Heart },
@@ -104,6 +108,7 @@ const UTILITY_ITEMS = [
   { href: '/alerts', label: 'Alerts', icon: Bell },
   { href: '/assistant', label: 'AI Assistant', icon: Bot },
   { href: '/admin', label: 'Admin', icon: Settings },
+  { href: '/admin/dashboard', label: 'Board Dashboard', icon: LayoutDashboard },
   { href: '/settings/notifications', label: 'Notifications', icon: Bell },
   { href: '/profile', label: 'Profile', icon: User },
 ];
