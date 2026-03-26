@@ -22,7 +22,7 @@ const STATE_STYLES: Record<string, { color: string; bg: string; border: string }
   Canceled: { color: 'text-gray-400', bg: 'bg-gray-500/10', border: 'border-gray-500/20' },
   Defeated: { color: 'text-red-400', bg: 'bg-red-500/10', border: 'border-red-500/20' },
   Succeeded: { color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' },
-  Queued: { color: 'text-purple-400', bg: 'bg-purple-500/10', border: 'border-purple-500/20' },
+  Queued: { color: 'text-[#c9a96e]', bg: 'bg-[#c9a96e]/10', border: 'border-[#c9a96e]/20' },
   Expired: { color: 'text-gray-400', bg: 'bg-gray-500/10', border: 'border-gray-500/20' },
   Executed: { color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20' },
 };
@@ -97,7 +97,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
           <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${style.bg} ${style.color} ${style.border}`}>
             {stateLabel || 'Loading...'}
           </span>
-          <span className="text-xs px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+          <span className="text-xs px-2.5 py-1 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20">
             {category.icon} {category.label}
           </span>
           <span className="text-xs text-gray-500">
@@ -133,7 +133,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
           </div>
           <div className="h-2 rounded-full bg-gray-800 overflow-hidden">
             <div
-              className={`h-full rounded-full transition-all duration-500 ${quorumPercent >= 100 ? 'bg-green-500' : 'bg-purple-500'}`}
+              className={`h-full rounded-full transition-all duration-500 ${quorumPercent >= 100 ? 'bg-green-500' : 'bg-[#c9a96e]/80'}`}
               style={{ width: `${Math.min(quorumPercent, 100)}%` }}
             />
           </div>
@@ -145,7 +145,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
         <div className="glass-card rounded-xl p-6 mb-6">
           <h2 className="text-lg font-semibold mb-4">Cast Your Vote</h2>
           <p className="text-sm text-gray-400 mb-4">
-            You have <span className="text-purple-400 font-bold">{votes}</span> vote{votes !== 1 ? 's' : ''}.
+            You have <span className="text-[#c9a96e] font-bold">{votes}</span> vote{votes !== 1 ? 's' : ''}.
             Choose your position:
           </p>
 
@@ -154,7 +154,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
               <p className="text-green-400 font-medium">✅ Vote submitted!</p>
               {hash && (
                 <a href={`https://sepolia.basescan.org/tx/${hash}`} target="_blank" rel="noopener noreferrer"
-                  className="text-xs text-purple-400 hover:underline font-mono mt-2 block">
+                  className="text-xs text-[#c9a96e] hover:underline font-mono mt-2 block">
                   View transaction →
                 </a>
               )}
@@ -185,7 +185,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
               <button
                 onClick={() => selectedVote !== null && castVote(proposalId, selectedVote)}
                 disabled={selectedVote === null || isPending || isConfirming}
-                className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all"
+                className="w-full py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
               >
                 {isPending ? '⏳ Confirm in Wallet...' :
                  isConfirming ? '⛓️ Submitting Vote...' :
@@ -273,7 +273,7 @@ function TimelineItem({ label, value, description, active }: {
 }) {
   return (
     <div className="flex items-start gap-3">
-      <div className={`w-3 h-3 rounded-full mt-1 shrink-0 ${active ? 'bg-purple-500' : 'bg-gray-700'}`} />
+      <div className={`w-3 h-3 rounded-full mt-1 shrink-0 ${active ? 'bg-[#c9a96e]/80' : 'bg-gray-700'}`} />
       <div>
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">{label}</span>

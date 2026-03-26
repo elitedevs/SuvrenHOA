@@ -29,7 +29,7 @@ export default function ProposalsPage() {
         {isConnected && (
           <button
             onClick={() => setShowCreate(!showCreate)}
-            className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 active:scale-95 text-sm font-bold transition-all duration-200 shrink-0 shadow-[0_0_20px_rgba(139,92,246,0.25)] min-h-[44px]"
+            className="px-5 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] active:scale-95 text-sm font-bold transition-all duration-200 shrink-0 shadow-[0_0_20px_rgba(201,169,110,0.25)] min-h-[44px]"
           >
             {showCreate ? '← Back to Proposals' : '+ New Proposal'}
           </button>
@@ -59,7 +59,7 @@ function ProposalsDashboard() {
       {/* Governance Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 page-enter page-enter-delay-1">
         {[
-          { value: activeProposalCount, label: 'Active Proposals', color: 'text-purple-400' },
+          { value: activeProposalCount, label: 'Active Proposals', color: 'text-[#c9a96e]' },
           { value: `${Math.round(votingDelay / 86400)}d`, label: 'Voting Delay', color: 'text-blue-400' },
           { value: `${Math.round(votingPeriod / 86400)}d`, label: 'Voting Period', color: 'text-green-400' },
           { value: '4', label: 'Categories', color: 'text-amber-400' },
@@ -77,13 +77,13 @@ function ProposalsDashboard() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {CATEGORIES.map((cat, i) => {
             const borderColors = [
-              'border-l-purple-500/60',
+              'border-l-[#c9a96e]/60',
               'border-l-blue-500/60',
               'border-l-green-500/60',
               'border-l-amber-500/60',
             ];
             const bgColors = [
-              'bg-purple-500/5',
+              'bg-[#c9a96e]/5',
               'bg-blue-500/5',
               'bg-green-500/5',
               'bg-amber-500/5',
@@ -113,7 +113,7 @@ function ProposalsDashboard() {
 
       {/* Proposals Empty State */}
       <div className="glass-card rounded-2xl hover-lift p-14 text-center page-enter page-enter-delay-3">
-        <div className="w-20 h-20 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-4xl mx-auto mb-6">
+        <div className="w-20 h-20 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-4xl mx-auto mb-6">
           🗳️
         </div>
         <h3 className="text-xl font-bold mb-3">No proposals yet</h3>
@@ -127,7 +127,7 @@ function ProposalsDashboard() {
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-4">Proposal Lifecycle</p>
           <div className="relative flex items-center justify-between">
             {/* Connecting line */}
-            <div className="absolute left-[10%] right-[10%] top-4 h-px bg-gradient-to-r from-purple-500/20 via-purple-500/40 to-purple-500/20" />
+            <div className="absolute left-[10%] right-[10%] top-4 h-px bg-gradient-to-r from-[#c9a96e]/20 via-[#c9a96e]/40 to-[#c9a96e]/20" />
 
             {['Pending', 'Active', 'Succeeded', 'Queued', 'Executed'].map((s, i) => {
               const stateColorMap: Record<string, string> = {
@@ -135,7 +135,7 @@ function ProposalsDashboard() {
                 Active: 'text-blue-400 border-blue-500/40 bg-blue-500/10',
                 Succeeded: 'text-green-400 border-green-500/40 bg-green-500/10',
                 Queued: 'text-amber-400 border-amber-500/40 bg-amber-500/10',
-                Executed: 'text-purple-400 border-purple-500/40 bg-purple-500/10',
+                Executed: 'text-[#c9a96e] border-[#c9a96e]/40 bg-[#c9a96e]/10',
               };
               return (
                 <div key={s} className="flex flex-col items-center gap-2 relative z-10">
@@ -215,7 +215,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
             href={`https://sepolia.basescan.org/tx/${hash}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs text-purple-400 hover:underline font-mono"
+            className="text-xs text-[#c9a96e] hover:underline font-mono"
           >
             View transaction →
           </a>
@@ -244,7 +244,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g., Hire new landscaping company for Q2"
-            className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100"
+            className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100"
           />
         </div>
 
@@ -258,7 +258,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Describe what this proposal does, why it matters, and what changes when it passes..."
             rows={6}
-            className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all resize-none text-gray-100"
+            className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all resize-none text-gray-100"
           />
         </div>
 
@@ -270,13 +270,13 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
           <div className="grid grid-cols-2 gap-3">
             {CATEGORIES.map((cat, i) => {
               const borderColors = [
-                'border-purple-500/50 bg-purple-500/10',
+                'border-[#c9a96e]/50 bg-[#c9a96e]/10',
                 'border-blue-500/50 bg-blue-500/10',
                 'border-green-500/50 bg-green-500/10',
                 'border-amber-500/50 bg-amber-500/10',
               ];
               const activeBorders = [
-                'border-purple-400/70',
+                'border-[#c9a96e]/70',
                 'border-blue-400/70',
                 'border-green-400/70',
                 'border-amber-400/70',
@@ -312,7 +312,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
       <button
         onClick={handleSubmit}
         disabled={isPending || isConfirming || !title.trim() || !description.trim()}
-        className="w-full py-4 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_24px_rgba(139,92,246,0.2)] hover:shadow-[0_0_32px_rgba(139,92,246,0.35)] min-h-[52px]"
+        className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] min-h-[52px]"
       >
         {isPending ? '⏳ Confirm in Wallet...' :
          isConfirming ? '⛓️ Submitting On-Chain...' :
@@ -320,8 +320,8 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
       </button>
 
       {/* Info */}
-      <div className="glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-purple-500/40 bg-purple-950/20">
-        <h4 className="text-sm font-bold text-purple-300 mb-3">What happens next?</h4>
+      <div className="glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/40">
+        <h4 className="text-sm font-bold text-[#e8d5a3] mb-3">What happens next?</h4>
         <ol className="text-xs text-gray-400 space-y-2 list-decimal list-inside leading-relaxed">
           <li>Proposal enters <strong className="text-gray-300">Pending</strong> state (1-day review period)</li>
           <li>Voting opens for <strong className="text-gray-300">7 days</strong></li>

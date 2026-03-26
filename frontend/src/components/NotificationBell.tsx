@@ -39,7 +39,7 @@ export function NotificationBell() {
           <div className="p-3 border-b border-white/5 flex items-center justify-between">
             <span className="text-sm font-semibold">Notifications</span>
             {unreadCount > 0 && (
-              <span className="text-[10px] text-purple-400">{unreadCount} new</span>
+              <span className="text-[10px] text-[#c9a96e]">{unreadCount} new</span>
             )}
           </div>
 
@@ -52,7 +52,7 @@ export function NotificationBell() {
               {notifications.slice(0, 20).map((n: Notification) => (
                 <div
                   key={n.id}
-                  className={`p-3 hover:bg-white/[0.02] transition-colors cursor-pointer ${!n.read ? 'bg-purple-500/[0.03]' : ''}`}
+                  className={`p-3 hover:bg-white/[0.02] transition-colors cursor-pointer ${!n.read ? 'bg-[#c9a96e]/80/[0.03]' : ''}`}
                   onClick={() => {
                     if (!n.read) markRead.mutate(n.id);
                     if (n.link) window.location.href = n.link;
@@ -61,7 +61,7 @@ export function NotificationBell() {
                 >
                   <div className="flex items-start gap-2">
                     {!n.read && (
-                      <span className="w-2 h-2 rounded-full bg-purple-500 mt-1.5 shrink-0" />
+                      <span className="w-2 h-2 rounded-full bg-[#c9a96e]/80 mt-1.5 shrink-0" />
                     )}
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-medium leading-snug">{n.title}</p>

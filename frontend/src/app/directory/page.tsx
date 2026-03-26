@@ -62,7 +62,7 @@ export default function DirectoryPage() {
       {/* Community Info */}
       <div className="glass-card rounded-xl hover-lift p-6 mb-8">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-14 h-14 rounded-xl bg-purple-600/20 border border-purple-500/20 flex items-center justify-center text-2xl">
+          <div className="w-14 h-14 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/20 flex items-center justify-center text-2xl">
             🏘️
           </div>
           <div>
@@ -72,7 +72,7 @@ export default function DirectoryPage() {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="p-3 rounded-lg bg-gray-800/30">
-            <p className="text-lg font-bold text-purple-400">{COMMUNITY_INFO.totalLots}</p>
+            <p className="text-lg font-bold text-[#c9a96e]">{COMMUNITY_INFO.totalLots}</p>
             <p className="text-[10px] text-gray-500">Total Lots</p>
           </div>
           <div className="p-3 rounded-lg bg-gray-800/30">
@@ -98,12 +98,12 @@ export default function DirectoryPage() {
         {BOARD_MEMBERS.map((member: any) => (
           <div key={member.name} className="glass-card rounded-xl hover-lift p-5">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 rounded-full bg-purple-600/20 border border-purple-500/20 flex items-center justify-center text-lg font-bold text-purple-400">
+              <div className="w-12 h-12 rounded-full bg-[#c9a96e]/15 border border-[#c9a96e]/20 flex items-center justify-center text-lg font-bold text-[#c9a96e]">
                 {(member.name || '').split(' ').map((n: string) => n[0]).join('')}
               </div>
               <div>
                 <h3 className="font-semibold text-sm">{member.name}</h3>
-                <p className="text-xs text-purple-400">{member.role}</p>
+                <p className="text-xs text-[#c9a96e]">{member.role}</p>
               </div>
             </div>
             <p className="text-xs text-gray-400 leading-relaxed mb-3">{member.bio}</p>
@@ -112,7 +112,7 @@ export default function DirectoryPage() {
               <span>Since {member.since}</span>
             </div>
             {member.email && (
-              <a href={`mailto:${member.email}`} className="text-[10px] text-purple-400 hover:underline mt-2 block">
+              <a href={`mailto:${member.email}`} className="text-[10px] text-[#c9a96e] hover:underline mt-2 block">
                 ✉️ {member.email}
               </a>
             )}
@@ -146,11 +146,11 @@ export default function DirectoryPage() {
       </div>
 
       {/* Contact */}
-      <div className="mt-8 glass-card rounded-xl hover-lift p-6 glow-purple">
-        <h3 className="font-medium text-sm text-purple-400 mb-2">📞 Need to reach the board?</h3>
+      <div className="mt-8 glass-card rounded-xl hover-lift p-6 glow-gold">
+        <h3 className="font-medium text-sm text-[#c9a96e] mb-2">📞 Need to reach the board?</h3>
         <p className="text-xs text-gray-400">
-          Email <a href="mailto:board@faircrofthoa.com" className="text-purple-400 hover:underline">board@faircrofthoa.com</a> or
-          post in the <a href="/community" className="text-purple-400 hover:underline">Community Forum</a>.
+          Email <a href="mailto:board@faircrofthoa.com" className="text-[#c9a96e] hover:underline">board@faircrofthoa.com</a> or
+          post in the <a href="/community" className="text-[#c9a96e] hover:underline">Community Forum</a>.
           Board meetings are open to all homeowners — see the Announcements page for the next scheduled meeting.
         </p>
       </div>

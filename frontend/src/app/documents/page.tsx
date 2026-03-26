@@ -40,8 +40,8 @@ export default function DocumentsPage() {
           onClick={() => setVerifyMode(!verifyMode)}
           className={`px-5 py-3 rounded-xl text-sm font-bold transition-all duration-200 shrink-0 min-h-[44px] ${
             verifyMode
-              ? 'bg-purple-600 text-white shadow-[0_0_20px_rgba(139,92,246,0.25)]'
-              : 'border border-gray-700/60 text-gray-300 hover:border-purple-500/40 hover:text-white hover:bg-white/[0.03]'
+              ? 'bg-[#c9a96e] text-white shadow-[0_0_20px_rgba(201,169,110,0.25)]'
+              : 'border border-gray-700/60 text-gray-300 hover:border-[#c9a96e]/40 hover:text-white hover:bg-white/[0.03]'
           }`}
         >
           {verifyMode ? '← Back to Documents' : '🔍 Verify Document'}
@@ -61,7 +61,7 @@ export default function DocumentsPage() {
           {/* Stats Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 page-enter page-enter-delay-1">
             {[
-              { value: documentCount, label: 'Total Documents', color: 'text-purple-400' },
+              { value: documentCount, label: 'Total Documents', color: 'text-[#c9a96e]' },
               { value: '✓', label: 'All Verified', color: 'text-green-400' },
               { value: '∞', label: 'Permanent Storage', color: 'text-blue-400' },
               { value: '0', label: 'Can Be Altered', color: 'text-amber-400' },
@@ -80,14 +80,14 @@ export default function DocumentsPage() {
               placeholder="Search documents..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100"
+              className="flex-1 px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100"
             />
             <div className="flex gap-2 overflow-x-auto pb-1">
               <button
                 onClick={() => setSelectedType(null)}
                 className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all min-h-[44px] ${
                   selectedType === null
-                    ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30'
+                    ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                     : 'text-gray-400 border border-gray-700/60 hover:border-gray-600/60 hover:text-gray-300'
                 }`}
               >
@@ -99,7 +99,7 @@ export default function DocumentsPage() {
                   onClick={() => setSelectedType(Number(key))}
                   className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all min-h-[44px] ${
                     selectedType === Number(key)
-                      ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30'
+                      ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                       : 'text-gray-400 border border-gray-700/60 hover:border-gray-600/60 hover:text-gray-300'
                   }`}
                 >
@@ -112,7 +112,7 @@ export default function DocumentsPage() {
           {/* Document List */}
           {documentCount === 0 ? (
             <div className="glass-card rounded-2xl hover-lift p-14 text-center page-enter page-enter-delay-3">
-              <div className="w-20 h-20 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-4xl mx-auto mb-6">
+              <div className="w-20 h-20 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-4xl mx-auto mb-6">
                 📄
               </div>
               <h3 className="text-xl font-bold mb-3">No documents registered yet</h3>
@@ -120,8 +120,8 @@ export default function DocumentsPage() {
                 CC&Rs, meeting minutes, budgets, and all governing documents will appear here
                 once registered on-chain. Every document is permanently stored and verifiable.
               </p>
-              <div className="glass-card rounded-xl hover-lift p-5 max-w-sm mx-auto border-l-2 border-l-purple-500/40 bg-purple-950/10">
-                <p className="text-xs text-purple-300 leading-relaxed">
+              <div className="glass-card rounded-xl hover-lift p-5 max-w-sm mx-auto border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30">
+                <p className="text-xs text-[#e8d5a3] leading-relaxed">
                   🔒 Unlike traditional HOA software, documents stored here cannot be altered,
                   deleted, or selectively shared — not even by the board.
                 </p>
@@ -147,7 +147,7 @@ export default function DocumentsPage() {
 }
 
 const TYPE_LEFT_BORDERS: Record<string, string> = {
-  purple: 'border-l-purple-500/60',
+  gold: 'border-l-[#c9a96e]/60',
   green: 'border-l-green-500/60',
   blue: 'border-l-blue-500/60',
   amber: 'border-l-amber-500/60',
@@ -185,7 +185,7 @@ function DocumentCard({
   }
 
   const color = getTypeColor(doc.docType);
-  const leftBorder = TYPE_LEFT_BORDERS[color] || 'border-l-purple-500/60';
+  const leftBorder = TYPE_LEFT_BORDERS[color] || 'border-l-[#c9a96e]/60';
   const date = new Date(doc.timestamp * 1000);
 
   return (
@@ -246,7 +246,7 @@ function DocumentCard({
                 href={`https://arweave.net/${doc.arweaveTxId}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-mono text-purple-400 hover:text-purple-300 hover:underline break-all"
+                className="text-xs font-mono text-[#c9a96e] hover:text-[#e8d5a3] hover:underline break-all"
                 onClick={(e) => e.stopPropagation()}
               >
                 {doc.arweaveTxId || '—'}
@@ -264,7 +264,7 @@ function DocumentCard({
               href={`https://arweave.net/${doc.arweaveTxId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-xl bg-purple-600/10 border border-purple-500/20 text-xs text-purple-400 hover:bg-purple-600/20 transition-colors font-semibold min-h-[44px] flex items-center"
+              className="px-4 py-2.5 rounded-xl bg-[#c9a96e]/8 border border-[#c9a96e]/20 text-xs text-[#c9a96e] hover:bg-[#c9a96e]/15 transition-colors font-semibold min-h-[44px] flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
               📥 Download from Arweave
@@ -307,11 +307,11 @@ function VerifyPanel({
         onDrop={onDrop}
         className={`p-14 rounded-2xl border-2 border-dashed text-center transition-all duration-300 cursor-pointer ${
           dragOver
-            ? 'border-purple-400 bg-purple-950/30 shadow-[0_0_40px_rgba(139,92,246,0.2)]'
-            : 'drop-zone-idle border-gray-600/40 bg-gray-900/30 hover:border-purple-500/40 hover:bg-purple-950/10'
+            ? 'border-[#c9a96e] bg-[#1a1a1a]/50 shadow-[0_0_40px_rgba(201,169,110,0.2)]'
+            : 'drop-zone-idle border-gray-600/40 bg-gray-900/30 hover:border-[#c9a96e]/40 hover:bg-[#1a1a1a]/30'
         }`}
       >
-        <div className={`w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-3xl mx-auto mb-5 transition-transform duration-300 ${dragOver ? 'scale-110' : ''}`}>
+        <div className={`w-16 h-16 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-3xl mx-auto mb-5 transition-transform duration-300 ${dragOver ? 'scale-110' : ''}`}>
           📄
         </div>
         <h3 className="text-xl font-bold mb-2 text-gray-100">Drop a file to verify</h3>
@@ -335,7 +335,7 @@ function VerifyPanel({
         placeholder="0x..."
         value={hash}
         onChange={(e) => setHash(e.target.value)}
-        className="w-full px-4 py-4 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-200"
+        className="w-full px-4 py-4 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200"
       />
 
       {/* Hash result placeholder */}
@@ -344,15 +344,15 @@ function VerifyPanel({
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Hash to verify</p>
           <p className="text-xs font-mono text-gray-300 break-all bg-gray-800/50 p-3 rounded-xl border border-gray-700/40 mb-4">{hash}</p>
           <div className="flex items-center gap-2 text-sm text-gray-400">
-            <div className="w-4 h-4 border-2 border-purple-500/40 border-t-purple-500 rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-[#c9a96e]/40 border-t-[#c9a96e] rounded-full animate-spin" />
             Checking on-chain registry...
           </div>
         </div>
       )}
 
       {/* How it works */}
-      <div className="glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-purple-500/40 bg-purple-950/10">
-        <h4 className="text-sm font-bold text-purple-300 mb-3">How verification works</h4>
+      <div className="glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30">
+        <h4 className="text-sm font-bold text-[#e8d5a3] mb-3">How verification works</h4>
         <div className="space-y-3">
           {[
             { n: 1, text: 'Drop the document file (PDF, spreadsheet, etc.)' },
@@ -362,7 +362,7 @@ function VerifyPanel({
             { n: 5, text: "If it doesn't match → the file has been modified or isn't registered" },
           ].map(({ n, text }) => (
             <div key={n} className="flex gap-3 items-start">
-              <div className="w-5 h-5 rounded-full bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-[10px] font-bold text-purple-400 shrink-0 mt-0.5">
+              <div className="w-5 h-5 rounded-full bg-[#c9a96e]/15 border border-[#c9a96e]/30 flex items-center justify-center text-[10px] font-bold text-[#c9a96e] shrink-0 mt-0.5">
                 {n}
               </div>
               <p className="text-xs text-gray-400 leading-relaxed">{text}</p>

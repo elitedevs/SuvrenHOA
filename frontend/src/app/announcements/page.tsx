@@ -107,7 +107,7 @@ function AnnouncementCard({ announcement }: { announcement: any }) {
         {/* Footer */}
         <div className="flex items-center justify-between pt-3 border-t border-white/5">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-purple-600/20 flex items-center justify-center text-[10px] font-bold text-purple-400">
+            <div className="w-6 h-6 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-[10px] font-bold text-[#c9a96e]">
               {announcement.author_name[0]}
             </div>
             <div>
@@ -120,7 +120,7 @@ function AnnouncementCard({ announcement }: { announcement: any }) {
             <div className="flex items-center gap-2">
               <div className="w-16 h-1.5 rounded-full bg-gray-800 overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-purple-500/60"
+                  className="h-full rounded-full bg-[#c9a96e]/80/60"
                   style={{ width: `${readPercent}%` }}
                 />
               </div>

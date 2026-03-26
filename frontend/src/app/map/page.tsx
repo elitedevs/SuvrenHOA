@@ -49,7 +49,7 @@ function LotCard({ lot, onClick }: { lot: LotData; onClick: () => void }) {
         'hover:bg-white/[0.06]',
         'hover:-translate-y-0.5 active:scale-[0.98]',
         'transition-all duration-200',
-        'focus:outline-none focus:ring-2 focus:ring-purple-500/50',
+        'focus:outline-none focus:ring-2 focus:ring-[#c9a96e]/50',
         'w-full',
       ].join(' ')}
     >
@@ -114,7 +114,7 @@ function DetailPanel({
 
       {/* Panel */}
       <div
-        className="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 glass border-l border-purple-500/15 flex flex-col overflow-y-auto"
+        className="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 glass border-l border-[#c9a96e]/15 flex flex-col overflow-y-auto"
         role="dialog"
         aria-label={'Lot #' + lot.lotNumber + ' details'}
       >
@@ -195,7 +195,7 @@ function StatsBar({ lots }: { lots: LotData[] }) {
   const overduePct = total > 0 ? Math.round((overdue / total) * 100) : 0;
 
   const stats = [
-    { label: 'Total Lots', value: String(total), color: 'text-purple-400' },
+    { label: 'Total Lots', value: String(total), color: 'text-[#c9a96e]' },
     { label: 'Dues Current', value: current + ' (' + paidPct + '%)', color: 'text-green-400' },
     { label: 'Overdue', value: overdue + ' (' + overduePct + '%)', color: 'text-red-400' },
     { label: 'Unknown', value: String(unknown), color: 'text-gray-400' },
@@ -246,7 +246,7 @@ export default function MapPage() {
   }, [lots, filter, search]);
 
   const filterButtons: { key: StatusFilter; label: string; activeClass: string }[] = [
-    { key: 'all', label: 'All', activeClass: 'bg-purple-500/20 text-purple-400 border border-purple-500/40' },
+    { key: 'all', label: 'All', activeClass: 'bg-[#c9a96e]/12 text-[#c9a96e] border border-[#c9a96e]/40' },
     { key: 'current', label: '✓ Current', activeClass: 'bg-green-500/20 text-green-400 border border-green-500/40' },
     { key: 'overdue', label: '✗ Overdue', activeClass: 'bg-red-500/20 text-red-400 border border-red-500/40' },
   ];
@@ -294,7 +294,7 @@ export default function MapPage() {
               placeholder="Search lot # or address…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2 text-sm text-gray-200 placeholder:text-gray-600 focus:outline-none focus:border-purple-500/50 focus:bg-white/[0.06] transition-all"
+              className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2 text-sm text-gray-200 placeholder:text-gray-600 focus:outline-none focus:border-[#c9a96e]/50 focus:bg-white/[0.06] transition-all"
             />
           </div>
 

@@ -30,7 +30,7 @@ export default function TreasuryPage() {
       </div>
 
       {/* Hero Balance */}
-      <div className="glass-card rounded-2xl hover-lift p-10 text-center glow-purple mb-6 border-l-2 border-l-purple-500/50 page-enter page-enter-delay-1">
+      <div className="glass-card rounded-2xl hover-lift p-10 text-center glow-gold mb-6 border-l-2 border-l-[#c9a96e]/50 page-enter page-enter-delay-1">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Total Community Balance</p>
         <div className="flex items-baseline justify-center gap-3 mb-2">
           <span className="text-6xl sm:text-7xl font-black gradient-text">${totalBalance}</span>
@@ -138,7 +138,7 @@ export default function TreasuryPage() {
                 {[40, 65, 30, 80, 55, 45, 70].map((h, i) => (
                   <div
                     key={i}
-                    className="w-6 rounded-t bg-purple-500/20 border-t border-purple-500/30"
+                    className="w-6 rounded-t bg-[#c9a96e]/12 border-t border-[#c9a96e]/30"
                     style={{ height: `${h}%` }}
                   />
                 ))}
@@ -164,11 +164,11 @@ export default function TreasuryPage() {
       </div>
 
       {/* On-chain banner */}
-      <div className="mt-8 glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-purple-500/40 bg-purple-950/10 page-enter page-enter-delay-4">
+      <div className="mt-8 glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30 page-enter page-enter-delay-4">
         <div className="flex items-start gap-3">
           <span className="text-xl">🔗</span>
           <div>
-            <h3 className="text-sm font-bold text-purple-300 mb-1">On-Chain Transparency</h3>
+            <h3 className="text-sm font-bold text-[#e8d5a3] mb-1">On-Chain Transparency</h3>
             <p className="text-xs text-gray-400 leading-relaxed">
               Every dollar in and out is permanently recorded on the Base blockchain.
               Anyone can verify these numbers at any time — they cannot be altered.

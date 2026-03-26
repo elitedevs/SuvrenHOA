@@ -23,16 +23,16 @@ function Landing() {
       {/* Background layers */}
       <div className="absolute inset-0 bg-grid opacity-60" />
       <div className="absolute inset-0 bg-radial-glow-strong" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-purple-600/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#c9a96e]/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute top-20 right-[20%] w-[400px] h-[400px] bg-cyan-500/[0.03] blur-[150px] rounded-full bg-orb pointer-events-none" />
-      <div className="absolute bottom-20 left-[10%] w-[300px] h-[300px] bg-purple-500/[0.04] blur-[100px] rounded-full bg-orb-slow pointer-events-none" />
+      <div className="absolute bottom-20 left-[10%] w-[300px] h-[300px] bg-[#c9a96e]/80/[0.04] blur-[100px] rounded-full bg-orb-slow pointer-events-none" />
 
       {/* Hero */}
       <section className="relative flex flex-col items-center justify-center min-h-[88vh] px-6 text-center">
         {/* Logo mark */}
         <div className="relative mb-10 page-enter page-enter-delay-1">
-          <div className="absolute inset-0 blur-2xl opacity-25 bg-purple-500 rounded-full scale-[2]" />
-          <div className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-400 via-purple-500 to-purple-800 flex items-center justify-center glow-purple pulse-glow shadow-2xl">
+          <div className="absolute inset-0 blur-2xl opacity-25 bg-[#c9a96e]/80 rounded-full scale-[2]" />
+          <div className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-[#c9a96e] via-[#b8942e] to-[#8a6820] flex items-center justify-center glow-gold pulse-glow shadow-2xl">
             <span className="text-5xl font-black text-white">S</span>
           </div>
         </div>
@@ -77,8 +77,8 @@ function Landing() {
               icon: '🏠',
               title: '1 Lot = 1 Vote',
               desc: 'Every property gets equal representation through a soulbound NFT. No proxy manipulation, no whale voting.',
-              accent: 'purple',
-              borderColor: 'border-l-purple-500/50',
+              accent: 'gold',
+              borderColor: 'border-l-[#c9a96e]/50',
             },
             {
               icon: '💰',
@@ -100,7 +100,7 @@ function Landing() {
               className={`glass-card rounded-2xl p-8 text-left group border-l-2 ${borderColor}`}
             >
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform duration-200 ${
-                accent === 'purple' ? 'bg-purple-500/10 border border-purple-500/20' :
+                accent === 'gold' ? 'bg-[#c9a96e]/10 border border-[#c9a96e]/20' :
                 accent === 'green' ? 'bg-green-500/10 border border-green-500/20' :
                 'bg-blue-500/10 border border-blue-500/20'
               }`}>
@@ -125,9 +125,9 @@ function Landing() {
               <div key={step} className="relative flex gap-5 items-start pb-8 last:pb-0">
                 {/* Timeline line */}
                 {i < arr.length - 1 && (
-                  <div className="absolute left-[15px] top-8 bottom-0 w-px bg-gradient-to-b from-purple-500/30 to-transparent" />
+                  <div className="absolute left-[15px] top-8 bottom-0 w-px bg-gradient-to-b from-[#c9a96e]/25 to-transparent" />
                 )}
-                <div className="w-8 h-8 rounded-full bg-purple-600/20 border border-purple-500/40 flex items-center justify-center text-sm font-bold text-purple-400 shrink-0 relative z-10">
+                <div className="w-8 h-8 rounded-full bg-[#c9a96e]/15 border border-[#c9a96e]/40 flex items-center justify-center text-sm font-bold text-[#c9a96e] shrink-0 relative z-10">
                   {step}
                 </div>
                 <div className="pt-0.5">
@@ -140,8 +140,8 @@ function Landing() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-20 glass-card rounded-2xl p-8 max-w-lg w-full text-center glow-purple page-enter page-enter-delay-4">
-          <div className="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-xl mx-auto mb-4">
+        <div className="mt-20 glass-card rounded-2xl p-8 max-w-lg w-full text-center glow-gold page-enter page-enter-delay-4">
+          <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-xl mx-auto mb-4">
             🔗
           </div>
           <p className="text-base font-semibold text-gray-200 mb-2">
@@ -201,7 +201,7 @@ function Dashboard() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-6 page-enter page-enter-delay-1">
           <div className="glass-card rounded-2xl p-6">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Voting Power</p>
-            <p className="text-4xl font-extrabold text-purple-400 leading-none mb-1">{votes}</p>
+            <p className="text-4xl font-extrabold text-[#c9a96e] leading-none mb-1">{votes}</p>
             <p className="text-[11px] text-gray-600 font-medium">of {totalSupply} total votes</p>
           </div>
 
@@ -242,8 +242,8 @@ function Dashboard() {
               icon: '🏠',
               title: 'My Property',
               desc: 'Lot details, voting power, and dues status',
-              accent: 'purple',
-              borderColor: 'border-l-purple-500/50',
+              accent: 'gold',
+              borderColor: 'border-l-[#c9a96e]/50',
             },
             {
               href: '/proposals',
@@ -292,7 +292,7 @@ function Dashboard() {
               className={`glass-card rounded-2xl p-7 group block border-l-2 hover-lift ${borderColor}`}
             >
               <span className="text-3xl block mb-4 group-hover:scale-110 transition-transform duration-200 inline-block">{icon}</span>
-              <h3 className="font-bold text-base mb-2 group-hover:text-purple-300 transition-colors duration-200 text-gray-100">
+              <h3 className="font-bold text-base mb-2 group-hover:text-[#e8d5a3] transition-colors duration-200 text-gray-100">
                 {title}
               </h3>
               <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
@@ -321,13 +321,13 @@ function Dashboard() {
         )}
 
         {/* Blockchain Trust Banner */}
-        <div className="mt-10 glass-card rounded-2xl p-7 glow-purple border-l-2 border-l-purple-500/50 page-enter page-enter-delay-3">
+        <div className="mt-10 glass-card rounded-2xl p-7 glow-gold border-l-2 border-l-[#c9a96e]/50 page-enter page-enter-delay-3">
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-xl shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-xl shrink-0">
               🔗
             </div>
             <div>
-              <h3 className="font-bold text-sm text-purple-300 mb-1">Powered by Base Blockchain</h3>
+              <h3 className="font-bold text-sm text-[#e8d5a3] mb-1">Powered by Base Blockchain</h3>
               <p className="text-sm text-gray-400 leading-relaxed">
                 Every vote, every dollar, every document is permanently recorded on the Base blockchain (Ethereum L2).
                 This data cannot be altered, deleted, or hidden by anyone — not the board, not a management company, not anyone.

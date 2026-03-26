@@ -185,13 +185,13 @@ function DuesPanel() {
                       isDone
                         ? 'bg-green-500/20 border border-green-500/40 text-green-400'
                         : isActive
-                        ? 'bg-purple-600/30 border border-purple-500/50 text-purple-300 shadow-[0_0_12px_rgba(139,92,246,0.3)]'
+                        ? 'bg-[#c9a96e]/20 border border-[#c9a96e]/50 text-[#e8d5a3] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
                         : 'bg-gray-800/60 border border-gray-700/40 text-gray-600'
                     }`}>
                       {isDone ? '✓' : i + 1}
                     </div>
                     <span className={`text-[11px] font-semibold whitespace-nowrap ${
-                      isActive ? 'text-purple-300' : isDone ? 'text-green-400' : 'text-gray-600'
+                      isActive ? 'text-[#e8d5a3]' : isDone ? 'text-green-400' : 'text-gray-600'
                     }`}>
                       {s.short}
                     </span>
@@ -201,7 +201,7 @@ function DuesPanel() {
                   {i < 2 && (
                     <div className={`flex-1 h-px mx-3 mb-4 transition-all duration-500 ${
                       STEPS.findIndex(x => x.id === step) > i
-                        ? 'bg-gradient-to-r from-green-500/50 to-purple-500/30'
+                        ? 'bg-gradient-to-r from-green-500/50 to-[#c9a96e]/20'
                         : 'bg-gray-800'
                     }`} />
                   )}
@@ -257,7 +257,7 @@ function DuesPanel() {
               href={`https://sepolia.basescan.org/tx/${payHash}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-purple-400 hover:underline font-mono"
+              className="text-xs text-[#c9a96e] hover:underline font-mono"
             >
               View transaction →
             </a>
@@ -283,16 +283,16 @@ function DuesPanel() {
                     onClick={() => setSelectedQuarters(quarters)}
                     className={`w-full p-5 rounded-2xl border text-left flex items-center gap-4 transition-all duration-200 min-h-[72px] ${
                       isSelected
-                        ? 'border-purple-400/60 bg-purple-950/30 shadow-[0_0_16px_rgba(139,92,246,0.15)]'
+                        ? 'border-[#c9a96e]/60 bg-[#1a1a1a]/50 shadow-[0_0_16px_rgba(201,169,110,0.12)]'
                         : recommended
-                        ? 'border-purple-500/20 bg-purple-950/10 hover:border-purple-500/40'
+                        ? 'border-[#c9a96e]/20 bg-[#1a1a1a]/30 hover:border-[#c9a96e]/40'
                         : 'border-gray-700/60 bg-gray-900/30 hover:border-gray-600/60'
                     }`}
                   >
                     {/* Radio indicator */}
                     <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${
                       isSelected
-                        ? 'border-purple-400 bg-purple-400'
+                        ? 'border-[#c9a96e] bg-[#c9a96e]'
                         : 'border-gray-600'
                     }`}>
                       {isSelected && (
@@ -305,13 +305,13 @@ function DuesPanel() {
                       <div className="flex items-center gap-2">
                         <p className="font-bold text-sm text-gray-100">{label}</p>
                         {recommended && (
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-600/20 border border-purple-500/30 text-purple-300 font-bold">
+                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#e8d5a3] font-bold">
                             {discount}% off
                           </span>
                         )}
                       </div>
                       {recommended && savings && (
-                        <p className="text-xs text-purple-400 font-medium mt-0.5">
+                        <p className="text-xs text-[#c9a96e] font-medium mt-0.5">
                           Save ${savings} vs quarterly
                         </p>
                       )}
@@ -331,7 +331,7 @@ function DuesPanel() {
           <button
             onClick={handlePay}
             disabled={!selectedQuarters || isApproving || isPaying}
-            className="w-full py-4 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:cursor-not-allowed text-base font-bold transition-all duration-200 shadow-[0_0_24px_rgba(139,92,246,0.2)] hover:shadow-[0_0_32px_rgba(139,92,246,0.35)] active:scale-[0.98] min-h-[56px]"
+            className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-base font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] active:scale-[0.98] min-h-[56px]"
           >
             {isApproving ? '⏳ Approving USDC...' :
              isPaying ? '⛓️ Processing Payment...' :

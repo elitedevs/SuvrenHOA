@@ -18,7 +18,7 @@ export function HealthScoreWidget() {
 
   if (error) {
     return (
-      <Link href="/health" className="glass-card rounded-2xl p-6 block hover:border-purple-500/30 transition-all duration-200">
+      <Link href="/health" className="glass-card rounded-2xl p-6 block hover:border-[#c9a96e]/30 transition-all duration-200">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-2">HOA Health</p>
         <p className="text-xs text-red-400">Unable to load</p>
       </Link>
@@ -28,7 +28,7 @@ export function HealthScoreWidget() {
   return (
     <Link
       href="/health"
-      className="glass-card rounded-2xl p-6 block group hover:border-purple-500/30 transition-all duration-200"
+      className="glass-card rounded-2xl p-6 block group hover:border-[#c9a96e]/30 transition-all duration-200"
       aria-label={`HOA Health Score: ${score} out of 100, Grade ${grade}. Click for full breakdown.`}
     >
       <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">HOA Health</p>
@@ -63,7 +63,7 @@ export function HealthScoreWidget() {
           {/* Score label inside ring */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             {loading ? (
-              <div className="w-4 h-4 border-2 border-purple-500/30 border-t-purple-400 rounded-full animate-spin" />
+              <div className="w-4 h-4 border-2 border-[#c9a96e]/30 border-t-[#c9a96e] rounded-full animate-spin" />
             ) : (
               <span className={`text-lg font-extrabold leading-none ${colorClass}`}>{score}</span>
             )}
@@ -88,7 +88,7 @@ export function HealthScoreWidget() {
 
       <div className="mt-3 flex items-center gap-1 text-[11px] text-gray-600 group-hover:text-gray-400 transition-colors">
         <span>Community health score</span>
-        <span className="ml-auto text-purple-500/60 group-hover:text-purple-400 transition-colors">→</span>
+        <span className="ml-auto text-[#b8942e]/60 group-hover:text-[#c9a96e] transition-colors">→</span>
       </div>
     </Link>
   );

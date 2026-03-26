@@ -82,7 +82,7 @@ export default function HealthPage() {
             {/* Center content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               {loading ? (
-                <div className="w-10 h-10 border-4 border-purple-500/30 border-t-purple-400 rounded-full animate-spin" />
+                <div className="w-10 h-10 border-4 border-[#c9a96e]/30 border-t-[#c9a96e] rounded-full animate-spin" />
               ) : error ? (
                 <div className="text-center">
                   <p className="text-red-400 text-sm">Error loading</p>
@@ -172,9 +172,9 @@ export default function HealthPage() {
 
         {/* What can we improve */}
         {!loading && !error && suggestions.length > 0 && (
-          <div className="glass-card rounded-2xl hover-lift p-6 mb-8 page-enter page-enter-delay-3 border-l-2 border-l-purple-500/50">
+          <div className="glass-card rounded-2xl hover-lift p-6 mb-8 page-enter page-enter-delay-3 border-l-2 border-l-[#c9a96e]/50">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-lg shrink-0">
+              <div className="w-9 h-9 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-lg shrink-0">
                 🎯
               </div>
               <h2 className="text-xl font-bold text-gray-200">What Can We Improve?</h2>
@@ -182,7 +182,7 @@ export default function HealthPage() {
             <div className="space-y-4">
               {suggestions.map((s, i) => (
                 <div key={s.name} className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-purple-600/20 border border-purple-500/40 flex items-center justify-center text-xs font-bold text-purple-400 shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-[#c9a96e]/15 border border-[#c9a96e]/40 flex items-center justify-center text-xs font-bold text-[#c9a96e] shrink-0 mt-0.5">
                     {i + 1}
                   </div>
                   <div>

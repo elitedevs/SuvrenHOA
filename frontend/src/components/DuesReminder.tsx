@@ -111,7 +111,7 @@ function CompactReminder({
           </div>
           <Link
             href="/dues"
-            className="text-xs text-purple-400 hover:text-purple-300 font-semibold whitespace-nowrap transition-colors"
+            className="text-xs text-[#c9a96e] hover:text-[#e8d5a3] font-semibold whitespace-nowrap transition-colors"
           >
             Pay Annual →
           </Link>

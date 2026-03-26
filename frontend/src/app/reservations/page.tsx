@@ -96,7 +96,7 @@ export default function ReservationsPage() {
             key={amenity.id}
             onClick={() => { setSelectedAmenity(amenity.id); setShowReserve(false); }}
             className={`glass-card rounded-xl p-5 text-left transition-all ${
-              selectedAmenity === amenity.id ? 'ring-1 ring-purple-500/40 border-purple-500/20' : ''
+              selectedAmenity === amenity.id ? 'ring-1 ring-[#c9a96e]/40 border-[#c9a96e]/20' : ''
             }`}
           >
             <div className="flex items-center gap-3 mb-3">
@@ -129,7 +129,7 @@ export default function ReservationsPage() {
             {selected.id !== 'lake' && selected.id !== 'playground' && (
               <button
                 onClick={() => setShowReserve(!showReserve)}
-                className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-sm font-medium transition-all"
+                className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all"
               >
                 {showReserve ? '← Back' : '📅 Reserve'}
               </button>
@@ -147,7 +147,7 @@ export default function ReservationsPage() {
                 <ul className="space-y-1">
                   {selected.rules.map((rule, i) => (
                     <li key={i} className="text-xs text-gray-400 flex items-start gap-2">
-                      <span className="text-purple-400 mt-0.5">•</span>
+                      <span className="text-[#c9a96e] mt-0.5">•</span>
                       {rule}
                     </li>
                   ))}
@@ -206,12 +206,12 @@ function ReserveForm({ amenity, onClose }: { amenity: Amenity; onClose: () => vo
         <div>
           <label className="block text-xs text-gray-400 mb-2">Date</label>
           <input type="date" value={date} onChange={e => setDate(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         <div>
           <label className="block text-xs text-gray-400 mb-2">Time Slot</label>
           <select value={timeSlot} onChange={e => setTimeSlot(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none">
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none">
             <option value="">Select time</option>
             {timeSlots.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
@@ -228,7 +228,7 @@ function ReserveForm({ amenity, onClose }: { amenity: Amenity; onClose: () => vo
                 { onSuccess: () => onClose() }
               );
             }}
-            className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all">
+            className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
             {createReservation.isPending ? '⏳ Booking...' : 'Confirm Reservation'}
           </button>
       </div>

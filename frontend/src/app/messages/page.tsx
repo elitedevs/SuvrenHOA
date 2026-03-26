@@ -43,13 +43,13 @@ function ConversationItem({
       onClick={onClick}
       className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-150 flex items-center gap-3 group ${
         isActive
-          ? 'bg-purple-500/15 border border-purple-500/25'
+          ? 'bg-[#c9a96e]/10 border border-[#c9a96e]/25'
           : 'hover:bg-white/[0.04] border border-transparent'
       }`}
     >
       {/* Avatar */}
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500/30 to-purple-700/30 border border-purple-500/20 flex items-center justify-center shrink-0">
-        <span className="text-xs font-bold text-purple-300">#{convo.lotId}</span>
+      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#c9a96e]/20 to-[#b8942e]/20 border border-[#c9a96e]/20 flex items-center justify-center shrink-0">
+        <span className="text-xs font-bold text-[#e8d5a3]">#{convo.lotId}</span>
       </div>
 
       {/* Content */}
@@ -63,7 +63,7 @@ function ConversationItem({
 
       {/* Unread badge */}
       {convo.unreadCount > 0 && (
-        <div className="w-5 h-5 rounded-full bg-purple-600 flex items-center justify-center shrink-0">
+        <div className="w-5 h-5 rounded-full bg-[#c9a96e] flex items-center justify-center shrink-0">
           <span className="text-[10px] font-bold text-white">
             {convo.unreadCount > 9 ? '9+' : convo.unreadCount}
           </span>
@@ -94,7 +94,7 @@ function NewMessageModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="glass-card rounded-2xl hover-lift w-full max-w-md p-6 border border-purple-500/20">
+      <div className="glass-card rounded-2xl hover-lift w-full max-w-md p-6 border border-[#c9a96e]/20">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-gray-100">New Message</h2>
           <button
@@ -110,7 +110,7 @@ function NewMessageModal({
           placeholder="Search lot number..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-purple-500/50 mb-4"
+          className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-[#c9a96e]/50 mb-4"
           autoFocus
         />
 
@@ -133,10 +133,10 @@ function NewMessageModal({
                   onSelect(lot.lotId);
                   onClose();
                 }}
-                className="w-full text-left px-4 py-3 rounded-xl hover:bg-purple-500/10 border border-transparent hover:border-purple-500/20 transition-all duration-150 flex items-center gap-3"
+                className="w-full text-left px-4 py-3 rounded-xl hover:bg-[#c9a96e]/10 border border-transparent hover:border-[#c9a96e]/20 transition-all duration-150 flex items-center gap-3"
               >
-                <div className="w-9 h-9 rounded-full bg-purple-500/15 border border-purple-500/20 flex items-center justify-center">
-                  <span className="text-xs font-bold text-purple-400">#{lot.lotId}</span>
+                <div className="w-9 h-9 rounded-full bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center">
+                  <span className="text-xs font-bold text-[#c9a96e]">#{lot.lotId}</span>
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-200">Lot #{lot.lotId}</p>
@@ -199,8 +199,8 @@ function ChatPanel({
         >
           ←
         </button>
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500/30 to-purple-700/30 border border-purple-500/20 flex items-center justify-center">
-          <span className="text-xs font-bold text-purple-300">#{lotId}</span>
+        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#c9a96e]/20 to-[#b8942e]/20 border border-[#c9a96e]/20 flex items-center justify-center">
+          <span className="text-xs font-bold text-[#e8d5a3]">#{lotId}</span>
         </div>
         <div>
           <p className="text-sm font-bold text-gray-200">Lot #{lotId}</p>
@@ -234,12 +234,12 @@ function ChatPanel({
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={`Message Lot #${lotId}...`}
-            className="flex-1 bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-purple-500/50 min-h-[44px]"
+            className="flex-1 bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-[#c9a96e]/50 min-h-[44px]"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim()}
-            className="w-11 h-11 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shrink-0"
+            className="w-11 h-11 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shrink-0"
             aria-label="Send message"
           >
             <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -320,7 +320,7 @@ function MessagingCenter({ address }: { address: string }) {
           <h1 className="text-2xl font-extrabold tracking-tight flex items-center gap-2">
             Neighbor Messaging
             {totalUnread > 0 && (
-              <span className="text-sm font-bold px-2 py-0.5 rounded-full bg-purple-600 text-white">
+              <span className="text-sm font-bold px-2 py-0.5 rounded-full bg-[#c9a96e] text-white">
                 {totalUnread}
               </span>
             )}
@@ -335,7 +335,7 @@ function MessagingCenter({ address }: { address: string }) {
           <div
             onClick={() => handleOptInToggle(!optIn)}
             className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${
-              optIn ? 'bg-purple-600' : 'bg-gray-700'
+              optIn ? 'bg-[#c9a96e]' : 'bg-gray-700'
             }`}
             role="switch"
             aria-checked={optIn}
@@ -372,7 +372,7 @@ function MessagingCenter({ address }: { address: string }) {
               <span className="text-sm font-bold text-gray-300">Conversations</span>
               <button
                 onClick={() => setShowNewModal(true)}
-                className="text-xs font-semibold text-purple-400 hover:text-purple-300 px-3 py-1.5 rounded-lg hover:bg-purple-500/10 transition-all duration-150 flex items-center gap-1"
+                className="text-xs font-semibold text-[#c9a96e] hover:text-[#e8d5a3] px-3 py-1.5 rounded-lg hover:bg-[#c9a96e]/10 transition-all duration-150 flex items-center gap-1"
               >
                 <span>✏️</span> New
               </button>
@@ -394,7 +394,7 @@ function MessagingCenter({ address }: { address: string }) {
                   </p>
                   <button
                     onClick={() => setShowNewModal(true)}
-                    className="text-sm font-semibold text-purple-400 hover:text-purple-300 px-4 py-2 rounded-xl hover:bg-purple-500/10 transition-all duration-150"
+                    className="text-sm font-semibold text-[#c9a96e] hover:text-[#e8d5a3] px-4 py-2 rounded-xl hover:bg-[#c9a96e]/10 transition-all duration-150"
                   >
                     Start a conversation →
                   </button>
@@ -432,7 +432,7 @@ function MessagingCenter({ address }: { address: string }) {
                 </p>
                 <button
                   onClick={() => setShowNewModal(true)}
-                  className="mt-2 px-5 py-2.5 rounded-xl bg-purple-600/20 border border-purple-500/30 hover:bg-purple-600/30 text-sm font-semibold text-purple-300 transition-all duration-200"
+                  className="mt-2 px-5 py-2.5 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/20 text-sm font-semibold text-[#e8d5a3] transition-all duration-200"
                 >
                   ✏️ New Message
                 </button>

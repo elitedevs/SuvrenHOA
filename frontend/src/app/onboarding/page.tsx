@@ -65,7 +65,7 @@ function StepIndicator({
         <span className="text-xs text-gray-500 font-semibold uppercase tracking-widest">
           Step {current} of {total}
         </span>
-        <span className="text-xs text-purple-400 font-semibold">
+        <span className="text-xs text-[#c9a96e] font-semibold">
           {Math.round((current / total) * 100)}%
         </span>
       </div>
@@ -98,9 +98,9 @@ function PetCard({
   onRemove: () => void;
 }) {
   return (
-    <div className="glass-card rounded-xl p-4 border border-purple-500/10 mb-3">
+    <div className="glass-card rounded-xl p-4 border border-[#c9a96e]/10 mb-3">
       <div className="flex justify-between items-start mb-3">
-        <span className="text-sm font-semibold text-purple-300">
+        <span className="text-sm font-semibold text-[#e8d5a3]">
           🐾 Pet
         </span>
         <button
@@ -112,13 +112,13 @@ function PetCard({
       </div>
       <div className="grid grid-cols-2 gap-3">
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-purple-500/50 col-span-2"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50 col-span-2"
           placeholder="Pet name"
           value={pet.name}
           onChange={(e) => onUpdate({ ...pet, name: e.target.value })}
         />
         <select
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-purple-500/50"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-[#c9a96e]/50"
           value={pet.type}
           onChange={(e) =>
             onUpdate({ ...pet, type: e.target.value as PetEntry["type"] })
@@ -129,13 +129,13 @@ function PetCard({
           <option value="other">🐾 Other</option>
         </select>
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-purple-500/50"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
           placeholder="Breed"
           value={pet.breed}
           onChange={(e) => onUpdate({ ...pet, breed: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-purple-500/50 col-span-2"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50 col-span-2"
           placeholder="Weight (lbs)"
           value={pet.weight}
           onChange={(e) => onUpdate({ ...pet, weight: e.target.value })}
@@ -293,7 +293,7 @@ function OnboardingWizard() {
 
       {/* ── Step 1: Welcome ── */}
       {step === 1 && (
-        <div className="glass-card rounded-2xl p-8 border-l-2 border-l-purple-500/50 animate-fade-in">
+        <div className="glass-card rounded-2xl p-8 border-l-2 border-l-[#c9a96e]/50 animate-fade-in">
           <div className="text-5xl mb-5 text-center">🏡</div>
           <h2 className="text-2xl font-extrabold text-center mb-2">
             Welcome to Faircroft!
@@ -303,7 +303,7 @@ function OnboardingWizard() {
           </p>
 
           {hasProperty && propertyInfo ? (
-            <div className="bg-purple-500/8 border border-purple-500/20 rounded-xl p-5 mb-7">
+            <div className="bg-[#c9a96e]/80/8 border border-[#c9a96e]/20 rounded-xl p-5 mb-7">
               <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">
                 Your Property
               </p>
@@ -340,7 +340,7 @@ function OnboardingWizard() {
 
           <button
             onClick={goNext}
-            className="w-full py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-all duration-200 min-h-[44px]"
+            className="w-full py-3.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all duration-200 min-h-[44px]"
           >
             Let&apos;s get you set up →
           </button>
@@ -360,7 +360,7 @@ function OnboardingWizard() {
                 Display Name
               </label>
               <input
-                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-purple-500/50"
+                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
                 placeholder="How should neighbors know you?"
                 value={profile.displayName}
                 onChange={(e) =>
@@ -374,7 +374,7 @@ function OnboardingWizard() {
               </label>
               <input
                 type="email"
-                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-purple-500/50"
+                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
                 placeholder="For HOA notifications"
                 value={profile.email}
                 onChange={(e) =>
@@ -388,7 +388,7 @@ function OnboardingWizard() {
               </label>
               <input
                 type="tel"
-                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-purple-500/50"
+                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
                 placeholder="For emergency alerts"
                 value={profile.phone}
                 onChange={(e) =>
@@ -410,7 +410,7 @@ function OnboardingWizard() {
                   setProfile((p) => ({ ...p, messagingOptIn: !p.messagingOptIn }))
                 }
                 className={`w-12 h-6 rounded-full transition-all duration-200 relative ${
-                  profile.messagingOptIn ? "bg-purple-600" : "bg-gray-700"
+                  profile.messagingOptIn ? "bg-[#c9a96e]" : "bg-gray-700"
                 }`}
               >
                 <span
@@ -431,7 +431,7 @@ function OnboardingWizard() {
             </button>
             <button
               onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
             >
               Continue →
             </button>
@@ -445,7 +445,7 @@ function OnboardingWizard() {
           <h2 className="text-xl font-bold mb-1">Pet Registration</h2>
           <p className="text-sm text-gray-500 mb-2">
             Register your pets with the HOA.{" "}
-            <Link href="/pets" className="text-purple-400 hover:underline">
+            <Link href="/pets" className="text-[#c9a96e] hover:underline">
               Manage later at /pets →
             </Link>
           </p>
@@ -468,7 +468,7 @@ function OnboardingWizard() {
 
           <button
             onClick={addPet}
-            className="w-full py-2.5 rounded-xl border border-dashed border-purple-500/30 text-purple-400 hover:border-purple-500/50 hover:bg-purple-500/5 text-sm font-semibold transition-all mt-3 mb-6"
+            className="w-full py-2.5 rounded-xl border border-dashed border-[#c9a96e]/30 text-[#c9a96e] hover:border-[#c9a96e]/50 hover:bg-[#c9a96e]/5 text-sm font-semibold transition-all mt-3 mb-6"
           >
             + Add a Pet
           </button>
@@ -482,7 +482,7 @@ function OnboardingWizard() {
             </button>
             <button
               onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
             >
               Continue →
             </button>
@@ -533,7 +533,7 @@ function OnboardingWizard() {
             </button>
             <button
               onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
             >
               Continue →
             </button>
@@ -625,20 +625,20 @@ function OnboardingWizard() {
           </div>
 
           {/* CC&Rs */}
-          <div className="border border-purple-500/20 rounded-xl p-4 mb-7 bg-purple-500/5">
+          <div className="border border-[#c9a96e]/20 rounded-xl p-4 mb-7 bg-[#c9a96e]/5">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={ccrAck}
                 onChange={(e) => setCcrAck(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded accent-purple-600"
+                className="mt-0.5 w-4 h-4 rounded accent-[#c9a96e]"
               />
               <span className="text-sm text-gray-300">
                 I have read and agree to the{" "}
                 <Link
                   href="/documents"
                   target="_blank"
-                  className="text-purple-400 hover:underline"
+                  className="text-[#c9a96e] hover:underline"
                 >
                   CC&Rs (Covenants, Conditions & Restrictions) →
                 </Link>
@@ -675,7 +675,7 @@ function OnboardingWizard() {
           <div className="grid grid-cols-2 gap-3">
             <Link
               href="/dashboard"
-              className="glass-card rounded-xl p-4 text-center hover:border-purple-500/25 transition-all"
+              className="glass-card rounded-xl p-4 text-center hover:border-[#c9a96e]/25 transition-all"
             >
               <div className="text-2xl mb-1">🏠</div>
               <p className="text-sm font-semibold text-gray-300">Dashboard</p>

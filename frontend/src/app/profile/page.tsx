@@ -92,7 +92,7 @@ function ProfileForm() {
           </div>
           <div>
             <p className="text-[10px] text-gray-500">Voting Power</p>
-            <p className="text-xs text-purple-400 font-bold">{votes} vote{votes !== 1 ? 's' : ''}</p>
+            <p className="text-xs text-[#c9a96e] font-bold">{votes} vote{votes !== 1 ? 's' : ''}</p>
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@ function ProfileForm() {
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="How neighbors will see you (e.g., Rick Morang)"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-purple-500/50 focus:outline-none"
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
           />
           <p className="text-[10px] text-gray-500 mt-1">This replaces your wallet address in community posts and comments</p>
         </div>
@@ -121,7 +121,7 @@ function ProfileForm() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="For notifications"
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-purple-500/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
             />
           </div>
           <div>
@@ -131,7 +131,7 @@ function ProfileForm() {
               value={phone}
               onChange={e => setPhone(e.target.value)}
               placeholder="For urgent alerts"
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-purple-500/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
             />
           </div>
         </div>
@@ -143,14 +143,14 @@ function ProfileForm() {
             onChange={e => setBio(e.target.value)}
             placeholder="A bit about yourself for the community directory"
             rows={3}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-purple-500/50 focus:outline-none resize-none"
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none resize-none"
           />
         </div>
 
         <button
           onClick={handleSave}
           disabled={updateProfile.isPending}
-          className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all"
+          className="w-full py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
         >
           {updateProfile.isPending ? '⏳ Saving...' : saved ? '✅ Saved!' : 'Save Profile'}
         </button>
@@ -158,7 +158,7 @@ function ProfileForm() {
 
       {/* Privacy note */}
       <div className="mt-6 p-4 rounded-xl glass-card">
-        <h4 className="text-xs font-medium text-purple-400 mb-1">🔒 Privacy</h4>
+        <h4 className="text-xs font-medium text-[#c9a96e] mb-1">🔒 Privacy</h4>
         <p className="text-[10px] text-gray-400">
           Your email and phone are never shared publicly. They&apos;re only used for notifications you opt into.
           Your display name and lot number are visible to the community. Your wallet address is always on-chain.

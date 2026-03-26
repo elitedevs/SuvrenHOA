@@ -69,11 +69,11 @@ function MintPropertyCard() {
   };
 
   return (
-    <div className="glass-card rounded-2xl overflow-hidden border-l-2 border-l-purple-500/50">
+    <div className="glass-card rounded-2xl overflow-hidden border-l-2 border-l-[#c9a96e]/50">
       {/* Section header */}
-      <div className="px-8 py-5 border-b border-gray-800/60 bg-purple-500/5">
+      <div className="px-8 py-5 border-b border-gray-800/60 bg-[#c9a96e]/5">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/25 flex items-center justify-center text-xl">
+          <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-xl">
             🏠
           </div>
           <div>
@@ -93,7 +93,7 @@ function MintPropertyCard() {
                 href={`https://sepolia.basescan.org/tx/${hash}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-purple-400 hover:underline font-mono"
+                className="text-xs text-[#c9a96e] hover:underline font-mono"
               >
                 View transaction →
               </a>
@@ -112,7 +112,7 @@ function MintPropertyCard() {
                   value={owner}
                   onChange={(e) => setOwner(e.target.value)}
                   placeholder="0x..."
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-200 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200 min-h-[52px]"
                 />
               </div>
               <div>
@@ -124,7 +124,7 @@ function MintPropertyCard() {
                   value={lotNumber}
                   onChange={(e) => setLotNumber(e.target.value)}
                   placeholder="1–150"
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
                 />
               </div>
             </div>
@@ -140,7 +140,7 @@ function MintPropertyCard() {
                   value={streetAddress}
                   onChange={(e) => setStreetAddress(e.target.value)}
                   placeholder="123 Faircroft Dr"
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
                 />
               </div>
               <div>
@@ -152,7 +152,7 @@ function MintPropertyCard() {
                   value={sqft}
                   onChange={(e) => setSqft(e.target.value)}
                   placeholder="2500"
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
                 />
               </div>
             </div>
@@ -160,7 +160,7 @@ function MintPropertyCard() {
             <button
               onClick={handleMint}
               disabled={isPending || isConfirming || !owner || !lotNumber || !streetAddress}
-              className="w-full py-4 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(139,92,246,0.15)] hover:shadow-[0_0_28px_rgba(139,92,246,0.28)] min-h-[52px]"
+              className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(201,169,110,0.12)] hover:shadow-[0_0_28px_rgba(201,169,110,0.28)] min-h-[52px]"
             >
               {isPending ? '⏳ Confirm in Wallet...' :
                isConfirming ? '⛓️ Minting...' :
@@ -237,7 +237,7 @@ function RegisterDocumentCard() {
                 href={`https://sepolia.basescan.org/tx/${hash}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-purple-400 hover:underline font-mono"
+                className="text-xs text-[#c9a96e] hover:underline font-mono"
               >
                 View transaction →
               </a>
@@ -272,7 +272,7 @@ function RegisterDocumentCard() {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Faircroft CC&Rs 2026"
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
                 />
               </div>
               <div>
@@ -280,7 +280,7 @@ function RegisterDocumentCard() {
                 <select
                   value={docType}
                   onChange={(e) => setDocType(Number(e.target.value))}
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-100 min-h-[52px] appearance-none"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px] appearance-none"
                 >
                   {docTypes.map((t, i) => (
                     <option key={i} value={i}>{t}</option>
@@ -298,7 +298,7 @@ function RegisterDocumentCard() {
                   value={arweaveTxId}
                   onChange={(e) => setArweaveTxId(e.target.value)}
                   placeholder="arweave-transaction-id"
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-200 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200 min-h-[52px]"
                 />
               </div>
               <div>
@@ -310,7 +310,7 @@ function RegisterDocumentCard() {
                   value={ipfsCid}
                   onChange={(e) => setIpfsCid(e.target.value)}
                   placeholder="bafybei..."
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-purple-500/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 transition-all text-gray-200 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200 min-h-[52px]"
                 />
               </div>
             </div>
@@ -335,7 +335,7 @@ function CommunityStats() {
   const { totalSupply } = useProperty();
 
   const stats = [
-    { value: totalSupply, label: 'Properties Minted', color: 'text-purple-400', icon: '🏠' },
+    { value: totalSupply, label: 'Properties Minted', color: 'text-[#c9a96e]', icon: '🏠' },
     { value: 150, label: 'Max Lots', color: 'text-blue-400', icon: '📍' },
     { value: totalSupply, label: 'Total Votes', color: 'text-green-400', icon: '🗳️' },
     { value: 150 - totalSupply, label: 'Lots Remaining', color: 'text-amber-400', icon: '🔓' },

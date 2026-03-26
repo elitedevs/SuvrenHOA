@@ -24,13 +24,13 @@ const STATUS_FLOW = {
   'notice-issued': { color: 'orange', label: '📨 Notice Issued', next: ['cure-period'] },
   'cure-period': { color: 'amber', label: '⏳ Cure Period', next: ['cured', 'disputed', 'fined'] },
   'cured': { color: 'green', label: '✅ Cured', next: ['resolved'] },
-  'disputed': { color: 'purple', label: '⚖️ Disputed', next: ['hearing'] },
-  'hearing': { color: 'purple', label: '🏛️ Hearing', next: ['ruling-upheld', 'ruling-modified', 'ruling-dismissed'] },
+  'disputed': { color: 'gold', label: '⚖️ Disputed', next: ['hearing'] },
+  'hearing': { color: 'gold', label: '🏛️ Hearing', next: ['ruling-upheld', 'ruling-modified', 'ruling-dismissed'] },
   'ruling-upheld': { color: 'red', label: '⚖️ Upheld', next: ['fined', 'appealed'] },
   'ruling-modified': { color: 'amber', label: '⚖️ Modified', next: ['fined', 'appealed'] },
   'ruling-dismissed': { color: 'green', label: '⚖️ Dismissed', next: ['resolved'] },
   'fined': { color: 'red', label: '💰 Fined', next: ['appealed', 'resolved'] },
-  'appealed': { color: 'purple', label: '🗳️ Community Appeal', next: ['appeal-upheld', 'appeal-overturned'] },
+  'appealed': { color: 'gold', label: '🗳️ Community Appeal', next: ['appeal-upheld', 'appeal-overturned'] },
   'appeal-upheld': { color: 'red', label: '🗳️ Appeal Denied', next: ['resolved'] },
   'appeal-overturned': { color: 'green', label: '🗳️ Overturned!', next: ['resolved'] },
   'resolved': { color: 'green', label: '✅ Resolved', next: ['closed'] },
@@ -81,7 +81,7 @@ export default function ViolationsPage() {
             </span>
           ))}
         </div>
-        <p className="text-[10px] text-purple-400 mt-2">
+        <p className="text-[10px] text-[#c9a96e] mt-2">
           🗳️ Homeowners can appeal ANY ruling to the full community for a democratic vote
         </p>
       </div>
@@ -121,7 +121,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
         <button
           onClick={() => setFilter('all')}
           className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
-            filter === 'all' ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30' : 'glass-card text-gray-400'
+            filter === 'all' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
           }`}
         >
           All
@@ -131,7 +131,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
             key={g.key}
             onClick={() => setFilter(g.key)}
             className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
-              filter === g.key ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30' : 'glass-card text-gray-400'
+              filter === g.key ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
             }`}
           >
             <span className={g.color}>{(violations || []).filter((v: any) => g.statuses.includes(v.status)).length}</span> {g.label}
@@ -169,7 +169,7 @@ function ViolationCard({ violation }: { violation: any }) {
   const colorClass = statusInfo.color === 'green' ? 'text-green-400 bg-green-500/10 border-green-500/20' :
     statusInfo.color === 'red' ? 'text-red-400 bg-red-500/10 border-red-500/20' :
     statusInfo.color === 'yellow' ? 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20' :
-    statusInfo.color === 'purple' ? 'text-purple-400 bg-purple-500/10 border-purple-500/20' :
+    statusInfo.color === 'gold' ? 'text-[#c9a96e] bg-[#c9a96e]/10 border-[#c9a96e]/20' :
     statusInfo.color === 'blue' ? 'text-blue-400 bg-blue-500/10 border-blue-500/20' :
     statusInfo.color === 'orange' ? 'text-orange-400 bg-orange-500/10 border-orange-500/20' :
     statusInfo.color === 'amber' ? 'text-amber-400 bg-amber-500/10 border-amber-500/20' :
@@ -223,7 +223,7 @@ function ViolationCard({ violation }: { violation: any }) {
 
             {violation.hearing_date && (
               <p className="text-xs text-gray-500">
-                🏛️ Hearing: <span className="text-purple-400">{new Date(violation.hearing_date).toLocaleDateString()}</span>
+                🏛️ Hearing: <span className="text-[#c9a96e]">{new Date(violation.hearing_date).toLocaleDateString()}</span>
               </p>
             )}
 
@@ -232,7 +232,7 @@ function ViolationCard({ violation }: { violation: any }) {
               <div className="space-y-2">
                 <p className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold">History</p>
                 {updates.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((u: any) => (
-                  <div key={u.id} className="pl-4 border-l-2 border-purple-500/20">
+                  <div key={u.id} className="pl-4 border-l-2 border-[#c9a96e]/20">
                     <p className="text-xs text-gray-400">{u.text}</p>
                     <p className="text-[10px] text-gray-600 mt-0.5">
                       {new Date(u.created_at).toLocaleDateString()} · {u.updated_by === 'anonymous' ? 'Anonymous' : u.updated_by?.slice(0, 10)}
@@ -248,14 +248,14 @@ function ViolationCard({ violation }: { violation: any }) {
                 <button className="px-3 py-1.5 rounded-lg bg-green-600/20 border border-green-500/30 text-xs text-green-400 hover:bg-green-600/30">
                   ✅ Submit Compliance Proof
                 </button>
-                <button className="px-3 py-1.5 rounded-lg bg-purple-600/20 border border-purple-500/30 text-xs text-purple-400 hover:bg-purple-600/30">
+                <button className="px-3 py-1.5 rounded-lg bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-xs text-[#c9a96e] hover:bg-[#c9a96e]/20">
                   ⚖️ Dispute
                 </button>
               </div>
             )}
 
             {(violation.status === 'ruling-upheld' || violation.status === 'fined') && (
-              <button className="px-3 py-1.5 rounded-lg bg-purple-600/20 border border-purple-500/30 text-xs text-purple-400 hover:bg-purple-600/30">
+              <button className="px-3 py-1.5 rounded-lg bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-xs text-[#c9a96e] hover:bg-[#c9a96e]/20">
                 🗳️ Appeal to Community
               </button>
             )}
@@ -314,12 +314,12 @@ function ReportForm({ onClose }: { onClose: () => void }) {
           <label className="block text-sm text-gray-400 mb-2">Lot Number (accused)</label>
           <input type="number" value={accusedLot} onChange={e => setAccusedLot(e.target.value)}
             placeholder="Which lot?" min="1" max="150"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-gray-400 mb-2">Category</label>
           <select value={category} onChange={e => setCategory(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none">
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none">
             <option value="">Select category</option>
             {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.icon} {c.label}</option>)}
           </select>
@@ -330,7 +330,7 @@ function ReportForm({ onClose }: { onClose: () => void }) {
         <label className="block text-sm text-gray-400 mb-2">Title</label>
         <input type="text" value={title} onChange={e => setTitle(e.target.value)}
           placeholder="Brief description of the violation"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
       </div>
 
       <div>
@@ -338,7 +338,7 @@ function ReportForm({ onClose }: { onClose: () => void }) {
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Provide details — what's happening, when did it start, impact on the community..."
           rows={4}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none resize-none" />
+          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -346,13 +346,13 @@ function ReportForm({ onClose }: { onClose: () => void }) {
           <label className="block text-sm text-gray-400 mb-2">Location (optional)</label>
           <input type="text" value={location} onChange={e => setLocation(e.target.value)}
             placeholder="Where specifically?"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-gray-400 mb-2">CC&R Section (optional)</label>
           <input type="text" value={ccrSection} onChange={e => setCcrSection(e.target.value)}
             placeholder="e.g., Section 4.2"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
       </div>
 
@@ -375,7 +375,7 @@ function ReportForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div className="p-4 rounded-xl glass-card">
-        <h4 className="text-xs font-medium text-purple-400 mb-1">🔒 What happens next?</h4>
+        <h4 className="text-xs font-medium text-[#c9a96e] mb-1">🔒 What happens next?</h4>
         <p className="text-[10px] text-gray-400">
           The board reviews your report within 48 hours. If valid, a notice is issued and the homeowner has 14-30 days to correct the issue.
           They can dispute it, and if the ruling stands, they can appeal to the entire community for a democratic vote.

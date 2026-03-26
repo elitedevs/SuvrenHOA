@@ -93,7 +93,7 @@ function LeaderboardRow({
 
   const rankStyle = RANK_STYLES[entry.rank];
   const rowBg = isYou
-    ? 'bg-purple-500/10 border-purple-500/30'
+    ? 'bg-[#c9a96e]/10 border-[#c9a96e]/30'
     : rankStyle
     ? `${rankStyle.bg} ${rankStyle.border}`
     : 'bg-white/[0.02] border-white/[0.04]';
@@ -112,13 +112,13 @@ function LeaderboardRow({
         <div className="flex items-center gap-2">
           <span
             className={`text-sm font-semibold font-mono truncate ${
-              isYou ? 'text-purple-300' : rankStyle ? rankStyle.text : 'text-gray-200'
+              isYou ? 'text-[#e8d5a3]' : rankStyle ? rankStyle.text : 'text-gray-200'
             }`}
           >
             {isYou ? '⭐ You' : truncateAddr(entry.address)}
           </span>
           {isYou && (
-            <span className="text-[10px] font-bold bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full">
+            <span className="text-[10px] font-bold bg-[#c9a96e]/12 text-[#e8d5a3] px-1.5 py-0.5 rounded-full">
               YOU
             </span>
           )}
@@ -132,7 +132,7 @@ function LeaderboardRow({
       <div className="shrink-0 text-right">
         <div
           className={`text-base font-bold tabular-nums ${
-            isYou ? 'text-purple-300' : rankStyle ? rankStyle.text : 'text-gray-300'
+            isYou ? 'text-[#e8d5a3]' : rankStyle ? rankStyle.text : 'text-gray-300'
           }`}
         >
           {entry.score.toLocaleString()}
@@ -259,7 +259,7 @@ export default function LeaderboardPage() {
                     {isGoodNeighborYou ? '⭐ You' : truncateAddr(goodNeighbor)}
                   </div>
                   {isGoodNeighborYou && (
-                    <span className="text-[10px] font-bold bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full">
+                    <span className="text-[10px] font-bold bg-[#c9a96e]/12 text-[#e8d5a3] px-1.5 py-0.5 rounded-full">
                       YOU
                     </span>
                   )}
@@ -285,7 +285,7 @@ export default function LeaderboardPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer ${
                 activeTab === tab.id
-                  ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
+                  ? 'bg-[#c9a96e]/12 text-[#e8d5a3] border border-[#c9a96e]/30'
                   : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04] border border-transparent'
               }`}
             >

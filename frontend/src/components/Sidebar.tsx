@@ -94,7 +94,7 @@ function NavItem({
       <Icon className={`w-[18px] h-[18px] shrink-0 ${active ? 'text-[oklch(0.75_0.12_85)]' : 'text-[oklch(0.45_0.01_60)] group-hover:text-[oklch(0.65_0.01_60)]'}`} />
       {!collapsed && <span className="truncate">{label}</span>}
       {badge !== undefined && badge > 0 && (
-        <span className={`${collapsed ? 'absolute -top-1 -right-1' : 'ml-auto'} min-w-[18px] h-[18px] px-1 rounded-full bg-[oklch(0.58_0.22_275)] text-white text-[10px] font-bold flex items-center justify-center`}>
+        <span className={`${collapsed ? 'absolute -top-1 -right-1' : 'ml-auto'} min-w-[18px] h-[18px] px-1 rounded-full bg-[#c9a96e] text-[#1a1a1a] text-[10px] font-bold flex items-center justify-center`}>
           {badge > 9 ? '9+' : badge}
         </span>
       )}

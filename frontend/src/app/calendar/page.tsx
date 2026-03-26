@@ -6,7 +6,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const EVENT_TYPES = [
-  { id: 'community', label: 'Community', icon: '🏘️', color: 'purple' },
+  { id: 'community', label: 'Community', icon: '🏘️', color: 'gold' },
   { id: 'board-meeting', label: 'Board Meeting', icon: '📋', color: 'blue' },
   { id: 'committee', label: 'Committee', icon: '👥', color: 'cyan' },
   { id: 'deadline', label: 'Deadline', icon: '⏰', color: 'red' },
@@ -58,7 +58,7 @@ export default function CalendarPage() {
         </div>
         <button
           onClick={() => setShowCreate(!showCreate)}
-          className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-sm font-medium transition-all shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
         >
           {showCreate ? '← Back' : '📅 Add Event'}
         </button>
@@ -88,7 +88,7 @@ export default function CalendarPage() {
           {Object.entries(eventsByDate).map(([date, dayEvents]) => (
             <div key={date}>
               <h3 className="text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-purple-500" />
+                <span className="w-2 h-2 rounded-full bg-[#c9a96e]/80" />
                 {date}
               </h3>
               <div className="space-y-2">
@@ -128,7 +128,7 @@ function EventCard({ event, walletAddress }: { event: any; walletAddress?: strin
   const endTime = event.end_time ? new Date(event.end_time) : null;
   const isPast = startTime < new Date();
 
-  const colorClass = type.color === 'purple' ? 'border-l-purple-500' :
+  const colorClass = type.color === 'gold' ? 'border-l-[#c9a96e]' :
     type.color === 'blue' ? 'border-l-blue-500' :
     type.color === 'red' ? 'border-l-red-500' :
     type.color === 'green' ? 'border-l-green-500' :
@@ -222,7 +222,7 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
           {EVENT_TYPES.map(t => (
             <button key={t.id} onClick={() => setEventType(t.id)}
               className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1 ${
-                eventType === t.id ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30' : 'glass-card text-gray-400'
+                eventType === t.id ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
               }`}>
               {t.icon} {t.label}
             </button>
@@ -233,26 +233,26 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
       <div>
         <label className="block text-sm text-gray-400 mb-2">Title</label>
         <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Q2 Board Meeting"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
           <label className="block text-sm text-gray-400 mb-2">Date</label>
           <input type="date" value={date} onChange={e => setDate(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         {!allDay && (
           <>
             <div>
               <label className="block text-sm text-gray-400 mb-2">Start Time</label>
               <input type="time" value={startTime} onChange={e => setStartTime(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
             </div>
             <div>
               <label className="block text-sm text-gray-400 mb-2">End Time</label>
               <input type="time" value={endTime} onChange={e => setEndTime(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
             </div>
           </>
         )}
@@ -272,19 +272,19 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
       <div>
         <label className="block text-sm text-gray-400 mb-2">Location</label>
         <input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="Faircroft Clubhouse"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
       </div>
 
       <div>
         <label className="block text-sm text-gray-400 mb-2">Description</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Event details..." rows={3}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none resize-none" />
+          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
       </div>
 
       <div className="flex gap-3">
         <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
         <button disabled={!title.trim() || !date || create.isPending} onClick={() => create.mutate()}
-          className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all">
+          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
           {create.isPending ? '⏳ Creating...' : 'Add Event'}
         </button>
       </div>

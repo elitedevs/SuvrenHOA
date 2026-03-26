@@ -98,7 +98,7 @@ function StatCard({
   suffix,
   decimals,
   subtext,
-  color = 'purple',
+  color = 'gold',
   loading,
 }: {
   icon: React.ElementType;
@@ -108,11 +108,11 @@ function StatCard({
   suffix?: string;
   decimals?: number;
   subtext?: string;
-  color?: 'purple' | 'green' | 'blue' | 'amber';
+  color?: 'gold' | 'green' | 'blue' | 'amber';
   loading?: boolean;
 }) {
   const colorMap = {
-    purple: { icon: 'text-purple-400', glow: 'var(--glow-purple)', bg: 'rgba(139,92,246,0.08)' },
+    gold: { icon: 'text-[#c9a96e]', glow: 'var(--glow-gold)', bg: 'rgba(201,169,110,0.08)' },
     green:  { icon: 'text-green-400',  glow: 'var(--glow-green)',  bg: 'rgba(34,197,94,0.08)' },
     blue:   { icon: 'text-blue-400',   glow: 'var(--glow-blue)',   bg: 'rgba(59,130,246,0.08)' },
     amber:  { icon: 'text-amber-400',  glow: 'var(--glow-amber)',  bg: 'rgba(245,158,11,0.08)' },
@@ -190,7 +190,7 @@ export function TransparencyDashboard() {
             className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full opacity-20"
             style={{
               background:
-                'radial-gradient(circle, rgba(139,92,246,0.35) 0%, transparent 70%)',
+                'radial-gradient(circle, rgba(201,169,110,0.35) 0%, transparent 70%)',
             }}
           />
           <div
@@ -204,7 +204,7 @@ export function TransparencyDashboard() {
             className="absolute bottom-0 left-[20%] w-[350px] h-[350px] rounded-full opacity-10 bg-orb-slow"
             style={{
               background:
-                'radial-gradient(circle, rgba(139,92,246,0.5) 0%, transparent 70%)',
+                'radial-gradient(circle, rgba(201,169,110,0.40) 0%, transparent 70%)',
             }}
           />
         </div>
@@ -212,7 +212,7 @@ export function TransparencyDashboard() {
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28 text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-[13px] font-semibold"
-               style={{ background: 'rgba(139,92,246,0.12)', border: '1px solid rgba(139,92,246,0.2)', color: 'rgba(167,139,250,1)' }}>
+               style={{ background: 'rgba(201,169,110,0.10)', border: '1px solid rgba(201,169,110,0.2)', color: 'rgba(201,169,110,1)' }}>
             <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
             Live on Base Sepolia
           </div>
@@ -239,7 +239,7 @@ export function TransparencyDashboard() {
               </div>
               <div className="w-px h-4 bg-white/10 hidden sm:block" />
               <div className="flex items-center gap-2 text-sm">
-                <DollarSign className="w-4 h-4 text-purple-400" />
+                <DollarSign className="w-4 h-4 text-[#c9a96e]" />
                 <span className="text-gray-400">${stats.totalTreasuryStr} USDC treasury</span>
               </div>
               <div className="w-px h-4 bg-white/10 hidden sm:block" />
@@ -270,7 +270,7 @@ export function TransparencyDashboard() {
             </div>
             <div className="flex items-center gap-2 text-[12px] text-gray-500">
               {stats.loading ? (
-                <RefreshCw className="w-3.5 h-3.5 animate-spin text-purple-400" />
+                <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#c9a96e]" />
               ) : (
                 <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               )}
@@ -288,7 +288,7 @@ export function TransparencyDashboard() {
           {/* Treasury row */}
           <div className="mb-3">
             <p className="text-[11px] uppercase tracking-widest text-gray-600 font-semibold mb-3 flex items-center gap-2">
-              <span className="inline-block w-3 h-px bg-purple-500/50" />
+              <span className="inline-block w-3 h-px bg-[#c9a96e]/50" />
               Treasury
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -300,7 +300,7 @@ export function TransparencyDashboard() {
                 suffix=" USDC"
                 decimals={2}
                 subtext="Operating + Reserve combined"
-                color="purple"
+                color="gold"
                 loading={stats.loading}
               />
               <StatCard
@@ -348,7 +348,7 @@ export function TransparencyDashboard() {
                 label="Total Properties"
                 value={stats.totalProperties}
                 subtext="Property NFTs minted on-chain"
-                color="purple"
+                color="gold"
                 loading={stats.loading}
               />
               <StatCard
@@ -387,7 +387,7 @@ export function TransparencyDashboard() {
           <section className="lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <Zap className="w-5 h-5 text-purple-400" />
+                <Zap className="w-5 h-5 text-[#c9a96e]" />
                 Recent Activity
               </h2>
               <span className="text-[12px] text-gray-500">Last 8 hours on-chain</span>
@@ -423,7 +423,7 @@ export function TransparencyDashboard() {
                       >
                         <div
                           className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 text-lg"
-                          style={{ background: 'rgba(139,92,246,0.08)' }}
+                          style={{ background: 'rgba(201,169,110,0.08)' }}
                         >
                           {event.icon}
                         </div>
@@ -440,7 +440,7 @@ export function TransparencyDashboard() {
                                 href={BASESCAN_BASE + '/tx/' + event.txHash}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-[11px] text-purple-400/70 hover:text-purple-300 flex items-center gap-1 transition-colors"
+                                className="text-[11px] text-[#c9a96e]/70 hover:text-[#e8d5a3] flex items-center gap-1 transition-colors"
                               >
                                 View tx
                                 <ExternalLink className="w-3 h-3" />
@@ -492,8 +492,8 @@ export function TransparencyDashboard() {
                     icon: Shield,
                     title: 'On-Chain Voting Records',
                     desc: 'Every vote is a blockchain transaction. Results cannot be changed after the fact.',
-                    color: 'text-purple-400',
-                    bg: 'rgba(139,92,246,0.1)',
+                    color: 'text-[#c9a96e]',
+                    bg: 'rgba(201,169,110,0.08)',
                   },
                 ].map((item) => {
                   const TrustIcon = item.icon;
@@ -548,7 +548,7 @@ export function TransparencyDashboard() {
                         {c.addr}
                       </p>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-gray-600 group-hover:text-purple-400 transition-colors shrink-0" />
+                    <ExternalLink className="w-3.5 h-3.5 text-gray-600 group-hover:text-[#c9a96e] transition-colors shrink-0" />
                   </a>
                 ))}
               </div>
@@ -562,8 +562,8 @@ export function TransparencyDashboard() {
             className="rounded-2xl p-8 sm:p-10 text-center relative overflow-hidden"
             style={{
               background:
-                'linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(59,130,246,0.08) 100%)',
-              border: '1px solid rgba(139,92,246,0.2)',
+                'linear-gradient(135deg, rgba(201,169,110,0.10) 0%, rgba(59,130,246,0.08) 100%)',
+              border: '1px solid rgba(201,169,110,0.2)',
             }}
           >
             {/* Glow */}
@@ -571,16 +571,16 @@ export function TransparencyDashboard() {
               className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  'radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.15) 0%, transparent 60%)',
+                  'radial-gradient(ellipse at 50% 0%, rgba(201,169,110,0.12) 0%, transparent 60%)',
               }}
             />
 
             <div className="relative z-10">
               <div
                 className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5 mx-auto"
-                style={{ background: 'rgba(139,92,246,0.15)', border: '1px solid rgba(139,92,246,0.25)' }}
+                style={{ background: 'rgba(201,169,110,0.12)', border: '1px solid rgba(201,169,110,0.25)' }}
               >
-                <Shield className="w-7 h-7 text-purple-400" />
+                <Shield className="w-7 h-7 text-[#c9a96e]" />
               </div>
 
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
@@ -596,8 +596,8 @@ export function TransparencyDashboard() {
                   href="/dashboard"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
                   style={{
-                    background: 'linear-gradient(135deg, oklch(0.59 0.22 296) 0%, oklch(0.52 0.23 293) 100%)',
-                    boxShadow: '0 0 24px rgba(139,92,246,0.3)',
+                    background: 'linear-gradient(135deg, oklch(0.72 0.12 76) 0%, oklch(0.62 0.12 74) 100%)',
+                    boxShadow: '0 0 24px rgba(201,169,110,0.25)',
                     color: 'white',
                   }}
                 >

@@ -29,7 +29,7 @@ export default function SurveysPage() {
         </div>
         <button
           onClick={() => setShowCreate(!showCreate)}
-          className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-sm font-medium transition-all shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
         >
           {showCreate ? '← Back' : '📊 Create Poll'}
         </button>
@@ -161,13 +161,13 @@ function SurveyCard({ survey }: { survey: any }) {
               className={`w-full text-left p-3 rounded-xl border transition-all relative overflow-hidden ${
                 hasVoted
                   ? 'border-gray-800 bg-gray-900/50 cursor-default'
-                  : 'border-gray-800 bg-gray-900/50 hover:border-purple-500/30 cursor-pointer'
+                  : 'border-gray-800 bg-gray-900/50 hover:border-[#c9a96e]/30 cursor-pointer'
               }`}
             >
               {/* Result bar (shown after voting) */}
               {(hasVoted || !isActive || isExpired) && (
                 <div
-                  className="absolute inset-y-0 left-0 bg-purple-500/10 transition-all duration-700"
+                  className="absolute inset-y-0 left-0 bg-[#c9a96e]/10 transition-all duration-700"
                   style={{ width: `${percent}%` }}
                 />
               )}
@@ -183,7 +183,7 @@ function SurveyCard({ survey }: { survey: any }) {
       </div>
 
       {hasVoted && (
-        <p className="text-[10px] text-purple-400 mt-3">✓ You voted</p>
+        <p className="text-[10px] text-[#c9a96e] mt-3">✓ You voted</p>
       )}
     </div>
   );
@@ -240,7 +240,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
           value={title}
           onChange={e => setTitle(e.target.value)}
           placeholder="What should we do about...?"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-purple-500/50 focus:outline-none"
+          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
         />
       </div>
 
@@ -251,7 +251,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
           onChange={e => setDescription(e.target.value)}
           placeholder="Add context..."
           rows={2}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-purple-500/50 focus:outline-none resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none resize-none"
         />
       </div>
 
@@ -265,7 +265,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
                 value={opt}
                 onChange={e => updateOption(i, e.target.value)}
                 placeholder={`Option ${i + 1}`}
-                className="flex-1 px-4 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-purple-500/50 focus:outline-none"
+                className="flex-1 px-4 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
               />
               {options.length > 2 && (
                 <button onClick={() => removeOption(i)} className="px-3 text-gray-500 hover:text-red-400 transition-colors">✕</button>
@@ -273,7 +273,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
             </div>
           ))}
         </div>
-        <button onClick={addOption} className="text-xs text-purple-400 hover:underline mt-2">+ Add option</button>
+        <button onClick={addOption} className="text-xs text-[#c9a96e] hover:underline mt-2">+ Add option</button>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -282,7 +282,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
           <select
             value={closesIn}
             onChange={e => setClosesIn(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none"
+            className="w-full px-4 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
           >
             <option value="1">1 day</option>
             <option value="3">3 days</option>
@@ -309,7 +309,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
         <button
           disabled={!title.trim() || options.filter(o => o.trim()).length < 2 || create.isPending}
           onClick={() => create.mutate()}
-          className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all"
+          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
         >
           {create.isPending ? '⏳ Creating...' : 'Create Poll'}
         </button>

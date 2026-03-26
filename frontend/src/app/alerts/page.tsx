@@ -176,7 +176,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
         className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/[0.02] transition-colors"
       >
         <div className="flex items-center gap-2">
-          <Plus className="w-5 h-5 text-purple-400" />
+          <Plus className="w-5 h-5 text-[#c9a96e]" />
           <span className="font-bold text-gray-100">Create Emergency Alert</span>
         </div>
         {open ? (
@@ -226,7 +226,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Gas leak at Building C — evacuate now"
                 maxLength={120}
-                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition"
+                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-[#c9a96e]/50 focus:ring-1 focus:ring-[#c9a96e]/30 transition"
               />
             </div>
 
@@ -241,7 +241,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                 placeholder="Optional additional details..."
                 rows={3}
                 maxLength={500}
-                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition resize-none"
+                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-[#c9a96e]/50 focus:ring-1 focus:ring-[#c9a96e]/30 transition resize-none"
               />
             </div>
 
@@ -258,7 +258,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                     onClick={() => setExpiresInHours(value)}
                     className={`px-3 py-2 rounded-xl text-sm font-semibold border transition-all ${
                       expiresInHours === value
-                        ? 'border-purple-500/50 bg-purple-500/10 text-purple-300'
+                        ? 'border-[#c9a96e]/50 bg-[#c9a96e]/10 text-[#e8d5a3]'
                         : 'border-white/10 text-gray-500 hover:border-white/20'
                     }`}
                   >
@@ -277,7 +277,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
             <button
               type="submit"
               disabled={loading || !title.trim()}
-              className="w-full py-3 rounded-xl font-bold text-sm bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed text-white transition-all duration-200"
+              className="w-full py-3 rounded-xl font-bold text-sm bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed text-white transition-all duration-200"
             >
               {loading ? 'Broadcasting…' : `Broadcast ${TYPE_LABELS[type]}`}
             </button>
@@ -331,7 +331,7 @@ export default function AlertsPage() {
             Community
           </p>
           <div className="flex items-center gap-3 mb-2">
-            <Bell className="w-7 h-7 text-purple-400" />
+            <Bell className="w-7 h-7 text-[#c9a96e]" />
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight gradient-text">
               Emergency Alerts
             </h1>

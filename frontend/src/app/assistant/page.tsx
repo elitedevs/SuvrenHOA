@@ -31,7 +31,7 @@ function MessageText({ text }: { text: string }) {
             tokens.push(<strong key={key++} className="font-semibold">{match[1]}</strong>);
           } else if (match[2] && match[3]) {
             tokens.push(
-              <Link key={key++} href={match[3]} className="underline text-purple-400 hover:text-purple-300">
+              <Link key={key++} href={match[3]} className="underline text-[#c9a96e] hover:text-[#e8d5a3]">
                 {match[2]}
               </Link>
             );
@@ -48,7 +48,7 @@ function MessageText({ text }: { text: string }) {
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-3 mb-4">
-      <div className="w-9 h-9 rounded-full bg-purple-700/40 flex items-center justify-center text-lg shrink-0">🤖</div>
+      <div className="w-9 h-9 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-lg shrink-0">🤖</div>
       <div className="bg-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 1, 2].map((i) => (
           <span key={i} className="w-2 h-2 rounded-full bg-gray-400 inline-block animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
@@ -84,10 +84,10 @@ export default function AssistantPage() {
   return (
     <div className="flex flex-col h-[calc(100vh-4rem)]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-900/40 to-violet-900/40 border-b border-white/[0.06] px-6 py-4 shrink-0">
+      <div className="bg-gradient-to-r from-[#1a1a1a]/80 to-[#2d2d2d]/80 border-b border-white/[0.06] px-6 py-4 shrink-0">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-violet-700 flex items-center justify-center text-xl">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center text-xl">
               🤖
             </div>
             <div>
@@ -110,14 +110,14 @@ export default function AssistantPage() {
               className={`flex items-end gap-3 mb-4 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
             >
               {msg.role === 'bot' && (
-                <div className="w-9 h-9 rounded-full bg-purple-700/40 flex items-center justify-center text-lg shrink-0">
+                <div className="w-9 h-9 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-lg shrink-0">
                   🤖
                 </div>
               )}
               <div
                 className={`max-w-[80%] rounded-2xl px-5 py-3 text-sm leading-relaxed ${
                   msg.role === 'user'
-                    ? 'bg-gradient-to-br from-purple-600 to-violet-700 text-white rounded-br-sm'
+                    ? 'bg-gradient-to-br from-[#c9a96e] to-[#b8942e] text-white rounded-br-sm'
                     : 'bg-white/[0.06] text-gray-200 rounded-bl-sm'
                 }`}
               >
@@ -143,7 +143,7 @@ export default function AssistantPage() {
                 key={a.label}
                 onClick={() => sendMessage(a.query)}
                 disabled={isTyping}
-                className="text-xs font-medium px-3 py-1.5 rounded-full bg-purple-600/20 text-purple-300 hover:bg-purple-600/30 hover:text-purple-200 transition-colors disabled:opacity-40 border border-purple-500/20"
+                className="text-xs font-medium px-3 py-1.5 rounded-full bg-[#c9a96e]/15 text-[#e8d5a3] hover:bg-[#c9a96e]/20 hover:text-[#e8d5a3] transition-colors disabled:opacity-40 border border-[#c9a96e]/20"
               >
                 {a.label}
               </button>
@@ -164,12 +164,12 @@ export default function AssistantPage() {
             placeholder="Ask about dues, treasury, proposals, amenities..."
             disabled={isTyping}
             autoFocus
-            className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-2xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 disabled:opacity-50 transition-colors"
+            className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-2xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#c9a96e]/50 disabled:opacity-50 transition-colors"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim() || isTyping}
-            className="w-11 h-11 flex items-center justify-center rounded-2xl bg-gradient-to-br from-purple-600 to-violet-700 hover:from-purple-500 hover:to-violet-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all shrink-0 shadow-lg shadow-purple-900/30"
+            className="w-11 h-11 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#c9a96e] to-[#b8942e] hover:from-[#e8d5a3] hover:to-[#c9a96e] disabled:opacity-40 disabled:cursor-not-allowed transition-all shrink-0 shadow-lg shadow-[#1a1a1a]/50"
             aria-label="Send message"
           >
             <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

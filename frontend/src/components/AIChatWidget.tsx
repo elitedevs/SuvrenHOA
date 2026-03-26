@@ -31,7 +31,7 @@ function MessageText({ text }: { text: string }) {
             tokens.push(<strong key={key++} className="font-semibold">{match[1]}</strong>);
           } else if (match[2] && match[3]) {
             tokens.push(
-              <Link key={key++} href={match[3]} className="underline text-purple-400 hover:text-purple-300">
+              <Link key={key++} href={match[3]} className="underline text-[#c9a96e] hover:text-[#e8d5a3]">
                 {match[2]}
               </Link>
             );
@@ -53,7 +53,7 @@ function MessageText({ text }: { text: string }) {
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-2 mb-3">
-      <div className="w-7 h-7 rounded-full bg-purple-700/40 flex items-center justify-center text-sm shrink-0">
+      <div className="w-7 h-7 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-sm shrink-0">
         🤖
       </div>
       <div className="bg-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1">
@@ -112,9 +112,9 @@ export function AIChatWidget() {
         aria-label="AI Community Assistant"
         aria-hidden={!isOpen}
       >
-        <div className="bg-[oklch(0.09_0.02_280)] border border-white/[0.08] rounded-2xl rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
+        <div className="bg-[oklch(0.09_0.005_50)] border border-white/[0.08] rounded-2xl rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-purple-900/60 to-violet-900/60 border-b border-white/[0.06] shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[#1a1a1a]/80 to-[#2d2d2d]/80 border-b border-white/[0.06] shrink-0">
             <div className="flex items-center gap-2">
               <span className="text-xl">🤖</span>
               <div>
@@ -151,14 +151,14 @@ export function AIChatWidget() {
                 className={`flex items-end gap-2 mb-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
               >
                 {msg.role === 'bot' && (
-                  <div className="w-7 h-7 rounded-full bg-purple-700/40 flex items-center justify-center text-sm shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-sm shrink-0">
                     🤖
                   </div>
                 )}
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                     msg.role === 'user'
-                      ? 'bg-gradient-to-br from-purple-600 to-violet-700 text-white rounded-br-sm'
+                      ? 'bg-gradient-to-br from-[#c9a96e] to-[#b8942e] text-white rounded-br-sm'
                       : 'bg-white/[0.06] text-gray-200 rounded-bl-sm'
                   }`}
                 >
@@ -177,7 +177,7 @@ export function AIChatWidget() {
                 key={a.label}
                 onClick={() => sendMessage(a.query)}
                 disabled={isTyping}
-                className="text-[11px] font-medium px-2.5 py-1.5 rounded-full bg-purple-600/20 text-purple-300 hover:bg-purple-600/30 hover:text-purple-200 transition-colors disabled:opacity-40 border border-purple-500/20"
+                className="text-[11px] font-medium px-2.5 py-1.5 rounded-full bg-[#c9a96e]/15 text-[#e8d5a3] hover:bg-[#c9a96e]/20 hover:text-[#e8d5a3] transition-colors disabled:opacity-40 border border-[#c9a96e]/20"
               >
                 {a.label}
               </button>
@@ -194,12 +194,12 @@ export function AIChatWidget() {
               onKeyDown={handleKeyDown}
               placeholder="Ask about dues, treasury, proposals..."
               disabled={isTyping}
-              className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-xl px-3 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 disabled:opacity-50 transition-colors"
+              className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-xl px-3 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/50 disabled:opacity-50 transition-colors"
             />
             <button
               onClick={handleSend}
               disabled={!input.trim() || isTyping}
-              className="w-9 h-9 flex items-center justify-center rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0"
+              className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0"
               aria-label="Send message"
             >
               <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -213,7 +213,7 @@ export function AIChatWidget() {
       {/* Floating Trigger Button */}
       <button
         onClick={() => setIsOpen((v) => !v)}
-        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-violet-700 shadow-lg shadow-purple-900/40 flex items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-purple-700/50 ${
+        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#c9a96e] to-[#b8942e] shadow-lg shadow-[#1a1a1a]/50 flex items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-[#c9a96e]/20 ${
           isOpen ? 'rotate-180' : ''
         }`}
         style={!isOpen ? { animation: 'chatPulse 2.5s ease-in-out infinite' } : undefined}
@@ -232,8 +232,8 @@ export function AIChatWidget() {
 
       <style jsx global>{`
         @keyframes chatPulse {
-          0%, 100% { box-shadow: 0 10px 25px rgba(109, 40, 217, 0.4), 0 0 0 0 rgba(139, 92, 246, 0.4); }
-          50% { box-shadow: 0 10px 25px rgba(109, 40, 217, 0.4), 0 0 0 8px rgba(139, 92, 246, 0); }
+          0%, 100% { box-shadow: 0 10px 25px rgba(184,148,46,0.35), 0 0 0 0 rgba(201,169,110,0.3); }
+          50% { box-shadow: 0 10px 25px rgba(184,148,46,0.35), 0 0 0 8px rgba(201,169,110,0); }
         }
       `}</style>
     </>

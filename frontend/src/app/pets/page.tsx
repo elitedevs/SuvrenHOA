@@ -39,7 +39,7 @@ export default function PetsPage() {
           <p className="text-sm text-gray-400 mt-1">Register your pets and see your neighbors' furry friends</p>
         </div>
         <button onClick={() => setShowRegister(!showRegister)}
-          className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-sm font-medium transition-all shrink-0">
+          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
           {showRegister ? '← Back' : '🐾 Register Pet'}
         </button>
       </div>
@@ -48,7 +48,7 @@ export default function PetsPage() {
       <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-6">
         {['all', 'dog', 'cat', 'bird', 'fish', 'reptile'].map(s => (
           <button key={s} onClick={() => setFilter(s)}
-            className={`glass-card rounded-xl hover-lift p-3 text-center transition-all ${filter === s ? 'ring-1 ring-purple-500/30' : ''}`}>
+            className={`glass-card rounded-xl hover-lift p-3 text-center transition-all ${filter === s ? 'ring-1 ring-[#c9a96e]/30' : ''}`}>
             <p className="text-lg">{s === 'all' ? '🐾' : SPECIES_ICONS[s]}</p>
             <p className="text-[10px] text-gray-500 capitalize">{s === 'all' ? `All (${(pets || []).length})` : `${s}s (${(pets || []).filter((p: any) => p.species === s).length})`}</p>
           </button>
@@ -70,7 +70,7 @@ export default function PetsPage() {
           {filtered.map((pet: any) => (
             <div key={pet.id} className="glass-card rounded-xl hover-lift p-5">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 rounded-full bg-purple-600/10 border border-purple-500/20 flex items-center justify-center text-2xl">
+                <div className="w-12 h-12 rounded-full bg-[#c9a96e]/8 border border-[#c9a96e]/20 flex items-center justify-center text-2xl">
                   {SPECIES_ICONS[pet.species] || '🐾'}
                 </div>
                 <div>
@@ -127,14 +127,14 @@ function RegisterPet({ onClose }: { onClose: () => void }) {
         <div>
           <label className="block text-sm text-gray-400 mb-2">Pet Name</label>
           <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Buddy"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-gray-400 mb-2">Species</label>
           <div className="flex gap-2">
             {Object.entries(SPECIES_ICONS).map(([s, icon]) => (
               <button key={s} onClick={() => setSpecies(s)}
-                className={`flex-1 py-2 rounded-xl text-xs transition-all ${species === s ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30' : 'glass-card text-gray-400'}`}>
+                className={`flex-1 py-2 rounded-xl text-xs transition-all ${species === s ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
                 {icon}
               </button>
             ))}
@@ -144,16 +144,16 @@ function RegisterPet({ onClose }: { onClose: () => void }) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div><label className="block text-xs text-gray-400 mb-1">Breed</label>
           <input type="text" value={breed} onChange={e => setBreed(e.target.value)} placeholder="Lab mix"
-            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" /></div>
+            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" /></div>
         <div><label className="block text-xs text-gray-400 mb-1">Color</label>
           <input type="text" value={color} onChange={e => setColor(e.target.value)} placeholder="Golden"
-            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" /></div>
+            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" /></div>
         <div><label className="block text-xs text-gray-400 mb-1">Weight</label>
           <input type="text" value={weight} onChange={e => setWeight(e.target.value)} placeholder="65 lbs"
-            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" /></div>
+            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" /></div>
         <div><label className="block text-xs text-gray-400 mb-1">Age</label>
           <input type="text" value={age} onChange={e => setAge(e.target.value)} placeholder="3 years"
-            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-purple-500/50 focus:outline-none" /></div>
+            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" /></div>
       </div>
       <div className="flex gap-4">
         <label className="flex items-center gap-2 cursor-pointer">
@@ -168,7 +168,7 @@ function RegisterPet({ onClose }: { onClose: () => void }) {
       <div className="flex gap-3">
         <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
         <button disabled={!name.trim() || register.isPending} onClick={() => register.mutate()}
-          className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all">
+          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
           {register.isPending ? '⏳ Registering...' : '🐾 Register Pet'}
         </button>
       </div>

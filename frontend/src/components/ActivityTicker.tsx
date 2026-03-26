@@ -16,7 +16,7 @@ function timeAgo(unix: number): string {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
-      <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-2xl mb-4">
+      <div className="w-12 h-12 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-2xl mb-4">
         🔗
       </div>
       <p className="text-sm text-gray-500 font-medium">No recent on-chain activity</p>
@@ -54,10 +54,10 @@ function EventRow({ item, isNew }: EventRowProps) {
       className={[
         'w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl',
         'transition-all duration-300 group cursor-pointer',
-        'hover:bg-white/5 hover:border-purple-500/20',
+        'hover:bg-white/5 hover:border-[#c9a96e]/20',
         'border border-transparent',
         isNew
-          ? 'bg-purple-500/8 border-purple-500/25 shadow-[0_0_12px_rgba(168,85,247,0.12)] activity-ticker-slide-in'
+          ? 'bg-[#c9a96e]/80/8 border-[#c9a96e]/25 shadow-[0_0_12px_rgba(168,85,247,0.12)] activity-ticker-slide-in'
           : 'activity-ticker-slide-in',
       ].join(' ')}
       style={{ animationFillMode: 'both' }}
@@ -67,7 +67,7 @@ function EventRow({ item, isNew }: EventRowProps) {
       <div className={[
         'w-8 h-8 rounded-lg flex items-center justify-center text-base shrink-0',
         'transition-transform duration-200 group-hover:scale-110',
-        isNew ? 'bg-purple-500/20 border border-purple-500/30' : 'bg-white/5 border border-white/10',
+        isNew ? 'bg-[#c9a96e]/12 border border-[#c9a96e]/30' : 'bg-white/5 border border-white/10',
       ].join(' ')}>
         {item.icon}
       </div>
@@ -76,7 +76,7 @@ function EventRow({ item, isNew }: EventRowProps) {
       <div className="flex-1 min-w-0">
         <p className={[
           'text-xs font-medium leading-snug truncate',
-          isNew ? 'text-purple-200' : 'text-gray-300 group-hover:text-gray-100',
+          isNew ? 'text-[#e8d5a3]' : 'text-gray-300 group-hover:text-gray-100',
           'transition-colors duration-200',
         ].join(' ')}>
           {item.description}
@@ -92,7 +92,7 @@ function EventRow({ item, isNew }: EventRowProps) {
           {timeAgo(item.timestamp)}
         </span>
         {isNew && (
-          <span className="text-[9px] font-semibold text-purple-400 uppercase tracking-wider">New</span>
+          <span className="text-[9px] font-semibold text-[#c9a96e] uppercase tracking-wider">New</span>
         )}
       </div>
     </button>
@@ -165,7 +165,7 @@ export function ActivityTicker({ className = '', maxHeight = '480px' }: Activity
             href="https://sepolia.basescan.org"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] text-purple-400/70 hover:text-purple-400 transition-colors duration-150"
+            className="text-[10px] text-[#c9a96e]/70 hover:text-[#c9a96e] transition-colors duration-150"
           >
             View all on BaseScan →
           </a>

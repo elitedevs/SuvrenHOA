@@ -8,7 +8,7 @@ import { useProperty } from '@/hooks/useProperty';
 
 
 const CATEGORIES = [
-  { id: 'general', label: 'General', icon: '💬', color: 'purple' },
+  { id: 'general', label: 'General', icon: '💬', color: 'gold' },
   { id: 'maintenance', label: 'Maintenance', icon: '🔧', color: 'amber' },
   { id: 'safety', label: 'Safety & Security', icon: '🛡️', color: 'red' },
   { id: 'events', label: 'Events', icon: '🎉', color: 'green' },
@@ -53,7 +53,7 @@ export default function CommunityPage() {
         </div>
         <button
           onClick={() => setShowNewPost(!showNewPost)}
-          className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(139,92,246,0.3)] shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)] shrink-0"
         >
           {showNewPost ? '← Back' : '✏️ New Post'}
         </button>
@@ -69,7 +69,7 @@ export default function CommunityPage() {
               onClick={() => setSelectedCategory(null)}
               className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
                 selectedCategory === null
-                  ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30'
+                  ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                   : 'glass-card text-gray-400 hover:text-gray-300'
               }`}
             >
@@ -81,7 +81,7 @@ export default function CommunityPage() {
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
                   selectedCategory === cat.id
-                    ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30'
+                    ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                     : 'glass-card text-gray-400 hover:text-gray-300'
                 }`}
               >
@@ -94,7 +94,7 @@ export default function CommunityPage() {
           {/* Pinned Posts */}
           {pinnedPosts.length > 0 && (
             <div className="mb-6">
-              <p className="text-[10px] uppercase tracking-wider text-purple-400 font-semibold mb-3 flex items-center gap-1.5">
+              <p className="text-[10px] uppercase tracking-wider text-[#c9a96e] font-semibold mb-3 flex items-center gap-1.5">
                 📌 Pinned
               </p>
               {pinnedPosts.map(post => (
@@ -123,18 +123,18 @@ function PostCard({ post }: { post: any }) {
     <div className="glass-card rounded-xl p-5 cursor-pointer group">
       <div className="flex items-start gap-4">
         {/* Author avatar */}
-        <div className="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/20 flex items-center justify-center text-xs font-bold text-purple-400 shrink-0">
+        <div className="w-10 h-10 rounded-full bg-[#c9a96e]/15 border border-[#c9a96e]/20 flex items-center justify-center text-xs font-bold text-[#c9a96e] shrink-0">
           #{post.lot_number || 0}
         </div>
 
         <div className="flex-1 min-w-0">
           {/* Title + Category */}
           <div className="flex items-center gap-2 flex-wrap mb-1">
-            <h3 className="font-semibold text-sm group-hover:text-purple-400 transition-colors">
+            <h3 className="font-semibold text-sm group-hover:text-[#c9a96e] transition-colors">
               {post.title}
             </h3>
             {post.pinned && (
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20">
                 📌 Pinned
               </span>
             )}
@@ -143,7 +143,7 @@ function PostCard({ post }: { post: any }) {
           {/* Category + Meta */}
           <div className="flex items-center gap-3 text-[11px] text-gray-500 mb-2">
             <span className={`flex items-center gap-1 ${
-              cat?.color === 'purple' ? 'text-purple-400' :
+              cat?.color === 'gold' ? 'text-[#c9a96e]' :
               cat?.color === 'red' ? 'text-red-400' :
               cat?.color === 'green' ? 'text-green-400' :
               cat?.color === 'amber' ? 'text-amber-400' :
@@ -165,13 +165,13 @@ function PostCard({ post }: { post: any }) {
 
           {/* Engagement */}
           <div className="flex items-center gap-4 mt-3">
-            <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-purple-400 transition-colors">
+            <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#c9a96e] transition-colors">
               ❤️ {post.likes_count || 0}
             </button>
-            <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-purple-400 transition-colors">
+            <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#c9a96e] transition-colors">
               💬 {post.replies_count || 0} replies
             </button>
-            <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-purple-400 transition-colors ml-auto">
+            <button className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-[#c9a96e] transition-colors ml-auto">
               🔗 Share
             </button>
           </div>
@@ -202,7 +202,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
               onClick={() => setCategory(cat.id)}
               className={`p-2.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 ${
                 category === cat.id
-                  ? 'bg-purple-600/20 text-purple-400 border border-purple-500/30'
+                  ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                   : 'glass-card text-gray-400 hover:text-gray-300'
               }`}
             >
@@ -219,7 +219,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
           value={title}
           onChange={e => setTitle(e.target.value)}
           placeholder="What's on your mind?"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-purple-500/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/20 transition-all"
+          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a96e]/20 transition-all"
         />
       </div>
 
@@ -230,7 +230,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
           onChange={e => setContent(e.target.value)}
           placeholder="Share details with your community..."
           rows={5}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-purple-500/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/20 transition-all resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a96e]/20 transition-all resize-none"
         />
       </div>
 
@@ -250,7 +250,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
               { onSuccess: () => onClose() }
             );
           }}
-          className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(139,92,246,0.3)]"
+          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)]"
         >
           {createPost.isPending ? '⏳ Posting...' : 'Post to Community'}
         </button>

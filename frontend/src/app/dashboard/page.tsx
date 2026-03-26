@@ -82,11 +82,11 @@ function PropertyDashboard() {
             Property Profile
           </h1>
         </div>
-        <div className="px-4 py-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
-          <span className="text-sm font-bold text-purple-300">
+        <div className="px-4 py-2 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20">
+          <span className="text-sm font-bold text-[#e8d5a3]">
             Lot #{tokenId}
             {hasMultipleProperties && (
-              <span className="ml-1 text-xs text-purple-400/60">
+              <span className="ml-1 text-xs text-[#c9a96e]/60">
                 ({properties.length} properties)
               </span>
             )}
@@ -105,7 +105,7 @@ function PropertyDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
 
         {/* Address Card */}
-        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-purple-500/50 page-enter page-enter-delay-1">
+        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-[#c9a96e]/50 page-enter page-enter-delay-1">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Property Address</p>
           <p className="text-2xl font-bold text-gray-100 leading-snug mb-2">
             {propertyInfo?.streetAddress || (
@@ -126,13 +126,13 @@ function PropertyDashboard() {
         <div className="glass-card rounded-2xl p-7 border-l-2 border-l-blue-500/50 page-enter page-enter-delay-1">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Voting Power</p>
           <div className="flex items-end gap-3 mb-2">
-            <p className="text-6xl font-black text-purple-400 leading-none">{votes}</p>
+            <p className="text-6xl font-black text-[#c9a96e] leading-none">{votes}</p>
             <p className="text-sm text-gray-500 font-medium mb-2">vote{Number(votes) !== 1 ? 's' : ''}</p>
           </div>
           <div className="flex items-center gap-2">
             <div className="progress-bar-track flex-1">
               <div
-                className="progress-bar-fill bg-gradient-to-r from-purple-600 to-purple-400"
+                className="progress-bar-fill bg-gradient-to-r from-[#c9a96e] to-[#e8d5a3]"
                 style={{ width: totalSupply > 0 ? `${(Number(votes) / Number(totalSupply)) * 100}%` : '0%' }}
               />
             </div>
@@ -221,27 +221,27 @@ function PropertyDashboard() {
 
       {/* Onboarding Banner */}
       {hasProperty && !isCompleted && (
-        <a href="/onboarding" className="flex items-center justify-between px-4 py-3.5 rounded-xl bg-purple-600/15 border border-purple-500/30 hover:bg-purple-600/22 transition-all duration-200 mb-4 cursor-pointer no-underline group">
+        <a href="/onboarding" className="flex items-center justify-between px-4 py-3.5 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/15 transition-all duration-200 mb-4 cursor-pointer no-underline group">
           <div className="flex items-center gap-3">
             <span className="text-xl">🏡</span>
             <div>
-              <p className="text-sm font-semibold text-purple-300 group-hover:text-purple-200">
+              <p className="text-sm font-semibold text-[#e8d5a3] group-hover:text-[#e8d5a3]">
                 Complete Your Setup
               </p>
               <p className="text-xs text-gray-500">Finish your move-in onboarding — takes 2 minutes</p>
             </div>
           </div>
-          <span className="text-gray-500 text-sm group-hover:text-purple-400 transition-colors">→</span>
+          <span className="text-gray-500 text-sm group-hover:text-[#c9a96e] transition-colors">→</span>
         </a>
       )}
 
       {/* Unread Messages Banner */}
       {totalUnread > 0 && (
-        <a href="/messages" className="flex items-center justify-between px-4 py-3 rounded-xl bg-purple-500/10 border border-purple-500/25 hover:bg-purple-500/15 transition-all duration-200 mb-4 cursor-pointer no-underline">
+        <a href="/messages" className="flex items-center justify-between px-4 py-3 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 hover:bg-[#c9a96e]/10 transition-all duration-200 mb-4 cursor-pointer no-underline">
           <div className="flex items-center gap-3">
             <span className="text-xl">💬</span>
             <div>
-              <p className="text-sm font-semibold text-purple-300">
+              <p className="text-sm font-semibold text-[#e8d5a3]">
                 {totalUnread} unread message{totalUnread !== 1 ? 's' : ''}
               </p>
               <p className="text-xs text-gray-500">Tap to open Messages</p>
@@ -256,21 +256,21 @@ function PropertyDashboard() {
         <h2 className="text-lg font-bold mb-4 text-gray-200">Quick Actions</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { href: '/messages', icon: '💬', label: 'Messages', color: 'purple' },
+            { href: '/messages', icon: '💬', label: 'Messages', color: 'gold' },
             { href: '/proposals', icon: '📋', label: 'Proposals', color: 'blue' },
             { href: '/treasury', icon: '💰', label: 'Treasury', color: 'green' },
             { href: '/documents', icon: '📄', label: 'Documents', color: 'amber' },
-            { href: '/dues', icon: '💳', label: 'Pay Dues', color: 'purple' },
+            { href: '/dues', icon: '💳', label: 'Pay Dues', color: 'gold' },
           ].map(({ href, icon, label }) => (
             <Link
               key={href}
               href={href}
-              className="glass-card rounded-xl p-4 text-center group min-h-[80px] flex flex-col items-center justify-center gap-2 hover:border-purple-500/25 relative"
+              className="glass-card rounded-xl p-4 text-center group min-h-[80px] flex flex-col items-center justify-center gap-2 hover:border-[#c9a96e]/25 relative"
             >
               <span className="text-2xl group-hover:scale-110 transition-transform duration-200">{icon}</span>
-              <p className="text-sm font-semibold text-gray-300 group-hover:text-purple-300 transition-colors duration-200">{label}</p>
+              <p className="text-sm font-semibold text-gray-300 group-hover:text-[#e8d5a3] transition-colors duration-200">{label}</p>
               {href === '/messages' && totalUnread > 0 && (
-                <span className="absolute top-2 right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-purple-600 text-white text-[10px] font-bold flex items-center justify-center">
+                <span className="absolute top-2 right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-[#c9a96e] text-white text-[10px] font-bold flex items-center justify-center">
                   {totalUnread > 9 ? '9+' : totalUnread}
                 </span>
               )}
