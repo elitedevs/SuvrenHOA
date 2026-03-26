@@ -14,7 +14,9 @@ import {
   User, ChevronLeft, ChevronRight, Menu, X, LogOut,
   Waves, Wrench, Shield, BookMarked, Receipt, FileBarChart2, ClipboardList,
   ParkingCircle, Volume2, Image, Newspaper, Zap, Search, DollarSign,
-  ShoppingBag, Code2, LayoutDashboard,
+  ShoppingBag, Code2, LayoutDashboard, ArrowRightLeft, Calculator,
+  Sprout, Package, UserCheck, GitCompare, CarFront, Battery,
+  BarChart2, TrendingUp,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -104,6 +106,26 @@ const NAV_SECTIONS = [
       { href: '/map', label: 'Map', icon: Map },
       { href: '/health', label: 'Health Score', icon: Heart },
       { href: '/activity', label: 'Activity Log', icon: BarChart3 },
+      { href: '/governance/elections', label: 'Elections', icon: Vote },
+      { href: '/reports/impact', label: 'Impact Report', icon: TrendingUp },
+    ],
+  },
+  {
+    label: 'Property Transfer',
+    items: [
+      { href: '/transfer', label: 'Transfer Wizard', icon: ArrowRightLeft },
+      { href: '/compare', label: 'HOA Comparison', icon: Calculator },
+      { href: '/documents/compare', label: 'Doc Compare', icon: GitCompare },
+    ],
+  },
+  {
+    label: 'Community+',
+    items: [
+      { href: '/community/garden', label: 'Garden Plots', icon: Sprout },
+      { href: '/community/rideshare', label: 'Rideshare Board', icon: CarFront },
+      { href: '/visitors', label: 'Visitor Passes', icon: UserCheck },
+      { href: '/services/packages', label: 'Package Log', icon: Package },
+      { href: '/energy', label: 'Energy Dashboard', icon: Battery },
     ],
   },
 ];
