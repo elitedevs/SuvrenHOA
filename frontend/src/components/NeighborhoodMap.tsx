@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import type { Map as LeafletMap, CircleMarker } from 'leaflet';
+import type { Map as LeafletMap, CircleMarker, Marker } from 'leaflet';
 import type { LotData } from '@/hooks/useNeighborhoodMap';
+import type { Incident } from '@/hooks/useIncidents';
 import { geocodeAddress, NEIGHBORHOOD_CENTER, DEFAULT_ZOOM } from '@/utils/geocoding';
 
 // ─────────────────────────────────────────
@@ -13,14 +14,131 @@ interface NeighborhoodMapProps {
   selectedLot: LotData | null;
   isBoard: boolean;
   onSelectLot: (lot: LotData) => void;
+  incidents?: Incident[];
+  onSelectIncident?: (incident: Incident) => void;
+  showLots?: boolean;
+  showIncidents?: boolean;
 }
 
 // ─────────────────────────────────────────
-// Marker color helpers
+// Incident type helpers
+// ─────────────────────────────────────────
+export const INCIDENT_COLORS: Record<Incident['type'], string> = {
+  crime: '#ef4444',
+  maintenance: '#f59e0b',
+  'road-closure': '#f97316',
+  'community-event': '#3b82f6',
+  hazard: '#eab308',
+  noise: '#8b5cf6',
+  other: '#6b7280',
+};
+
+export const INCIDENT_ICONS: Record<Incident['type'], string> = {
+  crime: '🚨',
+  maintenance: '🔧',
+  'road-closure': '🚧',
+  'community-event': '🎉',
+  hazard: '⚠️',
+  noise: '🔊',
+  other: '📋',
+};
+
+export const INCIDENT_LABELS: Record<Incident['type'], string> = {
+  crime: 'Crime',
+  maintenance: 'Maintenance',
+  'road-closure': 'Road Closure',
+  'community-event': 'Community Event',
+  hazard: 'Hazard',
+  noise: 'Noise',
+  other: 'Other',
+};
+
+function incidentDivIcon(L: typeof import('leaflet'), incident: Incident) {
+  const color = INCIDENT_COLORS[incident.type];
+  const isActive = incident.status === 'active';
+  const pulseStyle = isActive
+    ? `animation: incidentPulse 2s infinite; box-shadow: 0 0 0 0 ${color}80;`
+    : '';
+
+  const svg = `
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow-${incident.id}" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      ${isActive
+        ? `<circle cx="14" cy="14" r="13" fill="${color}22" stroke="${color}60" stroke-width="1"/>`
+        : ''
+      }
+      <polygon
+        points="14,3 25,22 3,22"
+        fill="${color}"
+        fill-opacity="${isActive ? '0.92' : '0.55'}"
+        stroke="${color}"
+        stroke-width="1.5"
+        stroke-linejoin="round"
+        filter="url(#glow-${incident.id})"
+      />
+      <text x="14" y="17.5" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif" font-weight="700">!</text>
+    </svg>
+  `;
+
+  return L.divIcon({
+    html: `<div style="width:28px;height:28px;${pulseStyle}">${svg}</div>`,
+    className: 'incident-marker',
+    iconSize: [28, 28],
+    iconAnchor: [14, 22],
+    popupAnchor: [0, -24],
+  });
+}
+
+function buildIncidentPopupHTML(incident: Incident): string {
+  const color = INCIDENT_COLORS[incident.type];
+  const icon = INCIDENT_ICONS[incident.type];
+  const label = INCIDENT_LABELS[incident.type];
+  const isActive = incident.status === 'active';
+  const statusBg = isActive ? 'rgba(201,169,110,0.12)' : 'rgba(34,197,94,0.12)';
+  const statusBorder = isActive ? 'rgba(201,169,110,0.35)' : 'rgba(34,197,94,0.35)';
+  const statusColor = isActive ? '#c9a96e' : '#22c55e';
+  const statusText = isActive ? 'Active' : 'Resolved';
+
+  const truncated = incident.description.length > 80
+    ? incident.description.slice(0, 80) + '…'
+    : incident.description;
+
+  return `
+    <div style="min-width:210px;font-family:'Plus Jakarta Sans',sans-serif;color:#e5e7eb;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="font-size:16px;">${icon}</span>
+        <div>
+          <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;">${label}</div>
+          <div style="font-size:14px;font-weight:700;color:#e5e7eb;line-height:1.2;">${incident.title}</div>
+        </div>
+        <div style="margin-left:auto;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${statusColor};white-space:nowrap;">${statusText}</div>
+      </div>
+      <div style="font-size:11px;color:#9ca3af;margin-bottom:6px;">${truncated}</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:10px;color:#6b7280;">
+        <span>📍 ${incident.location}</span>
+        <span style="margin-left:auto;">${incident.date}</span>
+      </div>
+      <div style="margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,0.06);">
+        <div style="width:100%;height:2px;border-radius:1px;background:linear-gradient(90deg,${color}60,transparent);"></div>
+      </div>
+    </div>
+  `;
+}
+
+// ─────────────────────────────────────────
+// Lot marker color helpers
 // ─────────────────────────────────────────
 function markerColor(lot: LotData): string {
-  if (lot.isDuesCurrent === null) return '#6b7280'; // gray-500
-  return lot.isDuesCurrent ? '#22c55e' : '#ef4444';  // green-500 / red-500
+  if (lot.isDuesCurrent === null) return '#6b7280';
+  return lot.isDuesCurrent ? '#22c55e' : '#ef4444';
 }
 
 function markerGlowColor(lot: LotData): string {
@@ -35,9 +153,6 @@ function statusLabel(lot: LotData): string {
   return lot.isDuesCurrent ? '✓ Current' : '✗ Overdue';
 }
 
-// ─────────────────────────────────────────
-// Custom popup HTML
-// ─────────────────────────────────────────
 function buildPopupHTML(lot: LotData, isBoard: boolean): string {
   const color = markerColor(lot);
   const status = statusLabel(lot);
@@ -64,11 +179,7 @@ function buildPopupHTML(lot: LotData, isBoard: boolean): string {
        </div>`;
 
   return `
-    <div style="
-      min-width:200px;
-      font-family:'Plus Jakarta Sans',sans-serif;
-      color:#e5e7eb;
-    ">
+    <div style="min-width:200px;font-family:'Plus Jakarta Sans',sans-serif;color:#e5e7eb;">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;">
         <div>
           <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;">Lot</div>
@@ -76,27 +187,10 @@ function buildPopupHTML(lot: LotData, isBoard: boolean): string {
             #${lot.lotNumber}
           </div>
         </div>
-        <div style="
-          padding:3px 8px;
-          border-radius:999px;
-          font-size:10px;
-          font-weight:600;
-          background:${statusBg};
-          border:1px solid ${statusBorder};
-          color:${color};
-          white-space:nowrap;
-        ">${status}</div>
+        <div style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${color};white-space:nowrap;">${status}</div>
       </div>
-
-      <div style="font-size:12px;color:#d1d5db;font-weight:500;margin-bottom:4px;">
-        ${lot.streetAddress}
-      </div>
-
-      ${lot.sqft > 0
-        ? `<div style="font-size:11px;color:#6b7280;">${lot.sqft.toLocaleString()} sq ft</div>`
-        : ''
-      }
-
+      <div style="font-size:12px;color:#d1d5db;font-weight:500;margin-bottom:4px;">${lot.streetAddress}</div>
+      ${lot.sqft > 0 ? `<div style="font-size:11px;color:#6b7280;">${lot.sqft.toLocaleString()} sq ft</div>` : ''}
       ${ownerRow}
     </div>
   `;
@@ -125,10 +219,15 @@ export default function NeighborhoodMap({
   selectedLot,
   isBoard,
   onSelectLot,
+  incidents = [],
+  onSelectIncident,
+  showLots = true,
+  showIncidents = true,
 }: NeighborhoodMapProps) {
   const mapRef = useRef<LeafletMap | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const markersRef = useRef<Map<number, CircleMarker>>(new Map());
+  const incidentMarkersRef = useRef<Map<string, Marker>>(new Map());
 
   // ── Initialize map (once) ──
   useEffect(() => {
@@ -138,7 +237,6 @@ export default function NeighborhoodMap({
 
     injectLeafletCSS();
 
-    // Dynamic import to avoid SSR issues
     import('leaflet').then((L) => {
       if (mapRef.current || !containerRef.current) return;
 
@@ -149,7 +247,6 @@ export default function NeighborhoodMap({
         attributionControl: true,
       });
 
-      // ── Dark tile layer (CartoDB Dark Matter) ──
       L.tileLayer(
         'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
         {
@@ -160,7 +257,6 @@ export default function NeighborhoodMap({
         }
       ).addTo(map);
 
-      // Style the attribution control to match dark theme
       const attrControl = map.attributionControl.getContainer();
       if (attrControl) {
         attrControl.style.background = 'rgba(10,10,15,0.85)';
@@ -178,11 +274,12 @@ export default function NeighborhoodMap({
         mapRef.current.remove();
         mapRef.current = null;
         markersRef.current.clear();
+        incidentMarkersRef.current.clear();
       }
     };
   }, []);
 
-  // ── Update markers when lots change ──
+  // ── Update property lot markers ──
   useEffect(() => {
     if (!mapRef.current) return;
     if (typeof window === 'undefined') return;
@@ -191,16 +288,17 @@ export default function NeighborhoodMap({
       const map = mapRef.current;
       if (!map) return;
 
-      // Remove old markers that are no longer in the list
+      // Remove markers not in list or when hidden
       const currentIds = new Set(lots.map((l) => l.tokenId));
       markersRef.current.forEach((marker, tokenId) => {
-        if (!currentIds.has(tokenId)) {
+        if (!currentIds.has(tokenId) || !showLots) {
           marker.remove();
           markersRef.current.delete(tokenId);
         }
       });
 
-      // Add/update markers
+      if (!showLots) return;
+
       lots.forEach((lot, i) => {
         const { lat, lng } = geocodeAddress(lot.streetAddress, i, lots.length);
         const color = markerColor(lot);
@@ -209,15 +307,11 @@ export default function NeighborhoodMap({
         const existing = markersRef.current.get(lot.tokenId);
         if (existing) {
           existing.setLatLng([lat, lng]);
-          existing.setStyle({
-            color,
-            fillColor: color,
-          });
+          existing.setStyle({ color, fillColor: color });
           existing.setPopupContent(buildPopupHTML(lot, isBoard));
           return;
         }
 
-        // Custom circle marker with glow ring
         const marker = L.circleMarker([lat, lng], {
           radius: 10,
           fillColor: color,
@@ -236,15 +330,10 @@ export default function NeighborhoodMap({
         }).setContent(buildPopupHTML(lot, isBoard));
 
         marker.bindPopup(popup);
-
-        marker.on('click', () => {
-          onSelectLot(lot);
-        });
-
+        marker.on('click', () => onSelectLot(lot));
         marker.on('mouseover', function (this: CircleMarker) {
           this.setStyle({ radius: 13, weight: 8 } as never);
         });
-
         marker.on('mouseout', function (this: CircleMarker) {
           this.setStyle({ radius: 10, weight: 6 } as never);
         });
@@ -253,7 +342,45 @@ export default function NeighborhoodMap({
         markersRef.current.set(lot.tokenId, marker);
       });
     });
-  }, [lots, isBoard, onSelectLot]);
+  }, [lots, isBoard, onSelectLot, showLots]);
+
+  // ── Update incident markers ──
+  useEffect(() => {
+    if (!mapRef.current) return;
+    if (typeof window === 'undefined') return;
+
+    import('leaflet').then((L) => {
+      const map = mapRef.current;
+      if (!map) return;
+
+      // Remove all incident markers first (re-render on each update)
+      incidentMarkersRef.current.forEach((marker) => marker.remove());
+      incidentMarkersRef.current.clear();
+
+      if (!showIncidents) return;
+
+      incidents.forEach((incident) => {
+        const icon = incidentDivIcon(L, incident);
+
+        const marker = L.marker([incident.lat, incident.lng], { icon });
+
+        const popup = L.popup({
+          className: 'faircroft-popup',
+          maxWidth: 280,
+          closeButton: true,
+          autoPan: true,
+        }).setContent(buildIncidentPopupHTML(incident));
+
+        marker.bindPopup(popup);
+        marker.on('click', () => {
+          if (onSelectIncident) onSelectIncident(incident);
+        });
+
+        marker.addTo(map);
+        incidentMarkersRef.current.set(incident.id, marker);
+      });
+    });
+  }, [incidents, showIncidents, onSelectIncident]);
 
   // ── Highlight selected lot ──
   useEffect(() => {
@@ -282,7 +409,6 @@ export default function NeighborhoodMap({
 
   return (
     <>
-      {/* Leaflet popup custom styles */}
       <style>{`
         .faircroft-popup .leaflet-popup-content-wrapper {
           background: rgba(13, 11, 20, 0.96);
@@ -317,6 +443,16 @@ export default function NeighborhoodMap({
           cursor: pointer;
           transition: all 0.15s ease;
         }
+        .incident-marker {
+          cursor: pointer;
+          background: transparent !important;
+          border: none !important;
+        }
+        @keyframes incidentPulse {
+          0% { box-shadow: 0 0 0 0 currentColor; }
+          70% { box-shadow: 0 0 0 8px transparent; }
+          100% { box-shadow: 0 0 0 0 transparent; }
+        }
         .leaflet-control-zoom {
           border: 1px solid rgba(255,255,255,0.08) !important;
           border-radius: 10px !important;
@@ -343,7 +479,7 @@ export default function NeighborhoodMap({
         ref={containerRef}
         style={{ minHeight: 520, width: '100%', borderRadius: '16px', overflow: 'hidden' }}
         className="border border-white/[0.08]"
-        aria-label="Neighborhood property map"
+        aria-label="Neighborhood property and incident map"
       />
     </>
   );
