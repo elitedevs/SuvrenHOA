@@ -96,27 +96,7 @@ export default function DirectoryPage() {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
         {BOARD_MEMBERS.map((member: any) => (
-          <div key={member.name} className="glass-card rounded-xl hover-lift p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 rounded-full bg-[#c9a96e]/15 border border-[#c9a96e]/20 flex items-center justify-center text-lg font-bold text-[#c9a96e]">
-                {(member.name || '').split(' ').map((n: string) => n[0]).join('')}
-              </div>
-              <div>
-                <h3 className="font-semibold text-sm">{member.name}</h3>
-                <p className="text-xs text-[#c9a96e]">{member.role}</p>
-              </div>
-            </div>
-            <p className="text-xs text-gray-400 leading-relaxed mb-3">{member.bio}</p>
-            <div className="flex items-center gap-3 text-[10px] text-gray-500">
-              <span>Lot #{member.lotNumber}</span>
-              <span>Since {member.since}</span>
-            </div>
-            {member.email && (
-              <a href={`mailto:${member.email}`} className="text-[10px] text-[#c9a96e] hover:underline mt-2 block">
-                ✉️ {member.email}
-              </a>
-            )}
-          </div>
+          <ResidentProfileCard key={member.name} member={member} isBoard />
         ))}
       </div>
 
@@ -153,6 +133,99 @@ export default function DirectoryPage() {
           post in the <a href="/community" className="text-[#c9a96e] hover:underline">Community Forum</a>.
           Board meetings are open to all homeowners — see the Announcements page for the next scheduled meeting.
         </p>
+      </div>
+    </div>
+  );
+}
+
+const TIER_LABELS: Record<number, { label: string; color: string; bg: string }> = {
+  1: { label: '👑 Founder', color: 'text-[#c9a96e]', bg: 'bg-[#c9a96e]/10 border-[#c9a96e]/20' },
+  2: { label: '🏛️ Elder', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+  3: { label: '🏠 Resident', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
+  4: { label: '🌱 New Owner', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
+};
+
+function ResidentProfileCard({ member, isBoard = false }: { member: any; isBoard?: boolean }) {
+  // Derive mock data for demo (in production these come from DB)
+  const tier = member.tier || (isBoard ? 1 : Math.floor(Math.random() * 3) + 2);
+  const tierInfo = TIER_LABELS[tier] ?? TIER_LABELS[4];
+  const duesStatus = member.duesCurrent !== false;
+  const petCount = member.petCount ?? 0;
+  const vehicleCount = member.vehicleCount ?? 1;
+
+  return (
+    <div className="glass-card rounded-xl hover-lift overflow-hidden border border-gray-700/30 group">
+      {/* Premium card header bar */}
+      <div className="h-1.5 bg-gradient-to-r from-[#b8942e] via-[#c9a96e] to-[#e8d5a3]" />
+
+      <div className="p-5">
+        {/* Avatar + name */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className="relative">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#c9a96e]/20 to-[#b8942e]/20 border border-[#c9a96e]/30 flex items-center justify-center text-lg font-bold text-[#c9a96e]">
+              {(member.name || '?').split(' ').map((n: string) => n[0]).join('').slice(0, 2)}
+            </div>
+            {isBoard && (
+              <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[#c9a96e] flex items-center justify-center text-[8px] text-[#1a1a1a] font-bold">★</div>
+            )}
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className="font-bold text-sm text-gray-100 truncate">{member.name}</h3>
+            {isBoard && <p className="text-[11px] text-[#c9a96e] font-medium">{member.role}</p>}
+          </div>
+        </div>
+
+        {/* Property info */}
+        <div className="space-y-2 mb-4">
+          <div className="flex items-center gap-2 text-[11px]">
+            <span className="text-gray-500 w-14 shrink-0">Lot</span>
+            <span className="font-mono font-semibold text-gray-200">#{member.lotNumber || '—'}</span>
+          </div>
+          {member.address && (
+            <div className="flex items-center gap-2 text-[11px]">
+              <span className="text-gray-500 w-14 shrink-0">Address</span>
+              <span className="text-gray-300 truncate">{member.address}</span>
+            </div>
+          )}
+          <div className="flex items-center gap-2 text-[11px]">
+            <span className="text-gray-500 w-14 shrink-0">Member</span>
+            <span className="text-gray-300">Since {member.since || '2024'}</span>
+          </div>
+        </div>
+
+        {/* Badges */}
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {/* Dues status */}
+          <span className={`text-[10px] px-2 py-0.5 rounded-full border font-semibold ${
+            duesStatus
+              ? 'bg-green-500/10 text-green-400 border-green-500/20'
+              : 'bg-red-500/10 text-red-400 border-red-500/20'
+          }`}>
+            {duesStatus ? '✓ Dues Current' : '⚠ Dues Overdue'}
+          </span>
+
+          {/* Voting tier */}
+          <span className={`text-[10px] px-2 py-0.5 rounded-full border font-semibold ${tierInfo.bg} ${tierInfo.color}`}>
+            {tierInfo.label}
+          </span>
+        </div>
+
+        {/* Pet & vehicle counts */}
+        <div className="flex gap-4 pt-3 border-t border-gray-700/30">
+          <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
+            <span>🐾</span>
+            <span>{petCount} pet{petCount !== 1 ? 's' : ''}</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
+            <span>🚗</span>
+            <span>{vehicleCount} vehicle{vehicleCount !== 1 ? 's' : ''}</span>
+          </div>
+          {member.email && (
+            <a href={`mailto:${member.email}`} className="ml-auto text-[#c9a96e]/60 hover:text-[#c9a96e] transition-colors text-[11px]">
+              ✉️
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -7,6 +7,8 @@ import { Sidebar } from '@/components/Sidebar';
 import { AlertBanner } from '@/components/AlertBanner';
 import { AIChatWidget } from '@/components/AIChatWidget';
 import { GlobalFeatures } from '@/components/GlobalFeatures';
+import { Breadcrumb } from '@/components/Breadcrumb';
+import { SeasonalBanner } from '@/components/SeasonalBanner';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -42,7 +44,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Sidebar />
           <div className="lg:pl-60 min-h-screen flex flex-col transition-all duration-200">
             <AlertBanner />
+            <SeasonalBanner />
             <main className="flex-1 p-4 sm:p-6 lg:p-8">
+              <Breadcrumb />
               {children}
             </main>
             <footer className="border-t border-[oklch(0.18_0.005_60)] py-5 px-6 text-center">

@@ -13,6 +13,7 @@ import {
   Eye, Map, Heart, MessageCircle, Bell, Bot, Settings,
   User, ChevronLeft, ChevronRight, Menu, X, LogOut,
 } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const NAV_SECTIONS = [
   {
@@ -64,6 +65,7 @@ const NAV_SECTIONS = [
       { href: '/transparency', label: 'Transparency', icon: Eye },
       { href: '/map', label: 'Map', icon: Map },
       { href: '/health', label: 'Health Score', icon: Heart },
+      { href: '/activity', label: 'Activity Log', icon: BarChart3 },
     ],
   },
 ];
@@ -183,8 +185,19 @@ export function Sidebar() {
         })}
       </div>
 
-      {/* Wallet */}
-      <div className="border-t border-[oklch(0.18_0.005_60)] p-3">
+      {/* Theme toggle + Wallet */}
+      <div className="border-t border-[oklch(0.18_0.005_60)] p-3 space-y-2">
+        {!collapsed && (
+          <div className="flex items-center justify-between px-1 py-1">
+            <span className="text-[11px] text-[oklch(0.38_0.01_60)] font-medium">Theme</span>
+            <ThemeToggle />
+          </div>
+        )}
+        {collapsed && (
+          <div className="flex justify-center py-1">
+            <ThemeToggle />
+          </div>
+        )}
         <div className={collapsed ? 'scale-75' : ''}>
           <ConnectButton label="Connect" showBalance={false} chainStatus="none" accountStatus={collapsed ? 'avatar' : 'address'} />
         </div>

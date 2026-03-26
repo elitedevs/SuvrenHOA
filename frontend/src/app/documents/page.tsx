@@ -1,15 +1,24 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { useAccount } from 'wagmi';
 import { useDocuments, useDocument, DOC_TYPE_LABELS } from '@/hooks/useDocuments';
+
+// Board member addresses (demo — in production derive from contract)
+const BOARD_ADDRESSES = [
+  '0x0000000000000000000000000000000000000001',
+];
 
 export default function DocumentsPage() {
   const { documentCount, getTypeLabel, getTypeColor, getTypeIcon } = useDocuments();
+  const { address } = useAccount();
+  const isBoardMember = true; // Demo: show upload for all connected wallets for UI preview
   const [selectedType, setSelectedType] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [verifyMode, setVerifyMode] = useState(false);
   const [verifyHash, setVerifyHash] = useState('');
   const [dragOver, setDragOver] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
 
   const handleFileDrop = useCallback(async (e: React.DragEvent) => {
     e.preventDefault();
@@ -36,17 +45,35 @@ export default function DocumentsPage() {
             Immutable community records — verified on-chain, stored permanently on Arweave
           </p>
         </div>
-        <button
-          onClick={() => setVerifyMode(!verifyMode)}
-          className={`px-5 py-3 rounded-xl text-sm font-bold transition-all duration-200 shrink-0 min-h-[44px] ${
-            verifyMode
-              ? 'bg-[#c9a96e] text-white shadow-[0_0_20px_rgba(201,169,110,0.25)]'
-              : 'border border-gray-700/60 text-gray-300 hover:border-[#c9a96e]/40 hover:text-white hover:bg-white/[0.03]'
-          }`}
-        >
-          {verifyMode ? '← Back to Documents' : '🔍 Verify Document'}
-        </button>
+        <div className="flex gap-2 shrink-0">
+          {isBoardMember && !verifyMode && (
+            <button
+              onClick={() => setShowUpload(!showUpload)}
+              className={`px-5 py-3 rounded-xl text-sm font-bold transition-all duration-200 min-h-[44px] ${
+                showUpload
+                  ? 'bg-[#c9a96e] text-[#1a1a1a] shadow-[0_0_20px_rgba(201,169,110,0.25)]'
+                  : 'border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/10'
+              }`}
+            >
+              {showUpload ? '✕ Close Upload' : '📤 Upload Document'}
+            </button>
+          )}
+          <button
+            onClick={() => setVerifyMode(!verifyMode)}
+            className={`px-5 py-3 rounded-xl text-sm font-bold transition-all duration-200 min-h-[44px] ${
+              verifyMode
+                ? 'bg-[#c9a96e] text-white shadow-[0_0_20px_rgba(201,169,110,0.25)]'
+                : 'border border-gray-700/60 text-gray-300 hover:border-[#c9a96e]/40 hover:text-white hover:bg-white/[0.03]'
+            }`}
+          >
+            {verifyMode ? '← Back to Documents' : '🔍 Verify Document'}
+          </button>
+        </div>
       </div>
+
+      {showUpload && !verifyMode && isBoardMember && (
+        <DocumentUploadForm onClose={() => setShowUpload(false)} />
+      )}
 
       {verifyMode ? (
         <VerifyPanel
@@ -370,6 +397,132 @@ function VerifyPanel({
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+function DocumentUploadForm({ onClose }: { onClose: () => void }) {
+  const [title, setTitle] = useState('');
+  const [docType, setDocType] = useState<number>(9);
+  const [fileName, setFileName] = useState<string | null>(null);
+  const [dragOver, setDragOver] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleFileSelect = (file: File) => {
+    setFileName(file.name);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDragOver(false);
+    const file = e.dataTransfer.files[0];
+    if (file) handleFileSelect(file);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('[DocumentUpload] Submitted:', { title, docType, fileName });
+    setSubmitted(true);
+    setTimeout(() => { setSubmitted(false); onClose(); }, 2000);
+  };
+
+  return (
+    <div className="glass-card rounded-2xl p-6 mb-8 border border-[#c9a96e]/20 page-enter">
+      <div className="flex items-center justify-between mb-5">
+        <div>
+          <h2 className="text-lg font-bold">Upload Document</h2>
+          <p className="text-xs text-gray-500 mt-0.5">Board members only · Arweave upload handled server-side</p>
+        </div>
+        <span className="text-[10px] px-2 py-1 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20 font-bold">
+          🔒 Board Access
+        </span>
+      </div>
+
+      {submitted ? (
+        <div className="text-center py-8">
+          <div className="text-4xl mb-3">✅</div>
+          <p className="text-green-400 font-semibold">Upload queued successfully!</p>
+          <p className="text-xs text-gray-500 mt-1">Arweave transaction will be processed shortly.</p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs text-gray-400 font-medium mb-2">Document Title</label>
+              <input
+                type="text"
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+                placeholder="e.g. Board Meeting Minutes — March 2026"
+                required
+                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none transition-all"
+              />
+            </div>
+            <div>
+              <label className="block text-xs text-gray-400 font-medium mb-2">Document Type</label>
+              <select
+                value={docType}
+                onChange={e => setDocType(Number(e.target.value))}
+                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700/60 text-sm focus:border-[#c9a96e]/50 focus:outline-none transition-all"
+              >
+                {Object.entries(DOC_TYPE_LABELS).map(([k, v]) => (
+                  <option key={k} value={k}>{v}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Drag & drop area */}
+          <div
+            onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={handleDrop}
+            onClick={() => document.getElementById('doc-file-input')?.click()}
+            className={`relative p-10 rounded-2xl border-2 border-dashed text-center cursor-pointer transition-all duration-300 ${
+              dragOver
+                ? 'border-[#c9a96e] bg-[#c9a96e]/5 shadow-[0_0_30px_rgba(201,169,110,0.15)]'
+                : fileName
+                ? 'border-green-500/40 bg-green-500/5'
+                : 'border-gray-700/60 hover:border-[#c9a96e]/40 hover:bg-[#1a1a1a]/20'
+            }`}
+          >
+            <input
+              id="doc-file-input"
+              type="file"
+              className="hidden"
+              onChange={e => { const f = e.target.files?.[0]; if (f) handleFileSelect(f); }}
+            />
+            <div className={`text-4xl mb-3 transition-transform ${dragOver ? 'scale-110' : ''}`}>
+              {fileName ? '📄' : '📁'}
+            </div>
+            {fileName ? (
+              <>
+                <p className="font-semibold text-green-400 text-sm">{fileName}</p>
+                <p className="text-xs text-gray-500 mt-1">Click to change file</p>
+              </>
+            ) : (
+              <>
+                <p className="font-semibold text-sm text-gray-300">Drop file here or click to browse</p>
+                <p className="text-xs text-gray-500 mt-1">PDF, DOCX, XLSX, images accepted</p>
+              </>
+            )}
+          </div>
+
+          <div className="flex gap-3">
+            <button type="button" onClick={onClose}
+              className="flex-1 py-3 rounded-xl border border-gray-700/60 text-sm font-medium hover:bg-gray-800/40 transition-colors">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={!title.trim() || !fileName}
+              className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] disabled:opacity-50 text-[#1a1a1a] text-sm font-bold transition-all"
+            >
+              Queue for Upload
+            </button>
+          </div>
+        </form>
+      )}
     </div>
   );
 }

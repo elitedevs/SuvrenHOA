@@ -179,6 +179,9 @@ export default function TreasuryPage() {
         )}
       </div>
 
+      {/* Spending Breakdown */}
+      <SpendingBreakdown />
+
       {/* On-chain banner */}
       <div className="mt-8 glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30 page-enter page-enter-delay-4">
         <div className="flex items-start gap-3">
@@ -192,6 +195,79 @@ export default function TreasuryPage() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+const SPENDING_CATEGORIES = [
+  { label: 'Maintenance', pct: 40, color: '#c9a96e', bg: 'bg-[#c9a96e]' },
+  { label: 'Landscaping', pct: 25, color: '#60a5fa', bg: 'bg-blue-400' },
+  { label: 'Reserves', pct: 20, color: '#4ade80', bg: 'bg-green-400' },
+  { label: 'Admin', pct: 15, color: '#f59e0b', bg: 'bg-amber-400' },
+];
+
+function SpendingBreakdown() {
+  // Build conic-gradient for the ring chart
+  const conicParts: string[] = [];
+  let cumulative = 0;
+  SPENDING_CATEGORIES.forEach(({ pct, color }) => {
+    conicParts.push(`${color} ${cumulative}% ${cumulative + pct}%`);
+    cumulative += pct;
+  });
+  const conicGradient = `conic-gradient(${conicParts.join(', ')})`;
+
+  return (
+    <div className="glass-card rounded-2xl hover-lift p-6 mb-8 page-enter page-enter-delay-3">
+      <h2 className="text-lg font-bold text-gray-200 mb-6">Spending Breakdown</h2>
+
+      <div className="flex flex-col sm:flex-row items-center gap-8">
+        {/* CSS Donut Ring */}
+        <div className="relative shrink-0">
+          <div
+            className="w-40 h-40 rounded-full"
+            style={{
+              background: conicGradient,
+              transition: 'all 0.7s ease',
+            }}
+          />
+          {/* Inner cutout */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-24 h-24 rounded-full bg-[oklch(0.10_0.005_60)] flex flex-col items-center justify-center">
+              <span className="text-[10px] text-gray-500 uppercase tracking-wide">Annual</span>
+              <span className="text-sm font-bold text-[#c9a96e]">Budget</span>
+              <span className="text-[10px] text-gray-400 font-semibold">$120K</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Legend */}
+        <div className="flex-1 space-y-3 w-full">
+          {SPENDING_CATEGORIES.map(({ label, pct, bg }) => (
+            <div key={label} className="flex items-center gap-3">
+              <div className={`w-3 h-3 rounded-full ${bg} shrink-0`} />
+              <div className="flex-1">
+                <div className="flex justify-between text-sm mb-1">
+                  <span className="font-medium text-gray-300">{label}</span>
+                  <span className="font-bold text-gray-200">{pct}%</span>
+                </div>
+                <div className="h-1.5 rounded-full bg-gray-800/60">
+                  <div
+                    className={`h-1.5 rounded-full ${bg} transition-all duration-700`}
+                    style={{ width: `${pct}%` }}
+                  />
+                </div>
+                <p className="text-[10px] text-gray-600 mt-0.5">
+                  ~${Math.round(120000 * pct / 100).toLocaleString()} / year
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <p className="text-[10px] text-gray-600 mt-5 pt-4 border-t border-gray-800/60">
+        Based on $120,000 annual community budget · Percentages are approximate and updated quarterly
+      </p>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useMaintenanceRequests, useCreateMaintenanceRequest } from '@/hooks/useMaintenance';
@@ -38,10 +38,11 @@ export default function MaintenancePage() {
   }
 
   const { data: apiRequests, isLoading } = useMaintenanceRequests(filter !== 'all' ? filter : null);
-  const filtered = apiRequests || [];
+  const allRequests = apiRequests || [];
+  const [viewMode, setViewMode] = useState<'list' | 'kanban'>('kanban');
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
@@ -50,18 +51,34 @@ export default function MaintenancePage() {
             Report issues, track repairs, and see resolution status
           </p>
         </div>
-        <button
-          onClick={() => setShowNewRequest(!showNewRequest)}
-          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)] shrink-0"
-        >
-          {showNewRequest ? '← Back' : '🔧 Report Issue'}
-        </button>
+        <div className="flex gap-2 shrink-0">
+          <div className="flex rounded-xl border border-gray-700/60 overflow-hidden">
+            <button
+              onClick={() => setViewMode('kanban')}
+              className={`px-4 py-2.5 text-xs font-semibold transition-all ${viewMode === 'kanban' ? 'bg-[#c9a96e]/15 text-[#c9a96e]' : 'text-gray-400 hover:text-gray-300'}`}
+            >
+              ☰ Kanban
+            </button>
+            <button
+              onClick={() => setViewMode('list')}
+              className={`px-4 py-2.5 text-xs font-semibold transition-all ${viewMode === 'list' ? 'bg-[#c9a96e]/15 text-[#c9a96e]' : 'text-gray-400 hover:text-gray-300'}`}
+            >
+              ≡ List
+            </button>
+          </div>
+          <button
+            onClick={() => setShowNewRequest(!showNewRequest)}
+            className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)]"
+          >
+            {showNewRequest ? '← Back' : '🔧 Report Issue'}
+          </button>
+        </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         {Object.entries(STATUS_STYLES).map(([status, style]) => {
-          const count = (apiRequests || []).filter((r: any) => r.status === status).length;
+          const count = allRequests.filter((r: any) => r.status === status).length;
           return (
             <button
               key={status}
@@ -77,9 +94,11 @@ export default function MaintenancePage() {
 
       {showNewRequest ? (
         <NewRequestForm onClose={() => setShowNewRequest(false)} />
+      ) : viewMode === 'kanban' ? (
+        <KanbanBoard requests={allRequests} />
       ) : (
         <div className="space-y-4">
-          {filtered.map(request => (
+          {allRequests.map((request: any) => (
             <RequestCard key={request.id} request={request} />
           ))}
         </div>
@@ -247,4 +266,81 @@ function getTimeAgo(date: Date): string {
   if (days === 1) return 'Yesterday';
   if (days < 7) return `${days}d ago`;
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+const KANBAN_COLUMNS = [
+  { id: 'open', label: 'Submitted', emoji: '📥', style: STATUS_STYLES.open },
+  { id: 'in-progress', label: 'In Progress', emoji: '🔧', style: STATUS_STYLES['in-progress'] },
+  { id: 'resolved', label: 'Completed', emoji: '✅', style: STATUS_STYLES.resolved },
+];
+
+function KanbanBoard({ requests }: { requests: any[] }) {
+  const columns = useMemo(() => {
+    return KANBAN_COLUMNS.map(col => ({
+      ...col,
+      items: requests.filter(r => r.status === col.id || (col.id === 'open' && !r.status)),
+    }));
+  }, [requests]);
+
+  if (requests.length === 0) {
+    return (
+      <div className="glass-card rounded-2xl p-12 text-center">
+        <div className="text-4xl mb-4">🔧</div>
+        <h3 className="text-lg font-bold mb-2">No maintenance requests</h3>
+        <p className="text-sm text-gray-400">Submit a request to get started</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {columns.map(col => (
+        <div key={col.id} className="flex flex-col gap-3">
+          {/* Column header */}
+          <div className={`flex items-center justify-between px-4 py-3 rounded-xl ${col.style.bg} border ${col.style.border}`}>
+            <div className="flex items-center gap-2">
+              <span>{col.emoji}</span>
+              <span className={`text-xs font-bold ${col.style.color}`}>{col.label}</span>
+            </div>
+            <span className={`text-xs font-bold ${col.style.color} min-w-[20px] h-5 rounded-full flex items-center justify-center bg-black/20`}>
+              {col.items.length}
+            </span>
+          </div>
+
+          {/* Cards */}
+          <div className="space-y-2 min-h-[100px]">
+            {col.items.length === 0 ? (
+              <div className="p-4 rounded-xl border border-dashed border-gray-700/40 text-center">
+                <p className="text-[11px] text-gray-600">No items</p>
+              </div>
+            ) : (
+              col.items.map((request: any) => (
+                <KanbanCard key={request.id} request={request} />
+              ))
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function KanbanCard({ request }: { request: any }) {
+  const priority = PRIORITY_STYLES[request.priority as keyof typeof PRIORITY_STYLES] || 'text-gray-400';
+  const timeAgo = getTimeAgo(new Date(request.created_at));
+
+  return (
+    <div className="glass-card rounded-xl p-4 hover-lift cursor-default">
+      <h4 className="text-sm font-semibold text-gray-200 mb-2 leading-snug">{request.title}</h4>
+      <div className="flex items-center gap-2 flex-wrap">
+        <span className={`text-[10px] font-bold uppercase ${priority}`}>
+          {request.priority}
+        </span>
+        {request.location && (
+          <span className="text-[10px] text-gray-500">📍 {request.location}</span>
+        )}
+      </div>
+      <p className="text-[10px] text-gray-600 mt-2">{timeAgo}</p>
+    </div>
+  );
 }

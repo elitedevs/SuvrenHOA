@@ -363,10 +363,49 @@ function Dashboard() {
           </div>
         </div>
 
+        {/* Quick Actions */}
+        <div className="mt-10 page-enter page-enter-delay-3">
+          <QuickActions />
+        </div>
+
         {/* Live Activity Ticker */}
         <div className="mt-10 page-enter page-enter-delay-4">
           <ActivityTicker />
         </div>
+      </div>
+    </div>
+  );
+}
+
+const QUICK_ACTIONS = [
+  { href: '/dues', icon: '💳', label: 'Pay Dues', desc: 'USDC payment', color: 'text-[#c9a96e]', bg: 'bg-[#c9a96e]/10 hover:bg-[#c9a96e]/20 border-[#c9a96e]/20 hover:border-[#c9a96e]/40' },
+  { href: '/maintenance', icon: '🔧', label: 'Submit Request', desc: 'Maintenance', color: 'text-blue-400', bg: 'bg-blue-500/10 hover:bg-blue-500/20 border-blue-500/20 hover:border-blue-500/40' },
+  { href: '/documents', icon: '📄', label: 'Documents', desc: 'View records', color: 'text-amber-400', bg: 'bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/20 hover:border-amber-500/40' },
+  { href: '/messages', icon: '💬', label: 'Message Neighbor', desc: 'Community chat', color: 'text-green-400', bg: 'bg-green-500/10 hover:bg-green-500/20 border-green-500/20 hover:border-green-500/40' },
+  { href: '/proposals', icon: '🗳️', label: 'Vote on Proposal', desc: 'Governance', color: 'text-purple-400', bg: 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/20 hover:border-purple-500/40' },
+  { href: '/activity', icon: '📋', label: 'Activity Log', desc: 'On-chain events', color: 'text-cyan-400', bg: 'bg-cyan-500/10 hover:bg-cyan-500/20 border-cyan-500/20 hover:border-cyan-500/40' },
+];
+
+function QuickActions() {
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-base font-bold text-gray-200">⚡ Quick Actions</h2>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {QUICK_ACTIONS.map(({ href, icon, label, desc, color, bg }) => (
+          <Link
+            key={href}
+            href={href}
+            className={`flex items-center gap-3 p-4 rounded-xl border transition-all duration-200 group ${bg}`}
+          >
+            <span className={`text-2xl group-hover:scale-110 transition-transform duration-200 inline-block`}>{icon}</span>
+            <div className="min-w-0">
+              <p className={`text-xs font-bold ${color} leading-tight`}>{label}</p>
+              <p className="text-[10px] text-gray-500 mt-0.5 truncate">{desc}</p>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
