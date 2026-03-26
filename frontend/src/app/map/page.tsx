@@ -1,13 +1,33 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
+import dynamic from 'next/dynamic';
 import { useAccount } from 'wagmi';
 import { useNeighborhoodMap, LotData } from '@/hooks/useNeighborhoodMap';
+
+// ─────────────────────────────────────────
+// Dynamic import of map (no SSR — Leaflet requires window)
+// ─────────────────────────────────────────
+const NeighborhoodMap = dynamic(() => import('@/components/NeighborhoodMap'), {
+  ssr: false,
+  loading: () => (
+    <div
+      className="w-full flex items-center justify-center border border-white/[0.08] rounded-2xl bg-white/[0.02]"
+      style={{ minHeight: 520 }}
+    >
+      <div className="flex flex-col items-center gap-3">
+        <div className="w-8 h-8 rounded-full border-2 border-[#c9a96e]/40 border-t-[#c9a96e] animate-spin" />
+        <span className="text-sm text-gray-500">Loading map…</span>
+      </div>
+    </div>
+  ),
+});
 
 // ─────────────────────────────────────────
 // Helpers
 // ─────────────────────────────────────────
 type StatusFilter = 'all' | 'current' | 'overdue';
+type ViewMode = 'map' | 'grid';
 
 function statusColor(lot: LotData) {
   if (lot.isDuesCurrent === null) return 'gray';
@@ -22,7 +42,7 @@ function statusLabel(lot: LotData) {
 // ─────────────────────────────────────────
 // Lot Card
 // ─────────────────────────────────────────
-function LotCard({ lot, onClick }: { lot: LotData; onClick: () => void }) {
+function LotCard({ lot, isSelected, onClick }: { lot: LotData; isSelected: boolean; onClick: () => void }) {
   const color = statusColor(lot);
 
   const borderClass =
@@ -46,7 +66,7 @@ function LotCard({ lot, onClick }: { lot: LotData; onClick: () => void }) {
         'relative glass-card rounded-xl hover-lift p-4 text-left cursor-pointer',
         'border-l-4',
         borderClass,
-        'hover:bg-white/[0.06]',
+        isSelected ? 'ring-2 ring-[#c9a96e]/50 bg-[#c9a96e]/5' : 'hover:bg-white/[0.06]',
         'hover:-translate-y-0.5 active:scale-[0.98]',
         'transition-all duration-200',
         'focus:outline-none focus:ring-2 focus:ring-[#c9a96e]/50',
@@ -214,6 +234,66 @@ function StatsBar({ lots }: { lots: LotData[] }) {
 }
 
 // ─────────────────────────────────────────
+// View Toggle
+// ─────────────────────────────────────────
+function ViewToggle({ view, onChange }: { view: ViewMode; onChange: (v: ViewMode) => void }) {
+  return (
+    <div className="flex gap-1 p-1 rounded-xl bg-white/[0.04] border border-white/[0.08]">
+      <button
+        onClick={() => onChange('map')}
+        className={[
+          'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200',
+          view === 'map'
+            ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
+            : 'text-gray-500 hover:text-gray-300',
+        ].join(' ')}
+        aria-pressed={view === 'map'}
+      >
+        <span>🗺</span>
+        <span>Map</span>
+      </button>
+      <button
+        onClick={() => onChange('grid')}
+        className={[
+          'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200',
+          view === 'grid'
+            ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
+            : 'text-gray-500 hover:text-gray-300',
+        ].join(' ')}
+        aria-pressed={view === 'grid'}
+      >
+        <span>⊞</span>
+        <span>Grid</span>
+      </button>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────
+// Map Legend
+// ─────────────────────────────────────────
+function MapLegend() {
+  const items = [
+    { color: '#22c55e', label: 'Dues Current' },
+    { color: '#ef4444', label: 'Overdue' },
+    { color: '#6b7280', label: 'Unknown' },
+  ];
+  return (
+    <div className="flex items-center gap-4 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] w-fit">
+      {items.map(({ color, label }) => (
+        <div key={label} className="flex items-center gap-1.5">
+          <span
+            className="w-3 h-3 rounded-full inline-block"
+            style={{ background: color, boxShadow: `0 0 6px ${color}80` }}
+          />
+          <span className="text-[11px] text-gray-400 font-medium">{label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────
 // Main Page
 // ─────────────────────────────────────────
 export default function MapPage() {
@@ -226,6 +306,11 @@ export default function MapPage() {
   const [filter, setFilter] = useState<StatusFilter>('all');
   const [search, setSearch] = useState('');
   const [selectedLot, setSelectedLot] = useState<LotData | null>(null);
+  const [viewMode, setViewMode] = useState<ViewMode>('map');
+
+  const handleSelectLot = useCallback((lot: LotData) => {
+    setSelectedLot(lot);
+  }, []);
 
   const filteredLots = useMemo(() => {
     let result = lots;
@@ -268,7 +353,7 @@ export default function MapPage() {
         {!loading && !error && <StatsBar lots={lots} />}
 
         {/* Controls */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row gap-3 mb-4">
           {/* Filter buttons */}
           <div className="flex gap-2 flex-wrap">
             {filterButtons.map(({ key, label, activeClass }) => (
@@ -308,6 +393,19 @@ export default function MapPage() {
             {loading ? '⟳ Loading…' : '⟳ Refresh'}
           </button>
         </div>
+
+        {/* View toggle + legend row */}
+        {!loading && !error && lots.length > 0 && (
+          <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
+            <div className="flex items-center gap-3 flex-wrap">
+              <ViewToggle view={viewMode} onChange={setViewMode} />
+              {viewMode === 'map' && <MapLegend />}
+            </div>
+            <p className="text-[12px] text-gray-600">
+              Showing {filteredLots.length} of {lots.length} lots
+            </p>
+          </div>
+        )}
 
         {/* Error */}
         {error && (
@@ -354,26 +452,32 @@ export default function MapPage() {
           </div>
         )}
 
-        {/* Lot grid */}
-        {!loading && filteredLots.length > 0 && (
-          <>
-            <p className="text-[12px] text-gray-600 mb-3">
-              Showing {filteredLots.length} of {lots.length} lots
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {filteredLots.map((lot) => (
-                <LotCard
-                  key={lot.tokenId}
-                  lot={lot}
-                  onClick={() => setSelectedLot(lot)}
-                />
-              ))}
-            </div>
-          </>
+        {/* ── Map View ── */}
+        {!loading && filteredLots.length > 0 && viewMode === 'map' && (
+          <NeighborhoodMap
+            lots={filteredLots}
+            selectedLot={selectedLot}
+            isBoard={isBoard}
+            onSelectLot={handleSelectLot}
+          />
+        )}
+
+        {/* ── Grid View ── */}
+        {!loading && filteredLots.length > 0 && viewMode === 'grid' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {filteredLots.map((lot) => (
+              <LotCard
+                key={lot.tokenId}
+                lot={lot}
+                isSelected={selectedLot?.tokenId === lot.tokenId}
+                onClick={() => handleSelectLot(lot)}
+              />
+            ))}
+          </div>
         )}
       </div>
 
-      {/* Detail panel */}
+      {/* Detail panel — shown in both modes */}
       {selectedLot && (
         <DetailPanel
           lot={selectedLot}
