@@ -790,9 +790,12 @@ export default function MapPage() {
 
         {/* Error */}
         {error && (
-          <div className="glass-card rounded-xl hover-lift p-6 border border-red-500/20 bg-red-500/5 mb-6">
-            <p className="text-red-400 font-semibold">⚠ Failed to load map data</p>
-            <p className="text-red-400/70 text-sm mt-1">{error}</p>
+          <div className="glass-card rounded-xl hover-lift p-6 border border-[#a85454]/20 bg-[#a85454]/5 mb-6">
+            <p className="text-[#d4a0a0] font-semibold">Map data temporarily unavailable</p>
+            <p className="text-gray-500 text-sm mt-1">Property data couldn&apos;t be loaded right now. The map will still display — try refreshing in a moment.</p>
+            <button onClick={refresh} className="mt-3 px-4 py-2 rounded-lg text-sm font-semibold bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30 hover:bg-[#c9a96e]/25 transition-all">
+              Retry
+            </button>
           </div>
         )}
 

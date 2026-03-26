@@ -184,7 +184,7 @@ export function Sidebar() {
       <div className="flex items-center justify-between px-4 h-14 border-b border-[oklch(0.18_0.005_60)]">
         {!collapsed && (
           <Link href="/" className="flex items-center gap-2">
-            <img src="/logo-full.png" alt="SuvrenHOA" className="h-7 w-auto" />
+            <img src="/logo-full.png" alt="SuvrenHOA" className="h-8 w-auto max-w-[140px] object-contain" />
           </Link>
         )}
         <button
