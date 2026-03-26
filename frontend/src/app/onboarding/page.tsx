@@ -16,7 +16,7 @@ import {
 function Confetti() {
   const pieces = Array.from({ length: 60 }, (_, i) => i);
   const colors = [
-    "#8b5cf6", "#a78bfa", "#6366f1", "#22c55e", "#f59e0b",
+    "#c9a96e", "#e8d5a3", "#b8942e", "#22c55e", "#f59e0b",
     "#ec4899", "#06b6d4", "#f97316",
   ];
   return (
@@ -77,7 +77,7 @@ function StepIndicator({
             style={{
               background:
                 i < current
-                  ? "linear-gradient(90deg, #8b5cf6, #6366f1)"
+                  ? "linear-gradient(90deg, #c9a96e, #b8942e)"
                   : "rgba(255,255,255,0.08)",
             }}
           />

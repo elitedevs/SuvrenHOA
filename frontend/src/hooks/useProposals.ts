@@ -8,7 +8,7 @@ export type ProposalCategory = 'Routine' | 'Financial' | 'Governance' | 'Constit
 export const CATEGORIES: { value: number; label: ProposalCategory; quorum: string; threshold: string; color: string; icon: string }[] = [
   { value: 0, label: 'Routine', quorum: '15%', threshold: '>50%', color: 'green', icon: '🔧' },
   { value: 1, label: 'Financial', quorum: '33%', threshold: '>50%', color: 'blue', icon: '💰' },
-  { value: 2, label: 'Governance', quorum: '51%', threshold: '>50%', color: 'purple', icon: '⚖️' },
+  { value: 2, label: 'Governance', quorum: '51%', threshold: '>50%', color: 'amber', icon: '⚖️' },
   { value: 3, label: 'Constitutional', quorum: '67%', threshold: '>66.7%', color: 'red', icon: '📜' },
 ];
 
@@ -22,7 +22,7 @@ const STATE_COLORS: Record<string, string> = {
   Canceled: 'gray',
   Defeated: 'red',
   Succeeded: 'green',
-  Queued: 'purple',
+  Queued: 'amber',
   Expired: 'gray',
   Executed: 'emerald',
 };

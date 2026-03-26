@@ -28,7 +28,7 @@ const DOC_TYPE_LABELS: Record<number, string> = {
 };
 
 const DOC_TYPE_COLORS: Record<number, string> = {
-  0: 'purple',
+  0: 'amber',
   1: 'blue',
   2: 'green',
   3: 'orange',
