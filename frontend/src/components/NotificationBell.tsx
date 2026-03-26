@@ -4,11 +4,45 @@ import { useState, useRef, useEffect } from 'react';
 import { useNotifications, useMarkRead, type Notification } from '@/hooks/useNotifications';
 import Link from 'next/link';
 
+/** Generate a pleasant chime using Web Audio API */
+function playChime() {
+  try {
+    const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+    const now = ctx.currentTime;
+
+    const freqs = [523.25, 659.25, 783.99]; // C5, E5, G5
+    freqs.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, now + i * 0.12);
+      gain.gain.linearRampToValueAtTime(0.18, now + i * 0.12 + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 0.35);
+      osc.start(now + i * 0.12);
+      osc.stop(now + i * 0.12 + 0.4);
+    });
+  } catch {
+    // Audio unavailable — silently ignore
+  }
+}
+
 export function NotificationBell() {
   const { notifications, unreadCount } = useNotifications();
   const markRead = useMarkRead();
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const prevUnreadRef = useRef(unreadCount);
+
+  // Play chime when new notifications arrive
+  useEffect(() => {
+    if (unreadCount > prevUnreadRef.current) {
+      playChime();
+    }
+    prevUnreadRef.current = unreadCount;
+  }, [unreadCount]);
 
   // Close on outside click
   useEffect(() => {

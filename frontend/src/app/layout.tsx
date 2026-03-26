@@ -6,6 +6,7 @@ import { Header } from '@/components/Header';
 import { Sidebar } from '@/components/Sidebar';
 import { AlertBanner } from '@/components/AlertBanner';
 import { AIChatWidget } from '@/components/AIChatWidget';
+import { GlobalFeatures } from '@/components/GlobalFeatures';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </footer>
           </div>
           <AIChatWidget />
+          <GlobalFeatures />
         </Providers>
       </body>
     </html>

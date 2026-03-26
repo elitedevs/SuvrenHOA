@@ -689,3 +689,70 @@ input:focus, textarea:focus, select:focus {
   letter-spacing: -0.02em;
   font-weight: 800;
 }
+
+/* ── Pulse Gold Animation (for active proposal stages) ───────────── */
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(201, 169, 110, 0); }
+}
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+/* ── Print Styles (Feature 8: Treasury PDF Export) ───────────────── */
+@media print {
+  /* Hide UI chrome */
+  nav, aside, header, footer,
+  .no-print,
+  [data-sidebar],
+  button:not(.print-visible) {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: #1a1a1a !important;
+  }
+
+  .glass-card,
+  .glass-card-success,
+  .glass-card-info {
+    background: #f9f9f9 !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .gradient-text {
+    color: #1a1a1a !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+  }
+
+  .gradient-text-green {
+    color: #2d6a4f !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+  }
+
+  /* Show print header */
+  .print-header {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #c9a96e;
+  }
+
+  /* Make content full width */
+  .lg\\:pl-60 {
+    padding-left: 0 !important;
+  }
+
+  @page {
+    margin: 1in;
+    size: letter portrait;
+  }
+}

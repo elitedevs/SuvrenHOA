@@ -2,6 +2,13 @@
 
 import { useTreasury } from '@/hooks/useTreasury';
 
+function exportTreasuryPDF() {
+  // Add print-specific class to body so @media print styles kick in
+  document.body.classList.add('printing-treasury');
+  window.print();
+  setTimeout(() => document.body.classList.remove('printing-treasury'), 500);
+}
+
 export default function TreasuryPage() {
   const {
     totalBalance,
@@ -21,12 +28,21 @@ export default function TreasuryPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-10 page-enter">
       {/* Page header */}
-      <div className="mb-10">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">On-Chain Finance</p>
-        <h1 className="text-3xl font-extrabold tracking-tight">Community Treasury</h1>
-        <p className="text-base text-gray-400 mt-2 font-medium">
-          Every dollar publicly recorded and verifiable on the blockchain
-        </p>
+      <div className="mb-10 flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">On-Chain Finance</p>
+          <h1 className="text-3xl font-extrabold tracking-tight">Community Treasury</h1>
+          <p className="text-base text-gray-400 mt-2 font-medium">
+            Every dollar publicly recorded and verifiable on the blockchain
+          </p>
+        </div>
+        <button
+          onClick={exportTreasuryPDF}
+          className="no-print shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
+          title="Export as PDF"
+        >
+          📄 Export PDF
+        </button>
       </div>
 
       {/* Hero Balance */}

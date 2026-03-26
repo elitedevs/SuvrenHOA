@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useProperty } from '@/hooks/useProperty';
@@ -7,6 +8,7 @@ import { useDuesStatus } from '@/hooks/useTreasury';
 import { useMessages } from '@/hooks/useMessages';
 import { useOnboarding } from '@/hooks/useOnboarding';
 import { PropertySelector } from '@/components/PropertySelector';
+import { QRModal } from '@/components/QRCode';
 import Link from 'next/link';
 
 export default function DashboardPage() {
@@ -43,6 +45,7 @@ function PropertyDashboard() {
   const { isCurrent, quartersOwed, amountOwed } = useDuesStatus(tokenId);
   const { totalUnread } = useMessages();
   const { isCompleted } = useOnboarding();
+  const [showQR, setShowQR] = useState(false);
 
   if (!hasProperty) {
     return (
@@ -82,17 +85,31 @@ function PropertyDashboard() {
             Property Profile
           </h1>
         </div>
-        <div className="px-4 py-2 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20">
-          <span className="text-sm font-bold text-[#e8d5a3]">
-            Lot #{tokenId}
-            {hasMultipleProperties && (
-              <span className="ml-1 text-xs text-[#c9a96e]/60">
-                ({properties.length} properties)
-              </span>
-            )}
-          </span>
+        <div className="flex items-center gap-3">
+          <div className="px-4 py-2 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20">
+            <span className="text-sm font-bold text-[#e8d5a3]">
+              Lot #{tokenId}
+              {hasMultipleProperties && (
+                <span className="ml-1 text-xs text-[#c9a96e]/60">
+                  ({properties.length} properties)
+                </span>
+              )}
+            </span>
+          </div>
+          {tokenId !== undefined && (
+            <button
+              onClick={() => setShowQR(true)}
+              className="px-3 py-2 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-xs font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
+              title="Share Property QR Code"
+            >
+              📱 Share
+            </button>
+          )}
         </div>
       </div>
+
+      {/* QR Modal */}
+      {showQR && <QRModal tokenId={tokenId} onClose={() => setShowQR(false)} />}
 
       {/* Property Selector — only shows when wallet owns multiple lots */}
       <PropertySelector

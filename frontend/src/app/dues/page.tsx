@@ -8,6 +8,7 @@ import { useTreasury, useDuesStatus } from '@/hooks/useTreasury';
 import { usePayDues, useUSDCBalance, useUSDCAllowance } from '@/hooks/usePayDues';
 import { DuesReminder } from '@/components/DuesReminder';
 import { useDuesSocialProof } from '@/hooks/useDuesSocialProof';
+import { DuesPaymentChart } from '@/components/DuesPaymentChart';
 
 export default function DuesPage() {
   const { isConnected } = useAccount();
@@ -350,6 +351,13 @@ function DuesPanel() {
           </div>
         </>
       )}
+
+      {/* Payment History Chart */}
+      <div className="mt-8 page-enter page-enter-delay-3">
+        <DuesPaymentChart
+          quarterlyAmount={parseFloat(quarterlyDues.replace(/,/g, '')) || 450}
+        />
+      </div>
     </div>
   );
 }

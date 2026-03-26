@@ -15,6 +15,7 @@ import {
 } from '@/hooks/useProposals';
 import { useProperty } from '@/hooks/useProperty';
 import { useState } from 'react';
+import { ProposalTimeline } from '@/components/ProposalTimeline';
 
 const STATE_STYLES: Record<string, { color: string; bg: string; border: string }> = {
   Pending: { color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20' },
@@ -212,9 +213,16 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
         </div>
       )}
 
-      {/* Timeline */}
+      {/* Proposal Lifecycle Timeline */}
+      {stateLabel && (
+        <div className="mb-6">
+          <ProposalTimeline currentState={stateLabel} />
+        </div>
+      )}
+
+      {/* Dates Timeline */}
       <div className="glass-card rounded-xl p-6">
-        <h2 className="text-lg font-semibold mb-4">Timeline</h2>
+        <h2 className="text-lg font-semibold mb-4">Key Dates</h2>
         <div className="space-y-4">
           <TimelineItem
             label="Snapshot"

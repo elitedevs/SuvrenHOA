@@ -11,6 +11,7 @@ import { ActivityTicker } from '@/components/ActivityTicker';
 import { HealthScoreWidget } from '@/components/HealthScoreWidget';
 import { DuesReminder } from '@/components/DuesReminder';
 import { useAlerts } from '@/hooks/useAlerts';
+import { AnimatedNumber } from '@/components/AnimatedNumber';
 
 export default function Home() {
   const { isConnected } = useAccount();
@@ -57,13 +58,21 @@ function Landing() {
         {/* Stats grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl w-full mb-16 page-enter page-enter-delay-2">
           {[
-            { value: '$0.35', label: 'Monthly Cost', sub: 'vs $15K–50K mgmt co' },
-            { value: '$2.00', label: 'Doc Storage', sub: 'Lifetime, permanent' },
-            { value: '7 days', label: 'Voting Period', sub: 'Fair + transparent' },
-            { value: '0', label: 'Can Be Altered', sub: 'Documents or votes' },
-          ].map(({ value, label, sub }) => (
+            { value: '$0.35', label: 'Monthly Cost', sub: 'vs $15K–50K mgmt co', numVal: 0.35, prefix: '$', decimals: 2 },
+            { value: '$2.00', label: 'Doc Storage', sub: 'Lifetime, permanent', numVal: 2.00, prefix: '$', decimals: 2 },
+            { value: '7 days', label: 'Voting Period', sub: 'Fair + transparent', numVal: 7, prefix: '', suffix: ' days', decimals: 0 },
+            { value: '0', label: 'Can Be Altered', sub: 'Documents or votes', numVal: 0, prefix: '', decimals: 0 },
+          ].map(({ label, sub, numVal, prefix, suffix, decimals }) => (
             <div key={label} className="glass-card rounded-2xl p-6 text-center">
-              <p className="text-2xl sm:text-3xl font-extrabold gradient-text mb-1">{value}</p>
+              <p className="text-2xl sm:text-3xl font-extrabold gradient-text mb-1">
+                <AnimatedNumber
+                  value={numVal}
+                  prefix={prefix}
+                  suffix={suffix}
+                  decimals={decimals}
+                  duration={900}
+                />
+              </p>
               <p className="text-xs font-semibold text-gray-300 uppercase tracking-wide">{label}</p>
               <p className="text-[11px] text-gray-500 mt-1">{sub}</p>
             </div>
@@ -201,25 +210,43 @@ function Dashboard() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-6 page-enter page-enter-delay-1">
           <div className="glass-card rounded-2xl p-6">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Voting Power</p>
-            <p className="text-4xl font-extrabold text-[#c9a96e] leading-none mb-1">{votes}</p>
+            <AnimatedNumber
+              value={Number(votes)}
+              className="text-4xl font-extrabold text-[#c9a96e] leading-none mb-1 block"
+              duration={800}
+            />
             <p className="text-[11px] text-gray-600 font-medium">of {totalSupply} total votes</p>
           </div>
 
           <div className="glass-card rounded-2xl p-6">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Treasury</p>
-            <p className="text-4xl font-extrabold gradient-text-green leading-none mb-1">${totalBalance}</p>
+            <AnimatedNumber
+              value={parseFloat(String(totalBalance).replace(/,/g, '')) || 0}
+              prefix="$"
+              format
+              className="text-4xl font-extrabold gradient-text-green leading-none mb-1 block"
+              duration={1000}
+            />
             <p className="text-[11px] text-gray-600 font-medium">community USDC</p>
           </div>
 
           <div className="glass-card rounded-2xl p-6">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Active Proposals</p>
-            <p className="text-4xl font-extrabold text-blue-400 leading-none mb-1">{activeProposalCount}</p>
+            <AnimatedNumber
+              value={activeProposalCount}
+              className="text-4xl font-extrabold text-blue-400 leading-none mb-1 block"
+              duration={600}
+            />
             <p className="text-[11px] text-gray-600 font-medium">open for voting</p>
           </div>
 
           <div className="glass-card rounded-2xl p-6">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Documents</p>
-            <p className="text-4xl font-extrabold text-amber-400 leading-none mb-1">{documentCount}</p>
+            <AnimatedNumber
+              value={documentCount}
+              className="text-4xl font-extrabold text-amber-400 leading-none mb-1 block"
+              duration={700}
+            />
             <p className="text-[11px] text-gray-600 font-medium">on-chain records</p>
           </div>
 

@@ -56,12 +56,20 @@ export default function CalendarPage() {
             Events, meetings, deadlines, and community gatherings
           </p>
         </div>
-        <button
-          onClick={() => setShowCreate(!showCreate)}
-          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
-        >
-          {showCreate ? '← Back' : '📅 Add Event'}
-        </button>
+        <div className="flex items-center gap-2 shrink-0">
+          <a
+            href="/calendar/meetings"
+            className="px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
+          >
+            📋 Board Meetings
+          </a>
+          <button
+            onClick={() => setShowCreate(!showCreate)}
+            className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all"
+          >
+            {showCreate ? '← Back' : '📅 Add Event'}
+          </button>
+        </div>
       </div>
 
       {/* Event Type Legend */}
