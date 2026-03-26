@@ -161,13 +161,8 @@ export function Sidebar() {
       {/* Logo area */}
       <div className="flex items-center justify-between px-4 h-14 border-b border-[oklch(0.18_0.005_60)]">
         {!collapsed && (
-          <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[oklch(0.75_0.12_85)] to-[oklch(0.58_0.14_80)] flex items-center justify-center text-[11px] font-bold text-[oklch(0.10_0.005_60)]">
-              S
-            </div>
-            <span className="text-[14px] font-semibold tracking-tight text-[oklch(0.85_0.01_60)]">
-              Suvren<span className="text-[oklch(0.50_0.01_60)]">HOA</span>
-            </span>
+          <Link href="/" className="flex items-center gap-2">
+            <img src="/logo-full.png" alt="SuvrenHOA" className="h-7 w-auto" />
           </Link>
         )}
         <button

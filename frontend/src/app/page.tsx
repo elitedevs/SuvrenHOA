@@ -35,9 +35,7 @@ function Landing() {
         {/* Logo mark */}
         <div className="relative mb-10 page-enter page-enter-delay-1">
           <div className="absolute inset-0 blur-2xl opacity-25 bg-[#c9a96e]/80 rounded-full scale-[2]" />
-          <div className="relative w-24 h-24 rounded-3xl bg-gradient-to-br from-[#c9a96e] via-[#b8942e] to-[#8a6820] flex items-center justify-center glow-gold pulse-glow shadow-2xl">
-            <span className="text-5xl font-black text-white">S</span>
-          </div>
+          <img src="/logo-full.png" alt="SuvrenHOA" className="relative h-16 w-auto glow-gold" />
         </div>
 
         {/* Headline — 2x+ type jumps */}
