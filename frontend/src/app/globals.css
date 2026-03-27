@@ -85,6 +85,18 @@ body {
 /* Heading font — Playfair Display for luxury feel */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), "Georgia", "Times New Roman", serif;
+  line-height: 1.15;
+}
+
+/* Typography optical sizing — tighten headings, loosen body */
+h1 { letter-spacing: -0.03em; }
+h2 { letter-spacing: -0.02em; }
+h3 { letter-spacing: -0.01em; }
+body { letter-spacing: 0.01em; line-height: 1.65; }
+
+/* Small-caps labels — spread for presence */
+.uppercase, [class*="tracking-wider"], [class*="tracking-widest"] {
+  font-family: var(--font-sans), "Inter", sans-serif;
 }
 
 /* Monospace for addresses and hashes */
@@ -241,7 +253,7 @@ pre,
 @keyframes page-enter {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -250,13 +262,23 @@ pre,
 }
 
 .page-enter {
-  animation: page-enter 400ms ease-out both;
+  animation: page-enter 300ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
-.page-enter-delay-1 { animation-delay: 60ms; }
-.page-enter-delay-2 { animation-delay: 120ms; }
-.page-enter-delay-3 { animation-delay: 180ms; }
-.page-enter-delay-4 { animation-delay: 240ms; }
+/* Staggered children — 40ms intervals for cascade effect */
+.page-enter > *:nth-child(1) { animation: page-enter 300ms cubic-bezier(0.23, 1, 0.32, 1) both; animation-delay: 0ms; }
+.page-enter > *:nth-child(2) { animation: page-enter 300ms cubic-bezier(0.23, 1, 0.32, 1) both; animation-delay: 40ms; }
+.page-enter > *:nth-child(3) { animation: page-enter 300ms cubic-bezier(0.23, 1, 0.32, 1) both; animation-delay: 80ms; }
+.page-enter > *:nth-child(4) { animation: page-enter 300ms cubic-bezier(0.23, 1, 0.32, 1) both; animation-delay: 120ms; }
+.page-enter > *:nth-child(5) { animation: page-enter 300ms cubic-bezier(0.23, 1, 0.32, 1) both; animation-delay: 160ms; }
+.page-enter > *:nth-child(6) { animation: page-enter 300ms cubic-bezier(0.23, 1, 0.32, 1) both; animation-delay: 200ms; }
+.page-enter > *:nth-child(7) { animation: page-enter 300ms cubic-bezier(0.23, 1, 0.32, 1) both; animation-delay: 240ms; }
+.page-enter > *:nth-child(8) { animation: page-enter 300ms cubic-bezier(0.23, 1, 0.32, 1) both; animation-delay: 280ms; }
+
+.page-enter-delay-1 { animation-delay: 40ms; }
+.page-enter-delay-2 { animation-delay: 80ms; }
+.page-enter-delay-3 { animation-delay: 120ms; }
+.page-enter-delay-4 { animation-delay: 160ms; }
 
 /* ── Pulse animations ─────────────────────────────────────────────────────── */
 @keyframes pulse-glow {
@@ -287,22 +309,28 @@ pre,
   animation: status-pulse 2s ease-in-out infinite;
 }
 
-/* ── Skeleton shimmer ─────────────────────────────────────────────────────── */
+/* ── Card hover — luxury lift ──────────────────────────────────────────────── */
+.glass-card {
+  transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Skeleton shimmer — patient, not anxious ──────────────────────────────── */
 @keyframes shimmer {
-  0% { background-position: -300% 0; }
-  100% { background-position: 300% 0; }
+  0% { opacity: 0.04; }
+  50% { opacity: 0.08; }
+  100% { opacity: 0.04; }
 }
 
 .skeleton {
-  background: linear-gradient(90deg,
-    rgba(201, 169, 110, 0.04) 20%,
-    rgba(201, 169, 110, 0.10) 40%,
-    rgba(232, 213, 163, 0.07) 60%,
-    rgba(201, 169, 110, 0.04) 80%
-  );
-  background-size: 300% 100%;
-  animation: shimmer 2s ease-in-out infinite;
-  border-radius: 6px;
+  background: rgba(245, 240, 232, 0.04);
+  border-radius: 8px;
+  animation: shimmer 1.5s ease-in-out infinite;
 }
 
 /* ── Dashed border animation (for drop zone) ──────────────────────────────── */
@@ -319,11 +347,17 @@ pre,
   animation: drop-zone-pulse 3s ease-in-out infinite;
 }
 
-/* ── Focus visible ────────────────────────────────────────────────────────── */
+/* ── Text selection — brass at 20% ─────────────────────────────────────────── */
+::selection {
+  background: rgba(176, 155, 113, 0.2);
+  color: inherit;
+}
+
+/* ── Focus visible — accessible + on-palette ──────────────────────────────── */
 :focus-visible {
-  outline: 2px solid #c9a96e;
+  outline: 2px solid rgba(176, 155, 113, 0.5);
   outline-offset: 2px;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 button:focus-visible,
@@ -331,7 +365,7 @@ a:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid #c9a96e;
+  outline: 2px solid rgba(176, 155, 113, 0.5);
   outline-offset: 2px;
 }
 
@@ -346,12 +380,12 @@ select:focus-visible {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(201, 169, 110, 0.20);
+  background: rgba(176, 155, 113, 0.15);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(201, 169, 110, 0.40);
+  background: rgba(176, 155, 113, 0.3);
 }
 
 /* ── Nav active bottom glow ───────────────────────────────────────────────── */
@@ -737,6 +771,36 @@ input:focus, textarea:focus, select:focus {
 .animate-pulse-gold {
   animation: pulse-gold 2s ease-in-out infinite;
 }
+
+/* ── Banner text breathing ─────────────────────────────────────────────────── */
+@keyframes breatheIn {
+  from { letter-spacing: 0em; opacity: 0; }
+  to { letter-spacing: 0.02em; opacity: 0.7; }
+}
+
+.seasonal-banner-text {
+  animation: breatheIn 600ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* ── Seasonal background wash — barely perceptible warmth ─────────────────── */
+/* Spring (Mar-May): warm rose */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: radial-gradient(ellipse at top center, rgba(180, 120, 100, 0.02), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Contextual color temperature per section ─────────────────────────────── */
+[data-section="treasury"] { background: #0D0C0B; }
+[data-section="community"] { background: #0B0C0E; }
+[data-section="governance"] { background: #0C0C0E; }
+[data-section="property"] { background: #0E0C0B; }
 
 /* ── Print Styles (Feature 8: Treasury PDF Export) ───────────────── */
 @media print {
