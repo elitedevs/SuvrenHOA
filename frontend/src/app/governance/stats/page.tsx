@@ -29,7 +29,7 @@ export default function GovernanceStatsPage() {
   const maxBarCount = Math.max(...MOCK_STATS.monthlyProposals.map(m => m.count));
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
+    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       {/* Header */}
       <div className="flex items-center gap-3 mb-2">
         <Link href="/proposals" className="text-gray-500 hover:text-[#c9a96e] text-sm transition-colors">← Proposals</Link>
@@ -121,19 +121,19 @@ export default function GovernanceStatsPage() {
         <div className="flex items-center gap-4 mb-3">
           <div className="flex-1 h-4 bg-gray-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full transition-all duration-700"
-              style={{ width: `${MOCK_STATS.passRate}%` }}
+              className="h-full rounded-full transition-all duration-700"
+              style={{ backgroundColor: '#2A5D4F', width: `${MOCK_STATS.passRate}%` }}
             />
           </div>
-          <span className="text-sm font-bold text-green-400 shrink-0">{MOCK_STATS.passRate}%</span>
+          <span className="text-sm font-bold text-[#2A5D4F] shrink-0">{MOCK_STATS.passRate}%</span>
         </div>
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center">
-            <p className="text-xl font-bold text-green-400">{Math.round(MOCK_STATS.totalProposals * MOCK_STATS.passRate / 100)}</p>
+            <p className="text-xl font-bold text-[#2A5D4F]">{Math.round(MOCK_STATS.totalProposals * MOCK_STATS.passRate / 100)}</p>
             <p className="text-[10px] text-gray-500">Passed</p>
           </div>
           <div className="text-center">
-            <p className="text-xl font-bold text-red-400">{Math.round(MOCK_STATS.totalProposals * (1 - MOCK_STATS.passRate / 100))}</p>
+            <p className="text-xl font-bold text-[#6B3A3A]">{Math.round(MOCK_STATS.totalProposals * (1 - MOCK_STATS.passRate / 100))}</p>
             <p className="text-[10px] text-gray-500">Failed/Defeated</p>
           </div>
           <div className="text-center">

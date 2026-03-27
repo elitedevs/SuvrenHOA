@@ -870,7 +870,7 @@ export default function OnboardingPage() {
   return (
     <div>
       {/* View switcher */}
-      <div className="max-w-3xl mx-auto px-4 pt-6 sm:pt-8">
+      <div className="max-w-[960px] mx-auto px-4 pt-6 sm:pt-8">
         <div className="flex gap-2 mb-6">
           <button onClick={() => setView('wizard')}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
@@ -890,11 +890,11 @@ export default function OnboardingPage() {
       {view === 'wizard' ? (
         <OnboardingWizard />
       ) : view === 'checklist-in' ? (
-        <div className="max-w-3xl mx-auto px-4 pb-8">
+        <div className="max-w-[960px] mx-auto px-4 pb-8">
           <MoveChecklist mode="move-in" />
         </div>
       ) : (
-        <div className="max-w-3xl mx-auto px-4 pb-8">
+        <div className="max-w-[960px] mx-auto px-4 pb-8">
           <MoveChecklist mode="move-out" />
         </div>
       )}

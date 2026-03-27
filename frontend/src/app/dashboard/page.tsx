@@ -108,7 +108,7 @@ function PropertyDashboard() {
 
   if (!hasProperty) {
     return (
-      <div className="max-w-4xl mx-auto px-6 py-12 page-enter">
+      <div className="max-w-[960px] mx-auto px-6 py-12 page-enter">
         <div className="flex items-center justify-between mb-8">
           <div>
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">My Property</p>
@@ -135,7 +135,7 @@ function PropertyDashboard() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10 page-enter">
+    <div className="max-w-[960px] mx-auto px-6 py-10 page-enter">
       {/* Page header */}
       <div className="flex items-center justify-between mb-8">
         <div>
