@@ -9,6 +9,9 @@ import { formatUnits } from 'viem';
 import { useState, useEffect, useCallback } from 'react';
 import { publicClient } from '@/lib/publicClient';
 import { getContracts } from '@/config/contracts';
+import { createLogger } from '@/lib/logger';
+
+const log = createLogger('usePublicData');
 
 import PropertyNFTAbi from '@/config/abis/PropertyNFT.json';
 import FaircroftGovernorAbi from '@/config/abis/FaircroftGovernor.json';
@@ -131,7 +134,7 @@ export function usePublicStats(): PublicStats {
         error: null,
       });
     } catch (err) {
-      console.error('[usePublicStats]', err);
+      log.error('Failed to fetch public stats', err);
       setStats((prev) => ({ ...prev, loading: false, error: 'Unable to load on-chain data' }));
     }
   }, []);

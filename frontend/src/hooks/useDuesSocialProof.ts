@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react';
 import { publicClient } from '@/lib/publicClient';
 import { getContracts } from '@/config/contracts';
+import { createLogger } from '@/lib/logger';
+
+const log = createLogger('useDuesSocialProof');
 import { formatUnits } from 'viem';
 
 import PropertyNFTAbi from '@/config/abis/PropertyNFT.json';
@@ -114,7 +117,7 @@ export function useDuesSocialProof(): DuesSocialProof {
           });
         }
       } catch (err) {
-        console.error('useDuesSocialProof error:', err);
+        log.error('Failed to fetch social proof', err);
         if (!cancelled) {
           setData((prev) => ({ ...prev, loading: false }));
         }

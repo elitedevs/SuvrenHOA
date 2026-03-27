@@ -3,6 +3,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import { useProperty } from '@/hooks/useProperty';
+import { createLogger } from '@/lib/logger';
+
+const log = createLogger('useOnboarding');
 
 export interface PetEntry {
   id: string;
@@ -111,7 +114,7 @@ export function useOnboarding() {
           }),
         });
       } catch (e) {
-        console.error('[onboarding] Failed to sync pet:', e);
+        log.error('Failed to sync pet', e);
       }
     }
 
@@ -133,7 +136,7 @@ export function useOnboarding() {
           }),
         });
       } catch (e) {
-        console.error('[onboarding] Failed to sync vehicle:', e);
+        log.error('Failed to sync vehicle', e);
       }
     }
 

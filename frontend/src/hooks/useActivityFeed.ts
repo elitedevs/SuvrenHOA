@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import { createLogger } from '@/lib/logger';
+
+const log = createLogger('useActivityFeed');
 
 import { publicClient } from '@/lib/publicClient';
 import { getContracts } from '@/config/contracts';
@@ -269,7 +272,7 @@ export function useActivityFeed() {
       }
       setLastFetched(new Date());
     } catch (err) {
-      console.error('[useActivityFeed] error:', err);
+      log.error('Failed to fetch events', err);
     } finally {
       setIsLoading(false);
     }

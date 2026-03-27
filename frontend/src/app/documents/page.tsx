@@ -3,6 +3,9 @@
 import { useState, useCallback } from 'react';
 import { useAccount } from 'wagmi';
 import { useDocuments, useDocument, DOC_TYPE_LABELS } from '@/hooks/useDocuments';
+import { createLogger } from '@/lib/logger';
+
+const log = createLogger('DocumentUpload');
 
 // Board member addresses (demo — in production derive from contract)
 const BOARD_ADDRESSES = [
@@ -421,7 +424,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('[DocumentUpload] Submitted:', { title, docType, fileName });
+    log.info('Submitted', { title, docType, fileName });
     setSubmitted(true);
     setTimeout(() => { setSubmitted(false); onClose(); }, 2000);
   };

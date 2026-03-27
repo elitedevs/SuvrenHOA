@@ -3,6 +3,9 @@
 import { useEffect, useState, useCallback } from 'react';
 import { publicClient } from '@/lib/publicClient';
 import { getContracts } from '@/config/contracts';
+import { createLogger } from '@/lib/logger';
+
+const log = createLogger('useLeaderboard');
 
 import FaircroftGovernorAbi from '@/config/abis/FaircroftGovernor.json';
 import FaircroftTreasuryAbi from '@/config/abis/FaircroftTreasury.json';
@@ -242,7 +245,7 @@ export function useLeaderboard(): LeaderboardData {
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Failed to load leaderboard';
       setError(msg);
-      console.error('[useLeaderboard] error:', err);
+      log.error('Failed to compute leaderboard', err);
     } finally {
       setIsLoading(false);
     }

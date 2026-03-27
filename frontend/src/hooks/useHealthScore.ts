@@ -8,6 +8,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { formatUnits } from 'viem';
 import { publicClient } from '@/lib/publicClient';
+import { createLogger } from '@/lib/logger';
+
+const log = createLogger('useHealthScore');
 import { getContracts } from '@/config/contracts';
 
 import PropertyNFTAbi from '@/config/abis/PropertyNFT.json';
@@ -258,7 +261,7 @@ export function useHealthScore(): HealthScoreData {
         error: null,
       });
     } catch (err) {
-      console.error('[useHealthScore]', err);
+      log.error('Failed to compute health score', err);
       setData((prev) => ({ ...prev, loading: false, error: 'Unable to compute health score' }));
     }
   }, []);
