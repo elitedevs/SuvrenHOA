@@ -842,28 +842,10 @@ body::before {
 
   }
 
-/* ── Subtle icons — luxury design ─────────────────────────────────────────── */
+/* ── Icons — slightly thinner stroke for luxury feel ──────────────────────── */
 svg[class*="lucide"],
 [data-lucide] {
   stroke-width: 1.5;
-  opacity: 0.4;
-}
-
-/* Sidebar icons — even more subtle */
-aside svg[class*="lucide"],
-aside [data-lucide] {
-  stroke-width: 1.5;
-  opacity: 0.35;
-  width: 18px;
-  height: 18px;
-}
-
-/* Don't apply to chart/sparkline/logo SVGs */
-svg[class*="recharts"],
-svg[viewBox] path:not([stroke-linecap]),
-.leaflet-container svg {
-  stroke-width: unset;
-  opacity: unset;
 }
 
 @media print {
