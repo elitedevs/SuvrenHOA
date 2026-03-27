@@ -76,7 +76,7 @@ export default function VotingPowerPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 page-enter">
+    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 page-enter">
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Governance</p>

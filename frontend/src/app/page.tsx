@@ -80,7 +80,7 @@ function Landing() {
         </div>
 
         {/* Features */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl w-full page-enter page-enter-delay-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[960px] w-full page-enter page-enter-delay-3">
           {[
             {
               icon: '🏠',
@@ -180,7 +180,7 @@ function Dashboard() {
     <div className="relative">
       <div className="absolute inset-0 bg-radial-glow pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
+      <div className="relative max-w-[960px] mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
         {/* Welcome header */}
         <div className="mb-10">
           <p className="text-sm text-gray-500 font-medium uppercase tracking-widest mb-2">Dashboard</p>
@@ -247,7 +247,7 @@ function Dashboard() {
               className="text-4xl font-extrabold text-amber-400 leading-none mb-1 block"
               duration={700}
             />
-            <p className="text-[11px] text-gray-600 font-medium">on-chain records</p>
+            <p className="text-[11px] text-gray-600 font-medium">community records</p>
           </div>
 
           {/* HOA Health Score Widget */}

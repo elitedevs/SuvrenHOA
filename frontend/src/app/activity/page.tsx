@@ -35,13 +35,13 @@ export default function ActivityPage() {
   const hasMore = paginated.length < filtered.length;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 page-enter">
+    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 page-enter">
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">On-Chain Events</p>
         <h1 className="text-3xl font-extrabold tracking-tight">Activity Log</h1>
         <p className="text-sm text-gray-400 mt-2">
-          Unified feed of all on-chain events — newest first
+          Unified feed of all community events — newest first
           {lastFetched && (
             <span className="ml-2 text-gray-600">· Updated {timeAgo(Math.floor(lastFetched.getTime() / 1000))}</span>
           )}
@@ -86,7 +86,7 @@ export default function ActivityPage() {
           <div className="text-4xl mb-4">📋</div>
           <h3 className="text-lg font-bold mb-2">No events found</h3>
           <p className="text-sm text-gray-400">
-            {activeFilter ? 'Try a different filter' : 'No on-chain events in the last ~14 hours'}
+            {activeFilter ? 'Try a different filter' : 'No events in the last ~14 hours'}
           </p>
         </div>
       ) : (

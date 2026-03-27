@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -79,9 +77,14 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background-color: #0d0d0d;
   color: oklch(0.92 0.008 60);
+}
+
+/* Heading font — Playfair Display for luxury feel */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), "Georgia", "Times New Roman", serif;
 }
 
 /* Monospace for addresses and hashes */
@@ -496,6 +499,42 @@ html.light .border-gray-700 { border-color: #d1ccc0; }
 html.light .border-white\/5 { border-color: rgba(0, 0, 0, 0.05); }
 html.light .border-white\/\[0\.03\] { border-color: rgba(0, 0, 0, 0.03); }
 
+/* Light mode sidebar — text must be dark on light bg */
+html.light aside {
+  color: rgba(26, 26, 30, 0.7);
+}
+html.light aside a,
+html.light aside button,
+html.light aside span {
+  color: rgba(26, 26, 30, 0.55) !important;
+}
+html.light aside a:hover,
+html.light aside button:hover {
+  color: rgba(26, 26, 30, 0.75) !important;
+  background: rgba(26, 26, 30, 0.04) !important;
+}
+/* Active sidebar links — strong dark text */
+html.light aside a[class*="border-l"],
+html.light aside [data-active="true"],
+html.light aside [aria-current="page"] {
+  color: rgba(26, 26, 30, 0.85) !important;
+  background: rgba(201, 169, 110, 0.08) !important;
+  border-color: #8A7A5A !important;
+}
+/* Sidebar section labels */
+html.light aside p[class*="uppercase"] {
+  color: rgba(26, 26, 30, 0.35) !important;
+}
+/* Sidebar icon colors in light mode */
+html.light aside svg {
+  color: rgba(26, 26, 30, 0.4) !important;
+}
+/* Gold elements darken for contrast on light */
+html.light aside .text-\[\#e8d5a3\],
+html.light aside .text-\[\#c9a96e\] {
+  color: #8A7A5A !important;
+}
+
 /* Light mode inputs */
 html.light input, html.light textarea, html.light select {
   color: #1a1a1a;
@@ -737,7 +776,34 @@ input:focus, textarea:focus, select:focus {
     -webkit-text-fill-color: unset !important;
   }
 
-  /* Show print header */
+  }
+
+/* ── Subtle icons — luxury design ─────────────────────────────────────────── */
+svg[class*="lucide"],
+[data-lucide] {
+  stroke-width: 1.5;
+  opacity: 0.4;
+}
+
+/* Sidebar icons — even more subtle */
+aside svg[class*="lucide"],
+aside [data-lucide] {
+  stroke-width: 1.5;
+  opacity: 0.35;
+  width: 18px;
+  height: 18px;
+}
+
+/* Don't apply to chart/sparkline/logo SVGs */
+svg[class*="recharts"],
+svg[viewBox] path:not([stroke-linecap]),
+.leaflet-container svg {
+  stroke-width: unset;
+  opacity: unset;
+}
+
+@media print {
+/* Show print header */
   .print-header {
     display: block !important;
     text-align: center;
