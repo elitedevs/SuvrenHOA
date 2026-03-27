@@ -25,7 +25,7 @@ export default function MeetingsPage() {
   const displayedMeetings = tab === 'upcoming' ? upcomingMeetings : meetings;
 
   return (
-    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 page-enter">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 page-enter">
       {/* Header */}
       <div className="flex items-center justify-between mb-2">
         <div>

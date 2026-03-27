@@ -101,7 +101,7 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
                     ${isActive
                       ? 'border-[#c9a96e] bg-[#c9a96e]/15 text-[#e8d5a3] shadow-[0_0_12px_rgba(201,169,110,0.4)] animate-pulse-gold'
                       : isDone
-                      ? 'border-[#c9a96e]/60 bg-[#c9a96e]/10 text-[#c9a96e]'
+                      ? 'border-green-500/60 bg-green-500/10 text-green-400'
                       : isFail
                       ? 'border-red-500/50 bg-red-500/10 text-red-400'
                       : 'border-gray-700/60 bg-gray-800/40 text-gray-600'
@@ -114,7 +114,7 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
                 {/* Label */}
                 <span
                   className={`text-[11px] font-medium text-center leading-tight
-                    ${isActive ? 'text-[#e8d5a3]' : isDone ? 'text-[#c9a96e]' : isFail ? 'text-[#6B3A3A]' : 'text-gray-600'}
+                    ${isActive ? 'text-[#e8d5a3]' : isDone ? 'text-green-400' : isFail ? 'text-red-400' : 'text-gray-600'}
                   `}
                 >
                   {stage.id === 'result' && defeated ? 'Defeated' :

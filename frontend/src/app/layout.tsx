@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { DM_Sans, Playfair_Display } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import { Header } from '@/components/Header';
@@ -10,19 +10,10 @@ import { GlobalFeatures } from '@/components/GlobalFeatures';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { SeasonalBanner } from '@/components/SeasonalBanner';
 
-const dmSans = DM_Sans({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal'],
+  weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-sans',
-  display: 'swap',
-});
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-heading',
   display: 'swap',
 });
 
@@ -48,7 +39,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${dmSans.variable} ${playfair.variable} font-sans antialiased bg-[oklch(0.10_0.005_60)] text-gray-100`}>
+      <body className={`${plusJakartaSans.variable} font-sans antialiased bg-[oklch(0.10_0.005_60)] text-gray-100`}>
         <Providers>
           <Sidebar />
           <div className="lg:pl-60 min-h-screen flex flex-col transition-all duration-200">

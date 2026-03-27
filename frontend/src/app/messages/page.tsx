@@ -310,7 +310,7 @@ function MessagingCenter({ address }: { address: string }) {
   }
 
   return (
-    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 page-enter">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 page-enter">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>

@@ -86,7 +86,7 @@ export default function ForumPage() {
 
   if (selectedTopic) {
     return (
-      <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
         <button onClick={() => setSelectedTopic(null)} className="text-gray-500 hover:text-[#c9a96e] text-sm transition-colors mb-4">
           ← Back to Forum
         </button>
@@ -161,11 +161,11 @@ export default function ForumPage() {
   }
 
   return (
-    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Community</p>
-          <h1 className="text-3xl font-extrabold tracking-tight">Discussion Forum</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight">💬 Discussion Forum</h1>
           <p className="text-base text-gray-400 mt-2">Community discussions, questions, and announcements</p>
         </div>
         {isConnected && (

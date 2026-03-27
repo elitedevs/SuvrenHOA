@@ -231,11 +231,6 @@ export function Sidebar() {
         <div className={collapsed ? 'scale-75' : ''}>
           <ConnectButton label="Connect" showBalance={false} chainStatus="none" accountStatus={collapsed ? 'avatar' : 'address'} />
         </div>
-        {!collapsed && (
-          <p className="text-center text-[10px] italic text-[oklch(0.30_0.01_60)] font-serif pt-2">
-            Faircroft — Est. 2025
-          </p>
-        )}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 import Link from 'next/link';
 import { useProperty } from '@/hooks/useProperty';
-import { useTreasury, useDuesStatus } from '@/hooks/useTreasury';
+import { useTreasury } from '@/hooks/useTreasury';
 import { useGovernorSettings } from '@/hooks/useProposals';
 import { useDocuments } from '@/hooks/useDocuments';
 import { ActivityTicker } from '@/components/ActivityTicker';
@@ -80,7 +80,7 @@ function Landing() {
         </div>
 
         {/* Features */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[960px] w-full page-enter page-enter-delay-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl w-full page-enter page-enter-delay-3">
           {[
             {
               icon: '🏠',
@@ -170,7 +170,6 @@ function Landing() {
 
 function Dashboard() {
   const { hasProperty, votes, totalSupply, tokenId, propertyInfo } = useProperty();
-  const { isCurrent, quartersOwed } = useDuesStatus(tokenId);
   const { getActiveAlerts } = useAlerts();
   const activeAlertCount = getActiveAlerts().length;
   const { totalBalance, operatingBalance, reserveBalance } = useTreasury();
@@ -181,38 +180,28 @@ function Dashboard() {
     <div className="relative">
       <div className="absolute inset-0 bg-radial-glow pointer-events-none" />
 
-      <div className="relative max-w-[960px] mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
-        {/* Welcome header — time-of-day greeting + prose summary */}
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
+        {/* Welcome header */}
         <div className="mb-10">
           <p className="text-sm text-gray-500 font-medium uppercase tracking-widest mb-2">Dashboard</p>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            {(() => {
-              const hour = new Date().getHours();
-              const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-              return hasProperty ? (
-                <>
-                  {greeting},{' '}
-                  <span className="gradient-text text-glow">Lot #{tokenId}</span>
-                </>
-              ) : (
-                <>
-                  {greeting},{' '}
-                  <span className="gradient-text">welcome to SuvrenHOA</span>
-                </>
-              );
-            })()}
+            {hasProperty ? (
+              <>
+                Welcome back,{' '}
+                <span className="gradient-text text-glow">Lot #{tokenId}</span>
+              </>
+            ) : (
+              <>
+                Welcome to{' '}
+                <span className="gradient-text">SuvrenHOA</span>
+              </>
+            )}
           </h1>
           {hasProperty && propertyInfo && (
-            <p className="text-gray-400 text-base mt-3 font-medium leading-relaxed">
-              {propertyInfo.streetAddress} · {Number(propertyInfo.squareFootage).toLocaleString()} sq ft.
-              {votes !== undefined && totalSupply !== undefined && (
-                <> You hold {Number(votes)} of {totalSupply} votes.</>
-              )}
-              {quartersOwed > 0 ? (
-                <span className="text-amber-400/80"> {quartersOwed} quarter{quartersOwed > 1 ? 's' : ''} past due.</span>
-              ) : isCurrent ? (
-                <span className="text-[#2A5D4F]"> Dues current.</span>
-              ) : null}
+            <p className="text-gray-400 text-base mt-2 font-medium">
+              {propertyInfo.streetAddress}
+              <span className="text-gray-600 mx-2">·</span>
+              <span className="text-gray-500">{Number(propertyInfo.squareFootage).toLocaleString()} sq ft</span>
             </p>
           )}
         </div>
@@ -258,7 +247,7 @@ function Dashboard() {
               className="text-4xl font-extrabold text-amber-400 leading-none mb-1 block"
               duration={700}
             />
-            <p className="text-[11px] text-gray-600 font-medium">community records</p>
+            <p className="text-[11px] text-gray-600 font-medium">on-chain records</p>
           </div>
 
           {/* HOA Health Score Widget */}
