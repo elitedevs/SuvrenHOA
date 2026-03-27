@@ -18,9 +18,9 @@ export default function Error({
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 px-6">
-      <div className="glass-card rounded-2xl p-10 text-center max-w-md w-full">
-        <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-3xl mx-auto mb-5">
-          ⚠️
+      <div className="glass-card rounded-lg p-10 text-center max-w-md w-full">
+        <div className="w-16 h-16 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-3xl mx-auto mb-5">
+          
         </div>
         <h2 className="text-xl font-semibold text-gray-100 mb-2">Something went wrong</h2>
         <p className="text-sm text-gray-400 mb-6 leading-relaxed">

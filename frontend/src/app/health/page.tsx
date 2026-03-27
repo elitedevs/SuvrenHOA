@@ -34,7 +34,7 @@ export default function HealthPage() {
             </Link>
           </div>
           <p className="text-sm text-gray-500 font-medium uppercase tracking-widest mb-2">Community Health</p>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-normal tracking-tight">
             HOA <span className="gradient-text">Health Score</span>
           </h1>
           <p className="text-gray-400 text-base mt-2 font-medium">
@@ -89,7 +89,7 @@ export default function HealthPage() {
                 </div>
               ) : (
                 <div className="text-center">
-                  <p className={`text-6xl sm:text-7xl font-extrabold leading-none mb-1 ${colorClass}`}>
+                  <p className={`text-6xl sm:text-7xl font-normal leading-none mb-1 ${colorClass}`}>
                     {score}
                   </p>
                   <p className="text-gray-500 text-sm font-semibold uppercase tracking-wider">out of 100</p>
@@ -101,13 +101,13 @@ export default function HealthPage() {
           {!loading && !error && (
             <div className="text-center">
               <div
-                className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl border"
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-lg border"
                 style={{
                   borderColor: `${color}40`,
                   background: `${color}10`,
                 }}
               >
-                <span className={`text-5xl font-extrabold ${colorClass}`}>{grade}</span>
+                <span className={`text-5xl font-normal ${colorClass}`}>{grade}</span>
                 <div className="text-left">
                   <p className="text-sm font-semibold text-gray-200">
                     {grade === 'A' && 'Excellent Community'}
@@ -136,7 +136,7 @@ export default function HealthPage() {
               const factorColorClass = pct >= 71 ? 'text-green-400' : pct >= 41 ? 'text-amber-400' : 'text-red-400';
 
               return (
-                <div key={factor.name} className="glass-card rounded-2xl hover-lift p-6">
+                <div key={factor.name} className="glass-card rounded-lg hover-lift p-6">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="flex items-center gap-3">
                       <span className="text-2xl">{factor.icon}</span>
@@ -146,7 +146,7 @@ export default function HealthPage() {
                       </div>
                     </div>
                     <div className="text-right shrink-0">
-                      <span className={`text-2xl font-extrabold ${factorColorClass}`}>{factor.score}</span>
+                      <span className={`text-2xl font-normal ${factorColorClass}`}>{factor.score}</span>
                       <span className="text-gray-600 text-sm font-medium">/{factor.max}</span>
                     </div>
                   </div>
@@ -172,10 +172,10 @@ export default function HealthPage() {
 
         {/* What can we improve */}
         {!loading && !error && suggestions.length > 0 && (
-          <div className="glass-card rounded-2xl hover-lift p-6 mb-8 page-enter page-enter-delay-3 border-l-2 border-l-[#c9a96e]/50">
+          <div className="glass-card rounded-lg hover-lift p-6 mb-8 page-enter page-enter-delay-3 border-l-2 border-l-[#c9a96e]/50">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-lg shrink-0">
-                🎯
+                
               </div>
               <h2 className="text-xl font-bold text-gray-200">What Can We Improve?</h2>
             </div>
@@ -202,8 +202,8 @@ export default function HealthPage() {
 
         {/* Perfect score message */}
         {!loading && !error && suggestions.length === 0 && (
-          <div className="glass-card-success rounded-2xl p-6 mb-8 page-enter page-enter-delay-3 text-center">
-            <p className="text-3xl mb-3">🏆</p>
+          <div className="glass-card-success rounded-lg p-6 mb-8 page-enter page-enter-delay-3 text-center">
+            <p className="text-3xl mb-3"></p>
             <h3 className="font-bold text-green-300 text-lg mb-1">Perfect Score!</h3>
             <p className="text-sm text-gray-400">Your community has achieved the maximum health score across all categories.</p>
           </div>

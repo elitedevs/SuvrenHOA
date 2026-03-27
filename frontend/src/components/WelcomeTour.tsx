@@ -16,19 +16,19 @@ const STEPS: TourStep[] = [
   {
     title: 'Welcome to SuvrenHOA',
     description: 'Your blockchain-powered HOA platform. Transparent governance, immutable records, and democratic decision-making — all on-chain.',
-    icon: '🏠',
+    icon: '',
     hint: 'No management companies. No hidden spending.',
   },
   {
     title: 'Your Dashboard',
     description: 'View your property NFT, voting power, dues status, and quick-access links to everything you need as a homeowner.',
-    icon: '📊',
+    icon: '',
     hint: 'Your lot = your vote. 1 property, 1 vote.',
   },
   {
     title: 'Get Involved',
     description: 'Vote on proposals, pay dues in USDC, participate in community discussions, and verify any document is authentic.',
-    icon: '🗳️',
+    icon: '',
     hint: 'Every vote, every dollar is permanently recorded on Base.',
   },
 ];
@@ -97,7 +97,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
 
       {/* Tour card */}
       <div
-        className="relative z-10 w-full max-w-sm rounded-2xl border border-[#c9a96e]/40 bg-[#0d0d0d] shadow-[0_0_60px_rgba(201,169,110,0.15)] overflow-hidden"
+        className="relative z-10 w-full max-w-sm rounded-lg border border-[#c9a96e]/40 bg-[#0d0d0d] shadow-[0_0_60px_rgba(201,169,110,0.15)] overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* Gold accent bar */}
@@ -122,12 +122,12 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
           </div>
 
           {/* Icon */}
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#c9a96e]/20 to-[#b8942e]/10 border border-[#c9a96e]/30 flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg">
+          <div className="w-20 h-20 rounded-lg bg-gradient-to-br from-[#c9a96e]/20 to-[#b8942e]/10 border border-[#c9a96e]/30 flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg">
             {current.icon}
           </div>
 
           {/* Text */}
-          <h2 className="text-xl font-extrabold text-[#e8d5a3] mb-3">{current.title}</h2>
+          <h2 className="text-xl font-normal text-[#e8d5a3] mb-3">{current.title}</h2>
           <p className="text-sm text-gray-400 leading-relaxed mb-4">{current.description}</p>
 
           {current.hint && (
@@ -158,7 +158,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
               onClick={next}
               className="flex-1 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_16px_rgba(201,169,110,0.25)]"
             >
-              {step < STEPS.length - 1 ? 'Next →' : "Let's Go! 🚀"}
+              {step < STEPS.length - 1 ? 'Next →' : "Let's Go! "}
             </button>
           </div>
 

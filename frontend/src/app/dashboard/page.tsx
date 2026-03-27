@@ -30,12 +30,12 @@ function PropertyInsights() {
   }).join(' ');
 
   return (
-    <div className="glass-card rounded-2xl p-6 mb-6 page-enter page-enter-delay-3">
+    <div className="glass-card rounded-lg p-6 mb-6 page-enter page-enter-delay-3">
       <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Property Insights</p>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         <div>
           <p className="text-[10px] text-gray-500 mb-1">Estimated Value</p>
-          <p className="text-2xl font-extrabold text-[#c9a96e]">${CURRENT_EST.toLocaleString()}</p>
+          <p className="text-2xl font-normal text-[#c9a96e]">${CURRENT_EST.toLocaleString()}</p>
           <p className="text-[11px] text-green-400 font-semibold mt-0.5">+{YOY_CHANGE}% YoY ↑</p>
         </div>
         <div>
@@ -76,7 +76,7 @@ export default function DashboardPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">🏠</div>
+        <div className="text-5xl mb-2"></div>
         <p className="text-gray-400 text-base font-medium">Sign in to view your property</p>
         <ConnectButton label="Sign In" />
       </div>
@@ -112,14 +112,14 @@ function PropertyDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">My Property</p>
-            <h1 className="text-3xl font-extrabold">Property Not Found</h1>
+            <h1 className="text-3xl font-normal">Property Not Found</h1>
           </div>
         </div>
 
         {/* Empty state */}
-        <div className="glass-card rounded-2xl p-12 text-center border-l-2 border-l-amber-500/40">
-          <div className="w-20 h-20 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-4xl mx-auto mb-6">
-            🏠
+        <div className="glass-card rounded-lg p-12 text-center border-l-2 border-l-amber-500/40">
+          <div className="w-20 h-20 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-4xl mx-auto mb-6">
+            
           </div>
           <h3 className="text-xl font-bold mb-3 text-gray-100">No Property NFT Detected</h3>
           <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed mb-6">
@@ -140,7 +140,7 @@ function PropertyDashboard() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">My Property</p>
-          <h1 className="text-3xl font-extrabold tracking-tight">
+          <h1 className="text-3xl font-normal tracking-tight">
             Property Profile
           </h1>
         </div>
@@ -161,7 +161,7 @@ function PropertyDashboard() {
               className="px-3 py-2 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-xs font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
               title="Share Property QR Code"
             >
-              📱 Share
+               Share
             </button>
           )}
         </div>
@@ -181,7 +181,7 @@ function PropertyDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
 
         {/* Address Card */}
-        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-[#c9a96e]/50 page-enter page-enter-delay-1">
+        <div className="glass-card rounded-lg p-7 border-l-2 border-l-[#c9a96e]/50 page-enter page-enter-delay-1">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Property Address</p>
           <p className="text-2xl font-bold text-gray-100 leading-snug mb-2">
             {propertyInfo?.streetAddress || (
@@ -190,7 +190,7 @@ function PropertyDashboard() {
           </p>
           {propertyInfo?.squareFootage && (
             <div className="flex items-center gap-2 mt-3">
-              <span className="text-xs text-gray-500">📐</span>
+              <span className="text-xs text-gray-500"></span>
               <p className="text-sm text-gray-500 font-medium">
                 {Number(propertyInfo.squareFootage).toLocaleString()} sq ft
               </p>
@@ -199,7 +199,7 @@ function PropertyDashboard() {
         </div>
 
         {/* Voting Power — BIG number */}
-        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-blue-500/50 page-enter page-enter-delay-1">
+        <div className="glass-card rounded-lg p-7 border-l-2 border-l-blue-500/50 page-enter page-enter-delay-1">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Voting Power</p>
           <div className="flex items-end gap-3 mb-2">
             <p className="text-6xl font-black text-[#c9a96e] leading-none">{votes}</p>
@@ -217,7 +217,7 @@ function PropertyDashboard() {
         </div>
 
         {/* Dues Status */}
-        <div className={`rounded-2xl p-7 border-l-2 page-enter page-enter-delay-2 ${
+        <div className={`rounded-lg p-7 border-l-2 page-enter page-enter-delay-2 ${
           isCurrent === undefined
             ? 'glass-card border-l-gray-500/40'
             : isCurrent
@@ -235,7 +235,7 @@ function PropertyDashboard() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center">
-                  <span className="text-xs text-green-400">✓</span>
+                  <span className="text-xs text-green-400"></span>
                 </div>
                 <p className="text-xl font-bold text-green-400">Current</p>
               </div>
@@ -257,21 +257,21 @@ function PropertyDashboard() {
                 href="/dues"
                 className="inline-flex items-center gap-1.5 mt-4 px-4 py-2.5 rounded-xl bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 text-sm font-semibold text-red-300 transition-all duration-200 min-h-[44px]"
               >
-                💳 Pay Now
+                 Pay Now
               </Link>
             </div>
           )}
         </div>
 
         {/* Delegation */}
-        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-amber-500/50 page-enter page-enter-delay-2">
+        <div className="glass-card rounded-lg p-7 border-l-2 border-l-amber-500/50 page-enter page-enter-delay-2">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Vote Delegation</p>
 
           {delegatee === address ? (
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-full bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xs">
-                  👤
+                  
                 </div>
                 <p className="text-base font-semibold text-gray-200">Self-delegated</p>
               </div>
@@ -281,7 +281,7 @@ function PropertyDashboard() {
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-full bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-xs">
-                  🔁
+                  
                 </div>
                 <p className="text-base font-semibold text-gray-200">Delegated</p>
               </div>
@@ -302,7 +302,7 @@ function PropertyDashboard() {
       {hasProperty && !isCompleted && (
         <a href="/onboarding" className="flex items-center justify-between px-4 py-3.5 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/15 transition-all duration-200 mb-4 cursor-pointer no-underline group">
           <div className="flex items-center gap-3">
-            <span className="text-xl">🏡</span>
+            <span className="text-xl"></span>
             <div>
               <p className="text-sm font-semibold text-[#e8d5a3] group-hover:text-[#e8d5a3]">
                 Complete Your Setup
@@ -318,7 +318,7 @@ function PropertyDashboard() {
       {totalUnread > 0 && (
         <a href="/messages" className="flex items-center justify-between px-4 py-3 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 hover:bg-[#c9a96e]/10 transition-all duration-200 mb-4 cursor-pointer no-underline">
           <div className="flex items-center gap-3">
-            <span className="text-xl">💬</span>
+            <span className="text-xl"></span>
             <div>
               <p className="text-sm font-semibold text-[#e8d5a3]">
                 {totalUnread} unread message{totalUnread !== 1 ? 's' : ''}
@@ -335,11 +335,11 @@ function PropertyDashboard() {
         <h2 className="text-lg font-bold mb-4 text-gray-200">Quick Actions</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { href: '/messages', icon: '💬', label: 'Messages', color: 'gold' },
-            { href: '/proposals', icon: '📋', label: 'Proposals', color: 'blue' },
-            { href: '/treasury', icon: '💰', label: 'Treasury', color: 'green' },
-            { href: '/documents', icon: '📄', label: 'Documents', color: 'amber' },
-            { href: '/dues', icon: '💳', label: 'Pay Dues', color: 'gold' },
+            { href: '/messages', icon: '', label: 'Messages', color: 'gold' },
+            { href: '/proposals', icon: '', label: 'Proposals', color: 'blue' },
+            { href: '/treasury', icon: '', label: 'Treasury', color: 'green' },
+            { href: '/documents', icon: '', label: 'Documents', color: 'amber' },
+            { href: '/dues', icon: '', label: 'Pay Dues', color: 'gold' },
           ].map(({ href, icon, label }) => (
             <Link
               key={href}

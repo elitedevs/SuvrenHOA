@@ -11,90 +11,105 @@ import {
   AlertTriangle, Users, Megaphone, Trophy, Calendar, BookOpen,
   CreditCard, Hammer, CalendarCheck, PenTool, BarChart3,
   Eye, Map, Heart, MessageCircle, Bell, Bot, Settings,
-  User, ChevronLeft, ChevronRight, Menu, X, LogOut,
+  User, ChevronDown, ChevronLeft, ChevronRight, Menu, X,
   Waves, Wrench, Shield, BookMarked, Receipt, FileBarChart2, ClipboardList,
   ParkingCircle, Volume2, Image, Newspaper, Zap, Search, DollarSign,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
+/* ── 8 Primary Sections with expandable children ──────────────────────────── */
 const NAV_SECTIONS = [
   {
-    label: 'Overview',
-    items: [
-      { href: '/', label: 'Dashboard', icon: Home },
-    ],
+    key: 'home',
+    label: 'Home',
+    icon: Home,
+    href: '/',
   },
   {
+    key: 'property',
     label: 'Property',
-    items: [
-      { href: '/dashboard', label: 'My Lots', icon: Building2 },
-      { href: '/pets', label: 'Pets', icon: PawPrint },
-      { href: '/vehicles', label: 'Vehicles', icon: Car },
+    icon: Building2,
+    children: [
+      { href: '/dashboard', label: 'My Lots' },
+      { href: '/pets', label: 'Pets' },
+      { href: '/vehicles', label: 'Vehicles' },
     ],
   },
   {
+    key: 'governance',
     label: 'Governance',
-    items: [
-      { href: '/proposals', label: 'Proposals', icon: Vote },
-      { href: '/governance/stats', label: 'Gov Stats', icon: BarChart3 },
-      { href: '/treasury', label: 'Treasury', icon: Landmark },
-      { href: '/documents', label: 'Documents', icon: FileText },
-      { href: '/violations', label: 'Violations', icon: AlertTriangle },
+    icon: Vote,
+    children: [
+      { href: '/proposals', label: 'Proposals' },
+      { href: '/governance/stats', label: 'Statistics' },
+      { href: '/governance/voting-power', label: 'Voting Power' },
+      { href: '/violations', label: 'Violations' },
     ],
   },
   {
+    key: 'treasury',
+    label: 'Treasury',
+    icon: Landmark,
+    children: [
+      { href: '/treasury', label: 'Overview' },
+      { href: '/treasury/vendors', label: 'Vendors' },
+      { href: '/treasury/reimbursement', label: 'Reimbursement' },
+      { href: '/dues', label: 'Pay Dues' },
+    ],
+  },
+  {
+    key: 'community',
     label: 'Community',
-    items: [
-      { href: '/community', label: 'Community', icon: Users },
-      { href: '/community/forum', label: 'Forum', icon: MessageCircle },
-      { href: '/announcements', label: 'Announcements', icon: Megaphone },
-      { href: '/community/leaderboard', label: 'Leaderboard', icon: Trophy },
-      { href: '/calendar', label: 'Calendar', icon: Calendar },
-      { href: '/directory', label: 'Directory', icon: BookOpen },
-      { href: '/emergency', label: 'Emergency', icon: AlertTriangle },
+    icon: Users,
+    children: [
+      { href: '/community', label: 'Hub' },
+      { href: '/community/forum', label: 'Forum' },
+      { href: '/announcements', label: 'Announcements' },
+      { href: '/community/leaderboard', label: 'Leaderboard' },
+      { href: '/calendar', label: 'Calendar' },
+      { href: '/directory', label: 'Directory' },
+      { href: '/emergency', label: 'Emergency' },
+      { href: '/gallery', label: 'Gallery' },
+      { href: '/lost-found', label: 'Lost & Found' },
+      { href: '/newsletter', label: 'Newsletter' },
     ],
   },
   {
+    key: 'documents',
+    label: 'Documents',
+    icon: FileText,
+    children: [
+      { href: '/documents', label: 'Records' },
+      { href: '/transparency', label: 'Transparency' },
+      { href: '/reports/annual', label: 'Annual Report' },
+      { href: '/contracts', label: 'Smart Contracts' },
+    ],
+  },
+  {
+    key: 'services',
     label: 'Services',
-    items: [
-      { href: '/dues', label: 'Pay Dues', icon: CreditCard },
-      { href: '/maintenance', label: 'Maintenance', icon: Hammer },
-      { href: '/amenities', label: 'Amenity Booking', icon: Waves },
-      { href: '/reservations', label: 'Reservations', icon: CalendarCheck },
-      { href: '/contractors', label: 'Contractors', icon: Wrench },
-      { href: '/architectural', label: 'Arch Review', icon: PenTool },
-      { href: '/surveys', label: 'Surveys', icon: BarChart3 },
-      { href: '/treasury/reimbursement', label: 'Reimbursement', icon: Receipt },
+    icon: Wrench,
+    children: [
+      { href: '/maintenance', label: 'Maintenance' },
+      { href: '/amenities', label: 'Amenities' },
+      { href: '/reservations', label: 'Reservations' },
+      { href: '/contractors', label: 'Contractors' },
+      { href: '/architectural', label: 'Architectural Review' },
+      { href: '/surveys', label: 'Surveys' },
+      { href: '/parking', label: 'Parking' },
+      { href: '/utilities', label: 'Utilities' },
+      { href: '/safety', label: 'Safety' },
+      { href: '/rules', label: 'Rules & FAQ' },
     ],
   },
   {
-    label: 'Community+',
-    items: [
-      { href: '/safety', label: 'Safety Watch', icon: Shield },
-      { href: '/rules', label: 'Rules & FAQ', icon: BookMarked },
-      { href: '/reports/annual', label: 'Annual Report', icon: FileBarChart2 },
-      { href: '/newsletter', label: 'Newsletter', icon: Newspaper },
-      { href: '/gallery', label: 'Photo Gallery', icon: Image },
-      { href: '/lost-found', label: 'Lost & Found', icon: Search },
-    ],
-  },
-  {
-    label: 'Services+',
-    items: [
-      { href: '/parking', label: 'Parking', icon: ParkingCircle },
-      { href: '/complaints/noise', label: 'Noise Complaints', icon: Volume2 },
-      { href: '/utilities', label: 'Utilities', icon: Zap },
-      { href: '/surveys/builder', label: 'Survey Builder', icon: ClipboardList },
-      { href: '/treasury/vendors', label: 'Vendor Payments', icon: DollarSign },
-    ],
-  },
-  {
-    label: 'Public',
-    items: [
-      { href: '/transparency', label: 'Transparency', icon: Eye },
-      { href: '/map', label: 'Map', icon: Map },
-      { href: '/health', label: 'Health Score', icon: Heart },
-      { href: '/activity', label: 'Activity Log', icon: BarChart3 },
+    key: 'settings',
+    label: 'Settings',
+    icon: Settings,
+    children: [
+      { href: '/profile', label: 'Profile' },
+      { href: '/settings/notifications', label: 'Notifications' },
+      { href: '/admin', label: 'Admin' },
     ],
   },
 ];
@@ -103,36 +118,7 @@ const UTILITY_ITEMS = [
   { href: '/messages', label: 'Messages', icon: MessageCircle, badge: 'messages' as const },
   { href: '/alerts', label: 'Alerts', icon: Bell },
   { href: '/assistant', label: 'AI Assistant', icon: Bot },
-  { href: '/admin', label: 'Admin', icon: Settings },
-  { href: '/settings/notifications', label: 'Notifications', icon: Bell },
-  { href: '/profile', label: 'Profile', icon: User },
 ];
-
-function NavItem({
-  href, label, icon: Icon, active, collapsed, badge,
-}: {
-  href: string; label: string; icon: React.ElementType; active: boolean; collapsed: boolean; badge?: number;
-}) {
-  return (
-    <Link
-      href={href}
-      className={`group flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 relative ${
-        active
-          ? 'bg-[oklch(0.18_0.01_60)] text-[oklch(0.75_0.12_85)] border-l-[3px] border-[oklch(0.75_0.12_85)] -ml-px'
-          : 'text-[oklch(0.55_0.01_60)] hover:text-[oklch(0.80_0.01_60)] hover:bg-[oklch(0.14_0.005_60)]'
-      }`}
-      title={collapsed ? label : undefined}
-    >
-      <Icon className={`w-[18px] h-[18px] shrink-0 ${active ? 'text-[oklch(0.75_0.12_85)]' : 'text-[oklch(0.45_0.01_60)] group-hover:text-[oklch(0.65_0.01_60)]'}`} />
-      {!collapsed && <span className="truncate">{label}</span>}
-      {badge !== undefined && badge > 0 && (
-        <span className={`${collapsed ? 'absolute -top-1 -right-1' : 'ml-auto'} min-w-[18px] h-[18px] px-1 rounded-full bg-[#c9a96e] text-[#1a1a1a] text-[10px] font-bold flex items-center justify-center`}>
-          {badge > 9 ? '9+' : badge}
-        </span>
-      )}
-    </Link>
-  );
-}
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -140,99 +126,186 @@ export function Sidebar() {
   const { totalUnread } = useMessages();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [expanded, setExpanded] = useState<string[]>([]);
 
-  // Close mobile sidebar on navigation
-  useEffect(() => { setMobileOpen(false); }, [pathname]);
+  // Auto-expand section containing the active route
+  useEffect(() => {
+    setMobileOpen(false);
+    for (const section of NAV_SECTIONS) {
+      if ('children' in section && section.children) {
+        const match = section.children.some(c => pathname === c.href || (c.href !== '/' && pathname.startsWith(c.href)));
+        if (match && !expanded.includes(section.key)) {
+          setExpanded(prev => [...prev, section.key]);
+        }
+      }
+    }
+  }, [pathname]);
 
   if (!isConnected) return null;
 
+  const toggleSection = (key: string) => {
+    setExpanded(prev => prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]);
+  };
+
   const sidebarContent = (
     <div className={`flex flex-col h-full ${collapsed ? 'w-16' : 'w-60'} transition-all duration-200`}>
-      {/* Logo area */}
-      <div className="flex items-center justify-between px-4 h-14 border-b border-[oklch(0.18_0.005_60)]">
+      {/* Logo */}
+      <div className="flex items-center justify-between px-4 h-14" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
         {!collapsed && (
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[oklch(0.75_0.12_85)] to-[oklch(0.58_0.14_80)] flex items-center justify-center text-[11px] font-bold text-[oklch(0.10_0.005_60)]">
-              S
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
+              <span className="text-[11px] font-heading" style={{ fontFamily: 'var(--font-heading), Georgia, serif', color: 'var(--accent-brass)' }}>S</span>
             </div>
-            <span className="text-[14px] font-semibold tracking-tight text-[oklch(0.85_0.01_60)]">
-              Suvren<span className="text-[oklch(0.50_0.01_60)]">HOA</span>
+            <span className="text-[14px] tracking-tight" style={{ color: 'var(--text-primary)' }}>
+              Suvren<span style={{ color: 'var(--text-muted)' }}>HOA</span>
             </span>
           </Link>
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="p-1.5 rounded-md text-[oklch(0.45_0.01_60)] hover:text-[oklch(0.70_0.01_60)] hover:bg-[oklch(0.14_0.005_60)] transition-colors hidden lg:flex"
+          className="p-1.5 rounded-md transition-colors hidden lg:flex"
+          style={{ color: 'var(--text-muted)' }}
         >
           {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
       </div>
 
-      {/* Nav sections */}
-      <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-6">
-        {NAV_SECTIONS.map((section) => (
-          <div key={section.label}>
-            {!collapsed && (
-              <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-[0.08em] text-[oklch(0.38_0.01_60)]">
-                {section.label}
-              </p>
-            )}
-            <div className="space-y-0.5">
-              {section.items.map((item) => {
-                const active = pathname === item.href || 
-                  (item.href !== '/' && pathname.startsWith(item.href));
-                return (
-                  <NavItem
-                    key={item.href}
-                    href={item.href}
-                    label={item.label}
-                    icon={item.icon}
-                    active={active}
-                    collapsed={collapsed}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        ))}
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto py-4 px-3">
+        <div className="space-y-1">
+          {NAV_SECTIONS.map((section) => {
+            const Icon = section.icon;
+            const isExpanded = expanded.includes(section.key);
+
+            // Direct link (Home)
+            if ('href' in section && section.href) {
+              const active = pathname === section.href;
+              return (
+                <Link
+                  key={section.key}
+                  href={section.href}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-md text-[14px] transition-all duration-200"
+                  style={{
+                    color: active ? 'var(--text-primary)' : 'var(--text-secondary)',
+                    borderLeft: active ? '2px solid var(--accent-brass)' : '2px solid transparent',
+                  }}
+                  title={collapsed ? section.label : undefined}
+                >
+                  <Icon className="w-[18px] h-[18px] shrink-0" style={{ opacity: active ? 0.6 : 0.35 }} />
+                  {!collapsed && <span>{section.label}</span>}
+                </Link>
+              );
+            }
+
+            // Expandable section
+            const hasActiveChild = 'children' in section && section.children?.some(
+              c => pathname === c.href || (c.href !== '/' && pathname.startsWith(c.href))
+            );
+
+            return (
+              <div key={section.key}>
+                <button
+                  onClick={() => toggleSection(section.key)}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-[14px] transition-all duration-200"
+                  style={{
+                    color: hasActiveChild ? 'var(--text-primary)' : 'var(--text-secondary)',
+                    borderLeft: hasActiveChild ? '2px solid var(--accent-brass)' : '2px solid transparent',
+                  }}
+                  title={collapsed ? section.label : undefined}
+                >
+                  <Icon className="w-[18px] h-[18px] shrink-0" style={{ opacity: hasActiveChild ? 0.6 : 0.35 }} />
+                  {!collapsed && (
+                    <>
+                      <span className="flex-1 text-left">{section.label}</span>
+                      <ChevronDown
+                        className="w-3.5 h-3.5 transition-transform duration-200"
+                        style={{
+                          transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                          opacity: 0.3,
+                        }}
+                      />
+                    </>
+                  )}
+                </button>
+
+                {/* Children — smooth expand */}
+                {!collapsed && isExpanded && 'children' in section && (
+                  <div className="ml-5 pl-3 mt-0.5 space-y-0.5" style={{ borderLeft: '1px solid var(--border-subtle)' }}>
+                    {section.children?.map((child) => {
+                      const active = pathname === child.href || (child.href !== '/' && pathname.startsWith(child.href));
+                      return (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="block px-3 py-1.5 rounded-md text-[13px] transition-all duration-200"
+                          style={{
+                            color: active ? 'var(--text-primary)' : 'var(--text-muted)',
+                          }}
+                        >
+                          {child.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Utility items — separated by whitespace (not a line) */}
+        <div className="mt-8 space-y-0.5">
+          {UTILITY_ITEMS.map((item) => {
+            const Icon = item.icon;
+            const active = pathname === item.href || pathname.startsWith(item.href);
+            const badge = item.badge === 'messages' ? totalUnread : undefined;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="flex items-center gap-3 px-3 py-2 rounded-md text-[13px] transition-all duration-200 relative"
+                style={{
+                  color: active ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  borderLeft: active ? '2px solid var(--accent-brass)' : '2px solid transparent',
+                }}
+                title={collapsed ? item.label : undefined}
+              >
+                <Icon className="w-[18px] h-[18px] shrink-0" style={{ opacity: active ? 0.6 : 0.35 }} />
+                {!collapsed && <span className="truncate">{item.label}</span>}
+                {badge !== undefined && badge > 0 && (
+                  <span
+                    className={`${collapsed ? 'absolute -top-1 -right-1' : 'ml-auto'} min-w-[18px] h-[18px] px-1 rounded-full text-[10px] flex items-center justify-center`}
+                    style={{ background: 'var(--accent-brass)', color: 'var(--bg-primary)', fontWeight: 600 }}
+                  >
+                    {badge > 9 ? '9+' : badge}
+                  </span>
+                )}
+              </Link>
+            );
+          })}
+        </div>
       </nav>
 
-      {/* Utility items */}
-      <div className="border-t border-[oklch(0.18_0.005_60)] py-3 px-3 space-y-0.5">
-        {UTILITY_ITEMS.map((item) => {
-          const active = pathname === item.href || pathname.startsWith(item.href);
-          return (
-            <NavItem
-              key={item.href}
-              href={item.href}
-              label={item.label}
-              icon={item.icon}
-              active={active}
-              collapsed={collapsed}
-              badge={item.badge === 'messages' ? totalUnread : undefined}
-            />
-          );
-        })}
-      </div>
-
-      {/* Theme toggle + Wallet */}
-      <div className="border-t border-[oklch(0.18_0.005_60)] p-3 space-y-2">
-        {!collapsed && (
-          <div className="flex items-center justify-between px-1 py-1">
-            <span className="text-[11px] text-[oklch(0.38_0.01_60)] font-medium">Theme</span>
-            <ThemeToggle />
-          </div>
-        )}
-        {collapsed && (
-          <div className="flex justify-center py-1">
-            <ThemeToggle />
-          </div>
-        )}
+      {/* Bottom: Theme + Wallet + Brand whisper */}
+      <div className="p-3 space-y-2" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+        <div className={`flex ${collapsed ? 'justify-center' : 'items-center justify-between px-1'} py-1`}>
+          {!collapsed && <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>Theme</span>}
+          <ThemeToggle />
+        </div>
         <div className={collapsed ? 'scale-75' : ''}>
           <ConnectButton label="Connect" showBalance={false} chainStatus="none" accountStatus={collapsed ? 'avatar' : 'address'} />
         </div>
         {!collapsed && (
-          <p className="text-center text-[10px] italic text-[oklch(0.30_0.01_60)] font-serif pt-2">
+          <p
+            className="text-center pt-2"
+            style={{
+              fontFamily: 'var(--font-heading), Georgia, serif',
+              fontStyle: 'italic',
+              fontSize: '10px',
+              color: 'var(--text-muted)',
+              opacity: 0.5,
+            }}
+          >
             Faircroft — Est. 2025
           </p>
         )}
@@ -243,13 +316,17 @@ export function Sidebar() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40 bg-[oklch(0.08_0.005_60)] border-r border-[oklch(0.18_0.005_60)]">
+      <aside
+        className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40"
+        style={{ background: '#111114', borderRight: '1px solid var(--border-subtle)' }}
+      >
         {sidebarContent}
       </aside>
 
       {/* Mobile hamburger */}
       <button
-        className="lg:hidden fixed top-3 left-3 z-50 p-2 rounded-lg bg-[oklch(0.12_0.005_60)] border border-[oklch(0.20_0.005_60)] text-[oklch(0.65_0.01_60)]"
+        className="lg:hidden fixed top-3 left-3 z-50 p-2 rounded-lg"
+        style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', color: 'var(--text-secondary)' }}
         onClick={() => setMobileOpen(true)}
       >
         <Menu className="w-5 h-5" />
@@ -259,9 +336,12 @@ export function Sidebar() {
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-50">
           <div className="absolute inset-0 bg-black/60" onClick={() => setMobileOpen(false)} />
-          <aside className="absolute left-0 top-0 bottom-0 bg-[oklch(0.08_0.005_60)] border-r border-[oklch(0.18_0.005_60)] shadow-2xl">
+          <aside
+            className="absolute left-0 top-0 bottom-0 shadow-2xl"
+            style={{ background: '#111114', borderRight: '1px solid var(--border-subtle)' }}
+          >
             <div className="absolute top-3 right-3">
-              <button onClick={() => setMobileOpen(false)} className="p-2 rounded-lg text-[oklch(0.50_0.01_60)] hover:text-[oklch(0.80_0.01_60)]">
+              <button onClick={() => setMobileOpen(false)} className="p-2 rounded-lg" style={{ color: 'var(--text-muted)' }}>
                 <X className="w-5 h-5" />
               </button>
             </div>

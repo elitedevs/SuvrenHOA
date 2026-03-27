@@ -171,7 +171,7 @@ export default function SurveyBuilderPage() {
         <div className="space-y-4">
           {surveys.length === 0 ? (
             <div className="glass-card rounded-xl p-12 text-center">
-              <p className="text-4xl mb-3">📋</p>
+              <p className="text-4xl mb-3"></p>
               <p className="text-gray-400">No surveys yet. Create your first one!</p>
             </div>
           ) : surveys.map(s => (
@@ -182,7 +182,7 @@ export default function SurveyBuilderPage() {
                     <span className={`text-[10px] px-2 py-0.5 rounded-full border ${
                       s.status === 'published' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-gray-500/10 text-gray-400 border-gray-500/20'
                     }`}>
-                      {s.status === 'published' ? '🟢 Published' : '📝 Draft'}
+                      {s.status === 'published' ? ' Published' : ' Draft'}
                     </span>
                     <span className="text-[10px] text-gray-500">{s.questions.length} questions · {s.responses.length} responses</span>
                   </div>
@@ -242,14 +242,14 @@ export default function SurveyBuilderPage() {
                   <div key={q.id} className="p-4 rounded-xl bg-gray-800/30 border border-gray-700 space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold">
-                        Q{qi + 1} · {q.type === 'text' ? '📝 Text' : q.type === 'multiple_choice' ? '☑️ Multiple Choice' : '⭐ Rating'}
+                        Q{qi + 1} · {q.type === 'text' ? ' Text' : q.type === 'multiple_choice' ? ' Multiple Choice' : '⭐ Rating'}
                       </span>
                       <div className="flex items-center gap-2">
                         <label className="flex items-center gap-1 text-[10px] text-gray-500 cursor-pointer">
                           <input type="checkbox" checked={q.required} onChange={e => updateQuestion(q.id, { required: e.target.checked })} className="w-3 h-3" />
                           Required
                         </label>
-                        <button onClick={() => removeQuestion(q.id)} className="text-gray-600 hover:text-red-400 text-sm transition-colors">✕</button>
+                        <button onClick={() => removeQuestion(q.id)} className="text-gray-600 hover:text-red-400 text-sm transition-colors"></button>
                       </div>
                     </div>
                     <input value={q.label} onChange={e => updateQuestion(q.id, { label: e.target.value })}
@@ -264,7 +264,7 @@ export default function SurveyBuilderPage() {
                             }} placeholder={`Option ${oi + 1}`}
                               className="flex-1 px-3 py-1.5 rounded-lg bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
                             {q.options!.length > 2 && (
-                              <button onClick={() => updateQuestion(q.id, { options: q.options!.filter((_, i) => i !== oi) })} className="text-gray-500 hover:text-red-400 text-xs">✕</button>
+                              <button onClick={() => updateQuestion(q.id, { options: q.options!.filter((_, i) => i !== oi) })} className="text-gray-500 hover:text-red-400 text-xs"></button>
                             )}
                           </div>
                         ))}
@@ -288,8 +288,8 @@ export default function SurveyBuilderPage() {
 
               {/* Add question */}
               <div className="flex gap-2 mt-4">
-                <button onClick={() => addQuestion('text')} className="flex-1 py-2 rounded-xl border border-dashed border-gray-700 text-xs text-gray-400 hover:border-[#c9a96e]/30 hover:text-[#c9a96e] transition-colors">📝 Text</button>
-                <button onClick={() => addQuestion('multiple_choice')} className="flex-1 py-2 rounded-xl border border-dashed border-gray-700 text-xs text-gray-400 hover:border-[#c9a96e]/30 hover:text-[#c9a96e] transition-colors">☑️ Multiple Choice</button>
+                <button onClick={() => addQuestion('text')} className="flex-1 py-2 rounded-xl border border-dashed border-gray-700 text-xs text-gray-400 hover:border-[#c9a96e]/30 hover:text-[#c9a96e] transition-colors"> Text</button>
+                <button onClick={() => addQuestion('multiple_choice')} className="flex-1 py-2 rounded-xl border border-dashed border-gray-700 text-xs text-gray-400 hover:border-[#c9a96e]/30 hover:text-[#c9a96e] transition-colors"> Multiple Choice</button>
                 <button onClick={() => addQuestion('rating')} className="flex-1 py-2 rounded-xl border border-dashed border-gray-700 text-xs text-gray-400 hover:border-[#c9a96e]/30 hover:text-[#c9a96e] transition-colors">⭐ Rating</button>
               </div>
             </div>
@@ -336,7 +336,7 @@ function SurveyPreview({ survey, onBack, onSubmit, address }: { survey: Survey; 
     <div className="space-y-5">
       <div className="glass-card rounded-xl p-5">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">👁️ Preview Mode</span>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20"> Preview Mode</span>
         </div>
         <h2 className="text-lg font-semibold mb-1">{survey.title}</h2>
         <p className="text-sm text-gray-400">{survey.description}</p>

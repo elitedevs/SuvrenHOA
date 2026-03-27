@@ -15,7 +15,7 @@ interface Template {
 const TEMPLATES: Template[] = [
   {
     id: 'budget_amendment',
-    icon: '💰',
+    icon: '',
     name: 'Budget Amendment',
     category: 1,
     categoryLabel: 'Financial',
@@ -41,7 +41,7 @@ const TEMPLATES: Template[] = [
   },
   {
     id: 'rule_change',
-    icon: '📋',
+    icon: '',
     name: 'Rule Change',
     category: 2,
     categoryLabel: 'Governance',
@@ -67,7 +67,7 @@ const TEMPLATES: Template[] = [
   },
   {
     id: 'capital_improvement',
-    icon: '🏗️',
+    icon: '',
     name: 'Capital Improvement',
     category: 1,
     categoryLabel: 'Financial',
@@ -99,7 +99,7 @@ const TEMPLATES: Template[] = [
   },
   {
     id: 'emergency_resolution',
-    icon: '🚨',
+    icon: '',
     name: 'Emergency Resolution',
     category: 0,
     categoryLabel: 'Routine',
@@ -123,7 +123,7 @@ The board will report all expenditures to residents within [X] days of action.`,
   },
   {
     id: 'board_election',
-    icon: '🗳️',
+    icon: '',
     name: 'Board Election',
     category: 2,
     categoryLabel: 'Governance',
@@ -164,9 +164,9 @@ interface Props {
 
 export function ProposalTemplates({ onUseTemplate }: Props) {
   return (
-    <div className="glass-card rounded-2xl p-6 mb-6">
+    <div className="glass-card rounded-lg p-6 mb-6">
       <div className="flex items-center gap-2 mb-5">
-        <span className="text-xl">📝</span>
+        <span className="text-xl"></span>
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest">Quick Start</p>
           <h3 className="text-base font-bold text-gray-100">Create from Template</h3>

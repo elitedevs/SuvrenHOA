@@ -36,7 +36,7 @@ export function MessageBubble({ message, myLotId }: MessageBubbleProps) {
 
       {/* Bubble */}
       <div
-        className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
+        className={`max-w-[75%] px-4 py-2.5 rounded-lg text-sm leading-relaxed ${
           isSent
             ? 'bg-[#c9a96e] text-white rounded-br-sm shadow-[0_2px_12px_rgba(201,169,110,0.25)]'
             : 'bg-gray-700/80 text-gray-100 rounded-bl-sm border border-gray-600/50'
@@ -50,7 +50,7 @@ export function MessageBubble({ message, myLotId }: MessageBubbleProps) {
         <span className="text-[10px] text-gray-600">{formatTime(message.timestamp)}</span>
         {isSent && (
           <span className={`text-[10px] ${message.read ? 'text-[#c9a96e]' : 'text-gray-600'}`}>
-            {message.read ? '✓✓' : '✓'}
+            {message.read ? '' : ''}
           </span>
         )}
       </div>

@@ -101,7 +101,7 @@ function PetCard({
     <div className="glass-card rounded-xl p-4 border border-[#c9a96e]/10 mb-3">
       <div className="flex justify-between items-start mb-3">
         <span className="text-sm font-semibold text-[#e8d5a3]">
-          🐾 Pet
+           Pet
         </span>
         <button
           onClick={onRemove}
@@ -124,9 +124,9 @@ function PetCard({
             onUpdate({ ...pet, type: e.target.value as PetEntry["type"] })
           }
         >
-          <option value="dog">🐕 Dog</option>
-          <option value="cat">🐈 Cat</option>
-          <option value="other">🐾 Other</option>
+          <option value="dog"> Dog</option>
+          <option value="cat"> Cat</option>
+          <option value="other"> Other</option>
         </select>
         <input
           className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
@@ -158,7 +158,7 @@ function VehicleCard({
   return (
     <div className="glass-card rounded-xl p-4 border border-blue-500/10 mb-3">
       <div className="flex justify-between items-start mb-3">
-        <span className="text-sm font-semibold text-blue-300">🚗 Vehicle</span>
+        <span className="text-sm font-semibold text-blue-300"> Vehicle</span>
         <button
           onClick={onRemove}
           className="text-xs text-red-400 hover:text-red-300 transition-colors"
@@ -282,7 +282,7 @@ function OnboardingWizard() {
 
       {step < 6 && (
         <div className="mb-6">
-          <h1 className="text-2xl font-extrabold text-gray-100 mb-1">
+          <h1 className="text-2xl font-normal text-gray-100 mb-1">
             Move-In Setup
           </h1>
           <p className="text-sm text-gray-500">Faircroft HOA · Property #{tokenId ?? "—"}</p>
@@ -293,9 +293,9 @@ function OnboardingWizard() {
 
       {/* ── Step 1: Welcome ── */}
       {step === 1 && (
-        <div className="glass-card rounded-2xl p-8 border-l-2 border-l-[#c9a96e]/50 animate-fade-in">
-          <div className="text-5xl mb-5 text-center">🏡</div>
-          <h2 className="text-2xl font-extrabold text-center mb-2">
+        <div className="glass-card rounded-lg p-8 border-l-2 border-l-[#c9a96e]/50 animate-fade-in">
+          <div className="text-5xl mb-5 text-center"></div>
+          <h2 className="text-2xl font-normal text-center mb-2">
             Welcome to Faircroft!
           </h2>
           <p className="text-gray-400 text-center text-sm mb-7">
@@ -349,7 +349,7 @@ function OnboardingWizard() {
 
       {/* ── Step 2: Profile ── */}
       {step === 2 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
+        <div className="glass-card rounded-lg p-7 animate-fade-in">
           <h2 className="text-xl font-bold mb-1">Your Profile</h2>
           <p className="text-sm text-gray-500 mb-6">
             All fields optional — helps the community reach you.
@@ -441,7 +441,7 @@ function OnboardingWizard() {
 
       {/* ── Step 3: Pets ── */}
       {step === 3 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
+        <div className="glass-card rounded-lg p-7 animate-fade-in">
           <h2 className="text-xl font-bold mb-1">Pet Registration</h2>
           <p className="text-sm text-gray-500 mb-2">
             Register your pets with the HOA.{" "}
@@ -492,7 +492,7 @@ function OnboardingWizard() {
 
       {/* ── Step 4: Vehicles ── */}
       {step === 4 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
+        <div className="glass-card rounded-lg p-7 animate-fade-in">
           <h2 className="text-xl font-bold mb-1">Vehicle Registration</h2>
           <p className="text-sm text-gray-500 mb-2">
             Register vehicles for parking records.{" "}
@@ -543,7 +543,7 @@ function OnboardingWizard() {
 
       {/* ── Step 5: Review ── */}
       {step === 5 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
+        <div className="glass-card rounded-lg p-7 animate-fade-in">
           <h2 className="text-xl font-bold mb-5">Review & Confirm</h2>
 
           {/* Profile summary */}
@@ -573,7 +573,7 @@ function OnboardingWizard() {
               <div className="flex justify-between">
                 <span className="text-xs text-gray-500">Messaging</span>
                 <span className="text-xs text-gray-300">
-                  {profile.messagingOptIn ? "✅ Opted in" : "❌ Opted out"}
+                  {profile.messagingOptIn ? " Opted in" : " Opted out"}
                 </span>
               </div>
               {!profile.displayName && !profile.email && !profile.phone && (
@@ -658,7 +658,7 @@ function OnboardingWizard() {
               disabled={!ccrAck}
               className="flex-1 py-3 rounded-xl bg-green-600 hover:bg-green-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
             >
-              Complete Setup ✓
+              Complete Setup 
             </button>
           </div>
         </div>
@@ -666,9 +666,9 @@ function OnboardingWizard() {
 
       {/* ── Step 6: All Done ── */}
       {step === 6 && (
-        <div className="glass-card rounded-2xl p-10 text-center animate-fade-in border-l-2 border-l-green-500/50">
-          <div className="text-6xl mb-5">🎉</div>
-          <h2 className="text-2xl font-extrabold mb-2">You&apos;re all set!</h2>
+        <div className="glass-card rounded-lg p-10 text-center animate-fade-in border-l-2 border-l-green-500/50">
+          <div className="text-6xl mb-5"></div>
+          <h2 className="text-2xl font-normal mb-2">You&apos;re all set!</h2>
           <p className="text-gray-400 text-sm mb-8">
             Welcome to the Faircroft community. Your setup is complete.
           </p>
@@ -677,28 +677,28 @@ function OnboardingWizard() {
               href="/dashboard"
               className="glass-card rounded-xl p-4 text-center hover:border-[#c9a96e]/25 transition-all"
             >
-              <div className="text-2xl mb-1">🏠</div>
+              <div className="text-2xl mb-1"></div>
               <p className="text-sm font-semibold text-gray-300">Dashboard</p>
             </Link>
             <Link
               href="/dues"
               className="glass-card rounded-xl p-4 text-center hover:border-green-500/25 transition-all"
             >
-              <div className="text-2xl mb-1">💳</div>
+              <div className="text-2xl mb-1"></div>
               <p className="text-sm font-semibold text-gray-300">Pay Dues</p>
             </Link>
             <Link
               href="/community"
               className="glass-card rounded-xl p-4 text-center hover:border-blue-500/25 transition-all"
             >
-              <div className="text-2xl mb-1">💬</div>
+              <div className="text-2xl mb-1"></div>
               <p className="text-sm font-semibold text-gray-300">Community</p>
             </Link>
             <Link
               href="/documents"
               className="glass-card rounded-xl p-4 text-center hover:border-amber-500/25 transition-all"
             >
-              <div className="text-2xl mb-1">📄</div>
+              <div className="text-2xl mb-1"></div>
               <p className="text-sm font-semibold text-gray-300">Documents</p>
             </Link>
           </div>
@@ -769,7 +769,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
         <div className="flex items-center justify-between mb-3">
           <div>
             <h3 className="font-semibold text-[#e8d5a3]">
-              {mode === 'move-in' ? '🏡 Move-In Checklist' : '📦 Move-Out Checklist'}
+              {mode === 'move-in' ? ' Move-In Checklist' : ' Move-Out Checklist'}
             </h3>
             <p className="text-xs text-gray-400">{completedRequired} of {totalRequired} required tasks complete</p>
           </div>
@@ -790,7 +790,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
           />
         </div>
         {pct === 100 && (
-          <p className="text-xs text-green-400 mt-2">🎉 All required tasks complete!</p>
+          <p className="text-xs text-green-400 mt-2"> All required tasks complete!</p>
         )}
       </div>
 
@@ -829,7 +829,7 @@ function ChecklistRow({ item, checked, onToggle }: { item: ChecklistItem; checke
             checked ? 'bg-[#c9a96e] border-[#c9a96e] text-[#1a1a1a]' : 'border-gray-600 hover:border-[#c9a96e]/50'
           }`}
         >
-          {checked && <span className="text-[10px] font-bold">✓</span>}
+          {checked && <span className="text-[10px] font-bold"></span>}
         </button>
         <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setExpanded(!expanded)}>
           <div className="flex items-center gap-2">
@@ -859,7 +859,7 @@ export default function OnboardingPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">🏡</div>
+        <div className="text-5xl mb-2"></div>
         <h2 className="text-xl font-bold">Move-In Setup</h2>
         <p className="text-gray-400 text-sm">Connect your wallet to begin</p>
         <ConnectButton label="Connect Wallet" />
@@ -874,15 +874,15 @@ export default function OnboardingPage() {
         <div className="flex gap-2 mb-6">
           <button onClick={() => setView('wizard')}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
-            🧭 Setup Wizard
+             Setup Wizard
           </button>
           <button onClick={() => setView('checklist-in')}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
-            🏡 Move-In Checklist
+             Move-In Checklist
           </button>
           <button onClick={() => setView('checklist-out')}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
-            📦 Move-Out Checklist
+             Move-Out Checklist
           </button>
         </div>
       </div>

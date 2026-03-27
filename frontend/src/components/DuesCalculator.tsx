@@ -59,13 +59,13 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
   const animatedAnnual = useAnimatedNumber(Math.round(annual));
 
   return (
-    <div className="glass-card rounded-2xl p-6">
+    <div className="glass-card rounded-lg p-6">
       <div className="flex items-center justify-between mb-5">
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Dues Calculator</p>
           <h3 className="text-lg font-bold text-gray-100">See Your Savings</h3>
         </div>
-        <div className="text-2xl">🧮</div>
+        <div className="text-2xl"></div>
       </div>
 
       {/* Lot sqft input */}
@@ -112,20 +112,20 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
       <div className="grid grid-cols-2 gap-3 mb-5">
         <div className="rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/20 p-4">
           <p className="text-[10px] text-gray-500 mb-1">Monthly</p>
-          <p className="text-xl font-extrabold text-[#c9a96e]">${monthly.toFixed(2)}</p>
+          <p className="text-xl font-normal text-[#c9a96e]">${monthly.toFixed(2)}</p>
           <p className="text-[10px] text-gray-500 mt-0.5">USDC / month</p>
         </div>
         <div className="rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/20 p-4">
           <p className="text-[10px] text-gray-500 mb-1">Annual</p>
-          <p className="text-xl font-extrabold text-[#c9a96e]">${animatedAnnual.toLocaleString()}</p>
+          <p className="text-xl font-normal text-[#c9a96e]">${animatedAnnual.toLocaleString()}</p>
           <p className="text-[10px] text-gray-500 mt-0.5">USDC / year</p>
         </div>
       </div>
 
       {/* Savings vs traditional */}
-      <div className="rounded-2xl bg-gradient-to-br from-green-500/10 to-emerald-500/5 border border-green-500/20 p-5">
+      <div className="rounded-lg bg-gradient-to-br from-green-500/10 to-emerald-500/5 border border-green-500/20 p-5">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-lg">💰</span>
+          <span className="text-lg"></span>
           <p className="text-sm font-bold text-green-400">vs. Traditional HOA</p>
         </div>
         <div className="grid grid-cols-2 gap-3 mb-3">
@@ -144,7 +144,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-[10px] text-gray-500">Estimated Annual Savings</p>
-            <p className="text-2xl font-extrabold text-green-400">
+            <p className="text-2xl font-normal text-green-400">
               ${animatedSavings.toLocaleString()}
             </p>
           </div>

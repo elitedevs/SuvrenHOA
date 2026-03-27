@@ -98,7 +98,7 @@ export default function NoiseComplaintPage() {
         </div>
         <button onClick={() => setShowForm(!showForm)}
           className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
-          {showForm ? '← Back' : '📢 Report Noise'}
+          {showForm ? '← Back' : ' Report Noise'}
         </button>
       </div>
 
@@ -164,7 +164,7 @@ export default function NoiseComplaintPage() {
         <div className="space-y-4">
           {complaints.length === 0 ? (
             <div className="glass-card rounded-xl p-12 text-center">
-              <p className="text-4xl mb-3">🔇</p>
+              <p className="text-4xl mb-3"></p>
               <p className="text-lg font-medium mb-1">No complaints filed</p>
               <p className="text-sm text-gray-400">All quiet in the community!</p>
             </div>
@@ -178,9 +178,9 @@ export default function NoiseComplaintPage() {
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xs font-mono text-gray-500">{c.id}</span>
                       <span className={`text-xs px-2 py-0.5 rounded-full border ${statusColor(c.status)}`}>
-                        {c.status === 'received' ? '📥 Received' : c.status === 'investigating' ? '🔍 Investigating' : '✅ Resolved'}
+                        {c.status === 'received' ? ' Received' : c.status === 'investigating' ? ' Investigating' : ' Resolved'}
                       </span>
-                      <span className="text-xs text-gray-500">Severity: {'★'.repeat(c.severity)}{'☆'.repeat(5-c.severity)}</span>
+                      <span className="text-xs text-gray-500">Severity: {''.repeat(c.severity)}{''.repeat(5-c.severity)}</span>
                     </div>
                     <p className="text-sm font-medium">{c.location}</p>
                     <p className="text-xs text-gray-500">{c.date} {c.time} · {c.duration} · {c.anonymous ? 'Anonymous' : c.submittedBy}</p>

@@ -44,7 +44,7 @@ export default function ProposalsPage() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Governance</p>
-          <h1 className="text-3xl font-extrabold tracking-tight">Proposals</h1>
+          <h1 className="text-3xl font-normal tracking-tight">Proposals</h1>
           <p className="text-base text-gray-400 mt-2 font-medium">
             Create, vote, and execute community governance proposals
           </p>
@@ -61,7 +61,7 @@ export default function ProposalsPage() {
 
       {!isConnected ? (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
-          <div className="text-5xl mb-2">🗳️</div>
+          <div className="text-5xl mb-2"></div>
           <p className="text-gray-400 text-base font-medium">Sign in to participate in governance</p>
           <ConnectButton label="Sign In" />
         </div>
@@ -93,8 +93,8 @@ function ProposalsDashboard() {
           { value: `${Math.round(votingPeriod / 86400)}d`, label: 'Voting Period', color: 'text-green-400' },
           { value: proposals.length, label: 'Total Proposals', color: 'text-amber-400' },
         ].map(({ value, label, color }) => (
-          <div key={label} className="glass-card rounded-2xl hover-lift p-6">
-            <p className={`text-3xl font-extrabold ${color} mb-1`}>{value}</p>
+          <div key={label} className="glass-card rounded-lg hover-lift p-6">
+            <p className={`text-3xl font-normal ${color} mb-1`}>{value}</p>
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide">{label}</p>
           </div>
         ))}
@@ -139,12 +139,12 @@ function ProposalsDashboard() {
       {/* Proposal List */}
       <div className="space-y-4 page-enter page-enter-delay-3">
         {isLoading ? (
-          <div className="glass-card rounded-2xl p-12 text-center">
-            <div className="text-3xl mb-3 animate-pulse">⛓️</div>
+          <div className="glass-card rounded-lg p-12 text-center">
+            <div className="text-3xl mb-3 animate-pulse"></div>
             <p className="text-gray-400 text-sm">Loading proposals from chain…</p>
           </div>
         ) : error ? (
-          <div className="glass-card rounded-2xl p-12 text-center border-l-2 border-l-red-500/40">
+          <div className="glass-card rounded-lg p-12 text-center border-l-2 border-l-red-500/40">
             <p className="text-red-400 text-sm mb-4">Failed to load proposals</p>
             <button
               onClick={refetch}
@@ -222,7 +222,7 @@ function ProposalCard({
 
   return (
     <Link href={`/proposals/${proposal.proposalId.toString()}`}>
-      <div className="glass-card rounded-2xl hover-lift p-6 cursor-pointer transition-all duration-200 hover:border-[#c9a96e]/20 border border-transparent">
+      <div className="glass-card rounded-lg hover-lift p-6 cursor-pointer transition-all duration-200 hover:border-[#c9a96e]/20 border border-transparent">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             {/* Badges */}
@@ -273,9 +273,9 @@ function ProposalCard({
 
 function EmptyState() {
   return (
-    <div className="glass-card rounded-2xl hover-lift p-14 text-center">
-      <div className="w-20 h-20 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-4xl mx-auto mb-6">
-        🗳️
+    <div className="glass-card rounded-lg hover-lift p-14 text-center">
+      <div className="w-20 h-20 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-4xl mx-auto mb-6">
+        
       </div>
       <h3 className="text-xl font-bold mb-3">No proposals yet</h3>
       <p className="text-sm text-gray-400 max-w-md mx-auto leading-relaxed mb-8">
@@ -308,13 +308,13 @@ function EmptyState() {
         </div>
         <div className="flex items-center justify-center gap-3 mt-8">
           <span className="text-xs px-3 py-1.5 rounded-lg bg-green-500/10 text-green-400 border border-green-500/20 font-semibold">
-            👍 For
+             For
           </span>
           <span className="text-xs px-3 py-1.5 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 font-semibold">
-            👎 Against
+             Against
           </span>
           <span className="text-xs px-3 py-1.5 rounded-lg bg-gray-500/10 text-gray-400 border border-gray-500/20 font-semibold">
-            🤷 Abstain
+             Abstain
           </span>
         </div>
       </div>
@@ -338,8 +338,8 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
 
   if (!hasProperty) {
     return (
-      <div className="glass-card rounded-2xl hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
-        <div className="text-5xl mb-4">🏠</div>
+      <div className="glass-card rounded-lg hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
+        <div className="text-5xl mb-4"></div>
         <h3 className="text-xl font-bold mb-3">Property Required</h3>
         <p className="text-sm text-gray-400 max-w-sm mx-auto">
           You need a Property NFT (at least 1 vote) to create proposals.
@@ -363,11 +363,11 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
 
   if (isSuccess) {
     return (
-      <div className="glass-card rounded-2xl p-12 text-center border-l-2 border-l-green-500/50">
-        <div className="w-16 h-16 rounded-2xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-3xl mx-auto mb-6">
-          ✅
+      <div className="glass-card rounded-lg p-12 text-center border-l-2 border-l-green-500/50">
+        <div className="w-16 h-16 rounded-lg bg-green-500/15 border border-green-500/25 flex items-center justify-center text-3xl mx-auto mb-6">
+          
         </div>
-        <h3 className="text-2xl font-extrabold text-green-400 mb-3">Proposal Submitted!</h3>
+        <h3 className="text-2xl font-normal text-green-400 mb-3">Proposal Submitted!</h3>
         <p className="text-sm text-gray-400 mb-6 max-w-sm mx-auto">
           Your proposal is in <strong>Pending</strong> state. Voting opens after the 1-day review period.
         </p>
@@ -399,7 +399,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
         setCategory(c);
       }} />
 
-      <div className="glass-card rounded-2xl hover-lift p-8 space-y-6">
+      <div className="glass-card rounded-lg hover-lift p-8 space-y-6">
         {/* Title */}
         <div>
           <label className="block text-sm font-semibold text-gray-300 mb-2">
@@ -425,7 +425,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
               onClick={() => setShowPreview(!showPreview)}
               className="text-xs text-[#c9a96e] hover:text-[#e8d5a3] transition-colors font-semibold"
             >
-              {showPreview ? '✏️ Edit' : '👁️ Preview'}
+              {showPreview ? ' Edit' : ' Preview'}
             </button>
           </div>
           {showPreview ? (
@@ -481,7 +481,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
                     <span className="text-base">{cat.icon}</span>
                     <span className="text-sm font-bold text-gray-100">{cat.label}</span>
                     {category === cat.value && (
-                      <span className="ml-auto text-xs text-green-400">✓</span>
+                      <span className="ml-auto text-xs text-green-400"></span>
                     )}
                   </div>
                   <p className="text-[11px] text-gray-500">
@@ -512,12 +512,12 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
         disabled={isPending || isConfirming || !title.trim() || !description.trim()}
         className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] min-h-[52px]"
       >
-        {isPending ? '⏳ Confirm in Wallet...' :
-         isConfirming ? '⛓️ Submitting On-Chain...' :
+        {isPending ? ' Confirm in Wallet...' :
+         isConfirming ? ' Submitting On-Chain...' :
          'Submit Proposal'}
       </button>
 
-      <div className="glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/40">
+      <div className="glass-card rounded-lg hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/40">
         <h4 className="text-sm font-bold text-[#e8d5a3] mb-3">What happens next?</h4>
         <ol className="text-xs text-gray-400 space-y-2 list-decimal list-inside leading-relaxed">
           <li>Proposal enters <strong className="text-gray-300">Pending</strong> state (1-day review period)</li>

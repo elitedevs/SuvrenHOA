@@ -34,13 +34,13 @@ export const INCIDENT_COLORS: Record<Incident['type'], string> = {
 };
 
 export const INCIDENT_ICONS: Record<Incident['type'], string> = {
-  crime: '🚨',
-  maintenance: '🔧',
-  'road-closure': '🚧',
-  'community-event': '🎉',
-  hazard: '⚠️',
-  noise: '🔊',
-  other: '📋',
+  crime: '',
+  maintenance: '',
+  'road-closure': '',
+  'community-event': '',
+  hazard: '',
+  noise: '',
+  other: '',
 };
 
 export const INCIDENT_LABELS: Record<Incident['type'], string> = {
@@ -123,7 +123,7 @@ function buildIncidentPopupHTML(incident: Incident): string {
       </div>
       <div style="font-size:11px;color:#9ca3af;margin-bottom:6px;">${truncated}</div>
       <div style="display:flex;align-items:center;gap:8px;font-size:10px;color:#6b7280;">
-        <span>📍 ${incident.location}</span>
+        <span> ${incident.location}</span>
         <span style="margin-left:auto;">${incident.date}</span>
       </div>
       <div style="margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,0.06);">
@@ -150,7 +150,7 @@ function markerGlowColor(lot: LotData): string {
 
 function statusLabel(lot: LotData): string {
   if (lot.isDuesCurrent === null) return 'Unknown';
-  return lot.isDuesCurrent ? '✓ Current' : '✗ Overdue';
+  return lot.isDuesCurrent ? ' Current' : ' Overdue';
 }
 
 function buildPopupHTML(lot: LotData, isBoard: boolean): string {
@@ -175,7 +175,7 @@ function buildPopupHTML(lot: LotData, isBoard: boolean): string {
         <div style="font-family:monospace;font-size:11px;color:#9ca3af;word-break:break-all;">${lot.owner}</div>
        </div>`
     : `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06);">
-        <div style="font-size:11px;color:#4b5563;font-style:italic;">🔒 Owner visible to board only</div>
+        <div style="font-size:11px;color:#4b5563;font-style:italic;"> Owner visible to board only</div>
        </div>`;
 
   return `

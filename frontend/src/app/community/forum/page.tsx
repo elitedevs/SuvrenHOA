@@ -92,14 +92,14 @@ export default function ForumPage() {
         </button>
 
         {/* Topic header */}
-        <div className="glass-card rounded-2xl p-6 mb-4">
+        <div className="glass-card rounded-lg p-6 mb-4">
           <div className="flex items-start gap-3 mb-3">
             <span className="text-[10px] px-2 py-1 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20 font-semibold shrink-0">
               {selectedTopic.category}
             </span>
             {selectedTopic.pinned && (
               <span className="text-[10px] px-2 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-semibold shrink-0">
-                📌 Pinned
+                 Pinned
               </span>
             )}
           </div>
@@ -133,7 +133,7 @@ export default function ForumPage() {
 
         {/* Reply form */}
         {isConnected ? (
-          <div className="glass-card rounded-2xl p-5">
+          <div className="glass-card rounded-lg p-5">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">Post a Reply</p>
             <textarea
               value={replyText}
@@ -165,7 +165,7 @@ export default function ForumPage() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Community</p>
-          <h1 className="text-3xl font-extrabold tracking-tight">Discussion Forum</h1>
+          <h1 className="text-3xl font-normal tracking-tight">Discussion Forum</h1>
           <p className="text-base text-gray-400 mt-2">Community discussions, questions, and announcements</p>
         </div>
         {isConnected && (
@@ -179,7 +179,7 @@ export default function ForumPage() {
       </div>
 
       {showCreate ? (
-        <div className="glass-card rounded-2xl p-6 mb-6">
+        <div className="glass-card rounded-lg p-6 mb-6">
           <h2 className="text-base font-bold mb-5">New Discussion Topic</h2>
           <div className="space-y-4">
             <div>
@@ -256,8 +256,8 @@ export default function ForumPage() {
       {!isLoaded ? (
         <div className="text-center py-12 text-gray-500">Loading discussions...</div>
       ) : sorted.length === 0 ? (
-        <div className="glass-card rounded-2xl p-12 text-center">
-          <p className="text-4xl mb-3">💬</p>
+        <div className="glass-card rounded-lg p-12 text-center">
+          <p className="text-4xl mb-3"></p>
           <p className="text-gray-400">No topics yet. Start the conversation!</p>
         </div>
       ) : (
@@ -266,12 +266,12 @@ export default function ForumPage() {
             <button
               key={topic.id}
               onClick={() => setSelectedTopic(topic)}
-              className="w-full text-left glass-card rounded-2xl hover-lift p-5 transition-all hover:border-[#c9a96e]/20 group"
+              className="w-full text-left glass-card rounded-lg hover-lift p-5 transition-all hover:border-[#c9a96e]/20 group"
             >
               <div className="flex items-start gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                    {topic.pinned && <span className="text-[10px] text-amber-400">📌</span>}
+                    {topic.pinned && <span className="text-[10px] text-amber-400"></span>}
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/15 font-medium">
                       {topic.category}
                     </span>

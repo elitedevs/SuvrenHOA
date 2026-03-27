@@ -7,31 +7,31 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useProperty } from '@/hooks/useProperty';
 
 const MOD_TYPES = [
-  { id: 'paint', label: 'Exterior Paint', icon: '🎨' },
-  { id: 'fence', label: 'Fence', icon: '🏗️' },
+  { id: 'paint', label: 'Exterior Paint', icon: '' },
+  { id: 'fence', label: 'Fence', icon: '' },
   { id: 'deck', label: 'Deck/Patio', icon: '🪵' },
-  { id: 'landscaping', label: 'Landscaping', icon: '🌿' },
-  { id: 'roof', label: 'Roof', icon: '🏠' },
-  { id: 'siding', label: 'Siding', icon: '🧱' },
-  { id: 'addition', label: 'Addition', icon: '🏗️' },
-  { id: 'shed', label: 'Shed/Storage', icon: '🏚️' },
-  { id: 'solar', label: 'Solar Panels', icon: '☀️' },
-  { id: 'lighting', label: 'Exterior Lighting', icon: '💡' },
-  { id: 'driveway', label: 'Driveway', icon: '🛣️' },
-  { id: 'mailbox', label: 'Mailbox', icon: '📬' },
-  { id: 'other', label: 'Other', icon: '📋' },
+  { id: 'landscaping', label: 'Landscaping', icon: '' },
+  { id: 'roof', label: 'Roof', icon: '' },
+  { id: 'siding', label: 'Siding', icon: '' },
+  { id: 'addition', label: 'Addition', icon: '' },
+  { id: 'shed', label: 'Shed/Storage', icon: '' },
+  { id: 'solar', label: 'Solar Panels', icon: '' },
+  { id: 'lighting', label: 'Exterior Lighting', icon: '' },
+  { id: 'driveway', label: 'Driveway', icon: '' },
+  { id: 'mailbox', label: 'Mailbox', icon: '' },
+  { id: 'other', label: 'Other', icon: '' },
 ];
 
 const STATUS_STYLES: Record<string, { color: string; label: string }> = {
-  'submitted': { color: 'yellow', label: '📋 Submitted' },
-  'under-review': { color: 'blue', label: '🔍 Under Review' },
-  'info-requested': { color: 'amber', label: '❓ Info Requested' },
-  'approved': { color: 'green', label: '✅ Approved' },
-  'approved-with-conditions': { color: 'green', label: '✅ Approved (Conditions)' },
-  'denied': { color: 'red', label: '❌ Denied' },
-  'in-progress': { color: 'blue', label: '🔨 In Progress' },
-  'completed': { color: 'emerald', label: '🏁 Completed' },
-  'inspected': { color: 'emerald', label: '✅ Inspected' },
+  'submitted': { color: 'yellow', label: ' Submitted' },
+  'under-review': { color: 'blue', label: ' Under Review' },
+  'info-requested': { color: 'amber', label: ' Info Requested' },
+  'approved': { color: 'green', label: ' Approved' },
+  'approved-with-conditions': { color: 'green', label: ' Approved (Conditions)' },
+  'denied': { color: 'red', label: ' Denied' },
+  'in-progress': { color: 'blue', label: ' In Progress' },
+  'completed': { color: 'emerald', label: ' Completed' },
+  'inspected': { color: 'emerald', label: ' Inspected' },
 };
 
 export default function ArchitecturalPage() {
@@ -61,7 +61,7 @@ export default function ArchitecturalPage() {
           onClick={() => setShowSubmit(!showSubmit)}
           className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
         >
-          {showSubmit ? '← Back' : '📝 New Request'}
+          {showSubmit ? '← Back' : ' New Request'}
         </button>
       </div>
 
@@ -75,11 +75,11 @@ export default function ArchitecturalPage() {
 }
 
 const PIPELINE_STAGES = [
-  { key: 'submitted', label: 'Submitted', icon: '📋', color: 'text-yellow-400', bg: 'bg-yellow-500/10 border-yellow-500/20' },
-  { key: 'under-review', label: 'Under Review', icon: '🔍', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
-  { key: 'info-requested', label: 'Info Needed', icon: '❓', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
-  { key: 'approved', label: 'Approved', icon: '✅', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
-  { key: 'denied', label: 'Denied', icon: '❌', color: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20' },
+  { key: 'submitted', label: 'Submitted', icon: '', color: 'text-yellow-400', bg: 'bg-yellow-500/10 border-yellow-500/20' },
+  { key: 'under-review', label: 'Under Review', icon: '', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+  { key: 'info-requested', label: 'Info Needed', icon: '', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
+  { key: 'approved', label: 'Approved', icon: '', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
+  { key: 'denied', label: 'Denied', icon: '', color: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20' },
 ];
 
 function ReviewPipeline({ requests, setFilter }: { requests: any[]; setFilter: (f: string) => void }) {
@@ -158,7 +158,7 @@ function RequestList({ filter, setFilter }: { filter: string; setFilter: (f: str
         <div className="text-center py-12 text-gray-500">Loading requests...</div>
       ) : !requests || requests.length === 0 ? (
         <div className="glass-card rounded-xl p-12 text-center">
-          <p className="text-5xl mb-4">🏗️</p>
+          <p className="text-5xl mb-4"></p>
           <h3 className="text-lg font-medium mb-2">No architectural requests</h3>
           <p className="text-sm text-gray-400 max-w-md mx-auto">
             Planning to paint, build a fence, add a deck, or install solar panels?
@@ -359,12 +359,12 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
           onClick={() => submit.mutate()}
           className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
         >
-          {submit.isPending ? '⏳ Submitting...' : 'Submit for Review'}
+          {submit.isPending ? ' Submitting...' : 'Submit for Review'}
         </button>
       </div>
 
       <div className="p-4 rounded-xl glass-card">
-        <h4 className="text-xs font-medium text-[#c9a96e] mb-1">📋 Review Process</h4>
+        <h4 className="text-xs font-medium text-[#c9a96e] mb-1"> Review Process</h4>
         <p className="text-[10px] text-gray-400">
           The Architectural Review Committee reviews requests within 14 days.
           You may be asked for additional information. Do not begin work until you receive approval.

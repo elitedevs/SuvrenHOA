@@ -94,14 +94,14 @@ function NewMessageModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="glass-card rounded-2xl hover-lift w-full max-w-md p-6 border border-[#c9a96e]/20">
+      <div className="glass-card rounded-lg hover-lift w-full max-w-md p-6 border border-[#c9a96e]/20">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold text-gray-100">New Message</h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-300 text-xl leading-none p-1"
           >
-            ✕
+            
           </button>
         </div>
 
@@ -212,7 +212,7 @@ function ChatPanel({
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-1">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
-            <div className="text-4xl">💬</div>
+            <div className="text-4xl"></div>
             <p className="text-gray-400 text-sm font-medium">
               No messages yet — say hello to Lot #{lotId}!
             </p>
@@ -259,7 +259,7 @@ export default function MessagesPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">💬</div>
+        <div className="text-5xl mb-2"></div>
         <p className="text-gray-400 text-base font-medium">Sign in to use messaging</p>
         <ConnectButton label="Sign In" />
       </div>
@@ -302,7 +302,7 @@ function MessagingCenter({ address }: { address: string }) {
   if (!hasProperty) {
     return (
       <div className="max-w-2xl mx-auto px-6 py-12 text-center">
-        <div className="text-5xl mb-4">🏠</div>
+        <div className="text-5xl mb-4"></div>
         <h2 className="text-xl font-bold mb-2">No Property NFT Found</h2>
         <p className="text-gray-400 text-sm">You need a Faircroft Property NFT to use messaging.</p>
       </div>
@@ -317,7 +317,7 @@ function MessagingCenter({ address }: { address: string }) {
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">
             Messages
           </p>
-          <h1 className="text-2xl font-extrabold tracking-tight flex items-center gap-2">
+          <h1 className="text-2xl font-normal tracking-tight flex items-center gap-2">
             Neighbor Messaging
             {totalUnread > 0 && (
               <span className="text-sm font-bold px-2 py-0.5 rounded-full bg-[#c9a96e] text-white">
@@ -354,12 +354,12 @@ function MessagingCenter({ address }: { address: string }) {
       {/* Opt-in info banner */}
       {!optIn && (
         <div className="mb-4 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-sm text-amber-300 font-medium">
-          💡 Messaging is opt-in. Enable the toggle above so neighbors can message you.
+           Messaging is opt-in. Enable the toggle above so neighbors can message you.
         </div>
       )}
 
       {/* Main Layout */}
-      <div className="glass-card rounded-2xl hover-lift overflow-hidden border border-gray-700/50" style={{ height: '70vh', minHeight: '500px' }}>
+      <div className="glass-card rounded-lg hover-lift overflow-hidden border border-gray-700/50" style={{ height: '70vh', minHeight: '500px' }}>
         <div className="flex h-full">
           {/* Sidebar — conversation list */}
           <div
@@ -374,7 +374,7 @@ function MessagingCenter({ address }: { address: string }) {
                 onClick={() => setShowNewModal(true)}
                 className="text-xs font-semibold text-[#c9a96e] hover:text-[#e8d5a3] px-3 py-1.5 rounded-lg hover:bg-[#c9a96e]/10 transition-all duration-150 flex items-center gap-1"
               >
-                <span>✏️</span> New
+                <span></span> New
               </button>
             </div>
 
@@ -388,7 +388,7 @@ function MessagingCenter({ address }: { address: string }) {
                 </div>
               ) : conversations.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-4 py-8">
-                  <div className="text-4xl">✉️</div>
+                  <div className="text-4xl"></div>
                   <p className="text-gray-500 text-sm font-medium">
                     No messages yet — reach out to a neighbor!
                   </p>
@@ -426,7 +426,7 @@ function MessagingCenter({ address }: { address: string }) {
               />
             ) : (
               <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-8">
-                <div className="text-5xl">💬</div>
+                <div className="text-5xl"></div>
                 <p className="text-gray-400 text-base font-medium">
                   Select a conversation or start a new one
                 </p>
@@ -434,7 +434,7 @@ function MessagingCenter({ address }: { address: string }) {
                   onClick={() => setShowNewModal(true)}
                   className="mt-2 px-5 py-2.5 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/20 text-sm font-semibold text-[#e8d5a3] transition-all duration-200"
                 >
-                  ✏️ New Message
+                   New Message
                 </button>
               </div>
             )}

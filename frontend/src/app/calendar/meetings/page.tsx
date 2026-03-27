@@ -15,7 +15,7 @@ export default function MeetingsPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">📋</div>
+        <div className="text-5xl mb-2"></div>
         <p className="text-gray-400 text-base font-medium">Sign in to view board meetings</p>
         <ConnectButton label="Sign In" />
       </div>
@@ -30,7 +30,7 @@ export default function MeetingsPage() {
       <div className="flex items-center justify-between mb-2">
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Board</p>
-          <h1 className="text-3xl font-extrabold tracking-tight">Meeting Scheduler</h1>
+          <h1 className="text-3xl font-normal tracking-tight">Meeting Scheduler</h1>
         </div>
         <div className="flex items-center gap-3">
           <Link href="/calendar" className="text-xs text-gray-500 hover:text-[#c9a96e] transition-colors">
@@ -40,7 +40,7 @@ export default function MeetingsPage() {
             onClick={() => setShowCreate(!showCreate)}
             className="px-4 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all"
           >
-            {showCreate ? '✕ Cancel' : '+ Schedule Meeting'}
+            {showCreate ? ' Cancel' : '+ Schedule Meeting'}
           </button>
         </div>
       </div>
@@ -74,8 +74,8 @@ export default function MeetingsPage() {
 
       {/* Meeting List */}
       {displayedMeetings.length === 0 ? (
-        <div className="glass-card rounded-2xl p-12 text-center">
-          <p className="text-5xl mb-4">📋</p>
+        <div className="glass-card rounded-lg p-12 text-center">
+          <p className="text-5xl mb-4"></p>
           <h3 className="text-lg font-bold mb-2">No Meetings Scheduled</h3>
           <p className="text-sm text-gray-400">Board meetings will appear here once scheduled.</p>
         </div>
@@ -89,7 +89,7 @@ export default function MeetingsPage() {
             const maybeCount = meeting.rsvps.filter(r => r.status === 'maybe').length;
 
             return (
-              <div key={meeting.id} className={`glass-card rounded-2xl p-6 border-l-2 border-l-[#c9a96e]/40 ${isPast ? 'opacity-60' : ''}`}>
+              <div key={meeting.id} className={`glass-card rounded-lg p-6 border-l-2 border-l-[#c9a96e]/40 ${isPast ? 'opacity-60' : ''}`}>
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
@@ -100,10 +100,10 @@ export default function MeetingsPage() {
                     </div>
 
                     <div className="flex flex-wrap gap-3 text-xs text-gray-500 mb-3">
-                      <span>📅 {dt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                      <span>🕐 {dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</span>
-                      {meeting.location && <span>📍 {meeting.location}</span>}
-                      {attendingCount > 0 && <span>👥 {attendingCount} attending{maybeCount > 0 ? `, ${maybeCount} maybe` : ''}</span>}
+                      <span> {dt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                      <span> {dt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</span>
+                      {meeting.location && <span> {meeting.location}</span>}
+                      {attendingCount > 0 && <span> {attendingCount} attending{maybeCount > 0 ? `, ${maybeCount} maybe` : ''}</span>}
                     </div>
 
                     {meeting.agenda && (
@@ -118,7 +118,7 @@ export default function MeetingsPage() {
                       <div className="flex gap-2">
                         {(['attending', 'maybe', 'decline'] as RSVPStatus[]).map(status => {
                           const isSelected = myRsvp?.status === status;
-                          const label = status === 'attending' ? '✅ Attending' : status === 'maybe' ? '🤔 Maybe' : '❌ Decline';
+                          const label = status === 'attending' ? ' Attending' : status === 'maybe' ? ' Maybe' : ' Decline';
                           return (
                             <button
                               key={status}
@@ -177,7 +177,7 @@ function CreateMeetingForm({
   };
 
   return (
-    <div className="glass-card rounded-2xl p-6 mb-6 border border-[#c9a96e]/20">
+    <div className="glass-card rounded-lg p-6 mb-6 border border-[#c9a96e]/20">
       <h2 className="text-base font-bold text-[#e8d5a3] mb-5">Schedule New Meeting</h2>
 
       <div className="space-y-4">
@@ -248,7 +248,7 @@ function CreateMeetingForm({
             disabled={!title.trim() || !date || saving}
             className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-bold transition-all"
           >
-            {saving ? '⏳ Saving...' : '📋 Schedule Meeting'}
+            {saving ? ' Saving...' : ' Schedule Meeting'}
           </button>
         </div>
       </div>

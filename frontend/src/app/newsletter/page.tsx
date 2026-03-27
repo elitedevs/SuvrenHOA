@@ -123,7 +123,7 @@ export default function NewsletterPage() {
         {isBoard && (
           <button onClick={() => setShowCreate(!showCreate)}
             className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
-            {showCreate ? '← Back' : '✏️ New Newsletter'}
+            {showCreate ? '← Back' : ' New Newsletter'}
           </button>
         )}
       </div>
@@ -171,7 +171,7 @@ export default function NewsletterPage() {
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    {nl.pinned && <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20">📌 Current Issue</span>}
+                    {nl.pinned && <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20"> Current Issue</span>}
                     <span className="text-xs text-gray-500">{new Date(nl.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>
                   <h3 className="font-semibold text-base mb-2">{nl.title}</h3>
@@ -181,7 +181,7 @@ export default function NewsletterPage() {
                   {isBoard && (
                     <button onClick={() => togglePin(nl.id)}
                       className={`px-2 py-1.5 rounded-lg text-xs transition-colors ${nl.pinned ? 'text-[#c9a96e]' : 'text-gray-500 hover:text-gray-300'}`}>
-                      📌
+                      
                     </button>
                   )}
                   <button onClick={() => setExpanded(expanded === nl.id ? null : nl.id)}

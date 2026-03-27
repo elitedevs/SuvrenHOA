@@ -31,7 +31,7 @@ export default function TreasuryPage() {
       <div className="mb-10 flex items-start justify-between gap-4">
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">On-Chain Finance</p>
-          <h1 className="text-3xl font-extrabold tracking-tight">Community Treasury</h1>
+          <h1 className="text-3xl font-normal tracking-tight">Community Treasury</h1>
           <p className="text-base text-gray-400 mt-2 font-medium">
             Every dollar publicly recorded and verifiable on the blockchain
           </p>
@@ -41,12 +41,12 @@ export default function TreasuryPage() {
           className="no-print shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
           title="Export as PDF"
         >
-          📄 Export PDF
+           Export PDF
         </button>
       </div>
 
       {/* Hero Balance */}
-      <div className="glass-card rounded-2xl hover-lift p-10 text-center glow-gold mb-6 border-l-2 border-l-[#c9a96e]/50 page-enter page-enter-delay-1">
+      <div className="glass-card rounded-lg hover-lift p-10 text-center glow-gold mb-6 border-l-2 border-l-[#c9a96e]/50 page-enter page-enter-delay-1">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Total Community Balance</p>
         <div className="flex items-baseline justify-center gap-3 mb-2">
           <span className="text-6xl sm:text-7xl font-black gradient-text">${totalBalance}</span>
@@ -58,15 +58,15 @@ export default function TreasuryPage() {
       {/* Operating + Reserve as visual gauges */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8 page-enter page-enter-delay-2">
         {/* Operating Fund */}
-        <div className="glass-card-success rounded-2xl p-7 border-l-2 border-l-green-500/50">
+        <div className="glass-card-success rounded-lg p-7 border-l-2 border-l-green-500/50">
           <div className="flex items-start justify-between mb-4">
             <div>
               <p className="text-xs text-green-400/70 font-semibold uppercase tracking-wide mb-1">Operating Fund</p>
-              <p className="text-3xl font-extrabold text-green-400">${operatingBalance}</p>
+              <p className="text-3xl font-normal text-green-400">${operatingBalance}</p>
               <p className="text-xs text-gray-500 mt-1">USDC · Day-to-day expenses</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-xl">
-              🏗️
+              
             </div>
           </div>
 
@@ -85,15 +85,15 @@ export default function TreasuryPage() {
         </div>
 
         {/* Reserve Fund */}
-        <div className="glass-card-info rounded-2xl p-7 border-l-2 border-l-blue-500/50">
+        <div className="glass-card-info rounded-lg p-7 border-l-2 border-l-blue-500/50">
           <div className="flex items-start justify-between mb-4">
             <div>
               <p className="text-xs text-blue-400/70 font-semibold uppercase tracking-wide mb-1">Reserve Fund</p>
-              <p className="text-3xl font-extrabold text-blue-400">${reserveBalance}</p>
+              <p className="text-3xl font-normal text-blue-400">${reserveBalance}</p>
               <p className="text-xs text-gray-500 mt-1">USDC · Long-term reserves</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-xl">
-              🏦
+              
             </div>
           </div>
 
@@ -113,7 +113,7 @@ export default function TreasuryPage() {
       </div>
 
       {/* Balance allocation visual bar */}
-      <div className="glass-card rounded-2xl hover-lift p-6 mb-8 page-enter page-enter-delay-2">
+      <div className="glass-card rounded-lg hover-lift p-6 mb-8 page-enter page-enter-delay-2">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-4">Allocation Overview</p>
         <div className="h-3 rounded-full overflow-hidden flex">
           <div
@@ -147,7 +147,7 @@ export default function TreasuryPage() {
         </div>
 
         {expenditureCount === 0 ? (
-          <div className="glass-card rounded-2xl hover-lift p-12 text-center">
+          <div className="glass-card rounded-lg hover-lift p-12 text-center">
             {/* Chart placeholder */}
             <div className="w-full h-32 rounded-xl bg-gray-800/30 border border-gray-700/30 flex items-center justify-center mb-6">
               <div className="flex items-end gap-2 h-16">
@@ -163,8 +163,8 @@ export default function TreasuryPage() {
             <p className="text-xs text-gray-600 font-medium uppercase tracking-wide mb-4">
               Expenditure chart — coming soon
             </p>
-            <div className="w-14 h-14 rounded-2xl bg-gray-800/50 border border-gray-700/30 flex items-center justify-center text-2xl mx-auto mb-4">
-              💰
+            <div className="w-14 h-14 rounded-lg bg-gray-800/50 border border-gray-700/30 flex items-center justify-center text-2xl mx-auto mb-4">
+              
             </div>
             <h3 className="text-lg font-bold mb-2 text-gray-200">No Expenditures Yet</h3>
             <p className="text-sm text-gray-400 max-w-md mx-auto">
@@ -183,9 +183,9 @@ export default function TreasuryPage() {
       <SpendingBreakdown />
 
       {/* On-chain banner */}
-      <div className="mt-8 glass-card rounded-2xl hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30 page-enter page-enter-delay-4">
+      <div className="mt-8 glass-card rounded-lg hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30 page-enter page-enter-delay-4">
         <div className="flex items-start gap-3">
-          <span className="text-xl">🔗</span>
+          <span className="text-xl"></span>
           <div>
             <h3 className="text-sm font-bold text-[#e8d5a3] mb-1">On-Chain Transparency</h3>
             <p className="text-xs text-gray-400 leading-relaxed">
@@ -217,7 +217,7 @@ function SpendingBreakdown() {
   const conicGradient = `conic-gradient(${conicParts.join(', ')})`;
 
   return (
-    <div className="glass-card rounded-2xl hover-lift p-6 mb-8 page-enter page-enter-delay-3">
+    <div className="glass-card rounded-lg hover-lift p-6 mb-8 page-enter page-enter-delay-3">
       <h2 className="text-lg font-bold text-gray-200 mb-6">Spending Breakdown</h2>
 
       <div className="flex flex-col sm:flex-row items-center gap-8">
@@ -232,7 +232,7 @@ function SpendingBreakdown() {
           />
           {/* Inner cutout */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-24 h-24 rounded-full bg-[oklch(0.10_0.005_60)] flex flex-col items-center justify-center">
+            <div className="w-24 h-24 rounded-full bg-[#0C0C0E] flex flex-col items-center justify-center">
               <span className="text-[10px] text-gray-500 uppercase tracking-wide">Annual</span>
               <span className="text-sm font-bold text-[#c9a96e]">Budget</span>
               <span className="text-[10px] text-gray-400 font-semibold">$120K</span>

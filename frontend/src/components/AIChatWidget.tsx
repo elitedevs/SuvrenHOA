@@ -54,9 +54,9 @@ function TypingIndicator() {
   return (
     <div className="flex items-end gap-2 mb-3">
       <div className="w-7 h-7 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-sm shrink-0">
-        🤖
+        
       </div>
-      <div className="bg-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1">
+      <div className="bg-white/[0.06] rounded-lg rounded-bl-sm px-4 py-3 flex items-center gap-1">
         {[0, 1, 2].map((i) => (
           <span
             key={i}
@@ -112,11 +112,11 @@ export function AIChatWidget() {
         aria-label="AI Community Assistant"
         aria-hidden={!isOpen}
       >
-        <div className="bg-[oklch(0.09_0.005_50)] border border-white/[0.08] rounded-2xl rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
+        <div className="bg-[#0C0C0E] border border-white/[0.08] rounded-lg rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[#1a1a1a]/80 to-[#2d2d2d]/80 border-b border-white/[0.06] shrink-0">
             <div className="flex items-center gap-2">
-              <span className="text-xl">🤖</span>
+              <span className="text-xl"></span>
               <div>
                 <p className="text-sm font-semibold text-gray-100">HOA Assistant</p>
                 <p className="text-[11px] text-green-400 flex items-center gap-1">
@@ -138,7 +138,7 @@ export function AIChatWidget() {
                 className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/10 text-gray-400 hover:text-gray-200 transition-colors"
                 aria-label="Close assistant"
               >
-                ✕
+                
               </button>
             </div>
           </div>
@@ -152,11 +152,11 @@ export function AIChatWidget() {
               >
                 {msg.role === 'bot' && (
                   <div className="w-7 h-7 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-sm shrink-0">
-                    🤖
+                    
                   </div>
                 )}
                 <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                  className={`max-w-[80%] rounded-lg px-4 py-2.5 text-sm leading-relaxed ${
                     msg.role === 'user'
                       ? 'bg-gradient-to-br from-[#c9a96e] to-[#b8942e] text-white rounded-br-sm'
                       : 'bg-white/[0.06] text-gray-200 rounded-bl-sm'

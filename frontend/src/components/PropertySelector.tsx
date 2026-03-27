@@ -30,7 +30,7 @@ export function PropertySelector({ properties, selectedIndex, onSelect }: Proper
               : 'bg-gray-800/40 border border-gray-700/40 text-gray-400 hover:bg-gray-800/60 hover:text-gray-300'
           }`}
         >
-          <span className="mr-1.5">🏠</span>
+          <span className="mr-1.5"></span>
           Lot #{prop.lotNumber}
           {prop.streetAddress && (
             <span className="ml-2 text-xs text-gray-500 font-normal hidden sm:inline">

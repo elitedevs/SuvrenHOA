@@ -17,7 +17,7 @@ export default function DuesPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">💳</div>
+        <div className="text-5xl mb-2"></div>
         <p className="text-gray-400 text-base font-medium">Sign in to pay dues</p>
         <ConnectButton label="Sign In" />
       </div>
@@ -41,7 +41,7 @@ function CommunityDuesStatus() {
 
   if (loading) {
     return (
-      <div className="glass-card rounded-2xl hover-lift p-6 mb-6">
+      <div className="glass-card rounded-lg hover-lift p-6 mb-6">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">Community Dues Status</p>
         <div className="skeleton h-4 w-full rounded-lg mb-3" />
         <div className="skeleton h-2 w-full rounded-full" />
@@ -52,7 +52,7 @@ function CommunityDuesStatus() {
   if (totalProperties === 0) return null;
 
   return (
-    <div className="glass-card rounded-2xl hover-lift p-6 mb-6 page-enter page-enter-delay-1">
+    <div className="glass-card rounded-lg hover-lift p-6 mb-6 page-enter page-enter-delay-1">
       <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Community Dues Status</p>
 
       {/* Progress bar */}
@@ -61,7 +61,7 @@ function CommunityDuesStatus() {
           <p className="text-sm font-bold text-gray-200">
             {paidCount} of {totalProperties} properties current
           </p>
-          <span className="text-sm font-extrabold text-green-400">{paidPercentage}%</span>
+          <span className="text-sm font-normal text-green-400">{paidPercentage}%</span>
         </div>
         <div className="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
           <div
@@ -74,11 +74,11 @@ function CommunityDuesStatus() {
       {/* Anonymous breakdown */}
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-xl bg-green-500/5 border border-green-500/20 p-4 text-center">
-          <p className="text-2xl font-extrabold text-green-400">{paidCount}</p>
+          <p className="text-2xl font-normal text-green-400">{paidCount}</p>
           <p className="text-xs text-gray-500 mt-1 font-semibold">Paid This Quarter</p>
         </div>
         <div className="rounded-xl bg-red-500/5 border border-red-500/20 p-4 text-center">
-          <p className="text-2xl font-extrabold text-red-400">{unpaidCount}</p>
+          <p className="text-2xl font-normal text-red-400">{unpaidCount}</p>
           <p className="text-xs text-gray-500 mt-1 font-semibold">Still Outstanding</p>
         </div>
       </div>
@@ -104,8 +104,8 @@ function DuesPanel() {
   if (!hasProperty) {
     return (
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12 page-enter">
-        <div className="glass-card rounded-2xl hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
-          <div className="text-5xl mb-4">🏠</div>
+        <div className="glass-card rounded-lg hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
+          <div className="text-5xl mb-4"></div>
           <h2 className="text-xl font-bold mb-3">No Property Found</h2>
           <p className="text-gray-400 text-sm">You need a Property NFT to pay dues.</p>
         </div>
@@ -160,7 +160,7 @@ function DuesPanel() {
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Payments</p>
-        <h1 className="text-3xl font-extrabold tracking-tight">Pay Dues</h1>
+        <h1 className="text-3xl font-normal tracking-tight">Pay Dues</h1>
       </div>
 
       {/* Smart Dues Reminder */}
@@ -190,7 +190,7 @@ function DuesPanel() {
                         ? 'bg-[#c9a96e]/20 border border-[#c9a96e]/50 text-[#e8d5a3] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
                         : 'bg-gray-800/60 border border-gray-700/40 text-gray-600'
                     }`}>
-                      {isDone ? '✓' : i + 1}
+                      {isDone ? '' : i + 1}
                     </div>
                     <span className={`text-[11px] font-semibold whitespace-nowrap ${
                       isActive ? 'text-[#e8d5a3]' : isDone ? 'text-green-400' : 'text-gray-600'
@@ -216,12 +216,12 @@ function DuesPanel() {
 
       {/* USDC Balance + Status */}
       <div className="grid grid-cols-2 gap-4 mb-6 page-enter page-enter-delay-1">
-        <div className="glass-card rounded-2xl hover-lift p-5">
+        <div className="glass-card rounded-lg hover-lift p-5">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-2">USDC Balance</p>
-          <p className="text-2xl font-extrabold text-gray-100">${usdcBalance.toFixed(2)}</p>
+          <p className="text-2xl font-normal text-gray-100">${usdcBalance.toFixed(2)}</p>
           <p className="text-[11px] text-gray-600 mt-1">on Base network</p>
         </div>
-        <div className={`rounded-2xl p-5 ${
+        <div className={`rounded-lg p-5 ${
           isCurrent === undefined
             ? 'glass-card'
             : isCurrent
@@ -234,10 +234,10 @@ function DuesPanel() {
           {isCurrent === undefined ? (
             <div className="skeleton h-7 w-20 rounded-lg" />
           ) : isCurrent ? (
-            <p className="text-2xl font-extrabold text-green-400">Current</p>
+            <p className="text-2xl font-normal text-green-400">Current</p>
           ) : (
             <>
-              <p className="text-2xl font-extrabold text-red-400">Past Due</p>
+              <p className="text-2xl font-normal text-red-400">Past Due</p>
               <p className="text-xs text-red-300/70 mt-1">${amountOwed} owed</p>
             </>
           )}
@@ -246,11 +246,11 @@ function DuesPanel() {
 
       {/* Done State */}
       {step === 'done' ? (
-        <div className="glass-card-success rounded-2xl p-12 text-center border-l-2 border-l-green-500/50 pulse-glow-green page-enter">
+        <div className="glass-card-success rounded-lg p-12 text-center border-l-2 border-l-green-500/50 pulse-glow-green page-enter">
           <div className="w-20 h-20 rounded-full bg-green-500/15 border-2 border-green-500/30 flex items-center justify-center text-4xl mx-auto mb-6">
-            ✅
+            
           </div>
-          <h3 className="text-2xl font-extrabold text-green-400 mb-3">Payment Successful!</h3>
+          <h3 className="text-2xl font-normal text-green-400 mb-3">Payment Successful!</h3>
           <p className="text-sm text-gray-400 mb-2 max-w-sm mx-auto">
             Your dues have been paid. The treasury has been updated on-chain.
           </p>
@@ -283,7 +283,7 @@ function DuesPanel() {
                   <button
                     key={quarters}
                     onClick={() => setSelectedQuarters(quarters)}
-                    className={`w-full p-5 rounded-2xl border text-left flex items-center gap-4 transition-all duration-200 min-h-[72px] ${
+                    className={`w-full p-5 rounded-lg border text-left flex items-center gap-4 transition-all duration-200 min-h-[72px] ${
                       isSelected
                         ? 'border-[#c9a96e]/60 bg-[#1a1a1a]/50 shadow-[0_0_16px_rgba(201,169,110,0.12)]'
                         : recommended
@@ -320,7 +320,7 @@ function DuesPanel() {
                     </div>
 
                     {/* Amount */}
-                    <span className="text-xl font-extrabold text-gray-100">
+                    <span className="text-xl font-normal text-gray-100">
                       ${amount.toFixed(2)}
                     </span>
                   </button>
@@ -335,8 +335,8 @@ function DuesPanel() {
             disabled={!selectedQuarters || isApproving || isPaying}
             className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-base font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] active:scale-[0.98] min-h-[56px]"
           >
-            {isApproving ? '⏳ Approving USDC...' :
-             isPaying ? '⛓️ Processing Payment...' :
+            {isApproving ? ' Approving USDC...' :
+             isPaying ? ' Processing Payment...' :
              selectedOption ? `Pay $${selectedOption.amount.toFixed(2)} USDC` :
              'Select a payment option'}
           </button>
@@ -346,7 +346,7 @@ function DuesPanel() {
             <p>Paid in USDC on Base. 80% → operating fund · 20% → reserve fund.</p>
             {selectedOption && usdcBalance < selectedOption.amount && (
               <p className="text-red-400 font-medium">
-                ⚠️ Insufficient balance. You need ${selectedOption.amount.toFixed(2)} but have ${usdcBalance.toFixed(2)}.
+                 Insufficient balance. You need ${selectedOption.amount.toFixed(2)} but have ${usdcBalance.toFixed(2)}.
               </p>
             )}
           </div>

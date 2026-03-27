@@ -12,7 +12,7 @@ export default function AdminPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">⚙️</div>
+        <div className="text-5xl mb-2"></div>
         <p className="text-gray-400 text-base font-medium">Sign in with board wallet to access admin</p>
         <ConnectButton label="Sign In" />
       </div>
@@ -24,7 +24,7 @@ export default function AdminPage() {
       {/* Header */}
       <div className="mb-10">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Board Access</p>
-        <h1 className="text-3xl font-extrabold tracking-tight">Administration</h1>
+        <h1 className="text-3xl font-normal tracking-tight">Administration</h1>
         <p className="text-base text-gray-400 mt-2 font-medium">
           Mint properties, manage roles, and register documents on-chain
         </p>
@@ -69,12 +69,12 @@ function MintPropertyCard() {
   };
 
   return (
-    <div className="glass-card rounded-2xl overflow-hidden border-l-2 border-l-[#c9a96e]/50">
+    <div className="glass-card rounded-lg overflow-hidden border-l-2 border-l-[#c9a96e]/50">
       {/* Section header */}
       <div className="px-8 py-5 border-b border-gray-800/60 bg-[#c9a96e]/5">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-xl">
-            🏠
+            
           </div>
           <div>
             <h2 className="text-base font-bold text-gray-100">Mint Property NFT</h2>
@@ -86,7 +86,7 @@ function MintPropertyCard() {
       <div className="px-8 py-7">
         {isSuccess ? (
           <div className="glass-card-success rounded-xl p-6 text-center border-l-2 border-l-green-500/50">
-            <div className="text-3xl mb-3">✅</div>
+            <div className="text-3xl mb-3"></div>
             <p className="text-green-400 font-bold text-base mb-1">Property #{lotNumber} Minted!</p>
             {hash && (
               <a
@@ -162,9 +162,9 @@ function MintPropertyCard() {
               disabled={isPending || isConfirming || !owner || !lotNumber || !streetAddress}
               className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(201,169,110,0.12)] hover:shadow-[0_0_28px_rgba(201,169,110,0.28)] min-h-[52px]"
             >
-              {isPending ? '⏳ Confirm in Wallet...' :
-               isConfirming ? '⛓️ Minting...' :
-               '🏠 Mint Property NFT'}
+              {isPending ? ' Confirm in Wallet...' :
+               isConfirming ? ' Minting...' :
+               ' Mint Property NFT'}
             </button>
           </div>
         )}
@@ -213,12 +213,12 @@ function RegisterDocumentCard() {
   };
 
   return (
-    <div className="glass-card rounded-2xl overflow-hidden border-l-2 border-l-blue-500/50">
+    <div className="glass-card rounded-lg overflow-hidden border-l-2 border-l-blue-500/50">
       {/* Section header */}
       <div className="px-8 py-5 border-b border-gray-800/60 bg-blue-500/5">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-xl">
-            📄
+            
           </div>
           <div>
             <h2 className="text-base font-bold text-gray-100">Register Document</h2>
@@ -230,7 +230,7 @@ function RegisterDocumentCard() {
       <div className="px-8 py-7">
         {isSuccess ? (
           <div className="glass-card-success rounded-xl p-6 text-center border-l-2 border-l-green-500/50">
-            <div className="text-3xl mb-3">✅</div>
+            <div className="text-3xl mb-3"></div>
             <p className="text-green-400 font-bold text-base mb-1">Document Registered On-Chain!</p>
             {hash && (
               <a
@@ -257,7 +257,7 @@ function RegisterDocumentCard() {
               />
               {fileHash && (
                 <div className="mt-2 px-3 py-2 rounded-lg bg-green-500/5 border border-green-500/15">
-                  <p className="text-[10px] text-green-400 font-semibold uppercase tracking-wide mb-0.5">Hash computed ✓</p>
+                  <p className="text-[10px] text-green-400 font-semibold uppercase tracking-wide mb-0.5">Hash computed </p>
                   <p className="text-[10px] font-mono text-gray-500 break-all">{fileHash}</p>
                 </div>
               )}
@@ -320,9 +320,9 @@ function RegisterDocumentCard() {
               disabled={isPending || isConfirming || !fileHash || !arweaveTxId || !title}
               className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_28px_rgba(59,130,246,0.25)] min-h-[52px]"
             >
-              {isPending ? '⏳ Confirm in Wallet...' :
-               isConfirming ? '⛓️ Registering...' :
-               '📄 Register Document On-Chain'}
+              {isPending ? ' Confirm in Wallet...' :
+               isConfirming ? ' Registering...' :
+               ' Register Document On-Chain'}
             </button>
           </div>
         )}
@@ -335,22 +335,22 @@ function CommunityStats() {
   const { totalSupply } = useProperty();
 
   const stats = [
-    { value: totalSupply, label: 'Properties Minted', color: 'text-[#c9a96e]', icon: '🏠' },
-    { value: 150, label: 'Max Lots', color: 'text-blue-400', icon: '📍' },
-    { value: totalSupply, label: 'Total Votes', color: 'text-green-400', icon: '🗳️' },
-    { value: 150 - totalSupply, label: 'Lots Remaining', color: 'text-amber-400', icon: '🔓' },
+    { value: totalSupply, label: 'Properties Minted', color: 'text-[#c9a96e]', icon: '' },
+    { value: 150, label: 'Max Lots', color: 'text-blue-400', icon: '' },
+    { value: totalSupply, label: 'Total Votes', color: 'text-green-400', icon: '' },
+    { value: 150 - totalSupply, label: 'Lots Remaining', color: 'text-amber-400', icon: '' },
   ];
 
   // Progress bar
   const fillPct = totalSupply > 0 ? (totalSupply / 150) * 100 : 0;
 
   return (
-    <div className="glass-card rounded-2xl overflow-hidden border-l-2 border-l-amber-500/50">
+    <div className="glass-card rounded-lg overflow-hidden border-l-2 border-l-amber-500/50">
       {/* Section header */}
       <div className="px-8 py-5 border-b border-gray-800/60 bg-amber-500/5">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xl">
-            📊
+            
           </div>
           <div>
             <h2 className="text-base font-bold text-gray-100">Community Overview</h2>
@@ -365,7 +365,7 @@ function CommunityStats() {
           {stats.map(({ value, label, color, icon }) => (
             <div key={label} className="glass-card rounded-xl p-5 text-center">
               <p className="text-xl mb-2">{icon}</p>
-              <p className={`text-2xl font-extrabold ${color} mb-1`}>{value}</p>
+              <p className={`text-2xl font-normal ${color} mb-1`}>{value}</p>
               <p className="text-[11px] text-gray-500 font-semibold uppercase tracking-wide">{label}</p>
             </div>
           ))}

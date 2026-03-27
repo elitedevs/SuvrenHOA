@@ -103,7 +103,7 @@ function CheckoutWizard() {
     <div className="max-w-lg mx-auto px-4 py-10 page-enter">
       {step < TOTAL_STEPS && (
         <div className="mb-6">
-          <h1 className="text-2xl font-extrabold text-gray-100 mb-1">
+          <h1 className="text-2xl font-normal text-gray-100 mb-1">
             Move-Out Checklist
           </h1>
           <p className="text-sm text-gray-500">
@@ -116,7 +116,7 @@ function CheckoutWizard() {
 
       {/* ── Step 1: Checklist ── */}
       {step === 1 && (
-        <div className="glass-card rounded-2xl p-7 border-l-2 border-l-amber-500/50 animate-fade-in">
+        <div className="glass-card rounded-lg p-7 border-l-2 border-l-amber-500/50 animate-fade-in">
           <h2 className="text-xl font-bold mb-1">Pre-Move Checklist</h2>
           <p className="text-sm text-gray-500 mb-6">
             Complete all items before proceeding.
@@ -133,9 +133,9 @@ function CheckoutWizard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {isCurrent !== false ? (
-                  <span className="text-green-400 text-lg">✅</span>
+                  <span className="text-green-400 text-lg"></span>
                 ) : (
-                  <span className="text-red-400 text-lg">❌</span>
+                  <span className="text-red-400 text-lg"></span>
                 )}
                 <div>
                   <p className="text-sm font-semibold text-gray-200">HOA Dues</p>
@@ -208,7 +208,7 @@ function CheckoutWizard() {
 
       {/* ── Step 2: Final Settlement ── */}
       {step === 2 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
+        <div className="glass-card rounded-lg p-7 animate-fade-in">
           <h2 className="text-xl font-bold mb-1">Final Settlement</h2>
           <p className="text-sm text-gray-500 mb-6">
             Confirm all financial obligations are met.
@@ -227,7 +227,7 @@ function CheckoutWizard() {
             </p>
             {isCurrent === false ? (
               <div>
-                <p className="text-2xl font-extrabold text-red-300 mb-1">
+                <p className="text-2xl font-normal text-red-300 mb-1">
                   ${amountOwed}
                 </p>
                 <p className="text-sm text-gray-400 mb-4">
@@ -237,12 +237,12 @@ function CheckoutWizard() {
                   href="/dues"
                   className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 text-sm font-semibold text-red-300 transition-all"
                 >
-                  💳 Pay Outstanding Balance
+                   Pay Outstanding Balance
                 </Link>
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <span className="text-2xl text-green-400">✅</span>
+                <span className="text-2xl text-green-400"></span>
                 <p className="text-lg font-bold text-green-300">
                   No outstanding balance
                 </p>
@@ -287,9 +287,9 @@ function CheckoutWizard() {
 
       {/* ── Step 3: Confirmation ── */}
       {step === 3 && (
-        <div className="glass-card rounded-2xl p-10 text-center animate-fade-in border-l-2 border-l-amber-500/50">
-          <div className="text-6xl mb-5">🏡</div>
-          <h2 className="text-2xl font-extrabold mb-2">
+        <div className="glass-card rounded-lg p-10 text-center animate-fade-in border-l-2 border-l-amber-500/50">
+          <div className="text-6xl mb-5"></div>
+          <h2 className="text-2xl font-normal mb-2">
             Thank You, Neighbor
           </h2>
           <p className="text-gray-400 text-sm mb-3 max-w-sm mx-auto">
@@ -298,7 +298,7 @@ function CheckoutWizard() {
           </p>
           <div className="bg-blue-500/8 border border-blue-500/20 rounded-xl p-4 mb-8 text-left">
             <p className="text-xs text-blue-300 font-semibold uppercase tracking-wide mb-1">
-              ℹ️ On-Chain Transfer
+              ℹ On-Chain Transfer
             </p>
             <p className="text-xs text-gray-400 leading-relaxed">
               Property ownership transfer happens on-chain when the Property NFT
@@ -324,7 +324,7 @@ export default function CheckoutPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2">📦</div>
+        <div className="text-5xl mb-2"></div>
         <h2 className="text-xl font-bold">Move-Out Wizard</h2>
         <p className="text-gray-400 text-sm">Connect your wallet to begin</p>
         <ConnectButton label="Connect Wallet" />

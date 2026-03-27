@@ -6,13 +6,13 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const EVENT_TYPES = [
-  { id: 'community', label: 'Community', icon: '🏘️', color: 'gold' },
-  { id: 'board-meeting', label: 'Board Meeting', icon: '📋', color: 'blue' },
-  { id: 'committee', label: 'Committee', icon: '👥', color: 'cyan' },
-  { id: 'deadline', label: 'Deadline', icon: '⏰', color: 'red' },
-  { id: 'holiday', label: 'Holiday', icon: '🎄', color: 'green' },
-  { id: 'social', label: 'Social', icon: '🎉', color: 'amber' },
-  { id: 'maintenance', label: 'Maintenance', icon: '🔧', color: 'orange' },
+  { id: 'community', label: 'Community', icon: '', color: 'gold' },
+  { id: 'board-meeting', label: 'Board Meeting', icon: '', color: 'blue' },
+  { id: 'committee', label: 'Committee', icon: '', color: 'cyan' },
+  { id: 'deadline', label: 'Deadline', icon: '', color: 'red' },
+  { id: 'holiday', label: 'Holiday', icon: '', color: 'green' },
+  { id: 'social', label: 'Social', icon: '', color: 'amber' },
+  { id: 'maintenance', label: 'Maintenance', icon: '', color: 'orange' },
 ];
 
 export default function CalendarPage() {
@@ -51,7 +51,7 @@ export default function CalendarPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">📅 Community Calendar</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold"> Community Calendar</h1>
           <p className="text-sm text-gray-400 mt-1">
             Events, meetings, deadlines, and community gatherings
           </p>
@@ -61,13 +61,13 @@ export default function CalendarPage() {
             href="/calendar/meetings"
             className="px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
           >
-            📋 Board Meetings
+             Board Meetings
           </a>
           <button
             onClick={() => setShowCreate(!showCreate)}
             className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all"
           >
-            {showCreate ? '← Back' : '📅 Add Event'}
+            {showCreate ? '← Back' : ' Add Event'}
           </button>
         </div>
       </div>
@@ -87,7 +87,7 @@ export default function CalendarPage() {
         <div className="text-center py-12 text-gray-500">Loading events...</div>
       ) : Object.keys(eventsByDate).length === 0 ? (
         <div className="glass-card rounded-xl p-12 text-center">
-          <p className="text-5xl mb-4">📅</p>
+          <p className="text-5xl mb-4"></p>
           <h3 className="text-lg font-medium mb-2">No upcoming events</h3>
           <p className="text-sm text-gray-400">Board meetings, community events, and deadlines will appear here</p>
         </div>
@@ -158,8 +158,8 @@ function EventCard({ event, walletAddress }: { event: any; walletAddress?: strin
                 {event.all_day ? 'All Day' :
                   `${startTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}${endTime ? ' — ' + endTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : ''}`}
               </span>
-              {event.location && <span>📍 {event.location}</span>}
-              {goingCount > 0 && <span>👥 {goingCount} going</span>}
+              {event.location && <span> {event.location}</span>}
+              {goingCount > 0 && <span> {goingCount} going</span>}
             </div>
             {event.description && (
               <p className="text-xs text-gray-400 line-clamp-2">{event.description}</p>
@@ -181,7 +181,7 @@ function EventCard({ event, walletAddress }: { event: any; walletAddress?: strin
                       : 'bg-gray-800/50 text-gray-500 hover:text-gray-300'
                   }`}
                 >
-                  {status === 'going' ? '✅' : status === 'maybe' ? '🤔' : '❌'}
+                  {status === 'going' ? '' : status === 'maybe' ? '' : ''}
                 </button>
               ))}
             </div>
@@ -293,7 +293,7 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
         <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
         <button disabled={!title.trim() || !date || create.isPending} onClick={() => create.mutate()}
           className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
-          {create.isPending ? '⏳ Creating...' : 'Add Event'}
+          {create.isPending ? ' Creating...' : 'Add Event'}
         </button>
       </div>
     </div>

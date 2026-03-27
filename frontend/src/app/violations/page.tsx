@@ -69,10 +69,10 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative glass-card rounded-2xl p-6 w-full max-w-lg space-y-4 shadow-2xl border border-[#c9a96e]/20">
+      <div className="relative glass-card rounded-lg p-6 w-full max-w-lg space-y-4 shadow-2xl border border-[#c9a96e]/20">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold">⚖️ Appeal Violation</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-300 text-xl">✕</button>
+          <h2 className="text-lg font-semibold"> Appeal Violation</h2>
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-300 text-xl"></button>
         </div>
 
         <div className="p-3 rounded-xl bg-gray-800/40 text-xs text-gray-400 space-y-1">
@@ -83,9 +83,9 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
         {existingAppeal ? (
           <div className="space-y-3">
             <div className={`inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border font-medium ${APPEAL_STATUS_STYLES[existingAppeal.status]}`}>
-              {existingAppeal.status === 'submitted' ? '📋 Appeal Submitted' :
-               existingAppeal.status === 'under-review' ? '🔍 Under Review' :
-               existingAppeal.status === 'approved' ? '✅ Appeal Approved' : '❌ Appeal Denied'}
+              {existingAppeal.status === 'submitted' ? ' Appeal Submitted' :
+               existingAppeal.status === 'under-review' ? ' Under Review' :
+               existingAppeal.status === 'approved' ? ' Appeal Approved' : ' Appeal Denied'}
             </div>
             <p className="text-xs text-gray-400">Submitted {new Date(existingAppeal.submittedAt).toLocaleDateString()}</p>
             <div className="space-y-2 text-xs text-gray-400">
@@ -97,7 +97,7 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
           </div>
         ) : submitted ? (
           <div className="text-center py-6 space-y-3">
-            <div className="text-4xl">✅</div>
+            <div className="text-4xl"></div>
             <h3 className="font-semibold">Appeal Submitted</h3>
             <p className="text-sm text-gray-400">Your appeal has been logged. The board will review within 5 business days.</p>
             <button onClick={onClose} className="px-6 py-2.5 rounded-xl bg-[#c9a96e] text-[#1a1a1a] text-sm font-medium">Done</button>
@@ -140,34 +140,34 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
 }
 
 const CATEGORIES = [
-  { id: 'architectural', label: 'Architectural', icon: '🏗️' },
-  { id: 'landscaping', label: 'Landscaping', icon: '🌿' },
-  { id: 'noise', label: 'Noise', icon: '🔊' },
-  { id: 'parking', label: 'Parking', icon: '🚗' },
-  { id: 'pet', label: 'Pet', icon: '🐕' },
-  { id: 'trash', label: 'Trash', icon: '🗑️' },
-  { id: 'maintenance', label: 'Maintenance', icon: '🔧' },
-  { id: 'other', label: 'Other', icon: '📋' },
+  { id: 'architectural', label: 'Architectural', icon: '' },
+  { id: 'landscaping', label: 'Landscaping', icon: '' },
+  { id: 'noise', label: 'Noise', icon: '' },
+  { id: 'parking', label: 'Parking', icon: '' },
+  { id: 'pet', label: 'Pet', icon: '' },
+  { id: 'trash', label: 'Trash', icon: '' },
+  { id: 'maintenance', label: 'Maintenance', icon: '' },
+  { id: 'other', label: 'Other', icon: '' },
 ];
 
 const STATUS_FLOW = {
-  'reported': { color: 'yellow', label: '📋 Reported', next: ['under-review', 'dismissed'] },
-  'under-review': { color: 'blue', label: '🔍 Under Review', next: ['notice-issued', 'dismissed'] },
-  'dismissed': { color: 'gray', label: '❌ Dismissed', next: [] },
-  'notice-issued': { color: 'orange', label: '📨 Notice Issued', next: ['cure-period'] },
-  'cure-period': { color: 'amber', label: '⏳ Cure Period', next: ['cured', 'disputed', 'fined'] },
-  'cured': { color: 'green', label: '✅ Cured', next: ['resolved'] },
-  'disputed': { color: 'gold', label: '⚖️ Disputed', next: ['hearing'] },
-  'hearing': { color: 'gold', label: '🏛️ Hearing', next: ['ruling-upheld', 'ruling-modified', 'ruling-dismissed'] },
-  'ruling-upheld': { color: 'red', label: '⚖️ Upheld', next: ['fined', 'appealed'] },
-  'ruling-modified': { color: 'amber', label: '⚖️ Modified', next: ['fined', 'appealed'] },
-  'ruling-dismissed': { color: 'green', label: '⚖️ Dismissed', next: ['resolved'] },
-  'fined': { color: 'red', label: '💰 Fined', next: ['appealed', 'resolved'] },
-  'appealed': { color: 'gold', label: '🗳️ Community Appeal', next: ['appeal-upheld', 'appeal-overturned'] },
-  'appeal-upheld': { color: 'red', label: '🗳️ Appeal Denied', next: ['resolved'] },
-  'appeal-overturned': { color: 'green', label: '🗳️ Overturned!', next: ['resolved'] },
-  'resolved': { color: 'green', label: '✅ Resolved', next: ['closed'] },
-  'closed': { color: 'gray', label: '📁 Closed', next: [] },
+  'reported': { color: 'yellow', label: ' Reported', next: ['under-review', 'dismissed'] },
+  'under-review': { color: 'blue', label: ' Under Review', next: ['notice-issued', 'dismissed'] },
+  'dismissed': { color: 'gray', label: ' Dismissed', next: [] },
+  'notice-issued': { color: 'orange', label: ' Notice Issued', next: ['cure-period'] },
+  'cure-period': { color: 'amber', label: ' Cure Period', next: ['cured', 'disputed', 'fined'] },
+  'cured': { color: 'green', label: ' Cured', next: ['resolved'] },
+  'disputed': { color: 'gold', label: ' Disputed', next: ['hearing'] },
+  'hearing': { color: 'gold', label: ' Hearing', next: ['ruling-upheld', 'ruling-modified', 'ruling-dismissed'] },
+  'ruling-upheld': { color: 'red', label: ' Upheld', next: ['fined', 'appealed'] },
+  'ruling-modified': { color: 'amber', label: ' Modified', next: ['fined', 'appealed'] },
+  'ruling-dismissed': { color: 'green', label: ' Dismissed', next: ['resolved'] },
+  'fined': { color: 'red', label: ' Fined', next: ['appealed', 'resolved'] },
+  'appealed': { color: 'gold', label: ' Community Appeal', next: ['appeal-upheld', 'appeal-overturned'] },
+  'appeal-upheld': { color: 'red', label: ' Appeal Denied', next: ['resolved'] },
+  'appeal-overturned': { color: 'green', label: ' Overturned!', next: ['resolved'] },
+  'resolved': { color: 'green', label: ' Resolved', next: ['closed'] },
+  'closed': { color: 'gray', label: ' Closed', next: [] },
 } as const;
 
 export default function ViolationsPage() {
@@ -197,7 +197,7 @@ export default function ViolationsPage() {
           onClick={() => setShowReport(!showReport)}
           className="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-sm font-medium transition-all shrink-0"
         >
-          {showReport ? '← Back' : '🚨 Report Violation'}
+          {showReport ? '← Back' : ' Report Violation'}
         </button>
       </div>
 
@@ -215,7 +215,7 @@ export default function ViolationsPage() {
           ))}
         </div>
         <p className="text-[10px] text-[#c9a96e] mt-2">
-          🗳️ Homeowners can appeal ANY ruling to the full community for a democratic vote
+           Homeowners can appeal ANY ruling to the full community for a democratic vote
         </p>
       </div>
 
@@ -276,7 +276,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
         <div className="text-center py-12 text-gray-500">Loading violations...</div>
       ) : !violations || violations.length === 0 ? (
         <div className="glass-card rounded-xl hover-lift p-12 text-center">
-          <p className="text-5xl mb-4">✅</p>
+          <p className="text-5xl mb-4"></p>
           <h3 className="text-lg font-medium mb-2">No violations</h3>
           <p className="text-sm text-gray-400">
             The community is in good standing. Violations will appear here when reported.
@@ -349,18 +349,18 @@ function ViolationCard({ violation }: { violation: any }) {
             <p className="text-sm text-gray-400 leading-relaxed">{violation.description}</p>
 
             {violation.ccr_section && (
-              <p className="text-xs text-gray-500">📜 CC&R Section: <span className="text-gray-300">{violation.ccr_section}</span></p>
+              <p className="text-xs text-gray-500"> CC&R Section: <span className="text-gray-300">{violation.ccr_section}</span></p>
             )}
 
             {violation.cure_deadline && (
               <p className="text-xs text-gray-500">
-                ⏰ Cure Deadline: <span className="text-amber-400">{new Date(violation.cure_deadline).toLocaleDateString()}</span>
+                 Cure Deadline: <span className="text-amber-400">{new Date(violation.cure_deadline).toLocaleDateString()}</span>
               </p>
             )}
 
             {violation.hearing_date && (
               <p className="text-xs text-gray-500">
-                🏛️ Hearing: <span className="text-[#c9a96e]">{new Date(violation.hearing_date).toLocaleDateString()}</span>
+                 Hearing: <span className="text-[#c9a96e]">{new Date(violation.hearing_date).toLocaleDateString()}</span>
               </p>
             )}
 
@@ -383,17 +383,17 @@ function ViolationCard({ violation }: { violation: any }) {
             {(violation.status === 'cure-period' || violation.status === 'notice-issued') && (
               <div className="flex gap-2">
                 <button className="px-3 py-1.5 rounded-lg bg-green-600/20 border border-green-500/30 text-xs text-green-400 hover:bg-green-600/30">
-                  ✅ Submit Compliance Proof
+                   Submit Compliance Proof
                 </button>
                 <button className="px-3 py-1.5 rounded-lg bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-xs text-[#c9a96e] hover:bg-[#c9a96e]/20">
-                  ⚖️ Dispute
+                   Dispute
                 </button>
               </div>
             )}
 
             {(violation.status === 'ruling-upheld' || violation.status === 'fined') && (
               <button className="px-3 py-1.5 rounded-lg bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-xs text-[#c9a96e] hover:bg-[#c9a96e]/20">
-                🗳️ Appeal to Community
+                 Appeal to Community
               </button>
             )}
 
@@ -404,7 +404,7 @@ function ViolationCard({ violation }: { violation: any }) {
                   onClick={(e) => { e.stopPropagation(); setShowAppeal(true); }}
                   className="px-3 py-1.5 rounded-lg bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-xs text-[#c9a96e] hover:bg-[#c9a96e]/20"
                 >
-                  ⚖️ File Appeal
+                   File Appeal
                 </button>
                 {hasAppeal && (
                   <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
@@ -530,12 +530,12 @@ function ReportForm({ onClose }: { onClose: () => void }) {
           onClick={() => report.mutate()}
           className="flex-1 py-3 rounded-xl bg-red-600 hover:bg-red-700 disabled:opacity-50 text-sm font-medium transition-all"
         >
-          {report.isPending ? '⏳ Submitting...' : 'Submit Report'}
+          {report.isPending ? ' Submitting...' : 'Submit Report'}
         </button>
       </div>
 
       <div className="p-4 rounded-xl glass-card">
-        <h4 className="text-xs font-medium text-[#c9a96e] mb-1">🔒 What happens next?</h4>
+        <h4 className="text-xs font-medium text-[#c9a96e] mb-1"> What happens next?</h4>
         <p className="text-[10px] text-gray-400">
           The board reviews your report within 48 hours. If valid, a notice is issued and the homeowner has 14-30 days to correct the issue.
           They can dispute it, and if the ruling stands, they can appeal to the entire community for a democratic vote.

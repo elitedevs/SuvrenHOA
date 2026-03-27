@@ -8,7 +8,7 @@ const VOTING_TIERS = [
   {
     tier: 1,
     name: 'Founder',
-    emoji: '👑',
+    emoji: '',
     votes: 4,
     color: 'text-[#c9a96e]',
     bg: 'bg-[#c9a96e]/10',
@@ -21,7 +21,7 @@ const VOTING_TIERS = [
   {
     tier: 2,
     name: 'Elder',
-    emoji: '🏛️',
+    emoji: '',
     votes: 3,
     color: 'text-blue-400',
     bg: 'bg-blue-500/10',
@@ -34,7 +34,7 @@ const VOTING_TIERS = [
   {
     tier: 3,
     name: 'Resident',
-    emoji: '🏠',
+    emoji: '',
     votes: 2,
     color: 'text-green-400',
     bg: 'bg-green-500/10',
@@ -47,7 +47,7 @@ const VOTING_TIERS = [
   {
     tier: 4,
     name: 'New Owner',
-    emoji: '🌱',
+    emoji: '',
     votes: 1,
     color: 'text-amber-400',
     bg: 'bg-amber-500/10',
@@ -80,7 +80,7 @@ export default function VotingPowerPage() {
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Governance</p>
-        <h1 className="text-3xl font-extrabold tracking-tight">Voting Power</h1>
+        <h1 className="text-3xl font-normal tracking-tight">Voting Power</h1>
         <p className="text-sm text-gray-400 mt-2">
           Faircroft HOA uses a 4-tier merit system. Consistent participation and dues payment increase your tier.
         </p>
@@ -88,10 +88,10 @@ export default function VotingPowerPage() {
 
       {/* My Power Card */}
       {hasProperty && (
-        <div className={`glass-card rounded-2xl p-7 mb-8 border-l-4 ${myTier.border.replace('border-', 'border-l-')} glow-gold`}>
+        <div className={`glass-card rounded-lg p-7 mb-8 border-l-4 ${myTier.border.replace('border-', 'border-l-')} glow-gold`}>
           <p className="text-xs text-gray-500 uppercase tracking-widest mb-3">Your Voting Power</p>
           <div className="flex items-center gap-5">
-            <div className={`w-16 h-16 rounded-2xl ${myTier.bg} border ${myTier.border} flex items-center justify-center text-3xl`}>
+            <div className={`w-16 h-16 rounded-lg ${myTier.bg} border ${myTier.border} flex items-center justify-center text-3xl`}>
               {myTier.emoji}
             </div>
             <div>
@@ -116,7 +116,7 @@ export default function VotingPowerPage() {
           return (
             <div
               key={tier.tier}
-              className={`glass-card rounded-2xl p-6 border-l-2 transition-all ${
+              className={`glass-card rounded-lg p-6 border-l-2 transition-all ${
                 isMyTier
                   ? `${tier.border.replace('border-', 'border-l-')} ring-1 ring-[#c9a96e]/20`
                   : 'border-l-gray-700/40'
@@ -164,8 +164,8 @@ export default function VotingPowerPage() {
       </div>
 
       {/* Info Card */}
-      <div className="glass-card rounded-2xl p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30">
-        <h4 className="text-sm font-bold text-[#e8d5a3] mb-3">📖 How Tier Advancement Works</h4>
+      <div className="glass-card rounded-lg p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30">
+        <h4 className="text-sm font-bold text-[#e8d5a3] mb-3"> How Tier Advancement Works</h4>
         <div className="space-y-2 text-xs text-gray-400 leading-relaxed">
           <p>• Voting power is determined automatically by your on-chain property NFT attributes.</p>
           <p>• Paying dues on time and holding your property longer increases your tier.</p>

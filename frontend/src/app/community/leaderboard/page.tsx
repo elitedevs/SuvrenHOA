@@ -16,27 +16,27 @@ const RANK_STYLES: Record<number, { bg: string; text: string; border: string; me
     bg: 'bg-[#FFD700]/10',
     text: 'text-[#FFD700]',
     border: 'border-[#FFD700]/30',
-    medal: '🏆',
+    medal: '',
   },
   2: {
     bg: 'bg-[#C0C0C0]/10',
     text: 'text-[#C0C0C0]',
     border: 'border-[#C0C0C0]/30',
-    medal: '🥈',
+    medal: '',
   },
   3: {
     bg: 'bg-[#CD7F32]/10',
     text: 'text-[#CD7F32]',
     border: 'border-[#CD7F32]/30',
-    medal: '🥉',
+    medal: '',
   },
 };
 
 const TABS = [
-  { id: 'governance', label: 'Governance Champions', icon: '🗳️', statLabel: 'Votes' },
-  { id: 'payers', label: 'Prompt Payers', icon: '💳', statLabel: 'Payments' },
-  { id: 'contributors', label: 'Community Contributors', icon: '💡', statLabel: 'Proposals' },
-  { id: 'documents', label: 'Document Champions', icon: '📄', statLabel: 'Uploads' },
+  { id: 'governance', label: 'Governance Champions', icon: '', statLabel: 'Votes' },
+  { id: 'payers', label: 'Prompt Payers', icon: '', statLabel: 'Payments' },
+  { id: 'contributors', label: 'Community Contributors', icon: '', statLabel: 'Proposals' },
+  { id: 'documents', label: 'Document Champions', icon: '', statLabel: 'Uploads' },
 ] as const;
 
 type TabId = (typeof TABS)[number]['id'];
@@ -56,7 +56,7 @@ function SkeletonRow() {
 function EmptyState() {
   return (
     <div className="text-center py-16 text-gray-500">
-      <div className="text-4xl mb-3">🌱</div>
+      <div className="text-4xl mb-3"></div>
       <p className="text-sm font-medium">No activity yet — be the first to participate!</p>
     </div>
   );
@@ -229,17 +229,17 @@ export default function LeaderboardPage() {
       {/* ── Error State ── */}
       {error && (
         <div className="glass rounded-xl p-4 border border-red-500/20 text-red-400 text-sm text-center">
-          ⚠️ {error}
+           {error}
         </div>
       )}
 
       {/* ── Good Neighbor Spotlight ── */}
       {(goodNeighbor || isLoading) && (
-        <div className="glass rounded-2xl p-6 border border-[#FFD700]/20 relative overflow-hidden">
+        <div className="glass rounded-lg p-6 border border-[#FFD700]/20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/5 to-transparent pointer-events-none" />
           <div className="relative">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-2xl">🌟</span>
+              <span className="text-2xl"></span>
               <h2 className="text-base font-bold text-[#FFD700]">Good Neighbor of the Month</h2>
             </div>
             <p className="text-xs text-gray-500 mb-4">Based on combined activity across all categories</p>
@@ -252,7 +252,7 @@ export default function LeaderboardPage() {
             ) : goodNeighbor ? (
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-[#FFD700]/20 flex items-center justify-center text-2xl shrink-0">
-                  🏆
+                  
                 </div>
                 <div>
                   <div className="text-lg font-bold font-mono text-[#FFD700]">
@@ -276,7 +276,7 @@ export default function LeaderboardPage() {
       )}
 
       {/* ── Tab Navigation ── */}
-      <div className="glass rounded-2xl p-6 border border-white/[0.04]">
+      <div className="glass rounded-lg p-6 border border-white/[0.04]">
         {/* Tabs */}
         <div className="flex flex-wrap gap-2 mb-6">
           {TABS.map((tab) => (

@@ -19,7 +19,7 @@ const NeighborhoodMap = dynamic(() => import('@/components/NeighborhoodMap'), {
   ssr: false,
   loading: () => (
     <div
-      className="w-full flex items-center justify-center border border-white/[0.08] rounded-2xl bg-white/[0.02]"
+      className="w-full flex items-center justify-center border border-white/[0.08] rounded-lg bg-white/[0.02]"
       style={{ minHeight: 520 }}
     >
       <div className="flex flex-col items-center gap-3">
@@ -120,7 +120,7 @@ function LotDetailPanel({ lot, isBoard, onClose }: { lot: LotData; isBoard: bool
           <button
             onClick={onClose}
             className="w-9 h-9 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-gray-400 hover:text-white flex items-center justify-center transition-all"
-          >✕</button>
+          ></button>
         </div>
         <div className="p-6 space-y-5">
           <div className={'inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold ' + statusBadgeClass}>
@@ -150,7 +150,7 @@ function LotDetailPanel({ lot, isBoard, onClose }: { lot: LotData; isBoard: bool
             </div>
           ) : (
             <div className="glass-card rounded-xl hover-lift p-4">
-              <p className="text-gray-500 text-sm italic">🔒 Owner details visible to board members only</p>
+              <p className="text-gray-500 text-sm italic"> Owner details visible to board members only</p>
             </div>
           )}
         </div>
@@ -201,7 +201,7 @@ function IncidentDetailPanel({
           <button
             onClick={onClose}
             className="w-9 h-9 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-gray-400 hover:text-white flex items-center justify-center transition-all"
-          >✕</button>
+          ></button>
         </div>
 
         {/* Body */}
@@ -231,7 +231,7 @@ function IncidentDetailPanel({
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-500">Location</span>
-                <span className="text-gray-200">📍 {incident.location}</span>
+                <span className="text-gray-200"> {incident.location}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Date</span>
@@ -258,7 +258,7 @@ function IncidentDetailPanel({
               onClick={() => { onResolve(incident.id); onClose(); }}
               className="w-full py-3 rounded-xl text-sm font-semibold transition-all bg-green-500/15 border border-green-500/30 text-green-400 hover:bg-green-500/25 hover:border-green-500/50"
             >
-              ✓ Mark as Resolved
+               Mark as Resolved
             </button>
           </div>
         )}
@@ -271,13 +271,13 @@ function IncidentDetailPanel({
 // Report Incident Modal
 // ─────────────────────────────────────────
 const INCIDENT_TYPES: { type: Incident['type']; label: string; icon: string }[] = [
-  { type: 'crime', label: 'Crime', icon: '🚨' },
-  { type: 'maintenance', label: 'Maintenance', icon: '🔧' },
-  { type: 'road-closure', label: 'Road Closure', icon: '🚧' },
-  { type: 'community-event', label: 'Community Event', icon: '🎉' },
-  { type: 'hazard', label: 'Hazard', icon: '⚠️' },
-  { type: 'noise', label: 'Noise', icon: '🔊' },
-  { type: 'other', label: 'Other', icon: '📋' },
+  { type: 'crime', label: 'Crime', icon: '' },
+  { type: 'maintenance', label: 'Maintenance', icon: '' },
+  { type: 'road-closure', label: 'Road Closure', icon: '' },
+  { type: 'community-event', label: 'Community Event', icon: '' },
+  { type: 'hazard', label: 'Hazard', icon: '' },
+  { type: 'noise', label: 'Noise', icon: '' },
+  { type: 'other', label: 'Other', icon: '' },
 ];
 
 function ReportIncidentModal({
@@ -327,7 +327,7 @@ function ReportIncidentModal({
     <>
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50" onClick={onClose} aria-hidden="true" />
       <div
-        className="fixed inset-x-4 top-1/2 -translate-y-1/2 max-w-lg mx-auto z-50 glass border border-white/[0.1] rounded-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
+        className="fixed inset-x-4 top-1/2 -translate-y-1/2 max-w-lg mx-auto z-50 glass border border-white/[0.1] rounded-lg overflow-hidden max-h-[90vh] overflow-y-auto"
         role="dialog"
         aria-label="Report Incident"
       >
@@ -339,7 +339,7 @@ function ReportIncidentModal({
           <button
             onClick={onClose}
             className="w-9 h-9 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-gray-400 hover:text-white flex items-center justify-center transition-all"
-          >✕</button>
+          ></button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
@@ -446,7 +446,7 @@ function ReportIncidentModal({
             disabled={submitting || !title.trim() || !location.trim() || !description.trim()}
             className="w-full py-3 rounded-xl text-sm font-semibold transition-all bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/25 hover:border-[#c9a96e]/50 disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            {submitting ? 'Submitting…' : '📍 Submit Report'}
+            {submitting ? 'Submitting…' : ' Submit Report'}
           </button>
         </form>
       </div>
@@ -507,7 +507,7 @@ function ViewToggle({ view, onChange }: { view: ViewMode; onChange: (v: ViewMode
           ].join(' ')}
           aria-pressed={view === v}
         >
-          <span>{v === 'map' ? '🗺' : '⊞'}</span>
+          <span>{v === 'map' ? '' : '⊞'}</span>
           <span>{v === 'map' ? 'Map' : 'Grid'}</span>
         </button>
       ))}
@@ -612,7 +612,7 @@ function IncidentsPanel({
   if (active.length === 0) {
     return (
       <div className="glass-card rounded-xl hover-lift p-6 text-center mt-6">
-        <div className="text-3xl mb-2">✅</div>
+        <div className="text-3xl mb-2"></div>
         <p className="text-gray-400 text-sm">No active incidents in the neighborhood</p>
       </div>
     );
@@ -644,7 +644,7 @@ function IncidentsPanel({
                     {label}
                   </div>
                   <div className="text-sm font-semibold text-gray-200 truncate">{incident.title}</div>
-                  <div className="text-[11px] text-gray-500 mt-1 truncate">📍 {incident.location}</div>
+                  <div className="text-[11px] text-gray-500 mt-1 truncate"> {incident.location}</div>
                 </div>
               </div>
             </button>
@@ -709,8 +709,8 @@ export default function MapPage() {
 
   const filterButtons: { key: StatusFilter; label: string; activeClass: string }[] = [
     { key: 'all', label: 'All', activeClass: 'bg-[#c9a96e]/12 text-[#c9a96e] border border-[#c9a96e]/40' },
-    { key: 'current', label: '✓ Current', activeClass: 'bg-green-500/20 text-green-400 border border-green-500/40' },
-    { key: 'overdue', label: '✗ Overdue', activeClass: 'bg-red-500/20 text-red-400 border border-red-500/40' },
+    { key: 'current', label: ' Current', activeClass: 'bg-green-500/20 text-green-400 border border-green-500/40' },
+    { key: 'overdue', label: ' Overdue', activeClass: 'bg-red-500/20 text-red-400 border border-red-500/40' },
   ];
 
   return (
@@ -726,7 +726,7 @@ export default function MapPage() {
             onClick={() => setShowReportModal(true)}
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/25 hover:border-[#c9a96e]/50 hover-lift"
           >
-            <span>📍</span>
+            <span></span>
             <span>Report Incident</span>
           </button>
         </div>
@@ -791,7 +791,7 @@ export default function MapPage() {
         {/* Error */}
         {error && (
           <div className="glass-card rounded-xl hover-lift p-6 border border-red-500/20 bg-red-500/5 mb-6">
-            <p className="text-red-400 font-semibold">⚠ Failed to load map data</p>
+            <p className="text-red-400 font-semibold"> Failed to load map data</p>
             <p className="text-red-400/70 text-sm mt-1">{error}</p>
           </div>
         )}
@@ -813,7 +813,7 @@ export default function MapPage() {
         {/* Empty state */}
         {!loading && !error && lots.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <div className="text-5xl mb-4">🏘️</div>
+            <div className="text-5xl mb-4"></div>
             <h2 className="text-xl font-bold text-gray-300 mb-2">No properties minted yet</h2>
             <p className="text-gray-500 text-sm max-w-sm">
               Once property NFTs are minted on-chain, they will appear here color-coded by dues status.
@@ -824,7 +824,7 @@ export default function MapPage() {
         {/* No filter results */}
         {!loading && !error && lots.length > 0 && filteredLots.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16 text-center">
-            <div className="text-4xl mb-3">🔍</div>
+            <div className="text-4xl mb-3"></div>
             <h2 className="text-lg font-bold text-gray-300 mb-1">No lots match your filters</h2>
             <p className="text-gray-500 text-sm">Try clearing the search or changing the filter.</p>
           </div>

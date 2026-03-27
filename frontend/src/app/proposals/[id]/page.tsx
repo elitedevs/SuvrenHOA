@@ -175,9 +175,9 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
       <div className="glass-card rounded-xl p-6 mb-6">
         <h2 className="text-lg font-semibold mb-4">Vote Results</h2>
         <div className="space-y-4 mb-6">
-          <VoteBar label="For" count={forVotes} percent={forPercent} color="green" icon="👍" />
-          <VoteBar label="Against" count={against} percent={againstPercent} color="red" icon="👎" />
-          <VoteBar label="Abstain" count={abstain} percent={abstainPercent} color="gray" icon="🤷" />
+          <VoteBar label="For" count={forVotes} percent={forPercent} color="green" icon="" />
+          <VoteBar label="Against" count={against} percent={againstPercent} color="red" icon="" />
+          <VoteBar label="Abstain" count={abstain} percent={abstainPercent} color="gray" icon="" />
         </div>
         {/* Quorum progress */}
         <div className="pt-4 border-t border-white/5">
@@ -185,7 +185,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
             <span className="text-gray-400">Quorum Progress</span>
             <span className={quorumPercent >= 100 ? 'text-green-400' : 'text-gray-400'}>
               {totalVotes} / {quorumRequired} votes ({quorumPercent.toFixed(0)}%)
-              {quorumPercent >= 100 && ' ✅'}
+              {quorumPercent >= 100 && ' '}
             </span>
           </div>
           <div className="h-2 rounded-full bg-gray-800 overflow-hidden">
@@ -204,11 +204,11 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
           {hasVoted ? (
             <div className="p-4 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 text-center mt-4">
-              <p className="text-[#c9a96e] font-semibold">✅ You have already voted on this proposal</p>
+              <p className="text-[#c9a96e] font-semibold"> You have already voted on this proposal</p>
             </div>
           ) : castSuccess ? (
             <div className="p-4 rounded-xl bg-green-950/20 border border-green-900/50 text-center mt-4">
-              <p className="text-green-400 font-medium">✅ Vote submitted!</p>
+              <p className="text-green-400 font-medium"> Vote submitted!</p>
               {castHash && (
                 <a
                   href={`https://sepolia.basescan.org/tx/${castHash}`}
@@ -229,9 +229,9 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
               <div className="grid grid-cols-3 gap-3 mb-4">
                 {[
-                  { value: 1, label: 'For', icon: '👍', borderActive: 'border-green-500/50 bg-green-950/30 ring-1 ring-green-500/30' },
-                  { value: 0, label: 'Against', icon: '👎', borderActive: 'border-red-500/50 bg-red-950/30 ring-1 ring-red-500/30' },
-                  { value: 2, label: 'Abstain', icon: '🤷', borderActive: 'border-gray-500/50 bg-gray-800/60 ring-1 ring-gray-500/30' },
+                  { value: 1, label: 'For', icon: '', borderActive: 'border-green-500/50 bg-green-950/30 ring-1 ring-green-500/30' },
+                  { value: 0, label: 'Against', icon: '', borderActive: 'border-red-500/50 bg-red-950/30 ring-1 ring-red-500/30' },
+                  { value: 2, label: 'Abstain', icon: '', borderActive: 'border-gray-500/50 bg-gray-800/60 ring-1 ring-gray-500/30' },
                 ].map(({ value, label, icon, borderActive }) => (
                   <button
                     key={value}
@@ -268,8 +268,8 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
                 disabled={selectedVote === null || castPending || castConfirming}
                 className="w-full py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-bold transition-all min-h-[44px]"
               >
-                {castPending ? '⏳ Confirm in Wallet...' :
-                 castConfirming ? '⛓️ Submitting Vote...' :
+                {castPending ? ' Confirm in Wallet...' :
+                 castConfirming ? ' Submitting Vote...' :
                  selectedVote === null ? 'Select your vote above' :
                  `Submit Vote: ${['Against', 'For', 'Abstain'][selectedVote]}`}
               </button>
@@ -287,7 +287,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
           </p>
           {queueSuccess ? (
             <div className="p-4 rounded-xl bg-green-950/20 border border-green-900/50 text-center">
-              <p className="text-green-400 font-medium">✅ Queued in timelock!</p>
+              <p className="text-green-400 font-medium"> Queued in timelock!</p>
               {queueHash && (
                 <a href={`https://sepolia.basescan.org/tx/${queueHash}`} target="_blank" rel="noopener noreferrer"
                   className="text-xs text-[#c9a96e] hover:underline font-mono mt-2 block">
@@ -301,9 +301,9 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
               disabled={queuePending || queueConfirming || !proposalEvent}
               className="w-full py-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 disabled:opacity-50 text-sm font-bold transition-all min-h-[44px]"
             >
-              {queuePending ? '⏳ Confirm in Wallet...' :
-               queueConfirming ? '⛓️ Queuing...' :
-               '⏱️ Queue for Execution'}
+              {queuePending ? ' Confirm in Wallet...' :
+               queueConfirming ? ' Queuing...' :
+               ' Queue for Execution'}
             </button>
           )}
         </div>
@@ -315,7 +315,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
           <h2 className="text-lg font-semibold mb-2">Execute Proposal</h2>
           {countdownStr ? (
             <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 mb-4">
-              <p className="text-amber-300 text-sm font-semibold">⏱️ Timelock: {countdownStr}</p>
+              <p className="text-amber-300 text-sm font-semibold"> Timelock: {countdownStr}</p>
               {etaDate && (
                 <p className="text-xs text-gray-500 mt-1">Executable after {etaDate.toLocaleString()}</p>
               )}
@@ -327,7 +327,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
           )}
           {execSuccess ? (
             <div className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/50 text-center">
-              <p className="text-emerald-400 font-medium text-lg">🎉 Proposal Executed!</p>
+              <p className="text-emerald-400 font-medium text-lg"> Proposal Executed!</p>
               {execHash && (
                 <a href={`https://sepolia.basescan.org/tx/${execHash}`} target="_blank" rel="noopener noreferrer"
                   className="text-xs text-[#c9a96e] hover:underline font-mono mt-2 block">
@@ -341,10 +341,10 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
               disabled={execPending || execConfirming || !proposalEvent || !!countdownStr}
               className="w-full py-3 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all min-h-[44px]"
             >
-              {execPending ? '⏳ Confirm in Wallet...' :
-               execConfirming ? '⛓️ Executing...' :
-               countdownStr ? `🔒 Locked — ${countdownStr}` :
-               '🚀 Execute Proposal'}
+              {execPending ? ' Confirm in Wallet...' :
+               execConfirming ? ' Executing...' :
+               countdownStr ? ` Locked — ${countdownStr}` :
+               ' Execute Proposal'}
             </button>
           )}
         </div>
@@ -354,11 +354,11 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
       {!isActive && !isSucceeded && !isQueued && stateLabel && (
         <div className="glass-card rounded-xl p-6 mb-6 text-center">
           <p className="text-gray-400">
-            {stateLabel === 'Pending' && '⏳ Voting opens after the 1-day delay period'}
-            {stateLabel === 'Executed' && '🎉 This proposal has been executed on-chain!'}
-            {stateLabel === 'Defeated' && '❌ This proposal was defeated'}
-            {stateLabel === 'Canceled' && '🚫 This proposal was canceled'}
-            {stateLabel === 'Expired' && '⏰ This proposal expired without execution'}
+            {stateLabel === 'Pending' && ' Voting opens after the 1-day delay period'}
+            {stateLabel === 'Executed' && ' This proposal has been executed on-chain!'}
+            {stateLabel === 'Defeated' && ' This proposal was defeated'}
+            {stateLabel === 'Canceled' && ' This proposal was canceled'}
+            {stateLabel === 'Expired' && ' This proposal expired without execution'}
           </p>
         </div>
       )}
@@ -408,7 +408,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
           />
           <TimelineItem
             label="Execution"
-            value={stateLabel === 'Executed' ? '✅ Done' : 'Pending'}
+            value={stateLabel === 'Executed' ? ' Done' : 'Pending'}
             description="After timelock delay (2-7 days based on category)"
             active={stateLabel === 'Executed'}
           />

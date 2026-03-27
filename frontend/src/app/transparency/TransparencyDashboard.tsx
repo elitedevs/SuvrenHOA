@@ -120,7 +120,7 @@ function StatCard({
   const c = colorMap[color];
 
   return (
-    <div className="glass-card rounded-2xl p-5 flex flex-col gap-3 hover-lift">
+    <div className="glass-card rounded-lg p-5 flex flex-col gap-3 hover-lift">
       <div className="flex items-center justify-between">
         <span className="text-[13px] font-semibold text-gray-400 uppercase tracking-wider">
           {label}
@@ -217,8 +217,8 @@ export function TransparencyDashboard() {
             Live on Base Sepolia
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-            <span className="gradient-text text-glow">Full Transparency.</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight mb-6 leading-[1.1]">
+            <span className="gradient-text">Full Transparency.</span>
             <br />
             <span className="text-white">Zero Trust Required.</span>
           </h1>
@@ -231,7 +231,7 @@ export function TransparencyDashboard() {
 
           {/* Live stats strip */}
           {!stats.loading && (
-            <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-3 px-6 py-3 rounded-2xl mx-auto"
+            <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-3 px-6 py-3 rounded-lg mx-auto"
                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
               <div className="flex items-center gap-2 text-sm">
                 <Shield className="w-4 h-4 text-green-400" />
@@ -263,7 +263,7 @@ export function TransparencyDashboard() {
         <section>
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-xl font-bold text-white text-glow">Live On-Chain Stats</h2>
+              <h2 className="text-xl font-bold text-white">Live On-Chain Stats</h2>
               <p className="text-[13px] text-gray-500 mt-1">
                 Reads directly from smart contracts — no backend, no caching
               </p>
@@ -281,7 +281,7 @@ export function TransparencyDashboard() {
           {stats.error && (
             <div className="mb-4 px-4 py-3 rounded-xl text-sm text-amber-300"
                  style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
-              ⚠ {stats.error} — showing cached values
+               {stats.error} — showing cached values
             </div>
           )}
 
@@ -393,7 +393,7 @@ export function TransparencyDashboard() {
               <span className="text-[12px] text-gray-500">Last 8 hours on-chain</span>
             </div>
 
-            <div className="glass-card rounded-2xl overflow-hidden">
+            <div className="glass-card rounded-lg overflow-hidden">
               {eventsLoading ? (
                 <div className="p-6 space-y-4">
                   {[...Array(5)].map((_, i) => (
@@ -559,7 +559,7 @@ export function TransparencyDashboard() {
         {/* ── CTA ──────────────────────────────────────────────────────────── */}
         <section>
           <div
-            className="rounded-2xl p-8 sm:p-10 text-center relative overflow-hidden"
+            className="rounded-lg p-8 sm:p-10 text-center relative overflow-hidden"
             style={{
               background:
                 'linear-gradient(135deg, rgba(201,169,110,0.10) 0%, rgba(59,130,246,0.08) 100%)',
@@ -577,7 +577,7 @@ export function TransparencyDashboard() {
 
             <div className="relative z-10">
               <div
-                className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5 mx-auto"
+                className="inline-flex items-center justify-center w-14 h-14 rounded-lg mb-5 mx-auto"
                 style={{ background: 'rgba(201,169,110,0.12)', border: '1px solid rgba(201,169,110,0.25)' }}
               >
                 <Shield className="w-7 h-7 text-[#c9a96e]" />
@@ -596,7 +596,7 @@ export function TransparencyDashboard() {
                   href="/dashboard"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
                   style={{
-                    background: 'linear-gradient(135deg, oklch(0.72 0.12 76) 0%, oklch(0.62 0.12 74) 100%)',
+                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                     boxShadow: '0 0 24px rgba(201,169,110,0.25)',
                     color: 'white',
                   }}

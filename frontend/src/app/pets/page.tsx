@@ -6,7 +6,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useProperty } from '@/hooks/useProperty';
 
-const SPECIES_ICONS: Record<string, string> = { dog: '🐕', cat: '🐱', bird: '🐦', fish: '🐟', reptile: '🦎', other: '🐾' };
+const SPECIES_ICONS: Record<string, string> = { dog: '', cat: '', bird: '', fish: '', reptile: '', other: '' };
 
 export default function PetsPage() {
   const { isConnected, address } = useAccount();
@@ -35,12 +35,12 @@ export default function PetsPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">🐕 Pet Registry</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold"> Pet Registry</h1>
           <p className="text-sm text-gray-400 mt-1">Register your pets and see your neighbors' furry friends</p>
         </div>
         <button onClick={() => setShowRegister(!showRegister)}
           className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
-          {showRegister ? '← Back' : '🐾 Register Pet'}
+          {showRegister ? '← Back' : ' Register Pet'}
         </button>
       </div>
 
@@ -49,7 +49,7 @@ export default function PetsPage() {
         {['all', 'dog', 'cat', 'bird', 'fish', 'reptile'].map(s => (
           <button key={s} onClick={() => setFilter(s)}
             className={`glass-card rounded-xl hover-lift p-3 text-center transition-all ${filter === s ? 'ring-1 ring-[#c9a96e]/30' : ''}`}>
-            <p className="text-lg">{s === 'all' ? '🐾' : SPECIES_ICONS[s]}</p>
+            <p className="text-lg">{s === 'all' ? '' : SPECIES_ICONS[s]}</p>
             <p className="text-[10px] text-gray-500 capitalize">{s === 'all' ? `All (${(pets || []).length})` : `${s}s (${(pets || []).filter((p: any) => p.species === s).length})`}</p>
           </button>
         ))}
@@ -59,17 +59,17 @@ export default function PetsPage() {
       {!showRegister && (pets || []).length > 0 && (() => {
         const potm = (pets || [])[0];
         return (
-          <div className="glass-card rounded-2xl p-5 mb-6 border border-[#c9a96e]/20 bg-gradient-to-br from-[#c9a96e]/5 to-transparent">
+          <div className="glass-card rounded-lg p-5 mb-6 border border-[#c9a96e]/20 bg-gradient-to-br from-[#c9a96e]/5 to-transparent">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-lg">🏆</span>
+              <span className="text-lg"></span>
               <p className="text-xs font-bold text-[#c9a96e] uppercase tracking-widest">Pet of the Month</p>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-3xl shadow-[0_0_16px_rgba(201,169,110,0.2)]">
-                {SPECIES_ICONS[potm.species] || '🐾'}
+              <div className="w-16 h-16 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-3xl shadow-[0_0_16px_rgba(201,169,110,0.2)]">
+                {SPECIES_ICONS[potm.species] || ''}
               </div>
               <div>
-                <p className="text-xl font-extrabold text-[#e8d5a3]">{potm.name}</p>
+                <p className="text-xl font-normal text-[#e8d5a3]">{potm.name}</p>
                 <p className="text-xs text-gray-400 capitalize">{potm.breed || potm.species} · Lot #{potm.lot_number}</p>
                 <p className="text-[10px] text-[#c9a96e] mt-1">⭐ Community favorite this month</p>
               </div>
@@ -84,7 +84,7 @@ export default function PetsPage() {
         <div className="text-center py-12 text-gray-500">Loading pets...</div>
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-xl hover-lift p-12 text-center">
-          <p className="text-5xl mb-4">🐾</p>
+          <p className="text-5xl mb-4"></p>
           <h3 className="text-lg font-medium mb-2">No pets registered yet</h3>
           <p className="text-sm text-gray-400">Register your pets so neighbors know who's who on walks!</p>
         </div>
@@ -98,7 +98,7 @@ export default function PetsPage() {
             <div key={pet.id} className="glass-card rounded-xl hover-lift p-5">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-12 h-12 rounded-full bg-[#c9a96e]/8 border border-[#c9a96e]/20 flex items-center justify-center text-2xl">
-                  {SPECIES_ICONS[pet.species] || '🐾'}
+                  {SPECIES_ICONS[pet.species] || ''}
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm">{pet.name}</h3>
@@ -111,8 +111,8 @@ export default function PetsPage() {
                 {pet.age && <div><span className="text-gray-500">Age:</span> <span className="text-gray-300">{pet.age}</span></div>}
               </div>
               <div className="flex gap-2 mt-3">
-                {pet.vaccinated && <span className="text-[9px] px-1.5 py-0.5 rounded bg-green-500/10 text-green-400">✅ Vaccinated</span>}
-                {pet.microchipped && <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400">📍 Microchipped</span>}
+                {pet.vaccinated && <span className="text-[9px] px-1.5 py-0.5 rounded bg-green-500/10 text-green-400"> Vaccinated</span>}
+                {pet.microchipped && <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400"> Microchipped</span>}
               </div>
             </div>
           ))}
@@ -197,7 +197,7 @@ function RegisterPet({ onClose }: { onClose: () => void }) {
         <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
         <button disabled={!name.trim() || register.isPending} onClick={() => register.mutate()}
           className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
-          {register.isPending ? '⏳ Registering...' : '🐾 Register Pet'}
+          {register.isPending ? ' Registering...' : ' Register Pet'}
         </button>
       </div>
     </div>

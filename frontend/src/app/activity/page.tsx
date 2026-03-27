@@ -6,11 +6,11 @@ import { useActivityFeed, ActivityItem } from '@/hooks/useActivityFeed';
 const PAGE_SIZE = 10;
 
 const EVENT_FILTERS = [
-  { label: 'All Events', icon: '📋', match: null },
-  { label: 'Properties', icon: '🏠', match: ['🏠'] },
-  { label: 'Votes', icon: '🗳️', match: ['🗳️', '✅', '❌', '🤷'] },
-  { label: 'Treasury', icon: '💰', match: ['💰', '📤'] },
-  { label: 'Documents', icon: '📄', match: ['📄'] },
+  { label: 'All Events', icon: '', match: null },
+  { label: 'Properties', icon: '', match: [''] },
+  { label: 'Votes', icon: '', match: ['', '', '', ''] },
+  { label: 'Treasury', icon: '', match: ['', ''] },
+  { label: 'Documents', icon: '', match: [''] },
 ];
 
 function timeAgo(timestamp: number): string {
@@ -39,7 +39,7 @@ export default function ActivityPage() {
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">On-Chain Events</p>
-        <h1 className="text-3xl font-extrabold tracking-tight">Activity Log</h1>
+        <h1 className="text-3xl font-normal tracking-tight">Activity Log</h1>
         <p className="text-sm text-gray-400 mt-2">
           Unified feed of all community events — newest first
           {lastFetched && (
@@ -82,8 +82,8 @@ export default function ActivityPage() {
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <div className="glass-card rounded-2xl p-12 text-center">
-          <div className="text-4xl mb-4">📋</div>
+        <div className="glass-card rounded-lg p-12 text-center">
+          <div className="text-4xl mb-4"></div>
           <h3 className="text-lg font-bold mb-2">No events found</h3>
           <p className="text-sm text-gray-400">
             {activeFilter ? 'Try a different filter' : 'No events in the last ~14 hours'}
@@ -133,12 +133,12 @@ export default function ActivityPage() {
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Event Types</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {[
-            { icon: '🏠', label: 'Property mint / transfer' },
-            { icon: '🗳️', label: 'Proposal created' },
-            { icon: '✅❌🤷', label: 'Vote cast' },
-            { icon: '💰', label: 'Dues payment' },
-            { icon: '📤', label: 'Treasury expenditure' },
-            { icon: '📄', label: 'Document registered' },
+            { icon: '', label: 'Property mint / transfer' },
+            { icon: '', label: 'Proposal created' },
+            { icon: '', label: 'Vote cast' },
+            { icon: '', label: 'Dues payment' },
+            { icon: '', label: 'Treasury expenditure' },
+            { icon: '', label: 'Document registered' },
           ].map(({ icon, label }) => (
             <div key={label} className="flex items-center gap-2 text-xs text-gray-500">
               <span>{icon}</span>

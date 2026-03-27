@@ -36,25 +36,25 @@ export default function GovernanceStatsPage() {
       </div>
       <div className="mb-8">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Governance</p>
-        <h1 className="text-3xl font-extrabold tracking-tight">Stats Dashboard</h1>
+        <h1 className="text-3xl font-normal tracking-tight">Stats Dashboard</h1>
         <p className="text-base text-gray-400 mt-2">Aggregate metrics for community governance</p>
       </div>
 
       {/* Stat Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: 'Total Proposals', value: MOCK_STATS.totalProposals, icon: '📋', color: 'blue' },
-          { label: 'Pass Rate', value: `${MOCK_STATS.passRate}%`, icon: '✅', color: 'green' },
-          { label: 'Avg Turnout', value: `${MOCK_STATS.avgTurnout}%`, icon: '🗳️', color: 'amber' },
-          { label: 'Avg Voting Period', value: `${MOCK_STATS.avgVotingPeriodDays}d`, icon: '⏱️', color: 'purple' },
+          { label: 'Total Proposals', value: MOCK_STATS.totalProposals, icon: '', color: 'blue' },
+          { label: 'Pass Rate', value: `${MOCK_STATS.passRate}%`, icon: '', color: 'green' },
+          { label: 'Avg Turnout', value: `${MOCK_STATS.avgTurnout}%`, icon: '', color: 'amber' },
+          { label: 'Avg Voting Period', value: `${MOCK_STATS.avgVotingPeriodDays}d`, icon: '', color: 'purple' },
         ].map(stat => (
-          <div key={stat.label} className="glass-card rounded-2xl hover-lift p-5">
+          <div key={stat.label} className="glass-card rounded-lg hover-lift p-5">
             <div className="flex items-start justify-between mb-3">
               <div className="w-9 h-9 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-lg">
                 {stat.icon}
               </div>
             </div>
-            <p className="text-2xl sm:text-3xl font-extrabold text-[#c9a96e]">{stat.value}</p>
+            <p className="text-2xl sm:text-3xl font-normal text-[#c9a96e]">{stat.value}</p>
             <p className="text-[10px] text-gray-500 mt-1 font-semibold uppercase tracking-wider">{stat.label}</p>
           </div>
         ))}
@@ -62,7 +62,7 @@ export default function GovernanceStatsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Monthly Proposal Bar Chart */}
-        <div className="glass-card rounded-2xl p-6">
+        <div className="glass-card rounded-lg p-6">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-5">Monthly Proposal Volume</p>
           <div className="flex items-end gap-2 h-36">
             {MOCK_STATS.monthlyProposals.map(m => {
@@ -82,7 +82,7 @@ export default function GovernanceStatsPage() {
         </div>
 
         {/* Most Active Voters */}
-        <div className="glass-card rounded-2xl p-6">
+        <div className="glass-card rounded-lg p-6">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Most Active Voters</p>
           <div className="space-y-3">
             {MOCK_STATS.mostActiveVoters.map((voter, i) => (
@@ -116,7 +116,7 @@ export default function GovernanceStatsPage() {
       </div>
 
       {/* Pass/Fail breakdown */}
-      <div className="glass-card rounded-2xl p-6">
+      <div className="glass-card rounded-lg p-6">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Pass / Fail Breakdown</p>
         <div className="flex items-center gap-4 mb-3">
           <div className="flex-1 h-4 bg-gray-800 rounded-full overflow-hidden">

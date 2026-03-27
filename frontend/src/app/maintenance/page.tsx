@@ -8,10 +8,10 @@ import { useProperty } from '@/hooks/useProperty';
 
 
 const STATUS_STYLES = {
-  open: { color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', label: '🟡 Open' },
-  'in-progress': { color: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20', label: '🔵 In Progress' },
-  scheduled: { color: 'text-[#c9a96e]', bg: 'bg-[#c9a96e]/10', border: 'border-[#c9a96e]/20', label: '📅 Scheduled' },
-  resolved: { color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20', label: '✅ Resolved' },
+  open: { color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', label: ' Open' },
+  'in-progress': { color: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20', label: ' In Progress' },
+  scheduled: { color: 'text-[#c9a96e]', bg: 'bg-[#c9a96e]/10', border: 'border-[#c9a96e]/20', label: ' Scheduled' },
+  resolved: { color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20', label: ' Resolved' },
 };
 
 const PRIORITY_STYLES = {
@@ -57,7 +57,7 @@ export default function MaintenancePage() {
               onClick={() => setViewMode('kanban')}
               className={`px-4 py-2.5 text-xs font-semibold transition-all ${viewMode === 'kanban' ? 'bg-[#c9a96e]/15 text-[#c9a96e]' : 'text-gray-400 hover:text-gray-300'}`}
             >
-              ☰ Kanban
+               Kanban
             </button>
             <button
               onClick={() => setViewMode('list')}
@@ -70,7 +70,7 @@ export default function MaintenancePage() {
             onClick={() => setShowNewRequest(!showNewRequest)}
             className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)]"
           >
-            {showNewRequest ? '← Back' : '🔧 Report Issue'}
+            {showNewRequest ? '← Back' : ' Report Issue'}
           </button>
         </div>
       </div>
@@ -128,7 +128,7 @@ function RequestCard({ request }: { request: any }) {
             </div>
             <h3 className="font-semibold text-sm mb-1">{request.title}</h3>
             <div className="flex items-center gap-3 text-[11px] text-gray-500">
-              <span>📍 {request.location}</span>
+              <span> {request.location}</span>
               <span>Lot #{request.lot_number || 0}</span>
               <span>{timeAgo}</span>
             </div>
@@ -251,7 +251,7 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
             );
           }}
           className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
-          {createRequest.isPending ? '⏳ Submitting...' : 'Submit Request'}
+          {createRequest.isPending ? ' Submitting...' : 'Submit Request'}
         </button>
       </div>
     </div>
@@ -269,9 +269,9 @@ function getTimeAgo(date: Date): string {
 }
 
 const KANBAN_COLUMNS = [
-  { id: 'open', label: 'Submitted', emoji: '📥', style: STATUS_STYLES.open },
-  { id: 'in-progress', label: 'In Progress', emoji: '🔧', style: STATUS_STYLES['in-progress'] },
-  { id: 'resolved', label: 'Completed', emoji: '✅', style: STATUS_STYLES.resolved },
+  { id: 'open', label: 'Submitted', emoji: '', style: STATUS_STYLES.open },
+  { id: 'in-progress', label: 'In Progress', emoji: '', style: STATUS_STYLES['in-progress'] },
+  { id: 'resolved', label: 'Completed', emoji: '', style: STATUS_STYLES.resolved },
 ];
 
 function KanbanBoard({ requests }: { requests: any[] }) {
@@ -284,8 +284,8 @@ function KanbanBoard({ requests }: { requests: any[] }) {
 
   if (requests.length === 0) {
     return (
-      <div className="glass-card rounded-2xl p-12 text-center">
-        <div className="text-4xl mb-4">🔧</div>
+      <div className="glass-card rounded-lg p-12 text-center">
+        <div className="text-4xl mb-4"></div>
         <h3 className="text-lg font-bold mb-2">No maintenance requests</h3>
         <p className="text-sm text-gray-400">Submit a request to get started</p>
       </div>
@@ -337,7 +337,7 @@ function KanbanCard({ request }: { request: any }) {
           {request.priority}
         </span>
         {request.location && (
-          <span className="text-[10px] text-gray-500">📍 {request.location}</span>
+          <span className="text-[10px] text-gray-500"> {request.location}</span>
         )}
       </div>
       <p className="text-[10px] text-gray-600 mt-2">{timeAgo}</p>

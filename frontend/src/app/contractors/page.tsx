@@ -20,14 +20,14 @@ interface Contractor {
 }
 
 const CATEGORIES = [
-  { id: 'all', label: 'All', icon: '🏠' },
-  { id: 'plumbing', label: 'Plumbing', icon: '🔧' },
-  { id: 'electrical', label: 'Electrical', icon: '⚡' },
-  { id: 'hvac', label: 'HVAC', icon: '❄️' },
-  { id: 'landscaping', label: 'Landscaping', icon: '🌿' },
-  { id: 'painting', label: 'Painting', icon: '🎨' },
-  { id: 'roofing', label: 'Roofing', icon: '🏚️' },
-  { id: 'general', label: 'General', icon: '🔨' },
+  { id: 'all', label: 'All', icon: '' },
+  { id: 'plumbing', label: 'Plumbing', icon: '' },
+  { id: 'electrical', label: 'Electrical', icon: '' },
+  { id: 'hvac', label: 'HVAC', icon: '' },
+  { id: 'landscaping', label: 'Landscaping', icon: '' },
+  { id: 'painting', label: 'Painting', icon: '' },
+  { id: 'roofing', label: 'Roofing', icon: '' },
+  { id: 'general', label: 'General', icon: '' },
 ];
 
 const SAMPLE_CONTRACTORS: Contractor[] = [
@@ -102,7 +102,7 @@ export default function ContractorsPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">🔨 Contractor Directory</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold"> Contractor Directory</h1>
           <p className="text-sm text-gray-400 mt-1">Board-vetted contractors for Faircroft residents</p>
         </div>
         <button
@@ -151,7 +151,7 @@ export default function ContractorsPage() {
 
           {filtered.length === 0 ? (
             <div className="glass-card rounded-xl p-12 text-center">
-              <p className="text-4xl mb-3">🔍</p>
+              <p className="text-4xl mb-3"></p>
               <h3 className="font-medium mb-1">No contractors found</h3>
               <p className="text-sm text-gray-400">Try adjusting your search or filters</p>
             </div>
@@ -170,7 +170,7 @@ function StarRating({ rating, count }: { rating: number; count: number }) {
   return (
     <div className="flex items-center gap-1">
       {[1, 2, 3, 4, 5].map(s => (
-        <span key={s} className={`text-xs ${s <= Math.round(rating) ? 'text-[#c9a96e]' : 'text-gray-600'}`}>★</span>
+        <span key={s} className={`text-xs ${s <= Math.round(rating) ? 'text-[#c9a96e]' : 'text-gray-600'}`}></span>
       ))}
       <span className="text-[10px] text-gray-500 ml-1">{rating.toFixed(1)} ({count})</span>
     </div>
@@ -190,7 +190,7 @@ function ContractorCard({ contractor: c }: { contractor: Contractor }) {
               <h3 className="font-semibold text-sm">{c.name}</h3>
               {c.verified && (
                 <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20 font-medium">
-                  ✓ Verified
+                   Verified
                 </span>
               )}
             </div>
@@ -205,11 +205,11 @@ function ContractorCard({ contractor: c }: { contractor: Contractor }) {
 
         <div className="mt-4 flex items-center justify-between">
           <a href={`tel:${c.phone}`} className="text-xs text-[#c9a96e] hover:text-[#e8d5a3] font-medium">
-            📞 {c.phone}
+             {c.phone}
           </a>
           {c.email && (
             <a href={`mailto:${c.email}`} className="text-xs text-gray-400 hover:text-gray-200">
-              ✉️ Email
+               Email
             </a>
           )}
         </div>

@@ -31,7 +31,7 @@ export default function SurveysPage() {
           onClick={() => setShowCreate(!showCreate)}
           className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
         >
-          {showCreate ? '← Back' : '📊 Create Poll'}
+          {showCreate ? '← Back' : ' Create Poll'}
         </button>
       </div>
 
@@ -60,7 +60,7 @@ function SurveyList() {
   if (!surveys || surveys.length === 0) {
     return (
       <div className="glass-card rounded-xl p-12 text-center">
-        <p className="text-5xl mb-4">📊</p>
+        <p className="text-5xl mb-4"></p>
         <h3 className="text-lg font-medium mb-2">No surveys yet</h3>
         <p className="text-sm text-gray-400 max-w-md mx-auto">
           Surveys let the board gather community input on everything from pool hours to
@@ -68,15 +68,15 @@ function SurveyList() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 max-w-lg mx-auto">
           <div className="p-3 rounded-lg bg-gray-800/30 text-center">
-            <p className="text-lg mb-1">📋</p>
+            <p className="text-lg mb-1"></p>
             <p className="text-[10px] text-gray-400">Quick polls for fast decisions</p>
           </div>
           <div className="p-3 rounded-lg bg-gray-800/30 text-center">
-            <p className="text-lg mb-1">🎉</p>
+            <p className="text-lg mb-1"></p>
             <p className="text-[10px] text-gray-400">RSVP for community events</p>
           </div>
           <div className="p-3 rounded-lg bg-gray-800/30 text-center">
-            <p className="text-lg mb-1">🔒</p>
+            <p className="text-lg mb-1"></p>
             <p className="text-[10px] text-gray-400">Anonymous feedback option</p>
           </div>
         </div>
@@ -126,7 +126,7 @@ function SurveyCard({ survey }: { survey: any }) {
             ? 'bg-green-500/10 text-green-400 border-green-500/20'
             : 'bg-gray-500/10 text-gray-400 border-gray-500/20'
         }`}>
-          {isActive && !isExpired ? '🟢 Active' : '⚪ Closed'}
+          {isActive && !isExpired ? ' Active' : ' Closed'}
         </span>
         <span className="text-[10px] text-gray-500">
           {totalVotes} response{totalVotes !== 1 ? 's' : ''}
@@ -183,7 +183,7 @@ function SurveyCard({ survey }: { survey: any }) {
       </div>
 
       {hasVoted && (
-        <p className="text-[10px] text-[#c9a96e] mt-3">✓ You voted</p>
+        <p className="text-[10px] text-[#c9a96e] mt-3"> You voted</p>
       )}
     </div>
   );
@@ -268,7 +268,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
                 className="flex-1 px-4 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
               />
               {options.length > 2 && (
-                <button onClick={() => removeOption(i)} className="px-3 text-gray-500 hover:text-red-400 transition-colors">✕</button>
+                <button onClick={() => removeOption(i)} className="px-3 text-gray-500 hover:text-red-400 transition-colors"></button>
               )}
             </div>
           ))}
@@ -311,7 +311,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
           onClick={() => create.mutate()}
           className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
         >
-          {create.isPending ? '⏳ Creating...' : 'Create Poll'}
+          {create.isPending ? ' Creating...' : 'Create Poll'}
         </button>
       </div>
     </div>

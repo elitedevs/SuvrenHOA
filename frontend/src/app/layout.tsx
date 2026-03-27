@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import { DM_Sans, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
-import { Header } from '@/components/Header';
 import { Sidebar } from '@/components/Sidebar';
 import { AlertBanner } from '@/components/AlertBanner';
 import { AIChatWidget } from '@/components/AIChatWidget';
@@ -12,7 +11,7 @@ import { SeasonalBanner } from '@/components/SeasonalBanner';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500'],
   style: ['normal'],
   variable: '--font-sans',
   display: 'swap',
@@ -20,7 +19,7 @@ const dmSans = DM_Sans({
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500'],
   style: ['normal', 'italic'],
   variable: '--font-heading',
   display: 'swap',
@@ -42,13 +41,13 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: '#c9a96e',
+  themeColor: '#0C0C0E',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${dmSans.variable} ${playfair.variable} font-sans antialiased bg-[oklch(0.10_0.005_60)] text-gray-100`}>
+      <body className={`${dmSans.variable} ${playfair.variable} font-sans antialiased`}>
         <Providers>
           <Sidebar />
           <div className="lg:pl-60 min-h-screen flex flex-col transition-all duration-200">
@@ -58,11 +57,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Breadcrumb />
               {children}
             </main>
-            <footer className="border-t border-[oklch(0.18_0.005_60)] py-5 px-6 text-center">
-              <p className="text-[11px] text-[oklch(0.38_0.01_60)] font-medium">
+            <footer className="py-5 px-6 text-center" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+              <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
                 © 2026 EliteDevs. All rights reserved. SuvrenHOA™ is a trademark of EliteDevs.
               </p>
-              <p className="text-[10px] text-[oklch(0.30_0.01_60)] mt-1">
+              <p className="text-[11px] mt-1" style={{ color: 'var(--text-muted)', opacity: 0.7 }}>
                 Powered by Base blockchain · Smart contracts audited · Documents stored on Arweave
               </p>
             </footer>

@@ -15,21 +15,21 @@ interface Contact {
 
 const CONTACTS: Contact[] = [
   // HOA Board
-  { id: 'board-president', category: 'HOA Board', name: 'Board President', phone: '(555) 201-0001', note: 'On-chain: 0x1234...5678', icon: '🏛️', urgent: false },
-  { id: 'board-treasurer', category: 'HOA Board', name: 'Board Treasurer', phone: '(555) 201-0002', note: 'On-chain: 0xABCD...EF01', icon: '💼', urgent: false },
-  { id: 'board-secretary', category: 'HOA Board', name: 'Board Secretary', phone: '(555) 201-0003', note: 'On-chain: 0x9876...4321', icon: '📋', urgent: false },
+  { id: 'board-president', category: 'HOA Board', name: 'Board President', phone: '(555) 201-0001', note: 'On-chain: 0x1234...5678', icon: '', urgent: false },
+  { id: 'board-treasurer', category: 'HOA Board', name: 'Board Treasurer', phone: '(555) 201-0002', note: 'On-chain: 0xABCD...EF01', icon: '', urgent: false },
+  { id: 'board-secretary', category: 'HOA Board', name: 'Board Secretary', phone: '(555) 201-0003', note: 'On-chain: 0x9876...4321', icon: '', urgent: false },
   // Emergency Services
-  { id: 'police', category: 'Emergency Services', name: 'Police Non-Emergency', phone: '(555) 911-0001', note: 'For non-life-threatening issues', icon: '👮', urgent: false },
-  { id: 'fire', category: 'Emergency Services', name: 'Fire Department', phone: '911', note: 'For emergencies — always call 911 first', icon: '🚒', urgent: true },
-  { id: 'animal', category: 'Emergency Services', name: 'Animal Control', phone: '(555) 555-2873', note: 'Stray or dangerous animals', icon: '🐾', urgent: false },
+  { id: 'police', category: 'Emergency Services', name: 'Police Non-Emergency', phone: '(555) 911-0001', note: 'For non-life-threatening issues', icon: '', urgent: false },
+  { id: 'fire', category: 'Emergency Services', name: 'Fire Department', phone: '911', note: 'For emergencies — always call 911 first', icon: '', urgent: true },
+  { id: 'animal', category: 'Emergency Services', name: 'Animal Control', phone: '(555) 555-2873', note: 'Stray or dangerous animals', icon: '', urgent: false },
   // Utilities
-  { id: 'electric', category: 'Utilities', name: 'Electric Company', phone: '(800) 555-3874', note: 'Power outages & emergencies', icon: '⚡', urgent: false },
-  { id: 'water', category: 'Utilities', name: 'Water District', phone: '(800) 555-9283', note: 'Water main breaks & outages', icon: '💧', urgent: false },
-  { id: 'gas', category: 'Utilities', name: 'Gas Company', phone: '(800) 555-4762', note: '24/7 gas leak emergencies', icon: '🔥', urgent: true },
-  { id: 'internet', category: 'Utilities', name: 'Internet / Cable', phone: '(800) 555-6372', note: 'Outages & technical support', icon: '📡', urgent: false },
+  { id: 'electric', category: 'Utilities', name: 'Electric Company', phone: '(800) 555-3874', note: 'Power outages & emergencies', icon: '', urgent: false },
+  { id: 'water', category: 'Utilities', name: 'Water District', phone: '(800) 555-9283', note: 'Water main breaks & outages', icon: '', urgent: false },
+  { id: 'gas', category: 'Utilities', name: 'Gas Company', phone: '(800) 555-4762', note: '24/7 gas leak emergencies', icon: '', urgent: true },
+  { id: 'internet', category: 'Utilities', name: 'Internet / Cable', phone: '(800) 555-6372', note: 'Outages & technical support', icon: '', urgent: false },
   // Health & Safety
-  { id: 'poison', category: 'Health & Safety', name: 'Poison Control', phone: '(800) 222-1222', note: 'National 24/7 hotline', icon: '☠️', urgent: true },
-  { id: 'hospital', category: 'Health & Safety', name: 'Nearest Hospital', phone: '(555) 333-7890', note: 'Faircroft Regional Medical', icon: '🏥', urgent: true },
+  { id: 'poison', category: 'Health & Safety', name: 'Poison Control', phone: '(800) 222-1222', note: 'National 24/7 hotline', icon: '', urgent: true },
+  { id: 'hospital', category: 'Health & Safety', name: 'Nearest Hospital', phone: '(555) 333-7890', note: 'Faircroft Regional Medical', icon: '', urgent: true },
 ];
 
 const CATEGORY_ORDER = ['HOA Board', 'Emergency Services', 'Utilities', 'Health & Safety'];
@@ -62,14 +62,14 @@ export default function EmergencyPage() {
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Community</p>
-        <h1 className="text-3xl font-extrabold tracking-tight flex items-center gap-3">
-          🚨 Emergency Contacts
+        <h1 className="text-3xl font-normal tracking-tight flex items-center gap-3">
+           Emergency Contacts
         </h1>
         <p className="text-base text-gray-400 mt-2">Important contacts for the Faircroft community</p>
       </div>
 
       {/* 911 Banner */}
-      <div className="rounded-2xl bg-red-500/10 border border-red-500/30 p-4 mb-6 flex items-center gap-3">
+      <div className="rounded-lg bg-red-500/10 border border-red-500/30 p-4 mb-6 flex items-center gap-3">
         <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center text-xl shrink-0">🆘</div>
         <div>
           <p className="text-sm font-bold text-red-400">Life-threatening emergency? Call 911 immediately.</p>
@@ -79,7 +79,7 @@ export default function EmergencyPage() {
 
       {/* Search */}
       <div className="relative mb-6">
-        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-sm">🔍</span>
+        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></span>
         <input
           type="text"
           value={search}
@@ -104,7 +104,7 @@ export default function EmergencyPage() {
                 {group.contacts.map(contact => (
                   <div
                     key={contact.id}
-                    className={`glass-card rounded-2xl hover-lift p-4 border transition-all ${
+                    className={`glass-card rounded-lg hover-lift p-4 border transition-all ${
                       contact.urgent
                         ? 'border-red-500/20 bg-red-500/5'
                         : 'border-[#c9a96e]/10'
@@ -129,7 +129,7 @@ export default function EmergencyPage() {
                         >
                           <span>{contact.phone}</span>
                           <span className="text-[10px] opacity-60 group-hover:opacity-100">
-                            {copied === contact.id ? '✅ Copied!' : '📋'}
+                            {copied === contact.id ? ' Copied!' : ''}
                           </span>
                         </button>
                       </div>

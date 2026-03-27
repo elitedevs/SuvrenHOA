@@ -96,11 +96,11 @@ function CompactReminder({
 }: ReminderProps) {
   if (isCurrent) {
     return (
-      <div className="glass-card rounded-2xl p-5 border-l-2 border-l-green-500/50 transition-all duration-300">
+      <div className="glass-card rounded-lg p-5 border-l-2 border-l-green-500/50 transition-all duration-300">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-lg shrink-0">
-              ✅
+              
             </div>
             <div>
               <p className="text-sm font-bold text-green-400">Dues Current</p>
@@ -122,11 +122,11 @@ function CompactReminder({
 
   if (isOverdue) {
     return (
-      <div className="glass-card rounded-2xl p-5 border-l-2 border-l-red-500/50 transition-all duration-300">
+      <div className="glass-card rounded-lg p-5 border-l-2 border-l-red-500/50 transition-all duration-300">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-red-500/15 border border-red-500/25 flex items-center justify-center text-lg shrink-0">
-              ⚠️
+              
             </div>
             <div>
               <p className="text-sm font-bold text-red-400">
@@ -148,11 +148,11 @@ function CompactReminder({
 
   // Upcoming / near-due state
   return (
-    <div className="glass-card rounded-2xl p-5 border-l-2 border-l-amber-500/50 transition-all duration-300">
+    <div className="glass-card rounded-lg p-5 border-l-2 border-l-amber-500/50 transition-all duration-300">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-lg shrink-0">
-            ⏰
+            
           </div>
           <div>
             <p className="text-sm font-bold text-amber-400">
@@ -189,14 +189,14 @@ function FullReminder({
 }: ReminderProps) {
   if (isCurrent) {
     return (
-      <div className="rounded-2xl p-6 border border-green-500/20 bg-green-500/5 border-l-2 border-l-green-500/50 transition-all duration-300">
+      <div className="rounded-lg p-6 border border-green-500/20 bg-green-500/5 border-l-2 border-l-green-500/50 transition-all duration-300">
         <div className="flex items-start gap-4 mb-4">
           <div className="w-10 h-10 rounded-xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-xl shrink-0">
-            ✅
+            
           </div>
           <div className="flex-1">
             <h3 className="text-base font-bold text-green-400 mb-1">
-              You&apos;re all paid up! 🎉
+              You&apos;re all paid up! 
             </h3>
             <p className="text-sm text-gray-400">
               Lot #{tokenId} is current on dues. Next quarter coming up — stay ahead with annual payments.
@@ -207,7 +207,7 @@ function FullReminder({
         <div className="flex items-center gap-4 p-4 rounded-xl bg-green-500/5 border border-green-500/15">
           <div className="flex-1">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1">Annual Plan Savings</p>
-            <p className="text-xl font-extrabold text-green-400">${annualSavings}</p>
+            <p className="text-xl font-normal text-green-400">${annualSavings}</p>
             <p className="text-xs text-gray-600 mt-0.5">vs paying quarterly ({annualDiscount}% discount)</p>
           </div>
           <Link
@@ -231,10 +231,10 @@ function FullReminder({
 
   if (isOverdue) {
     return (
-      <div className="rounded-2xl p-6 border border-red-500/20 bg-red-500/5 border-l-2 border-l-red-500/50 transition-all duration-300">
+      <div className="rounded-lg p-6 border border-red-500/20 bg-red-500/5 border-l-2 border-l-red-500/50 transition-all duration-300">
         <div className="flex items-start gap-4 mb-4">
           <div className="w-10 h-10 rounded-xl bg-red-500/15 border border-red-500/25 flex items-center justify-center text-xl shrink-0">
-            ⚠️
+            
           </div>
           <div className="flex-1">
             <h3 className="text-base font-bold text-red-400 mb-1">
@@ -252,7 +252,7 @@ function FullReminder({
         <div className="flex items-center gap-4 p-4 rounded-xl bg-red-500/5 border border-red-500/15 mb-4">
           <div className="flex-1">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1">Amount Owed</p>
-            <p className="text-xl font-extrabold text-red-400">${amountOwed.toFixed(2)} USDC</p>
+            <p className="text-xl font-normal text-red-400">${amountOwed.toFixed(2)} USDC</p>
             <p className="text-xs text-gray-600 mt-0.5">
               {quartersOwed} × ${quarterlyNum.toFixed(2)} quarterly
             </p>
@@ -278,10 +278,10 @@ function FullReminder({
 
   // Upcoming / near-due state
   return (
-    <div className="rounded-2xl p-6 border border-amber-500/20 bg-amber-500/5 border-l-2 border-l-amber-500/50 transition-all duration-300">
+    <div className="rounded-lg p-6 border border-amber-500/20 bg-amber-500/5 border-l-2 border-l-amber-500/50 transition-all duration-300">
       <div className="flex items-start gap-4 mb-4">
         <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xl shrink-0">
-          ⏰
+          
         </div>
         <div className="flex-1">
           <h3 className="text-base font-bold text-amber-400 mb-1">
@@ -302,7 +302,7 @@ function FullReminder({
       <div className="flex items-center gap-4 p-4 rounded-xl bg-amber-500/5 border border-amber-500/15 mb-4">
         <div className="flex-1">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1">Annual Savings</p>
-          <p className="text-xl font-extrabold text-amber-400">Save ${annualSavings}</p>
+          <p className="text-xl font-normal text-amber-400">Save ${annualSavings}</p>
           <p className="text-xs text-gray-600 mt-0.5">pay 4 quarters at {annualDiscount}% off</p>
         </div>
         <Link

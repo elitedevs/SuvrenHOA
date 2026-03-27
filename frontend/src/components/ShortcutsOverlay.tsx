@@ -17,20 +17,20 @@ export function ShortcutsOverlay({ onClose }: ShortcutsOverlayProps) {
 
       {/* Modal */}
       <div
-        className="relative z-10 w-full max-w-sm rounded-2xl border border-[#c9a96e]/30 bg-[#0d0d0d] shadow-2xl p-6"
+        className="relative z-10 w-full max-w-sm rounded-lg border border-[#c9a96e]/30 bg-[#0d0d0d] shadow-2xl p-6"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
-            <span className="text-lg">⌨️</span>
+            <span className="text-lg"></span>
             <h2 className="text-base font-bold text-[#e8d5a3]">Keyboard Shortcuts</h2>
           </div>
           <button
             onClick={onClose}
             className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-500 hover:text-gray-300 hover:bg-white/5 transition-colors text-sm"
           >
-            ✕
+            
           </button>
         </div>
 

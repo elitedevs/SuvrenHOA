@@ -5,14 +5,14 @@ import Link from 'next/link';
 import { useAIAssistant } from '@/hooks/useAIAssistant';
 
 const QUICK_ACTIONS = [
-  { label: '💳 My Dues', query: 'What are my dues?' },
-  { label: '💰 Treasury', query: 'How much is in the treasury?' },
-  { label: '🗳️ Proposals', query: 'Are there active proposals?' },
-  { label: '❤️ Health Score', query: "What's the community health score?" },
-  { label: '📄 CC&Rs', query: 'What are the CC&Rs?' },
-  { label: '🔧 Maintenance', query: 'How do I submit a maintenance request?' },
-  { label: '🏊 Pool Hours', query: 'What are the pool hours?' },
-  { label: '📬 Contact', query: 'How do I contact the board?' },
+  { label: ' My Dues', query: 'What are my dues?' },
+  { label: ' Treasury', query: 'How much is in the treasury?' },
+  { label: ' Proposals', query: 'Are there active proposals?' },
+  { label: ' Health Score', query: "What's the community health score?" },
+  { label: ' CC&Rs', query: 'What are the CC&Rs?' },
+  { label: ' Maintenance', query: 'How do I submit a maintenance request?' },
+  { label: ' Pool Hours', query: 'What are the pool hours?' },
+  { label: ' Contact', query: 'How do I contact the board?' },
 ];
 
 function MessageText({ text }: { text: string }) {
@@ -48,8 +48,8 @@ function MessageText({ text }: { text: string }) {
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-3 mb-4">
-      <div className="w-9 h-9 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-lg shrink-0">🤖</div>
-      <div className="bg-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
+      <div className="w-9 h-9 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-lg shrink-0"></div>
+      <div className="bg-white/[0.06] rounded-lg rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 1, 2].map((i) => (
           <span key={i} className="w-2 h-2 rounded-full bg-gray-400 inline-block animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
         ))}
@@ -88,7 +88,7 @@ export default function AssistantPage() {
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center text-xl">
-              🤖
+              
             </div>
             <div>
               <h1 className="text-lg font-bold text-gray-100">HOA Assistant</h1>
@@ -111,11 +111,11 @@ export default function AssistantPage() {
             >
               {msg.role === 'bot' && (
                 <div className="w-9 h-9 rounded-full bg-[#c9a96e]/15 flex items-center justify-center text-lg shrink-0">
-                  🤖
+                  
                 </div>
               )}
               <div
-                className={`max-w-[80%] rounded-2xl px-5 py-3 text-sm leading-relaxed ${
+                className={`max-w-[80%] rounded-lg px-5 py-3 text-sm leading-relaxed ${
                   msg.role === 'user'
                     ? 'bg-gradient-to-br from-[#c9a96e] to-[#b8942e] text-white rounded-br-sm'
                     : 'bg-white/[0.06] text-gray-200 rounded-bl-sm'
@@ -164,12 +164,12 @@ export default function AssistantPage() {
             placeholder="Ask about dues, treasury, proposals, amenities..."
             disabled={isTyping}
             autoFocus
-            className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-2xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#c9a96e]/50 disabled:opacity-50 transition-colors"
+            className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-lg px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#c9a96e]/50 disabled:opacity-50 transition-colors"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim() || isTyping}
-            className="w-11 h-11 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#c9a96e] to-[#b8942e] hover:from-[#e8d5a3] hover:to-[#c9a96e] disabled:opacity-40 disabled:cursor-not-allowed transition-all shrink-0 shadow-lg shadow-[#1a1a1a]/50"
+            className="w-11 h-11 flex items-center justify-center rounded-lg bg-gradient-to-br from-[#c9a96e] to-[#b8942e] hover:from-[#e8d5a3] hover:to-[#c9a96e] disabled:opacity-40 disabled:cursor-not-allowed transition-all shrink-0 shadow-lg shadow-[#1a1a1a]/50"
             aria-label="Send message"
           >
             <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

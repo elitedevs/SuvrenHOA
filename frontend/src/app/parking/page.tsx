@@ -50,7 +50,7 @@ function ParkingContent() {
           {(['map', 'passes'] as const).map(t => (
             <button key={t} onClick={() => setTab(t)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all capitalize ${tab === t ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
-              {t === 'map' ? '🅿️ Spot Map' : `🎫 Passes (${activePasses.length})`}
+              {t === 'map' ? '🅿 Spot Map' : ` Passes (${activePasses.length})`}
             </button>
           ))}
         </div>
@@ -197,7 +197,7 @@ function ParkingContent() {
         <div className="space-y-3">
           {activePasses.length === 0 ? (
             <div className="glass-card rounded-xl p-12 text-center">
-              <p className="text-4xl mb-3">🎫</p>
+              <p className="text-4xl mb-3"></p>
               <p className="text-gray-400">No active visitor passes</p>
             </div>
           ) : activePasses.map(pass => {

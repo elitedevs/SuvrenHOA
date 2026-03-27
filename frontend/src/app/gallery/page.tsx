@@ -21,16 +21,16 @@ const STORAGE_KEY = 'faircroft_gallery_v1';
 const CATEGORIES = ['All', 'Events', 'Landscaping', 'Improvements', 'Pets', 'Seasonal'];
 
 const CATEGORY_EMOJIS: Record<string, string> = {
-  Events: '🎉', Landscaping: '🌿', Improvements: '🏗️', Pets: '🐾', Seasonal: '🍂',
+  Events: '', Landscaping: '', Improvements: '', Pets: '', Seasonal: '',
 };
 
 const SAMPLE: GalleryPhoto[] = [
-  { id: 'PH-001', category: 'Events', caption: 'Spring BBQ 2025', description: 'Annual spring barbecue at the community center. Great turnout!', date: '2025-05-20', postedBy: '7', emoji: '🎉', likes: [], postedAt: new Date(Date.now() - 30 * 86400000).toISOString() },
-  { id: 'PH-002', category: 'Landscaping', caption: 'New flower beds', description: 'Fresh perennial plantings along the main entrance. Selected by resident vote.', date: '2026-03-15', postedBy: '22', emoji: '🌸', likes: [], postedAt: new Date(Date.now() - 10 * 86400000).toISOString() },
-  { id: 'PH-003', category: 'Improvements', caption: 'Parking lot resurfaced', description: 'Section B parking lot completely repaved. No more potholes!', date: '2026-03-20', postedBy: '1', emoji: '🛣️', likes: [], postedAt: new Date(Date.now() - 5 * 86400000).toISOString() },
-  { id: 'PH-004', category: 'Pets', caption: 'Morning walk crew', description: 'Our regular morning dog walkers at the greenbelt. 8 dogs, 7 owners!', date: '2026-03-22', postedBy: '31', emoji: '🐕', likes: [], postedAt: new Date(Date.now() - 3 * 86400000).toISOString() },
-  { id: 'PH-005', category: 'Seasonal', caption: 'First spring blooms', description: 'Cherry blossoms on Faircroft Drive. Peak bloom this weekend!', date: '2026-03-25', postedBy: '14', emoji: '🌸', likes: [], postedAt: new Date(Date.now() - 86400000).toISOString() },
-  { id: 'PH-006', category: 'Events', caption: 'Kids Easter Hunt', description: 'Annual egg hunt drew 40+ kids. Thank you to the social committee!', date: '2025-04-01', postedBy: '8', emoji: '🐣', likes: [], postedAt: new Date(Date.now() - 60 * 86400000).toISOString() },
+  { id: 'PH-001', category: 'Events', caption: 'Spring BBQ 2025', description: 'Annual spring barbecue at the community center. Great turnout!', date: '2025-05-20', postedBy: '7', emoji: '', likes: [], postedAt: new Date(Date.now() - 30 * 86400000).toISOString() },
+  { id: 'PH-002', category: 'Landscaping', caption: 'New flower beds', description: 'Fresh perennial plantings along the main entrance. Selected by resident vote.', date: '2026-03-15', postedBy: '22', emoji: '', likes: [], postedAt: new Date(Date.now() - 10 * 86400000).toISOString() },
+  { id: 'PH-003', category: 'Improvements', caption: 'Parking lot resurfaced', description: 'Section B parking lot completely repaved. No more potholes!', date: '2026-03-20', postedBy: '1', emoji: '', likes: [], postedAt: new Date(Date.now() - 5 * 86400000).toISOString() },
+  { id: 'PH-004', category: 'Pets', caption: 'Morning walk crew', description: 'Our regular morning dog walkers at the greenbelt. 8 dogs, 7 owners!', date: '2026-03-22', postedBy: '31', emoji: '', likes: [], postedAt: new Date(Date.now() - 3 * 86400000).toISOString() },
+  { id: 'PH-005', category: 'Seasonal', caption: 'First spring blooms', description: 'Cherry blossoms on Faircroft Drive. Peak bloom this weekend!', date: '2026-03-25', postedBy: '14', emoji: '', likes: [], postedAt: new Date(Date.now() - 86400000).toISOString() },
+  { id: 'PH-006', category: 'Events', caption: 'Kids Easter Hunt', description: 'Annual egg hunt drew 40+ kids. Thank you to the social committee!', date: '2025-04-01', postedBy: '8', emoji: '', likes: [], postedAt: new Date(Date.now() - 60 * 86400000).toISOString() },
 ];
 
 export default function GalleryPage() {
@@ -39,7 +39,7 @@ export default function GalleryPage() {
   const [category, setCategory] = useState('All');
   const [lightbox, setLightbox] = useState<GalleryPhoto | null>(null);
   const [showUpload, setShowUpload] = useState(false);
-  const [form, setForm] = useState({ category: 'Events', caption: '', description: '', date: '', postedBy: '', emoji: '📷' });
+  const [form, setForm] = useState({ category: 'Events', caption: '', description: '', date: '', postedBy: '', emoji: '' });
 
   useEffect(() => {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -60,7 +60,7 @@ export default function GalleryPage() {
       postedAt: new Date().toISOString(),
     };
     save([p, ...photos]);
-    setForm({ category: 'Events', caption: '', description: '', date: '', postedBy: '', emoji: '📷' });
+    setForm({ category: 'Events', caption: '', description: '', date: '', postedBy: '', emoji: '' });
     setShowUpload(false);
   };
 
@@ -95,7 +95,7 @@ export default function GalleryPage() {
         </div>
         <button onClick={() => setShowUpload(!showUpload)}
           className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
-          {showUpload ? '← Back' : '📤 Add Photo'}
+          {showUpload ? '← Back' : ' Add Photo'}
         </button>
       </div>
 
@@ -136,11 +136,11 @@ export default function GalleryPage() {
             <div>
               <label className="block text-xs text-gray-400 mb-1">Photo Emoji</label>
               <input value={form.emoji} onChange={e => setForm({...form, emoji: e.target.value})}
-                placeholder="📷" className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+                placeholder="" className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
             </div>
           </div>
           <div className="p-3 rounded-xl bg-gray-800/30 text-xs text-gray-500">
-            📷 Photo uploads coming in a future update. For now, describe your photo and add an emoji.
+             Photo uploads coming in a future update. For now, describe your photo and add an emoji.
           </div>
           <div className="flex gap-3">
             <button onClick={() => setShowUpload(false)} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
@@ -179,7 +179,7 @@ export default function GalleryPage() {
                   <span className="text-[10px] text-gray-600">Lot #{photo.postedBy}</span>
                   <button onClick={e => { e.stopPropagation(); toggleLike(photo.id); }}
                     className={`flex items-center gap-1 text-[11px] transition-colors ${liked ? 'text-red-400' : 'text-gray-500 hover:text-red-400'}`}>
-                    {liked ? '❤️' : '🤍'} {photo.likes.length}
+                    {liked ? '' : ''} {photo.likes.length}
                   </button>
                 </div>
               </div>
@@ -192,7 +192,7 @@ export default function GalleryPage() {
       {lightbox && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
           <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
-          <div className="relative z-10 max-w-lg w-full glass-card rounded-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+          <div className="relative z-10 max-w-lg w-full glass-card rounded-lg overflow-hidden" onClick={e => e.stopPropagation()}>
             <div className="aspect-video flex items-center justify-center text-[8rem] bg-gradient-to-br from-gray-900 to-gray-800">
               {lightbox.emoji}
             </div>
@@ -202,7 +202,7 @@ export default function GalleryPage() {
                   <h3 className="font-semibold text-base">{lightbox.caption}</h3>
                   <p className="text-xs text-gray-500">{lightbox.category} · {lightbox.date} · Lot #{lightbox.postedBy}</p>
                 </div>
-                <button onClick={() => setLightbox(null)} className="text-gray-500 hover:text-white transition-colors text-lg ml-3">✕</button>
+                <button onClick={() => setLightbox(null)} className="text-gray-500 hover:text-white transition-colors text-lg ml-3"></button>
               </div>
               {lightbox.description && <p className="text-sm text-gray-400 mb-4">{lightbox.description}</p>}
               <button onClick={() => toggleLike(lightbox.id)}
@@ -211,7 +211,7 @@ export default function GalleryPage() {
                     ? 'bg-red-500/10 border-red-500/30 text-red-400'
                     : 'glass-card text-gray-400 hover:border-red-500/30 hover:text-red-400'
                 }`}>
-                {address && lightbox.likes.includes(address) ? '❤️' : '🤍'} {lightbox.likes.length} like{lightbox.likes.length !== 1 ? 's' : ''}
+                {address && lightbox.likes.includes(address) ? '' : ''} {lightbox.likes.length} like{lightbox.likes.length !== 1 ? 's' : ''}
               </button>
             </div>
           </div>

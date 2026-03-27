@@ -17,14 +17,14 @@ interface SafetyEntry {
 }
 
 const REPORT_TYPES = [
-  { id: 'suspicious', label: 'Suspicious Activity', icon: '👀', color: 'red' },
-  { id: 'streetlight', label: 'Broken Streetlight', icon: '💡', color: 'amber' },
-  { id: 'pothole', label: 'Pothole / Road Damage', icon: '🛣️', color: 'orange' },
-  { id: 'vandalism', label: 'Vandalism', icon: '🎭', color: 'red' },
-  { id: 'trespassing', label: 'Trespassing', icon: '🚫', color: 'red' },
-  { id: 'hazard', label: 'Safety Hazard', icon: '⚠️', color: 'yellow' },
-  { id: 'noise', label: 'Noise Disturbance', icon: '🔊', color: 'blue' },
-  { id: 'other', label: 'Other Concern', icon: '📋', color: 'gray' },
+  { id: 'suspicious', label: 'Suspicious Activity', icon: '', color: 'red' },
+  { id: 'streetlight', label: 'Broken Streetlight', icon: '', color: 'amber' },
+  { id: 'pothole', label: 'Pothole / Road Damage', icon: '', color: 'orange' },
+  { id: 'vandalism', label: 'Vandalism', icon: '', color: 'red' },
+  { id: 'trespassing', label: 'Trespassing', icon: '', color: 'red' },
+  { id: 'hazard', label: 'Safety Hazard', icon: '', color: 'yellow' },
+  { id: 'noise', label: 'Noise Disturbance', icon: '', color: 'blue' },
+  { id: 'other', label: 'Other Concern', icon: '', color: 'gray' },
 ];
 
 const STATUS_STYLES = {
@@ -106,7 +106,7 @@ export default function SafetyPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">🔒 Neighborhood Watch</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold"> Neighborhood Watch</h1>
           <p className="text-sm text-gray-400 mt-1">Report and track community safety observations</p>
         </div>
         <button
@@ -156,7 +156,7 @@ export default function SafetyPage() {
 
           {filtered.length === 0 ? (
             <div className="glass-card rounded-xl p-12 text-center">
-              <p className="text-4xl mb-3">🛡️</p>
+              <p className="text-4xl mb-3"></p>
               <h3 className="font-medium mb-1">No reports</h3>
               <p className="text-sm text-gray-400">Safety observations will appear here</p>
             </div>
@@ -194,8 +194,8 @@ function SafetyCard({ entry, onUpdateStatus }: { entry: SafetyEntry; onUpdateSta
               </span>
             </div>
             <div className="flex items-center gap-3 text-[11px] text-gray-500">
-              <span>📍 {entry.location}</span>
-              <span>🕐 {timeAgo}</span>
+              <span> {entry.location}</span>
+              <span> {timeAgo}</span>
               {entry.anonymous && <span className="text-gray-600">Anonymous</span>}
             </div>
           </div>
@@ -212,12 +212,12 @@ function SafetyCard({ entry, onUpdateStatus }: { entry: SafetyEntry; onUpdateSta
                 {entry.status === 'reported' && (
                   <button onClick={(e) => { e.stopPropagation(); onUpdateStatus(entry.id, 'acknowledged'); }}
                     className="px-3 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-xs text-blue-400 hover:bg-blue-500/20">
-                    ✓ Acknowledge
+                     Acknowledge
                   </button>
                 )}
                 <button onClick={(e) => { e.stopPropagation(); onUpdateStatus(entry.id, 'resolved'); }}
                   className="px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/20 text-xs text-green-400 hover:bg-green-500/20">
-                  ✓ Mark Resolved
+                   Mark Resolved
                 </button>
               </div>
             )}

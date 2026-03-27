@@ -35,17 +35,17 @@ export default function VehiclesPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">🚗 Vehicle Registration</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold"> Vehicle Registration</h1>
           <p className="text-sm text-gray-400 mt-1">Register vehicles and issue guest parking passes</p>
         </div>
         <div className="flex gap-2">
           <button onClick={() => { setShowRegister(!showRegister); setShowGuest(false); }}
             className="px-4 py-2 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all">
-            {showRegister ? '← Back' : '🚗 Add Vehicle'}
+            {showRegister ? '← Back' : ' Add Vehicle'}
           </button>
           <button onClick={() => { setShowGuest(!showGuest); setShowRegister(false); }}
             className="px-4 py-2 rounded-xl border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/8 text-sm font-medium transition-all">
-            {showGuest ? '← Back' : '🎫 Guest Pass'}
+            {showGuest ? '← Back' : ' Guest Pass'}
           </button>
         </div>
       </div>
@@ -68,14 +68,14 @@ export default function VehiclesPage() {
 
       {/* Community Vehicle Overview */}
       {!showRegister && !showGuest && !isLoading && (vehicles || []).length > 0 && (
-        <div className="glass-card rounded-2xl p-5 mb-5">
+        <div className="glass-card rounded-lg p-5 mb-5">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Community Vehicle Overview</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
             {[
-              { type: 'car', label: 'Cars', icon: '🚗', color: 'blue' },
-              { type: 'truck', label: 'Trucks', icon: '🛻', color: 'amber' },
-              { type: 'motorcycle', label: 'Motorcycles', icon: '🏍️', color: 'purple' },
-              { type: 'other', label: 'Other', icon: '🚙', color: 'gray' },
+              { type: 'car', label: 'Cars', icon: '', color: 'blue' },
+              { type: 'truck', label: 'Trucks', icon: '', color: 'amber' },
+              { type: 'motorcycle', label: 'Motorcycles', icon: '', color: 'purple' },
+              { type: 'other', label: 'Other', icon: '', color: 'gray' },
             ].map(({ type, label, icon, color }) => {
               const count = residentVehicles.filter((v: any) => (v.vehicle_type || 'car') === type).length;
               return (
@@ -112,7 +112,7 @@ export default function VehiclesPage() {
         <div className="text-center py-12 text-gray-500">Loading vehicles...</div>
       ) : (vehicles || []).length === 0 ? (
         <div className="glass-card rounded-xl hover-lift p-12 text-center">
-          <p className="text-5xl mb-4">🚗</p>
+          <p className="text-5xl mb-4"></p>
           <h3 className="text-lg font-medium mb-2">No vehicles registered</h3>
           <p className="text-sm text-gray-400">Register your vehicles for parking management and security</p>
         </div>
@@ -121,7 +121,7 @@ export default function VehiclesPage() {
           {(vehicles || []).map((v: any) => (
             <div key={v.id} className={`glass-card rounded-xl hover-lift p-4 flex items-center gap-4 ${v.is_guest ? 'border-l-4 border-l-amber-500' : ''}`}>
               <div className="w-10 h-10 rounded-lg bg-[#c9a96e]/8 flex items-center justify-center text-lg">
-                {v.vehicle_type === 'motorcycle' ? '🏍️' : v.vehicle_type === 'truck' ? '🛻' : v.vehicle_type === 'suv' ? '🚙' : '🚗'}
+                {v.vehicle_type === 'motorcycle' ? '' : v.vehicle_type === 'truck' ? '' : v.vehicle_type === 'suv' ? '' : ''}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
@@ -176,7 +176,7 @@ function VehicleForm({ isGuest, onClose }: { isGuest: boolean; onClose: () => vo
 
   return (
     <div className="glass-card rounded-xl hover-lift p-6 space-y-5">
-      <h2 className="text-lg font-semibold">{isGuest ? '🎫 Issue Guest Pass' : '🚗 Register Vehicle'}</h2>
+      <h2 className="text-lg font-semibold">{isGuest ? ' Issue Guest Pass' : ' Register Vehicle'}</h2>
 
       {isGuest && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -223,7 +223,7 @@ function VehicleForm({ isGuest, onClose }: { isGuest: boolean; onClose: () => vo
         <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
         <button disabled={!make || !model || !color || !plate || register.isPending} onClick={() => register.mutate()}
           className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
-          {register.isPending ? '⏳ Registering...' : isGuest ? '🎫 Issue Pass' : '🚗 Register'}
+          {register.isPending ? ' Registering...' : isGuest ? ' Issue Pass' : ' Register'}
         </button>
       </div>
     </div>

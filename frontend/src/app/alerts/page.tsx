@@ -20,9 +20,9 @@ import type { Alert, AlertType } from '@/hooks/useAlerts';
 // ─── Styling maps ─────────────────────────────────────────────────────────────
 
 const TYPE_LABELS: Record<AlertType, string> = {
-  emergency: '🔴 Emergency',
-  urgent: '🟠 Urgent',
-  info: '🔵 Info',
+  emergency: ' Emergency',
+  urgent: ' Urgent',
+  info: ' Info',
 };
 
 const TYPE_STYLE: Record<
@@ -94,7 +94,7 @@ function AlertCard({
 
   return (
     <div
-      className={`glass-card rounded-2xl hover-lift p-5 border-l-4 ${s.border} ${s.glow}`}
+      className={`glass-card rounded-lg hover-lift p-5 border-l-4 ${s.border} ${s.glow}`}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 min-w-0">
@@ -170,7 +170,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
   }
 
   return (
-    <div className="glass-card rounded-2xl hover-lift overflow-hidden mb-8">
+    <div className="glass-card rounded-lg hover-lift overflow-hidden mb-8">
       <button
         onClick={() => setOpen(!open)}
         className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/[0.02] transition-colors"
@@ -332,7 +332,7 @@ export default function AlertsPage() {
           </p>
           <div className="flex items-center gap-3 mb-2">
             <Bell className="w-7 h-7 text-[#c9a96e]" />
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight gradient-text">
+            <h1 className="text-3xl sm:text-4xl font-normal tracking-tight gradient-text">
               Emergency Alerts
             </h1>
           </div>
@@ -348,7 +348,7 @@ export default function AlertsPage() {
 
         {/* Not connected nudge */}
         {!isConnected && (
-          <div className="glass-card rounded-2xl hover-lift p-6 mb-8 flex flex-col items-center gap-4 text-center">
+          <div className="glass-card rounded-lg hover-lift p-6 mb-8 flex flex-col items-center gap-4 text-center">
             <Info className="w-8 h-8 text-blue-400" />
             <div>
               <p className="font-semibold text-gray-200 mb-1">Connect to dismiss alerts</p>
@@ -371,9 +371,9 @@ export default function AlertsPage() {
           </h2>
 
           {sortedActive.length === 0 ? (
-            <div className="glass-card rounded-2xl hover-lift p-8 text-center">
-              <div className="w-12 h-12 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">✅</span>
+            <div className="glass-card rounded-lg hover-lift p-8 text-center">
+              <div className="w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl"></span>
               </div>
               <p className="font-semibold text-gray-300 mb-1">All clear</p>
               <p className="text-sm text-gray-500">No active alerts for your community.</p>
@@ -400,7 +400,7 @@ export default function AlertsPage() {
           </h2>
 
           {historyAlerts.length === 0 ? (
-            <div className="glass-card rounded-2xl hover-lift p-6 text-center">
+            <div className="glass-card rounded-lg hover-lift p-6 text-center">
               <p className="text-sm text-gray-600">No past alerts yet.</p>
             </div>
           ) : (
