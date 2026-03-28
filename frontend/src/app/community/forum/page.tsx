@@ -106,7 +106,7 @@ export default function ForumPage() {
           <h1 className="text-xl font-bold text-gray-100 mb-3">{selectedTopic.title}</h1>
           <p className="text-sm text-gray-300 leading-relaxed mb-4 whitespace-pre-wrap">{selectedTopic.content}</p>
           <div className="flex items-center gap-2 text-[11px] text-gray-500">
-            <span className="font-medium text-[#c9a96e]">{selectedTopic.author}</span>
+            <span className=" text-[#c9a96e]">{selectedTopic.author}</span>
             {selectedTopic.lotNumber && <span>· Lot #{selectedTopic.lotNumber}</span>}
             <span>· {timeAgo(selectedTopic.createdAt)}</span>
           </div>
@@ -122,7 +122,7 @@ export default function ForumPage() {
               <div key={reply.id} className="glass-card rounded-md p-4 border-l-2 border-l-[#c9a96e]/20">
                 <p className="text-sm text-gray-300 leading-relaxed mb-2 whitespace-pre-wrap">{reply.content}</p>
                 <div className="flex items-center gap-2 text-[11px] text-gray-500">
-                  <span className="font-medium text-[#c9a96e]">{reply.author}</span>
+                  <span className=" text-[#c9a96e]">{reply.author}</span>
                   {reply.lotNumber && <span>· Lot #{reply.lotNumber}</span>}
                   <span>· {timeAgo(reply.createdAt)}</span>
                 </div>
@@ -145,7 +145,7 @@ export default function ForumPage() {
             <button
               onClick={() => handleReply(selectedTopic)}
               disabled={!replyText.trim()}
-              className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 text-sm font-medium transition-all"
+              className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 text-sm  transition-all"
             >
               Post Reply
             </button>
@@ -199,7 +199,7 @@ export default function ForumPage() {
                   <button
                     key={cat}
                     onClick={() => setNewCategory(cat)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    className={`px-3 py-1.5 rounded-lg text-xs  transition-all ${
                       newCategory === cat
                         ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                         : 'bg-gray-800/40 text-gray-400 border border-gray-700/40 hover:border-gray-600'
@@ -221,7 +221,7 @@ export default function ForumPage() {
               />
             </div>
             <div className="flex gap-3">
-              <button onClick={() => setShowCreate(false)} className="flex-1 py-3 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">
+              <button onClick={() => setShowCreate(false)} className="flex-1 py-3 rounded-md border border-gray-700 text-sm  hover:bg-gray-800/50 transition-colors">
                 Cancel
               </button>
               <button
@@ -242,7 +242,7 @@ export default function ForumPage() {
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all shrink-0 ${
+            className={`px-3 py-1.5 rounded-lg text-xs  whitespace-nowrap transition-all shrink-0 ${
               selectedCategory === cat
                 ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                 : 'bg-gray-800/40 text-gray-400 border border-gray-700/40 hover:border-gray-600'
@@ -271,22 +271,22 @@ export default function ForumPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                     {topic.pinned && <span className="text-[10px] text-amber-400"></span>}
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/15 font-medium">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/15 ">
                       {topic.category}
                     </span>
                   </div>
-                  <h3 className="text-sm font-semibold text-gray-100 group-hover:text-[#e8d5a3] transition-colors leading-snug mb-1.5">
+                  <h3 className="text-[15px] text-gray-100 group-hover:text-gray-200 transition-colors leading-snug mb-1.5">
                     {topic.title}
                   </h3>
                   <p className="text-[11px] text-gray-500 line-clamp-2">{topic.content}</p>
                 </div>
                 <div className="text-right shrink-0 ml-3">
-                  <div className="text-lg font-bold text-gray-300">{topic.replies.length}</div>
+                  <span className="text-[13px] text-gray-400">{topic.replies.length} replies</span>
                   <div className="text-[10px] text-gray-500">replies</div>
                 </div>
               </div>
               <div className="flex items-center gap-2 mt-3 text-[11px] text-gray-500">
-                <span className="text-[#c9a96e] font-medium">{topic.author}</span>
+                <span className="text-[#c9a96e] ">{topic.author}</span>
                 {topic.lotNumber && <span>· Lot #{topic.lotNumber}</span>}
                 <span>· {timeAgo(topic.createdAt)}</span>
               </div>

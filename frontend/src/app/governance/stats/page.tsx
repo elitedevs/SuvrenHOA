@@ -43,19 +43,15 @@ export default function GovernanceStatsPage() {
       {/* Stat Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: 'Total Proposals', value: MOCK_STATS.totalProposals, color: 'blue' },
-          { label: 'Pass Rate', value: `${MOCK_STATS.passRate}%`, color: 'green' },
-          { label: 'Avg Turnout', value: `${MOCK_STATS.avgTurnout}%`, color: 'amber' },
-          { label: 'Avg Voting Period', value: `${MOCK_STATS.avgVotingPeriodDays}d`, color: 'purple' },
+          { label: 'Total Proposals', value: MOCK_STATS.totalProposals },
+          { label: 'Pass Rate', value: `${MOCK_STATS.passRate}%` },
+          { label: 'Avg Turnout', value: `${MOCK_STATS.avgTurnout}%` },
+          { label: 'Avg Voting Period', value: `${MOCK_STATS.avgVotingPeriodDays}d` },
         ].map(stat => (
           <div key={stat.label} className="glass-card rounded-lg hover-lift p-5">
-            <div className="flex items-start justify-between mb-3">
-              <div className="w-9 h-9 rounded-md bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-lg">
-                
-              </div>
-            </div>
-            <p className="text-2xl sm:text-3xl font-normal text-[#c9a96e]">{stat.value}</p>
-            <p className="text-[10px] text-gray-500 mt-1 font-semibold uppercase tracking-wider">{stat.label}</p>
+
+            <p className="text-2xl sm:text-3xl font-heading" style={{ fontFamily: 'var(--font-heading), Georgia, serif', color: 'var(--accent-brass)' }}>{stat.value}</p>
+            <p className="text-[11px] uppercase tracking-widest mt-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>{stat.label}</p>
           </div>
         ))}
       </div>

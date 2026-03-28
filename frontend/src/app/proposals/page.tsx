@@ -222,7 +222,7 @@ function ProposalCard({
 
   return (
     <Link href={`/proposals/${proposal.proposalId.toString()}`}>
-      <div className="glass-card rounded-lg hover-lift p-6 cursor-pointer transition-all duration-200 hover:border-[#c9a96e]/20 border border-transparent">
+      <div className="glass-card rounded-lg hover-lift p-6 cursor-pointer transition-all duration-200">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             {/* Badges */}
@@ -302,17 +302,6 @@ function EmptyState() {
               </div>
             );
           })}
-        </div>
-        <div className="flex items-center justify-center gap-3 mt-8">
-          <span className="text-xs px-3 py-1.5 rounded-lg bg-green-500/10 text-green-400 border border-green-500/20 font-semibold">
-             For
-          </span>
-          <span className="text-xs px-3 py-1.5 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 font-semibold">
-             Against
-          </span>
-          <span className="text-xs px-3 py-1.5 rounded-lg bg-gray-500/10 text-gray-400 border border-gray-500/20 font-semibold">
-             Abstain
-          </span>
         </div>
       </div>
     </div>
@@ -509,15 +498,12 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
          'Submit Proposal'}
       </button>
 
-      <div className="glass-card rounded-lg hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/40">
-        <h4 className="text-sm font-bold text-[#e8d5a3] mb-3">What happens next?</h4>
-        <ol className="text-xs text-gray-400 space-y-2 list-decimal list-inside leading-relaxed">
-          <li>Proposal enters <strong className="text-gray-300">Pending</strong> state (1-day review period)</li>
-          <li>Voting opens for <strong className="text-gray-300">7 days</strong></li>
-          <li>If quorum + threshold met → <strong className="text-gray-300">Succeeded</strong></li>
-          <li>Queue in Timelock (2–7 day delay based on category)</li>
-          <li>Execute → changes take effect</li>
-        </ol>
+      <div className="glass-card rounded-lg p-6" style={{ borderLeft: '2px solid rgba(176,155,113,0.25)' }}>
+        <p className="text-[14px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          After submission, your proposal enters a one-day review period before voting opens.
+          The community then has seven days to vote. If quorum and threshold are met, the
+          proposal is queued in the timelock and executed automatically.
+        </p>
       </div>
     </div>
   );
