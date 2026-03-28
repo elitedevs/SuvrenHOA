@@ -62,10 +62,7 @@ export default function DirectoryPage() {
       {/* Community Info */}
       <div className="glass-card rounded-md hover-lift p-6 mb-8">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-14 h-14 rounded-md bg-[#c9a96e]/15 border border-[#c9a96e]/20 flex items-center justify-center text-2xl">
-            
-          </div>
-          <div>
+                    <div>
             <h2 className="text-xl font-bold">{COMMUNITY_INFO.name}</h2>
             <p className="text-sm text-gray-400">{COMMUNITY_INFO.location} · Est. {COMMUNITY_INFO.established}</p>
           </div>

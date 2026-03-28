@@ -133,9 +133,9 @@ function CheckoutWizard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {isCurrent !== false ? (
-                  <span className="text-green-400 text-lg"></span>
+                  <span style={{ color: '#5A9E8F' }}>●</span>
                 ) : (
-                  <span className="text-red-400 text-lg"></span>
+                  <span style={{ color: '#8B5A5A' }}>●</span>
                 )}
                 <div>
                   <p className="text-sm font-semibold text-gray-200">HOA Dues</p>
@@ -242,8 +242,8 @@ function CheckoutWizard() {
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <span className="text-2xl text-green-400"></span>
-                <p className="text-lg font-bold text-green-300">
+                <span style={{ color: '#5A9E8F' }}>●</span>
+                <p className="text-lg text-green-300">
                   No outstanding balance
                 </p>
               </div>
@@ -324,8 +324,7 @@ export default function CheckoutPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2"></div>
-        <h2 className="text-xl font-bold">Move-Out Wizard</h2>
+                <h2 className="text-xl font-bold">Move-Out Wizard</h2>
         <p className="text-gray-400 text-sm">Connect your wallet to begin</p>
         <ConnectButton label="Connect Wallet" />
       </div>

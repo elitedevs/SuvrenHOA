@@ -61,8 +61,7 @@ export default function ProposalsPage() {
 
       {!isConnected ? (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
-          <div className="text-5xl mb-2"></div>
-          <p className="text-gray-400 text-base font-medium">Sign in to participate in governance</p>
+                    <p className="text-gray-400 text-base font-medium">Sign in to participate in governance</p>
           <ConnectButton label="Sign In" />
         </div>
       ) : showCreate ? (
@@ -140,8 +139,7 @@ function ProposalsDashboard() {
       <div className="space-y-4 page-enter page-enter-delay-3">
         {isLoading ? (
           <div className="glass-card rounded-lg p-12 text-center">
-            <div className="text-3xl mb-3 animate-pulse"></div>
-            <p className="text-gray-400 text-sm">Loading proposals from chain…</p>
+                        <p className="text-gray-400 text-sm">Loading proposals from chain…</p>
           </div>
         ) : error ? (
           <div className="glass-card rounded-lg p-12 text-center border-l-2 border-l-red-500/40">
@@ -274,10 +272,7 @@ function ProposalCard({
 function EmptyState() {
   return (
     <div className="glass-card rounded-lg hover-lift p-14 text-center">
-      <div className="w-20 h-20 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-4xl mx-auto mb-6">
-        
-      </div>
-      <h3 className="text-xl font-bold mb-3">No proposals yet</h3>
+            <h3 className="text-xl font-bold mb-3">No proposals yet</h3>
       <p className="text-sm text-gray-400 max-w-md mx-auto leading-relaxed mb-8">
         Any homeowner with a Property NFT can submit a proposal.
         Once submitted, the community votes over a 7-day period.
@@ -339,8 +334,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
   if (!hasProperty) {
     return (
       <div className="glass-card rounded-lg hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
-        <div className="text-5xl mb-4"></div>
-        <h3 className="text-xl font-bold mb-3">Property Required</h3>
+                <h3 className="text-xl font-bold mb-3">Property Required</h3>
         <p className="text-sm text-gray-400 max-w-sm mx-auto">
           You need a Property NFT (at least 1 vote) to create proposals.
         </p>
@@ -364,10 +358,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
   if (isSuccess) {
     return (
       <div className="glass-card rounded-lg p-12 text-center border-l-2 border-l-green-500/50">
-        <div className="w-16 h-16 rounded-lg bg-green-500/15 border border-green-500/25 flex items-center justify-center text-3xl mx-auto mb-6">
-          
-        </div>
-        <h3 className="text-2xl font-normal text-green-400 mb-3">Proposal Submitted!</h3>
+                <h3 className="text-2xl font-normal text-green-400 mb-3">Proposal Submitted!</h3>
         <p className="text-sm text-gray-400 mb-6 max-w-sm mx-auto">
           Your proposal is in <strong>Pending</strong> state. Voting opens after the 1-day review period.
         </p>

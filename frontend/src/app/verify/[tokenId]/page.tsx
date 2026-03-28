@@ -12,7 +12,7 @@ export default async function VerifyPropertyPage({ params }: Props) {
       {/* Logo */}
       <div className="relative mb-8 inline-block">
         <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#c9a96e] via-[#b8942e] to-[#8a6820] flex items-center justify-center shadow-2xl mx-auto">
-          <span className="text-4xl font-black text-white">S</span>
+          <span className="text-4xl font-normal text-white">S</span>
         </div>
       </div>
 

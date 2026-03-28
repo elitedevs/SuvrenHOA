@@ -203,8 +203,7 @@ export default function HealthPage() {
         {/* Perfect score message */}
         {!loading && !error && suggestions.length === 0 && (
           <div className="glass-card-success rounded-lg p-6 mb-8 page-enter page-enter-delay-3 text-center">
-            <p className="text-3xl mb-3"></p>
-            <h3 className="font-bold text-green-300 text-lg mb-1">Perfect Score!</h3>
+                        <h3 className="font-bold text-green-300 text-lg mb-1">Perfect Score!</h3>
             <p className="text-sm text-gray-400">Your community has achieved the maximum health score across all categories.</p>
           </div>
         )}

@@ -60,23 +60,19 @@ function SurveyList() {
   if (!surveys || surveys.length === 0) {
     return (
       <div className="glass-card rounded-md p-12 text-center">
-        <p className="text-5xl mb-4"></p>
-        <h3 className="text-lg font-medium mb-2">No surveys yet</h3>
+                <h3 className="text-lg font-medium mb-2">No surveys yet</h3>
         <p className="text-sm text-gray-400 max-w-md mx-auto">
           Surveys let the board gather community input on everything from pool hours to
           landscaping vendors. Results are transparent and tamper-proof.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 max-w-lg mx-auto">
           <div className="p-3 rounded-lg bg-gray-800/30 text-center">
-            <p className="text-lg mb-1"></p>
             <p className="text-[10px] text-gray-400">Quick polls for fast decisions</p>
           </div>
           <div className="p-3 rounded-lg bg-gray-800/30 text-center">
-            <p className="text-lg mb-1"></p>
             <p className="text-[10px] text-gray-400">RSVP for community events</p>
           </div>
           <div className="p-3 rounded-lg bg-gray-800/30 text-center">
-            <p className="text-lg mb-1"></p>
             <p className="text-[10px] text-gray-400">Anonymous feedback option</p>
           </div>
         </div>

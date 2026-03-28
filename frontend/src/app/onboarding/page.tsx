@@ -294,8 +294,7 @@ function OnboardingWizard() {
       {/* ── Step 1: Welcome ── */}
       {step === 1 && (
         <div className="glass-card rounded-lg p-8 border-l-2 border-l-[#c9a96e]/50 animate-fade-in">
-          <div className="text-5xl mb-5 text-center"></div>
-          <h2 className="text-2xl font-normal text-center mb-2">
+                    <h2 className="text-2xl font-normal text-center mb-2">
             Welcome to Faircroft!
           </h2>
           <p className="text-gray-400 text-center text-sm mb-7">
@@ -677,29 +676,25 @@ function OnboardingWizard() {
               href="/dashboard"
               className="glass-card rounded-md p-4 text-center hover:border-[#c9a96e]/25 transition-all"
             >
-              <div className="text-2xl mb-1"></div>
-              <p className="text-sm font-semibold text-gray-300">Dashboard</p>
+                            <p className="text-sm font-semibold text-gray-300">Dashboard</p>
             </Link>
             <Link
               href="/dues"
               className="glass-card rounded-md p-4 text-center hover:border-green-500/25 transition-all"
             >
-              <div className="text-2xl mb-1"></div>
-              <p className="text-sm font-semibold text-gray-300">Pay Dues</p>
+                            <p className="text-sm font-semibold text-gray-300">Pay Dues</p>
             </Link>
             <Link
               href="/community"
               className="glass-card rounded-md p-4 text-center hover:border-blue-500/25 transition-all"
             >
-              <div className="text-2xl mb-1"></div>
-              <p className="text-sm font-semibold text-gray-300">Community</p>
+                            <p className="text-sm font-semibold text-gray-300">Community</p>
             </Link>
             <Link
               href="/documents"
               className="glass-card rounded-md p-4 text-center hover:border-amber-500/25 transition-all"
             >
-              <div className="text-2xl mb-1"></div>
-              <p className="text-sm font-semibold text-gray-300">Documents</p>
+                            <p className="text-sm font-semibold text-gray-300">Documents</p>
             </Link>
           </div>
         </div>
@@ -859,8 +854,7 @@ export default function OnboardingPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2"></div>
-        <h2 className="text-xl font-bold">Move-In Setup</h2>
+                <h2 className="text-xl font-bold">Move-In Setup</h2>
         <p className="text-gray-400 text-sm">Connect your wallet to begin</p>
         <ConnectButton label="Connect Wallet" />
       </div>

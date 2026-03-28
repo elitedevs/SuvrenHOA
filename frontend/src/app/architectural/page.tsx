@@ -158,8 +158,7 @@ function RequestList({ filter, setFilter }: { filter: string; setFilter: (f: str
         <div className="text-center py-12 text-gray-500">Loading requests...</div>
       ) : !requests || requests.length === 0 ? (
         <div className="glass-card rounded-md p-12 text-center">
-          <p className="text-5xl mb-4"></p>
-          <h3 className="text-lg font-medium mb-2">No architectural requests</h3>
+                    <h3 className="text-lg font-medium mb-2">No architectural requests</h3>
           <p className="text-sm text-gray-400 max-w-md mx-auto">
             Planning to paint, build a fence, add a deck, or install solar panels?
             Submit a request here for board approval before starting work.

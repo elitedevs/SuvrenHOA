@@ -61,7 +61,7 @@ export default function PetsPage() {
         return (
           <div className="glass-card rounded-lg p-5 mb-6 border border-[#c9a96e]/20 bg-gradient-to-br from-[#c9a96e]/5 to-transparent">
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-lg"></span>
+              
               <p className="text-xs font-bold text-[#c9a96e] uppercase tracking-widest">Pet of the Month</p>
             </div>
             <div className="flex items-center gap-4">
@@ -84,8 +84,7 @@ export default function PetsPage() {
         <div className="text-center py-12 text-gray-500">Loading pets...</div>
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-md hover-lift p-12 text-center">
-          <p className="text-5xl mb-4"></p>
-          <h3 className="text-lg font-medium mb-2">No pets registered yet</h3>
+                    <h3 className="text-lg font-medium mb-2">No pets registered yet</h3>
           <p className="text-sm text-gray-400">Register your pets so neighbors know who's who on walks!</p>
         </div>
       ) : (

@@ -285,8 +285,7 @@ function KanbanBoard({ requests }: { requests: any[] }) {
   if (requests.length === 0) {
     return (
       <div className="glass-card rounded-lg p-12 text-center">
-        <div className="text-4xl mb-4"></div>
-        <h3 className="text-lg font-bold mb-2">No maintenance requests</h3>
+                <h3 className="text-lg font-bold mb-2">No maintenance requests</h3>
         <p className="text-sm text-gray-400">Submit a request to get started</p>
       </div>
     );

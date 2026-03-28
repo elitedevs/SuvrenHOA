@@ -56,8 +56,7 @@ function SkeletonRow() {
 function EmptyState() {
   return (
     <div className="text-center py-16 text-gray-500">
-      <div className="text-4xl mb-3"></div>
-      <p className="text-sm font-medium">No activity yet — be the first to participate!</p>
+            <p className="text-sm font-medium">No activity yet — be the first to participate!</p>
     </div>
   );
 }
@@ -214,7 +213,7 @@ export default function LeaderboardPage() {
     goodNeighbor.toLowerCase() === connectedAddress.toLowerCase();
 
   return (
-    <main className="max-w-[960px] mx-auto px-4 py-8 space-y-8">
+    <main className="max-w-[960px] mx-auto px-4 py-8 space-y-8 page-enter">
       {/* ── Header ── */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold gradient-text">Community Leaderboard</h1>
@@ -239,7 +238,7 @@ export default function LeaderboardPage() {
           <div className="absolute inset-0 bg-gradient-to-br from-[#FFD700]/5 to-transparent pointer-events-none" />
           <div className="relative">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-2xl"></span>
+              
               <h2 className="text-base font-bold text-[#FFD700]">Good Neighbor of the Month</h2>
             </div>
             <p className="text-xs text-gray-500 mb-4">Based on combined activity across all categories</p>
@@ -251,10 +250,7 @@ export default function LeaderboardPage() {
               </div>
             ) : goodNeighbor ? (
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#FFD700]/20 flex items-center justify-center text-2xl shrink-0">
-                  
-                </div>
-                <div>
+                                <div>
                   <div className="text-lg font-bold font-mono text-[#FFD700]">
                     {isGoodNeighborYou ? '⭐ You' : truncateAddr(goodNeighbor)}
                   </div>

@@ -23,7 +23,7 @@ export function ShortcutsOverlay({ onClose }: ShortcutsOverlayProps) {
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-2">
-            <span className="text-lg"></span>
+            
             <h2 className="text-base font-bold text-[#e8d5a3]">Keyboard Shortcuts</h2>
           </div>
           <button

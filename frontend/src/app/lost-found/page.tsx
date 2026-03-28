@@ -194,8 +194,7 @@ export default function LostFoundPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filtered.length === 0 ? (
           <div className="col-span-full glass-card rounded-md p-12 text-center">
-            <p className="text-4xl mb-3"></p>
-            <p className="text-gray-400">No items in this category</p>
+                        <p className="text-gray-400">No items in this category</p>
           </div>
         ) : filtered.map(item => (
           <div key={item.id} className={`glass-card rounded-md overflow-hidden ${item.status === 'claimed' ? 'opacity-60' : ''}`}>

@@ -83,8 +83,7 @@ export default function ActivityPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-lg p-12 text-center">
-          <div className="text-4xl mb-4"></div>
-          <h3 className="text-lg font-bold mb-2">No events found</h3>
+                    <h3 className="text-lg font-bold mb-2">No events found</h3>
           <p className="text-sm text-gray-400">
             {activeFilter ? 'Try a different filter' : 'No events in the last ~14 hours'}
           </p>

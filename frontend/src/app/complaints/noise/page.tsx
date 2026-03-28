@@ -164,8 +164,7 @@ export default function NoiseComplaintPage() {
         <div className="space-y-4">
           {complaints.length === 0 ? (
             <div className="glass-card rounded-md p-12 text-center">
-              <p className="text-4xl mb-3"></p>
-              <p className="text-lg font-medium mb-1">No complaints filed</p>
+                            <p className="text-lg font-medium mb-1">No complaints filed</p>
               <p className="text-sm text-gray-400">All quiet in the community!</p>
             </div>
           ) : complaints.map(c => {

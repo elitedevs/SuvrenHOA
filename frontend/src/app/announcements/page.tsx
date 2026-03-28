@@ -181,8 +181,7 @@ export default function AnnouncementsPage() {
         <ArchiveList items={archiveItems} readSet={readSet} />
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-md hover-lift p-12 text-center">
-          <p className="text-4xl mb-3"></p>
-          <h3 className="font-medium mb-1">No announcements</h3>
+                    <h3 className="font-medium mb-1">No announcements</h3>
           <p className="text-sm text-gray-400">Board announcements will appear here</p>
         </div>
       ) : (
@@ -294,8 +293,7 @@ function ArchiveList({ items, readSet }: { items: any[]; readSet: Set<string> })
   if (items.length === 0) {
     return (
       <div className="glass-card rounded-md p-12 text-center">
-        <p className="text-4xl mb-3"></p>
-        <h3 className="font-medium mb-1">No archived announcements</h3>
+                <h3 className="font-medium mb-1">No archived announcements</h3>
         <p className="text-sm text-gray-400">Announcements older than 60 days appear here</p>
       </div>
     );

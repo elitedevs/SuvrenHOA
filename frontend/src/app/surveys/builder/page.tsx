@@ -171,8 +171,7 @@ export default function SurveyBuilderPage() {
         <div className="space-y-4">
           {surveys.length === 0 ? (
             <div className="glass-card rounded-md p-12 text-center">
-              <p className="text-4xl mb-3"></p>
-              <p className="text-gray-400">No surveys yet. Create your first one!</p>
+                            <p className="text-gray-400">No surveys yet. Create your first one!</p>
             </div>
           ) : surveys.map(s => (
             <div key={s.id} className="glass-card rounded-md p-5">

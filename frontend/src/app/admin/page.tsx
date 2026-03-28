@@ -12,8 +12,7 @@ export default function AdminPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2"></div>
-        <p className="text-gray-400 text-base font-medium">Sign in with board wallet to access admin</p>
+                <p className="text-gray-400 text-base font-medium">Sign in with board wallet to access admin</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -86,8 +85,7 @@ function MintPropertyCard() {
       <div className="px-8 py-7">
         {isSuccess ? (
           <div className="glass-card-success rounded-md p-6 text-center border-l-2 border-l-green-500/50">
-            <div className="text-3xl mb-3"></div>
-            <p className="text-green-400 font-bold text-base mb-1">Property #{lotNumber} Minted!</p>
+                        <p className="text-green-400 font-bold text-base mb-1">Property #{lotNumber} Minted!</p>
             {hash && (
               <a
                 href={`https://sepolia.basescan.org/tx/${hash}`}
@@ -230,8 +228,7 @@ function RegisterDocumentCard() {
       <div className="px-8 py-7">
         {isSuccess ? (
           <div className="glass-card-success rounded-md p-6 text-center border-l-2 border-l-green-500/50">
-            <div className="text-3xl mb-3"></div>
-            <p className="text-green-400 font-bold text-base mb-1">Document Registered On-Chain!</p>
+                        <p className="text-green-400 font-bold text-base mb-1">Document Registered On-Chain!</p>
             {hash && (
               <a
                 href={`https://sepolia.basescan.org/tx/${hash}`}

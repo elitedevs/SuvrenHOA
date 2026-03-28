@@ -82,9 +82,9 @@ export default function AssistantPage() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)]">
+    <div className="flex flex-col h-[calc(100vh-4rem)] page-enter">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#1a1a1a]/80 to-[#2d2d2d]/80 border-b border-white/[0.06] px-6 py-4 shrink-0">
+      <div className=" border-b border-white/[0.06] px-6 py-4 shrink-0">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center text-xl">

@@ -142,10 +142,7 @@ export default function DocumentsPage() {
           {/* Document List */}
           {documentCount === 0 ? (
             <div className="glass-card rounded-lg hover-lift p-14 text-center page-enter page-enter-delay-3">
-              <div className="w-20 h-20 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-4xl mx-auto mb-6">
-                
-              </div>
-              <h3 className="text-xl font-bold mb-3">No documents registered yet</h3>
+                            <h3 className="text-xl font-bold mb-3">No documents registered yet</h3>
               <p className="text-sm text-gray-400 max-w-md mx-auto leading-relaxed mb-6">
                 CC&Rs, meeting minutes, budgets, and all governing documents will appear here
                 once registered on-chain. Every document is permanently stored and verifiable.
@@ -443,8 +440,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
 
       {submitted ? (
         <div className="text-center py-8">
-          <div className="text-4xl mb-3"></div>
-          <p className="text-green-400 font-semibold">Upload queued successfully!</p>
+                    <p className="text-green-400 font-semibold">Upload queued successfully!</p>
           <p className="text-xs text-gray-500 mt-1">Arweave transaction will be processed shortly.</p>
         </div>
       ) : (

@@ -197,8 +197,7 @@ function ParkingContent() {
         <div className="space-y-3">
           {activePasses.length === 0 ? (
             <div className="glass-card rounded-md p-12 text-center">
-              <p className="text-4xl mb-3"></p>
-              <p className="text-gray-400">No active visitor passes</p>
+                            <p className="text-gray-400">No active visitor passes</p>
             </div>
           ) : activePasses.map(pass => {
             const expires = new Date(pass.expiresAt);

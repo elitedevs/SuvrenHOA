@@ -65,8 +65,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Dues Calculator</p>
           <h3 className="text-lg font-bold text-[var(--text-primary)]">See Your Savings</h3>
         </div>
-        <div className="text-2xl"></div>
-      </div>
+              </div>
 
       {/* Lot sqft input */}
       <div className="mb-4">
@@ -125,7 +124,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
       {/* Savings vs traditional */}
       <div className="rounded-lg bg-gradient-to-br from-green-500/10 to-emerald-500/5 border border-green-500/20 p-5">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-lg"></span>
+          
           <p className="text-sm font-bold text-green-400">vs. Traditional HOA</p>
         </div>
         <div className="grid grid-cols-2 gap-3 mb-3">

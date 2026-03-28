@@ -15,8 +15,7 @@ export default function MeetingsPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2"></div>
-        <p className="text-gray-400 text-base font-medium">Sign in to view board meetings</p>
+                <p className="text-gray-400 text-base font-medium">Sign in to view board meetings</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -75,8 +74,7 @@ export default function MeetingsPage() {
       {/* Meeting List */}
       {displayedMeetings.length === 0 ? (
         <div className="glass-card rounded-lg p-12 text-center">
-          <p className="text-5xl mb-4"></p>
-          <h3 className="text-lg font-bold mb-2">No Meetings Scheduled</h3>
+                    <h3 className="text-lg font-bold mb-2">No Meetings Scheduled</h3>
           <p className="text-sm text-gray-400">Board meetings will appear here once scheduled.</p>
         </div>
       ) : (

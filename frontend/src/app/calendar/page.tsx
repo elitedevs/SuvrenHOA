@@ -87,8 +87,7 @@ export default function CalendarPage() {
         <div className="text-center py-12 text-gray-500">Loading events...</div>
       ) : Object.keys(eventsByDate).length === 0 ? (
         <div className="glass-card rounded-md p-12 text-center">
-          <p className="text-5xl mb-4"></p>
-          <h3 className="text-lg font-medium mb-2">No upcoming events</h3>
+                    <h3 className="text-lg font-medium mb-2">No upcoming events</h3>
           <p className="text-sm text-gray-400">Board meetings, community events, and deadlines will appear here</p>
         </div>
       ) : (

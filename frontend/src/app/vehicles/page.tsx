@@ -112,8 +112,7 @@ export default function VehiclesPage() {
         <div className="text-center py-12 text-gray-500">Loading vehicles...</div>
       ) : (vehicles || []).length === 0 ? (
         <div className="glass-card rounded-md hover-lift p-12 text-center">
-          <p className="text-5xl mb-4"></p>
-          <h3 className="text-lg font-medium mb-2">No vehicles registered</h3>
+                    <h3 className="text-lg font-medium mb-2">No vehicles registered</h3>
           <p className="text-sm text-gray-400">Register your vehicles for parking management and security</p>
         </div>
       ) : (

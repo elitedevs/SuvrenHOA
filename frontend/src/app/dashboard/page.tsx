@@ -76,8 +76,7 @@ export default function DashboardPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2"></div>
-        <p className="text-gray-400 text-base font-medium">Sign in to view your property</p>
+                <p className="text-gray-400 text-base font-medium">Sign in to view your property</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -118,10 +117,7 @@ function PropertyDashboard() {
 
         {/* Empty state */}
         <div className="glass-card rounded-lg p-12 text-center border-l-2 border-l-amber-500/40">
-          <div className="w-20 h-20 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-4xl mx-auto mb-6">
-            
-          </div>
-          <h3 className="text-xl font-bold mb-3 text-gray-100">No Property NFT Detected</h3>
+                    <h3 className="text-xl font-bold mb-3 text-gray-100">No Property NFT Detected</h3>
           <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed mb-6">
             Your wallet doesn&apos;t hold a Faircroft Property NFT.
             If you&apos;re a homeowner, contact the board to have your property minted.
@@ -202,7 +198,7 @@ function PropertyDashboard() {
         <div className="glass-card rounded-lg p-7 border-l-2 border-l-blue-500/50 page-enter page-enter-delay-1">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Voting Power</p>
           <div className="flex items-end gap-3 mb-2">
-            <p className="text-6xl font-black text-[#c9a96e] leading-none">{votes}</p>
+            <p className="text-6xl font-normal text-[#c9a96e] leading-none">{votes}</p>
             <p className="text-sm text-gray-500 font-medium mb-2">vote{Number(votes) !== 1 ? 's' : ''}</p>
           </div>
           <div className="flex items-center gap-2">

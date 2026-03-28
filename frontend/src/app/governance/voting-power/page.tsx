@@ -96,7 +96,7 @@ export default function VotingPowerPage() {
             </div>
             <div>
               <div className="flex items-baseline gap-3 mb-1">
-                <span className={`text-5xl font-black ${myTier.color}`}>{currentVotes}</span>
+                <span className={`text-5xl font-normal ${myTier.color}`}>{currentVotes}</span>
                 <span className="text-gray-500 text-lg">votes</span>
               </div>
               <p className={`text-sm font-bold ${myTier.color}`}>{myTier.name} Tier · Lot #{tokenId}</p>
@@ -140,7 +140,7 @@ export default function VotingPowerPage() {
                   </div>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className={`text-2xl font-black ${tier.color}`}>{tier.votes}</p>
+                  <p className={`text-2xl font-normal ${tier.color}`}>{tier.votes}</p>
                   <p className="text-[10px] text-gray-500">votes</p>
                 </div>
               </div>

@@ -114,6 +114,27 @@ p, span, li, td, th, label, a { font-size: max(13px, inherit); }
 .bg-elevated { background: var(--bg-elevated) !important; }
 .border-token { border-color: var(--border-subtle) !important; }
 
+/* ── Legacy Gold Override — Map old champagne to aged brass ───────────────── */
+/* Old palette used #c9a96e (champagne), #e8d5a3 (light gold), #b8942e (dark gold) */
+/* New palette uses #B09B71 (aged brass) — warmer, more desaturated */
+html.dark .text-\[\#c9a96e\] { color: var(--accent-brass) !important; }
+html.dark .text-\[\#e8d5a3\] { color: rgba(176, 155, 113, 0.85) !important; }
+html.dark .text-\[\#b8942e\] { color: var(--accent-brass) !important; }
+html.dark .bg-\[\#c9a96e\] { background: var(--accent-brass) !important; }
+html.dark .bg-\[\#c9a96e\]\/10 { background: rgba(176, 155, 113, 0.08) !important; }
+html.dark .bg-\[\#c9a96e\]\/15 { background: rgba(176, 155, 113, 0.10) !important; }
+html.dark .bg-\[\#c9a96e\]\/5 { background: rgba(176, 155, 113, 0.04) !important; }
+html.dark .border-\[\#c9a96e\] { border-color: var(--accent-brass) !important; }
+html.dark .border-\[\#c9a96e\]\/20 { border-color: rgba(176, 155, 113, 0.15) !important; }
+html.dark .border-\[\#c9a96e\]\/25 { border-color: rgba(176, 155, 113, 0.18) !important; }
+html.dark .border-\[\#c9a96e\]\/30 { border-color: rgba(176, 155, 113, 0.20) !important; }
+html.dark .border-\[\#c9a96e\]\/40 { border-color: rgba(176, 155, 113, 0.25) !important; }
+html.dark .border-\[\#c9a96e\]\/50 { border-color: rgba(176, 155, 113, 0.30) !important; }
+html.dark .border-l-\[\#c9a96e\]\/40 { border-left-color: rgba(176, 155, 113, 0.25) !important; }
+html.dark .border-l-\[\#c9a96e\]\/50 { border-left-color: rgba(176, 155, 113, 0.30) !important; }
+html.dark .hover\:border-\[\#c9a96e\]\/30:hover { border-color: rgba(176, 155, 113, 0.20) !important; }
+html.dark .hover\:text-\[\#e8d5a3\]:hover { color: rgba(176, 155, 113, 0.85) !important; }
+
 /* ── Tailwind Gray Override — Force palette on raw gray classes ────────────── */
 /* This ensures existing text-gray-* / bg-gray-* classes render on-palette */
 /* instead of Tailwind's default cool grays. Luxury is in the detail. */
@@ -895,3 +916,14 @@ h1, h2, h3, h4, h5, h6 {
 button, [role="button"], a[class*="btn"] {
   font-weight: 500;
 }
+
+/* ── Weight discipline — global cap at 500 ─────────────────────────────────── */
+/* Only buttons and interactive controls should use 500. Everything else: 400. */
+/* This overrides Tailwind's font-bold (700) and font-semibold (600) globally */
+.font-bold {
+  font-weight: 500 !important;
+}
+.font-semibold {
+  font-weight: 500 !important;
+}
+/* Headings already forced to 400 above */

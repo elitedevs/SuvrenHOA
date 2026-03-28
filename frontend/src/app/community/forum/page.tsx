@@ -257,8 +257,7 @@ export default function ForumPage() {
         <div className="text-center py-12 text-gray-500">Loading discussions...</div>
       ) : sorted.length === 0 ? (
         <div className="glass-card rounded-lg p-12 text-center">
-          <p className="text-4xl mb-3"></p>
-          <p className="text-gray-400">No topics yet. Start the conversation!</p>
+                    <p className="text-gray-400">No topics yet. Start the conversation!</p>
         </div>
       ) : (
         <div className="space-y-3">

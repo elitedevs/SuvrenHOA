@@ -373,7 +373,7 @@ export default function AlertsPage() {
           {sortedActive.length === 0 ? (
             <div className="glass-card rounded-lg hover-lift p-8 text-center">
               <div className="w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl"></span>
+                
               </div>
               <p className="font-semibold text-gray-300 mb-1">All clear</p>
               <p className="text-sm text-gray-500">No active alerts for your community.</p>

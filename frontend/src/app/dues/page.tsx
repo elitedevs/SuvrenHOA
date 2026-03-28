@@ -17,8 +17,7 @@ export default function DuesPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2"></div>
-        <p className="text-gray-400 text-base font-medium">Sign in to pay dues</p>
+                <p className="text-gray-400 text-base font-medium">Sign in to pay dues</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -105,8 +104,7 @@ function DuesPanel() {
     return (
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12 page-enter">
         <div className="glass-card rounded-lg hover-lift p-12 text-center border-l-2 border-l-amber-500/40">
-          <div className="text-5xl mb-4"></div>
-          <h2 className="text-xl font-bold mb-3">No Property Found</h2>
+                    <h2 className="text-xl font-bold mb-3">No Property Found</h2>
           <p className="text-gray-400 text-sm">You need a Property NFT to pay dues.</p>
         </div>
       </div>
@@ -247,10 +245,7 @@ function DuesPanel() {
       {/* Done State */}
       {step === 'done' ? (
         <div className="glass-card-success rounded-lg p-12 text-center border-l-2 border-l-green-500/50 pulse-glow-green page-enter">
-          <div className="w-20 h-20 rounded-full bg-green-500/15 border-2 border-green-500/30 flex items-center justify-center text-4xl mx-auto mb-6">
-            
-          </div>
-          <h3 className="text-2xl font-normal text-green-400 mb-3">Payment Successful!</h3>
+                    <h3 className="text-2xl font-normal text-green-400 mb-3">Payment Successful!</h3>
           <p className="text-sm text-gray-400 mb-2 max-w-sm mx-auto">
             Your dues have been paid. The treasury has been updated on-chain.
           </p>

@@ -97,8 +97,7 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
           </div>
         ) : submitted ? (
           <div className="text-center py-6 space-y-3">
-            <div className="text-4xl"></div>
-            <h3 className="font-semibold">Appeal Submitted</h3>
+                        <h3 className="font-semibold">Appeal Submitted</h3>
             <p className="text-sm text-gray-400">Your appeal has been logged. The board will review within 5 business days.</p>
             <button onClick={onClose} className="px-6 py-2.5 rounded-md bg-[#c9a96e] text-[#1a1a1a] text-sm font-medium">Done</button>
           </div>
@@ -276,8 +275,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
         <div className="text-center py-12 text-gray-500">Loading violations...</div>
       ) : !violations || violations.length === 0 ? (
         <div className="glass-card rounded-md hover-lift p-12 text-center">
-          <p className="text-5xl mb-4"></p>
-          <h3 className="text-lg font-medium mb-2">No violations</h3>
+                    <h3 className="text-lg font-medium mb-2">No violations</h3>
           <p className="text-sm text-gray-400">
             The community is in good standing. Violations will appear here when reported.
           </p>

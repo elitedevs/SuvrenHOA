@@ -612,8 +612,7 @@ function IncidentsPanel({
   if (active.length === 0) {
     return (
       <div className="glass-card rounded-md hover-lift p-6 text-center mt-6">
-        <div className="text-3xl mb-2"></div>
-        <p className="text-gray-400 text-sm">No active incidents in the neighborhood</p>
+                <p className="text-gray-400 text-sm">No active incidents in the neighborhood</p>
       </div>
     );
   }
@@ -714,7 +713,7 @@ export default function MapPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#0d0b14] to-[#080810]">
+    <main className="min-h-screen page-enter" style={{ background: "var(--bg-primary)" }}>
       <div className="max-w-[960px] mx-auto px-4 py-8 sm:px-6">
         {/* Page header */}
         <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
@@ -813,8 +812,7 @@ export default function MapPage() {
         {/* Empty state */}
         {!loading && !error && lots.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <div className="text-5xl mb-4"></div>
-            <h2 className="text-xl font-bold text-gray-300 mb-2">No properties minted yet</h2>
+                        <h2 className="text-xl font-bold text-gray-300 mb-2">No properties minted yet</h2>
             <p className="text-gray-500 text-sm max-w-sm">
               Once property NFTs are minted on-chain, they will appear here color-coded by dues status.
             </p>
@@ -824,8 +822,7 @@ export default function MapPage() {
         {/* No filter results */}
         {!loading && !error && lots.length > 0 && filteredLots.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16 text-center">
-            <div className="text-4xl mb-3"></div>
-            <h2 className="text-lg font-bold text-gray-300 mb-1">No lots match your filters</h2>
+                        <h2 className="text-lg font-bold text-gray-300 mb-1">No lots match your filters</h2>
             <p className="text-gray-500 text-sm">Try clearing the search or changing the filter.</p>
           </div>
         )}

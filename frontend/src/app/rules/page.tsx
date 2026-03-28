@@ -248,8 +248,7 @@ export default function RulesPage() {
 
       {filteredSections.length === 0 && (
         <div className="glass-card rounded-md p-12 text-center">
-          <p className="text-4xl mb-3"></p>
-          <h3 className="font-medium mb-1">No results found</h3>
+                    <h3 className="font-medium mb-1">No results found</h3>
           <p className="text-sm text-gray-400">Try different keywords or browse by section above</p>
         </div>
       )}
