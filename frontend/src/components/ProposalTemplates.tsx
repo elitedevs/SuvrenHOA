@@ -2,7 +2,6 @@
 
 interface Template {
   id: string;
-  icon?: string;
   name: string;
   category: number;  // 0=Routine, 1=Financial, 2=Governance, 3=Constitutional
   categoryLabel: string;
@@ -182,7 +181,6 @@ export function ProposalTemplates({ onUseTemplate }: Props) {
               className="text-left rounded-md p-4 border border-gray-700/50 bg-gray-800/30 hover:border-[#c9a96e]/30 hover:bg-[#c9a96e]/5 transition-all group"
             >
               <div className="flex items-start gap-3">
-                <span className="text-2xl">{t.icon}</span>
                 <div className="min-w-0">
                   <p className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[#e8d5a3] transition-colors">{t.name}</p>
                   <p className={`text-[10px] mt-0.5 text-${color}-400`}>{t.categoryLabel}</p>

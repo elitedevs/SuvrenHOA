@@ -18,7 +18,6 @@ export interface AmenityBooking {
 export interface Amenity {
   id: string;
   name: string;
-  icon?: string;
   description: string;
   capacity: number;
   rules: string[];

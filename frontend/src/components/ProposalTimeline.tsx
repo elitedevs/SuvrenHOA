@@ -7,7 +7,6 @@ interface ProposalTimelineProps {
 type Stage = {
   id: string;
   label: string;
-  icon?: string;
   activeStates: string[];
   doneStates: string[];
   failStates?: string[];

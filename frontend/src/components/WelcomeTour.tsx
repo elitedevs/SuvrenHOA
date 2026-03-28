@@ -8,7 +8,6 @@ const WALLET_SEEN_KEY = 'suvren-wallet-seen';
 interface TourStep {
   title: string;
   description: string;
-  icon?: string;
   hint?: string;
 }
 

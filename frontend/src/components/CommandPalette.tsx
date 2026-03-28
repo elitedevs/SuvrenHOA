@@ -7,7 +7,6 @@ interface SearchItem {
   id: string;
   title: string;
   subtitle?: string;
-  icon?: string;
   href: string;
   category: string;
 }

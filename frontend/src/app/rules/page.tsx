@@ -11,7 +11,6 @@ interface Rule {
 
 interface Section {
   id: string;
-  icon?: string;
   title: string;
   description: string;
   rules: Rule[];
@@ -192,7 +191,6 @@ export default function RulesPage() {
               className="w-full p-5 flex items-center justify-between text-left hover:bg-white/2 transition-colors"
             >
               <div className="flex items-center gap-3">
-                <span className="text-2xl">{section.icon}</span>
                 <div>
                   <h2 className="font-semibold text-base">{section.title}</h2>
                   <p className="text-xs text-gray-400 mt-0.5">{section.description}</p>

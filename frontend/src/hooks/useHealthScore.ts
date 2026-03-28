@@ -26,7 +26,6 @@ export type HealthFactor = {
   max: number;
   description: string;
   improvement: string;
-  icon?: string;
 };
 
 export type HealthScoreData = {

@@ -98,7 +98,7 @@ export function useAIAssistant() {
         if (health.loading) {
           return " Calculating the community health score... try again in a moment!";
         }
-        const factorLines = health.factors.map((f) => `• ${f.icon} ${f.name}: ${f.score}/${f.max}`).join('\n');
+        const factorLines = health.factors.map((f) => `• ${f.name}: ${f.score}/${f.max}`).join('\n');
         return ` **Community Health Score: ${health.score}/100 (Grade ${health.grade})**\n\nKey factors:\n${factorLines}\n\nSee the full breakdown at [/health](/health).`;
       }
 

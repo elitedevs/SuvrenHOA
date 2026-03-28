@@ -139,7 +139,6 @@ export default function HealthPage() {
                 <div key={factor.name} className="glass-card rounded-lg hover-lift p-6">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="flex items-center gap-3">
-                      <span className="text-2xl">{factor.icon}</span>
                       <div>
                         <h3 className="font-bold text-gray-100 text-base">{factor.name}</h3>
                         <p className="text-xs text-gray-500 mt-0.5">{factor.description}</p>

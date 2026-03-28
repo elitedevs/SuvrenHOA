@@ -15,7 +15,6 @@ import DocumentRegistryAbi from '@/config/abis/DocumentRegistry.json';
 
 export interface ActivityItem {
   id: string;           // unique key: txHash-logIndex
-  icon?: string;
   description: string;
   txHash: `0x${string}`;
   blockNumber: bigint;
@@ -144,7 +143,6 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const reasonStr = reason && reason.trim().length > 0 ? ` — "${reason.trim().slice(0, 40)}"` : '';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: support === 1 ? '' : support === 0 ? '' : '',
       description: `${voterStr} voted ${supportLabel}${reasonStr}`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,

@@ -6,7 +6,6 @@ interface NotifPref {
   id: string;
   label: string;
   description: string;
-  icon?: string;
   urgent?: boolean;
 }
 

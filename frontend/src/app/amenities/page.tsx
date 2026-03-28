@@ -88,7 +88,7 @@ function AmenityGrid({ onSelect, walletAddress }: { onSelect: (a: Amenity) => vo
                 const amenity = AMENITIES.find(a => a.id === b.amenityId);
                 return (
                   <div key={b.id} className="flex items-center justify-between text-sm">
-                    <span className="text-gray-300">{amenity?.icon} {amenity?.name}</span>
+                    <span className="text-gray-300">{amenity?.name}</span>
                     <span className="text-gray-500">{b.date} at {b.slot}</span>
                     <span className="text-xs text-[#c9a96e] truncate max-w-[120px]">{b.purpose}</span>
                   </div>

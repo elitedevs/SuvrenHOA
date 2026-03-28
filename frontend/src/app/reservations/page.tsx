@@ -9,7 +9,6 @@ import { useProperty } from '@/hooks/useProperty';
 interface Amenity {
   id: string;
   name: string;
-  icon?: string;
   description: string;
   rules: string[];
   hours: string;

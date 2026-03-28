@@ -1087,3 +1087,89 @@ a:active {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Push to 55 — Every last detail
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── font-medium → 400 (luxury doesn't need medium weight) ────────────────── */
+.font-medium {
+  font-weight: 400 !important;
+}
+
+/* ── text-white → warm parchment (never pure white) ──────────────────────── */
+html.dark .text-white {
+  color: #F5F0E8 !important;
+}
+
+/* ── border-white → palette border ───────────────────────────────────────── */
+html.dark .border-white\/5 { border-color: rgba(245, 240, 232, 0.04) !important; }
+html.dark .border-white\/\[0\.03\] { border-color: rgba(245, 240, 232, 0.03) !important; }
+html.dark .border-white\/\[0\.06\] { border-color: rgba(245, 240, 232, 0.05) !important; }
+html.dark .border-white\/\[0\.08\] { border-color: rgba(245, 240, 232, 0.06) !important; }
+html.dark .border-white\/10 { border-color: rgba(245, 240, 232, 0.08) !important; }
+html.dark .border-white\/20 { border-color: rgba(245, 240, 232, 0.12) !important; }
+
+/* ── bg-[#1a1a1a] → proper surface ──────────────────────────────────────── */
+html.dark .bg-\[\#1a1a1a\] { background: var(--bg-elevated) !important; }
+html.dark .bg-\[\#1a1a1a\]\/30 { background: rgba(26, 26, 30, 0.3) !important; }
+html.dark .bg-\[\#1a1a1a\]\/40 { background: rgba(26, 26, 30, 0.4) !important; }
+
+/* ── hover:border → remove the border flash, keep shadow hover ───────────── */
+html.dark .hover\:border-\[\#c9a96e\]\/20:hover { border-color: transparent !important; }
+html.dark .hover\:border-\[\#c9a96e\]\/25:hover { border-color: transparent !important; }
+html.dark .hover\:border-\[\#c9a96e\]\/30:hover { border-color: transparent !important; }
+html.dark .hover\:border-gray-600:hover { border-color: transparent !important; }
+html.dark .hover\:border-gray-700:hover { border-color: transparent !important; }
+
+/* ── animate-spin → shimmer (consistent with animate-pulse override) ──────── */
+@keyframes gentle-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  animation: gentle-spin 1.5s linear infinite !important;
+  opacity: 0.4;
+}
+
+/* ── bg-white opacity variants → proper elevated surfaces ────────────────── */
+html.dark .bg-white\/5 { background: rgba(245, 240, 232, 0.03) !important; }
+html.dark .bg-white\/\[0\.03\] { background: rgba(245, 240, 232, 0.02) !important; }
+html.dark .bg-white\/\[0\.04\] { background: rgba(245, 240, 232, 0.03) !important; }
+html.dark .bg-white\/\[0\.06\] { background: rgba(245, 240, 232, 0.04) !important; }
+html.dark .bg-white\/\[0\.08\] { background: rgba(245, 240, 232, 0.05) !important; }
+html.dark .bg-white\/10 { background: rgba(245, 240, 232, 0.06) !important; }
+
+/* ── Remaining hover effects → subtle opacity, not color change ──────────── */
+html.dark .hover\:text-white:hover { color: #F5F0E8 !important; }
+html.dark .hover\:text-\[\#e8d5a3\]:hover { color: rgba(176, 155, 113, 0.85) !important; }
+html.dark .hover\:bg-white\/5:hover { background: rgba(245, 240, 232, 0.04) !important; }
+html.dark .hover\:bg-white\/10:hover { background: rgba(245, 240, 232, 0.06) !important; }
+
+/* ── Filter chips / badges — 400 weight, smaller radius ──────────────────── */
+[class*="rounded-full"][class*="px-"] {
+  font-weight: 400;
+}
+
+/* ── Light Mode — comprehensive overrides for Push-to-55 ─────────────────── */
+html.light .text-white { color: #1A1A1E !important; }
+html.light .font-medium { font-weight: 400 !important; }
+html.light .bg-\[\#1a1a1a\] { background: #F2F0ED !important; }
+html.light .bg-\[\#1a1a1a\]\/30 { background: rgba(242, 240, 237, 0.5) !important; }
+html.light .bg-\[\#1a1a1a\]\/40 { background: rgba(242, 240, 237, 0.6) !important; }
+html.light .border-white\/5 { border-color: rgba(26, 26, 30, 0.05) !important; }
+html.light .border-white\/10 { border-color: rgba(26, 26, 30, 0.08) !important; }
+html.light .bg-white\/5 { background: rgba(26, 26, 30, 0.03) !important; }
+html.light .bg-white\/10 { background: rgba(26, 26, 30, 0.05) !important; }
+
+/* Light mode solid colors */
+html.light .bg-green-500 { background: #2A5D4F !important; }
+html.light .bg-red-500 { background: #6B3A3A !important; }
+html.light .bg-blue-500 { background: #6B7B90 !important; }
+html.light .bg-amber-500 { background: #8A7A5A !important; }
+
+/* Light mode text colors */
+html.light .text-green-400 { color: #2A5D4F !important; }
+html.light .text-red-400 { color: #6B3A3A !important; }
+html.light .text-blue-400 { color: #5A6A7E !important; }
+html.light .text-amber-400 { color: #8A7A5A !important; }
