@@ -45,7 +45,7 @@ export default function DocumentsPage() {
           <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Community Records</p>
           <h1 className="text-3xl font-normal tracking-tight">Documents</h1>
           <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-            Immutable community records — verified on-chain, stored permanently on Arweave
+            Immutable community records — verified and stored permanently
           </p>
         </div>
         <div className="flex gap-2 shrink-0">
@@ -142,10 +142,10 @@ export default function DocumentsPage() {
           {/* Document List */}
           {documentCount === 0 ? (
             <div className="glass-card rounded-lg hover-lift p-14 text-center page-enter page-enter-delay-3">
-                            <h3 className="text-xl font-bold mb-3">No documents registered yet</h3>
+                            <h3 style={{ fontFamily: "var(--font-heading), Georgia, serif", fontStyle: "italic", fontSize: "18px", fontWeight: 400, color: "var(--text-secondary)" }}>No documents registered</h3>
               <p className="text-sm text-gray-400 max-w-md mx-auto leading-relaxed mb-6">
                 CC&Rs, meeting minutes, budgets, and all governing documents will appear here
-                once registered on-chain. Every document is permanently stored and verifiable.
+                once registered. Every document is permanently stored and verifiable.
               </p>
               <div className="glass-card rounded-md hover-lift p-5 max-w-sm mx-auto border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30">
                 <p className="text-xs text-[#e8d5a3] leading-relaxed">
@@ -343,7 +343,7 @@ function VerifyPanel({
         </div>
         <h3 className="text-xl font-bold mb-2 text-gray-100">Drop a file to verify</h3>
         <p className="text-sm text-gray-400 max-w-sm mx-auto leading-relaxed">
-          We&apos;ll compute the SHA-256 hash and check it against the on-chain registry.
+          We&apos;ll compute the SHA-256 hash and check it against the registry.
           <br />
           <span className="text-gray-500">The file never leaves your device.</span>
         </p>
@@ -372,7 +372,7 @@ function VerifyPanel({
           <p className="text-xs font-mono text-gray-300 break-all bg-gray-800/50 p-3 rounded-md border border-gray-700/40 mb-4">{hash}</p>
           <div className="flex items-center gap-2 text-sm text-gray-400">
             <div className="w-4 h-4 border-2 border-[#c9a96e]/40 border-t-[#c9a96e] rounded-full animate-spin" />
-            Checking on-chain registry...
+            Checking registry...
           </div>
         </div>
       )}
@@ -384,7 +384,7 @@ function VerifyPanel({
           {[
             { n: 1, text: 'Drop the document file (PDF, spreadsheet, etc.)' },
             { n: 2, text: 'Your browser computes the SHA-256 hash locally' },
-            { n: 3, text: 'We check if that hash exists in the on-chain DocumentRegistry' },
+            { n: 3, text: 'We check if that hash exists in the registry' },
             { n: 4, text: 'If it matches → the document is authentic and unaltered ' },
             { n: 5, text: "If it doesn't match → the file has been modified or isn't registered" },
           ].map(({ n, text }) => (

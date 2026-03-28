@@ -60,7 +60,7 @@ function SurveyList() {
   if (!surveys || surveys.length === 0) {
     return (
       <div className="glass-card rounded-md p-12 text-center">
-                <h3 className="text-lg font-medium mb-2">No surveys yet</h3>
+                <h3 style={{ fontFamily: "var(--font-heading), Georgia, serif", fontStyle: "italic", fontSize: "16px", fontWeight: 400, color: "var(--text-secondary)" }}>No surveys yet</h3>
         <p className="text-sm text-gray-400 max-w-md mx-auto">
           Surveys let the board gather community input on everything from pool hours to
           landscaping vendors. Results are transparent and tamper-proof.

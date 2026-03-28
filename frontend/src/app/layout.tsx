@@ -62,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 © 2026 EliteDevs. All rights reserved. SuvrenHOA™ is a trademark of EliteDevs.
               </p>
               <p className="text-[11px] mt-1" style={{ color: 'var(--text-muted)', opacity: 0.7 }}>
-                Powered by Base blockchain · Smart contracts audited · Documents stored on Arweave
+                Independently verified · Permanently stored
               </p>
             </footer>
           </div>

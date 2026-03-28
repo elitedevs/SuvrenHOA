@@ -42,7 +42,7 @@ export default function CommunityPage() {
   const regularPosts = posts.filter((p: any) => !p.pinned);
 
   return (
-    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
+    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter" data-section="community">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>

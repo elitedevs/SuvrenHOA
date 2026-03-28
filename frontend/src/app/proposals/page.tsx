@@ -42,7 +42,7 @@ export default function ProposalsPage() {
   const [showCreate, setShowCreate] = useState(false);
 
   return (
-    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
+    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter" data-section="governance">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
           <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Governance</p>
@@ -274,7 +274,7 @@ function ProposalCard({
 function EmptyState() {
   return (
     <div className="glass-card rounded-lg hover-lift p-14 text-center">
-            <h3 className="text-xl font-bold mb-3">No proposals yet</h3>
+            <h3 style={{ fontFamily: "var(--font-heading), Georgia, serif", fontStyle: "italic", fontSize: "18px", fontWeight: 400, color: "var(--text-secondary)" }}>No proposals are open</h3>
       <p className="text-sm text-gray-400 max-w-md mx-auto leading-relaxed mb-8">
         Any homeowner with a Property NFT can submit a proposal.
         Once submitted, the community votes over a 7-day period.
@@ -505,7 +505,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
         className="w-full py-4 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] min-h-[52px]"
       >
         {isPending ? ' Confirm in Wallet...' :
-         isConfirming ? ' Submitting On-Chain...' :
+         isConfirming ? ' Submitting...' :
          'Submit Proposal'}
       </button>
 
@@ -516,7 +516,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
           <li>Voting opens for <strong className="text-gray-300">7 days</strong></li>
           <li>If quorum + threshold met → <strong className="text-gray-300">Succeeded</strong></li>
           <li>Queue in Timelock (2–7 day delay based on category)</li>
-          <li>Execute → changes take effect on-chain</li>
+          <li>Execute → changes take effect</li>
         </ol>
       </div>
     </div>

@@ -56,7 +56,7 @@ function SkeletonRow() {
 function EmptyState() {
   return (
     <div className="text-center py-16 text-gray-500">
-            <p className="text-sm font-medium">No activity yet — be the first to participate!</p>
+            <p className="text-sm font-medium">No activity recorded yet.</p>
     </div>
   );
 }
@@ -213,7 +213,7 @@ export default function LeaderboardPage() {
     goodNeighbor.toLowerCase() === connectedAddress.toLowerCase();
 
   return (
-    <main className="max-w-[960px] mx-auto px-4 py-8 space-y-8 page-enter">
+    <main className="max-w-[960px] mx-auto px-4 py-8 space-y-8 page-enter" data-section="community">
       {/* ── Header ── */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold gradient-text">Community Leaderboard</h1>
@@ -265,7 +265,7 @@ export default function LeaderboardPage() {
                 </div>
               </div>
             ) : (
-              <p className="text-gray-500 text-sm">No activity yet — be the first to participate!</p>
+              <p className="text-gray-500 text-sm">No activity recorded yet.</p>
             )}
           </div>
         </div>
@@ -314,7 +314,7 @@ export default function LeaderboardPage() {
 
       {/* ── Footer Info ── */}
       <div className="text-center text-xs text-gray-600 space-y-1">
-        <p>Data sourced from on-chain events · Last ~50,000 blocks (~27 hours)</p>
+        <p>Data sourced from blockchain events · Last ~50,000 blocks (~27 hours)</p>
         <p>Auto-refreshes every 5 minutes</p>
       </div>
     </main>

@@ -146,7 +146,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
   };
 
   return (
-    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
+    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter" data-section="governance">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 flex-wrap mb-3">
@@ -258,7 +258,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
                   type="text"
                   value={voteReason}
                   onChange={(e) => setVoteReason(e.target.value)}
-                  placeholder="Why are you voting this way? (stored on-chain)"
+                  placeholder="Why are you voting this way? (recorded permanently)"
                   className="w-full px-4 py-3 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100"
                 />
               </div>
@@ -355,7 +355,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
         <div className="glass-card rounded-md p-6 mb-6 text-center">
           <p className="text-gray-400">
             {stateLabel === 'Pending' && ' Voting opens after the 1-day delay period'}
-            {stateLabel === 'Executed' && ' This proposal has been executed on-chain!'}
+            {stateLabel === 'Executed' && ' This proposal has been executed.'}
             {stateLabel === 'Defeated' && ' This proposal was defeated'}
             {stateLabel === 'Canceled' && ' This proposal was canceled'}
             {stateLabel === 'Expired' && ' This proposal expired without execution'}

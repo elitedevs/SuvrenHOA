@@ -250,7 +250,7 @@ export function TransparencyDashboard() {
               <div className="w-px h-4 bg-white/10 hidden sm:block" />
               <div className="flex items-center gap-2 text-sm">
                 <FileText className="w-4 h-4 text-amber-400" />
-                <span className="text-gray-400">{stats.documentsOnChain} docs on-chain</span>
+                <span className="text-gray-400">{stats.documentsOnChain} verified records</span>
               </div>
             </div>
           )}
@@ -263,7 +263,7 @@ export function TransparencyDashboard() {
         <section>
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-xl font-bold text-white">Live On-Chain Stats</h2>
+              <h2 className="text-xl font-bold text-white">Live Statistics</h2>
               <p className="text-[13px] text-gray-500 mt-1">
                 Reads directly from smart contracts — no backend, no caching
               </p>
@@ -347,7 +347,7 @@ export function TransparencyDashboard() {
                 icon={Building2}
                 label="Total Properties"
                 value={stats.totalProperties}
-                subtext="Property NFTs minted on-chain"
+                subtext="Properties verified"
                 color="gold"
                 loading={stats.loading}
               />

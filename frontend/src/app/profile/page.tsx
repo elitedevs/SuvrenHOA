@@ -99,7 +99,7 @@ function ProfileForm() {
 
       {/* Property Info (read-only from chain) */}
       <div className="glass-card rounded-md p-5 mb-6">
-        <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-3">On-Chain Identity</h3>
+        <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-3">Blockchain Identity</h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <p className="text-[10px] text-gray-500">Wallet</p>
@@ -224,7 +224,7 @@ function ProfileForm() {
         <h4 className="text-xs font-medium text-[#c9a96e] mb-1"> Privacy</h4>
         <p className="text-[10px] text-gray-400">
           Your email and phone are never shared publicly. They&apos;re only used for notifications you opt into.
-          Your display name and lot number are visible to the community. Your wallet address is always on-chain.
+          Your display name and lot number are visible to the community. Your wallet address is publicly verifiable.
         </p>
       </div>
     </div>

@@ -812,7 +812,7 @@ export default function MapPage() {
         {/* Empty state */}
         {!loading && !error && lots.length === 0 && (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-                        <h2 className="text-xl font-bold text-gray-300 mb-2">No properties minted yet</h2>
+                        <h2 style={{ fontFamily: "var(--font-heading), Georgia, serif", fontStyle: "italic", fontSize: "18px", fontWeight: 400, color: "var(--text-secondary)" }}>No properties registered</h2>
             <p className="text-gray-500 text-sm max-w-sm">
               Once property NFTs are minted on-chain, they will appear here color-coded by dues status.
             </p>

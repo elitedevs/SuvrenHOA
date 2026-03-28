@@ -298,10 +298,10 @@ function CheckoutWizard() {
           </p>
           <div className="bg-blue-500/8 border border-blue-500/20 rounded-md p-4 mb-8 text-left">
             <p className="text-xs text-blue-300 font-semibold uppercase tracking-wide mb-1">
-              ℹ On-Chain Transfer
+              ℹ Ownership Transfer
             </p>
             <p className="text-xs text-gray-400 leading-relaxed">
-              Property ownership transfer happens on-chain when the Property NFT
+              Property ownership transfer happens when the Property NFT
               is transferred to the new owner&apos;s wallet. The board will
               coordinate this step with you and the buyer.
             </p>

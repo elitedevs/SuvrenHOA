@@ -23,7 +23,7 @@ export default function TreasuryPage() {
   const reservePct = total > 0 ? (reserve / total) * 100 : 20;
 
   return (
-    <div className="max-w-[960px] mx-auto px-6 py-10 page-enter">
+    <div className="max-w-[960px] mx-auto px-6 py-10 page-enter" data-section="treasury">
       {/* Header */}
       <div className="mb-10 flex items-start justify-between gap-4">
         <div>

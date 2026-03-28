@@ -29,7 +29,7 @@ export default function GovernanceStatsPage() {
   const maxBarCount = Math.max(...MOCK_STATS.monthlyProposals.map(m => m.count));
 
   return (
-    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
+    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter" data-section="governance">
       {/* Header */}
       <div className="flex items-center gap-3 mb-2">
         <Link href="/proposals" className="text-gray-500 hover:text-[#c9a96e] text-sm transition-colors">← Proposals</Link>

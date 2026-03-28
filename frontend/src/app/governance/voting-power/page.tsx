@@ -76,7 +76,7 @@ export default function VotingPowerPage() {
   }
 
   return (
-    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 page-enter">
+    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 page-enter" data-section="governance">
       {/* Header */}
       <div className="mb-8">
         <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Governance</p>
@@ -167,7 +167,7 @@ export default function VotingPowerPage() {
       <div className="glass-card rounded-lg p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30">
         <h4 className="text-sm font-bold text-[#e8d5a3] mb-3"> How Tier Advancement Works</h4>
         <div className="space-y-2 text-xs text-gray-400 leading-relaxed">
-          <p>• Voting power is determined automatically by your on-chain property NFT attributes.</p>
+          <p>• Voting power is determined automatically by your property attributes.</p>
           <p>• Paying dues on time and holding your property longer increases your tier.</p>
           <p>• Tier changes take effect at the start of the next governance cycle (quarterly).</p>
           <p>• Your tier is publicly verifiable — no behind-the-scenes manipulation.</p>

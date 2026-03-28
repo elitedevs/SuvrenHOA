@@ -38,7 +38,7 @@ export default function ActivityPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 page-enter">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>On-Chain Events</p>
+        <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Activity</p>
         <h1 className="text-3xl font-normal tracking-tight">Activity Log</h1>
         <p className="text-sm text-gray-400 mt-2">
           Unified feed of all community events — newest first
@@ -83,7 +83,7 @@ export default function ActivityPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-lg p-12 text-center">
-                    <h3 className="text-lg font-bold mb-2">No events found</h3>
+                    <h3 style={{ fontFamily: "var(--font-heading), Georgia, serif", fontStyle: "italic", fontSize: "16px", fontWeight: 400, color: "var(--text-secondary)" }}>No recent activity</h3>
           <p className="text-sm text-gray-400">
             {activeFilter ? 'Try a different filter' : 'No events in the last ~14 hours'}
           </p>

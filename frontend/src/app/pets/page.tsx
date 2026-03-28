@@ -32,7 +32,7 @@ export default function PetsPage() {
   const myPets = (pets || []).filter((p: any) => p.wallet_address === address?.toLowerCase());
 
   return (
-    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
+    <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter" data-section="property">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold"> Pet Registry</h1>
@@ -84,7 +84,7 @@ export default function PetsPage() {
         <div className="text-center py-12 text-gray-500">Loading pets...</div>
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-md hover-lift p-12 text-center">
-                    <h3 className="text-lg font-medium mb-2">No pets registered yet</h3>
+                    <h3 style={{ fontFamily: "var(--font-heading), Georgia, serif", fontStyle: "italic", fontSize: "16px", fontWeight: 400, color: "var(--text-secondary)" }}>No pets registered</h3>
           <p className="text-sm text-gray-400">Register your pets so neighbors know who's who on walks!</p>
         </div>
       ) : (

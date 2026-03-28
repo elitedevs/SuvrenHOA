@@ -86,7 +86,7 @@ export default function ForumPage() {
 
   if (selectedTopic) {
     return (
-      <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
+      <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter" data-section="community">
         <button onClick={() => setSelectedTopic(null)} className="text-gray-500 hover:text-[#c9a96e] text-sm transition-colors mb-4">
           ← Back to Forum
         </button>
@@ -257,7 +257,7 @@ export default function ForumPage() {
         <div className="text-center py-12 text-gray-500">Loading discussions...</div>
       ) : sorted.length === 0 ? (
         <div className="glass-card rounded-lg p-12 text-center">
-                    <p className="text-gray-400">No topics yet. Start the conversation!</p>
+                    <p style={{ fontFamily: "var(--font-heading), Georgia, serif", fontStyle: "italic", fontSize: "15px", color: "var(--text-muted)" }}>A quiet day at Faircroft.</p>
         </div>
       ) : (
         <div className="space-y-3">

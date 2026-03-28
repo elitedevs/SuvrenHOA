@@ -57,7 +57,7 @@ export default async function VerifyPropertyPage({ params }: Props) {
         <div className="flex items-start gap-3 text-left">
           <span className="text-xl"></span>
           <div>
-            <p className="text-sm font-semibold text-[#e8d5a3] mb-1">On-Chain Transparency</p>
+            <p className="text-sm font-semibold text-[#e8d5a3] mb-1">Verification</p>
             <p className="text-xs text-gray-400 leading-relaxed">
               This property is recorded as an NFT on the Base blockchain.
               Ownership, voting rights, and dues history are permanently immutable.

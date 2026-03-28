@@ -944,3 +944,30 @@ html.dark .border-pink-500\/20 { border-color: rgba(176, 155, 113, 0.12) !import
 html.dark .bg-indigo-500\/10 { background: rgba(176, 155, 113, 0.06) !important; }
 html.dark .text-indigo-400 { color: rgba(176, 155, 113, 0.7) !important; }
 html.dark .border-indigo-500\/20 { border-color: rgba(176, 155, 113, 0.12) !important; }
+
+/* ── Cursor discipline — pointer only on genuinely interactive elements ────── */
+/* Remove false affordance from non-clickable cards */
+.glass-card {
+  cursor: default;
+}
+a.glass-card, button.glass-card, [role="button"].glass-card {
+  cursor: pointer;
+}
+
+/* ── Tooltip styling — on palette ─────────────────────────────────────────── */
+[data-tooltip]::after,
+[title]::after {
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* ── Subtle brass accent on links ─────────────────────────────────────────── */
+a:hover {
+  color: var(--accent-brass);
+}
+
+/* ── Print: hide non-essential ────────────────────────────────────────────── */
+@media print {
+  .no-print, aside, footer, [data-tooltip] {
+    display: none !important;
+  }
+}
