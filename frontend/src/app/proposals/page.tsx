@@ -52,7 +52,7 @@ export default function ProposalsPage() {
         {isConnected && (
           <button
             onClick={() => setShowCreate(!showCreate)}
-            className="px-5 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] active:scale-95 text-sm font-bold transition-all duration-200 shrink-0 shadow-[0_0_20px_rgba(201,169,110,0.25)] min-h-[44px]"
+            className="px-5 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] active:scale-95 text-sm font-bold transition-all duration-200 shrink-0 shadow-[0_0_20px_rgba(201,169,110,0.25)] min-h-[44px]"
           >
             {showCreate ? '← Back to Proposals' : '+ New Proposal'}
           </button>
@@ -383,7 +383,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
         )}
         <button
           onClick={onClose}
-          className="block mx-auto mt-6 px-5 py-2.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-sm font-semibold transition-colors min-h-[44px]"
+          className="block mx-auto mt-6 px-5 py-2.5 rounded-md bg-gray-800 hover:bg-gray-700 text-sm font-semibold transition-colors min-h-[44px]"
         >
           Back to Proposals
         </button>
@@ -410,7 +410,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g., Hire new landscaping company for Q2"
-            className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100"
+            className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100"
           />
         </div>
 
@@ -429,7 +429,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
             </button>
           </div>
           {showPreview ? (
-            <div className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm text-gray-300 min-h-[160px] prose prose-invert prose-sm max-w-none leading-relaxed">
+            <div className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm text-gray-300 min-h-[160px] prose prose-invert prose-sm max-w-none leading-relaxed">
               {description ? (
                 <MarkdownPreview text={description} />
               ) : (
@@ -442,7 +442,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Describe what this proposal does, why it matters, and what changes when it passes..."
               rows={8}
-              className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all resize-none text-gray-100 font-mono"
+              className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all resize-none text-gray-100 font-mono"
             />
           )}
         </div>
@@ -471,7 +471,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
                   key={cat.value}
                   type="button"
                   onClick={() => setCategory(cat.value)}
-                  className={`p-4 rounded-xl border text-left transition-all duration-200 min-h-[44px] ${
+                  className={`p-4 rounded-md border text-left transition-all duration-200 min-h-[44px] ${
                     category === cat.value
                       ? `${borderColors[i % 4]} ${activeBorders[i % 4]} shadow-sm`
                       : 'border-gray-700/60 bg-gray-800/30 hover:border-gray-600/60'
@@ -494,7 +494,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* Quorum Estimate */}
-        <div className="rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/15 px-5 py-4">
+        <div className="rounded-md bg-[#c9a96e]/5 border border-[#c9a96e]/15 px-5 py-4">
           <p className="text-xs font-semibold text-[#e8d5a3] mb-1">
             {selectedCategory.icon} {selectedCategory.label} — Quorum Requirement
           </p>
@@ -510,7 +510,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
       <button
         onClick={handleSubmit}
         disabled={isPending || isConfirming || !title.trim() || !description.trim()}
-        className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] min-h-[52px]"
+        className="w-full py-4 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] min-h-[52px]"
       >
         {isPending ? ' Confirm in Wallet...' :
          isConfirming ? ' Submitting On-Chain...' :

@@ -153,7 +153,7 @@ export default function AnnouncementsPage() {
           const style = p !== 'all' ? PRIORITY_STYLES[p as keyof typeof PRIORITY_STYLES] : null;
           return (
             <button key={p} onClick={() => setPriorityFilter(p)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap transition-all ${
                 priorityFilter === p ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
               }`}>
               {style && <span className={`w-2 h-2 rounded-full ${style.dot}`} />}
@@ -166,11 +166,11 @@ export default function AnnouncementsPage() {
       {/* Tab */}
       <div className="flex gap-2 mb-6">
         <button onClick={() => setActiveTab('active')}
-          className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'active' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+          className={`px-4 py-2 rounded-md text-xs font-medium transition-all ${activeTab === 'active' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
           Active ({activeItems.length})
         </button>
         <button onClick={() => setActiveTab('archive')}
-          className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'archive' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+          className={`px-4 py-2 rounded-md text-xs font-medium transition-all ${activeTab === 'archive' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
            Archive ({archiveItems.length})
         </button>
       </div>
@@ -180,7 +180,7 @@ export default function AnnouncementsPage() {
       ) : activeTab === 'archive' ? (
         <ArchiveList items={archiveItems} readSet={readSet} />
       ) : filtered.length === 0 ? (
-        <div className="glass-card rounded-xl hover-lift p-12 text-center">
+        <div className="glass-card rounded-md hover-lift p-12 text-center">
           <p className="text-4xl mb-3"></p>
           <h3 className="font-medium mb-1">No announcements</h3>
           <p className="text-sm text-gray-400">Board announcements will appear here</p>
@@ -219,7 +219,7 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
   const readPct = Math.min(100, Math.round(readCount / TOTAL_RESIDENTS * 100));
 
   return (
-    <div className={`glass-card rounded-xl hover-lift border-l-4 ${style.border} overflow-hidden ${!isRead ? 'ring-1 ring-white/5' : ''}`}>
+    <div className={`glass-card rounded-md hover-lift border-l-4 ${style.border} overflow-hidden ${!isRead ? 'ring-1 ring-white/5' : ''}`}>
       <div className={`p-6 ${style.bg}`}>
         {/* Pin indicator */}
         {isPinned && (
@@ -293,7 +293,7 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
 function ArchiveList({ items, readSet }: { items: any[]; readSet: Set<string> }) {
   if (items.length === 0) {
     return (
-      <div className="glass-card rounded-xl p-12 text-center">
+      <div className="glass-card rounded-md p-12 text-center">
         <p className="text-4xl mb-3"></p>
         <h3 className="font-medium mb-1">No archived announcements</h3>
         <p className="text-sm text-gray-400">Announcements older than 60 days appear here</p>
@@ -308,7 +308,7 @@ function ArchiveList({ items, readSet }: { items: any[]; readSet: Set<string> })
         const priority = a.priority as keyof typeof PRIORITY_STYLES;
         const style = PRIORITY_STYLES[priority] || PRIORITY_STYLES.info;
         return (
-          <div key={a.id} className={`glass-card rounded-xl border-l-4 ${style.border} p-4 opacity-70`}>
+          <div key={a.id} className={`glass-card rounded-md border-l-4 ${style.border} p-4 opacity-70`}>
             <div className="flex items-center gap-2 flex-wrap mb-1">
               <span className={`text-[10px] px-2 py-0.5 rounded-full border ${style.badge}`}>{style.label}</span>
               <span className="text-[10px] text-gray-600">{new Date(a.created_at).toLocaleDateString()}</span>

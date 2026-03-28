@@ -59,7 +59,7 @@ export default function ArchitecturalPage() {
         </div>
         <button
           onClick={() => setShowSubmit(!showSubmit)}
-          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
+          className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
         >
           {showSubmit ? '← Back' : ' New Request'}
         </button>
@@ -90,14 +90,14 @@ function ReviewPipeline({ requests, setFilter }: { requests: any[]; setFilter: (
     });
   }
   return (
-    <div className="glass-card rounded-xl p-4 mb-6">
+    <div className="glass-card rounded-md p-4 mb-6">
       <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-3">Review Pipeline</p>
       <div className="flex items-center gap-1 overflow-x-auto pb-1">
         {PIPELINE_STAGES.map((stage, i) => (
           <div key={stage.key} className="flex items-center gap-1 min-w-0">
             <button
               onClick={() => setFilter(stage.key)}
-              className={`flex flex-col items-center px-3 py-2.5 rounded-xl border transition-all cursor-pointer hover:scale-105 shrink-0 ${stage.bg}`}
+              className={`flex flex-col items-center px-3 py-2.5 rounded-md border transition-all cursor-pointer hover:scale-105 shrink-0 ${stage.bg}`}
             >
               <span className="text-lg">{stage.icon}</span>
               <span className={`text-[10px] font-medium mt-1 ${stage.color}`}>{stage.label}</span>
@@ -145,7 +145,7 @@ function RequestList({ filter, setFilter }: { filter: string; setFilter: (f: str
           <button
             key={s}
             onClick={() => setFilter(s)}
-            className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
+            className={`px-4 py-2 rounded-md text-xs font-medium whitespace-nowrap transition-all ${
               filter === s ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
             }`}
           >
@@ -157,7 +157,7 @@ function RequestList({ filter, setFilter }: { filter: string; setFilter: (f: str
       {isLoading ? (
         <div className="text-center py-12 text-gray-500">Loading requests...</div>
       ) : !requests || requests.length === 0 ? (
-        <div className="glass-card rounded-xl p-12 text-center">
+        <div className="glass-card rounded-md p-12 text-center">
           <p className="text-5xl mb-4"></p>
           <h3 className="text-lg font-medium mb-2">No architectural requests</h3>
           <p className="text-sm text-gray-400 max-w-md mx-auto">
@@ -191,7 +191,7 @@ function RequestCard({ request }: { request: any }) {
     'text-gray-400 bg-gray-500/10 border-gray-500/20';
 
   return (
-    <div className="glass-card rounded-xl overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
+    <div className="glass-card rounded-md overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -299,7 +299,7 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
   });
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5">
+    <div className="glass-card rounded-md p-6 space-y-5">
       <h2 className="text-lg font-semibold">Submit Modification Request</h2>
 
       <div>
@@ -307,7 +307,7 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
           {MOD_TYPES.map(m => (
             <button key={m.id} onClick={() => setModType(m.id)}
-              className={`p-2.5 rounded-xl text-[11px] font-medium transition-all flex flex-col items-center gap-1 ${
+              className={`p-2.5 rounded-md text-[11px] font-medium transition-all flex flex-col items-center gap-1 ${
                 modType === m.id ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
               }`}>
               <span className="text-lg">{m.icon}</span>
@@ -321,7 +321,7 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
         <label className="block text-sm text-gray-400 mb-2">What are you planning?</label>
         <input type="text" value={title} onChange={e => setTitle(e.target.value)}
           placeholder="e.g., Install 6ft privacy fence along back property line"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
       </div>
 
       <div>
@@ -329,7 +329,7 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Materials, colors, dimensions, placement... the more detail the faster the review"
           rows={4}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -337,33 +337,33 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
           <label className="block text-sm text-gray-400 mb-2">Estimated Cost</label>
           <input type="text" value={estimatedCost} onChange={e => setEstimatedCost(e.target.value)}
             placeholder="$5,000"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-gray-400 mb-2">Contractor</label>
           <input type="text" value={contractorName} onChange={e => setContractorName(e.target.value)}
             placeholder="Company name"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-gray-400 mb-2">Target Start</label>
           <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
       </div>
 
       <div className="flex gap-3">
-        <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+        <button onClick={onClose} className="flex-1 py-3 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
         <button
           disabled={!title.trim() || !description.trim() || !modType || submit.isPending}
           onClick={() => submit.mutate()}
-          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
+          className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
         >
           {submit.isPending ? ' Submitting...' : 'Submit for Review'}
         </button>
       </div>
 
-      <div className="p-4 rounded-xl glass-card">
+      <div className="p-4 rounded-md glass-card">
         <h4 className="text-xs font-medium text-[#c9a96e] mb-1"> Review Process</h4>
         <p className="text-[10px] text-gray-400">
           The Architectural Review Committee reviews requests within 14 days.

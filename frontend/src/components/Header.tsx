@@ -106,7 +106,7 @@ function NavDropdown({
         className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
           hasActive
             ? 'text-[#e8d5a3] bg-[#c9a96e]/10'
-            : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+            : 'text-gray-400 hover:text-[var(--text-primary)] hover:bg-white/[0.04]'
         }`}
         onClick={() => setOpen(!open)}
         aria-expanded={open}
@@ -119,7 +119,7 @@ function NavDropdown({
       </button>
 
       {open && (
-        <div className="absolute top-full left-0 mt-1 w-52 py-2 rounded-xl border border-white/[0.06] bg-[rgba(15,15,20,0.95)] backdrop-blur-xl shadow-2xl shadow-black/20 z-50 animate-fade-in">
+        <div className="absolute top-full left-0 mt-1 w-52 py-2 rounded-md border border-white/[0.06] bg-[rgba(15,15,20,0.95)] backdrop-blur-xl shadow-2xl shadow-black/20 z-50 animate-fade-in">
           {items.map((item) => {
             const ItemIcon = item.icon;
             const active = pathname === item.href || pathname.startsWith(item.href + '/');
@@ -131,7 +131,7 @@ function NavDropdown({
                 className={`flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium transition-colors duration-150 ${
                   active
                     ? 'text-[#e8d5a3] bg-[#c9a96e]/10'
-                    : 'text-gray-400 hover:text-gray-100 hover:bg-white/[0.04]'
+                    : 'text-gray-400 hover:text-[var(--text-primary)] hover:bg-white/[0.04]'
                 }`}
               >
                 <ItemIcon className="w-4 h-4 opacity-70" />
@@ -179,7 +179,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                 href={item.href}
                 onClick={onClose}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium transition-colors ${
-                  active ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+                  active ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-400 hover:text-[var(--text-primary)] hover:bg-white/[0.04]'
                 }`}
               >
                 <ItemIcon className="w-4 h-4" />
@@ -216,7 +216,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                         href={item.href}
                         onClick={onClose}
                         className={`flex items-center gap-3 px-6 py-2 rounded-lg text-[13px] font-medium transition-colors ${
-                          active ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-500 hover:text-gray-200 hover:bg-white/[0.04]'
+                          active ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-500 hover:text-[var(--text-primary)] hover:bg-white/[0.04]'
                         }`}
                       >
                         <ItemIcon className="w-3.5 h-3.5 opacity-60" />
@@ -244,7 +244,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                 key={item.href}
                 href={item.href}
                 onClick={onClose}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium text-gray-500 hover:text-gray-200 hover:bg-white/[0.04] transition-colors"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium text-gray-500 hover:text-[var(--text-primary)] hover:bg-white/[0.04] transition-colors"
               >
                 <ItemIcon className="w-4 h-4" />
                 {item.label}
@@ -271,7 +271,7 @@ export function Header() {
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center font-bold text-sm text-white group-hover:shadow-[0_0_16px_rgba(201,169,110,0.4)] transition-all duration-300 group-hover:scale-105">
+              <div className="w-8 h-8 rounded-md bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center font-bold text-sm text-white group-hover:shadow-[0_0_16px_rgba(201,169,110,0.4)] transition-all duration-300 group-hover:scale-105">
                 S
               </div>
               <span className="text-[15px] font-bold hidden sm:block tracking-tight">
@@ -286,7 +286,7 @@ export function Header() {
               <Link
                 href="/transparency"
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
-                  pathname.startsWith('/transparency') ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+                  pathname.startsWith('/transparency') ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-400 hover:text-[var(--text-primary)] hover:bg-white/[0.04]'
                 }`}
               >
                 <Eye className="w-4 h-4" />
@@ -295,7 +295,7 @@ export function Header() {
               <Link
                 href="/map"
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
-                  pathname.startsWith('/map') ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-400 hover:text-gray-200 hover:bg-white/[0.04]'
+                  pathname.startsWith('/map') ? 'text-[#e8d5a3] bg-[#c9a96e]/10' : 'text-gray-400 hover:text-[var(--text-primary)] hover:bg-white/[0.04]'
                 }`}
               >
                 <Map className="w-4 h-4" />
@@ -359,7 +359,7 @@ export function Header() {
               <ConnectButton label="Sign In" showBalance={false} chainStatus="icon" accountStatus="avatar" />
               {/* Mobile hamburger */}
               <button
-                className="lg:hidden p-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-white/[0.04] transition-colors"
+                className="lg:hidden p-2 rounded-lg text-gray-400 hover:text-[var(--text-primary)] hover:bg-white/[0.04] transition-colors"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
               >

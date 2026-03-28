@@ -2,20 +2,27 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 px-6">
-      <div className="glass-card rounded-lg p-10 text-center max-w-md w-full">
-        <div className="w-16 h-16 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-3xl mx-auto mb-5">
-          
-        </div>
-        <h2 className="text-xl font-semibold text-gray-100 mb-2">Page Not Found</h2>
-        <p className="text-sm text-gray-400 mb-6 leading-relaxed">
-          This page doesn&apos;t exist or may have moved. Head back to the dashboard.
+    <div className="flex flex-col items-center justify-center min-h-[60vh] px-6">
+      <div className="text-center max-w-md">
+        <h2
+          className="text-2xl mb-3 font-heading"
+          style={{ fontFamily: 'var(--font-heading), Georgia, serif', color: 'rgba(245, 240, 232, 0.7)' }}
+        >
+          Page Not Found
+        </h2>
+        <p className="text-[14px] mb-8" style={{ color: 'var(--text-muted)' }}>
+          This page doesn&apos;t exist or may have moved.
         </p>
         <Link
-          href="/dashboard"
-          className="inline-block px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all"
+          href="/"
+          className="inline-block px-5 py-2.5 rounded-md text-[13px] transition-all"
+          style={{
+            background: 'rgba(176, 155, 113, 0.12)',
+            color: 'var(--accent-brass)',
+            border: '1px solid rgba(176, 155, 113, 0.2)',
+          }}
         >
-          Back to Dashboard
+          Return to Dashboard
         </Link>
       </div>
     </div>

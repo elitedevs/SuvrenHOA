@@ -70,7 +70,7 @@ export default function EmergencyPage() {
 
       {/* 911 Banner */}
       <div className="rounded-lg bg-red-500/10 border border-red-500/30 p-4 mb-6 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center text-xl shrink-0">🆘</div>
+        <div className="w-10 h-10 rounded-md bg-red-500/20 flex items-center justify-center text-xl shrink-0">🆘</div>
         <div>
           <p className="text-sm font-bold text-red-400">Life-threatening emergency? Call 911 immediately.</p>
           <p className="text-[11px] text-gray-400">All other contacts on this page are for non-emergency situations.</p>
@@ -85,7 +85,7 @@ export default function EmergencyPage() {
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search contacts..."
-          className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
+          className="w-full pl-10 pr-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
         />
       </div>
 
@@ -111,7 +111,7 @@ export default function EmergencyPage() {
                     }`}
                   >
                     <div className="flex items-start gap-3">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0 ${
+                      <div className={`w-10 h-10 rounded-md flex items-center justify-center text-xl shrink-0 ${
                         contact.urgent ? 'bg-red-500/15' : 'bg-[#c9a96e]/10'
                       }`}>
                         {contact.icon}

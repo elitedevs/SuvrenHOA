@@ -38,7 +38,7 @@ export default function MeetingsPage() {
           </Link>
           <button
             onClick={() => setShowCreate(!showCreate)}
-            className="px-4 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all"
+            className="px-4 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all"
           >
             {showCreate ? ' Cancel' : '+ Schedule Meeting'}
           </button>
@@ -61,7 +61,7 @@ export default function MeetingsPage() {
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
               tab === t
                 ? 'bg-[#c9a96e]/15 text-[#e8d5a3] border border-[#c9a96e]/30'
                 : 'text-gray-400 hover:text-gray-300'
@@ -188,7 +188,7 @@ function CreateMeetingForm({
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Q2 2026 Board Meeting"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
           />
         </div>
 
@@ -200,7 +200,7 @@ function CreateMeetingForm({
               value={date}
               onChange={e => setDate(e.target.value)}
               min={new Date().toISOString().split('T')[0]}
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
             />
           </div>
           <div>
@@ -209,7 +209,7 @@ function CreateMeetingForm({
               type="time"
               value={time}
               onChange={e => setTime(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
             />
           </div>
         </div>
@@ -221,7 +221,7 @@ function CreateMeetingForm({
             value={location}
             onChange={e => setLocation(e.target.value)}
             placeholder="Faircroft Clubhouse, Room A"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
           />
         </div>
 
@@ -232,21 +232,21 @@ function CreateMeetingForm({
             onChange={e => setAgenda(e.target.value)}
             placeholder="1. Call to order&#10;2. Review minutes&#10;3. Financial report..."
             rows={4}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none"
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none"
           />
         </div>
 
         <div className="flex gap-3 pt-2">
           <button
             onClick={onCreated}
-            className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors"
+            className="flex-1 py-3 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={handleSubmit}
             disabled={!title.trim() || !date || saving}
-            className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-bold transition-all"
+            className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-bold transition-all"
           >
             {saving ? ' Saving...' : ' Schedule Meeting'}
           </button>

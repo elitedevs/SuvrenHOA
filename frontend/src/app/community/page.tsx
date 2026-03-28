@@ -53,7 +53,7 @@ export default function CommunityPage() {
         </div>
         <button
           onClick={() => setShowNewPost(!showNewPost)}
-          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)] shrink-0"
+          className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)] shrink-0"
         >
           {showNewPost ? '← Back' : ' New Post'}
         </button>
@@ -67,7 +67,7 @@ export default function CommunityPage() {
           <div className="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-none">
             <button
               onClick={() => setSelectedCategory(null)}
-              className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
+              className={`px-4 py-2 rounded-md text-xs font-medium whitespace-nowrap transition-all ${
                 selectedCategory === null
                   ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                   : 'glass-card text-gray-400 hover:text-gray-300'
@@ -79,7 +79,7 @@ export default function CommunityPage() {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                className={`px-4 py-2 rounded-md text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
                   selectedCategory === cat.id
                     ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                     : 'glass-card text-gray-400 hover:text-gray-300'
@@ -120,7 +120,7 @@ function PostCard({ post }: { post: any }) {
   const timeAgo = getTimeAgo(new Date(post.created_at));
 
   return (
-    <div className="glass-card rounded-xl p-5 cursor-pointer group">
+    <div className="glass-card rounded-md p-5 cursor-pointer group">
       <div className="flex items-start gap-4">
         {/* Author avatar */}
         <div className="w-10 h-10 rounded-full bg-[#c9a96e]/15 border border-[#c9a96e]/20 flex items-center justify-center text-xs font-bold text-[#c9a96e] shrink-0">
@@ -190,7 +190,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
   const [category, setCategory] = useState('general');
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5">
+    <div className="glass-card rounded-md p-6 space-y-5">
       <h2 className="text-lg font-semibold">Create a Post</h2>
 
       <div>
@@ -200,7 +200,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
             <button
               key={cat.id}
               onClick={() => setCategory(cat.id)}
-              className={`p-2.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 ${
+              className={`p-2.5 rounded-md text-xs font-medium transition-all flex items-center gap-1.5 ${
                 category === cat.id
                   ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                   : 'glass-card text-gray-400 hover:text-gray-300'
@@ -219,7 +219,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
           value={title}
           onChange={e => setTitle(e.target.value)}
           placeholder="What's on your mind?"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a96e]/20 transition-all"
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a96e]/20 transition-all"
         />
       </div>
 
@@ -230,14 +230,14 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
           onChange={e => setContent(e.target.value)}
           placeholder="Share details with your community..."
           rows={5}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a96e]/20 transition-all resize-none"
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c9a96e]/20 transition-all resize-none"
         />
       </div>
 
       <div className="flex gap-3">
         <button
           onClick={onClose}
-          className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors"
+          className="flex-1 py-3 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors"
         >
           Cancel
         </button>
@@ -250,7 +250,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
               { onSuccess: () => onClose() }
             );
           }}
-          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)]"
+          className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)]"
         >
           {createPost.isPending ? ' Posting...' : 'Post to Community'}
         </button>

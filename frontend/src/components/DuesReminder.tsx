@@ -99,7 +99,7 @@ function CompactReminder({
       <div className="glass-card rounded-lg p-5 border-l-2 border-l-green-500/50 transition-all duration-300">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-lg shrink-0">
+            <div className="w-8 h-8 rounded-md bg-green-500/15 border border-green-500/25 flex items-center justify-center text-lg shrink-0">
               
             </div>
             <div>
@@ -125,7 +125,7 @@ function CompactReminder({
       <div className="glass-card rounded-lg p-5 border-l-2 border-l-red-500/50 transition-all duration-300">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-red-500/15 border border-red-500/25 flex items-center justify-center text-lg shrink-0">
+            <div className="w-8 h-8 rounded-md bg-red-500/15 border border-red-500/25 flex items-center justify-center text-lg shrink-0">
               
             </div>
             <div>
@@ -151,7 +151,7 @@ function CompactReminder({
     <div className="glass-card rounded-lg p-5 border-l-2 border-l-amber-500/50 transition-all duration-300">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-lg shrink-0">
+          <div className="w-8 h-8 rounded-md bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-lg shrink-0">
             
           </div>
           <div>
@@ -191,7 +191,7 @@ function FullReminder({
     return (
       <div className="rounded-lg p-6 border border-green-500/20 bg-green-500/5 border-l-2 border-l-green-500/50 transition-all duration-300">
         <div className="flex items-start gap-4 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-green-500/15 border border-green-500/25 flex items-center justify-center text-xl shrink-0">
+          <div className="w-10 h-10 rounded-md bg-green-500/15 border border-green-500/25 flex items-center justify-center text-xl shrink-0">
             
           </div>
           <div className="flex-1">
@@ -204,7 +204,7 @@ function FullReminder({
           </div>
         </div>
 
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-green-500/5 border border-green-500/15">
+        <div className="flex items-center gap-4 p-4 rounded-md bg-green-500/5 border border-green-500/15">
           <div className="flex-1">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1">Annual Plan Savings</p>
             <p className="text-xl font-normal text-green-400">${annualSavings}</p>
@@ -212,7 +212,7 @@ function FullReminder({
           </div>
           <Link
             href="/dues"
-            className="px-5 py-2.5 rounded-xl bg-green-600/20 border border-green-500/30 text-green-400 hover:bg-green-600/30 text-sm font-bold transition-all whitespace-nowrap"
+            className="px-5 py-2.5 rounded-md bg-green-600/20 border border-green-500/30 text-green-400 hover:bg-green-600/30 text-sm font-bold transition-all whitespace-nowrap"
           >
             Switch to Annual →
           </Link>
@@ -233,7 +233,7 @@ function FullReminder({
     return (
       <div className="rounded-lg p-6 border border-red-500/20 bg-red-500/5 border-l-2 border-l-red-500/50 transition-all duration-300">
         <div className="flex items-start gap-4 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-red-500/15 border border-red-500/25 flex items-center justify-center text-xl shrink-0">
+          <div className="w-10 h-10 rounded-md bg-red-500/15 border border-red-500/25 flex items-center justify-center text-xl shrink-0">
             
           </div>
           <div className="flex-1">
@@ -249,7 +249,7 @@ function FullReminder({
           </div>
         </div>
 
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-red-500/5 border border-red-500/15 mb-4">
+        <div className="flex items-center gap-4 p-4 rounded-md bg-red-500/5 border border-red-500/15 mb-4">
           <div className="flex-1">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1">Amount Owed</p>
             <p className="text-xl font-normal text-red-400">${amountOwed.toFixed(2)} USDC</p>
@@ -259,7 +259,7 @@ function FullReminder({
           </div>
           <Link
             href="/dues"
-            className="px-5 py-2.5 rounded-xl bg-red-600/20 border border-red-500/30 text-red-400 hover:bg-red-600/30 text-sm font-bold transition-all whitespace-nowrap"
+            className="px-5 py-2.5 rounded-md bg-red-600/20 border border-red-500/30 text-red-400 hover:bg-red-600/30 text-sm font-bold transition-all whitespace-nowrap"
           >
             Pay Now →
           </Link>
@@ -280,7 +280,7 @@ function FullReminder({
   return (
     <div className="rounded-lg p-6 border border-amber-500/20 bg-amber-500/5 border-l-2 border-l-amber-500/50 transition-all duration-300">
       <div className="flex items-start gap-4 mb-4">
-        <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xl shrink-0">
+        <div className="w-10 h-10 rounded-md bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xl shrink-0">
           
         </div>
         <div className="flex-1">
@@ -299,7 +299,7 @@ function FullReminder({
         </div>
       </div>
 
-      <div className="flex items-center gap-4 p-4 rounded-xl bg-amber-500/5 border border-amber-500/15 mb-4">
+      <div className="flex items-center gap-4 p-4 rounded-md bg-amber-500/5 border border-amber-500/15 mb-4">
         <div className="flex-1">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1">Annual Savings</p>
           <p className="text-xl font-normal text-amber-400">Save ${annualSavings}</p>
@@ -307,7 +307,7 @@ function FullReminder({
         </div>
         <Link
           href="/dues"
-          className="px-5 py-2.5 rounded-xl bg-amber-600/20 border border-amber-500/30 text-amber-400 hover:bg-amber-600/30 text-sm font-bold transition-all whitespace-nowrap"
+          className="px-5 py-2.5 rounded-md bg-amber-600/20 border border-amber-500/30 text-amber-400 hover:bg-amber-600/30 text-sm font-bold transition-all whitespace-nowrap"
         >
           Pay Dues →
         </Link>

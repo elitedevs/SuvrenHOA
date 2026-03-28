@@ -52,7 +52,7 @@ export default function DocumentsPage() {
           {isBoardMember && !verifyMode && (
             <button
               onClick={() => setShowUpload(!showUpload)}
-              className={`px-5 py-3 rounded-xl text-sm font-bold transition-all duration-200 min-h-[44px] ${
+              className={`px-5 py-3 rounded-md text-sm font-bold transition-all duration-200 min-h-[44px] ${
                 showUpload
                   ? 'bg-[#c9a96e] text-[#1a1a1a] shadow-[0_0_20px_rgba(201,169,110,0.25)]'
                   : 'border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/10'
@@ -63,7 +63,7 @@ export default function DocumentsPage() {
           )}
           <button
             onClick={() => setVerifyMode(!verifyMode)}
-            className={`px-5 py-3 rounded-xl text-sm font-bold transition-all duration-200 min-h-[44px] ${
+            className={`px-5 py-3 rounded-md text-sm font-bold transition-all duration-200 min-h-[44px] ${
               verifyMode
                 ? 'bg-[#c9a96e] text-white shadow-[0_0_20px_rgba(201,169,110,0.25)]'
                 : 'border border-gray-700/60 text-gray-300 hover:border-[#c9a96e]/40 hover:text-white hover:bg-white/[0.03]'
@@ -110,12 +110,12 @@ export default function DocumentsPage() {
               placeholder="Search documents..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100"
+              className="flex-1 px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100"
             />
             <div className="flex gap-2 overflow-x-auto pb-1">
               <button
                 onClick={() => setSelectedType(null)}
-                className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all min-h-[44px] ${
+                className={`px-4 py-2.5 rounded-md text-xs font-semibold whitespace-nowrap transition-all min-h-[44px] ${
                   selectedType === null
                     ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                     : 'text-gray-400 border border-gray-700/60 hover:border-gray-600/60 hover:text-gray-300'
@@ -127,7 +127,7 @@ export default function DocumentsPage() {
                 <button
                   key={key}
                   onClick={() => setSelectedType(Number(key))}
-                  className={`px-4 py-2.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all min-h-[44px] ${
+                  className={`px-4 py-2.5 rounded-md text-xs font-semibold whitespace-nowrap transition-all min-h-[44px] ${
                     selectedType === Number(key)
                       ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30'
                       : 'text-gray-400 border border-gray-700/60 hover:border-gray-600/60 hover:text-gray-300'
@@ -150,7 +150,7 @@ export default function DocumentsPage() {
                 CC&Rs, meeting minutes, budgets, and all governing documents will appear here
                 once registered on-chain. Every document is permanently stored and verifiable.
               </p>
-              <div className="glass-card rounded-xl hover-lift p-5 max-w-sm mx-auto border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30">
+              <div className="glass-card rounded-md hover-lift p-5 max-w-sm mx-auto border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30">
                 <p className="text-xs text-[#e8d5a3] leading-relaxed">
                    Unlike traditional HOA software, documents stored here cannot be altered,
                   deleted, or selectively shared — not even by the board.
@@ -204,7 +204,7 @@ function DocumentCard({
     return (
       <div className="glass-card rounded-lg hover-lift p-6">
         <div className="flex items-center gap-4">
-          <div className="skeleton w-12 h-12 rounded-xl" />
+          <div className="skeleton w-12 h-12 rounded-md" />
           <div className="flex-1 space-y-2">
             <div className="skeleton h-4 rounded w-1/3" />
             <div className="skeleton h-3 rounded w-1/2" />
@@ -225,7 +225,7 @@ function DocumentCard({
     >
       <div className="flex items-start gap-4">
         {/* Type Icon */}
-        <div className={`w-12 h-12 rounded-xl bg-${color}-500/10 border border-${color}-500/20 flex items-center justify-center text-xl shrink-0`}>
+        <div className={`w-12 h-12 rounded-md bg-${color}-500/10 border border-${color}-500/20 flex items-center justify-center text-xl shrink-0`}>
           {getTypeIcon(doc.docType)}
         </div>
 
@@ -266,7 +266,7 @@ function DocumentCard({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mb-2">Content Hash (SHA-256)</p>
-              <p className="text-xs font-mono text-gray-300 break-all bg-gray-800/50 p-3 rounded-xl border border-gray-700/40">
+              <p className="text-xs font-mono text-gray-300 break-all bg-gray-800/50 p-3 rounded-md border border-gray-700/40">
                 {doc.contentHash}
               </p>
             </div>
@@ -294,7 +294,7 @@ function DocumentCard({
               href={`https://arweave.net/${doc.arweaveTxId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-xl bg-[#c9a96e]/8 border border-[#c9a96e]/20 text-xs text-[#c9a96e] hover:bg-[#c9a96e]/15 transition-colors font-semibold min-h-[44px] flex items-center"
+              className="px-4 py-2.5 rounded-md bg-[#c9a96e]/8 border border-[#c9a96e]/20 text-xs text-[#c9a96e] hover:bg-[#c9a96e]/15 transition-colors font-semibold min-h-[44px] flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
                Download from Arweave
@@ -303,7 +303,7 @@ function DocumentCard({
               href={`https://sepolia.basescan.org/address/${doc.uploadedBy}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 text-xs text-gray-400 hover:text-gray-300 transition-colors font-semibold min-h-[44px] flex items-center"
+              className="px-4 py-2.5 rounded-md bg-gray-800/60 border border-gray-700/60 text-xs text-gray-400 hover:text-gray-300 transition-colors font-semibold min-h-[44px] flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
                View on Basescan
@@ -365,14 +365,14 @@ function VerifyPanel({
         placeholder="0x..."
         value={hash}
         onChange={(e) => setHash(e.target.value)}
-        className="w-full px-4 py-4 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200"
+        className="w-full px-4 py-4 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200"
       />
 
       {/* Hash result placeholder */}
       {hash && (
         <div className="glass-card rounded-lg hover-lift p-6">
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Hash to verify</p>
-          <p className="text-xs font-mono text-gray-300 break-all bg-gray-800/50 p-3 rounded-xl border border-gray-700/40 mb-4">{hash}</p>
+          <p className="text-xs font-mono text-gray-300 break-all bg-gray-800/50 p-3 rounded-md border border-gray-700/40 mb-4">{hash}</p>
           <div className="flex items-center gap-2 text-sm text-gray-400">
             <div className="w-4 h-4 border-2 border-[#c9a96e]/40 border-t-[#c9a96e] rounded-full animate-spin" />
             Checking on-chain registry...
@@ -458,7 +458,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
                 onChange={e => setTitle(e.target.value)}
                 placeholder="e.g. Board Meeting Minutes — March 2026"
                 required
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none transition-all"
+                className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none transition-all"
               />
             </div>
             <div>
@@ -466,7 +466,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
               <select
                 value={docType}
                 onChange={e => setDocType(Number(e.target.value))}
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700/60 text-sm focus:border-[#c9a96e]/50 focus:outline-none transition-all"
+                className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700/60 text-sm focus:border-[#c9a96e]/50 focus:outline-none transition-all"
               >
                 {Object.entries(DOC_TYPE_LABELS).map(([k, v]) => (
                   <option key={k} value={k}>{v}</option>
@@ -513,13 +513,13 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
 
           <div className="flex gap-3">
             <button type="button" onClick={onClose}
-              className="flex-1 py-3 rounded-xl border border-gray-700/60 text-sm font-medium hover:bg-gray-800/40 transition-colors">
+              className="flex-1 py-3 rounded-md border border-gray-700/60 text-sm font-medium hover:bg-gray-800/40 transition-colors">
               Cancel
             </button>
             <button
               type="submit"
               disabled={!title.trim() || !fileName}
-              className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] disabled:opacity-50 text-[#1a1a1a] text-sm font-bold transition-all"
+              className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] disabled:opacity-50 text-[#1a1a1a] text-sm font-bold transition-all"
             >
               Queue for Upload
             </button>

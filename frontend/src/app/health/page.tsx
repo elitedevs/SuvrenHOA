@@ -174,7 +174,7 @@ export default function HealthPage() {
         {!loading && !error && suggestions.length > 0 && (
           <div className="glass-card rounded-lg hover-lift p-6 mb-8 page-enter page-enter-delay-3 border-l-2 border-l-[#c9a96e]/50">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-lg shrink-0">
+              <div className="w-9 h-9 rounded-md bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-lg shrink-0">
                 
               </div>
               <h2 className="text-xl font-bold text-gray-200">What Can We Improve?</h2>

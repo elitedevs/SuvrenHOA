@@ -75,7 +75,7 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
     : STAGES;
 
   return (
-    <div className="glass-card rounded-xl p-6">
+    <div className="glass-card rounded-md p-6">
       <h2 className="text-base font-semibold mb-5">Proposal Lifecycle</h2>
 
       <div className="relative">

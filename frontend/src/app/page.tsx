@@ -220,10 +220,10 @@ function Dashboard() {
             { href: '/community', title: 'Community', desc: 'Forum, events, directory, and more' },
           ].map(({ href, title, desc }) => (
             <Link key={href} href={href} className="glass-card rounded-lg p-6 group block hover-lift">
-              <h3 className="text-[15px] mb-2 group-hover:opacity-80 transition-opacity" style={{ color: 'var(--text-primary)' }}>
+              <h3 className="text-[18px] mb-2 group-hover:opacity-80 transition-opacity" style={{ fontFamily: 'var(--font-heading), Georgia, serif', color: 'var(--text-primary)' }}>
                 {title}
               </h3>
-              <p className="text-[13px]" style={{ color: 'var(--text-muted)' }}>{desc}</p>
+              <p className="text-[13px]" style={{ color: 'rgba(245, 240, 232, 0.45)' }}>{desc}</p>
             </Link>
           ))}
         </div>

@@ -63,7 +63,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
       <div className="flex items-center justify-between mb-5">
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Dues Calculator</p>
-          <h3 className="text-lg font-bold text-gray-100">See Your Savings</h3>
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">See Your Savings</h3>
         </div>
         <div className="text-2xl"></div>
       </div>
@@ -86,7 +86,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
           placeholder="e.g. 8500"
           min={500}
           max={100000}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
         />
       </div>
 
@@ -96,7 +96,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
           <button
             key={t.id}
             onClick={() => setTierId(t.id)}
-            className={`rounded-xl p-3 text-center transition-all border ${
+            className={`rounded-md p-3 text-center transition-all border ${
               tierId === t.id
                 ? 'border-[#c9a96e]/50 bg-[#c9a96e]/10 text-[#e8d5a3]'
                 : 'border-gray-700/50 bg-gray-800/40 text-gray-400 hover:border-gray-600'
@@ -110,12 +110,12 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
 
       {/* Breakdown */}
       <div className="grid grid-cols-2 gap-3 mb-5">
-        <div className="rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/20 p-4">
+        <div className="rounded-md bg-[#c9a96e]/5 border border-[#c9a96e]/20 p-4">
           <p className="text-[10px] text-gray-500 mb-1">Monthly</p>
           <p className="text-xl font-normal text-[#c9a96e]">${monthly.toFixed(2)}</p>
           <p className="text-[10px] text-gray-500 mt-0.5">USDC / month</p>
         </div>
-        <div className="rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/20 p-4">
+        <div className="rounded-md bg-[#c9a96e]/5 border border-[#c9a96e]/20 p-4">
           <p className="text-[10px] text-gray-500 mb-1">Annual</p>
           <p className="text-xl font-normal text-[#c9a96e]">${animatedAnnual.toLocaleString()}</p>
           <p className="text-[10px] text-gray-500 mt-0.5">USDC / year</p>

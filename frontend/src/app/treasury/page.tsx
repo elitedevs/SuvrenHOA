@@ -3,7 +3,6 @@
 import { useTreasury } from '@/hooks/useTreasury';
 
 function exportTreasuryPDF() {
-  // Add print-specific class to body so @media print styles kick in
   document.body.classList.add('printing-treasury');
   window.print();
   setTimeout(() => document.body.classList.remove('printing-treasury'), 500);
@@ -17,256 +16,250 @@ export default function TreasuryPage() {
     expenditureCount,
   } = useTreasury();
 
-  // Parse balances for progress bar calculation
   const total = parseFloat(totalBalance.replace(/,/g, '')) || 0;
   const operating = parseFloat(operatingBalance.replace(/,/g, '')) || 0;
   const reserve = parseFloat(reserveBalance.replace(/,/g, '')) || 0;
-
   const operatingPct = total > 0 ? (operating / total) * 100 : 80;
   const reservePct = total > 0 ? (reserve / total) * 100 : 20;
 
   return (
     <div className="max-w-[960px] mx-auto px-6 py-10 page-enter">
-      {/* Page header */}
+      {/* Header */}
       <div className="mb-10 flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">On-Chain Finance</p>
-          <h1 className="text-3xl font-normal tracking-tight">Community Treasury</h1>
-          <p className="text-base text-gray-400 mt-2 font-medium">
-            Every dollar publicly recorded and verifiable on the blockchain
+          <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
+            Finance
+          </p>
+          <h1 className="text-3xl tracking-tight" style={{ fontWeight: 400 }}>Community Treasury</h1>
+          <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            Every dollar publicly recorded and permanently verifiable
           </p>
         </div>
         <button
           onClick={exportTreasuryPDF}
-          className="no-print shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
+          className="no-print shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-md text-[13px] transition-all"
+          style={{
+            background: 'var(--bg-surface)',
+            border: '1px solid var(--border-subtle)',
+            color: 'var(--text-secondary)',
+          }}
           title="Export as PDF"
         >
-           Export PDF
+          Export PDF
         </button>
       </div>
 
-      {/* Hero Balance */}
-      <div className="glass-card rounded-lg hover-lift p-10 text-center glow-gold mb-6 border-l-2 border-l-[#c9a96e]/50 page-enter page-enter-delay-1">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Total Community Balance</p>
-        <div className="flex items-baseline justify-center gap-3 mb-2">
-          <span className="text-6xl sm:text-7xl font-black gradient-text">${totalBalance}</span>
-          <span className="text-2xl font-bold text-gray-500">USDC</span>
+      {/* Hero — prose style, not giant number */}
+      <div className="glass-card rounded-lg p-10 mb-6 page-enter page-enter-delay-1">
+        <p className="text-[11px] uppercase tracking-widest mb-6" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
+          Total Community Balance
+        </p>
+        <div className="flex items-baseline gap-3 mb-3">
+          <span
+            className="font-heading"
+            style={{
+              fontFamily: 'var(--font-heading), Georgia, serif',
+              fontSize: '48px',
+              fontWeight: 400,
+              letterSpacing: '-0.03em',
+              color: 'var(--accent-brass)',
+            }}
+          >
+            ${totalBalance}
+          </span>
+          <span
+            className="text-[13px] uppercase tracking-widest"
+            style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}
+          >
+            USDC
+          </span>
         </div>
-        <p className="text-sm text-gray-500 mt-2">Combined operating + reserve fund</p>
+        <p className="text-[15px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          The community treasury holds ${totalBalance} USDC, with ${operatingBalance} allocated to
+          day-to-day operations and ${reserveBalance} held in long-term reserves.
+        </p>
       </div>
 
-      {/* Operating + Reserve as visual gauges */}
+      {/* Fund cards — verdigris for operating, steel-brass for reserve */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8 page-enter page-enter-delay-2">
         {/* Operating Fund */}
-        <div className="glass-card-success rounded-lg p-7 border-l-2 border-l-green-500/50">
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <p className="text-xs text-green-400/70 font-semibold uppercase tracking-wide mb-1">Operating Fund</p>
-              <p className="text-3xl font-normal text-green-400">${operatingBalance}</p>
-              <p className="text-xs text-gray-500 mt-1">USDC · Day-to-day expenses</p>
-            </div>
-            <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-xl">
-              
-            </div>
-          </div>
+        <div
+          className="glass-card rounded-lg p-7"
+          style={{ borderLeft: '2px solid rgba(42, 93, 79, 0.4)' }}
+        >
+          <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: '#5A9E8F', letterSpacing: '0.08em' }}>
+            Operating Fund
+          </p>
+          <p
+            className="text-3xl font-heading mb-1"
+            style={{ fontFamily: 'var(--font-heading), Georgia, serif', fontWeight: 400, color: '#5A9E8F' }}
+          >
+            ${operatingBalance}
+          </p>
+          <p className="text-[12px] mb-4" style={{ color: 'var(--text-muted)' }}>USDC · Day-to-day expenses</p>
 
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-gray-500 font-medium">
+            <div className="flex justify-between text-[12px]" style={{ color: 'var(--text-muted)' }}>
               <span>80% of dues</span>
-              <span className="text-green-400 font-bold">{operatingPct.toFixed(0)}%</span>
+              <span style={{ color: '#5A9E8F' }}>{operatingPct.toFixed(0)}%</span>
             </div>
             <div className="progress-bar-track">
               <div
-                className="progress-bar-fill bg-gradient-to-r from-green-600 to-green-400"
-                style={{ width: `${operatingPct}%` }}
+                className="progress-bar-fill"
+                style={{ width: `${operatingPct}%`, background: '#2A5D4F' }}
               />
             </div>
           </div>
         </div>
 
         {/* Reserve Fund */}
-        <div className="glass-card-info rounded-lg p-7 border-l-2 border-l-blue-500/50">
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <p className="text-xs text-blue-400/70 font-semibold uppercase tracking-wide mb-1">Reserve Fund</p>
-              <p className="text-3xl font-normal text-blue-400">${reserveBalance}</p>
-              <p className="text-xs text-gray-500 mt-1">USDC · Long-term reserves</p>
-            </div>
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-xl">
-              
-            </div>
-          </div>
+        <div
+          className="glass-card rounded-lg p-7"
+          style={{ borderLeft: '2px solid rgba(139, 155, 176, 0.3)' }}
+        >
+          <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: '#8B9BB0', letterSpacing: '0.08em' }}>
+            Reserve Fund
+          </p>
+          <p
+            className="text-3xl font-heading mb-1"
+            style={{ fontFamily: 'var(--font-heading), Georgia, serif', fontWeight: 400, color: '#8B9BB0' }}
+          >
+            ${reserveBalance}
+          </p>
+          <p className="text-[12px] mb-4" style={{ color: 'var(--text-muted)' }}>USDC · Long-term reserves</p>
 
           <div className="space-y-2">
-            <div className="flex justify-between text-xs text-gray-500 font-medium">
+            <div className="flex justify-between text-[12px]" style={{ color: 'var(--text-muted)' }}>
               <span>20% of dues</span>
-              <span className="text-blue-400 font-bold">{reservePct.toFixed(0)}%</span>
+              <span style={{ color: '#8B9BB0' }}>{reservePct.toFixed(0)}%</span>
             </div>
             <div className="progress-bar-track">
               <div
-                className="progress-bar-fill bg-gradient-to-r from-blue-600 to-blue-400"
-                style={{ width: `${reservePct}%` }}
+                className="progress-bar-fill"
+                style={{ width: `${reservePct}%`, background: '#6B7B90' }}
               />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Balance allocation visual bar */}
-      <div className="glass-card rounded-lg hover-lift p-6 mb-8 page-enter page-enter-delay-2">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-4">Allocation Overview</p>
-        <div className="h-3 rounded-full overflow-hidden flex">
+      {/* Allocation bar — verdigris + steel-brass */}
+      <div className="glass-card rounded-lg p-6 mb-8 page-enter page-enter-delay-2">
+        <p className="text-[11px] uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
+          Allocation Overview
+        </p>
+        <div className="h-2 rounded-full overflow-hidden flex" style={{ background: 'rgba(245, 240, 232, 0.04)' }}>
           <div
-            className="bg-gradient-to-r from-green-600 to-green-400 transition-all duration-700"
-            style={{ width: `${operatingPct}%` }}
+            className="transition-all duration-700"
+            style={{ width: `${operatingPct}%`, background: '#2A5D4F' }}
           />
           <div
-            className="bg-gradient-to-r from-blue-600 to-blue-400 transition-all duration-700"
-            style={{ width: `${reservePct}%` }}
+            className="transition-all duration-700"
+            style={{ width: `${reservePct}%`, background: '#6B7B90' }}
           />
         </div>
-        <div className="flex justify-between mt-3 text-xs text-gray-500">
+        <div className="flex justify-between mt-3 text-[12px]" style={{ color: 'var(--text-muted)' }}>
           <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-            <span>Operating <span className="font-bold text-green-400">{operatingPct.toFixed(0)}%</span></span>
+            <div className="w-2 h-2 rounded-full" style={{ background: '#2A5D4F' }} />
+            <span>Operating <span style={{ color: '#5A9E8F' }}>{operatingPct.toFixed(0)}%</span></span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-            <span>Reserve <span className="font-bold text-blue-400">{reservePct.toFixed(0)}%</span></span>
+            <div className="w-2 h-2 rounded-full" style={{ background: '#6B7B90' }} />
+            <span>Reserve <span style={{ color: '#8B9BB0' }}>{reservePct.toFixed(0)}%</span></span>
           </div>
         </div>
       </div>
 
-      {/* Expenditures section */}
+      {/* Expenditures */}
       <div className="page-enter page-enter-delay-3">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold text-gray-200">Expenditures</h2>
-          <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-800/60 border border-gray-700/60 text-gray-400">
+          <h2 className="text-lg" style={{ fontWeight: 400 }}>Expenditures</h2>
+          <span
+            className="px-3 py-1.5 rounded-md text-[12px]"
+            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', color: 'var(--text-muted)' }}
+          >
             {expenditureCount} total
           </span>
         </div>
 
         {expenditureCount === 0 ? (
-          <div className="glass-card rounded-lg hover-lift p-12 text-center">
-            {/* Chart placeholder */}
-            <div className="w-full h-32 rounded-xl bg-gray-800/30 border border-gray-700/30 flex items-center justify-center mb-6">
-              <div className="flex items-end gap-2 h-16">
-                {[40, 65, 30, 80, 55, 45, 70].map((h, i) => (
-                  <div
-                    key={i}
-                    className="w-6 rounded-t bg-[#c9a96e]/12 border-t border-[#c9a96e]/30"
-                    style={{ height: `${h}%` }}
-                  />
-                ))}
-              </div>
-            </div>
-            <p className="text-xs text-gray-600 font-medium uppercase tracking-wide mb-4">
-              Expenditure chart — coming soon
+          <div className="glass-card rounded-lg p-12 text-center">
+            <p
+              className="font-heading mb-2"
+              style={{
+                fontFamily: 'var(--font-heading), Georgia, serif',
+                fontStyle: 'italic',
+                fontSize: '16px',
+                color: 'var(--text-secondary)',
+              }}
+            >
+              No expenditures recorded yet.
             </p>
-            <div className="w-14 h-14 rounded-lg bg-gray-800/50 border border-gray-700/30 flex items-center justify-center text-2xl mx-auto mb-4">
-              
-            </div>
-            <h3 className="text-lg font-bold mb-2 text-gray-200">No Expenditures Yet</h3>
-            <p className="text-sm text-gray-400 max-w-md mx-auto">
-              All community spending will be recorded here with full transparency.
-              Every transaction is verifiable on-chain — permanently.
+            <p className="text-[13px] max-w-md mx-auto" style={{ color: 'var(--text-muted)' }}>
+              Every dollar spent will appear here, verified permanently.
             </p>
           </div>
         ) : (
           <div className="space-y-3">
-            <p className="text-sm text-gray-500">Loading expenditures...</p>
+            <p className="text-[14px]" style={{ color: 'var(--text-muted)' }}>Loading expenditures...</p>
           </div>
         )}
       </div>
 
-      {/* Spending Breakdown */}
+      {/* Spending Breakdown — brass bars, no donut */}
       <SpendingBreakdown />
 
-      {/* On-chain banner */}
-      <div className="mt-8 glass-card rounded-lg hover-lift p-6 border-l-2 border-l-[#c9a96e]/40 bg-[#1a1a1a]/30 page-enter page-enter-delay-4">
-        <div className="flex items-start gap-3">
-          <span className="text-xl"></span>
-          <div>
-            <h3 className="text-sm font-bold text-[#e8d5a3] mb-1">On-Chain Transparency</h3>
-            <p className="text-xs text-gray-400 leading-relaxed">
-              Every dollar in and out is permanently recorded on the Base blockchain.
-              Anyone can verify these numbers at any time — they cannot be altered.
-            </p>
-          </div>
-        </div>
+      {/* Transparency banner */}
+      <div className="mt-8 glass-card rounded-lg p-6 page-enter page-enter-delay-4" style={{ borderLeft: '2px solid rgba(176, 155, 113, 0.25)' }}>
+        <h3 className="text-[14px] mb-1" style={{ fontWeight: 400, color: 'var(--accent-brass)' }}>Transparency</h3>
+        <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          Every dollar in and out is permanently recorded. Anyone can verify these numbers at any time — they cannot be altered.
+        </p>
       </div>
     </div>
   );
 }
 
 const SPENDING_CATEGORIES = [
-  { label: 'Maintenance', pct: 40, color: '#c9a96e', bg: 'bg-[#c9a96e]' },
-  { label: 'Landscaping', pct: 25, color: '#60a5fa', bg: 'bg-blue-400' },
-  { label: 'Reserves', pct: 20, color: '#4ade80', bg: 'bg-green-400' },
-  { label: 'Admin', pct: 15, color: '#f59e0b', bg: 'bg-amber-400' },
+  { label: 'Maintenance', pct: 40, amount: 48000 },
+  { label: 'Landscaping', pct: 25, amount: 30000 },
+  { label: 'Reserves', pct: 20, amount: 24000 },
+  { label: 'Admin', pct: 15, amount: 18000 },
 ];
 
 function SpendingBreakdown() {
-  // Build conic-gradient for the ring chart
-  const conicParts: string[] = [];
-  let cumulative = 0;
-  SPENDING_CATEGORIES.forEach(({ pct, color }) => {
-    conicParts.push(`${color} ${cumulative}% ${cumulative + pct}%`);
-    cumulative += pct;
-  });
-  const conicGradient = `conic-gradient(${conicParts.join(', ')})`;
-
   return (
-    <div className="glass-card rounded-lg hover-lift p-6 mb-8 page-enter page-enter-delay-3">
-      <h2 className="text-lg font-bold text-gray-200 mb-6">Spending Breakdown</h2>
+    <div className="glass-card rounded-lg p-6 mb-8 page-enter page-enter-delay-3">
+      <h2 className="text-lg mb-6" style={{ fontWeight: 400 }}>Spending Breakdown</h2>
 
-      <div className="flex flex-col sm:flex-row items-center gap-8">
-        {/* CSS Donut Ring */}
-        <div className="relative shrink-0">
-          <div
-            className="w-40 h-40 rounded-full"
-            style={{
-              background: conicGradient,
-              transition: 'all 0.7s ease',
-            }}
-          />
-          {/* Inner cutout */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-24 h-24 rounded-full bg-[#0C0C0E] flex flex-col items-center justify-center">
-              <span className="text-[10px] text-gray-500 uppercase tracking-wide">Annual</span>
-              <span className="text-sm font-bold text-[#c9a96e]">Budget</span>
-              <span className="text-[10px] text-gray-400 font-semibold">$120K</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Legend */}
-        <div className="flex-1 space-y-3 w-full">
-          {SPENDING_CATEGORIES.map(({ label, pct, bg }) => (
-            <div key={label} className="flex items-center gap-3">
-              <div className={`w-3 h-3 rounded-full ${bg} shrink-0`} />
-              <div className="flex-1">
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="font-medium text-gray-300">{label}</span>
-                  <span className="font-bold text-gray-200">{pct}%</span>
-                </div>
-                <div className="h-1.5 rounded-full bg-gray-800/60">
-                  <div
-                    className={`h-1.5 rounded-full ${bg} transition-all duration-700`}
-                    style={{ width: `${pct}%` }}
-                  />
-                </div>
-                <p className="text-[10px] text-gray-600 mt-0.5">
-                  ~${Math.round(120000 * pct / 100).toLocaleString()} / year
-                </p>
+      <div className="space-y-4">
+        {SPENDING_CATEGORIES.map(({ label, pct, amount }, i) => {
+          const opacities = [1, 0.8, 0.6, 0.4];
+          return (
+            <div key={label}>
+              <div className="flex justify-between text-[13px] mb-1.5">
+                <span style={{ color: 'var(--text-secondary)' }}>{label}</span>
+                <span style={{ color: 'var(--text-secondary)' }}>
+                  {pct}% · ~${amount.toLocaleString()}/yr
+                </span>
+              </div>
+              <div className="h-1.5 rounded-full" style={{ background: 'rgba(245, 240, 232, 0.04)' }}>
+                <div
+                  className="h-1.5 rounded-full transition-all duration-700"
+                  style={{
+                    width: `${pct}%`,
+                    background: 'var(--accent-brass)',
+                    opacity: opacities[i] ?? 0.4,
+                  }}
+                />
               </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
 
-      <p className="text-[10px] text-gray-600 mt-5 pt-4 border-t border-gray-800/60">
-        Based on $120,000 annual community budget · Percentages are approximate and updated quarterly
+      <p className="text-[11px] mt-5 pt-4" style={{ color: 'var(--text-muted)', borderTop: '1px solid var(--border-subtle)' }}>
+        Based on $120,000 annual community budget · Updated quarterly
       </p>
     </div>
   );

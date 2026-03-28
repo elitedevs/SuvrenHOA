@@ -32,7 +32,7 @@ export function CommunityPoll() {
       </div>
 
       {showCreate && (
-        <div className="mb-4 p-4 rounded-xl bg-gray-800/30 border border-gray-700 space-y-3">
+        <div className="mb-4 p-4 rounded-md bg-gray-800/30 border border-gray-700 space-y-3">
           <input value={newQuestion} onChange={e => setNewQuestion(e.target.value)}
             placeholder="Poll question..." className="w-full px-3 py-2 rounded-lg bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
           {newOptions.map((opt, i) => (

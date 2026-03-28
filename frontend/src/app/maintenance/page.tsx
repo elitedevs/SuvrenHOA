@@ -52,7 +52,7 @@ export default function MaintenancePage() {
           </p>
         </div>
         <div className="flex gap-2 shrink-0">
-          <div className="flex rounded-xl border border-gray-700/60 overflow-hidden">
+          <div className="flex rounded-md border border-gray-700/60 overflow-hidden">
             <button
               onClick={() => setViewMode('kanban')}
               className={`px-4 py-2.5 text-xs font-semibold transition-all ${viewMode === 'kanban' ? 'bg-[#c9a96e]/15 text-[#c9a96e]' : 'text-gray-400 hover:text-gray-300'}`}
@@ -68,7 +68,7 @@ export default function MaintenancePage() {
           </div>
           <button
             onClick={() => setShowNewRequest(!showNewRequest)}
-            className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)]"
+            className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)]"
           >
             {showNewRequest ? '← Back' : ' Report Issue'}
           </button>
@@ -83,7 +83,7 @@ export default function MaintenancePage() {
             <button
               key={status}
               onClick={() => setFilter(filter === status ? 'all' : status)}
-              className={`glass-card rounded-xl hover-lift p-4 text-center transition-all ${filter === status ? 'ring-1 ring-[#c9a96e]/30' : ''}`}
+              className={`glass-card rounded-md hover-lift p-4 text-center transition-all ${filter === status ? 'ring-1 ring-[#c9a96e]/30' : ''}`}
             >
               <p className={`text-2xl font-bold ${style.color}`}>{count}</p>
               <p className="text-[10px] text-gray-500">{style.label}</p>
@@ -113,7 +113,7 @@ function RequestCard({ request }: { request: any }) {
   const timeAgo = getTimeAgo(new Date(request.created_at));
 
   return (
-    <div className="glass-card rounded-xl hover-lift overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
+    <div className="glass-card rounded-md hover-lift overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -186,7 +186,7 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
   const categories = ['Irrigation', 'Lighting', 'Roads', 'Plumbing', 'Landscaping', 'Fencing', 'Clubhouse', 'Pool', 'Other'];
 
   return (
-    <div className="glass-card rounded-xl hover-lift p-6 space-y-5">
+    <div className="glass-card rounded-md hover-lift p-6 space-y-5">
       <h2 className="text-lg font-semibold">Report an Issue</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -194,13 +194,13 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
           <label className="block text-sm text-gray-400 mb-2">Title</label>
           <input type="text" value={title} onChange={e => setTitle(e.target.value)}
             placeholder="Brief description of the issue"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none transition-all" />
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none transition-all" />
         </div>
         <div>
           <label className="block text-sm text-gray-400 mb-2">Location</label>
           <input type="text" value={location} onChange={e => setLocation(e.target.value)}
             placeholder="Where is the issue? (e.g., Oak Lane near Lot 42)"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none transition-all" />
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none transition-all" />
         </div>
       </div>
 
@@ -208,7 +208,7 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
         <div>
           <label className="block text-sm text-gray-400 mb-2">Category</label>
           <select value={category} onChange={e => setCategory(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none transition-all">
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none transition-all">
             <option value="">Select category</option>
             {categories.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
@@ -218,7 +218,7 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
           <div className="flex gap-2">
             {['low', 'medium', 'high', 'urgent'].map(p => (
               <button key={p} onClick={() => setPriority(p)}
-                className={`flex-1 py-2.5 rounded-xl text-xs font-medium capitalize transition-all ${
+                className={`flex-1 py-2.5 rounded-md text-xs font-medium capitalize transition-all ${
                   priority === p ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
                 }`}>
                 {p}
@@ -233,12 +233,12 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Provide details — what's the issue, how long has it been happening, any safety concerns?"
           rows={4}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none transition-all resize-none" />
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none transition-all resize-none" />
       </div>
 
       <div className="flex gap-3">
         <button onClick={onClose}
-          className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">
+          className="flex-1 py-3 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">
           Cancel
         </button>
         <button 
@@ -250,7 +250,7 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
               { onSuccess: () => onClose() }
             );
           }}
-          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+          className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
           {createRequest.isPending ? ' Submitting...' : 'Submit Request'}
         </button>
       </div>
@@ -297,7 +297,7 @@ function KanbanBoard({ requests }: { requests: any[] }) {
       {columns.map(col => (
         <div key={col.id} className="flex flex-col gap-3">
           {/* Column header */}
-          <div className={`flex items-center justify-between px-4 py-3 rounded-xl ${col.style.bg} border ${col.style.border}`}>
+          <div className={`flex items-center justify-between px-4 py-3 rounded-md ${col.style.bg} border ${col.style.border}`}>
             <div className="flex items-center gap-2">
               <span>{col.emoji}</span>
               <span className={`text-xs font-bold ${col.style.color}`}>{col.label}</span>
@@ -310,7 +310,7 @@ function KanbanBoard({ requests }: { requests: any[] }) {
           {/* Cards */}
           <div className="space-y-2 min-h-[100px]">
             {col.items.length === 0 ? (
-              <div className="p-4 rounded-xl border border-dashed border-gray-700/40 text-center">
+              <div className="p-4 rounded-md border border-dashed border-gray-700/40 text-center">
                 <p className="text-[11px] text-gray-600">No items</p>
               </div>
             ) : (
@@ -330,7 +330,7 @@ function KanbanCard({ request }: { request: any }) {
   const timeAgo = getTimeAgo(new Date(request.created_at));
 
   return (
-    <div className="glass-card rounded-xl p-4 hover-lift cursor-default">
+    <div className="glass-card rounded-md p-4 hover-lift cursor-default">
       <h4 className="text-sm font-semibold text-gray-200 mb-2 leading-snug">{request.title}</h4>
       <div className="flex items-center gap-2 flex-wrap">
         <span className={`text-[10px] font-bold uppercase ${priority}`}>

@@ -56,7 +56,7 @@ export default function ActivityPage() {
             <button
               key={f.label}
               onClick={() => { setActiveFilter(f.match); setPage(1); }}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all border ${
+              className={`px-4 py-2 rounded-md text-xs font-semibold transition-all border ${
                 isActive
                   ? 'bg-[#c9a96e]/15 text-[#c9a96e] border-[#c9a96e]/30'
                   : 'text-gray-400 border-gray-700/60 hover:border-gray-600/60 hover:text-gray-300'
@@ -72,8 +72,8 @@ export default function ActivityPage() {
       {isLoading ? (
         <div className="space-y-3">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="glass-card rounded-xl p-5 flex gap-4">
-              <div className="skeleton w-10 h-10 rounded-xl shrink-0" />
+            <div key={i} className="glass-card rounded-md p-5 flex gap-4">
+              <div className="skeleton w-10 h-10 rounded-md shrink-0" />
               <div className="flex-1 space-y-2">
                 <div className="skeleton h-4 rounded w-3/4" />
                 <div className="skeleton h-3 rounded w-1/3" />
@@ -97,10 +97,10 @@ export default function ActivityPage() {
               href={`https://sepolia.basescan.org/tx/${event.txHash}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-card rounded-xl p-4 flex items-start gap-4 hover:border-[#c9a96e]/20 border border-transparent transition-all group block"
+              className="glass-card rounded-md p-4 flex items-start gap-4 hover:border-[#c9a96e]/20 border border-transparent transition-all group block"
               style={{ animationDelay: `${i * 30}ms` }}
             >
-              <div className="w-10 h-10 rounded-xl bg-gray-800/60 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-md bg-gray-800/60 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition-transform">
                 {event.icon}
               </div>
               <div className="flex-1 min-w-0">
@@ -120,7 +120,7 @@ export default function ActivityPage() {
           {hasMore && (
             <button
               onClick={() => setPage(p => p + 1)}
-              className="w-full py-3 rounded-xl border border-gray-700/60 text-sm text-gray-400 hover:text-gray-300 hover:border-[#c9a96e]/30 transition-all font-medium"
+              className="w-full py-3 rounded-md border border-gray-700/60 text-sm text-gray-400 hover:text-gray-300 hover:border-[#c9a96e]/30 transition-all font-medium"
             >
               Load more ({filtered.length - paginated.length} remaining)
             </button>
@@ -129,7 +129,7 @@ export default function ActivityPage() {
       )}
 
       {/* Legend */}
-      <div className="mt-8 glass-card rounded-xl p-4 border-l-2 border-l-[#c9a96e]/40">
+      <div className="mt-8 glass-card rounded-md p-4 border-l-2 border-l-[#c9a96e]/40">
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Event Types</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {[

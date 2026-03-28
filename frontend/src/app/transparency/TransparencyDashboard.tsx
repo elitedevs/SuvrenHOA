@@ -126,7 +126,7 @@ function StatCard({
           {label}
         </span>
         <div
-          className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+          className="w-9 h-9 rounded-md flex items-center justify-center shrink-0"
           style={{ background: c.bg, boxShadow: `0 0 16px ${c.glow}` }}
         >
           <Icon className={`w-4.5 h-4.5 ${c.icon}`} />
@@ -225,7 +225,7 @@ export function TransparencyDashboard() {
 
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
             Every dollar, every vote, every document —{' '}
-            <span className="text-gray-200 font-semibold">publicly verifiable on the blockchain.</span>
+            <span className="text-[var(--text-primary)] font-semibold">publicly verifiable on the blockchain.</span>
             {' '}No sign-in. No middleman. Just math.
           </p>
 
@@ -279,7 +279,7 @@ export function TransparencyDashboard() {
           </div>
 
           {stats.error && (
-            <div className="mb-4 px-4 py-3 rounded-xl text-sm text-amber-300"
+            <div className="mb-4 px-4 py-3 rounded-md text-sm text-amber-300"
                  style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
                {stats.error} — showing cached values
             </div>
@@ -398,7 +398,7 @@ export function TransparencyDashboard() {
                 <div className="p-6 space-y-4">
                   {[...Array(5)].map((_, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-white/[0.05] animate-pulse shrink-0" />
+                      <div className="w-9 h-9 rounded-md bg-white/[0.05] animate-pulse shrink-0" />
                       <div className="flex-1 space-y-2">
                         <div className="h-4 w-3/4 rounded bg-white/[0.05] animate-pulse" />
                         <div className="h-3 w-1/3 rounded bg-white/[0.04] animate-pulse" />
@@ -422,13 +422,13 @@ export function TransparencyDashboard() {
                         className="flex items-start gap-3 px-5 py-4 hover:bg-white/[0.02] transition-colors"
                       >
                         <div
-                          className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 text-lg"
+                          className="w-9 h-9 rounded-md flex items-center justify-center shrink-0 mt-0.5 text-lg"
                           style={{ background: 'rgba(201,169,110,0.08)' }}
                         >
                           {event.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-[13px] text-gray-200 font-medium leading-snug">
+                          <p className="text-[13px] text-[var(--text-primary)] font-medium leading-snug">
                             {event.description}
                           </p>
                           <div className="flex items-center gap-3 mt-1">
@@ -500,7 +500,7 @@ export function TransparencyDashboard() {
                   return (
                     <div
                       key={item.title}
-                      className="glass-card rounded-xl p-4 flex items-start gap-3"
+                      className="glass-card rounded-md p-4 flex items-start gap-3"
                     >
                       <div
                         className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
@@ -509,7 +509,7 @@ export function TransparencyDashboard() {
                         <TrustIcon className={'w-4 h-4 ' + item.color} />
                       </div>
                       <div>
-                        <p className="text-[13px] font-semibold text-gray-200">{item.title}</p>
+                        <p className="text-[13px] font-semibold text-[var(--text-primary)]">{item.title}</p>
                         <p className="text-[12px] text-gray-500 mt-0.5 leading-relaxed">{item.desc}</p>
                       </div>
                     </div>
@@ -525,7 +525,7 @@ export function TransparencyDashboard() {
                 Verify the Contracts
               </h2>
 
-              <div className="glass-card rounded-xl overflow-hidden">
+              <div className="glass-card rounded-md overflow-hidden">
                 {[
                   { label: 'PropertyNFT', addr: contracts.propertyNFT },
                   { label: 'Treasury', addr: contracts.treasury },
@@ -594,7 +594,7 @@ export function TransparencyDashboard() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Link
                   href="/dashboard"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-sm transition-all duration-200"
                   style={{
                     background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                     boxShadow: '0 0 24px rgba(201,169,110,0.25)',
@@ -608,7 +608,7 @@ export function TransparencyDashboard() {
                   href={BASESCAN_BASE + '/address/' + contracts.governor}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-gray-300 hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-md font-semibold text-sm text-gray-300 hover:text-white transition-colors"
                   style={{
                     background: 'rgba(255,255,255,0.04)',
                     border: '1px solid rgba(255,255,255,0.08)',

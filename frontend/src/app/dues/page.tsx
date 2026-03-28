@@ -73,11 +73,11 @@ function CommunityDuesStatus() {
 
       {/* Anonymous breakdown */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="rounded-xl bg-green-500/5 border border-green-500/20 p-4 text-center">
+        <div className="rounded-md bg-green-500/5 border border-green-500/20 p-4 text-center">
           <p className="text-2xl font-normal text-green-400">{paidCount}</p>
           <p className="text-xs text-gray-500 mt-1 font-semibold">Paid This Quarter</p>
         </div>
-        <div className="rounded-xl bg-red-500/5 border border-red-500/20 p-4 text-center">
+        <div className="rounded-md bg-red-500/5 border border-red-500/20 p-4 text-center">
           <p className="text-2xl font-normal text-red-400">{unpaidCount}</p>
           <p className="text-xs text-gray-500 mt-1 font-semibold">Still Outstanding</p>
         </div>
@@ -266,7 +266,7 @@ function DuesPanel() {
           )}
           <button
             onClick={() => { setStep('select'); setSelectedQuarters(null); }}
-            className="block mx-auto mt-6 px-6 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 text-sm font-bold transition-colors min-h-[44px]"
+            className="block mx-auto mt-6 px-6 py-3 rounded-md bg-gray-800 hover:bg-gray-700 text-sm font-bold transition-colors min-h-[44px]"
           >
             Done
           </button>
@@ -333,7 +333,7 @@ function DuesPanel() {
           <button
             onClick={handlePay}
             disabled={!selectedQuarters || isApproving || isPaying}
-            className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-base font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] active:scale-[0.98] min-h-[56px]"
+            className="w-full py-4 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-base font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] active:scale-[0.98] min-h-[56px]"
           >
             {isApproving ? ' Approving USDC...' :
              isPaying ? ' Processing Payment...' :

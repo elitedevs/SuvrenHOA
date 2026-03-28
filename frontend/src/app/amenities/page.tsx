@@ -49,7 +49,7 @@ export default function AmenitiesPage() {
         {selectedAmenity && (
           <button
             onClick={() => setSelectedAmenity(null)}
-            className="px-4 py-2 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors"
+            className="px-4 py-2 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors"
           >
             ← All Amenities
           </button>
@@ -77,7 +77,7 @@ function AmenityGrid({ onSelect, walletAddress }: { onSelect: (a: Amenity) => vo
   return (
     <>
       {myBookings.length > 0 && (
-        <div className="mb-8 glass-card rounded-xl p-5">
+        <div className="mb-8 glass-card rounded-md p-5">
           <h3 className="text-sm font-semibold text-[#c9a96e] mb-3"> Your Upcoming Bookings</h3>
           <div className="space-y-2">
             {myBookings
@@ -103,7 +103,7 @@ function AmenityGrid({ onSelect, walletAddress }: { onSelect: (a: Amenity) => vo
           <button
             key={amenity.id}
             onClick={() => onSelect(amenity)}
-            className="glass-card rounded-xl hover-lift p-6 text-left transition-all hover:border-[#c9a96e]/30 border border-transparent group"
+            className="glass-card rounded-md hover-lift p-6 text-left transition-all hover:border-[#c9a96e]/30 border border-transparent group"
           >
             <div className="text-4xl mb-3">{amenity.icon}</div>
             <h3 className="font-semibold text-base mb-1">{amenity.name}</h3>
@@ -160,7 +160,7 @@ function AmenityBookingView({
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Calendar / Week View */}
       <div className="lg:col-span-2 space-y-4">
-        <div className="glass-card rounded-xl p-5">
+        <div className="glass-card rounded-md p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-[#c9a96e]">{amenity.icon} {amenity.name}</h3>
             <div className="flex items-center gap-2">
@@ -237,7 +237,7 @@ function AmenityBookingView({
         </div>
 
         {/* Rules */}
-        <div className="glass-card rounded-xl p-4">
+        <div className="glass-card rounded-md p-4">
           <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2"> Rules & Requirements</h4>
           <ul className="space-y-1">
             {amenity.rules.map((rule, i) => (
@@ -268,7 +268,7 @@ function AmenityBookingView({
         </div>
 
         {activeTab === 'book' ? (
-          <div className="glass-card rounded-xl p-5 space-y-4">
+          <div className="glass-card rounded-md p-5 space-y-4">
             {success && (
               <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 text-xs text-green-400">
                  Booking confirmed!
@@ -303,13 +303,13 @@ function AmenityBookingView({
             <button
               onClick={handleBook}
               disabled={!selectedDate || !selectedSlot || !purpose.trim()}
-              className="w-full py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
+              className="w-full py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
             >
               Confirm Booking
             </button>
           </div>
         ) : (
-          <div className="glass-card rounded-xl p-5 space-y-3">
+          <div className="glass-card rounded-md p-5 space-y-3">
             {myBookings.length === 0 ? (
               <p className="text-sm text-gray-500 text-center py-4">No bookings yet</p>
             ) : (

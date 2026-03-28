@@ -111,7 +111,7 @@ export default function SafetyPage() {
         </div>
         <button
           onClick={() => setShowReport(!showReport)}
-          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
+          className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
         >
           {showReport ? '← Back to Log' : '+ Report Concern'}
         </button>
@@ -124,7 +124,7 @@ export default function SafetyPage() {
           { label: 'Acknowledged', count: counts.acknowledged, color: 'text-blue-400', bg: 'bg-blue-500/5 border-blue-500/20' },
           { label: 'Resolved', count: counts.resolved, color: 'text-green-400', bg: 'bg-green-500/5 border-green-500/20' },
         ].map(s => (
-          <div key={s.label} className={`glass-card rounded-xl p-3 text-center border ${s.bg}`}>
+          <div key={s.label} className={`glass-card rounded-md p-3 text-center border ${s.bg}`}>
             <div className={`text-2xl font-bold ${s.color}`}>{s.count}</div>
             <div className="text-[10px] text-gray-500">{s.label}</div>
           </div>
@@ -140,7 +140,7 @@ export default function SafetyPage() {
             <div className="flex gap-2">
               {(['all', 'reported', 'acknowledged', 'resolved'] as const).map(s => (
                 <button key={s} onClick={() => setStatusFilter(s)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium capitalize transition-all ${
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium capitalize transition-all ${
                     statusFilter === s ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
                   }`}>
                   {s}
@@ -148,14 +148,14 @@ export default function SafetyPage() {
               ))}
             </div>
             <select value={typeFilter} onChange={e => setTypeFilter(e.target.value)}
-              className="px-3 py-1.5 rounded-xl bg-gray-800/80 border border-gray-700 text-xs text-gray-400 focus:outline-none">
+              className="px-3 py-1.5 rounded-md bg-gray-800/80 border border-gray-700 text-xs text-gray-400 focus:outline-none">
               <option value="all">All Types</option>
               {REPORT_TYPES.map(t => <option key={t.id} value={t.id}>{t.icon} {t.label}</option>)}
             </select>
           </div>
 
           {filtered.length === 0 ? (
-            <div className="glass-card rounded-xl p-12 text-center">
+            <div className="glass-card rounded-md p-12 text-center">
               <p className="text-4xl mb-3"></p>
               <h3 className="font-medium mb-1">No reports</h3>
               <p className="text-sm text-gray-400">Safety observations will appear here</p>
@@ -182,7 +182,7 @@ function SafetyCard({ entry, onUpdateStatus }: { entry: SafetyEntry; onUpdateSta
   const timeAgo = getTimeAgo(new Date(entry.createdAt));
 
   return (
-    <div className="glass-card rounded-xl hover-lift overflow-hidden">
+    <div className="glass-card rounded-md hover-lift overflow-hidden">
       <div className="p-5 cursor-pointer" onClick={() => setExpanded(!expanded)}>
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -245,7 +245,7 @@ function ReportForm({ onSubmit, onCancel, address }: {
   };
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5 max-w-2xl">
+    <div className="glass-card rounded-md p-6 space-y-5 max-w-2xl">
       <h2 className="text-lg font-semibold">Report a Safety Concern</h2>
 
       <div>
@@ -253,7 +253,7 @@ function ReportForm({ onSubmit, onCancel, address }: {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {REPORT_TYPES.map(t => (
             <button key={t.id} onClick={() => setType(t.id)}
-              className={`p-3 rounded-xl text-center transition-all ${
+              className={`p-3 rounded-md text-center transition-all ${
                 type === t.id ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400 hover:text-gray-200'
               }`}>
               <div className="text-xl mb-1">{t.icon}</div>
@@ -266,20 +266,20 @@ function ReportForm({ onSubmit, onCancel, address }: {
       <div>
         <label className="block text-sm text-gray-400 mb-2">Location *</label>
         <input value={location} onChange={e => setLocation(e.target.value)} placeholder="e.g., Corner of Maple Ave and Oak St"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
       </div>
 
       <div>
         <label className="block text-sm text-gray-400 mb-2">Description *</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Describe what you observed — when, what you saw, any relevant details..."
-          rows={4} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
+          rows={4} className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
       </div>
 
       <div>
         <label className="block text-sm text-gray-400 mb-2">Date Observed</label>
         <input type="date" value={date} onChange={e => setDate(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
       </div>
 
       <label className="flex items-center gap-2 cursor-pointer">
@@ -288,9 +288,9 @@ function ReportForm({ onSubmit, onCancel, address }: {
       </label>
 
       <div className="flex gap-3">
-        <button onClick={onCancel} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+        <button onClick={onCancel} className="flex-1 py-3 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
         <button onClick={handleSubmit} disabled={!type || !location.trim() || !description.trim()}
-          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+          className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
           Submit Report
         </button>
       </div>

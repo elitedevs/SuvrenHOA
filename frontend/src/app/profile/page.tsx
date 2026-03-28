@@ -98,7 +98,7 @@ function ProfileForm() {
       </p>
 
       {/* Property Info (read-only from chain) */}
-      <div className="glass-card rounded-xl p-5 mb-6">
+      <div className="glass-card rounded-md p-5 mb-6">
         <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-3">On-Chain Identity</h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -135,13 +135,13 @@ function ProfileForm() {
           {badges.map(badge => (
             <div
               key={badge.id}
-              className={`flex items-center gap-3 rounded-xl p-3 transition-all ${
+              className={`flex items-center gap-3 rounded-md p-3 transition-all ${
                 badge.earned
                   ? 'bg-[#c9a96e]/10 border border-[#c9a96e]/30 shadow-[0_0_12px_rgba(201,169,110,0.15)]'
                   : 'bg-gray-800/40 border border-gray-700/40 opacity-40'
               }`}
             >
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0 ${
+              <div className={`w-10 h-10 rounded-md flex items-center justify-center text-xl shrink-0 ${
                 badge.earned
                   ? 'bg-[#c9a96e]/20 shadow-[0_0_8px_rgba(201,169,110,0.3)]'
                   : 'bg-gray-700/40'
@@ -161,7 +161,7 @@ function ProfileForm() {
       </div>
 
       {/* Editable Profile */}
-      <div className="glass-card rounded-xl p-6 space-y-5">
+      <div className="glass-card rounded-md p-6 space-y-5">
         <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Profile Settings</h3>
 
         <div>
@@ -171,7 +171,7 @@ function ProfileForm() {
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="How neighbors will see you (e.g., Rick Morang)"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
           />
           <p className="text-[10px] text-gray-500 mt-1">This replaces your wallet address in community posts and comments</p>
         </div>
@@ -184,7 +184,7 @@ function ProfileForm() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="For notifications"
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
             />
           </div>
           <div>
@@ -194,7 +194,7 @@ function ProfileForm() {
               value={phone}
               onChange={e => setPhone(e.target.value)}
               placeholder="For urgent alerts"
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none"
             />
           </div>
         </div>
@@ -206,21 +206,21 @@ function ProfileForm() {
             onChange={e => setBio(e.target.value)}
             placeholder="A bit about yourself for the community directory"
             rows={3}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none resize-none"
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#c9a96e]/50 focus:outline-none resize-none"
           />
         </div>
 
         <button
           onClick={handleSave}
           disabled={updateProfile.isPending}
-          className="w-full py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
+          className="w-full py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
         >
           {updateProfile.isPending ? ' Saving...' : saved ? ' Saved!' : 'Save Profile'}
         </button>
       </div>
 
       {/* Privacy note */}
-      <div className="mt-6 p-4 rounded-xl glass-card">
+      <div className="mt-6 p-4 rounded-md glass-card">
         <h4 className="text-xs font-medium text-[#c9a96e] mb-1"> Privacy</h4>
         <p className="text-[10px] text-gray-400">
           Your email and phone are never shared publicly. They&apos;re only used for notifications you opt into.

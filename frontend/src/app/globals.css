@@ -101,6 +101,80 @@ h3 { letter-spacing: -0.01em; }
 /* Minimum text sizes */
 p, span, li, td, th, label, a { font-size: max(13px, inherit); }
 
+/* ── Design Token Utility Classes ─────────────────────────────────────────── */
+/* These replace raw Tailwind gray-* classes with palette-correct values */
+/* Mapping: gray-100/200 → primary, gray-300 → bright secondary, gray-400 → secondary, gray-500 → muted, gray-600/700 → deep muted */
+.text-primary { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-dim { color: var(--text-muted) !important; }
+.text-brass { color: var(--accent-brass) !important; }
+.text-verdigris { color: #5A9E8F !important; }
+.text-rosewood { color: #8B5A5A !important; }
+.bg-surface { background: var(--bg-surface) !important; }
+.bg-elevated { background: var(--bg-elevated) !important; }
+.border-token { border-color: var(--border-subtle) !important; }
+
+/* ── Tailwind Gray Override — Force palette on raw gray classes ────────────── */
+/* This ensures existing text-gray-* / bg-gray-* classes render on-palette */
+/* instead of Tailwind's default cool grays. Luxury is in the detail. */
+html.dark .text-gray-100 { color: #F5F0E8 !important; }
+html.dark .text-gray-200 { color: rgba(245, 240, 232, 0.85) !important; }
+html.dark .text-gray-300 { color: rgba(245, 240, 232, 0.70) !important; }
+html.dark .text-gray-400 { color: rgba(245, 240, 232, 0.55) !important; }
+html.dark .text-gray-500 { color: rgba(245, 240, 232, 0.35) !important; }
+html.dark .text-gray-600 { color: rgba(245, 240, 232, 0.25) !important; }
+html.dark .text-gray-700 { color: rgba(245, 240, 232, 0.15) !important; }
+
+html.dark .bg-gray-800 { background: var(--bg-surface) !important; }
+html.dark .bg-gray-800\/80 { background: rgba(20, 20, 22, 0.8) !important; }
+html.dark .bg-gray-800\/60 { background: rgba(20, 20, 22, 0.6) !important; }
+html.dark .bg-gray-800\/50 { background: rgba(20, 20, 22, 0.5) !important; }
+html.dark .bg-gray-800\/30 { background: rgba(20, 20, 22, 0.3) !important; }
+html.dark .bg-gray-900 { background: var(--bg-primary) !important; }
+html.dark .bg-gray-900\/50 { background: rgba(12, 12, 14, 0.5) !important; }
+html.dark .bg-gray-900\/60 { background: rgba(12, 12, 14, 0.6) !important; }
+html.dark .bg-gray-950 { background: #08080A !important; }
+
+html.dark .border-gray-700 { border-color: var(--border-default) !important; }
+html.dark .border-gray-700\/60 { border-color: rgba(245, 240, 232, 0.06) !important; }
+html.dark .border-gray-800 { border-color: var(--border-subtle) !important; }
+html.dark .border-gray-800\/60 { border-color: rgba(245, 240, 232, 0.04) !important; }
+
+/* Override saturated Tailwind accent colors → palette equivalents */
+html.dark .text-green-400 { color: #5A9E8F !important; }
+html.dark .text-green-300 { color: #6DB3A3 !important; }
+html.dark .text-blue-400 { color: #8B9BB0 !important; }
+html.dark .text-blue-300 { color: #9AABBB !important; }
+html.dark .text-red-400 { color: #8B5A5A !important; }
+html.dark .text-red-300 { color: #A06E6E !important; }
+html.dark .text-amber-400 { color: var(--accent-brass) !important; }
+html.dark .text-yellow-400 { color: var(--accent-brass) !important; }
+html.dark .text-purple-400 { color: rgba(176, 155, 113, 0.7) !important; }
+html.dark .text-cyan-400 { color: #5A9E8F !important; }
+html.dark .text-emerald-400 { color: #5A9E8F !important; }
+
+html.dark .bg-green-500\/10 { background: rgba(42, 93, 79, 0.08) !important; }
+html.dark .bg-green-500\/5 { background: rgba(42, 93, 79, 0.04) !important; }
+html.dark .bg-blue-500\/10 { background: rgba(139, 155, 176, 0.06) !important; }
+html.dark .bg-blue-500\/5 { background: rgba(139, 155, 176, 0.04) !important; }
+html.dark .bg-red-500\/10 { background: rgba(107, 58, 58, 0.08) !important; }
+html.dark .bg-red-500\/5 { background: rgba(107, 58, 58, 0.04) !important; }
+html.dark .bg-amber-500\/10 { background: rgba(176, 155, 113, 0.08) !important; }
+html.dark .bg-yellow-500\/10 { background: rgba(176, 155, 113, 0.08) !important; }
+
+html.dark .border-green-500\/20 { border-color: rgba(42, 93, 79, 0.15) !important; }
+html.dark .border-blue-500\/20 { border-color: rgba(139, 155, 176, 0.12) !important; }
+html.dark .border-red-500\/20 { border-color: rgba(107, 58, 58, 0.15) !important; }
+html.dark .border-amber-500\/20 { border-color: rgba(176, 155, 113, 0.15) !important; }
+
+/* Gradient overrides — solid palette colors, no gradients */
+html.dark .from-green-600 { --tw-gradient-from: #2A5D4F !important; }
+html.dark .to-green-400 { --tw-gradient-to: #2A5D4F !important; }
+html.dark .from-blue-600 { --tw-gradient-from: #6B7B90 !important; }
+html.dark .to-blue-400 { --tw-gradient-to: #6B7B90 !important; }
+html.dark .from-red-600 { --tw-gradient-from: #6B3A3A !important; }
+html.dark .to-red-400 { --tw-gradient-to: #6B3A3A !important; }
+
 /* ── Surface cards — luxury elevation, no visible borders ─────────────────── */
 .glass {
   background: var(--bg-surface);
@@ -809,4 +883,15 @@ h1 svg, h2 svg { display: none; }
     margin: 1in;
     size: letter portrait;
   }
+}
+
+/* ── Heading weight discipline — luxury whispers, never shouts ────────────── */
+/* Override any Tailwind font-bold/font-semibold/font-black on headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400 !important;
+}
+
+/* Exception: buttons and interactive elements can use 500 max */
+button, [role="button"], a[class*="btn"] {
+  font-weight: 500;
 }

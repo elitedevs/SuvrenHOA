@@ -41,7 +41,7 @@ function ConversationItem({
   return (
     <button
       onClick={onClick}
-      className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-150 flex items-center gap-3 group ${
+      className={`w-full text-left px-4 py-3 rounded-md transition-all duration-150 flex items-center gap-3 group ${
         isActive
           ? 'bg-[#c9a96e]/10 border border-[#c9a96e]/25'
           : 'hover:bg-white/[0.04] border border-transparent'
@@ -110,7 +110,7 @@ function NewMessageModal({
           placeholder="Search lot number..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-[#c9a96e]/50 mb-4"
+          className="w-full bg-gray-800/60 border border-gray-700/60 rounded-md px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-[#c9a96e]/50 mb-4"
           autoFocus
         />
 
@@ -133,7 +133,7 @@ function NewMessageModal({
                   onSelect(lot.lotId);
                   onClose();
                 }}
-                className="w-full text-left px-4 py-3 rounded-xl hover:bg-[#c9a96e]/10 border border-transparent hover:border-[#c9a96e]/20 transition-all duration-150 flex items-center gap-3"
+                className="w-full text-left px-4 py-3 rounded-md hover:bg-[#c9a96e]/10 border border-transparent hover:border-[#c9a96e]/20 transition-all duration-150 flex items-center gap-3"
               >
                 <div className="w-9 h-9 rounded-full bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center">
                   <span className="text-xs font-bold text-[#c9a96e]">#{lot.lotId}</span>
@@ -234,12 +234,12 @@ function ChatPanel({
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={`Message Lot #${lotId}...`}
-            className="flex-1 bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-[#c9a96e]/50 min-h-[44px]"
+            className="flex-1 bg-gray-800/60 border border-gray-700/60 rounded-md px-4 py-2.5 text-sm text-gray-200 placeholder-gray-600 outline-none focus:border-[#c9a96e]/50 min-h-[44px]"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim()}
-            className="w-11 h-11 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shrink-0"
+            className="w-11 h-11 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-all duration-200 shrink-0"
             aria-label="Send message"
           >
             <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -353,7 +353,7 @@ function MessagingCenter({ address }: { address: string }) {
 
       {/* Opt-in info banner */}
       {!optIn && (
-        <div className="mb-4 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-sm text-amber-300 font-medium">
+        <div className="mb-4 px-4 py-3 rounded-md bg-amber-500/10 border border-amber-500/20 text-sm text-amber-300 font-medium">
            Messaging is opt-in. Enable the toggle above so neighbors can message you.
         </div>
       )}
@@ -383,7 +383,7 @@ function MessagingCenter({ address }: { address: string }) {
               {!isLoaded ? (
                 <div className="space-y-2 p-2">
                   {[...Array(4)].map((_, i) => (
-                    <div key={i} className="skeleton h-16 rounded-xl" />
+                    <div key={i} className="skeleton h-16 rounded-md" />
                   ))}
                 </div>
               ) : conversations.length === 0 ? (
@@ -394,7 +394,7 @@ function MessagingCenter({ address }: { address: string }) {
                   </p>
                   <button
                     onClick={() => setShowNewModal(true)}
-                    className="text-sm font-semibold text-[#c9a96e] hover:text-[#e8d5a3] px-4 py-2 rounded-xl hover:bg-[#c9a96e]/10 transition-all duration-150"
+                    className="text-sm font-semibold text-[#c9a96e] hover:text-[#e8d5a3] px-4 py-2 rounded-md hover:bg-[#c9a96e]/10 transition-all duration-150"
                   >
                     Start a conversation →
                   </button>
@@ -432,7 +432,7 @@ function MessagingCenter({ address }: { address: string }) {
                 </p>
                 <button
                   onClick={() => setShowNewModal(true)}
-                  className="mt-2 px-5 py-2.5 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/20 text-sm font-semibold text-[#e8d5a3] transition-all duration-200"
+                  className="mt-2 px-5 py-2.5 rounded-md bg-[#c9a96e]/15 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/20 text-sm font-semibold text-[#e8d5a3] transition-all duration-200"
                 >
                    New Message
                 </button>

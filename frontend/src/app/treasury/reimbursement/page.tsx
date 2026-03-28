@@ -102,7 +102,7 @@ export default function ReimbursementPage() {
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
+          className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
         >
           {showForm ? '← Back' : '+ New Request'}
         </button>
@@ -110,15 +110,15 @@ export default function ReimbursementPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="glass-card rounded-xl p-4 text-center">
+        <div className="glass-card rounded-md p-4 text-center">
           <div className="text-xl font-bold text-gray-100">${(totalMine / 100).toFixed(2)}</div>
           <div className="text-[10px] text-gray-500">Total Submitted</div>
         </div>
-        <div className="glass-card rounded-xl p-4 text-center">
+        <div className="glass-card rounded-md p-4 text-center">
           <div className="text-xl font-bold text-green-400">${(paidMine / 100).toFixed(2)}</div>
           <div className="text-[10px] text-gray-500">Paid Out</div>
         </div>
-        <div className="glass-card rounded-xl p-4 text-center">
+        <div className="glass-card rounded-md p-4 text-center">
           <div className="text-xl font-bold text-yellow-400">${(pendingMine / 100).toFixed(2)}</div>
           <div className="text-[10px] text-gray-500">Pending</div>
         </div>
@@ -131,17 +131,17 @@ export default function ReimbursementPage() {
           {/* Tabs */}
           <div className="flex gap-2 mb-6">
             <button onClick={() => setActiveTab('mine')}
-              className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'mine' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+              className={`px-4 py-2 rounded-md text-xs font-medium transition-all ${activeTab === 'mine' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
               My Requests ({myRequests.length})
             </button>
             <button onClick={() => setActiveTab('all')}
-              className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'all' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+              className={`px-4 py-2 rounded-md text-xs font-medium transition-all ${activeTab === 'all' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
               All Requests ({requests.length})
             </button>
           </div>
 
           {/* Policy note */}
-          <div className="p-3 rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/15 mb-5">
+          <div className="p-3 rounded-md bg-[#c9a96e]/5 border border-[#c9a96e]/15 mb-5">
             <p className="text-[11px] text-gray-400">
               <span className="text-[#c9a96e] font-medium"> Policy:</span>{' '}
               Reimbursements require pre-approval for expenses over $150. Keep original receipts for 3 years. Requests must be submitted within 60 days of purchase. For emergency expenses, notify the board within 24 hours.
@@ -149,7 +149,7 @@ export default function ReimbursementPage() {
           </div>
 
           {displayRequests.length === 0 ? (
-            <div className="glass-card rounded-xl p-12 text-center">
+            <div className="glass-card rounded-md p-12 text-center">
               <p className="text-4xl mb-3"></p>
               <h3 className="font-medium mb-1">No requests yet</h3>
               <p className="text-sm text-gray-400">Submit your first reimbursement request above</p>
@@ -173,7 +173,7 @@ function RequestCard({ request: r }: { request: ReimbursementRequest }) {
   const statusStyle = STATUS_STYLES[r.status];
 
   return (
-    <div className="glass-card rounded-xl hover-lift overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
+    <div className="glass-card rounded-md hover-lift overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -226,7 +226,7 @@ function ReimbursementForm({ onSubmit, onCancel }: {
   };
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5 max-w-2xl">
+    <div className="glass-card rounded-md p-6 space-y-5 max-w-2xl">
       <h2 className="text-lg font-semibold">New Reimbursement Request</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -234,12 +234,12 @@ function ReimbursementForm({ onSubmit, onCancel }: {
           <label className="block text-sm text-gray-400 mb-2">Amount ($) *</label>
           <input type="number" value={amountStr} onChange={e => setAmountStr(e.target.value)}
             placeholder="0.00" step="0.01" min="0"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-gray-400 mb-2">Category *</label>
           <select value={category} onChange={e => setCategory(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none">
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none">
             <option value="">Select category</option>
             {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.icon} {c.label}</option>)}
           </select>
@@ -249,26 +249,26 @@ function ReimbursementForm({ onSubmit, onCancel }: {
       <div>
         <label className="block text-sm text-gray-400 mb-2">Receipt Reference # *</label>
         <input value={receiptRef} onChange={e => setReceiptRef(e.target.value)} placeholder="e.g., RCPT-2026-042 or store receipt number"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
       </div>
 
       <div>
         <label className="block text-sm text-gray-400 mb-2">Description *</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="What was purchased? Why was it needed? How does it benefit the community?"
-          rows={4} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
+          rows={4} className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
       </div>
 
       {parseFloat(amountStr) > 150 && (
-        <div className="p-3 rounded-xl bg-amber-500/5 border border-amber-500/20 text-xs text-amber-400">
+        <div className="p-3 rounded-md bg-amber-500/5 border border-amber-500/20 text-xs text-amber-400">
            Expenses over $150 require prior board approval. If this was not pre-approved, your request may be rejected.
         </div>
       )}
 
       <div className="flex gap-3">
-        <button onClick={onCancel} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+        <button onClick={onCancel} className="flex-1 py-3 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
         <button onClick={handleSubmit} disabled={!amountStr || !category || !description.trim() || !receiptRef.trim()}
-          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+          className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
           Submit Request
         </button>
       </div>

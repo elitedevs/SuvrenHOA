@@ -151,7 +151,7 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
         </div>
 
         <div className="flex justify-center mb-4">
-          <div className="p-3 rounded-xl bg-white">
+          <div className="p-3 rounded-md bg-white">
             <QRCode value={url} size={180} />
           </div>
         </div>
@@ -166,7 +166,7 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
           onClick={() => {
             navigator.clipboard?.writeText(url);
           }}
-          className="w-full py-2.5 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#e8d5a3] text-sm font-medium hover:bg-[#c9a96e]/25 transition-colors"
+          className="w-full py-2.5 rounded-md bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#e8d5a3] text-sm font-medium hover:bg-[#c9a96e]/25 transition-colors"
         >
            Copy Link
         </button>

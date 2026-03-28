@@ -126,7 +126,7 @@ function PropertyDashboard() {
             Your wallet doesn&apos;t hold a Faircroft Property NFT.
             If you&apos;re a homeowner, contact the board to have your property minted.
           </p>
-          <div className="inline-block px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60">
+          <div className="inline-block px-4 py-2.5 rounded-md bg-gray-800/60 border border-gray-700/60">
             <p className="text-xs text-gray-500 font-mono">{address}</p>
           </div>
         </div>
@@ -145,7 +145,7 @@ function PropertyDashboard() {
           </h1>
         </div>
         <div className="flex items-center gap-3">
-          <div className="px-4 py-2 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20">
+          <div className="px-4 py-2 rounded-md bg-[#c9a96e]/10 border border-[#c9a96e]/20">
             <span className="text-sm font-bold text-[#e8d5a3]">
               Lot #{tokenId}
               {hasMultipleProperties && (
@@ -158,7 +158,7 @@ function PropertyDashboard() {
           {tokenId !== undefined && (
             <button
               onClick={() => setShowQR(true)}
-              className="px-3 py-2 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-xs font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
+              className="px-3 py-2 rounded-md bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-xs font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
               title="Share Property QR Code"
             >
                Share
@@ -255,7 +255,7 @@ function PropertyDashboard() {
               <p className="text-lg font-bold text-red-300">${amountOwed}</p>
               <Link
                 href="/dues"
-                className="inline-flex items-center gap-1.5 mt-4 px-4 py-2.5 rounded-xl bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 text-sm font-semibold text-red-300 transition-all duration-200 min-h-[44px]"
+                className="inline-flex items-center gap-1.5 mt-4 px-4 py-2.5 rounded-md bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 text-sm font-semibold text-red-300 transition-all duration-200 min-h-[44px]"
               >
                  Pay Now
               </Link>
@@ -300,7 +300,7 @@ function PropertyDashboard() {
 
       {/* Onboarding Banner */}
       {hasProperty && !isCompleted && (
-        <a href="/onboarding" className="flex items-center justify-between px-4 py-3.5 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/15 transition-all duration-200 mb-4 cursor-pointer no-underline group">
+        <a href="/onboarding" className="flex items-center justify-between px-4 py-3.5 rounded-md bg-[#c9a96e]/10 border border-[#c9a96e]/30 hover:bg-[#c9a96e]/15 transition-all duration-200 mb-4 cursor-pointer no-underline group">
           <div className="flex items-center gap-3">
             <span className="text-xl"></span>
             <div>
@@ -316,7 +316,7 @@ function PropertyDashboard() {
 
       {/* Unread Messages Banner */}
       {totalUnread > 0 && (
-        <a href="/messages" className="flex items-center justify-between px-4 py-3 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 hover:bg-[#c9a96e]/10 transition-all duration-200 mb-4 cursor-pointer no-underline">
+        <a href="/messages" className="flex items-center justify-between px-4 py-3 rounded-md bg-[#c9a96e]/10 border border-[#c9a96e]/25 hover:bg-[#c9a96e]/10 transition-all duration-200 mb-4 cursor-pointer no-underline">
           <div className="flex items-center gap-3">
             <span className="text-xl"></span>
             <div>
@@ -344,7 +344,7 @@ function PropertyDashboard() {
             <Link
               key={href}
               href={href}
-              className="glass-card rounded-xl p-4 text-center group min-h-[80px] flex flex-col items-center justify-center gap-2 hover:border-[#c9a96e]/25 relative"
+              className="glass-card rounded-md p-4 text-center group min-h-[80px] flex flex-col items-center justify-center gap-2 hover:border-[#c9a96e]/25 relative"
             >
               <span className="text-2xl group-hover:scale-110 transition-transform duration-200">{icon}</span>
               <p className="text-sm font-semibold text-gray-300 group-hover:text-[#e8d5a3] transition-colors duration-200">{label}</p>

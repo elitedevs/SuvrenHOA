@@ -137,7 +137,7 @@ export default function NotificationPrefsPage() {
         {!loaded ? (
           <div className="space-y-3">
             {[1, 2, 3, 4].map(i => (
-              <div key={i} className="skeleton h-16 rounded-xl" />
+              <div key={i} className="skeleton h-16 rounded-md" />
             ))}
           </div>
         ) : (
@@ -145,13 +145,13 @@ export default function NotificationPrefsPage() {
             {PREFS.map(pref => (
               <div
                 key={pref.id}
-                className={`flex items-center gap-4 rounded-xl p-4 transition-all ${
+                className={`flex items-center gap-4 rounded-md p-4 transition-all ${
                   prefs[pref.id]
                     ? 'bg-[#c9a96e]/5 border border-[#c9a96e]/15'
                     : 'bg-gray-800/30 border border-gray-700/30'
                 }`}
               >
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0 ${
+                <div className={`w-10 h-10 rounded-md flex items-center justify-center text-xl shrink-0 ${
                   prefs[pref.id] ? 'bg-[#c9a96e]/15' : 'bg-gray-700/30'
                 }`}>
                   {pref.icon}
@@ -191,7 +191,7 @@ export default function NotificationPrefsPage() {
 
       <button
         onClick={handleSave}
-        className="w-full py-3.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_20px_rgba(201,169,110,0.2)]"
+        className="w-full py-3.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_20px_rgba(201,169,110,0.2)]"
       >
         {saved ? ' Preferences Saved!' : 'Save Preferences'}
       </button>

@@ -202,7 +202,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                       key={t}
                       type="button"
                       onClick={() => setType(t)}
-                      className={`px-3 py-2 rounded-xl text-sm font-semibold border transition-all ${
+                      className={`px-3 py-2 rounded-md text-sm font-semibold border transition-all ${
                         type === t
                           ? `${s.badge} ${s.glow}`
                           : 'border-white/10 text-gray-500 hover:border-white/20'
@@ -226,7 +226,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Gas leak at Building C — evacuate now"
                 maxLength={120}
-                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-[#c9a96e]/50 focus:ring-1 focus:ring-[#c9a96e]/30 transition"
+                className="w-full bg-white/[0.04] border border-white/10 rounded-md px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-[#c9a96e]/50 focus:ring-1 focus:ring-[#c9a96e]/30 transition"
               />
             </div>
 
@@ -241,7 +241,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                 placeholder="Optional additional details..."
                 rows={3}
                 maxLength={500}
-                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-[#c9a96e]/50 focus:ring-1 focus:ring-[#c9a96e]/30 transition resize-none"
+                className="w-full bg-white/[0.04] border border-white/10 rounded-md px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-[#c9a96e]/50 focus:ring-1 focus:ring-[#c9a96e]/30 transition resize-none"
               />
             </div>
 
@@ -256,7 +256,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                     key={label}
                     type="button"
                     onClick={() => setExpiresInHours(value)}
-                    className={`px-3 py-2 rounded-xl text-sm font-semibold border transition-all ${
+                    className={`px-3 py-2 rounded-md text-sm font-semibold border transition-all ${
                       expiresInHours === value
                         ? 'border-[#c9a96e]/50 bg-[#c9a96e]/10 text-[#e8d5a3]'
                         : 'border-white/10 text-gray-500 hover:border-white/20'
@@ -269,7 +269,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
             </div>
 
             {error && (
-              <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2">
+              <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-md px-4 py-2">
                 {error}
               </p>
             )}
@@ -277,7 +277,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
             <button
               type="submit"
               disabled={loading || !title.trim()}
-              className="w-full py-3 rounded-xl font-bold text-sm bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed text-white transition-all duration-200"
+              className="w-full py-3 rounded-md font-bold text-sm bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed text-white transition-all duration-200"
             >
               {loading ? 'Broadcasting…' : `Broadcast ${TYPE_LABELS[type]}`}
             </button>

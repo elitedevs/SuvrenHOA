@@ -124,7 +124,7 @@ export default function VotingPowerPage() {
             >
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-xl ${tier.bg} border ${tier.border} flex items-center justify-center text-xl`}>
+                  <div className={`w-10 h-10 rounded-md ${tier.bg} border ${tier.border} flex items-center justify-center text-xl`}>
                     {tier.emoji}
                   </div>
                   <div>

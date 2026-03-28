@@ -50,7 +50,7 @@ export default function GovernanceStatsPage() {
         ].map(stat => (
           <div key={stat.label} className="glass-card rounded-lg hover-lift p-5">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-9 h-9 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-lg">
+              <div className="w-9 h-9 rounded-md bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-lg">
                 {stat.icon}
               </div>
             </div>

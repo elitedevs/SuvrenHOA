@@ -52,7 +52,7 @@ function EventRow({ item, isNew }: EventRowProps) {
     <button
       onClick={handleClick}
       className={[
-        'w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl',
+        'w-full text-left flex items-center gap-3 px-4 py-3 rounded-md',
         'transition-all duration-300 group cursor-pointer',
         'hover:bg-white/5 hover:border-[#c9a96e]/20',
         'border border-transparent',
@@ -76,7 +76,7 @@ function EventRow({ item, isNew }: EventRowProps) {
       <div className="flex-1 min-w-0">
         <p className={[
           'text-xs font-medium leading-snug truncate',
-          isNew ? 'text-[#e8d5a3]' : 'text-gray-300 group-hover:text-gray-100',
+          isNew ? 'text-[#e8d5a3]' : 'text-gray-300 group-hover:text-[var(--text-primary)]',
           'transition-colors duration-200',
         ].join(' ')}>
           {item.description}
@@ -117,7 +117,7 @@ export function ActivityTicker({ className = '', maxHeight = '480px' }: Activity
             <span className="absolute inline-flex w-3 h-3 rounded-full bg-green-400/30 animate-ping" />
             <span className="relative inline-flex w-2 h-2 rounded-full bg-green-400" />
           </div>
-          <h3 className="text-sm font-bold text-gray-200 tracking-wide">Live Activity</h3>
+          <h3 className="text-sm font-bold text-[var(--text-primary)] tracking-wide">Live Activity</h3>
           <span className="text-[10px] font-medium text-gray-600 bg-white/5 px-2 py-0.5 rounded-full border border-white/8">
             Base Sepolia
           </span>

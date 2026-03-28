@@ -73,7 +73,7 @@ function MintPropertyCard() {
       {/* Section header */}
       <div className="px-8 py-5 border-b border-gray-800/60 bg-[#c9a96e]/5">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-xl">
+          <div className="w-10 h-10 rounded-md bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-xl">
             
           </div>
           <div>
@@ -85,7 +85,7 @@ function MintPropertyCard() {
 
       <div className="px-8 py-7">
         {isSuccess ? (
-          <div className="glass-card-success rounded-xl p-6 text-center border-l-2 border-l-green-500/50">
+          <div className="glass-card-success rounded-md p-6 text-center border-l-2 border-l-green-500/50">
             <div className="text-3xl mb-3"></div>
             <p className="text-green-400 font-bold text-base mb-1">Property #{lotNumber} Minted!</p>
             {hash && (
@@ -112,7 +112,7 @@ function MintPropertyCard() {
                   value={owner}
                   onChange={(e) => setOwner(e.target.value)}
                   placeholder="0x..."
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200 min-h-[52px]"
                 />
               </div>
               <div>
@@ -124,7 +124,7 @@ function MintPropertyCard() {
                   value={lotNumber}
                   onChange={(e) => setLotNumber(e.target.value)}
                   placeholder="1–150"
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
                 />
               </div>
             </div>
@@ -140,7 +140,7 @@ function MintPropertyCard() {
                   value={streetAddress}
                   onChange={(e) => setStreetAddress(e.target.value)}
                   placeholder="123 Faircroft Dr"
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
                 />
               </div>
               <div>
@@ -152,7 +152,7 @@ function MintPropertyCard() {
                   value={sqft}
                   onChange={(e) => setSqft(e.target.value)}
                   placeholder="2500"
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
                 />
               </div>
             </div>
@@ -160,7 +160,7 @@ function MintPropertyCard() {
             <button
               onClick={handleMint}
               disabled={isPending || isConfirming || !owner || !lotNumber || !streetAddress}
-              className="w-full py-4 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(201,169,110,0.12)] hover:shadow-[0_0_28px_rgba(201,169,110,0.28)] min-h-[52px]"
+              className="w-full py-4 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(201,169,110,0.12)] hover:shadow-[0_0_28px_rgba(201,169,110,0.28)] min-h-[52px]"
             >
               {isPending ? ' Confirm in Wallet...' :
                isConfirming ? ' Minting...' :
@@ -217,7 +217,7 @@ function RegisterDocumentCard() {
       {/* Section header */}
       <div className="px-8 py-5 border-b border-gray-800/60 bg-blue-500/5">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-xl">
+          <div className="w-10 h-10 rounded-md bg-blue-500/15 border border-blue-500/25 flex items-center justify-center text-xl">
             
           </div>
           <div>
@@ -229,7 +229,7 @@ function RegisterDocumentCard() {
 
       <div className="px-8 py-7">
         {isSuccess ? (
-          <div className="glass-card-success rounded-xl p-6 text-center border-l-2 border-l-green-500/50">
+          <div className="glass-card-success rounded-md p-6 text-center border-l-2 border-l-green-500/50">
             <div className="text-3xl mb-3"></div>
             <p className="text-green-400 font-bold text-base mb-1">Document Registered On-Chain!</p>
             {hash && (
@@ -253,7 +253,7 @@ function RegisterDocumentCard() {
               <input
                 type="file"
                 onChange={handleFileSelect}
-                className="w-full text-sm text-gray-400 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:bg-gray-800 file:text-gray-300 file:text-sm file:font-semibold hover:file:bg-gray-700 file:cursor-pointer file:transition-colors"
+                className="w-full text-sm text-gray-400 file:mr-3 file:py-2.5 file:px-4 file:rounded-md file:border-0 file:bg-gray-800 file:text-gray-300 file:text-sm file:font-semibold hover:file:bg-gray-700 file:cursor-pointer file:transition-colors"
               />
               {fileHash && (
                 <div className="mt-2 px-3 py-2 rounded-lg bg-green-500/5 border border-green-500/15">
@@ -272,7 +272,7 @@ function RegisterDocumentCard() {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Faircroft CC&Rs 2026"
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px]"
                 />
               </div>
               <div>
@@ -280,7 +280,7 @@ function RegisterDocumentCard() {
                 <select
                   value={docType}
                   onChange={(e) => setDocType(Number(e.target.value))}
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px] appearance-none"
+                  className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100 min-h-[52px] appearance-none"
                 >
                   {docTypes.map((t, i) => (
                     <option key={i} value={i}>{t}</option>
@@ -298,7 +298,7 @@ function RegisterDocumentCard() {
                   value={arweaveTxId}
                   onChange={(e) => setArweaveTxId(e.target.value)}
                   placeholder="arweave-transaction-id"
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200 min-h-[52px]"
                 />
               </div>
               <div>
@@ -310,7 +310,7 @@ function RegisterDocumentCard() {
                   value={ipfsCid}
                   onChange={(e) => setIpfsCid(e.target.value)}
                   placeholder="bafybei..."
-                  className="w-full px-4 py-3.5 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200 min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm font-mono placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-200 min-h-[52px]"
                 />
               </div>
             </div>
@@ -318,7 +318,7 @@ function RegisterDocumentCard() {
             <button
               onClick={handleRegister}
               disabled={isPending || isConfirming || !fileHash || !arweaveTxId || !title}
-              className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_28px_rgba(59,130,246,0.25)] min-h-[52px]"
+              className="w-full py-4 rounded-md bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_28px_rgba(59,130,246,0.25)] min-h-[52px]"
             >
               {isPending ? ' Confirm in Wallet...' :
                isConfirming ? ' Registering...' :
@@ -349,7 +349,7 @@ function CommunityStats() {
       {/* Section header */}
       <div className="px-8 py-5 border-b border-gray-800/60 bg-amber-500/5">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xl">
+          <div className="w-10 h-10 rounded-md bg-amber-500/15 border border-amber-500/25 flex items-center justify-center text-xl">
             
           </div>
           <div>
@@ -363,7 +363,7 @@ function CommunityStats() {
         {/* Stats grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
           {stats.map(({ value, label, color, icon }) => (
-            <div key={label} className="glass-card rounded-xl p-5 text-center">
+            <div key={label} className="glass-card rounded-md p-5 text-center">
               <p className="text-xl mb-2">{icon}</p>
               <p className={`text-2xl font-normal ${color} mb-1`}>{value}</p>
               <p className="text-[11px] text-gray-500 font-semibold uppercase tracking-wide">{label}</p>

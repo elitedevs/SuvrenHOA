@@ -122,42 +122,42 @@ export default function NewsletterPage() {
         </div>
         {isBoard && (
           <button onClick={() => setShowCreate(!showCreate)}
-            className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
+            className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
             {showCreate ? '← Back' : ' New Newsletter'}
           </button>
         )}
       </div>
 
       {showCreate && (
-        <div className="glass-card rounded-xl p-6 space-y-4 mb-6">
+        <div className="glass-card rounded-md p-6 space-y-4 mb-6">
           <h2 className="text-lg font-semibold">Create Newsletter</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs text-gray-400 mb-1">Title</label>
               <input value={form.title} onChange={e => setForm({...form, title: e.target.value})}
-                placeholder="Spring 2026 Newsletter" className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+                placeholder="Spring 2026 Newsletter" className="w-full px-3 py-2.5 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-gray-400 mb-1">Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+                className="w-full px-3 py-2.5 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
             </div>
           </div>
           <div>
             <label className="block text-xs text-gray-400 mb-1">Summary (shown in list)</label>
             <input value={form.summary} onChange={e => setForm({...form, summary: e.target.value})}
-              placeholder="Brief one-sentence summary..." className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+              placeholder="Brief one-sentence summary..." className="w-full px-3 py-2.5 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
           </div>
           <div>
             <label className="block text-xs text-gray-400 mb-1">Full Content</label>
             <textarea value={form.content} onChange={e => setForm({...form, content: e.target.value})}
               placeholder="Full newsletter content..." rows={10}
-              className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-y font-mono" />
+              className="w-full px-3 py-2.5 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-y font-mono" />
           </div>
           <div className="flex gap-3">
-            <button onClick={() => setShowCreate(false)} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+            <button onClick={() => setShowCreate(false)} className="flex-1 py-3 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
             <button onClick={create} disabled={!form.title || !form.date || !form.summary || !form.content}
-              className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+              className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
               Publish Newsletter
             </button>
           </div>
@@ -166,7 +166,7 @@ export default function NewsletterPage() {
 
       <div className="space-y-4">
         {sorted.map(nl => (
-          <div key={nl.id} className={`glass-card rounded-xl overflow-hidden ${nl.pinned ? 'border border-[#c9a96e]/20' : ''}`}>
+          <div key={nl.id} className={`glass-card rounded-md overflow-hidden ${nl.pinned ? 'border border-[#c9a96e]/20' : ''}`}>
             <div className="p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1">

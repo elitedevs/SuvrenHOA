@@ -62,7 +62,7 @@ export function DuesPaymentChart({ paidMonths = [], quarterlyAmount = 450 }: Due
       <div className="flex items-center justify-between mb-5">
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Payment History</p>
-          <h2 className="text-base font-bold text-gray-100">Last 12 Months</h2>
+          <h2 className="text-base font-bold text-[var(--text-primary)]">Last 12 Months</h2>
         </div>
         <div className="flex items-center gap-4 text-xs">
           <div className="flex items-center gap-1.5">

@@ -60,9 +60,9 @@ export default function DirectoryPage() {
       </div>
 
       {/* Community Info */}
-      <div className="glass-card rounded-xl hover-lift p-6 mb-8">
+      <div className="glass-card rounded-md hover-lift p-6 mb-8">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-14 h-14 rounded-xl bg-[#c9a96e]/15 border border-[#c9a96e]/20 flex items-center justify-center text-2xl">
+          <div className="w-14 h-14 rounded-md bg-[#c9a96e]/15 border border-[#c9a96e]/20 flex items-center justify-center text-2xl">
             
           </div>
           <div>
@@ -106,7 +106,7 @@ export default function DirectoryPage() {
       </h2>
       <div className="space-y-4">
         {COMMITTEES.map((committee: any) => (
-          <div key={committee.name} className="glass-card rounded-xl hover-lift p-5">
+          <div key={committee.name} className="glass-card rounded-md hover-lift p-5">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">{committee.icon}</span>
               <div>
@@ -126,7 +126,7 @@ export default function DirectoryPage() {
       </div>
 
       {/* Contact */}
-      <div className="mt-8 glass-card rounded-xl hover-lift p-6 glow-gold">
+      <div className="mt-8 glass-card rounded-md hover-lift p-6 glow-gold">
         <h3 className="font-medium text-sm text-[#c9a96e] mb-2"> Need to reach the board?</h3>
         <p className="text-xs text-gray-400">
           Email <a href="mailto:board@faircrofthoa.com" className="text-[#c9a96e] hover:underline">board@faircrofthoa.com</a> or
@@ -154,7 +154,7 @@ function ResidentProfileCard({ member, isBoard = false }: { member: any; isBoard
   const vehicleCount = member.vehicleCount ?? 1;
 
   return (
-    <div className="glass-card rounded-xl hover-lift overflow-hidden border border-gray-700/30 group">
+    <div className="glass-card rounded-md hover-lift overflow-hidden border border-gray-700/30 group">
       {/* Premium card header bar */}
       <div className="h-1.5 bg-gradient-to-r from-[#b8942e] via-[#c9a96e] to-[#e8d5a3]" />
 

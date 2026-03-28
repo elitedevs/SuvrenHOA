@@ -168,7 +168,7 @@ export default function RulesPage() {
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search rules... e.g. 'fence height', 'quiet hours', 'rental'"
-          className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
+          className="w-full pl-10 pr-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
         />
         {search && (
           <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
@@ -192,7 +192,7 @@ export default function RulesPage() {
 
       <div className="space-y-4">
         {filteredSections.map(section => (
-          <div key={section.id} id={section.id} className="glass-card rounded-xl overflow-hidden">
+          <div key={section.id} id={section.id} className="glass-card rounded-md overflow-hidden">
             {/* Section header */}
             <button
               onClick={() => toggleSection(section.id)}
@@ -247,14 +247,14 @@ export default function RulesPage() {
       </div>
 
       {filteredSections.length === 0 && (
-        <div className="glass-card rounded-xl p-12 text-center">
+        <div className="glass-card rounded-md p-12 text-center">
           <p className="text-4xl mb-3"></p>
           <h3 className="font-medium mb-1">No results found</h3>
           <p className="text-sm text-gray-400">Try different keywords or browse by section above</p>
         </div>
       )}
 
-      <div className="mt-8 p-4 rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/15">
+      <div className="mt-8 p-4 rounded-md bg-[#c9a96e]/5 border border-[#c9a96e]/15">
         <p className="text-xs text-gray-400">
           <span className="text-[#c9a96e] font-medium"> Official Document:</span>{' '}
           These FAQs summarize the Faircroft CC&Rs and HOA Rules & Regulations. In case of discrepancy, the official recorded documents in the Documents section govern. Contact the board with any questions.

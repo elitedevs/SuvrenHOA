@@ -59,13 +59,13 @@ export default function CalendarPage() {
         <div className="flex items-center gap-2 shrink-0">
           <a
             href="/calendar/meetings"
-            className="px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
+            className="px-4 py-2.5 rounded-md bg-gray-800/60 border border-gray-700/60 hover:border-[#c9a96e]/30 text-sm font-medium text-gray-400 hover:text-[#e8d5a3] transition-all"
           >
              Board Meetings
           </a>
           <button
             onClick={() => setShowCreate(!showCreate)}
-            className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all"
+            className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all"
           >
             {showCreate ? '← Back' : ' Add Event'}
           </button>
@@ -86,7 +86,7 @@ export default function CalendarPage() {
       ) : isLoading ? (
         <div className="text-center py-12 text-gray-500">Loading events...</div>
       ) : Object.keys(eventsByDate).length === 0 ? (
-        <div className="glass-card rounded-xl p-12 text-center">
+        <div className="glass-card rounded-md p-12 text-center">
           <p className="text-5xl mb-4"></p>
           <h3 className="text-lg font-medium mb-2">No upcoming events</h3>
           <p className="text-sm text-gray-400">Board meetings, community events, and deadlines will appear here</p>
@@ -145,7 +145,7 @@ function EventCard({ event, walletAddress }: { event: any; walletAddress?: strin
     'border-l-cyan-500';
 
   return (
-    <div className={`glass-card rounded-xl border-l-4 ${colorClass} ${isPast ? 'opacity-60' : ''}`}>
+    <div className={`glass-card rounded-md border-l-4 ${colorClass} ${isPast ? 'opacity-60' : ''}`}>
       <div className="p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
@@ -221,7 +221,7 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
   });
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5">
+    <div className="glass-card rounded-md p-6 space-y-5">
       <h2 className="text-lg font-semibold">Add Event</h2>
 
       <div>
@@ -229,7 +229,7 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
         <div className="flex gap-2 flex-wrap">
           {EVENT_TYPES.map(t => (
             <button key={t.id} onClick={() => setEventType(t.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1 ${
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1 ${
                 eventType === t.id ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
               }`}>
               {t.icon} {t.label}
@@ -241,26 +241,26 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
       <div>
         <label className="block text-sm text-gray-400 mb-2">Title</label>
         <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Q2 Board Meeting"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
           <label className="block text-sm text-gray-400 mb-2">Date</label>
           <input type="date" value={date} onChange={e => setDate(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         {!allDay && (
           <>
             <div>
               <label className="block text-sm text-gray-400 mb-2">Start Time</label>
               <input type="time" value={startTime} onChange={e => setStartTime(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+                className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
             </div>
             <div>
               <label className="block text-sm text-gray-400 mb-2">End Time</label>
               <input type="time" value={endTime} onChange={e => setEndTime(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+                className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
             </div>
           </>
         )}
@@ -280,19 +280,19 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
       <div>
         <label className="block text-sm text-gray-400 mb-2">Location</label>
         <input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="Faircroft Clubhouse"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
       </div>
 
       <div>
         <label className="block text-sm text-gray-400 mb-2">Description</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Event details..." rows={3}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
       </div>
 
       <div className="flex gap-3">
-        <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+        <button onClick={onClose} className="flex-1 py-3 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
         <button disabled={!title.trim() || !date || create.isPending} onClick={() => create.mutate()}
-          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+          className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
           {create.isPending ? ' Creating...' : 'Add Event'}
         </button>
       </div>

@@ -158,7 +158,7 @@ export function CommandPalette() {
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search pages, proposals, documents..."
-            className="flex-1 bg-transparent text-gray-100 placeholder-gray-600 text-sm outline-none"
+            className="flex-1 bg-transparent text-[var(--text-primary)] placeholder-gray-600 text-sm outline-none"
           />
           <kbd className="text-[10px] text-gray-600 bg-gray-800 px-1.5 py-0.5 rounded border border-gray-700 font-mono">
             ESC
@@ -189,7 +189,7 @@ export function CommandPalette() {
                 >
                   <span className="text-lg w-7 flex-shrink-0 text-center">{item.icon}</span>
                   <div className="flex-1 min-w-0">
-                    <p className={`text-sm font-medium ${selectedIndex === i ? 'text-[#e8d5a3]' : 'text-gray-200'}`}>
+                    <p className={`text-sm font-medium ${selectedIndex === i ? 'text-[#e8d5a3]' : 'text-[var(--text-primary)]'}`}>
                       {item.title}
                     </p>
                     {item.subtitle && (

@@ -169,7 +169,7 @@ export function ProposalTemplates({ onUseTemplate }: Props) {
         <span className="text-xl"></span>
         <div>
           <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest">Quick Start</p>
-          <h3 className="text-base font-bold text-gray-100">Create from Template</h3>
+          <h3 className="text-base font-bold text-[var(--text-primary)]">Create from Template</h3>
         </div>
       </div>
 
@@ -184,12 +184,12 @@ export function ProposalTemplates({ onUseTemplate }: Props) {
                 description: t.descriptionTemplate,
                 category: t.category,
               })}
-              className="text-left rounded-xl p-4 border border-gray-700/50 bg-gray-800/30 hover:border-[#c9a96e]/30 hover:bg-[#c9a96e]/5 transition-all group"
+              className="text-left rounded-md p-4 border border-gray-700/50 bg-gray-800/30 hover:border-[#c9a96e]/30 hover:bg-[#c9a96e]/5 transition-all group"
             >
               <div className="flex items-start gap-3">
                 <span className="text-2xl">{t.icon}</span>
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-gray-100 group-hover:text-[#e8d5a3] transition-colors">{t.name}</p>
+                  <p className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[#e8d5a3] transition-colors">{t.name}</p>
                   <p className={`text-[10px] mt-0.5 text-${color}-400`}>{t.categoryLabel}</p>
                   <p className="text-[10px] text-gray-500 mt-1">~{t.suggestedVotingDays}d voting · {t.suggestedQuorum} quorum</p>
                 </div>

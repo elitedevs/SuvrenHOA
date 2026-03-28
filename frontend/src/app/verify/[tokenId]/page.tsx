@@ -53,7 +53,7 @@ export default async function VerifyPropertyPage({ params }: Props) {
       </div>
 
       {/* Trust badge */}
-      <div className="glass-card rounded-xl p-5 mb-8 border border-[#c9a96e]/20">
+      <div className="glass-card rounded-md p-5 mb-8 border border-[#c9a96e]/20">
         <div className="flex items-start gap-3 text-left">
           <span className="text-xl"></span>
           <div>
@@ -68,7 +68,7 @@ export default async function VerifyPropertyPage({ params }: Props) {
 
       <Link
         href="/"
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all"
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all"
       >
          Visit SuvrenHOA
       </Link>

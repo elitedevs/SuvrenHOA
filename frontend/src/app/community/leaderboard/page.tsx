@@ -100,7 +100,7 @@ function LeaderboardRow({
 
   return (
     <div
-      className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-300 ${rowBg}`}
+      className={`flex items-center gap-3 px-4 py-3 rounded-md border transition-all duration-300 ${rowBg}`}
     >
       {/* Rank */}
       <div className="w-8 flex items-center justify-center shrink-0">
@@ -228,7 +228,7 @@ export default function LeaderboardPage() {
 
       {/* ── Error State ── */}
       {error && (
-        <div className="glass rounded-xl p-4 border border-red-500/20 text-red-400 text-sm text-center">
+        <div className="glass rounded-md p-4 border border-red-500/20 text-red-400 text-sm text-center">
            {error}
         </div>
       )}

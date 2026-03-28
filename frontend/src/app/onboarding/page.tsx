@@ -98,7 +98,7 @@ function PetCard({
   onRemove: () => void;
 }) {
   return (
-    <div className="glass-card rounded-xl p-4 border border-[#c9a96e]/10 mb-3">
+    <div className="glass-card rounded-md p-4 border border-[#c9a96e]/10 mb-3">
       <div className="flex justify-between items-start mb-3">
         <span className="text-sm font-semibold text-[#e8d5a3]">
            Pet
@@ -112,13 +112,13 @@ function PetCard({
       </div>
       <div className="grid grid-cols-2 gap-3">
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50 col-span-2"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-md px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50 col-span-2"
           placeholder="Pet name"
           value={pet.name}
           onChange={(e) => onUpdate({ ...pet, name: e.target.value })}
         />
         <select
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-[#c9a96e]/50"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-md px-3 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-[#c9a96e]/50"
           value={pet.type}
           onChange={(e) =>
             onUpdate({ ...pet, type: e.target.value as PetEntry["type"] })
@@ -129,13 +129,13 @@ function PetCard({
           <option value="other"> Other</option>
         </select>
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-md px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
           placeholder="Breed"
           value={pet.breed}
           onChange={(e) => onUpdate({ ...pet, breed: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50 col-span-2"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-md px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50 col-span-2"
           placeholder="Weight (lbs)"
           value={pet.weight}
           onChange={(e) => onUpdate({ ...pet, weight: e.target.value })}
@@ -156,7 +156,7 @@ function VehicleCard({
   onRemove: () => void;
 }) {
   return (
-    <div className="glass-card rounded-xl p-4 border border-blue-500/10 mb-3">
+    <div className="glass-card rounded-md p-4 border border-blue-500/10 mb-3">
       <div className="flex justify-between items-start mb-3">
         <span className="text-sm font-semibold text-blue-300"> Vehicle</span>
         <button
@@ -168,31 +168,31 @@ function VehicleCard({
       </div>
       <div className="grid grid-cols-2 gap-3">
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-md px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
           placeholder="Make (e.g. Toyota)"
           value={vehicle.make}
           onChange={(e) => onUpdate({ ...vehicle, make: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-md px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
           placeholder="Model (e.g. Camry)"
           value={vehicle.model}
           onChange={(e) => onUpdate({ ...vehicle, model: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-md px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
           placeholder="Year"
           value={vehicle.year}
           onChange={(e) => onUpdate({ ...vehicle, year: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-md px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
           placeholder="Color"
           value={vehicle.color}
           onChange={(e) => onUpdate({ ...vehicle, color: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/50 col-span-2"
+          className="bg-gray-800/60 border border-gray-700/60 rounded-md px-3 py-2.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-blue-500/50 col-span-2"
           placeholder="License Plate"
           value={vehicle.plate}
           onChange={(e) => onUpdate({ ...vehicle, plate: e.target.value })}
@@ -303,7 +303,7 @@ function OnboardingWizard() {
           </p>
 
           {hasProperty && propertyInfo ? (
-            <div className="bg-[#c9a96e]/10 border border-[#c9a96e]/20 rounded-xl p-5 mb-7">
+            <div className="bg-[#c9a96e]/10 border border-[#c9a96e]/20 rounded-md p-5 mb-7">
               <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">
                 Your Property
               </p>
@@ -331,7 +331,7 @@ function OnboardingWizard() {
               </div>
             </div>
           ) : (
-            <div className="bg-amber-500/8 border border-amber-500/20 rounded-xl p-4 mb-7 text-center">
+            <div className="bg-amber-500/8 border border-amber-500/20 rounded-md p-4 mb-7 text-center">
               <p className="text-sm text-amber-300">
                 No property NFT detected. Contact the board if you&apos;re a homeowner.
               </p>
@@ -340,7 +340,7 @@ function OnboardingWizard() {
 
           <button
             onClick={goNext}
-            className="w-full py-3.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all duration-200 min-h-[44px]"
+            className="w-full py-3.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all duration-200 min-h-[44px]"
           >
             Let&apos;s get you set up →
           </button>
@@ -360,7 +360,7 @@ function OnboardingWizard() {
                 Display Name
               </label>
               <input
-                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
+                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-md px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
                 placeholder="How should neighbors know you?"
                 value={profile.displayName}
                 onChange={(e) =>
@@ -374,7 +374,7 @@ function OnboardingWizard() {
               </label>
               <input
                 type="email"
-                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
+                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-md px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
                 placeholder="For HOA notifications"
                 value={profile.email}
                 onChange={(e) =>
@@ -388,7 +388,7 @@ function OnboardingWizard() {
               </label>
               <input
                 type="tel"
-                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
+                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-md px-4 py-3 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-[#c9a96e]/50"
                 placeholder="For emergency alerts"
                 value={profile.phone}
                 onChange={(e) =>
@@ -396,7 +396,7 @@ function OnboardingWizard() {
                 }
               />
             </div>
-            <div className="flex items-center justify-between py-3 px-4 bg-gray-800/40 rounded-xl border border-gray-700/40">
+            <div className="flex items-center justify-between py-3 px-4 bg-gray-800/40 rounded-md border border-gray-700/40">
               <div>
                 <p className="text-sm font-semibold text-gray-200">
                   Messaging Opt-In
@@ -425,13 +425,13 @@ function OnboardingWizard() {
           <div className="flex gap-3 mt-7">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-gray-400 hover:text-gray-200 font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-md bg-gray-800/60 border border-gray-700/50 text-gray-400 hover:text-gray-200 font-semibold text-sm transition-all"
             >
               ← Back
             </button>
             <button
               onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
             >
               Continue →
             </button>
@@ -468,7 +468,7 @@ function OnboardingWizard() {
 
           <button
             onClick={addPet}
-            className="w-full py-2.5 rounded-xl border border-dashed border-[#c9a96e]/30 text-[#c9a96e] hover:border-[#c9a96e]/50 hover:bg-[#c9a96e]/5 text-sm font-semibold transition-all mt-3 mb-6"
+            className="w-full py-2.5 rounded-md border border-dashed border-[#c9a96e]/30 text-[#c9a96e] hover:border-[#c9a96e]/50 hover:bg-[#c9a96e]/5 text-sm font-semibold transition-all mt-3 mb-6"
           >
             + Add a Pet
           </button>
@@ -476,13 +476,13 @@ function OnboardingWizard() {
           <div className="flex gap-3">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-gray-400 hover:text-gray-200 font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-md bg-gray-800/60 border border-gray-700/50 text-gray-400 hover:text-gray-200 font-semibold text-sm transition-all"
             >
               ← Back
             </button>
             <button
               onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
             >
               Continue →
             </button>
@@ -519,7 +519,7 @@ function OnboardingWizard() {
 
           <button
             onClick={addVehicle}
-            className="w-full py-2.5 rounded-xl border border-dashed border-blue-500/30 text-blue-400 hover:border-blue-500/50 hover:bg-blue-500/5 text-sm font-semibold transition-all mt-3 mb-6"
+            className="w-full py-2.5 rounded-md border border-dashed border-blue-500/30 text-blue-400 hover:border-blue-500/50 hover:bg-blue-500/5 text-sm font-semibold transition-all mt-3 mb-6"
           >
             + Add a Vehicle
           </button>
@@ -527,13 +527,13 @@ function OnboardingWizard() {
           <div className="flex gap-3">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-gray-400 hover:text-gray-200 font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-md bg-gray-800/60 border border-gray-700/50 text-gray-400 hover:text-gray-200 font-semibold text-sm transition-all"
             >
               ← Back
             </button>
             <button
               onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
             >
               Continue →
             </button>
@@ -551,7 +551,7 @@ function OnboardingWizard() {
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-2">
               Profile
             </p>
-            <div className="bg-gray-800/40 rounded-xl p-4 space-y-1.5">
+            <div className="bg-gray-800/40 rounded-md p-4 space-y-1.5">
               {profile.displayName && (
                 <div className="flex justify-between">
                   <span className="text-xs text-gray-500">Name</span>
@@ -590,7 +590,7 @@ function OnboardingWizard() {
             {pets.length === 0 ? (
               <p className="text-xs text-gray-500">None registered</p>
             ) : (
-              <div className="bg-gray-800/40 rounded-xl p-4 space-y-1.5">
+              <div className="bg-gray-800/40 rounded-md p-4 space-y-1.5">
                 {pets.map((p) => (
                   <div key={p.id} className="flex justify-between">
                     <span className="text-xs text-gray-300">{p.name || "Unnamed"}</span>
@@ -611,7 +611,7 @@ function OnboardingWizard() {
             {vehicles.length === 0 ? (
               <p className="text-xs text-gray-500">None registered</p>
             ) : (
-              <div className="bg-gray-800/40 rounded-xl p-4 space-y-1.5">
+              <div className="bg-gray-800/40 rounded-md p-4 space-y-1.5">
                 {vehicles.map((v) => (
                   <div key={v.id} className="flex justify-between">
                     <span className="text-xs text-gray-300">
@@ -625,7 +625,7 @@ function OnboardingWizard() {
           </div>
 
           {/* CC&Rs */}
-          <div className="border border-[#c9a96e]/20 rounded-xl p-4 mb-7 bg-[#c9a96e]/5">
+          <div className="border border-[#c9a96e]/20 rounded-md p-4 mb-7 bg-[#c9a96e]/5">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
@@ -649,14 +649,14 @@ function OnboardingWizard() {
           <div className="flex gap-3">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-gray-400 hover:text-gray-200 font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-md bg-gray-800/60 border border-gray-700/50 text-gray-400 hover:text-gray-200 font-semibold text-sm transition-all"
             >
               ← Back
             </button>
             <button
               onClick={handleComplete}
               disabled={!ccrAck}
-              className="flex-1 py-3 rounded-xl bg-green-600 hover:bg-green-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-md bg-green-600 hover:bg-green-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
             >
               Complete Setup 
             </button>
@@ -675,28 +675,28 @@ function OnboardingWizard() {
           <div className="grid grid-cols-2 gap-3">
             <Link
               href="/dashboard"
-              className="glass-card rounded-xl p-4 text-center hover:border-[#c9a96e]/25 transition-all"
+              className="glass-card rounded-md p-4 text-center hover:border-[#c9a96e]/25 transition-all"
             >
               <div className="text-2xl mb-1"></div>
               <p className="text-sm font-semibold text-gray-300">Dashboard</p>
             </Link>
             <Link
               href="/dues"
-              className="glass-card rounded-xl p-4 text-center hover:border-green-500/25 transition-all"
+              className="glass-card rounded-md p-4 text-center hover:border-green-500/25 transition-all"
             >
               <div className="text-2xl mb-1"></div>
               <p className="text-sm font-semibold text-gray-300">Pay Dues</p>
             </Link>
             <Link
               href="/community"
-              className="glass-card rounded-xl p-4 text-center hover:border-blue-500/25 transition-all"
+              className="glass-card rounded-md p-4 text-center hover:border-blue-500/25 transition-all"
             >
               <div className="text-2xl mb-1"></div>
               <p className="text-sm font-semibold text-gray-300">Community</p>
             </Link>
             <Link
               href="/documents"
-              className="glass-card rounded-xl p-4 text-center hover:border-amber-500/25 transition-all"
+              className="glass-card rounded-md p-4 text-center hover:border-amber-500/25 transition-all"
             >
               <div className="text-2xl mb-1"></div>
               <p className="text-sm font-semibold text-gray-300">Documents</p>
@@ -765,7 +765,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
   return (
     <div className="space-y-6">
       {/* Progress */}
-      <div className="glass-card rounded-xl p-5">
+      <div className="glass-card rounded-md p-5">
         <div className="flex items-center justify-between mb-3">
           <div>
             <h3 className="font-semibold text-[#e8d5a3]">
@@ -821,7 +821,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
 function ChecklistRow({ item, checked, onToggle }: { item: ChecklistItem; checked: boolean; onToggle: () => void }) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className={`glass-card rounded-xl overflow-hidden transition-all ${checked ? 'opacity-60' : ''}`}>
+    <div className={`glass-card rounded-md overflow-hidden transition-all ${checked ? 'opacity-60' : ''}`}>
       <div className="p-4 flex items-start gap-3">
         <button
           onClick={onToggle}
@@ -873,15 +873,15 @@ export default function OnboardingPage() {
       <div className="max-w-[960px] mx-auto px-4 pt-6 sm:pt-8">
         <div className="flex gap-2 mb-6">
           <button onClick={() => setView('wizard')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+            className={`px-4 py-2 rounded-md text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
              Setup Wizard
           </button>
           <button onClick={() => setView('checklist-in')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+            className={`px-4 py-2 rounded-md text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
              Move-In Checklist
           </button>
           <button onClick={() => setView('checklist-out')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+            className={`px-4 py-2 rounded-md text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
              Move-Out Checklist
           </button>
         </div>

@@ -172,7 +172,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
       </div>
 
       {/* Vote Results */}
-      <div className="glass-card rounded-xl p-6 mb-6">
+      <div className="glass-card rounded-md p-6 mb-6">
         <h2 className="text-lg font-semibold mb-4">Vote Results</h2>
         <div className="space-y-4 mb-6">
           <VoteBar label="For" count={forVotes} percent={forPercent} color="green" icon="" />
@@ -199,15 +199,15 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
       {/* Cast Vote */}
       {isActive && hasProperty && (
-        <div className="glass-card rounded-xl p-6 mb-6">
+        <div className="glass-card rounded-md p-6 mb-6">
           <h2 className="text-lg font-semibold mb-1">Cast Your Vote</h2>
 
           {hasVoted ? (
-            <div className="p-4 rounded-xl bg-[#c9a96e]/10 border border-[#c9a96e]/20 text-center mt-4">
+            <div className="p-4 rounded-md bg-[#c9a96e]/10 border border-[#c9a96e]/20 text-center mt-4">
               <p className="text-[#c9a96e] font-semibold"> You have already voted on this proposal</p>
             </div>
           ) : castSuccess ? (
-            <div className="p-4 rounded-xl bg-green-950/20 border border-green-900/50 text-center mt-4">
+            <div className="p-4 rounded-md bg-green-950/20 border border-green-900/50 text-center mt-4">
               <p className="text-green-400 font-medium"> Vote submitted!</p>
               {castHash && (
                 <a
@@ -237,7 +237,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
                     key={value}
                     type="button"
                     onClick={() => setSelectedVote(value)}
-                    className={`p-4 rounded-xl border text-center transition-all min-h-[44px] ${
+                    className={`p-4 rounded-md border text-center transition-all min-h-[44px] ${
                       selectedVote === value
                         ? borderActive
                         : 'border-gray-800 bg-gray-900/50 hover:border-gray-700'
@@ -259,14 +259,14 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
                   value={voteReason}
                   onChange={(e) => setVoteReason(e.target.value)}
                   placeholder="Why are you voting this way? (stored on-chain)"
-                  className="w-full px-4 py-3 rounded-xl bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100"
+                  className="w-full px-4 py-3 rounded-md bg-gray-900/60 border border-gray-700/60 text-sm placeholder-gray-600 focus:border-[#c9a96e]/50 focus:outline-none focus:ring-1 focus:ring-[#c9a96e]/20 transition-all text-gray-100"
                 />
               </div>
 
               <button
                 onClick={handleCastVote}
                 disabled={selectedVote === null || castPending || castConfirming}
-                className="w-full py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-bold transition-all min-h-[44px]"
+                className="w-full py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-bold transition-all min-h-[44px]"
               >
                 {castPending ? ' Confirm in Wallet...' :
                  castConfirming ? ' Submitting Vote...' :
@@ -280,13 +280,13 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
       {/* Queue for Execution */}
       {isSucceeded && (
-        <div className="glass-card rounded-xl p-6 mb-6">
+        <div className="glass-card rounded-md p-6 mb-6">
           <h2 className="text-lg font-semibold mb-2">Queue for Execution</h2>
           <p className="text-sm text-gray-400 mb-4">
             This proposal passed. Queue it to the timelock before it can be executed.
           </p>
           {queueSuccess ? (
-            <div className="p-4 rounded-xl bg-green-950/20 border border-green-900/50 text-center">
+            <div className="p-4 rounded-md bg-green-950/20 border border-green-900/50 text-center">
               <p className="text-green-400 font-medium"> Queued in timelock!</p>
               {queueHash && (
                 <a href={`https://sepolia.basescan.org/tx/${queueHash}`} target="_blank" rel="noopener noreferrer"
@@ -299,7 +299,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
             <button
               onClick={handleQueue}
               disabled={queuePending || queueConfirming || !proposalEvent}
-              className="w-full py-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 disabled:opacity-50 text-sm font-bold transition-all min-h-[44px]"
+              className="w-full py-3 rounded-md bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 disabled:opacity-50 text-sm font-bold transition-all min-h-[44px]"
             >
               {queuePending ? ' Confirm in Wallet...' :
                queueConfirming ? ' Queuing...' :
@@ -311,10 +311,10 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
       {/* Execute */}
       {isQueued && (
-        <div className="glass-card rounded-xl p-6 mb-6">
+        <div className="glass-card rounded-md p-6 mb-6">
           <h2 className="text-lg font-semibold mb-2">Execute Proposal</h2>
           {countdownStr ? (
-            <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 mb-4">
+            <div className="p-4 rounded-md bg-amber-500/10 border border-amber-500/20 mb-4">
               <p className="text-amber-300 text-sm font-semibold"> Timelock: {countdownStr}</p>
               {etaDate && (
                 <p className="text-xs text-gray-500 mt-1">Executable after {etaDate.toLocaleString()}</p>
@@ -326,7 +326,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
             </p>
           )}
           {execSuccess ? (
-            <div className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/50 text-center">
+            <div className="p-4 rounded-md bg-emerald-950/20 border border-emerald-900/50 text-center">
               <p className="text-emerald-400 font-medium text-lg"> Proposal Executed!</p>
               {execHash && (
                 <a href={`https://sepolia.basescan.org/tx/${execHash}`} target="_blank" rel="noopener noreferrer"
@@ -339,7 +339,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
             <button
               onClick={handleExecute}
               disabled={execPending || execConfirming || !proposalEvent || !!countdownStr}
-              className="w-full py-3 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all min-h-[44px]"
+              className="w-full py-3 rounded-md bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all min-h-[44px]"
             >
               {execPending ? ' Confirm in Wallet...' :
                execConfirming ? ' Executing...' :
@@ -352,7 +352,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
       {/* Not active/actionable info messages */}
       {!isActive && !isSucceeded && !isQueued && stateLabel && (
-        <div className="glass-card rounded-xl p-6 mb-6 text-center">
+        <div className="glass-card rounded-md p-6 mb-6 text-center">
           <p className="text-gray-400">
             {stateLabel === 'Pending' && ' Voting opens after the 1-day delay period'}
             {stateLabel === 'Executed' && ' This proposal has been executed on-chain!'}
@@ -372,14 +372,14 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
       {/* Description */}
       {description && (
-        <div className="glass-card rounded-xl p-6 mb-6">
+        <div className="glass-card rounded-md p-6 mb-6">
           <h2 className="text-lg font-semibold mb-4">Proposal Description</h2>
           <DescriptionContent text={description} />
         </div>
       )}
 
       {/* Key Dates */}
-      <div className="glass-card rounded-xl p-6">
+      <div className="glass-card rounded-md p-6">
         <h2 className="text-lg font-semibold mb-4">Key Dates</h2>
         <div className="space-y-4">
           <TimelineItem

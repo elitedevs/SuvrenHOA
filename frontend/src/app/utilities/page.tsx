@@ -89,7 +89,7 @@ export default function UtilitiesPage() {
         <div className="flex gap-2">
           {(['overview', 'trend', 'breakdown'] as const).map(v => (
             <button key={v} onClick={() => setView(v)}
-              className={`px-3 py-2 rounded-xl text-xs font-medium capitalize transition-all ${view === v ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+              className={`px-3 py-2 rounded-md text-xs font-medium capitalize transition-all ${view === v ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
               {v}
             </button>
           ))}
@@ -104,7 +104,7 @@ export default function UtilitiesPage() {
           const over = actual > budget;
           return (
             <button key={u.key} onClick={() => { setSelectedUtil(u.key); setView('trend'); }}
-              className={`glass-card rounded-xl p-4 text-left transition-all ${selectedUtil === u.key ? 'border-[#c9a96e]/30 bg-[#c9a96e]/5' : 'hover:border-gray-600'}`}>
+              className={`glass-card rounded-md p-4 text-left transition-all ${selectedUtil === u.key ? 'border-[#c9a96e]/30 bg-[#c9a96e]/5' : 'hover:border-gray-600'}`}>
               <p className="text-lg mb-1">{u.icon}</p>
               <p className="text-[10px] text-gray-400">{u.label}</p>
               <p className="text-base font-bold" style={{ color: u.color }}>${actual.toLocaleString()}</p>
@@ -118,7 +118,7 @@ export default function UtilitiesPage() {
 
       {view === 'overview' && (
         <>
-          <div className="glass-card rounded-xl p-5 mb-5">
+          <div className="glass-card rounded-md p-5 mb-5">
             <h3 className="text-sm font-semibold mb-4">Current Month Total: ${totalLatest.toLocaleString()}</h3>
             <div className="space-y-3">
               {UTIL_CONFIG.map(u => {
@@ -140,7 +140,7 @@ export default function UtilitiesPage() {
             </div>
           </div>
 
-          <div className="glass-card rounded-xl p-5">
+          <div className="glass-card rounded-md p-5">
             <h3 className="text-sm font-semibold mb-1">Year-over-Year Comparison</h3>
             <p className="text-xs text-gray-500 mb-4">Total community spend</p>
             <div className="grid grid-cols-2 gap-4">
@@ -149,7 +149,7 @@ export default function UtilitiesPage() {
                 const prevTotal = prevYear.reduce((s, d) => s + (d as any)[u.key], 0);
                 const delta = prevTotal > 0 ? ((thisTotal - prevTotal) / prevTotal) * 100 : 0;
                 return (
-                  <div key={u.key} className="p-3 rounded-xl bg-gray-800/30">
+                  <div key={u.key} className="p-3 rounded-md bg-gray-800/30">
                     <p className="text-xs text-gray-400">{u.icon} {u.label}</p>
                     <p className="text-sm font-semibold mt-1">${thisTotal.toLocaleString()}</p>
                     <p className={`text-[10px] ${delta < 0 ? 'text-green-400' : 'text-red-400'}`}>
@@ -164,7 +164,7 @@ export default function UtilitiesPage() {
       )}
 
       {view === 'trend' && (
-        <div className="glass-card rounded-xl p-5">
+        <div className="glass-card rounded-md p-5">
           <div className="flex items-center justify-between mb-5">
             <h3 className="text-sm font-semibold">{cfg.icon} {cfg.label} — 12-Month Trend</h3>
             <div className="flex gap-1">
@@ -206,7 +206,7 @@ export default function UtilitiesPage() {
       )}
 
       {view === 'breakdown' && (
-        <div className="glass-card rounded-xl p-5">
+        <div className="glass-card rounded-md p-5">
           <h3 className="text-sm font-semibold mb-4">Per-Unit Breakdown — {latest.month}</h3>
           <p className="text-xs text-gray-500 mb-4">{TOTAL_UNITS} occupied units</p>
           <div className="space-y-4">
@@ -214,7 +214,7 @@ export default function UtilitiesPage() {
               const total = (latest as any)[u.key];
               const perUnit = total / TOTAL_UNITS;
               return (
-                <div key={u.key} className="flex items-center gap-4 p-3 rounded-xl bg-gray-800/30">
+                <div key={u.key} className="flex items-center gap-4 p-3 rounded-md bg-gray-800/30">
                   <span className="text-2xl">{u.icon}</span>
                   <div className="flex-1">
                     <p className="text-sm font-medium">{u.label}</p>
@@ -228,7 +228,7 @@ export default function UtilitiesPage() {
               );
             })}
           </div>
-          <div className="mt-4 p-3 rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/10">
+          <div className="mt-4 p-3 rounded-md bg-[#c9a96e]/5 border border-[#c9a96e]/10">
             <p className="text-xs text-[#c9a96e] font-medium">Total per unit this month</p>
             <p className="text-xl font-bold text-white">${(totalLatest / TOTAL_UNITS).toFixed(2)}</p>
           </div>

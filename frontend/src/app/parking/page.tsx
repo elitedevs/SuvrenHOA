@@ -49,7 +49,7 @@ function ParkingContent() {
         <div className="flex gap-2">
           {(['map', 'passes'] as const).map(t => (
             <button key={t} onClick={() => setTab(t)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all capitalize ${tab === t ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-all capitalize ${tab === t ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'}`}>
               {t === 'map' ? '🅿 Spot Map' : ` Passes (${activePasses.length})`}
             </button>
           ))}
@@ -63,7 +63,7 @@ function ParkingContent() {
           { label: 'Assigned', count: counts.assigned, color: 'text-[#c9a96e]', dot: 'bg-[#c9a96e]' },
           { label: 'Visitor', count: counts.visitor, color: 'text-red-400', dot: 'bg-red-400' },
         ].map(({ label, count, color, dot }) => (
-          <div key={label} className="glass-card rounded-xl p-4 text-center">
+          <div key={label} className="glass-card rounded-md p-4 text-center">
             <div className="flex items-center justify-center gap-2 mb-1">
               <div className={`w-2.5 h-2.5 rounded-full ${dot}`} />
               <span className="text-xs text-gray-400">{label}</span>
@@ -89,7 +89,7 @@ function ParkingContent() {
           <div className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 gap-2 mb-6">
             {filtered.map(spot => (
               <button key={spot.id} onClick={() => setSelected(selected?.id === spot.id ? null : spot)}
-                className={`relative rounded-xl border p-3 text-center transition-all ${spotColor(spot.status)} ${selected?.id === spot.id ? 'ring-2 ring-[#c9a96e]' : ''}`}>
+                className={`relative rounded-md border p-3 text-center transition-all ${spotColor(spot.status)} ${selected?.id === spot.id ? 'ring-2 ring-[#c9a96e]' : ''}`}>
                 <p className="text-[11px] font-bold">{spot.number}</p>
                 {spot.status === 'assigned' && spot.assignedTo && (
                   <p className="text-[9px] mt-0.5 truncate">#{spot.assignedTo}</p>
@@ -101,7 +101,7 @@ function ParkingContent() {
 
           {/* Detail panel */}
           {selected && (
-            <div className="glass-card rounded-xl p-5 space-y-4">
+            <div className="glass-card rounded-md p-5 space-y-4">
               <div className="flex items-center justify-between">
                 <h3 className="font-semibold">Spot #{selected.number}</h3>
                 <span className={`text-xs px-2 py-1 rounded-full ${
@@ -132,7 +132,7 @@ function ParkingContent() {
                         setAssignForm({ lotNumber: '', name: '' });
                         setSelected(null);
                       }
-                    }} className="flex-1 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all">
+                    }} className="flex-1 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all">
                       Assign Spot
                     </button>
                     <button onClick={() => {
@@ -141,7 +141,7 @@ function ParkingContent() {
                         setVisitorForm({ name: '', lot: '', plate: '', hours: '24' });
                         setSelected(null);
                       }
-                    }} className="flex-1 py-2.5 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500/10 text-sm font-medium transition-all">
+                    }} className="flex-1 py-2.5 rounded-md border border-red-500/30 text-red-400 hover:bg-red-500/10 text-sm font-medium transition-all">
                       Visitor Pass
                     </button>
                   </div>
@@ -170,7 +170,7 @@ function ParkingContent() {
                     Assigned to <span className="text-[#c9a96e] font-medium">{selected.assignedName}</span> (Lot #{selected.assignedTo})
                   </p>
                   <button onClick={() => { releaseSpot(selected.id); setSelected(null); }}
-                    className="px-4 py-2 rounded-xl border border-gray-700 text-sm hover:bg-gray-800/50 transition-colors">
+                    className="px-4 py-2 rounded-md border border-gray-700 text-sm hover:bg-gray-800/50 transition-colors">
                     Release Spot
                   </button>
                 </div>
@@ -185,7 +185,7 @@ function ParkingContent() {
                     <p className="text-xs text-gray-500">Pass ID: {selected.visitorPass.id}</p>
                   </div>
                   <button onClick={() => { expirePass(selected.visitorPass!.id); setSelected(null); }}
-                    className="px-4 py-2 rounded-xl border border-red-500/30 text-red-400 text-sm hover:bg-red-500/10 transition-colors">
+                    className="px-4 py-2 rounded-md border border-red-500/30 text-red-400 text-sm hover:bg-red-500/10 transition-colors">
                     Revoke Pass
                   </button>
                 </div>
@@ -196,7 +196,7 @@ function ParkingContent() {
       ) : (
         <div className="space-y-3">
           {activePasses.length === 0 ? (
-            <div className="glass-card rounded-xl p-12 text-center">
+            <div className="glass-card rounded-md p-12 text-center">
               <p className="text-4xl mb-3"></p>
               <p className="text-gray-400">No active visitor passes</p>
             </div>
@@ -204,7 +204,7 @@ function ParkingContent() {
             const expires = new Date(pass.expiresAt);
             const hoursLeft = Math.max(0, (expires.getTime() - Date.now()) / 3600000);
             return (
-              <div key={pass.id} className="glass-card rounded-xl p-4 flex items-center justify-between gap-4">
+              <div key={pass.id} className="glass-card rounded-md p-4 flex items-center justify-between gap-4">
                 <div>
                   <p className="font-medium text-sm">{pass.visitorName}</p>
                   <p className="text-xs text-gray-500">Spot #{pass.spotId} · Hosted by Lot #{pass.issuedBy}</p>

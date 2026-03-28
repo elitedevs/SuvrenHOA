@@ -103,7 +103,7 @@ export default function AnnualReportPage() {
       <div className="flex justify-end mb-6 print:hidden">
         <button
           onClick={() => window.print()}
-          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all"
+          className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all"
         >
            Export / Print
         </button>
@@ -224,15 +224,15 @@ export default function AnnualReportPage() {
           <MetricCard label="Emergency" value={d.emergencyResponses} color="red" />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-          <div className="glass-card rounded-xl p-4 text-center">
+          <div className="glass-card rounded-md p-4 text-center">
             <div className="text-2xl font-bold text-[#c9a96e]">{d.amenityBookings}</div>
             <div className="text-[10px] text-gray-500">Amenity Bookings</div>
           </div>
-          <div className="glass-card rounded-xl p-4 text-center">
+          <div className="glass-card rounded-md p-4 text-center">
             <div className="text-2xl font-bold text-[#c9a96e]">{d.poolVisits.toLocaleString()}</div>
             <div className="text-[10px] text-gray-500">Pool Visits</div>
           </div>
-          <div className="glass-card rounded-xl p-4 text-center">
+          <div className="glass-card rounded-md p-4 text-center">
             <div className="text-2xl font-bold text-[#c9a96e]">{d.clubhouseEvents}</div>
             <div className="text-[10px] text-gray-500">Clubhouse Events</div>
           </div>
@@ -253,7 +253,7 @@ export default function AnnualReportPage() {
       </Section>
 
       {/* Footer */}
-      <div className="mt-8 p-5 rounded-xl bg-[#c9a96e]/5 border border-[#c9a96e]/15 text-center">
+      <div className="mt-8 p-5 rounded-md bg-[#c9a96e]/5 border border-[#c9a96e]/15 text-center">
         <p className="text-xs text-gray-400">
           {d.community} — {d.year} Annual Report · Generated {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
         </p>
@@ -267,7 +267,7 @@ export default function AnnualReportPage() {
 
 function Section({ title, subtitle, children }: { title: string; subtitle: string; children: React.ReactNode }) {
   return (
-    <div className="glass-card rounded-xl p-6 mb-6">
+    <div className="glass-card rounded-md p-6 mb-6">
       <div className="mb-5">
         <h2 className="text-lg font-bold">{title}</h2>
         <p className="text-xs text-gray-400 mt-0.5">{subtitle}</p>
@@ -308,7 +308,7 @@ function FinRow({ label, amount, budget, positive, bold }: { label: string; amou
 
 function MetricCard({ label, value, color }: { label: string; value: number | string; color?: 'green' | 'red' }) {
   return (
-    <div className="bg-gray-800/30 rounded-xl p-3 text-center">
+    <div className="bg-gray-800/30 rounded-md p-3 text-center">
       <div className={`text-2xl font-bold ${color === 'green' ? 'text-green-400' : color === 'red' ? 'text-red-400' : 'text-[#c9a96e]'}`}>
         {value}
       </div>

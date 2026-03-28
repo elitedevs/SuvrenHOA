@@ -107,7 +107,7 @@ export default function ContractorsPage() {
         </div>
         <button
           onClick={() => setShowAdd(!showAdd)}
-          className="px-5 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
+          className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
         >
           {showAdd ? '← Back' : '+ Add Contractor'}
         </button>
@@ -124,7 +124,7 @@ export default function ContractorsPage() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search by name, specialty, or service..."
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none"
             />
             <div className="flex items-center gap-3 flex-wrap">
               <div className="flex gap-2 overflow-x-auto pb-1 flex-1">
@@ -132,7 +132,7 @@ export default function ContractorsPage() {
                   <button
                     key={c.id}
                     onClick={() => setCategory(c.id)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1 ${
+                    className={`px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1 ${
                       category === c.id ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
                     }`}
                   >
@@ -150,7 +150,7 @@ export default function ContractorsPage() {
           <p className="text-xs text-gray-500 mb-4">{filtered.length} contractor{filtered.length !== 1 ? 's' : ''} found</p>
 
           {filtered.length === 0 ? (
-            <div className="glass-card rounded-xl p-12 text-center">
+            <div className="glass-card rounded-md p-12 text-center">
               <p className="text-4xl mb-3"></p>
               <h3 className="font-medium mb-1">No contractors found</h3>
               <p className="text-sm text-gray-400">Try adjusting your search or filters</p>
@@ -182,7 +182,7 @@ function ContractorCard({ contractor: c }: { contractor: Contractor }) {
   const cat = CATEGORIES.find(cat => cat.id === c.category);
 
   return (
-    <div className="glass-card rounded-xl hover-lift overflow-hidden">
+    <div className="glass-card rounded-md hover-lift overflow-hidden">
       <div className="p-5">
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex-1 min-w-0">
@@ -246,19 +246,19 @@ function AddContractorForm({ onAdd, onCancel }: {
   };
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5 max-w-2xl">
+    <div className="glass-card rounded-md p-6 space-y-5 max-w-2xl">
       <h2 className="text-lg font-semibold">Add Contractor</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm text-gray-400 mb-2">Company Name *</label>
           <input value={name} onChange={e => setName(e.target.value)} placeholder="Apex Plumbing Co."
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-gray-400 mb-2">Category</label>
           <select value={category} onChange={e => setCategory(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none">
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none">
             {CATEGORIES.filter(c => c.id !== 'all').map(c => (
               <option key={c.id} value={c.id}>{c.icon} {c.label}</option>
             ))}
@@ -269,19 +269,19 @@ function AddContractorForm({ onAdd, onCancel }: {
       <div>
         <label className="block text-sm text-gray-400 mb-2">Specialty *</label>
         <input value={specialty} onChange={e => setSpecialty(e.target.value)} placeholder="Water heater repair, drain cleaning..."
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm text-gray-400 mb-2">Phone *</label>
           <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="(555) 123-4567" type="tel"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-gray-400 mb-2">Email (optional)</label>
           <input value={email} onChange={e => setEmail(e.target.value)} placeholder="contact@company.com" type="email"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none" />
         </div>
       </div>
 
@@ -289,7 +289,7 @@ function AddContractorForm({ onAdd, onCancel }: {
         <label className="block text-sm text-gray-400 mb-2">Description</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Services offered, experience, any HOA discounts or notes..."
-          rows={3} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
+          rows={3} className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none resize-none" />
       </div>
 
       <label className="flex items-center gap-2 cursor-pointer">
@@ -298,9 +298,9 @@ function AddContractorForm({ onAdd, onCancel }: {
       </label>
 
       <div className="flex gap-3">
-        <button onClick={onCancel} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+        <button onClick={onCancel} className="flex-1 py-3 rounded-md border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
         <button onClick={handleSubmit} disabled={!name.trim() || !phone.trim() || !specialty.trim()}
-          className="flex-1 py-3 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+          className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
           Add Contractor
         </button>
       </div>

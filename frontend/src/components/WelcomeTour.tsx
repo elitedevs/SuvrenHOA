@@ -131,7 +131,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
           <p className="text-sm text-gray-400 leading-relaxed mb-4">{current.description}</p>
 
           {current.hint && (
-            <div className="px-4 py-3 rounded-xl bg-[#c9a96e]/8 border border-[#c9a96e]/20 mb-6">
+            <div className="px-4 py-3 rounded-md bg-[#c9a96e]/8 border border-[#c9a96e]/20 mb-6">
               <p className="text-xs text-[#c9a96e] font-medium">{current.hint}</p>
             </div>
           )}
@@ -141,14 +141,14 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
             {step > 0 ? (
               <button
                 onClick={prev}
-                className="flex-1 py-2.5 rounded-xl border border-gray-700 text-sm font-medium text-gray-400 hover:text-gray-300 hover:bg-white/5 transition-colors"
+                className="flex-1 py-2.5 rounded-md border border-gray-700 text-sm font-medium text-gray-400 hover:text-gray-300 hover:bg-white/5 transition-colors"
               >
                 ← Back
               </button>
             ) : (
               <button
                 onClick={dismiss}
-                className="flex-1 py-2.5 rounded-xl border border-gray-700 text-sm font-medium text-gray-400 hover:text-gray-300 hover:bg-white/5 transition-colors"
+                className="flex-1 py-2.5 rounded-md border border-gray-700 text-sm font-medium text-gray-400 hover:text-gray-300 hover:bg-white/5 transition-colors"
               >
                 Skip Tour
               </button>
@@ -156,7 +156,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
 
             <button
               onClick={next}
-              className="flex-1 py-2.5 rounded-xl bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_16px_rgba(201,169,110,0.25)]"
+              className="flex-1 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_16px_rgba(201,169,110,0.25)]"
             >
               {step < STEPS.length - 1 ? 'Next →' : "Let's Go! "}
             </button>

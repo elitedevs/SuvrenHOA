@@ -237,9 +237,9 @@ export function Sidebar() {
                         <Link
                           key={child.href}
                           href={child.href}
-                          className="block px-3 py-1.5 rounded-md text-[13px] transition-all duration-200"
+                          className="block px-3 py-1.5 rounded-md text-[12px] transition-all duration-200"
                           style={{
-                            color: active ? 'var(--text-primary)' : 'var(--text-muted)',
+                            color: active ? 'rgba(245, 240, 232, 0.75)' : 'rgba(245, 240, 232, 0.40)',
                           }}
                         >
                           {child.label}
@@ -318,7 +318,7 @@ export function Sidebar() {
       {/* Desktop sidebar */}
       <aside
         className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40"
-        style={{ background: '#111114', borderRight: '1px solid var(--border-subtle)' }}
+        style={{ background: '#151518', boxShadow: '1px 0 8px rgba(0, 0, 0, 0.3)' }}
       >
         {sidebarContent}
       </aside>
@@ -338,7 +338,7 @@ export function Sidebar() {
           <div className="absolute inset-0 bg-black/60" onClick={() => setMobileOpen(false)} />
           <aside
             className="absolute left-0 top-0 bottom-0 shadow-2xl"
-            style={{ background: '#111114', borderRight: '1px solid var(--border-subtle)' }}
+            style={{ background: '#151518', boxShadow: '1px 0 8px rgba(0, 0, 0, 0.3)' }}
           >
             <div className="absolute top-3 right-3">
               <button onClick={() => setMobileOpen(false)} className="p-2 rounded-lg" style={{ color: 'var(--text-muted)' }}>

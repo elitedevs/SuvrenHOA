@@ -68,7 +68,7 @@ function LotCard({ lot, isSelected, onClick }: { lot: LotData; isSelected: boole
     <button
       onClick={onClick}
       className={[
-        'relative glass-card rounded-xl hover-lift p-4 text-left cursor-pointer border-l-4',
+        'relative glass-card rounded-md hover-lift p-4 text-left cursor-pointer border-l-4',
         borderClass,
         isSelected ? 'ring-2 ring-[#c9a96e]/50 bg-[#c9a96e]/5' : 'hover:bg-white/[0.06]',
         'hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200',
@@ -123,16 +123,16 @@ function LotDetailPanel({ lot, isBoard, onClose }: { lot: LotData; isBoard: bool
           ></button>
         </div>
         <div className="p-6 space-y-5">
-          <div className={'inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold ' + statusBadgeClass}>
+          <div className={'inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold ' + statusBadgeClass}>
             <span className={'w-2 h-2 rounded-full ' + dotClass} />
             {'Dues ' + statusLabel(lot)}
           </div>
-          <div className="glass-card rounded-xl hover-lift p-4 space-y-3">
+          <div className="glass-card rounded-md hover-lift p-4 space-y-3">
             <h3 className="text-[11px] text-gray-500 uppercase tracking-wider font-semibold">Location</h3>
             <p className="text-gray-200 font-medium">{lot.streetAddress}</p>
             {lot.sqft > 0 && <p className="text-gray-400 text-sm">{lot.sqft.toLocaleString() + ' sq ft'}</p>}
           </div>
-          <div className="glass-card rounded-xl hover-lift p-4 space-y-3">
+          <div className="glass-card rounded-md hover-lift p-4 space-y-3">
             <h3 className="text-[11px] text-gray-500 uppercase tracking-wider font-semibold">NFT Details</h3>
             <div className="flex justify-between text-sm">
               <span className="text-gray-500">Token ID</span>
@@ -144,12 +144,12 @@ function LotDetailPanel({ lot, isBoard, onClose }: { lot: LotData; isBoard: bool
             </div>
           </div>
           {isBoard ? (
-            <div className="glass-card rounded-xl hover-lift p-4 space-y-3">
+            <div className="glass-card rounded-md hover-lift p-4 space-y-3">
               <h3 className="text-[11px] text-gray-500 uppercase tracking-wider font-semibold">Owner</h3>
               <p className="text-gray-200 font-mono text-sm break-all">{lot.owner}</p>
             </div>
           ) : (
-            <div className="glass-card rounded-xl hover-lift p-4">
+            <div className="glass-card rounded-md hover-lift p-4">
               <p className="text-gray-500 text-sm italic"> Owner details visible to board members only</p>
             </div>
           )}
@@ -188,7 +188,7 @@ function IncidentDetailPanel({
         <div className="flex items-center justify-between p-6 border-b border-white/[0.06]">
           <div className="flex items-center gap-3">
             <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
+              className="w-10 h-10 rounded-md flex items-center justify-center text-lg"
               style={{ background: color + '20', border: `1px solid ${color}40` }}
             >
               {icon}
@@ -208,7 +208,7 @@ function IncidentDetailPanel({
         <div className="p-6 space-y-4 flex-1">
           {/* Status */}
           <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold"
             style={{
               background: isActive ? 'rgba(201,169,110,0.1)' : 'rgba(34,197,94,0.1)',
               border: `1px solid ${isActive ? 'rgba(201,169,110,0.3)' : 'rgba(34,197,94,0.3)'}`,
@@ -220,13 +220,13 @@ function IncidentDetailPanel({
           </div>
 
           {/* Description */}
-          <div className="glass-card rounded-xl hover-lift p-4 space-y-2">
+          <div className="glass-card rounded-md hover-lift p-4 space-y-2">
             <h3 className="text-[11px] text-gray-500 uppercase tracking-wider font-semibold">Description</h3>
             <p className="text-gray-200 text-sm leading-relaxed">{incident.description}</p>
           </div>
 
           {/* Details grid */}
-          <div className="glass-card rounded-xl hover-lift p-4 space-y-3">
+          <div className="glass-card rounded-md hover-lift p-4 space-y-3">
             <h3 className="text-[11px] text-gray-500 uppercase tracking-wider font-semibold">Details</h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
@@ -256,7 +256,7 @@ function IncidentDetailPanel({
           <div className="p-6 border-t border-white/[0.06]">
             <button
               onClick={() => { onResolve(incident.id); onClose(); }}
-              className="w-full py-3 rounded-xl text-sm font-semibold transition-all bg-green-500/15 border border-green-500/30 text-green-400 hover:bg-green-500/25 hover:border-green-500/50"
+              className="w-full py-3 rounded-md text-sm font-semibold transition-all bg-green-500/15 border border-green-500/30 text-green-400 hover:bg-green-500/25 hover:border-green-500/50"
             >
                Mark as Resolved
             </button>
@@ -357,7 +357,7 @@ function ReportIncidentModal({
                     key={t}
                     type="button"
                     onClick={() => setType(t)}
-                    className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl border transition-all duration-150"
+                    className="flex flex-col items-center gap-1.5 p-2.5 rounded-md border transition-all duration-150"
                     style={{
                       background: isSelected ? color + '18' : 'rgba(255,255,255,0.02)',
                       borderColor: isSelected ? color + '60' : 'rgba(255,255,255,0.08)',
@@ -444,7 +444,7 @@ function ReportIncidentModal({
           <button
             type="submit"
             disabled={submitting || !title.trim() || !location.trim() || !description.trim()}
-            className="w-full py-3 rounded-xl text-sm font-semibold transition-all bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/25 hover:border-[#c9a96e]/50 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full py-3 rounded-md text-sm font-semibold transition-all bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/25 hover:border-[#c9a96e]/50 disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {submitting ? 'Submitting…' : ' Submit Report'}
           </button>
@@ -480,7 +480,7 @@ function StatsBar({ lots, incidents, layerMode }: { lots: LotData[]; incidents: 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
       {stats.map(({ label, value, color }) => (
-        <div key={label} className="glass-card rounded-xl hover-lift p-4 text-center">
+        <div key={label} className="glass-card rounded-md hover-lift p-4 text-center">
           <div className={'text-xl font-bold ' + color}>{value}</div>
           <div className="text-[11px] text-gray-500 uppercase tracking-wider mt-1">{label}</div>
         </div>
@@ -494,7 +494,7 @@ function StatsBar({ lots, incidents, layerMode }: { lots: LotData[]; incidents: 
 // ─────────────────────────────────────────
 function ViewToggle({ view, onChange }: { view: ViewMode; onChange: (v: ViewMode) => void }) {
   return (
-    <div className="flex gap-1 p-1 rounded-xl bg-white/[0.04] border border-white/[0.08]">
+    <div className="flex gap-1 p-1 rounded-md bg-white/[0.04] border border-white/[0.08]">
       {(['map', 'grid'] as ViewMode[]).map((v) => (
         <button
           key={v}
@@ -525,7 +525,7 @@ function LayerToggle({ layer, onChange }: { layer: LayerMode; onChange: (l: Laye
     { key: 'incidents', label: 'Incidents' },
   ];
   return (
-    <div className="flex gap-1 p-1 rounded-xl bg-white/[0.04] border border-white/[0.08]">
+    <div className="flex gap-1 p-1 rounded-md bg-white/[0.04] border border-white/[0.08]">
       {options.map(({ key, label }) => (
         <button
           key={key}
@@ -560,7 +560,7 @@ function MapLegend({ showProperties, showIncidents }: { showProperties: boolean;
   }));
 
   return (
-    <div className="flex flex-wrap gap-4 px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+    <div className="flex flex-wrap gap-4 px-4 py-3 rounded-md bg-white/[0.03] border border-white/[0.06]">
       {showProperties && (
         <div className="flex flex-wrap items-center gap-3">
           <span className="text-[10px] text-gray-600 uppercase tracking-wider font-semibold">Lots:</span>
@@ -611,7 +611,7 @@ function IncidentsPanel({
 
   if (active.length === 0) {
     return (
-      <div className="glass-card rounded-xl hover-lift p-6 text-center mt-6">
+      <div className="glass-card rounded-md hover-lift p-6 text-center mt-6">
         <div className="text-3xl mb-2"></div>
         <p className="text-gray-400 text-sm">No active incidents in the neighborhood</p>
       </div>
@@ -634,7 +634,7 @@ function IncidentsPanel({
             <button
               key={incident.id}
               onClick={() => onSelect(incident)}
-              className="glass-card rounded-xl hover-lift p-4 text-left transition-all duration-200 hover:bg-white/[0.06] focus:outline-none focus:ring-2 focus:ring-[#c9a96e]/50"
+              className="glass-card rounded-md hover-lift p-4 text-left transition-all duration-200 hover:bg-white/[0.06] focus:outline-none focus:ring-2 focus:ring-[#c9a96e]/50"
               style={{ borderLeft: `3px solid ${color}60` }}
             >
               <div className="flex items-start gap-3">
@@ -724,7 +724,7 @@ export default function MapPage() {
           </div>
           <button
             onClick={() => setShowReportModal(true)}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/25 hover:border-[#c9a96e]/50 hover-lift"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-semibold transition-all bg-[#c9a96e]/15 border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/25 hover:border-[#c9a96e]/50 hover-lift"
           >
             <span></span>
             <span>Report Incident</span>
@@ -790,7 +790,7 @@ export default function MapPage() {
 
         {/* Error */}
         {error && (
-          <div className="glass-card rounded-xl hover-lift p-6 border border-red-500/20 bg-red-500/5 mb-6">
+          <div className="glass-card rounded-md hover-lift p-6 border border-red-500/20 bg-red-500/5 mb-6">
             <p className="text-red-400 font-semibold"> Failed to load map data</p>
             <p className="text-red-400/70 text-sm mt-1">{error}</p>
           </div>
@@ -800,7 +800,7 @@ export default function MapPage() {
         {loading && !error && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="glass-card rounded-xl hover-lift p-4 border-l-4 border-l-gray-700 animate-pulse">
+              <div key={i} className="glass-card rounded-md hover-lift p-4 border-l-4 border-l-gray-700 animate-pulse">
                 <div className="h-3 w-12 bg-white/[0.07] rounded mb-3" />
                 <div className="h-6 w-16 bg-white/[0.07] rounded mb-4" />
                 <div className="h-3 w-full bg-white/[0.05] rounded mb-2" />
