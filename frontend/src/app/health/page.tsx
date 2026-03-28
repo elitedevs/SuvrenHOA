@@ -37,7 +37,7 @@ export default function HealthPage() {
           <h1 className="text-3xl sm:text-4xl font-normal tracking-tight">
             HOA <span className="gradient-text">Health Score</span>
           </h1>
-          <p className="text-gray-400 text-base mt-2 font-medium">
+          <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             A composite snapshot of your community's financial, governance, and compliance health.
           </p>
         </div>

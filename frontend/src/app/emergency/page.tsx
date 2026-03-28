@@ -64,7 +64,7 @@ export default function EmergencyPage() {
         <h1 className="text-3xl font-normal tracking-tight flex items-center gap-3">
            Emergency Contacts
         </h1>
-        <p className="text-base text-gray-400 mt-2">Important contacts for the Faircroft community</p>
+        <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>Important contacts for the Faircroft community</p>
       </div>
 
       {/* 911 Banner */}

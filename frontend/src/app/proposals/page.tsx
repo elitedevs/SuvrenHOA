@@ -89,14 +89,14 @@ function ProposalsDashboard() {
       {/* Governance Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 page-enter page-enter-delay-1">
         {[
-          { value: activeProposalCount, label: 'Active Proposals', color: 'text-[#c9a96e]' },
-          { value: `${Math.round(votingDelay / 86400)}d`, label: 'Voting Delay', color: 'text-blue-400' },
-          { value: `${Math.round(votingPeriod / 86400)}d`, label: 'Voting Period', color: 'text-green-400' },
-          { value: proposals.length, label: 'Total Proposals', color: 'text-amber-400' },
-        ].map(({ value, label, color }) => (
+          { value: activeProposalCount, label: 'Active Proposals' },
+          { value: `${Math.round(votingDelay / 86400)}d`, label: 'Voting Delay' },
+          { value: `${Math.round(votingPeriod / 86400)}d`, label: 'Voting Period' },
+          { value: proposals.length, label: 'Total Proposals' },
+        ].map(({ value, label }) => (
           <div key={label} className="glass-card rounded-lg hover-lift p-6">
-            <p className={`text-3xl font-normal ${color} mb-1`}>{value}</p>
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide">{label}</p>
+            <p className="text-3xl font-heading mb-1" style={{ fontFamily: "var(--font-heading), Georgia, serif", color: "var(--accent-brass)" }}>{value}</p>
+            <p className="text-[11px] uppercase tracking-widest" style={{ color: "var(--text-muted)", letterSpacing: "0.08em" }}>{label}</p>
           </div>
         ))}
       </div>

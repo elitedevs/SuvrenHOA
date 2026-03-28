@@ -98,7 +98,7 @@ export default function NotificationPrefsPage() {
       <div className="mb-8">
         <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Settings</p>
         <h1 className="text-3xl font-normal tracking-tight"> Notifications</h1>
-        <p className="text-base text-gray-400 mt-2">Choose which updates you want to receive</p>
+        <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>Choose which updates you want to receive</p>
       </div>
 
       <div className="glass-card rounded-lg p-6 mb-4">

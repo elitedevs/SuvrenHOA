@@ -37,7 +37,7 @@ export default function GovernanceStatsPage() {
       <div className="mb-8">
         <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Governance</p>
         <h1 className="text-3xl font-normal tracking-tight">Stats Dashboard</h1>
-        <p className="text-base text-gray-400 mt-2">Aggregate metrics for community governance</p>
+        <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>Aggregate metrics for community governance</p>
       </div>
 
       {/* Stat Cards */}

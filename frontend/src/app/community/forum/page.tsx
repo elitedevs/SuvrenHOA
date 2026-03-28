@@ -166,7 +166,7 @@ export default function ForumPage() {
         <div>
           <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Community</p>
           <h1 className="text-3xl font-normal tracking-tight">Discussion Forum</h1>
-          <p className="text-base text-gray-400 mt-2">Community discussions, questions, and announcements</p>
+          <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>Community discussions, questions, and announcements</p>
         </div>
         {isConnected && (
           <button
@@ -282,7 +282,6 @@ export default function ForumPage() {
                 </div>
                 <div className="text-right shrink-0 ml-3">
                   <span className="text-[13px] text-gray-400">{topic.replies.length} replies</span>
-                  <div className="text-[10px] text-gray-500">replies</div>
                 </div>
               </div>
               <div className="flex items-center gap-2 mt-3 text-[11px] text-gray-500">
