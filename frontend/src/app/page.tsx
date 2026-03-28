@@ -113,7 +113,7 @@ function Landing() {
 
         {/* Bottom CTA */}
         <div className="mt-20 glass-card rounded-lg p-8 max-w-md w-full text-center page-enter page-enter-delay-4">
-          <p className="text-[15px] mb-2" style={{ color: 'var(--text-primary)' }}>
+          <p className="text-[14px] mb-2" style={{ color: 'var(--text-primary)' }}>
             No management company needed.
           </p>
           <p className="text-[13px] mb-6" style={{ color: 'var(--text-secondary)' }}>
@@ -160,7 +160,7 @@ function Dashboard() {
           </h1>
           {/* Prose summary — one sentence replaces multiple stat cards */}
           {hasProperty && propertyInfo && (
-            <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-[14px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               {propertyInfo.streetAddress}
               {propertyInfo.squareFootage ? ` — ${Number(propertyInfo.squareFootage).toLocaleString()} sq ft` : ''}.
               {votes !== undefined && totalSupply !== undefined && (

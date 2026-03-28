@@ -104,7 +104,7 @@ function CompactReminder({
             </div>
             <div>
               <p className="text-sm font-bold text-green-400">Dues Current</p>
-              <p className="text-xs text-gray-500 mt-0.5">
+              <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>
                 Save ${annualSavings} with annual plan ({annualDiscount}% off)
               </p>
             </div>
@@ -129,15 +129,15 @@ function CompactReminder({
               
             </div>
             <div>
-              <p className="text-sm font-bold text-red-400">
+              <p className="text-sm" style={{ color: "#9C6262" }}>
                 {quartersOwed} quarter{quartersOwed > 1 ? 's' : ''} overdue
               </p>
-              <p className="text-xs text-gray-500 mt-0.5">${amountOwed.toFixed(2)} USDC owed</p>
+              <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>${amountOwed.toFixed(2)} USDC owed</p>
             </div>
           </div>
           <Link
             href="/dues"
-            className="text-xs px-3 py-1.5 rounded-lg bg-red-600/20 border border-red-500/30 text-red-400 hover:bg-red-600/30 font-semibold whitespace-nowrap transition-all"
+            className="text-xs px-3 py-1.5 rounded-md whitespace-nowrap transition-all" style={{ background: "rgba(107, 58, 58, 0.15)", border: "1px solid rgba(107, 58, 58, 0.3)", color: "#9C6262" }}
           >
             Pay Now →
           </Link>
@@ -158,7 +158,7 @@ function CompactReminder({
             <p className="text-sm font-bold text-amber-400">
               Dues due soon — ${quarterlyNum.toFixed(2)}
             </p>
-            <p className="text-xs text-gray-500 mt-0.5">Save ${annualSavings} with annual plan</p>
+            <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>Save ${annualSavings} with annual plan</p>
           </div>
         </div>
         <Link
@@ -252,14 +252,14 @@ function FullReminder({
         <div className="flex items-center gap-4 p-4 rounded-md bg-red-500/5 border border-red-500/15 mb-4">
           <div className="flex-1">
             <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-1">Amount Owed</p>
-            <p className="text-xl font-normal text-red-400">${amountOwed.toFixed(2)} USDC</p>
+            <p className="text-xl" style={{ color: "#9C6262" }}>${amountOwed.toFixed(2)} USDC</p>
             <p className="text-xs text-gray-600 mt-0.5">
               {quartersOwed} × ${quarterlyNum.toFixed(2)} quarterly
             </p>
           </div>
           <Link
             href="/dues"
-            className="px-5 py-2.5 rounded-md bg-red-600/20 border border-red-500/30 text-red-400 hover:bg-red-600/30 text-sm font-bold transition-all whitespace-nowrap"
+            className="px-5 py-2.5 rounded-md text-sm transition-all whitespace-nowrap" style={{ background: "rgba(107, 58, 58, 0.15)", border: "1px solid rgba(107, 58, 58, 0.3)", color: "#9C6262" }}
           >
             Pay Now →
           </Link>

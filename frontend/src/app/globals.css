@@ -1173,3 +1173,22 @@ html.light .text-green-400 { color: #2A5D4F !important; }
 html.light .text-red-400 { color: #6B3A3A !important; }
 html.light .text-blue-400 { color: #5A6A7E !important; }
 html.light .text-amber-400 { color: #8A7A5A !important; }
+
+/* ── Light mode: nav card description fix ─────────────────────────────────── */
+/* Dark-mode parchment opacity values are invisible on cream — override to dark text */
+html.light [style*="rgba(245, 240, 232"] {
+  color: rgba(26, 26, 30, 0.45) !important;
+}
+
+/* Light mode sidebar shadow — lighter weight */
+html.light aside {
+  box-shadow: 1px 0 6px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ── Wallet address — never pure white, use parchment ─────────────────────── */
+[data-rk] * {
+  color: #F5F0E8 !important;
+}
+html.light [data-rk] * {
+  color: #1A1A1E !important;
+}

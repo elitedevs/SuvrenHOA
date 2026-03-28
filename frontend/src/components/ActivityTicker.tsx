@@ -16,8 +16,8 @@ function timeAgo(unix: number): string {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
-            <p className="text-sm text-gray-500 font-medium">No recent activity</p>
-      <p className="text-xs text-gray-600 mt-1">Events will appear here as they happen</p>
+            <p style={{ fontFamily: "var(--font-heading), Georgia, serif", fontStyle: "italic", fontSize: "15px", color: "var(--text-muted)" }}>No activity recorded yet.</p>
+      <p className="text-[13px] mt-1" style={{ color: "var(--text-muted)" }}>Events will appear here as they're confirmed.</p>
     </div>
   );
 }
