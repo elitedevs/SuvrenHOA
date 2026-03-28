@@ -8,7 +8,7 @@ const WALLET_SEEN_KEY = 'suvren-wallet-seen';
 interface TourStep {
   title: string;
   description: string;
-  icon: string;
+  icon?: string;
   hint?: string;
 }
 
@@ -16,19 +16,16 @@ const STEPS: TourStep[] = [
   {
     title: 'Welcome to SuvrenHOA',
     description: 'Your blockchain-powered HOA platform. Transparent governance, immutable records, and democratic decision-making — all on-chain.',
-    icon: '',
     hint: 'No management companies. No hidden spending.',
   },
   {
     title: 'Your Dashboard',
     description: 'View your property NFT, voting power, dues status, and quick-access links to everything you need as a homeowner.',
-    icon: '',
     hint: 'Your lot = your vote. 1 property, 1 vote.',
   },
   {
     title: 'Get Involved',
     description: 'Vote on proposals, pay dues in USDC, participate in community discussions, and verify any document is authentic.',
-    icon: '',
     hint: 'Every vote, every dollar is permanently recorded on Base.',
   },
 ];

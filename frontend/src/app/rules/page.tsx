@@ -11,7 +11,7 @@ interface Rule {
 
 interface Section {
   id: string;
-  icon: string;
+  icon?: string;
   title: string;
   description: string;
   rules: Rule[];
@@ -20,7 +20,6 @@ interface Section {
 const SECTIONS: Section[] = [
   {
     id: 'parking',
-    icon: '',
     title: 'Parking',
     description: 'Rules governing parking in driveways, streets, and common areas.',
     rules: [
@@ -33,7 +32,6 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'pets',
-    icon: '',
     title: 'Pets',
     description: 'Guidelines for pet ownership, leashing, and community spaces.',
     rules: [
@@ -46,7 +44,6 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'noise',
-    icon: '',
     title: 'Noise',
     description: 'Quiet hours and acceptable noise levels in the community.',
     rules: [
@@ -58,7 +55,6 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'architectural',
-    icon: '',
     title: 'Architectural Changes',
     description: 'Requirements for home modifications, additions, and exterior changes.',
     rules: [
@@ -71,7 +67,6 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'landscaping',
-    icon: '',
     title: 'Landscaping',
     description: 'Standards for lawn maintenance, plantings, and curb appeal.',
     rules: [
@@ -83,7 +78,6 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'rentals',
-    icon: '',
     title: 'Rentals',
     description: 'Policies for renting your home within the community.',
     rules: [
@@ -95,7 +89,6 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'common-areas',
-    icon: '',
     title: 'Common Areas',
     description: 'Use guidelines for shared spaces including pool, clubhouse, and parks.',
     rules: [

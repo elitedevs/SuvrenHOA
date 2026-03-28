@@ -9,7 +9,7 @@ import { useProperty } from '@/hooks/useProperty';
 interface Amenity {
   id: string;
   name: string;
-  icon: string;
+  icon?: string;
   description: string;
   rules: string[];
   hours: string;
@@ -18,48 +18,44 @@ interface Amenity {
   image?: string;
 }
 
-
-
 const AMENITIES: Amenity[] = [
   {
-    id: 'pool', name: 'Community Pool', icon: '', hours: '7am — 9pm (May–Sep)',
+    id: 'pool', name: 'Community Pool', hours: '7am — 9pm (May–Sep)',
     description: 'Olympic-sized pool with lap lanes, shallow end, and splash pad for kids.',
     rules: ['No glass containers', 'Children under 12 must have adult supervision', 'No diving in shallow end', 'Shower before entering'],
     capacity: 50, requiresKey: true,
   },
   {
-    id: 'clubhouse', name: 'Clubhouse', icon: '', hours: '8am — 10pm',
+    id: 'clubhouse', name: 'Clubhouse', hours: '8am — 10pm',
     description: 'Indoor event space with kitchen, seating for 80, A/V equipment, and patio access.',
     rules: ['$100 refundable deposit required', 'Clean up after use', 'No amplified music after 9pm', 'Reserve at least 48 hours in advance'],
     capacity: 80, requiresKey: true,
   },
   {
-    id: 'tennis', name: 'Tennis Courts', icon: '', hours: '6am — 10pm',
+    id: 'tennis', name: 'Tennis Courts', hours: '6am — 10pm',
     description: 'Two lighted tennis courts. First come, first served — or reserve a 1-hour slot.',
     rules: ['Proper tennis shoes required', 'Max 1-hour reservation during peak times', 'Turn off lights when done'],
     capacity: 8, requiresKey: false,
   },
   {
-    id: 'playground', name: 'Playground', icon: '', hours: 'Dawn — Dusk',
+    id: 'playground', name: 'Playground', hours: 'Dawn — Dusk',
     description: 'Fenced playground with equipment for ages 2-12. Adjacent to the picnic pavilion.',
     rules: ['Children must be supervised', 'No food on equipment', 'Report damaged equipment immediately'],
     capacity: 30, requiresKey: false,
   },
   {
-    id: 'pavilion', name: 'Picnic Pavilion', icon: '', hours: '8am — Dusk',
+    id: 'pavilion', name: 'Picnic Pavilion', hours: '8am — Dusk',
     description: 'Covered pavilion with 4 picnic tables, 2 grills, and power outlets. Great for cookouts.',
     rules: ['Clean grills after use', 'Dispose of charcoal properly', 'Reserve for groups of 10+'],
     capacity: 40, requiresKey: false,
   },
   {
-    id: 'lake', name: 'Lake Trail', icon: '', hours: 'Dawn — Dusk',
+    id: 'lake', name: 'Lake Trail', hours: 'Dawn — Dusk',
     description: '1.2 mile walking trail around the community lake. Catch-and-release fishing permitted.',
     rules: ['No swimming', 'Dogs must be leashed', 'Stay on marked trail', 'No motorized boats'],
     capacity: 0, requiresKey: false,
   },
 ];
-
-
 
 export default function ReservationsPage() {
   const { isConnected } = useAccount();
@@ -100,7 +96,7 @@ export default function ReservationsPage() {
             }`}
           >
             <div className="flex items-center gap-3 mb-3">
-              <span className="text-3xl">{amenity.icon}</span>
+              <span className="text-3xl"></span>
               <div>
                 <h3 className="font-semibold text-sm">{amenity.name}</h3>
                 <p className="text-[10px] text-gray-500">{amenity.hours}</p>
@@ -120,7 +116,7 @@ export default function ReservationsPage() {
         <div className="glass-card rounded-md p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <span className="text-4xl">{selected.icon}</span>
+              <span className="text-4xl"></span>
               <div>
                 <h2 className="text-xl font-bold">{selected.name}</h2>
                 <p className="text-sm text-gray-400">{selected.hours}</p>

@@ -139,14 +139,14 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
 }
 
 const CATEGORIES = [
-  { id: 'architectural', label: 'Architectural', icon: '' },
-  { id: 'landscaping', label: 'Landscaping', icon: '' },
-  { id: 'noise', label: 'Noise', icon: '' },
-  { id: 'parking', label: 'Parking', icon: '' },
-  { id: 'pet', label: 'Pet', icon: '' },
-  { id: 'trash', label: 'Trash', icon: '' },
-  { id: 'maintenance', label: 'Maintenance', icon: '' },
-  { id: 'other', label: 'Other', icon: '' },
+  { id: 'architectural', label: 'Architectural' },
+  { id: 'landscaping', label: 'Landscaping' },
+  { id: 'noise', label: 'Noise' },
+  { id: 'parking', label: 'Parking' },
+  { id: 'pet', label: 'Pet' },
+  { id: 'trash', label: 'Trash' },
+  { id: 'maintenance', label: 'Maintenance' },
+  { id: 'other', label: 'Other' },
 ];
 
 const STATUS_FLOW = {

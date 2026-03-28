@@ -18,7 +18,7 @@ export interface AmenityBooking {
 export interface Amenity {
   id: string;
   name: string;
-  icon: string;
+  icon?: string;
   description: string;
   capacity: number;
   rules: string[];
@@ -29,7 +29,6 @@ export const AMENITIES: Amenity[] = [
   {
     id: 'pool',
     name: 'Community Pool',
-    icon: '',
     description: 'Olympic-style pool with lap lanes, open May–September',
     capacity: 30,
     rules: ['No running on deck', 'Shower before entering', 'Children under 12 must be supervised'],
@@ -38,7 +37,6 @@ export const AMENITIES: Amenity[] = [
   {
     id: 'clubhouse',
     name: 'Clubhouse',
-    icon: '',
     description: 'Event hall with catering kitchen, seats up to 80',
     capacity: 80,
     rules: ['Must be cleaned after use', 'No smoking indoors', '72-hour cancellation notice required'],
@@ -47,7 +45,6 @@ export const AMENITIES: Amenity[] = [
   {
     id: 'tennis',
     name: 'Tennis Court',
-    icon: '',
     description: 'Two regulation tennis courts, lighted until 10 PM',
     capacity: 4,
     rules: ['2-hour max per booking', 'Proper tennis shoes required', 'Equipment available at front desk'],
@@ -56,7 +53,6 @@ export const AMENITIES: Amenity[] = [
   {
     id: 'bbq',
     name: 'BBQ Area',
-    icon: '',
     description: 'Covered pavilion with 4 grills and picnic tables',
     capacity: 20,
     rules: ['Clean grill after use', 'No charcoal – gas only', 'Dispose of grease properly'],
@@ -65,7 +61,6 @@ export const AMENITIES: Amenity[] = [
   {
     id: 'playground',
     name: 'Playground',
-    icon: '',
     description: 'Modern playground equipment for ages 2–12',
     capacity: 25,
     rules: ['Supervised children only', 'No bicycles inside playground area', 'Report damaged equipment immediately'],
@@ -74,7 +69,6 @@ export const AMENITIES: Amenity[] = [
   {
     id: 'fitness',
     name: 'Fitness Center',
-    icon: '',
     description: 'Full gym with cardio machines, free weights, and yoga studio',
     capacity: 15,
     rules: ['Wipe equipment after use', 'Proper athletic attire required', 'No outside food or drinks'],

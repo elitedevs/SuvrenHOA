@@ -6,7 +6,6 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useMaintenanceRequests, useCreateMaintenanceRequest } from '@/hooks/useMaintenance';
 import { useProperty } from '@/hooks/useProperty';
 
-
 const STATUS_STYLES = {
   open: { color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', label: ' Open' },
   'in-progress': { color: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20', label: ' In Progress' },
@@ -20,8 +19,6 @@ const PRIORITY_STYLES = {
   high: 'text-orange-400',
   urgent: 'text-red-400',
 };
-
-
 
 export default function MaintenancePage() {
   const { isConnected } = useAccount();

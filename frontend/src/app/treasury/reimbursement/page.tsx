@@ -18,13 +18,13 @@ interface ReimbursementRequest {
 }
 
 const CATEGORIES = [
-  { id: 'supplies', label: 'Office / Supplies', icon: '' },
-  { id: 'landscaping', label: 'Landscaping Materials', icon: '' },
-  { id: 'maintenance', label: 'Maintenance Supplies', icon: '' },
-  { id: 'events', label: 'Community Events', icon: '' },
-  { id: 'printing', label: 'Printing / Postage', icon: '' },
-  { id: 'emergency', label: 'Emergency Repairs', icon: '' },
-  { id: 'other', label: 'Other (Pre-Approved)', icon: '' },
+  { id: 'supplies', label: 'Office / Supplies' },
+  { id: 'landscaping', label: 'Landscaping Materials' },
+  { id: 'maintenance', label: 'Maintenance Supplies' },
+  { id: 'events', label: 'Community Events' },
+  { id: 'printing', label: 'Printing / Postage' },
+  { id: 'emergency', label: 'Emergency Repairs' },
+  { id: 'other', label: 'Other (Pre-Approved)' },
 ];
 
 const STATUS_STYLES = {

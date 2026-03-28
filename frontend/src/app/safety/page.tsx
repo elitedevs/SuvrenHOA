@@ -17,14 +17,14 @@ interface SafetyEntry {
 }
 
 const REPORT_TYPES = [
-  { id: 'suspicious', label: 'Suspicious Activity', icon: '', color: 'red' },
-  { id: 'streetlight', label: 'Broken Streetlight', icon: '', color: 'amber' },
-  { id: 'pothole', label: 'Pothole / Road Damage', icon: '', color: 'orange' },
-  { id: 'vandalism', label: 'Vandalism', icon: '', color: 'red' },
-  { id: 'trespassing', label: 'Trespassing', icon: '', color: 'red' },
-  { id: 'hazard', label: 'Safety Hazard', icon: '', color: 'yellow' },
-  { id: 'noise', label: 'Noise Disturbance', icon: '', color: 'blue' },
-  { id: 'other', label: 'Other Concern', icon: '', color: 'gray' },
+  { id: 'suspicious', label: 'Suspicious Activity', color: 'red' },
+  { id: 'streetlight', label: 'Broken Streetlight', color: 'amber' },
+  { id: 'pothole', label: 'Pothole / Road Damage', color: 'orange' },
+  { id: 'vandalism', label: 'Vandalism', color: 'red' },
+  { id: 'trespassing', label: 'Trespassing', color: 'red' },
+  { id: 'hazard', label: 'Safety Hazard', color: 'yellow' },
+  { id: 'noise', label: 'Noise Disturbance', color: 'blue' },
+  { id: 'other', label: 'Other Concern', color: 'gray' },
 ];
 
 const STATUS_STYLES = {
@@ -186,7 +186,7 @@ function SafetyCard({ entry, onUpdateStatus }: { entry: SafetyEntry; onUpdateSta
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1">
-              <span className="text-base">{typeInfo.icon}</span>
+              <span className="text-base"></span>
               <span className="font-semibold text-sm">{typeInfo.label}</span>
               <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${statusStyle.color}`}>
                 {statusStyle.label}
@@ -255,7 +255,6 @@ function ReportForm({ onSubmit, onCancel, address }: {
               className={`p-3 rounded-md text-center transition-all ${
                 type === t.id ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400 hover:text-gray-200'
               }`}>
-              <div className="text-xl mb-1">{t.icon}</div>
               <div className="text-[10px] font-medium leading-tight">{t.label}</div>
             </button>
           ))}

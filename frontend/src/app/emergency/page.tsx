@@ -9,27 +9,26 @@ interface Contact {
   phone: string;
   note?: string;
   address?: string;
-  icon: string;
   urgent?: boolean;
 }
 
 const CONTACTS: Contact[] = [
   // HOA Board
-  { id: 'board-president', category: 'HOA Board', name: 'Board President', phone: '(555) 201-0001', note: 'On-chain: 0x1234...5678', icon: '', urgent: false },
-  { id: 'board-treasurer', category: 'HOA Board', name: 'Board Treasurer', phone: '(555) 201-0002', note: 'On-chain: 0xABCD...EF01', icon: '', urgent: false },
-  { id: 'board-secretary', category: 'HOA Board', name: 'Board Secretary', phone: '(555) 201-0003', note: 'On-chain: 0x9876...4321', icon: '', urgent: false },
+  { id: 'board-president', category: 'HOA Board', name: 'Board President', phone: '(555) 201-0001', note: 'On-chain: 0x1234...5678', urgent: false },
+  { id: 'board-treasurer', category: 'HOA Board', name: 'Board Treasurer', phone: '(555) 201-0002', note: 'On-chain: 0xABCD...EF01', urgent: false },
+  { id: 'board-secretary', category: 'HOA Board', name: 'Board Secretary', phone: '(555) 201-0003', note: 'On-chain: 0x9876...4321', urgent: false },
   // Emergency Services
-  { id: 'police', category: 'Emergency Services', name: 'Police Non-Emergency', phone: '(555) 911-0001', note: 'For non-life-threatening issues', icon: '', urgent: false },
-  { id: 'fire', category: 'Emergency Services', name: 'Fire Department', phone: '911', note: 'For emergencies — always call 911 first', icon: '', urgent: true },
-  { id: 'animal', category: 'Emergency Services', name: 'Animal Control', phone: '(555) 555-2873', note: 'Stray or dangerous animals', icon: '', urgent: false },
+  { id: 'police', category: 'Emergency Services', name: 'Police Non-Emergency', phone: '(555) 911-0001', note: 'For non-life-threatening issues', urgent: false },
+  { id: 'fire', category: 'Emergency Services', name: 'Fire Department', phone: '911', note: 'For emergencies — always call 911 first', urgent: true },
+  { id: 'animal', category: 'Emergency Services', name: 'Animal Control', phone: '(555) 555-2873', note: 'Stray or dangerous animals', urgent: false },
   // Utilities
-  { id: 'electric', category: 'Utilities', name: 'Electric Company', phone: '(800) 555-3874', note: 'Power outages & emergencies', icon: '', urgent: false },
-  { id: 'water', category: 'Utilities', name: 'Water District', phone: '(800) 555-9283', note: 'Water main breaks & outages', icon: '', urgent: false },
-  { id: 'gas', category: 'Utilities', name: 'Gas Company', phone: '(800) 555-4762', note: '24/7 gas leak emergencies', icon: '', urgent: true },
-  { id: 'internet', category: 'Utilities', name: 'Internet / Cable', phone: '(800) 555-6372', note: 'Outages & technical support', icon: '', urgent: false },
+  { id: 'electric', category: 'Utilities', name: 'Electric Company', phone: '(800) 555-3874', note: 'Power outages & emergencies', urgent: false },
+  { id: 'water', category: 'Utilities', name: 'Water District', phone: '(800) 555-9283', note: 'Water main breaks & outages', urgent: false },
+  { id: 'gas', category: 'Utilities', name: 'Gas Company', phone: '(800) 555-4762', note: '24/7 gas leak emergencies', urgent: true },
+  { id: 'internet', category: 'Utilities', name: 'Internet / Cable', phone: '(800) 555-6372', note: 'Outages & technical support', urgent: false },
   // Health & Safety
-  { id: 'poison', category: 'Health & Safety', name: 'Poison Control', phone: '(800) 222-1222', note: 'National 24/7 hotline', icon: '', urgent: true },
-  { id: 'hospital', category: 'Health & Safety', name: 'Nearest Hospital', phone: '(555) 333-7890', note: 'Faircroft Regional Medical', icon: '', urgent: true },
+  { id: 'poison', category: 'Health & Safety', name: 'Poison Control', phone: '(800) 222-1222', note: 'National 24/7 hotline', urgent: true },
+  { id: 'hospital', category: 'Health & Safety', name: 'Nearest Hospital', phone: '(555) 333-7890', note: 'Faircroft Regional Medical', urgent: true },
 ];
 
 const CATEGORY_ORDER = ['HOA Board', 'Emergency Services', 'Utilities', 'Health & Safety'];

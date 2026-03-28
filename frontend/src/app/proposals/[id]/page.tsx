@@ -175,9 +175,9 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
       <div className="glass-card rounded-md p-6 mb-6">
         <h2 className="text-lg font-semibold mb-4">Vote Results</h2>
         <div className="space-y-4 mb-6">
-          <VoteBar label="For" count={forVotes} percent={forPercent} color="green" icon="" />
-          <VoteBar label="Against" count={against} percent={againstPercent} color="red" icon="" />
-          <VoteBar label="Abstain" count={abstain} percent={abstainPercent} color="gray" icon="" />
+          <VoteBar label="For" count={forVotes} percent={forPercent} color="green" />
+          <VoteBar label="Against" count={against} percent={againstPercent} color="red" />
+          <VoteBar label="Abstain" count={abstain} percent={abstainPercent} color="gray" />
         </div>
         {/* Quorum progress */}
         <div className="pt-4 border-t border-white/5">
@@ -229,10 +229,10 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
               <div className="grid grid-cols-3 gap-3 mb-4">
                 {[
-                  { value: 1, label: 'For', icon: '', borderActive: 'border-green-500/50 bg-green-950/30 ring-1 ring-green-500/30' },
-                  { value: 0, label: 'Against', icon: '', borderActive: 'border-red-500/50 bg-red-950/30 ring-1 ring-red-500/30' },
-                  { value: 2, label: 'Abstain', icon: '', borderActive: 'border-gray-500/50 bg-gray-800/60 ring-1 ring-gray-500/30' },
-                ].map(({ value, label, icon, borderActive }) => (
+                  { value: 1, label: 'For', borderActive: 'border-green-500/50 bg-green-950/30 ring-1 ring-green-500/30' },
+                  { value: 0, label: 'Against', borderActive: 'border-red-500/50 bg-red-950/30 ring-1 ring-red-500/30' },
+                  { value: 2, label: 'Abstain', borderActive: 'border-gray-500/50 bg-gray-800/60 ring-1 ring-gray-500/30' },
+                ].map(({ value, label, borderActive }) => (
                   <button
                     key={value}
                     type="button"
@@ -243,7 +243,6 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
                         : 'border-gray-800 bg-gray-900/50 hover:border-gray-700'
                     }`}
                   >
-                    <span className="text-2xl block mb-1">{icon}</span>
                     <span className="text-sm font-medium">{label}</span>
                   </button>
                 ))}
@@ -420,8 +419,8 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
-function VoteBar({ label, count, percent, color, icon }: {
-  label: string; count: number; percent: number; color: string; icon: string;
+function VoteBar({ label, count, percent, color}: {
+  label: string; count: number; percent: number; color: string;
 }) {
   const colorClass = color === 'green' ? 'bg-green-500' : color === 'red' ? 'bg-red-500' : 'bg-gray-500';
   const textClass = color === 'green' ? 'text-green-400' : color === 'red' ? 'text-red-400' : 'text-gray-400';
@@ -429,7 +428,7 @@ function VoteBar({ label, count, percent, color, icon }: {
   return (
     <div>
       <div className="flex items-center justify-between text-xs mb-1.5">
-        <span className={`font-medium ${textClass}`}>{icon} {label}</span>
+        <span className={`font-medium ${textClass}`}>{label}</span>
         <span className="text-gray-400">{count} vote{count !== 1 ? 's' : ''} ({percent.toFixed(1)}%)</span>
       </div>
       <div className="h-3 rounded-full bg-gray-800 overflow-hidden">

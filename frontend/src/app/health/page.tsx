@@ -132,7 +132,7 @@ export default function HealthPage() {
             <h2 className="text-xl font-bold text-gray-200">Score Breakdown</h2>
             {factors.map((factor) => {
               const pct = (factor.score / factor.max) * 100;
-              const factorColor = pct >= 71 ? '#22c55e' : pct >= 41 ? '#f59e0b' : '#ef4444';
+              const factorColor = pct >= 71 ? '#2A5D4F' : pct >= 41 ? '#B09B71' : '#6B3A3A';
               const factorColorClass = pct >= 71 ? 'text-green-400' : pct >= 41 ? 'text-amber-400' : 'text-red-400';
 
               return (

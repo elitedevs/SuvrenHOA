@@ -33,10 +33,10 @@ const RANK_STYLES: Record<number, { bg: string; text: string; border: string; me
 };
 
 const TABS = [
-  { id: 'governance', label: 'Governance Champions', icon: '', statLabel: 'Votes' },
-  { id: 'payers', label: 'Prompt Payers', icon: '', statLabel: 'Payments' },
-  { id: 'contributors', label: 'Community Contributors', icon: '', statLabel: 'Proposals' },
-  { id: 'documents', label: 'Document Champions', icon: '', statLabel: 'Uploads' },
+  { id: 'governance', label: 'Governance Champions', statLabel: 'Votes' },
+  { id: 'payers', label: 'Prompt Payers', statLabel: 'Payments' },
+  { id: 'contributors', label: 'Community Contributors', statLabel: 'Proposals' },
+  { id: 'documents', label: 'Document Champions', statLabel: 'Uploads' },
 ] as const;
 
 type TabId = (typeof TABS)[number]['id'];
@@ -294,7 +294,7 @@ export default function LeaderboardPage() {
 
         {/* Tab Title */}
         <div className="flex items-center gap-2 mb-4">
-          <span className="text-xl">{currentTab.icon}</span>
+          
           <h2 className="text-lg font-bold text-gray-100">{currentTab.label}</h2>
           {!isLoading && entriesMap[activeTab].length > 0 && (
             <span className="text-xs text-gray-600 ml-auto">

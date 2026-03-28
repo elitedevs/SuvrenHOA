@@ -6,20 +6,18 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { usePosts, useCreatePost, type Post as PostType } from '@/hooks/usePosts';
 import { useProperty } from '@/hooks/useProperty';
 
-
 const CATEGORIES = [
-  { id: 'general', label: 'General', icon: '', color: 'gold' },
-  { id: 'maintenance', label: 'Maintenance', icon: '', color: 'amber' },
-  { id: 'safety', label: 'Safety & Security', icon: '', color: 'red' },
-  { id: 'events', label: 'Events', icon: '', color: 'green' },
-  { id: 'landscaping', label: 'Landscaping', icon: '', color: 'emerald' },
-  { id: 'pets', label: 'Pets & Animals', icon: '', color: 'blue' },
+  { id: 'general', label: 'General', color: 'gold' },
+  { id: 'maintenance', label: 'Maintenance', color: 'amber' },
+  { id: 'safety', label: 'Safety & Security', color: 'red' },
+  { id: 'events', label: 'Events', color: 'green' },
+  { id: 'landscaping', label: 'Landscaping', color: 'emerald' },
+  { id: 'pets', label: 'Pets & Animals', color: 'blue' },
   { id: 'recommendations', label: 'Recommendations', icon: '⭐', color: 'yellow' },
-  { id: 'lost-found', label: 'Lost & Found', icon: '', color: 'cyan' },
+  { id: 'lost-found', label: 'Lost & Found', color: 'cyan' },
 ];
 
 // Demo data for presentation
-
 
 export default function CommunityPage() {
   const { isConnected } = useAccount();

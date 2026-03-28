@@ -24,10 +24,10 @@ interface NeighborhoodMapProps {
 // Incident type helpers
 // ─────────────────────────────────────────
 export const INCIDENT_COLORS: Record<Incident['type'], string> = {
-  crime: '#ef4444',
-  maintenance: '#f59e0b',
-  'road-closure': '#f97316',
-  'community-event': '#3b82f6',
+  crime: '#6B3A3A',
+  maintenance: '#B09B71',
+  'road-closure': '#B09B71',
+  'community-event': '#6B7B90',
   hazard: '#eab308',
   noise: '#8b5cf6',
   other: '#6b7280',
@@ -104,7 +104,7 @@ function buildIncidentPopupHTML(incident: Incident): string {
   const isActive = incident.status === 'active';
   const statusBg = isActive ? 'rgba(201,169,110,0.12)' : 'rgba(34,197,94,0.12)';
   const statusBorder = isActive ? 'rgba(201,169,110,0.35)' : 'rgba(34,197,94,0.35)';
-  const statusColor = isActive ? '#c9a96e' : '#22c55e';
+  const statusColor = isActive ? '#c9a96e' : '#2A5D4F';
   const statusText = isActive ? 'Active' : 'Resolved';
 
   const truncated = incident.description.length > 80
@@ -138,7 +138,7 @@ function buildIncidentPopupHTML(incident: Incident): string {
 // ─────────────────────────────────────────
 function markerColor(lot: LotData): string {
   if (lot.isDuesCurrent === null) return '#6b7280';
-  return lot.isDuesCurrent ? '#22c55e' : '#ef4444';
+  return lot.isDuesCurrent ? '#2A5D4F' : '#6B3A3A';
 }
 
 function markerGlowColor(lot: LotData): string {
@@ -183,7 +183,7 @@ function buildPopupHTML(lot: LotData, isBoard: boolean): string {
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;">
         <div>
           <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;">Lot</div>
-          <div style="font-size:20px;font-weight:700;background:linear-gradient(135deg,#c9a96e,#e8d5a3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+          <div style="font-size:20px;font-weight:700;background:linear-gradient(135deg,#B09B71,#C4B08A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
             #${lot.lotNumber}
           </div>
         </div>

@@ -191,7 +191,7 @@ function IncidentDetailPanel({
               className="w-10 h-10 rounded-md flex items-center justify-center text-lg"
               style={{ background: color + '20', border: `1px solid ${color}40` }}
             >
-              {icon}
+              
             </div>
             <div>
               <p className="text-[11px] text-gray-500 uppercase tracking-wider font-semibold">{label}</p>
@@ -212,10 +212,10 @@ function IncidentDetailPanel({
             style={{
               background: isActive ? 'rgba(201,169,110,0.1)' : 'rgba(34,197,94,0.1)',
               border: `1px solid ${isActive ? 'rgba(201,169,110,0.3)' : 'rgba(34,197,94,0.3)'}`,
-              color: isActive ? '#c9a96e' : '#22c55e',
+              color: isActive ? '#B09B71' : '#2A5D4F',
             }}
           >
-            <span className={`w-2 h-2 rounded-full ${isActive ? 'animate-pulse' : ''}`} style={{ background: isActive ? '#c9a96e' : '#22c55e' }} />
+            <span className={`w-2 h-2 rounded-full ${isActive ? 'animate-pulse' : ''}`} style={{ background: isActive ? '#B09B71' : '#2A5D4F' }} />
             {isActive ? 'Active' : 'Resolved'}
           </div>
 
@@ -270,14 +270,14 @@ function IncidentDetailPanel({
 // ─────────────────────────────────────────
 // Report Incident Modal
 // ─────────────────────────────────────────
-const INCIDENT_TYPES: { type: Incident['type']; label: string; icon: string }[] = [
-  { type: 'crime', label: 'Crime', icon: '' },
-  { type: 'maintenance', label: 'Maintenance', icon: '' },
-  { type: 'road-closure', label: 'Road Closure', icon: '' },
-  { type: 'community-event', label: 'Community Event', icon: '' },
-  { type: 'hazard', label: 'Hazard', icon: '' },
-  { type: 'noise', label: 'Noise', icon: '' },
-  { type: 'other', label: 'Other', icon: '' },
+const INCIDENT_TYPES: { type: Incident['type']; label: string; icon?: string }[] = [
+  { type: 'crime', label: 'Crime' },
+  { type: 'maintenance', label: 'Maintenance' },
+  { type: 'road-closure', label: 'Road Closure' },
+  { type: 'community-event', label: 'Community Event' },
+  { type: 'hazard', label: 'Hazard' },
+  { type: 'noise', label: 'Noise' },
+  { type: 'other', label: 'Other' },
 ];
 
 function ReportIncidentModal({
@@ -349,7 +349,7 @@ function ReportIncidentModal({
               Incident Type
             </label>
             <div className="grid grid-cols-4 gap-2">
-              {INCIDENT_TYPES.map(({ type: t, label, icon }) => {
+              {INCIDENT_TYPES.map(({ type: t, label }) => {
                 const color = INCIDENT_COLORS[t];
                 const isSelected = type === t;
                 return (
@@ -363,7 +363,7 @@ function ReportIncidentModal({
                       borderColor: isSelected ? color + '60' : 'rgba(255,255,255,0.08)',
                     }}
                   >
-                    <span className="text-xl">{icon}</span>
+                    <span className="text-xl"></span>
                     <span className="text-[10px] font-semibold text-center leading-tight" style={{ color: isSelected ? color : '#6b7280' }}>
                       {label}
                     </span>
@@ -549,8 +549,8 @@ function LayerToggle({ layer, onChange }: { layer: LayerMode; onChange: (l: Laye
 // ─────────────────────────────────────────
 function MapLegend({ showProperties, showIncidents }: { showProperties: boolean; showIncidents: boolean }) {
   const propertyItems = [
-    { color: '#22c55e', label: 'Dues Current' },
-    { color: '#ef4444', label: 'Overdue' },
+    { color: '#2A5D4F', label: 'Dues Current' },
+    { color: '#6B3A3A', label: 'Overdue' },
     { color: '#6b7280', label: 'Unknown' },
   ];
 
@@ -637,7 +637,7 @@ function IncidentsPanel({
               style={{ borderLeft: `3px solid ${color}60` }}
             >
               <div className="flex items-start gap-3">
-                <span className="text-lg flex-shrink-0 mt-0.5">{icon}</span>
+                <span className="text-lg flex-shrink-0 mt-0.5"></span>
                 <div className="min-w-0">
                   <div className="text-[10px] uppercase tracking-wider font-semibold mb-0.5" style={{ color }}>
                     {label}

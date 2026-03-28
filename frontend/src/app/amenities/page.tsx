@@ -105,7 +105,7 @@ function AmenityGrid({ onSelect, walletAddress }: { onSelect: (a: Amenity) => vo
             onClick={() => onSelect(amenity)}
             className="glass-card rounded-md hover-lift p-6 text-left transition-all hover:border-[#c9a96e]/30 border border-transparent group"
           >
-            <div className="text-4xl mb-3">{amenity.icon}</div>
+            <div className="text-4xl mb-3"></div>
             <h3 className="font-semibold text-base mb-1">{amenity.name}</h3>
             <p className="text-xs text-gray-400 mb-3 leading-relaxed">{amenity.description}</p>
             <div className="flex items-center justify-between">
@@ -162,7 +162,7 @@ function AmenityBookingView({
       <div className="lg:col-span-2 space-y-4">
         <div className="glass-card rounded-md p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-[#c9a96e]">{amenity.icon} {amenity.name}</h3>
+            <h3 className="font-semibold text-[#c9a96e]"> {amenity.name}</h3>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setWeekOffset(Math.max(0, weekOffset - 1))}

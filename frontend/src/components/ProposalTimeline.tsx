@@ -7,7 +7,7 @@ interface ProposalTimelineProps {
 type Stage = {
   id: string;
   label: string;
-  icon: string;
+  icon?: string;
   activeStates: string[];
   doneStates: string[];
   failStates?: string[];
@@ -17,14 +17,12 @@ const STAGES: Stage[] = [
   {
     id: 'created',
     label: 'Created',
-    icon: '',
     activeStates: ['Pending'],
     doneStates: ['Active', 'Succeeded', 'Defeated', 'Queued', 'Executed', 'Canceled', 'Expired'],
   },
   {
     id: 'voting',
     label: 'Voting',
-    icon: '',
     activeStates: ['Active'],
     doneStates: ['Succeeded', 'Defeated', 'Queued', 'Executed'],
     failStates: ['Canceled'],
@@ -32,7 +30,6 @@ const STAGES: Stage[] = [
   {
     id: 'result',
     label: 'Result',
-    icon: '',
     activeStates: ['Succeeded', 'Defeated'],
     doneStates: ['Queued', 'Executed'],
     failStates: ['Defeated'],
@@ -40,7 +37,6 @@ const STAGES: Stage[] = [
   {
     id: 'queued',
     label: 'Queued',
-    icon: '',
     activeStates: ['Queued'],
     doneStates: ['Executed'],
     failStates: ['Expired'],
@@ -48,7 +44,6 @@ const STAGES: Stage[] = [
   {
     id: 'executed',
     label: 'Executed',
-    icon: '',
     activeStates: ['Executed'],
     doneStates: [],
   },

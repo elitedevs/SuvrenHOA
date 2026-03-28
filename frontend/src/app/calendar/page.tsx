@@ -6,13 +6,13 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const EVENT_TYPES = [
-  { id: 'community', label: 'Community', icon: '', color: 'gold' },
-  { id: 'board-meeting', label: 'Board Meeting', icon: '', color: 'blue' },
-  { id: 'committee', label: 'Committee', icon: '', color: 'cyan' },
-  { id: 'deadline', label: 'Deadline', icon: '', color: 'red' },
-  { id: 'holiday', label: 'Holiday', icon: '', color: 'green' },
-  { id: 'social', label: 'Social', icon: '', color: 'amber' },
-  { id: 'maintenance', label: 'Maintenance', icon: '', color: 'orange' },
+  { id: 'community', label: 'Community', color: 'gold' },
+  { id: 'board-meeting', label: 'Board Meeting', color: 'blue' },
+  { id: 'committee', label: 'Committee', color: 'cyan' },
+  { id: 'deadline', label: 'Deadline', color: 'red' },
+  { id: 'holiday', label: 'Holiday', color: 'green' },
+  { id: 'social', label: 'Social', color: 'amber' },
+  { id: 'maintenance', label: 'Maintenance', color: 'orange' },
 ];
 
 export default function CalendarPage() {
@@ -149,7 +149,7 @@ function EventCard({ event, walletAddress }: { event: any; walletAddress?: strin
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-sm">{type.icon}</span>
+              
               <h4 className="font-semibold text-sm">{event.title}</h4>
             </div>
             <div className="flex items-center gap-3 text-[11px] text-gray-500 mb-2">

@@ -2,7 +2,7 @@
 
 interface Template {
   id: string;
-  icon: string;
+  icon?: string;
   name: string;
   category: number;  // 0=Routine, 1=Financial, 2=Governance, 3=Constitutional
   categoryLabel: string;
@@ -15,7 +15,6 @@ interface Template {
 const TEMPLATES: Template[] = [
   {
     id: 'budget_amendment',
-    icon: '',
     name: 'Budget Amendment',
     category: 1,
     categoryLabel: 'Financial',
@@ -41,7 +40,6 @@ const TEMPLATES: Template[] = [
   },
   {
     id: 'rule_change',
-    icon: '',
     name: 'Rule Change',
     category: 2,
     categoryLabel: 'Governance',
@@ -67,7 +65,6 @@ const TEMPLATES: Template[] = [
   },
   {
     id: 'capital_improvement',
-    icon: '',
     name: 'Capital Improvement',
     category: 1,
     categoryLabel: 'Financial',
@@ -99,7 +96,6 @@ const TEMPLATES: Template[] = [
   },
   {
     id: 'emergency_resolution',
-    icon: '',
     name: 'Emergency Resolution',
     category: 0,
     categoryLabel: 'Routine',
@@ -123,7 +119,6 @@ The board will report all expenditures to residents within [X] days of action.`,
   },
   {
     id: 'board_election',
-    icon: '',
     name: 'Board Election',
     category: 2,
     categoryLabel: 'Governance',

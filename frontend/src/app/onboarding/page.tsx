@@ -16,8 +16,8 @@ import {
 function Confetti() {
   const pieces = Array.from({ length: 60 }, (_, i) => i);
   const colors = [
-    '#c9a96e', '#e8d5a3', '#b8942e', '#22c55e', '#f59e0b',
-    '#ec4899', '#06b6d4', '#f97316',
+    '#c9a96e', '#C4B08A', '#B09B71', '#2A5D4F', '#B09B71',
+    'rgba(176,155,113,0.6)', '#5A9E8F', '#B09B71',
   ];
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden z-50">
@@ -780,7 +780,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
             className="h-full rounded-full transition-all duration-500"
             style={{
               width: `${pct}%`,
-              background: pct === 100 ? '#22c55e' : 'linear-gradient(90deg, #b8942e, #c9a96e)',
+              background: pct === 100 ? '#2A5D4F' : 'linear-gradient(90deg, #b8942e, #c9a96e)',
             }}
           />
         </div>

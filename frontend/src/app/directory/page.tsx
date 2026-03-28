@@ -4,14 +4,6 @@ import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery } from '@tanstack/react-query';
 
-
-
-
-
-
-
-
-
 const COMMUNITY_INFO = {
   name: 'Faircroft HOA',
   location: 'Raleigh, NC',
@@ -105,7 +97,7 @@ export default function DirectoryPage() {
         {COMMITTEES.map((committee: any) => (
           <div key={committee.name} className="glass-card rounded-md hover-lift p-5">
             <div className="flex items-center gap-3 mb-3">
-              <span className="text-2xl">{committee.icon}</span>
+              <span className="text-2xl"></span>
               <div>
                 <h3 className="font-semibold text-sm">{committee.name}</h3>
                 <p className="text-xs text-gray-400">Chair: {committee.chair}</p>

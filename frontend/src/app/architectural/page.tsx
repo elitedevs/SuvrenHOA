@@ -7,19 +7,19 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useProperty } from '@/hooks/useProperty';
 
 const MOD_TYPES = [
-  { id: 'paint', label: 'Exterior Paint', icon: '' },
-  { id: 'fence', label: 'Fence', icon: '' },
-  { id: 'deck', label: 'Deck/Patio', icon: '' },
-  { id: 'landscaping', label: 'Landscaping', icon: '' },
-  { id: 'roof', label: 'Roof', icon: '' },
-  { id: 'siding', label: 'Siding', icon: '' },
-  { id: 'addition', label: 'Addition', icon: '' },
-  { id: 'shed', label: 'Shed/Storage', icon: '' },
-  { id: 'solar', label: 'Solar Panels', icon: '' },
-  { id: 'lighting', label: 'Exterior Lighting', icon: '' },
-  { id: 'driveway', label: 'Driveway', icon: '' },
-  { id: 'mailbox', label: 'Mailbox', icon: '' },
-  { id: 'other', label: 'Other', icon: '' },
+  { id: 'paint', label: 'Exterior Paint' },
+  { id: 'fence', label: 'Fence' },
+  { id: 'deck', label: 'Deck/Patio' },
+  { id: 'landscaping', label: 'Landscaping' },
+  { id: 'roof', label: 'Roof' },
+  { id: 'siding', label: 'Siding' },
+  { id: 'addition', label: 'Addition' },
+  { id: 'shed', label: 'Shed/Storage' },
+  { id: 'solar', label: 'Solar Panels' },
+  { id: 'lighting', label: 'Exterior Lighting' },
+  { id: 'driveway', label: 'Driveway' },
+  { id: 'mailbox', label: 'Mailbox' },
+  { id: 'other', label: 'Other' },
 ];
 
 const STATUS_STYLES: Record<string, { color: string; label: string }> = {
@@ -75,11 +75,11 @@ export default function ArchitecturalPage() {
 }
 
 const PIPELINE_STAGES = [
-  { key: 'submitted', label: 'Submitted', icon: '', color: 'text-yellow-400', bg: 'bg-yellow-500/10 border-yellow-500/20' },
-  { key: 'under-review', label: 'Under Review', icon: '', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
-  { key: 'info-requested', label: 'Info Needed', icon: '', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
-  { key: 'approved', label: 'Approved', icon: '', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
-  { key: 'denied', label: 'Denied', icon: '', color: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20' },
+  { key: 'submitted', label: 'Submitted', color: 'text-yellow-400', bg: 'bg-yellow-500/10 border-yellow-500/20' },
+  { key: 'under-review', label: 'Under Review', color: 'text-blue-400', bg: 'bg-blue-500/10 border-blue-500/20' },
+  { key: 'info-requested', label: 'Info Needed', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
+  { key: 'approved', label: 'Approved', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20' },
+  { key: 'denied', label: 'Denied', color: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20' },
 ];
 
 function ReviewPipeline({ requests, setFilter }: { requests: any[]; setFilter: (f: string) => void }) {
@@ -198,7 +198,7 @@ function RequestCard({ request }: { request: any }) {
               <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${colorClass}`}>
                 {status.label}
               </span>
-              <span className="text-[10px] text-gray-500">{modType?.icon} {modType?.label}</span>
+              <span className="text-[10px] text-gray-500">{modType?.label}</span>
             </div>
             <h3 className="font-semibold text-sm mb-1">{request.title}</h3>
             <div className="flex items-center gap-3 text-[11px] text-gray-500">
@@ -308,7 +308,7 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
               className={`p-2.5 rounded-md text-[11px] font-medium transition-all flex flex-col items-center gap-1 ${
                 modType === m.id ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
               }`}>
-              <span className="text-lg">{m.icon}</span>
+              
               {m.label}
             </button>
           ))}

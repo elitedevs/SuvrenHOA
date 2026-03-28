@@ -72,15 +72,14 @@ export default function VehiclesPage() {
           <p className="text-[11px] uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Community Vehicle Overview</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
             {[
-              { type: 'car', label: 'Cars', icon: '', color: 'blue' },
-              { type: 'truck', label: 'Trucks', icon: '', color: 'amber' },
-              { type: 'motorcycle', label: 'Motorcycles', icon: '', color: 'purple' },
-              { type: 'other', label: 'Other', icon: '', color: 'gray' },
-            ].map(({ type, label, icon, color }) => {
+              { type: 'car', label: 'Cars', color: 'blue' },
+              { type: 'truck', label: 'Trucks', color: 'amber' },
+              { type: 'motorcycle', label: 'Motorcycles', color: 'purple' },
+              { type: 'other', label: 'Other', color: 'gray' },
+            ].map(({ type, label }) => {
               const count = residentVehicles.filter((v: any) => (v.vehicle_type || 'car') === type).length;
               return (
                 <div key={type} className="rounded-md bg-gray-800/40 border border-gray-700/40 p-3 text-center">
-                  <p className="text-xl mb-1">{icon}</p>
                   <p className="text-lg font-bold text-[#c9a96e]">{count}</p>
                   <p className="text-[10px] text-gray-500">{label}</p>
                 </div>

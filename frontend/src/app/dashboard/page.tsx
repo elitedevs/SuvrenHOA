@@ -290,7 +290,6 @@ function PropertyDashboard() {
         </div>
       </div>
 
-
       {/* Property Insights */}
       <PropertyInsights />
 
@@ -331,18 +330,17 @@ function PropertyDashboard() {
         <h2 className="text-lg font-bold mb-4 text-gray-200">Quick Actions</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { href: '/messages', icon: '', label: 'Messages', color: 'gold' },
-            { href: '/proposals', icon: '', label: 'Proposals', color: 'blue' },
-            { href: '/treasury', icon: '', label: 'Treasury', color: 'green' },
-            { href: '/documents', icon: '', label: 'Documents', color: 'amber' },
-            { href: '/dues', icon: '', label: 'Pay Dues', color: 'gold' },
-          ].map(({ href, icon, label }) => (
+            { href: '/messages', label: 'Messages', color: 'gold' },
+            { href: '/proposals', label: 'Proposals', color: 'blue' },
+            { href: '/treasury', label: 'Treasury', color: 'green' },
+            { href: '/documents', label: 'Documents', color: 'amber' },
+            { href: '/dues', label: 'Pay Dues', color: 'gold' },
+          ].map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               className="glass-card rounded-md p-4 text-center group min-h-[80px] flex flex-col items-center justify-center gap-2 hover:border-[#c9a96e]/25 relative"
             >
-              <span className="text-2xl group-hover:scale-110 transition-transform duration-200">{icon}</span>
               <p className="text-sm font-semibold text-gray-300 group-hover:text-[#e8d5a3] transition-colors duration-200">{label}</p>
               {href === '/messages' && totalUnread > 0 && (
                 <span className="absolute top-2 right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-[#c9a96e] text-white text-[10px] font-bold flex items-center justify-center">

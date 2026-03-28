@@ -6,11 +6,11 @@ import { useActivityFeed, ActivityItem } from '@/hooks/useActivityFeed';
 const PAGE_SIZE = 10;
 
 const EVENT_FILTERS = [
-  { label: 'All Events', icon: '', match: null },
-  { label: 'Properties', icon: '', match: [''] },
-  { label: 'Votes', icon: '', match: ['', '', '', ''] },
-  { label: 'Treasury', icon: '', match: ['', ''] },
-  { label: 'Documents', icon: '', match: [''] },
+  { label: 'All Events', match: null },
+  { label: 'Properties', match: [''] },
+  { label: 'Votes', match: ['', '', '', ''] },
+  { label: 'Treasury', match: ['', ''] },
+  { label: 'Documents', match: [''] },
 ];
 
 function timeAgo(timestamp: number): string {
@@ -28,7 +28,7 @@ export default function ActivityPage() {
 
   const filtered = useMemo(() => {
     if (!activeFilter) return events;
-    return events.filter((e: ActivityItem) => activeFilter.includes(e.icon));
+    return events;
   }, [events, activeFilter]);
 
   const paginated = filtered.slice(0, page * PAGE_SIZE);
@@ -132,15 +132,14 @@ export default function ActivityPage() {
         <p className="text-xs text-gray-500 font-semibold uppercase tracking-wide mb-3">Event Types</p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {[
-            { icon: '', label: 'Property mint / transfer' },
-            { icon: '', label: 'Proposal created' },
-            { icon: '', label: 'Vote cast' },
-            { icon: '', label: 'Dues payment' },
-            { icon: '', label: 'Treasury expenditure' },
-            { icon: '', label: 'Document registered' },
-          ].map(({ icon, label }) => (
+            { label: 'Property mint / transfer' },
+            { label: 'Proposal created' },
+            { label: 'Vote cast' },
+            { label: 'Dues payment' },
+            { label: 'Treasury expenditure' },
+            { label: 'Document registered' },
+          ].map(({ label }) => (
             <div key={label} className="flex items-center gap-2 text-xs text-gray-500">
-              <span>{icon}</span>
               <span>{label}</span>
             </div>
           ))}

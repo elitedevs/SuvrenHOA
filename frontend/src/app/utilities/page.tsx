@@ -42,11 +42,11 @@ function generateSampleData(): UtilityMonth[] {
 }
 
 const UTIL_CONFIG = [
-  { key: 'water', label: 'Water', icon: '', color: '#3b82f6' },
-  { key: 'electric', label: 'Electric', icon: '', color: '#eab308' },
-  { key: 'gas', label: 'Gas', icon: '', color: '#f97316' },
-  { key: 'internet', label: 'Internet', icon: '', color: '#8b5cf6' },
-  { key: 'waste', label: 'Waste', icon: '', color: '#22c55e' },
+  { key: 'water', label: 'Water', color: '#6B7B90' },
+  { key: 'electric', label: 'Electric', color: '#eab308' },
+  { key: 'gas', label: 'Gas', color: '#B09B71' },
+  { key: 'internet', label: 'Internet', color: '#8b5cf6' },
+  { key: 'waste', label: 'Waste', color: '#2A5D4F' },
 ];
 
 const TOTAL_UNITS = 50;
@@ -132,7 +132,7 @@ export default function UtilitiesPage() {
                       <span className={pct > 100 ? 'text-red-400' : 'text-gray-300'}>${actual.toLocaleString()} / ${budget.toLocaleString()}</span>
                     </div>
                     <div className="h-2 rounded-full bg-gray-800">
-                      <div className="h-2 rounded-full transition-all" style={{ width: `${Math.min(pct, 100)}%`, backgroundColor: pct > 100 ? '#ef4444' : u.color }} />
+                      <div className="h-2 rounded-full transition-all" style={{ width: `${Math.min(pct, 100)}%`, backgroundColor: pct > 100 ? '#6B3A3A' : u.color }} />
                     </div>
                   </div>
                 );

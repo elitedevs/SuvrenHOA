@@ -162,8 +162,6 @@ function relativeTime(ms: number): string {
   return Math.floor(diff / 86_400_000) + ' days ago';
 }
 
-
-
 // ── Main component ────────────────────────────────────────────────────────────
 export function TransparencyDashboard() {
   const stats = usePublicStats();

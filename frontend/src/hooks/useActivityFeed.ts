@@ -15,14 +15,13 @@ import DocumentRegistryAbi from '@/config/abis/DocumentRegistry.json';
 
 export interface ActivityItem {
   id: string;           // unique key: txHash-logIndex
-  icon: string;
+  icon?: string;
   description: string;
   txHash: `0x${string}`;
   blockNumber: bigint;
   timestamp: number;    // unix seconds, estimated from block
   isNew?: boolean;      // true for first ~5s after appearing
 }
-
 
 const CHAIN_ID = 84532;
 const BLOCK_SCAN_RANGE = BigInt(2000); // ~14 hours on Base (~2s blocks)
@@ -77,7 +76,6 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const ownerStr = owner ? truncateAddr(owner) : '?';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '',
       description: `${lotNum} minted to ${ownerStr}${streetAddress ? ` — ${streetAddress}` : ''}`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -101,7 +99,6 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const toStr = to ? truncateAddr(to) : '?';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '',
       description: `Property #${tokenId} transferred from ${fromStr} to ${toStr}`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -125,7 +122,6 @@ async function fetchEvents(): Promise<ActivityItem[]> {
       : 'New Proposal';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '',
       description: `New Proposal: '${title}'`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -170,7 +166,6 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const amountStr = amount !== undefined ? usdcAmount(BigInt(amount)) : '?';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '',
       description: `$${amountStr} USDC dues paid by Lot #${tokenId} (${payerStr})`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -192,7 +187,6 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const descStr = description ? description.trim().slice(0, 50) : 'Expenditure';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '',
       description: `$${amountStr} spent: '${descStr}'`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -213,7 +207,6 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const titleStr = title ? title.slice(0, 60) : 'New Document';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '',
       description: `New document: '${titleStr}'`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,

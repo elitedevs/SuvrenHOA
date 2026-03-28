@@ -6,7 +6,7 @@ export interface Badge {
   id: string;
   name: string;
   description: string;
-  icon: string;
+  icon?: string;
   earned: boolean;
 }
 
@@ -26,35 +26,30 @@ export function useBadges(input: BadgeInput): Badge[] {
         id: 'early_adopter',
         name: 'Early Adopter',
         description: 'One of the first 10 residents to mint',
-        icon: '',
         earned: !!tokenId && tokenId <= 10,
       },
       {
         id: 'perfect_payer',
         name: 'Perfect Payer',
         description: 'All dues are current',
-        icon: '',
         earned: !!duesCurrents,
       },
       {
         id: 'active_voter',
         name: 'Active Voter',
         description: 'Voted on 3 or more governance proposals',
-        icon: '',
         earned: voteCount >= 3,
       },
       {
         id: 'community_builder',
         name: 'Community Builder',
         description: 'Sent 5 or more community messages',
-        icon: '',
         earned: messageCount >= 5,
       },
       {
         id: 'document_keeper',
         name: 'Document Keeper',
         description: 'Uploaded at least one community document',
-        icon: '',
         earned: documentCount >= 1,
       },
     ];

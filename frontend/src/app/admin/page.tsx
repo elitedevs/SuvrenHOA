@@ -332,10 +332,10 @@ function CommunityStats() {
   const { totalSupply } = useProperty();
 
   const stats = [
-    { value: totalSupply, label: 'Properties Minted', color: 'text-[#c9a96e]', icon: '' },
-    { value: 150, label: 'Max Lots', color: 'text-blue-400', icon: '' },
-    { value: totalSupply, label: 'Total Votes', color: 'text-green-400', icon: '' },
-    { value: 150 - totalSupply, label: 'Lots Remaining', color: 'text-amber-400', icon: '' },
+    { value: totalSupply, label: 'Properties Minted', color: 'text-[#c9a96e]' },
+    { value: 150, label: 'Max Lots', color: 'text-blue-400' },
+    { value: totalSupply, label: 'Total Votes', color: 'text-green-400' },
+    { value: 150 - totalSupply, label: 'Lots Remaining', color: 'text-amber-400' },
   ];
 
   // Progress bar
@@ -359,9 +359,8 @@ function CommunityStats() {
       <div className="px-8 py-7">
         {/* Stats grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-          {stats.map(({ value, label, color, icon }) => (
+          {stats.map(({ value, label, color }) => (
             <div key={label} className="glass-card rounded-md p-5 text-center">
-              <p className="text-xl mb-2">{icon}</p>
               <p className={`text-2xl font-normal ${color} mb-1`}>{value}</p>
               <p className="text-[11px] text-gray-500 font-semibold uppercase tracking-wide">{label}</p>
             </div>

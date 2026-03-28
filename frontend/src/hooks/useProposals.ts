@@ -10,11 +10,11 @@ import { getContracts } from '@/config/contracts';
 
 export type ProposalCategory = 'Routine' | 'Financial' | 'Governance' | 'Constitutional';
 
-export const CATEGORIES: { value: number; label: ProposalCategory; quorum: string; threshold: string; color: string; icon: string }[] = [
-  { value: 0, label: 'Routine', quorum: '15%', threshold: '>50%', color: 'green', icon: '' },
-  { value: 1, label: 'Financial', quorum: '33%', threshold: '>50%', color: 'blue', icon: '' },
-  { value: 2, label: 'Governance', quorum: '51%', threshold: '>50%', color: 'amber', icon: '' },
-  { value: 3, label: 'Constitutional', quorum: '67%', threshold: '>66.7%', color: 'red', icon: '' },
+export const CATEGORIES: { value: number; label: ProposalCategory; quorum: string; threshold: string; color: string; icon?: string }[] = [
+  { value: 0, label: 'Routine', quorum: '15%', threshold: '>50%', color: 'green' },
+  { value: 1, label: 'Financial', quorum: '33%', threshold: '>50%', color: 'blue' },
+  { value: 2, label: 'Governance', quorum: '51%', threshold: '>50%', color: 'amber' },
+  { value: 3, label: 'Constitutional', quorum: '67%', threshold: '>66.7%', color: 'red' },
 ];
 
 export const PROPOSAL_STATES = [

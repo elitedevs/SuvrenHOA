@@ -6,7 +6,7 @@ interface NotifPref {
   id: string;
   label: string;
   description: string;
-  icon: string;
+  icon?: string;
   urgent?: boolean;
 }
 
@@ -15,50 +15,42 @@ const PREFS: NotifPref[] = [
     id: 'emergency_alerts',
     label: 'Emergency Alerts',
     description: 'Critical community alerts, safety notices, and urgent HOA communications',
-    icon: '',
     urgent: true,
   },
   {
     id: 'proposal_updates',
     label: 'Proposal Updates',
     description: 'New proposals, voting opened/closed, and results',
-    icon: '',
   },
   {
     id: 'dues_reminders',
     label: 'Dues Reminders',
     description: 'Payment reminders, overdue notices, and confirmation receipts',
-    icon: '',
   },
   {
     id: 'community_messages',
     label: 'Community Messages',
     description: 'Direct messages and mentions from neighbors',
-    icon: '',
   },
   {
     id: 'maintenance_updates',
     label: 'Maintenance Updates',
     description: 'Status changes on your maintenance requests',
-    icon: '',
   },
   {
     id: 'announcements',
     label: 'Announcements',
     description: 'HOA board announcements and community news',
-    icon: '',
   },
   {
     id: 'violation_notices',
     label: 'Violation Notices',
     description: 'Violation reports filed against your property',
-    icon: '',
   },
   {
     id: 'meeting_reminders',
     label: 'Meeting Reminders',
     description: 'Board meeting and community event reminders',
-    icon: '',
   },
 ];
 

@@ -20,14 +20,14 @@ interface Contractor {
 }
 
 const CATEGORIES = [
-  { id: 'all', label: 'All', icon: '' },
-  { id: 'plumbing', label: 'Plumbing', icon: '' },
-  { id: 'electrical', label: 'Electrical', icon: '' },
-  { id: 'hvac', label: 'HVAC', icon: '' },
-  { id: 'landscaping', label: 'Landscaping', icon: '' },
-  { id: 'painting', label: 'Painting', icon: '' },
-  { id: 'roofing', label: 'Roofing', icon: '' },
-  { id: 'general', label: 'General', icon: '' },
+  { id: 'all', label: 'All' },
+  { id: 'plumbing', label: 'Plumbing' },
+  { id: 'electrical', label: 'Electrical' },
+  { id: 'hvac', label: 'HVAC' },
+  { id: 'landscaping', label: 'Landscaping' },
+  { id: 'painting', label: 'Painting' },
+  { id: 'roofing', label: 'Roofing' },
+  { id: 'general', label: 'General' },
 ];
 
 const SAMPLE_CONTRACTORS: Contractor[] = [
@@ -193,7 +193,7 @@ function ContractorCard({ contractor: c }: { contractor: Contractor }) {
                 </span>
               )}
             </div>
-            <p className="text-xs text-gray-400">{cat?.icon} {c.specialty}</p>
+            <p className="text-xs text-gray-400">{c.specialty}</p>
           </div>
           <span className="text-[10px] px-2 py-1 rounded-lg bg-gray-800/50 text-gray-500 capitalize shrink-0">{c.category}</span>
         </div>
