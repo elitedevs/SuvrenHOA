@@ -996,3 +996,16 @@ main::before {
   pointer-events: none;
   z-index: 0;
 }
+
+/* ── Vote bar + solid color overrides ─────────────────────────────────────── */
+html.dark .bg-green-500 { background: #2A5D4F !important; }
+html.dark .bg-green-600 { background: #1F4A3D !important; }
+html.dark .bg-red-500 { background: #6B3A3A !important; }
+html.dark .bg-red-600 { background: #5A2E2E !important; }
+html.dark .bg-blue-500 { background: #6B7B90 !important; }
+html.dark .bg-blue-600 { background: #5A6A7E !important; }
+html.dark .bg-amber-500 { background: #B09B71 !important; }
+html.dark .bg-yellow-500 { background: #B09B71 !important; }
+html.dark .bg-emerald-500 { background: #2A5D4F !important; }
+html.dark .bg-purple-500 { background: rgba(176, 155, 113, 0.6) !important; }
+html.dark .bg-cyan-500 { background: #5A9E8F !important; }

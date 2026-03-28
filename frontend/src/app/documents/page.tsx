@@ -54,7 +54,7 @@ export default function DocumentsPage() {
               onClick={() => setShowUpload(!showUpload)}
               className={`px-5 py-3 rounded-md text-sm font-bold transition-all duration-200 min-h-[44px] ${
                 showUpload
-                  ? 'bg-[#c9a96e] text-[#1a1a1a] shadow-[0_0_20px_rgba(201,169,110,0.25)]'
+                  ? 'bg-[#c9a96e] text-[#1a1a1a] shadow-sm'
                   : 'border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/10'
               }`}
             >
@@ -65,7 +65,7 @@ export default function DocumentsPage() {
             onClick={() => setVerifyMode(!verifyMode)}
             className={`px-5 py-3 rounded-md text-sm font-bold transition-all duration-200 min-h-[44px] ${
               verifyMode
-                ? 'bg-[#c9a96e] text-white shadow-[0_0_20px_rgba(201,169,110,0.25)]'
+                ? 'bg-[#c9a96e] text-white shadow-sm'
                 : 'border border-gray-700/60 text-gray-300 hover:border-[#c9a96e]/40 hover:text-white hover:bg-white/[0.03]'
             }`}
           >
@@ -334,7 +334,7 @@ function VerifyPanel({
         onDrop={onDrop}
         className={`p-14 rounded-lg border-2 border-dashed text-center transition-all duration-300 cursor-pointer ${
           dragOver
-            ? 'border-[#c9a96e] bg-[#1a1a1a]/50 shadow-[0_0_40px_rgba(201,169,110,0.2)]'
+            ? 'border-[#c9a96e] bg-[#1a1a1a]/50 shadow-sm'
             : 'drop-zone-idle border-gray-600/40 bg-gray-900/30 hover:border-[#c9a96e]/40 hover:bg-[#1a1a1a]/30'
         }`}
       >
@@ -479,7 +479,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
             onClick={() => document.getElementById('doc-file-input')?.click()}
             className={`relative p-10 rounded-lg border-2 border-dashed text-center cursor-pointer transition-all duration-300 ${
               dragOver
-                ? 'border-[#c9a96e] bg-[#c9a96e]/5 shadow-[0_0_30px_rgba(201,169,110,0.15)]'
+                ? 'border-[#c9a96e] bg-[#c9a96e]/5 shadow-sm'
                 : fileName
                 ? 'border-green-500/40 bg-green-500/5'
                 : 'border-gray-700/60 hover:border-[#c9a96e]/40 hover:bg-[#1a1a1a]/20'

@@ -25,7 +25,7 @@ const TYPE_CONFIG: Record<
     border: 'border-red-500/60',
     text: 'text-red-100',
     badge: 'bg-red-600 text-white',
-    glow: 'shadow-[0_0_20px_rgba(239,68,68,0.3)]',
+    glow: 'shadow-sm',
     pulse: true,
   },
   urgent: {
@@ -34,7 +34,7 @@ const TYPE_CONFIG: Record<
     border: 'border-orange-500/60',
     text: 'text-orange-100',
     badge: 'bg-orange-500 text-white',
-    glow: 'shadow-[0_0_20px_rgba(249,115,22,0.25)]',
+    glow: 'shadow-sm',
     pulse: false,
   },
   info: {
@@ -43,7 +43,7 @@ const TYPE_CONFIG: Record<
     border: 'border-blue-500/60',
     text: 'text-blue-100',
     badge: 'bg-blue-600 text-white',
-    glow: 'shadow-[0_0_20px_rgba(59,130,246,0.2)]',
+    glow: 'shadow-sm',
     pulse: false,
   },
 };

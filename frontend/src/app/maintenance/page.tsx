@@ -65,7 +65,7 @@ export default function MaintenancePage() {
           </div>
           <button
             onClick={() => setShowNewRequest(!showNewRequest)}
-            className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)]"
+            className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-sm"
           >
             {showNewRequest ? '← Back' : ' Report Issue'}
           </button>

@@ -54,7 +54,7 @@ function EventRow({ item, isNew }: EventRowProps) {
         'hover:bg-white/5 hover:border-[#c9a96e]/20',
         'border border-transparent',
         isNew
-          ? 'bg-[#c9a96e]/10 border-[#c9a96e]/25 shadow-[0_0_12px_rgba(201,169,110,0.12)] activity-ticker-slide-in'
+          ? 'bg-[#c9a96e]/10 border-[#c9a96e]/25 shadow-sm activity-ticker-slide-in'
           : 'activity-ticker-slide-in',
       ].join(' ')}
       style={{ animationFillMode: 'both' }}

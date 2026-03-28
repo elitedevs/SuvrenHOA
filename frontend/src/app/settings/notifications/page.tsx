@@ -183,7 +183,7 @@ export default function NotificationPrefsPage() {
 
       <button
         onClick={handleSave}
-        className="w-full py-3.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_20px_rgba(201,169,110,0.2)]"
+        className="w-full py-3.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-sm"
       >
         {saved ? ' Preferences Saved!' : 'Save Preferences'}
       </button>

@@ -271,7 +271,7 @@ export function Header() {
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-              <div className="w-8 h-8 rounded-md bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center font-bold text-sm text-white group-hover:shadow-[0_0_16px_rgba(201,169,110,0.4)] transition-all duration-300 group-hover:scale-105">
+              <div className="w-8 h-8 rounded-md bg-gradient-to-br from-[#c9a96e] to-[#b8942e] flex items-center justify-center font-bold text-sm text-white group-hover:shadow-sm transition-all duration-300 group-hover:scale-105">
                 S
               </div>
               <span className="text-[15px] font-bold hidden sm:block tracking-tight">

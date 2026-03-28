@@ -137,13 +137,13 @@ function ProfileForm() {
               key={badge.id}
               className={`flex items-center gap-3 rounded-md p-3 transition-all ${
                 badge.earned
-                  ? 'bg-[#c9a96e]/10 border border-[#c9a96e]/30 shadow-[0_0_12px_rgba(201,169,110,0.15)]'
+                  ? 'bg-[#c9a96e]/10 border border-[#c9a96e]/30 shadow-sm'
                   : 'bg-gray-800/40 border border-gray-700/40 opacity-40'
               }`}
             >
               <div className={`w-10 h-10 rounded-md flex items-center justify-center text-xl shrink-0 ${
                 badge.earned
-                  ? 'bg-[#c9a96e]/20 shadow-[0_0_8px_rgba(201,169,110,0.3)]'
+                  ? 'bg-[#c9a96e]/20 shadow-sm'
                   : 'bg-gray-700/40'
               }`}>
                 

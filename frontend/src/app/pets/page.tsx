@@ -65,7 +65,7 @@ export default function PetsPage() {
               <p className="text-xs font-bold text-[#c9a96e] uppercase tracking-widest">Pet of the Month</p>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-3xl shadow-[0_0_16px_rgba(201,169,110,0.2)]">
+              <div className="w-16 h-16 rounded-lg bg-[#c9a96e]/10 border border-[#c9a96e]/25 flex items-center justify-center text-3xl shadow-sm">
                 {SPECIES_ICONS[potm.species] || ''}
               </div>
               <div>

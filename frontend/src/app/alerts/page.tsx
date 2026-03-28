@@ -33,14 +33,14 @@ const TYPE_STYLE: Record<
     border: 'border-red-500/40',
     text: 'text-red-300',
     badge: 'bg-red-600/20 text-red-300 border border-red-500/30',
-    glow: 'shadow-[0_0_20px_rgba(239,68,68,0.15)]',
+    glow: 'shadow-sm',
     icon: <AlertTriangle className="w-5 h-5" />,
   },
   urgent: {
     border: 'border-orange-500/40',
     text: 'text-orange-300',
     badge: 'bg-orange-600/20 text-orange-300 border border-orange-500/30',
-    glow: 'shadow-[0_0_20px_rgba(249,115,22,0.15)]',
+    glow: 'shadow-sm',
     icon: <AlertCircle className="w-5 h-5" />,
   },
   info: {

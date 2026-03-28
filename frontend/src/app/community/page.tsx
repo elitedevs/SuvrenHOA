@@ -51,7 +51,7 @@ export default function CommunityPage() {
         </div>
         <button
           onClick={() => setShowNewPost(!showNewPost)}
-          className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)] shrink-0"
+          className="px-5 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-medium transition-all hover:shadow-sm shrink-0"
         >
           {showNewPost ? '← Back' : ' New Post'}
         </button>
@@ -248,7 +248,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
               { onSuccess: () => onClose() }
             );
           }}
-          className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)]"
+          className="flex-1 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all hover:shadow-sm"
         >
           {createPost.isPending ? ' Posting...' : 'Post to Community'}
         </button>

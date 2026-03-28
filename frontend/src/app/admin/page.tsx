@@ -158,7 +158,7 @@ function MintPropertyCard() {
             <button
               onClick={handleMint}
               disabled={isPending || isConfirming || !owner || !lotNumber || !streetAddress}
-              className="w-full py-4 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(201,169,110,0.12)] hover:shadow-[0_0_28px_rgba(201,169,110,0.28)] min-h-[52px]"
+              className="w-full py-4 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-sm hover:shadow-sm min-h-[52px]"
             >
               {isPending ? ' Confirm in Wallet...' :
                isConfirming ? ' Minting...' :
@@ -315,7 +315,7 @@ function RegisterDocumentCard() {
             <button
               onClick={handleRegister}
               disabled={isPending || isConfirming || !fileHash || !arweaveTxId || !title}
-              className="w-full py-4 rounded-md bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_20px_rgba(59,130,246,0.15)] hover:shadow-[0_0_28px_rgba(59,130,246,0.25)] min-h-[52px]"
+              className="w-full py-4 rounded-md bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-sm hover:shadow-sm min-h-[52px]"
             >
               {isPending ? ' Confirm in Wallet...' :
                isConfirming ? ' Registering...' :

@@ -94,7 +94,7 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
                   className={`
                     relative w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all
                     ${isActive
-                      ? 'border-[#c9a96e] bg-[#c9a96e]/15 text-[#e8d5a3] shadow-[0_0_12px_rgba(201,169,110,0.4)] animate-pulse-gold'
+                      ? 'border-[#c9a96e] bg-[#c9a96e]/15 text-[#e8d5a3] shadow-sm animate-pulse-gold'
                       : isDone
                       ? 'border-[#c9a96e]/60 bg-[#c9a96e]/10 text-[#c9a96e]'
                       : isFail

@@ -94,7 +94,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
 
       {/* Tour card */}
       <div
-        className="relative z-10 w-full max-w-sm rounded-lg border border-[#c9a96e]/40 bg-[#0d0d0d] shadow-[0_0_60px_rgba(201,169,110,0.15)] overflow-hidden"
+        className="relative z-10 w-full max-w-sm rounded-lg border border-[#c9a96e]/40 bg-[#0d0d0d] shadow-sm overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* Gold accent bar */}
@@ -153,7 +153,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
 
             <button
               onClick={next}
-              className="flex-1 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-[0_0_16px_rgba(201,169,110,0.25)]"
+              className="flex-1 py-2.5 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] text-sm font-bold transition-all shadow-sm"
             >
               {step < STEPS.length - 1 ? 'Next →' : "Let's Go! "}
             </button>

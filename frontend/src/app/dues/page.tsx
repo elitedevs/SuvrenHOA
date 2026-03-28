@@ -185,7 +185,7 @@ function DuesPanel() {
                       isDone
                         ? 'bg-green-500/20 border border-green-500/40 text-green-400'
                         : isActive
-                        ? 'bg-[#c9a96e]/20 border border-[#c9a96e]/50 text-[#e8d5a3] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
+                        ? 'bg-[#c9a96e]/20 border border-[#c9a96e]/50 text-[#e8d5a3] shadow-sm'
                         : 'bg-gray-800/60 border border-gray-700/40 text-gray-600'
                     }`}>
                       {isDone ? '' : i + 1}
@@ -280,7 +280,7 @@ function DuesPanel() {
                     onClick={() => setSelectedQuarters(quarters)}
                     className={`w-full p-5 rounded-lg border text-left flex items-center gap-4 transition-all duration-200 min-h-[72px] ${
                       isSelected
-                        ? 'border-[#c9a96e]/60 bg-[#1a1a1a]/50 shadow-[0_0_16px_rgba(201,169,110,0.12)]'
+                        ? 'border-[#c9a96e]/60 bg-[#1a1a1a]/50 shadow-sm'
                         : recommended
                         ? 'border-[#c9a96e]/20 bg-[#1a1a1a]/30 hover:border-[#c9a96e]/40'
                         : 'border-gray-700/60 bg-gray-900/30 hover:border-gray-600/60'
@@ -328,7 +328,7 @@ function DuesPanel() {
           <button
             onClick={handlePay}
             disabled={!selectedQuarters || isApproving || isPaying}
-            className="w-full py-4 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-base font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] active:scale-[0.98] min-h-[56px]"
+            className="w-full py-4 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-base font-bold transition-all duration-200 shadow-sm hover:shadow-sm active:scale-[0.98] min-h-[56px]"
           >
             {isApproving ? ' Approving USDC...' :
              isPaying ? ' Processing Payment...' :

@@ -54,7 +54,7 @@ export default function ProposalsPage() {
         {isConnected && (
           <button
             onClick={() => setShowCreate(!showCreate)}
-            className="px-5 py-3 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] active:scale-95 text-sm font-bold transition-all duration-200 shrink-0 shadow-[0_0_20px_rgba(201,169,110,0.25)] min-h-[44px]"
+            className="px-5 py-3 rounded-md bg-amber-500 hover:bg-amber-400 text-[#1a1a1a] active:scale-95 text-sm font-bold transition-all duration-200 shrink-0 shadow-sm min-h-[44px]"
           >
             {showCreate ? '← Back to Proposals' : '+ New Proposal'}
           </button>
@@ -287,11 +287,11 @@ function EmptyState() {
           <div className="absolute left-[10%] right-[10%] top-4 h-px bg-gradient-to-r from-[#c9a96e]/20 via-[#c9a96e]/40 to-[#c9a96e]/20" />
           {['Pending', 'Active', 'Succeeded', 'Queued', 'Executed'].map((s, i) => {
             const stateColorMap: Record<string, string> = {
-              Pending: 'text-gray-400 border-gray-600/40 bg-gray-500/10',
-              Active: 'text-blue-400 border-blue-500/40 bg-blue-500/10',
-              Succeeded: 'text-green-400 border-green-500/40 bg-green-500/10',
-              Queued: 'text-amber-400 border-amber-500/40 bg-amber-500/10',
-              Executed: 'text-[#c9a96e] border-[#c9a96e]/40 bg-[#c9a96e]/10',
+              Pending: 'text-amber-400 border-amber-500/20 bg-amber-500/10 opacity-40',
+              Active: 'text-amber-400 border-amber-500/20 bg-amber-500/10 opacity-60',
+              Succeeded: 'text-amber-400 border-amber-500/20 bg-amber-500/10 opacity-80',
+              Queued: 'text-amber-400 border-amber-500/20 bg-amber-500/10 opacity-90',
+              Executed: 'text-amber-400 border-amber-500/20 bg-amber-500/10',
             };
             return (
               <div key={s} className="flex flex-col items-center gap-2 relative z-10">
@@ -502,7 +502,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
       <button
         onClick={handleSubmit}
         disabled={isPending || isConfirming || !title.trim() || !description.trim()}
-        className="w-full py-4 rounded-md bg-[#c9a96e] hover:bg-[#e8d5a3] text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-[0_0_24px_rgba(201,169,110,0.2)] hover:shadow-[0_0_32px_rgba(201,169,110,0.35)] min-h-[52px]"
+        className="w-full py-4 rounded-md bg-amber-500 hover:bg-amber-400 text-[#1a1a1a] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold transition-all duration-200 shadow-sm min-h-[52px]"
       >
         {isPending ? ' Confirm in Wallet...' :
          isConfirming ? ' Submitting...' :
