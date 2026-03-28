@@ -15,14 +15,15 @@ export function useConnectSound() {
   useEffect(() => {
     if (isConnected && !wasConnected.current) {
       wasConnected.current = true;
-      playChime();
-    } else if (!isConnected) {
+      playChime('connect');
+    } else if (!isConnected && wasConnected.current) {
       wasConnected.current = false;
+      playChime('disconnect');
     }
   }, [isConnected]);
 }
 
-function playChime() {
+function playChime(type: 'connect' | 'disconnect') {
   try {
     const ctx = new AudioContext();
     const osc = ctx.createOscillator();
@@ -31,13 +32,20 @@ function playChime() {
     osc.connect(gain);
     gain.connect(ctx.destination);
 
-    // Soft sine tone — A5 (880Hz), barely audible
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(880, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.08);
 
-    // Volume: 12% — whisper, not announcement
-    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+    if (type === 'connect') {
+      // Ascending — arrival: 880Hz → 1320Hz
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1320, ctx.currentTime + 0.08);
+    } else {
+      // Descending — departure: 660Hz → 440Hz
+      osc.frequency.setValueAtTime(660, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.12);
+    }
+
+    // Volume: 10% — whisper
+    gain.gain.setValueAtTime(0.10, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
 
     osc.start(ctx.currentTime);

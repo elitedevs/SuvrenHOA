@@ -494,7 +494,7 @@ select:focus-visible {
 .progress-bar-fill {
   height: 100%;
   border-radius: 100px;
-  transition: width 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: width 400ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 /* ── Step connector ───────────────────────────────────────────────────────── */
@@ -1255,4 +1255,117 @@ h3 { letter-spacing: -0.01em !important; }
 .page-header.compressed .page-label {
   opacity: 0;
   max-height: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Path to 60 — The last details
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tabular numerals — numbers align like a ledger ──────────────────────── */
+.font-heading,
+[style*="font-heading"],
+[style*="Georgia"],
+.text-2xl, .text-3xl, .text-4xl, .text-5xl,
+.stat-number,
+[class*="text-[2"] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Prose max-width — optimal reading length ────────────────────────────── */
+.page-subtitle,
+main p[style*="text-secondary"],
+main p[style*="text-muted"] {
+  max-width: 65ch;
+}
+
+/* ── Formalized shadow scale — 4 tiers, nothing else ─────────────────────── */
+/* Level 0: flat surface — no shadow */
+/* Level 1: card — already in .glass-card */
+/* Level 2: card hover — already in .glass-card:hover */
+/* Level 3: modal/overlay */
+.shadow-elevated {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ── Sidebar icons — 1.25 stroke for ultimate refinement ─────────────────── */
+aside svg {
+  stroke-width: 1.25 !important;
+  opacity: 0.3 !important;
+}
+
+/* ── Light mode seasonal atmosphere ──────────────────────────────────────── */
+html.light [data-season="spring"] main::before {
+  background: radial-gradient(ellipse at top center, rgba(180, 120, 100, 0.025), transparent 70%) !important;
+}
+html.light [data-season="summer"] main::before {
+  background: radial-gradient(ellipse at top center, rgba(176, 155, 113, 0.025), transparent 70%) !important;
+}
+html.light [data-season="autumn"] main::before {
+  background: radial-gradient(ellipse at top center, rgba(160, 110, 60, 0.025), transparent 70%) !important;
+}
+html.light [data-season="winter"] main::before {
+  background: radial-gradient(ellipse at top center, rgba(120, 140, 170, 0.025), transparent 70%) !important;
+}
+
+/* ── Print — private banker's quarterly letter ───────────────────────────── */
+@media print {
+  body {
+    background: white !important;
+    color: #1A1A1E !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Georgia', serif !important;
+    color: #1A1A1E !important;
+    page-break-after: avoid;
+  }
+
+  .glass-card {
+    background: #FAFAF8 !important;
+    border: none !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  /* Brass rule at top of printed pages */
+  main::before {
+    content: '' !important;
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: 2px !important;
+    background: #B09B71 !important;
+    margin-bottom: 24px !important;
+  }
+
+  main::after {
+    content: 'SuvrenHOA · Faircroft — Est. 2025' !important;
+    display: block !important;
+    text-align: center !important;
+    font-size: 9pt !important;
+    color: #999 !important;
+    font-style: italic !important;
+    margin-top: 48px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid #ddd !important;
+  }
+
+  .progress-bar-track,
+  .progress-bar-fill {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+}
+
+/* ── prefers-color-scheme auto detection ──────────────────────────────────── */
+@media (prefers-color-scheme: light) {
+  html:not(.dark):not(.light) {
+    color-scheme: light;
+  }
+  html:not(.dark):not(.light) body {
+    background: #FAF8F5;
+    color: #1A1A1E;
+  }
 }
