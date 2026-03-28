@@ -971,3 +971,28 @@ a:hover {
     display: none !important;
   }
 }
+
+/* ── Border-left color overrides — all map to palette ─────────────────────── */
+html.dark .border-l-green-500\/50 { border-left-color: rgba(42, 93, 79, 0.4) !important; }
+html.dark .border-l-blue-500\/50 { border-left-color: rgba(139, 155, 176, 0.35) !important; }
+html.dark .border-l-red-500\/50 { border-left-color: rgba(107, 58, 58, 0.4) !important; }
+html.dark .border-l-red-500\/40 { border-left-color: rgba(107, 58, 58, 0.35) !important; }
+html.dark .border-l-amber-500\/50 { border-left-color: rgba(176, 155, 113, 0.35) !important; }
+html.dark .border-l-amber-500\/40 { border-left-color: rgba(176, 155, 113, 0.3) !important; }
+html.dark .border-l-cyan-500\/50 { border-left-color: rgba(42, 93, 79, 0.35) !important; }
+html.dark .border-l-purple-500\/50 { border-left-color: rgba(176, 155, 113, 0.3) !important; }
+html.dark .border-l-gray-500\/50 { border-left-color: rgba(245, 240, 232, 0.06) !important; }
+
+/* ── Landing-to-app warm continuity — first-load warmth ───────────────────── */
+/* A barely perceptible warm wash at the top of every page */
+main::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background: radial-gradient(ellipse at top center, rgba(176, 155, 113, 0.015), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
