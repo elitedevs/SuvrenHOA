@@ -9,6 +9,7 @@ import { GlobalFeatures } from '@/components/GlobalFeatures';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { SeasonalBanner } from '@/components/SeasonalBanner';
 import { SeasonalTheme } from '@/components/SeasonalTheme';
+import { ConnectChime } from '@/components/ConnectChime';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <AIChatWidget />
           <GlobalFeatures />
           <SeasonalTheme />
+          <ConnectChime />
         </Providers>
       </body>
     </html>

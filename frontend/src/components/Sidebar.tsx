@@ -153,8 +153,16 @@ export function Sidebar() {
       <div className="flex items-center justify-between px-4 h-14 mb-4">
         {!collapsed && (
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
-              <span className="text-[11px] font-heading" style={{ fontFamily: 'var(--font-heading), Georgia, serif', color: 'var(--accent-brass)' }}>S</span>
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{
+                background: 'radial-gradient(circle at 40% 35%, rgba(196, 176, 138, 0.15), rgba(176, 155, 113, 0.06))',
+                border: '1px solid rgba(176, 155, 113, 0.12)',
+              }}>
+              <span className="text-[12px]" style={{
+                fontFamily: 'var(--font-heading), Georgia, serif',
+                background: 'radial-gradient(circle at 50% 40%, #C4B08A, #B09B71)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}>S</span>
             </div>
             <span
               className="text-[14px] tracking-tight"

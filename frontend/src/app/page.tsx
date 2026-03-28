@@ -11,6 +11,7 @@ import { ActivityTicker } from '@/components/ActivityTicker';
 import { HealthScoreWidget } from '@/components/HealthScoreWidget';
 import { DuesReminder } from '@/components/DuesReminder';
 import { useAlerts } from '@/hooks/useAlerts';
+import { useScrollCompression } from '@/hooks/useScrollCompression';
 
 export default function Home() {
   const { isConnected } = useAccount();
@@ -137,6 +138,7 @@ function Dashboard() {
   const { activeProposalCount } = useGovernorSettings();
   const { documentCount } = useDocuments();
 
+  const compressed = useScrollCompression(80);
   const hour = new Date().getHours();
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
 
@@ -145,9 +147,9 @@ function Dashboard() {
       <div className="absolute inset-0 bg-radial-glow pointer-events-none" />
 
       <div className="relative max-w-[960px] mx-auto py-8 sm:py-12 page-enter">
-        {/* Greeting — prose style, first name only feel */}
-        <div className="mb-10">
-          <h1 className="text-3xl sm:text-4xl tracking-tight" style={{ fontWeight: 400 }}>
+        {/* Greeting — scroll-aware compression */}
+        <div className={`page-header ${compressed ? "compressed" : ""} mb-10`}>
+          <h1 className="text-3xl sm:text-4xl tracking-tight page-title" style={{ fontWeight: 400 }}>
             {hasProperty ? (
               <>
                 {greeting}, <span style={{ color: 'var(--accent-brass)' }}>Lot #{tokenId}</span>
@@ -160,7 +162,7 @@ function Dashboard() {
           </h1>
           {/* Prose summary — one sentence replaces multiple stat cards */}
           {hasProperty && propertyInfo && (
-            <p className="text-[14px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-[14px] mt-3 leading-relaxed page-subtitle" style={{ color: 'var(--text-secondary)' }}>
               {propertyInfo.streetAddress}
               {propertyInfo.squareFootage ? ` — ${Number(propertyInfo.squareFootage).toLocaleString()} sq ft` : ''}.
               {votes !== undefined && totalSupply !== undefined && (
