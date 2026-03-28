@@ -211,7 +211,7 @@ export default function TreasuryPage() {
 
       {/* Transparency banner */}
       <div className="mt-8 glass-card rounded-lg p-6 page-enter page-enter-delay-4" style={{ borderLeft: '2px solid rgba(176, 155, 113, 0.25)' }}>
-        <h3 className="text-[14px] mb-1" style={{ fontWeight: 400, color: 'var(--accent-brass)' }}>Transparency</h3>
+        <h3 className="text-[18px] mb-2" style={{ fontFamily: "var(--font-heading), Georgia, serif", fontStyle: "italic", fontWeight: 400, color: "var(--accent-brass)" }}>Transparency</h3>
         <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
           Every dollar in and out is permanently recorded. Anyone can verify these numbers at any time — they cannot be altered.
         </p>
@@ -234,7 +234,7 @@ function SpendingBreakdown() {
 
       <div className="space-y-4">
         {SPENDING_CATEGORIES.map(({ label, pct, amount }, i) => {
-          const opacities = [1, 0.8, 0.6, 0.4];
+          const opacities = [0.8, 0.6, 0.4, 0.25];
           return (
             <div key={label}>
               <div className="flex justify-between text-[13px] mb-1.5">

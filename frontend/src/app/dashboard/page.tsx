@@ -30,7 +30,7 @@ function PropertyInsights() {
   }).join(' ');
 
   return (
-    <div className="glass-card rounded-lg p-6 mb-6 page-enter" data-section="property page-enter-delay-3">
+    <div className="glass-card rounded-lg p-6 mb-6 page-enter" data-section="property">
       <p className="text-[11px] uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Property Insights</p>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         <div>

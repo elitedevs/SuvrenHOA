@@ -1192,3 +1192,31 @@ html.light aside {
 html.light [data-rk] * {
   color: #1A1A1E !important;
 }
+
+/* ── Tooltip styling — on palette ─────────────────────────────────────────── */
+[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1A1A1E;
+  color: rgba(245, 240, 232, 0.7);
+  font-size: 12px;
+  font-family: var(--font-sans), sans-serif;
+  padding: 6px 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* ── Letter-spacing system complete ───────────────────────────────────────── */
+h2 { letter-spacing: -0.02em !important; }
+h3 { letter-spacing: -0.01em !important; }
+
+/* ── Cursor audit — pointer only on genuinely interactive ─────────────────── */
+.glass-card:not(a):not(button):not([role="button"]):not([onclick]) {
+  cursor: default !important;
+}

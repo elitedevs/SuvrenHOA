@@ -167,7 +167,7 @@ function Dashboard() {
                 <> You hold {Number(votes)} of {totalSupply} votes.</>
               )}
               {quartersOwed > 0 ? (
-                <span style={{ color: '#6B3A3A' }}> {quartersOwed} quarter{quartersOwed > 1 ? 's' : ''} past due.</span>
+                <span style={{ color: '#9C6262' }}> {quartersOwed} quarter{quartersOwed > 1 ? 's' : ''} past due.</span>
               ) : isCurrent ? (
                 <span style={{ color: '#2A5D4F' }}> Dues current.</span>
               ) : null}
