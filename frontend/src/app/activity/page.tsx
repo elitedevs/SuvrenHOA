@@ -38,7 +38,7 @@ export default function ActivityPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 page-enter">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">On-Chain Events</p>
+        <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>On-Chain Events</p>
         <h1 className="text-3xl font-normal tracking-tight">Activity Log</h1>
         <p className="text-sm text-gray-400 mt-2">
           Unified feed of all community events — newest first
@@ -62,7 +62,7 @@ export default function ActivityPage() {
                   : 'text-gray-400 border-gray-700/60 hover:border-gray-600/60 hover:text-gray-300'
               }`}
             >
-              {f.icon} {f.label}
+              {f.label}
             </button>
           );
         })}
@@ -100,7 +100,7 @@ export default function ActivityPage() {
               style={{ animationDelay: `${i * 30}ms` }}
             >
               <div className="w-10 h-10 rounded-md bg-gray-800/60 flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition-transform">
-                {event.icon}
+                
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-gray-200 leading-snug">{event.description}</p>

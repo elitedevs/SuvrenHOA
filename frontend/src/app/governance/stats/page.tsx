@@ -35,7 +35,7 @@ export default function GovernanceStatsPage() {
         <Link href="/proposals" className="text-gray-500 hover:text-[#c9a96e] text-sm transition-colors">← Proposals</Link>
       </div>
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Governance</p>
+        <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Governance</p>
         <h1 className="text-3xl font-normal tracking-tight">Stats Dashboard</h1>
         <p className="text-base text-gray-400 mt-2">Aggregate metrics for community governance</p>
       </div>
@@ -51,7 +51,7 @@ export default function GovernanceStatsPage() {
           <div key={stat.label} className="glass-card rounded-lg hover-lift p-5">
             <div className="flex items-start justify-between mb-3">
               <div className="w-9 h-9 rounded-md bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex items-center justify-center text-lg">
-                {stat.icon}
+                
               </div>
             </div>
             <p className="text-2xl sm:text-3xl font-normal text-[#c9a96e]">{stat.value}</p>
@@ -63,7 +63,7 @@ export default function GovernanceStatsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Monthly Proposal Bar Chart */}
         <div className="glass-card rounded-lg p-6">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-5">Monthly Proposal Volume</p>
+          <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Monthly Proposal Volume</p>
           <div className="flex items-end gap-2 h-36">
             {MOCK_STATS.monthlyProposals.map(m => {
               const heightPct = maxBarCount > 0 ? (m.count / maxBarCount) * 100 : 0;
@@ -83,7 +83,7 @@ export default function GovernanceStatsPage() {
 
         {/* Most Active Voters */}
         <div className="glass-card rounded-lg p-6">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Most Active Voters</p>
+          <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Most Active Voters</p>
           <div className="space-y-3">
             {MOCK_STATS.mostActiveVoters.map((voter, i) => (
               <div key={voter.address} className="flex items-center gap-3">
@@ -117,7 +117,7 @@ export default function GovernanceStatsPage() {
 
       {/* Pass/Fail breakdown */}
       <div className="glass-card rounded-lg p-6">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Pass / Fail Breakdown</p>
+        <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Pass / Fail Breakdown</p>
         <div className="flex items-center gap-4 mb-3">
           <div className="flex-1 h-4 bg-gray-800 rounded-full overflow-hidden">
             <div

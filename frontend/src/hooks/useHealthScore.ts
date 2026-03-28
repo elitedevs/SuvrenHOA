@@ -191,7 +191,7 @@ export function useHealthScore(): HealthScoreData {
             duesRate < 1
               ? `${behind} ${behind === 1 ? 'property' : 'properties'} behind on dues`
               : 'All dues are current — excellent!',
-          icon: '💳',
+          icon: '',
         },
         {
           name: 'Treasury Health',
@@ -204,7 +204,7 @@ export function useHealthScore(): HealthScoreData {
               : Number(reservePct) <= 20
               ? `Increase reserve fund above 20% for bonus points (currently ${reservePct}%)`
               : 'Treasury is healthy with strong reserves!',
-          icon: '💰',
+          icon: '',
         },
         {
           name: 'Governance',
@@ -217,7 +217,7 @@ export function useHealthScore(): HealthScoreData {
               : executedProposals <= 5
               ? `Execute ${6 - executedProposals} more proposal${6 - executedProposals === 1 ? '' : 's'} for full governance score`
               : 'Governance is active — great participation!',
-          icon: '🗳️',
+          icon: '',
         },
         {
           name: 'Document Compliance',
@@ -232,7 +232,7 @@ export function useHealthScore(): HealthScoreData {
               : docCount < 16
               ? `Upload ${16 - docCount} more document${16 - docCount === 1 ? '' : 's'} for maximum score`
               : 'Document compliance is excellent!',
-          icon: '📄',
+          icon: '',
         },
         {
           name: 'Community Size',
@@ -247,7 +247,7 @@ export function useHealthScore(): HealthScoreData {
               : totalProperties < 21
               ? `Add ${21 - totalProperties} more ${21 - totalProperties === 1 ? 'property' : 'properties'} for maximum size score`
               : 'Community has reached full size score!',
-          icon: '🏠',
+          icon: '',
         },
       ];
 

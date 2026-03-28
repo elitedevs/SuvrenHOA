@@ -187,7 +187,7 @@ export function CommandPalette() {
                     selectedIndex === i ? 'bg-[#c9a96e]/10' : 'hover:bg-white/[0.03]'
                   }`}
                 >
-                  <span className="text-lg w-7 flex-shrink-0 text-center">{item.icon}</span>
+                  <span className="text-lg w-7 flex-shrink-0 text-center"></span>
                   <div className="flex-1 min-w-0">
                     <p className={`text-sm font-medium ${selectedIndex === i ? 'text-[#e8d5a3]' : 'text-[var(--text-primary)]'}`}>
                       {item.title}

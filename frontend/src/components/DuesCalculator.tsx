@@ -62,7 +62,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
     <div className="glass-card rounded-lg p-6">
       <div className="flex items-center justify-between mb-5">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Dues Calculator</p>
+          <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Dues Calculator</p>
           <h3 className="text-lg font-bold text-[var(--text-primary)]">See Your Savings</h3>
         </div>
               </div>

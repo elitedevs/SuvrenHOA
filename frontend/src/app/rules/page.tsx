@@ -184,7 +184,7 @@ export default function RulesPage() {
           {SECTIONS.map(s => (
             <a key={s.id} href={`#${s.id}`}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-800/40 text-xs text-gray-400 hover:text-[#c9a96e] hover:bg-[#c9a96e]/10 whitespace-nowrap transition-all">
-              {s.icon} {s.title}
+              {s.title}
             </a>
           ))}
         </div>

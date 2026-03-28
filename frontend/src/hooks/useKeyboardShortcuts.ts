@@ -126,5 +126,5 @@ export const KEYBOARD_SHORTCUTS = [
   { keys: 'g h', description: 'Go to Home' },
   { keys: '?', description: 'Show / Hide this help' },
   { keys: 'Esc', description: 'Close modals & overlays' },
-  { keys: '⌘ K', description: 'Open Command Palette' },
+  { keys: ' K', description: 'Open Command Palette' },
 ];

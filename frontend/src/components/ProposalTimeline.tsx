@@ -108,7 +108,7 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
                     }
                   `}
                 >
-                  {isDone ? '' : isFail && (defeated || canceled || expired) ? '' : stage.icon}
+                  
                 </div>
 
                 {/* Label */}

@@ -77,7 +77,7 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const ownerStr = owner ? truncateAddr(owner) : '?';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '🏠',
+      icon: '',
       description: `${lotNum} minted to ${ownerStr}${streetAddress ? ` — ${streetAddress}` : ''}`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -101,7 +101,7 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const toStr = to ? truncateAddr(to) : '?';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '🏠',
+      icon: '',
       description: `Property #${tokenId} transferred from ${fromStr} to ${toStr}`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -125,7 +125,7 @@ async function fetchEvents(): Promise<ActivityItem[]> {
       : 'New Proposal';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '🗳️',
+      icon: '',
       description: `New Proposal: '${title}'`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -148,7 +148,7 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const reasonStr = reason && reason.trim().length > 0 ? ` — "${reason.trim().slice(0, 40)}"` : '';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: support === 1 ? '✅' : support === 0 ? '❌' : '🤷',
+      icon: support === 1 ? '' : support === 0 ? '' : '',
       description: `${voterStr} voted ${supportLabel}${reasonStr}`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -170,7 +170,7 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const amountStr = amount !== undefined ? usdcAmount(BigInt(amount)) : '?';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '💰',
+      icon: '',
       description: `$${amountStr} USDC dues paid by Lot #${tokenId} (${payerStr})`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -192,7 +192,7 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const descStr = description ? description.trim().slice(0, 50) : 'Expenditure';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '📤',
+      icon: '',
       description: `$${amountStr} spent: '${descStr}'`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,
@@ -213,7 +213,7 @@ async function fetchEvents(): Promise<ActivityItem[]> {
     const titleStr = title ? title.slice(0, 60) : 'New Document';
     items.push({
       id: `${log.transactionHash}-${log.logIndex}`,
-      icon: '📄',
+      icon: '',
       description: `New document: '${titleStr}'`,
       txHash: log.transactionHash,
       blockNumber: log.blockNumber,

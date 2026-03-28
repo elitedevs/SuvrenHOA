@@ -106,7 +106,7 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
 
   const governanceChampions = rankEntries(voteMap, (addr, score, rank) => {
     const rate = Math.min(100, Math.round((score / totalProposals) * 100));
-    if (rank === 1) return `👑 ${rate}% participation`;
+    if (rank === 1) return ` ${rate}% participation`;
     return `${rate}% participation`;
   });
 
@@ -152,8 +152,8 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
     if (!data) return undefined;
     const isFirst = data.firstBlock === earliestBlock;
     const streakStr = `Paid on time ${score} quarter${score !== 1 ? 's' : ''} in a row`;
-    if (rank === 1 && isFirst) return `🥇 First to pay! ${streakStr}`;
-    if (isFirst) return `⚡ First to pay this period`;
+    if (rank === 1 && isFirst) return ` First to pay! ${streakStr}`;
+    if (isFirst) return ` First to pay this period`;
     return streakStr;
   });
 
@@ -166,7 +166,7 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
   }
 
   const communityContributors = rankEntries(proposerMap, (addr, score, rank) => {
-    if (rank === 1) return `🏅 Top contributor`;
+    if (rank === 1) return ` Top contributor`;
     return `${score} proposal${score !== 1 ? 's' : ''} submitted`;
   });
 
@@ -187,7 +187,7 @@ async function fetchLeaderboardData(): Promise<Omit<LeaderboardData, 'isLoading'
   }
 
   const documentChampions = rankEntries(docMap, (addr, score, rank) => {
-    if (rank === 1) return `📚 Top uploader`;
+    if (rank === 1) return ` Top uploader`;
     return `${score} doc${score !== 1 ? 's' : ''} uploaded`;
   });
 

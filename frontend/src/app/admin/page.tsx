@@ -22,9 +22,9 @@ export default function AdminPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-10 page-enter">
       {/* Header */}
       <div className="mb-10">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Board Access</p>
+        <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Board Access</p>
         <h1 className="text-3xl font-normal tracking-tight">Administration</h1>
-        <p className="text-base text-gray-400 mt-2 font-medium">
+        <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
           Mint properties, manage roles, and register documents on-chain
         </p>
       </div>

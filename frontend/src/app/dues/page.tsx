@@ -41,7 +41,7 @@ function CommunityDuesStatus() {
   if (loading) {
     return (
       <div className="glass-card rounded-lg hover-lift p-6 mb-6">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">Community Dues Status</p>
+        <p className="text-[11px] uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Community Dues Status</p>
         <div className="skeleton h-4 w-full rounded-lg mb-3" />
         <div className="skeleton h-2 w-full rounded-full" />
       </div>
@@ -52,7 +52,7 @@ function CommunityDuesStatus() {
 
   return (
     <div className="glass-card rounded-lg hover-lift p-6 mb-6 page-enter page-enter-delay-1">
-      <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Community Dues Status</p>
+      <p className="text-[11px] uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Community Dues Status</p>
 
       {/* Progress bar */}
       <div className="mb-4">
@@ -157,7 +157,7 @@ function DuesPanel() {
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10 page-enter">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Payments</p>
+        <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Payments</p>
         <h1 className="text-3xl font-normal tracking-tight">Pay Dues</h1>
       </div>
 

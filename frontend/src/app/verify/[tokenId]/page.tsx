@@ -23,7 +23,7 @@ export default async function VerifyPropertyPage({ params }: Props) {
 
       {/* Property Info Card */}
       <div className="glass-card rounded-lg p-8 text-left border-l-2 border-l-[#c9a96e]/50 mb-6">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Property NFT</p>
+        <p className="text-[11px] uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Property NFT</p>
 
         <div className="space-y-4">
           <div>

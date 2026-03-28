@@ -105,14 +105,14 @@ export default function NotificationPrefsPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Settings</p>
+        <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Settings</p>
         <h1 className="text-3xl font-normal tracking-tight"> Notifications</h1>
         <p className="text-base text-gray-400 mt-2">Choose which updates you want to receive</p>
       </div>
 
       <div className="glass-card rounded-lg p-6 mb-4">
         <div className="flex items-center justify-between mb-5">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest">
+          <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
             {enabledCount} of {PREFS.length} enabled
           </p>
           <div className="flex gap-2">
@@ -154,7 +154,7 @@ export default function NotificationPrefsPage() {
                 <div className={`w-10 h-10 rounded-md flex items-center justify-center text-xl shrink-0 ${
                   prefs[pref.id] ? 'bg-[#c9a96e]/15' : 'bg-gray-700/30'
                 }`}>
-                  {pref.icon}
+                  
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">

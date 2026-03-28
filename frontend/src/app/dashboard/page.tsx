@@ -31,7 +31,7 @@ function PropertyInsights() {
 
   return (
     <div className="glass-card rounded-lg p-6 mb-6 page-enter page-enter-delay-3">
-      <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Property Insights</p>
+      <p className="text-[11px] uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Property Insights</p>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         <div>
           <p className="text-[10px] text-gray-500 mb-1">Estimated Value</p>
@@ -110,7 +110,7 @@ function PropertyDashboard() {
       <div className="max-w-[960px] mx-auto px-6 py-12 page-enter">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">My Property</p>
+            <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>My Property</p>
             <h1 className="text-3xl font-normal">Property Not Found</h1>
           </div>
         </div>
@@ -135,7 +135,7 @@ function PropertyDashboard() {
       {/* Page header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">My Property</p>
+          <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>My Property</p>
           <h1 className="text-3xl font-normal tracking-tight">
             Property Profile
           </h1>

@@ -85,7 +85,7 @@ export default function CommunityPage() {
                     : 'glass-card text-gray-400 hover:text-gray-300'
                 }`}
               >
-                <span>{cat.icon}</span>
+                <span></span>
                 {cat.label}
               </button>
             ))}
@@ -152,7 +152,7 @@ function PostCard({ post }: { post: any }) {
               cat?.color === 'yellow' ? 'text-yellow-400' :
               'text-cyan-400'
             }`}>
-              {cat?.icon} {cat?.label}
+              {cat?.label}
             </span>
             <span>Lot #{post.lot_number || 0}</span>
             <span>{timeAgo}</span>
@@ -206,7 +206,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
                   : 'glass-card text-gray-400 hover:text-gray-300'
               }`}
             >
-              {cat.icon} {cat.label}
+              {cat.label}
             </button>
           ))}
         </div>

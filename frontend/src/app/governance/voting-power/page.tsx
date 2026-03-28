@@ -79,7 +79,7 @@ export default function VotingPowerPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 page-enter">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Governance</p>
+        <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Governance</p>
         <h1 className="text-3xl font-normal tracking-tight">Voting Power</h1>
         <p className="text-sm text-gray-400 mt-2">
           Faircroft HOA uses a 4-tier merit system. Consistent participation and dues payment increase your tier.

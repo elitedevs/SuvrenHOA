@@ -181,7 +181,7 @@ function RequestCard({ request: r }: { request: ReimbursementRequest }) {
               <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${statusStyle.color}`}>
                 {statusStyle.label}
               </span>
-              <span className="text-[10px] text-gray-500">{cat?.icon} {cat?.label}</span>
+              <span className="text-[10px] text-gray-500">{cat?.label}</span>
             </div>
             <div className="flex items-center gap-3">
               <span className="text-base font-semibold text-[#c9a96e]">${(r.amount / 100).toFixed(2)}</span>
@@ -240,7 +240,7 @@ function ReimbursementForm({ onSubmit, onCancel }: {
           <select value={category} onChange={e => setCategory(e.target.value)}
             className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none">
             <option value="">Select category</option>
-            {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.icon} {c.label}</option>)}
+            {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
           </select>
         </div>
       </div>

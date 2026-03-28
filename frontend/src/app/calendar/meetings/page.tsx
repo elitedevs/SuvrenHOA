@@ -28,7 +28,7 @@ export default function MeetingsPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-2">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Board</p>
+          <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Board</p>
           <h1 className="text-3xl font-normal tracking-tight">Meeting Scheduler</h1>
         </div>
         <div className="flex items-center gap-3">

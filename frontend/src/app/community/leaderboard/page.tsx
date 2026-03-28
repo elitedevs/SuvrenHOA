@@ -285,7 +285,7 @@ export default function LeaderboardPage() {
                   : 'text-gray-500 hover:text-gray-300 hover:bg-white/[0.04] border border-transparent'
               }`}
             >
-              <span>{tab.icon}</span>
+              
               <span className="hidden sm:inline">{tab.label}</span>
               <span className="sm:hidden">{tab.label.split(' ')[0]}</span>
             </button>

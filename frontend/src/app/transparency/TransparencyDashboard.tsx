@@ -425,7 +425,7 @@ export function TransparencyDashboard() {
                           className="w-9 h-9 rounded-md flex items-center justify-center shrink-0 mt-0.5 text-lg"
                           style={{ background: 'rgba(201,169,110,0.08)' }}
                         >
-                          {event.icon}
+                          
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="text-[13px] text-[var(--text-primary)] font-medium leading-snug">

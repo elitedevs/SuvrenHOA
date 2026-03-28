@@ -41,8 +41,8 @@ const DOC_TYPE_COLORS: Record<number, string> = {
 };
 
 const DOC_TYPE_ICONS: Record<number, string> = {
-  0: '📜', 1: '📝', 2: '📊', 3: '✏️', 4: '⚖️',
-  5: '💰', 6: '🏗️', 7: '📢', 8: '🗳️', 9: '📄',
+  0: '', 1: '', 2: '', 3: '', 4: '',
+  5: '', 6: '', 7: '', 8: '', 9: '',
 };
 
 export function useDocuments() {
@@ -59,7 +59,7 @@ export function useDocuments() {
     documentCount,
     getTypeLabel: (type: number) => DOC_TYPE_LABELS[type] || 'Other',
     getTypeColor: (type: number) => DOC_TYPE_COLORS[type] || 'gray',
-    getTypeIcon: (type: number) => DOC_TYPE_ICONS[type] || '📄',
+    getTypeIcon: (type: number) => DOC_TYPE_ICONS[type] || '',
   };
 }
 

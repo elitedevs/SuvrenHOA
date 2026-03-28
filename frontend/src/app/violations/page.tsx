@@ -320,7 +320,7 @@ function ViolationCard({ violation }: { violation: any }) {
               <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${colorClass}`}>
                 {statusInfo.label}
               </span>
-              <span className="text-[10px] text-gray-500">{cat?.icon} {cat?.label}</span>
+              <span className="text-[10px] text-gray-500">{cat?.label}</span>
               {violation.severity !== 'minor' && (
                 <span className={`text-[10px] font-medium ${
                   violation.severity === 'critical' ? 'text-red-400' :
@@ -479,7 +479,7 @@ function ReportForm({ onClose }: { onClose: () => void }) {
           <select value={category} onChange={e => setCategory(e.target.value)}
             className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none">
             <option value="">Select category</option>
-            {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.icon} {c.label}</option>)}
+            {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
           </select>
         </div>
       </div>

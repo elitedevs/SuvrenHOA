@@ -66,7 +66,7 @@ function EventRow({ item, isNew }: EventRowProps) {
         'transition-transform duration-200 group-hover:scale-110',
         isNew ? 'bg-[#c9a96e]/12 border border-[#c9a96e]/30' : 'bg-white/5 border border-white/10',
       ].join(' ')}>
-        {item.icon}
+        
       </div>
 
       {/* Description */}

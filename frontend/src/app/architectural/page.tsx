@@ -9,7 +9,7 @@ import { useProperty } from '@/hooks/useProperty';
 const MOD_TYPES = [
   { id: 'paint', label: 'Exterior Paint', icon: '' },
   { id: 'fence', label: 'Fence', icon: '' },
-  { id: 'deck', label: 'Deck/Patio', icon: '🪵' },
+  { id: 'deck', label: 'Deck/Patio', icon: '' },
   { id: 'landscaping', label: 'Landscaping', icon: '' },
   { id: 'roof', label: 'Roof', icon: '' },
   { id: 'siding', label: 'Siding', icon: '' },
@@ -99,7 +99,6 @@ function ReviewPipeline({ requests, setFilter }: { requests: any[]; setFilter: (
               onClick={() => setFilter(stage.key)}
               className={`flex flex-col items-center px-3 py-2.5 rounded-md border transition-all cursor-pointer hover:scale-105 shrink-0 ${stage.bg}`}
             >
-              <span className="text-lg">{stage.icon}</span>
               <span className={`text-[10px] font-medium mt-1 ${stage.color}`}>{stage.label}</span>
               <span className={`text-lg font-bold ${stage.color}`}>{counts[stage.key] || 0}</span>
             </button>

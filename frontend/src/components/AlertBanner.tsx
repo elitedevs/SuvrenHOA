@@ -112,7 +112,7 @@ function AlertItem({ alert, onDismiss }: { alert: Alert; onDismiss: (id: string)
         <div className="max-w-6xl mx-auto flex items-start justify-between gap-3">
           <div className={`flex items-start gap-2.5 ${cfg.text} min-w-0`}>
             <span className={`mt-0.5 p-1 rounded ${cfg.badge} shrink-0`}>
-              {cfg.icon}
+              
             </span>
             <div className="min-w-0">
               <div className="flex items-center gap-2 flex-wrap">

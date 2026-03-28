@@ -42,9 +42,9 @@ export default function DocumentsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Community Records</p>
+          <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Community Records</p>
           <h1 className="text-3xl font-normal tracking-tight">Documents</h1>
-          <p className="text-base text-gray-400 mt-2 font-medium">
+          <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Immutable community records — verified on-chain, stored permanently on Arweave
           </p>
         </div>

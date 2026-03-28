@@ -115,7 +115,7 @@ export default function ForumPage() {
         {/* Replies */}
         {selectedTopic.replies.length > 0 && (
           <div className="space-y-3 mb-4">
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest">
+            <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
               {selectedTopic.replies.length} {selectedTopic.replies.length === 1 ? 'Reply' : 'Replies'}
             </p>
             {selectedTopic.replies.map(reply => (
@@ -134,7 +134,7 @@ export default function ForumPage() {
         {/* Reply form */}
         {isConnected ? (
           <div className="glass-card rounded-lg p-5">
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">Post a Reply</p>
+            <p className="text-[11px] uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Post a Reply</p>
             <textarea
               value={replyText}
               onChange={e => setReplyText(e.target.value)}
@@ -164,7 +164,7 @@ export default function ForumPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Community</p>
+          <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Community</p>
           <h1 className="text-3xl font-normal tracking-tight">Discussion Forum</h1>
           <p className="text-base text-gray-400 mt-2">Community discussions, questions, and announcements</p>
         </div>

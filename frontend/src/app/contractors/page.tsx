@@ -136,7 +136,7 @@ export default function ContractorsPage() {
                       category === c.id ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
                     }`}
                   >
-                    {c.icon} {c.label}
+                    {c.label}
                   </button>
                 ))}
               </div>
@@ -259,7 +259,7 @@ function AddContractorForm({ onAdd, onCancel }: {
           <select value={category} onChange={e => setCategory(e.target.value)}
             className="w-full px-4 py-3 rounded-md bg-gray-800/80 border border-gray-700 text-sm focus:border-[#c9a96e]/50 focus:outline-none">
             {CATEGORIES.filter(c => c.id !== 'all').map(c => (
-              <option key={c.id} value={c.id}>{c.icon} {c.label}</option>
+              <option key={c.id} value={c.id}>{c.label}</option>
             ))}
           </select>
         </div>

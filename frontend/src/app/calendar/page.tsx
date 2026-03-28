@@ -76,7 +76,7 @@ export default function CalendarPage() {
       <div className="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-none">
         {EVENT_TYPES.map(t => (
           <span key={t.id} className="flex items-center gap-1 text-[10px] text-gray-400 whitespace-nowrap px-2 py-1 rounded-lg bg-gray-800/30">
-            {t.icon} {t.label}
+            {t.label}
           </span>
         ))}
       </div>
@@ -231,7 +231,7 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1 ${
                 eventType === t.id ? 'bg-[#c9a96e]/15 text-[#c9a96e] border border-[#c9a96e]/30' : 'glass-card text-gray-400'
               }`}>
-              {t.icon} {t.label}
+              {t.label}
             </button>
           ))}
         </div>

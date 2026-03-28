@@ -154,7 +154,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
             {stateLabel || 'Loading...'}
           </span>
           <span className="text-xs px-2.5 py-1 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20">
-            {category.icon} {category.label}
+            {category.label}
           </span>
           <span className="text-xs text-gray-500">
             Quorum: {category.quorum} · Pass: {category.threshold}

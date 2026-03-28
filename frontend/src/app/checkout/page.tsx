@@ -12,7 +12,7 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs text-gray-500 font-semibold uppercase tracking-widest">
+        <span className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
           Step {current} of {total}
         </span>
         <span className="text-xs text-amber-400 font-semibold">
@@ -222,7 +222,7 @@ function CheckoutWizard() {
                 : 'border-green-500/30 bg-green-500/5'
             }`}
           >
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">
+            <p className="text-[11px] uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
               Outstanding Balance
             </p>
             {isCurrent === false ? (

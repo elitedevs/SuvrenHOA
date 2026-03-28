@@ -69,7 +69,7 @@ export default function VehiclesPage() {
       {/* Community Vehicle Overview */}
       {!showRegister && !showGuest && !isLoading && (vehicles || []).length > 0 && (
         <div className="glass-card rounded-lg p-5 mb-5">
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Community Vehicle Overview</p>
+          <p className="text-[11px] uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Community Vehicle Overview</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
             {[
               { type: 'car', label: 'Cars', icon: '', color: 'blue' },

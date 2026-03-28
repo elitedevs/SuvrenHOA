@@ -146,7 +146,7 @@ function ProfileForm() {
                   ? 'bg-[#c9a96e]/20 shadow-[0_0_8px_rgba(201,169,110,0.3)]'
                   : 'bg-gray-700/40'
               }`}>
-                {badge.icon}
+                
               </div>
               <div className="min-w-0">
                 <p className={`text-sm font-semibold truncate ${badge.earned ? 'text-[#e8d5a3]' : 'text-gray-500'}`}>

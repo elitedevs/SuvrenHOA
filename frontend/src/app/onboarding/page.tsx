@@ -62,7 +62,7 @@ function StepIndicator({
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs text-gray-500 font-semibold uppercase tracking-widest">
+        <span className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
           Step {current} of {total}
         </span>
         <span className="text-xs text-[#c9a96e] font-semibold">
@@ -303,7 +303,7 @@ function OnboardingWizard() {
 
           {hasProperty && propertyInfo ? (
             <div className="bg-[#c9a96e]/10 border border-[#c9a96e]/20 rounded-md p-5 mb-7">
-              <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">
+              <p className="text-[11px] uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
                 Your Property
               </p>
               <div className="space-y-2">
@@ -547,7 +547,7 @@ function OnboardingWizard() {
 
           {/* Profile summary */}
           <div className="mb-5">
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-2">
+            <p className="text-[11px] uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
               Profile
             </p>
             <div className="bg-gray-800/40 rounded-md p-4 space-y-1.5">
@@ -583,7 +583,7 @@ function OnboardingWizard() {
 
           {/* Pets summary */}
           <div className="mb-5">
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-2">
+            <p className="text-[11px] uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
               Pets ({pets.length})
             </p>
             {pets.length === 0 ? (
@@ -604,7 +604,7 @@ function OnboardingWizard() {
 
           {/* Vehicles summary */}
           <div className="mb-6">
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-2">
+            <p className="text-[11px] uppercase tracking-widest mb-2" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
               Vehicles ({vehicles.length})
             </p>
             {vehicles.length === 0 ? (

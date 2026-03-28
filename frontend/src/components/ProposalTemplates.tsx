@@ -168,7 +168,7 @@ export function ProposalTemplates({ onUseTemplate }: Props) {
       <div className="flex items-center gap-2 mb-5">
         <span className="text-xl"></span>
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest">Quick Start</p>
+          <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Quick Start</p>
           <h3 className="text-base font-bold text-[var(--text-primary)]">Create from Template</h3>
         </div>
       </div>

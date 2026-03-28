@@ -311,7 +311,7 @@ function MessagingCenter({ address }: { address: string }) {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">
+          <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
             Messages
           </p>
           <h1 className="text-2xl font-normal tracking-tight flex items-center gap-2">

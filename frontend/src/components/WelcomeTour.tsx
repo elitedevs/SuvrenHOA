@@ -123,7 +123,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
 
           {/* Icon */}
           <div className="w-20 h-20 rounded-lg bg-gradient-to-br from-[#c9a96e]/20 to-[#b8942e]/10 border border-[#c9a96e]/30 flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg">
-            {current.icon}
+            
           </div>
 
           {/* Text */}

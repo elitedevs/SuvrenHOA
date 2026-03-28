@@ -927,3 +927,20 @@ button, [role="button"], a[class*="btn"] {
   font-weight: 500 !important;
 }
 /* Headings already forced to 400 above */
+
+/* ── Missing color overrides (Lux V2 gap) ─────────────────────────────────── */
+html.dark .bg-emerald-500\/10 { background: rgba(42, 93, 79, 0.08) !important; }
+html.dark .bg-emerald-500\/5 { background: rgba(42, 93, 79, 0.04) !important; }
+html.dark .border-emerald-500\/20 { border-color: rgba(42, 93, 79, 0.15) !important; }
+html.dark .border-emerald-500\/30 { border-color: rgba(42, 93, 79, 0.20) !important; }
+html.dark .text-orange-400 { color: var(--accent-brass) !important; }
+html.dark .text-orange-300 { color: rgba(176, 155, 113, 0.85) !important; }
+html.dark .bg-orange-500\/10 { background: rgba(176, 155, 113, 0.08) !important; }
+html.dark .bg-orange-500\/5 { background: rgba(176, 155, 113, 0.04) !important; }
+html.dark .border-orange-500\/20 { border-color: rgba(176, 155, 113, 0.15) !important; }
+html.dark .bg-pink-500\/10 { background: rgba(176, 155, 113, 0.06) !important; }
+html.dark .text-pink-400 { color: rgba(176, 155, 113, 0.7) !important; }
+html.dark .border-pink-500\/20 { border-color: rgba(176, 155, 113, 0.12) !important; }
+html.dark .bg-indigo-500\/10 { background: rgba(176, 155, 113, 0.06) !important; }
+html.dark .text-indigo-400 { color: rgba(176, 155, 113, 0.7) !important; }
+html.dark .border-indigo-500\/20 { border-color: rgba(176, 155, 113, 0.12) !important; }

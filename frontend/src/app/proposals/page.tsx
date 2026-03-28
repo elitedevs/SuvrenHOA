@@ -22,15 +22,17 @@ import { ProposalTemplates } from '@/components/ProposalTemplates';
 
 // ─── State badge styles ───────────────────────────────────────────────────────
 
+/* Proposal state colors — all derived from the three palette accents:
+   brass (#B09B71) for active/pending/queued, verdigris (#2A5D4F) for success, rosewood (#6B3A3A) for failure */
 const STATE_STYLES: Record<string, { color: string; bg: string; border: string }> = {
-  Pending: { color: 'text-yellow-400', bg: 'bg-yellow-500/10', border: 'border-yellow-500/20' },
-  Active: { color: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/20' },
-  Canceled: { color: 'text-gray-400', bg: 'bg-gray-500/10', border: 'border-gray-500/20' },
-  Defeated: { color: 'text-red-400', bg: 'bg-red-500/10', border: 'border-red-500/20' },
-  Succeeded: { color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' },
-  Queued: { color: 'text-[#c9a96e]', bg: 'bg-[#c9a96e]/10', border: 'border-[#c9a96e]/20' },
-  Expired: { color: 'text-gray-400', bg: 'bg-gray-500/10', border: 'border-gray-500/20' },
-  Executed: { color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/20' },
+  Pending:   { color: 'text-gray-400',     bg: 'bg-gray-800',         border: 'border-gray-700' },
+  Active:    { color: 'text-amber-400',     bg: 'bg-amber-500/10',     border: 'border-amber-500/20' },
+  Canceled:  { color: 'text-gray-500',      bg: 'bg-gray-800',         border: 'border-gray-700' },
+  Defeated:  { color: 'text-red-400',       bg: 'bg-red-500/10',       border: 'border-red-500/20' },
+  Succeeded: { color: 'text-green-400',     bg: 'bg-green-500/10',     border: 'border-green-500/20' },
+  Queued:    { color: 'text-amber-400',     bg: 'bg-amber-500/10',     border: 'border-amber-500/20' },
+  Expired:   { color: 'text-gray-500',      bg: 'bg-gray-800',         border: 'border-gray-700' },
+  Executed:  { color: 'text-green-400',     bg: 'bg-green-500/10',     border: 'border-green-500/20' },
 };
 
 // ─── Entry point ──────────────────────────────────────────────────────────────
@@ -43,9 +45,9 @@ export default function ProposalsPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Governance</p>
-          <h1 className="text-3xl font-normal tracking-tight">Proposals</h1>
-          <p className="text-base text-gray-400 mt-2 font-medium">
+          <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Governance</p>
+          <h1 className="text-3xl tracking-tight">Proposals</h1>
+          <p className="text-[15px] mt-3 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Create, vote, and execute community governance proposals
           </p>
         </div>
@@ -229,7 +231,7 @@ function ProposalCard({
                 {stateLabel || '…'}
               </span>
               <span className="text-xs px-2.5 py-1 rounded-full bg-[#c9a96e]/10 text-[#c9a96e] border border-[#c9a96e]/20">
-                {category.icon} {category.label}
+                {category.label}
               </span>
             </div>
 
@@ -469,7 +471,6 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-1.5">
-                    <span className="text-base">{cat.icon}</span>
                     <span className="text-sm font-bold text-gray-100">{cat.label}</span>
                     {category === cat.value && (
                       <span className="ml-auto text-xs text-green-400"></span>
@@ -487,7 +488,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
         {/* Quorum Estimate */}
         <div className="rounded-md bg-[#c9a96e]/5 border border-[#c9a96e]/15 px-5 py-4">
           <p className="text-xs font-semibold text-[#e8d5a3] mb-1">
-            {selectedCategory.icon} {selectedCategory.label} — Quorum Requirement
+            {selectedCategory.label} — Quorum Requirement
           </p>
           <p className="text-xs text-gray-400 leading-relaxed">
             Requires <strong className="text-gray-200">{selectedCategory.quorum}</strong> of total voting supply to participate,

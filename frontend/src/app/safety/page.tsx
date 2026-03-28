@@ -150,7 +150,7 @@ export default function SafetyPage() {
             <select value={typeFilter} onChange={e => setTypeFilter(e.target.value)}
               className="px-3 py-1.5 rounded-md bg-gray-800/80 border border-gray-700 text-xs text-gray-400 focus:outline-none">
               <option value="all">All Types</option>
-              {REPORT_TYPES.map(t => <option key={t.id} value={t.id}>{t.icon} {t.label}</option>)}
+              {REPORT_TYPES.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
             </select>
           </div>
 

@@ -61,7 +61,7 @@ export default function EmergencyPage() {
     <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-1">Community</p>
+        <p className="text-[11px] uppercase tracking-widest mb-1" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>Community</p>
         <h1 className="text-3xl font-normal tracking-tight flex items-center gap-3">
            Emergency Contacts
         </h1>
@@ -95,7 +95,7 @@ export default function EmergencyPage() {
         <div className="space-y-6">
           {byCategory.map(group => (
             <div key={group.category}>
-              <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3 flex items-center gap-2">
+              <p className="text-[11px] uppercase mb-3 flex items-center gap-2 tracking-widest" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
                 <span className="h-px flex-1 bg-gray-800" />
                 {group.category}
                 <span className="h-px flex-1 bg-gray-800" />
@@ -114,7 +114,7 @@ export default function EmergencyPage() {
                       <div className={`w-10 h-10 rounded-md flex items-center justify-center text-xl shrink-0 ${
                         contact.urgent ? 'bg-red-500/15' : 'bg-[#c9a96e]/10'
                       }`}>
-                        {contact.icon}
+                        
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-semibold text-gray-100 truncate">{contact.name}</p>

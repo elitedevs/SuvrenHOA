@@ -89,7 +89,7 @@ export default function PetsPage() {
         </div>
       ) : (
         <>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-3">
+          <p className="text-[11px] uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
             Community Gallery · {filtered.length} pet{filtered.length !== 1 ? 's' : ''}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
