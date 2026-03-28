@@ -1186,11 +1186,14 @@ html.light aside {
 }
 
 /* ── Wallet address — never pure white, use parchment ─────────────────────── */
-[data-rk] * {
-  color: #F5F0E8 !important;
+/* Scope narrowly to RainbowKit button only, not the entire provider */
+[data-rk] button[data-testid],
+[data-rk] [class*="iekbcc0"] {
+  color: #F5F0E8;
 }
-html.light [data-rk] * {
-  color: #1A1A1E !important;
+html.light [data-rk] button[data-testid],
+html.light [data-rk] [class*="iekbcc0"] {
+  color: #1A1A1E;
 }
 
 /* ── Tooltip styling — on palette ─────────────────────────────────────────── */
