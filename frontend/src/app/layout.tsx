@@ -8,6 +8,7 @@ import { AIChatWidget } from '@/components/AIChatWidget';
 import { GlobalFeatures } from '@/components/GlobalFeatures';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { SeasonalBanner } from '@/components/SeasonalBanner';
+import { SeasonalTheme } from '@/components/SeasonalTheme';
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
           <AIChatWidget />
           <GlobalFeatures />
+          <SeasonalTheme />
         </Providers>
       </body>
     </html>

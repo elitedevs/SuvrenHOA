@@ -150,7 +150,7 @@ export function Sidebar() {
   const sidebarContent = (
     <div className={`flex flex-col h-full ${collapsed ? 'w-16' : 'w-60'} transition-all duration-200`}>
       {/* Logo */}
-      <div className="flex items-center justify-between px-4 h-14" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+      <div className="flex items-center justify-between px-4 h-14 mb-4">
         {!collapsed && (
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--bg-elevated)' }}>
@@ -295,7 +295,7 @@ export function Sidebar() {
       </nav>
 
       {/* Bottom: Theme + Wallet + Brand whisper */}
-      <div className="p-3 space-y-2" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+      <div className="p-3 pt-8 space-y-2">
         <div className={`flex ${collapsed ? 'justify-center' : 'items-center justify-between px-1'} py-1`}>
           {!collapsed && <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>Theme</span>}
           <ThemeToggle />

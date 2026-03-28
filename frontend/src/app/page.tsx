@@ -175,32 +175,17 @@ function Dashboard() {
           )}
         </div>
 
-        {/* Three stat cards — reduced from 5+, using brass palette */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8 page-enter page-enter-delay-1">
-          <div className="glass-card rounded-lg p-6">
-            <p className="text-[11px] uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>Voting Power</p>
-            <p className="text-3xl font-heading" style={{ fontFamily: 'var(--font-heading), Georgia, serif', color: 'var(--accent-brass)' }}>
-              {votes !== undefined ? Number(votes) : '—'}
-            </p>
-            <p className="text-[12px] mt-1" style={{ color: 'var(--text-muted)' }}>of {totalSupply || '—'} total</p>
-          </div>
-
-          <div className="glass-card rounded-lg p-6">
-            <p className="text-[11px] uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>Treasury</p>
-            <p className="text-3xl font-heading" style={{ fontFamily: 'var(--font-heading), Georgia, serif', color: 'var(--accent-brass)' }}>
-              ${totalBalance || '0'}
-            </p>
-            <p className="text-[12px] mt-1" style={{ color: 'var(--text-muted)' }}>community USDC</p>
-          </div>
-
-          <div className="glass-card rounded-lg p-6">
-            <p className="text-[11px] uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>Active Proposals</p>
-            <p className="text-3xl font-heading" style={{ fontFamily: 'var(--font-heading), Georgia, serif', color: 'var(--accent-brass)' }}>
-              {activeProposalCount ?? '—'}
-            </p>
-            <p className="text-[12px] mt-1" style={{ color: 'var(--text-muted)' }}>open for voting</p>
-          </div>
-        </div>
+        {/* Data as prose — concierge narrates, dashboards display */}
+        <p className="text-[15px] mb-8 leading-relaxed page-enter page-enter-delay-1" style={{ color: 'var(--text-secondary)' }}>
+          {votes !== undefined && totalSupply !== undefined && (
+            <>You hold {Number(votes)} of {Number(totalSupply)} votes. </>
+          )}
+          The treasury has ${totalBalance || '0'} allocated.
+          {activeProposalCount !== undefined && activeProposalCount > 0
+            ? ` ${activeProposalCount} proposal${activeProposalCount > 1 ? 's are' : ' is'} open for voting.`
+            : ' No proposals are open.'
+          }
+        </p>
 
         {/* Dues reminder — concierge style */}
         {hasProperty && (

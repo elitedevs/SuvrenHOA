@@ -1009,3 +1009,81 @@ html.dark .bg-yellow-500 { background: #B09B71 !important; }
 html.dark .bg-emerald-500 { background: #2A5D4F !important; }
 html.dark .bg-purple-500 { background: rgba(176, 155, 113, 0.6) !important; }
 html.dark .bg-cyan-500 { background: #5A9E8F !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Beyond 50 — The refinements that make luxury feel *expensive*
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Sidebar expand/collapse — 200ms ease-out, like a heavy door ──────────── */
+aside nav [class*="space-y"] {
+  transition: max-height 200ms cubic-bezier(0.23, 1, 0.32, 1),
+              opacity 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+
+/* ── Banner text breathing — barely perceptible letter-spacing on load ────── */
+@keyframes breatheIn {
+  from { letter-spacing: 0em; opacity: 0; }
+  to { letter-spacing: 0.02em; opacity: 0.7; }
+}
+
+.seasonal-banner-text {
+  animation: breatheIn 600ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* ── Sidebar dividers → whitespace (architectural, not structural) ────────── */
+aside [style*="border"] {
+  border: none !important;
+}
+aside > div > div:last-child {
+  padding-top: 16px;
+}
+
+/* ── Seasonal gradients — shift with the season ──────────────────────────── */
+/* Override the body::before based on month (JS sets data-season) */
+[data-season="spring"] main::before {
+  background: radial-gradient(ellipse at top center, rgba(180, 120, 100, 0.015), transparent 70%) !important;
+}
+[data-season="summer"] main::before {
+  background: radial-gradient(ellipse at top center, rgba(176, 155, 113, 0.015), transparent 70%) !important;
+}
+[data-season="autumn"] main::before {
+  background: radial-gradient(ellipse at top center, rgba(160, 110, 60, 0.015), transparent 70%) !important;
+}
+[data-season="winter"] main::before {
+  background: radial-gradient(ellipse at top center, rgba(120, 140, 170, 0.015), transparent 70%) !important;
+}
+
+/* ── Loading states — replace anxious spinners with patient shimmers ──────── */
+.animate-pulse {
+  animation: shimmer 1.5s ease-in-out infinite !important;
+  background: rgba(245, 240, 232, 0.04) !important;
+  border-radius: 8px;
+}
+.animate-spin {
+  animation: shimmer 1.5s ease-in-out infinite !important;
+}
+
+/* ── Tooltip styling — on palette ─────────────────────────────────────────── */
+[title] {
+  position: relative;
+}
+
+/* ── Button press — physical response ─────────────────────────────────────── */
+button:active:not(:disabled),
+a:active {
+  transform: scale(0.98);
+  transition: transform 100ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ── Line-height by purpose (verify) ──────────────────────────────────────── */
+.leading-tight { line-height: 1.15 !important; }
+.leading-relaxed { line-height: 1.65 !important; }
+
+/* ── No motion on scroll — only state changes ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
