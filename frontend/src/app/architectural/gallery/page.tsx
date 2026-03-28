@@ -179,7 +179,7 @@ const GALLERY_CATEGORIES: GalleryCategory[] = [
 function ColorSwatch({ color }: { color: string }) {
   return (
     <div
-      className="w-8 h-8 rounded-lg border border-white/10 shadow"
+      className="w-8 h-8 rounded-lg border border-[rgba(245,240,232,0.10)] shadow"
       style={{ background: color }}
       title={color}
     />
@@ -195,18 +195,18 @@ function GalleryCard({ item, onClick }: { item: GalleryItem; onClick: () => void
       }`}
     >
       <div className="flex items-start justify-between mb-2">
-        <h4 className="text-sm font-semibold text-[rgba(245,240,232,0.80)] group-hover:text-[#D4C4A0] transition-colors leading-tight">
+        <h4 className="text-sm font-medium text-[var(--parchment)] group-hover:text-[#D4C4A0] transition-colors leading-tight">
           {item.title}
         </h4>
-        <span className={`shrink-0 ml-2 text-[10px] font-bold px-2 py-0.5 rounded-full ${
+        <span className={`shrink-0 ml-2 text-[10px] font-medium px-2 py-0.5 rounded-full ${
           item.approved
-            ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-green-500/25'
-            : 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-red-500/25'
+            ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)]'
+            : 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-[rgba(139,90,90,0.25)]'
         }`}>
           {item.approved ? ' Approved' : ' Not Approved'}
         </span>
       </div>
-      <p className="text-xs text-[rgba(245,240,232,0.35)] leading-relaxed mb-3">{item.description}</p>
+      <p className="text-xs text-[var(--text-disabled)] leading-relaxed mb-3">{item.description}</p>
       {item.colors && (
         <div className="flex gap-1.5 flex-wrap">
           {item.colors.map(c => <ColorSwatch key={c} color={c} />)}
@@ -214,7 +214,7 @@ function GalleryCard({ item, onClick }: { item: GalleryItem; onClick: () => void
       )}
       {!item.colors && (
         <div className={`h-16 rounded-lg flex items-center justify-center text-2xl ${
-          item.approved ? 'bg-[#B09B71]/5 border border-[#B09B71]/10' : 'bg-[#8B5A5A]/5 border border-red-500/10'
+          item.approved ? 'bg-[#B09B71]/5 border border-[#B09B71]/10' : 'bg-[#8B5A5A]/5 border border-[rgba(139,90,90,0.10)]'
         }`}>
           {item.approved ? '' : ''}
         </div>
@@ -227,42 +227,42 @@ function ItemDetailModal({ item, onClose }: { item: GalleryItem; onClose: () => 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={onClose}>
       <div
-        className="bg-[#121212] border border-[#B09B71]/25 rounded-2xl p-6 w-full max-w-md"
+        className="bg-[var(--surface-1)] border border-[#B09B71]/25 rounded-xl p-6 w-full max-w-md"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-4">
-          <h3 className="text-lg font-bold text-[#D4C4A0]">{item.title}</h3>
-          <button onClick={onClose} className="p-1.5 text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)]">
+          <h3 className="text-lg font-medium text-[#D4C4A0]">{item.title}</h3>
+          <button onClick={onClose} className="p-1.5 text-[var(--text-disabled)] hover:text-[var(--text-body)]">
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <div className={`inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full mb-4 ${
+        <div className={`inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full mb-4 ${
           item.approved
-            ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-green-500/25'
-            : 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-red-500/25'
+            ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)]'
+            : 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-[rgba(139,90,90,0.25)]'
         }`}>
           {item.approved ? ' Board Approved' : ' Requires Board Variance'}
         </div>
 
         {item.colors && (
           <div className="mb-4">
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">Color Examples</p>
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-2">Color Examples</p>
             <div className="flex gap-2 flex-wrap">
               {item.colors.map(c => (
                 <div key={c} className="flex flex-col items-center gap-1">
-                  <div className="w-10 h-10 rounded-lg border border-white/10" style={{ background: c }} />
-                  <code className="text-[9px] text-[rgba(245,240,232,0.25)]">{c}</code>
+                  <div className="w-10 h-10 rounded-lg border border-[rgba(245,240,232,0.10)]" style={{ background: c }} />
+                  <code className="text-[9px] text-[var(--text-disabled)]">{c}</code>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed mb-4">{item.details}</p>
+        <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-4">{item.details}</p>
 
         <div className="pt-4 border-t border-[oklch(0.18_0.005_60)]">
-          <p className="text-xs text-[rgba(245,240,232,0.25)]">
+          <p className="text-xs text-[var(--text-disabled)]">
             Need to submit for approval?{' '}
             <Link href="/architectural" className="text-[#B09B71] hover:text-[#D4C4A0]">
               Submit Architectural Review →
@@ -282,7 +282,7 @@ export default function ArchitecturalGalleryPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view architectural standards</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to view architectural standards</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -296,12 +296,12 @@ export default function ArchitecturalGalleryPage() {
     <div className="max-w-5xl mx-auto px-6 py-10 page-enter">
       {/* Header */}
       <div className="mb-8">
-        <Link href="/architectural" className="flex items-center gap-1 text-xs text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] mb-4 transition-colors">
+        <Link href="/architectural" className="flex items-center gap-1 text-xs text-[var(--text-disabled)] hover:text-[#B09B71] mb-4 transition-colors">
           <ChevronLeft className="w-3 h-3" /> Back to Arch Review
         </Link>
-        <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Standards Reference</p>
+        <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Standards Reference</p>
         <h1 className="text-3xl font-normal tracking-tight">Architectural Standards Gallery</h1>
-        <p className="text-[rgba(245,240,232,0.50)] text-sm mt-2">
+        <p className="text-[var(--text-muted)] text-sm mt-2">
           Visual guide to approved styles — review before submitting an architectural request
         </p>
       </div>
@@ -310,10 +310,10 @@ export default function ArchitecturalGalleryPage() {
       <div className="flex flex-wrap gap-2 mb-8">
         <button
           onClick={() => setActiveCategory('all')}
-          className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+          className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${
             activeCategory === 'all'
               ? 'bg-[#B09B71]/20 border border-[#B09B71]/40 text-[#D4C4A0]'
-              : 'bg-white/5 border border-gray-700/50 text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)]'
+              : 'bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] text-[var(--text-disabled)] hover:text-[var(--text-body)]'
           }`}
         >
           All
@@ -322,10 +322,10 @@ export default function ArchitecturalGalleryPage() {
           <button
             key={cat.id}
             onClick={() => setActiveCategory(cat.id)}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${
               activeCategory === cat.id
                 ? 'bg-[#B09B71]/20 border border-[#B09B71]/40 text-[#D4C4A0]'
-                : 'bg-white/5 border border-gray-700/50 text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)]'
+                : 'bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] text-[var(--text-disabled)] hover:text-[var(--text-body)]'
             }`}
           >
             {cat.emoji} {cat.name}
@@ -336,7 +336,7 @@ export default function ArchitecturalGalleryPage() {
       {/* Categories */}
       {categories.map(category => (
         <div key={category.id} className="mb-10">
-          <h2 className="flex items-center gap-2 text-base font-bold text-[#D4C4A0] mb-4">
+          <h2 className="flex items-center gap-2 text-base font-medium text-[#D4C4A0] mb-4">
             <span>{category.emoji}</span>
             {category.name}
           </h2>
@@ -349,12 +349,12 @@ export default function ArchitecturalGalleryPage() {
       ))}
 
       {/* CTA */}
-      <div className="mt-6 glass-card rounded-2xl p-6 border border-[#B09B71]/15 text-center">
-        <p className="text-sm font-bold text-[#D4C4A0] mb-2">Ready to make changes to your property?</p>
-        <p className="text-xs text-[rgba(245,240,232,0.35)] mb-4">Submit an architectural review request — board responds within 30 days</p>
+      <div className="mt-6 glass-card rounded-xl p-6 border border-[#B09B71]/15 text-center">
+        <p className="text-sm font-medium text-[#D4C4A0] mb-2">Ready to make changes to your property?</p>
+        <p className="text-xs text-[var(--text-disabled)] mb-4">Submit an architectural review request — board responds within 30 days</p>
         <Link
           href="/architectural"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#b8942e] to-[#B09B71] text-[#1a1a1a] font-bold text-sm hover:opacity-90 transition-opacity"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[var(--brass-deep)] to-[#B09B71] text-[var(--surface-2)] font-medium text-sm hover:opacity-90 transition-opacity"
         >
           Submit Architectural Review
         </Link>

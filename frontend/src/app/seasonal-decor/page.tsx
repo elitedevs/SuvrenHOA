@@ -54,8 +54,8 @@ const SEASONS: Season[] = [
     period: 'June 21 – Sep 22',
     icon: Sun,
     color: 'text-[#B09B71]',
-    bg: 'bg-yellow-400/10',
-    border: 'border-yellow-400/20',
+    bg: 'bg-[rgba(176,155,113,0.10)]',
+    border: 'border-[rgba(176,155,113,0.20)]',
     installBy: 'June 25',
     removeBy: 'July 10',
     isCurrent: false,
@@ -66,8 +66,8 @@ const SEASONS: Season[] = [
     period: 'Sep 23 – Nov 30',
     icon: Leaf,
     color: 'text-[#B09B71]',
-    bg: 'bg-orange-400/10',
-    border: 'border-orange-400/20',
+    bg: 'bg-[#B09B71]/10',
+    border: 'border-[rgba(176,155,113,0.40)]/20',
     installBy: 'Oct 1',
     removeBy: 'Nov 15',
     isCurrent: false,
@@ -77,9 +77,9 @@ const SEASONS: Season[] = [
     name: 'Winter / Holidays',
     period: 'Dec 1 – Jan 15',
     icon: Snowflake,
-    color: 'text-[#5A7A9A]',
-    bg: 'bg-[#5A7A9A]/10',
-    border: 'border-blue-400/20',
+    color: 'text-[var(--steel)]',
+    bg: 'bg-[var(--steel)]/10',
+    border: 'border-[rgba(90,122,154,0.20)]',
     installBy: 'Dec 1',
     removeBy: 'Jan 15',
     isCurrent: false,
@@ -156,31 +156,31 @@ export default function SeasonalDecorPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view decoration guidelines</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to view decoration guidelines</p>
         <ConnectButton label="Sign In" />
       </div>
     );
   }
 
   const STATUS_MAP = {
-    pending: { label: 'Pending Review', color: 'text-[#B09B71]', bg: 'bg-yellow-400/10', border: 'border-yellow-400/20', icon: Clock },
-    approved: { label: 'Approved', color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-green-400/20', icon: CheckCircle },
-    rejected: { label: 'Rejected', color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-red-400/20', icon: XCircle },
+    pending: { label: 'Pending Review', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]', icon: Clock },
+    approved: { label: 'Approved', color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-[rgba(42,93,79,0.20)]', icon: CheckCircle },
+    rejected: { label: 'Rejected', color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-[rgba(139,90,90,0.20)]', icon: XCircle },
   };
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-3">
             <Sparkles className="w-7 h-7 text-[#B09B71]" />
             Seasonal Decoration Guidelines
           </h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Approved decoration standards and photo submission for review</p>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Approved decoration standards and photo submission for review</p>
         </div>
         <button
           onClick={() => setShowSubmit(true)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-colors"
         >
           <Upload className="w-4 h-4" />
           Submit for Approval
@@ -188,13 +188,13 @@ export default function SeasonalDecorPage() {
       </div>
 
       {/* Current Season Banner */}
-      <div className="mb-8 p-5 rounded-2xl bg-gradient-to-r from-pink-500/10 to-[#B09B71]/10 border border-pink-400/20">
+      <div className="mb-8 p-5 rounded-xl bg-gradient-to-r from-pink-500/10 to-[#B09B71]/10 border border-pink-400/20">
         <div className="flex items-center gap-3">
           <Flower2 className="w-8 h-8 text-pink-400" />
           <div>
-            <p className="text-xs text-pink-400 font-semibold uppercase tracking-wider">Current Season</p>
-            <h2 className="text-lg font-bold text-white">Spring Decorations</h2>
-            <p className="text-sm text-[rgba(245,240,232,0.50)]">Install by April 1 · Remove by June 25</p>
+            <p className="text-xs text-pink-400 font-medium uppercase tracking-wider">Current Season</p>
+            <h2 className="text-lg font-medium text-[var(--text-heading)]">Spring Decorations</h2>
+            <p className="text-sm text-[var(--text-muted)]">Install by April 1 · Remove by June 25</p>
           </div>
         </div>
       </div>
@@ -208,12 +208,12 @@ export default function SeasonalDecorPage() {
               key={s.id}
               onClick={() => setSelectedSeason(s)}
               className={`p-3 rounded-xl border text-left transition-all ${
-                selectedSeason.id === s.id ? `${s.bg} ${s.border} ring-1 ring-[#B09B71]/30` : 'glass-card border-white/10 hover:border-white/20'
+                selectedSeason.id === s.id ? `${s.bg} ${s.border} ring-1 ring-[#B09B71]/30` : 'glass-card border-[rgba(245,240,232,0.10)] hover:border-[rgba(245,240,232,0.20)]'
               } ${s.isCurrent ? 'ring-1 ring-[#B09B71]/20' : ''}`}
             >
-              <Icon className={`w-5 h-5 mb-2 ${selectedSeason.id === s.id ? s.color : 'text-[rgba(245,240,232,0.35)]'}`} />
-              <p className={`text-sm font-semibold ${selectedSeason.id === s.id ? 'text-white' : 'text-[rgba(245,240,232,0.50)]'}`}>{s.name}</p>
-              <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">{s.period}</p>
+              <Icon className={`w-5 h-5 mb-2 ${selectedSeason.id === s.id ? s.color : 'text-[var(--text-disabled)]'}`} />
+              <p className={`text-sm font-medium ${selectedSeason.id === s.id ? 'text-[var(--text-heading)]' : 'text-[var(--text-muted)]'}`}>{s.name}</p>
+              <p className="text-xs text-[var(--text-disabled)] mt-0.5">{s.period}</p>
               {s.isCurrent && <span className="mt-1 inline-block text-[10px] text-[#B09B71] font-medium">● Current</span>}
             </button>
           );
@@ -227,17 +227,17 @@ export default function SeasonalDecorPage() {
             <Calendar className={`w-4 h-4 ${selectedSeason.color}`} />
           </div>
           <div>
-            <p className="text-xs text-[rgba(245,240,232,0.35)]">Install By</p>
-            <p className="text-sm font-bold text-white">{selectedSeason.installBy}</p>
+            <p className="text-xs text-[var(--text-disabled)]">Install By</p>
+            <p className="text-sm font-medium text-[var(--text-heading)]">{selectedSeason.installBy}</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-[#8B5A5A]/10 border border-red-400/20">
+          <div className="p-2 rounded-lg bg-[#8B5A5A]/10 border border-[rgba(139,90,90,0.20)]">
             <AlertTriangle className="w-4 h-4 text-[#8B5A5A]" />
           </div>
           <div>
-            <p className="text-xs text-[rgba(245,240,232,0.35)]">Remove By</p>
-            <p className="text-sm font-bold text-white">{selectedSeason.removeBy}</p>
+            <p className="text-xs text-[var(--text-disabled)]">Remove By</p>
+            <p className="text-sm font-medium text-[var(--text-heading)]">{selectedSeason.removeBy}</p>
           </div>
         </div>
       </div>
@@ -246,16 +246,16 @@ export default function SeasonalDecorPage() {
       <div className="space-y-6 mb-8">
         {GUIDELINES.map((g) => (
           <div key={g.category} className="glass-card rounded-xl p-5">
-            <h3 className="text-sm font-semibold text-[#B09B71] mb-4">{g.category}</h3>
+            <h3 className="text-sm font-medium text-[#B09B71] mb-4">{g.category}</h3>
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <CheckCircle className="w-4 h-4 text-[#3A7D6F]" />
-                  <span className="text-xs font-semibold text-[#3A7D6F] uppercase tracking-wider">Approved</span>
+                  <span className="text-xs font-medium text-[#3A7D6F] uppercase tracking-wider">Approved</span>
                 </div>
                 <ul className="space-y-2">
                   {g.approved.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-xs text-[rgba(245,240,232,0.65)]">
+                    <li key={item} className="flex items-start gap-2 text-xs text-[var(--text-body)]">
                       <ChevronRight className="w-3 h-3 text-[#3A7D6F] mt-0.5 shrink-0" />
                       {item}
                     </li>
@@ -265,11 +265,11 @@ export default function SeasonalDecorPage() {
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <XCircle className="w-4 h-4 text-[#8B5A5A]" />
-                  <span className="text-xs font-semibold text-[#8B5A5A] uppercase tracking-wider">Not Permitted</span>
+                  <span className="text-xs font-medium text-[#8B5A5A] uppercase tracking-wider">Not Permitted</span>
                 </div>
                 <ul className="space-y-2">
                   {g.notApproved.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-xs text-[rgba(245,240,232,0.65)]">
+                    <li key={item} className="flex items-start gap-2 text-xs text-[var(--text-body)]">
                       <ChevronRight className="w-3 h-3 text-[#8B5A5A] mt-0.5 shrink-0" />
                       {item}
                     </li>
@@ -282,7 +282,7 @@ export default function SeasonalDecorPage() {
       </div>
 
       {/* My Submissions */}
-      <h2 className="text-sm font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wider mb-3">My Submissions</h2>
+      <h2 className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider mb-3">My Submissions</h2>
       <div className="space-y-3">
         {submissions.filter((s) => s.lot === myLot).map((sub) => {
           const cfg = STATUS_MAP[sub.status];
@@ -290,20 +290,20 @@ export default function SeasonalDecorPage() {
           return (
             <div key={sub.id} className={`glass-card rounded-xl p-4 border ${cfg.border}`}>
               <div className="flex items-start justify-between gap-3">
-                <p className="text-sm text-[rgba(245,240,232,0.65)]">{sub.description}</p>
+                <p className="text-sm text-[var(--text-body)]">{sub.description}</p>
                 <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cfg.bg} ${cfg.color} border ${cfg.border} shrink-0`}>
                   <Icon className="w-3 h-3" />
                   {cfg.label}
                 </div>
               </div>
-              <p className="text-xs text-[rgba(245,240,232,0.35)] mt-2">Submitted {new Date(sub.submittedAt).toLocaleDateString()}</p>
+              <p className="text-xs text-[var(--text-disabled)] mt-2">Submitted {new Date(sub.submittedAt).toLocaleDateString()}</p>
             </div>
           );
         })}
         {submissions.filter((s) => s.lot === myLot).length === 0 && (
           <div className="glass-card rounded-xl p-6 text-center">
-            <Upload className="w-8 h-8 text-[rgba(245,240,232,0.25)] mx-auto mb-2" />
-            <p className="text-sm text-[rgba(245,240,232,0.50)]">No submissions yet</p>
+            <Upload className="w-8 h-8 text-[var(--text-disabled)] mx-auto mb-2" />
+            <p className="text-sm text-[var(--text-muted)]">No submissions yet</p>
           </div>
         )}
       </div>
@@ -311,19 +311,19 @@ export default function SeasonalDecorPage() {
       {/* Submit Modal */}
       {showSubmit && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className="glass-card rounded-2xl p-6 w-full max-w-md border border-[#B09B71]/20">
-            <h2 className="text-lg font-semibold mb-4">Submit Decoration for Approval</h2>
+          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[#B09B71]/20">
+            <h2 className="text-lg font-medium mb-4">Submit Decoration for Approval</h2>
             <textarea
               value={newDesc}
               onChange={(e) => setNewDesc(e.target.value)}
               placeholder="Describe your planned decoration (type, size, location on property)..."
               rows={4}
-              className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none resize-none"
+              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
             />
-            <p className="text-xs text-[rgba(245,240,232,0.35)] mt-2">The board will review within 3 business days.</p>
+            <p className="text-xs text-[var(--text-disabled)] mt-2">The board will review within 3 business days.</p>
             <div className="flex gap-3 mt-4">
-              <button onClick={() => setShowSubmit(false)} className="flex-1 px-4 py-2 rounded-lg border border-white/10 text-sm text-[rgba(245,240,232,0.50)] hover:text-white transition-colors">Cancel</button>
-              <button onClick={submit} className="flex-1 px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors">Submit</button>
+              <button onClick={() => setShowSubmit(false)} className="flex-1 px-4 py-2 rounded-lg border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors">Cancel</button>
+              <button onClick={submit} className="flex-1 px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-colors">Submit</button>
             </div>
           </div>
         </div>

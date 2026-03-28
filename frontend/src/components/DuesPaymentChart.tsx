@@ -61,20 +61,20 @@ export function DuesPaymentChart({ paidMonths = [], quarterlyAmount = 450 }: Due
   const missedCount = months.filter(m => m.status === 'missed').length;
 
   return (
-    <div className="glass-card rounded-2xl p-6">
+    <div className="glass-card rounded-xl p-6">
       <div className="flex items-center justify-between mb-5">
         <div>
-          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Payment History</p>
-          <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)]">Last 12 Months</h2>
+          <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Payment History</p>
+          <h2 className="text-base font-medium text-[var(--parchment)]">Last 12 Months</h2>
         </div>
         <div className="flex items-center gap-4 text-xs">
           <div className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-sm bg-[#3A7D6F]/70" />
-            <span className="text-[rgba(245,240,232,0.50)]">{paidCount} Paid</span>
+            <span className="text-[var(--text-muted)]">{paidCount} Paid</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="w-2.5 h-2.5 rounded-sm bg-[#8B5A5A]/50" />
-            <span className="text-[rgba(245,240,232,0.50)]">{missedCount} Missed</span>
+            <span className="text-[var(--text-muted)]">{missedCount} Missed</span>
           </div>
         </div>
       </div>
@@ -87,8 +87,8 @@ export function DuesPaymentChart({ paidMonths = [], quarterlyAmount = 450 }: Due
           return (
             <div key={month} className="flex-1 flex flex-col items-center gap-1 group relative">
               {/* Tooltip */}
-              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-gray-900 border border-gray-700 rounded-lg px-2 py-1 text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
-                {shortMonth}: <span className={status === 'paid' ? 'text-[#3A7D6F]' : status === 'missed' ? 'text-[#8B5A5A]' : 'text-[rgba(245,240,232,0.35)]'}>
+              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[var(--surface-1)] border border-[rgba(245,240,232,0.08)] rounded-lg px-2 py-1 text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                {shortMonth}: <span className={status === 'paid' ? 'text-[#3A7D6F]' : status === 'missed' ? 'text-[#8B5A5A]' : 'text-[var(--text-disabled)]'}>
                   {status === 'paid' ? ' Paid' : status === 'missed' ? ' Missed' : '— Pending'}
                 </span>
               </div>
@@ -98,10 +98,10 @@ export function DuesPaymentChart({ paidMonths = [], quarterlyAmount = 450 }: Due
                 <div
                   className={`w-full rounded-t transition-all duration-500 ${
                     status === 'paid'
-                      ? 'bg-gradient-to-t from-green-600/80 to-green-400/80 border-t border-[rgba(42,93,79,0.30)]'
+                      ? 'bg-gradient-to-t from-[#2A5D4F]/80 to-[#3A7D6F]/70 border-t border-[rgba(42,93,79,0.30)]'
                       : status === 'missed'
-                      ? 'bg-gradient-to-t from-red-900/60 to-red-700/40 border-t border-[rgba(107,58,58,0.20)]'
-                      : 'bg-gray-800/40 border-t border-gray-700/20'
+                      ? 'bg-gradient-to-t from-[#6B3A3A]/60 to-[#8B5A5A]/40 border-t border-[rgba(107,58,58,0.20)]'
+                      : 'bg-[rgba(26,26,30,0.40)] border-t border-[rgba(245,240,232,0.04)]'
                   }`}
                   style={{ height: `${heightPct}%` }}
                 />
@@ -115,14 +115,14 @@ export function DuesPaymentChart({ paidMonths = [], quarterlyAmount = 450 }: Due
       <div className="flex gap-1.5">
         {months.map(({ month, shortMonth }) => (
           <div key={month} className="flex-1 text-center">
-            <span className="text-[9px] text-[rgba(245,240,232,0.25)] font-medium">{shortMonth}</span>
+            <span className="text-[9px] text-[var(--text-disabled)] font-medium">{shortMonth}</span>
           </div>
         ))}
       </div>
 
       {/* Summary */}
-      <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between text-xs">
-        <span className="text-[rgba(245,240,232,0.35)]">
+      <div className="mt-4 pt-4 border-t border-[rgba(245,240,232,0.05)] flex items-center justify-between text-xs">
+        <span className="text-[var(--text-disabled)]">
           {paidCount === 0
             ? 'No payment history found'
             : `${paidCount} of 12 months paid`}

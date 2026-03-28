@@ -152,10 +152,10 @@ The board will report all expenditures to residents within [X] days of action.`,
 ];
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Routine: 'green',
-  Financial: 'blue',
-  Governance: 'amber',
-  Constitutional: 'red',
+  Routine: '[#B09B71]',
+  Financial: '[#B09B71]',
+  Governance: '[#B09B71]',
+  Constitutional: '[#8B5A5A]',
 };
 
 interface Props {
@@ -164,12 +164,12 @@ interface Props {
 
 export function ProposalTemplates({ onUseTemplate }: Props) {
   return (
-    <div className="glass-card rounded-2xl p-6 mb-6">
+    <div className="glass-card rounded-xl p-6 mb-6">
       <div className="flex items-center gap-2 mb-5">
         <span className="text-xl"></span>
         <div>
-          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)]">Quick Start</p>
-          <h3 className="text-base font-bold text-[rgba(245,240,232,0.90)]">Create from Template</h3>
+          <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)]">Quick Start</p>
+          <h3 className="text-base font-medium text-[var(--parchment)]">Create from Template</h3>
         </div>
       </div>
 
@@ -184,14 +184,14 @@ export function ProposalTemplates({ onUseTemplate }: Props) {
                 description: t.descriptionTemplate,
                 category: t.category,
               })}
-              className="text-left rounded-xl p-4 border border-gray-700/50 bg-gray-800/30 hover:border-[#B09B71]/30 hover:bg-[#B09B71]/5 transition-all group"
+              className="text-left rounded-xl p-4 border border-[rgba(245,240,232,0.08)] bg-[rgba(26,26,30,0.30)] hover:border-[#B09B71]/30 hover:bg-[#B09B71]/5 transition-all group"
             >
               <div className="flex items-start gap-3">
                 <span className="text-2xl">{t.icon}</span>
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold text-[rgba(245,240,232,0.90)] group-hover:text-[#D4C4A0] transition-colors">{t.name}</p>
-                  <p className={`text-[10px] mt-0.5 text-${color}-400`}>{t.categoryLabel}</p>
-                  <p className="text-[10px] text-[rgba(245,240,232,0.35)] mt-1">~{t.suggestedVotingDays}d voting · {t.suggestedQuorum} quorum</p>
+                  <p className="text-sm font-medium text-[var(--parchment)] group-hover:text-[#D4C4A0] transition-colors">{t.name}</p>
+                  <p className={`text-[10px] mt-0.5 text-${color}`}>{t.categoryLabel}</p>
+                  <p className="text-[10px] text-[var(--text-disabled)] mt-1">~{t.suggestedVotingDays}d voting · {t.suggestedQuorum} quorum</p>
                 </div>
               </div>
             </button>
@@ -199,7 +199,7 @@ export function ProposalTemplates({ onUseTemplate }: Props) {
         })}
       </div>
 
-      <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-4">
+      <p className="text-[10px] text-[var(--text-disabled)] mt-4">
         Templates pre-fill the proposal form with structured sections. You can edit everything before submitting.
       </p>
     </div>

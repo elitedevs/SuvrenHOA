@@ -81,8 +81,8 @@ function MiniLineChart({ data, threshold }: { data: Projection[]; threshold: num
       {showThreshold && (
         <>
           <line x1={PAD.left} y1={thresholdY} x2={W - PAD.right} y2={thresholdY}
-            stroke="#ef4444" strokeWidth={1} strokeDasharray="4 3" opacity={0.6} />
-          <text x={W - PAD.right - 2} y={thresholdY - 3} fill="#ef4444" fontSize={9} textAnchor="end" opacity={0.8}>
+            stroke="#8B5A5A" strokeWidth={1} strokeDasharray="4 3" opacity={0.6} />
+          <text x={W - PAD.right - 2} y={thresholdY - 3} fill="#8B5A5A" fontSize={9} textAnchor="end" opacity={0.8}>
             Reserve min
           </text>
         </>
@@ -96,15 +96,15 @@ function MiniLineChart({ data, threshold }: { data: Projection[]; threshold: num
         <circle
           key={i}
           cx={p.x} cy={p.y} r={3}
-          fill={p.isBelowThreshold ? '#ef4444' : '#B09B71'}
-          stroke={p.isBelowThreshold ? '#7f1d1d' : '#1a1a1a'}
+          fill={p.isBelowThreshold ? '#8B5A5A' : '#B09B71'}
+          stroke={p.isBelowThreshold ? '#7f1d1d' : '#1A1A1E'}
           strokeWidth={1.5}
         />
       ))}
 
       {/* Month labels */}
       {points.map((p, i) => (
-        <text key={i} x={p.x} y={H - 2} textAnchor="middle" fill="#6b7280" fontSize={9}>
+        <text key={i} x={p.x} y={H - 2} textAnchor="middle" fill="rgba(245,240,232,0.35)" fontSize={9}>
           {p.month}
         </text>
       ))}
@@ -114,7 +114,7 @@ function MiniLineChart({ data, threshold }: { data: Projection[]; threshold: num
         const val = min + t * range;
         const y = PAD.top + (1 - t) * chartH;
         return (
-          <text key={t} x={PAD.left - 4} y={y + 3} textAnchor="end" fill="#6b7280" fontSize={9}>
+          <text key={t} x={PAD.left - 4} y={y + 3} textAnchor="end" fill="rgba(245,240,232,0.35)" fontSize={9}>
             ${(val / 1000).toFixed(0)}K
           </text>
         );
@@ -141,13 +141,13 @@ export function TreasuryProjections() {
   const minBalance = Math.min(...projections.map(p => p.balance));
 
   return (
-    <div className="glass-card rounded-2xl p-6">
+    <div className="glass-card rounded-xl p-6">
       <div className="flex items-start justify-between mb-5">
         <div>
-          <h2 className="text-sm font-bold text-[#D4C4A0]">12-Month Projections</h2>
-          <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1">Based on current income/expense trends</p>
+          <h2 className="text-sm font-medium text-[#D4C4A0]">12-Month Projections</h2>
+          <p className="text-xs text-[var(--text-disabled)] mt-1">Based on current income/expense trends</p>
         </div>
-        <div className={`flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full ${
+        <div className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full ${
           change >= 0
             ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border border-[rgba(42,93,79,0.20)]'
             : 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border border-[rgba(107,58,58,0.20)]'
@@ -162,7 +162,7 @@ export function TreasuryProjections() {
         <div className="flex items-start gap-3 p-3 rounded-xl bg-[#8B5A5A]/5 border border-[rgba(107,58,58,0.20)] mb-5">
           <AlertTriangle className="w-4 h-4 text-[#8B5A5A] shrink-0 mt-0.5" />
           <div>
-            <p className="text-xs font-bold text-[#8B5A5A]">Reserve Warning</p>
+            <p className="text-xs font-medium text-[#8B5A5A]">Reserve Warning</p>
             <p className="text-xs text-[#8B5A5A]/70 mt-0.5">
               Balance projected below ${RESERVE_THRESHOLD.toLocaleString()} minimum in{' '}
               {warningMonths.map(m => m.month).join(', ')}
@@ -178,18 +178,18 @@ export function TreasuryProjections() {
 
       {/* Summary stats */}
       <div className="grid grid-cols-3 gap-3 mb-5">
-        <div className="bg-white/3 rounded-xl p-3">
-          <p className="text-[10px] text-[rgba(245,240,232,0.25)] uppercase tracking-wide font-semibold mb-1">Current</p>
-          <p className="text-sm font-normal text-[rgba(245,240,232,0.80)]">${(currentBalance / 1000).toFixed(1)}K</p>
+        <div className="bg-[rgba(245,240,232,0.03)] rounded-xl p-3">
+          <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wide font-medium mb-1">Current</p>
+          <p className="text-sm font-normal text-[var(--parchment)]">${(currentBalance / 1000).toFixed(1)}K</p>
         </div>
-        <div className="bg-white/3 rounded-xl p-3">
-          <p className="text-[10px] text-[rgba(245,240,232,0.25)] uppercase tracking-wide font-semibold mb-1">Projected End</p>
+        <div className="bg-[rgba(245,240,232,0.03)] rounded-xl p-3">
+          <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wide font-medium mb-1">Projected End</p>
           <p className={`text-sm font-normal ${endBalance < RESERVE_THRESHOLD ? 'text-[#8B5A5A]' : 'text-[#3A7D6F]'}`}>
             ${(endBalance / 1000).toFixed(1)}K
           </p>
         </div>
-        <div className="bg-white/3 rounded-xl p-3">
-          <p className="text-[10px] text-[rgba(245,240,232,0.25)] uppercase tracking-wide font-semibold mb-1">Min Balance</p>
+        <div className="bg-[rgba(245,240,232,0.03)] rounded-xl p-3">
+          <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wide font-medium mb-1">Min Balance</p>
           <p className={`text-sm font-normal ${minBalance < RESERVE_THRESHOLD ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>
             ${(minBalance / 1000).toFixed(1)}K
           </p>
@@ -198,14 +198,14 @@ export function TreasuryProjections() {
 
       {/* Monthly table (collapsed by default) */}
       <details className="group">
-        <summary className="text-xs text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] cursor-pointer transition-colors list-none flex items-center gap-1">
+        <summary className="text-xs text-[var(--text-disabled)] hover:text-[#B09B71] cursor-pointer transition-colors list-none flex items-center gap-1">
           <span className="group-open:rotate-90 inline-block transition-transform">▶</span>
           Monthly breakdown
         </summary>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
-              <tr className="text-[rgba(245,240,232,0.25)] border-b border-[oklch(0.15_0.005_60)]">
+              <tr className="text-[var(--text-disabled)] border-b border-[oklch(0.15_0.005_60)]">
                 <th className="text-left py-1 pr-3">Month</th>
                 <th className="text-right py-1 pr-3">Income</th>
                 <th className="text-right py-1 pr-3">Expenses</th>
@@ -215,10 +215,10 @@ export function TreasuryProjections() {
             <tbody>
               {projections.map((p, i) => (
                 <tr key={i} className={`border-b border-[oklch(0.12_0.005_60)] ${p.isBelowThreshold ? 'bg-[#8B5A5A]/5' : ''}`}>
-                  <td className={`py-1.5 pr-3 font-medium ${p.isBelowThreshold ? 'text-[#8B5A5A]' : 'text-[rgba(245,240,232,0.50)]'}`}>{p.month}</td>
+                  <td className={`py-1.5 pr-3 font-medium ${p.isBelowThreshold ? 'text-[#8B5A5A]' : 'text-[var(--text-muted)]'}`}>{p.month}</td>
                   <td className="text-right py-1.5 pr-3 text-[#3A7D6F]">${(p.income / 1000).toFixed(1)}K</td>
                   <td className="text-right py-1.5 pr-3 text-[#8B5A5A]">${(p.expenses / 1000).toFixed(1)}K</td>
-                  <td className={`text-right py-1.5 font-bold ${p.isBelowThreshold ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>
+                  <td className={`text-right py-1.5 font-medium ${p.isBelowThreshold ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>
                     ${(p.balance / 1000).toFixed(1)}K
                     {p.isBelowThreshold && ' '}
                   </td>
@@ -229,7 +229,7 @@ export function TreasuryProjections() {
         </div>
       </details>
 
-      <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-3">
+      <p className="text-[10px] text-[var(--text-disabled)] mt-3">
         * Projections based on avg dues collection rates and historical expense patterns. Actual results may vary.
       </p>
     </div>

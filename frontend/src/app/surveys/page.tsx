@@ -13,7 +13,7 @@ export default function SurveysPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to participate in surveys</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to participate in surveys</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -23,14 +23,14 @@ export default function SurveysPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">Surveys & Polls</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">
+          <h1 className="text-2xl sm:text-3xl font-medium">Surveys & Polls</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-1">
             Community input on decisions, events, and improvements
           </p>
         </div>
         <button
           onClick={() => setShowCreate(!showCreate)}
-          className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all shrink-0"
         >
           {showCreate ? '← Back' : ' Create Poll'}
         </button>
@@ -56,29 +56,29 @@ function SurveyList() {
     staleTime: 30_000,
   });
 
-  if (isLoading) return <div className="text-center py-12 text-[rgba(245,240,232,0.35)]">Loading surveys...</div>;
+  if (isLoading) return <div className="text-center py-12 text-[var(--text-disabled)]">Loading surveys...</div>;
 
   if (!surveys || surveys.length === 0) {
     return (
       <div className="glass-card rounded-xl p-12 text-center">
-        <BarChart3 className="w-8 h-8 text-[rgba(245,240,232,0.50)] mx-auto mb-4" />
+        <BarChart3 className="w-8 h-8 text-[var(--text-muted)] mx-auto mb-4" />
         <h3 className="text-lg font-medium mb-2">No surveys yet</h3>
-        <p className="text-sm text-[rgba(245,240,232,0.50)] max-w-md mx-auto">
+        <p className="text-sm text-[var(--text-muted)] max-w-md mx-auto">
           Surveys let the board gather community input on everything from pool hours to
           landscaping vendors. Results are transparent and tamper-proof.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 max-w-lg mx-auto">
-          <div className="p-3 rounded-lg bg-gray-800/30 text-center">
+          <div className="p-3 rounded-lg bg-[rgba(26,26,30,0.30)] text-center">
             <p className="text-lg mb-1"></p>
-            <p className="text-[10px] text-[rgba(245,240,232,0.50)]">Quick polls for fast decisions</p>
+            <p className="text-[10px] text-[var(--text-muted)]">Quick polls for fast decisions</p>
           </div>
-          <div className="p-3 rounded-lg bg-gray-800/30 text-center">
+          <div className="p-3 rounded-lg bg-[rgba(26,26,30,0.30)] text-center">
             <p className="text-lg mb-1"></p>
-            <p className="text-[10px] text-[rgba(245,240,232,0.50)]">RSVP for community events</p>
+            <p className="text-[10px] text-[var(--text-muted)]">RSVP for community events</p>
           </div>
-          <div className="p-3 rounded-lg bg-gray-800/30 text-center">
+          <div className="p-3 rounded-lg bg-[rgba(26,26,30,0.30)] text-center">
             <p className="text-lg mb-1"></p>
-            <p className="text-[10px] text-[rgba(245,240,232,0.50)]">Anonymous feedback option</p>
+            <p className="text-[10px] text-[var(--text-muted)]">Anonymous feedback option</p>
           </div>
         </div>
       </div>
@@ -125,23 +125,23 @@ function SurveyCard({ survey }: { survey: any }) {
         <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
           isActive && !isExpired
             ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]'
-            : 'bg-gray-500/10 text-[rgba(245,240,232,0.50)] border-gray-500/20'
+            : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)] border-[rgba(245,240,232,0.08)]'
         }`}>
           {isActive && !isExpired ? ' Active' : ' Closed'}
         </span>
-        <span className="text-[10px] text-[rgba(245,240,232,0.35)]">
+        <span className="text-[10px] text-[var(--text-disabled)]">
           {totalVotes} response{totalVotes !== 1 ? 's' : ''}
         </span>
         {closesAt && (
-          <span className="text-[10px] text-[rgba(245,240,232,0.35)]">
+          <span className="text-[10px] text-[var(--text-disabled)]">
             Closes {closesAt.toLocaleDateString()}
           </span>
         )}
       </div>
 
-      <h3 className="text-base font-semibold mb-2">{survey.title}</h3>
+      <h3 className="text-base font-medium mb-2">{survey.title}</h3>
       {survey.description && (
-        <p className="text-sm text-[rgba(245,240,232,0.50)] mb-4">{survey.description}</p>
+        <p className="text-sm text-[var(--text-muted)] mb-4">{survey.description}</p>
       )}
 
       {/* Options */}
@@ -161,8 +161,8 @@ function SurveyCard({ survey }: { survey: any }) {
               disabled={hasVoted || !isActive || !!isExpired || vote.isPending}
               className={`w-full text-left p-3 rounded-xl border transition-all relative overflow-hidden ${
                 hasVoted
-                  ? 'border-gray-800 bg-gray-900/50 cursor-default'
-                  : 'border-gray-800 bg-gray-900/50 hover:border-[#B09B71]/30 cursor-pointer'
+                  ? 'border-[rgba(245,240,232,0.06)] bg-[rgba(20,20,22,0.50)] cursor-default'
+                  : 'border-[rgba(245,240,232,0.06)] bg-[rgba(20,20,22,0.50)] hover:border-[#B09B71]/30 cursor-pointer'
               }`}
             >
               {/* Result bar (shown after voting) */}
@@ -175,7 +175,7 @@ function SurveyCard({ survey }: { survey: any }) {
               <div className="relative flex items-center justify-between">
                 <span className="text-sm">{option.label}</span>
                 {(hasVoted || !isActive || isExpired) && (
-                  <span className="text-xs text-[rgba(245,240,232,0.50)]">{optionVotes} ({percent.toFixed(0)}%)</span>
+                  <span className="text-xs text-[var(--text-muted)]">{optionVotes} ({percent.toFixed(0)}%)</span>
                 )}
               </div>
             </button>
@@ -232,32 +232,32 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="glass-card rounded-xl p-6 space-y-5">
-      <h2 className="text-lg font-semibold">Create a Poll</h2>
+      <h2 className="text-lg font-medium">Create a Poll</h2>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Question</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Question</label>
         <input
           type="text"
           value={title}
           onChange={e => setTitle(e.target.value)}
           placeholder="What should we do about...?"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none"
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
         />
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Description (optional)</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Description (optional)</label>
         <textarea
           value={description}
           onChange={e => setDescription(e.target.value)}
           placeholder="Add context..."
           rows={2}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
         />
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Options</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Options</label>
         <div className="space-y-2">
           {options.map((opt, i) => (
             <div key={i} className="flex gap-2">
@@ -266,10 +266,10 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
                 value={opt}
                 onChange={e => updateOption(i, e.target.value)}
                 placeholder={`Option ${i + 1}`}
-                className="flex-1 px-4 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none"
+                className="flex-1 px-4 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
               />
               {options.length > 2 && (
-                <button onClick={() => removeOption(i)} className="px-3 text-[rgba(245,240,232,0.35)] hover:text-[#8B5A5A] transition-colors"></button>
+                <button onClick={() => removeOption(i)} className="px-3 text-[var(--text-disabled)] hover:text-[#8B5A5A] transition-colors"></button>
               )}
             </div>
           ))}
@@ -279,11 +279,11 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Closes in</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Closes in</label>
           <select
             value={closesIn}
             onChange={e => setClosesIn(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none"
+            className="w-full px-4 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none"
           >
             <option value="1">1 day</option>
             <option value="3">3 days</option>
@@ -298,21 +298,21 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
               type="checkbox"
               checked={anonymous}
               onChange={e => setAnonymous(e.target.checked)}
-              className="rounded border-gray-700 bg-gray-800"
+              className="rounded border-[rgba(245,240,232,0.08)] bg-[var(--surface-2)]"
             />
-            <span className="text-sm text-[rgba(245,240,232,0.50)]">Anonymous responses</span>
+            <span className="text-sm text-[var(--text-muted)]">Anonymous responses</span>
           </label>
         </div>
       </div>
 
       <div className="flex gap-3">
-        <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+        <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
         <button
           disabled={!title.trim() || options.filter(o => o.trim()).length < 2 || create.isPending}
           onClick={() => create.mutate()}
-          className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
+          className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all"
         >
-          {create.isPending ? '⏳ Creating...' : 'Create Poll'}
+          {create.isPending ? ' Creating...' : 'Create Poll'}
         </button>
       </div>
     </div>

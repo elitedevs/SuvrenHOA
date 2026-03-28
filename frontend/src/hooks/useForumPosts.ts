@@ -44,7 +44,7 @@ function getDefaultTopics(): ForumTopic[] {
   return [
     {
       id: 'default-1',
-      title: 'Welcome to the Faircroft Community Forum! 🏠',
+      title: 'Welcome to the Faircroft Community Forum!',
       author: 'Board Admin',
       lotNumber: 1,
       category: 'Announcements',

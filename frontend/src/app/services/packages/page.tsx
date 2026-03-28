@@ -19,16 +19,16 @@ interface PackageEntry {
 }
 
 const CARRIER_COLORS: Record<Carrier, string> = {
-  USPS: 'bg-blue-900/40 text-[#5A7A9A]',
+  USPS: 'bg-[rgba(90,122,154,0.40)] text-[var(--steel)]',
   UPS: 'bg-amber-900/40 text-[#B09B71]',
-  FedEx: 'bg-purple-900/40 text-purple-300',
-  Amazon: 'bg-orange-900/40 text-[#B09B71]',
-  DHL: 'bg-yellow-900/40 text-[#B09B71]',
-  Other: 'bg-gray-900/40 text-[rgba(245,240,232,0.65)]',
+  FedEx: 'bg-[rgba(90,122,154,0.25)] text-[#D4C4A0]',
+  Amazon: 'bg-[rgba(176,155,113,0.25)] text-[#B09B71]',
+  DHL: 'bg-[rgba(176,155,113,0.25)] text-[#B09B71]',
+  Other: 'bg-[rgba(20,20,22,0.40)] text-[var(--text-body)]',
 };
 
 const STATUS_COLORS: Record<PackageStatus, string> = {
-  delivered: 'bg-green-900/40 text-[#3A7D6F]',
+  delivered: 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]',
   held: 'bg-amber-900/40 text-[#B09B71]',
   'picked-up': 'bg-[oklch(0.18_0.005_60)] text-[oklch(0.45_0.01_60)]',
 };
@@ -86,14 +86,14 @@ export default function PackagesPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-8 flex items-start justify-between flex-wrap gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-[#D4C4A0] mb-2 flex items-center gap-3">
+            <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2 flex items-center gap-3">
               <Package className="w-8 h-8 text-[#B09B71]" /> Package Delivery Log
             </h1>
             <p className="text-[oklch(0.50_0.01_60)]">Track deliveries for the community</p>
           </div>
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#b8942e] text-[#1a1a1a] font-semibold hover:bg-[#B09B71] transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium hover:bg-[#B09B71] transition-colors"
           >
             <Plus className="w-4 h-4" /> Log Package
           </button>
@@ -107,7 +107,7 @@ export default function PackagesPage() {
             { label: 'Total Tracked', val: packages.length, color: 'text-[oklch(0.65_0.01_60)]' },
           ].map(({ label, val, color }) => (
             <div key={label} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
-              <p className={`text-2xl font-bold ${color}`}>{val}</p>
+              <p className={`text-2xl font-medium ${color}`}>{val}</p>
               <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">{label}</p>
             </div>
           ))}
@@ -129,7 +129,7 @@ export default function PackagesPage() {
               <button
                 key={s}
                 onClick={() => setFilterStatus(s)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-colors ${filterStatus === s ? 'bg-[#b8942e] text-[#1a1a1a]' : 'bg-[oklch(0.12_0.005_60)] border border-[oklch(0.20_0.005_60)] text-[oklch(0.55_0.01_60)] hover:text-[#D4C4A0]'}`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-colors ${filterStatus === s ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'bg-[oklch(0.12_0.005_60)] border border-[oklch(0.20_0.005_60)] text-[oklch(0.55_0.01_60)] hover:text-[#D4C4A0]'}`}
               >
                 {s}
               </button>
@@ -146,9 +146,9 @@ export default function PackagesPage() {
             <div key={pkg.id} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl px-5 py-4 flex items-center gap-4 flex-wrap">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${CARRIER_COLORS[pkg.carrier]}`}>{pkg.carrier}</span>
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${CARRIER_COLORS[pkg.carrier]}`}>{pkg.carrier}</span>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[pkg.status]}`}>{pkg.status}</span>
-                  {!pkg.notified && <span className="text-xs px-2 py-0.5 rounded-full bg-red-900/40 text-[#8B5A5A] flex items-center gap-1"><Bell className="w-3 h-3" /> Notify</span>}
+                  {!pkg.notified && <span className="text-xs px-2 py-0.5 rounded-full bg-[rgba(139,90,90,0.40)] text-[#8B5A5A] flex items-center gap-1"><Bell className="w-3 h-3" /> Notify</span>}
                 </div>
                 <p className="text-sm font-mono text-[#D4C4A0] truncate">{pkg.tracking}</p>
                 <p className="text-xs text-[oklch(0.45_0.01_60)] mt-0.5">Lot {pkg.lot} • {pkg.recipient} • {pkg.date}</p>
@@ -157,7 +157,7 @@ export default function PackagesPage() {
                 {pkg.status !== 'picked-up' && (
                   <button
                     onClick={() => updateStatus(pkg.id, 'picked-up')}
-                    className="text-xs px-3 py-1.5 rounded-lg bg-green-900/30 border border-green-700/40 text-[#3A7D6F] hover:bg-green-900/50 transition-colors"
+                    className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.30)] border border-[rgba(42,93,79,0.40)] text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.50)] transition-colors"
                   >
                     Mark Picked Up
                   </button>
@@ -179,9 +179,9 @@ export default function PackagesPage() {
       {/* Add package modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-2xl p-6 max-w-md w-full">
+          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-xl p-6 max-w-md w-full">
             <div className="flex items-center justify-between mb-5">
-              <h3 className="font-semibold text-[#D4C4A0]">Log New Package</h3>
+              <h3 className="font-medium text-[#D4C4A0]">Log New Package</h3>
               <button onClick={() => setShowForm(false)}><X className="w-4 h-4 text-[oklch(0.45_0.01_60)]" /></button>
             </div>
             <div className="space-y-3">
@@ -216,7 +216,7 @@ export default function PackagesPage() {
                   <option value="picked-up">Picked Up</option>
                 </select>
               </div>
-              <button onClick={addPackage} disabled={!form.tracking || !form.lot} className="w-full py-2.5 rounded-xl bg-[#b8942e] text-[#1a1a1a] font-semibold disabled:opacity-40 hover:bg-[#B09B71] transition-colors">
+              <button onClick={addPackage} disabled={!form.tracking || !form.lot} className="w-full py-2.5 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium disabled:opacity-40 hover:bg-[#B09B71] transition-colors">
                 Log Package
               </button>
             </div>

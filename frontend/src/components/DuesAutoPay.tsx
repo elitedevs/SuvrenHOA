@@ -81,23 +81,23 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
   const config = FREQUENCY_CONFIG[settings.frequency];
 
   return (
-    <div className="glass-card rounded-2xl hover-lift p-6 border border-white/[0.04]">
+    <div className="glass-card rounded-xl hover-lift p-6 border border-[rgba(245,240,232,0.04)]">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-[#B09B71]/15 flex items-center justify-center">
             <RefreshCw className="w-5 h-5 text-[#B09B71]" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-[rgba(245,240,232,0.90)]">Auto-Pay</h3>
-            <p className="text-xs text-[rgba(245,240,232,0.35)]">Recurring dues payments</p>
+            <h3 className="text-sm font-medium text-[var(--parchment)]">Auto-Pay</h3>
+            <p className="text-xs text-[var(--text-disabled)]">Recurring dues payments</p>
           </div>
         </div>
         <button
           onClick={toggleAutoPay}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border transition-all cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${
             settings.enabled
-              ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border-green-500/25'
-              : 'bg-white/[0.04] text-[rgba(245,240,232,0.50)] border-white/[0.08] hover:border-[#B09B71]/30 hover:text-[#B09B71]'
+              ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border-[rgba(42,93,79,0.25)]'
+              : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)] border-[rgba(245,240,232,0.08)] hover:border-[#B09B71]/30 hover:text-[#B09B71]'
           }`}
         >
           {settings.enabled ? (
@@ -114,35 +114,35 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
           <div className="p-4 rounded-xl bg-[#3A7D6F]/[0.07] border border-[rgba(42,93,79,0.20)]">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
-              <span className="text-xs font-bold text-[#3A7D6F]">Auto-Pay Active</span>
+              <span className="text-xs font-medium text-[#3A7D6F]">Auto-Pay Active</span>
             </div>
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div>
-                <span className="text-[rgba(245,240,232,0.35)]">Frequency:</span>
-                <span className="text-[rgba(245,240,232,0.80)] ml-1 font-semibold">{config.label}</span>
+                <span className="text-[var(--text-disabled)]">Frequency:</span>
+                <span className="text-[var(--parchment)] ml-1 font-medium">{config.label}</span>
               </div>
               <div>
-                <span className="text-[rgba(245,240,232,0.35)]">Amount:</span>
-                <span className="text-[#B09B71] ml-1 font-bold">${config.amount} USDC</span>
+                <span className="text-[var(--text-disabled)]">Amount:</span>
+                <span className="text-[#B09B71] ml-1 font-medium">${config.amount} USDC</span>
               </div>
               <div className="col-span-2">
-                <span className="text-[rgba(245,240,232,0.35)]">Next payment:</span>
-                <span className="text-[rgba(245,240,232,0.80)] ml-1 font-semibold">{getNextPaymentDate(settings.frequency)}</span>
+                <span className="text-[var(--text-disabled)]">Next payment:</span>
+                <span className="text-[var(--parchment)] ml-1 font-medium">{getNextPaymentDate(settings.frequency)}</span>
               </div>
             </div>
           </div>
 
           {/* Payment method */}
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-[rgba(245,240,232,0.02)] border border-[rgba(245,240,232,0.04)]">
             <CreditCard className="w-4 h-4 text-[#B09B71]" />
             <div className="flex-1 min-w-0">
-              <div className="text-xs font-semibold text-[rgba(245,240,232,0.65)]">Payment Wallet</div>
-              <div className="text-[11px] text-[rgba(245,240,232,0.35)] font-mono truncate">
+              <div className="text-xs font-medium text-[var(--text-body)]">Payment Wallet</div>
+              <div className="text-[11px] text-[var(--text-disabled)] font-mono truncate">
                 {settings.walletAddress ? `${settings.walletAddress.slice(0, 10)}...${settings.walletAddress.slice(-6)}` : 'Connected wallet'}
               </div>
             </div>
             <div className="text-right">
-              <div className="text-[10px] text-[rgba(245,240,232,0.25)]">Est. gas</div>
+              <div className="text-[10px] text-[var(--text-disabled)]">Est. gas</div>
               <div className="text-xs text-[#B09B71]">~$0.05</div>
             </div>
           </div>
@@ -156,8 +156,8 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
         </div>
       ) : (
         <div className="text-center py-4">
-          <p className="text-xs text-[rgba(245,240,232,0.35)] mb-2">Set up automatic dues payments from your connected wallet</p>
-          <div className="flex items-center gap-1 justify-center text-[11px] text-[rgba(245,240,232,0.25)]">
+          <p className="text-xs text-[var(--text-disabled)] mb-2">Set up automatic dues payments from your connected wallet</p>
+          <div className="flex items-center gap-1 justify-center text-[11px] text-[var(--text-disabled)]">
             <Zap className="w-3 h-3" />
             <span>Smart contract integration coming soon</span>
           </div>
@@ -167,11 +167,11 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
       {/* Setup Modal */}
       {showSetup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className="glass w-full max-w-sm rounded-2xl border border-white/[0.08] p-5">
-            <h3 className="text-base font-bold text-[rgba(245,240,232,0.90)] mb-4">Set Up Auto-Pay</h3>
+          <div className="glass w-full max-w-sm rounded-xl border border-[rgba(245,240,232,0.08)] p-5">
+            <h3 className="text-base font-medium text-[var(--parchment)] mb-4">Set Up Auto-Pay</h3>
             
             <div className="mb-4">
-              <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-2 block">Payment Frequency</label>
+              <label className="text-xs font-medium text-[var(--text-muted)] mb-2 block">Payment Frequency</label>
               <div className="space-y-2">
                 {(Object.entries(FREQUENCY_CONFIG) as [Frequency, typeof FREQUENCY_CONFIG[Frequency]][]).map(([freq, cfg]) => (
                   <div
@@ -180,50 +180,50 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
                     className={`p-3 rounded-xl cursor-pointer border transition-all ${
                       settings.frequency === freq
                         ? 'bg-[#B09B71]/10 border-[#B09B71]/30'
-                        : 'bg-white/[0.02] border-white/[0.04] hover:border-[#B09B71]/15'
+                        : 'bg-[rgba(245,240,232,0.02)] border-[rgba(245,240,232,0.04)] hover:border-[#B09B71]/15'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{cfg.label}</div>
-                        <div className="text-[11px] text-[rgba(245,240,232,0.35)]">{cfg.description}</div>
+                        <div className="text-sm font-medium text-[var(--parchment)]">{cfg.label}</div>
+                        <div className="text-[11px] text-[var(--text-disabled)]">{cfg.description}</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-bold text-[#B09B71]">${cfg.amount}</div>
-                        <div className="text-[10px] text-[rgba(245,240,232,0.25)]">USDC</div>
+                        <div className="text-sm font-medium text-[#B09B71]">${cfg.amount}</div>
+                        <div className="text-[10px] text-[var(--text-disabled)]">USDC</div>
                       </div>
                     </div>
                     {freq === 'annual' && (
-                      <div className="mt-1.5 text-[10px] text-[#3A7D6F] font-semibold"> Save 5% vs quarterly</div>
+                      <div className="mt-1.5 text-[10px] text-[#3A7D6F] font-medium"> Save 5% vs quarterly</div>
                     )}
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04] mb-4">
+            <div className="p-3 rounded-xl bg-[rgba(245,240,232,0.02)] border border-[rgba(245,240,232,0.04)] mb-4">
               <div className="flex items-center gap-2 text-xs">
                 <Calendar className="w-3.5 h-3.5 text-[#B09B71]" />
-                <span className="text-[rgba(245,240,232,0.50)]">Next payment: <span className="text-[rgba(245,240,232,0.80)] font-semibold">{getNextPaymentDate(settings.frequency)}</span></span>
+                <span className="text-[var(--text-muted)]">Next payment: <span className="text-[var(--parchment)] font-medium">{getNextPaymentDate(settings.frequency)}</span></span>
               </div>
               <div className="flex items-center gap-2 text-xs mt-1.5">
                 <CreditCard className="w-3.5 h-3.5 text-[#B09B71]" />
-                <span className="text-[rgba(245,240,232,0.50)]">From: <span className="text-[rgba(245,240,232,0.80)] font-mono text-[11px]">{walletAddress ? `${walletAddress.slice(0, 10)}...${walletAddress.slice(-4)}` : 'Connected wallet'}</span></span>
+                <span className="text-[var(--text-muted)]">From: <span className="text-[var(--parchment)] font-mono text-[11px]">{walletAddress ? `${walletAddress.slice(0, 10)}...${walletAddress.slice(-4)}` : 'Connected wallet'}</span></span>
               </div>
               <div className="flex items-center gap-2 text-xs mt-1.5">
                 <Zap className="w-3.5 h-3.5 text-[#B09B71]" />
-                <span className="text-[rgba(245,240,232,0.50)]">Est. gas per tx: <span className="text-[#B09B71] font-semibold">~$0.05</span></span>
+                <span className="text-[var(--text-muted)]">Est. gas per tx: <span className="text-[#B09B71] font-medium">~$0.05</span></span>
               </div>
             </div>
 
-            <div className="p-2.5 rounded-lg bg-yellow-400/8 border border-yellow-400/15 mb-4">
+            <div className="p-2.5 rounded-lg bg-[rgba(176,155,113,0.08)] border border-[rgba(176,155,113,0.15)] mb-4">
               <p className="text-[11px] text-[#B09B71]"> Note: Auto-pay scheduling requires smart contract support. This saves your preference — actual automation coming in a future update.</p>
             </div>
 
             <div className="flex gap-3">
               <button
                 onClick={() => setShowSetup(false)}
-                className="flex-1 py-2.5 rounded-xl border border-white/[0.08] text-sm text-[rgba(245,240,232,0.50)] cursor-pointer"
+                className="flex-1 py-2.5 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm text-[var(--text-muted)] cursor-pointer"
               >
                 Cancel
               </button>
@@ -232,7 +232,7 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
                   saveSettings({ ...settings, enabled: true, setupDate: new Date().toISOString() });
                   setShowSetup(false);
                 }}
-                className="flex-1 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold cursor-pointer"
+                className="flex-1 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium cursor-pointer"
               >
                 Enable Auto-Pay
               </button>

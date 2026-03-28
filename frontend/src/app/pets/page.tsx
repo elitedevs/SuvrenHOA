@@ -47,19 +47,19 @@ function PlaydatesTab() {
   };
 
   if (!loaded) {
-    return <div className="text-center py-12 text-[rgba(245,240,232,0.35)] animate-pulse">Loading playdates...</div>;
+    return <div className="text-center py-12 text-[var(--text-disabled)] animate-pulse">Loading playdates...</div>;
   }
 
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)]"> Upcoming Playdates</h2>
-          <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">Schedule hangouts for your furry friends</p>
+          <h2 className="text-base font-medium text-[var(--parchment)]"> Upcoming Playdates</h2>
+          <p className="text-xs text-[var(--text-disabled)] mt-0.5">Schedule hangouts for your furry friends</p>
         </div>
         <button
           onClick={() => setShowAdd(!showAdd)}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           Schedule
@@ -68,28 +68,28 @@ function PlaydatesTab() {
 
       {/* Add Form */}
       {showAdd && (
-        <div className="glass-card rounded-2xl p-5 border border-[#B09B71]/20">
-          <h3 className="text-sm font-bold text-[rgba(245,240,232,0.80)] mb-4">Schedule a Playdate</h3>
+        <div className="glass-card rounded-xl p-5 border border-[#B09B71]/20">
+          <h3 className="text-sm font-medium text-[var(--parchment)] mb-4">Schedule a Playdate</h3>
           <form onSubmit={handleSchedule} className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Date</label>
+                <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Date</label>
                 <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})} required
-                  className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm text-[rgba(245,240,232,0.80)] focus:border-[#B09B71]/50 focus:outline-none" />
+                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
               </div>
               <div>
-                <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Time</label>
+                <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Time</label>
                 <input type="time" value={form.time} onChange={e => setForm({...form, time: e.target.value})}
-                  className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm text-[rgba(245,240,232,0.80)] focus:border-[#B09B71]/50 focus:outline-none" />
+                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
               </div>
             </div>
             <div>
-              <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Location</label>
+              <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Location</label>
               <div className="flex gap-2">
                 {(['Park', 'Yard', 'Common Area'] as const).map(loc => (
                   <button key={loc} type="button" onClick={() => setForm({...form, location: loc})}
-                    className={`flex-1 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                      form.location === loc ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)] border border-white/[0.04]'
+                    className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
+                      form.location === loc ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)] border border-[rgba(245,240,232,0.04)]'
                     }`}>
                     {LOCATION_ICONS[loc]} {loc}
                   </button>
@@ -98,26 +98,26 @@ function PlaydatesTab() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Your Lot #</label>
+                <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Your Lot #</label>
                 <input value={form.organizer} onChange={e => setForm({...form, organizer: e.target.value})} placeholder="Lot 5" required
-                  className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm text-[rgba(245,240,232,0.80)] focus:border-[#B09B71]/50 focus:outline-none" />
+                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
               </div>
               <div>
-                <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Pets Invited (comma-sep)</label>
+                <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Pets Invited (comma-sep)</label>
                 <input value={form.petsInvited} onChange={e => setForm({...form, petsInvited: e.target.value})} placeholder="Buddy, Luna"
-                  className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm text-[rgba(245,240,232,0.80)] focus:border-[#B09B71]/50 focus:outline-none" />
+                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
               </div>
             </div>
             <div>
-              <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Description (optional)</label>
+              <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Description (optional)</label>
               <input value={form.description} onChange={e => setForm({...form, description: e.target.value})} placeholder="Casual morning play session!"
-                className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm text-[rgba(245,240,232,0.80)] focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
             <div className="flex gap-3">
               <button type="button" onClick={() => setShowAdd(false)}
-                className="flex-1 py-2.5 rounded-xl border border-gray-700 text-sm text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] cursor-pointer">Cancel</button>
+                className="flex-1 py-2.5 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm text-[var(--text-muted)] hover:text-[var(--parchment)] cursor-pointer">Cancel</button>
               <button type="submit"
-                className="flex-1 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold cursor-pointer">Schedule </button>
+                className="flex-1 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium cursor-pointer">Schedule </button>
             </div>
           </form>
         </div>
@@ -125,10 +125,10 @@ function PlaydatesTab() {
 
       {/* RSVP name */}
       {upcomingPlaydates.length > 0 && (
-        <div className="glass-card rounded-xl p-3 border border-white/[0.04]">
-          <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Your name for RSVPs:</label>
+        <div className="glass-card rounded-xl p-3 border border-[rgba(245,240,232,0.04)]">
+          <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Your name for RSVPs:</label>
           <input value={myName} onChange={e => setMyName(e.target.value)} placeholder="Lot 5 or your name"
-            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm text-[rgba(245,240,232,0.80)] focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
         </div>
       )}
 
@@ -136,7 +136,7 @@ function PlaydatesTab() {
       {upcomingPlaydates.length === 0 ? (
         <div className="glass-card rounded-xl p-12 text-center">
           <div className="text-4xl mb-3"></div>
-          <p className="text-[rgba(245,240,232,0.50)] text-sm">No upcoming playdates. Schedule one!</p>
+          <p className="text-[var(--text-muted)] text-sm">No upcoming playdates. Schedule one!</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -145,24 +145,24 @@ function PlaydatesTab() {
             const myRsvp = myName ? pd.rsvps.find(r => r.name === myName)?.status : undefined;
 
             return (
-              <div key={pd.id} className="glass-card rounded-2xl p-5 border border-white/[0.04] hover-lift">
+              <div key={pd.id} className="glass-card rounded-xl p-5 border border-[rgba(245,240,232,0.04)] hover-lift">
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div>
                     <div className="flex items-center gap-2">
                       <span className="text-xl">{LOCATION_ICONS[pd.location]}</span>
-                      <span className="text-base font-bold text-[rgba(245,240,232,0.90)]">{pd.location}</span>
+                      <span className="text-base font-medium text-[var(--parchment)]">{pd.location}</span>
                     </div>
                     {pd.description && (
-                      <p className="text-xs text-[rgba(245,240,232,0.50)] mt-0.5">{pd.description}</p>
+                      <p className="text-xs text-[var(--text-muted)] mt-0.5">{pd.description}</p>
                     )}
                   </div>
                   <div className="text-right shrink-0">
-                    <div className="text-sm font-semibold text-[#B09B71]">{formatDate(pd.date)}</div>
-                    <div className="text-xs text-[rgba(245,240,232,0.35)]">{pd.time}</div>
+                    <div className="text-sm font-medium text-[#B09B71]">{formatDate(pd.date)}</div>
+                    <div className="text-xs text-[var(--text-disabled)]">{pd.time}</div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 text-xs text-[rgba(245,240,232,0.35)] mb-3">
+                <div className="flex items-center gap-4 text-xs text-[var(--text-disabled)] mb-3">
                   <span>By {pd.organizer}</span>
                   {pd.petsInvited.length > 0 && (
                     <span> {pd.petsInvited.join(', ')}</span>
@@ -177,12 +177,12 @@ function PlaydatesTab() {
                       key={status}
                       onClick={() => myName && rsvp(pd.id, myName, status)}
                       disabled={!myName}
-                      className={`flex-1 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer disabled:opacity-40 ${
+                      className={`flex-1 py-1.5 rounded-lg text-xs font-medium border transition-all cursor-pointer disabled:opacity-40 ${
                         myRsvp === status
                           ? status === 'yes' ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border-[rgba(42,93,79,0.25)]'
-                          : status === 'maybe' ? 'bg-yellow-500/20 text-[#B09B71] border-yellow-500/30'
+                          : status === 'maybe' ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border-[rgba(176,155,113,0.30)]'
                           : 'bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] border-[rgba(107,58,58,0.25)]'
-                          : 'bg-white/[0.03] text-[rgba(245,240,232,0.35)] border-white/[0.06] hover:text-[rgba(245,240,232,0.65)]'
+                          : 'bg-[rgba(245,240,232,0.03)] text-[var(--text-disabled)] border-[rgba(245,240,232,0.06)] hover:text-[var(--text-body)]'
                       }`}
                     >
                       {status === 'yes' ? ' Going' : status === 'maybe' ? ' Maybe' : ' Can\'t'}
@@ -191,7 +191,7 @@ function PlaydatesTab() {
                 </div>
 
                 {pd.rsvps.length > 0 && (
-                  <div className="mt-2 text-[10px] text-[rgba(245,240,232,0.25)]">
+                  <div className="mt-2 text-[10px] text-[var(--text-disabled)]">
                     RSVPs: {pd.rsvps.map(r => `${r.name} (${r.status})`).join(', ')}
                   </div>
                 )}
@@ -221,7 +221,7 @@ export default function PetsPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view the pet registry</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to view the pet registry</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -233,12 +233,12 @@ export default function PetsPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2"><PawPrint className="w-7 h-7 text-[#B09B71]" /> Pet Registry</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Register pets and schedule playdates</p>
+          <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-2"><PawPrint className="w-7 h-7 text-[#B09B71]" /> Pet Registry</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Register pets and schedule playdates</p>
         </div>
         {activeTab === 'registry' && (
           <button onClick={() => setShowRegister(!showRegister)}
-            className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-medium transition-all shrink-0 cursor-pointer">
+            className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all shrink-0 cursor-pointer">
             {showRegister ? '← Back' : ' Register Pet'}
           </button>
         )}
@@ -248,20 +248,20 @@ export default function PetsPage() {
       <div className="flex gap-2 mb-6">
         <button
           onClick={() => setActiveTab('registry')}
-          className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+          className={`px-5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
             activeTab === 'registry'
               ? 'bg-[#B09B71]/15 text-[#D4C4A0] border border-[#B09B71]/25'
-              : 'glass text-[rgba(245,240,232,0.50)] border border-white/[0.04] hover:text-[rgba(245,240,232,0.80)]'
+              : 'glass text-[var(--text-muted)] border border-[rgba(245,240,232,0.04)] hover:text-[var(--parchment)]'
           }`}
         >
            Registry
         </button>
         <button
           onClick={() => setActiveTab('playdates')}
-          className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+          className={`px-5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
             activeTab === 'playdates'
               ? 'bg-[#B09B71]/15 text-[#D4C4A0] border border-[#B09B71]/25'
-              : 'glass text-[rgba(245,240,232,0.50)] border border-white/[0.04] hover:text-[rgba(245,240,232,0.80)]'
+              : 'glass text-[var(--text-muted)] border border-[rgba(245,240,232,0.04)] hover:text-[var(--parchment)]'
           }`}
         >
            Playdates
@@ -278,7 +278,7 @@ export default function PetsPage() {
               <button key={s} onClick={() => setFilter(s)}
                 className={`glass-card rounded-xl hover-lift p-3 text-center transition-all cursor-pointer ${filter === s ? 'ring-1 ring-[#B09B71]/30' : ''}`}>
                 <p className="text-lg">{s === 'all' ? '' : SPECIES_ICONS[s]}</p>
-                <p className="text-[10px] text-[rgba(245,240,232,0.35)] capitalize">{s === 'all' ? `All (${(pets || []).length})` : `${s === 'fish' ? 'Fish' : s + 's'} (${(pets || []).filter((p: any) => p.species === s).length})`}</p>
+                <p className="text-[10px] text-[var(--text-disabled)] capitalize">{s === 'all' ? `All (${(pets || []).length})` : `${s === 'fish' ? 'Fish' : s + 's'} (${(pets || []).filter((p: any) => p.species === s).length})`}</p>
               </button>
             ))}
           </div>
@@ -287,18 +287,18 @@ export default function PetsPage() {
           {!showRegister && (pets || []).length > 0 && (() => {
             const potm = (pets || [])[0];
             return (
-              <div className="glass-card rounded-2xl p-5 mb-6 border border-[#B09B71]/20 bg-gradient-to-br from-[#B09B71]/5 to-transparent">
+              <div className="glass-card rounded-xl p-5 mb-6 border border-[#B09B71]/20 bg-gradient-to-br from-[#B09B71]/5 to-transparent">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-lg"></span>
-                  <p className="text-xs font-bold text-[#B09B71] uppercase tracking-widest">Pet of the Month</p>
+                  <p className="text-xs font-medium text-[#B09B71] uppercase tracking-widest">Pet of the Month</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center text-3xl shadow-[0_0_16px_rgba(201,169,110,0.2)]">
+                  <div className="w-16 h-16 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center text-3xl shadow-[0_0_16px_rgba(201,169,110,0.2)]">
                     {SPECIES_ICONS[potm.species] || ''}
                   </div>
                   <div>
                     <p className="text-xl font-normal text-[#D4C4A0]">{potm.name}</p>
-                    <p className="text-xs text-[rgba(245,240,232,0.50)] capitalize">{potm.breed || potm.species} · Lot #{potm.lot_number}</p>
+                    <p className="text-xs text-[var(--text-muted)] capitalize">{potm.breed || potm.species} · Lot #{potm.lot_number}</p>
                     <p className="text-[10px] text-[#B09B71] mt-1">⭐ Community favorite this month</p>
                   </div>
                 </div>
@@ -309,16 +309,16 @@ export default function PetsPage() {
           {showRegister ? (
             <RegisterPet onClose={() => setShowRegister(false)} />
           ) : isLoading ? (
-            <div className="text-center py-12 text-[rgba(245,240,232,0.35)]">Loading pets...</div>
+            <div className="text-center py-12 text-[var(--text-disabled)]">Loading pets...</div>
           ) : filtered.length === 0 ? (
             <div className="glass-card rounded-xl hover-lift p-12 text-center">
               <p className="text-5xl mb-4"></p>
               <h3 className="text-lg font-medium mb-2">No pets registered yet</h3>
-              <p className="text-sm text-[rgba(245,240,232,0.50)]">Register your pets so neighbors know who's who on walks!</p>
+              <p className="text-sm text-[var(--text-muted)]">Register your pets so neighbors know who's who on walks!</p>
             </div>
           ) : (
             <>
-              <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">
+              <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">
                 Community Gallery · {filtered.length} pet{filtered.length !== 1 ? 's' : ''}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -329,18 +329,18 @@ export default function PetsPage() {
                         {SPECIES_ICONS[pet.species] || ''}
                       </div>
                       <div>
-                        <h3 className="font-semibold text-sm">{pet.name}</h3>
-                        <p className="text-[10px] text-[rgba(245,240,232,0.35)] capitalize">{pet.breed || pet.species} · Lot #{pet.lot_number}</p>
+                        <h3 className="font-medium text-sm">{pet.name}</h3>
+                        <p className="text-[10px] text-[var(--text-disabled)] capitalize">{pet.breed || pet.species} · Lot #{pet.lot_number}</p>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-[10px]">
-                      {pet.color && <div><span className="text-[rgba(245,240,232,0.35)]">Color:</span> <span className="text-[rgba(245,240,232,0.65)]">{pet.color}</span></div>}
-                      {pet.weight && <div><span className="text-[rgba(245,240,232,0.35)]">Weight:</span> <span className="text-[rgba(245,240,232,0.65)]">{pet.weight}</span></div>}
-                      {pet.age && <div><span className="text-[rgba(245,240,232,0.35)]">Age:</span> <span className="text-[rgba(245,240,232,0.65)]">{pet.age}</span></div>}
+                      {pet.color && <div><span className="text-[var(--text-disabled)]">Color:</span> <span className="text-[var(--text-body)]">{pet.color}</span></div>}
+                      {pet.weight && <div><span className="text-[var(--text-disabled)]">Weight:</span> <span className="text-[var(--text-body)]">{pet.weight}</span></div>}
+                      {pet.age && <div><span className="text-[var(--text-disabled)]">Age:</span> <span className="text-[var(--text-body)]">{pet.age}</span></div>}
                     </div>
                     <div className="flex gap-2 mt-3">
                       {pet.vaccinated && <span className="text-[9px] px-1.5 py-0.5 rounded bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] flex items-center gap-0.5"><CheckCircle className="w-2.5 h-2.5" /> Vaccinated</span>}
-                      {pet.microchipped && <span className="text-[9px] px-1.5 py-0.5 rounded bg-[rgba(90,122,154,0.10)] text-[#5A7A9A]"> Microchipped</span>}
+                      {pet.microchipped && <span className="text-[9px] px-1.5 py-0.5 rounded bg-[rgba(90,122,154,0.10)] text-[var(--steel)]"> Microchipped</span>}
                     </div>
                   </div>
                 ))}
@@ -380,19 +380,19 @@ function RegisterPet({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="glass-card rounded-xl hover-lift p-6 space-y-5">
-      <h2 className="text-lg font-semibold">Register Your Pet</h2>
+      <h2 className="text-lg font-medium">Register Your Pet</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Pet Name</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Pet Name</label>
           <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Buddy"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
         </div>
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Species</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Species</label>
           <div className="flex gap-2">
             {Object.entries(SPECIES_ICONS).map(([s, icon]) => (
               <button key={s} onClick={() => setSpecies(s)}
-                className={`flex-1 py-2 rounded-xl text-xs transition-all cursor-pointer ${species === s ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'}`}>
+                className={`flex-1 py-2 rounded-xl text-xs transition-all cursor-pointer ${species === s ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
                 {icon}
               </button>
             ))}
@@ -400,33 +400,33 @@ function RegisterPet({ onClose }: { onClose: () => void }) {
         </div>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div><label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Breed</label>
+        <div><label className="block text-xs text-[var(--text-muted)] mb-1">Breed</label>
           <input type="text" value={breed} onChange={e => setBreed(e.target.value)} placeholder="Lab mix"
-            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
-        <div><label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Color</label>
+            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
+        <div><label className="block text-xs text-[var(--text-muted)] mb-1">Color</label>
           <input type="text" value={color} onChange={e => setColor(e.target.value)} placeholder="Golden"
-            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
-        <div><label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Weight</label>
+            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
+        <div><label className="block text-xs text-[var(--text-muted)] mb-1">Weight</label>
           <input type="text" value={weight} onChange={e => setWeight(e.target.value)} placeholder="65 lbs"
-            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
-        <div><label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Age</label>
+            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
+        <div><label className="block text-xs text-[var(--text-muted)] mb-1">Age</label>
           <input type="text" value={age} onChange={e => setAge(e.target.value)} placeholder="3 years"
-            className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
+            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
       </div>
       <div className="flex gap-4">
         <label className="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" checked={vaccinated} onChange={e => setVaccinated(e.target.checked)} className="rounded border-gray-700 bg-gray-800" />
-          <span className="text-sm text-[rgba(245,240,232,0.50)]">Vaccinated</span>
+          <input type="checkbox" checked={vaccinated} onChange={e => setVaccinated(e.target.checked)} className="rounded border-[rgba(245,240,232,0.08)] bg-[var(--surface-2)]" />
+          <span className="text-sm text-[var(--text-muted)]">Vaccinated</span>
         </label>
         <label className="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" checked={microchipped} onChange={e => setMicrochipped(e.target.checked)} className="rounded border-gray-700 bg-gray-800" />
-          <span className="text-sm text-[rgba(245,240,232,0.50)]">Microchipped</span>
+          <input type="checkbox" checked={microchipped} onChange={e => setMicrochipped(e.target.checked)} className="rounded border-[rgba(245,240,232,0.08)] bg-[var(--surface-2)]" />
+          <span className="text-sm text-[var(--text-muted)]">Microchipped</span>
         </label>
       </div>
       <div className="flex gap-3">
-        <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors cursor-pointer">Cancel</button>
+        <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors cursor-pointer">Cancel</button>
         <button disabled={!name.trim() || register.isPending} onClick={() => register.mutate()}
-          className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all cursor-pointer">
+          className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all cursor-pointer">
           {register.isPending ? '⏳ Registering...' : ' Register Pet'}
         </button>
       </div>

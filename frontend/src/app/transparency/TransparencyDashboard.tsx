@@ -114,15 +114,15 @@ function StatCard({
   const colorMap = {
     gold: { icon: 'text-[#B09B71]', glow: 'var(--glow-gold)', bg: 'rgba(201,169,110,0.08)' },
     green:  { icon: 'text-[#3A7D6F]',  glow: 'var(--glow-green)',  bg: 'rgba(34,197,94,0.08)' },
-    blue:   { icon: 'text-[#5A7A9A]',   glow: 'var(--glow-blue)',   bg: 'rgba(59,130,246,0.08)' },
+    blue:   { icon: 'text-[var(--steel)]',   glow: 'var(--glow-blue)',   bg: 'rgba(59,130,246,0.08)' },
     amber:  { icon: 'text-[#B09B71]',  glow: 'var(--glow-amber)',  bg: 'rgba(245,158,11,0.08)' },
   };
   const c = colorMap[color];
 
   return (
-    <div className="glass-card rounded-2xl p-5 flex flex-col gap-3 hover-lift">
+    <div className="glass-card rounded-xl p-5 flex flex-col gap-3 hover-lift">
       <div className="flex items-center justify-between">
-        <span className="text-[13px] font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wider">
+        <span className="text-[13px] font-medium text-[var(--text-muted)] uppercase tracking-wider">
           {label}
         </span>
         <div
@@ -134,9 +134,9 @@ function StatCard({
       </div>
 
       {loading ? (
-        <div className="h-8 w-24 rounded-lg animate-pulse bg-white/[0.06]" />
+        <div className="h-8 w-24 rounded-lg animate-pulse bg-[rgba(245,240,232,0.06)]" />
       ) : (
-        <div className="text-3xl font-normal text-white">
+        <div className="text-3xl font-normal text-[var(--text-heading)]">
           <AnimatedCounter
             value={value}
             prefix={prefix}
@@ -147,7 +147,7 @@ function StatCard({
       )}
 
       {subtext && (
-        <p className="text-[12px] text-[rgba(245,240,232,0.35)] font-medium">{subtext}</p>
+        <p className="text-[12px] text-[var(--text-disabled)] font-medium">{subtext}</p>
       )}
     </div>
   );
@@ -211,7 +211,7 @@ export function TransparencyDashboard() {
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28 text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-[13px] font-semibold"
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-[13px] font-medium"
                style={{ background: 'rgba(201,169,110,0.10)', border: '1px solid rgba(201,169,110,0.2)', color: 'rgba(201,169,110,1)' }}>
             <div className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
             Live on Base Sepolia
@@ -220,37 +220,37 @@ export function TransparencyDashboard() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight mb-6 leading-[1.1]">
             <span className="gradient-text text-glow">Full Transparency.</span>
             <br />
-            <span className="text-white">Zero Trust Required.</span>
+            <span className="text-[var(--text-heading)]">Zero Trust Required.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-[rgba(245,240,232,0.50)] max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg sm:text-xl text-[var(--text-muted)] max-w-2xl mx-auto mb-10 leading-relaxed">
             Every dollar, every vote, every document —{' '}
-            <span className="text-[rgba(245,240,232,0.80)] font-semibold">publicly verifiable on the blockchain.</span>
+            <span className="text-[var(--parchment)] font-medium">publicly verifiable on the blockchain.</span>
             {' '}No sign-in. No middleman. Just math.
           </p>
 
           {/* Live stats strip */}
           {!stats.loading && (
-            <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-3 px-6 py-3 rounded-2xl mx-auto"
+            <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-3 px-6 py-3 rounded-xl mx-auto"
                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
               <div className="flex items-center gap-2 text-sm">
                 <Shield className="w-4 h-4 text-[#3A7D6F]" />
-                <span className="text-[rgba(245,240,232,0.50)]">{stats.totalProperties} properties</span>
+                <span className="text-[var(--text-muted)]">{stats.totalProperties} properties</span>
               </div>
-              <div className="w-px h-4 bg-white/10 hidden sm:block" />
+              <div className="w-px h-4 bg-[rgba(245,240,232,0.10)] hidden sm:block" />
               <div className="flex items-center gap-2 text-sm">
                 <DollarSign className="w-4 h-4 text-[#B09B71]" />
-                <span className="text-[rgba(245,240,232,0.50)]">${stats.totalTreasuryStr} USDC treasury</span>
+                <span className="text-[var(--text-muted)]">${stats.totalTreasuryStr} USDC treasury</span>
               </div>
-              <div className="w-px h-4 bg-white/10 hidden sm:block" />
+              <div className="w-px h-4 bg-[rgba(245,240,232,0.10)] hidden sm:block" />
               <div className="flex items-center gap-2 text-sm">
-                <Activity className="w-4 h-4 text-[#5A7A9A]" />
-                <span className="text-[rgba(245,240,232,0.50)]">{stats.activeProposals} active proposals</span>
+                <Activity className="w-4 h-4 text-[var(--steel)]" />
+                <span className="text-[var(--text-muted)]">{stats.activeProposals} active proposals</span>
               </div>
-              <div className="w-px h-4 bg-white/10 hidden sm:block" />
+              <div className="w-px h-4 bg-[rgba(245,240,232,0.10)] hidden sm:block" />
               <div className="flex items-center gap-2 text-sm">
                 <FileText className="w-4 h-4 text-[#B09B71]" />
-                <span className="text-[rgba(245,240,232,0.50)]">{stats.documentsOnChain} docs on-chain</span>
+                <span className="text-[var(--text-muted)]">{stats.documentsOnChain} docs on-chain</span>
               </div>
             </div>
           )}
@@ -263,12 +263,12 @@ export function TransparencyDashboard() {
         <section>
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-xl font-bold text-white text-glow">Live On-Chain Stats</h2>
-              <p className="text-[13px] text-[rgba(245,240,232,0.35)] mt-1">
+              <h2 className="text-xl font-medium text-[var(--text-heading)] text-glow">Live On-Chain Stats</h2>
+              <p className="text-[13px] text-[var(--text-disabled)] mt-1">
                 Reads directly from smart contracts — no backend, no caching
               </p>
             </div>
-            <div className="flex items-center gap-2 text-[12px] text-[rgba(245,240,232,0.35)]">
+            <div className="flex items-center gap-2 text-[12px] text-[var(--text-disabled)]">
               {stats.loading ? (
                 <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#B09B71]" />
               ) : (
@@ -287,7 +287,7 @@ export function TransparencyDashboard() {
 
           {/* Treasury row */}
           <div className="mb-3">
-            <p className="text-[11px] uppercase tracking-widest text-[rgba(245,240,232,0.25)] font-semibold mb-3 flex items-center gap-2">
+            <p className="text-[11px] uppercase tracking-widest text-[var(--text-disabled)] font-medium mb-3 flex items-center gap-2">
               <span className="inline-block w-3 h-px bg-[#B09B71]/50" />
               Treasury
             </p>
@@ -338,8 +338,8 @@ export function TransparencyDashboard() {
 
           {/* Community row */}
           <div className="mt-6">
-            <p className="text-[11px] uppercase tracking-widest text-[rgba(245,240,232,0.25)] font-semibold mb-3 flex items-center gap-2">
-              <span className="inline-block w-3 h-px bg-[#5A7A9A]/50" />
+            <p className="text-[11px] uppercase tracking-widest text-[var(--text-disabled)] font-medium mb-3 flex items-center gap-2">
+              <span className="inline-block w-3 h-px bg-[var(--steel)]/50" />
               Community
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -386,31 +386,31 @@ export function TransparencyDashboard() {
           {/* Activity Feed */}
           <section className="lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <h2 className="text-xl font-medium text-[var(--text-heading)] flex items-center gap-2">
                 <Zap className="w-5 h-5 text-[#B09B71]" />
                 Recent Activity
               </h2>
-              <span className="text-[12px] text-[rgba(245,240,232,0.35)]">Last 8 hours on-chain</span>
+              <span className="text-[12px] text-[var(--text-disabled)]">Last 8 hours on-chain</span>
             </div>
 
-            <div className="glass-card rounded-2xl overflow-hidden">
+            <div className="glass-card rounded-xl overflow-hidden">
               {eventsLoading ? (
                 <div className="p-6 space-y-4">
                   {[...Array(5)].map((_, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-white/[0.05] animate-pulse shrink-0" />
+                      <div className="w-9 h-9 rounded-xl bg-[rgba(245,240,232,0.05)] animate-pulse shrink-0" />
                       <div className="flex-1 space-y-2">
-                        <div className="h-4 w-3/4 rounded bg-white/[0.05] animate-pulse" />
-                        <div className="h-3 w-1/3 rounded bg-white/[0.04] animate-pulse" />
+                        <div className="h-4 w-3/4 rounded bg-[rgba(245,240,232,0.05)] animate-pulse" />
+                        <div className="h-3 w-1/3 rounded bg-[rgba(245,240,232,0.04)] animate-pulse" />
                       </div>
                     </div>
                   ))}
                 </div>
               ) : events.length === 0 ? (
                 <div className="p-10 text-center">
-                  <Activity className="w-10 h-10 text-gray-700 mx-auto mb-3" />
-                  <p className="text-[rgba(245,240,232,0.35)] text-sm">No activity in the last 8 hours</p>
-                  <p className="text-[rgba(245,240,232,0.25)] text-xs mt-1">
+                  <Activity className="w-10 h-10 text-[var(--text-disabled)] mx-auto mb-3" />
+                  <p className="text-[var(--text-disabled)] text-sm">No activity in the last 8 hours</p>
+                  <p className="text-[var(--text-disabled)] text-xs mt-1">
                     Transactions will appear here as they happen on-chain
                   </p>
                 </div>
@@ -419,7 +419,7 @@ export function TransparencyDashboard() {
                   {events.slice(0, 10).map((event) => (
                       <div
                         key={event.id}
-                        className="flex items-start gap-3 px-5 py-4 hover:bg-white/[0.02] transition-colors"
+                        className="flex items-start gap-3 px-5 py-4 hover:bg-[rgba(245,240,232,0.02)] transition-colors"
                       >
                         <div
                           className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 text-lg"
@@ -428,11 +428,11 @@ export function TransparencyDashboard() {
                           {event.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-[13px] text-[rgba(245,240,232,0.80)] font-medium leading-snug">
+                          <p className="text-[13px] text-[var(--parchment)] font-medium leading-snug">
                             {event.description}
                           </p>
                           <div className="flex items-center gap-3 mt-1">
-                            <span className="text-[11px] text-[rgba(245,240,232,0.35)]">
+                            <span className="text-[11px] text-[var(--text-disabled)]">
                               {relativeTime(event.timestamp * 1000)}
                             </span>
                             {event.txHash && (
@@ -460,7 +460,7 @@ export function TransparencyDashboard() {
 
             {/* Trust indicators */}
             <section>
-              <h2 className="text-xl font-bold text-white flex items-center gap-2 mb-4">
+              <h2 className="text-xl font-medium text-[var(--text-heading)] flex items-center gap-2 mb-4">
                 <Shield className="w-5 h-5 text-[#3A7D6F]" />
                 Why Trust This?
               </h2>
@@ -485,7 +485,7 @@ export function TransparencyDashboard() {
                     icon: Lock,
                     title: 'Multi-Sig Treasury',
                     desc: 'No single party controls the treasury. All spending requires governance approval.',
-                    color: 'text-[#5A7A9A]',
+                    color: 'text-[var(--steel)]',
                     bg: 'rgba(59,130,246,0.1)',
                   },
                   {
@@ -509,8 +509,8 @@ export function TransparencyDashboard() {
                         <TrustIcon className={'w-4 h-4 ' + item.color} />
                       </div>
                       <div>
-                        <p className="text-[13px] font-semibold text-[rgba(245,240,232,0.80)]">{item.title}</p>
-                        <p className="text-[12px] text-[rgba(245,240,232,0.35)] mt-0.5 leading-relaxed">{item.desc}</p>
+                        <p className="text-[13px] font-medium text-[var(--parchment)]">{item.title}</p>
+                        <p className="text-[12px] text-[var(--text-disabled)] mt-0.5 leading-relaxed">{item.desc}</p>
                       </div>
                     </div>
                   );
@@ -520,7 +520,7 @@ export function TransparencyDashboard() {
 
             {/* Contract addresses */}
             <section>
-              <h2 className="text-[13px] font-bold text-[rgba(245,240,232,0.50)] uppercase tracking-wider mb-3 flex items-center gap-2">
+              <h2 className="text-[13px] font-medium text-[var(--text-muted)] uppercase tracking-wider mb-3 flex items-center gap-2">
                 <ExternalLink className="w-3.5 h-3.5" />
                 Verify the Contracts
               </h2>
@@ -538,17 +538,17 @@ export function TransparencyDashboard() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={
-                      'flex items-center justify-between px-4 py-3 hover:bg-white/[0.03] transition-colors group' +
+                      'flex items-center justify-between px-4 py-3 hover:bg-[rgba(245,240,232,0.03)] transition-colors group' +
                       (i < arr.length - 1 ? ' border-b border-[rgba(255,255,255,0.04)]' : '')
                     }
                   >
                     <div>
-                      <p className="text-[12px] font-semibold text-[rgba(245,240,232,0.65)]">{c.label}</p>
-                      <p className="text-[11px] text-[rgba(245,240,232,0.25)] font-mono truncate max-w-[160px]">
+                      <p className="text-[12px] font-medium text-[var(--text-body)]">{c.label}</p>
+                      <p className="text-[11px] text-[var(--text-disabled)] font-mono truncate max-w-[160px]">
                         {c.addr}
                       </p>
                     </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-[rgba(245,240,232,0.25)] group-hover:text-[#B09B71] transition-colors shrink-0" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[var(--text-disabled)] group-hover:text-[#B09B71] transition-colors shrink-0" />
                   </a>
                 ))}
               </div>
@@ -559,7 +559,7 @@ export function TransparencyDashboard() {
         {/* ── CTA ──────────────────────────────────────────────────────────── */}
         <section>
           <div
-            className="rounded-2xl p-8 sm:p-10 text-center relative overflow-hidden"
+            className="rounded-xl p-8 sm:p-10 text-center relative overflow-hidden"
             style={{
               background:
                 'linear-gradient(135deg, rgba(201,169,110,0.10) 0%, rgba(59,130,246,0.08) 100%)',
@@ -577,16 +577,16 @@ export function TransparencyDashboard() {
 
             <div className="relative z-10">
               <div
-                className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5 mx-auto"
+                className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-5 mx-auto"
                 style={{ background: 'rgba(201,169,110,0.12)', border: '1px solid rgba(201,169,110,0.25)' }}
               >
                 <Shield className="w-7 h-7 text-[#B09B71]" />
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+              <h2 className="text-2xl sm:text-3xl font-medium text-[var(--text-heading)] mb-3">
                 Ready to Participate?
               </h2>
-              <p className="text-[rgba(245,240,232,0.50)] max-w-lg mx-auto mb-7 text-base">
+              <p className="text-[var(--text-muted)] max-w-lg mx-auto mb-7 text-base">
                 Connect your wallet to vote on proposals, pay dues, manage your property,
                 and submit architectural review requests — all on-chain, all transparent.
               </p>
@@ -594,7 +594,7 @@ export function TransparencyDashboard() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Link
                   href="/dashboard"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm transition-all duration-200"
                   style={{
                     background: 'linear-gradient(135deg, oklch(0.72 0.12 76) 0%, oklch(0.62 0.12 74) 100%)',
                     boxShadow: '0 0 24px rgba(201,169,110,0.25)',
@@ -608,7 +608,7 @@ export function TransparencyDashboard() {
                   href={BASESCAN_BASE + '/address/' + contracts.governor}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-[rgba(245,240,232,0.65)] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm text-[var(--text-body)] hover:text-[var(--text-heading)] transition-colors"
                   style={{
                     background: 'rgba(255,255,255,0.04)',
                     border: '1px solid rgba(255,255,255,0.08)',

@@ -108,7 +108,7 @@ export default function NewsletterPage() {
 
   if (!isConnected) return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
-      <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view newsletters</p>
+      <p className="text-[var(--text-muted)] mb-4">Sign in to view newsletters</p>
       <ConnectButton label="Sign In" />
     </div>
   );
@@ -117,12 +117,12 @@ export default function NewsletterPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">Community Newsletter</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Stay informed with community updates</p>
+          <h1 className="text-2xl sm:text-3xl font-medium">Community Newsletter</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Stay informed with community updates</p>
         </div>
         {isBoard && (
           <button onClick={() => setShowCreate(!showCreate)}
-            className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
+            className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all shrink-0">
             {showCreate ? '← Back' : ' New Newsletter'}
           </button>
         )}
@@ -130,34 +130,34 @@ export default function NewsletterPage() {
 
       {showCreate && (
         <div className="glass-card rounded-xl p-6 space-y-4 mb-6">
-          <h2 className="text-lg font-semibold">Create Newsletter</h2>
+          <h2 className="text-lg font-medium">Create Newsletter</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Title</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Title</label>
               <input value={form.title} onChange={e => setForm({...form, title: e.target.value})}
-                placeholder="Spring 2026 Newsletter" className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="Spring 2026 Newsletter" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Date</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
           </div>
           <div>
-            <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Summary (shown in list)</label>
+            <label className="block text-xs text-[var(--text-muted)] mb-1">Summary (shown in list)</label>
             <input value={form.summary} onChange={e => setForm({...form, summary: e.target.value})}
-              placeholder="Brief one-sentence summary..." className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+              placeholder="Brief one-sentence summary..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
           </div>
           <div>
-            <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Full Content</label>
+            <label className="block text-xs text-[var(--text-muted)] mb-1">Full Content</label>
             <textarea value={form.content} onChange={e => setForm({...form, content: e.target.value})}
               placeholder="Full newsletter content..." rows={10}
-              className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-y font-mono" />
+              className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-y font-mono" />
           </div>
           <div className="flex gap-3">
-            <button onClick={() => setShowCreate(false)} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+            <button onClick={() => setShowCreate(false)} className="flex-1 py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
             <button onClick={create} disabled={!form.title || !form.date || !form.summary || !form.content}
-              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all">
               Publish Newsletter
             </button>
           </div>
@@ -172,34 +172,34 @@ export default function NewsletterPage() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     {nl.pinned && <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20"> Current Issue</span>}
-                    <span className="text-xs text-[rgba(245,240,232,0.35)]">{new Date(nl.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    <span className="text-xs text-[var(--text-disabled)]">{new Date(nl.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>
-                  <h3 className="font-semibold text-base mb-2">{nl.title}</h3>
-                  <p className="text-sm text-[rgba(245,240,232,0.50)]">{nl.summary}</p>
+                  <h3 className="font-medium text-base mb-2">{nl.title}</h3>
+                  <p className="text-sm text-[var(--text-muted)]">{nl.summary}</p>
                 </div>
                 <div className="flex gap-2 shrink-0">
                   {isBoard && (
                     <button onClick={() => togglePin(nl.id)}
-                      className={`px-2 py-1.5 rounded-lg text-xs transition-colors ${nl.pinned ? 'text-[#B09B71]' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)]'}`}>
+                      className={`px-2 py-1.5 rounded-lg text-xs transition-colors ${nl.pinned ? 'text-[#B09B71]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}>
                       
                     </button>
                   )}
                   <button onClick={() => setExpanded(expanded === nl.id ? null : nl.id)}
-                    className="px-3 py-1.5 rounded-lg text-xs border border-gray-700 text-[rgba(245,240,232,0.65)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors">
+                    className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(245,240,232,0.08)] text-[var(--text-body)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors">
                     {expanded === nl.id ? 'Collapse' : 'Read'}
                   </button>
                 </div>
               </div>
 
               {expanded === nl.id && (
-                <div className="mt-4 pt-4 border-t border-gray-800">
+                <div className="mt-4 pt-4 border-t border-[rgba(245,240,232,0.06)]">
                   <div className="prose prose-invert prose-sm max-w-none">
                     {nl.content.split('\n').map((line, i) => {
                       if (line.startsWith('**') && line.endsWith('**')) {
-                        return <p key={i} className="font-semibold text-[#B09B71] mt-3 mb-1">{line.slice(2, -2)}</p>;
+                        return <p key={i} className="font-medium text-[#B09B71] mt-3 mb-1">{line.slice(2, -2)}</p>;
                       }
                       if (line.trim() === '') return <div key={i} className="h-2" />;
-                      return <p key={i} className="text-sm text-[rgba(245,240,232,0.65)] leading-relaxed">{line}</p>;
+                      return <p key={i} className="text-sm text-[var(--text-body)] leading-relaxed">{line}</p>;
                     })}
                   </div>
                 </div>

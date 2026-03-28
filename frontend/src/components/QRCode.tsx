@@ -112,7 +112,7 @@ export function QRCode({ value, size = 200, className = '' }: QRCodeProps) {
               y={quiet + ri * cellSize}
               width={cellSize}
               height={cellSize}
-              fill="#1a1a1a"
+              fill="#0C0C0E"
             />
           ) : null
         )
@@ -137,16 +137,16 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
       <div
-        className="relative z-10 w-full max-w-xs rounded-2xl border border-[#B09B71]/30 bg-[#0d0d0d] shadow-2xl p-6 text-center"
+        className="relative z-10 w-full max-w-xs rounded-xl border border-[#B09B71]/30 bg-[var(--obsidian)] shadow-2xl p-6 text-center"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-base font-bold text-[#D4C4A0]">Share Property</h2>
+          <h2 className="text-base font-medium text-[#D4C4A0]">Share Property</h2>
           <button
             onClick={onClose}
-            className="w-7 h-7 rounded-lg flex items-center justify-center text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/5 transition-colors text-sm"
+            className="w-7 h-7 rounded-lg flex items-center justify-center text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.05)] transition-colors text-sm"
           >
-            
+            ×
           </button>
         </div>
 
@@ -156,10 +156,10 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
           </div>
         </div>
 
-        <p className="text-xs text-[rgba(245,240,232,0.35)] mb-3">Scan to view property #{tokenId}</p>
+        <p className="text-xs text-[var(--text-disabled)] mb-3">Scan to view property #{tokenId}</p>
 
-        <div className="px-3 py-2 rounded-lg bg-gray-800/60 border border-gray-700 mb-4">
-          <p className="text-[11px] font-mono text-[rgba(245,240,232,0.50)] break-all">{url}</p>
+        <div className="px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] mb-4">
+          <p className="text-[11px] font-mono text-[var(--text-muted)] break-all">{url}</p>
         </div>
 
         <button
@@ -168,7 +168,7 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
           }}
           className="w-full py-2.5 rounded-xl bg-[#B09B71]/15 border border-[#B09B71]/30 text-[#D4C4A0] text-sm font-medium hover:bg-[#B09B71]/25 transition-colors"
         >
-           Copy Link
+          Copy Link
         </button>
       </div>
     </div>

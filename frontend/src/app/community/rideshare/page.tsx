@@ -65,12 +65,12 @@ export default function RidesharePage() {
       <div className="max-w-4xl mx-auto">
         <div className="mb-8 flex items-start justify-between flex-wrap gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-[#D4C4A0] mb-2 flex items-center gap-3">
+            <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2 flex items-center gap-3">
               <Car className="w-8 h-8 text-[#B09B71]" /> Community Rideshare
             </h1>
             <p className="text-[oklch(0.50_0.01_60)]">Coordinate rides, reduce traffic, build community</p>
           </div>
-          <button onClick={() => setShowForm(true)} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#b8942e] text-[#1a1a1a] font-semibold hover:bg-[#B09B71] transition-colors">
+          <button onClick={() => setShowForm(true)} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium hover:bg-[#B09B71] transition-colors">
             <Plus className="w-4 h-4" /> Offer a Ride
           </button>
         </div>
@@ -83,7 +83,7 @@ export default function RidesharePage() {
             { label: 'Recurring Routes', val: rides.filter(r => r.recurring !== 'none').length, color: 'text-[oklch(0.65_0.01_60)]' },
           ].map(({ label, val, color }) => (
             <div key={label} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
-              <p className={`text-2xl font-bold ${color}`}>{val}</p>
+              <p className={`text-2xl font-medium ${color}`}>{val}</p>
               <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">{label}</p>
             </div>
           ))}
@@ -96,9 +96,9 @@ export default function RidesharePage() {
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-2">
-                    <h3 className="font-semibold text-[#D4C4A0] text-lg">{ride.destination}</h3>
+                    <h3 className="font-medium text-[#D4C4A0] text-lg">{ride.destination}</h3>
                     {ride.recurring !== 'none' && (
-                      <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-[#b8942e]/20 text-[#B09B71]">
+                      <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-[var(--brass-deep)]/20 text-[#B09B71]">
                         <RotateCcw className="w-3 h-3" /> {ride.recurring}
                       </span>
                     )}
@@ -117,7 +117,7 @@ export default function RidesharePage() {
                   <button
                     onClick={() => requestSeat(ride.id)}
                     disabled={ride.seatsLeft === 0 || ride.riders.includes('You (Lot 12)')}
-                    className="px-4 py-2 rounded-lg bg-[#b8942e] text-[#1a1a1a] font-semibold text-sm disabled:opacity-40 hover:bg-[#B09B71] transition-colors"
+                    className="px-4 py-2 rounded-lg bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium text-sm disabled:opacity-40 hover:bg-[#B09B71] transition-colors"
                   >
                     {ride.riders.includes('You (Lot 12)') ? ' Joined' : ride.seatsLeft === 0 ? 'Full' : 'Request Seat'}
                   </button>
@@ -137,9 +137,9 @@ export default function RidesharePage() {
       {/* Add ride modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-2xl p-6 max-w-md w-full">
+          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-xl p-6 max-w-md w-full">
             <div className="flex items-center justify-between mb-5">
-              <h3 className="font-semibold text-[#D4C4A0]">Post a Ride</h3>
+              <h3 className="font-medium text-[#D4C4A0]">Post a Ride</h3>
               <button onClick={() => setShowForm(false)}><X className="w-4 h-4 text-[oklch(0.45_0.01_60)]" /></button>
             </div>
             <div className="space-y-3">
@@ -171,7 +171,7 @@ export default function RidesharePage() {
                 <label className="block text-xs text-[oklch(0.45_0.01_60)] mb-1">Notes</label>
                 <textarea value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })} rows={2} placeholder="Details for riders..." className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71] resize-none" />
               </div>
-              <button onClick={addRide} disabled={!form.destination || !form.datetime || !form.driverLot} className="w-full py-2.5 rounded-xl bg-[#b8942e] text-[#1a1a1a] font-semibold disabled:opacity-40 hover:bg-[#B09B71] transition-colors">
+              <button onClick={addRide} disabled={!form.destination || !form.datetime || !form.driverLot} className="w-full py-2.5 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium disabled:opacity-40 hover:bg-[#B09B71] transition-colors">
                 Post Ride
               </button>
             </div>
@@ -182,14 +182,14 @@ export default function RidesharePage() {
       {/* Message driver modal */}
       {msgRide && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-2xl p-6 max-w-sm w-full">
+          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-xl p-6 max-w-sm w-full">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-[#D4C4A0]">Message {msgRide.driver}</h3>
+              <h3 className="font-medium text-[#D4C4A0]">Message {msgRide.driver}</h3>
               <button onClick={() => setMsgRide(null)}><X className="w-4 h-4 text-[oklch(0.45_0.01_60)]" /></button>
             </div>
             <p className="text-xs text-[oklch(0.45_0.01_60)] mb-3">Re: {msgRide.destination}</p>
             <textarea value={msgText} onChange={e => setMsgText(e.target.value)} rows={4} placeholder="Hi! Is there still a spot available?" className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71] resize-none mb-3" />
-            <button onClick={() => { alert('Message sent! (Demo mode)'); setMsgRide(null); setMsgText(''); }} className="w-full py-2.5 rounded-xl bg-[#b8942e] text-[#1a1a1a] font-semibold hover:bg-[#B09B71] transition-colors">
+            <button onClick={() => { alert('Message sent! (Demo mode)'); setMsgRide(null); setMsgText(''); }} className="w-full py-2.5 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium hover:bg-[#B09B71] transition-colors">
               Send Message
             </button>
           </div>

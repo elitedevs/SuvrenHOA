@@ -68,9 +68,9 @@ const DEMO_POLICIES: Policy[] = [
 ];
 
 const STATUS_CONFIG = {
-  active: { label: 'Active', icon: CheckCircle, color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-green-400/20' },
-  expiring: { label: 'Expiring Soon', icon: AlertTriangle, color: 'text-[#B09B71]', bg: 'bg-yellow-400/10', border: 'border-yellow-400/20' },
-  expired: { label: 'Expired', icon: X, color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-red-400/20' },
+  active: { label: 'Active', icon: CheckCircle, color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-[rgba(42,93,79,0.20)]' },
+  expiring: { label: 'Expiring Soon', icon: AlertTriangle, color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]' },
+  expired: { label: 'Expired', icon: X, color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-[rgba(139,90,90,0.20)]' },
 };
 
 function daysUntil(dateStr: string): number {
@@ -96,15 +96,15 @@ function PolicyCard({ policy, onEdit, onDelete }: { policy: Policy; onEdit: () =
               <Shield className={`w-5 h-5 ${cfg.color}`} />
             </div>
             <div className="min-w-0">
-              <h3 className="font-semibold text-white text-sm">{policy.name}</h3>
-              <p className="text-xs text-[rgba(245,240,232,0.50)] mt-0.5">{policy.provider} · {policy.policyNumber}</p>
+              <h3 className="font-medium text-[var(--text-heading)] text-sm">{policy.name}</h3>
+              <p className="text-xs text-[var(--text-muted)] mt-0.5">{policy.provider} · {policy.policyNumber}</p>
             </div>
           </div>
           <div className="flex items-center gap-1 shrink-0">
-            <button onClick={onEdit} className="p-1.5 rounded-lg text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] hover:bg-[#B09B71]/10 transition-colors">
+            <button onClick={onEdit} className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[#B09B71] hover:bg-[#B09B71]/10 transition-colors">
               <Edit2 className="w-3.5 h-3.5" />
             </button>
-            <button onClick={onDelete} className="p-1.5 rounded-lg text-[rgba(245,240,232,0.35)] hover:text-[#8B5A5A] hover:bg-[#8B5A5A]/10 transition-colors">
+            <button onClick={onDelete} className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[#8B5A5A] hover:bg-[#8B5A5A]/10 transition-colors">
               <Trash2 className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -112,16 +112,16 @@ function PolicyCard({ policy, onEdit, onDelete }: { policy: Policy; onEdit: () =
 
         <div className="grid grid-cols-3 gap-3 mt-4">
           <div>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)] uppercase tracking-wider mb-1">Coverage</p>
-            <p className="text-sm font-bold text-[#B09B71]">{formatCurrency(policy.coverageAmount)}</p>
+            <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wider mb-1">Coverage</p>
+            <p className="text-sm font-medium text-[#B09B71]">{formatCurrency(policy.coverageAmount)}</p>
           </div>
           <div>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)] uppercase tracking-wider mb-1">Annual Premium</p>
-            <p className="text-sm font-bold text-white">{formatCurrency(policy.premium)}</p>
+            <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wider mb-1">Annual Premium</p>
+            <p className="text-sm font-medium text-[var(--text-heading)]">{formatCurrency(policy.premium)}</p>
           </div>
           <div>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)] uppercase tracking-wider mb-1">Renewal</p>
-            <p className="text-sm font-bold text-white">{new Date(policy.renewalDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })}</p>
+            <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wider mb-1">Renewal</p>
+            <p className="text-sm font-medium text-[var(--text-heading)]">{new Date(policy.renewalDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })}</p>
           </div>
         </div>
 
@@ -138,24 +138,24 @@ function PolicyCard({ policy, onEdit, onDelete }: { policy: Policy; onEdit: () =
           {days <= 0 && <div className="text-xs font-medium text-[#8B5A5A]">Expired {Math.abs(days)} days ago</div>}
           <button
             onClick={() => setExpanded(!expanded)}
-            className="p-1 rounded text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] transition-colors"
+            className="p-1 rounded text-[var(--text-disabled)] hover:text-[var(--text-body)] transition-colors"
           >
             {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
         </div>
 
         {expanded && (
-          <div className="mt-3 pt-3 border-t border-white/5">
-            <p className="text-xs text-[rgba(245,240,232,0.50)]">{policy.notes}</p>
+          <div className="mt-3 pt-3 border-t border-[rgba(245,240,232,0.05)]">
+            <p className="text-xs text-[var(--text-muted)]">{policy.notes}</p>
             {days > 0 && (
               <div className="mt-3">
-                <div className="flex justify-between text-xs text-[rgba(245,240,232,0.35)] mb-1">
+                <div className="flex justify-between text-xs text-[var(--text-disabled)] mb-1">
                   <span>Renewal countdown</span>
                   <span>{days} days remaining</span>
                 </div>
-                <div className="w-full h-1.5 bg-[#1a1a1a] rounded-full overflow-hidden">
+                <div className="w-full h-1.5 bg-[var(--surface-2)] rounded-full overflow-hidden">
                   <div
-                    className={`h-full rounded-full transition-all ${days < 30 ? 'bg-[#8B5A5A]' : days < 60 ? 'bg-yellow-500' : 'bg-[#3A7D6F]'}`}
+                    className={`h-full rounded-full transition-all ${days < 30 ? 'bg-[#8B5A5A]' : days < 60 ? 'bg-[#B09B71]' : 'bg-[#3A7D6F]'}`}
                     style={{ width: `${Math.min(100, Math.max(0, (365 - days) / 365 * 100))}%` }}
                   />
                 </div>
@@ -193,10 +193,10 @@ function PolicyModal({ policy, onSave, onClose }: { policy: Partial<Policy>; onS
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-      <div className="glass-card rounded-2xl p-6 w-full max-w-lg border border-[#B09B71]/20">
+      <div className="glass-card rounded-xl p-6 w-full max-w-lg border border-[#B09B71]/20">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-semibold">{form.id ? 'Edit Policy' : 'Add Policy'}</h2>
-          <button onClick={onClose} className="p-1.5 rounded-lg text-[rgba(245,240,232,0.35)] hover:text-white hover:bg-white/5 transition-colors">
+          <h2 className="text-lg font-medium">{form.id ? 'Edit Policy' : 'Add Policy'}</h2>
+          <button onClick={onClose} className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[var(--text-heading)] hover:bg-[rgba(245,240,232,0.05)] transition-colors">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -207,53 +207,53 @@ function PolicyModal({ policy, onSave, onClose }: { policy: Partial<Policy>; onS
             { label: 'Policy Number', key: 'policyNumber', placeholder: 'e.g. NW-HOA-2024-0042' },
           ].map(({ label, key, placeholder }) => (
             <div key={key}>
-              <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">{label}</label>
+              <label className="text-xs text-[var(--text-muted)] mb-1 block">{label}</label>
               <input
                 value={(form as any)[key] ?? ''}
                 onChange={(e) => set(key as keyof Policy, e.target.value)}
                 placeholder={placeholder}
-                className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
               />
             </div>
           ))}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Coverage Amount ($)</label>
+              <label className="text-xs text-[var(--text-muted)] mb-1 block">Coverage Amount ($)</label>
               <input
                 type="number"
                 value={form.coverageAmount ?? ''}
                 onChange={(e) => set('coverageAmount', e.target.value)}
                 placeholder="2000000"
-                className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
               />
             </div>
             <div>
-              <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Annual Premium ($)</label>
+              <label className="text-xs text-[var(--text-muted)] mb-1 block">Annual Premium ($)</label>
               <input
                 type="number"
                 value={form.premium ?? ''}
                 onChange={(e) => set('premium', e.target.value)}
                 placeholder="4800"
-                className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
               />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Renewal Date</label>
+              <label className="text-xs text-[var(--text-muted)] mb-1 block">Renewal Date</label>
               <input
                 type="date"
                 value={form.renewalDate ?? ''}
                 onChange={(e) => set('renewalDate', e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[#B09B71]/50 focus:outline-none"
               />
             </div>
             <div>
-              <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Status</label>
+              <label className="text-xs text-[var(--text-muted)] mb-1 block">Status</label>
               <select
                 value={form.status ?? 'active'}
                 onChange={(e) => set('status', e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[#B09B71]/50 focus:outline-none"
               >
                 <option value="active">Active</option>
                 <option value="expiring">Expiring Soon</option>
@@ -262,19 +262,19 @@ function PolicyModal({ policy, onSave, onClose }: { policy: Partial<Policy>; onS
             </div>
           </div>
           <div>
-            <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Notes</label>
+            <label className="text-xs text-[var(--text-muted)] mb-1 block">Notes</label>
             <textarea
               value={form.notes ?? ''}
               onChange={(e) => set('notes', e.target.value)}
               rows={2}
               placeholder="Coverage details, contact info, etc."
-              className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none resize-none"
+              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
             />
           </div>
         </div>
         <div className="flex gap-3 mt-5">
-          <button onClick={onClose} className="flex-1 px-4 py-2 rounded-lg border border-white/10 text-sm text-[rgba(245,240,232,0.50)] hover:text-white hover:border-white/20 transition-colors">Cancel</button>
-          <button onClick={handleSave} className="flex-1 px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors">Save Policy</button>
+          <button onClick={onClose} className="flex-1 px-4 py-2 rounded-lg border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:border-[rgba(245,240,232,0.20)] transition-colors">Cancel</button>
+          <button onClick={handleSave} className="flex-1 px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-colors">Save Policy</button>
         </div>
       </div>
     </div>
@@ -313,7 +313,7 @@ export default function InsurancePage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view insurance policies</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to view insurance policies</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -327,15 +327,15 @@ export default function InsurancePage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-3">
             <Shield className="w-7 h-7 text-[#B09B71]" />
             Insurance Tracker
           </h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Community insurance policies and renewal schedule</p>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Community insurance policies and renewal schedule</p>
         </div>
         <button
           onClick={() => setEditing({})}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-colors"
         >
           <Plus className="w-4 h-4" />
           Add Policy
@@ -347,15 +347,15 @@ export default function InsurancePage() {
         {[
           { label: 'Total Coverage', value: formatCurrency(totalCoverage), icon: Shield, color: 'text-[#B09B71]' },
           { label: 'Annual Premium', value: formatCurrency(totalPremium), icon: DollarSign, color: 'text-[#3A7D6F]' },
-          { label: 'Active Policies', value: String(policies.filter((p) => p.status === 'active').length), icon: CheckCircle, color: 'text-[#5A7A9A]' },
+          { label: 'Active Policies', value: String(policies.filter((p) => p.status === 'active').length), icon: CheckCircle, color: 'text-[var(--steel)]' },
           { label: 'Need Attention', value: String(expiring.length), icon: AlertTriangle, color: 'text-[#B09B71]' },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="glass-card rounded-xl p-4">
             <div className="flex items-center gap-2 mb-2">
               <Icon className={`w-4 h-4 ${color}`} />
-              <span className="text-xs text-[rgba(245,240,232,0.35)]">{label}</span>
+              <span className="text-xs text-[var(--text-disabled)]">{label}</span>
             </div>
-            <p className={`text-xl font-bold ${color}`}>{value}</p>
+            <p className={`text-xl font-medium ${color}`}>{value}</p>
           </div>
         ))}
       </div>
@@ -364,8 +364,8 @@ export default function InsurancePage() {
       <div className="space-y-4">
         {policies.length === 0 && (
           <div className="glass-card rounded-xl p-8 text-center">
-            <Shield className="w-10 h-10 text-[rgba(245,240,232,0.25)] mx-auto mb-3" />
-            <p className="text-[rgba(245,240,232,0.50)]">No insurance policies added yet</p>
+            <Shield className="w-10 h-10 text-[var(--text-disabled)] mx-auto mb-3" />
+            <p className="text-[var(--text-muted)]">No insurance policies added yet</p>
             <button onClick={() => setEditing({})} className="mt-3 text-sm text-[#B09B71] hover:underline">Add your first policy</button>
           </div>
         )}

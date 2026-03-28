@@ -52,14 +52,14 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
   );
 
   return (
-    <div className="glass-card rounded-2xl overflow-hidden">
+    <div className="glass-card rounded-xl overflow-hidden">
       <div className="px-5 py-4 border-b border-[oklch(0.18_0.005_60)] flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-[#D4C4A0]">Neighborhood Map View</h3>
-          <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">Click a lot to see resident info</p>
+          <h3 className="text-sm font-medium text-[#D4C4A0]">Neighborhood Map View</h3>
+          <p className="text-xs text-[var(--text-disabled)] mt-0.5">Click a lot to see resident info</p>
         </div>
         {onClose && (
-          <button onClick={onClose} className="p-1.5 text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] rounded-lg hover:bg-white/5 transition-colors">
+          <button onClick={onClose} className="p-1.5 text-[var(--text-disabled)] hover:text-[var(--text-body)] rounded-lg hover:bg-[rgba(245,240,232,0.05)] transition-colors">
             <X className="w-4 h-4" />
           </button>
         )}
@@ -67,15 +67,15 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
 
       <div className="p-4 flex flex-col lg:flex-row gap-4">
         {/* Map */}
-        <div className="relative flex-1 min-h-[280px] bg-[#0d1a0d]/30 rounded-xl border border-green-900/30 overflow-hidden">
+        <div className="relative flex-1 min-h-[280px] bg-[#0d1a0d]/30 rounded-xl border border-[rgba(42,93,79,0.30)] overflow-hidden">
           {/* Street labels */}
-          <div className="absolute inset-x-0 top-1 text-center text-[9px] text-gray-700 font-medium uppercase tracking-widest">
+          <div className="absolute inset-x-0 top-1 text-center text-[9px] text-[var(--text-disabled)] font-medium uppercase tracking-widest">
             Faircroft Drive
           </div>
-          <div className="absolute inset-x-0 bottom-1 text-center text-[9px] text-gray-700 font-medium uppercase tracking-widest">
+          <div className="absolute inset-x-0 bottom-1 text-center text-[9px] text-[var(--text-disabled)] font-medium uppercase tracking-widest">
             Oak Meadow Lane
           </div>
-          <div className="absolute inset-y-0 left-1 text-center writing-vertical text-[9px] text-gray-700 font-medium" style={{ writingMode: 'vertical-rl', display: 'flex', alignItems: 'center' }}>
+          <div className="absolute inset-y-0 left-1 text-center writing-vertical text-[9px] text-[var(--text-disabled)] font-medium" style={{ writingMode: 'vertical-rl', display: 'flex', alignItems: 'center' }}>
             Willow Creek Blvd
           </div>
 
@@ -129,7 +129,7 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
           {/* Tooltip */}
           {tooltip && (
             <div
-              className="absolute z-30 pointer-events-none bg-[#1a1a1a] border border-[#B09B71]/30 rounded-lg px-2 py-1 text-[10px] text-[rgba(245,240,232,0.65)]"
+              className="absolute z-30 pointer-events-none bg-[var(--surface-2)] border border-[#B09B71]/30 rounded-lg px-2 py-1 text-[10px] text-[var(--text-body)]"
               style={{
                 left: `${Math.min(tooltip.x + 3, 80)}%`,
                 top: `${Math.max(tooltip.y - 8, 5)}%`,
@@ -147,40 +147,40 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
         <div className="w-full lg:w-56 space-y-3">
           {selected ? (
             <div className="glass-card rounded-xl p-4 border border-[#B09B71]/20">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#B09B71] to-[#b8942e] flex items-center justify-center text-sm font-normal text-[#1a1a1a] mb-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] flex items-center justify-center text-sm font-normal text-[var(--surface-2)] mb-3">
                 {selected.display_name?.charAt(0) || '?'}
               </div>
-              <p className="text-sm font-bold text-[#D4C4A0]">{selected.display_name || 'Anonymous'}</p>
-              <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">Lot #{selected.lot_number}</p>
+              <p className="text-sm font-medium text-[#D4C4A0]">{selected.display_name || 'Anonymous'}</p>
+              <p className="text-xs text-[var(--text-disabled)] mt-0.5">Lot #{selected.lot_number}</p>
               {selected.board_role && (
-                <p className="text-xs text-[#B09B71] font-semibold mt-1">{selected.board_role}</p>
+                <p className="text-xs text-[#B09B71] font-medium mt-1">{selected.board_role}</p>
               )}
               {selected.years_in_community && (
-                <p className="text-xs text-[rgba(245,240,232,0.25)] mt-2">{selected.years_in_community} years in community</p>
+                <p className="text-xs text-[var(--text-disabled)] mt-2">{selected.years_in_community} years in community</p>
               )}
               <button
                 onClick={() => setSelected(null)}
-                className="mt-3 text-xs text-[rgba(245,240,232,0.25)] hover:text-[rgba(245,240,232,0.50)] transition-colors"
+                className="mt-3 text-xs text-[var(--text-disabled)] hover:text-[var(--text-muted)] transition-colors"
               >
                 ← Back to map
               </button>
             </div>
           ) : (
             <div className="space-y-2">
-              <p className="text-xs font-semibold text-[rgba(245,240,232,0.35)] uppercase tracking-wide">Legend</p>
-              <div className="flex items-center gap-2 text-xs text-[rgba(245,240,232,0.50)]">
+              <p className="text-xs font-medium text-[var(--text-disabled)] uppercase tracking-wide">Legend</p>
+              <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
                 <div className="w-3 h-3 rounded-full bg-[#B09B71]" />
                 Board member
               </div>
-              <div className="flex items-center gap-2 text-xs text-[rgba(245,240,232,0.50)]">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
                 <div className="w-3 h-3 rounded-full bg-[rgba(201,169,110,0.6)]" />
                 Registered resident
               </div>
-              <div className="flex items-center gap-2 text-xs text-[rgba(245,240,232,0.50)]">
-                <div className="w-3 h-3 rounded-full bg-[rgba(255,255,255,0.1)] border border-white/10" />
+              <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+                <div className="w-3 h-3 rounded-full bg-[rgba(255,255,255,0.1)] border border-[rgba(245,240,232,0.10)]" />
                 Vacant / no data
               </div>
-              <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-2 leading-relaxed">
+              <p className="text-[10px] text-[var(--text-disabled)] mt-2 leading-relaxed">
                 {residents.length} lots have registered residents.
               </p>
             </div>

@@ -28,7 +28,7 @@ function MessageText({ text }: { text: string }) {
         while ((match = regex.exec(line)) !== null) {
           if (match.index > last) tokens.push(<span key={key++}>{line.slice(last, match.index)}</span>);
           if (match[1]) {
-            tokens.push(<strong key={key++} className="font-semibold">{match[1]}</strong>);
+            tokens.push(<strong key={key++} className="font-medium">{match[1]}</strong>);
           } else if (match[2] && match[3]) {
             tokens.push(
               <Link key={key++} href={match[3]} className="underline text-[#B09B71] hover:text-[#D4C4A0]">
@@ -49,9 +49,9 @@ function TypingIndicator() {
   return (
     <div className="flex items-end gap-3 mb-4">
       <div className="w-9 h-9 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-lg shrink-0"></div>
-      <div className="bg-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
+      <div className="bg-[rgba(245,240,232,0.06)] rounded-xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 1, 2].map((i) => (
-          <span key={i} className="w-2 h-2 rounded-full bg-gray-400 inline-block animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
+          <span key={i} className="w-2 h-2 rounded-full bg-[var(--text-muted)] inline-block animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
         ))}
       </div>
     </div>
@@ -84,14 +84,14 @@ export default function AssistantPage() {
   return (
     <div className="flex flex-col h-[calc(100vh-4rem)]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#1a1a1a]/80 to-[#2d2d2d]/80 border-b border-white/[0.06] px-6 py-4 shrink-0">
+      <div className="bg-gradient-to-r from-[rgba(26,26,30,0.80)] to-[#222228]/80 border-b border-[rgba(245,240,232,0.06)] px-6 py-4 shrink-0">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#B09B71] to-[#b8942e] flex items-center justify-center text-xl">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] flex items-center justify-center text-xl">
               
             </div>
             <div>
-              <h1 className="text-lg font-bold text-[rgba(245,240,232,0.90)]">HOA Assistant</h1>
+              <h1 className="text-lg font-medium text-[var(--parchment)]">HOA Assistant</h1>
               <p className="text-xs text-[#3A7D6F] flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#3A7D6F] inline-block" />
                 Online — answers HOA questions using live on-chain data
@@ -115,10 +115,10 @@ export default function AssistantPage() {
                 </div>
               )}
               <div
-                className={`max-w-[80%] rounded-2xl px-5 py-3 text-sm leading-relaxed ${
+                className={`max-w-[80%] rounded-xl px-5 py-3 text-sm leading-relaxed ${
                   msg.role === 'user'
-                    ? 'bg-gradient-to-br from-[#B09B71] to-[#b8942e] text-white rounded-br-sm'
-                    : 'bg-white/[0.06] text-[rgba(245,240,232,0.80)] rounded-bl-sm'
+                    ? 'bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] text-[var(--text-heading)] rounded-br-sm'
+                    : 'bg-[rgba(245,240,232,0.06)] text-[var(--parchment)] rounded-bl-sm'
                 }`}
               >
                 <MessageText text={msg.text} />
@@ -134,9 +134,9 @@ export default function AssistantPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="border-t border-white/[0.04] px-4 py-3 shrink-0">
+      <div className="border-t border-[rgba(245,240,232,0.04)] px-4 py-3 shrink-0">
         <div className="max-w-2xl mx-auto">
-          <p className="text-[11px] text-[rgba(245,240,232,0.35)] mb-2">Quick questions</p>
+          <p className="text-[11px] text-[var(--text-disabled)] mb-2">Quick questions</p>
           <div className="flex flex-wrap gap-2">
             {QUICK_ACTIONS.map((a) => (
               <button
@@ -153,7 +153,7 @@ export default function AssistantPage() {
       </div>
 
       {/* Input */}
-      <div className="border-t border-white/[0.06] px-4 pb-6 pt-3 shrink-0">
+      <div className="border-t border-[rgba(245,240,232,0.06)] px-4 pb-6 pt-3 shrink-0">
         <div className="max-w-2xl mx-auto flex gap-3">
           <input
             ref={inputRef}
@@ -164,15 +164,15 @@ export default function AssistantPage() {
             placeholder="Ask about dues, treasury, proposals, amenities..."
             disabled={isTyping}
             autoFocus
-            className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-2xl px-4 py-3 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#B09B71]/50 disabled:opacity-50 transition-colors"
+            className="flex-1 bg-[rgba(245,240,232,0.06)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:ring-2 focus:ring-[#B09B71]/50 disabled:opacity-50 transition-colors"
           />
           <button
             onClick={handleSend}
             disabled={!input.trim() || isTyping}
-            className="w-11 h-11 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#B09B71] to-[#b8942e] hover:from-[#D4C4A0] hover:to-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed transition-all shrink-0 shadow-lg shadow-[#1a1a1a]/50"
+            className="w-11 h-11 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] hover:from-[#D4C4A0] hover:to-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed transition-all shrink-0 shadow-lg shadow-[rgba(26,26,30,0.50)]"
             aria-label="Send message"
           >
-            <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-5 h-5 text-[var(--text-heading)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
           </button>

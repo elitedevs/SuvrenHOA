@@ -38,6 +38,34 @@ const SEARCH_ITEMS: SearchItem[] = [
   { id: 'pets', title: 'Pets', subtitle: 'Register pets', icon: '', href: '/pets', category: 'Pages' },
   { id: 'map', title: 'Neighborhood Map', subtitle: 'Property map view', icon: '', href: '/map', category: 'Pages' },
   { id: 'assistant', title: 'AI Assistant', subtitle: 'HOA AI helper', icon: '', href: '/assistant', category: 'Pages' },
+  { id: 'violations', title: 'Violations', subtitle: 'HOA violation tracker', icon: '', href: '/violations', category: 'Pages' },
+  { id: 'architectural', title: 'Arch Review', subtitle: 'Architectural review requests', icon: '', href: '/architectural', category: 'Pages' },
+  { id: 'rules', title: 'Rules', subtitle: 'HOA rules & regulations', icon: '', href: '/rules', category: 'Pages' },
+  { id: 'safety', title: 'Safety', subtitle: 'Community safety info', icon: '', href: '/safety', category: 'Pages' },
+  { id: 'emergency', title: 'Emergency', subtitle: 'Emergency contacts & info', icon: '', href: '/emergency', category: 'Pages' },
+  { id: 'newsletter', title: 'Newsletter', subtitle: 'Community newsletter', icon: '', href: '/newsletter', category: 'Pages' },
+  { id: 'activity', title: 'Activity Log', subtitle: 'On-chain activity feed', icon: '', href: '/activity', category: 'Pages' },
+  { id: 'contractors', title: 'Contractors', subtitle: 'Approved contractor directory', icon: '', href: '/contractors', category: 'Pages' },
+  { id: 'utilities', title: 'Utilities', subtitle: 'Utility management', icon: '', href: '/utilities', category: 'Pages' },
+  { id: 'contracts', title: 'Contracts', subtitle: 'Smart contracts', icon: '', href: '/contracts', category: 'Pages' },
+  { id: 'lost-found', title: 'Lost & Found', subtitle: 'Community lost & found', icon: '', href: '/lost-found', category: 'Pages' },
+  { id: 'gallery', title: 'Gallery', subtitle: 'Community photo gallery', icon: '', href: '/gallery', category: 'Pages' },
+  { id: 'parking', title: 'Parking', subtitle: 'Parking management', icon: '', href: '/parking', category: 'Pages' },
+  { id: 'reservations', title: 'Reservations', subtitle: 'Book amenities', icon: '', href: '/reservations', category: 'Pages' },
+  { id: 'health', title: 'Health Score', subtitle: 'Community health metrics', icon: '', href: '/health', category: 'Pages' },
+  { id: 'onboarding', title: 'Onboarding', subtitle: 'Setup wizard for new residents', icon: '', href: '/onboarding', category: 'Pages' },
+  { id: 'checkout', title: 'Move Out', subtitle: 'Move-out / checkout process', icon: '', href: '/checkout', category: 'Pages' },
+  { id: 'reports', title: 'Annual Report', subtitle: 'Community annual report', icon: '', href: '/reports/annual', category: 'Pages' },
+  { id: 'noise', title: 'Noise Complaint', subtitle: 'Submit a noise complaint', icon: '', href: '/complaints/noise', category: 'Pages' },
+  { id: 'leaderboard', title: 'Leaderboard', subtitle: 'Community engagement rankings', icon: '', href: '/community/leaderboard', category: 'Pages' },
+  { id: 'voting-power', title: 'Voting Power', subtitle: 'Your governance weight', icon: '', href: '/governance/voting-power', category: 'Pages' },
+  { id: 'gov-stats', title: 'Gov Stats', subtitle: 'Governance statistics', icon: '', href: '/governance/stats', category: 'Pages' },
+  { id: 'survey-builder', title: 'Survey Builder', subtitle: 'Create community surveys', icon: '', href: '/surveys/builder', category: 'Pages' },
+  { id: 'reimbursement', title: 'Reimbursement', subtitle: 'Request expense reimbursement', icon: '', href: '/treasury/reimbursement', category: 'Pages' },
+  { id: 'vendors', title: 'Vendors', subtitle: 'Approved vendors list', icon: '', href: '/treasury/vendors', category: 'Pages' },
+  { id: 'amenities', title: 'Amenities', subtitle: 'Community amenities', icon: '', href: '/amenities', category: 'Pages' },
+  { id: 'marketplace', title: 'Marketplace', subtitle: 'Community marketplace', icon: '', href: '/marketplace', category: 'Pages' },
+  { id: 'notifications', title: 'Notifications', subtitle: 'Notification settings', icon: '', href: '/settings/notifications', category: 'Pages' },
 ];
 
 function fuzzyMatch(query: string, item: SearchItem): boolean {
@@ -146,21 +174,21 @@ export function CommandPalette() {
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       <div
-        className="relative z-10 w-full max-w-lg rounded-2xl border border-[#B09B71]/30 bg-[#0d0d0d] shadow-2xl overflow-hidden"
+        className="relative z-10 w-full max-w-lg rounded-xl border border-[#B09B71]/30 bg-[var(--obsidian)] shadow-2xl overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* Search input */}
-        <div className="flex items-center gap-3 px-4 py-4 border-b border-white/5">
-          <span className="text-[rgba(245,240,232,0.35)] text-lg"></span>
+        <div className="flex items-center gap-3 px-4 py-4 border-b border-[rgba(245,240,232,0.05)]">
+          <span className="text-[var(--text-disabled)] text-lg"></span>
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search pages, proposals, documents..."
-            className="flex-1 bg-transparent text-[rgba(245,240,232,0.90)] placeholder-gray-600 text-sm outline-none"
+            className="flex-1 bg-transparent text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] text-sm outline-none"
           />
-          <kbd className="text-[10px] text-[rgba(245,240,232,0.25)] bg-gray-800 px-1.5 py-0.5 rounded border border-gray-700 font-mono">
+          <kbd className="text-[10px] text-[var(--text-disabled)] bg-[var(--surface-2)] px-1.5 py-0.5 rounded border border-[rgba(245,240,232,0.08)] font-mono">
             ESC
           </kbd>
         </div>
@@ -169,12 +197,12 @@ export function CommandPalette() {
         <div className="max-h-80 overflow-y-auto">
           {filteredItems.length === 0 ? (
             <div className="px-4 py-8 text-center">
-              <p className="text-sm text-[rgba(245,240,232,0.35)]">No results for &ldquo;{query}&rdquo;</p>
+              <p className="text-sm text-[var(--text-disabled)]">No results for &ldquo;{query}&rdquo;</p>
             </div>
           ) : (
             <div className="py-2">
               {!query && (
-                <p className="px-4 py-1.5 text-[10px] text-[rgba(245,240,232,0.25)] font-semibold uppercase tracking-widest">
+                <p className="px-4 py-1.5 text-[10px] text-[var(--text-disabled)] font-medium uppercase tracking-widest">
                   Quick Navigation
                 </p>
               )}
@@ -184,20 +212,20 @@ export function CommandPalette() {
                   onClick={() => navigate(item.href)}
                   onMouseEnter={() => setSelectedIndex(i)}
                   className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
-                    selectedIndex === i ? 'bg-[#B09B71]/10' : 'hover:bg-white/[0.03]'
+                    selectedIndex === i ? 'bg-[#B09B71]/10' : 'hover:bg-[rgba(245,240,232,0.03)]'
                   }`}
                 >
                   <span className="text-lg w-7 flex-shrink-0 text-center">{item.icon}</span>
                   <div className="flex-1 min-w-0">
-                    <p className={`text-sm font-medium ${selectedIndex === i ? 'text-[#D4C4A0]' : 'text-[rgba(245,240,232,0.80)]'}`}>
+                    <p className={`text-sm font-medium ${selectedIndex === i ? 'text-[#D4C4A0]' : 'text-[var(--parchment)]'}`}>
                       {item.title}
                     </p>
                     {item.subtitle && (
-                      <p className="text-[11px] text-[rgba(245,240,232,0.35)] truncate">{item.subtitle}</p>
+                      <p className="text-[11px] text-[var(--text-disabled)] truncate">{item.subtitle}</p>
                     )}
                   </div>
                   {selectedIndex === i && (
-                    <span className="text-[10px] text-[rgba(245,240,232,0.25)] font-mono shrink-0">↵ enter</span>
+                    <span className="text-[10px] text-[var(--text-disabled)] font-mono shrink-0">↵ enter</span>
                   )}
                 </button>
               ))}
@@ -206,13 +234,13 @@ export function CommandPalette() {
         </div>
 
         {/* Footer */}
-        <div className="px-4 py-2.5 border-t border-white/5 flex items-center justify-between">
-          <div className="flex items-center gap-3 text-[10px] text-[rgba(245,240,232,0.25)]">
+        <div className="px-4 py-2.5 border-t border-[rgba(245,240,232,0.05)] flex items-center justify-between">
+          <div className="flex items-center gap-3 text-[10px] text-[var(--text-disabled)]">
             <span>↑↓ navigate</span>
             <span>↵ select</span>
             <span>esc close</span>
           </div>
-          <span className="text-[10px] text-[rgba(245,240,232,0.25)]">⌘K to open</span>
+          <span className="text-[10px] text-[var(--text-disabled)]">⌘K to open</span>
         </div>
       </div>
     </div>

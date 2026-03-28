@@ -104,8 +104,8 @@ export default function ElectionsPage() {
   };
 
   const STATUS_BADGE: Record<string, string> = {
-    upcoming: 'bg-blue-900/40 text-[#5A7A9A]',
-    active: 'bg-green-900/40 text-[#3A7D6F]',
+    upcoming: 'bg-[rgba(90,122,154,0.40)] text-[var(--steel)]',
+    active: 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]',
     completed: 'bg-[oklch(0.18_0.005_60)] text-[oklch(0.45_0.01_60)]',
   };
 
@@ -113,7 +113,7 @@ export default function ElectionsPage() {
     <div className="min-h-screen bg-[oklch(0.06_0.005_60)] p-6 lg:p-10">
       <div className="max-w-4xl mx-auto">
         <div className="mb-10">
-          <h1 className="text-3xl font-bold text-[#D4C4A0] mb-2 flex items-center gap-3">
+          <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2 flex items-center gap-3">
             <Vote className="w-8 h-8 text-[#B09B71]" /> Board Elections
           </h1>
           <p className="text-[oklch(0.50_0.01_60)]">On-chain democratic governance — nominate, campaign, and vote</p>
@@ -127,13 +127,13 @@ export default function ElectionsPage() {
               : null;
 
             return (
-              <div key={election.id} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl overflow-hidden">
+              <div key={election.id} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl overflow-hidden">
                 {/* Election header */}
                 <div className="px-6 py-5 border-b border-[oklch(0.15_0.005_60)]">
                   <div className="flex items-start justify-between gap-4 flex-wrap">
                     <div>
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <h2 className="text-lg font-semibold text-[#D4C4A0]">{election.title}</h2>
+                        <h2 className="text-lg font-medium text-[#D4C4A0]">{election.title}</h2>
                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_BADGE[election.status]}`}>{election.status}</span>
                       </div>
                       <p className="text-sm text-[oklch(0.55_0.01_60)]">{election.description}</p>
@@ -146,7 +146,7 @@ export default function ElectionsPage() {
                       {election.status === 'upcoming' && (
                         <button
                           onClick={() => { setActiveElection(election.id); setShowNominate(true); }}
-                          className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#b8942e]/20 border border-[#b8942e]/40 text-[#B09B71] text-sm hover:bg-[#b8942e]/30 transition-colors"
+                          className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--brass-deep)]/20 border border-[var(--brass-deep)]/40 text-[#B09B71] text-sm hover:bg-[var(--brass-deep)]/30 transition-colors"
                         >
                           <Plus className="w-3.5 h-3.5" /> Nominate
                         </button>
@@ -172,7 +172,7 @@ export default function ElectionsPage() {
                 {/* Expanded candidates */}
                 {isActive && (
                   <div className="p-6">
-                    <h3 className="text-sm font-semibold text-[oklch(0.55_0.01_60)] uppercase tracking-wide mb-4">
+                    <h3 className="text-sm font-medium text-[oklch(0.55_0.01_60)] uppercase tracking-wide mb-4">
                       Candidates ({election.candidates.length})
                     </h3>
                     <div className="space-y-3">
@@ -181,17 +181,17 @@ export default function ElectionsPage() {
                         const isExpanded = expandedCandidate === c.id;
                         const voted = election.myVote === c.id;
                         return (
-                          <div key={c.id} className={`rounded-xl border p-4 transition-all ${voted ? 'border-[#b8942e]/50 bg-[#b8942e]/10' : 'border-[oklch(0.20_0.005_60)] bg-[oklch(0.12_0.005_60)]'}`}>
+                          <div key={c.id} className={`rounded-xl border p-4 transition-all ${voted ? 'border-[var(--brass-deep)]/50 bg-[var(--brass-deep)]/10' : 'border-[oklch(0.20_0.005_60)] bg-[oklch(0.12_0.005_60)]'}`}>
                             <div className="flex items-center justify-between gap-4 flex-wrap">
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 flex-wrap">
-                                  <p className="font-semibold text-[#D4C4A0]">{c.name}</p>
+                                  <p className="font-medium text-[#D4C4A0]">{c.name}</p>
                                   <span className="text-xs text-[oklch(0.45_0.01_60)]">Lot {c.lot}</span>
                                   {voted && <CheckCircle className="w-4 h-4 text-[#B09B71]" />}
                                 </div>
                                 <div className="flex items-center gap-2 mt-2">
                                   <div className="flex-1 bg-[oklch(0.18_0.005_60)] rounded-full h-1.5">
-                                    <div className="bg-[#b8942e] h-1.5 rounded-full transition-all duration-700" style={{ width: `${pct}%` }} />
+                                    <div className="bg-[var(--brass-deep)] h-1.5 rounded-full transition-all duration-700" style={{ width: `${pct}%` }} />
                                   </div>
                                   <span className="text-xs text-[oklch(0.50_0.01_60)] font-mono w-16 text-right">{c.votes} votes ({pct}%)</span>
                                 </div>
@@ -203,7 +203,7 @@ export default function ElectionsPage() {
                                 {(election.status === 'active' || election.status === 'upcoming') && !election.myVote && (
                                   <button
                                     onClick={() => castVote(election.id, c.id)}
-                                    className="px-3 py-1.5 rounded-lg bg-[#b8942e] text-[#1a1a1a] font-semibold text-xs hover:bg-[#B09B71] transition-colors"
+                                    className="px-3 py-1.5 rounded-lg bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium text-xs hover:bg-[#B09B71] transition-colors"
                                   >
                                     Vote
                                   </button>
@@ -227,8 +227,8 @@ export default function ElectionsPage() {
         </div>
 
         {/* Election timeline */}
-        <div className="mt-8 bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl p-6">
-          <h2 className="text-lg font-semibold text-[#D4C4A0] mb-5 flex items-center gap-2">
+        <div className="mt-8 bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
+          <h2 className="text-lg font-medium text-[#D4C4A0] mb-5 flex items-center gap-2">
             <Clock className="w-5 h-5 text-[#B09B71]" /> Election Timeline
           </h2>
           <div className="space-y-4">
@@ -241,7 +241,7 @@ export default function ElectionsPage() {
             ].map(({ phase, date, done, desc }, i) => (
               <div key={i} className="flex gap-4">
                 <div className="flex flex-col items-center">
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${done ? 'bg-[#b8942e] text-[#1a1a1a]' : 'border-2 border-[oklch(0.25_0.005_60)] text-[oklch(0.40_0.01_60)]'}`}>
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${done ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'border-2 border-[oklch(0.25_0.005_60)] text-[oklch(0.40_0.01_60)]'}`}>
                     {done ? '' : i + 1}
                   </div>
                   {i < 4 && <div className="w-0.5 h-8 bg-[oklch(0.18_0.005_60)] mt-1" />}
@@ -262,9 +262,9 @@ export default function ElectionsPage() {
       {/* Nominate modal */}
       {showNominate && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-5">
-              <h3 className="font-semibold text-[#D4C4A0]">Nominate a Candidate</h3>
+              <h3 className="font-medium text-[#D4C4A0]">Nominate a Candidate</h3>
               <button onClick={() => setShowNominate(false)}><X className="w-4 h-4 text-[oklch(0.45_0.01_60)]" /></button>
             </div>
             <div className="space-y-3">
@@ -282,7 +282,7 @@ export default function ElectionsPage() {
                 <label className="block text-xs text-[oklch(0.45_0.01_60)] mb-1">Campaign Statement *</label>
                 <textarea value={nomForm.statement} onChange={e => setNomForm({ ...nomForm, statement: e.target.value })} rows={4} placeholder="Why should residents vote for this candidate?" className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71] resize-none" />
               </div>
-              <button onClick={addNomination} disabled={!nomForm.name || !nomForm.lot || !nomForm.statement || !nomForm.nominatedBy} className="w-full py-2.5 rounded-xl bg-[#b8942e] text-[#1a1a1a] font-semibold disabled:opacity-40 hover:bg-[#B09B71] transition-colors">
+              <button onClick={addNomination} disabled={!nomForm.name || !nomForm.lot || !nomForm.statement || !nomForm.nominatedBy} className="w-full py-2.5 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium disabled:opacity-40 hover:bg-[#B09B71] transition-colors">
                 Submit Nomination
               </button>
             </div>

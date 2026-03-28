@@ -21,28 +21,28 @@ const TYPE_CONFIG: Record<
 > = {
   emergency: {
     icon: <AlertTriangle className="w-4 h-4 shrink-0" />,
-    bg: 'bg-red-950/80',
-    border: 'border-red-500/60',
-    text: 'text-[rgba(245,240,232,0.80)]',
-    badge: 'bg-red-600 text-white',
+    bg: 'bg-[rgba(139,90,90,0.80)]',
+    border: 'border-[rgba(139,90,90,0.60)]',
+    text: 'text-[var(--parchment)]',
+    badge: 'bg-[#8B5A5A] text-[var(--text-heading)]',
     glow: 'shadow-[0_0_20px_rgba(239,68,68,0.3)]',
     pulse: true,
   },
   urgent: {
     icon: <AlertCircle className="w-4 h-4 shrink-0" />,
-    bg: 'bg-orange-950/80',
-    border: 'border-orange-500/60',
-    text: 'text-orange-100',
-    badge: 'bg-orange-500 text-white',
+    bg: 'bg-[rgba(176,155,113,0.80)]',
+    border: 'border-[rgba(176,155,113,0.60)]',
+    text: 'text-[var(--parchment)]',
+    badge: 'bg-[#B09B71] text-[var(--text-heading)]',
     glow: 'shadow-[0_0_20px_rgba(249,115,22,0.25)]',
     pulse: false,
   },
   info: {
     icon: <Info className="w-4 h-4 shrink-0" />,
-    bg: 'bg-blue-950/80',
-    border: 'border-blue-500/60',
-    text: 'text-[rgba(245,240,232,0.80)]',
-    badge: 'bg-blue-600 text-white',
+    bg: 'bg-[rgba(90,122,154,0.80)]',
+    border: 'border-[rgba(90,122,154,0.60)]',
+    text: 'text-[var(--parchment)]',
+    badge: 'bg-[var(--steel)] text-[var(--text-heading)]',
     glow: 'shadow-[0_0_20px_rgba(59,130,246,0.2)]',
     pulse: false,
   },
@@ -116,8 +116,8 @@ function AlertItem({ alert, onDismiss }: { alert: Alert; onDismiss: (id: string)
             </span>
             <div className="min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-bold text-sm">{alert.title}</span>
-                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide ${cfg.badge}`}>
+                <span className="font-medium text-sm">{alert.title}</span>
+                <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded uppercase tracking-wide ${cfg.badge}`}>
                   {alert.type}
                 </span>
               </div>
@@ -131,7 +131,7 @@ function AlertItem({ alert, onDismiss }: { alert: Alert; onDismiss: (id: string)
           </div>
           <button
             onClick={handleDismiss}
-            className={`${cfg.text} opacity-60 hover:opacity-100 transition-opacity shrink-0 p-1 rounded hover:bg-white/10`}
+            className={`${cfg.text} opacity-60 hover:opacity-100 transition-opacity shrink-0 p-1 rounded hover:bg-[rgba(245,240,232,0.10)]`}
             aria-label="Dismiss alert"
           >
             <X className="w-4 h-4" />

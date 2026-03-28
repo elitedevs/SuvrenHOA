@@ -40,7 +40,7 @@ const STAGES: Stage[] = [
   {
     id: 'queued',
     label: 'Queued',
-    icon: '⏱',
+    icon: '',
     activeStates: ['Queued'],
     doneStates: ['Executed'],
     failStates: ['Expired'],
@@ -76,11 +76,11 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
 
   return (
     <div className="glass-card rounded-xl p-6">
-      <h2 className="text-base font-semibold mb-5">Proposal Lifecycle</h2>
+      <h2 className="text-base font-medium mb-5">Proposal Lifecycle</h2>
 
       <div className="relative">
         {/* Connecting line */}
-        <div className="absolute top-5 left-5 right-5 h-px bg-gray-800 z-0" />
+        <div className="absolute top-5 left-5 right-5 h-px bg-[var(--surface-2)] z-0" />
 
         <div className="relative z-10 flex items-start justify-between gap-2">
           {visibleStages.map((stage, i) => {
@@ -97,14 +97,14 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
                 {/* Dot */}
                 <div
                   className={`
-                    relative w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all
+                    relative w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium border-2 transition-all
                     ${isActive
-                      ? 'border-[#B09B71] bg-[#B09B71]/15 text-[#D4C4A0] shadow-[0_0_12px_rgba(201,169,110,0.4)] animate-pulse-gold'
+                      ? 'border-[#B09B71] bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] shadow-[0_0_12px_rgba(176,155,113,0.35)] animate-pulse-gold'
                       : isDone
-                      ? 'border-green-500/60 bg-[rgba(42,93,79,0.10)] text-[#3A7D6F]'
+                      ? 'border-[#B09B71] bg-[rgba(176,155,113,0.12)] text-[#B09B71]'
                       : isFail
-                      ? 'border-red-500/50 bg-[rgba(107,58,58,0.10)] text-[#8B5A5A]'
-                      : 'border-gray-700/60 bg-gray-800/40 text-[rgba(245,240,232,0.25)]'
+                      ? 'border-[rgba(107,58,58,0.60)] bg-[rgba(107,58,58,0.10)] text-[#8B5A5A]'
+                      : 'border-[var(--border-default)] bg-[rgba(245,240,232,0.05)] text-[var(--text-disabled)]'
                     }
                   `}
                 >
@@ -114,7 +114,7 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
                 {/* Label */}
                 <span
                   className={`text-[11px] font-medium text-center leading-tight
-                    ${isActive ? 'text-[#D4C4A0]' : isDone ? 'text-[#3A7D6F]' : isFail ? 'text-[#8B5A5A]' : 'text-[rgba(245,240,232,0.25)]'}
+                    ${isActive ? 'text-[#D4C4A0]' : isDone ? 'text-[#B09B71]' : isFail ? 'text-[#8B5A5A]' : 'text-[var(--text-disabled)]'}
                   `}
                 >
                   {stage.id === 'result' && defeated ? 'Defeated' :
@@ -130,16 +130,16 @@ export function ProposalTimeline({ currentState }: ProposalTimelineProps) {
       </div>
 
       {/* Status description */}
-      <div className="mt-4 pt-4 border-t border-white/5">
-        <p className="text-xs text-[rgba(245,240,232,0.35)] text-center">
-          {currentState === 'Pending' && '⏳ Waiting for voting to open (1-day delay)'}
+      <div className="mt-4 pt-4 border-t border-[rgba(245,240,232,0.05)]">
+        <p className="text-xs text-[var(--text-disabled)] text-center">
+          {currentState === 'Pending' && 'Waiting for voting to open (1-day delay)'}
           {currentState === 'Active' && ' Voting is open — cast your vote now'}
           {currentState === 'Succeeded' && ' Proposal passed! Waiting to be queued for execution'}
           {currentState === 'Defeated' && ' This proposal did not receive enough votes to pass'}
-          {currentState === 'Queued' && '⏱ In timelock — will be executable after the delay period'}
-          {currentState === 'Executed' && ' This proposal has been executed on-chain!'}
+          {currentState === 'Queued' && 'In timelock — will be executable after the delay period'}
+          {currentState === 'Executed' && ' This proposal has been executed.'}
           {currentState === 'Canceled' && ' This proposal was canceled by the board'}
-          {currentState === 'Expired' && '⏰ This proposal expired without execution'}
+          {currentState === 'Expired' && 'This proposal expired without execution'}
         </p>
       </div>
     </div>

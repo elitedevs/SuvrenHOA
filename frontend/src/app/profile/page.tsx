@@ -7,6 +7,7 @@ import { useProfile, useUpdateProfile } from '@/hooks/useProfile';
 import { useProperty } from '@/hooks/useProperty';
 import { useBadges } from '@/hooks/useBadges';
 import { useDuesStatus } from '@/hooks/useTreasury';
+import { X } from 'lucide-react';
 
 export default function ProfilePage() {
   const { isConnected } = useAccount();
@@ -14,7 +15,7 @@ export default function ProfilePage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to manage your profile</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to manage your profile</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -35,17 +36,23 @@ function ProfileForm() {
   const [phone, setPhone] = useState('');
   const [bio, setBio] = useState('');
   const [saved, setSaved] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [saveError, setSaveError] = useState('');
+  const [dismissedError, setDismissedError] = useState(false);
 
-  // Badge inputs from localStorage
-  const voteCount = typeof window !== 'undefined'
-    ? parseInt(localStorage.getItem('voteCount') || '0', 10)
-    : 0;
-  const messageCount = typeof window !== 'undefined'
-    ? parseInt(localStorage.getItem('messageCount') || '0', 10)
-    : 0;
-  const documentCount = typeof window !== 'undefined'
-    ? parseInt(localStorage.getItem('documentCount') || '0', 10)
-    : 0;
+  // Badge inputs from localStorage — safe fallback if storage was cleared
+  const voteCount = (() => {
+    try { return typeof window !== 'undefined' ? parseInt(localStorage.getItem('voteCount') || '0', 10) : 0; }
+    catch { return 0; }
+  })();
+  const messageCount = (() => {
+    try { return typeof window !== 'undefined' ? parseInt(localStorage.getItem('messageCount') || '0', 10) : 0; }
+    catch { return 0; }
+  })();
+  const documentCount = (() => {
+    try { return typeof window !== 'undefined' ? parseInt(localStorage.getItem('documentCount') || '0', 10) : 0; }
+    catch { return 0; }
+  })();
 
   const badges = useBadges({
     tokenId: tokenId ?? undefined,
@@ -85,75 +92,103 @@ function ProfileForm() {
   };
 
   if (isLoading) {
-    return <div className="text-center py-12 text-[rgba(245,240,232,0.35)]">Loading profile...</div>;
+    return (
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter animate-pulse">
+        <div className="h-8 w-40 bg-[rgba(245,240,232,0.08)] rounded mb-2" />
+        <div className="h-4 w-64 bg-[rgba(245,240,232,0.06)] rounded mb-8" />
+        <div className="glass-card rounded-lg p-5 mb-6">
+          <div className="h-3 w-32 bg-[rgba(245,240,232,0.06)] rounded mb-3" />
+          <div className="grid grid-cols-2 gap-4">
+            {[1,2,3,4].map(i => (
+              <div key={i}>
+                <div className="h-2 w-16 bg-[rgba(245,240,232,0.05)] rounded mb-1" />
+                <div className="h-4 w-32 bg-[rgba(245,240,232,0.08)] rounded" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="glass-card rounded-lg p-6 mb-6">
+          <div className="h-3 w-40 bg-[rgba(245,240,232,0.06)] rounded mb-4" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[1,2,3,4].map(i => (
+              <div key={i} className="h-16 bg-[rgba(245,240,232,0.06)] rounded-lg" />
+            ))}
+          </div>
+        </div>
+        <div className="glass-card rounded-lg p-6">
+          <div className="h-3 w-28 bg-[rgba(245,240,232,0.06)] rounded mb-4" />
+          <div className="h-12 w-full bg-[rgba(245,240,232,0.06)] rounded-lg mb-4" />
+          <div className="h-12 w-full bg-[rgba(245,240,232,0.06)] rounded-lg" />
+        </div>
+      </div>
+    );
   }
 
   const earnedCount = badges.filter(b => b.earned).length;
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
-      <h1 className="text-2xl sm:text-3xl font-bold mb-2">Your Profile</h1>
-      <p className="text-sm text-[rgba(245,240,232,0.50)] mb-8">
+      <h1 className="text-2xl sm:text-3xl font-medium mb-2">Your Profile</h1>
+      <p className="text-sm text-[var(--text-muted)] mb-8">
         Set your display name so neighbors see a real name instead of a wallet address
       </p>
 
-      {/* Property Info (read-only from chain) */}
-      <div className="glass-card rounded-xl p-5 mb-6">
-        <h3 className="text-xs uppercase tracking-wider text-[rgba(245,240,232,0.35)] font-semibold mb-3">On-Chain Identity</h3>
+      {/* Property Info (read-only) */}
+      <div className="glass-card rounded-lg p-5 mb-6">
+        <h3 className="text-xs uppercase tracking-wider text-[var(--text-disabled)] font-medium mb-3">Verified Identity</h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)]">Wallet</p>
+            <p className="text-[10px] text-[var(--text-disabled)]">Wallet</p>
             <p className="text-xs font-mono">{address?.slice(0, 10)}...{address?.slice(-8)}</p>
           </div>
           <div>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)]">Lot</p>
+            <p className="text-[10px] text-[var(--text-disabled)]">Lot</p>
             <p className="text-xs">{tokenId !== undefined ? `#${tokenId}` : 'No property'}</p>
           </div>
           <div>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)]">Address</p>
+            <p className="text-[10px] text-[var(--text-disabled)]">Address</p>
             <p className="text-xs">{propertyInfo?.streetAddress || '—'}</p>
           </div>
           <div>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)]">Voting Power</p>
-            <p className="text-xs text-[#B09B71] font-bold">{votes} vote{votes !== 1 ? 's' : ''}</p>
+            <p className="text-[10px] text-[var(--text-disabled)]">Voting Power</p>
+            <p className="text-xs text-[#B09B71] font-medium">{votes} vote{votes !== 1 ? 's' : ''}</p>
           </div>
         </div>
       </div>
 
-      {/* ── Achievements / Badges ── */}
-      <div className="glass-card rounded-2xl p-6 mb-6">
+      {/* Achievements / Badges */}
+      <div className="glass-card rounded-lg p-6 mb-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-xs uppercase tracking-wider text-[rgba(245,240,232,0.35)] font-semibold">Resident Achievements</h3>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)] mt-0.5">{earnedCount} of {badges.length} earned</p>
+            <h3 className="text-xs uppercase tracking-wider text-[var(--text-disabled)] font-medium">Resident Achievements</h3>
+            <p className="text-[10px] text-[var(--text-disabled)] mt-0.5">{earnedCount} of {badges.length} earned</p>
           </div>
           <div className="px-3 py-1 rounded-full bg-[#B09B71]/10 border border-[#B09B71]/20">
-            <span className="text-xs font-bold text-[#B09B71]">{earnedCount}/{badges.length}</span>
+            <span className="text-xs font-medium text-[#B09B71]">{earnedCount}/{badges.length}</span>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {badges.map(badge => (
             <div
               key={badge.id}
-              className={`flex items-center gap-3 rounded-xl p-3 transition-all ${
+              className={`flex items-center gap-3 rounded-lg p-3 transition-all ${
                 badge.earned
                   ? 'bg-[#B09B71]/10 border border-[#B09B71]/30 shadow-[0_0_12px_rgba(201,169,110,0.15)]'
-                  : 'bg-gray-800/40 border border-gray-700/40 opacity-40'
+                  : 'bg-[rgba(26,26,30,0.40)] border border-[rgba(245,240,232,0.06)] opacity-40'
               }`}
             >
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0 ${
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${
                 badge.earned
                   ? 'bg-[#B09B71]/20 shadow-[0_0_8px_rgba(201,169,110,0.3)]'
-                  : 'bg-gray-700/40'
+                  : 'bg-[rgba(34,34,40,0.40)]'
               }`}>
-                {badge.icon}
               </div>
               <div className="min-w-0">
-                <p className={`text-sm font-semibold truncate ${badge.earned ? 'text-[#D4C4A0]' : 'text-[rgba(245,240,232,0.35)]'}`}>
+                <p className={`text-sm font-medium truncate ${badge.earned ? 'text-[#D4C4A0]' : 'text-[var(--text-disabled)]'}`}>
                   {badge.name}
                   {badge.earned && <span className="ml-1.5 text-[10px] text-[#B09B71]"> Earned</span>}
                 </p>
-                <p className="text-[10px] text-[rgba(245,240,232,0.35)] leading-tight">{badge.description}</p>
+                <p className="text-[10px] text-[var(--text-disabled)] leading-tight">{badge.description}</p>
               </div>
             </div>
           ))}
@@ -161,70 +196,70 @@ function ProfileForm() {
       </div>
 
       {/* Editable Profile */}
-      <div className="glass-card rounded-xl p-6 space-y-5">
-        <h3 className="text-xs uppercase tracking-wider text-[rgba(245,240,232,0.35)] font-semibold">Profile Settings</h3>
+      <div className="glass-card rounded-lg p-6 space-y-5">
+        <h3 className="text-xs uppercase tracking-wider text-[var(--text-disabled)] font-medium">Profile Settings</h3>
 
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Display Name</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Display Name</label>
           <input
             type="text"
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="How neighbors will see you (e.g., Rick Morang)"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none"
+            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
           />
-          <p className="text-[10px] text-[rgba(245,240,232,0.35)] mt-1">This replaces your wallet address in community posts and comments</p>
+          <p className="text-[10px] text-[var(--text-disabled)] mt-1">This replaces your wallet address in community posts and comments</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Email (optional)</label>
+            <label className="block text-sm text-[var(--text-muted)] mb-2">Email (optional)</label>
             <input
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="For notifications"
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
             />
           </div>
           <div>
-            <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Phone (optional)</label>
+            <label className="block text-sm text-[var(--text-muted)] mb-2">Phone (optional)</label>
             <input
               type="tel"
               value={phone}
               onChange={e => setPhone(e.target.value)}
               placeholder="For urgent alerts"
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Bio (optional)</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Bio (optional)</label>
           <textarea
             value={bio}
             onChange={e => setBio(e.target.value)}
             placeholder="A bit about yourself for the community directory"
             rows={3}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none resize-none"
+            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
           />
         </div>
 
         <button
           onClick={handleSave}
           disabled={updateProfile.isPending}
-          className="w-full py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
+          className="w-full py-3 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all"
         >
-          {updateProfile.isPending ? '⏳ Saving...' : saved ? ' Saved!' : 'Save Profile'}
+          {updateProfile.isPending ? 'Saving...' : saved ? 'Saved' : 'Save Profile'}
         </button>
       </div>
 
       {/* Privacy note */}
-      <div className="mt-6 p-4 rounded-xl glass-card">
-        <h4 className="text-xs font-medium text-[#B09B71] mb-1"> Privacy</h4>
-        <p className="text-[10px] text-[rgba(245,240,232,0.50)]">
+      <div className="mt-6 p-4 rounded-lg glass-card">
+        <h4 className="text-xs font-medium text-[#B09B71] mb-1">Privacy</h4>
+        <p className="text-[10px] text-[var(--text-muted)]">
           Your email and phone are never shared publicly. They&apos;re only used for notifications you opt into.
-          Your display name and lot number are visible to the community. Your wallet address is always on-chain.
+          Your display name and lot number are visible to the community. Your wallet address is publicly visible on the network.
         </p>
       </div>
     </div>

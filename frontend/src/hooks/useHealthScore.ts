@@ -45,23 +45,23 @@ function getGrade(score: number): string {
 }
 
 function getColor(score: number): string {
-  if (score >= 71) return '#22c55e';
-  if (score >= 41) return '#f59e0b';
-  return '#ef4444';
+  if (score >= 71) return '#2A5D4F';   // verdigris
+  if (score >= 41) return '#B09B71';   // aged brass
+  return '#6B3A3A';                     // rosewood
 }
 
 function getColorClass(score: number): string {
-  if (score >= 71) return 'text-green-400';
-  if (score >= 41) return 'text-amber-400';
-  return 'text-red-400';
+  if (score >= 71) return 'text-[#2A5D4F]';
+  if (score >= 41) return 'text-[#B09B71]';
+  return 'text-[#6B3A3A]';
 }
 
 export function useHealthScore(): HealthScoreData {
   const [data, setData] = useState<HealthScoreData>({
     score: 0,
     grade: 'F',
-    color: '#ef4444',
-    colorClass: 'text-red-400',
+    color: '#8B5A5A',
+    colorClass: 'text-[#8B5A5A]',
     factors: [],
     loading: true,
     error: null,

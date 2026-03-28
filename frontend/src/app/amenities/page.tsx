@@ -34,7 +34,7 @@ export default function AmenitiesPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to book community amenities</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to book community amenities</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -44,13 +44,13 @@ export default function AmenitiesPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold"> Amenity Booking</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Reserve community facilities — pool, clubhouse, courts & more</p>
+          <h1 className="text-2xl sm:text-3xl font-medium"> Amenity Booking</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Reserve community facilities — pool, clubhouse, courts & more</p>
         </div>
         {selectedAmenity && (
           <button
             onClick={() => setSelectedAmenity(null)}
-            className="px-4 py-2 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors"
+            className="px-4 py-2 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors"
           >
             ← All Amenities
           </button>
@@ -79,7 +79,7 @@ function AmenityGrid({ onSelect, walletAddress }: { onSelect: (a: Amenity) => vo
     <>
       {myBookings.length > 0 && (
         <div className="mb-8 glass-card rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-[#B09B71] mb-3"> Your Upcoming Bookings</h3>
+          <h3 className="text-sm font-medium text-[#B09B71] mb-3"> Your Upcoming Bookings</h3>
           <div className="space-y-2">
             {myBookings
               .filter(b => b.date >= new Date().toISOString().split('T')[0])
@@ -89,8 +89,8 @@ function AmenityGrid({ onSelect, walletAddress }: { onSelect: (a: Amenity) => vo
                 const amenity = AMENITIES.find(a => a.id === b.amenityId);
                 return (
                   <div key={b.id} className="flex items-center justify-between text-sm">
-                    <span className="text-[rgba(245,240,232,0.65)]">{amenity?.icon} {amenity?.name}</span>
-                    <span className="text-[rgba(245,240,232,0.35)]">{b.date} at {b.slot}</span>
+                    <span className="text-[var(--text-body)]">{amenity?.icon} {amenity?.name}</span>
+                    <span className="text-[var(--text-disabled)]">{b.date} at {b.slot}</span>
                     <span className="text-xs text-[#B09B71] truncate max-w-[120px]">{b.purpose}</span>
                   </div>
                 );
@@ -107,10 +107,10 @@ function AmenityGrid({ onSelect, walletAddress }: { onSelect: (a: Amenity) => vo
             className="glass-card rounded-xl hover-lift p-6 text-left transition-all hover:border-[#B09B71]/30 border border-transparent group"
           >
             <div className="text-4xl mb-3">{amenity.icon}</div>
-            <h3 className="font-semibold text-base mb-1">{amenity.name}</h3>
-            <p className="text-xs text-[rgba(245,240,232,0.50)] mb-3 leading-relaxed">{amenity.description}</p>
+            <h3 className="font-medium text-base mb-1">{amenity.name}</h3>
+            <p className="text-xs text-[var(--text-muted)] mb-3 leading-relaxed">{amenity.description}</p>
             <div className="flex items-center justify-between">
-              <span className="text-[10px] text-[rgba(245,240,232,0.35)]"> Capacity: {amenity.capacity}</span>
+              <span className="text-[10px] text-[var(--text-disabled)]"> Capacity: {amenity.capacity}</span>
               <span className="text-[10px] text-[#B09B71] opacity-0 group-hover:opacity-100 transition-opacity">
                 Book → 
               </span>
@@ -163,19 +163,19 @@ function AmenityBookingView({
       <div className="lg:col-span-2 space-y-4">
         <div className="glass-card rounded-xl p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-[#B09B71]">{amenity.icon} {amenity.name}</h3>
+            <h3 className="font-medium text-[#B09B71]">{amenity.icon} {amenity.name}</h3>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setWeekOffset(Math.max(0, weekOffset - 1))}
                 disabled={weekOffset === 0}
-                className="px-2 py-1 rounded text-[rgba(245,240,232,0.50)] hover:text-white disabled:opacity-30 text-sm"
+                className="px-2 py-1 rounded text-[var(--text-muted)] hover:text-[var(--text-heading)] disabled:opacity-30 text-sm"
               >
                 ‹
               </button>
-              <span className="text-xs text-[rgba(245,240,232,0.50)]">{weekDates[0].label} — {weekDates[6].label}</span>
+              <span className="text-xs text-[var(--text-muted)]">{weekDates[0].label} — {weekDates[6].label}</span>
               <button
                 onClick={() => setWeekOffset(weekOffset + 1)}
-                className="px-2 py-1 rounded text-[rgba(245,240,232,0.50)] hover:text-white text-sm"
+                className="px-2 py-1 rounded text-[var(--text-muted)] hover:text-[var(--text-heading)] text-sm"
               >
                 ›
               </button>
@@ -191,14 +191,14 @@ function AmenityBookingView({
                 disabled={d.date < today}
                 className={`py-2 rounded-lg text-center transition-all disabled:opacity-30 disabled:cursor-not-allowed ${
                   selectedDate === d.date
-                    ? 'bg-[#B09B71] text-[#1a1a1a]'
+                    ? 'bg-[#B09B71] text-[var(--surface-2)]'
                     : d.date === today
                     ? 'bg-[#B09B71]/10 border border-[#B09B71]/30 text-[#B09B71]'
-                    : 'hover:bg-gray-800/50 text-[rgba(245,240,232,0.50)]'
+                    : 'hover:bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)]'
                 }`}
               >
                 <div className="text-[9px] font-medium">{d.dayName}</div>
-                <div className="text-xs font-semibold">{d.label.split(' ')[1]}</div>
+                <div className="text-xs font-medium">{d.label.split(' ')[1]}</div>
               </button>
             ))}
           </div>
@@ -206,7 +206,7 @@ function AmenityBookingView({
           {/* Time slots */}
           {selectedDate ? (
             <div>
-              <p className="text-xs text-[rgba(245,240,232,0.35)] mb-3 mt-4">Available slots for {selectedDate}</p>
+              <p className="text-xs text-[var(--text-disabled)] mb-3 mt-4">Available slots for {selectedDate}</p>
               <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
                 {amenity.slots.map(slot => {
                   const booked = isSlotBooked(amenity.id, selectedDate, slot);
@@ -220,10 +220,10 @@ function AmenityBookingView({
                         mine
                           ? 'bg-[#B09B71]/20 text-[#B09B71] border border-[#B09B71]/30 cursor-not-allowed'
                           : booked
-                          ? 'bg-gray-800/30 text-[rgba(245,240,232,0.25)] cursor-not-allowed line-through'
+                          ? 'bg-[rgba(26,26,30,0.30)] text-[var(--text-disabled)] cursor-not-allowed line-through'
                           : selectedSlot === slot
-                          ? 'bg-[#B09B71] text-[#1a1a1a]'
-                          : 'bg-gray-800/50 text-[rgba(245,240,232,0.65)] hover:bg-gray-700/50'
+                          ? 'bg-[#B09B71] text-[var(--surface-2)]'
+                          : 'bg-[rgba(26,26,30,0.50)] text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.06)]'
                       }`}
                     >
                       {mine ? '' : booked ? '' : ''}{slot}
@@ -233,16 +233,16 @@ function AmenityBookingView({
               </div>
             </div>
           ) : (
-            <p className="text-sm text-[rgba(245,240,232,0.35)] text-center py-6">Select a date to see available time slots</p>
+            <p className="text-sm text-[var(--text-disabled)] text-center py-6">Select a date to see available time slots</p>
           )}
         </div>
 
         {/* Rules */}
         <div className="glass-card rounded-xl p-4">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-[rgba(245,240,232,0.35)] mb-2 flex items-center gap-1.5"><ClipboardList className="w-3.5 h-3.5 text-[#B09B71]" /> Rules &amp; Requirements</h4>
+          <h4 className="text-xs font-medium uppercase tracking-wider text-[var(--text-disabled)] mb-2 flex items-center gap-1.5"><ClipboardList className="w-3.5 h-3.5 text-[#B09B71]" /> Rules &amp; Requirements</h4>
           <ul className="space-y-1">
             {amenity.rules.map((rule, i) => (
-              <li key={i} className="text-xs text-[rgba(245,240,232,0.50)] flex items-start gap-2">
+              <li key={i} className="text-xs text-[var(--text-muted)] flex items-start gap-2">
                 <span className="text-[#B09B71] mt-0.5">•</span>
                 {rule}
               </li>
@@ -256,13 +256,13 @@ function AmenityBookingView({
         <div className="flex gap-2 mb-2">
           <button
             onClick={() => setActiveTab('book')}
-            className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'book' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'}`}
+            className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'book' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}
           >
             New Booking
           </button>
           <button
             onClick={() => setActiveTab('my')}
-            className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'my' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'}`}
+            className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'my' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}
           >
             My Bookings {myBookings.length > 0 && `(${myBookings.length})`}
           </button>
@@ -277,34 +277,34 @@ function AmenityBookingView({
             )}
 
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Selected Date</label>
-              <p className="text-sm font-medium text-[rgba(245,240,232,0.80)]">
-                {selectedDate || <span className="text-[rgba(245,240,232,0.35)] text-xs">← Pick from calendar</span>}
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Selected Date</label>
+              <p className="text-sm font-medium text-[var(--parchment)]">
+                {selectedDate || <span className="text-[var(--text-disabled)] text-xs">← Pick from calendar</span>}
               </p>
             </div>
 
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Selected Time</label>
-              <p className="text-sm font-medium text-[rgba(245,240,232,0.80)]">
-                {selectedSlot || <span className="text-[rgba(245,240,232,0.35)] text-xs">← Pick a time slot</span>}
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Selected Time</label>
+              <p className="text-sm font-medium text-[var(--parchment)]">
+                {selectedSlot || <span className="text-[var(--text-disabled)] text-xs">← Pick a time slot</span>}
               </p>
             </div>
 
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Purpose / Notes</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Purpose / Notes</label>
               <textarea
                 value={purpose}
                 onChange={e => setPurpose(e.target.value)}
                 placeholder="e.g., Birthday party, lap swimming, family gathering..."
                 rows={3}
-                className="w-full px-3 py-2 rounded-lg bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none"
+                className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none"
               />
             </div>
 
             <button
               onClick={handleBook}
               disabled={!selectedDate || !selectedSlot || !purpose.trim()}
-              className="w-full py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all"
+              className="w-full py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all"
             >
               Confirm Booking
             </button>
@@ -312,19 +312,19 @@ function AmenityBookingView({
         ) : (
           <div className="glass-card rounded-xl p-5 space-y-3">
             {myBookings.length === 0 ? (
-              <p className="text-sm text-[rgba(245,240,232,0.35)] text-center py-4">No bookings yet</p>
+              <p className="text-sm text-[var(--text-disabled)] text-center py-4">No bookings yet</p>
             ) : (
               myBookings
                 .sort((a, b) => a.date.localeCompare(b.date))
                 .map(b => (
-                  <div key={b.id} className="p-3 rounded-lg bg-gray-800/40 space-y-1">
+                  <div key={b.id} className="p-3 rounded-lg bg-[rgba(26,26,30,0.40)] space-y-1">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-medium text-[rgba(245,240,232,0.80)]">{b.date} · {b.slot}</span>
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${b.status === 'confirmed' ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F]' : 'bg-gray-500/10 text-[rgba(245,240,232,0.35)]'}`}>
+                      <span className="text-xs font-medium text-[var(--parchment)]">{b.date} · {b.slot}</span>
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${b.status === 'confirmed' ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F]' : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-disabled)]'}`}>
                         {b.status}
                       </span>
                     </div>
-                    <p className="text-[11px] text-[rgba(245,240,232,0.50)]">{b.purpose}</p>
+                    <p className="text-[11px] text-[var(--text-muted)]">{b.purpose}</p>
                     {b.status === 'confirmed' && b.date >= today && (
                       <button
                         onClick={() => cancelBooking(b.id)}

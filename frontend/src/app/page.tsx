@@ -34,7 +34,7 @@ function Landing() {
       <div className="absolute inset-0 bg-grid opacity-60" />
       <div className="absolute inset-0 bg-radial-glow-strong" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#B09B71]/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute top-20 right-[20%] w-[400px] h-[400px] bg-cyan-500/[0.03] blur-[150px] rounded-full bg-orb pointer-events-none" />
+      <div className="absolute top-20 right-[20%] w-[400px] h-[400px] bg-[rgba(176,155,113,0.03)] blur-[150px] rounded-full bg-orb pointer-events-none" />
       <div className="absolute bottom-20 left-[10%] w-[300px] h-[300px] bg-[#B09B71]/[0.04] blur-[100px] rounded-full bg-orb-slow pointer-events-none" />
 
       {/* Hero */}
@@ -51,10 +51,10 @@ function Landing() {
             Welcome to{' '}
             <span className="gradient-text text-glow">SuvrenHOA</span>
           </h1>
-          <p className="text-[rgba(245,240,232,0.50)] text-xl sm:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          <p className="text-[var(--text-muted)] text-xl sm:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
             Transparent, immutable, democratic HOA governance on the blockchain.
             <br className="hidden sm:block" />
-            <span className="text-[rgba(245,240,232,0.35)] text-lg font-normal mt-2 block">No management companies. No hidden spending. No altered records.</span>
+            <span className="text-[var(--text-disabled)] text-lg font-normal mt-2 block">No management companies. No hidden spending. No altered records.</span>
           </p>
         </div>
 
@@ -70,7 +70,7 @@ function Landing() {
             { value: '7 days', label: 'Voting Period', sub: 'Fair + transparent', numVal: 7, prefix: '', suffix: ' days', decimals: 0 },
             { value: '0', label: 'Can Be Altered', sub: 'Documents or votes', numVal: 0, prefix: '', decimals: 0 },
           ].map(({ label, sub, numVal, prefix, suffix, decimals }) => (
-            <div key={label} className="glass-card rounded-2xl p-6 text-center">
+            <div key={label} className="glass-card rounded-xl p-6 text-center">
               <p className="text-2xl sm:text-3xl font-normal gradient-text mb-1">
                 <AnimatedNumber
                   value={numVal}
@@ -80,8 +80,8 @@ function Landing() {
                   duration={900}
                 />
               </p>
-              <p className="text-xs font-semibold text-[rgba(245,240,232,0.65)] uppercase tracking-wide">{label}</p>
-              <p className="text-[11px] text-[rgba(245,240,232,0.35)] mt-1">{sub}</p>
+              <p className="text-xs font-medium text-[var(--text-body)] uppercase tracking-wide">{label}</p>
+              <p className="text-[11px] text-[var(--text-disabled)] mt-1">{sub}</p>
             </div>
           ))}
         </div>
@@ -113,7 +113,7 @@ function Landing() {
           ].map(({ icon, title, desc, accent, borderColor }) => (
             <div
               key={title}
-              className={`glass-card rounded-2xl p-8 text-left group border-l-2 ${borderColor}`}
+              className={`glass-card rounded-xl p-8 text-left group border-l-2 ${borderColor}`}
             >
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform duration-200 ${
                 accent === 'gold' ? 'bg-[#B09B71]/10 border border-[#B09B71]/20' :
@@ -122,15 +122,15 @@ function Landing() {
               }`}>
                 {icon}
               </div>
-              <h3 className="font-bold text-base mb-3 text-[rgba(245,240,232,0.90)]">{title}</h3>
-              <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed">{desc}</p>
+              <h3 className="font-medium text-base mb-3 text-[var(--parchment)]">{title}</h3>
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">{desc}</p>
             </div>
           ))}
         </div>
 
         {/* How it works */}
         <div className="mt-20 max-w-2xl w-full card-enter card-enter-delay-4">
-          <h2 className="text-2xl font-bold mb-8 gradient-text text-center">How It Works</h2>
+          <h2 className="text-2xl font-medium mb-8 gradient-text text-center">How It Works</h2>
           <div className="space-y-0">
             {[
               { step: '1', title: 'Sign In', desc: 'Use your email or Coinbase account — no crypto knowledge needed, no apps to install' },
@@ -143,12 +143,12 @@ function Landing() {
                 {i < arr.length - 1 && (
                   <div className="absolute left-[15px] top-8 bottom-0 w-px bg-gradient-to-b from-[#B09B71]/25 to-transparent" />
                 )}
-                <div className="w-8 h-8 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/40 flex items-center justify-center text-sm font-bold text-[#B09B71] shrink-0 relative z-10">
+                <div className="w-8 h-8 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/40 flex items-center justify-center text-sm font-medium text-[#B09B71] shrink-0 relative z-10">
                   {step}
                 </div>
                 <div className="pt-0.5">
-                  <h4 className="font-semibold text-sm text-[rgba(245,240,232,0.80)] mb-1">{title}</h4>
-                  <p className="text-sm text-[rgba(245,240,232,0.35)] leading-relaxed">{desc}</p>
+                  <h4 className="font-medium text-sm text-[var(--parchment)] mb-1">{title}</h4>
+                  <p className="text-sm text-[var(--text-disabled)] leading-relaxed">{desc}</p>
                 </div>
               </div>
             ))}
@@ -156,14 +156,14 @@ function Landing() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-20 glass-card rounded-2xl p-8 max-w-lg w-full text-center card-enter card-enter-delay-4">
+        <div className="mt-20 glass-card rounded-xl p-8 max-w-lg w-full text-center card-enter card-enter-delay-4">
           <div className="w-10 h-10 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center mx-auto mb-4">
             <Link2 className="w-5 h-5 text-[#B09B71]" />
           </div>
-          <p className="text-base font-semibold text-[rgba(245,240,232,0.80)] mb-2">
+          <p className="text-base font-medium text-[var(--parchment)] mb-2">
             No management company needed.
           </p>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mb-6">
+          <p className="text-sm text-[var(--text-muted)] mb-6">
             No monthly fees. Just transparent governance on the blockchain.
           </p>
           <ConnectButton label="Get Started" />
@@ -192,7 +192,7 @@ function Dashboard() {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
         {/* Welcome header */}
         <div className="mb-10">
-          <p className="text-sm text-[rgba(245,240,232,0.35)] font-medium uppercase tracking-widest mb-2">Dashboard</p>
+          <p className="text-sm text-[var(--text-disabled)] font-medium uppercase tracking-widest mb-2">Dashboard</p>
           <h1 className="text-3xl sm:text-4xl font-normal tracking-tight">
             {hasProperty ? (
               <>
@@ -207,28 +207,28 @@ function Dashboard() {
             )}
           </h1>
           {hasProperty && propertyInfo && (
-            <p className="text-[rgba(245,240,232,0.50)] text-base mt-2 font-medium">
+            <p className="text-[var(--text-muted)] text-base mt-2 font-medium">
               {propertyInfo.streetAddress}
-              <span className="text-[rgba(245,240,232,0.25)] mx-2">·</span>
-              <span className="text-[rgba(245,240,232,0.35)]">{Number(propertyInfo.squareFootage).toLocaleString()} sq ft</span>
+              <span className="text-[var(--text-disabled)] mx-2">·</span>
+              <span className="text-[var(--text-disabled)]">{Number(propertyInfo.squareFootage).toLocaleString()} sq ft</span>
             </p>
           )}
         </div>
 
-        {/* Primary Stats — pops more with varied card colors */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-6 card-enter card-enter-delay-1">
-          <div className="glass-card rounded-2xl p-6">
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">Voting Power</p>
+        {/* Primary Stats — 3 above-fold highlights */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 card-enter card-enter-delay-1">
+          <div className="glass-card rounded-xl p-6">
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">Voting Power</p>
             <AnimatedNumber
               value={Number(votes)}
               className="text-4xl font-normal text-[#B09B71] number-reveal leading-none mb-1 block"
               duration={800}
             />
-            <p className="text-[11px] text-[rgba(245,240,232,0.25)] font-medium">of {totalSupply} total votes</p>
+            <p className="text-[11px] text-[var(--text-disabled)] font-medium">of {totalSupply} total votes</p>
           </div>
 
-          <div className="glass-card rounded-2xl p-6">
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">Treasury</p>
+          <div className="glass-card rounded-xl p-6">
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">Treasury</p>
             <AnimatedNumber
               value={parseFloat(String(totalBalance).replace(/,/g, '')) || 0}
               prefix="$"
@@ -236,126 +236,65 @@ function Dashboard() {
               className="text-4xl font-normal gradient-text-green leading-none mb-1 block"
               duration={1000}
             />
-            <p className="text-[11px] text-[rgba(245,240,232,0.25)] font-medium">community USDC</p>
+            <p className="text-[11px] text-[var(--text-disabled)] font-medium">community USDC</p>
           </div>
 
-          <div className="glass-card rounded-2xl p-6">
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">Active Proposals</p>
+          <div className="glass-card rounded-xl p-6">
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">Active Proposals</p>
             <AnimatedNumber
               value={activeProposalCount}
-              className="text-4xl font-normal text-[#5A7A9A] leading-none mb-1 block"
+              className="text-4xl font-normal text-[#B09B71] leading-none mb-1 block"
               duration={600}
             />
-            <p className="text-[11px] text-[rgba(245,240,232,0.25)] font-medium">open for voting</p>
+            <p className="text-[11px] text-[var(--text-disabled)] font-medium">open for voting</p>
           </div>
+        </div>
 
-          <div className="glass-card rounded-2xl p-6">
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">Documents</p>
+        {/* Smart Dues Reminder — only shows when connected and has a property */}
+        {hasProperty && (
+          <div className="mb-6 card-enter card-enter-delay-2">
+            <DuesReminder compact />
+          </div>
+        )}
+
+        {/* Below-fold: Secondary content */}
+        {/* HOA Health + Documents stat — moved below fold */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 card-enter card-enter-delay-3">
+          <HealthScoreWidget />
+          <div className="glass-card rounded-xl p-6">
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">Documents</p>
             <AnimatedNumber
               value={documentCount}
               className="text-4xl font-normal text-[#B09B71] number-reveal leading-none mb-1 block"
               duration={700}
             />
-            <p className="text-[11px] text-[rgba(245,240,232,0.25)] font-medium">on-chain records</p>
+            <p className="text-[11px] text-[var(--text-disabled)] font-medium">on-chain records</p>
           </div>
-
-          {/* HOA Health Score Widget */}
-          <HealthScoreWidget />
-
-          {/* Weather Widget */}
-          <WeatherWidget />
         </div>
 
-        {/* Onboarding checklist for new residents */}
-        <div className="card-enter card-enter-delay-2">
+        {/* Onboarding checklist — below fold */}
+        <div className="mb-6 card-enter card-enter-delay-3">
           <OnboardingChecklist />
         </div>
 
-        {/* Smart Dues Reminder — only shows when connected and has a property */}
-        {hasProperty && (
-          <div className="mb-8 card-enter card-enter-delay-2">
-            <DuesReminder compact />
-          </div>
-        )}
-
-        {/* Resident Spotlight */}
-        <div className="mb-8 card-enter card-enter-delay-2">
+        {/* Resident Spotlight — below fold */}
+        <div className="mb-8 card-enter card-enter-delay-3">
           <ResidentSpotlight />
-        </div>
-
-        {/* Navigation Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 card-enter card-enter-delay-2">
-          {[
-            {
-              href: '/dashboard',
-              icon: <HomeIcon className="w-6 h-6 text-[#B09B71]" />,
-              title: 'My Property',
-              desc: 'Lot details, voting power, and dues status',
-              borderColor: 'border-l-[#B09B71]/50',
-            },
-            {
-              href: '/proposals',
-              icon: <Vote className="w-6 h-6 text-[#5A7A9A]" />,
-              title: 'Proposals',
-              desc: 'Vote on active proposals or create a new one',
-              borderColor: '',
-            },
-            {
-              href: '/treasury',
-              icon: <DollarSign className="w-6 h-6 text-[#3A7D6F]" />,
-              title: 'Treasury',
-              desc: `$${totalBalance} in community funds — fully transparent`,
-              borderColor: '',
-            },
-            {
-              href: '/documents',
-              icon: <FileText className="w-6 h-6 text-[#B09B71]" />,
-              title: 'Documents',
-              desc: `${documentCount} immutable records — verify any document`,
-              borderColor: '',
-            },
-            {
-              href: '/dues',
-              icon: <CreditCard className="w-6 h-6 text-cyan-400" />,
-              title: 'Pay Dues',
-              desc: 'Quarterly or annual payments in USDC',
-              borderColor: 'border-l-cyan-500/50',
-            },
-            {
-              href: '/admin',
-              icon: <Settings className="w-6 h-6 text-[rgba(245,240,232,0.50)]" />,
-              title: 'Admin',
-              desc: 'Board tools: mint properties, register documents',
-              borderColor: 'border-l-gray-500/50',
-            },
-          ].map(({ href, icon, title, desc, borderColor }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`glass-card rounded-2xl p-7 group block border-l-2 hover-lift ${borderColor}`}
-            >
-              <span className="block mb-4 group-hover:scale-110 transition-transform duration-200 inline-block">{icon}</span>
-              <h3 className="font-bold text-base mb-2 group-hover:text-[#D4C4A0] transition-colors duration-200 text-[rgba(245,240,232,0.90)]">
-                {title}
-              </h3>
-              <p className="text-sm text-[rgba(245,240,232,0.35)] leading-relaxed">{desc}</p>
-            </Link>
-          ))}
         </div>
 
         {/* Alerts Quick Link */}
         {activeAlertCount > 0 && (
           <div className="mt-6 card-enter card-enter-delay-2">
-            <Link href="/alerts" className="glass-card rounded-2xl p-5 group block shadow-[0_0_20px_rgba(239,68,68,0.15)] hover:shadow-[0_0_30px_rgba(239,68,68,0.25)] transition-all duration-200">
+            <Link href="/alerts" className="glass-card rounded-xl p-5 group block shadow-[0_0_20px_rgba(107,58,58,0.15)] hover:shadow-[0_0_30px_rgba(107,58,58,0.25)] transition-all duration-200">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <AlertTriangle className="w-6 h-6 text-[#8B5A5A] group-hover:scale-110 transition-transform duration-200" />
                   <div>
-                    <h3 className="font-bold text-base text-[#8B5A5A] group-hover:text-[rgba(107,58,58,0.80)] transition-colors">Active Community Alerts</h3>
-                    <p className="text-sm text-[rgba(245,240,232,0.50)]">There {activeAlertCount === 1 ? "is" : "are"} {activeAlertCount} active alert{activeAlertCount !== 1 ? "s" : ""} requiring attention</p>
+                    <h3 className="font-medium text-base text-[#8B5A5A] group-hover:text-[rgba(107,58,58,0.80)] transition-colors">Active Community Alerts</h3>
+                    <p className="text-sm text-[var(--text-muted)]">There {activeAlertCount === 1 ? "is" : "are"} {activeAlertCount} active alert{activeAlertCount !== 1 ? "s" : ""} requiring attention</p>
                   </div>
                 </div>
-                <span className="min-w-[28px] h-7 px-2 rounded-full bg-red-600 text-white text-sm font-bold flex items-center justify-center animate-pulse">
+                <span className="min-w-[28px] h-7 px-2 rounded-full bg-[#8B5A5A] text-[var(--text-heading)] text-sm font-medium flex items-center justify-center animate-pulse">
                   {activeAlertCount}
                 </span>
               </div>
@@ -364,24 +303,19 @@ function Dashboard() {
         )}
 
         {/* Blockchain Trust Banner */}
-        <div className="mt-10 glass-card rounded-2xl p-7 card-enter card-enter-delay-3">
+        <div className="mt-10 glass-card rounded-xl p-7 card-enter card-enter-delay-3">
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center shrink-0">
               <Link2 className="w-5 h-5 text-[#B09B71]" />
             </div>
             <div>
-              <h3 className="font-bold text-sm text-[#D4C4A0] mb-1">Powered by Base Blockchain</h3>
-              <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed">
+              <h3 className="font-medium text-sm text-[#D4C4A0] mb-1">Powered by Base Blockchain</h3>
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                 Every vote, every dollar, every document is permanently recorded on the Base blockchain (Ethereum L2).
                 This data cannot be altered, deleted, or hidden by anyone — not the board, not a management company, not anyone.
               </p>
             </div>
           </div>
-        </div>
-
-        {/* Quick Actions */}
-        <div className="mt-10 card-enter card-enter-delay-3">
-          <QuickActions />
         </div>
 
         {/* Live Activity Ticker */}
@@ -394,19 +328,19 @@ function Dashboard() {
 }
 
 const QUICK_ACTIONS = [
-  { href: '/dues', icon: <CreditCard className="w-5 h-5 text-[#B09B71]" />, label: 'Pay Dues', desc: 'USDC payment', color: 'text-[#B09B71]', bg: 'bg-[#B09B71]/10 hover:bg-[#B09B71]/20 border-[#B09B71]/20 hover:border-[#B09B71]/40' },
-  { href: '/maintenance', icon: <Wrench className="w-5 h-5 text-[#5A7A9A]" />, label: 'Submit Request', desc: 'Maintenance', color: 'text-[#5A7A9A]', bg: 'bg-[rgba(90,122,154,0.10)] hover:bg-[rgba(90,122,154,0.15)] border-[rgba(90,122,154,0.20)] hover:border-[rgba(90,122,154,0.30)]' },
+  { href: '/dues', icon: <CreditCard className="w-5 h-5 text-[#B09B71]" />, label: 'Pay Dues', desc: 'USDC payment', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] hover:bg-[rgba(176,155,113,0.18)] border-[rgba(176,155,113,0.20)] hover:border-[rgba(176,155,113,0.40)]' },
+  { href: '/maintenance', icon: <Wrench className="w-5 h-5 text-[#B09B71]" />, label: 'Submit Request', desc: 'Maintenance', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.08)] hover:bg-[rgba(176,155,113,0.14)] border-[rgba(176,155,113,0.15)] hover:border-[rgba(176,155,113,0.28)]' },
   { href: '/documents', icon: <FileText className="w-5 h-5 text-[#B09B71]" />, label: 'Documents', desc: 'View records', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] hover:bg-[rgba(176,155,113,0.15)] border-[rgba(176,155,113,0.20)] hover:border-[rgba(176,155,113,0.30)]' },
-  { href: '/messages', icon: <MessageSquare className="w-5 h-5 text-[#3A7D6F]" />, label: 'Message Neighbor', desc: 'Community chat', color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.10)] hover:bg-[rgba(42,93,79,0.15)] border-[rgba(42,93,79,0.20)] hover:border-[rgba(42,93,79,0.30)]' },
-  { href: '/proposals', icon: <Vote className="w-5 h-5 text-[#B09B71]" />, label: 'Vote on Proposal', desc: 'Governance', color: 'text-[#B09B71]', bg: 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/20 hover:border-purple-500/40' },
-  { href: '/activity', icon: <ClipboardList className="w-5 h-5 text-cyan-400" />, label: 'Activity Log', desc: 'On-chain events', color: 'text-cyan-400', bg: 'bg-cyan-500/10 hover:bg-cyan-500/20 border-cyan-500/20 hover:border-cyan-500/40' },
+  { href: '/messages', icon: <MessageSquare className="w-5 h-5 text-[#2A5D4F]" />, label: 'Message Neighbor', desc: 'Community chat', color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.10)] hover:bg-[rgba(42,93,79,0.15)] border-[rgba(42,93,79,0.20)] hover:border-[rgba(42,93,79,0.30)]' },
+  { href: '/proposals', icon: <Vote className="w-5 h-5 text-[#B09B71]" />, label: 'Vote on Proposal', desc: 'Governance', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] hover:bg-[rgba(176,155,113,0.18)] border-[rgba(176,155,113,0.20)] hover:border-[rgba(176,155,113,0.40)]' },
+  { href: '/activity', icon: <ClipboardList className="w-5 h-5 text-[#B09B71]" />, label: 'Activity Log', desc: 'On-chain events', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.08)] hover:bg-[rgba(176,155,113,0.14)] border-[rgba(176,155,113,0.15)] hover:border-[rgba(176,155,113,0.28)]' },
 ];
 
 function QuickActions() {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-base font-bold text-[rgba(245,240,232,0.80)] flex items-center gap-2"><Zap className="w-4 h-4 text-[#B09B71]" /> Quick Actions</h2>
+        <h2 className="text-base font-medium text-[var(--parchment)] flex items-center gap-2"><Zap className="w-4 h-4 text-[#B09B71]" /> Quick Actions</h2>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {QUICK_ACTIONS.map(({ href, icon, label, desc, color, bg }) => (
@@ -417,8 +351,8 @@ function QuickActions() {
           >
             <span className="group-hover:scale-110 transition-transform duration-200 inline-block shrink-0">{icon}</span>
             <div className="min-w-0">
-              <p className={`text-xs font-bold ${color} leading-tight`}>{label}</p>
-              <p className="text-[10px] text-[rgba(245,240,232,0.35)] mt-0.5 truncate">{desc}</p>
+              <p className={`text-xs font-medium ${color} leading-tight`}>{label}</p>
+              <p className="text-[10px] text-[var(--text-disabled)] mt-0.5 truncate">{desc}</p>
             </div>
           </Link>
         ))}

@@ -29,8 +29,8 @@ const REPORT_TYPES = [
 ];
 
 const STATUS_STYLES = {
-  reported: { label: 'Reported', color: 'text-[#B09B71] bg-yellow-500/10 border-yellow-500/20' },
-  acknowledged: { label: 'Acknowledged', color: 'text-[#5A7A9A] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' },
+  reported: { label: 'Reported', color: 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' },
+  acknowledged: { label: 'Acknowledged', color: 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' },
   resolved: { label: 'Resolved', color: 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' },
 };
 
@@ -66,7 +66,7 @@ export default function SafetyPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view or report safety concerns</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to view or report safety concerns</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -107,12 +107,12 @@ export default function SafetyPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2"><ShieldCheck className="w-7 h-7 text-[#B09B71]" /> Neighborhood Watch</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Report and track community safety observations</p>
+          <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-2"><ShieldCheck className="w-7 h-7 text-[#B09B71]" /> Neighborhood Watch</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Report and track community safety observations</p>
         </div>
         <button
           onClick={() => setShowReport(!showReport)}
-          className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all shrink-0"
         >
           {showReport ? '← Back to Log' : '+ Report Concern'}
         </button>
@@ -121,13 +121,13 @@ export default function SafetyPage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3 mb-6">
         {[
-          { label: 'Reported', count: counts.reported, color: 'text-[#B09B71]', bg: 'bg-yellow-500/5 border-yellow-500/20' },
-          { label: 'Acknowledged', count: counts.acknowledged, color: 'text-[#5A7A9A]', bg: 'bg-[#5A7A9A]/5 border-[rgba(90,122,154,0.20)]' },
+          { label: 'Reported', count: counts.reported, color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.05)] border-[rgba(176,155,113,0.20)]' },
+          { label: 'Acknowledged', count: counts.acknowledged, color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/5 border-[rgba(90,122,154,0.20)]' },
           { label: 'Resolved', count: counts.resolved, color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/5 border-[rgba(42,93,79,0.20)]' },
         ].map(s => (
           <div key={s.label} className={`glass-card rounded-xl p-3 text-center border ${s.bg}`}>
-            <div className={`text-2xl font-bold ${s.color}`}>{s.count}</div>
-            <div className="text-[10px] text-[rgba(245,240,232,0.35)]">{s.label}</div>
+            <div className={`text-2xl font-medium ${s.color}`}>{s.count}</div>
+            <div className="text-[10px] text-[var(--text-disabled)]">{s.label}</div>
           </div>
         ))}
       </div>
@@ -142,14 +142,14 @@ export default function SafetyPage() {
               {(['all', 'reported', 'acknowledged', 'resolved'] as const).map(s => (
                 <button key={s} onClick={() => setStatusFilter(s)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-medium capitalize transition-all ${
-                    statusFilter === s ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'
+                    statusFilter === s ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
                   }`}>
                   {s}
                 </button>
               ))}
             </div>
             <select value={typeFilter} onChange={e => setTypeFilter(e.target.value)}
-              className="px-3 py-1.5 rounded-xl bg-gray-800/80 border border-gray-700 text-xs text-[rgba(245,240,232,0.50)] focus:outline-none">
+              className="px-3 py-1.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] focus:outline-none">
               <option value="all">All Types</option>
               {REPORT_TYPES.map(t => <option key={t.id} value={t.id}>{t.icon} {t.label}</option>)}
             </select>
@@ -159,7 +159,7 @@ export default function SafetyPage() {
             <div className="glass-card rounded-xl p-12 text-center">
               <p className="text-4xl mb-3"></p>
               <h3 className="font-medium mb-1">No reports</h3>
-              <p className="text-sm text-[rgba(245,240,232,0.50)]">Safety observations will appear here</p>
+              <p className="text-sm text-[var(--text-muted)]">Safety observations will appear here</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -189,30 +189,30 @@ function SafetyCard({ entry, onUpdateStatus }: { entry: SafetyEntry; onUpdateSta
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1">
               <span className="text-base">{typeInfo.icon}</span>
-              <span className="font-semibold text-sm">{typeInfo.label}</span>
+              <span className="font-medium text-sm">{typeInfo.label}</span>
               <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${statusStyle.color}`}>
                 {statusStyle.label}
               </span>
             </div>
-            <div className="flex items-center gap-3 text-[11px] text-[rgba(245,240,232,0.35)]">
+            <div className="flex items-center gap-3 text-[11px] text-[var(--text-disabled)]">
               <span> {entry.location}</span>
               <span> {timeAgo}</span>
-              {entry.anonymous && <span className="text-[rgba(245,240,232,0.25)]">Anonymous</span>}
+              {entry.anonymous && <span className="text-[var(--text-disabled)]">Anonymous</span>}
             </div>
           </div>
-          <span className={`text-[rgba(245,240,232,0.35)] transition-transform text-sm ${expanded ? 'rotate-180' : ''}`}>▾</span>
+          <span className={`text-[var(--text-disabled)] transition-transform text-sm ${expanded ? 'rotate-180' : ''}`}>▾</span>
         </div>
 
         {expanded && (
-          <div className="mt-4 pt-4 border-t border-white/5 space-y-3">
-            <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed">{entry.description}</p>
-            <p className="text-[11px] text-[rgba(245,240,232,0.25)]">Reported: {entry.date}</p>
+          <div className="mt-4 pt-4 border-t border-[rgba(245,240,232,0.05)] space-y-3">
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed">{entry.description}</p>
+            <p className="text-[11px] text-[var(--text-disabled)]">Reported: {entry.date}</p>
 
             {entry.status !== 'resolved' && (
               <div className="flex gap-2 pt-1">
                 {entry.status === 'reported' && (
                   <button onClick={(e) => { e.stopPropagation(); onUpdateStatus(entry.id, 'acknowledged'); }}
-                    className="px-3 py-1.5 rounded-lg bg-[rgba(90,122,154,0.10)] border border-[rgba(90,122,154,0.20)] text-xs text-[#5A7A9A] hover:bg-[rgba(90,122,154,0.15)]">
+                    className="px-3 py-1.5 rounded-lg bg-[rgba(90,122,154,0.10)] border border-[rgba(90,122,154,0.20)] text-xs text-[var(--steel)] hover:bg-[rgba(90,122,154,0.15)]">
                      Acknowledge
                   </button>
                 )}
@@ -247,15 +247,15 @@ function ReportForm({ onSubmit, onCancel, address }: {
 
   return (
     <div className="glass-card rounded-xl p-6 space-y-5 max-w-2xl">
-      <h2 className="text-lg font-semibold">Report a Safety Concern</h2>
+      <h2 className="text-lg font-medium">Report a Safety Concern</h2>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Type of Concern</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Type of Concern</label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {REPORT_TYPES.map(t => (
             <button key={t.id} onClick={() => setType(t.id)}
               className={`p-3 rounded-xl text-center transition-all ${
-                type === t.id ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)]'
+                type === t.id ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)] hover:text-[var(--parchment)]'
               }`}>
               <div className="text-xl mb-1">{t.icon}</div>
               <div className="text-[10px] font-medium leading-tight">{t.label}</div>
@@ -265,33 +265,33 @@ function ReportForm({ onSubmit, onCancel, address }: {
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Location *</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Location *</label>
         <input value={location} onChange={e => setLocation(e.target.value)} placeholder="e.g., Corner of Maple Ave and Oak St"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Description *</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Description *</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Describe what you observed — when, what you saw, any relevant details..."
-          rows={4} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+          rows={4} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Date Observed</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Date Observed</label>
         <input type="date" value={date} onChange={e => setDate(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
       </div>
 
       <label className="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" checked={anonymous} onChange={e => setAnonymous(e.target.checked)} className="rounded border-gray-700 bg-gray-800" />
-        <span className="text-sm text-[rgba(245,240,232,0.50)]">Report anonymously</span>
+        <input type="checkbox" checked={anonymous} onChange={e => setAnonymous(e.target.checked)} className="rounded border-[rgba(245,240,232,0.08)] bg-[var(--surface-2)]" />
+        <span className="text-sm text-[var(--text-muted)]">Report anonymously</span>
       </label>
 
       <div className="flex gap-3">
-        <button onClick={onCancel} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+        <button onClick={onCancel} className="flex-1 py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
         <button onClick={handleSubmit} disabled={!type || !location.trim() || !description.trim()}
-          className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+          className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all">
           Submit Report
         </button>
       </div>

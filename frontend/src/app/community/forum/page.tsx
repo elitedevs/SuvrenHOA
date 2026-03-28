@@ -88,25 +88,25 @@ export default function ForumPage() {
   if (selectedTopic) {
     return (
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
-        <button onClick={() => setSelectedTopic(null)} className="text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] text-sm transition-colors mb-4">
+        <button onClick={() => setSelectedTopic(null)} className="text-[var(--text-disabled)] hover:text-[#B09B71] text-sm transition-colors mb-4">
           ← Back to Forum
         </button>
 
         {/* Topic header */}
-        <div className="glass-card rounded-2xl p-6 mb-4">
+        <div className="glass-card rounded-lg p-6 mb-4">
           <div className="flex items-start gap-3 mb-3">
-            <span className="text-[10px] px-2 py-1 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20 font-semibold shrink-0">
+            <span className="text-[10px] px-2 py-1 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20 font-medium shrink-0">
               {selectedTopic.category}
             </span>
             {selectedTopic.pinned && (
-              <span className="text-[10px] px-2 py-1 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-semibold shrink-0">
-                 Pinned
+              <span className="text-[10px] px-2 py-1 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium shrink-0">
+                Pinned
               </span>
             )}
           </div>
-          <h1 className="text-xl font-bold text-[rgba(245,240,232,0.90)] mb-3">{selectedTopic.title}</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.65)] leading-relaxed mb-4 whitespace-pre-wrap">{selectedTopic.content}</p>
-          <div className="flex items-center gap-2 text-[11px] text-[rgba(245,240,232,0.35)]">
+          <h1 className="text-xl font-medium text-[var(--parchment)] mb-3">{selectedTopic.title}</h1>
+          <p className="text-sm text-[var(--text-body)] leading-relaxed mb-4 whitespace-pre-wrap">{selectedTopic.content}</p>
+          <div className="flex items-center gap-2 text-[11px] text-[var(--text-disabled)]">
             <span className="font-medium text-[#B09B71]">{selectedTopic.author}</span>
             {selectedTopic.lotNumber && <span>· Lot #{selectedTopic.lotNumber}</span>}
             <span>· {timeAgo(selectedTopic.createdAt)}</span>
@@ -116,13 +116,13 @@ export default function ForumPage() {
         {/* Replies */}
         {selectedTopic.replies.length > 0 && (
           <div className="space-y-3 mb-4">
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)]">
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)]">
               {selectedTopic.replies.length} {selectedTopic.replies.length === 1 ? 'Reply' : 'Replies'}
             </p>
             {selectedTopic.replies.map(reply => (
-              <div key={reply.id} className="glass-card rounded-xl p-4">
-                <p className="text-sm text-[rgba(245,240,232,0.65)] leading-relaxed mb-2 whitespace-pre-wrap">{reply.content}</p>
-                <div className="flex items-center gap-2 text-[11px] text-[rgba(245,240,232,0.35)]">
+              <div key={reply.id} className="glass-card rounded-lg p-4">
+                <p className="text-sm text-[var(--text-body)] leading-relaxed mb-2 whitespace-pre-wrap">{reply.content}</p>
+                <div className="flex items-center gap-2 text-[11px] text-[var(--text-disabled)]">
                   <span className="font-medium text-[#B09B71]">{reply.author}</span>
                   {reply.lotNumber && <span>· Lot #{reply.lotNumber}</span>}
                   <span>· {timeAgo(reply.createdAt)}</span>
@@ -134,26 +134,26 @@ export default function ForumPage() {
 
         {/* Reply form */}
         {isConnected ? (
-          <div className="glass-card rounded-2xl p-5">
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">Post a Reply</p>
+          <div className="glass-card rounded-lg p-5">
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">Post a Reply</p>
             <textarea
               value={replyText}
               onChange={e => setReplyText(e.target.value)}
               placeholder="Share your thoughts..."
               rows={4}
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none resize-none mb-3"
+              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none resize-none mb-3"
             />
             <button
               onClick={() => handleReply(selectedTopic)}
               disabled={!replyText.trim()}
-              className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-40 text-sm font-medium transition-all"
+              className="px-5 py-2.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-40 text-sm font-medium transition-all"
             >
               Post Reply
             </button>
           </div>
         ) : (
-          <div className="glass-card rounded-xl p-5 text-center">
-            <p className="text-[rgba(245,240,232,0.50)] text-sm mb-3">Sign in to reply</p>
+          <div className="glass-card rounded-lg p-5 text-center">
+            <p className="text-[var(--text-muted)] text-sm mb-3">Sign in to reply</p>
             <ConnectButton label="Sign In" />
           </div>
         )}
@@ -165,14 +165,14 @@ export default function ForumPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
-          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-1">Community</p>
+          <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Community</p>
           <h1 className="text-3xl font-normal tracking-tight flex items-center gap-2"><MessageSquare className="w-7 h-7 text-[#B09B71]" /> Discussion Forum</h1>
-          <p className="text-base text-[rgba(245,240,232,0.50)] mt-2">Community discussions, questions, and announcements</p>
+          <p className="text-base text-[var(--text-muted)] mt-2">Community discussions, questions, and announcements</p>
         </div>
         {isConnected && (
           <button
             onClick={() => setShowCreate(!showCreate)}
-            className="px-5 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-bold transition-all shrink-0"
+            className="px-5 py-3 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all shrink-0"
           >
             {showCreate ? '← Back' : '+ New Topic'}
           </button>
@@ -180,21 +180,21 @@ export default function ForumPage() {
       </div>
 
       {showCreate ? (
-        <div className="glass-card rounded-2xl p-6 mb-6">
-          <h2 className="text-base font-bold mb-5">New Discussion Topic</h2>
+        <div className="glass-card rounded-lg p-6 mb-6">
+          <h2 className="text-base font-medium mb-5">New Discussion Topic</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-2">Title</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-2">Title</label>
               <input
                 type="text"
                 value={newTitle}
                 onChange={e => setNewTitle(e.target.value)}
                 placeholder="What would you like to discuss?"
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
               />
             </div>
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-2">Category</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-2">Category</label>
               <div className="flex flex-wrap gap-2">
                 {CATEGORIES.filter(c => c !== 'All').map(cat => (
                   <button
@@ -203,7 +203,7 @@ export default function ForumPage() {
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                       newCategory === cat
                         ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
-                        : 'bg-gray-800/40 text-[rgba(245,240,232,0.50)] border border-gray-700/40 hover:border-gray-600'
+                        : 'bg-[rgba(26,26,30,0.40)] text-[var(--text-muted)] border border-[rgba(245,240,232,0.06)] hover:border-[rgba(245,240,232,0.10)]'
                     }`}
                   >
                     {cat}
@@ -212,23 +212,23 @@ export default function ForumPage() {
               </div>
             </div>
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-2">Message</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-2">Message</label>
               <textarea
                 value={newContent}
                 onChange={e => setNewContent(e.target.value)}
                 placeholder="Share more details..."
                 rows={5}
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm placeholder-gray-500 focus:border-[#B09B71]/50 focus:outline-none resize-none"
+                className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
               />
             </div>
             <div className="flex gap-3">
-              <button onClick={() => setShowCreate(false)} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">
+              <button onClick={() => setShowCreate(false)} className="flex-1 py-3 rounded-lg border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">
                 Cancel
               </button>
               <button
                 onClick={handleCreateTopic}
                 disabled={!newTitle.trim() || !newContent.trim() || submitting}
-                className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-40 text-sm font-bold transition-all"
+                className="flex-1 py-3 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-40 text-sm font-medium transition-all"
               >
                 Post Topic
               </button>
@@ -246,7 +246,7 @@ export default function ForumPage() {
             className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all shrink-0 ${
               selectedCategory === cat
                 ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
-                : 'bg-gray-800/40 text-[rgba(245,240,232,0.50)] border border-gray-700/40 hover:border-gray-600'
+                : 'bg-[rgba(26,26,30,0.40)] text-[var(--text-muted)] border border-[rgba(245,240,232,0.06)] hover:border-[rgba(245,240,232,0.10)]'
             }`}
           >
             {cat}
@@ -255,11 +255,11 @@ export default function ForumPage() {
       </div>
 
       {!isLoaded ? (
-        <div className="text-center py-12 text-[rgba(245,240,232,0.35)]">Loading discussions...</div>
+        <div className="text-center py-12 text-[var(--text-disabled)]">Loading discussions...</div>
       ) : sorted.length === 0 ? (
-        <div className="glass-card rounded-2xl p-12 text-center">
-          <MessageSquare className="w-8 h-8 text-[rgba(245,240,232,0.50)] mx-auto mb-3" />
-          <p className="text-[rgba(245,240,232,0.50)]">No topics yet. Start the conversation!</p>
+        <div className="glass-card rounded-lg p-12 text-center">
+          <MessageSquare className="w-8 h-8 text-[var(--text-muted)] mx-auto mb-3" />
+          <p className="text-[var(--text-muted)]">No topics yet. Start the conversation!</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -267,27 +267,27 @@ export default function ForumPage() {
             <button
               key={topic.id}
               onClick={() => setSelectedTopic(topic)}
-              className="w-full text-left glass-card rounded-2xl hover-lift p-5 transition-all hover:border-[#B09B71]/20 group"
+              className="w-full text-left glass-card rounded-lg hover-lift p-5 transition-all hover:border-[#B09B71]/20 group"
             >
               <div className="flex items-start gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                    {topic.pinned && <span className="text-[10px] text-[#B09B71]"></span>}
+                    {topic.pinned && <span className="text-[10px] text-[#B09B71]">Pinned</span>}
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/15 font-medium">
                       {topic.category}
                     </span>
                   </div>
-                  <h3 className="text-sm font-semibold text-[rgba(245,240,232,0.90)] group-hover:text-[#D4C4A0] transition-colors leading-snug mb-1.5">
+                  <h3 className="text-sm font-medium text-[var(--parchment)] group-hover:text-[#D4C4A0] transition-colors leading-snug mb-1.5">
                     {topic.title}
                   </h3>
-                  <p className="text-[11px] text-[rgba(245,240,232,0.35)] line-clamp-2">{topic.content}</p>
+                  <p className="text-[11px] text-[var(--text-disabled)] line-clamp-2">{topic.content}</p>
                 </div>
                 <div className="text-right shrink-0 ml-3">
-                  <div className="text-lg font-bold text-[rgba(245,240,232,0.65)]">{topic.replies.length}</div>
-                  <div className="text-[10px] text-[rgba(245,240,232,0.35)]">replies</div>
+                  <div className="text-lg font-medium text-[var(--text-body)]">{topic.replies.length}</div>
+                  <div className="text-[10px] text-[var(--text-disabled)]">replies</div>
                 </div>
               </div>
-              <div className="flex items-center gap-2 mt-3 text-[11px] text-[rgba(245,240,232,0.35)]">
+              <div className="flex items-center gap-2 mt-3 text-[11px] text-[var(--text-disabled)]">
                 <span className="text-[#B09B71] font-medium">{topic.author}</span>
                 {topic.lotNumber && <span>· Lot #{topic.lotNumber}</span>}
                 <span>· {timeAgo(topic.createdAt)}</span>

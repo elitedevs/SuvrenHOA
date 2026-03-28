@@ -23,7 +23,7 @@ export function useProperty() {
   const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(0);
 
   // How many NFTs does this wallet hold?
-  const { data: balance } = useReadContract({
+  const { data: balance, isLoading: balanceLoading } = useReadContract({
     ...propertyNFT,
     functionName: 'balanceOf',
     args: address ? [address] : undefined,
@@ -65,7 +65,7 @@ export function useProperty() {
     }));
   }, [address, balanceNum, propertyNFT]);
 
-  const { data: tokenIdResults } = useReadContracts({
+  const { data: tokenIdResults, isLoading: tokenIdsLoading } = useReadContracts({
     contracts: tokenIdCalls as any,
     query: { enabled: tokenIdCalls.length > 0 },
   });
@@ -89,7 +89,7 @@ export function useProperty() {
     }));
   }, [tokenIds, propertyNFT]);
 
-  const { data: propertyInfoResults } = useReadContracts({
+  const { data: propertyInfoResults, isLoading: propertyInfoLoading } = useReadContracts({
     contracts: propertyInfoCalls as any,
     query: { enabled: propertyInfoCalls.length > 0 },
   });
@@ -126,10 +126,13 @@ export function useProperty() {
 
   const hasProperty = balanceNum > 0;
 
+  const isLoading = !!address && (balanceLoading || tokenIdsLoading || propertyInfoLoading);
+
   return {
     // Backward-compatible single-property fields (point to selected)
     address,
     hasProperty,
+    isLoading,
     balance: balanceNum,
     votes: votes ? Number(votes) : 0,
     delegatee: delegatee as string | undefined,

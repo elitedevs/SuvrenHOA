@@ -117,7 +117,7 @@ export default function RulesPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view community rules & FAQs</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to view community rules & FAQs</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -157,24 +157,24 @@ export default function RulesPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-1 flex items-center gap-2"><ClipboardList className="w-7 h-7 text-[#B09B71]" /> Community Rules &amp; FAQ</h1>
-        <p className="text-sm text-[rgba(245,240,232,0.50)]">Official Faircroft HOA guidelines, organized and searchable</p>
+        <h1 className="text-2xl sm:text-3xl font-medium mb-1 flex items-center gap-2"><ClipboardList className="w-7 h-7 text-[#B09B71]" /> Community Rules &amp; FAQ</h1>
+        <p className="text-sm text-[var(--text-muted)]">Official Faircroft HOA guidelines, organized and searchable</p>
       </div>
 
       {/* Search */}
       <div className="relative mb-6">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[rgba(245,240,232,0.35)] text-sm"></span>
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-disabled)] text-sm"></span>
         <input
           type="text"
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search rules... e.g. 'fence height', 'quiet hours', 'rental'"
-          className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none"
+          className="w-full pl-10 pr-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none"
         />
         {search && (
           <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
-            <span className="text-[10px] text-[rgba(245,240,232,0.35)]">{totalResults} result{totalResults !== 1 ? 's' : ''}</span>
-            <button onClick={() => setSearch('')} className="text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] text-xs"></button>
+            <span className="text-[10px] text-[var(--text-disabled)]">{totalResults} result{totalResults !== 1 ? 's' : ''}</span>
+            <button onClick={() => setSearch('')} className="text-[var(--text-disabled)] hover:text-[var(--text-body)] text-xs"></button>
           </div>
         )}
       </div>
@@ -184,7 +184,7 @@ export default function RulesPage() {
         <div className="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-none">
           {SECTIONS.map(s => (
             <a key={s.id} href={`#${s.id}`}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-800/40 text-xs text-[rgba(245,240,232,0.50)] hover:text-[#B09B71] hover:bg-[#B09B71]/10 whitespace-nowrap transition-all">
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgba(26,26,30,0.40)] text-xs text-[var(--text-muted)] hover:text-[#B09B71] hover:bg-[#B09B71]/10 whitespace-nowrap transition-all">
               {s.icon} {s.title}
             </a>
           ))}
@@ -197,26 +197,26 @@ export default function RulesPage() {
             {/* Section header */}
             <button
               onClick={() => toggleSection(section.id)}
-              className="w-full p-5 flex items-center justify-between text-left hover:bg-white/2 transition-colors"
+              className="w-full p-5 flex items-center justify-between text-left hover:bg-[rgba(245,240,232,0.02)] transition-colors"
             >
               <div className="flex items-center gap-3">
                 <span className="text-2xl">{section.icon}</span>
                 <div>
-                  <h2 className="font-semibold text-base">{section.title}</h2>
-                  <p className="text-xs text-[rgba(245,240,232,0.50)] mt-0.5">{section.description}</p>
+                  <h2 className="font-medium text-base">{section.title}</h2>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{section.description}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                <span className="text-[10px] text-[rgba(245,240,232,0.35)] bg-gray-800/50 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] text-[var(--text-disabled)] bg-[rgba(26,26,30,0.50)] px-2 py-0.5 rounded-full">
                   {section.rules.length} rule{section.rules.length !== 1 ? 's' : ''}
                 </span>
-                <span className={`text-[rgba(245,240,232,0.35)] transition-transform text-sm ${openSections.has(section.id) ? 'rotate-180' : ''}`}>▾</span>
+                <span className={`text-[var(--text-disabled)] transition-transform text-sm ${openSections.has(section.id) ? 'rotate-180' : ''}`}>▾</span>
               </div>
             </button>
 
             {/* Rules accordion */}
             {(openSections.has(section.id) || search.trim()) && (
-              <div className="border-t border-white/5 divide-y divide-white/5">
+              <div className="border-t border-[rgba(245,240,232,0.05)] divide-y divide-[rgba(245,240,232,0.05)]">
                 {section.rules.map((rule, i) => {
                   const key = `${section.id}-${i}`;
                   const isOpen = openRules.has(key) || !!search.trim();
@@ -224,16 +224,16 @@ export default function RulesPage() {
                     <div key={key}>
                       <button
                         onClick={() => !search.trim() && toggleRule(key)}
-                        className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-white/2 transition-colors"
+                        className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-[rgba(245,240,232,0.02)] transition-colors"
                       >
                         <span className="text-sm font-medium pr-4 leading-snug">{rule.question}</span>
                         {!search.trim() && (
-                          <span className={`text-[rgba(245,240,232,0.35)] transition-transform text-sm shrink-0 ${isOpen ? 'rotate-45' : ''}`}>+</span>
+                          <span className={`text-[var(--text-disabled)] transition-transform text-sm shrink-0 ${isOpen ? 'rotate-45' : ''}`}>+</span>
                         )}
                       </button>
                       {isOpen && (
                         <div className="px-5 pb-4">
-                          <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed border-l-2 border-[#B09B71]/30 pl-4">
+                          <p className="text-sm text-[var(--text-muted)] leading-relaxed border-l-2 border-[#B09B71]/30 pl-4">
                             {rule.answer}
                           </p>
                         </div>
@@ -251,12 +251,12 @@ export default function RulesPage() {
         <div className="glass-card rounded-xl p-12 text-center">
           <p className="text-4xl mb-3"></p>
           <h3 className="font-medium mb-1">No results found</h3>
-          <p className="text-sm text-[rgba(245,240,232,0.50)]">Try different keywords or browse by section above</p>
+          <p className="text-sm text-[var(--text-muted)]">Try different keywords or browse by section above</p>
         </div>
       )}
 
       <div className="mt-8 p-4 rounded-xl bg-[#B09B71]/5 border border-[#B09B71]/15">
-        <p className="text-xs text-[rgba(245,240,232,0.50)]">
+        <p className="text-xs text-[var(--text-muted)]">
           <span className="text-[#B09B71] font-medium"> Official Document:</span>{' '}
           These FAQs summarize the Faircroft CC&Rs and HOA Rules & Regulations. In case of discrepancy, the official recorded documents in the Documents section govern. Contact the board with any questions.
         </p>

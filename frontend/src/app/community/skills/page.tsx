@@ -23,10 +23,10 @@ interface SkillListing {
 }
 
 const CATEGORIES: { id: Category; icon: React.ElementType; color: string; bg: string; border: string }[] = [
-  { id: 'Tech', icon: Laptop, color: 'text-[#5A7A9A]', bg: 'bg-[#5A7A9A]/10', border: 'border-blue-400/20' },
-  { id: 'Garden', icon: Leaf, color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-green-400/20' },
-  { id: 'Home Repair', icon: Wrench, color: 'text-[#B09B71]', bg: 'bg-orange-400/10', border: 'border-orange-400/20' },
-  { id: 'Cooking', icon: ChefHat, color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-red-400/20' },
+  { id: 'Tech', icon: Laptop, color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/10', border: 'border-[rgba(90,122,154,0.20)]' },
+  { id: 'Garden', icon: Leaf, color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-[rgba(42,93,79,0.20)]' },
+  { id: 'Home Repair', icon: Wrench, color: 'text-[#B09B71]', bg: 'bg-[#B09B71]/10', border: 'border-[rgba(176,155,113,0.40)]/20' },
+  { id: 'Cooking', icon: ChefHat, color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-[rgba(139,90,90,0.20)]' },
   { id: 'Childcare', icon: Baby, color: 'text-pink-400', bg: 'bg-pink-400/10', border: 'border-pink-400/20' },
   { id: 'Pets', icon: PawPrint, color: 'text-[#B09B71]', bg: 'bg-[#B09B71]/10', border: 'border-amber-400/20' },
 ];
@@ -99,7 +99,7 @@ export default function SkillsExchangePage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to join the skills exchange</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to join the skills exchange</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -112,29 +112,29 @@ export default function SkillsExchangePage() {
     const isMine = listing.lot === myLot;
 
     return (
-      <div className={`glass-card rounded-xl p-4 border ${listing.type === 'offer' ? 'border-green-400/15' : 'border-blue-400/15'}`}>
+      <div className={`glass-card rounded-xl p-4 border ${listing.type === 'offer' ? 'border-[rgba(42,93,79,0.15)]' : 'border-[rgba(90,122,154,0.15)]'}`}>
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex items-start gap-2.5">
             <div className={`p-1.5 rounded-lg ${cfg.bg} border ${cfg.border} shrink-0`}>
               <Icon className={`w-4 h-4 ${cfg.color}`} />
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">{listing.skill}</p>
-              <p className="text-xs text-[rgba(245,240,232,0.35)]">{listing.lot === myLot ? 'You' : `Lot #${listing.lot} · ${listing.name}`}</p>
+              <p className="text-sm font-medium text-[var(--text-heading)]">{listing.skill}</p>
+              <p className="text-xs text-[var(--text-disabled)]">{listing.lot === myLot ? 'You' : `Lot #${listing.lot} · ${listing.name}`}</p>
             </div>
           </div>
           <div className="flex items-center gap-1">
-            <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${listing.type === 'offer' ? 'bg-[#3A7D6F]/10 text-[#3A7D6F]' : 'bg-[#5A7A9A]/10 text-[#5A7A9A]'}`}>
+            <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${listing.type === 'offer' ? 'bg-[#3A7D6F]/10 text-[#3A7D6F]' : 'bg-[var(--steel)]/10 text-[var(--steel)]'}`}>
               {listing.type === 'offer' ? 'CAN HELP' : 'NEEDS HELP'}
             </span>
             {isMine && (
-              <button onClick={() => remove(listing.id)} className="p-1 rounded text-[rgba(245,240,232,0.25)] hover:text-[#8B5A5A] transition-colors">
+              <button onClick={() => remove(listing.id)} className="p-1 rounded text-[var(--text-disabled)] hover:text-[#8B5A5A] transition-colors">
                 <X className="w-3 h-3" />
               </button>
             )}
           </div>
         </div>
-        <p className="text-xs text-[rgba(245,240,232,0.50)] mt-1">{listing.description}</p>
+        <p className="text-xs text-[var(--text-muted)] mt-1">{listing.description}</p>
         {matches.length > 0 && (
           <button
             onClick={() => setSelectedMatch(listing)}
@@ -152,15 +152,15 @@ export default function SkillsExchangePage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-3">
             <Handshake className="w-7 h-7 text-[#B09B71]" />
             Skills Exchange
           </h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Neighbors helping neighbors — share what you know, get what you need</p>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Neighbors helping neighbors — share what you know, get what you need</p>
         </div>
         <button
           onClick={() => setShowCreate(true)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-colors"
         >
           <Plus className="w-4 h-4" />
           Add Listing
@@ -171,12 +171,12 @@ export default function SkillsExchangePage() {
       <div className="grid grid-cols-3 gap-4 mb-6">
         {[
           { label: 'Skills Offered', value: listings.filter((l) => l.type === 'offer').length, color: 'text-[#3A7D6F]' },
-          { label: 'Skills Needed', value: listings.filter((l) => l.type === 'request').length, color: 'text-[#5A7A9A]' },
+          { label: 'Skills Needed', value: listings.filter((l) => l.type === 'request').length, color: 'text-[var(--steel)]' },
           { label: 'Potential Matches', value: listings.filter((l) => findMatches(l, listings).length > 0).length, color: 'text-[#B09B71]' },
         ].map(({ label, value, color }) => (
           <div key={label} className="glass-card rounded-xl p-4 text-center">
-            <p className={`text-2xl font-bold ${color}`}>{value}</p>
-            <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">{label}</p>
+            <p className={`text-2xl font-medium ${color}`}>{value}</p>
+            <p className="text-xs text-[var(--text-disabled)] mt-0.5">{label}</p>
           </div>
         ))}
       </div>
@@ -185,7 +185,7 @@ export default function SkillsExchangePage() {
       <div className="flex gap-2 flex-wrap mb-4">
         <button
           onClick={() => setFilterCat(null)}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${!filterCat ? 'bg-[#B09B71] text-[#1a1a1a]' : 'glass-card text-[rgba(245,240,232,0.50)] hover:text-white'}`}
+          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${!filterCat ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'glass-card text-[var(--text-muted)] hover:text-[var(--text-heading)]'}`}
         >
           All
         </button>
@@ -193,7 +193,7 @@ export default function SkillsExchangePage() {
           <button
             key={id}
             onClick={() => setFilterCat(filterCat === id ? null : id)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${filterCat === id ? 'bg-[#B09B71] text-[#1a1a1a]' : 'glass-card text-[rgba(245,240,232,0.50)] hover:text-white'}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${filterCat === id ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'glass-card text-[var(--text-muted)] hover:text-[var(--text-heading)]'}`}
           >
             <Icon className={`w-3.5 h-3.5 ${filterCat === id ? '' : color}`} />
             {id}
@@ -206,14 +206,14 @@ export default function SkillsExchangePage() {
         <div>
           <div className="flex items-center gap-2 mb-3">
             <div className="w-2 h-2 rounded-full bg-[#3A7D6F]" />
-            <h2 className="text-sm font-semibold text-[#3A7D6F] uppercase tracking-wider">I Can Help ({offers.length})</h2>
+            <h2 className="text-sm font-medium text-[#3A7D6F] uppercase tracking-wider">I Can Help ({offers.length})</h2>
           </div>
           <div className="space-y-3">
             {offers.map((l) => <ListingCard key={l.id} listing={l} />)}
             {offers.length === 0 && (
               <div className="glass-card rounded-xl p-6 text-center">
-                <Users className="w-7 h-7 text-[rgba(245,240,232,0.25)] mx-auto mb-2" />
-                <p className="text-xs text-[rgba(245,240,232,0.50)]">No offers in this category yet</p>
+                <Users className="w-7 h-7 text-[var(--text-disabled)] mx-auto mb-2" />
+                <p className="text-xs text-[var(--text-muted)]">No offers in this category yet</p>
               </div>
             )}
           </div>
@@ -222,15 +222,15 @@ export default function SkillsExchangePage() {
         {/* Requests */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-2 h-2 rounded-full bg-[#5A7A9A]" />
-            <h2 className="text-sm font-semibold text-[#5A7A9A] uppercase tracking-wider">I Need Help ({requests.length})</h2>
+            <div className="w-2 h-2 rounded-full bg-[var(--steel)]" />
+            <h2 className="text-sm font-medium text-[var(--steel)] uppercase tracking-wider">I Need Help ({requests.length})</h2>
           </div>
           <div className="space-y-3">
             {requests.map((l) => <ListingCard key={l.id} listing={l} />)}
             {requests.length === 0 && (
               <div className="glass-card rounded-xl p-6 text-center">
-                <Users className="w-7 h-7 text-[rgba(245,240,232,0.25)] mx-auto mb-2" />
-                <p className="text-xs text-[rgba(245,240,232,0.50)]">No requests in this category yet</p>
+                <Users className="w-7 h-7 text-[var(--text-disabled)] mx-auto mb-2" />
+                <p className="text-xs text-[var(--text-muted)]">No requests in this category yet</p>
               </div>
             )}
           </div>
@@ -240,10 +240,10 @@ export default function SkillsExchangePage() {
       {/* Match Modal */}
       {selectedMatch && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className="glass-card rounded-2xl p-6 w-full max-w-md border border-[#B09B71]/20">
+          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[#B09B71]/20">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold">Compatible {selectedMatch.type === 'offer' ? 'Requests' : 'Offers'}</h2>
-              <button onClick={() => setSelectedMatch(null)} className="p-1 rounded text-[rgba(245,240,232,0.35)] hover:text-white">
+              <h2 className="font-medium">Compatible {selectedMatch.type === 'offer' ? 'Requests' : 'Offers'}</h2>
+              <button onClick={() => setSelectedMatch(null)} className="p-1 rounded text-[var(--text-disabled)] hover:text-[var(--text-heading)]">
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -252,22 +252,22 @@ export default function SkillsExchangePage() {
                 const cfg = getCategoryConfig(m.category);
                 const Icon = cfg.icon;
                 return (
-                  <div key={m.id} className="p-3 rounded-xl bg-[#1a1a1a] border border-white/10">
+                  <div key={m.id} className="p-3 rounded-xl bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)]">
                     <div className="flex items-start gap-2.5">
                       <div className={`p-1.5 rounded-lg ${cfg.bg} border ${cfg.border}`}>
                         <Icon className={`w-4 h-4 ${cfg.color}`} />
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-white">{m.skill}</p>
-                        <p className="text-xs text-[rgba(245,240,232,0.50)]">Lot #{m.lot} · {m.name}</p>
-                        <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1">{m.description}</p>
+                        <p className="text-sm font-medium text-[var(--text-heading)]">{m.skill}</p>
+                        <p className="text-xs text-[var(--text-muted)]">Lot #{m.lot} · {m.name}</p>
+                        <p className="text-xs text-[var(--text-disabled)] mt-1">{m.description}</p>
                       </div>
                     </div>
                   </div>
                 );
               })}
             </div>
-            <p className="text-xs text-[rgba(245,240,232,0.35)] mt-4 text-center">Connect through the Directory or Community forum</p>
+            <p className="text-xs text-[var(--text-disabled)] mt-4 text-center">Connect through the Directory or Community forum</p>
           </div>
         </div>
       )}
@@ -275,22 +275,22 @@ export default function SkillsExchangePage() {
       {/* Create Modal */}
       {showCreate && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className="glass-card rounded-2xl p-6 w-full max-w-md border border-[#B09B71]/20">
+          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[#B09B71]/20">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="font-semibold">Add Skills Listing</h2>
-              <button onClick={() => setShowCreate(false)} className="p-1 rounded text-[rgba(245,240,232,0.35)] hover:text-white">
+              <h2 className="font-medium">Add Skills Listing</h2>
+              <button onClick={() => setShowCreate(false)} className="p-1 rounded text-[var(--text-disabled)] hover:text-[var(--text-heading)]">
                 <X className="w-4 h-4" />
               </button>
             </div>
             <div className="space-y-4">
               <div>
-                <label className="text-xs text-[rgba(245,240,232,0.50)] mb-2 block">I want to...</label>
+                <label className="text-xs text-[var(--text-muted)] mb-2 block">I want to...</label>
                 <div className="grid grid-cols-2 gap-2">
                   {(['offer', 'request'] as ListingType[]).map((t) => (
                     <button
                       key={t}
                       onClick={() => setForm((f) => ({ ...f, type: t }))}
-                      className={`py-2 rounded-lg text-sm font-medium transition-colors ${form.type === t ? 'bg-[#B09B71] text-[#1a1a1a]' : 'glass-card text-[rgba(245,240,232,0.50)] hover:text-white'}`}
+                      className={`py-2 rounded-lg text-sm font-medium transition-colors ${form.type === t ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'glass-card text-[var(--text-muted)] hover:text-[var(--text-heading)]'}`}
                     >
                       {t === 'offer' ? ' Offer Help' : ' Request Help'}
                     </button>
@@ -298,13 +298,13 @@ export default function SkillsExchangePage() {
                 </div>
               </div>
               <div>
-                <label className="text-xs text-[rgba(245,240,232,0.50)] mb-2 block">Category</label>
+                <label className="text-xs text-[var(--text-muted)] mb-2 block">Category</label>
                 <div className="grid grid-cols-3 gap-2">
                   {CATEGORIES.map(({ id, icon: Icon, color }) => (
                     <button
                       key={id}
                       onClick={() => setForm((f) => ({ ...f, category: id }))}
-                      className={`flex flex-col items-center gap-1 py-2 rounded-lg text-xs font-medium transition-colors ${form.category === id ? 'bg-[#B09B71] text-[#1a1a1a]' : 'glass-card text-[rgba(245,240,232,0.50)] hover:text-white'}`}
+                      className={`flex flex-col items-center gap-1 py-2 rounded-lg text-xs font-medium transition-colors ${form.category === id ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'glass-card text-[var(--text-muted)] hover:text-[var(--text-heading)]'}`}
                     >
                       <Icon className={`w-4 h-4 ${form.category === id ? '' : color}`} />
                       {id}
@@ -313,28 +313,28 @@ export default function SkillsExchangePage() {
                 </div>
               </div>
               <div>
-                <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Skill / Service</label>
+                <label className="text-xs text-[var(--text-muted)] mb-1 block">Skill / Service</label>
                 <input
                   value={form.skill}
                   onChange={(e) => setForm((f) => ({ ...f, skill: e.target.value }))}
                   placeholder="e.g. Smart Home Setup"
-                  className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
                 />
               </div>
               <div>
-                <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Description</label>
+                <label className="text-xs text-[var(--text-muted)] mb-1 block">Description</label>
                 <textarea
                   value={form.description}
                   onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
                   placeholder="Briefly describe what you can help with or what you need..."
                   rows={2}
-                  className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
                 />
               </div>
             </div>
             <div className="flex gap-3 mt-5">
-              <button onClick={() => setShowCreate(false)} className="flex-1 px-4 py-2 rounded-lg border border-white/10 text-sm text-[rgba(245,240,232,0.50)] hover:text-white transition-colors">Cancel</button>
-              <button onClick={create} className="flex-1 px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors">Post Listing</button>
+              <button onClick={() => setShowCreate(false)} className="flex-1 px-4 py-2 rounded-lg border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors">Cancel</button>
+              <button onClick={create} className="flex-1 px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-colors">Post Listing</button>
             </div>
           </div>
         </div>

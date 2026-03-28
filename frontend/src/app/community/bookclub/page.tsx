@@ -136,7 +136,7 @@ export default function BookClubPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to join the book club</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to join the book club</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -152,21 +152,21 @@ export default function BookClubPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+        <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-3">
           <BookOpen className="w-7 h-7 text-[#B09B71]" />
           Community Book Club
         </h1>
-        <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Monthly reads, discussions, and what's next</p>
+        <p className="text-sm text-[var(--text-muted)] mt-1">Monthly reads, discussions, and what's next</p>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 p-1 rounded-xl bg-[#1a1a1a] border border-white/10 mb-8">
+      <div className="flex gap-1 p-1 rounded-xl bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] mb-8">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             onClick={() => setTab(id)}
             className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
-              tab === id ? 'bg-[#B09B71] text-[#1a1a1a]' : 'text-[rgba(245,240,232,0.50)] hover:text-white'
+              tab === id ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'text-[var(--text-muted)] hover:text-[var(--text-heading)]'
             }`}
           >
             <Icon className="w-3.5 h-3.5" />
@@ -177,10 +177,10 @@ export default function BookClubPage() {
 
       {tab === 'current' && currentBook && (
         <div className="space-y-6">
-          <div className="glass-card rounded-2xl p-6 border border-[#B09B71]/20">
+          <div className="glass-card rounded-xl p-6 border border-[#B09B71]/20">
             <div className="flex gap-5">
-              <div className={`w-24 h-32 rounded-xl bg-gradient-to-b ${currentBook.coverColor} border border-white/10 shrink-0 flex items-center justify-center`}>
-                <BookOpen className="w-8 h-8 text-white/50" />
+              <div className={`w-24 h-32 rounded-xl bg-gradient-to-b ${currentBook.coverColor} border border-[rgba(245,240,232,0.10)] shrink-0 flex items-center justify-center`}>
+                <BookOpen className="w-8 h-8 text-[rgba(245,240,232,0.50)]" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
@@ -190,10 +190,10 @@ export default function BookClubPage() {
                   <Star className="w-4 h-4 text-[#B09B71] fill-[#B09B71]" />
                   <span className="text-xs text-[#B09B71] font-medium">This Month's Pick</span>
                 </div>
-                <h2 className="text-xl font-bold text-white">{currentBook.title}</h2>
-                <p className="text-sm text-[rgba(245,240,232,0.50)] mt-0.5">by {currentBook.author}</p>
-                <p className="text-sm text-[rgba(245,240,232,0.65)] mt-3 leading-relaxed">{currentBook.synopsis}</p>
-                <p className="text-xs text-[rgba(245,240,232,0.35)] mt-2">{currentBook.pages} pages</p>
+                <h2 className="text-xl font-medium text-[var(--text-heading)]">{currentBook.title}</h2>
+                <p className="text-sm text-[var(--text-muted)] mt-0.5">by {currentBook.author}</p>
+                <p className="text-sm text-[var(--text-body)] mt-3 leading-relaxed">{currentBook.synopsis}</p>
+                <p className="text-xs text-[var(--text-disabled)] mt-2">{currentBook.pages} pages</p>
               </div>
             </div>
           </div>
@@ -208,12 +208,12 @@ export default function BookClubPage() {
               onChange={(e) => setNewComment(e.target.value)}
               placeholder={`Share your thoughts on "${currentBook?.title}"...`}
               rows={3}
-              className="w-full bg-transparent text-sm text-white placeholder-gray-600 focus:outline-none resize-none"
+              className="w-full bg-transparent text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none resize-none"
             />
             <div className="flex justify-end mt-2">
               <button
                 onClick={postComment}
-                className="px-4 py-1.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-xs font-semibold transition-colors"
+                className="px-4 py-1.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-xs font-medium transition-colors"
               >
                 Post
               </button>
@@ -223,10 +223,10 @@ export default function BookClubPage() {
             <div key={thread.id} className="glass-card rounded-xl p-4">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-medium text-[#B09B71]">{thread.author}</span>
-                <span className="text-xs text-[rgba(245,240,232,0.35)]">{new Date(thread.timestamp).toLocaleDateString()}</span>
+                <span className="text-xs text-[var(--text-disabled)]">{new Date(thread.timestamp).toLocaleDateString()}</span>
               </div>
-              <p className="text-sm text-[rgba(245,240,232,0.65)]">{thread.content}</p>
-              <button onClick={() => likeThread(thread.id)} className="flex items-center gap-1.5 mt-2 text-xs text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] transition-colors">
+              <p className="text-sm text-[var(--text-body)]">{thread.content}</p>
+              <button onClick={() => likeThread(thread.id)} className="flex items-center gap-1.5 mt-2 text-xs text-[var(--text-disabled)] hover:text-[#B09B71] transition-colors">
                 <ThumbsUp className="w-3.5 h-3.5" />
                 {thread.likes}
               </button>
@@ -234,8 +234,8 @@ export default function BookClubPage() {
           ))}
           {currentThreads.length === 0 && (
             <div className="glass-card rounded-xl p-8 text-center">
-              <MessageSquare className="w-8 h-8 text-[rgba(245,240,232,0.25)] mx-auto mb-2" />
-              <p className="text-sm text-[rgba(245,240,232,0.50)]">No discussion yet — start the conversation!</p>
+              <MessageSquare className="w-8 h-8 text-[var(--text-disabled)] mx-auto mb-2" />
+              <p className="text-sm text-[var(--text-muted)]">No discussion yet — start the conversation!</p>
             </div>
           )}
         </div>
@@ -244,42 +244,42 @@ export default function BookClubPage() {
       {tab === 'nominate' && (
         <div className="space-y-4">
           <div className="glass-card rounded-xl p-4 border border-[#B09B71]/20">
-            <h3 className="text-sm font-semibold text-white mb-3">Nominate a Book</h3>
+            <h3 className="text-sm font-medium text-[var(--text-heading)] mb-3">Nominate a Book</h3>
             <div className="grid grid-cols-2 gap-3">
               <input
                 value={newNomTitle}
                 onChange={(e) => setNewNomTitle(e.target.value)}
                 placeholder="Book title"
-                className="px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
+                className="px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
               />
               <input
                 value={newNomAuthor}
                 onChange={(e) => setNewNomAuthor(e.target.value)}
                 placeholder="Author"
-                className="px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
+                className="px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
               />
             </div>
             <button
               onClick={addNomination}
-              className="mt-3 w-full px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors"
+              className="mt-3 w-full px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-colors"
             >
               Nominate
             </button>
           </div>
 
-          <h3 className="text-sm font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wider">Nominations — Vote for Next Month</h3>
+          <h3 className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider">Nominations — Vote for Next Month</h3>
           {nominations.sort((a, b) => b.votes.length - a.votes.length).map((nom) => {
             const hasVoted = nom.votes.includes(myLot);
             return (
               <div key={nom.id} className="glass-card rounded-xl p-4 flex items-center gap-4">
                 <div className="flex-1">
-                  <p className="font-semibold text-white text-sm">{nom.title}</p>
-                  <p className="text-xs text-[rgba(245,240,232,0.50)]">by {nom.author} · nominated by {nom.nominatedBy}</p>
+                  <p className="font-medium text-[var(--text-heading)] text-sm">{nom.title}</p>
+                  <p className="text-xs text-[var(--text-muted)]">by {nom.author} · nominated by {nom.nominatedBy}</p>
                 </div>
                 <button
                   onClick={() => vote(nom.id)}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                    hasVoted ? 'bg-[#B09B71] text-[#1a1a1a]' : 'border border-white/10 text-[rgba(245,240,232,0.50)] hover:border-[#B09B71]/30 hover:text-[#B09B71]'
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    hasVoted ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'border border-[rgba(245,240,232,0.10)] text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71]'
                   }`}
                 >
                   <ThumbsUp className="w-3.5 h-3.5" />
@@ -295,13 +295,13 @@ export default function BookClubPage() {
         <div className="space-y-3">
           {books.filter((b) => b.status === 'past').map((book) => (
             <div key={book.id} className="glass-card rounded-xl p-4 flex gap-4">
-              <div className={`w-12 h-16 rounded-lg bg-gradient-to-b ${book.coverColor} border border-white/10 shrink-0 flex items-center justify-center`}>
-                <BookOpen className="w-5 h-5 text-white/50" />
+              <div className={`w-12 h-16 rounded-lg bg-gradient-to-b ${book.coverColor} border border-[rgba(245,240,232,0.10)] shrink-0 flex items-center justify-center`}>
+                <BookOpen className="w-5 h-5 text-[rgba(245,240,232,0.50)]" />
               </div>
               <div>
-                <p className="font-semibold text-white text-sm">{book.title}</p>
-                <p className="text-xs text-[rgba(245,240,232,0.50)]">by {book.author}</p>
-                <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1">{book.month} {book.year} · {book.pages} pages</p>
+                <p className="font-medium text-[var(--text-heading)] text-sm">{book.title}</p>
+                <p className="text-xs text-[var(--text-muted)]">by {book.author}</p>
+                <p className="text-xs text-[var(--text-disabled)] mt-1">{book.month} {book.year} · {book.pages} pages</p>
               </div>
             </div>
           ))}

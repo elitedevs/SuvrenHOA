@@ -9,7 +9,8 @@ import { useMessages } from '@/hooks/useMessages';
 import {
   Home, Building2, Vote, Landmark, Users, FileText,
   Wrench, Settings, ChevronLeft, ChevronRight,
-  ChevronDown, Menu, X,
+  ChevronDown, Menu, X, MessageCircle,
+  BookOpen, Megaphone, Eye,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -52,6 +53,8 @@ const NAV_SECTIONS: NavSection[] = [
       { href: '/governance/stats', label: 'Gov Stats' },
       { href: '/governance/elections', label: 'Elections' },
       { href: '/governance/voting-power', label: 'Voting Power' },
+      { href: '/violations', label: 'Violations' },
+      { href: '/architectural', label: 'Arch Review' },
     ],
   },
   {
@@ -63,6 +66,8 @@ const NAV_SECTIONS: NavSection[] = [
       { href: '/treasury/budget', label: 'Budget' },
       { href: '/treasury/vendors', label: 'Vendors' },
       { href: '/treasury/reimbursement', label: 'Reimbursement' },
+      { href: '/loans', label: 'Payment Plans' },
+      { href: '/contracts', label: 'Contracts' },
     ],
   },
   {
@@ -71,6 +76,7 @@ const NAV_SECTIONS: NavSection[] = [
     icon: Users,
     children: [
       { href: '/community/forum', label: 'Forum' },
+      { href: '/community/leaderboard', label: 'Leaderboard' },
       { href: '/community/cookbook', label: 'Cookbook' },
       { href: '/community/fitness', label: 'Fitness' },
       { href: '/community/garden', label: 'Garden' },
@@ -80,6 +86,27 @@ const NAV_SECTIONS: NavSection[] = [
       { href: '/community/awards', label: 'Awards' },
       { href: '/gallery', label: 'Gallery' },
       { href: '/marketplace', label: 'Marketplace' },
+      { href: '/lost-found', label: 'Lost & Found' },
+    ],
+  },
+  {
+    href: '/messages',
+    label: 'Messages',
+    icon: MessageCircle,
+  },
+  {
+    href: '/directory',
+    label: 'Directory',
+    icon: BookOpen,
+  },
+  {
+    href: '/announcements',
+    label: 'Announcements',
+    icon: Megaphone,
+    children: [
+      { href: '/announcements', label: 'Announcements' },
+      { href: '/newsletter', label: 'Newsletter' },
+      { href: '/alerts', label: 'Alerts' },
     ],
   },
   {
@@ -90,14 +117,16 @@ const NAV_SECTIONS: NavSection[] = [
       { href: '/documents', label: 'All Docs' },
       { href: '/documents/minutes', label: 'Minutes' },
       { href: '/documents/compare', label: 'Compare' },
+      { href: '/rules', label: 'Rules' },
     ],
   },
   {
-    href: '/services',
+    href: '/maintenance',
     label: 'Services',
     icon: Wrench,
     children: [
       { href: '/maintenance', label: 'Maintenance' },
+      { href: '/reservations', label: 'Reservations' },
       { href: '/amenities', label: 'Amenities' },
       { href: '/parking', label: 'Parking' },
       { href: '/services/packages', label: 'Packages' },
@@ -106,19 +135,43 @@ const NAV_SECTIONS: NavSection[] = [
       { href: '/services/carpool', label: 'Carpool' },
       { href: '/services/trash', label: 'Trash' },
       { href: '/contractors', label: 'Contractors' },
+      { href: '/utilities', label: 'Utilities' },
     ],
   },
   {
-    href: '/settings',
+    href: '/transparency',
+    label: 'Info & Safety',
+    icon: Eye,
+    children: [
+      { href: '/transparency', label: 'Transparency' },
+      { href: '/health', label: 'Health Score' },
+      { href: '/map', label: 'Map' },
+      { href: '/safety', label: 'Safety' },
+      { href: '/emergency', label: 'Emergency' },
+      { href: '/activity', label: 'Activity Log' },
+      { href: '/surveys', label: 'Surveys' },
+      { href: '/surveys/builder', label: 'Survey Builder' },
+      { href: '/reports/annual', label: 'Annual Report' },
+      { href: '/complaints/noise', label: 'Noise Complaint' },
+    ],
+  },
+  {
+    href: '/profile',
     label: 'Settings',
     icon: Settings,
     children: [
       { href: '/profile', label: 'Profile' },
       { href: '/settings/notifications', label: 'Notifications' },
       { href: '/admin', label: 'Admin' },
+      { href: '/onboarding', label: 'Onboarding' },
+      { href: '/checkout', label: 'Move Out' },
     ],
   },
 ];
+
+// Section groupings — hairline dividers appear between these clusters
+// [0]=Home  [1-3]=Property/Governance/Treasury  [4-9]=Community/Messages/Directory/Announcements/Documents/Services  [10-11]=Info/Settings
+const DIVIDER_BEFORE = new Set([1, 4, 10]);
 
 function NavItem({
   section,
@@ -146,101 +199,136 @@ function NavItem({
     : false;
   const highlighted = isActive || isChildActive;
 
+  // Shared hover handlers
+  const hoverOn = (el: HTMLElement) => {
+    if (!highlighted) el.style.background = 'rgba(245,240,232,0.03)';
+  };
+  const hoverOff = (el: HTMLElement) => {
+    if (!highlighted) el.style.background = 'transparent';
+  };
+
+  const parentStyle: React.CSSProperties = {
+    color: highlighted ? 'rgba(245,240,232,0.90)' : 'rgba(245,240,232,0.55)',
+    background: highlighted ? 'rgba(176,155,113,0.06)' : 'transparent',
+    transition: 'background 150ms ease-out, color 150ms ease-out',
+  };
+
   if (hasChildren && !collapsed) {
     return (
       <div>
         <button
           onClick={() => onToggle(section.label)}
-          className="w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-colors duration-150 relative"
-          style={{
-            color: highlighted ? '#F5F0E8' : 'rgba(245,240,232,0.60)',
-          }}
+          className="w-full flex items-center gap-3 px-3 py-2.5 text-[15px] rounded-lg relative"
+          style={parentStyle}
+          onMouseEnter={(e) => hoverOn(e.currentTarget)}
+          onMouseLeave={(e) => hoverOff(e.currentTarget)}
         >
+          {/* Left accent — 3px brass, visible only when highlighted */}
           {highlighted && (
             <span
-              className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-5 rounded-full"
-              style={{ background: '#B09B71' }}
+              className="absolute left-0 top-1/2 -translate-y-1/2 rounded-full"
+              style={{ width: '3px', height: '20px', background: 'rgba(176,155,113,0.70)' }}
             />
           )}
           <Icon
-            size={18}
+            size={20}
             className="shrink-0"
-            style={{ opacity: highlighted ? 0.85 : 0.55 }}
+            style={{ opacity: highlighted ? 0.80 : 0.45, transition: 'opacity 150ms ease-out' }}
           />
-          <span className="flex-1 text-left">{section.label}</span>
+          <span className="flex-1 text-left font-normal">{section.label}</span>
           <ChevronDown
-            size={14}
+            size={13}
             style={{
-              opacity: 0.3,
+              opacity: 0.25,
               transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
-              transition: 'transform 200ms ease',
+              transition: 'transform 200ms ease-out',
             }}
           />
         </button>
 
+        {/* Accordion children */}
         <div
           style={{
             overflow: 'hidden',
-            maxHeight: expanded
-              ? `${section.children!.length * 32 + 8}px`
-              : '0px',
-            transition: 'max-height 200ms ease, opacity 200ms ease',
+            maxHeight: expanded ? `${section.children!.length * 32 + 8}px` : '0px',
+            transition: 'max-height 200ms ease-out, opacity 180ms ease-out',
             opacity: expanded ? 1 : 0,
           }}
         >
-          <div className="pl-9 pr-2 pb-1 space-y-0.5">
-            {section.children!.map((child) => {
-              const childActive =
-                pathname === child.href ||
-                pathname.startsWith(child.href + '/');
-              return (
-                <Link
-                  key={child.href}
-                  href={child.href}
-                  className="block py-1.5 px-2 text-[13px] rounded transition-colors duration-150 relative"
-                  style={{
-                    color: childActive
-                      ? '#F5F0E8'
-                      : 'rgba(245,240,232,0.50)',
-                  }}
-                >
-                  {childActive && (
-                    <span
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-4 rounded-full"
-                      style={{ background: '#B09B71' }}
-                    />
-                  )}
-                  <span className="pl-1">{child.label}</span>
-                </Link>
-              );
-            })}
+          <div className="relative pb-1" style={{ paddingLeft: '36px', paddingRight: '8px', marginTop: '1px' }}>
+            {/* Whisper connector line */}
+            <span
+              className="absolute"
+              style={{
+                left: '21px',
+                top: '6px',
+                bottom: '6px',
+                width: '1px',
+                background: 'rgba(245,240,232,0.06)',
+                pointerEvents: 'none',
+              }}
+            />
+
+            <div className="space-y-0.5">
+              {section.children!.map((child) => {
+                const childActive =
+                  pathname === child.href || pathname.startsWith(child.href + '/');
+                return (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    className="block py-1.5 px-2 text-sm rounded-md relative"
+                    style={{
+                      color: childActive ? 'rgba(245,240,232,0.88)' : 'rgba(245,240,232,0.45)',
+                      background: childActive ? 'rgba(176,155,113,0.04)' : 'transparent',
+                      transition: 'background 150ms ease-out, color 150ms ease-out',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!childActive) (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(245,240,232,0.03)';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!childActive) (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+                    }}
+                  >
+                    {childActive && (
+                      <span
+                        className="absolute left-0 top-1/2 -translate-y-1/2 rounded-full"
+                        style={{ width: '2px', height: '12px', background: 'rgba(176,155,113,0.60)' }}
+                      />
+                    )}
+                    <span className="pl-1">{child.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
     );
   }
 
+  // Leaf item (no children, or collapsed)
   return (
     <Link
       href={section.href}
-      className="flex items-center gap-3 px-3 py-2.5 text-sm transition-colors duration-150 relative"
-      style={{
-        color: highlighted ? '#F5F0E8' : 'rgba(245,240,232,0.60)',
-      }}
+      className="flex items-center gap-3 px-3 py-2.5 text-[15px] rounded-lg relative"
+      style={parentStyle}
+      onMouseEnter={(e) => hoverOn(e.currentTarget as HTMLAnchorElement)}
+      onMouseLeave={(e) => hoverOff(e.currentTarget as HTMLAnchorElement)}
       title={collapsed ? section.label : undefined}
     >
       {highlighted && (
         <span
-          className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-5 rounded-full"
-          style={{ background: '#B09B71' }}
+          className="absolute left-0 top-1/2 -translate-y-1/2 rounded-full"
+          style={{ width: '3px', height: '20px', background: 'rgba(176,155,113,0.70)' }}
         />
       )}
       <Icon
-        size={18}
+        size={20}
         className="shrink-0"
-        style={{ opacity: highlighted ? 0.85 : 0.55 }}
+        style={{ opacity: highlighted ? 0.80 : 0.45, transition: 'opacity 150ms ease-out' }}
       />
-      {!collapsed && <span className="truncate">{section.label}</span>}
+      {!collapsed && <span className="truncate font-normal">{section.label}</span>}
     </Link>
   );
 }
@@ -248,7 +336,7 @@ function NavItem({
 export function Sidebar() {
   const pathname = usePathname();
   const { isConnected } = useAccount();
-  const { totalUnread } = useMessages();
+  const { totalUnread: _totalUnread } = useMessages(); // reserved for future badge
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
@@ -270,95 +358,131 @@ export function Sidebar() {
   const toggleSection = (label: string) => {
     setExpandedSections((prev) => {
       const next = new Set(prev);
-      if (next.has(label)) {
-        next.delete(label);
-      } else {
-        next.add(label);
-      }
+      if (next.has(label)) next.delete(label);
+      else next.add(label);
       return next;
     });
   };
+
+  // Sync sidebar width to CSS custom property so layout.tsx can react
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--sidebar-width',
+      collapsed ? '64px' : '240px'
+    );
+  }, [collapsed]);
 
   if (!isConnected) return null;
 
   const sidebarContent = (
     <div
-      className="flex flex-col h-full transition-all duration-200"
-      style={{ width: collapsed ? '64px' : '240px' }}
+      className="flex flex-col h-full"
+      style={{
+        width: collapsed ? '64px' : '240px',
+        transition: 'width 200ms ease-out',
+      }}
     >
-      {/* Logo */}
+      {/* ── Logo header ── */}
       <div
-        className="flex items-center justify-between px-4 h-14"
-        style={{ borderBottom: '1px solid rgba(245,240,232,0.06)' }}
+        className="flex items-center justify-between px-4 shrink-0"
+        style={{
+          height: '80px',
+          borderBottom: '1px solid rgba(245,240,232,0.05)',
+        }}
       >
         {collapsed ? (
           <Link href="/" className="flex items-center justify-center mx-auto">
-            <img
-              src="/logo-icon.svg"
-              alt="SuvrenHOA"
-              className="h-7 w-7 object-contain"
-            />
+            <img src="/logo-icon.svg" alt="SuvrenHOA" className="h-8 w-8 object-contain" />
           </Link>
         ) : (
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center">
             <img
               src="/logo-full.svg"
               alt="SuvrenHOA"
-              className="h-7 w-auto max-w-[160px] object-contain"
+              className="h-10 w-auto max-w-[180px] object-contain"
             />
           </Link>
         )}
+
+        {/* Collapse toggle */}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="p-1.5 rounded-md transition-colors hidden lg:flex"
-          style={{ color: 'rgba(245,240,232,0.30)' }}
+          className="p-1.5 rounded-md hidden lg:flex shrink-0"
+          style={{
+            color: 'rgba(245,240,232,0.40)',
+            transition: 'color 150ms ease-out',
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(245,240,232,0.65)'; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(245,240,232,0.40)'; }}
         >
-          {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+          {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
         </button>
       </div>
 
-      {/* Nav */}
-      <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-0.5">
-        {NAV_SECTIONS.map((section) => (
-          <NavItem
-            key={section.label}
-            section={section}
-            collapsed={collapsed}
-            pathname={pathname}
-            onToggle={toggleSection}
-            expanded={expandedSections.has(section.label)}
-          />
+      {/* ── Navigation ── */}
+      <nav className="flex-1 overflow-y-auto py-3 px-2.5">
+        {NAV_SECTIONS.map((section, index) => (
+          <div key={section.label}>
+            {/* Hairline divider between section clusters */}
+            {DIVIDER_BEFORE.has(index) && (
+              <div
+                style={{
+                  height: '1px',
+                  background: 'rgba(245,240,232,0.04)',
+                  margin: '8px 4px',
+                }}
+              />
+            )}
+            <NavItem
+              section={section}
+              collapsed={collapsed}
+              pathname={pathname}
+              onToggle={toggleSection}
+              expanded={expandedSections.has(section.label)}
+            />
+          </div>
         ))}
       </nav>
 
-      {/* Theme + Wallet */}
+      {/* ── Bottom: theme + wallet ── */}
       <div
-        className="p-3 space-y-2"
-        style={{ borderTop: '1px solid rgba(245,240,232,0.06)' }}
+        className="shrink-0 px-3 py-3 space-y-2.5"
+        style={{ borderTop: '1px solid rgba(245,240,232,0.05)' }}
       >
-        {!collapsed && (
-          <div className="flex items-center justify-between px-1 py-1">
+        {/* Theme toggle — minimal, tucked */}
+        {!collapsed ? (
+          <div className="flex items-center justify-between px-1">
             <span
-              className="text-xs font-medium"
-              style={{ color: 'rgba(245,240,232,0.40)' }}
+              className="text-[10px] tracking-widest uppercase"
+              style={{ color: 'rgba(245,240,232,0.25)', letterSpacing: '0.10em' }}
             >
               Theme
             </span>
             <ThemeToggle />
           </div>
-        )}
-        {collapsed && (
-          <div className="flex justify-center py-1">
+        ) : (
+          <div className="flex justify-center">
             <ThemeToggle />
           </div>
         )}
-        <div className={collapsed ? 'scale-75' : ''}>
-          <ConnectButton
-            label="Connect"
-            showBalance={false}
-            chainStatus="none"
-            accountStatus={collapsed ? 'avatar' : 'address'}
-          />
+
+        {/* Wallet — glass-surface treatment */}
+        <div
+          className="rounded-lg"
+          style={{
+            background: 'rgba(245,240,232,0.02)',
+            border: '1px solid rgba(245,240,232,0.06)',
+            padding: collapsed ? '6px 4px' : '8px 10px',
+          }}
+        >
+          <div className={collapsed ? 'flex justify-center scale-75' : ''}>
+            <ConnectButton
+              label="Connect"
+              showBalance={false}
+              chainStatus="none"
+              accountStatus={collapsed ? 'avatar' : 'address'}
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -370,8 +494,8 @@ export function Sidebar() {
       <aside
         className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40"
         style={{
-          background: '#111114',
-          borderRight: '1px solid rgba(245,240,232,0.06)',
+          background: 'var(--surface-1, #141416)',
+          borderRight: '1px solid var(--divider, rgba(245,240,232,0.05))',
         }}
       >
         {sidebarContent}
@@ -380,10 +504,7 @@ export function Sidebar() {
       {/* Mobile hamburger */}
       <button
         className="lg:hidden fixed top-3 left-3 z-50 p-2 rounded-lg"
-        style={{
-          background: '#111114',
-          color: 'rgba(245,240,232,0.50)',
-        }}
+        style={{ background: 'var(--surface-1, #141416)', color: 'var(--text-muted, rgba(245,240,232,0.45))' }}
         onClick={() => setMobileOpen(true)}
       >
         <Menu size={20} />
@@ -392,24 +513,21 @@ export function Sidebar() {
       {/* Mobile overlay */}
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-50">
-          <div
-            className="absolute inset-0 bg-black/70"
-            onClick={() => setMobileOpen(false)}
-          />
+          <div className="absolute inset-0 bg-black/60" onClick={() => setMobileOpen(false)} />
           <aside
             className="absolute left-0 top-0 bottom-0 shadow-2xl"
             style={{
-              background: '#111114',
-              borderRight: '1px solid rgba(245,240,232,0.06)',
+              background: 'var(--surface-1, #141416)',
+              borderRight: '1px solid var(--divider, rgba(245,240,232,0.05))',
             }}
           >
             <div className="absolute top-3 right-3">
               <button
                 onClick={() => setMobileOpen(false)}
                 className="p-2 rounded-lg"
-                style={{ color: 'rgba(245,240,232,0.35)' }}
+                style={{ color: 'rgba(245,240,232,0.30)' }}
               >
-                <X size={20} />
+                <X size={18} />
               </button>
             </div>
             {sidebarContent}

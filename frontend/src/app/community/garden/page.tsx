@@ -74,8 +74,8 @@ export default function GardenPage() {
   };
 
   const plotColor = (status: Plot['status']) => {
-    if (status === 'planted') return 'bg-green-700 hover:bg-green-600 border-[rgba(42,93,79,0.30)]';
-    if (status === 'reserved') return 'bg-[#b8942e] hover:bg-[#B09B71] border-[#a07828]';
+    if (status === 'planted') return 'bg-[#2A5D4F] hover:bg-[#3A7D6F] border-[rgba(42,93,79,0.30)]';
+    if (status === 'reserved') return 'bg-[var(--brass-deep)] hover:bg-[#B09B71] border-[#8A7550]';
     return 'bg-[oklch(0.20_0.04_50)] hover:bg-[oklch(0.25_0.04_50)] border-[oklch(0.28_0.04_50)]';
   };
 
@@ -92,7 +92,7 @@ export default function GardenPage() {
       <div className="max-w-5xl mx-auto">
         <div className="mb-8 flex items-start justify-between flex-wrap gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-[#D4C4A0] mb-2 flex items-center gap-3">
+            <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2 flex items-center gap-3">
               <Sprout className="w-8 h-8 text-[#3A7D6F]" /> Community Garden
             </h1>
             <p className="text-[oklch(0.50_0.01_60)]">8×8 shared garden — click a plot to view details or reserve</p>
@@ -100,8 +100,8 @@ export default function GardenPage() {
           <div className="flex gap-3 text-xs">
             {[
               { label: 'Available', color: 'bg-[oklch(0.20_0.04_50)]', val: stats.available },
-              { label: 'Planted', color: 'bg-green-700', val: stats.planted },
-              { label: 'Reserved', color: 'bg-[#b8942e]', val: stats.reserved },
+              { label: 'Planted', color: 'bg-[#2A5D4F]', val: stats.planted },
+              { label: 'Reserved', color: 'bg-[var(--brass-deep)]', val: stats.reserved },
             ].map(({ label, color, val }) => (
               <div key={label} className="flex items-center gap-1.5">
                 <div className={`w-3 h-3 rounded-sm ${color}`} />
@@ -114,7 +114,7 @@ export default function GardenPage() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           {/* Garden grid */}
           <div className="xl:col-span-2">
-            <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl p-6">
+            <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
               <div className="grid grid-cols-8 gap-2">
                 {plots.map((plot) => (
                   <button
@@ -133,14 +133,14 @@ export default function GardenPage() {
           <div className="space-y-4">
             {/* Selected plot detail */}
             {selected ? (
-              <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl p-5">
+              <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-semibold text-[#D4C4A0]">
+                  <h3 className="font-medium text-[#D4C4A0]">
                     Plot {String.fromCharCode(65 + selected.row)}{selected.col + 1}
                   </h3>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                    selected.status === 'planted' ? 'bg-green-900/40 text-[#3A7D6F]'
-                    : selected.status === 'reserved' ? 'bg-[#b8942e]/20 text-[#B09B71]'
+                    selected.status === 'planted' ? 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]'
+                    : selected.status === 'reserved' ? 'bg-[var(--brass-deep)]/20 text-[#B09B71]'
                     : 'bg-[oklch(0.18_0.005_60)] text-[oklch(0.55_0.01_60)]'
                   }`}>{selected.status}</span>
                 </div>
@@ -152,7 +152,7 @@ export default function GardenPage() {
                   {selected.status === 'available' && (
                     <button
                       onClick={() => setShowReserve(true)}
-                      className="mt-3 w-full flex items-center justify-center gap-2 py-2 rounded-lg bg-[#b8942e] text-[#1a1a1a] font-semibold text-sm hover:bg-[#B09B71] transition-colors"
+                      className="mt-3 w-full flex items-center justify-center gap-2 py-2 rounded-lg bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium text-sm hover:bg-[#B09B71] transition-colors"
                     >
                       <Plus className="w-4 h-4" /> Reserve This Plot
                     </button>
@@ -160,15 +160,15 @@ export default function GardenPage() {
                 </div>
               </div>
             ) : (
-              <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl p-5 text-center">
+              <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-5 text-center">
                 <Info className="w-8 h-8 text-[oklch(0.35_0.01_60)] mx-auto mb-2" />
                 <p className="text-sm text-[oklch(0.45_0.01_60)]">Click a plot to view details</p>
               </div>
             )}
 
             {/* Seasonal calendar */}
-            <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-2xl p-5">
-              <h3 className="font-semibold text-[#D4C4A0] mb-3 flex items-center gap-2">
+            <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
+              <h3 className="font-medium text-[#D4C4A0] mb-3 flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-[#B09B71]" /> {season} Planting Tips
               </h3>
               <ul className="space-y-2">
@@ -186,9 +186,9 @@ export default function GardenPage() {
       {/* Reserve modal */}
       {showReserve && selected && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-2xl p-6 max-w-sm w-full">
+          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-xl p-6 max-w-sm w-full">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-[#D4C4A0]">Reserve Plot {String.fromCharCode(65 + selected.row)}{selected.col + 1}</h3>
+              <h3 className="font-medium text-[#D4C4A0]">Reserve Plot {String.fromCharCode(65 + selected.row)}{selected.col + 1}</h3>
               <button onClick={() => setShowReserve(false)}><X className="w-4 h-4 text-[oklch(0.45_0.01_60)]" /></button>
             </div>
             <div className="space-y-3">
@@ -200,7 +200,7 @@ export default function GardenPage() {
                 <label className="block text-xs text-[oklch(0.45_0.01_60)] mb-1">Lot Number *</label>
                 <input value={reserveLot} onChange={e => setReserveLot(e.target.value)} placeholder="12" className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71]" />
               </div>
-              <button onClick={handleReserve} disabled={!reserveLot} className="w-full py-2.5 rounded-xl bg-[#b8942e] text-[#1a1a1a] font-semibold disabled:opacity-40 hover:bg-[#B09B71] transition-colors">
+              <button onClick={handleReserve} disabled={!reserveLot} className="w-full py-2.5 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium disabled:opacity-40 hover:bg-[#B09B71] transition-colors">
                 Submit Reservation
               </button>
             </div>

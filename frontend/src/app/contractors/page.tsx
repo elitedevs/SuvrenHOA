@@ -70,7 +70,7 @@ export default function ContractorsPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view the contractor directory</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to view the contractor directory</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -102,12 +102,12 @@ export default function ContractorsPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold"> Contractor Directory</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Board-vetted contractors for Faircroft residents</p>
+          <h1 className="text-2xl sm:text-3xl font-medium"> Contractor Directory</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Board-vetted contractors for Faircroft residents</p>
         </div>
         <button
           onClick={() => setShowAdd(!showAdd)}
-          className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-medium transition-all shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all shrink-0"
         >
           {showAdd ? '← Back' : '+ Add Contractor'}
         </button>
@@ -124,7 +124,7 @@ export default function ContractorsPage() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search by name, specialty, or service..."
-              className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none"
             />
             <div className="flex items-center gap-3 flex-wrap">
               <div className="flex gap-2 overflow-x-auto pb-1 flex-1">
@@ -133,7 +133,7 @@ export default function ContractorsPage() {
                     key={c.id}
                     onClick={() => setCategory(c.id)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1 ${
-                      category === c.id ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'
+                      category === c.id ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
                     }`}
                   >
                     {c.icon} {c.label}
@@ -141,19 +141,19 @@ export default function ContractorsPage() {
                 ))}
               </div>
               <label className="flex items-center gap-2 cursor-pointer shrink-0">
-                <input type="checkbox" checked={verifiedOnly} onChange={e => setVerifiedOnly(e.target.checked)} className="rounded border-gray-700 bg-gray-800" />
-                <span className="text-xs text-[rgba(245,240,232,0.50)]">Verified only</span>
+                <input type="checkbox" checked={verifiedOnly} onChange={e => setVerifiedOnly(e.target.checked)} className="rounded border-[rgba(245,240,232,0.08)] bg-[var(--surface-2)]" />
+                <span className="text-xs text-[var(--text-muted)]">Verified only</span>
               </label>
             </div>
           </div>
 
-          <p className="text-xs text-[rgba(245,240,232,0.35)] mb-4">{filtered.length} contractor{filtered.length !== 1 ? 's' : ''} found</p>
+          <p className="text-xs text-[var(--text-disabled)] mb-4">{filtered.length} contractor{filtered.length !== 1 ? 's' : ''} found</p>
 
           {filtered.length === 0 ? (
             <div className="glass-card rounded-xl p-12 text-center">
               <p className="text-4xl mb-3"></p>
               <h3 className="font-medium mb-1">No contractors found</h3>
-              <p className="text-sm text-[rgba(245,240,232,0.50)]">Try adjusting your search or filters</p>
+              <p className="text-sm text-[var(--text-muted)]">Try adjusting your search or filters</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -170,9 +170,9 @@ function StarRating({ rating, count }: { rating: number; count: number }) {
   return (
     <div className="flex items-center gap-1">
       {[1, 2, 3, 4, 5].map(s => (
-        <span key={s} className={`text-xs ${s <= Math.round(rating) ? 'text-[#B09B71]' : 'text-[rgba(245,240,232,0.25)]'}`}></span>
+        <span key={s} className={`text-xs ${s <= Math.round(rating) ? 'text-[#B09B71]' : 'text-[var(--text-disabled)]'}`}></span>
       ))}
-      <span className="text-[10px] text-[rgba(245,240,232,0.35)] ml-1">{rating.toFixed(1)} ({count})</span>
+      <span className="text-[10px] text-[var(--text-disabled)] ml-1">{rating.toFixed(1)} ({count})</span>
     </div>
   );
 }
@@ -187,40 +187,40 @@ function ContractorCard({ contractor: c }: { contractor: Contractor }) {
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1">
-              <h3 className="font-semibold text-sm">{c.name}</h3>
+              <h3 className="font-medium text-sm">{c.name}</h3>
               {c.verified && (
                 <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20 font-medium">
                    Verified
                 </span>
               )}
             </div>
-            <p className="text-xs text-[rgba(245,240,232,0.50)]">{cat?.icon} {c.specialty}</p>
+            <p className="text-xs text-[var(--text-muted)]">{cat?.icon} {c.specialty}</p>
           </div>
-          <span className="text-[10px] px-2 py-1 rounded-lg bg-gray-800/50 text-[rgba(245,240,232,0.35)] capitalize shrink-0">{c.category}</span>
+          <span className="text-[10px] px-2 py-1 rounded-lg bg-[rgba(26,26,30,0.50)] text-[var(--text-disabled)] capitalize shrink-0">{c.category}</span>
         </div>
 
         <StarRating rating={c.rating} count={c.reviews} />
 
-        <p className="text-xs text-[rgba(245,240,232,0.35)] mt-3 leading-relaxed line-clamp-2">{c.description}</p>
+        <p className="text-xs text-[var(--text-disabled)] mt-3 leading-relaxed line-clamp-2">{c.description}</p>
 
         <div className="mt-4 flex items-center justify-between">
           <a href={`tel:${c.phone}`} className="text-xs text-[#B09B71] hover:text-[#D4C4A0] font-medium">
              {c.phone}
           </a>
           {c.email && (
-            <a href={`mailto:${c.email}`} className="text-xs text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)]">
+            <a href={`mailto:${c.email}`} className="text-xs text-[var(--text-muted)] hover:text-[var(--parchment)]">
                Email
             </a>
           )}
         </div>
 
         {expanded && (
-          <div className="mt-3 pt-3 border-t border-white/5">
-            <p className="text-xs text-[rgba(245,240,232,0.50)] leading-relaxed">{c.description}</p>
-            <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-2">Added {c.addedAt}</p>
+          <div className="mt-3 pt-3 border-t border-[rgba(245,240,232,0.05)]">
+            <p className="text-xs text-[var(--text-muted)] leading-relaxed">{c.description}</p>
+            <p className="text-[10px] text-[var(--text-disabled)] mt-2">Added {c.addedAt}</p>
           </div>
         )}
-        <button onClick={() => setExpanded(!expanded)} className="mt-2 text-[10px] text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)]">
+        <button onClick={() => setExpanded(!expanded)} className="mt-2 text-[10px] text-[var(--text-disabled)] hover:text-[var(--text-body)]">
           {expanded ? 'Show less ▲' : 'Show more ▾'}
         </button>
       </div>
@@ -247,18 +247,18 @@ function AddContractorForm({ onAdd, onCancel }: {
 
   return (
     <div className="glass-card rounded-xl p-6 space-y-5 max-w-2xl">
-      <h2 className="text-lg font-semibold">Add Contractor</h2>
+      <h2 className="text-lg font-medium">Add Contractor</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Company Name *</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Company Name *</label>
           <input value={name} onChange={e => setName(e.target.value)} placeholder="Apex Plumbing Co."
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
         </div>
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Category</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Category</label>
           <select value={category} onChange={e => setCategory(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none">
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none">
             {CATEGORIES.filter(c => c.id !== 'all').map(c => (
               <option key={c.id} value={c.id}>{c.icon} {c.label}</option>
             ))}
@@ -267,40 +267,40 @@ function AddContractorForm({ onAdd, onCancel }: {
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Specialty *</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Specialty *</label>
         <input value={specialty} onChange={e => setSpecialty(e.target.value)} placeholder="Water heater repair, drain cleaning..."
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Phone *</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Phone *</label>
           <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="(555) 123-4567" type="tel"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
         </div>
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Email (optional)</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Email (optional)</label>
           <input value={email} onChange={e => setEmail(e.target.value)} placeholder="contact@company.com" type="email"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Description</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Description</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Services offered, experience, any HOA discounts or notes..."
-          rows={3} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+          rows={3} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
       </div>
 
       <label className="flex items-center gap-2 cursor-pointer">
-        <input type="checkbox" checked={verified} onChange={e => setVerified(e.target.checked)} className="rounded border-gray-700 bg-gray-800" />
-        <span className="text-sm text-[rgba(245,240,232,0.50)]">Board-verified contractor</span>
+        <input type="checkbox" checked={verified} onChange={e => setVerified(e.target.checked)} className="rounded border-[rgba(245,240,232,0.08)] bg-[var(--surface-2)]" />
+        <span className="text-sm text-[var(--text-muted)]">Board-verified contractor</span>
       </label>
 
       <div className="flex gap-3">
-        <button onClick={onCancel} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+        <button onClick={onCancel} className="flex-1 py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
         <button onClick={handleSubmit} disabled={!name.trim() || !phone.trim() || !specialty.trim()}
-          className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+          className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all">
           Add Contractor
         </button>
       </div>

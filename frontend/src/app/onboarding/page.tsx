@@ -17,8 +17,8 @@ import { Home, CreditCard, MessageSquare, FileText, Car } from 'lucide-react';
 function Confetti() {
   const pieces = Array.from({ length: 60 }, (_, i) => i);
   const colors = [
-    '#B09B71', '#D4C4A0', '#b8942e', '#22c55e', '#f59e0b',
-    '#ec4899', '#06b6d4', '#f97316',
+    '#B09B71', '#D4C4A0', '#b8942e', '#3A7D6F', '#b8942e',
+    '#8B5A5A', '#5A7A9A', '#b8942e',
   ];
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden z-50">
@@ -63,10 +63,10 @@ function StepIndicator({
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)]">
+        <span className="text-xs tracking-widest uppercase text-[var(--text-disabled)]">
           Step {current} of {total}
         </span>
-        <span className="text-xs text-[#B09B71] font-semibold">
+        <span className="text-xs text-[#B09B71] font-medium">
           {Math.round((current / total) * 100)}%
         </span>
       </div>
@@ -101,7 +101,7 @@ function PetCard({
   return (
     <div className="glass-card rounded-xl p-4 border border-[#B09B71]/10 mb-3">
       <div className="flex justify-between items-start mb-3">
-        <span className="text-sm font-semibold text-[#D4C4A0]">
+        <span className="text-sm font-medium text-[#D4C4A0]">
            Pet
         </span>
         <button
@@ -113,13 +113,13 @@ function PetCard({
       </div>
       <div className="grid grid-cols-2 gap-3">
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-[#B09B71]/50 col-span-2"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50 col-span-2"
           placeholder="Pet name"
           value={pet.name}
           onChange={(e) => onUpdate({ ...pet, name: e.target.value })}
         />
         <select
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50"
           value={pet.type}
           onChange={(e) =>
             onUpdate({ ...pet, type: e.target.value as PetEntry["type"] })
@@ -130,13 +130,13 @@ function PetCard({
           <option value="other"> Other</option>
         </select>
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-[#B09B71]/50"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50"
           placeholder="Breed"
           value={pet.breed}
           onChange={(e) => onUpdate({ ...pet, breed: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-[#B09B71]/50 col-span-2"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50 col-span-2"
           placeholder="Weight (lbs)"
           value={pet.weight}
           onChange={(e) => onUpdate({ ...pet, weight: e.target.value })}
@@ -157,9 +157,9 @@ function VehicleCard({
   onRemove: () => void;
 }) {
   return (
-    <div className="glass-card rounded-xl p-4 border border-blue-500/10 mb-3">
+    <div className="glass-card rounded-xl p-4 border border-[rgba(90,122,154,0.10)] mb-3">
       <div className="flex justify-between items-start mb-3">
-        <span className="text-sm font-semibold text-[#5A7A9A] flex items-center gap-1.5"><Car className="w-4 h-4" /> Vehicle</span>
+        <span className="text-sm font-medium text-[var(--steel)] flex items-center gap-1.5"><Car className="w-4 h-4" /> Vehicle</span>
         <button
           onClick={onRemove}
           className="text-xs text-[#8B5A5A] hover:text-[#8B5A5A] transition-colors"
@@ -169,31 +169,31 @@ function VehicleCard({
       </div>
       <div className="grid grid-cols-2 gap-3">
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(90,122,154,0.50)]"
           placeholder="Make (e.g. Toyota)"
           value={vehicle.make}
           onChange={(e) => onUpdate({ ...vehicle, make: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(90,122,154,0.50)]"
           placeholder="Model (e.g. Camry)"
           value={vehicle.model}
           onChange={(e) => onUpdate({ ...vehicle, model: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(90,122,154,0.50)]"
           placeholder="Year"
           value={vehicle.year}
           onChange={(e) => onUpdate({ ...vehicle, year: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-blue-500/50"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(90,122,154,0.50)]"
           placeholder="Color"
           value={vehicle.color}
           onChange={(e) => onUpdate({ ...vehicle, color: e.target.value })}
         />
         <input
-          className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-3 py-2.5 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-blue-500/50 col-span-2"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(90,122,154,0.50)] col-span-2"
           placeholder="License Plate"
           value={vehicle.plate}
           onChange={(e) => onUpdate({ ...vehicle, plate: e.target.value })}
@@ -283,10 +283,10 @@ function OnboardingWizard() {
 
       {step < 6 && (
         <div className="mb-6">
-          <h1 className="text-2xl font-normal text-[rgba(245,240,232,0.90)] mb-1">
+          <h1 className="text-2xl font-normal text-[var(--parchment)] mb-1">
             Move-In Setup
           </h1>
-          <p className="text-sm text-[rgba(245,240,232,0.35)]">Faircroft HOA · Property #{tokenId ?? "—"}</p>
+          <p className="text-sm text-[var(--text-disabled)]">Faircroft HOA · Property #{tokenId ?? "—"}</p>
         </div>
       )}
 
@@ -294,37 +294,37 @@ function OnboardingWizard() {
 
       {/* ── Step 1: Welcome ── */}
       {step === 1 && (
-        <div className="glass-card rounded-2xl p-8 animate-fade-in">
+        <div className="glass-card rounded-xl p-8 animate-fade-in">
           <div className="flex justify-center mb-5"><Home className="w-10 h-10 text-[#B09B71]" /></div>
           <h2 className="text-2xl font-normal text-center mb-2">
             Welcome to Faircroft!
           </h2>
-          <p className="text-[rgba(245,240,232,0.50)] text-center text-sm mb-7">
+          <p className="text-[var(--text-muted)] text-center text-sm mb-7">
             Let&apos;s get you set up as a homeowner. This takes about 2 minutes.
           </p>
 
           {hasProperty && propertyInfo ? (
             <div className="bg-[#B09B71]/10 border border-[#B09B71]/20 rounded-xl p-5 mb-7">
-              <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">
+              <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">
                 Your Property
               </p>
               <div className="space-y-2">
                 {address && (
                   <div className="flex justify-between">
-                    <span className="text-sm text-[rgba(245,240,232,0.35)]">Address</span>
-                    <span className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{address}</span>
+                    <span className="text-sm text-[var(--text-disabled)]">Address</span>
+                    <span className="text-sm font-medium text-[var(--parchment)]">{address}</span>
                   </div>
                 )}
                 {lot !== null && (
                   <div className="flex justify-between">
-                    <span className="text-sm text-[rgba(245,240,232,0.35)]">Lot #</span>
-                    <span className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{lot}</span>
+                    <span className="text-sm text-[var(--text-disabled)]">Lot #</span>
+                    <span className="text-sm font-medium text-[var(--parchment)]">{lot}</span>
                   </div>
                 )}
                 {sqft !== null && (
                   <div className="flex justify-between">
-                    <span className="text-sm text-[rgba(245,240,232,0.35)]">Sq Ft</span>
-                    <span className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">
+                    <span className="text-sm text-[var(--text-disabled)]">Sq Ft</span>
+                    <span className="text-sm font-medium text-[var(--parchment)]">
                       {sqft.toLocaleString()} sqft
                     </span>
                   </div>
@@ -341,7 +341,7 @@ function OnboardingWizard() {
 
           <button
             onClick={goNext}
-            className="w-full py-3.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-white font-semibold text-sm transition-all duration-200 min-h-[44px]"
+            className="w-full py-3.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-[var(--text-heading)] font-medium text-sm transition-all duration-200 min-h-[44px]"
           >
             Let&apos;s get you set up →
           </button>
@@ -350,18 +350,18 @@ function OnboardingWizard() {
 
       {/* ── Step 2: Profile ── */}
       {step === 2 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
-          <h2 className="text-xl font-bold mb-1">Your Profile</h2>
-          <p className="text-sm text-[rgba(245,240,232,0.35)] mb-6">
+        <div className="glass-card rounded-xl p-7 animate-fade-in">
+          <h2 className="text-xl font-medium mb-1">Your Profile</h2>
+          <p className="text-sm text-[var(--text-disabled)] mb-6">
             All fields optional — helps the community reach you.
           </p>
           <div className="space-y-4">
             <div>
-              <label className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] block mb-1.5">
+              <label className="text-xs tracking-widest uppercase text-[var(--text-disabled)] block mb-1.5">
                 Display Name
               </label>
               <input
-                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-[#B09B71]/50"
+                className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50"
                 placeholder="How should neighbors know you?"
                 value={profile.displayName}
                 onChange={(e) =>
@@ -370,12 +370,12 @@ function OnboardingWizard() {
               />
             </div>
             <div>
-              <label className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] block mb-1.5">
+              <label className="text-xs tracking-widest uppercase text-[var(--text-disabled)] block mb-1.5">
                 Email
               </label>
               <input
                 type="email"
-                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-[#B09B71]/50"
+                className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50"
                 placeholder="For HOA notifications"
                 value={profile.email}
                 onChange={(e) =>
@@ -384,12 +384,12 @@ function OnboardingWizard() {
               />
             </div>
             <div>
-              <label className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] block mb-1.5">
+              <label className="text-xs tracking-widest uppercase text-[var(--text-disabled)] block mb-1.5">
                 Phone
               </label>
               <input
                 type="tel"
-                className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-[#B09B71]/50"
+                className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50"
                 placeholder="For emergency alerts"
                 value={profile.phone}
                 onChange={(e) =>
@@ -397,12 +397,12 @@ function OnboardingWizard() {
                 }
               />
             </div>
-            <div className="flex items-center justify-between py-3 px-4 bg-gray-800/40 rounded-xl border border-gray-700/40">
+            <div className="flex items-center justify-between py-3 px-4 bg-[rgba(26,26,30,0.40)] rounded-xl border border-[rgba(245,240,232,0.06)]">
               <div>
-                <p className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">
+                <p className="text-sm font-medium text-[var(--parchment)]">
                   Messaging Opt-In
                 </p>
-                <p className="text-xs text-[rgba(245,240,232,0.35)]">
+                <p className="text-xs text-[var(--text-disabled)]">
                   Receive HOA announcements & alerts
                 </p>
               </div>
@@ -411,7 +411,7 @@ function OnboardingWizard() {
                   setProfile((p) => ({ ...p, messagingOptIn: !p.messagingOptIn }))
                 }
                 className={`w-12 h-6 rounded-full transition-all duration-200 relative ${
-                  profile.messagingOptIn ? "bg-[#B09B71]" : "bg-gray-700"
+                  profile.messagingOptIn ? "bg-[#B09B71]" : "bg-[var(--surface-3)]"
                 }`}
               >
                 <span
@@ -426,13 +426,13 @@ function OnboardingWizard() {
           <div className="flex gap-3 mt-7">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
             >
               ← Back
             </button>
             <button
               onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-[var(--text-heading)] font-medium text-sm transition-all"
             >
               Continue →
             </button>
@@ -442,9 +442,9 @@ function OnboardingWizard() {
 
       {/* ── Step 3: Pets ── */}
       {step === 3 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
-          <h2 className="text-xl font-bold mb-1">Pet Registration</h2>
-          <p className="text-sm text-[rgba(245,240,232,0.35)] mb-2">
+        <div className="glass-card rounded-xl p-7 animate-fade-in">
+          <h2 className="text-xl font-medium mb-1">Pet Registration</h2>
+          <p className="text-sm text-[var(--text-disabled)] mb-2">
             Register your pets with the HOA.{" "}
             <Link href="/pets" className="text-[#B09B71] hover:underline">
               Manage later at /pets →
@@ -461,7 +461,7 @@ function OnboardingWizard() {
               />
             ))}
             {pets.length === 0 && (
-              <p className="text-sm text-[rgba(245,240,232,0.35)] text-center py-4">
+              <p className="text-sm text-[var(--text-disabled)] text-center py-4">
                 No pets? That&apos;s okay! Skip to continue.
               </p>
             )}
@@ -469,7 +469,7 @@ function OnboardingWizard() {
 
           <button
             onClick={addPet}
-            className="w-full py-2.5 rounded-xl border border-dashed border-[#B09B71]/30 text-[#B09B71] hover:border-[#B09B71]/50 hover:bg-[#B09B71]/5 text-sm font-semibold transition-all mt-3 mb-6"
+            className="w-full py-2.5 rounded-xl border border-dashed border-[#B09B71]/30 text-[#B09B71] hover:border-[#B09B71]/50 hover:bg-[#B09B71]/5 text-sm font-medium transition-all mt-3 mb-6"
           >
             + Add a Pet
           </button>
@@ -477,13 +477,13 @@ function OnboardingWizard() {
           <div className="flex gap-3">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
             >
               ← Back
             </button>
             <button
               onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-[var(--text-heading)] font-medium text-sm transition-all"
             >
               Continue →
             </button>
@@ -493,11 +493,11 @@ function OnboardingWizard() {
 
       {/* ── Step 4: Vehicles ── */}
       {step === 4 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
-          <h2 className="text-xl font-bold mb-1">Vehicle Registration</h2>
-          <p className="text-sm text-[rgba(245,240,232,0.35)] mb-2">
+        <div className="glass-card rounded-xl p-7 animate-fade-in">
+          <h2 className="text-xl font-medium mb-1">Vehicle Registration</h2>
+          <p className="text-sm text-[var(--text-disabled)] mb-2">
             Register vehicles for parking records.{" "}
-            <Link href="/vehicles" className="text-[#5A7A9A] hover:underline">
+            <Link href="/vehicles" className="text-[var(--steel)] hover:underline">
               Manage later at /vehicles →
             </Link>
           </p>
@@ -512,7 +512,7 @@ function OnboardingWizard() {
               />
             ))}
             {vehicles.length === 0 && (
-              <p className="text-sm text-[rgba(245,240,232,0.35)] text-center py-4">
+              <p className="text-sm text-[var(--text-disabled)] text-center py-4">
                 No vehicles? Skip to continue.
               </p>
             )}
@@ -520,7 +520,7 @@ function OnboardingWizard() {
 
           <button
             onClick={addVehicle}
-            className="w-full py-2.5 rounded-xl border border-dashed border-[rgba(90,122,154,0.25)] text-[#5A7A9A] hover:border-blue-500/50 hover:bg-[#5A7A9A]/5 text-sm font-semibold transition-all mt-3 mb-6"
+            className="w-full py-2.5 rounded-xl border border-dashed border-[rgba(90,122,154,0.25)] text-[var(--steel)] hover:border-[rgba(90,122,154,0.50)] hover:bg-[rgba(90,122,154,0.05)] text-sm font-medium transition-all mt-3 mb-6"
           >
             + Add a Vehicle
           </button>
@@ -528,13 +528,13 @@ function OnboardingWizard() {
           <div className="flex gap-3">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
             >
               ← Back
             </button>
             <button
               onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-[var(--text-heading)] font-medium text-sm transition-all"
             >
               Continue →
             </button>
@@ -544,58 +544,58 @@ function OnboardingWizard() {
 
       {/* ── Step 5: Review ── */}
       {step === 5 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
-          <h2 className="text-xl font-bold mb-5">Review & Confirm</h2>
+        <div className="glass-card rounded-xl p-7 animate-fade-in">
+          <h2 className="text-xl font-medium mb-5">Review & Confirm</h2>
 
           {/* Profile summary */}
           <div className="mb-5">
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-2">
               Profile
             </p>
-            <div className="bg-gray-800/40 rounded-xl p-4 space-y-1.5">
+            <div className="bg-[rgba(26,26,30,0.40)] rounded-xl p-4 space-y-1.5">
               {profile.displayName && (
                 <div className="flex justify-between">
-                  <span className="text-xs text-[rgba(245,240,232,0.35)]">Name</span>
-                  <span className="text-xs text-[rgba(245,240,232,0.65)]">{profile.displayName}</span>
+                  <span className="text-xs text-[var(--text-disabled)]">Name</span>
+                  <span className="text-xs text-[var(--text-body)]">{profile.displayName}</span>
                 </div>
               )}
               {profile.email && (
                 <div className="flex justify-between">
-                  <span className="text-xs text-[rgba(245,240,232,0.35)]">Email</span>
-                  <span className="text-xs text-[rgba(245,240,232,0.65)]">{profile.email}</span>
+                  <span className="text-xs text-[var(--text-disabled)]">Email</span>
+                  <span className="text-xs text-[var(--text-body)]">{profile.email}</span>
                 </div>
               )}
               {profile.phone && (
                 <div className="flex justify-between">
-                  <span className="text-xs text-[rgba(245,240,232,0.35)]">Phone</span>
-                  <span className="text-xs text-[rgba(245,240,232,0.65)]">{profile.phone}</span>
+                  <span className="text-xs text-[var(--text-disabled)]">Phone</span>
+                  <span className="text-xs text-[var(--text-body)]">{profile.phone}</span>
                 </div>
               )}
               <div className="flex justify-between">
-                <span className="text-xs text-[rgba(245,240,232,0.35)]">Messaging</span>
-                <span className="text-xs text-[rgba(245,240,232,0.65)]">
+                <span className="text-xs text-[var(--text-disabled)]">Messaging</span>
+                <span className="text-xs text-[var(--text-body)]">
                   {profile.messagingOptIn ? " Opted in" : " Opted out"}
                 </span>
               </div>
               {!profile.displayName && !profile.email && !profile.phone && (
-                <p className="text-xs text-[rgba(245,240,232,0.35)]">No profile info entered</p>
+                <p className="text-xs text-[var(--text-disabled)]">No profile info entered</p>
               )}
             </div>
           </div>
 
           {/* Pets summary */}
           <div className="mb-5">
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-2">
               Pets ({pets.length})
             </p>
             {pets.length === 0 ? (
-              <p className="text-xs text-[rgba(245,240,232,0.35)]">None registered</p>
+              <p className="text-xs text-[var(--text-disabled)]">None registered</p>
             ) : (
-              <div className="bg-gray-800/40 rounded-xl p-4 space-y-1.5">
+              <div className="bg-[rgba(26,26,30,0.40)] rounded-xl p-4 space-y-1.5">
                 {pets.map((p) => (
                   <div key={p.id} className="flex justify-between">
-                    <span className="text-xs text-[rgba(245,240,232,0.65)]">{p.name || "Unnamed"}</span>
-                    <span className="text-xs text-[rgba(245,240,232,0.35)]">
+                    <span className="text-xs text-[var(--text-body)]">{p.name || "Unnamed"}</span>
+                    <span className="text-xs text-[var(--text-disabled)]">
                       {p.type} {p.breed && `· ${p.breed}`}
                     </span>
                   </div>
@@ -606,19 +606,19 @@ function OnboardingWizard() {
 
           {/* Vehicles summary */}
           <div className="mb-6">
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-2">
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-2">
               Vehicles ({vehicles.length})
             </p>
             {vehicles.length === 0 ? (
-              <p className="text-xs text-[rgba(245,240,232,0.35)]">None registered</p>
+              <p className="text-xs text-[var(--text-disabled)]">None registered</p>
             ) : (
-              <div className="bg-gray-800/40 rounded-xl p-4 space-y-1.5">
+              <div className="bg-[rgba(26,26,30,0.40)] rounded-xl p-4 space-y-1.5">
                 {vehicles.map((v) => (
                   <div key={v.id} className="flex justify-between">
-                    <span className="text-xs text-[rgba(245,240,232,0.65)]">
+                    <span className="text-xs text-[var(--text-body)]">
                       {[v.year, v.make, v.model].filter(Boolean).join(" ") || "Vehicle"}
                     </span>
-                    <span className="text-xs text-[rgba(245,240,232,0.35)]">{v.plate}</span>
+                    <span className="text-xs text-[var(--text-disabled)]">{v.plate}</span>
                   </div>
                 ))}
               </div>
@@ -634,7 +634,7 @@ function OnboardingWizard() {
                 onChange={(e) => setCcrAck(e.target.checked)}
                 className="mt-0.5 w-4 h-4 rounded accent-[#B09B71]"
               />
-              <span className="text-sm text-[rgba(245,240,232,0.65)]">
+              <span className="text-sm text-[var(--text-body)]">
                 I have read and agree to the{" "}
                 <Link
                   href="/documents"
@@ -650,14 +650,14 @@ function OnboardingWizard() {
           <div className="flex gap-3">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
             >
               ← Back
             </button>
             <button
               onClick={handleComplete}
               disabled={!ccrAck}
-              className="flex-1 py-3 rounded-xl bg-green-600 hover:bg-[#3A7D6F] disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[#2A5D4F] hover:bg-[#3A7D6F] disabled:opacity-40 disabled:cursor-not-allowed text-[var(--text-heading)] font-medium text-sm transition-all"
             >
               Complete Setup 
             </button>
@@ -667,10 +667,10 @@ function OnboardingWizard() {
 
       {/* ── Step 6: All Done ── */}
       {step === 6 && (
-        <div className="glass-card rounded-2xl p-10 text-center animate-fade-in">
+        <div className="glass-card rounded-xl p-10 text-center animate-fade-in">
           <div className="text-6xl mb-5"></div>
           <h2 className="text-2xl font-normal mb-2">You&apos;re all set!</h2>
-          <p className="text-[rgba(245,240,232,0.50)] text-sm mb-8">
+          <p className="text-[var(--text-muted)] text-sm mb-8">
             Welcome to the Faircroft community. Your setup is complete.
           </p>
           <div className="grid grid-cols-2 gap-3">
@@ -679,28 +679,28 @@ function OnboardingWizard() {
               className="glass-card rounded-xl p-4 text-center hover:border-[#B09B71]/25 transition-all"
             >
               <Home className="w-6 h-6 text-[#B09B71] mx-auto mb-1" />
-              <p className="text-sm font-semibold text-[rgba(245,240,232,0.65)]">Dashboard</p>
+              <p className="text-sm font-medium text-[var(--text-body)]">Dashboard</p>
             </Link>
             <Link
               href="/dues"
-              className="glass-card rounded-xl p-4 text-center hover:border-green-500/25 transition-all"
+              className="glass-card rounded-xl p-4 text-center hover:border-[rgba(42,93,79,0.25)] transition-all"
             >
               <CreditCard className="w-6 h-6 text-[#3A7D6F] mx-auto mb-1" />
-              <p className="text-sm font-semibold text-[rgba(245,240,232,0.65)]">Pay Dues</p>
+              <p className="text-sm font-medium text-[var(--text-body)]">Pay Dues</p>
             </Link>
             <Link
               href="/community"
-              className="glass-card rounded-xl p-4 text-center hover:border-blue-500/25 transition-all"
+              className="glass-card rounded-xl p-4 text-center hover:border-[rgba(90,122,154,0.25)] transition-all"
             >
-              <MessageSquare className="w-6 h-6 text-[#5A7A9A] mx-auto mb-1" />
-              <p className="text-sm font-semibold text-[rgba(245,240,232,0.65)]">Community</p>
+              <MessageSquare className="w-6 h-6 text-[var(--steel)] mx-auto mb-1" />
+              <p className="text-sm font-medium text-[var(--text-body)]">Community</p>
             </Link>
             <Link
               href="/documents"
               className="glass-card rounded-xl p-4 text-center hover:border-amber-500/25 transition-all"
             >
               <FileText className="w-6 h-6 text-[#B09B71] mx-auto mb-1" />
-              <p className="text-sm font-semibold text-[rgba(245,240,232,0.65)]">Documents</p>
+              <p className="text-sm font-medium text-[var(--text-body)]">Documents</p>
             </Link>
           </div>
         </div>
@@ -769,24 +769,24 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
       <div className="glass-card rounded-xl p-5">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h3 className="font-semibold text-[#D4C4A0]">
+            <h3 className="font-medium text-[#D4C4A0]">
               {mode === 'move-in' ? <span className="flex items-center gap-1.5"><Home className="w-4 h-4" /> Move-In Checklist</span> : ' Move-Out Checklist'}
             </h3>
-            <p className="text-xs text-[rgba(245,240,232,0.50)]">{completedRequired} of {totalRequired} required tasks complete</p>
+            <p className="text-xs text-[var(--text-muted)]">{completedRequired} of {totalRequired} required tasks complete</p>
           </div>
           <div className="text-right">
-            <div className={`text-2xl font-bold ${pct === 100 ? 'text-[#3A7D6F]' : pct >= 60 ? 'text-[#B09B71]' : 'text-[rgba(245,240,232,0.65)]'}`}>
+            <div className={`text-2xl font-medium ${pct === 100 ? 'text-[#3A7D6F]' : pct >= 60 ? 'text-[#B09B71]' : 'text-[var(--text-body)]'}`}>
               {pct}%
             </div>
-            <div className="text-[10px] text-[rgba(245,240,232,0.35)]">Complete</div>
+            <div className="text-[10px] text-[var(--text-disabled)]">Complete</div>
           </div>
         </div>
-        <div className="h-2.5 rounded-full bg-gray-800 overflow-hidden">
+        <div className="h-2.5 rounded-full bg-[var(--surface-2)] overflow-hidden">
           <div
             className="h-full rounded-full transition-all duration-500"
             style={{
               width: `${pct}%`,
-              background: pct === 100 ? '#22c55e' : 'linear-gradient(90deg, #b8942e, #B09B71)',
+              background: pct === 100 ? '#3A7D6F' : 'linear-gradient(90deg, #b8942e, #B09B71)',
             }}
           />
         </div>
@@ -797,7 +797,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
 
       {/* Required tasks */}
       <div>
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-[rgba(245,240,232,0.35)] mb-3">Required ({completedRequired}/{totalRequired})</h4>
+        <h4 className="text-xs font-medium uppercase tracking-wider text-[var(--text-disabled)] mb-3">Required ({completedRequired}/{totalRequired})</h4>
         <div className="space-y-2">
           {required.map(item => (
             <ChecklistRow key={item.id} item={item} checked={checked.has(item.id)} onToggle={() => toggle(item.id)} />
@@ -807,7 +807,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
 
       {optional.length > 0 && (
         <div>
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-[rgba(245,240,232,0.35)] mb-3">Optional</h4>
+          <h4 className="text-xs font-medium uppercase tracking-wider text-[var(--text-disabled)] mb-3">Optional</h4>
           <div className="space-y-2">
             {optional.map(item => (
               <ChecklistRow key={item.id} item={item} checked={checked.has(item.id)} onToggle={() => toggle(item.id)} />
@@ -827,14 +827,14 @@ function ChecklistRow({ item, checked, onToggle }: { item: ChecklistItem; checke
         <button
           onClick={onToggle}
           className={`mt-0.5 w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-all ${
-            checked ? 'bg-[#B09B71] border-[#B09B71] text-[#1a1a1a]' : 'border-gray-600 hover:border-[#B09B71]/50'
+            checked ? 'bg-[#B09B71] border-[#B09B71] text-[var(--surface-2)]' : 'border-[rgba(245,240,232,0.10)] hover:border-[#B09B71]/50'
           }`}
         >
-          {checked && <span className="text-[10px] font-bold"></span>}
+          {checked && <span className="text-[10px] font-medium"></span>}
         </button>
         <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setExpanded(!expanded)}>
           <div className="flex items-center gap-2">
-            <span className={`text-sm font-medium ${checked ? 'line-through text-[rgba(245,240,232,0.35)]' : 'text-[rgba(245,240,232,0.80)]'}`}>
+            <span className={`text-sm font-medium ${checked ? 'line-through text-[var(--text-disabled)]' : 'text-[var(--parchment)]'}`}>
               {item.label}
             </span>
             {item.required && !checked && (
@@ -842,10 +842,10 @@ function ChecklistRow({ item, checked, onToggle }: { item: ChecklistItem; checke
             )}
           </div>
           {expanded && (
-            <p className="text-xs text-[rgba(245,240,232,0.50)] mt-2 leading-relaxed">{item.description}</p>
+            <p className="text-xs text-[var(--text-muted)] mt-2 leading-relaxed">{item.description}</p>
           )}
         </div>
-        <button onClick={() => setExpanded(!expanded)} className="text-[rgba(245,240,232,0.25)] text-xs shrink-0">
+        <button onClick={() => setExpanded(!expanded)} className="text-[var(--text-disabled)] text-xs shrink-0">
           {expanded ? '▲' : '▾'}
         </button>
       </div>
@@ -861,8 +861,8 @@ export default function OnboardingPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
         <Home className="w-10 h-10 text-[#B09B71] mb-2" />
-        <h2 className="text-xl font-bold">Move-In Setup</h2>
-        <p className="text-[rgba(245,240,232,0.50)] text-sm">Connect your wallet to begin</p>
+        <h2 className="text-xl font-medium">Move-In Setup</h2>
+        <p className="text-[var(--text-muted)] text-sm">Connect your wallet to begin</p>
         <ConnectButton label="Connect Wallet" />
       </div>
     );
@@ -874,15 +874,15 @@ export default function OnboardingPage() {
       <div className="max-w-3xl mx-auto px-4 pt-6 sm:pt-8">
         <div className="flex gap-2 mb-6">
           <button onClick={() => setView('wizard')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'}`}>
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
              Setup Wizard
           </button>
           <button onClick={() => setView('checklist-in')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'}`}>
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
             <span className="flex items-center gap-1.5"><Home className="w-3.5 h-3.5" /> Move-In Checklist</span>
           </button>
           <button onClick={() => setView('checklist-out')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'}`}>
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
              Move-Out Checklist
           </button>
         </div>

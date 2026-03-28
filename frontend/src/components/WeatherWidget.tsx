@@ -82,18 +82,18 @@ export function WeatherWidget() {
 
   if (loading) {
     return (
-      <div className="glass-card rounded-2xl p-4 animate-pulse">
-        <div className="h-4 bg-white/10 rounded w-24 mb-2" />
-        <div className="h-8 bg-white/10 rounded w-16" />
+      <div className="glass-card rounded-xl p-4 animate-pulse">
+        <div className="h-4 bg-[rgba(245,240,232,0.10)] rounded w-24 mb-2" />
+        <div className="h-8 bg-[rgba(245,240,232,0.10)] rounded w-16" />
       </div>
     );
   }
 
   if (error || !weather) {
     return (
-      <div className="glass-card rounded-2xl p-4 border border-[#B09B71]/10">
-        <p className="text-xs text-[rgba(245,240,232,0.35)]"> Raleigh, NC</p>
-        <p className="text-xs text-[rgba(245,240,232,0.25)] mt-1">Weather unavailable</p>
+      <div className="glass-card rounded-xl p-4 border border-[#B09B71]/10">
+        <p className="text-xs text-[var(--text-disabled)]"> Raleigh, NC</p>
+        <p className="text-xs text-[var(--text-disabled)] mt-1">Weather unavailable</p>
       </div>
     );
   }
@@ -101,19 +101,19 @@ export function WeatherWidget() {
   const emoji = getWeatherEmoji(weather.weatherCode);
 
   return (
-    <div className="glass-card rounded-2xl p-5 border border-[#B09B71]/15">
+    <div className="glass-card rounded-xl p-5 border border-[#B09B71]/15">
       <div className="flex items-start justify-between mb-2">
         <div>
-          <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)]">Raleigh, NC</p>
+          <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)]">Raleigh, NC</p>
           <div className="flex items-baseline gap-2 mt-1">
             <span className="text-3xl font-normal text-[#D4C4A0]">{weather.temp_F}°</span>
-            <span className="text-xs text-[rgba(245,240,232,0.35)]">F</span>
+            <span className="text-xs text-[var(--text-disabled)]">F</span>
           </div>
         </div>
         <span className="text-3xl">{emoji}</span>
       </div>
-      <p className="text-xs text-[rgba(245,240,232,0.50)] mb-3">{weather.weatherDesc}</p>
-      <div className="flex gap-3 text-xs text-[rgba(245,240,232,0.35)]">
+      <p className="text-xs text-[var(--text-muted)] mb-3">{weather.weatherDesc}</p>
+      <div className="flex gap-3 text-xs text-[var(--text-disabled)]">
         <span> {weather.humidity}%</span>
         <span> {weather.windspeedMiles} mph</span>
       </div>

@@ -29,21 +29,21 @@ export default function HealthPage() {
         {/* Header */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-2">
-            <Link href="/" className="text-sm text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] transition-colors">
+            <Link href="/" className="text-sm text-[var(--text-disabled)] hover:text-[var(--text-body)] transition-colors">
               ← Dashboard
             </Link>
           </div>
-          <p className="text-sm text-[rgba(245,240,232,0.35)] font-medium uppercase tracking-widest mb-2">Community Health</p>
+          <p className="text-sm text-[var(--text-disabled)] font-medium uppercase tracking-widest mb-2">Community Health</p>
           <h1 className="text-3xl sm:text-4xl font-normal tracking-tight">
             HOA <span className="gradient-text">Health Score</span>
           </h1>
-          <p className="text-[rgba(245,240,232,0.50)] text-base mt-2 font-medium">
+          <p className="text-[var(--text-muted)] text-base mt-2 font-medium">
             A composite snapshot of your community's financial, governance, and compliance health.
           </p>
         </div>
 
         {/* Big ring + score */}
-        <div className="glass-card rounded-3xl p-8 sm:p-12 mb-8 card-enter card-enter-delay-1 flex flex-col items-center">
+        <div className="glass-card rounded-xl p-8 sm:p-12 mb-8 card-enter card-enter-delay-1 flex flex-col items-center">
           <div className="relative mb-6">
             <svg
               width={radius * 2 + strokeWidth * 2}
@@ -92,7 +92,7 @@ export default function HealthPage() {
                   <p className={`text-6xl sm:text-7xl font-normal leading-none mb-1 ${colorClass}`}>
                     {score}
                   </p>
-                  <p className="text-[rgba(245,240,232,0.35)] text-sm font-semibold uppercase tracking-wider">out of 100</p>
+                  <p className="text-[var(--text-disabled)] text-sm font-medium uppercase tracking-wider">out of 100</p>
                 </div>
               )}
             </div>
@@ -101,7 +101,7 @@ export default function HealthPage() {
           {!loading && !error && (
             <div className="text-center">
               <div
-                className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl border"
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-xl border"
                 style={{
                   borderColor: `${color}40`,
                   background: `${color}10`,
@@ -109,19 +109,19 @@ export default function HealthPage() {
               >
                 <span className={`text-5xl font-normal ${colorClass}`}>{grade}</span>
                 <div className="text-left">
-                  <p className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">
+                  <p className="text-sm font-medium text-[var(--parchment)]">
                     {grade === 'A' && 'Excellent Community'}
                     {grade === 'B' && 'Very Good Community'}
                     {grade === 'C' && 'Average Community'}
                     {grade === 'D' && 'Needs Improvement'}
                     {grade === 'F' && 'Critical Attention Needed'}
                   </p>
-                  <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">
+                  <p className="text-xs text-[var(--text-disabled)] mt-0.5">
                     {score >= 71 ? 'Community is thriving' : score >= 41 ? 'Room for improvement' : 'Immediate action recommended'}
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-[rgba(245,240,232,0.25)] mt-4">Auto-refreshes every 60 seconds</p>
+              <p className="text-xs text-[var(--text-disabled)] mt-4">Auto-refreshes every 60 seconds</p>
             </div>
           )}
         </div>
@@ -129,30 +129,30 @@ export default function HealthPage() {
         {/* Factor breakdown */}
         {!loading && !error && factors.length > 0 && (
           <div className="space-y-4 mb-8 card-enter card-enter-delay-2">
-            <h2 className="text-xl font-bold text-[rgba(245,240,232,0.80)]">Score Breakdown</h2>
+            <h2 className="text-xl font-medium text-[var(--parchment)]">Score Breakdown</h2>
             {factors.map((factor) => {
               const pct = (factor.score / factor.max) * 100;
-              const factorColor = pct >= 71 ? '#22c55e' : pct >= 41 ? '#f59e0b' : '#ef4444';
+              const factorColor = pct >= 71 ? '#3A7D6F' : pct >= 41 ? '#b8942e' : '#8B5A5A';
               const factorColorClass = pct >= 71 ? 'text-[#3A7D6F]' : pct >= 41 ? 'text-[#B09B71]' : 'text-[#8B5A5A]';
 
               return (
-                <div key={factor.name} className="glass-card rounded-2xl hover-lift p-6">
+                <div key={factor.name} className="glass-card rounded-xl hover-lift p-6">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <div className="flex items-center gap-3">
                       <span className="text-2xl">{factor.icon}</span>
                       <div>
-                        <h3 className="font-bold text-[rgba(245,240,232,0.90)] text-base">{factor.name}</h3>
-                        <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">{factor.description}</p>
+                        <h3 className="font-medium text-[var(--parchment)] text-base">{factor.name}</h3>
+                        <p className="text-xs text-[var(--text-disabled)] mt-0.5">{factor.description}</p>
                       </div>
                     </div>
                     <div className="text-right shrink-0">
                       <span className={`text-2xl font-normal ${factorColorClass}`}>{factor.score}</span>
-                      <span className="text-[rgba(245,240,232,0.25)] text-sm font-medium">/{factor.max}</span>
+                      <span className="text-[var(--text-disabled)] text-sm font-medium">/{factor.max}</span>
                     </div>
                   </div>
 
                   {/* Progress bar */}
-                  <div className="h-2.5 bg-white/5 rounded-full overflow-hidden mb-3">
+                  <div className="h-2.5 bg-[rgba(245,240,232,0.05)] rounded-full overflow-hidden mb-3">
                     <div
                       className="h-full rounded-full transition-all duration-1000 ease-out"
                       style={{
@@ -163,7 +163,7 @@ export default function HealthPage() {
                     />
                   </div>
 
-                  <p className="text-xs text-[rgba(245,240,232,0.35)] leading-relaxed">{factor.improvement}</p>
+                  <p className="text-xs text-[var(--text-disabled)] leading-relaxed">{factor.improvement}</p>
                 </div>
               );
             })}
@@ -172,27 +172,27 @@ export default function HealthPage() {
 
         {/* What can we improve */}
         {!loading && !error && suggestions.length > 0 && (
-          <div className="glass-card rounded-2xl hover-lift p-6 mb-8 card-enter card-enter-delay-3">
+          <div className="glass-card rounded-xl hover-lift p-6 mb-8 card-enter card-enter-delay-3">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center text-lg shrink-0">
                 
               </div>
-              <h2 className="text-xl font-bold text-[rgba(245,240,232,0.80)]">What Can We Improve?</h2>
+              <h2 className="text-xl font-medium text-[var(--parchment)]">What Can We Improve?</h2>
             </div>
             <div className="space-y-4">
               {suggestions.map((s, i) => (
                 <div key={s.name} className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/40 flex items-center justify-center text-xs font-bold text-[#B09B71] shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/40 flex items-center justify-center text-xs font-medium text-[#B09B71] shrink-0 mt-0.5">
                     {i + 1}
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{s.name}</span>
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-white/5 text-[rgba(245,240,232,0.35)]">
+                      <span className="text-sm font-medium text-[var(--parchment)]">{s.name}</span>
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-[rgba(245,240,232,0.05)] text-[var(--text-disabled)]">
                         {s.score}/{s.max} pts
                       </span>
                     </div>
-                    <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed">{s.improvement}</p>
+                    <p className="text-sm text-[var(--text-muted)] leading-relaxed">{s.improvement}</p>
                   </div>
                 </div>
               ))}
@@ -202,16 +202,16 @@ export default function HealthPage() {
 
         {/* Perfect score message */}
         {!loading && !error && suggestions.length === 0 && (
-          <div className="glass-card-success rounded-2xl p-6 mb-8 card-enter card-enter-delay-3 text-center">
+          <div className="glass-card-success rounded-xl p-6 mb-8 card-enter card-enter-delay-3 text-center">
             <p className="text-3xl mb-3"></p>
-            <h3 className="font-bold text-[#3A7D6F] text-lg mb-1">Perfect Score!</h3>
-            <p className="text-sm text-[rgba(245,240,232,0.50)]">Your community has achieved the maximum health score across all categories.</p>
+            <h3 className="font-medium text-[#3A7D6F] text-lg mb-1">Perfect Score!</h3>
+            <p className="text-sm text-[var(--text-muted)]">Your community has achieved the maximum health score across all categories.</p>
           </div>
         )}
 
         {/* Footer: back to transparency */}
-        <div className="text-center text-sm text-[rgba(245,240,232,0.25)] card-enter card-enter-delay-4">
-          <Link href="/transparency" className="hover:text-[rgba(245,240,232,0.50)] transition-colors">
+        <div className="text-center text-sm text-[var(--text-disabled)] card-enter card-enter-delay-4">
+          <Link href="/transparency" className="hover:text-[var(--text-muted)] transition-colors">
             View full Transparency Dashboard →
           </Link>
         </div>

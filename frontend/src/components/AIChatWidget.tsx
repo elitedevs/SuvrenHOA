@@ -28,7 +28,7 @@ function MessageText({ text }: { text: string }) {
             tokens.push(<span key={key++}>{line.slice(last, match.index)}</span>);
           }
           if (match[1]) {
-            tokens.push(<strong key={key++} className="font-semibold">{match[1]}</strong>);
+            tokens.push(<strong key={key++} className="font-medium">{match[1]}</strong>);
           } else if (match[2] && match[3]) {
             tokens.push(
               <Link key={key++} href={match[3]} className="underline text-[#B09B71] hover:text-[#D4C4A0]">
@@ -56,11 +56,11 @@ function TypingIndicator() {
       <div className="w-7 h-7 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-sm shrink-0">
         
       </div>
-      <div className="bg-white/[0.06] rounded-2xl rounded-bl-sm px-4 py-3 flex items-center gap-1">
+      <div className="bg-[rgba(245,240,232,0.06)] rounded-xl rounded-bl-sm px-4 py-3 flex items-center gap-1">
         {[0, 1, 2].map((i) => (
           <span
             key={i}
-            className="w-1.5 h-1.5 rounded-full bg-gray-400 inline-block animate-bounce"
+            className="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)] inline-block animate-bounce"
             style={{ animationDelay: `${i * 0.15}s` }}
           />
         ))}
@@ -112,13 +112,13 @@ export function AIChatWidget() {
         aria-label="AI Community Assistant"
         aria-hidden={!isOpen}
       >
-        <div className="bg-[oklch(0.09_0.005_50)] border border-white/[0.08] rounded-2xl rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
+        <div className="bg-[oklch(0.09_0.005_50)] border border-[rgba(245,240,232,0.08)] rounded-xl rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[#1a1a1a]/80 to-[#2d2d2d]/80 border-b border-white/[0.06] shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[rgba(26,26,30,0.80)] to-[#222228]/80 border-b border-[rgba(245,240,232,0.06)] shrink-0">
             <div className="flex items-center gap-2">
               <span className="text-xl"></span>
               <div>
-                <p className="text-sm font-semibold text-[rgba(245,240,232,0.90)]">HOA Assistant</p>
+                <p className="text-sm font-medium text-[var(--parchment)]">HOA Assistant</p>
                 <p className="text-[11px] text-[#3A7D6F] flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#3A7D6F] inline-block" />
                   Online
@@ -128,14 +128,14 @@ export function AIChatWidget() {
             <div className="flex items-center gap-2">
               <Link
                 href="/assistant"
-                className="text-[11px] text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] transition-colors px-2 py-1 rounded-lg hover:bg-white/[0.06]"
+                className="text-[11px] text-[var(--text-muted)] hover:text-[var(--parchment)] transition-colors px-2 py-1 rounded-lg hover:bg-[rgba(245,240,232,0.06)]"
                 title="Open full page"
               >
                 ↗ Full page
               </Link>
               <button
                 onClick={() => setIsOpen(false)}
-                className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/10 text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] transition-colors"
+                className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-[rgba(245,240,232,0.10)] text-[var(--text-muted)] hover:text-[var(--parchment)] transition-colors"
                 aria-label="Close assistant"
               >
                 
@@ -156,10 +156,10 @@ export function AIChatWidget() {
                   </div>
                 )}
                 <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
+                  className={`max-w-[80%] rounded-xl px-4 py-2.5 text-sm leading-relaxed ${
                     msg.role === 'user'
-                      ? 'bg-gradient-to-br from-[#B09B71] to-[#b8942e] text-white rounded-br-sm'
-                      : 'bg-white/[0.06] text-[rgba(245,240,232,0.80)] rounded-bl-sm'
+                      ? 'bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] text-[var(--text-heading)] rounded-br-sm'
+                      : 'bg-[rgba(245,240,232,0.06)] text-[var(--parchment)] rounded-bl-sm'
                   }`}
                 >
                   <MessageText text={msg.text} />
@@ -171,7 +171,7 @@ export function AIChatWidget() {
           </div>
 
           {/* Quick Actions */}
-          <div className="px-3 pb-2 pt-1 flex gap-1.5 flex-wrap shrink-0 border-t border-white/[0.04]">
+          <div className="px-3 pb-2 pt-1 flex gap-1.5 flex-wrap shrink-0 border-t border-[rgba(245,240,232,0.04)]">
             {QUICK_ACTIONS.map((a) => (
               <button
                 key={a.label}
@@ -194,15 +194,15 @@ export function AIChatWidget() {
               onKeyDown={handleKeyDown}
               placeholder="Ask about dues, treasury, proposals..."
               disabled={isTyping}
-              className="flex-1 bg-white/[0.06] border border-white/[0.08] rounded-xl px-3 py-2 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/50 disabled:opacity-50 transition-colors"
+              className="flex-1 bg-[rgba(245,240,232,0.06)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:ring-1 focus:ring-[#B09B71]/50 disabled:opacity-50 transition-colors"
             />
             <button
               onClick={handleSend}
               disabled={!input.trim() || isTyping}
-              className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0"
+              className="w-9 h-9 flex items-center justify-center rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0"
               aria-label="Send message"
             >
-              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 text-[var(--text-heading)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>
             </button>
@@ -213,18 +213,18 @@ export function AIChatWidget() {
       {/* Floating Trigger Button */}
       <button
         onClick={() => setIsOpen((v) => !v)}
-        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#B09B71] to-[#b8942e] shadow-lg shadow-[#1a1a1a]/50 flex items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-[#B09B71]/20 ${
+        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] shadow-lg shadow-[rgba(26,26,30,0.50)] flex items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-[#B09B71]/20 ${
           isOpen ? 'rotate-180' : ''
         }`}
         style={!isOpen ? { animation: 'chatPulse 2.5s ease-in-out infinite' } : undefined}
         aria-label={isOpen ? 'Close assistant' : 'Open HOA assistant'}
       >
         {isOpen ? (
-          <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <svg className="w-6 h-6 text-[var(--text-heading)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
           </svg>
         ) : (
-          <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-6 h-6 text-[var(--text-heading)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
         )}

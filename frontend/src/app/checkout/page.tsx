@@ -13,10 +13,10 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)]">
+        <span className="text-xs tracking-widest uppercase text-[var(--text-disabled)]">
           Step {current} of {total}
         </span>
-        <span className="text-xs text-[#B09B71] font-semibold">
+        <span className="text-xs text-[#B09B71] font-medium">
           {Math.round((current / total) * 100)}%
         </span>
       </div>
@@ -57,7 +57,7 @@ function CheckRow({
       className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
         checked
           ? 'border-[rgba(42,93,79,0.25)] bg-[#3A7D6F]/5'
-          : 'border-gray-700/40 bg-gray-800/30'
+          : 'border-[rgba(245,240,232,0.06)] bg-[rgba(26,26,30,0.30)]'
       } ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`}
     >
       <input
@@ -68,8 +68,8 @@ function CheckRow({
         className="mt-0.5 w-4 h-4 rounded accent-green-500"
       />
       <div>
-        <p className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{label}</p>
-        {sublabel && <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">{sublabel}</p>}
+        <p className="text-sm font-medium text-[var(--parchment)]">{label}</p>
+        {sublabel && <p className="text-xs text-[var(--text-disabled)] mt-0.5">{sublabel}</p>}
       </div>
     </label>
   );
@@ -104,10 +104,10 @@ function CheckoutWizard() {
     <div className="max-w-lg mx-auto px-4 py-10 page-enter">
       {step < TOTAL_STEPS && (
         <div className="mb-6">
-          <h1 className="text-2xl font-normal text-[rgba(245,240,232,0.90)] mb-1">
+          <h1 className="text-2xl font-normal text-[var(--parchment)] mb-1">
             Move-Out Checklist
           </h1>
-          <p className="text-sm text-[rgba(245,240,232,0.35)]">
+          <p className="text-sm text-[var(--text-disabled)]">
             Faircroft HOA · Property #{tokenId ?? '—'}
           </p>
         </div>
@@ -117,9 +117,9 @@ function CheckoutWizard() {
 
       {/* ── Step 1: Checklist ── */}
       {step === 1 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
-          <h2 className="text-xl font-bold mb-1">Pre-Move Checklist</h2>
-          <p className="text-sm text-[rgba(245,240,232,0.35)] mb-6">
+        <div className="glass-card rounded-xl p-7 animate-fade-in">
+          <h2 className="text-xl font-medium mb-1">Pre-Move Checklist</h2>
+          <p className="text-sm text-[var(--text-disabled)] mb-6">
             Complete all items before proceeding.
           </p>
 
@@ -139,8 +139,8 @@ function CheckoutWizard() {
                   <span className="text-[#8B5A5A] text-lg"></span>
                 )}
                 <div>
-                  <p className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">HOA Dues</p>
-                  <p className="text-xs text-[rgba(245,240,232,0.35)]">
+                  <p className="text-sm font-medium text-[var(--parchment)]">HOA Dues</p>
+                  <p className="text-xs text-[var(--text-disabled)]">
                     {isCurrent === undefined
                       ? 'Checking...'
                       : isCurrent
@@ -176,11 +176,11 @@ function CheckoutWizard() {
           </div>
 
           <div className="mb-7">
-            <label className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] block mb-1.5">
+            <label className="text-xs tracking-widest uppercase text-[var(--text-disabled)] block mb-1.5">
               Forwarding Address
             </label>
             <input
-              className="w-full bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3 text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-500 focus:outline-none focus:border-amber-500/50"
+              className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-amber-500/50"
               placeholder="Where should we send final correspondence?"
               value={forwardingAddress}
               onChange={(e) => setForwardingAddress(e.target.value)}
@@ -190,7 +190,7 @@ function CheckoutWizard() {
           <button
             onClick={goNext}
             disabled={!step1Valid || isCurrent === false}
-            className="w-full py-3.5 rounded-xl bg-amber-600 hover:bg-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
+            className="w-full py-3.5 rounded-xl bg-amber-600 hover:bg-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed text-[var(--text-heading)] font-medium text-sm transition-all"
           >
             Continue →
           </button>
@@ -200,7 +200,7 @@ function CheckoutWizard() {
             </p>
           )}
           {isCurrent !== false && !step1Valid && (
-            <p className="text-xs text-[rgba(245,240,232,0.35)] text-center mt-3">
+            <p className="text-xs text-[var(--text-disabled)] text-center mt-3">
               Complete all checklist items to continue.
             </p>
           )}
@@ -209,9 +209,9 @@ function CheckoutWizard() {
 
       {/* ── Step 2: Final Settlement ── */}
       {step === 2 && (
-        <div className="glass-card rounded-2xl p-7 animate-fade-in">
-          <h2 className="text-xl font-bold mb-1">Final Settlement</h2>
-          <p className="text-sm text-[rgba(245,240,232,0.35)] mb-6">
+        <div className="glass-card rounded-xl p-7 animate-fade-in">
+          <h2 className="text-xl font-medium mb-1">Final Settlement</h2>
+          <p className="text-sm text-[var(--text-disabled)] mb-6">
             Confirm all financial obligations are met.
           </p>
 
@@ -223,7 +223,7 @@ function CheckoutWizard() {
                 : 'border-[rgba(42,93,79,0.25)] bg-[#3A7D6F]/5'
             }`}
           >
-            <p className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] mb-3">
+            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">
               Outstanding Balance
             </p>
             {isCurrent === false ? (
@@ -231,12 +231,12 @@ function CheckoutWizard() {
                 <p className="text-2xl font-normal text-[#8B5A5A] mb-1">
                   ${amountOwed}
                 </p>
-                <p className="text-sm text-[rgba(245,240,232,0.50)] mb-4">
-                  {quartersOwed} quarter{quartersOwed !== 1 ? 's' : ''} past due
+                <p className="text-sm text-[var(--text-muted)] mb-4">
+                  {quartersOwed} quarter{quartersOwed !== 1 ? 's' : ''} outstanding
                 </p>
                 <Link
                   href="/dues"
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(107,58,58,0.25)] hover:bg-red-600/30 text-sm font-semibold text-[#8B5A5A] transition-all"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(107,58,58,0.25)] hover:bg-[rgba(139,90,90,0.30)] text-sm font-medium text-[#8B5A5A] transition-all"
                 >
                    Pay Outstanding Balance
                 </Link>
@@ -244,7 +244,7 @@ function CheckoutWizard() {
             ) : (
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-6 h-6 text-[#3A7D6F]" />
-                <p className="text-lg font-bold text-[#3A7D6F]">
+                <p className="text-lg font-medium text-[#3A7D6F]">
                   No outstanding balance
                 </p>
               </div>
@@ -261,7 +261,7 @@ function CheckoutWizard() {
                 disabled={isCurrent === false}
                 className="mt-0.5 w-4 h-4 rounded accent-amber-500"
               />
-              <span className="text-sm text-[rgba(245,240,232,0.65)]">
+              <span className="text-sm text-[var(--text-body)]">
                 I confirm all HOA obligations have been met and I am ready to
                 transfer ownership of this property.
               </span>
@@ -271,14 +271,14 @@ function CheckoutWizard() {
           <div className="flex gap-3">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
             >
               ← Back
             </button>
             <button
               onClick={goNext}
               disabled={!step2Valid}
-              className="flex-1 py-3 rounded-xl bg-amber-600 hover:bg-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-amber-600 hover:bg-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed text-[var(--text-heading)] font-medium text-sm transition-all"
             >
               Confirm →
             </button>
@@ -288,20 +288,20 @@ function CheckoutWizard() {
 
       {/* ── Step 3: Confirmation ── */}
       {step === 3 && (
-        <div className="glass-card rounded-2xl p-10 text-center animate-fade-in">
+        <div className="glass-card rounded-xl p-10 text-center animate-fade-in">
           <div className="flex justify-center mb-5"><Home className="w-12 h-12 text-[#B09B71]" /></div>
           <h2 className="text-2xl font-normal mb-2">
             Thank You, Neighbor
           </h2>
-          <p className="text-[rgba(245,240,232,0.50)] text-sm mb-3 max-w-sm mx-auto">
+          <p className="text-[var(--text-muted)] text-sm mb-3 max-w-sm mx-auto">
             Thank you for being part of the Faircroft community. We wish you
             all the best in your new home.
           </p>
-          <div className="bg-[#5A7A9A]/8 border border-[rgba(90,122,154,0.20)] rounded-xl p-4 mb-8 text-left">
-            <p className="text-xs text-[#5A7A9A] font-semibold uppercase tracking-wide mb-1">
+          <div className="bg-[var(--steel)]/8 border border-[rgba(90,122,154,0.20)] rounded-xl p-4 mb-8 text-left">
+            <p className="text-xs text-[var(--steel)] font-medium uppercase tracking-wide mb-1">
               ℹ On-Chain Transfer
             </p>
-            <p className="text-xs text-[rgba(245,240,232,0.50)] leading-relaxed">
+            <p className="text-xs text-[var(--text-muted)] leading-relaxed">
               Property ownership transfer happens on-chain when the Property NFT
               is transferred to the new owner&apos;s wallet. The board will
               coordinate this step with you and the buyer.
@@ -309,7 +309,7 @@ function CheckoutWizard() {
           </div>
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-[rgba(245,240,232,0.65)] hover:text-white font-semibold text-sm transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-body)] hover:text-[var(--text-heading)] font-medium text-sm transition-all"
           >
             ← Return to Dashboard
           </Link>
@@ -326,8 +326,8 @@ export default function CheckoutPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
         <div className="text-5xl mb-2"></div>
-        <h2 className="text-xl font-bold">Move-Out Wizard</h2>
-        <p className="text-[rgba(245,240,232,0.50)] text-sm">Connect your wallet to begin</p>
+        <h2 className="text-xl font-medium">Move-Out Wizard</h2>
+        <p className="text-[var(--text-muted)] text-sm">Connect your wallet to begin</p>
         <ConnectButton label="Connect Wallet" />
       </div>
     );

@@ -88,17 +88,17 @@ function ActionItemRow({ item, onChange }: { item: ActionItem; onChange: (update
       <button
         onClick={() => onChange({ ...item, done: !item.done })}
         className={`mt-0.5 shrink-0 w-4 h-4 rounded border cursor-pointer transition-all ${
-          item.done ? 'bg-[#B09B71] border-[#B09B71]' : 'border-gray-600 hover:border-[#B09B71]'
+          item.done ? 'bg-[#B09B71] border-[#B09B71]' : 'border-[rgba(245,240,232,0.10)] hover:border-[#B09B71]'
         }`}
       >
-        {item.done && <span className="text-[#1a1a1a] text-[10px] font-bold flex items-center justify-center h-full"></span>}
+        {item.done && <span className="text-[var(--surface-2)] text-[10px] font-medium flex items-center justify-center h-full"></span>}
       </button>
       <div className="flex-1 min-w-0">
-        <span className={`text-sm ${item.done ? 'line-through text-[rgba(245,240,232,0.35)]' : 'text-[rgba(245,240,232,0.65)]'}`}>{item.task}</span>
+        <span className={`text-sm ${item.done ? 'line-through text-[var(--text-disabled)]' : 'text-[var(--text-body)]'}`}>{item.task}</span>
         <div className="flex items-center gap-2 mt-0.5">
           <span className="text-[11px] text-[#B09B71]">→ {item.assignee}</span>
           {item.dueDate && (
-            <span className="text-[11px] text-[rgba(245,240,232,0.25)]">Due {new Date(item.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+            <span className="text-[11px] text-[var(--text-disabled)]">Due {new Date(item.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
           )}
         </div>
       </div>
@@ -121,24 +121,24 @@ function MinutesCard({ entry, isBoard, onUpdate }: { entry: MinutesEntry; isBoar
     <div className="relative flex gap-4">
       {/* Timeline dot */}
       <div className="flex flex-col items-center shrink-0">
-        <div className="w-4 h-4 rounded-full bg-[#B09B71] border-2 border-[#1a1a1a] z-10 mt-1" />
-        <div className="w-px flex-1 bg-white/[0.06] mt-1" />
+        <div className="w-4 h-4 rounded-full bg-[#B09B71] border-2 border-[var(--divider)] z-10 mt-1" />
+        <div className="w-px flex-1 bg-[rgba(245,240,232,0.06)] mt-1" />
       </div>
 
       {/* Card */}
-      <div className="flex-1 glass rounded-2xl border border-white/[0.04] mb-4 overflow-hidden">
+      <div className="flex-1 glass rounded-xl border border-[rgba(245,240,232,0.04)] mb-4 overflow-hidden">
         <button
           onClick={() => setExpanded(!expanded)}
-          className="w-full flex items-start gap-3 p-5 text-left cursor-pointer hover:bg-white/[0.02] transition-colors"
+          className="w-full flex items-start gap-3 p-5 text-left cursor-pointer hover:bg-[rgba(245,240,232,0.02)] transition-colors"
         >
           <div className="flex-1">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-base font-bold text-[rgba(245,240,232,0.90)]">{entry.title}</span>
+              <span className="text-base font-medium text-[var(--parchment)]">{entry.title}</span>
               {entry.quorum && (
-                <span className="text-[10px] font-bold bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-green-500/25 px-2 py-0.5 rounded-full">Quorum </span>
+                <span className="text-[10px] font-medium bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)] px-2 py-0.5 rounded-full">Quorum </span>
               )}
             </div>
-            <div className="flex items-center gap-3 mt-1 text-xs text-[rgba(245,240,232,0.35)]">
+            <div className="flex items-center gap-3 mt-1 text-xs text-[var(--text-disabled)]">
               <span className="flex items-center gap-1">
                 <Calendar className="w-3 h-3" />
                 {new Date(entry.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -153,17 +153,17 @@ function MinutesCard({ entry, isBoard, onUpdate }: { entry: MinutesEntry; isBoar
               </span>
             </div>
           </div>
-          {expanded ? <ChevronUp className="w-4 h-4 text-[rgba(245,240,232,0.35)] shrink-0 mt-1" /> : <ChevronDown className="w-4 h-4 text-[rgba(245,240,232,0.35)] shrink-0 mt-1" />}
+          {expanded ? <ChevronUp className="w-4 h-4 text-[var(--text-disabled)] shrink-0 mt-1" /> : <ChevronDown className="w-4 h-4 text-[var(--text-disabled)] shrink-0 mt-1" />}
         </button>
 
         {expanded && (
-          <div className="px-5 pb-5 space-y-5 border-t border-white/[0.04]">
+          <div className="px-5 pb-5 space-y-5 border-t border-[rgba(245,240,232,0.04)]">
             {/* Key Decisions */}
             <div>
-              <h3 className="text-xs font-bold text-[#B09B71] uppercase tracking-widest mb-3 pt-4">Key Decisions</h3>
+              <h3 className="text-xs font-medium text-[#B09B71] uppercase tracking-widest mb-3 pt-4">Key Decisions</h3>
               <ul className="space-y-2">
                 {entry.keyDecisions.map((decision, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-[rgba(245,240,232,0.65)]">
+                  <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-body)]">
                     <ArrowRight className="w-4 h-4 text-[#B09B71] shrink-0 mt-0.5" />
                     {decision}
                   </li>
@@ -173,7 +173,7 @@ function MinutesCard({ entry, isBoard, onUpdate }: { entry: MinutesEntry; isBoar
 
             {/* Action Items */}
             <div>
-              <h3 className="text-xs font-bold text-[#B09B71] uppercase tracking-widest mb-2">Action Items</h3>
+              <h3 className="text-xs font-medium text-[#B09B71] uppercase tracking-widest mb-2">Action Items</h3>
               <div className="divide-y divide-white/[0.04]">
                 {entry.actionItems.map((item, i) => (
                   <ActionItemRow key={i} item={item} onChange={(updated) => updateActionItem(i, updated)} />
@@ -183,8 +183,8 @@ function MinutesCard({ entry, isBoard, onUpdate }: { entry: MinutesEntry; isBoar
 
             {/* Notes */}
             {entry.notes && (
-              <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-                <p className="text-xs text-[rgba(245,240,232,0.35)] italic">{entry.notes}</p>
+              <div className="p-3 rounded-xl bg-[rgba(245,240,232,0.02)] border border-[rgba(245,240,232,0.04)]">
+                <p className="text-xs text-[var(--text-disabled)] italic">{entry.notes}</p>
               </div>
             )}
           </div>
@@ -227,56 +227,56 @@ function AddMinutesModal({ onAdd, onClose }: { onAdd: (entry: MinutesEntry) => v
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-      <div className="glass w-full max-w-lg rounded-2xl border border-white/[0.08] max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between p-5 border-b border-white/[0.06]">
-          <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)]">Add Meeting Minutes</h2>
-          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-white/[0.06] text-[rgba(245,240,232,0.50)] cursor-pointer"><X className="w-4 h-4" /></button>
+      <div className="glass w-full max-w-lg rounded-xl border border-[rgba(245,240,232,0.08)] max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between p-5 border-b border-[rgba(245,240,232,0.06)]">
+          <h2 className="text-base font-medium text-[var(--parchment)]">Add Meeting Minutes</h2>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-[rgba(245,240,232,0.06)] text-[var(--text-muted)] cursor-pointer"><X className="w-4 h-4" /></button>
         </div>
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Date</label>
+              <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50" required />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" required />
             </div>
             <div>
-              <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Attendees</label>
+              <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Attendees</label>
               <input type="number" placeholder="0" value={form.attendeesCount} onChange={e => setForm({...form, attendeesCount: e.target.value})}
-                className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50" />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" />
             </div>
           </div>
           <div>
-            <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Meeting Title</label>
+            <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Meeting Title</label>
             <input type="text" placeholder="April Board Meeting" value={form.title} onChange={e => setForm({...form, title: e.target.value})}
-              className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50" required />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" required />
           </div>
           <div>
-            <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Key Decisions (one per line)</label>
+            <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Key Decisions (one per line)</label>
             <textarea rows={4} placeholder="Approved budget for..." value={form.keyDecisions} onChange={e => setForm({...form, keyDecisions: e.target.value})}
-              className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
           </div>
           <div>
-            <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Action Items (task|assignee, one per line)</label>
+            <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Action Items (task|assignee, one per line)</label>
             <textarea rows={3} placeholder="Send RFP|Treasurer" value={form.actionItems} onChange={e => setForm({...form, actionItems: e.target.value})}
-              className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
           </div>
           <div>
-            <label className="text-xs font-semibold text-[rgba(245,240,232,0.50)] mb-1 block">Notes (optional)</label>
+            <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Notes (optional)</label>
             <textarea rows={2} placeholder="Additional context..." value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}
-              className="w-full px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
           </div>
           <div className="flex items-center gap-2">
             <input type="checkbox" id="quorum" checked={form.quorum} onChange={e => setForm({...form, quorum: e.target.checked})}
               className="accent-[#B09B71]" />
-            <label htmlFor="quorum" className="text-sm text-[rgba(245,240,232,0.65)] cursor-pointer">Quorum achieved</label>
+            <label htmlFor="quorum" className="text-sm text-[var(--text-body)] cursor-pointer">Quorum achieved</label>
           </div>
           <div className="flex gap-3">
             <button type="button" onClick={onClose}
-              className="flex-1 py-2.5 rounded-xl border border-white/[0.08] text-sm text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04] transition-all cursor-pointer">
+              className="flex-1 py-2.5 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)] transition-all cursor-pointer">
               Cancel
             </button>
             <button type="submit"
-              className="flex-1 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-all cursor-pointer">
+              className="flex-1 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all cursor-pointer">
               Add Minutes
             </button>
           </div>
@@ -321,13 +321,13 @@ export default function MeetingMinutesPage() {
     <main className="max-w-3xl mx-auto px-4 py-8">
       <div className="flex items-start justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold gradient-text">Meeting Minutes</h1>
-          <p className="text-[rgba(245,240,232,0.50)] text-sm mt-1">Board meeting records and decisions</p>
+          <h1 className="text-3xl font-medium gradient-text">Meeting Minutes</h1>
+          <p className="text-[var(--text-muted)] text-sm mt-1">Board meeting records and decisions</p>
         </div>
         {isBoard && (
           <button
             onClick={() => setShowAdd(true)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-all cursor-pointer shrink-0"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all cursor-pointer shrink-0"
           >
             <Plus className="w-4 h-4" /> Add Minutes
           </button>
@@ -341,10 +341,10 @@ export default function MeetingMinutesPage() {
           { label: 'Action Items', value: sorted.reduce((acc, m) => acc + m.actionItems.length, 0), icon: '' },
           { label: 'Completed', value: sorted.reduce((acc, m) => acc + m.actionItems.filter(a => a.done).length, 0), icon: '' },
         ].map((stat, i) => (
-          <div key={i} className="glass-card rounded-xl p-4 text-center border border-white/[0.04]">
+          <div key={i} className="glass-card rounded-xl p-4 text-center border border-[rgba(245,240,232,0.04)]">
             <div className="text-xl mb-1">{stat.icon}</div>
-            <div className="text-xl font-bold text-[#B09B71]">{stat.value}</div>
-            <div className="text-[10px] text-[rgba(245,240,232,0.35)] mt-0.5">{stat.label}</div>
+            <div className="text-xl font-medium text-[#B09B71]">{stat.value}</div>
+            <div className="text-[10px] text-[var(--text-disabled)] mt-0.5">{stat.label}</div>
           </div>
         ))}
       </div>

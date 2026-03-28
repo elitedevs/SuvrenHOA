@@ -139,77 +139,77 @@ export default function FitnessPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 py-8 space-y-8">
       <div>
-        <h1 className="text-3xl font-bold gradient-text">Community Fitness</h1>
-        <p className="text-[rgba(245,240,232,0.50)] text-sm mt-1">Move together, thrive together </p>
+        <h1 className="text-3xl font-medium gradient-text">Community Fitness</h1>
+        <p className="text-[var(--text-muted)] text-sm mt-1">Move together, thrive together </p>
       </div>
 
       {/* Current Challenge */}
-      <div className="glass rounded-2xl p-6 border border-[#B09B71]/20 relative overflow-hidden">
+      <div className="glass rounded-xl p-6 border border-[#B09B71]/20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#B09B71]/5 to-transparent pointer-events-none" />
         <div className="relative">
           <div className="flex items-start justify-between gap-3 mb-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-3xl">{CURRENT_CHALLENGE.emoji}</span>
-                <span className="text-xs font-bold bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-green-400/25 px-2 py-0.5 rounded-full">ACTIVE</span>
+                <span className="text-xs font-medium bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)] px-2 py-0.5 rounded-full">ACTIVE</span>
               </div>
-              <h2 className="text-xl font-bold text-[rgba(245,240,232,0.90)]">{CURRENT_CHALLENGE.title}</h2>
-              <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">{CURRENT_CHALLENGE.description}</p>
+              <h2 className="text-xl font-medium text-[var(--parchment)]">{CURRENT_CHALLENGE.title}</h2>
+              <p className="text-sm text-[var(--text-muted)] mt-1">{CURRENT_CHALLENGE.description}</p>
             </div>
             <div className="text-right shrink-0">
-              <div className="text-2xl font-bold text-[#B09B71]">{daysLeft}</div>
-              <div className="text-xs text-[rgba(245,240,232,0.35)]">days left</div>
+              <div className="text-2xl font-medium text-[#B09B71]">{daysLeft}</div>
+              <div className="text-xs text-[var(--text-disabled)]">days left</div>
             </div>
           </div>
 
           {/* Progress Bar */}
           <div className="mb-2">
-            <div className="flex justify-between text-xs text-[rgba(245,240,232,0.35)] mb-1.5">
+            <div className="flex justify-between text-xs text-[var(--text-disabled)] mb-1.5">
               <span>{totalProgress.toLocaleString()} {CURRENT_CHALLENGE.unit}</span>
               <span>{progressPct.toFixed(1)}% of {CURRENT_CHALLENGE.goal.toLocaleString()}</span>
             </div>
-            <div className="h-4 rounded-full bg-white/[0.06] overflow-hidden">
+            <div className="h-4 rounded-full bg-[rgba(245,240,232,0.06)] overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-1000 relative overflow-hidden"
                 style={{ width: `${progressPct}%`, background: 'linear-gradient(90deg, #b8942e, #B09B71, #D4C4A0)' }}
               >
-                <div className="absolute inset-0 animate-pulse opacity-30 bg-white/20" />
+                <div className="absolute inset-0 animate-pulse opacity-30 bg-[rgba(245,240,232,0.20)]" />
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 text-xs text-[rgba(245,240,232,0.35)] mb-5">
+          <div className="flex items-center gap-4 text-xs text-[var(--text-disabled)] mb-5">
             <span> Ends {new Date(CURRENT_CHALLENGE.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
             <span> {leaderboard.length} participants</span>
           </div>
 
           {/* Check In Form */}
-          <div className="p-4 rounded-xl bg-white/[0.04] border border-white/[0.06]">
-            <h3 className="text-sm font-bold text-[rgba(245,240,232,0.80)] mb-3"> Log Your Activity</h3>
+          <div className="p-4 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.06)]">
+            <h3 className="text-sm font-medium text-[var(--parchment)] mb-3"> Log Your Activity</h3>
             <div className="flex flex-col sm:flex-row gap-3">
               <input
                 value={myLot}
                 onChange={e => setMyLot(e.target.value)}
                 placeholder="Your Lot # (e.g. Lot 5)"
-                className="flex-1 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-600 focus:outline-none focus:border-[#B09B71]/50"
+                className="flex-1 px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[#B09B71]/50"
               />
               <input
                 type="number"
                 value={checkInAmount}
                 onChange={e => setCheckInAmount(e.target.value)}
                 placeholder={`${CURRENT_CHALLENGE.unit} today`}
-                className="flex-1 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-[rgba(245,240,232,0.80)] placeholder-gray-600 focus:outline-none focus:border-[#B09B71]/50"
+                className="flex-1 px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[#B09B71]/50"
               />
               <button
                 onClick={handleCheckIn}
                 disabled={!checkInAmount || !myLot}
-                className="px-5 py-2 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                className="px-5 py-2 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 Check In 
               </button>
             </div>
             {showSuccess && (
-              <div className="mt-3 text-sm text-[#3A7D6F] font-semibold animate-pulse">
+              <div className="mt-3 text-sm text-[#3A7D6F] font-medium animate-pulse">
                  Logged! Keep it up!
               </div>
             )}
@@ -218,28 +218,28 @@ export default function FitnessPage() {
       </div>
 
       {/* Leaderboard */}
-      <div className="glass rounded-2xl p-6 border border-white/[0.04]">
-        <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)] mb-4"> Participant Leaderboard</h2>
+      <div className="glass rounded-xl p-6 border border-[rgba(245,240,232,0.04)]">
+        <h2 className="text-base font-medium text-[var(--parchment)] mb-4"> Participant Leaderboard</h2>
         {leaderboard.length === 0 ? (
-          <p className="text-[rgba(245,240,232,0.35)] text-sm text-center py-8">No check-ins yet. Be the first!</p>
+          <p className="text-[var(--text-disabled)] text-sm text-center py-8">No check-ins yet. Be the first!</p>
         ) : (
           <div className="space-y-2">
             {leaderboard.map((entry, idx) => {
               const pct = (entry.total / totalProgress) * 100;
               const medals = ['', '', ''];
               return (
-                <div key={entry.lot} className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                <div key={entry.lot} className="flex items-center gap-3 p-3 rounded-xl bg-[rgba(245,240,232,0.02)] border border-[rgba(245,240,232,0.04)]">
                   <span className="text-lg w-8 text-center">{medals[idx] || `#${idx + 1}`}</span>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-semibold text-[rgba(245,240,232,0.80)]">{entry.lot}</span>
-                      <span className="text-sm font-bold text-[#B09B71]">{entry.total.toLocaleString()}</span>
+                      <span className="text-sm font-medium text-[var(--parchment)]">{entry.lot}</span>
+                      <span className="text-sm font-medium text-[#B09B71]">{entry.total.toLocaleString()}</span>
                     </div>
-                    <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                    <div className="h-1.5 rounded-full bg-[rgba(245,240,232,0.06)] overflow-hidden">
                       <div className="h-full rounded-full bg-[#B09B71]/60" style={{ width: `${pct}%` }} />
                     </div>
                   </div>
-                  <span className="text-xs text-[rgba(245,240,232,0.25)] w-10 text-right">{pct.toFixed(0)}%</span>
+                  <span className="text-xs text-[var(--text-disabled)] w-10 text-right">{pct.toFixed(0)}%</span>
                 </div>
               );
             })}
@@ -248,30 +248,30 @@ export default function FitnessPage() {
       </div>
 
       {/* Past Challenges */}
-      <div className="glass rounded-2xl p-6 border border-white/[0.04]">
-        <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)] mb-4"> Past Challenges</h2>
+      <div className="glass rounded-xl p-6 border border-[rgba(245,240,232,0.04)]">
+        <h2 className="text-base font-medium text-[var(--parchment)] mb-4"> Past Challenges</h2>
         <div className="space-y-3">
           {pastResults.map(ch => {
             const pct = Math.min(100, (ch.achieved / ch.goal) * 100);
             return (
-              <div key={ch.id} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+              <div key={ch.id} className="p-4 rounded-xl bg-[rgba(245,240,232,0.02)] border border-[rgba(245,240,232,0.04)]">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-xl">{ch.emoji}</span>
                   <div className="flex-1">
-                    <div className="text-sm font-semibold text-[rgba(245,240,232,0.65)]">{ch.title}</div>
-                    <div className="text-[11px] text-[rgba(245,240,232,0.25)]">
+                    <div className="text-sm font-medium text-[var(--text-body)]">{ch.title}</div>
+                    <div className="text-[11px] text-[var(--text-disabled)]">
                       {new Date(ch.startDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className={`text-sm font-bold ${pct >= 100 ? 'text-[#3A7D6F]' : 'text-[#B09B71]'}`}>{pct.toFixed(0)}%</span>
+                    <span className={`text-sm font-medium ${pct >= 100 ? 'text-[#3A7D6F]' : 'text-[#B09B71]'}`}>{pct.toFixed(0)}%</span>
                     {pct >= 100 && <span className="ml-1 text-xs"></span>}
                   </div>
                 </div>
-                <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
+                <div className="h-2 rounded-full bg-[rgba(245,240,232,0.06)] overflow-hidden">
                   <div className={`h-full rounded-full ${pct >= 100 ? 'bg-[#3A7D6F]' : 'bg-[#B09B71]/60'}`} style={{ width: `${pct}%` }} />
                 </div>
-                <div className="text-[10px] text-[rgba(245,240,232,0.25)] mt-1">
+                <div className="text-[10px] text-[var(--text-disabled)] mt-1">
                   {ch.achieved.toLocaleString()} / {ch.goal.toLocaleString()} {ch.unit}
                 </div>
               </div>

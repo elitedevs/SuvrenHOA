@@ -24,9 +24,9 @@ interface CarpoolRoute {
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const TYPE_CONFIG = {
-  school: { label: 'School Run', color: 'text-[#5A7A9A]', bg: 'bg-[#5A7A9A]/10', border: 'border-blue-400/20' },
+  school: { label: 'School Run', color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/10', border: 'border-[rgba(90,122,154,0.20)]' },
   work: { label: 'Work Commute', color: 'text-[#B09B71]', bg: 'bg-[#B09B71]/10', border: 'border-[#B09B71]/20' },
-  errands: { label: 'Errands', color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-green-400/20' },
+  errands: { label: 'Errands', color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-[rgba(42,93,79,0.20)]' },
 };
 
 const DEMO_ROUTES: CarpoolRoute[] = [
@@ -87,8 +87,8 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
               <Car className={`w-5 h-5 ${cfg.color}`} />
             </div>
             <div>
-              <h3 className="font-semibold text-white text-sm">{route.name}</h3>
-              <p className="text-xs text-[rgba(245,240,232,0.50)] mt-0.5 flex items-center gap-1">
+              <h3 className="font-medium text-[var(--text-heading)] text-sm">{route.name}</h3>
+              <p className="text-xs text-[var(--text-muted)] mt-0.5 flex items-center gap-1">
                 <MapPin className="w-3 h-3" /> {route.destination}
               </p>
             </div>
@@ -100,16 +100,16 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
 
         <div className="grid grid-cols-3 gap-3 mb-3">
           <div>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)] uppercase tracking-wider mb-1">Departs</p>
-            <p className="text-sm font-semibold text-white flex items-center gap-1"><Clock className="w-3 h-3 text-[rgba(245,240,232,0.35)]" /> {route.departureTime}</p>
+            <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wider mb-1">Departs</p>
+            <p className="text-sm font-medium text-[var(--text-heading)] flex items-center gap-1"><Clock className="w-3 h-3 text-[var(--text-disabled)]" /> {route.departureTime}</p>
           </div>
           <div>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)] uppercase tracking-wider mb-1">Returns</p>
-            <p className="text-sm font-semibold text-white flex items-center gap-1"><Clock className="w-3 h-3 text-[rgba(245,240,232,0.35)]" /> {route.returnTime}</p>
+            <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wider mb-1">Returns</p>
+            <p className="text-sm font-medium text-[var(--text-heading)] flex items-center gap-1"><Clock className="w-3 h-3 text-[var(--text-disabled)]" /> {route.returnTime}</p>
           </div>
           <div>
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)] uppercase tracking-wider mb-1">Driver</p>
-            <p className="text-sm font-semibold text-white">Lot #{route.driverLot}</p>
+            <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wider mb-1">Driver</p>
+            <p className="text-sm font-medium text-[var(--text-heading)]">Lot #{route.driverLot}</p>
           </div>
         </div>
 
@@ -117,7 +117,7 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
           {DAYS.map((day) => (
             <span
               key={day}
-              className={`text-xs px-2 py-0.5 rounded font-medium ${route.days.includes(day) ? `${cfg.bg} ${cfg.color}` : 'bg-white/5 text-[rgba(245,240,232,0.25)]'}`}
+              className={`text-xs px-2 py-0.5 rounded font-medium ${route.days.includes(day) ? `${cfg.bg} ${cfg.color}` : 'bg-[rgba(245,240,232,0.05)] text-[var(--text-disabled)]'}`}
             >
               {day}
             </span>
@@ -126,8 +126,8 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Users className="w-4 h-4 text-[rgba(245,240,232,0.35)]" />
-            <span className="text-xs text-[rgba(245,240,232,0.50)]">{route.riders.length}/{route.maxRiders} riders</span>
+            <Users className="w-4 h-4 text-[var(--text-disabled)]" />
+            <span className="text-xs text-[var(--text-muted)]">{route.riders.length}/{route.maxRiders} riders</span>
             {spots > 0 && !isDriver && (
               <span className="text-xs text-[#3A7D6F]">{spots} spot{spots > 1 ? 's' : ''} open</span>
             )}
@@ -141,31 +141,31 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
           {!isMember && spots > 0 && (
             <button
               onClick={() => setShowJoin(!showJoin)}
-              className="text-xs px-3 py-1.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] font-semibold transition-colors"
+              className="text-xs px-3 py-1.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] font-medium transition-colors"
             >
               Join Route
             </button>
           )}
           {!isMember && spots === 0 && (
-            <span className="text-xs text-[rgba(245,240,232,0.35)]">Full</span>
+            <span className="text-xs text-[var(--text-disabled)]">Full</span>
           )}
         </div>
 
         {showJoin && (
-          <div className="mt-3 pt-3 border-t border-white/5 space-y-2">
-            <p className="text-xs text-[rgba(245,240,232,0.50)]">Select your pickup point:</p>
+          <div className="mt-3 pt-3 border-t border-[rgba(245,240,232,0.05)] space-y-2">
+            <p className="text-xs text-[var(--text-muted)]">Select your pickup point:</p>
             <select
               value={selectedPickup}
               onChange={(e) => setSelectedPickup(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white focus:border-[#B09B71]/50 focus:outline-none"
+              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[#B09B71]/50 focus:outline-none"
             >
               {route.pickupPoints.map((p) => <option key={p} value={p}>{p}</option>)}
             </select>
             <div className="flex gap-2">
-              <button onClick={() => setShowJoin(false)} className="flex-1 px-3 py-1.5 rounded-lg border border-white/10 text-xs text-[rgba(245,240,232,0.50)] hover:text-white transition-colors">Cancel</button>
+              <button onClick={() => setShowJoin(false)} className="flex-1 px-3 py-1.5 rounded-lg border border-[rgba(245,240,232,0.10)] text-xs text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors">Cancel</button>
               <button
                 onClick={() => { onJoin(route.id, selectedPickup); setShowJoin(false); }}
-                className="flex-1 px-3 py-1.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-xs font-semibold transition-colors"
+                className="flex-1 px-3 py-1.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-xs font-medium transition-colors"
               >
                 Confirm
               </button>
@@ -176,11 +176,11 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
 
       {route.riders.length > 0 && (
         <div className="px-4 pb-3">
-          <div className="pt-3 border-t border-white/5">
-            <p className="text-[10px] text-[rgba(245,240,232,0.35)] uppercase tracking-wider mb-2">Riders</p>
+          <div className="pt-3 border-t border-[rgba(245,240,232,0.05)]">
+            <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wider mb-2">Riders</p>
             <div className="flex flex-wrap gap-2">
               {route.riders.map((r) => (
-                <span key={r.lot} className="text-xs px-2 py-0.5 rounded-full bg-white/5 text-[rgba(245,240,232,0.50)]">
+                <span key={r.lot} className="text-xs px-2 py-0.5 rounded-full bg-[rgba(245,240,232,0.05)] text-[var(--text-muted)]">
                   Lot #{r.lot} · {r.pickup.split('(')[0].trim()}
                 </span>
               ))}
@@ -227,7 +227,7 @@ export default function CarpoolPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to join the carpool network</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to join the carpool network</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -237,11 +237,11 @@ export default function CarpoolPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-3">
             <Car className="w-7 h-7 text-[#B09B71]" />
             Carpool Scheduler
           </h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Coordinate rides for school, work, and errands</p>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Coordinate rides for school, work, and errands</p>
         </div>
       </div>
 
@@ -249,13 +249,13 @@ export default function CarpoolPage() {
       <div className="grid grid-cols-3 gap-4 mb-8">
         {[
           { label: 'Active Routes', value: routes.length, icon: Car, color: 'text-[#B09B71]' },
-          { label: 'Total Riders', value: routes.reduce((s, r) => s + r.riders.length, 0), icon: Users, color: 'text-[#5A7A9A]' },
+          { label: 'Total Riders', value: routes.reduce((s, r) => s + r.riders.length, 0), icon: Users, color: 'text-[var(--steel)]' },
           { label: 'Open Spots', value: routes.reduce((s, r) => s + (r.maxRiders - r.riders.length), 0), icon: User, color: 'text-[#3A7D6F]' },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="glass-card rounded-xl p-4 text-center">
             <Icon className={`w-5 h-5 ${color} mx-auto mb-2`} />
-            <p className={`text-2xl font-bold ${color}`}>{value}</p>
-            <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">{label}</p>
+            <p className={`text-2xl font-medium ${color}`}>{value}</p>
+            <p className="text-xs text-[var(--text-disabled)] mt-0.5">{label}</p>
           </div>
         ))}
       </div>
@@ -268,8 +268,8 @@ export default function CarpoolPage() {
             onClick={() => setActiveDay(day)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors shrink-0 ${
               activeDay === day
-                ? 'bg-[#B09B71] text-[#1a1a1a]'
-                : 'glass-card text-[rgba(245,240,232,0.50)] hover:text-white'
+                ? 'bg-[#B09B71] text-[var(--surface-2)]'
+                : 'glass-card text-[var(--text-muted)] hover:text-[var(--text-heading)]'
             }`}
           >
             {day}
@@ -280,8 +280,8 @@ export default function CarpoolPage() {
       <div className="space-y-4">
         {filteredRoutes.length === 0 && (
           <div className="glass-card rounded-xl p-8 text-center">
-            <Car className="w-10 h-10 text-[rgba(245,240,232,0.25)] mx-auto mb-3" />
-            <p className="text-[rgba(245,240,232,0.50)]">No carpool routes scheduled for {activeDay}</p>
+            <Car className="w-10 h-10 text-[var(--text-disabled)] mx-auto mb-3" />
+            <p className="text-[var(--text-muted)]">No carpool routes scheduled for {activeDay}</p>
           </div>
         )}
         {filteredRoutes.map((route) => (

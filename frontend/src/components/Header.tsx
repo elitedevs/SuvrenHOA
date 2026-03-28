@@ -103,10 +103,10 @@ function NavDropdown({
       onMouseLeave={handleLeave}
     >
       <button
-        className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
+        className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
           hasActive
             ? 'text-[#D4C4A0] bg-[#B09B71]/10'
-            : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04]'
+            : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
         }`}
         onClick={() => setOpen(!open)}
         aria-expanded={open}
@@ -119,7 +119,7 @@ function NavDropdown({
       </button>
 
       {open && (
-        <div className="absolute top-full left-0 mt-1 w-52 py-2 rounded-xl border border-white/[0.06] bg-[rgba(15,15,20,0.95)] backdrop-blur-xl shadow-2xl shadow-black/20 z-50 animate-fade-in">
+        <div className="absolute top-full left-0 mt-1 w-52 py-2 rounded-xl border border-[rgba(245,240,232,0.06)] bg-[rgba(15,15,20,0.95)] backdrop-blur-xl shadow-2xl shadow-black/20 z-50 animate-fade-in">
           {items.map((item) => {
             const ItemIcon = item.icon;
             const active = pathname === item.href || pathname.startsWith(item.href + '/');
@@ -131,7 +131,7 @@ function NavDropdown({
                 className={`flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium transition-colors duration-150 ${
                   active
                     ? 'text-[#D4C4A0] bg-[#B09B71]/10'
-                    : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.90)] hover:bg-white/[0.04]'
+                    : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
                 }`}
               >
                 <ItemIcon className="w-4 h-4 opacity-70" />
@@ -152,20 +152,20 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
   return (
     <div className="fixed inset-0 z-[100] bg-[rgba(0,0,0,0.6)] backdrop-blur-sm" onClick={onClose}>
       <div
-        className="absolute right-0 top-0 bottom-0 w-[280px] bg-[rgba(15,15,20,0.98)] backdrop-blur-xl border-l border-white/[0.06] overflow-y-auto"
+        className="absolute right-0 top-0 bottom-0 w-[280px] bg-[rgba(15,15,20,0.98)] backdrop-blur-xl border-l border-[rgba(245,240,232,0.06)] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close */}
-        <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
-          <span className="text-[15px] font-bold gradient-text">SuvrenHOA</span>
-          <button onClick={onClose} className="p-2 rounded-lg hover:bg-white/[0.06] text-[rgba(245,240,232,0.50)]">
+        <div className="flex items-center justify-between p-4 border-b border-[rgba(245,240,232,0.06)]">
+          <span className="text-[15px] font-medium gradient-text">SuvrenHOA</span>
+          <button onClick={onClose} className="p-2 rounded-lg hover:bg-[rgba(245,240,232,0.06)] text-[var(--text-muted)]">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Public links */}
-        <div className="p-3 border-b border-white/[0.06]">
-          <p className="text-[10px] uppercase tracking-widest text-[rgba(245,240,232,0.25)] font-bold px-3 mb-2">Public</p>
+        <div className="p-3 border-b border-[rgba(245,240,232,0.06)]">
+          <p className="text-[10px] uppercase tracking-widest text-[var(--text-disabled)] font-medium px-3 mb-2">Public</p>
           {[
             { href: '/transparency', label: 'Transparency', icon: Eye },
             { href: '/map', label: 'Map', icon: Map },
@@ -179,7 +179,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                 href={item.href}
                 onClick={onClose}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium transition-colors ${
-                  active ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04]'
+                  active ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
                 }`}
               >
                 <ItemIcon className="w-4 h-4" />
@@ -194,10 +194,10 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
           const GroupIcon = group.icon;
           const isExpanded = expanded === group.label;
           return (
-            <div key={group.label} className="border-b border-white/[0.06]">
+            <div key={group.label} className="border-b border-[rgba(245,240,232,0.06)]">
               <button
                 onClick={() => setExpanded(isExpanded ? null : group.label)}
-                className="flex items-center justify-between w-full px-6 py-3 text-[13px] font-semibold text-[rgba(245,240,232,0.65)] hover:text-white transition-colors"
+                className="flex items-center justify-between w-full px-6 py-3 text-[13px] font-medium text-[var(--text-body)] hover:text-[var(--text-heading)] transition-colors"
               >
                 <span className="flex items-center gap-2">
                   <GroupIcon className="w-4 h-4 text-[#B09B71]/70" />
@@ -216,7 +216,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                         href={item.href}
                         onClick={onClose}
                         className={`flex items-center gap-3 px-6 py-2 rounded-lg text-[13px] font-medium transition-colors ${
-                          active ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04]'
+                          active ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[var(--text-disabled)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
                         }`}
                       >
                         <ItemIcon className="w-3.5 h-3.5 opacity-60" />
@@ -232,7 +232,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
 
         {/* Utility links */}
         <div className="p-3">
-          <p className="text-[10px] uppercase tracking-widest text-[rgba(245,240,232,0.25)] font-bold px-3 mb-2">Account</p>
+          <p className="text-[10px] uppercase tracking-widest text-[var(--text-disabled)] font-medium px-3 mb-2">Account</p>
           {[
             { href: '/admin', label: 'Admin', icon: Settings },
             { href: '/onboarding', label: 'Setup Wizard', icon: PackageOpen },
@@ -244,7 +244,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                 key={item.href}
                 href={item.href}
                 onClick={onClose}
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04] transition-colors"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium text-[var(--text-disabled)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)] transition-colors"
               >
                 <ItemIcon className="w-4 h-4" />
                 {item.label}
@@ -271,12 +271,12 @@ export function Header() {
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#B09B71] to-[#b8942e] flex items-center justify-center font-bold text-sm text-white group-hover:shadow-[0_0_16px_rgba(201,169,110,0.4)] transition-all duration-300 group-hover:scale-105">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] flex items-center justify-center font-medium text-sm text-[var(--text-heading)] group-hover:shadow-[0_0_16px_rgba(201,169,110,0.4)] transition-all duration-300 group-hover:scale-105">
                 S
               </div>
-              <span className="text-[15px] font-bold hidden sm:block tracking-tight">
+              <span className="text-[15px] font-medium hidden sm:block tracking-tight">
                 <span className="gradient-text">Suvren</span>
-                <span className="text-[rgba(245,240,232,0.35)]">HOA</span>
+                <span className="text-[var(--text-disabled)]">HOA</span>
               </span>
             </Link>
 
@@ -285,8 +285,8 @@ export function Header() {
               {/* Public links */}
               <Link
                 href="/transparency"
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
-                  pathname.startsWith('/transparency') ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04]'
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
+                  pathname.startsWith('/transparency') ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
                 }`}
               >
                 <Eye className="w-4 h-4" />
@@ -294,8 +294,8 @@ export function Header() {
               </Link>
               <Link
                 href="/map"
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
-                  pathname.startsWith('/map') ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04]'
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
+                  pathname.startsWith('/map') ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
                 }`}
               >
                 <Map className="w-4 h-4" />
@@ -320,33 +320,33 @@ export function Header() {
                 <>
                   <Link
                     href="/health"
-                    className={`p-2 rounded-lg transition-colors ${pathname === '/health' ? 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)]' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/[0.04]'}`}
+                    className={`p-2 rounded-lg transition-colors ${pathname === '/health' ? 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.04)]'}`}
                     title="Health Score"
                   >
                     <Heart className="w-4 h-4" />
                   </Link>
                   <Link
                     href="/alerts"
-                    className={`p-2 rounded-lg transition-colors ${pathname === '/alerts' ? 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)]' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/[0.04]'}`}
+                    className={`p-2 rounded-lg transition-colors ${pathname === '/alerts' ? 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.04)]'}`}
                     title="Alerts"
                   >
                     <Bell className="w-4 h-4" />
                   </Link>
                   <Link
                     href="/messages"
-                    className={`relative p-2 rounded-lg transition-colors ${pathname === '/messages' ? 'text-[#B09B71] bg-[#B09B71]/10' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/[0.04]'}`}
+                    className={`relative p-2 rounded-lg transition-colors ${pathname === '/messages' ? 'text-[#B09B71] bg-[#B09B71]/10' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.04)]'}`}
                     title="Messages"
                   >
                     <MessageCircle className="w-4 h-4" />
                     {totalUnread > 0 && (
-                      <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-[16px] px-1 rounded-full bg-[#B09B71] text-white text-[9px] font-bold flex items-center justify-center">
+                      <span className="absolute -top-0.5 -right-0.5 min-w-[16px] h-[16px] px-1 rounded-full bg-[#B09B71] text-[var(--text-heading)] text-[9px] font-medium flex items-center justify-center">
                         {totalUnread > 9 ? '9+' : totalUnread}
                       </span>
                     )}
                   </Link>
                   <Link
                     href="/assistant"
-                    className={`p-2 rounded-lg transition-colors ${pathname === '/assistant' ? 'text-[#5A7A9A] bg-[rgba(90,122,154,0.10)]' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] hover:bg-white/[0.04]'}`}
+                    className={`p-2 rounded-lg transition-colors ${pathname === '/assistant' ? 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.04)]'}`}
                     title="AI Assistant"
                   >
                     <Bot className="w-4 h-4" />
@@ -359,7 +359,7 @@ export function Header() {
               <ConnectButton label="Sign In" showBalance={false} chainStatus="icon" accountStatus="avatar" />
               {/* Mobile hamburger */}
               <button
-                className="lg:hidden p-2 rounded-lg text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] hover:bg-white/[0.04] transition-colors"
+                className="lg:hidden p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)] transition-colors"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
               >

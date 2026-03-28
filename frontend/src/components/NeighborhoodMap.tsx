@@ -23,13 +23,13 @@ interface NeighborhoodMapProps {
 // Incident type helpers (exported for page.tsx)
 // ─────────────────────────────────────────
 export const INCIDENT_COLORS: Record<Incident['type'], string> = {
-  crime: '#ef4444',
-  maintenance: '#f59e0b',
-  'road-closure': '#f97316',
-  'community-event': '#3b82f6',
-  hazard: '#eab308',
-  noise: '#8b5cf6',
-  other: '#6b7280',
+  crime: '#8B5A5A',
+  maintenance: '#b8942e',
+  'road-closure': '#b8942e',
+  'community-event': '#5A7A9A',
+  hazard: '#B09B71',
+  noise: '#8B5A5A',
+  other: `rgba(245,240,232,0.35)`,
 };
 
 export const INCIDENT_ICONS: Record<Incident['type'], string> = {
@@ -73,8 +73,8 @@ const DARK_MAP_STYLES: google.maps.MapTypeStyle[] = [
 // Lot marker color helpers
 // ─────────────────────────────────────────
 function markerColor(lot: LotData): string {
-  if (lot.isDuesCurrent === null) return '#6b7280';
-  return lot.isDuesCurrent ? '#22c55e' : '#ef4444';
+  if (lot.isDuesCurrent === null) return `rgba(245,240,232,0.35)`;
+  return lot.isDuesCurrent ? '#3A7D6F' : '#8B5A5A';
 }
 
 function statusLabel(lot: LotData): string {
@@ -160,24 +160,24 @@ function buildLotPopupHTML(lot: LotData, isBoard: boolean): string {
 
   const ownerRow = isBoard
     ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.07);">
-        <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;">Owner</div>
-        <div style="font-family:monospace;font-size:11px;color:#9ca3af;word-break:break-all;">${lot.owner}</div>
+        <div style="font-size:10px;color:rgba(245,240,232,0.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;">Owner</div>
+        <div style="font-family:monospace;font-size:11px;color:rgba(245,240,232,0.45);word-break:break-all;">${lot.owner}</div>
        </div>`
     : `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.07);">
-        <div style="font-size:11px;color:#4b5563;font-style:italic;"> Owner visible to board only</div>
+        <div style="font-size:11px;color:rgba(245,240,232,0.30);font-style:italic;"> Owner visible to board only</div>
        </div>`;
 
   return `
-    <div style="min-width:210px;max-width:250px;font-family:'Plus Jakarta Sans',sans-serif;color:#e5e7eb;">
+    <div style="min-width:210px;max-width:250px;font-family:'Plus Jakarta Sans',sans-serif;color:#F5F0E8;">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;">
         <div>
-          <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;">Lot</div>
+          <div style="font-size:10px;color:rgba(245,240,232,0.35);text-transform:uppercase;letter-spacing:.08em;">Lot</div>
           <div style="font-size:20px;font-weight:700;background:linear-gradient(135deg,#B09B71,#D4C4A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">#${lot.lotNumber}</div>
         </div>
         <div style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${color};white-space:nowrap;margin-top:2px;">${status}</div>
       </div>
-      <div style="font-size:12px;color:#d1d5db;font-weight:500;margin-bottom:4px;">${lot.streetAddress}</div>
-      ${lot.sqft > 0 ? `<div style="font-size:11px;color:#6b7280;">${lot.sqft.toLocaleString()} sq ft</div>` : ''}
+      <div style="font-size:12px;color:rgba(245,240,232,0.75);font-weight:500;margin-bottom:4px;">${lot.streetAddress}</div>
+      ${lot.sqft > 0 ? `<div style="font-size:11px;color:rgba(245,240,232,0.35);">${lot.sqft.toLocaleString()} sq ft</div>` : ''}
       ${ownerRow}
     </div>
   `;
@@ -193,7 +193,7 @@ function buildIncidentPopupHTML(incident: Incident): string {
   const isActive = incident.status === 'active';
   const statusBg = isActive ? 'rgba(201,169,110,0.12)' : 'rgba(34,197,94,0.12)';
   const statusBorder = isActive ? 'rgba(201,169,110,0.35)' : 'rgba(34,197,94,0.35)';
-  const statusColor = isActive ? '#B09B71' : '#22c55e';
+  const statusColor = isActive ? '#B09B71' : '#3A7D6F';
   const statusText = isActive ? 'Active' : 'Resolved';
 
   const truncated = incident.description.length > 80
@@ -201,17 +201,17 @@ function buildIncidentPopupHTML(incident: Incident): string {
     : incident.description;
 
   return `
-    <div style="min-width:210px;max-width:260px;font-family:'Plus Jakarta Sans',sans-serif;color:#e5e7eb;">
+    <div style="min-width:210px;max-width:260px;font-family:'Plus Jakarta Sans',sans-serif;color:#F5F0E8;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
         <span style="font-size:16px;">${icon}</span>
         <div style="flex:1;min-width:0;">
-          <div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.08em;">${label}</div>
-          <div style="font-size:13px;font-weight:700;color:#e5e7eb;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${incident.title}</div>
+          <div style="font-size:10px;color:rgba(245,240,232,0.35);text-transform:uppercase;letter-spacing:.08em;">${label}</div>
+          <div style="font-size:13px;font-weight:700;color:#F5F0E8;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${incident.title}</div>
         </div>
         <div style="padding:2px 7px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${statusColor};white-space:nowrap;flex-shrink:0;">${statusText}</div>
       </div>
-      <div style="font-size:11px;color:#9ca3af;margin-bottom:6px;">${truncated}</div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:10px;color:#6b7280;">
+      <div style="font-size:11px;color:rgba(245,240,232,0.45);margin-bottom:6px;">${truncated}</div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:10px;color:rgba(245,240,232,0.35);">
         <span> ${incident.location}</span>
         <span style="margin-left:auto;">${incident.date}</span>
       </div>
@@ -298,7 +298,7 @@ function injectPopupStyles() {
     }
     .gm-control-active {
       background: rgba(13,11,20,0.92) !important;
-      color: #9ca3af !important;
+      color: rgba(245,240,232,0.45) !important;
     }
     .gm-control-active:hover {
       background: rgba(201,169,110,0.12) !important;
@@ -309,7 +309,7 @@ function injectPopupStyles() {
     }
     a[href^="https://maps.google.com"],
     a[href^="https://www.google.com/maps"] {
-      color: #6b7280 !important;
+      color: rgba(245,240,232,0.35) !important;
     }
   `;
   document.head.appendChild(style);
@@ -529,7 +529,7 @@ export default function NeighborhoodMap({
     <div
       ref={containerRef}
       style={{ minHeight: 520, width: '100%', borderRadius: '16px', overflow: 'hidden' }}
-      className="border border-white/[0.08]"
+      className="border border-[rgba(245,240,232,0.08)]"
       aria-label="Neighborhood property and incident map"
     />
   );

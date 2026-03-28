@@ -38,16 +38,16 @@ const TYPE_STYLE: Record<
     icon: <AlertTriangle className="w-5 h-5" />,
   },
   urgent: {
-    border: 'border-orange-500/40',
+    border: 'border-[rgba(176,155,113,0.40)]',
     text: 'text-[#B09B71]',
-    badge: 'bg-orange-600/20 text-[#B09B71] border border-orange-500/30',
+    badge: 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]',
     glow: 'shadow-[0_0_20px_rgba(249,115,22,0.15)]',
     icon: <AlertCircle className="w-5 h-5" />,
   },
   info: {
     border: 'border-[rgba(90,122,154,0.30)]',
-    text: 'text-[#5A7A9A]',
-    badge: 'bg-[rgba(90,122,154,0.15)] text-[#5A7A9A] border border-[rgba(90,122,154,0.25)]',
+    text: 'text-[var(--steel)]',
+    badge: 'bg-[rgba(90,122,154,0.15)] text-[var(--steel)] border border-[rgba(90,122,154,0.25)]',
     glow: '',
     icon: <Info className="w-5 h-5" />,
   },
@@ -75,8 +75,8 @@ function Countdown({ expiresAt }: { expiresAt: string | null }) {
     return () => clearInterval(id);
   }, [expiresAt]);
 
-  if (!expiresAt) return <span className="text-[rgba(245,240,232,0.35)] text-xs">No expiry</span>;
-  return <span className="text-[rgba(245,240,232,0.50)] text-xs font-mono">{text}</span>;
+  if (!expiresAt) return <span className="text-[var(--text-disabled)] text-xs">No expiry</span>;
+  return <span className="text-[var(--text-muted)] text-xs font-mono">{text}</span>;
 }
 
 // ─── Alert Card ───────────────────────────────────────────────────────────────
@@ -95,23 +95,23 @@ function AlertCard({
 
   return (
     <div
-      className={`glass-card rounded-2xl hover-lift p-5 border-l-4 ${s.border} ${s.glow}`}
+      className={`glass-card rounded-xl hover-lift p-5 border-l-4 ${s.border} ${s.glow}`}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 min-w-0">
           <span className={s.text}>{s.icon}</span>
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1">
-              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${s.badge}`}>
+              <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.badge}`}>
                 {alert.type.toUpperCase()}
               </span>
               <Countdown expiresAt={alert.expiresAt} />
             </div>
-            <h3 className="font-bold text-base text-[rgba(245,240,232,0.90)] mb-1">{alert.title}</h3>
+            <h3 className="font-medium text-base text-[var(--parchment)] mb-1">{alert.title}</h3>
             {alert.description && (
-              <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed">{alert.description}</p>
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">{alert.description}</p>
             )}
-            <p className="text-[11px] text-[rgba(245,240,232,0.25)] mt-2">
+            <p className="text-[11px] text-[var(--text-disabled)] mt-2">
               {createdDate.toLocaleDateString()} {createdDate.toLocaleTimeString()} ·{' '}
               {alert.createdBy.slice(0, 6)}…{alert.createdBy.slice(-4)}
             </p>
@@ -120,7 +120,7 @@ function AlertCard({
         {isBoardMember && onDelete && (
           <button
             onClick={() => onDelete(alert.id)}
-            className="text-[rgba(245,240,232,0.25)] hover:text-[#8B5A5A] transition-colors p-1 rounded shrink-0"
+            className="text-[var(--text-disabled)] hover:text-[#8B5A5A] transition-colors p-1 rounded shrink-0"
             title="Delete alert"
           >
             <Trash2 className="w-4 h-4" />
@@ -171,28 +171,28 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
   }
 
   return (
-    <div className="glass-card rounded-2xl hover-lift overflow-hidden mb-8">
+    <div className="glass-card rounded-xl hover-lift overflow-hidden mb-8">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/[0.02] transition-colors"
+        className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-[rgba(245,240,232,0.02)] transition-colors"
       >
         <div className="flex items-center gap-2">
           <Plus className="w-5 h-5 text-[#B09B71]" />
-          <span className="font-bold text-[rgba(245,240,232,0.90)]">Create Emergency Alert</span>
+          <span className="font-medium text-[var(--parchment)]">Create Emergency Alert</span>
         </div>
         {open ? (
-          <ChevronUp className="w-4 h-4 text-[rgba(245,240,232,0.35)]" />
+          <ChevronUp className="w-4 h-4 text-[var(--text-disabled)]" />
         ) : (
-          <ChevronDown className="w-4 h-4 text-[rgba(245,240,232,0.35)]" />
+          <ChevronDown className="w-4 h-4 text-[var(--text-disabled)]" />
         )}
       </button>
 
       {open && (
-        <form onSubmit={handleSubmit} className="px-6 pb-6 border-t border-white/[0.06]">
+        <form onSubmit={handleSubmit} className="px-6 pb-6 border-t border-[rgba(245,240,232,0.06)]">
           <div className="pt-5 space-y-4">
             {/* Type selector */}
             <div>
-              <label className="block text-xs font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wide mb-2">
+              <label className="block text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">
                 Alert Type
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -203,10 +203,10 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                       key={t}
                       type="button"
                       onClick={() => setType(t)}
-                      className={`px-3 py-2 rounded-xl text-sm font-semibold border transition-all ${
+                      className={`px-3 py-2 rounded-xl text-sm font-medium border transition-all ${
                         type === t
                           ? `${s.badge} ${s.glow}`
-                          : 'border-white/10 text-[rgba(245,240,232,0.35)] hover:border-white/20'
+                          : 'border-[rgba(245,240,232,0.10)] text-[var(--text-disabled)] hover:border-[rgba(245,240,232,0.20)]'
                       }`}
                     >
                       {label}
@@ -218,7 +218,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
 
             {/* Title */}
             <div>
-              <label className="block text-xs font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wide mb-2">
+              <label className="block text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">
                 Title *
               </label>
               <input
@@ -227,13 +227,13 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Gas leak at Building C — evacuate now"
                 maxLength={120}
-                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[rgba(245,240,232,0.90)] placeholder-gray-600 focus:outline-none focus:border-[#B09B71]/50 focus:ring-1 focus:ring-[#B09B71]/30 transition"
+                className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.10)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[#B09B71]/50 focus:ring-1 focus:ring-[#B09B71]/30 transition"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="block text-xs font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wide mb-2">
+              <label className="block text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">
                 Description
               </label>
               <textarea
@@ -242,13 +242,13 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                 placeholder="Optional additional details..."
                 rows={3}
                 maxLength={500}
-                className="w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-[rgba(245,240,232,0.90)] placeholder-gray-600 focus:outline-none focus:border-[#B09B71]/50 focus:ring-1 focus:ring-[#B09B71]/30 transition resize-none"
+                className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.10)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[#B09B71]/50 focus:ring-1 focus:ring-[#B09B71]/30 transition resize-none"
               />
             </div>
 
             {/* Expiry */}
             <div>
-              <label className="block text-xs font-semibold text-[rgba(245,240,232,0.50)] uppercase tracking-wide mb-2">
+              <label className="block text-xs font-medium text-[var(--text-muted)] uppercase tracking-wide mb-2">
                 Auto-Expire
               </label>
               <div className="grid grid-cols-4 gap-2">
@@ -257,10 +257,10 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                     key={label}
                     type="button"
                     onClick={() => setExpiresInHours(value)}
-                    className={`px-3 py-2 rounded-xl text-sm font-semibold border transition-all ${
+                    className={`px-3 py-2 rounded-xl text-sm font-medium border transition-all ${
                       expiresInHours === value
                         ? 'border-[#B09B71]/50 bg-[#B09B71]/10 text-[#D4C4A0]'
-                        : 'border-white/10 text-[rgba(245,240,232,0.35)] hover:border-white/20'
+                        : 'border-[rgba(245,240,232,0.10)] text-[var(--text-disabled)] hover:border-[rgba(245,240,232,0.20)]'
                     }`}
                   >
                     {label}
@@ -278,7 +278,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
             <button
               type="submit"
               disabled={loading || !title.trim()}
-              className="w-full py-3 rounded-xl font-bold text-sm bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-40 disabled:cursor-not-allowed text-white transition-all duration-200"
+              className="w-full py-3 rounded-xl font-medium text-sm bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-40 disabled:cursor-not-allowed text-[var(--text-heading)] transition-all duration-200"
             >
               {loading ? 'Broadcasting…' : `Broadcast ${TYPE_LABELS[type]}`}
             </button>
@@ -328,7 +328,7 @@ export default function AlertsPage() {
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
         {/* Header */}
         <div className="mb-10">
-          <p className="text-sm text-[rgba(245,240,232,0.35)] font-medium uppercase tracking-widest mb-2">
+          <p className="text-sm text-[var(--text-disabled)] font-medium uppercase tracking-widest mb-2">
             Community
           </p>
           <div className="flex items-center gap-3 mb-2">
@@ -337,7 +337,7 @@ export default function AlertsPage() {
               Emergency Alerts
             </h1>
           </div>
-          <p className="text-[rgba(245,240,232,0.50)] text-base">
+          <p className="text-[var(--text-muted)] text-base">
             Urgent community broadcasts — stay informed and safe.
           </p>
         </div>
@@ -349,11 +349,11 @@ export default function AlertsPage() {
 
         {/* Not connected nudge */}
         {!isConnected && (
-          <div className="glass-card rounded-2xl hover-lift p-6 mb-8 flex flex-col items-center gap-4 text-center">
-            <Info className="w-8 h-8 text-[#5A7A9A]" />
+          <div className="glass-card rounded-xl hover-lift p-6 mb-8 flex flex-col items-center gap-4 text-center">
+            <Info className="w-8 h-8 text-[var(--steel)]" />
             <div>
-              <p className="font-semibold text-[rgba(245,240,232,0.80)] mb-1">Connect to dismiss alerts</p>
-              <p className="text-sm text-[rgba(245,240,232,0.35)]">You can view alerts without signing in.</p>
+              <p className="font-medium text-[var(--parchment)] mb-1">Connect to dismiss alerts</p>
+              <p className="text-sm text-[var(--text-disabled)]">You can view alerts without signing in.</p>
             </div>
             <ConnectButton label="Sign In" showBalance={false} />
           </div>
@@ -361,23 +361,23 @@ export default function AlertsPage() {
 
         {/* Active Alerts */}
         <section className="mb-10">
-          <h2 className="text-sm font-bold text-[rgba(245,240,232,0.50)] uppercase tracking-widest mb-4 flex items-center gap-2">
+          <h2 className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-widest mb-4 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#8B5A5A] inline-block animate-pulse" />
             Active Alerts
             {sortedActive.length > 0 && (
-              <span className="ml-1 px-2 py-0.5 rounded-full bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] text-xs font-bold border border-[rgba(107,58,58,0.20)]">
+              <span className="ml-1 px-2 py-0.5 rounded-full bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] text-xs font-medium border border-[rgba(107,58,58,0.20)]">
                 {sortedActive.length}
               </span>
             )}
           </h2>
 
           {sortedActive.length === 0 ? (
-            <div className="glass-card rounded-2xl hover-lift p-8 text-center">
-              <div className="w-12 h-12 rounded-2xl bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)] flex items-center justify-center mx-auto mb-4">
+            <div className="glass-card rounded-xl hover-lift p-8 text-center">
+              <div className="w-12 h-12 rounded-xl bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)] flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-6 h-6 text-[#3A7D6F]" />
               </div>
-              <p className="font-semibold text-[rgba(245,240,232,0.65)] mb-1">All clear</p>
-              <p className="text-sm text-[rgba(245,240,232,0.35)]">No active alerts for your community.</p>
+              <p className="font-medium text-[var(--text-body)] mb-1">All clear</p>
+              <p className="text-sm text-[var(--text-disabled)]">No active alerts for your community.</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -395,14 +395,14 @@ export default function AlertsPage() {
 
         {/* History */}
         <section>
-          <h2 className="text-sm font-bold text-[rgba(245,240,232,0.50)] uppercase tracking-widest mb-4 flex items-center gap-2">
+          <h2 className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-widest mb-4 flex items-center gap-2">
             <Clock className="w-4 h-4" />
             Alert History
           </h2>
 
           {historyAlerts.length === 0 ? (
-            <div className="glass-card rounded-2xl hover-lift p-6 text-center">
-              <p className="text-sm text-[rgba(245,240,232,0.25)]">No past alerts yet.</p>
+            <div className="glass-card rounded-xl hover-lift p-6 text-center">
+              <p className="text-sm text-[var(--text-disabled)]">No past alerts yet.</p>
             </div>
           ) : (
             <div className="space-y-3">

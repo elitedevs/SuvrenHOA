@@ -8,12 +8,12 @@ import { CalendarDays } from 'lucide-react';
 
 const EVENT_TYPES = [
   { id: 'community', label: 'Community', icon: '', color: 'gold' },
-  { id: 'board-meeting', label: 'Board Meeting', icon: '', color: 'blue' },
-  { id: 'committee', label: 'Committee', icon: '', color: 'cyan' },
-  { id: 'deadline', label: 'Deadline', icon: '⏰', color: 'red' },
-  { id: 'holiday', label: 'Holiday', icon: '', color: 'green' },
-  { id: 'social', label: 'Social', icon: '', color: 'amber' },
-  { id: 'maintenance', label: 'Maintenance', icon: '', color: 'orange' },
+  { id: 'board-meeting', label: 'Board Meeting', icon: '', color: 'brass' },
+  { id: 'committee', label: 'Committee', icon: '', color: 'brass' },
+  { id: 'deadline', label: 'Deadline', icon: '', color: 'red' },
+  { id: 'holiday', label: 'Holiday', icon: '', color: 'verdigris' },
+  { id: 'social', label: 'Social', icon: '', color: 'gold' },
+  { id: 'maintenance', label: 'Maintenance', icon: '', color: 'muted' },
 ];
 
 export default function CalendarPage() {
@@ -34,7 +34,7 @@ export default function CalendarPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view the community calendar</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to view the community calendar</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -52,23 +52,23 @@ export default function CalendarPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2"><CalendarDays className="w-7 h-7 text-[#B09B71]" /> Community Calendar</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">
+          <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-2"><CalendarDays className="w-7 h-7 text-[#B09B71]" /> Community Calendar</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-1">
             Events, meetings, deadlines, and community gatherings
           </p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <a
             href="/calendar/meetings"
-            className="px-4 py-2.5 rounded-xl bg-gray-800/60 border border-gray-700/60 hover:border-[#B09B71]/30 text-sm font-medium text-[rgba(245,240,232,0.50)] hover:text-[#D4C4A0] transition-all"
+            className="px-4 py-2.5 rounded-lg bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] hover:border-[#B09B71]/30 text-sm font-medium text-[var(--text-muted)] hover:text-[#D4C4A0] transition-all"
           >
-             Board Meetings
+            Board Meetings
           </a>
           <button
             onClick={() => setShowCreate(!showCreate)}
-            className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-medium transition-all"
+            className="px-5 py-2.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all"
           >
-            {showCreate ? '← Back' : ' Add Event'}
+            {showCreate ? '← Back' : 'Add Event'}
           </button>
         </div>
       </div>
@@ -76,8 +76,8 @@ export default function CalendarPage() {
       {/* Event Type Legend */}
       <div className="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-none">
         {EVENT_TYPES.map(t => (
-          <span key={t.id} className="flex items-center gap-1 text-[10px] text-[rgba(245,240,232,0.50)] whitespace-nowrap px-2 py-1 rounded-lg bg-gray-800/30">
-            {t.icon} {t.label}
+          <span key={t.id} className="flex items-center gap-1 text-[10px] text-[var(--text-muted)] whitespace-nowrap px-2 py-1 rounded-lg bg-[rgba(26,26,30,0.30)]">
+            {t.label}
           </span>
         ))}
       </div>
@@ -85,18 +85,18 @@ export default function CalendarPage() {
       {showCreate ? (
         <CreateEvent onClose={() => setShowCreate(false)} />
       ) : isLoading ? (
-        <div className="text-center py-12 text-[rgba(245,240,232,0.35)]">Loading events...</div>
+        <div className="text-center py-12 text-[var(--text-disabled)]">Loading events...</div>
       ) : Object.keys(eventsByDate).length === 0 ? (
-        <div className="glass-card rounded-xl p-12 text-center">
-          <CalendarDays className="w-8 h-8 text-[rgba(245,240,232,0.50)] mx-auto mb-4" />
+        <div className="glass-card rounded-lg p-12 text-center">
+          <CalendarDays className="w-8 h-8 text-[var(--text-muted)] mx-auto mb-4" />
           <h3 className="text-lg font-medium mb-2">No upcoming events</h3>
-          <p className="text-sm text-[rgba(245,240,232,0.50)]">Board meetings, community events, and deadlines will appear here</p>
+          <p className="text-sm text-[var(--text-muted)]">Board meetings, community events, and deadlines will appear here</p>
         </div>
       ) : (
         <div className="space-y-6">
           {Object.entries(eventsByDate).map(([date, dayEvents]) => (
             <div key={date}>
-              <h3 className="text-sm font-semibold text-[rgba(245,240,232,0.65)] mb-3 flex items-center gap-2">
+              <h3 className="text-sm font-medium text-[var(--text-body)] mb-3 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#B09B71]/80" />
                 {date}
               </h3>
@@ -138,32 +138,30 @@ function EventCard({ event, walletAddress }: { event: any; walletAddress?: strin
   const isPast = startTime < new Date();
 
   const colorClass = type.color === 'gold' ? 'border-l-[#B09B71]' :
-    type.color === 'blue' ? 'border-l-blue-500' :
-    type.color === 'red' ? 'border-l-red-500' :
-    type.color === 'green' ? 'border-l-green-500' :
-    type.color === 'amber' ? 'border-l-amber-500' :
-    type.color === 'orange' ? 'border-l-orange-500' :
-    'border-l-cyan-500';
+    type.color === 'brass' ? 'border-l-[#B09B71]' :
+    type.color === 'red' ? 'border-l-[#6B3A3A]' :
+    type.color === 'verdigris' ? 'border-l-[#2A5D4F]' :
+    type.color === 'muted' ? 'border-l-[rgba(245,240,232,0.20)]' :
+    'border-l-[#B09B71]';
 
   return (
-    <div className={`glass-card rounded-xl border-l-4 ${colorClass} ${isPast ? 'opacity-60' : ''}`}>
+    <div className={`glass-card rounded-lg border-l-4 ${colorClass} ${isPast ? 'opacity-60' : ''}`}>
       <div className="p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-sm">{type.icon}</span>
-              <h4 className="font-semibold text-sm">{event.title}</h4>
+              <h4 className="font-medium text-sm">{event.title}</h4>
             </div>
-            <div className="flex items-center gap-3 text-[11px] text-[rgba(245,240,232,0.35)] mb-2">
+            <div className="flex items-center gap-3 text-[11px] text-[var(--text-disabled)] mb-2">
               <span>
                 {event.all_day ? 'All Day' :
                   `${startTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}${endTime ? ' — ' + endTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : ''}`}
               </span>
-              {event.location && <span> {event.location}</span>}
-              {goingCount > 0 && <span> {goingCount} going</span>}
+              {event.location && <span>{event.location}</span>}
+              {goingCount > 0 && <span>{goingCount} going</span>}
             </div>
             {event.description && (
-              <p className="text-xs text-[rgba(245,240,232,0.50)] line-clamp-2">{event.description}</p>
+              <p className="text-xs text-[var(--text-muted)] line-clamp-2">{event.description}</p>
             )}
           </div>
 
@@ -179,10 +177,10 @@ function EventCard({ event, walletAddress }: { event: any; walletAddress?: strin
                       ? status === 'going' ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)]'
                         : status === 'maybe' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.25)]'
                         : 'bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] border border-[rgba(107,58,58,0.25)]'
-                      : 'bg-gray-800/50 text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)]'
+                      : 'bg-[rgba(26,26,30,0.50)] text-[var(--text-disabled)] hover:text-[var(--text-body)]'
                   }`}
                 >
-                  {status === 'going' ? '' : status === 'maybe' ? '' : ''}
+                  {status === 'going' ? 'Going' : status === 'maybe' ? 'Maybe' : 'Decline'}
                 </button>
               ))}
             </div>
@@ -222,46 +220,46 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
   });
 
   return (
-    <div className="glass-card rounded-xl p-6 space-y-5">
-      <h2 className="text-lg font-semibold">Add Event</h2>
+    <div className="glass-card rounded-lg p-6 space-y-5">
+      <h2 className="text-lg font-medium">Add Event</h2>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Event Type</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Event Type</label>
         <div className="flex gap-2 flex-wrap">
           {EVENT_TYPES.map(t => (
             <button key={t.id} onClick={() => setEventType(t.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1 ${
-                eventType === t.id ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1 ${
+                eventType === t.id ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
               }`}>
-              {t.icon} {t.label}
+              {t.label}
             </button>
           ))}
         </div>
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Title</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Title</label>
         <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Q2 Board Meeting"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Date</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Date</label>
           <input type="date" value={date} onChange={e => setDate(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
         </div>
         {!allDay && (
           <>
             <div>
-              <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Start Time</label>
+              <label className="block text-sm text-[var(--text-muted)] mb-2">Start Time</label>
               <input type="time" value={startTime} onChange={e => setStartTime(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
             <div>
-              <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">End Time</label>
+              <label className="block text-sm text-[var(--text-muted)] mb-2">End Time</label>
               <input type="time" value={endTime} onChange={e => setEndTime(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
           </>
         )}
@@ -269,32 +267,32 @@ function CreateEvent({ onClose }: { onClose: () => void }) {
 
       <div className="flex gap-4">
         <label className="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" checked={allDay} onChange={e => setAllDay(e.target.checked)} className="rounded border-gray-700 bg-gray-800" />
-          <span className="text-sm text-[rgba(245,240,232,0.50)]">All day</span>
+          <input type="checkbox" checked={allDay} onChange={e => setAllDay(e.target.checked)} className="rounded border-[rgba(245,240,232,0.08)] bg-[var(--surface-2)]" />
+          <span className="text-sm text-[var(--text-muted)]">All day</span>
         </label>
         <label className="flex items-center gap-2 cursor-pointer">
-          <input type="checkbox" checked={rsvpRequired} onChange={e => setRsvpRequired(e.target.checked)} className="rounded border-gray-700 bg-gray-800" />
-          <span className="text-sm text-[rgba(245,240,232,0.50)]">RSVP required</span>
+          <input type="checkbox" checked={rsvpRequired} onChange={e => setRsvpRequired(e.target.checked)} className="rounded border-[rgba(245,240,232,0.08)] bg-[var(--surface-2)]" />
+          <span className="text-sm text-[var(--text-muted)]">RSVP required</span>
         </label>
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Location</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Location</label>
         <input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="Faircroft Clubhouse"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Description</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Description</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Event details..." rows={3}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+          className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
       </div>
 
       <div className="flex gap-3">
-        <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+        <button onClick={onClose} className="flex-1 py-3 rounded-lg border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
         <button disabled={!title.trim() || !date || create.isPending} onClick={() => create.mutate()}
-          className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
-          {create.isPending ? '⏳ Creating...' : 'Add Event'}
+          className="flex-1 py-3 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all">
+          {create.isPending ? 'Creating...' : 'Add Event'}
         </button>
       </div>
     </div>

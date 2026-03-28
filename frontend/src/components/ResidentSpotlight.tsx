@@ -76,7 +76,7 @@ export function ResidentSpotlight() {
   const next = () => setCurrentIdx((i) => (i + 1) % spotlights.length);
 
   return (
-    <div className="glass-card rounded-2xl p-5 border border-[#B09B71]/20 relative overflow-hidden">
+    <div className="glass-card rounded-xl p-5 border border-[#B09B71]/20 relative overflow-hidden">
       {/* Glow accent */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-[#B09B71]/5 blur-2xl rounded-full pointer-events-none" />
 
@@ -85,15 +85,15 @@ export function ResidentSpotlight() {
           <div className="p-1.5 rounded-lg bg-[#B09B71]/15">
             <Star className="w-4 h-4 text-[#B09B71]" />
           </div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#B09B71]">Resident Spotlight</span>
+          <span className="text-xs font-medium uppercase tracking-wider text-[#B09B71]">Resident Spotlight</span>
         </div>
         {spotlights.length > 1 && (
           <div className="flex items-center gap-1">
-            <button onClick={prev} className="p-1 rounded-md text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] transition-colors">
+            <button onClick={prev} className="p-1 rounded-md text-[var(--text-disabled)] hover:text-[#B09B71] transition-colors">
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="text-xs text-[rgba(245,240,232,0.35)]">{currentIdx + 1}/{spotlights.length}</span>
-            <button onClick={next} className="p-1 rounded-md text-[rgba(245,240,232,0.35)] hover:text-[#B09B71] transition-colors">
+            <span className="text-xs text-[var(--text-disabled)]">{currentIdx + 1}/{spotlights.length}</span>
+            <button onClick={next} className="p-1 rounded-md text-[var(--text-disabled)] hover:text-[#B09B71] transition-colors">
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
@@ -101,19 +101,19 @@ export function ResidentSpotlight() {
       </div>
 
       <div className="flex items-start gap-3">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#B09B71]/30 to-[#b8942e]/20 border border-[#B09B71]/30 flex items-center justify-center shrink-0">
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#B09B71]/30 to-[var(--brass-deep)]/20 border border-[#B09B71]/30 flex items-center justify-center shrink-0">
           <Users className="w-6 h-6 text-[#B09B71]" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="font-semibold text-white text-sm">{current.name}</h3>
+            <h3 className="font-medium text-[var(--text-heading)] text-sm">{current.name}</h3>
             <span className="text-xs px-2 py-0.5 rounded-full bg-[#B09B71]/15 text-[#B09B71] font-medium border border-[#B09B71]/20">
               Lot #{current.lot}
             </span>
           </div>
-          <p className="text-xs text-[rgba(245,240,232,0.50)] mt-1 italic">"{current.funFact}"</p>
-          <div className="mt-2 p-2.5 rounded-lg bg-[#1a1a1a]/60 border border-[#B09B71]/10">
-            <p className="text-xs text-[rgba(245,240,232,0.65)]">
+          <p className="text-xs text-[var(--text-muted)] mt-1 italic">"{current.funFact}"</p>
+          <div className="mt-2 p-2.5 rounded-lg bg-[rgba(26,26,30,0.60)] border border-[#B09B71]/10">
+            <p className="text-xs text-[var(--text-body)]">
               <span className="text-[#B09B71] font-medium">Community contribution: </span>
               {current.contribution}
             </p>
@@ -126,7 +126,7 @@ export function ResidentSpotlight() {
           <button
             key={i}
             onClick={() => setCurrentIdx(i)}
-            className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentIdx ? 'bg-[#B09B71] w-4' : 'bg-gray-600 hover:bg-gray-400'}`}
+            className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentIdx ? 'bg-[#B09B71] w-4' : 'bg-[rgba(245,240,232,0.10)] hover:bg-[rgba(245,240,232,0.10)]'}`}
           />
         ))}
       </div>

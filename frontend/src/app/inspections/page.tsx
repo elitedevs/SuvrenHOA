@@ -23,10 +23,10 @@ interface Inspection {
 }
 
 const RESULT_CONFIG: Record<InspectionResult, { label: string; icon: React.ElementType; color: string; bg: string; border: string }> = {
-  pass: { label: 'Pass', icon: CheckCircle, color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-green-400/20' },
-  'needs-attention': { label: 'Needs Attention', icon: AlertTriangle, color: 'text-[#B09B71]', bg: 'bg-yellow-400/10', border: 'border-yellow-400/20' },
-  violation: { label: 'Violation', icon: XCircle, color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-red-400/20' },
-  pending: { label: 'Scheduled', icon: Clock, color: 'text-[#5A7A9A]', bg: 'bg-[#5A7A9A]/10', border: 'border-blue-400/20' },
+  pass: { label: 'Pass', icon: CheckCircle, color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-[rgba(42,93,79,0.20)]' },
+  'needs-attention': { label: 'Needs Attention', icon: AlertTriangle, color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]' },
+  violation: { label: 'Violation', icon: XCircle, color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-[rgba(139,90,90,0.20)]' },
+  pending: { label: 'Scheduled', icon: Clock, color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/10', border: 'border-[rgba(90,122,154,0.20)]' },
 };
 
 const TYPE_LABELS = { annual: 'Annual', quarterly: 'Quarterly', 'follow-up': 'Follow-Up' };
@@ -57,23 +57,23 @@ function InspectionCard({ inspection }: { inspection: Inspection }) {
           </div>
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="text-sm font-semibold text-white">{TYPE_LABELS[inspection.type]} Inspection</p>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${cfg.bg} ${cfg.color} border ${cfg.border}`}>{cfg.label}</span>
+              <p className="text-sm font-medium text-[var(--text-heading)]">{TYPE_LABELS[inspection.type]} Inspection</p>
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${cfg.bg} ${cfg.color} border ${cfg.border}`}>{cfg.label}</span>
             </div>
-            <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5 flex items-center gap-1">
+            <p className="text-xs text-[var(--text-disabled)] mt-0.5 flex items-center gap-1">
               <Calendar className="w-3 h-3" />
               {new Date(inspection.scheduledDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
             {isUpcoming && daysAway > 0 && (
-              <p className="text-xs text-[#5A7A9A] mt-1">In {daysAway} days</p>
+              <p className="text-xs text-[var(--steel)] mt-1">In {daysAway} days</p>
             )}
           </div>
         </div>
-        <p className="text-xs text-[rgba(245,240,232,0.35)] shrink-0">by {inspection.inspector}</p>
+        <p className="text-xs text-[var(--text-disabled)] shrink-0">by {inspection.inspector}</p>
       </div>
       {inspection.notes && (
         <div className={`mt-3 p-2.5 rounded-lg ${cfg.bg} border ${cfg.border}`}>
-          <p className="text-xs text-[rgba(245,240,232,0.65)]">{inspection.notes}</p>
+          <p className="text-xs text-[var(--text-body)]">{inspection.notes}</p>
         </div>
       )}
     </div>
@@ -129,7 +129,7 @@ export default function InspectionsPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view property inspections</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to view property inspections</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -139,15 +139,15 @@ export default function InspectionsPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-3">
             <ClipboardCheck className="w-7 h-7 text-[#B09B71]" />
             Property Inspections
           </h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Schedule and track annual and quarterly property inspections</p>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Schedule and track annual and quarterly property inspections</p>
         </div>
         <button
           onClick={() => setShowSchedule(true)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-colors"
         >
           <Plus className="w-4 h-4" />
           Schedule Inspection
@@ -156,13 +156,13 @@ export default function InspectionsPage() {
 
       {/* My upcoming */}
       {myUpcoming && (
-        <div className="mb-8 p-5 rounded-2xl bg-[rgba(90,122,154,0.10)] border border-blue-400/20">
+        <div className="mb-8 p-5 rounded-xl bg-[rgba(90,122,154,0.10)] border border-[rgba(90,122,154,0.20)]">
           <div className="flex items-center gap-3">
-            <Clock className="w-6 h-6 text-[#5A7A9A] shrink-0" />
+            <Clock className="w-6 h-6 text-[var(--steel)] shrink-0" />
             <div>
-              <p className="text-sm font-semibold text-[#5A7A9A]">Your Next Inspection</p>
-              <p className="text-white font-bold">{new Date(myUpcoming.scheduledDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-              <p className="text-xs text-[rgba(245,240,232,0.50)]">{TYPE_LABELS[myUpcoming.type]} · {myUpcoming.inspector}</p>
+              <p className="text-sm font-medium text-[var(--steel)]">Your Next Inspection</p>
+              <p className="text-[var(--text-heading)] font-medium">{new Date(myUpcoming.scheduledDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+              <p className="text-xs text-[var(--text-muted)]">{TYPE_LABELS[myUpcoming.type]} · {myUpcoming.inspector}</p>
             </div>
           </div>
         </div>
@@ -178,14 +178,14 @@ export default function InspectionsPage() {
         ].map(({ label, value, color, icon: Icon }) => (
           <div key={label} className="glass-card rounded-xl p-4 text-center">
             <Icon className={`w-4 h-4 ${color} mx-auto mb-1`} />
-            <p className={`text-2xl font-bold ${color}`}>{value}</p>
-            <p className="text-xs text-[rgba(245,240,232,0.35)] mt-0.5">{label}</p>
+            <p className={`text-2xl font-medium ${color}`}>{value}</p>
+            <p className="text-xs text-[var(--text-disabled)] mt-0.5">{label}</p>
           </div>
         ))}
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 p-1 rounded-xl bg-[#1a1a1a] border border-white/10 mb-6">
+      <div className="flex gap-1 p-1 rounded-xl bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] mb-6">
         {[
           { id: 'my', label: 'My Property' },
           { id: 'all', label: 'Upcoming (All)' },
@@ -194,7 +194,7 @@ export default function InspectionsPage() {
           <button
             key={id}
             onClick={() => setTab(id as any)}
-            className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${tab === id ? 'bg-[#B09B71] text-[#1a1a1a]' : 'text-[rgba(245,240,232,0.50)] hover:text-white'}`}
+            className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${tab === id ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'text-[var(--text-muted)] hover:text-[var(--text-heading)]'}`}
           >
             {label}
           </button>
@@ -206,8 +206,8 @@ export default function InspectionsPage() {
           {myInspections.map((i) => <InspectionCard key={i.id} inspection={i} />)}
           {myInspections.length === 0 && (
             <div className="glass-card rounded-xl p-8 text-center">
-              <ClipboardCheck className="w-10 h-10 text-[rgba(245,240,232,0.25)] mx-auto mb-3" />
-              <p className="text-[rgba(245,240,232,0.50)]">No inspections recorded for your property</p>
+              <ClipboardCheck className="w-10 h-10 text-[var(--text-disabled)] mx-auto mb-3" />
+              <p className="text-[var(--text-muted)]">No inspections recorded for your property</p>
             </div>
           )}
         </div>
@@ -218,18 +218,18 @@ export default function InspectionsPage() {
           {upcomingAll.map((i) => (
             <div key={i.id} className="glass-card rounded-xl p-4 flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-white">{i.address}</p>
-                <p className="text-xs text-[rgba(245,240,232,0.50)]">{TYPE_LABELS[i.type]} · {new Date(i.scheduledDate).toLocaleDateString()}</p>
+                <p className="text-sm font-medium text-[var(--text-heading)]">{i.address}</p>
+                <p className="text-xs text-[var(--text-muted)]">{TYPE_LABELS[i.type]} · {new Date(i.scheduledDate).toLocaleDateString()}</p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xs px-2 py-0.5 rounded-full bg-[#5A7A9A]/10 text-[#5A7A9A] border border-blue-400/20">Lot #{i.lot}</span>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--steel)]/10 text-[var(--steel)] border border-[rgba(90,122,154,0.20)]">Lot #{i.lot}</span>
               </div>
             </div>
           ))}
           {upcomingAll.length === 0 && (
             <div className="glass-card rounded-xl p-8 text-center">
-              <Calendar className="w-8 h-8 text-[rgba(245,240,232,0.25)] mx-auto mb-2" />
-              <p className="text-[rgba(245,240,232,0.50)]">No upcoming inspections scheduled</p>
+              <Calendar className="w-8 h-8 text-[var(--text-disabled)] mx-auto mb-2" />
+              <p className="text-[var(--text-muted)]">No upcoming inspections scheduled</p>
             </div>
           )}
         </div>
@@ -243,9 +243,9 @@ export default function InspectionsPage() {
             return (
               <div key={i.id} className={`glass-card rounded-xl p-4 border ${cfg.border} flex items-center justify-between`}>
                 <div>
-                  <p className="text-sm font-semibold text-white">{i.address}</p>
-                  <p className="text-xs text-[rgba(245,240,232,0.50)]">{TYPE_LABELS[i.type]} · {new Date(i.scheduledDate).toLocaleDateString()}</p>
-                  {i.notes && <p className="text-xs text-[rgba(245,240,232,0.35)] mt-1 truncate max-w-xs">{i.notes}</p>}
+                  <p className="text-sm font-medium text-[var(--text-heading)]">{i.address}</p>
+                  <p className="text-xs text-[var(--text-muted)]">{TYPE_LABELS[i.type]} · {new Date(i.scheduledDate).toLocaleDateString()}</p>
+                  {i.notes && <p className="text-xs text-[var(--text-disabled)] mt-1 truncate max-w-xs">{i.notes}</p>}
                 </div>
                 <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cfg.bg} ${cfg.color} border ${cfg.border}`}>
                   <Icon className="w-3 h-3" />
@@ -260,30 +260,30 @@ export default function InspectionsPage() {
       {/* Schedule Modal */}
       {showSchedule && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className="glass-card rounded-2xl p-6 w-full max-w-md border border-[#B09B71]/20">
+          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[#B09B71]/20">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="font-semibold">Schedule Inspection</h2>
-              <button onClick={() => setShowSchedule(false)} className="p-1 rounded text-[rgba(245,240,232,0.35)] hover:text-white">
+              <h2 className="font-medium">Schedule Inspection</h2>
+              <button onClick={() => setShowSchedule(false)} className="p-1 rounded text-[var(--text-disabled)] hover:text-[var(--text-heading)]">
                 <X className="w-4 h-4" />
               </button>
             </div>
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Lot #</label>
+                  <label className="text-xs text-[var(--text-muted)] mb-1 block">Lot #</label>
                   <input
                     value={schedForm.lot}
                     onChange={(e) => setSchedForm((f) => ({ ...f, lot: e.target.value }))}
                     placeholder="42"
-                    className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Type</label>
+                  <label className="text-xs text-[var(--text-muted)] mb-1 block">Type</label>
                   <select
                     value={schedForm.type}
                     onChange={(e) => setSchedForm((f) => ({ ...f, type: e.target.value as any }))}
-                    className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white focus:border-[#B09B71]/50 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[#B09B71]/50 focus:outline-none"
                   >
                     <option value="annual">Annual</option>
                     <option value="quarterly">Quarterly</option>
@@ -292,27 +292,27 @@ export default function InspectionsPage() {
                 </div>
               </div>
               <div>
-                <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Address</label>
+                <label className="text-xs text-[var(--text-muted)] mb-1 block">Address</label>
                 <input
                   value={schedForm.address}
                   onChange={(e) => setSchedForm((f) => ({ ...f, address: e.target.value }))}
                   placeholder="42 Maple Drive"
-                  className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white placeholder-gray-600 focus:border-[#B09B71]/50 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
                 />
               </div>
               <div>
-                <label className="text-xs text-[rgba(245,240,232,0.50)] mb-1 block">Inspection Date</label>
+                <label className="text-xs text-[var(--text-muted)] mb-1 block">Inspection Date</label>
                 <input
                   type="date"
                   value={schedForm.date}
                   onChange={(e) => setSchedForm((f) => ({ ...f, date: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-lg bg-[#1a1a1a] border border-white/10 text-sm text-white focus:border-[#B09B71]/50 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[#B09B71]/50 focus:outline-none"
                 />
               </div>
             </div>
             <div className="flex gap-3 mt-5">
-              <button onClick={() => setShowSchedule(false)} className="flex-1 px-4 py-2 rounded-lg border border-white/10 text-sm text-[rgba(245,240,232,0.50)] hover:text-white transition-colors">Cancel</button>
-              <button onClick={scheduleInspection} className="flex-1 px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-semibold transition-colors">Schedule</button>
+              <button onClick={() => setShowSchedule(false)} className="flex-1 px-4 py-2 rounded-lg border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-muted)] hover:text-[var(--text-heading)] transition-colors">Cancel</button>
+              <button onClick={scheduleInspection} className="flex-1 px-4 py-2 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-colors">Schedule</button>
             </div>
           </div>
         </div>

@@ -68,14 +68,14 @@ function StatCard({ icon: Icon, label, value, sub, color, href }: {
   href?: string;
 }) {
   const content = (
-    <div className={`glass-card rounded-2xl p-5 border-l-2 ${color} hover:opacity-90 transition-all group`}>
+    <div className={`glass-card rounded-xl p-5 border-l-2 ${color} hover:opacity-90 transition-all group`}>
       <div className="flex items-start justify-between mb-3">
-        <Icon className="w-5 h-5 text-gray-500 group-hover:text-gray-400 transition-colors" />
-        {href && <ArrowRight className="w-4 h-4 text-gray-700 group-hover:text-gray-500 transition-colors" />}
+        <Icon className="w-5 h-5 text-[var(--text-muted)] group-hover:text-[var(--text-body)] transition-colors" />
+        {href && <ArrowRight className="w-4 h-4 text-[var(--text-disabled)] group-hover:text-[var(--text-muted)] transition-colors" />}
       </div>
-      <p className="text-2xl font-normal text-gray-100 mb-1">{value}</p>
-      <p className="text-xs font-semibold text-gray-400">{label}</p>
-      {sub && <p className="text-[10px] text-gray-600 mt-0.5">{sub}</p>}
+      <p className="text-2xl font-normal text-[var(--text-heading)] mb-1">{value}</p>
+      <p className="text-xs font-medium text-[var(--text-body)]">{label}</p>
+      {sub && <p className="text-[10px] text-[var(--text-muted)] mt-0.5">{sub}</p>}
     </div>
   );
 
@@ -94,14 +94,14 @@ function QuickActionButton({ href, emoji, label, desc, urgent }: {
       href={href}
       className={`flex items-center gap-3 p-4 rounded-xl border transition-all group ${
         urgent
-          ? 'bg-red-500/5 border-red-500/20 hover:border-red-500/40'
-          : 'bg-white/3 border-gray-700/40 hover:border-[#B09B71]/30'
+          ? 'bg-[rgba(139,90,90,0.05)] border-[rgba(139,90,90,0.20)] hover:border-[#8B5A5A]/40'
+          : 'bg-[rgba(245,240,232,0.03)] border-[rgba(245,240,232,0.06)] hover:border-[#B09B71]/30'
       }`}
     >
       <span className="text-xl group-hover:scale-110 transition-transform inline-block">{emoji}</span>
       <div>
-        <p className={`text-xs font-bold leading-tight ${urgent ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>{label}</p>
-        <p className="text-[10px] text-gray-600 mt-0.5">{desc}</p>
+        <p className={`text-xs font-medium leading-tight ${urgent ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>{label}</p>
+        <p className="text-[10px] text-[var(--text-muted)] mt-0.5">{desc}</p>
       </div>
     </Link>
   );
@@ -119,7 +119,7 @@ export default function BoardDashboardPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-gray-400 mb-4">Sign in to access the board dashboard</p>
+        <p className="text-[var(--text-body)] mb-4">Sign in to access the board dashboard</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -136,14 +136,14 @@ export default function BoardDashboardPage() {
   if (!isBoard) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-6">
-        <div className="w-16 h-16 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-3xl mb-4">
+        <div className="w-16 h-16 rounded-xl bg-[rgba(139,90,90,0.10)] border border-[rgba(139,90,90,0.20)] flex items-center justify-center text-3xl mb-4">
           
         </div>
-        <h2 className="text-xl font-bold text-gray-200 mb-2">Board Members Only</h2>
-        <p className="text-sm text-gray-500 max-w-sm mb-6">
+        <h2 className="text-xl font-medium text-[var(--text-heading)] mb-2">Board Members Only</h2>
+        <p className="text-sm text-[var(--text-muted)] max-w-sm mb-6">
           This dashboard is restricted to HOA board members. Contact your board administrator to request access.
         </p>
-        <Link href="/admin" className="px-4 py-2 rounded-xl bg-white/5 border border-gray-700/50 text-sm text-gray-400 hover:text-gray-300 transition-colors">
+        <Link href="/admin" className="px-4 py-2 rounded-xl bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--text-body)] hover:text-[var(--text-body)] transition-colors">
           → Go to Admin Panel
         </Link>
         {/* Dev bypass */}
@@ -162,7 +162,7 @@ export default function BoardDashboardPage() {
               }
             }
           }}
-          className="mt-4 text-xs text-gray-700 hover:text-gray-600"
+          className="mt-4 text-xs text-[var(--text-disabled)] hover:text-[var(--text-muted)]"
         >
           (Demo: enable board access via admin panel)
         </button>
@@ -179,10 +179,10 @@ export default function BoardDashboardPage() {
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-1">
           <Shield className="w-4 h-4 text-[#B09B71]" />
-          <p className="text-xs text-[#B09B71] font-semibold uppercase tracking-widest">Board Member Portal</p>
+          <p className="text-xs text-[#B09B71] font-medium uppercase tracking-widest">Board Member Portal</p>
         </div>
         <h1 className="text-3xl font-normal">Board Dashboard</h1>
-        <p className="text-gray-400 text-sm mt-2">HOA operations overview — real-time status</p>
+        <p className="text-[var(--text-body)] text-sm mt-2">HOA operations overview — real-time status</p>
       </div>
 
       {/* Stats */}
@@ -250,24 +250,24 @@ export default function BoardDashboardPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Activity Feed */}
-        <div className="lg:col-span-2 glass-card rounded-2xl overflow-hidden">
+        <div className="lg:col-span-2 glass-card rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-[oklch(0.18_0.005_60)] flex items-center justify-between">
-            <h2 className="text-sm font-bold text-[#e8d5a3]">Recent Activity</h2>
-            <Link href="/activity" className="text-xs text-[#B09B71] hover:text-[#e8d5a3] transition-colors">
+            <h2 className="text-sm font-medium text-[#D4C4A0]">Recent Activity</h2>
+            <Link href="/activity" className="text-xs text-[#B09B71] hover:text-[#D4C4A0] transition-colors">
               View all →
             </Link>
           </div>
           <div className="divide-y divide-[oklch(0.13_0.005_60)]">
             {activity.map(event => (
-              <div key={event.id} className="flex items-start gap-3 px-6 py-4 hover:bg-white/[0.02] transition-colors">
+              <div key={event.id} className="flex items-start gap-3 px-6 py-4 hover:bg-[rgba(245,240,232,0.02)] transition-colors">
                 <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
-                  event.severity === 'success' ? 'bg-green-400' :
-                  event.severity === 'warning' ? 'bg-orange-400' :
-                  'bg-blue-400'
+                  event.severity === 'success' ? 'bg-[#3A7D6F]' :
+                  event.severity === 'warning' ? 'bg-[#B09B71]' :
+                  'bg-[var(--steel)]'
                 }`} />
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs text-gray-300 leading-relaxed">{event.message}</p>
-                  <p className="text-[10px] text-gray-600 mt-1 flex items-center gap-1">
+                  <p className="text-xs text-[var(--text-body)] leading-relaxed">{event.message}</p>
+                  <p className="text-[10px] text-[var(--text-muted)] mt-1 flex items-center gap-1">
                     <Clock className="w-3 h-3" /> {timeAgo(event.timestamp)}
                   </p>
                 </div>
@@ -278,9 +278,9 @@ export default function BoardDashboardPage() {
 
         {/* Quick Actions */}
         <div className="space-y-4">
-          <div className="glass-card rounded-2xl overflow-hidden">
+          <div className="glass-card rounded-xl overflow-hidden">
             <div className="px-5 py-4 border-b border-[oklch(0.18_0.005_60)]">
-              <h2 className="text-sm font-bold text-[#e8d5a3]">Quick Actions</h2>
+              <h2 className="text-sm font-medium text-[#D4C4A0]">Quick Actions</h2>
             </div>
             <div className="p-4 space-y-2">
               <QuickActionButton href="/violations" emoji="" label="Review Violations" desc="3 pending response" urgent />
@@ -293,16 +293,16 @@ export default function BoardDashboardPage() {
           </div>
 
           {/* Upcoming */}
-          <div className="glass-card rounded-2xl p-5">
-            <h2 className="text-sm font-bold text-[#e8d5a3] mb-3">Upcoming</h2>
+          <div className="glass-card rounded-xl p-5">
+            <h2 className="text-sm font-medium text-[#D4C4A0] mb-3">Upcoming</h2>
             <div className="space-y-3">
               {[
                 { date: 'Apr 1', label: 'Q2 Dues Due', color: 'text-[#B09B71]' },
-                { date: 'Apr 8', label: 'Board Meeting', color: 'text-[#5A7A9A]' },
-                { date: 'Apr 15', label: 'Budget Review', color: 'text-purple-400' },
+                { date: 'Apr 8', label: 'Board Meeting', color: 'text-[var(--steel)]' },
+                { date: 'Apr 15', label: 'Budget Review', color: 'text-[#B09B71]' },
               ].map(item => (
                 <div key={item.label} className="flex items-center gap-3">
-                  <div className="text-[11px] font-bold text-gray-500 w-12 shrink-0">{item.date}</div>
+                  <div className="text-[11px] font-medium text-[var(--text-muted)] w-12 shrink-0">{item.date}</div>
                   <div className={`text-xs font-medium ${item.color}`}>{item.label}</div>
                 </div>
               ))}

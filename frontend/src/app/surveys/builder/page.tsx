@@ -143,7 +143,7 @@ export default function SurveyBuilderPage() {
 
   if (!isConnected) return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
-      <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to access the Survey Builder</p>
+      <p className="text-[var(--text-muted)] mb-4">Sign in to access the Survey Builder</p>
       <ConnectButton label="Sign In" />
     </div>
   );
@@ -153,16 +153,16 @@ export default function SurveyBuilderPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Link href="/surveys" className="text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] text-sm transition-colors">Surveys</Link>
-            <span className="text-[rgba(245,240,232,0.25)]">/</span>
-            <span className="text-sm text-[rgba(245,240,232,0.65)]">Builder</span>
+            <Link href="/surveys" className="text-[var(--text-disabled)] hover:text-[var(--text-body)] text-sm transition-colors">Surveys</Link>
+            <span className="text-[var(--text-disabled)]">/</span>
+            <span className="text-sm text-[var(--text-body)]">Builder</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold">Survey Builder</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Create rich multi-question surveys for the community</p>
+          <h1 className="text-2xl sm:text-3xl font-medium">Survey Builder</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Create rich multi-question surveys for the community</p>
         </div>
         {view === 'list' && (
           <button onClick={() => setView('build')}
-            className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
+            className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all shrink-0">
             + New Survey
           </button>
         )}
@@ -172,8 +172,8 @@ export default function SurveyBuilderPage() {
         <div className="space-y-4">
           {surveys.length === 0 ? (
             <div className="glass-card rounded-xl p-12 text-center">
-              <ClipboardList className="w-8 h-8 text-[rgba(245,240,232,0.50)] mx-auto mb-3" />
-              <p className="text-[rgba(245,240,232,0.50)]">No surveys yet. Create your first one!</p>
+              <ClipboardList className="w-8 h-8 text-[var(--text-muted)] mx-auto mb-3" />
+              <p className="text-[var(--text-muted)]">No surveys yet. Create your first one!</p>
             </div>
           ) : surveys.map(s => (
             <div key={s.id} className="glass-card rounded-xl p-5">
@@ -181,14 +181,14 @@ export default function SurveyBuilderPage() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <span className={`text-[10px] px-2 py-0.5 rounded-full border ${
-                      s.status === 'published' ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]' : 'bg-gray-500/10 text-[rgba(245,240,232,0.50)] border-gray-500/20'
+                      s.status === 'published' ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]' : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)] border-[rgba(245,240,232,0.08)]'
                     }`}>
                       {s.status === 'published' ? ' Published' : ' Draft'}
                     </span>
-                    <span className="text-[10px] text-[rgba(245,240,232,0.35)]">{s.questions.length} questions · {s.responses.length} responses</span>
+                    <span className="text-[10px] text-[var(--text-disabled)]">{s.questions.length} questions · {s.responses.length} responses</span>
                   </div>
-                  <h3 className="font-semibold">{s.title}</h3>
-                  <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">{s.description}</p>
+                  <h3 className="font-medium">{s.title}</h3>
+                  <p className="text-sm text-[var(--text-muted)] mt-1">{s.description}</p>
                 </div>
                 <div className="flex gap-2 shrink-0">
                   {s.status === 'published' && (
@@ -199,7 +199,7 @@ export default function SurveyBuilderPage() {
                   )}
                   {s.status === 'draft' && (
                     <button onClick={() => { setCurrent(s); setQuestions(s.questions); setView('build'); }}
-                      className="px-3 py-1.5 rounded-lg text-xs border border-gray-700 text-[rgba(245,240,232,0.65)] hover:bg-gray-800/50 transition-colors">
+                      className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(245,240,232,0.08)] text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.04)] transition-colors">
                       Edit
                     </button>
                   )}
@@ -214,20 +214,20 @@ export default function SurveyBuilderPage() {
         <div className="space-y-5">
           {!current && (
             <div className="glass-card rounded-xl p-5 space-y-4">
-              <h2 className="text-base font-semibold">Survey Details</h2>
+              <h2 className="text-base font-medium">Survey Details</h2>
               <div>
-                <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Title</label>
+                <label className="block text-xs text-[var(--text-muted)] mb-1">Title</label>
                 <input value={draftForm.title} onChange={e => setDraftForm({...draftForm, title: e.target.value})}
-                  placeholder="Survey title..." className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                  placeholder="Survey title..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
               </div>
               <div>
-                <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Description</label>
+                <label className="block text-xs text-[var(--text-muted)] mb-1">Description</label>
                 <textarea value={draftForm.description} onChange={e => setDraftForm({...draftForm, description: e.target.value})}
                   placeholder="Brief explanation for respondents..." rows={2}
-                  className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+                  className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
               </div>
               <button onClick={createDraft} disabled={!draftForm.title}
-                className="px-4 py-2 rounded-xl bg-[#B09B71] text-[#1a1a1a] text-sm font-medium disabled:opacity-50 transition-all">
+                className="px-4 py-2 rounded-xl bg-[#B09B71] text-[var(--surface-2)] text-sm font-medium disabled:opacity-50 transition-all">
                 Continue →
               </button>
             </div>
@@ -236,25 +236,25 @@ export default function SurveyBuilderPage() {
           {/* Questions */}
           {current && (
             <div className="glass-card rounded-xl p-5">
-              <h2 className="text-base font-semibold mb-1">{current.title}</h2>
-              <p className="text-sm text-[rgba(245,240,232,0.50)] mb-4">{current.description}</p>
+              <h2 className="text-base font-medium mb-1">{current.title}</h2>
+              <p className="text-sm text-[var(--text-muted)] mb-4">{current.description}</p>
               <div className="space-y-4">
                 {questions.map((q, qi) => (
-                  <div key={q.id} className="p-4 rounded-xl bg-gray-800/30 border border-gray-700 space-y-3">
+                  <div key={q.id} className="p-4 rounded-xl bg-[rgba(26,26,30,0.30)] border border-[rgba(245,240,232,0.08)] space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] uppercase tracking-wider text-[rgba(245,240,232,0.35)] font-semibold">
-                        Q{qi + 1} · {q.type === 'text' ? ' Text' : q.type === 'multiple_choice' ? ' Multiple Choice' : '⭐ Rating'}
+                      <span className="text-[10px] uppercase tracking-wider text-[var(--text-disabled)] font-medium">
+                        Q{qi + 1} · {q.type === 'text' ? 'Text' : q.type === 'multiple_choice' ? 'Multiple Choice' : 'Rating'}
                       </span>
                       <div className="flex items-center gap-2">
-                        <label className="flex items-center gap-1 text-[10px] text-[rgba(245,240,232,0.35)] cursor-pointer">
+                        <label className="flex items-center gap-1 text-[10px] text-[var(--text-disabled)] cursor-pointer">
                           <input type="checkbox" checked={q.required} onChange={e => updateQuestion(q.id, { required: e.target.checked })} className="w-3 h-3" />
                           Required
                         </label>
-                        <button onClick={() => removeQuestion(q.id)} className="text-[rgba(245,240,232,0.25)] hover:text-[#8B5A5A] text-sm transition-colors"></button>
+                        <button onClick={() => removeQuestion(q.id)} className="text-[var(--text-disabled)] hover:text-[#8B5A5A] text-sm transition-colors"></button>
                       </div>
                     </div>
                     <input value={q.label} onChange={e => updateQuestion(q.id, { label: e.target.value })}
-                      placeholder="Question text..." className="w-full px-3 py-2 rounded-lg bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                      placeholder="Question text..." className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
                     {q.type === 'multiple_choice' && q.options && (
                       <div className="space-y-2">
                         {q.options.map((opt, oi) => (
@@ -263,9 +263,9 @@ export default function SurveyBuilderPage() {
                               const opts = [...q.options!]; opts[oi] = e.target.value;
                               updateQuestion(q.id, { options: opts });
                             }} placeholder={`Option ${oi + 1}`}
-                              className="flex-1 px-3 py-1.5 rounded-lg bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                              className="flex-1 px-3 py-1.5 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
                             {q.options!.length > 2 && (
-                              <button onClick={() => updateQuestion(q.id, { options: q.options!.filter((_, i) => i !== oi) })} className="text-[rgba(245,240,232,0.35)] hover:text-[#8B5A5A] text-xs"></button>
+                              <button onClick={() => updateQuestion(q.id, { options: q.options!.filter((_, i) => i !== oi) })} className="text-[var(--text-disabled)] hover:text-[#8B5A5A] text-xs"></button>
                             )}
                           </div>
                         ))}
@@ -274,10 +274,10 @@ export default function SurveyBuilderPage() {
                     )}
                     {q.type === 'rating' && (
                       <div className="flex items-center gap-3">
-                        <span className="text-xs text-[rgba(245,240,232,0.50)]">Scale:</span>
+                        <span className="text-xs text-[var(--text-muted)]">Scale:</span>
                         {[3, 5, 10].map(n => (
                           <button key={n} onClick={() => updateQuestion(q.id, { scale: n })}
-                            className={`px-2 py-1 rounded text-xs ${q.scale === n ? 'bg-[#B09B71]/20 text-[#B09B71]' : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)]'}`}>
+                            className={`px-2 py-1 rounded text-xs ${q.scale === n ? 'bg-[#B09B71]/20 text-[#B09B71]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}>
                             1–{n}
                           </button>
                         ))}
@@ -289,23 +289,23 @@ export default function SurveyBuilderPage() {
 
               {/* Add question */}
               <div className="flex gap-2 mt-4">
-                <button onClick={() => addQuestion('text')} className="flex-1 py-2 rounded-xl border border-dashed border-gray-700 text-xs text-[rgba(245,240,232,0.50)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors"> Text</button>
-                <button onClick={() => addQuestion('multiple_choice')} className="flex-1 py-2 rounded-xl border border-dashed border-gray-700 text-xs text-[rgba(245,240,232,0.50)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors"> Multiple Choice</button>
-                <button onClick={() => addQuestion('rating')} className="flex-1 py-2 rounded-xl border border-dashed border-gray-700 text-xs text-[rgba(245,240,232,0.50)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors">⭐ Rating</button>
+                <button onClick={() => addQuestion('text')} className="flex-1 py-2 rounded-xl border border-dashed border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors"> Text</button>
+                <button onClick={() => addQuestion('multiple_choice')} className="flex-1 py-2 rounded-xl border border-dashed border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors"> Multiple Choice</button>
+                <button onClick={() => addQuestion('rating')} className="flex-1 py-2 rounded-xl border border-dashed border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors"> Rating</button>
               </div>
             </div>
           )}
 
           {current && (
             <div className="flex gap-3">
-              <button onClick={() => { setView('list'); setCurrent(null); setQuestions([]); }} className="py-3 px-5 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
-              <button onClick={saveDraft} disabled={questions.length === 0} className="py-3 px-5 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 disabled:opacity-50 transition-colors">Save Draft</button>
+              <button onClick={() => { setView('list'); setCurrent(null); setQuestions([]); }} className="py-3 px-5 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
+              <button onClick={saveDraft} disabled={questions.length === 0} className="py-3 px-5 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] disabled:opacity-50 transition-colors">Save Draft</button>
               <button onClick={() => setView('preview')} disabled={questions.length === 0}
                 className="py-3 px-5 rounded-xl border border-[#B09B71]/30 text-[#B09B71] text-sm font-medium hover:bg-[#B09B71]/10 disabled:opacity-50 transition-colors">
                 Preview
               </button>
               <button onClick={publish} disabled={questions.length === 0}
-                className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+                className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all">
                 Publish to Community
               </button>
             </div>
@@ -337,10 +337,10 @@ function SurveyPreview({ survey, onBack, onSubmit, address }: { survey: Survey; 
     <div className="space-y-5">
       <div className="glass-card rounded-xl p-5">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(90,122,154,0.10)] text-[#5A7A9A] border border-[rgba(90,122,154,0.20)]"> Preview Mode</span>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(90,122,154,0.10)] text-[var(--steel)] border border-[rgba(90,122,154,0.20)]"> Preview Mode</span>
         </div>
-        <h2 className="text-lg font-semibold mb-1">{survey.title}</h2>
-        <p className="text-sm text-[rgba(245,240,232,0.50)]">{survey.description}</p>
+        <h2 className="text-lg font-medium mb-1">{survey.title}</h2>
+        <p className="text-sm text-[var(--text-muted)]">{survey.description}</p>
       </div>
 
       {survey.questions.map((q, qi) => (
@@ -351,7 +351,7 @@ function SurveyPreview({ survey, onBack, onSubmit, address }: { survey: Survey; 
           </p>
           {q.type === 'text' && (
             <textarea value={String(answers[q.id] || '')} onChange={e => setAnswers({...answers, [q.id]: e.target.value})}
-              placeholder="Your answer..." rows={3} className="w-full px-3 py-2 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+              placeholder="Your answer..." rows={3} className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
           )}
           {q.type === 'multiple_choice' && q.options && (
             <div className="space-y-2">
@@ -359,7 +359,7 @@ function SurveyPreview({ survey, onBack, onSubmit, address }: { survey: Survey; 
                 <label key={opt} className="flex items-center gap-3 cursor-pointer">
                   <input type="radio" name={q.id} value={opt} checked={answers[q.id] === opt}
                     onChange={() => setAnswers({...answers, [q.id]: opt})} className="accent-[#B09B71]" />
-                  <span className="text-sm text-[rgba(245,240,232,0.65)]">{opt}</span>
+                  <span className="text-sm text-[var(--text-body)]">{opt}</span>
                 </label>
               ))}
             </div>
@@ -368,8 +368,8 @@ function SurveyPreview({ survey, onBack, onSubmit, address }: { survey: Survey; 
             <div className="flex gap-2">
               {Array.from({ length: q.scale || 5 }, (_, i) => i + 1).map(n => (
                 <button key={n} onClick={() => setAnswers({...answers, [q.id]: n})}
-                  className={`w-10 h-10 rounded-xl text-sm font-bold border transition-all ${
-                    answers[q.id] === n ? 'bg-[#B09B71]/20 text-[#B09B71] border-[#B09B71]/40' : 'glass-card text-[rgba(245,240,232,0.35)] border-gray-700'
+                  className={`w-10 h-10 rounded-xl text-sm font-medium border transition-all ${
+                    answers[q.id] === n ? 'bg-[#B09B71]/20 text-[#B09B71] border-[#B09B71]/40' : 'glass-card text-[var(--text-disabled)] border-[rgba(245,240,232,0.08)]'
                   }`}>{n}</button>
               ))}
             </div>
@@ -378,10 +378,10 @@ function SurveyPreview({ survey, onBack, onSubmit, address }: { survey: Survey; 
       ))}
 
       <div className="flex gap-3">
-        <button onClick={onBack} className="py-3 px-5 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">← Back to Builder</button>
+        <button onClick={onBack} className="py-3 px-5 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">← Back to Builder</button>
         {!alreadyResponded && (
           <button onClick={() => onSubmit(answers)}
-            className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-medium transition-all">
+            className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all">
             Submit Response
           </button>
         )}
@@ -395,8 +395,8 @@ function SurveyResults({ survey, onBack }: { survey: Survey; onBack: () => void 
     <div className="space-y-5">
       <div className="glass-card rounded-xl p-5">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold">{survey.title} — Results</h2>
-          <span className="text-sm text-[rgba(245,240,232,0.50)]">{survey.responses.length} response{survey.responses.length !== 1 ? 's' : ''}</span>
+          <h2 className="text-lg font-medium">{survey.title} — Results</h2>
+          <span className="text-sm text-[var(--text-muted)]">{survey.responses.length} response{survey.responses.length !== 1 ? 's' : ''}</span>
         </div>
       </div>
 
@@ -413,18 +413,18 @@ function SurveyResults({ survey, onBack }: { survey: Survey; onBack: () => void 
               nums.forEach(n => { dist[n] = (dist[n] || 0) + 1; });
               return (
                 <div>
-                  <p className="text-2xl font-bold text-[#B09B71] mb-4">{avg.toFixed(1)} <span className="text-sm text-[rgba(245,240,232,0.50)]">/ {scale} avg</span></p>
+                  <p className="text-2xl font-medium text-[#B09B71] mb-4">{avg.toFixed(1)} <span className="text-sm text-[var(--text-muted)]">/ {scale} avg</span></p>
                   <div className="space-y-2">
                     {Array.from({ length: scale }, (_, i) => i + 1).map(n => {
                       const cnt = dist[n] || 0;
                       const pct = answers.length > 0 ? (cnt / answers.length) * 100 : 0;
                       return (
                         <div key={n} className="flex items-center gap-3">
-                          <span className="text-xs text-[rgba(245,240,232,0.50)] w-4">{n}</span>
-                          <div className="flex-1 h-2 rounded-full bg-gray-800">
+                          <span className="text-xs text-[var(--text-muted)] w-4">{n}</span>
+                          <div className="flex-1 h-2 rounded-full bg-[var(--surface-2)]">
                             <div className="h-2 rounded-full bg-[#B09B71] transition-all" style={{ width: `${pct}%` }} />
                           </div>
-                          <span className="text-xs text-[rgba(245,240,232,0.35)] w-6">{cnt}</span>
+                          <span className="text-xs text-[var(--text-disabled)] w-6">{cnt}</span>
                         </div>
                       );
                     })}
@@ -444,10 +444,10 @@ function SurveyResults({ survey, onBack }: { survey: Survey; onBack: () => void 
                     return (
                       <div key={opt}>
                         <div className="flex justify-between text-xs mb-1">
-                          <span className="text-[rgba(245,240,232,0.65)]">{opt}</span>
-                          <span className="text-[rgba(245,240,232,0.35)]">{cnt} ({pct.toFixed(0)}%)</span>
+                          <span className="text-[var(--text-body)]">{opt}</span>
+                          <span className="text-[var(--text-disabled)]">{cnt} ({pct.toFixed(0)}%)</span>
                         </div>
-                        <div className="h-2 rounded-full bg-gray-800">
+                        <div className="h-2 rounded-full bg-[var(--surface-2)]">
                           <div className="h-2 rounded-full bg-[#B09B71] transition-all" style={{ width: `${pct}%` }} />
                         </div>
                       </div>
@@ -459,16 +459,16 @@ function SurveyResults({ survey, onBack }: { survey: Survey; onBack: () => void 
             {q.type === 'text' && (
               <div className="space-y-2 max-h-40 overflow-y-auto">
                 {(answers as string[]).filter(a => a.trim()).map((a, i) => (
-                  <div key={i} className="px-3 py-2 rounded-lg bg-gray-800/30 text-sm text-[rgba(245,240,232,0.65)] italic">"{a}"</div>
+                  <div key={i} className="px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.30)] text-sm text-[var(--text-body)] italic">"{a}"</div>
                 ))}
-                {answers.filter((a: any) => a.trim()).length === 0 && <p className="text-xs text-[rgba(245,240,232,0.35)]">No text responses yet</p>}
+                {answers.filter((a: any) => a.trim()).length === 0 && <p className="text-xs text-[var(--text-disabled)]">No text responses yet</p>}
               </div>
             )}
           </div>
         );
       })}
 
-      <button onClick={onBack} className="py-3 px-5 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">← Back</button>
+      <button onClick={onBack} className="py-3 px-5 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">← Back</button>
     </div>
   );
 }

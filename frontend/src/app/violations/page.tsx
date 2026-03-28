@@ -45,8 +45,8 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
   }, [violation.id]);
 
   const APPEAL_STATUS_STYLES = {
-    submitted: 'text-[#B09B71] bg-yellow-500/10 border-yellow-500/20',
-    'under-review': 'text-[#5A7A9A] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]',
+    submitted: 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]',
+    'under-review': 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]',
     approved: 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]',
     denied: 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)] border-[rgba(107,58,58,0.20)]',
   };
@@ -71,15 +71,15 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative glass-card rounded-2xl p-6 w-full max-w-lg space-y-4 shadow-2xl border border-[#B09B71]/20">
+      <div className="relative glass-card rounded-xl p-6 w-full max-w-lg space-y-4 shadow-2xl border border-[#B09B71]/20">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold"> Appeal Violation</h2>
-          <button onClick={onClose} className="text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] text-xl"></button>
+          <h2 className="text-lg font-medium"> Appeal Violation</h2>
+          <button onClick={onClose} className="text-[var(--text-disabled)] hover:text-[var(--text-body)] text-xl"></button>
         </div>
 
-        <div className="p-3 rounded-xl bg-gray-800/40 text-xs text-[rgba(245,240,232,0.50)] space-y-1">
-          <p className="font-medium text-[rgba(245,240,232,0.80)]">{violation.title}</p>
-          <p className="font-mono text-[rgba(245,240,232,0.35)]">{violation.violation_number}</p>
+        <div className="p-3 rounded-xl bg-[rgba(26,26,30,0.40)] text-xs text-[var(--text-muted)] space-y-1">
+          <p className="font-medium text-[var(--parchment)]">{violation.title}</p>
+          <p className="font-mono text-[var(--text-disabled)]">{violation.violation_number}</p>
         </div>
 
         {existingAppeal ? (
@@ -89,48 +89,48 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
                existingAppeal.status === 'under-review' ? ' Under Review' :
                existingAppeal.status === 'approved' ? ' Appeal Approved' : ' Appeal Denied'}
             </div>
-            <p className="text-xs text-[rgba(245,240,232,0.50)]">Submitted {new Date(existingAppeal.submittedAt).toLocaleDateString()}</p>
-            <div className="space-y-2 text-xs text-[rgba(245,240,232,0.50)]">
-              <div><span className="text-[rgba(245,240,232,0.65)] font-medium">Reason:</span> {existingAppeal.reason}</div>
-              {existingAppeal.evidence && <div><span className="text-[rgba(245,240,232,0.65)] font-medium">Evidence:</span> {existingAppeal.evidence}</div>}
-              <div><span className="text-[rgba(245,240,232,0.65)] font-medium">Desired Resolution:</span> {existingAppeal.desiredResolution}</div>
+            <p className="text-xs text-[var(--text-muted)]">Submitted {new Date(existingAppeal.submittedAt).toLocaleDateString()}</p>
+            <div className="space-y-2 text-xs text-[var(--text-muted)]">
+              <div><span className="text-[var(--text-body)] font-medium">Reason:</span> {existingAppeal.reason}</div>
+              {existingAppeal.evidence && <div><span className="text-[var(--text-body)] font-medium">Evidence:</span> {existingAppeal.evidence}</div>}
+              <div><span className="text-[var(--text-body)] font-medium">Desired Resolution:</span> {existingAppeal.desiredResolution}</div>
             </div>
-            <button onClick={onClose} className="w-full py-2.5 rounded-xl bg-gray-800 text-sm font-medium hover:bg-gray-700 transition-colors">Close</button>
+            <button onClick={onClose} className="w-full py-2.5 rounded-xl bg-[var(--surface-2)] text-sm font-medium hover:bg-[rgba(245,240,232,0.06)] transition-colors">Close</button>
           </div>
         ) : submitted ? (
           <div className="text-center py-6 space-y-3">
             <CheckCircle className="w-8 h-8 text-[#3A7D6F] mx-auto" />
-            <h3 className="font-semibold">Appeal Submitted</h3>
-            <p className="text-sm text-[rgba(245,240,232,0.50)]">Your appeal has been logged. The board will review within 5 business days.</p>
-            <button onClick={onClose} className="px-6 py-2.5 rounded-xl bg-[#B09B71] text-[#1a1a1a] text-sm font-medium">Done</button>
+            <h3 className="font-medium">Appeal Submitted</h3>
+            <p className="text-sm text-[var(--text-muted)]">Your appeal has been logged. The board will review within 5 business days.</p>
+            <button onClick={onClose} className="px-6 py-2.5 rounded-xl bg-[#B09B71] text-[var(--surface-2)] text-sm font-medium">Done</button>
           </div>
         ) : (
           <>
             <div>
-              <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Reason for Appeal *</label>
+              <label className="block text-sm text-[var(--text-muted)] mb-2">Reason for Appeal *</label>
               <textarea value={reason} onChange={e => setReason(e.target.value)}
                 placeholder="Explain why you believe this violation was issued in error or should be dismissed..."
-                rows={3} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+                rows={3} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
             </div>
 
             <div>
-              <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Supporting Evidence (optional)</label>
+              <label className="block text-sm text-[var(--text-muted)] mb-2">Supporting Evidence (optional)</label>
               <textarea value={evidence} onChange={e => setEvidence(e.target.value)}
                 placeholder="Describe any photos, documents, timestamps, or witness accounts that support your appeal..."
-                rows={3} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+                rows={3} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
             </div>
 
             <div>
-              <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Desired Resolution *</label>
+              <label className="block text-sm text-[var(--text-muted)] mb-2">Desired Resolution *</label>
               <textarea value={desiredResolution} onChange={e => setDesiredResolution(e.target.value)}
                 placeholder="What outcome are you seeking? (e.g., dismissal of violation, removal of fine, extended cure period...)"
-                rows={2} className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+                rows={2} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
             </div>
 
             <div className="flex gap-3 pt-1">
-              <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+              <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
               <button onClick={handleSubmit} disabled={!reason.trim() || !desiredResolution.trim()}
-                className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+                className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all">
                 Submit Appeal
               </button>
             </div>
@@ -180,7 +180,7 @@ export default function ViolationsPage() {
   if (!isConnected) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[rgba(245,240,232,0.50)] mb-4">Sign in to view and report violations</p>
+        <p className="text-[var(--text-muted)] mb-4">Sign in to view and report violations</p>
         <ConnectButton label="Sign In" />
       </div>
     );
@@ -190,14 +190,14 @@ export default function ViolationsPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">Violations</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">
+          <h1 className="text-2xl sm:text-3xl font-medium">Violations</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-1">
             Report issues, track status, dispute rulings, and appeal to the community
           </p>
         </div>
         <button
           onClick={() => setShowReport(!showReport)}
-          className="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-sm font-medium transition-all shrink-0"
+          className="px-5 py-2.5 rounded-xl bg-[#8B5A5A] hover:bg-[#6B3A3A] text-sm font-medium transition-all shrink-0"
         >
           {showReport ? '← Back' : ' Report Violation'}
         </button>
@@ -205,14 +205,14 @@ export default function ViolationsPage() {
 
       {/* Process Explainer */}
       <div className="glass-card rounded-xl hover-lift p-5 mb-6">
-        <h3 className="text-xs uppercase tracking-wider text-[rgba(245,240,232,0.35)] font-semibold mb-3">How Violations Work</h3>
+        <h3 className="text-xs uppercase tracking-wider text-[var(--text-disabled)] font-medium mb-3">How Violations Work</h3>
         <div className="flex items-center gap-1 overflow-x-auto pb-2 scrollbar-none">
           {['Report', 'Review', 'Notice', 'Cure', 'Hearing', 'Ruling', 'Appeal'].map((step, i) => (
             <span key={step} className="flex items-center shrink-0">
-              <span className="text-[10px] px-2 py-1 rounded bg-gray-800/50 text-[rgba(245,240,232,0.50)] whitespace-nowrap">
+              <span className="text-[10px] px-2 py-1 rounded bg-[rgba(26,26,30,0.50)] text-[var(--text-muted)] whitespace-nowrap">
                 {i + 1}. {step}
               </span>
-              {i < 6 && <span className="text-[rgba(245,240,232,0.25)] mx-1">→</span>}
+              {i < 6 && <span className="text-[var(--text-disabled)] mx-1">→</span>}
             </span>
           ))}
         </div>
@@ -261,7 +261,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
         <button
           onClick={() => setFilter('all')}
           className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
-            filter === 'all' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'
+            filter === 'all' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
           }`}
         >
           All
@@ -271,7 +271,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
             key={g.key}
             onClick={() => setFilter(g.key)}
             className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
-              filter === g.key ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'
+              filter === g.key ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
             }`}
           >
             <span className={g.color}>{(violations || []).filter((v: any) => g.statuses.includes(v.status)).length}</span> {g.label}
@@ -280,12 +280,12 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
       </div>
 
       {isLoading ? (
-        <div className="text-center py-12 text-[rgba(245,240,232,0.35)]">Loading violations...</div>
+        <div className="text-center py-12 text-[var(--text-disabled)]">Loading violations...</div>
       ) : !violations || violations.length === 0 ? (
         <div className="glass-card rounded-xl hover-lift p-12 text-center">
           <CheckCircle className="w-8 h-8 text-[#3A7D6F] mx-auto mb-4" />
           <h3 className="text-lg font-medium mb-2">No violations</h3>
-          <p className="text-sm text-[rgba(245,240,232,0.50)]">
+          <p className="text-sm text-[var(--text-muted)]">
             The community is in good standing. Violations will appear here when reported.
           </p>
         </div>
@@ -312,12 +312,12 @@ function ViolationCard({ violation }: { violation: any }) {
 
   const colorClass = statusInfo.color === 'green' ? 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
     statusInfo.color === 'red' ? 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)] border-[rgba(107,58,58,0.20)]' :
-    statusInfo.color === 'yellow' ? 'text-[#B09B71] bg-yellow-500/10 border-yellow-500/20' :
+    statusInfo.color === 'yellow' ? 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' :
     statusInfo.color === 'gold' ? 'text-[#B09B71] bg-[#B09B71]/10 border-[#B09B71]/20' :
-    statusInfo.color === 'blue' ? 'text-[#5A7A9A] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' :
-    statusInfo.color === 'orange' ? 'text-[#B09B71] bg-orange-500/10 border-orange-500/20' :
+    statusInfo.color === 'blue' ? 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' :
+    statusInfo.color === 'orange' ? 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' :
     statusInfo.color === 'amber' ? 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' :
-    'text-[rgba(245,240,232,0.50)] bg-gray-500/10 border-gray-500/20';
+    'text-[var(--text-muted)] bg-[rgba(245,240,232,0.04)] border-[rgba(245,240,232,0.08)]';
 
   return (
     <div className="glass-card rounded-xl hover-lift overflow-hidden cursor-pointer" onClick={() => setExpanded(!expanded)}>
@@ -325,11 +325,11 @@ function ViolationCard({ violation }: { violation: any }) {
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1.5">
-              <span className="text-[10px] font-mono text-[rgba(245,240,232,0.35)]">{violation.violation_number}</span>
+              <span className="text-[10px] font-mono text-[var(--text-disabled)]">{violation.violation_number}</span>
               <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${colorClass}`}>
                 {statusInfo.label}
               </span>
-              <span className="text-[10px] text-[rgba(245,240,232,0.35)]">{cat?.icon} {cat?.label}</span>
+              <span className="text-[10px] text-[var(--text-disabled)]">{cat?.icon} {cat?.label}</span>
               {violation.severity !== 'minor' && (
                 <span className={`text-[10px] font-medium ${
                   violation.severity === 'critical' ? 'text-[#8B5A5A]' :
@@ -339,8 +339,8 @@ function ViolationCard({ violation }: { violation: any }) {
                 </span>
               )}
             </div>
-            <h3 className="font-semibold text-sm mb-1">{violation.title}</h3>
-            <div className="flex items-center gap-3 text-[11px] text-[rgba(245,240,232,0.35)]">
+            <h3 className="font-medium text-sm mb-1">{violation.title}</h3>
+            <div className="flex items-center gap-3 text-[11px] text-[var(--text-disabled)]">
               <span>Lot #{violation.accused_lot}</span>
               {violation.fine_amount > 0 && (
                 <span className="text-[#8B5A5A] font-medium">${(violation.fine_amount / 100).toFixed(2)} fine</span>
@@ -348,25 +348,25 @@ function ViolationCard({ violation }: { violation: any }) {
               <span>{new Date(violation.created_at).toLocaleDateString()}</span>
             </div>
           </div>
-          <span className={`text-[rgba(245,240,232,0.35)] transition-transform ${expanded ? 'rotate-180' : ''}`}>▾</span>
+          <span className={`text-[var(--text-disabled)] transition-transform ${expanded ? 'rotate-180' : ''}`}>▾</span>
         </div>
 
         {expanded && (
-          <div className="mt-4 pt-4 border-t border-white/5 space-y-4">
-            <p className="text-sm text-[rgba(245,240,232,0.50)] leading-relaxed">{violation.description}</p>
+          <div className="mt-4 pt-4 border-t border-[rgba(245,240,232,0.05)] space-y-4">
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed">{violation.description}</p>
 
             {violation.ccr_section && (
-              <p className="text-xs text-[rgba(245,240,232,0.35)]"> CC&R Section: <span className="text-[rgba(245,240,232,0.65)]">{violation.ccr_section}</span></p>
+              <p className="text-xs text-[var(--text-disabled)]"> CC&R Section: <span className="text-[var(--text-body)]">{violation.ccr_section}</span></p>
             )}
 
             {violation.cure_deadline && (
-              <p className="text-xs text-[rgba(245,240,232,0.35)]">
+              <p className="text-xs text-[var(--text-disabled)]">
                 ⏰ Cure Deadline: <span className="text-[#B09B71]">{new Date(violation.cure_deadline).toLocaleDateString()}</span>
               </p>
             )}
 
             {violation.hearing_date && (
-              <p className="text-xs text-[rgba(245,240,232,0.35)]">
+              <p className="text-xs text-[var(--text-disabled)]">
                  Hearing: <span className="text-[#B09B71]">{new Date(violation.hearing_date).toLocaleDateString()}</span>
               </p>
             )}
@@ -374,11 +374,11 @@ function ViolationCard({ violation }: { violation: any }) {
             {/* Timeline */}
             {updates.length > 0 && (
               <div className="space-y-2">
-                <p className="text-[10px] uppercase tracking-wider text-[rgba(245,240,232,0.35)] font-semibold">History</p>
+                <p className="text-[10px] uppercase tracking-wider text-[var(--text-disabled)] font-medium">History</p>
                 {updates.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((u: any) => (
                   <div key={u.id} className="pl-4 border-l-2 border-[#B09B71]/20">
-                    <p className="text-xs text-[rgba(245,240,232,0.50)]">{u.text}</p>
-                    <p className="text-[10px] text-[rgba(245,240,232,0.25)] mt-0.5">
+                    <p className="text-xs text-[var(--text-muted)]">{u.text}</p>
+                    <p className="text-[10px] text-[var(--text-disabled)] mt-0.5">
                       {new Date(u.created_at).toLocaleDateString()} · {u.updated_by === 'anonymous' ? 'Anonymous' : u.updated_by?.slice(0, 10)}
                     </p>
                   </div>
@@ -389,7 +389,7 @@ function ViolationCard({ violation }: { violation: any }) {
             {/* Actions based on status */}
             {(violation.status === 'cure-period' || violation.status === 'notice-issued') && (
               <div className="flex gap-2">
-                <button className="px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)] text-xs text-[#3A7D6F] hover:bg-green-600/30">
+                <button className="px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)] text-xs text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.30)]">
                    Submit Compliance Proof
                 </button>
                 <button className="px-3 py-1.5 rounded-lg bg-[#B09B71]/15 border border-[#B09B71]/30 text-xs text-[#B09B71] hover:bg-[#B09B71]/20">
@@ -417,8 +417,8 @@ function ViolationCard({ violation }: { violation: any }) {
                   <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
                     appealRecord?.status === 'approved' ? 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
                     appealRecord?.status === 'denied' ? 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)] border-[rgba(107,58,58,0.20)]' :
-                    appealRecord?.status === 'under-review' ? 'text-[#5A7A9A] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' :
-                    'text-[#B09B71] bg-yellow-500/10 border-yellow-500/20'
+                    appealRecord?.status === 'under-review' ? 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' :
+                    'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]'
                   }`}>
                     Appeal: {appealRecord?.status}
                   </span>
@@ -474,19 +474,19 @@ function ReportForm({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="glass-card rounded-xl hover-lift p-6 space-y-5">
-      <h2 className="text-lg font-semibold">Report a Violation</h2>
+      <h2 className="text-lg font-medium">Report a Violation</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Lot Number (accused)</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Lot Number (accused)</label>
           <input type="number" value={accusedLot} onChange={e => setAccusedLot(e.target.value)}
             placeholder="Which lot?" min="1" max="150"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
         </div>
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Category</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Category</label>
           <select value={category} onChange={e => setCategory(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none">
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none">
             <option value="">Select category</option>
             {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.icon} {c.label}</option>)}
           </select>
@@ -494,48 +494,48 @@ function ReportForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Title</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Title</label>
         <input type="text" value={title} onChange={e => setTitle(e.target.value)}
           placeholder="Brief description of the violation"
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
       </div>
 
       <div>
-        <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Description</label>
+        <label className="block text-sm text-[var(--text-muted)] mb-2">Description</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Provide details — what's happening, when did it start, impact on the community..."
           rows={4}
-          className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">Location (optional)</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Location (optional)</label>
           <input type="text" value={location} onChange={e => setLocation(e.target.value)}
             placeholder="Where specifically?"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
         </div>
         <div>
-          <label className="block text-sm text-[rgba(245,240,232,0.50)] mb-2">CC&R Section (optional)</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">CC&R Section (optional)</label>
           <input type="text" value={ccrSection} onChange={e => setCcrSection(e.target.value)}
             placeholder="e.g., Section 4.2"
-            className="w-full px-4 py-3 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
         </div>
       </div>
 
       <label className="flex items-center gap-2 cursor-pointer">
         <input type="checkbox" checked={anonymous} onChange={e => setAnonymous(e.target.checked)}
-          className="rounded border-gray-700 bg-gray-800" />
-        <span className="text-sm text-[rgba(245,240,232,0.50)]">Submit anonymously</span>
-        <span className="text-[10px] text-[rgba(245,240,232,0.35)]">(board will still see your identity for follow-up)</span>
+          className="rounded border-[rgba(245,240,232,0.08)] bg-[var(--surface-2)]" />
+        <span className="text-sm text-[var(--text-muted)]">Submit anonymously</span>
+        <span className="text-[10px] text-[var(--text-disabled)]">(board will still see your identity for follow-up)</span>
       </label>
 
       <div className="flex gap-3">
-        <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+        <button onClick={onClose} className="flex-1 py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
         <button
           disabled={!title.trim() || !description.trim() || !accusedLot || !category || report.isPending}
           onClick={() => report.mutate()}
-          className="flex-1 py-3 rounded-xl bg-red-600 hover:bg-red-700 disabled:opacity-50 text-sm font-medium transition-all"
+          className="flex-1 py-3 rounded-xl bg-[#8B5A5A] hover:bg-[#6B3A3A] disabled:opacity-50 text-sm font-medium transition-all"
         >
           {report.isPending ? '⏳ Submitting...' : 'Submit Report'}
         </button>
@@ -543,7 +543,7 @@ function ReportForm({ onClose }: { onClose: () => void }) {
 
       <div className="p-4 rounded-xl glass-card">
         <h4 className="text-xs font-medium text-[#B09B71] mb-1 flex items-center gap-1.5"><Lock className="w-3.5 h-3.5" /> What happens next?</h4>
-        <p className="text-[10px] text-[rgba(245,240,232,0.50)]">
+        <p className="text-[10px] text-[var(--text-muted)]">
           The board reviews your report within 48 hours. If valid, a notice is issued and the homeowner has 14-30 days to correct the issue.
           They can dispute it, and if the ruling stands, they can appeal to the entire community for a democratic vote.
           Every step is logged transparently.

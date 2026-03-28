@@ -26,7 +26,7 @@ function getSeasonInfo(): SeasonInfo {
     return {
       emoji: '',
       message: 'Happy Halloween, Faircroft!',
-      gradient: 'from-orange-900/30 to-gray-900/20',
+      gradient: 'from-orange-900/30 to-[rgba(20,20,22,0.20)]',
       textColor: 'text-[#B09B71]',
     };
   }
@@ -61,7 +61,7 @@ function getSeasonInfo(): SeasonInfo {
     emoji: '',
     message: 'Winter at Faircroft — stay warm and safe.',
     gradient: 'from-blue-900/20 to-slate-900/10',
-    textColor: 'text-[#5A7A9A]',
+    textColor: 'text-[var(--steel)]',
   };
 }
 
@@ -93,15 +93,22 @@ export function SeasonalBanner() {
   if (!visible || !season) return null;
 
   return (
-    <div className={`relative bg-gradient-to-r ${season.gradient} border-b border-white/5 px-4 sm:px-6 py-2`}>
+    <div className={`relative bg-gradient-to-r ${season.gradient} border-b border-[rgba(245,240,232,0.05)] px-4 sm:px-6 py-2`}>
       <div className="max-w-6xl mx-auto flex items-center gap-3">
         <span className="text-lg shrink-0">{season.emoji}</span>
-        <p className={`text-xs font-medium ${season.textColor} flex-1`}>
+        <p className="flex-1" style={{
+          fontFamily: '"Playfair Display", Georgia, serif',
+          fontStyle: 'italic',
+          fontSize: '13px',
+          letterSpacing: '0.02em',
+          opacity: 0.7,
+          color: 'var(--parchment)',
+        }}>
           {season.message}
         </p>
         <button
           onClick={dismiss}
-          className="text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] transition-colors text-sm shrink-0 ml-2 leading-none"
+          className="text-[var(--text-disabled)] hover:text-[var(--text-body)] transition-colors text-sm shrink-0 ml-2 leading-none"
           aria-label="Dismiss"
         >
           

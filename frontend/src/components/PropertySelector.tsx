@@ -17,23 +17,22 @@ export function PropertySelector({ properties, selectedIndex, onSelect }: Proper
 
   return (
     <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1">
-      <span className="text-xs tracking-widest uppercase text-[rgba(245,240,232,0.35)] shrink-0 mr-1">
+      <span className="text-xs tracking-widest uppercase text-[var(--text-disabled)] shrink-0 mr-1">
         Properties ({properties.length})
       </span>
       {properties.map((prop, i) => (
         <button
           key={prop.tokenId}
           onClick={() => onSelect(i)}
-          className={`shrink-0 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 min-h-[40px] ${
+          className={`shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 min-h-[40px] ${
             i === selectedIndex
               ? 'bg-[#B09B71]/25 border border-[#B09B71]/40 text-[#D4C4A0] shadow-sm shadow-[#B09B71]/8'
-              : 'bg-gray-800/40 border border-gray-700/40 text-[rgba(245,240,232,0.50)] hover:bg-gray-800/60 hover:text-[rgba(245,240,232,0.65)]'
+              : 'bg-[rgba(26,26,30,0.40)] border border-[rgba(245,240,232,0.06)] text-[var(--text-muted)] hover:bg-[rgba(245,240,232,0.06)] hover:text-[var(--text-body)]'
           }`}
         >
-          <span className="mr-1.5"></span>
           Lot #{prop.lotNumber}
           {prop.streetAddress && (
-            <span className="ml-2 text-xs text-[rgba(245,240,232,0.35)] font-normal hidden sm:inline">
+            <span className="ml-2 text-xs text-[var(--text-disabled)] font-normal hidden sm:inline">
               {prop.streetAddress.split(',')[0]}
             </span>
           )}

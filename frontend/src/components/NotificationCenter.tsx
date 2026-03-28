@@ -110,7 +110,7 @@ const CATEGORY_ICONS: Record<NotifCategory, React.ElementType> = {
 };
 
 const CATEGORY_COLORS: Record<NotifCategory, string> = {
-  Governance: 'text-[#5A7A9A]',
+  Governance: 'text-[var(--steel)]',
   Dues: 'text-[#B09B71]',
   Community: 'text-[#3A7D6F]',
   Safety: 'text-[#8B5A5A]',
@@ -162,12 +162,12 @@ export function NotificationBell() {
     <div className="relative" ref={panelRef}>
       <button
         onClick={() => setOpen(!open)}
-        className="relative p-2 rounded-lg text-[rgba(245,240,232,0.50)] hover:text-[#B09B71] hover:bg-white/[0.04] transition-all cursor-pointer"
+        className="relative p-2 rounded-lg text-[var(--text-muted)] hover:text-[#B09B71] hover:bg-[rgba(245,240,232,0.04)] transition-all cursor-pointer"
         aria-label="Notifications"
       >
         <Bell className="w-5 h-5" />
         {unreadCount > 0 && (
-          <span className="absolute top-0.5 right-0.5 min-w-[16px] h-[16px] rounded-full bg-[#B09B71] text-[#1a1a1a] text-[9px] font-bold flex items-center justify-center px-0.5">
+          <span className="absolute top-0.5 right-0.5 min-w-[16px] h-[16px] rounded-full bg-[#B09B71] text-[var(--surface-2)] text-[9px] font-medium flex items-center justify-center px-0.5">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
@@ -184,10 +184,10 @@ export function NotificationBell() {
             style={{ background: 'oklch(0.12 0.005 60)', borderLeft: '1px solid rgba(201,169,110,0.15)' }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06]">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-[rgba(245,240,232,0.06)]">
               <div>
-                <h2 className="text-base font-bold text-[rgba(245,240,232,0.90)]">Notifications</h2>
-                <p className="text-xs text-[rgba(245,240,232,0.35)]">{unreadCount} unread</p>
+                <h2 className="text-base font-medium text-[var(--parchment)]">Notifications</h2>
+                <p className="text-xs text-[var(--text-disabled)]">{unreadCount} unread</p>
               </div>
               <div className="flex items-center gap-2">
                 {unreadCount > 0 && (
@@ -200,7 +200,7 @@ export function NotificationBell() {
                 )}
                 <button
                   onClick={() => setOpen(false)}
-                  className="p-1.5 rounded-lg hover:bg-white/[0.06] text-[rgba(245,240,232,0.50)] hover:text-[rgba(245,240,232,0.80)] transition-all cursor-pointer"
+                  className="p-1.5 rounded-lg hover:bg-[rgba(245,240,232,0.06)] text-[var(--text-muted)] hover:text-[var(--parchment)] transition-all cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -208,15 +208,15 @@ export function NotificationBell() {
             </div>
 
             {/* Filter Tabs */}
-            <div className="flex gap-1 px-4 py-2 border-b border-white/[0.04] overflow-x-auto">
+            <div className="flex gap-1 px-4 py-2 border-b border-[rgba(245,240,232,0.04)] overflow-x-auto">
               {FILTER_TABS.map(tab => (
                 <button
                   key={tab}
                   onClick={() => setFilter(tab)}
-                  className={`px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                  className={`px-3 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
                     filter === tab
                       ? 'bg-[#B09B71]/15 text-[#D4C4A0] border border-[#B09B71]/25'
-                      : 'text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)]'
+                      : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'
                   }`}
                 >
                   {tab}
@@ -227,7 +227,7 @@ export function NotificationBell() {
             {/* Notification List */}
             <div className="flex-1 overflow-y-auto">
               {filtered.length === 0 ? (
-                <div className="text-center py-16 text-[rgba(245,240,232,0.35)]">
+                <div className="text-center py-16 text-[var(--text-disabled)]">
                   <div className="text-4xl mb-3"></div>
                   <p className="text-sm">No notifications</p>
                 </div>
@@ -237,7 +237,7 @@ export function NotificationBell() {
                   if (!items?.length) return null;
                   return (
                     <div key={groupName}>
-                      <div className="px-5 py-2 text-[11px] font-bold text-[rgba(245,240,232,0.25)] uppercase tracking-widest sticky top-0"
+                      <div className="px-5 py-2 text-[11px] font-medium text-[var(--text-disabled)] uppercase tracking-widest sticky top-0"
                         style={{ background: 'oklch(0.12 0.005 60)' }}
                       >
                         {groupName}
@@ -248,28 +248,28 @@ export function NotificationBell() {
                           <div
                             key={notif.id}
                             onClick={() => markRead(notif.id)}
-                            className={`flex gap-3 px-5 py-4 border-b border-white/[0.03] cursor-pointer transition-colors hover:bg-white/[0.03] ${
+                            className={`flex gap-3 px-5 py-4 border-b border-[rgba(245,240,232,0.03)] cursor-pointer transition-colors hover:bg-[rgba(245,240,232,0.03)] ${
                               !notif.read ? 'bg-[#B09B71]/[0.04]' : ''
                             }`}
                           >
                             <div className="relative shrink-0">
-                              <div className="w-9 h-9 rounded-full bg-white/[0.06] flex items-center justify-center text-lg">
+                              <div className="w-9 h-9 rounded-full bg-[rgba(245,240,232,0.06)] flex items-center justify-center text-lg">
                                 {notif.icon}
                               </div>
                               {!notif.read && (
-                                <span className="absolute top-0 right-0 w-2 h-2 rounded-full bg-[#B09B71] border border-[#1a1a1a]" />
+                                <span className="absolute top-0 right-0 w-2 h-2 rounded-full bg-[#B09B71] border border-[var(--divider)]" />
                               )}
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-start justify-between gap-2">
-                                <span className={`text-xs font-bold ${!notif.read ? 'text-[rgba(245,240,232,0.80)]' : 'text-[rgba(245,240,232,0.50)]'}`}>
+                                <span className={`text-xs font-medium ${!notif.read ? 'text-[var(--parchment)]' : 'text-[var(--text-muted)]'}`}>
                                   {notif.title}
                                 </span>
-                                <span className="text-[10px] text-[rgba(245,240,232,0.25)] whitespace-nowrap shrink-0">
+                                <span className="text-[10px] text-[var(--text-disabled)] whitespace-nowrap shrink-0">
                                   {timeAgo(notif.time)}
                                 </span>
                               </div>
-                              <p className="text-[11px] text-[rgba(245,240,232,0.35)] mt-0.5 line-clamp-2">{notif.description}</p>
+                              <p className="text-[11px] text-[var(--text-disabled)] mt-0.5 line-clamp-2">{notif.description}</p>
                               <div className={`flex items-center gap-1 mt-1.5 ${CATEGORY_COLORS[notif.category]}`}>
                                 <CatIcon className="w-3 h-3" />
                                 <span className="text-[10px] font-medium">{notif.category}</span>

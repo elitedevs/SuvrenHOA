@@ -83,12 +83,12 @@ export default function VendorPaymentsPage() {
   const statusColor = (s: string) => {
     if (s === 'paid') return 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]';
     if (s === 'overdue') return 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border-[rgba(107,58,58,0.20)]';
-    return 'bg-yellow-500/10 text-[#B09B71] border-yellow-500/20';
+    return 'bg-[rgba(176,155,113,0.10)] text-[#B09B71] border-[rgba(176,155,113,0.20)]';
   };
 
   if (!isConnected) return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
-      <p className="text-[rgba(245,240,232,0.50)] mb-4">Board access required</p>
+      <p className="text-[var(--text-muted)] mb-4">Board access required</p>
       <ConnectButton label="Sign In" />
     </div>
   );
@@ -97,12 +97,12 @@ export default function VendorPaymentsPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold">Vendor Payments</h1>
-          <p className="text-sm text-[rgba(245,240,232,0.50)] mt-1">Track contractor and vendor invoices</p>
+          <h1 className="text-2xl sm:text-3xl font-normal">Vendor Payments</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-1">Track contractor and vendor invoices</p>
         </div>
         {isBoard && (
           <button onClick={() => setShowForm(!showForm)}
-            className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] text-sm font-medium transition-all shrink-0">
+            className="px-5 py-2.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all shrink-0">
             {showForm ? '← Back' : '+ Add Payment'}
           </button>
         )}
@@ -116,51 +116,51 @@ export default function VendorPaymentsPage() {
           { label: 'Overdue', amount: totals.overdue, color: 'text-[#8B5A5A]' },
         ].map(({ label, amount, color }) => (
           <div key={label} className="glass-card rounded-xl p-4 text-center">
-            <p className="text-xs text-[rgba(245,240,232,0.50)] mb-1">{label}</p>
-            <p className={`text-lg font-bold ${color}`}>${amount.toLocaleString()}</p>
+            <p className="text-xs text-[var(--text-muted)] mb-1">{label}</p>
+            <p className={`text-lg font-medium ${color}`}>${amount.toLocaleString()}</p>
           </div>
         ))}
       </div>
 
       {showForm && (
         <div className="glass-card rounded-xl p-6 space-y-4 mb-6">
-          <h2 className="text-lg font-semibold">Add Vendor Payment</h2>
+          <h2 className="text-lg font-medium">Add Vendor Payment</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Vendor Name</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Vendor Name</label>
               <input value={form.vendor} onChange={e => setForm({...form, vendor: e.target.value})}
-                placeholder="Company name" className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="Company name" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Service / Description</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Service / Description</label>
               <input value={form.service} onChange={e => setForm({...form, service: e.target.value})}
-                placeholder="Landscaping - March 2026" className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="Landscaping - March 2026" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Amount ($)</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Amount ($)</label>
               <input type="number" value={form.amount} onChange={e => setForm({...form, amount: e.target.value})}
-                placeholder="0.00" className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="0.00" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Due Date</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Due Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Invoice Reference</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Invoice Reference</label>
               <input value={form.invoiceRef} onChange={e => setForm({...form, invoiceRef: e.target.value})}
-                placeholder="INV-2026-001" className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="INV-2026-001" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
             <div>
-              <label className="block text-xs text-[rgba(245,240,232,0.50)] mb-1">Notes</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-1">Notes</label>
               <input value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}
-                placeholder="Optional" className="w-full px-3 py-2.5 rounded-xl bg-gray-800/80 border border-gray-700 text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="Optional" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
             </div>
           </div>
           <div className="flex gap-3">
-            <button onClick={() => setShowForm(false)} className="flex-1 py-3 rounded-xl border border-gray-700 text-sm font-medium hover:bg-gray-800/50 transition-colors">Cancel</button>
+            <button onClick={() => setShowForm(false)} className="flex-1 py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
             <button onClick={add} disabled={!form.vendor || !form.service || !form.amount || !form.date || !form.invoiceRef}
-              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#1a1a1a] disabled:opacity-50 text-sm font-medium transition-all">
+              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all">
               Add Payment
             </button>
           </div>
@@ -171,15 +171,15 @@ export default function VendorPaymentsPage() {
       <div className="flex gap-2 mb-4 flex-wrap items-center">
         {(['all', 'pending', 'paid', 'overdue'] as const).map(f => (
           <button key={f} onClick={() => setFilter(f)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${filter === f ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[rgba(245,240,232,0.50)]'}`}>
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${filter === f ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
             {f}
           </button>
         ))}
         <div className="ml-auto flex gap-2">
-          <span className="text-xs text-[rgba(245,240,232,0.35)] self-center">Sort:</span>
+          <span className="text-xs text-[var(--text-disabled)] self-center">Sort:</span>
           {(['date', 'amount', 'vendor'] as const).map(s => (
             <button key={s} onClick={() => setSortField(s)}
-              className={`px-3 py-1.5 rounded-lg text-xs capitalize transition-all ${sortField === s ? 'text-[#B09B71]' : 'text-[rgba(245,240,232,0.35)]'}`}>
+              className={`px-3 py-1.5 rounded-lg text-xs capitalize transition-all ${sortField === s ? 'text-[#B09B71]' : 'text-[var(--text-disabled)]'}`}>
               {s}
             </button>
           ))}
@@ -191,27 +191,27 @@ export default function VendorPaymentsPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-800">
-                <th className="text-left px-4 py-3 text-xs font-medium text-[rgba(245,240,232,0.35)]">Vendor</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-[rgba(245,240,232,0.35)]">Service</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-[rgba(245,240,232,0.35)]">Invoice</th>
-                <th className="text-right px-4 py-3 text-xs font-medium text-[rgba(245,240,232,0.35)]">Amount</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-[rgba(245,240,232,0.35)]">Date</th>
-                <th className="text-left px-4 py-3 text-xs font-medium text-[rgba(245,240,232,0.35)]">Status</th>
-                {isBoard && <th className="px-4 py-3 text-xs font-medium text-[rgba(245,240,232,0.35)]">Actions</th>}
+              <tr className="border-b border-[rgba(245,240,232,0.06)]">
+                <th className="text-left px-4 py-3 text-xs font-medium text-[var(--text-disabled)]">Vendor</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-[var(--text-disabled)]">Service</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-[var(--text-disabled)]">Invoice</th>
+                <th className="text-right px-4 py-3 text-xs font-medium text-[var(--text-disabled)]">Amount</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-[var(--text-disabled)]">Date</th>
+                <th className="text-left px-4 py-3 text-xs font-medium text-[var(--text-disabled)]">Status</th>
+                {isBoard && <th className="px-4 py-3 text-xs font-medium text-[var(--text-disabled)]">Actions</th>}
               </tr>
             </thead>
             <tbody>
               {filtered.map(p => (
-                <tr key={p.id} className="border-b border-gray-800/50 hover:bg-gray-800/20 transition-colors">
+                <tr key={p.id} className="border-b border-[rgba(245,240,232,0.04)] hover:bg-[rgba(245,240,232,0.04)] transition-colors">
                   <td className="px-4 py-3 font-medium">{p.vendor}</td>
-                  <td className="px-4 py-3 text-[rgba(245,240,232,0.50)] text-xs max-w-[160px] truncate">{p.service}</td>
-                  <td className="px-4 py-3 text-[rgba(245,240,232,0.35)] text-xs font-mono">{p.invoiceRef}</td>
-                  <td className="px-4 py-3 text-right font-semibold text-[#B09B71]">${p.amount.toLocaleString()}</td>
-                  <td className="px-4 py-3 text-[rgba(245,240,232,0.50)] text-xs">{p.date}</td>
+                  <td className="px-4 py-3 text-[var(--text-muted)] text-xs max-w-[160px] truncate">{p.service}</td>
+                  <td className="px-4 py-3 text-[var(--text-disabled)] text-xs font-mono">{p.invoiceRef}</td>
+                  <td className="px-4 py-3 text-right font-medium text-[#B09B71]">${p.amount.toLocaleString()}</td>
+                  <td className="px-4 py-3 text-[var(--text-muted)] text-xs">{p.date}</td>
                   <td className="px-4 py-3">
                     <span className={`text-[10px] px-2 py-0.5 rounded-full border ${statusColor(p.status)}`}>
-                      {p.status === 'paid' ? ' Paid' : p.status === 'overdue' ? ' Overdue' : '⏳ Pending'}
+                      {p.status === 'paid' ? 'Paid' : p.status === 'overdue' ? 'Overdue' : 'Pending'}
                     </span>
                   </td>
                   {isBoard && (
@@ -236,9 +236,9 @@ export default function VendorPaymentsPage() {
               ))}
             </tbody>
             <tfoot>
-              <tr className="border-t border-gray-800 bg-gray-900/30">
-                <td colSpan={3} className="px-4 py-3 text-xs font-medium text-[rgba(245,240,232,0.50)]">Total ({filtered.length} items)</td>
-                <td className="px-4 py-3 text-right font-bold text-[#B09B71]">${total.toLocaleString()}</td>
+              <tr className="border-t border-[rgba(245,240,232,0.06)] bg-[rgba(20,20,22,0.30)]">
+                <td colSpan={3} className="px-4 py-3 text-xs font-medium text-[var(--text-muted)]">Total ({filtered.length} items)</td>
+                <td className="px-4 py-3 text-right font-medium text-[#B09B71]">${total.toLocaleString()}</td>
                 <td colSpan={isBoard ? 3 : 2} />
               </tr>
             </tfoot>
