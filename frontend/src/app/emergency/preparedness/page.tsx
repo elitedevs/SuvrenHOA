@@ -138,7 +138,7 @@ export default function PreparednessPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
       <div>
-        <h1 className="text-3xl font-medium gradient-text">Emergency Preparedness</h1>
+        <h1 className="text-3xl font-medium text-[var(--text-heading)]">Emergency Preparedness</h1>
         <p className="text-[var(--text-muted)] text-sm mt-1">Stay ready. Stay safe. </p>
       </div>
 
