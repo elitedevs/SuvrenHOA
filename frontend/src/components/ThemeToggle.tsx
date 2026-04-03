@@ -9,17 +9,22 @@ export function ThemeToggle() {
     const saved = localStorage.getItem('suvren-hoa-theme') as 'dark' | 'light' | null;
     if (saved) {
       setTheme(saved);
-      document.documentElement.classList.toggle('light', saved === 'light');
-      document.documentElement.classList.toggle('dark', saved === 'dark');
+      applyTheme(saved);
     }
   }, []);
+
+  const applyTheme = (t: 'dark' | 'light') => {
+    const el = document.documentElement;
+    // Only add/remove theme classes — preserve font variable classes
+    el.classList.remove('dark', 'light');
+    el.classList.add(t);
+  };
 
   const toggle = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);
     localStorage.setItem('suvren-hoa-theme', next);
-    document.documentElement.classList.toggle('light', next === 'light');
-    document.documentElement.classList.toggle('dark', next === 'dark');
+    applyTheme(next);
   };
 
   return (

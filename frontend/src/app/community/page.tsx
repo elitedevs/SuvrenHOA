@@ -108,6 +108,43 @@ export default function CommunityPage() {
               <PostCard key={post.id} post={post} />
             ))}
           </div>
+
+          {/* Empty state */}
+          {!isLoading && posts.length === 0 && (
+            <div className="glass-card rounded-xl p-10 text-center mt-4">
+              <div className="w-14 h-14 rounded-xl bg-[rgba(176,155,113,0.08)] flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">💬</span>
+              </div>
+              <h3 className="text-lg font-medium text-[var(--text-heading)] mb-2">No posts yet</h3>
+              <p className="text-sm text-[var(--text-muted)] max-w-md mx-auto mb-5">
+                Be the first to start a conversation! Share a recommendation, report an issue, or just say hello to your neighbors.
+              </p>
+              <button
+                onClick={() => setShowNewPost(true)}
+                className="px-5 py-2.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(201,169,110,0.25)]"
+              >
+                Create First Post
+              </button>
+            </div>
+          )}
+
+          {/* Loading state */}
+          {isLoading && (
+            <div className="space-y-3 mt-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="glass-card rounded-lg p-5">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-[rgba(245,240,232,0.05)] animate-pulse shrink-0" />
+                    <div className="flex-1 space-y-3">
+                      <div className="h-4 w-2/3 rounded bg-[rgba(245,240,232,0.05)] animate-pulse" />
+                      <div className="h-3 w-1/3 rounded bg-[rgba(245,240,232,0.04)] animate-pulse" />
+                      <div className="h-3 w-full rounded bg-[rgba(245,240,232,0.03)] animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </>
       )}
     </div>
