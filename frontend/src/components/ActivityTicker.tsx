@@ -112,15 +112,12 @@ export function ActivityTicker({ className = '', maxHeight = '480px' }: Activity
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-4 border-b border-[rgba(245,240,232,0.08)]">
         <div className="flex items-center gap-2.5">
-          {/* Pulsing live dot */}
+          {/* Pulsing live dot — verdigris */}
           <div className="relative flex items-center justify-center">
-            <span className="absolute inline-flex w-3 h-3 rounded-full bg-[#3A7D6F]/30 animate-ping" />
-            <span className="relative inline-flex w-2 h-2 rounded-full bg-[#3A7D6F]" />
+            <span className="absolute inline-flex w-3 h-3 rounded-full animate-ping" style={{ background: 'rgba(42,93,79,0.30)' }} />
+            <span className="relative inline-flex rounded-full" style={{ width: '6px', height: '6px', background: '#2A5D4F' }} />
           </div>
           <h3 className="text-sm font-medium text-[var(--parchment)] tracking-wide">Live Activity</h3>
-          <span className="text-[10px] font-medium text-[var(--text-disabled)] bg-[rgba(245,240,232,0.05)] px-2 py-0.5 rounded-full border border-[rgba(245,240,232,0.08)]">
-            Base Sepolia
-          </span>
         </div>
 
         <div className="flex items-center gap-2">
@@ -129,9 +126,11 @@ export function ActivityTicker({ className = '', maxHeight = '480px' }: Activity
               Updated {timeAgo(Math.floor(lastFetched.getTime() / 1000))}
             </span>
           )}
-          <span className="text-[10px] text-[var(--text-disabled)] bg-[rgba(245,240,232,0.05)] px-2 py-0.5 rounded-full border border-[rgba(245,240,232,0.08)]">
-            {events.length} events
-          </span>
+          {events.length > 0 && (
+            <span className="text-[10px] text-[var(--text-disabled)] bg-[rgba(245,240,232,0.05)] px-2 py-0.5 rounded-full border border-[rgba(245,240,232,0.08)]">
+              {events.length} events
+            </span>
+          )}
         </div>
       </div>
 

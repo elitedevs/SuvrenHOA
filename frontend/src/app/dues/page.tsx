@@ -94,11 +94,27 @@ function CommunityDuesStatus() {
 
 function DuesPanel() {
   const { address, hasProperty, tokenId } = useProperty();
-  const { quarterlyDues, annualAmount, annualDiscount } = useTreasury();
-  const { isCurrent, quartersOwed, amountOwed } = useDuesStatus(tokenId);
-  const usdcBalance = useUSDCBalance(address);
-  const allowance = useUSDCAllowance(address);
-  const { approve, payDues, isApproving, isApproved, isPaying, isPaid, payHash } = usePayDues();
+  const { quarterlyDues, annualAmount, annualDiscount, loading: treasuryLoading, error: treasuryError } = useTreasury();
+  const { isCurrent, quartersOwed, amountOwed, error: duesStatusError } = useDuesStatus(tokenId);
+  const { value: usdcBalance, isLoading: balanceLoading } = useUSDCBalance(address);
+  const { value: allowance, isLoading: allowanceLoading } = useUSDCAllowance(address);
+  const {
+    approve,
+    payDues,
+    isApprovePending,
+    isApproveConfirming,
+    isApproved,
+    approveError,
+    approveHash,
+    isPayPending,
+    isPayConfirming,
+    isPaid,
+    payError,
+    payHash,
+    error,
+    isApproving,
+    isPaying,
+  } = usePayDues();
 
   const [selectedQuarters, setSelectedQuarters] = useState<number | null>(null);
   const [step, setStep] = useState<Step>('select');
@@ -131,21 +147,24 @@ function DuesPanel() {
   ];
 
   const selectedOption = paymentOptions.find(o => o.quarters === selectedQuarters);
+  const hasInsufficientBalance = selectedOption ? usdcBalance < selectedOption.amount : false;
+  const allowanceAlreadySet = selectedOption ? allowance >= selectedOption.amount : false;
 
   const handlePay = () => {
     if (!selectedOption || tokenId === undefined) return;
     const amountStr = selectedOption.amount.toFixed(2);
 
-    if (allowance < selectedOption.amount) {
-      setStep('approve');
-      approve(amountStr);
-    } else {
+    if (allowanceAlreadySet) {
+      // Skip approve — allowance already sufficient
       setStep('pay');
       payDues(tokenId, selectedOption.quarters);
+    } else {
+      setStep('approve');
+      approve(amountStr);
     }
   };
 
-  // Auto-advance from approve to pay
+  // Auto-advance from approve to pay once approval confirmed
   if (isApproved && step === 'approve' && tokenId !== undefined && selectedQuarters !== null) {
     setStep('pay');
     payDues(tokenId, selectedQuarters);
@@ -164,6 +183,13 @@ function DuesPanel() {
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Payments</p>
         <h1 className="text-3xl font-normal tracking-tight">Community Dues</h1>
       </div>
+
+      {/* Treasury / DuesStatus errors */}
+      {(treasuryError || duesStatusError) && (
+        <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+          ⚠️ {treasuryError ?? duesStatusError}
+        </div>
+      )}
 
       {/* Smart Dues Reminder */}
       <div className="mb-6 card-enter card-enter-delay-1">
@@ -192,7 +218,7 @@ function DuesPanel() {
                         ? 'bg-[#B09B71]/20 border border-[#B09B71]/50 text-[#D4C4A0] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
                         : 'bg-[var(--surface-2)] border border-[var(--divider)] text-[var(--text-disabled)]'
                     }`}>
-                      {isDone ? '' : i + 1}
+                      {isDone ? '✓' : i + 1}
                     </div>
                     <span className={`text-[11px] font-medium whitespace-nowrap ${
                       isActive ? 'text-[#D4C4A0]' : isDone ? 'text-[#3A7D6F]' : 'text-[var(--text-disabled)]'
@@ -220,7 +246,11 @@ function DuesPanel() {
       <div className="grid grid-cols-2 gap-4 mb-6 card-enter card-enter-delay-1">
         <div className="glass-card rounded-xl hover-lift p-5">
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-2">USDC Balance</p>
-          <p className="text-2xl font-normal text-[var(--parchment)]">${usdcBalance.toFixed(2)}</p>
+          {balanceLoading ? (
+            <div className="animate-pulse h-8 w-28 bg-[var(--surface-2)] rounded-lg mb-1" />
+          ) : (
+            <p className="text-2xl font-normal text-[var(--parchment)]">${usdcBalance.toFixed(2)}</p>
+          )}
           <p className="text-[11px] text-[var(--text-disabled)] mt-1">on Base network</p>
         </div>
         <div className={`rounded-xl p-5 ${
@@ -234,7 +264,7 @@ function DuesPanel() {
             Lot #{tokenId} Status
           </p>
           {isCurrent === undefined ? (
-            <div className="skeleton h-7 w-20 rounded-lg" />
+            <div className="animate-pulse h-7 w-20 bg-[var(--surface-2)] rounded-lg" />
           ) : isCurrent ? (
             <p className="text-2xl font-normal text-[#3A7D6F]">Current</p>
           ) : (
@@ -250,7 +280,7 @@ function DuesPanel() {
       {step === 'done' ? (
         <div className="glass-card-success rounded-xl p-12 text-center pulse-glow-green page-enter">
           <div className="w-20 h-20 rounded-full bg-[rgba(42,93,79,0.15)] border-2 border-[rgba(42,93,79,0.25)] flex items-center justify-center text-4xl mx-auto mb-6">
-            
+            ✓
           </div>
           <h3 className="text-2xl font-normal text-[#3A7D6F] mb-3">Payment Successful!</h3>
           <p className="text-sm text-[var(--text-muted)] mb-2 max-w-sm mx-auto">
@@ -278,67 +308,146 @@ function DuesPanel() {
           {/* Payment Options — radio-style */}
           <div className="mb-6 card-enter card-enter-delay-2">
             <h2 className="text-base font-medium text-[var(--parchment)] mb-3">Select Payment Amount</h2>
-            <div className="space-y-3">
-              {paymentOptions.map(({ quarters, label, amount, recommended, savings, discount }) => {
-                const isSelected = selectedQuarters === quarters;
-                return (
-                  <button
-                    key={quarters}
-                    onClick={() => setSelectedQuarters(quarters)}
-                    className={`w-full p-5 rounded-xl border text-left flex items-center gap-4 transition-all duration-200 min-h-[72px] ${
-                      isSelected
-                        ? 'border-[#B09B71]/60 bg-[rgba(26,26,30,0.50)] shadow-[0_0_16px_rgba(201,169,110,0.12)]'
-                        : recommended
-                        ? 'border-[#B09B71]/20 bg-[rgba(26,26,30,0.30)] hover:border-[#B09B71]/40'
-                        : 'border-[var(--divider)] bg-[var(--surface-1)] hover:border-[var(--border-default)]'
-                    }`}
-                  >
-                    {/* Radio indicator */}
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${
-                      isSelected
-                        ? 'border-[#B09B71] bg-[#B09B71]'
-                        : 'border-[var(--border-default)]'
-                    }`}>
-                      {isSelected && (
-                        <div className="w-2 h-2 rounded-full bg-white" />
-                      )}
-                    </div>
-
-                    {/* Labels */}
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <p className="font-medium text-sm text-[var(--parchment)]">{label}</p>
-                        {recommended && (
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/30 text-[#D4C4A0] font-medium">
-                            {discount}% off
-                          </span>
+            {treasuryLoading ? (
+              <div className="space-y-3">
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="animate-pulse h-[72px] rounded-xl bg-[var(--surface-2)]" />
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {paymentOptions.map(({ quarters, label, amount, recommended, savings, discount }) => {
+                  const isSelected = selectedQuarters === quarters;
+                  return (
+                    <button
+                      key={quarters}
+                      onClick={() => setSelectedQuarters(quarters)}
+                      className={`w-full p-5 rounded-xl border text-left flex items-center gap-4 transition-all duration-200 min-h-[72px] ${
+                        isSelected
+                          ? 'border-[#B09B71]/60 bg-[rgba(26,26,30,0.50)] shadow-[0_0_16px_rgba(201,169,110,0.12)]'
+                          : recommended
+                          ? 'border-[#B09B71]/20 bg-[rgba(26,26,30,0.30)] hover:border-[#B09B71]/40'
+                          : 'border-[var(--divider)] bg-[var(--surface-1)] hover:border-[var(--border-default)]'
+                      }`}
+                    >
+                      {/* Radio indicator */}
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition-all duration-200 ${
+                        isSelected
+                          ? 'border-[#B09B71] bg-[#B09B71]'
+                          : 'border-[var(--border-default)]'
+                      }`}>
+                        {isSelected && (
+                          <div className="w-2 h-2 rounded-full bg-white" />
                         )}
                       </div>
-                      {recommended && savings && (
-                        <p className="text-xs text-[#B09B71] font-medium mt-0.5">
-                          Save ${savings} vs quarterly
-                        </p>
-                      )}
-                    </div>
 
-                    {/* Amount */}
-                    <span className="text-xl font-normal text-[var(--parchment)]">
-                      ${amount.toFixed(2)}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+                      {/* Labels */}
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="font-medium text-sm text-[var(--parchment)]">{label}</p>
+                          {recommended && (
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/30 text-[#D4C4A0] font-medium">
+                              {discount}% off
+                            </span>
+                          )}
+                        </div>
+                        {recommended && savings && (
+                          <p className="text-xs text-[#B09B71] font-medium mt-0.5">
+                            Save ${savings} vs quarterly
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Amount */}
+                      <span className="text-xl font-normal text-[var(--parchment)]">
+                        ${amount.toFixed(2)}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
+
+          {/* Transaction state feedback */}
+          {(isApprovePending) && (
+            <div className="mb-4 p-3 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#D4C4A0] text-sm">
+              ⏳ Waiting for wallet confirmation...
+            </div>
+          )}
+          {(isApproveConfirming && approveHash) && (
+            <div className="mb-4 p-3 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#D4C4A0] text-sm">
+              🔄 Approve submitted. Confirming...{' '}
+              <a
+                href={`https://sepolia.basescan.org/tx/${approveHash}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline font-mono text-xs"
+              >
+                {approveHash.slice(0, 10)}…
+              </a>
+            </div>
+          )}
+          {(isPayPending) && (
+            <div className="mb-4 p-3 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#D4C4A0] text-sm">
+              ⏳ Waiting for wallet confirmation...
+            </div>
+          )}
+          {(isPayConfirming && payHash) && (
+            <div className="mb-4 p-3 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#D4C4A0] text-sm">
+              🔄 Transaction submitted. Confirming...{' '}
+              <a
+                href={`https://sepolia.basescan.org/tx/${payHash}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline font-mono text-xs"
+              >
+                {payHash.slice(0, 10)}…
+              </a>
+            </div>
+          )}
+
+          {/* Hook errors */}
+          {error && (
+            <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+              ⚠️ {error}
+            </div>
+          )}
+
+          {/* Insufficient balance warning */}
+          {selectedOption && hasInsufficientBalance && (
+            <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+              ⚠️ Insufficient USDC balance. You need ${selectedOption.amount.toFixed(2)} but have ${usdcBalance.toFixed(2)}.
+            </div>
+          )}
+
+          {/* Zero quarters guard (shouldn't happen with current options, but safety) */}
+          {selectedQuarters === 0 && (
+            <div className="mb-4 p-3 rounded-lg bg-[var(--surface-2)] border border-[var(--divider)] text-[var(--text-muted)] text-sm">
+              Please select a payment option.
+            </div>
+          )}
 
           {/* Pay Button */}
           <button
             onClick={handlePay}
-            disabled={!selectedQuarters || isApproving || isPaying}
+            disabled={
+              !selectedQuarters ||
+              selectedQuarters === 0 ||
+              isApproving ||
+              isPaying ||
+              hasInsufficientBalance ||
+              balanceLoading ||
+              allowanceLoading
+            }
             className="w-full py-4 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 disabled:cursor-not-allowed text-base font-medium transition-all duration-200 active:scale-[0.98] min-h-[56px]"
           >
-            {isApproving ? ' Approving USDC...' :
-             isPaying ? ' Processing Payment...' :
+            {isApprovePending ? '⏳ Waiting for wallet...' :
+             isApproveConfirming ? '🔄 Confirming approval...' :
+             isPayPending ? '⏳ Waiting for wallet...' :
+             isPayConfirming ? '🔄 Confirming payment...' :
+             !selectedQuarters ? 'Select a payment option' :
+             hasInsufficientBalance ? 'Insufficient USDC balance' :
              selectedOption ? `Pay $${selectedOption.amount.toFixed(2)} USDC` :
              'Select a payment option'}
           </button>
@@ -346,9 +455,9 @@ function DuesPanel() {
           {/* Info */}
           <div className="mt-4 text-xs text-[var(--text-disabled)] text-center space-y-1">
             <p>Paid in USDC on Base. 80% → operating fund · 20% → reserve fund.</p>
-            {selectedOption && usdcBalance < selectedOption.amount && (
-              <p className="text-[#8B5A5A] font-medium">
-                 Insufficient balance. You need ${selectedOption.amount.toFixed(2)} but have ${usdcBalance.toFixed(2)}.
+            {allowanceAlreadySet && selectedOption && (
+              <p className="text-[#3A7D6F]">
+                ✓ USDC already approved — no approval step needed.
               </p>
             )}
           </div>

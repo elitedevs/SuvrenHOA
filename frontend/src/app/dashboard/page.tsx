@@ -132,6 +132,7 @@ function PropertyDashboard() {
     address,
     hasProperty,
     isLoading,
+    error: propertyError,
     votes,
     delegatee,
     totalSupply,
@@ -143,12 +144,14 @@ function PropertyDashboard() {
     hasMultipleProperties,
   } = useProperty();
 
-  const { isCurrent, quartersOwed, amountOwed } = useDuesStatus(tokenId);
+  const { isCurrent, quartersOwed, amountOwed, error: duesError } = useDuesStatus(tokenId);
   const { totalUnread } = useMessages();
   const { isCompleted } = useOnboarding();
   const { profile } = useProfile();
   const [showQR, setShowQR] = useState(false);
   const [dismissedError, setDismissedError] = useState(false);
+
+  const pageError = propertyError || duesError || null;
 
   // Show skeleton while blockchain data loads
   if (isLoading) {
@@ -169,13 +172,21 @@ function PropertyDashboard() {
           <div className="w-20 h-20 rounded-xl bg-[rgba(176,155,113,0.08)] flex items-center justify-center mx-auto mb-6">
             <Home className="w-8 h-8 text-[#B09B71] opacity-60" />
           </div>
-          <h3 className="text-xl font-normal mb-3">No Property NFT Detected</h3>
+          <h3 className="text-xl font-normal mb-3">No properties found. Complete onboarding to get started.</h3>
           <p className="text-[var(--text-muted)] text-sm max-w-md mx-auto leading-relaxed mb-6">
             Your wallet doesn&apos;t hold a Faircroft Property NFT.
             If you&apos;re a homeowner, contact the board to have your property minted.
           </p>
-          <div className="inline-block px-4 py-2.5 rounded-xl bg-[rgba(245,240,232,0.04)]">
-            <p className="text-xs text-[var(--text-disabled)] font-mono">{address}</p>
+          <div className="flex flex-col items-center gap-4">
+            <div className="inline-block px-4 py-2.5 rounded-xl bg-[rgba(245,240,232,0.04)]">
+              <p className="text-xs text-[var(--text-disabled)] font-mono">{address}</p>
+            </div>
+            <Link
+              href="/onboarding"
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[rgba(176,155,113,0.12)] hover:bg-[rgba(176,155,113,0.20)] text-sm text-[#B09B71] transition-all duration-200"
+            >
+              Start Onboarding <ChevronRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </div>
@@ -184,6 +195,14 @@ function PropertyDashboard() {
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-10 page-enter">
+      {/* Error banner */}
+      {pageError && !dismissedError && (
+        <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center justify-between">
+          <span>⚠️ {pageError}</span>
+          <button onClick={() => setDismissedError(true)} className="text-red-400/60 hover:text-red-400">✕</button>
+        </div>
+      )}
+
       {/* Page header */}
       <div className="flex items-center justify-between mb-8">
         <div>

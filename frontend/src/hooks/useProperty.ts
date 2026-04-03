@@ -23,7 +23,7 @@ export function useProperty() {
   const [selectedPropertyIndex, setSelectedPropertyIndex] = useState(0);
 
   // How many NFTs does this wallet hold?
-  const { data: balance, isLoading: balanceLoading } = useReadContract({
+  const { data: balance, isLoading: balanceLoading, error: balanceError } = useReadContract({
     ...propertyNFT,
     functionName: 'balanceOf',
     args: address ? [address] : undefined,
@@ -128,7 +128,10 @@ export function useProperty() {
 
   const isLoading = !!address && (balanceLoading || tokenIdsLoading || propertyInfoLoading);
 
+  const error = balanceError ? (balanceError as Error).message || 'Failed to load property data' : null;
+
   return {
+    error,
     // Backward-compatible single-property fields (point to selected)
     address,
     hasProperty,

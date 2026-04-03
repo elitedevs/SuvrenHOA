@@ -26,7 +26,7 @@ export default function ProfilePage() {
 
 function ProfileForm() {
   const { address } = useAccount();
-  const { profile, isLoading } = useProfile();
+  const { profile, isLoading, error: profileError } = useProfile();
   const { tokenId, propertyInfo, votes } = useProperty();
   const updateProfile = useUpdateProfile();
   const { isCurrent } = useDuesStatus(tokenId);
@@ -37,8 +37,10 @@ function ProfileForm() {
   const [bio, setBio] = useState('');
   const [saved, setSaved] = useState(false);
   const [emailError, setEmailError] = useState('');
+  const [nameError, setNameError] = useState('');
   const [saveError, setSaveError] = useState('');
   const [dismissedError, setDismissedError] = useState(false);
+  const [dismissedHookError, setDismissedHookError] = useState(false);
 
   // Badge inputs from localStorage — safe fallback if storage was cleared
   const voteCount = (() => {
@@ -71,8 +73,19 @@ function ProfileForm() {
     }
   }, [profile]);
 
+  const validateEmail = (val: string) => {
+    if (!val) return '';
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) ? '' : 'Enter a valid email address';
+  };
+
   const handleSave = () => {
     if (!address) return;
+    const nameErr = name.trim() === '' ? 'Display name is required' : '';
+    const emailErr = validateEmail(email);
+    setNameError(nameErr);
+    if (nameErr || emailErr) { setEmailError(emailErr); return; }
+    setSaveError('');
+    setDismissedError(false);
     updateProfile.mutate(
       {
         wallet_address: address,
@@ -86,6 +99,10 @@ function ProfileForm() {
         onSuccess: () => {
           setSaved(true);
           setTimeout(() => setSaved(false), 3000);
+        },
+        onError: (err: unknown) => {
+          const msg = err instanceof Error ? err.message : 'Failed to save profile. Please try again.';
+          setSaveError(msg);
         },
       }
     );
@@ -128,6 +145,23 @@ function ProfileForm() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
+      {/* Hook error banner */}
+      {profileError && !dismissedHookError && (
+        <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center justify-between">
+          <span>⚠️ {profileError}</span>
+          <button onClick={() => setDismissedHookError(true)} className="text-red-400/60 hover:text-red-400">✕</button>
+        </div>
+      )}
+
+      {/* Save error banner */}
+      {saveError && !dismissedError && (
+        <div className="flex items-center justify-between gap-3 mb-4 px-4 py-3 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(139,90,90,0.30)] text-[#8B5A5A] text-sm">
+          <span>{saveError}</span>
+          <button onClick={() => setDismissedError(true)} className="shrink-0 hover:opacity-70 transition-opacity" aria-label="Dismiss error">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
       <h1 className="text-2xl sm:text-3xl font-medium mb-2">Your Profile</h1>
       <p className="text-sm text-[var(--text-muted)] mb-8">
         Set your display name so neighbors see a real name instead of a wallet address
@@ -200,14 +234,15 @@ function ProfileForm() {
         <h3 className="text-xs uppercase tracking-wider text-[var(--text-disabled)] font-medium">Profile Settings</h3>
 
         <div>
-          <label className="block text-sm text-[var(--text-muted)] mb-2">Display Name</label>
+          <label className="block text-sm text-[var(--text-muted)] mb-2">Display Name <span className="text-red-400">*</span></label>
           <input
             type="text"
             value={name}
-            onChange={e => setName(e.target.value)}
+            onChange={e => { setName(e.target.value); if (nameError) setNameError(''); }}
             placeholder="How neighbors will see you (e.g., Rick Morang)"
-            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
+            className={`w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border text-sm placeholder-[rgba(245,240,232,0.25)] focus:outline-none ${nameError ? 'border-[#8B5A5A]/60 focus:border-[#8B5A5A]' : 'border-[rgba(245,240,232,0.08)] focus:border-[#B09B71]/50'}`}
           />
+          {nameError && <p className="text-xs text-[#8B5A5A] mt-1">{nameError}</p>}
           <p className="text-[10px] text-[var(--text-disabled)] mt-1">This replaces your wallet address in community posts and comments</p>
         </div>
 
@@ -217,10 +252,11 @@ function ProfileForm() {
             <input
               type="email"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={e => { setEmail(e.target.value); setEmailError(validateEmail(e.target.value)); }}
               placeholder="For notifications"
-              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
+              className={`w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border text-sm placeholder-[rgba(245,240,232,0.25)] focus:outline-none ${emailError ? 'border-[#8B5A5A]/60 focus:border-[#8B5A5A]' : 'border-[rgba(245,240,232,0.08)] focus:border-[#B09B71]/50'}`}
             />
+            {emailError && <p className="text-xs text-[#8B5A5A] mt-1">{emailError}</p>}
           </div>
           <div>
             <label className="block text-sm text-[var(--text-muted)] mb-2">Phone (optional)</label>
@@ -247,10 +283,10 @@ function ProfileForm() {
 
         <button
           onClick={handleSave}
-          disabled={updateProfile.isPending}
-          className="w-full py-3 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 text-sm font-medium transition-all"
+          disabled={updateProfile.isPending || !!emailError}
+          className="w-full py-3 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium transition-all"
         >
-          {updateProfile.isPending ? 'Saving...' : saved ? 'Saved' : 'Save Profile'}
+          {updateProfile.isPending ? 'Saving…' : saved ? '✓ Saved' : 'Save Profile'}
         </button>
       </div>
 

@@ -24,6 +24,7 @@ type NavSection = {
   label: string;
   icon: React.ElementType;
   children?: NavChild[];
+  utility?: boolean; // utility items get reduced opacity + smaller font
 };
 
 const NAV_SECTIONS: NavSection[] = [
@@ -93,11 +94,13 @@ const NAV_SECTIONS: NavSection[] = [
     href: '/messages',
     label: 'Messages',
     icon: MessageCircle,
+    utility: true,
   },
   {
     href: '/directory',
     label: 'Directory',
     icon: BookOpen,
+    utility: true,
   },
   {
     href: '/announcements',
@@ -198,6 +201,11 @@ function NavItem({
       )
     : false;
   const highlighted = isActive || isChildActive;
+  const isUtility = section.utility === true;
+
+  // Utility items: reduced opacity + smaller font
+  const baseOpacity = isUtility ? 0.50 : 0.85;
+  const fontSize = isUtility ? '13px' : '15px';
 
   // Shared hover handlers
   const hoverOn = (el: HTMLElement) => {
@@ -208,9 +216,10 @@ function NavItem({
   };
 
   const parentStyle: React.CSSProperties = {
-    color: highlighted ? 'rgba(245,240,232,0.90)' : 'rgba(245,240,232,0.55)',
+    color: highlighted ? 'rgba(245,240,232,0.90)' : `rgba(245,240,232,${baseOpacity})`,
     background: highlighted ? 'rgba(176,155,113,0.06)' : 'transparent',
     transition: 'background 150ms ease-out, color 150ms ease-out',
+    fontSize,
   };
 
   if (hasChildren && !collapsed) {
@@ -218,7 +227,7 @@ function NavItem({
       <div>
         <button
           onClick={() => onToggle(section.label)}
-          className="w-full flex items-center gap-3 px-3 py-2.5 text-[15px] rounded-lg relative"
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg relative"
           style={parentStyle}
           onMouseEnter={(e) => hoverOn(e.currentTarget)}
           onMouseLeave={(e) => hoverOff(e.currentTarget)}
@@ -232,12 +241,14 @@ function NavItem({
           )}
           <Icon
             size={20}
+            strokeWidth={1.25}
             className="shrink-0"
-            style={{ opacity: highlighted ? 0.80 : 0.45, transition: 'opacity 150ms ease-out' }}
+            style={{ opacity: highlighted ? 0.80 : isUtility ? 0.40 : 0.45, transition: 'opacity 150ms ease-out' }}
           />
           <span className="flex-1 text-left font-normal">{section.label}</span>
           <ChevronDown
             size={13}
+            strokeWidth={1.25}
             style={{
               opacity: 0.25,
               transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
@@ -277,17 +288,25 @@ function NavItem({
                   <Link
                     key={child.href}
                     href={child.href}
-                    className="block py-1.5 px-2 text-sm rounded-md relative"
+                    className="block py-1.5 px-2 rounded-md relative"
                     style={{
-                      color: childActive ? 'rgba(245,240,232,0.88)' : 'rgba(245,240,232,0.45)',
+                      fontSize: '13px',
+                      paddingLeft: '36px',
+                      color: childActive ? 'rgba(245,240,232,0.88)' : 'rgba(245,240,232,0.50)',
                       background: childActive ? 'rgba(176,155,113,0.04)' : 'transparent',
-                      transition: 'background 150ms ease-out, color 150ms ease-out',
+                      transition: 'background 150ms ease-out, color 150ms ease-out, opacity 150ms ease-out',
                     }}
                     onMouseEnter={(e) => {
-                      if (!childActive) (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(245,240,232,0.03)';
+                      if (!childActive) {
+                        (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(245,240,232,0.03)';
+                        (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(245,240,232,0.75)';
+                      }
                     }}
                     onMouseLeave={(e) => {
-                      if (!childActive) (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+                      if (!childActive) {
+                        (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+                        (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(245,240,232,0.50)';
+                      }
                     }}
                   >
                     {childActive && (
@@ -296,7 +315,7 @@ function NavItem({
                         style={{ width: '2px', height: '12px', background: 'rgba(176,155,113,0.60)' }}
                       />
                     )}
-                    <span className="pl-1">{child.label}</span>
+                    {child.label}
                   </Link>
                 );
               })}
@@ -311,7 +330,7 @@ function NavItem({
   return (
     <Link
       href={section.href}
-      className="flex items-center gap-3 px-3 py-2.5 text-[15px] rounded-lg relative"
+      className="flex items-center gap-3 px-3 py-2.5 rounded-lg relative"
       style={parentStyle}
       onMouseEnter={(e) => hoverOn(e.currentTarget as HTMLAnchorElement)}
       onMouseLeave={(e) => hoverOff(e.currentTarget as HTMLAnchorElement)}
@@ -325,8 +344,9 @@ function NavItem({
       )}
       <Icon
         size={20}
+        strokeWidth={1.25}
         className="shrink-0"
-        style={{ opacity: highlighted ? 0.80 : 0.45, transition: 'opacity 150ms ease-out' }}
+        style={{ opacity: highlighted ? 0.80 : isUtility ? 0.40 : 0.45, transition: 'opacity 150ms ease-out' }}
       />
       {!collapsed && <span className="truncate font-normal">{section.label}</span>}
     </Link>
@@ -415,33 +435,41 @@ export function Sidebar() {
           onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(245,240,232,0.65)'; }}
           onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(245,240,232,0.40)'; }}
         >
-          {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+          {collapsed ? <ChevronRight size={15} strokeWidth={1.25} /> : <ChevronLeft size={15} strokeWidth={1.25} />}
         </button>
       </div>
 
       {/* ── Navigation ── */}
       <nav className="flex-1 overflow-y-auto py-3 px-2.5">
-        {NAV_SECTIONS.map((section, index) => (
-          <div key={section.label}>
-            {/* Hairline divider between section clusters */}
-            {DIVIDER_BEFORE.has(index) && (
-              <div
-                style={{
-                  height: '1px',
-                  background: 'rgba(245,240,232,0.04)',
-                  margin: '8px 4px',
-                }}
+        {NAV_SECTIONS.map((section, index) => {
+          const prevSection = index > 0 ? NAV_SECTIONS[index - 1] : null;
+          const isFirstUtility = section.utility && !prevSection?.utility;
+          return (
+            <div key={section.label}>
+              {/* Hairline divider between section clusters */}
+              {DIVIDER_BEFORE.has(index) && (
+                <div
+                  style={{
+                    height: '1px',
+                    background: 'rgba(245,240,232,0.04)',
+                    margin: '8px 4px',
+                  }}
+                />
+              )}
+              {/* mt-6 spacer before first utility item */}
+              {isFirstUtility && !DIVIDER_BEFORE.has(index) && (
+                <div style={{ height: '24px' }} />
+              )}
+              <NavItem
+                section={section}
+                collapsed={collapsed}
+                pathname={pathname}
+                onToggle={toggleSection}
+                expanded={expandedSections.has(section.label)}
               />
-            )}
-            <NavItem
-              section={section}
-              collapsed={collapsed}
-              pathname={pathname}
-              onToggle={toggleSection}
-              expanded={expandedSections.has(section.label)}
-            />
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </nav>
 
       {/* ── Bottom: theme + wallet ── */}

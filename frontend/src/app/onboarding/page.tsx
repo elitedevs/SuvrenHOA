@@ -209,6 +209,9 @@ function OnboardingWizard() {
   const { data, save, complete, isCompleted } = useOnboarding();
   const [step, setStep] = useState(1);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [completing, setCompleting] = useState(false);
+  const [completeError, setCompleteError] = useState('');
+  const [stepError, setStepError] = useState('');
   const router = useRouter();
 
   const TOTAL_STEPS = 6;
@@ -227,13 +230,40 @@ function OnboardingWizard() {
     setCcrAck(data.ccrAcknowledged);
   }, [data]);
 
+  const validateStep = useCallback((): string => {
+    if (step === 2) {
+      if (profile.messagingOptIn && !profile.email && !profile.phone) {
+        return 'Please provide an email or phone number to receive messages, or opt out of messaging.';
+      }
+    }
+    if (step === 3) {
+      for (const pet of pets) {
+        if (!pet.name.trim()) return 'Each pet must have a name. Fill in or remove incomplete pets.';
+      }
+    }
+    if (step === 4) {
+      for (const v of vehicles) {
+        if (!v.make.trim() || !v.model.trim()) return 'Each vehicle must have a make and model. Fill in or remove incomplete vehicles.';
+        if (!v.plate.trim()) return 'Each vehicle must have a license plate. Fill in or remove incomplete vehicles.';
+      }
+    }
+    return '';
+  }, [step, profile, pets, vehicles]);
+
   const goNext = useCallback(() => {
+    const err = validateStep();
+    if (err) { setStepError(err); return; }
+    setStepError('');
     // Save progress
     save({ profile, pets, vehicles, ccrAcknowledged: ccrAck });
     if (step < TOTAL_STEPS) setStep((s) => s + 1);
-  }, [step, save, profile, pets, vehicles, ccrAck]);
+  }, [step, save, profile, pets, vehicles, ccrAck, validateStep]);
 
-  const goBack = () => setStep((s) => Math.max(1, s - 1));
+  const goBack = () => {
+    setStepError('');
+    save({ profile, pets, vehicles, ccrAcknowledged: ccrAck });
+    setStep((s) => Math.max(1, s - 1));
+  };
 
   const addPet = () => {
     setPets((prev) => [
@@ -265,12 +295,22 @@ function OnboardingWizard() {
     setVehicles((prev) => prev.filter((v) => v.id !== id));
   };
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
     save({ profile, pets, vehicles, ccrAcknowledged: ccrAck });
-    complete();
-    setShowConfetti(true);
-    setStep(6);
-    setTimeout(() => setShowConfetti(false), 5000);
+    setCompleting(true);
+    setCompleteError('');
+    setStepError('');
+    try {
+      await complete();
+      setShowConfetti(true);
+      setStep(6);
+      setTimeout(() => setShowConfetti(false), 5000);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Failed to complete setup. Please try again.';
+      setCompleteError(msg);
+    } finally {
+      setCompleting(false);
+    }
   };
 
   const lot = propertyInfo ? Number(propertyInfo.lotNumber) : null;
@@ -291,6 +331,12 @@ function OnboardingWizard() {
       )}
 
       {step < 6 && <StepIndicator current={step} total={TOTAL_STEPS} />}
+
+      {stepError && step < 6 && (
+        <div className="mb-4 px-4 py-3 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(139,90,90,0.30)] text-[#8B5A5A] text-sm">
+          {stepError}
+        </div>
+      )}
 
       {/* ── Step 1: Welcome ── */}
       {step === 1 && (
@@ -626,7 +672,7 @@ function OnboardingWizard() {
           </div>
 
           {/* CC&Rs */}
-          <div className="border border-[#B09B71]/20 rounded-xl p-4 mb-7 bg-[#B09B71]/5">
+          <div className="border border-[#B09B71]/20 rounded-xl p-4 mb-4 bg-[#B09B71]/5">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
@@ -647,19 +693,26 @@ function OnboardingWizard() {
             </label>
           </div>
 
+          {completeError && (
+            <div className="mb-4 px-4 py-3 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(139,90,90,0.30)] text-[#8B5A5A] text-sm">
+              {completeError}
+            </div>
+          )}
+
           <div className="flex gap-3">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
+              disabled={completing}
+              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all disabled:opacity-50"
             >
               ← Back
             </button>
             <button
               onClick={handleComplete}
-              disabled={!ccrAck}
+              disabled={!ccrAck || completing}
               className="flex-1 py-3 rounded-xl bg-[#2A5D4F] hover:bg-[#3A7D6F] disabled:opacity-40 disabled:cursor-not-allowed text-[var(--text-heading)] font-medium text-sm transition-all"
             >
-              Complete Setup 
+              {completing ? 'Completing…' : 'Complete Setup '}
             </button>
           </div>
         </div>
@@ -740,7 +793,7 @@ const LS_CHECKLIST = 'suvren_checklist_completed';
 function loadChecked(): Set<string> {
   if (typeof window === 'undefined') return new Set();
   try { return new Set(JSON.parse(localStorage.getItem(LS_CHECKLIST) || '[]')); }
-  catch { return new Set(); }
+  catch (err) { console.error('[MoveChecklist] Failed to parse checklist state from localStorage:', err); return new Set(); }
 }
 
 function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
@@ -869,7 +922,7 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div>
+    <div className="page-enter">
       {/* View switcher */}
       <div className="max-w-3xl mx-auto px-4 pt-6 sm:pt-8">
         <div className="flex gap-2 mb-6">

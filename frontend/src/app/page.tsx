@@ -16,8 +16,8 @@ import { OnboardingChecklist } from '@/components/OnboardingChecklist';
 import { WeatherWidget } from '@/components/WeatherWidget';
 import { useProfile } from '@/hooks/useProfile';
 import {
-  Home as HomeIcon, Vote, DollarSign, FileText, CreditCard, Settings,
-  Wrench, MessageSquare, ClipboardList, Zap, Link2,
+  Home as HomeIcon, Vote, FileText, Settings,
+  MessageSquare, Zap, Link2,
   AlertTriangle,
 } from 'lucide-react';
 import { ResidentSpotlight } from '@/components/ResidentSpotlight';
@@ -328,12 +328,9 @@ function Dashboard() {
 }
 
 const QUICK_ACTIONS = [
-  { href: '/dues', icon: <CreditCard className="w-5 h-5 text-[#B09B71]" />, label: 'Pay Dues', desc: 'USDC payment', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] hover:bg-[rgba(176,155,113,0.18)] border-[rgba(176,155,113,0.20)] hover:border-[rgba(176,155,113,0.40)]' },
-  { href: '/maintenance', icon: <Wrench className="w-5 h-5 text-[#B09B71]" />, label: 'Submit Request', desc: 'Maintenance', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.08)] hover:bg-[rgba(176,155,113,0.14)] border-[rgba(176,155,113,0.15)] hover:border-[rgba(176,155,113,0.28)]' },
-  { href: '/documents', icon: <FileText className="w-5 h-5 text-[#B09B71]" />, label: 'Documents', desc: 'View records', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] hover:bg-[rgba(176,155,113,0.15)] border-[rgba(176,155,113,0.20)] hover:border-[rgba(176,155,113,0.30)]' },
-  { href: '/messages', icon: <MessageSquare className="w-5 h-5 text-[#2A5D4F]" />, label: 'Message Neighbor', desc: 'Community chat', color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.10)] hover:bg-[rgba(42,93,79,0.15)] border-[rgba(42,93,79,0.20)] hover:border-[rgba(42,93,79,0.30)]' },
-  { href: '/proposals', icon: <Vote className="w-5 h-5 text-[#B09B71]" />, label: 'Vote on Proposal', desc: 'Governance', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] hover:bg-[rgba(176,155,113,0.18)] border-[rgba(176,155,113,0.20)] hover:border-[rgba(176,155,113,0.40)]' },
-  { href: '/activity', icon: <ClipboardList className="w-5 h-5 text-[#B09B71]" />, label: 'Activity Log', desc: 'On-chain events', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.08)] hover:bg-[rgba(176,155,113,0.14)] border-[rgba(176,155,113,0.15)] hover:border-[rgba(176,155,113,0.28)]' },
+  { href: '/dashboard', icon: <HomeIcon className="w-5 h-5 text-[#B09B71]" />, label: 'My Property', desc: 'Lots, pets, vehicles', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] hover:bg-[rgba(176,155,113,0.18)] border-[rgba(176,155,113,0.20)] hover:border-[rgba(176,155,113,0.40)]' },
+  { href: '/proposals', icon: <Vote className="w-5 h-5 text-[#B09B71]" />, label: 'Governance', desc: 'Proposals & treasury', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] hover:bg-[rgba(176,155,113,0.18)] border-[rgba(176,155,113,0.20)] hover:border-[rgba(176,155,113,0.40)]' },
+  { href: '/community', icon: <MessageSquare className="w-5 h-5 text-[#2A5D4F]" />, label: 'Community', desc: 'Forum & documents', color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.10)] hover:bg-[rgba(42,93,79,0.15)] border-[rgba(42,93,79,0.20)] hover:border-[rgba(42,93,79,0.30)]' },
 ];
 
 function QuickActions() {
@@ -342,7 +339,7 @@ function QuickActions() {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-base font-medium text-[var(--parchment)] flex items-center gap-2"><Zap className="w-4 h-4 text-[#B09B71]" /> Quick Actions</h2>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-3">
         {QUICK_ACTIONS.map(({ href, icon, label, desc, color, bg }) => (
           <Link
             key={href}
@@ -351,7 +348,7 @@ function QuickActions() {
           >
             <span className="group-hover:scale-110 transition-transform duration-200 inline-block shrink-0">{icon}</span>
             <div className="min-w-0">
-              <p className={`text-xs font-medium ${color} leading-tight`}>{label}</p>
+              <p className={`text-xs font-normal ${color} leading-tight`}>{label}</p>
               <p className="text-[10px] text-[var(--text-disabled)] mt-0.5 truncate">{desc}</p>
             </div>
           </Link>

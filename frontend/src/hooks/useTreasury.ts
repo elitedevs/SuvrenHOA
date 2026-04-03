@@ -10,17 +10,17 @@ import { formatUnits } from 'viem';
 export function useTreasury() {
   const { treasury } = useContracts();
 
-  const { data: snapshot } = useReadContract({
+  const { data: snapshot, isLoading: snapLoading, error: snapError } = useReadContract({
     ...treasury,
     functionName: 'getTreasurySnapshot',
   });
 
-  const { data: quarterlyDues } = useReadContract({
+  const { data: quarterlyDues, isLoading: duesLoading, error: duesError } = useReadContract({
     ...treasury,
     functionName: 'quarterlyDuesAmount',
   });
 
-  const { data: annualDiscount } = useReadContract({
+  const { data: annualDiscount, error: discountError } = useReadContract({
     ...treasury,
     functionName: 'annualDuesDiscount',
   });
@@ -43,6 +43,8 @@ export function useTreasury() {
     ? formatUSDC((quarterlyDues as bigint) * BigInt(4) * BigInt(10000 - Number(annualDiscount ?? 0)) / BigInt(10000))
     : '760.00';
 
+  const firstError = snapError ?? duesError ?? discountError;
+
   return {
     totalBalance: total,
     operatingBalance: operating,
@@ -51,6 +53,8 @@ export function useTreasury() {
     annualDiscount: discount,
     annualAmount,
     expenditureCount: expenditureCount ? Number(expenditureCount) : 0,
+    loading: snapLoading || duesLoading,
+    error: firstError ? (firstError as Error).message || 'Failed to load treasury data' : null,
   };
 }
 
@@ -60,7 +64,7 @@ export function useTreasury() {
 export function useDuesStatus(tokenId: number | undefined) {
   const { treasury } = useContracts();
 
-  const { data: isCurrent } = useReadContract({
+  const { data: isCurrent, error: isCurrentError } = useReadContract({
     ...treasury,
     functionName: 'isDuesCurrent',
     args: tokenId !== undefined ? [BigInt(tokenId)] : undefined,
@@ -78,6 +82,7 @@ export function useDuesStatus(tokenId: number | undefined) {
     isCurrent: isCurrent as boolean | undefined,
     quartersOwed: duesOwed ? Number((duesOwed as [bigint, bigint])[0]) : 0,
     amountOwed: duesOwed ? formatUSDC((duesOwed as [bigint, bigint])[1]) : '0.00',
+    error: isCurrentError ? (isCurrentError as Error).message || 'Failed to load dues status' : null,
   };
 }
 

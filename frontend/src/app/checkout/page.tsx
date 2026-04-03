@@ -78,7 +78,7 @@ function CheckRow({
 // ── Main Checkout Wizard ──────────────────────────────────────────────────────
 function CheckoutWizard() {
   const { tokenId } = useProperty();
-  const { isCurrent, quartersOwed, amountOwed } = useDuesStatus(tokenId);
+  const { isCurrent, quartersOwed, amountOwed, error: duesError } = useDuesStatus(tokenId);
   const [step, setStep] = useState(1);
 
   // Step 1 state
@@ -115,6 +115,13 @@ function CheckoutWizard() {
 
       {step < TOTAL_STEPS && <StepIndicator current={step} total={TOTAL_STEPS} />}
 
+      {/* ── Dues status error ── */}
+      {duesError && (
+        <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+          ⚠️ {duesError}
+        </div>
+      )}
+
       {/* ── Step 1: Checklist ── */}
       {step === 1 && (
         <div className="glass-card rounded-xl p-7 animate-fade-in">
@@ -134,19 +141,21 @@ function CheckoutWizard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {isCurrent !== false ? (
-                  <span className="text-[#3A7D6F] text-lg"></span>
+                  <span className="text-[#3A7D6F] text-lg">✓</span>
                 ) : (
-                  <span className="text-[#8B5A5A] text-lg"></span>
+                  <span className="text-[#8B5A5A] text-lg">⚠</span>
                 )}
                 <div>
                   <p className="text-sm font-medium text-[var(--parchment)]">HOA Dues</p>
-                  <p className="text-xs text-[var(--text-disabled)]">
-                    {isCurrent === undefined
-                      ? 'Checking...'
-                      : isCurrent
-                      ? 'All dues are current'
-                      : `${quartersOwed} quarters owed · $${amountOwed}`}
-                  </p>
+                  {isCurrent === undefined ? (
+                    <div className="animate-pulse h-3 w-24 bg-[var(--surface-2)] rounded mt-1" />
+                  ) : (
+                    <p className="text-xs text-[var(--text-disabled)]">
+                      {isCurrent
+                        ? 'All dues are current'
+                        : `${quartersOwed} quarters owed · $${amountOwed}`}
+                    </p>
+                  )}
                 </div>
               </div>
               {isCurrent === false && (
@@ -226,7 +235,9 @@ function CheckoutWizard() {
             <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">
               Outstanding Balance
             </p>
-            {isCurrent === false ? (
+            {isCurrent === undefined ? (
+              <div className="animate-pulse h-8 w-32 bg-[var(--surface-2)] rounded-lg" />
+            ) : isCurrent === false ? (
               <div>
                 <p className="text-2xl font-normal text-[#8B5A5A] mb-1">
                   ${amountOwed}
@@ -238,7 +249,7 @@ function CheckoutWizard() {
                   href="/dues"
                   className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(107,58,58,0.25)] hover:bg-[rgba(139,90,90,0.30)] text-sm font-medium text-[#8B5A5A] transition-all"
                 >
-                   Pay Outstanding Balance
+                  ⚠ Pay Outstanding Balance
                 </Link>
               </div>
             ) : (

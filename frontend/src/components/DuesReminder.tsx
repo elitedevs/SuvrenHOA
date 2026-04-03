@@ -3,6 +3,7 @@
 import { useDuesStatus, useTreasury } from '@/hooks/useTreasury';
 import { useProperty } from '@/hooks/useProperty';
 import { useDuesSocialProof } from '@/hooks/useDuesSocialProof';
+import { Clock } from 'lucide-react';
 import Link from 'next/link';
 
 interface DuesReminderProps {
@@ -122,12 +123,20 @@ function CompactReminder({
 
   if (isOverdue) {
     return (
-      <div className="glass-card rounded-xl p-5 transition-all duration-300">
+      <div
+        className="rounded-xl p-5 transition-all duration-300"
+        style={{
+          background: '#1A1A1E',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.4)',
+          borderLeft: '2px solid #6B3A3A',
+        }}
+      >
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-[rgba(107,58,58,0.12)] border border-[rgba(139,90,90,0.25)] flex items-center justify-center text-lg shrink-0">
-              
-            </div>
+            <Clock
+              className="shrink-0 text-[#6B3A3A]"
+              style={{ width: '16px', height: '16px', opacity: 0.6 }}
+            />
             <div>
               <p className="text-sm font-medium text-[#8B5A5A]">
                 {quartersOwed} quarter{quartersOwed > 1 ? 's' : ''} overdue
@@ -137,9 +146,21 @@ function CompactReminder({
           </div>
           <Link
             href="/dues"
-            className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(107,58,58,0.15)] border border-[rgba(107,58,58,0.25)] text-[#8B5A5A] hover:bg-[rgba(139,90,90,0.30)] font-medium whitespace-nowrap transition-all"
+            style={{
+              background: '#B09B71',
+              color: '#0C0C0E',
+              border: 'none',
+              borderRadius: '6px',
+              padding: '10px 24px',
+              fontSize: '14px',
+              fontWeight: 500,
+              whiteSpace: 'nowrap',
+              transition: 'opacity 150ms',
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.85'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
           >
-            Settle Balance →
+            Pay Now
           </Link>
         </div>
       </div>
@@ -230,11 +251,19 @@ function FullReminder({
 
   if (isOverdue) {
     return (
-      <div className="rounded-xl p-6 border border-[rgba(107,58,58,0.20)] bg-[#8B5A5A]/5 transition-all duration-300">
+      <div
+        className="rounded-xl p-6 transition-all duration-300"
+        style={{
+          background: '#1A1A1E',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.4)',
+          borderLeft: '2px solid #6B3A3A',
+        }}
+      >
         <div className="flex items-start gap-4 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-[rgba(107,58,58,0.12)] border border-[rgba(139,90,90,0.25)] flex items-center justify-center text-xl shrink-0">
-            
-          </div>
+          <Clock
+            className="shrink-0 text-[#6B3A3A] mt-0.5"
+            style={{ width: '16px', height: '16px', opacity: 0.6 }}
+          />
           <div className="flex-1">
             <h3 className="text-base font-medium text-[#8B5A5A] mb-1">
               {quartersOwed} Quarter{quartersOwed > 1 ? 's' : ''} Payment Reminder
@@ -258,9 +287,21 @@ function FullReminder({
           </div>
           <Link
             href="/dues"
-            className="px-5 py-2.5 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(107,58,58,0.25)] text-[#8B5A5A] hover:bg-[rgba(139,90,90,0.30)] text-sm font-medium transition-all whitespace-nowrap"
+            style={{
+              background: '#B09B71',
+              color: '#0C0C0E',
+              border: 'none',
+              borderRadius: '6px',
+              padding: '10px 24px',
+              fontSize: '14px',
+              fontWeight: 500,
+              whiteSpace: 'nowrap',
+              transition: 'opacity 150ms',
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '0.85'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = '1'; }}
           >
-            Settle Balance →
+            Pay Now
           </Link>
         </div>
 

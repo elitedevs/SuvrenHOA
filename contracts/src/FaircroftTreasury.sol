@@ -25,6 +25,9 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     /// @notice Role for governance-approved operations (Timelock)
     bytes32 public constant GOVERNOR_ROLE = keccak256("GOVERNOR_ROLE");
 
+    /// @notice Role for yield manager contract (TreasuryYield)
+    bytes32 public constant YIELD_MANAGER_ROLE = keccak256("YIELD_MANAGER_ROLE");
+
     // ── Immutables ───────────────────────────────────────────────────────────
 
     /// @notice USDC token contract (6 decimals on Base)
@@ -125,6 +128,8 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     event DuesAmountUpdated(uint256 oldAmount, uint256 newAmount);
     event SplitUpdated(uint256 oldBps, uint256 newBps);
     event ReserveTransfer(uint256 amount, bool toOperating);
+    event ReserveReleasedForYield(address indexed to, uint256 amount);
+    event YieldReturned(address indexed from, uint256 amount);
 
     // ── Errors ───────────────────────────────────────────────────────────────
 
@@ -330,6 +335,46 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
 
     function setGracePeriod(uint256 newPeriod) external onlyRole(GOVERNOR_ROLE) {
         gracePeriod = newPeriod;
+    }
+
+    // ── Yield Management ─────────────────────────────────────────────────────
+
+    /**
+     * @notice Release reserve funds to yield manager contract for Aave deployment
+     * @param to   Address to receive the USDC (should be TreasuryYield contract)
+     * @param amount Amount of USDC to release from reserve
+     */
+    function releaseReserveForYield(address to, uint256 amount)
+        external
+        nonReentrant
+        onlyRole(YIELD_MANAGER_ROLE)
+    {
+        if (to == address(0)) revert ZeroAddress();
+        if (amount == 0) revert ZeroAmount();
+        if (amount > reserveBalance) revert InsufficientReserveBalance(amount, reserveBalance);
+
+        reserveBalance -= amount;
+        usdc.safeTransfer(to, amount);
+
+        emit ReserveReleasedForYield(to, amount);
+    }
+
+    /**
+     * @notice Accept USDC returned from yield manager and credit reserve balance
+     * @dev Caller must have approved this contract to spend `amount` USDC first
+     * @param amount Amount of USDC being returned
+     */
+    function creditYieldReturn(uint256 amount)
+        external
+        nonReentrant
+        onlyRole(YIELD_MANAGER_ROLE)
+    {
+        if (amount == 0) revert ZeroAmount();
+
+        usdc.safeTransferFrom(msg.sender, address(this), amount);
+        reserveBalance += amount;
+
+        emit YieldReturned(msg.sender, amount);
     }
 
     // ── View Functions ───────────────────────────────────────────────────────

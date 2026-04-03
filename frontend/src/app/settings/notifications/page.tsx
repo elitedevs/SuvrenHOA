@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Bell } from 'lucide-react';
+import { Bell, X } from 'lucide-react';
 
 interface NotifPref {
   id: string;
@@ -61,20 +61,27 @@ function loadPrefs(): Record<string, boolean> {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw);
-  } catch {}
+  } catch (err) { console.error('[NotificationPrefs] Failed to parse stored preferences:', err); }
   // defaults: all on except...
   return Object.fromEntries(PREFS.map(p => [p.id, true]));
 }
 
-function savePrefs(prefs: Record<string, boolean>) {
-  if (typeof window === 'undefined') return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+function savePrefs(prefs: Record<string, boolean>): string | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+    return null;
+  } catch {
+    return 'Unable to save preferences — storage may be full or restricted.';
+  }
 }
 
 export default function NotificationPrefsPage() {
   const [prefs, setPrefs] = useState<Record<string, boolean>>({});
   const [loaded, setLoaded] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState('');
+  const [hasUnsaved, setHasUnsaved] = useState(false);
 
   useEffect(() => {
     setPrefs(loadPrefs());
@@ -84,11 +91,19 @@ export default function NotificationPrefsPage() {
   const toggle = (id: string) => {
     setPrefs(prev => ({ ...prev, [id]: !prev[id] }));
     setSaved(false);
+    setHasUnsaved(true);
+    setSaveError('');
   };
 
   const handleSave = () => {
-    savePrefs(prefs);
+    const err = savePrefs(prefs);
+    if (err) {
+      setSaveError(err);
+      return;
+    }
     setSaved(true);
+    setHasUnsaved(false);
+    setSaveError('');
     setTimeout(() => setSaved(false), 2500);
   };
 
@@ -96,6 +111,14 @@ export default function NotificationPrefsPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
+      {saveError && (
+        <div className="flex items-center justify-between gap-3 mb-4 px-4 py-3 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(139,90,90,0.30)] text-[#8B5A5A] text-sm">
+          <span>{saveError}</span>
+          <button onClick={() => setSaveError('')} className="shrink-0 hover:opacity-70 transition-opacity" aria-label="Dismiss error">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
       <div className="mb-8">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Settings</p>
         <h1 className="text-3xl font-normal tracking-tight flex items-center gap-2"><Bell className="w-7 h-7 text-[#B09B71]" /> Notifications</h1>
@@ -109,7 +132,7 @@ export default function NotificationPrefsPage() {
           </p>
           <div className="flex gap-2">
             <button
-              onClick={() => setPrefs(Object.fromEntries(PREFS.map(p => [p.id, true])))}
+              onClick={() => { setPrefs(Object.fromEntries(PREFS.map(p => [p.id, true]))); setSaved(false); setHasUnsaved(true); setSaveError(''); }}
               className="text-xs px-2.5 py-1 rounded-lg border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-all"
             >
               All on
@@ -118,6 +141,9 @@ export default function NotificationPrefsPage() {
               onClick={() => {
                 const urgentOnly = Object.fromEntries(PREFS.map(p => [p.id, !!p.urgent]));
                 setPrefs(urgentOnly);
+                setSaved(false);
+                setHasUnsaved(true);
+                setSaveError('');
               }}
               className="text-xs px-2.5 py-1 rounded-lg border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-all"
             >
@@ -184,7 +210,7 @@ export default function NotificationPrefsPage() {
         onClick={handleSave}
         className="w-full py-3.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all shadow-[0_0_20px_rgba(201,169,110,0.2)]"
       >
-        {saved ? 'Preferences Saved' : 'Save Preferences'}
+        {saved ? '✓ Preferences Saved' : hasUnsaved ? 'Save Preferences *' : 'Save Preferences'}
       </button>
 
       <p className="text-[11px] text-[var(--text-disabled)] text-center mt-4">

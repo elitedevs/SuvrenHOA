@@ -16,7 +16,7 @@ export interface Profile {
 export function useProfile() {
   const { address } = useAccount();
 
-  const { data, isLoading } = useQuery<Profile>({
+  const { data, isLoading, error } = useQuery<Profile | null>({
     queryKey: ['profile', address],
     queryFn: async () => {
       if (!address) return null;
@@ -35,6 +35,7 @@ export function useProfile() {
     isLoading,
     needsSetup,
     displayName: data?.display_name || shortenAddress(address),
+    error: error ? (error as Error).message : null,
   };
 }
 
