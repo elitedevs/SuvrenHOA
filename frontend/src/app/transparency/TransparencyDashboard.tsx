@@ -209,7 +209,7 @@ export function TransparencyDashboard() {
           />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28 text-center">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-20 md:py-28 text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-[13px] font-medium"
                style={{ background: 'rgba(201,169,110,0.10)', border: '1px solid rgba(201,169,110,0.2)', color: 'rgba(201,169,110,1)' }}>
@@ -257,7 +257,7 @@ export function TransparencyDashboard() {
         </div>
       </section>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 space-y-12">
 
         {/* ── Stats grid ─────────────────────────────────────────────────────── */}
         <section>
@@ -380,82 +380,10 @@ export function TransparencyDashboard() {
           </div>
         </section>
 
-        {/* ── Two-column: activity + trust ──────────────────────────────────── */}
+        {/* ── Two-column: trust (left) + activity (right) ────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-          {/* Activity Feed */}
-          <section className="lg:col-span-2">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-medium text-[var(--text-heading)] flex items-center gap-2">
-                <Zap className="w-5 h-5 text-[#B09B71]" />
-                Recent Activity
-              </h2>
-              <span className="text-[12px] text-[var(--text-disabled)]">Last 8 hours on-chain</span>
-            </div>
-
-            <div className="glass-card rounded-xl overflow-hidden">
-              {eventsLoading ? (
-                <div className="p-6 space-y-4">
-                  {[...Array(5)].map((_, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-[rgba(245,240,232,0.05)] animate-pulse shrink-0" />
-                      <div className="flex-1 space-y-2">
-                        <div className="h-4 w-3/4 rounded bg-[rgba(245,240,232,0.05)] animate-pulse" />
-                        <div className="h-3 w-1/3 rounded bg-[rgba(245,240,232,0.04)] animate-pulse" />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : events.length === 0 ? (
-                <div className="p-10 text-center">
-                  <Activity className="w-10 h-10 text-[var(--text-disabled)] mx-auto mb-3" />
-                  <p className="text-[var(--text-disabled)] text-sm">No activity in the last 8 hours</p>
-                  <p className="text-[var(--text-disabled)] text-xs mt-1">
-                    Transactions will appear here as they happen on-chain
-                  </p>
-                </div>
-              ) : (
-                <div className="divide-y divide-[rgba(255,255,255,0.04)]">
-                  {events.slice(0, 10).map((event) => (
-                      <div
-                        key={event.id}
-                        className="flex items-start gap-3 px-5 py-4 hover:bg-[rgba(245,240,232,0.02)] transition-colors"
-                      >
-                        <div
-                          className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 text-lg"
-                          style={{ background: 'rgba(201,169,110,0.08)' }}
-                        >
-                          {event.icon}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-[13px] text-[var(--parchment)] font-medium leading-snug">
-                            {event.description}
-                          </p>
-                          <div className="flex items-center gap-3 mt-1">
-                            <span className="text-[11px] text-[var(--text-disabled)]">
-                              {relativeTime(event.timestamp * 1000)}
-                            </span>
-                            {event.txHash && (
-                              <a
-                                href={BASESCAN_BASE + '/tx/' + event.txHash}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-[11px] text-[#B09B71]/70 hover:text-[#D4C4A0] flex items-center gap-1 transition-colors"
-                              >
-                                View tx
-                                <ExternalLink className="w-3 h-3" />
-                              </a>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </section>
-
-          {/* Trust column */}
+          {/* Trust column — LEFT */}
           <div className="space-y-5">
 
             {/* Trust indicators */}
@@ -554,6 +482,79 @@ export function TransparencyDashboard() {
               </div>
             </section>
           </div>
+
+          {/* Activity Feed — RIGHT */}
+          <section className="lg:col-span-2">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-medium text-[var(--text-heading)] flex items-center gap-2">
+                <Zap className="w-5 h-5 text-[#B09B71]" />
+                Recent Activity
+              </h2>
+              <span className="text-[12px] text-[var(--text-disabled)]">Last 8 hours on-chain</span>
+            </div>
+
+            <div className="glass-card rounded-xl overflow-hidden">
+              {eventsLoading ? (
+                <div className="p-6 space-y-4">
+                  {[...Array(5)].map((_, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-[rgba(245,240,232,0.05)] animate-pulse shrink-0" />
+                      <div className="flex-1 space-y-2">
+                        <div className="h-4 w-3/4 rounded bg-[rgba(245,240,232,0.05)] animate-pulse" />
+                        <div className="h-3 w-1/3 rounded bg-[rgba(245,240,232,0.04)] animate-pulse" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : events.length === 0 ? (
+                <div className="p-10 text-center">
+                  <Activity className="w-10 h-10 text-[var(--text-disabled)] mx-auto mb-3" />
+                  <p className="text-[var(--text-disabled)] text-sm">No activity in the last 8 hours</p>
+                  <p className="text-[var(--text-disabled)] text-xs mt-1">
+                    Transactions will appear here as they happen on-chain
+                  </p>
+                </div>
+              ) : (
+                <div className="divide-y divide-[rgba(255,255,255,0.04)]">
+                  {events.slice(0, 10).map((event) => (
+                      <div
+                        key={event.id}
+                        className="flex items-start gap-3 px-5 py-4 hover:bg-[rgba(245,240,232,0.02)] transition-colors"
+                      >
+                        <div
+                          className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 text-lg"
+                          style={{ background: 'rgba(201,169,110,0.08)' }}
+                        >
+                          {event.icon}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[13px] text-[var(--parchment)] font-medium leading-snug">
+                            {event.description}
+                          </p>
+                          <div className="flex items-center gap-3 mt-1">
+                            <span className="text-[11px] text-[var(--text-disabled)]">
+                              {relativeTime(event.timestamp * 1000)}
+                            </span>
+                            {event.txHash && (
+                              <a
+                                href={BASESCAN_BASE + '/tx/' + event.txHash}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[11px] text-[#B09B71]/70 hover:text-[#D4C4A0] flex items-center gap-1 transition-colors"
+                              >
+                                View tx
+                                <ExternalLink className="w-3 h-3" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+
         </div>
 
         {/* ── CTA ──────────────────────────────────────────────────────────── */}
