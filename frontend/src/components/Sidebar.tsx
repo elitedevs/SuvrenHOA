@@ -261,7 +261,7 @@ function NavItem({
         <div
           style={{
             overflow: 'hidden',
-            maxHeight: expanded ? `${section.children!.length * 32 + 8}px` : '0px',
+            maxHeight: expanded ? `${section.children!.length * 36 + 12}px` : '0px',
             transition: 'max-height 200ms ease-out, opacity 180ms ease-out',
             opacity: expanded ? 1 : 0,
           }}
