@@ -414,6 +414,27 @@ pre,
   border: 1px solid rgba(245, 240, 232, 0.06);
 }
 
+/* ── RainbowKit / MetaMask overrides ── */
+[data-rk] button,
+[data-rk] [role="button"] {
+  background: rgba(245, 240, 232, 0.04) !important;
+  color: rgba(245, 240, 232, 0.7) !important;
+  border: 1px solid rgba(245, 240, 232, 0.08) !important;
+  border-radius: 8px !important;
+  font-family: var(--font-body) !important;
+  font-size: 13px !important;
+  box-shadow: none !important;
+}
+[data-rk] button:hover,
+[data-rk] [role="button"]:hover {
+  background: rgba(245, 240, 232, 0.06) !important;
+  color: rgba(245, 240, 232, 0.85) !important;
+}
+[data-rk] [class*="iekbcc0"] {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 /* ── Drop zone ────────────────────────────────────────────────────────────── */
 @keyframes drop-zone-pulse {
   0%, 100% { border-color: rgba(176, 155, 113, 0.20); }

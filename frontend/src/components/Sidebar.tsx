@@ -481,22 +481,10 @@ export function Sidebar() {
         className="shrink-0 px-3 py-3 space-y-2.5"
         style={{ borderTop: '1px solid rgba(245,240,232,0.05)' }}
       >
-        {/* Theme toggle — minimal, tucked */}
-        {!collapsed ? (
-          <div className="flex items-center justify-between px-1">
-            <span
-              className="text-[10px] tracking-widest uppercase"
-              style={{ color: 'rgba(245,240,232,0.25)', letterSpacing: '0.10em' }}
-            >
-              Theme
-            </span>
-            <ThemeToggle />
-          </div>
-        ) : (
-          <div className="flex justify-center">
-            <ThemeToggle />
-          </div>
-        )}
+        {/* Theme toggle — icon only */}
+        <div className={collapsed ? 'flex justify-center' : 'flex justify-end px-1'}>
+          <ThemeToggle />
+        </div>
 
         {/* Wallet — glass-surface treatment */}
         <div
