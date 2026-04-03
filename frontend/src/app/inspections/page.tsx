@@ -23,9 +23,9 @@ interface Inspection {
 }
 
 const RESULT_CONFIG: Record<InspectionResult, { label: string; icon: React.ElementType; color: string; bg: string; border: string }> = {
-  pass: { label: 'Pass', icon: CheckCircle, color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-[rgba(42,93,79,0.20)]' },
+  pass: { label: 'Pass', icon: CheckCircle, color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
   'needs-attention': { label: 'Needs Attention', icon: AlertTriangle, color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]' },
-  violation: { label: 'Violation', icon: XCircle, color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-[rgba(139,90,90,0.20)]' },
+  violation: { label: 'Violation', icon: XCircle, color: 'text-[#8B5A5A]', bg: 'bg-[rgba(139,90,90,0.10)]', border: 'border-[rgba(139,90,90,0.20)]' },
   pending: { label: 'Scheduled', icon: Clock, color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/10', border: 'border-[rgba(90,122,154,0.20)]' },
 };
 
@@ -260,7 +260,7 @@ export default function InspectionsPage() {
       {/* Schedule Modal */}
       {showSchedule && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[#B09B71]/20">
+          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[rgba(176,155,113,0.20)]">
             <div className="flex items-center justify-between mb-5">
               <h2 className="font-medium">Schedule Inspection</h2>
               <button onClick={() => setShowSchedule(false)} className="p-1 rounded text-[var(--text-disabled)] hover:text-[var(--text-heading)]">
@@ -275,7 +275,7 @@ export default function InspectionsPage() {
                     value={schedForm.lot}
                     onChange={(e) => setSchedForm((f) => ({ ...f, lot: e.target.value }))}
                     placeholder="42"
-                    className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
                   />
                 </div>
                 <div>
@@ -283,7 +283,7 @@ export default function InspectionsPage() {
                   <select
                     value={schedForm.type}
                     onChange={(e) => setSchedForm((f) => ({ ...f, type: e.target.value as any }))}
-                    className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[#B09B71]/50 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
                   >
                     <option value="annual">Annual</option>
                     <option value="quarterly">Quarterly</option>
@@ -297,7 +297,7 @@ export default function InspectionsPage() {
                   value={schedForm.address}
                   onChange={(e) => setSchedForm((f) => ({ ...f, address: e.target.value }))}
                   placeholder="42 Maple Drive"
-                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
                 />
               </div>
               <div>
@@ -306,7 +306,7 @@ export default function InspectionsPage() {
                   type="date"
                   value={schedForm.date}
                   onChange={(e) => setSchedForm((f) => ({ ...f, date: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[#B09B71]/50 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
                 />
               </div>
             </div>

@@ -44,12 +44,12 @@ function ConversationItem({
       onClick={onClick}
       className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-150 flex items-center gap-3 group ${
         isActive
-          ? 'bg-[#B09B71]/10 border border-[#B09B71]/25'
+          ? 'bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.25)]'
           : 'hover:bg-[rgba(245,240,232,0.04)] border border-transparent'
       }`}
     >
       {/* Avatar */}
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#B09B71]/20 to-[var(--brass-deep)]/20 border border-[#B09B71]/20 flex items-center justify-center shrink-0">
+      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[rgba(176,155,113,0.20)] to-[var(--brass-deep)]/20 border border-[rgba(176,155,113,0.20)] flex items-center justify-center shrink-0">
         <span className="text-xs font-medium text-[#D4C4A0]">#{convo.lotId}</span>
       </div>
 
@@ -95,7 +95,7 @@ function NewMessageModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="glass-card rounded-xl hover-lift w-full max-w-md p-6 border border-[#B09B71]/20">
+      <div className="glass-card rounded-xl hover-lift w-full max-w-md p-6 border border-[rgba(176,155,113,0.20)]">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-medium text-[var(--parchment)]">New Message</h2>
           <button
@@ -111,7 +111,7 @@ function NewMessageModal({
           placeholder="Search lot number..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] outline-none focus:border-[#B09B71]/50 mb-4"
+          className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] outline-none focus:border-[rgba(176,155,113,0.50)] mb-4"
           autoFocus
         />
 
@@ -134,9 +134,9 @@ function NewMessageModal({
                   onSelect(lot.lotId);
                   onClose();
                 }}
-                className="w-full text-left px-4 py-3 rounded-xl hover:bg-[#B09B71]/10 border border-transparent hover:border-[#B09B71]/20 transition-all duration-150 flex items-center gap-3"
+                className="w-full text-left px-4 py-3 rounded-xl hover:bg-[rgba(176,155,113,0.10)] border border-transparent hover:border-[rgba(176,155,113,0.20)] transition-all duration-150 flex items-center gap-3"
               >
-                <div className="w-9 h-9 rounded-full bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-full bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center">
                   <span className="text-xs font-medium text-[#B09B71]">#{lot.lotId}</span>
                 </div>
                 <div>
@@ -200,7 +200,7 @@ function ChatPanel({
         >
           ←
         </button>
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#B09B71]/20 to-[var(--brass-deep)]/20 border border-[#B09B71]/20 flex items-center justify-center">
+        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[rgba(176,155,113,0.20)] to-[var(--brass-deep)]/20 border border-[rgba(176,155,113,0.20)] flex items-center justify-center">
           <span className="text-xs font-medium text-[#D4C4A0]">#{lotId}</span>
         </div>
         <div>
@@ -235,7 +235,7 @@ function ChatPanel({
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={`Message Lot #${lotId}...`}
-            className="flex-1 bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] outline-none focus:border-[#B09B71]/50 min-h-[44px]"
+            className="flex-1 bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] outline-none focus:border-[rgba(176,155,113,0.50)] min-h-[44px]"
           />
           <button
             onClick={handleSend}
@@ -373,7 +373,7 @@ function MessagingCenter({ address }: { address: string }) {
               <span className="text-sm font-medium text-[var(--text-body)]">Conversations</span>
               <button
                 onClick={() => setShowNewModal(true)}
-                className="text-xs font-medium text-[#B09B71] hover:text-[#D4C4A0] px-3 py-1.5 rounded-lg hover:bg-[#B09B71]/10 transition-all duration-150 flex items-center gap-1"
+                className="text-xs font-medium text-[#B09B71] hover:text-[#D4C4A0] px-3 py-1.5 rounded-lg hover:bg-[rgba(176,155,113,0.10)] transition-all duration-150 flex items-center gap-1"
               >
                 <span></span> New
               </button>
@@ -395,7 +395,7 @@ function MessagingCenter({ address }: { address: string }) {
                   </p>
                   <button
                     onClick={() => setShowNewModal(true)}
-                    className="text-sm font-medium text-[#B09B71] hover:text-[#D4C4A0] px-4 py-2 rounded-xl hover:bg-[#B09B71]/10 transition-all duration-150"
+                    className="text-sm font-medium text-[#B09B71] hover:text-[#D4C4A0] px-4 py-2 rounded-xl hover:bg-[rgba(176,155,113,0.10)] transition-all duration-150"
                   >
                     Start a conversation →
                   </button>
@@ -433,7 +433,7 @@ function MessagingCenter({ address }: { address: string }) {
                 </p>
                 <button
                   onClick={() => setShowNewModal(true)}
-                  className="mt-2 px-5 py-2.5 rounded-xl bg-[#B09B71]/15 border border-[#B09B71]/30 hover:bg-[#B09B71]/20 text-sm font-medium text-[#D4C4A0] transition-all duration-200"
+                  className="mt-2 px-5 py-2.5 rounded-xl bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)] hover:bg-[rgba(176,155,113,0.20)] text-sm font-medium text-[#D4C4A0] transition-all duration-200"
                 >
                    New Message
                 </button>

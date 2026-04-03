@@ -197,7 +197,7 @@ function ProfileForm() {
             <h3 className="text-xs uppercase tracking-wider text-[var(--text-disabled)] font-medium">Resident Achievements</h3>
             <p className="text-[10px] text-[var(--text-disabled)] mt-0.5">{earnedCount} of {badges.length} earned</p>
           </div>
-          <div className="px-3 py-1 rounded-full bg-[#B09B71]/10 border border-[#B09B71]/20">
+          <div className="px-3 py-1 rounded-full bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)]">
             <span className="text-xs font-medium text-[#B09B71]">{earnedCount}/{badges.length}</span>
           </div>
         </div>
@@ -207,13 +207,13 @@ function ProfileForm() {
               key={badge.id}
               className={`flex items-center gap-3 rounded-lg p-3 transition-all ${
                 badge.earned
-                  ? 'bg-[#B09B71]/10 border border-[#B09B71]/30 shadow-[0_0_12px_rgba(201,169,110,0.15)]'
+                  ? 'bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.30)] shadow-[0_0_12px_rgba(201,169,110,0.15)]'
                   : 'bg-[rgba(26,26,30,0.40)] border border-[rgba(245,240,232,0.06)] opacity-40'
               }`}
             >
               <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${
                 badge.earned
-                  ? 'bg-[#B09B71]/20 shadow-[0_0_8px_rgba(201,169,110,0.3)]'
+                  ? 'bg-[rgba(176,155,113,0.20)] shadow-[0_0_8px_rgba(201,169,110,0.3)]'
                   : 'bg-[rgba(34,34,40,0.40)]'
               }`}>
               </div>
@@ -240,7 +240,7 @@ function ProfileForm() {
             value={name}
             onChange={e => { setName(e.target.value); if (nameError) setNameError(''); }}
             placeholder="How neighbors will see you (e.g., Rick Morang)"
-            className={`w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border text-sm placeholder-[rgba(245,240,232,0.25)] focus:outline-none ${nameError ? 'border-[#8B5A5A]/60 focus:border-[#8B5A5A]' : 'border-[rgba(245,240,232,0.08)] focus:border-[#B09B71]/50'}`}
+            className={`w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border text-sm placeholder-[rgba(245,240,232,0.25)] focus:outline-none ${nameError ? 'border-[rgba(139,90,90,0.60)] focus:border-[#8B5A5A]' : 'border-[rgba(245,240,232,0.08)] focus:border-[rgba(176,155,113,0.50)]'}`}
           />
           {nameError && <p className="text-xs text-[#8B5A5A] mt-1">{nameError}</p>}
           <p className="text-[10px] text-[var(--text-disabled)] mt-1">This replaces your wallet address in community posts and comments</p>
@@ -254,7 +254,7 @@ function ProfileForm() {
               value={email}
               onChange={e => { setEmail(e.target.value); setEmailError(validateEmail(e.target.value)); }}
               placeholder="For notifications"
-              className={`w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border text-sm placeholder-[rgba(245,240,232,0.25)] focus:outline-none ${emailError ? 'border-[#8B5A5A]/60 focus:border-[#8B5A5A]' : 'border-[rgba(245,240,232,0.08)] focus:border-[#B09B71]/50'}`}
+              className={`w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border text-sm placeholder-[rgba(245,240,232,0.25)] focus:outline-none ${emailError ? 'border-[rgba(139,90,90,0.60)] focus:border-[#8B5A5A]' : 'border-[rgba(245,240,232,0.08)] focus:border-[rgba(176,155,113,0.50)]'}`}
             />
             {emailError && <p className="text-xs text-[#8B5A5A] mt-1">{emailError}</p>}
           </div>
@@ -265,7 +265,7 @@ function ProfileForm() {
               value={phone}
               onChange={e => setPhone(e.target.value)}
               placeholder="For urgent alerts"
-              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
             />
           </div>
         </div>
@@ -277,7 +277,7 @@ function ProfileForm() {
             onChange={e => setBio(e.target.value)}
             placeholder="A bit about yourself for the community directory"
             rows={3}
-            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
+            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none"
           />
         </div>
 

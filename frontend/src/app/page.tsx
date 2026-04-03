@@ -33,7 +33,7 @@ function Landing() {
       {/* Background layers */}
       <div className="absolute inset-0 bg-grid opacity-60" />
       <div className="absolute inset-0 bg-radial-glow-strong" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#B09B71]/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[rgba(176,155,113,0.05)] blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute top-20 right-[20%] w-[400px] h-[400px] bg-[rgba(176,155,113,0.03)] blur-[150px] rounded-full bg-orb pointer-events-none" />
       <div className="absolute bottom-20 left-[10%] w-[300px] h-[300px] bg-[#B09B71]/[0.04] blur-[100px] rounded-full bg-orb-slow pointer-events-none" />
 
@@ -41,7 +41,7 @@ function Landing() {
       <section className="relative flex flex-col items-center justify-center min-h-[88vh] px-6 text-center">
         {/* Logo mark */}
         <div className="relative mb-10 card-enter card-enter-delay-1">
-          <div className="absolute inset-0 blur-2xl opacity-25 bg-[#B09B71]/80 rounded-full scale-[2]" />
+          <div className="absolute inset-0 blur-2xl opacity-25 bg-[rgba(176,155,113,0.80)] rounded-full scale-[2]" />
           <img src="/logo-full.svg" alt="SuvrenHOA" className="relative h-14 w-auto" />
         </div>
 
@@ -94,7 +94,7 @@ function Landing() {
               title: '1 Lot = 1 Vote',
               desc: 'Every property gets equal representation through a soulbound NFT. No proxy manipulation, no whale voting.',
               accent: 'gold',
-              borderColor: 'border-l-[#B09B71]/50',
+              borderColor: 'border-l-[rgba(176,155,113,0.50)]',
             },
             {
               icon: '',
@@ -116,7 +116,7 @@ function Landing() {
               className={`glass-card rounded-xl p-8 text-left group border-l-2 ${borderColor}`}
             >
               <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform duration-200 ${
-                accent === 'gold' ? 'bg-[#B09B71]/10 border border-[#B09B71]/20' :
+                accent === 'gold' ? 'bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)]' :
                 accent === 'green' ? 'bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)]' :
                 'bg-[rgba(90,122,154,0.10)] border border-[rgba(90,122,154,0.20)]'
               }`}>
@@ -141,9 +141,9 @@ function Landing() {
               <div key={step} className="relative flex gap-5 items-start pb-8 last:pb-0">
                 {/* Timeline line */}
                 {i < arr.length - 1 && (
-                  <div className="absolute left-[15px] top-8 bottom-0 w-px bg-gradient-to-b from-[#B09B71]/25 to-transparent" />
+                  <div className="absolute left-[15px] top-8 bottom-0 w-px bg-gradient-to-b from-[rgba(176,155,113,0.25)] to-transparent" />
                 )}
-                <div className="w-8 h-8 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/40 flex items-center justify-center text-sm font-medium text-[#B09B71] shrink-0 relative z-10">
+                <div className="w-8 h-8 rounded-full bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.40)] flex items-center justify-center text-sm font-medium text-[#B09B71] shrink-0 relative z-10">
                   {step}
                 </div>
                 <div className="pt-0.5">
@@ -157,7 +157,7 @@ function Landing() {
 
         {/* Bottom CTA */}
         <div className="mt-20 glass-card rounded-xl p-8 max-w-lg w-full text-center card-enter card-enter-delay-4">
-          <div className="w-10 h-10 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center mx-auto mb-4">
+          <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.25)] flex items-center justify-center mx-auto mb-4">
             <Link2 className="w-5 h-5 text-[#B09B71]" />
           </div>
           <p className="text-base font-medium text-[var(--parchment)] mb-2">
@@ -305,7 +305,7 @@ function Dashboard() {
         {/* Blockchain Trust Banner */}
         <div className="mt-10 glass-card rounded-xl p-7 card-enter card-enter-delay-3">
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.25)] flex items-center justify-center shrink-0">
               <Link2 className="w-5 h-5 text-[#B09B71]" />
             </div>
             <div>

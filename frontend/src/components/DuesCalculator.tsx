@@ -86,7 +86,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
           placeholder="e.g. 8500"
           min={500}
           max={100000}
-          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
         />
       </div>
 
@@ -98,7 +98,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
             onClick={() => setTierId(t.id)}
             className={`rounded-xl p-3 text-center transition-all border ${
               tierId === t.id
-                ? 'border-[#B09B71]/50 bg-[#B09B71]/10 text-[#D4C4A0]'
+                ? 'border-[rgba(176,155,113,0.50)] bg-[rgba(176,155,113,0.10)] text-[#D4C4A0]'
                 : 'border-[rgba(245,240,232,0.08)] bg-[rgba(26,26,30,0.40)] text-[var(--text-muted)] hover:border-[rgba(245,240,232,0.10)]'
             }`}
           >
@@ -110,12 +110,12 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
 
       {/* Breakdown */}
       <div className="grid grid-cols-2 gap-3 mb-5">
-        <div className="rounded-xl bg-[#B09B71]/5 border border-[#B09B71]/20 p-4">
+        <div className="rounded-xl bg-[rgba(176,155,113,0.05)] border border-[rgba(176,155,113,0.20)] p-4">
           <p className="text-[10px] text-[var(--text-disabled)] mb-1">Monthly</p>
           <p className="text-xl font-normal text-[#B09B71]">${monthly.toFixed(2)}</p>
           <p className="text-[10px] text-[var(--text-disabled)] mt-0.5">USDC / month</p>
         </div>
-        <div className="rounded-xl bg-[#B09B71]/5 border border-[#B09B71]/20 p-4">
+        <div className="rounded-xl bg-[rgba(176,155,113,0.05)] border border-[rgba(176,155,113,0.20)] p-4">
           <p className="text-[10px] text-[var(--text-disabled)] mb-1">Annual</p>
           <p className="text-xl font-normal text-[#B09B71]">${animatedAnnual.toLocaleString()}</p>
           <p className="text-[10px] text-[var(--text-disabled)] mt-0.5">USDC / year</p>

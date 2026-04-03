@@ -63,9 +63,9 @@ function AwardCard({ award, nominations, myLot, onNominate, onVote }: {
   const leader = [...currentNoms].sort((a, b) => b.votes.length - a.votes.length)[0];
 
   return (
-    <div className="glass-card rounded-xl p-5 border border-[#B09B71]/10">
+    <div className="glass-card rounded-xl p-5 border border-[rgba(176,155,113,0.10)]">
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2.5 rounded-xl bg-[#B09B71]/15 border border-[#B09B71]/20">
+        <div className="p-2.5 rounded-xl bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.20)]">
           <Icon className="w-5 h-5 text-[#B09B71]" />
         </div>
         <div>
@@ -79,7 +79,7 @@ function AwardCard({ award, nominations, myLot, onNominate, onVote }: {
           const hasVoted = nom.votes.includes(myLot);
           const isLeading = nom.id === leader?.id;
           return (
-            <div key={nom.id} className={`p-3 rounded-lg border ${isLeading ? 'border-[#B09B71]/30 bg-[#B09B71]/5' : 'border-[rgba(245,240,232,0.05)] bg-[rgba(26,26,30,0.40)]'}`}>
+            <div key={nom.id} className={`p-3 rounded-lg border ${isLeading ? 'border-[rgba(176,155,113,0.30)] bg-[rgba(176,155,113,0.05)]' : 'border-[rgba(245,240,232,0.05)] bg-[rgba(26,26,30,0.40)]'}`}>
               <div className="flex items-start justify-between gap-2">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
@@ -93,7 +93,7 @@ function AwardCard({ award, nominations, myLot, onNominate, onVote }: {
                   <button
                     onClick={() => onVote(nom.id)}
                     className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all shrink-0 ${
-                      hasVoted ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'border border-[rgba(245,240,232,0.10)] text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71]'
+                      hasVoted ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'border border-[rgba(245,240,232,0.10)] text-[var(--text-muted)] hover:border-[rgba(176,155,113,0.30)] hover:text-[#B09B71]'
                     }`}
                   >
                     <ThumbsUp className="w-3 h-3" />
@@ -113,7 +113,7 @@ function AwardCard({ award, nominations, myLot, onNominate, onVote }: {
 
       <button
         onClick={() => onNominate(award.id)}
-        className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-[#B09B71]/20 text-xs font-medium text-[#B09B71] hover:bg-[#B09B71]/10 transition-colors"
+        className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-[rgba(176,155,113,0.20)] text-xs font-medium text-[#B09B71] hover:bg-[rgba(176,155,113,0.10)] transition-colors"
       >
         <Plus className="w-3.5 h-3.5" />
         Nominate Someone
@@ -188,7 +188,7 @@ export default function AwardsPage() {
 
       {/* Status Banner */}
       {VOTING_OPEN && (
-        <div className="mb-8 p-4 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center gap-3">
+        <div className="mb-8 p-4 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center gap-3">
           <Vote className="w-5 h-5 text-[#B09B71] shrink-0" />
           <div>
             <p className="text-sm font-medium text-[#B09B71]">Voting is Open!</p>
@@ -243,9 +243,9 @@ export default function AwardsPage() {
                   if (!award) return null;
                   const Icon = ICON_MAP[award.icon] ?? Trophy;
                   return (
-                    <div key={nom.id} className="glass-card rounded-xl p-4 border border-[#B09B71]/20">
+                    <div key={nom.id} className="glass-card rounded-xl p-4 border border-[rgba(176,155,113,0.20)]">
                       <div className="flex items-center gap-2 mb-3">
-                        <div className="p-1.5 rounded-lg bg-[#B09B71]/15 border border-[#B09B71]/20">
+                        <div className="p-1.5 rounded-lg bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.20)]">
                           <Icon className="w-4 h-4 text-[#B09B71]" />
                         </div>
                         <p className="text-xs font-medium text-[#B09B71] uppercase tracking-wider">{award.category}</p>
@@ -274,7 +274,7 @@ export default function AwardsPage() {
       {/* Nominate Modal */}
       {nominatingFor && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[#B09B71]/20">
+          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[rgba(176,155,113,0.20)]">
             <div className="flex items-center justify-between mb-5">
               <h2 className="font-medium">Nominate for {AWARDS.find((a) => a.id === nominatingFor)?.category}</h2>
               <button onClick={() => setNominatingFor(null)} className="p-1 rounded text-[var(--text-disabled)] hover:text-[var(--text-heading)]">
@@ -289,7 +289,7 @@ export default function AwardsPage() {
                     value={nomForm.lot}
                     onChange={(e) => setNomForm((f) => ({ ...f, lot: e.target.value }))}
                     placeholder="42"
-                    className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
                   />
                 </div>
                 <div>
@@ -298,7 +298,7 @@ export default function AwardsPage() {
                     value={nomForm.name}
                     onChange={(e) => setNomForm((f) => ({ ...f, name: e.target.value }))}
                     placeholder="Jane Smith"
-                    className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
                   />
                 </div>
               </div>
@@ -309,7 +309,7 @@ export default function AwardsPage() {
                   onChange={(e) => setNomForm((f) => ({ ...f, reason: e.target.value }))}
                   placeholder="Tell us why this neighbor deserves to win..."
                   rows={3}
-                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none"
                 />
               </div>
             </div>

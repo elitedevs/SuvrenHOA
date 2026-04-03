@@ -124,7 +124,7 @@ export default function ContractorsPage() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search by name, specialty, or service..."
-              className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
             />
             <div className="flex items-center gap-3 flex-wrap">
               <div className="flex gap-2 overflow-x-auto pb-1 flex-1">
@@ -133,7 +133,7 @@ export default function ContractorsPage() {
                     key={c.id}
                     onClick={() => setCategory(c.id)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1 ${
-                      category === c.id ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
+                      category === c.id ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'
                     }`}
                   >
                     {c.icon} {c.label}
@@ -189,7 +189,7 @@ function ContractorCard({ contractor: c }: { contractor: Contractor }) {
             <div className="flex items-center gap-2 flex-wrap mb-1">
               <h3 className="font-medium text-sm">{c.name}</h3>
               {c.verified && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20 font-medium">
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium">
                    Verified
                 </span>
               )}
@@ -253,12 +253,12 @@ function AddContractorForm({ onAdd, onCancel }: {
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Company Name *</label>
           <input value={name} onChange={e => setName(e.target.value)} placeholder="Apex Plumbing Co."
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Category</label>
           <select value={category} onChange={e => setCategory(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none">
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none">
             {CATEGORIES.filter(c => c.id !== 'all').map(c => (
               <option key={c.id} value={c.id}>{c.icon} {c.label}</option>
             ))}
@@ -269,19 +269,19 @@ function AddContractorForm({ onAdd, onCancel }: {
       <div>
         <label className="block text-sm text-[var(--text-muted)] mb-2">Specialty *</label>
         <input value={specialty} onChange={e => setSpecialty(e.target.value)} placeholder="Water heater repair, drain cleaning..."
-          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Phone *</label>
           <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="(555) 123-4567" type="tel"
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Email (optional)</label>
           <input value={email} onChange={e => setEmail(e.target.value)} placeholder="contact@company.com" type="email"
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
         </div>
       </div>
 
@@ -289,7 +289,7 @@ function AddContractorForm({ onAdd, onCancel }: {
         <label className="block text-sm text-[var(--text-muted)] mb-2">Description</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Services offered, experience, any HOA discounts or notes..."
-          rows={3} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+          rows={3} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none" />
       </div>
 
       <label className="flex items-center gap-2 cursor-pointer">

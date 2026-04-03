@@ -147,7 +147,7 @@ function RequestList({ filter, setFilter }: { filter: string; setFilter: (f: str
             key={s}
             onClick={() => setFilter(s)}
             className={`px-4 py-2 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
-              filter === s ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
+              filter === s ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'
             }`}
           >
             {s === 'all' ? 'All' : STATUS_STYLES[s]?.label || s}
@@ -230,7 +230,7 @@ function RequestCard({ request }: { request: any }) {
             </div>
 
             {request.conditions && (
-              <div className="p-3 rounded-lg bg-[#B09B71]/5 border border-amber-500/10">
+              <div className="p-3 rounded-lg bg-[rgba(176,155,113,0.05)] border border-amber-500/10">
                 <p className="text-xs text-[#B09B71] font-medium mb-1">Conditions:</p>
                 <p className="text-xs text-[var(--text-muted)]">{request.conditions}</p>
               </div>
@@ -247,7 +247,7 @@ function RequestCard({ request }: { request: any }) {
               <div className="space-y-2">
                 <p className="text-[10px] uppercase tracking-wider text-[var(--text-disabled)] font-medium">Comments</p>
                 {comments.map((c: any) => (
-                  <div key={c.id} className="pl-3 border-l-2 border-[#B09B71]/20">
+                  <div key={c.id} className="pl-3 border-l-2 border-[rgba(176,155,113,0.20)]">
                     <p className="text-xs text-[var(--text-muted)]">{c.text}</p>
                     <p className="text-[10px] text-[var(--text-disabled)] mt-0.5">{new Date(c.created_at).toLocaleDateString()}</p>
                   </div>
@@ -309,7 +309,7 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
           {MOD_TYPES.map(m => (
             <button key={m.id} onClick={() => setModType(m.id)}
               className={`p-2.5 rounded-xl text-[11px] font-medium transition-all flex flex-col items-center gap-1 ${
-                modType === m.id ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
+                modType === m.id ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'
               }`}>
               <span className="text-lg">{m.icon}</span>
               {m.label}
@@ -322,7 +322,7 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
         <label className="block text-sm text-[var(--text-muted)] mb-2">What are you planning?</label>
         <input type="text" value={title} onChange={e => setTitle(e.target.value)}
           placeholder="e.g., Install 6ft privacy fence along back property line"
-          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
       </div>
 
       <div>
@@ -330,7 +330,7 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Materials, colors, dimensions, placement... the more detail the faster the review"
           rows={4}
-          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -338,18 +338,18 @@ function SubmitForm({ onClose }: { onClose: () => void }) {
           <label className="block text-sm text-[var(--text-muted)] mb-2">Estimated Cost</label>
           <input type="text" value={estimatedCost} onChange={e => setEstimatedCost(e.target.value)}
             placeholder="$5,000"
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Contractor</label>
           <input type="text" value={contractorName} onChange={e => setContractorName(e.target.value)}
             placeholder="Company name"
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Target Start</label>
           <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
         </div>
       </div>
 

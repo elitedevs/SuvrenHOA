@@ -66,7 +66,7 @@ const SEASONS: Season[] = [
     period: 'Sep 23 – Nov 30',
     icon: Leaf,
     color: 'text-[#B09B71]',
-    bg: 'bg-[#B09B71]/10',
+    bg: 'bg-[rgba(176,155,113,0.10)]',
     border: 'border-[rgba(176,155,113,0.40)]/20',
     installBy: 'Oct 1',
     removeBy: 'Nov 15',
@@ -164,8 +164,8 @@ export default function SeasonalDecorPage() {
 
   const STATUS_MAP = {
     pending: { label: 'Pending Review', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]', icon: Clock },
-    approved: { label: 'Approved', color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-[rgba(42,93,79,0.20)]', icon: CheckCircle },
-    rejected: { label: 'Rejected', color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-[rgba(139,90,90,0.20)]', icon: XCircle },
+    approved: { label: 'Approved', color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]', icon: CheckCircle },
+    rejected: { label: 'Rejected', color: 'text-[#8B5A5A]', bg: 'bg-[rgba(139,90,90,0.10)]', border: 'border-[rgba(139,90,90,0.20)]', icon: XCircle },
   };
 
   return (
@@ -188,7 +188,7 @@ export default function SeasonalDecorPage() {
       </div>
 
       {/* Current Season Banner */}
-      <div className="mb-8 p-5 rounded-xl bg-gradient-to-r from-pink-500/10 to-[#B09B71]/10 border border-pink-400/20">
+      <div className="mb-8 p-5 rounded-xl bg-gradient-to-r from-pink-500/10 to-[rgba(176,155,113,0.10)] border border-pink-400/20">
         <div className="flex items-center gap-3">
           <Flower2 className="w-8 h-8 text-pink-400" />
           <div>
@@ -208,8 +208,8 @@ export default function SeasonalDecorPage() {
               key={s.id}
               onClick={() => setSelectedSeason(s)}
               className={`p-3 rounded-xl border text-left transition-all ${
-                selectedSeason.id === s.id ? `${s.bg} ${s.border} ring-1 ring-[#B09B71]/30` : 'glass-card border-[rgba(245,240,232,0.10)] hover:border-[rgba(245,240,232,0.20)]'
-              } ${s.isCurrent ? 'ring-1 ring-[#B09B71]/20' : ''}`}
+                selectedSeason.id === s.id ? `${s.bg} ${s.border} ring-1 ring-[rgba(176,155,113,0.30)]` : 'glass-card border-[rgba(245,240,232,0.10)] hover:border-[rgba(245,240,232,0.20)]'
+              } ${s.isCurrent ? 'ring-1 ring-[rgba(176,155,113,0.20)]' : ''}`}
             >
               <Icon className={`w-5 h-5 mb-2 ${selectedSeason.id === s.id ? s.color : 'text-[var(--text-disabled)]'}`} />
               <p className={`text-sm font-medium ${selectedSeason.id === s.id ? 'text-[var(--text-heading)]' : 'text-[var(--text-muted)]'}`}>{s.name}</p>
@@ -232,7 +232,7 @@ export default function SeasonalDecorPage() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-[#8B5A5A]/10 border border-[rgba(139,90,90,0.20)]">
+          <div className="p-2 rounded-lg bg-[rgba(139,90,90,0.10)] border border-[rgba(139,90,90,0.20)]">
             <AlertTriangle className="w-4 h-4 text-[#8B5A5A]" />
           </div>
           <div>
@@ -311,14 +311,14 @@ export default function SeasonalDecorPage() {
       {/* Submit Modal */}
       {showSubmit && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[#B09B71]/20">
+          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[rgba(176,155,113,0.20)]">
             <h2 className="text-lg font-medium mb-4">Submit Decoration for Approval</h2>
             <textarea
               value={newDesc}
               onChange={(e) => setNewDesc(e.target.value)}
               placeholder="Describe your planned decoration (type, size, location on property)..."
               rows={4}
-              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
+              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none"
             />
             <p className="text-xs text-[var(--text-disabled)] mt-2">The board will review within 3 business days.</p>
             <div className="flex gap-3 mt-4">

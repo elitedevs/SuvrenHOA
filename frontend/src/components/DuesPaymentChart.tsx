@@ -69,11 +69,11 @@ export function DuesPaymentChart({ paidMonths = [], quarterlyAmount = 450 }: Due
         </div>
         <div className="flex items-center gap-4 text-xs">
           <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-sm bg-[#3A7D6F]/70" />
+            <div className="w-2.5 h-2.5 rounded-sm bg-[rgba(58,125,111,0.70)]" />
             <span className="text-[var(--text-muted)]">{paidCount} Paid</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-sm bg-[#8B5A5A]/50" />
+            <div className="w-2.5 h-2.5 rounded-sm bg-[rgba(139,90,90,0.50)]" />
             <span className="text-[var(--text-muted)]">{missedCount} Missed</span>
           </div>
         </div>
@@ -98,9 +98,9 @@ export function DuesPaymentChart({ paidMonths = [], quarterlyAmount = 450 }: Due
                 <div
                   className={`w-full rounded-t transition-all duration-500 ${
                     status === 'paid'
-                      ? 'bg-gradient-to-t from-[#2A5D4F]/80 to-[#3A7D6F]/70 border-t border-[rgba(42,93,79,0.30)]'
+                      ? 'bg-gradient-to-t from-[rgba(42,93,79,0.80)] to-[rgba(58,125,111,0.70)] border-t border-[rgba(42,93,79,0.30)]'
                       : status === 'missed'
-                      ? 'bg-gradient-to-t from-[#6B3A3A]/60 to-[#8B5A5A]/40 border-t border-[rgba(107,58,58,0.20)]'
+                      ? 'bg-gradient-to-t from-[rgba(107,58,58,0.60)] to-[rgba(139,90,90,0.40)] border-t border-[rgba(107,58,58,0.20)]'
                       : 'bg-[rgba(26,26,30,0.40)] border-t border-[rgba(245,240,232,0.04)]'
                   }`}
                   style={{ height: `${heightPct}%` }}

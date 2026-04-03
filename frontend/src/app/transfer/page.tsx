@@ -47,7 +47,7 @@ export default function TransferPage() {
           <AlertTriangle className="w-5 h-5 text-[#B09B71] shrink-0 mt-0.5" />
           <div>
             <p className="text-[#B09B71] font-medium text-sm">Important: This action is irreversible</p>
-            <p className="text-[#B09B71]/70 text-xs mt-1">Transferring your NFT will immediately revoke your voting rights, community access, amenity bookings, and all resident privileges. This process requires board approval and cannot be undone.</p>
+            <p className="text-[rgba(176,155,113,0.70)] text-xs mt-1">Transferring your NFT will immediately revoke your voting rights, community access, amenity bookings, and all resident privileges. This process requires board approval and cannot be undone.</p>
           </div>
         </div>
 
@@ -178,7 +178,7 @@ export default function TransferPage() {
               </div>
               <div className="p-4 rounded-xl border border-[rgba(139,90,90,0.40)] bg-[rgba(139,90,90,0.08)]">
                 <p className="text-[#8B5A5A] text-xs font-medium mb-1"> Final Warning</p>
-                <p className="text-[#8B5A5A]/70 text-xs">This transfer requires board approval. You will lose all access immediately upon board confirmation. There is no undo.</p>
+                <p className="text-[rgba(139,90,90,0.70)] text-xs">This transfer requires board approval. You will lose all access immediately upon board confirmation. There is no undo.</p>
               </div>
               <div className="flex gap-3">
                 <button onClick={() => setStep(1)} className="px-5 py-2.5 rounded-xl border border-[rgba(245,240,232,0.10)] text-[var(--text-body)] hover:text-[#D4C4A0] transition-colors text-sm">Back</button>
@@ -204,7 +204,7 @@ export default function TransferPage() {
                 <p className="text-xs text-[var(--text-muted)] font-medium">Approval Checklist:</p>
                 {['Verify purchase agreement on file', 'Confirm buyer identity', 'Check outstanding dues/violations', 'Board vote (3/5 required)'].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs text-[var(--text-body)]">
-                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center text-[8px] ${i === 0 ? 'border-[#B09B71] bg-[var(--brass-deep)]/20 text-[#B09B71]' : 'border-[rgba(245,240,232,0.12)]'}`}>
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center text-[8px] ${i === 0 ? 'border-[#B09B71] bg-[rgba(176,155,113,0.20)] text-[#B09B71]' : 'border-[rgba(245,240,232,0.12)]'}`}>
                       {i === 0 ? '' : ''}
                     </div>
                     {item}

@@ -99,7 +99,7 @@ function PetCard({
   onRemove: () => void;
 }) {
   return (
-    <div className="glass-card rounded-xl p-4 border border-[#B09B71]/10 mb-3">
+    <div className="glass-card rounded-xl p-4 border border-[rgba(176,155,113,0.10)] mb-3">
       <div className="flex justify-between items-start mb-3">
         <span className="text-sm font-medium text-[#D4C4A0]">
            Pet
@@ -113,13 +113,13 @@ function PetCard({
       </div>
       <div className="grid grid-cols-2 gap-3">
         <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50 col-span-2"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] col-span-2"
           placeholder="Pet name"
           value={pet.name}
           onChange={(e) => onUpdate({ ...pet, name: e.target.value })}
         />
         <select
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
           value={pet.type}
           onChange={(e) =>
             onUpdate({ ...pet, type: e.target.value as PetEntry["type"] })
@@ -130,13 +130,13 @@ function PetCard({
           <option value="other"> Other</option>
         </select>
         <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
           placeholder="Breed"
           value={pet.breed}
           onChange={(e) => onUpdate({ ...pet, breed: e.target.value })}
         />
         <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50 col-span-2"
+          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] col-span-2"
           placeholder="Weight (lbs)"
           value={pet.weight}
           onChange={(e) => onUpdate({ ...pet, weight: e.target.value })}
@@ -350,7 +350,7 @@ function OnboardingWizard() {
           </p>
 
           {hasProperty && propertyInfo ? (
-            <div className="bg-[#B09B71]/10 border border-[#B09B71]/20 rounded-xl p-5 mb-7">
+            <div className="bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] rounded-xl p-5 mb-7">
               <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">
                 Your Property
               </p>
@@ -378,7 +378,7 @@ function OnboardingWizard() {
               </div>
             </div>
           ) : (
-            <div className="bg-[#B09B71]/8 border border-[rgba(176,155,113,0.20)] rounded-xl p-4 mb-7 text-center">
+            <div className="bg-[rgba(176,155,113,0.08)] border border-[rgba(176,155,113,0.20)] rounded-xl p-4 mb-7 text-center">
               <p className="text-sm text-[#B09B71]">
                 No property NFT detected. Contact the board if you&apos;re a homeowner.
               </p>
@@ -407,7 +407,7 @@ function OnboardingWizard() {
                 Display Name
               </label>
               <input
-                className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50"
+                className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
                 placeholder="How should neighbors know you?"
                 value={profile.displayName}
                 onChange={(e) =>
@@ -421,7 +421,7 @@ function OnboardingWizard() {
               </label>
               <input
                 type="email"
-                className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50"
+                className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
                 placeholder="For HOA notifications"
                 value={profile.email}
                 onChange={(e) =>
@@ -435,7 +435,7 @@ function OnboardingWizard() {
               </label>
               <input
                 type="tel"
-                className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[#B09B71]/50"
+                className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
                 placeholder="For emergency alerts"
                 value={profile.phone}
                 onChange={(e) =>
@@ -515,7 +515,7 @@ function OnboardingWizard() {
 
           <button
             onClick={addPet}
-            className="w-full py-2.5 rounded-xl border border-dashed border-[#B09B71]/30 text-[#B09B71] hover:border-[#B09B71]/50 hover:bg-[#B09B71]/5 text-sm font-medium transition-all mt-3 mb-6"
+            className="w-full py-2.5 rounded-xl border border-dashed border-[rgba(176,155,113,0.30)] text-[#B09B71] hover:border-[rgba(176,155,113,0.50)] hover:bg-[rgba(176,155,113,0.05)] text-sm font-medium transition-all mt-3 mb-6"
           >
             + Add a Pet
           </button>
@@ -672,7 +672,7 @@ function OnboardingWizard() {
           </div>
 
           {/* CC&Rs */}
-          <div className="border border-[#B09B71]/20 rounded-xl p-4 mb-4 bg-[#B09B71]/5">
+          <div className="border border-[rgba(176,155,113,0.20)] rounded-xl p-4 mb-4 bg-[rgba(176,155,113,0.05)]">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
@@ -729,7 +729,7 @@ function OnboardingWizard() {
           <div className="grid grid-cols-2 gap-3">
             <Link
               href="/dashboard"
-              className="glass-card rounded-xl p-4 text-center hover:border-[#B09B71]/25 transition-all"
+              className="glass-card rounded-xl p-4 text-center hover:border-[rgba(176,155,113,0.25)] transition-all"
             >
               <Home className="w-6 h-6 text-[#B09B71] mx-auto mb-1" />
               <p className="text-sm font-medium text-[var(--text-body)]">Dashboard</p>
@@ -880,7 +880,7 @@ function ChecklistRow({ item, checked, onToggle }: { item: ChecklistItem; checke
         <button
           onClick={onToggle}
           className={`mt-0.5 w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-all ${
-            checked ? 'bg-[#B09B71] border-[#B09B71] text-[var(--surface-2)]' : 'border-[rgba(245,240,232,0.10)] hover:border-[#B09B71]/50'
+            checked ? 'bg-[#B09B71] border-[#B09B71] text-[var(--surface-2)]' : 'border-[rgba(245,240,232,0.10)] hover:border-[rgba(176,155,113,0.50)]'
           }`}
         >
           {checked && <span className="text-[10px] font-medium"></span>}
@@ -891,7 +891,7 @@ function ChecklistRow({ item, checked, onToggle }: { item: ChecklistItem; checke
               {item.label}
             </span>
             {item.required && !checked && (
-              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20">Required</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]">Required</span>
             )}
           </div>
           {expanded && (
@@ -927,15 +927,15 @@ export default function OnboardingPage() {
       <div className="max-w-4xl mx-auto px-4 pt-6 sm:pt-8">
         <div className="flex gap-2 mb-6">
           <button onClick={() => setView('wizard')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
              Setup Wizard
           </button>
           <button onClick={() => setView('checklist-in')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
             <span className="flex items-center gap-1.5"><Home className="w-3.5 h-3.5" /> Move-In Checklist</span>
           </button>
           <button onClick={() => setView('checklist-out')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
              Move-Out Checklist
           </button>
         </div>

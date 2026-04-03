@@ -139,9 +139,9 @@ const SAMPLE_RECIPES: Recipe[] = [
 ];
 
 const DIFFICULTY_COLORS: Record<Difficulty, string> = {
-  Easy: 'text-[#3A7D6F] bg-[#3A7D6F]/10 border-[rgba(42,93,79,0.20)]',
+  Easy: 'text-[#3A7D6F] bg-[rgba(58,125,111,0.10)] border-[rgba(42,93,79,0.20)]',
   Medium: 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]',
-  Hard: 'text-[#8B5A5A] bg-[#8B5A5A]/10 border-[rgba(139,90,90,0.20)]',
+  Hard: 'text-[#8B5A5A] bg-[rgba(139,90,90,0.10)] border-[rgba(139,90,90,0.20)]',
 };
 
 function formatPrepTime(mins: number): string {
@@ -155,7 +155,7 @@ function RecipeCard({ recipe, onClick }: { recipe: Recipe; onClick: () => void }
   return (
     <div
       onClick={onClick}
-      className="glass-card rounded-xl p-5 border border-[rgba(245,240,232,0.04)] cursor-pointer hover:border-[#B09B71]/20 hover-lift transition-all"
+      className="glass-card rounded-xl p-5 border border-[rgba(245,240,232,0.04)] cursor-pointer hover:border-[rgba(176,155,113,0.20)] hover-lift transition-all"
     >
       <div className="text-3xl mb-3">{recipe.emoji}</div>
       <h3 className="text-base font-medium text-[var(--parchment)] mb-1">{recipe.title}</h3>
@@ -210,7 +210,7 @@ function RecipeModal({ recipe, onClose }: { recipe: Recipe; onClose: () => void 
             <ol className="space-y-3">
               {recipe.steps.map((step, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-[var(--text-body)]">
-                  <span className="w-6 h-6 rounded-full bg-[#B09B71]/20 text-[#B09B71] text-xs font-medium flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
+                  <span className="w-6 h-6 rounded-full bg-[rgba(176,155,113,0.20)] text-[#B09B71] text-xs font-medium flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
                   {step}
                 </li>
               ))}
@@ -261,24 +261,24 @@ function AddRecipeModal({ onAdd, onClose }: { onAdd: (r: Recipe) => void; onClos
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Title *</label>
               <input value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="My Famous Chili"
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" required />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" required />
             </div>
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Emoji</label>
               <input value={form.emoji} onChange={e => setForm({...form, emoji: e.target.value})} placeholder=""
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" />
             </div>
           </div>
           <div className="grid grid-cols-3 gap-3">
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Cuisine</label>
               <input value={form.cuisine} onChange={e => setForm({...form, cuisine: e.target.value})} placeholder="Italian"
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" />
             </div>
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Difficulty</label>
               <select value={form.difficulty} onChange={e => setForm({...form, difficulty: e.target.value as Difficulty})}
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50">
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]">
                 <option value="Easy">Easy</option>
                 <option value="Medium">Medium</option>
                 <option value="Hard">Hard</option>
@@ -287,28 +287,28 @@ function AddRecipeModal({ onAdd, onClose }: { onAdd: (r: Recipe) => void; onClos
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Prep (min)</label>
               <input type="number" value={form.prepTime} onChange={e => setForm({...form, prepTime: e.target.value})} placeholder="30"
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" />
             </div>
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Your Lot #</label>
             <input value={form.submittedBy} onChange={e => setForm({...form, submittedBy: e.target.value})} placeholder="Lot 5"
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Description</label>
             <textarea rows={2} value={form.description} onChange={e => setForm({...form, description: e.target.value})} placeholder="Tell us about this recipe..."
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] resize-none" />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Ingredients (one per line)</label>
             <textarea rows={4} value={form.ingredients} onChange={e => setForm({...form, ingredients: e.target.value})} placeholder="2 cups flour&#10;1 tsp salt"
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] resize-none" />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Steps (one per line)</label>
             <textarea rows={4} value={form.steps} onChange={e => setForm({...form, steps: e.target.value})} placeholder="Preheat oven to 375°F&#10;Mix dry ingredients"
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] resize-none" />
           </div>
           <div className="flex gap-3">
             <button type="button" onClick={onClose}
@@ -386,13 +386,13 @@ export default function CookbookPage() {
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search recipes..."
-          className="flex-1 min-w-[160px] px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[#B09B71]/50"
+          className="flex-1 min-w-[160px] px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
         />
         <div className="glass rounded-xl p-1 flex gap-1 border border-[rgba(245,240,232,0.04)]">
           {(['All', 'Easy', 'Medium', 'Hard'] as const).map(d => (
             <button key={d} onClick={() => setFilter(d)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-                filter === d ? 'bg-[#B09B71]/20 text-[#D4C4A0] border border-[#B09B71]/30' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'
+                filter === d ? 'bg-[rgba(176,155,113,0.20)] text-[#D4C4A0] border border-[rgba(176,155,113,0.30)]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'
               }`}
             >{d}</button>
           ))}

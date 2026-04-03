@@ -16,7 +16,7 @@ function timeAgo(unix: number): string {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
-      <div className="w-12 h-12 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center text-2xl mb-4">
+      <div className="w-12 h-12 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center text-2xl mb-4">
         
       </div>
       <p className="text-sm text-[var(--text-disabled)] font-medium">No recent activity</p>
@@ -54,10 +54,10 @@ function EventRow({ item, isNew }: EventRowProps) {
       className={[
         'w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl',
         'transition-all duration-300 group cursor-pointer',
-        'hover:bg-[rgba(245,240,232,0.05)] hover:border-[#B09B71]/20',
+        'hover:bg-[rgba(245,240,232,0.05)] hover:border-[rgba(176,155,113,0.20)]',
         'border border-transparent',
         isNew
-          ? 'bg-[#B09B71]/10 border-[#B09B71]/25 shadow-[0_0_12px_rgba(201,169,110,0.12)] activity-ticker-slide-in'
+          ? 'bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.25)] shadow-[0_0_12px_rgba(201,169,110,0.12)] activity-ticker-slide-in'
           : 'activity-ticker-slide-in',
       ].join(' ')}
       style={{ animationFillMode: 'both' }}
@@ -67,7 +67,7 @@ function EventRow({ item, isNew }: EventRowProps) {
       <div className={[
         'w-8 h-8 rounded-lg flex items-center justify-center text-base shrink-0',
         'transition-transform duration-200 group-hover:scale-110',
-        isNew ? 'bg-[#B09B71]/12 border border-[#B09B71]/30' : 'bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.10)]',
+        isNew ? 'bg-[rgba(176,155,113,0.12)] border border-[rgba(176,155,113,0.30)]' : 'bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.10)]',
       ].join(' ')}>
         {item.icon}
       </div>
@@ -164,7 +164,7 @@ export function ActivityTicker({ className = '', maxHeight = '480px' }: Activity
             href="https://sepolia.basescan.org"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] text-[#B09B71]/70 hover:text-[#B09B71] transition-colors duration-150"
+            className="text-[10px] text-[rgba(176,155,113,0.70)] hover:text-[#B09B71] transition-colors duration-150"
           >
             View all on BaseScan →
           </a>

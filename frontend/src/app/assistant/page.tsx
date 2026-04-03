@@ -48,7 +48,7 @@ function MessageText({ text }: { text: string }) {
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-3 mb-4">
-      <div className="w-9 h-9 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-lg shrink-0"></div>
+      <div className="w-9 h-9 rounded-full bg-[rgba(176,155,113,0.15)] flex items-center justify-center text-lg shrink-0"></div>
       <div className="bg-[rgba(245,240,232,0.06)] rounded-xl rounded-bl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 1, 2].map((i) => (
           <span key={i} className="w-2 h-2 rounded-full bg-[var(--text-muted)] inline-block animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
@@ -84,7 +84,7 @@ export default function AssistantPage() {
   return (
     <div className="flex flex-col h-[calc(100vh-4rem)]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[rgba(26,26,30,0.80)] to-[#222228]/80 border-b border-[rgba(245,240,232,0.06)] px-6 py-4 shrink-0">
+      <div className="bg-gradient-to-r from-[rgba(26,26,30,0.80)] to-[rgba(34,34,40,0.80)] border-b border-[rgba(245,240,232,0.06)] px-6 py-4 shrink-0">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] flex items-center justify-center text-xl">
@@ -110,7 +110,7 @@ export default function AssistantPage() {
               className={`flex items-end gap-3 mb-4 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
             >
               {msg.role === 'bot' && (
-                <div className="w-9 h-9 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-lg shrink-0">
+                <div className="w-9 h-9 rounded-full bg-[rgba(176,155,113,0.15)] flex items-center justify-center text-lg shrink-0">
                   
                 </div>
               )}
@@ -143,7 +143,7 @@ export default function AssistantPage() {
                 key={a.label}
                 onClick={() => sendMessage(a.query)}
                 disabled={isTyping}
-                className="text-xs font-medium px-3 py-1.5 rounded-full bg-[#B09B71]/15 text-[#D4C4A0] hover:bg-[#B09B71]/20 hover:text-[#D4C4A0] transition-colors disabled:opacity-40 border border-[#B09B71]/20"
+                className="text-xs font-medium px-3 py-1.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] hover:bg-[rgba(176,155,113,0.20)] hover:text-[#D4C4A0] transition-colors disabled:opacity-40 border border-[rgba(176,155,113,0.20)]"
               >
                 {a.label}
               </button>
@@ -164,7 +164,7 @@ export default function AssistantPage() {
             placeholder="Ask about dues, treasury, proposals, amenities..."
             disabled={isTyping}
             autoFocus
-            className="flex-1 bg-[rgba(245,240,232,0.06)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:ring-2 focus:ring-[#B09B71]/50 disabled:opacity-50 transition-colors"
+            className="flex-1 bg-[rgba(245,240,232,0.06)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:ring-2 focus:ring-[rgba(176,155,113,0.50)] disabled:opacity-50 transition-colors"
           />
           <button
             onClick={handleSend}

@@ -95,7 +95,7 @@ export default function ForumPage() {
         {/* Topic header */}
         <div className="glass-card rounded-lg p-6 mb-4">
           <div className="flex items-start gap-3 mb-3">
-            <span className="text-[10px] px-2 py-1 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20 font-medium shrink-0">
+            <span className="text-[10px] px-2 py-1 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium shrink-0">
               {selectedTopic.category}
             </span>
             {selectedTopic.pinned && (
@@ -141,7 +141,7 @@ export default function ForumPage() {
               onChange={e => setReplyText(e.target.value)}
               placeholder="Share your thoughts..."
               rows={4}
-              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none resize-none mb-3"
+              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none mb-3"
             />
             <button
               onClick={() => handleReply(selectedTopic)}
@@ -190,7 +190,7 @@ export default function ForumPage() {
                 value={newTitle}
                 onChange={e => setNewTitle(e.target.value)}
                 placeholder="What would you like to discuss?"
-                className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
               />
             </div>
             <div>
@@ -202,7 +202,7 @@ export default function ForumPage() {
                     onClick={() => setNewCategory(cat)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                       newCategory === cat
-                        ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
+                        ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]'
                         : 'bg-[rgba(26,26,30,0.40)] text-[var(--text-muted)] border border-[rgba(245,240,232,0.06)] hover:border-[rgba(245,240,232,0.10)]'
                     }`}
                   >
@@ -218,7 +218,7 @@ export default function ForumPage() {
                 onChange={e => setNewContent(e.target.value)}
                 placeholder="Share more details..."
                 rows={5}
-                className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
+                className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none"
               />
             </div>
             <div className="flex gap-3">
@@ -245,7 +245,7 @@ export default function ForumPage() {
             onClick={() => setSelectedCategory(cat)}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all shrink-0 ${
               selectedCategory === cat
-                ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
+                ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]'
                 : 'bg-[rgba(26,26,30,0.40)] text-[var(--text-muted)] border border-[rgba(245,240,232,0.06)] hover:border-[rgba(245,240,232,0.10)]'
             }`}
           >
@@ -267,13 +267,13 @@ export default function ForumPage() {
             <button
               key={topic.id}
               onClick={() => setSelectedTopic(topic)}
-              className="w-full text-left glass-card rounded-lg hover-lift p-5 transition-all hover:border-[#B09B71]/20 group"
+              className="w-full text-left glass-card rounded-lg hover-lift p-5 transition-all hover:border-[rgba(176,155,113,0.20)] group"
             >
               <div className="flex items-start gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                     {topic.pinned && <span className="text-[10px] text-[#B09B71]">Pinned</span>}
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/15 font-medium">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.15)] font-medium">
                       {topic.category}
                     </span>
                   </div>

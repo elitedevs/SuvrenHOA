@@ -133,7 +133,7 @@ export default function NotificationPrefsPage() {
           <div className="flex gap-2">
             <button
               onClick={() => { setPrefs(Object.fromEntries(PREFS.map(p => [p.id, true]))); setSaved(false); setHasUnsaved(true); setSaveError(''); }}
-              className="text-xs px-2.5 py-1 rounded-lg border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-all"
+              className="text-xs px-2.5 py-1 rounded-lg border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:border-[rgba(176,155,113,0.30)] hover:text-[#B09B71] transition-all"
             >
               All on
             </button>
@@ -145,7 +145,7 @@ export default function NotificationPrefsPage() {
                 setHasUnsaved(true);
                 setSaveError('');
               }}
-              className="text-xs px-2.5 py-1 rounded-lg border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-all"
+              className="text-xs px-2.5 py-1 rounded-lg border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:border-[rgba(176,155,113,0.30)] hover:text-[#B09B71] transition-all"
             >
               Urgent only
             </button>
@@ -165,7 +165,7 @@ export default function NotificationPrefsPage() {
                 key={pref.id}
                 className={`flex items-center gap-4 rounded-lg p-4 transition-all ${
                   prefs[pref.id]
-                    ? 'bg-[#B09B71]/5 border border-[#B09B71]/15'
+                    ? 'bg-[rgba(176,155,113,0.05)] border border-[rgba(176,155,113,0.15)]'
                     : 'bg-[rgba(26,26,30,0.30)] border border-[rgba(245,240,232,0.06)]'
                 }`}
               >

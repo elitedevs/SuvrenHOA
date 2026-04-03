@@ -89,11 +89,11 @@ export function OnboardingChecklist() {
   }
 
   return (
-    <div className="glass-card rounded-xl border border-[#B09B71]/20 overflow-hidden mb-6 page-enter">
+    <div className="glass-card rounded-xl border border-[rgba(176,155,113,0.20)] overflow-hidden mb-6 page-enter">
       {/* Header */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(245,240,232,0.06)]">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center text-base">
+          <div className="w-8 h-8 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center text-base">
             
           </div>
           <div>
@@ -144,7 +144,7 @@ export function OnboardingChecklist() {
           {STEPS.map((step) => {
             const done = completedSet.has(step.id);
             return (
-              <div key={step.id} className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${done ? 'bg-[#B09B71]/5' : 'hover:bg-[rgba(245,240,232,0.03)]'}`}>
+              <div key={step.id} className={`flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${done ? 'bg-[rgba(176,155,113,0.05)]' : 'hover:bg-[rgba(245,240,232,0.03)]'}`}>
                 <button
                   onClick={() => toggleStep(step.id)}
                   className={`shrink-0 transition-colors ${done ? 'text-[#B09B71]' : 'text-[var(--text-disabled)] hover:text-[var(--text-muted)]'}`}
@@ -172,7 +172,7 @@ export function OnboardingChecklist() {
           })}
 
           {allDone && (
-            <div className="mt-3 text-center py-3 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/20">
+            <div className="mt-3 text-center py-3 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)]">
               <p className="text-sm font-medium text-[#D4C4A0]"> You're all set!</p>
               <p className="text-xs text-[var(--text-disabled)] mt-1">Welcome to Faircroft HOA</p>
             </div>

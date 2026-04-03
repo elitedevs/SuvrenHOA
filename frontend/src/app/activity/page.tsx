@@ -59,7 +59,7 @@ export default function ActivityPage() {
               onClick={() => { setActiveFilter(f.match); setPage(1); }}
               className={`px-4 py-2 rounded-xl text-xs font-medium transition-all border ${
                 isActive
-                  ? 'bg-[#B09B71]/15 text-[#B09B71] border-[#B09B71]/30'
+                  ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border-[rgba(176,155,113,0.30)]'
                   : 'text-[var(--text-muted)] border-[rgba(245,240,232,0.08)] hover:border-[rgba(245,240,232,0.10)] hover:text-[var(--text-body)]'
               }`}
             >
@@ -98,7 +98,7 @@ export default function ActivityPage() {
               href={`https://sepolia.basescan.org/tx/${event.txHash}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-card rounded-xl p-4 flex items-start gap-4 hover:border-[#B09B71]/20 border border-transparent transition-all group block"
+              className="glass-card rounded-xl p-4 flex items-start gap-4 hover:border-[rgba(176,155,113,0.20)] border border-transparent transition-all group block"
               style={{ animationDelay: `${i * 30}ms` }}
             >
               <div className="w-10 h-10 rounded-xl bg-[rgba(26,26,30,0.60)] flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition-transform">
@@ -112,7 +112,7 @@ export default function ActivityPage() {
                   <span className="font-mono text-[var(--text-disabled)]">
                     Block #{Number(event.blockNumber).toLocaleString()}
                   </span>
-                  <span className="text-[#B09B71]/60 group-hover:text-[#B09B71] transition-colors">↗ Basescan</span>
+                  <span className="text-[rgba(176,155,113,0.60)] group-hover:text-[#B09B71] transition-colors">↗ Basescan</span>
                 </div>
               </div>
             </a>
@@ -121,7 +121,7 @@ export default function ActivityPage() {
           {hasMore && (
             <button
               onClick={() => setPage(p => p + 1)}
-              className="w-full py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm text-[var(--text-muted)] hover:text-[var(--text-body)] hover:border-[#B09B71]/30 transition-all font-medium"
+              className="w-full py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm text-[var(--text-muted)] hover:text-[var(--text-body)] hover:border-[rgba(176,155,113,0.30)] transition-all font-medium"
             >
               Load more ({filtered.length - paginated.length} remaining)
             </button>

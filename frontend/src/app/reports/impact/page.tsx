@@ -76,14 +76,14 @@ export default function ImpactPage() {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <Award className="w-7 h-7 text-[#B09B71]" />
-              <span className="text-xs font-medium uppercase tracking-widest text-[var(--brass-deep)] bg-[var(--brass-deep)]/10 px-2 py-0.5 rounded-full">Community Impact Report</span>
+              <span className="text-xs font-medium uppercase tracking-widest text-[var(--brass-deep)] bg-[rgba(176,155,113,0.10)] px-2 py-0.5 rounded-full">Community Impact Report</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2">Faircroft HOA — Blockchain Impact</h1>
             <p className="text-[rgba(245,240,232,0.45)]">Measuring how on-chain governance has transformed our community since January 2025</p>
           </div>
           <button
             onClick={share}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[var(--brass-deep)]/50 text-[#B09B71] hover:bg-[var(--brass-deep)]/10 transition-colors font-medium"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-[var(--brass-deep)]/50 text-[#B09B71] hover:bg-[rgba(176,155,113,0.10)] transition-colors font-medium"
           >
             <Share2 className="w-4 h-4" />
             {copied ? ' Copied!' : 'Share Report'}
@@ -138,7 +138,7 @@ export default function ImpactPage() {
             </div>
 
             {/* Shareable card */}
-            <div className="bg-gradient-to-br from-[var(--surface-2)] via-[#1A1A1E] to-[var(--surface-2)] border border-[var(--brass-deep)]/40 rounded-xl p-8 text-center">
+            <div className="bg-gradient-to-br from-[var(--surface-2)] via-[#1A1A1E] to-[var(--surface-2)] border border-[rgba(176,155,113,0.40)] rounded-xl p-8 text-center">
               <p className="text-xs uppercase tracking-widest text-[var(--brass-deep)] mb-3 font-medium">Faircroft HOA — Blockchain Community</p>
               <h3 className="text-2xl font-normal text-[#D4C4A0] mb-6">The Numbers Speak For Themselves</h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

@@ -167,14 +167,14 @@ export default function BudgetPlannerPage() {
 
       {/* Pie chart */}
       <div className="glass-card rounded-xl p-7 mb-8">
-        <h2 className="text-sm font-medium text-[#D4C4A0] mb-5">Budget Allocation</h2>
+        <h2 className="text-lg font-medium text-[#D4C4A0] mb-5">Budget Allocation</h2>
         <PieChart categories={budget} total={total} />
       </div>
 
       {/* Categories table */}
       <div className="glass-card rounded-xl overflow-hidden mb-6">
         <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(245,240,232,0.06)]">
-          <h2 className="text-sm font-medium text-[#D4C4A0]">Category Breakdown</h2>
+          <h2 className="text-lg font-medium text-[#D4C4A0]">Category Breakdown</h2>
           <div className="flex gap-2">
             {editing ? (
               <>
@@ -186,7 +186,7 @@ export default function BudgetPlannerPage() {
                 </button>
                 <button
                   onClick={handleSave}
-                  className="text-xs px-3 py-1.5 rounded-lg bg-[#B09B71]/20 border border-[#B09B71]/30 text-[#D4C4A0] hover:bg-[#B09B71]/30 transition-colors"
+                  className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(176,155,113,0.20)] border border-[rgba(176,155,113,0.30)] text-[#D4C4A0] hover:bg-[rgba(176,155,113,0.30)] transition-colors"
                 >
                   Save
                 </button>
@@ -194,7 +194,7 @@ export default function BudgetPlannerPage() {
             ) : (
               <button
                 onClick={() => setEditing(true)}
-                className="text-xs px-3 py-1.5 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#B09B71] hover:bg-[#B09B71]/20 transition-colors"
+                className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#B09B71] hover:bg-[rgba(176,155,113,0.20)] transition-colors"
               >
                  Edit (Board Only)
               </button>
@@ -218,7 +218,7 @@ export default function BudgetPlannerPage() {
                           type="number"
                           value={cat.thisYear}
                           onChange={e => updateAmount(i, e.target.value)}
-                          className="w-28 px-2 py-1 text-right text-sm bg-[rgba(245,240,232,0.05)] border border-[#B09B71]/30 rounded-lg text-[#D4C4A0] focus:outline-none focus:border-[#B09B71]/60"
+                          className="w-28 px-2 py-1 text-right text-sm bg-[rgba(245,240,232,0.05)] border border-[rgba(176,155,113,0.30)] rounded-lg text-[#D4C4A0] focus:outline-none focus:border-[rgba(176,155,113,0.60)]"
                         />
                       ) : (
                         <span className="text-sm font-medium text-[#D4C4A0]">${cat.thisYear.toLocaleString()}</span>

@@ -128,29 +128,29 @@ export default function LostFoundPage() {
           <div>
             <label className="block text-xs text-[var(--text-muted)] mb-1">Item Title</label>
             <input value={form.title} onChange={e => setForm({...form, title: e.target.value})}
-              placeholder="e.g. Orange tabby cat, set of keys..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+              placeholder="e.g. Orange tabby cat, set of keys..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
           </div>
           <div>
             <label className="block text-xs text-[var(--text-muted)] mb-1">Description</label>
             <textarea value={form.description} onChange={e => setForm({...form, description: e.target.value})}
               placeholder="Details that help identify the item..." rows={3}
-              className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+              className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none" />
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div className="sm:col-span-2">
               <label className="block text-xs text-[var(--text-muted)] mb-1">Location</label>
               <input value={form.location} onChange={e => setForm({...form, location: e.target.value})}
-                placeholder="Where it was lost/found" className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="Where it was lost/found" className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Your Lot #</label>
               <input value={form.contactLot} onChange={e => setForm({...form, contactLot: e.target.value})}
-                placeholder="42" className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="42" className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
           </div>
           <div>
@@ -158,7 +158,7 @@ export default function LostFoundPage() {
             <div className="flex gap-2 flex-wrap">
               {CATEGORIES.slice(1).map(c => (
                 <button key={c} onClick={() => setForm({...form, category: c})}
-                  className={`px-3 py-1.5 rounded-lg text-xs transition-all ${form.category === c ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+                  className={`px-3 py-1.5 rounded-lg text-xs transition-all ${form.category === c ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
                   {c}
                 </button>
               ))}
@@ -178,14 +178,14 @@ export default function LostFoundPage() {
       <div className="flex gap-2 mb-4 flex-wrap">
         {(['all', 'lost', 'found', 'claimed'] as const).map(f => (
           <button key={f} onClick={() => setFilter(f)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${filter === f ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${filter === f ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
             {f}
           </button>
         ))}
         <div className="w-px bg-[var(--surface-2)] self-stretch mx-1" />
         {CATEGORIES.map(c => (
           <button key={c} onClick={() => setCatFilter(c)}
-            className={`px-3 py-1.5 rounded-lg text-xs transition-all ${catFilter === c ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+            className={`px-3 py-1.5 rounded-lg text-xs transition-all ${catFilter === c ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
             {c}
           </button>
         ))}

@@ -89,7 +89,7 @@ export function NotificationBell() {
               {notifications.slice(0, 20).map((n: Notification) => (
                 <div
                   key={n.id}
-                  className={`p-3 hover:bg-[rgba(245,240,232,0.02)] transition-colors cursor-pointer ${!n.read ? 'bg-[#B09B71]/5' : ''}`}
+                  className={`p-3 hover:bg-[rgba(245,240,232,0.02)] transition-colors cursor-pointer ${!n.read ? 'bg-[rgba(176,155,113,0.05)]' : ''}`}
                   onClick={() => {
                     if (!n.read) markRead.mutate(n.id);
                     if (n.link) window.location.href = n.link;
@@ -98,7 +98,7 @@ export function NotificationBell() {
                 >
                   <div className="flex items-start gap-2">
                     {!n.read && (
-                      <span className="w-2 h-2 rounded-full bg-[#B09B71]/80 mt-1.5 shrink-0" />
+                      <span className="w-2 h-2 rounded-full bg-[rgba(176,155,113,0.80)] mt-1.5 shrink-0" />
                     )}
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-medium leading-snug">{n.title}</p>

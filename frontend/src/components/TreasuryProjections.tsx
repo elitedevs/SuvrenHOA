@@ -144,7 +144,7 @@ export function TreasuryProjections() {
     <div className="glass-card rounded-xl p-6">
       <div className="flex items-start justify-between mb-5">
         <div>
-          <h2 className="text-sm font-medium text-[#D4C4A0]">12-Month Projections</h2>
+          <h2 className="text-lg font-medium text-[#D4C4A0]">12-Month Projections</h2>
           <p className="text-xs text-[var(--text-disabled)] mt-1">Based on current income/expense trends</p>
         </div>
         <div className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full ${
@@ -159,11 +159,11 @@ export function TreasuryProjections() {
 
       {/* Warning */}
       {warningMonths.length > 0 && (
-        <div className="flex items-start gap-3 p-3 rounded-xl bg-[#6B3A3A]/5 border border-[rgba(107,58,58,0.20)] mb-5">
+        <div className="flex items-start gap-3 p-3 rounded-xl bg-[rgba(107,58,58,0.05)] border border-[rgba(107,58,58,0.20)] mb-5">
           <AlertTriangle className="w-4 h-4 text-[#6B3A3A] shrink-0 mt-0.5" />
           <div>
             <p className="text-xs font-medium text-[#6B3A3A]">Reserve Warning</p>
-            <p className="text-xs text-[#6B3A3A]/70 mt-0.5">
+            <p className="text-xs text-[rgba(107,58,58,0.70)] mt-0.5">
               Balance projected below ${RESERVE_THRESHOLD.toLocaleString()} minimum in{' '}
               {warningMonths.map(m => m.month).join(', ')}
             </p>
@@ -214,7 +214,7 @@ export function TreasuryProjections() {
             </thead>
             <tbody>
               {projections.map((p, i) => (
-                <tr key={i} className={`border-b border-[rgba(245,240,232,0.04)] ${p.isBelowThreshold ? 'bg-[#6B3A3A]/5' : ''}`}>
+                <tr key={i} className={`border-b border-[rgba(245,240,232,0.04)] ${p.isBelowThreshold ? 'bg-[rgba(107,58,58,0.05)]' : ''}`}>
                   <td className={`py-1.5 pr-3 font-medium ${p.isBelowThreshold ? 'text-[#6B3A3A]' : 'text-[var(--text-muted)]'}`}>{p.month}</td>
                   <td className="text-right py-1.5 pr-3" style={{ color: '#2A5D4F' }}>${(p.income / 1000).toFixed(1)}K</td>
                   <td className="text-right py-1.5 pr-3" style={{ color: '#6B3A3A' }}>${(p.expenses / 1000).toFixed(1)}K</td>

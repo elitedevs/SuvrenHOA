@@ -109,29 +109,29 @@ export default function NoiseComplaintPage() {
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Date of Incident</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Time</label>
               <input type="time" value={form.time} onChange={e => setForm({...form, time: e.target.value})}
-                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Duration</label>
               <input type="text" value={form.duration} onChange={e => setForm({...form, duration: e.target.value})}
-                placeholder="e.g. 2 hours" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="e.g. 2 hours" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
           </div>
           <div>
             <label className="block text-xs text-[var(--text-muted)] mb-1">Location of Noise</label>
             <input type="text" value={form.location} onChange={e => setForm({...form, location: e.target.value})}
-              placeholder="Lot number, building, address..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+              placeholder="Lot number, building, address..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
           </div>
           <div>
             <label className="block text-xs text-[var(--text-muted)] mb-1">Description</label>
             <textarea value={form.description} onChange={e => setForm({...form, description: e.target.value})}
               placeholder="Describe the noise — type, volume, impact..." rows={3}
-              className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+              className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none" />
           </div>
           <div>
             <label className="block text-xs text-[var(--text-muted)] mb-2">Severity: {form.severity}/5</label>
@@ -139,7 +139,7 @@ export default function NoiseComplaintPage() {
               {[1,2,3,4,5].map(n => (
                 <button key={n} onClick={() => setForm({...form, severity: n})}
                   className={`w-10 h-10 rounded-xl text-sm font-medium border transition-all ${
-                    form.severity >= n ? 'bg-[#B09B71]/20 text-[#B09B71] border-[#B09B71]/40' : 'glass-card text-[var(--text-disabled)] border-[rgba(245,240,232,0.08)]'
+                    form.severity >= n ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border-[rgba(176,155,113,0.40)]' : 'glass-card text-[var(--text-disabled)] border-[rgba(245,240,232,0.08)]'
                   }`}>{n}</button>
               ))}
               <span className="self-center text-xs text-[var(--text-disabled)] ml-2">
@@ -218,7 +218,7 @@ export default function NoiseComplaintPage() {
                 {isBoard && editing && (
                   <div className="mt-2 flex gap-2">
                     <input value={editNote} onChange={e => setEditNote(e.target.value)}
-                      placeholder="Add a note..." className="flex-1 px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs focus:border-[#B09B71]/50 focus:outline-none" />
+                      placeholder="Add a note..." className="flex-1 px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
                     <button onClick={() => { updateStatus(c.id, c.status, editNote); setEditing(false); }}
                       className="px-3 py-2 rounded-lg bg-[#B09B71] text-[var(--surface-2)] text-xs font-medium">Save</button>
                     <button onClick={() => setEditing(false)} className="px-3 py-2 rounded-lg border border-[rgba(245,240,232,0.08)] text-xs">Cancel</button>

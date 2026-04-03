@@ -140,7 +140,7 @@ export default function GardenPage() {
                   </h3>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                     selected.status === 'planted' ? 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]'
-                    : selected.status === 'reserved' ? 'bg-[var(--brass-deep)]/20 text-[#B09B71]'
+                    : selected.status === 'reserved' ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71]'
                     : 'bg-[rgba(245,240,232,0.06)] text-[var(--text-body)]'
                   }`}>{selected.status}</span>
                 </div>

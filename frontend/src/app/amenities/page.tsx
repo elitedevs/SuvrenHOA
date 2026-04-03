@@ -104,7 +104,7 @@ function AmenityGrid({ onSelect, walletAddress }: { onSelect: (a: Amenity) => vo
           <button
             key={amenity.id}
             onClick={() => onSelect(amenity)}
-            className="glass-card rounded-xl hover-lift p-6 text-left transition-all hover:border-[#B09B71]/30 border border-transparent group"
+            className="glass-card rounded-xl hover-lift p-6 text-left transition-all hover:border-[rgba(176,155,113,0.30)] border border-transparent group"
           >
             <div className="text-4xl mb-3">{amenity.icon}</div>
             <h3 className="font-medium text-base mb-1">{amenity.name}</h3>
@@ -193,7 +193,7 @@ function AmenityBookingView({
                   selectedDate === d.date
                     ? 'bg-[#B09B71] text-[var(--surface-2)]'
                     : d.date === today
-                    ? 'bg-[#B09B71]/10 border border-[#B09B71]/30 text-[#B09B71]'
+                    ? 'bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.30)] text-[#B09B71]'
                     : 'hover:bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)]'
                 }`}
               >
@@ -218,7 +218,7 @@ function AmenityBookingView({
                       disabled={booked}
                       className={`py-2 rounded-lg text-[11px] font-medium transition-all ${
                         mine
-                          ? 'bg-[#B09B71]/20 text-[#B09B71] border border-[#B09B71]/30 cursor-not-allowed'
+                          ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border border-[rgba(176,155,113,0.30)] cursor-not-allowed'
                           : booked
                           ? 'bg-[rgba(26,26,30,0.30)] text-[var(--text-disabled)] cursor-not-allowed line-through'
                           : selectedSlot === slot
@@ -256,13 +256,13 @@ function AmenityBookingView({
         <div className="flex gap-2 mb-2">
           <button
             onClick={() => setActiveTab('book')}
-            className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'book' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}
+            className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'book' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}
           >
             New Booking
           </button>
           <button
             onClick={() => setActiveTab('my')}
-            className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'my' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}
+            className={`flex-1 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'my' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}
           >
             My Bookings {myBookings.length > 0 && `(${myBookings.length})`}
           </button>
@@ -297,7 +297,7 @@ function AmenityBookingView({
                 onChange={e => setPurpose(e.target.value)}
                 placeholder="e.g., Birthday party, lap swimming, family gathering..."
                 rows={3}
-                className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none"
+                className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none"
               />
             </div>
 

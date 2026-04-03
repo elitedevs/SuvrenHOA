@@ -123,7 +123,7 @@ export default function SafetyPage() {
         {[
           { label: 'Reported', count: counts.reported, color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.05)] border-[rgba(176,155,113,0.20)]' },
           { label: 'Acknowledged', count: counts.acknowledged, color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/5 border-[rgba(90,122,154,0.20)]' },
-          { label: 'Resolved', count: counts.resolved, color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/5 border-[rgba(42,93,79,0.20)]' },
+          { label: 'Resolved', count: counts.resolved, color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.05)] border-[rgba(42,93,79,0.20)]' },
         ].map(s => (
           <div key={s.label} className={`glass-card rounded-xl p-3 text-center border ${s.bg}`}>
             <div className={`text-2xl font-medium ${s.color}`}>{s.count}</div>
@@ -142,7 +142,7 @@ export default function SafetyPage() {
               {(['all', 'reported', 'acknowledged', 'resolved'] as const).map(s => (
                 <button key={s} onClick={() => setStatusFilter(s)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-medium capitalize transition-all ${
-                    statusFilter === s ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
+                    statusFilter === s ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'
                   }`}>
                   {s}
                 </button>
@@ -255,7 +255,7 @@ function ReportForm({ onSubmit, onCancel, address }: {
           {REPORT_TYPES.map(t => (
             <button key={t.id} onClick={() => setType(t.id)}
               className={`p-3 rounded-xl text-center transition-all ${
-                type === t.id ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)] hover:text-[var(--parchment)]'
+                type === t.id ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)] hover:text-[var(--parchment)]'
               }`}>
               <div className="text-xl mb-1">{t.icon}</div>
               <div className="text-[10px] font-medium leading-tight">{t.label}</div>
@@ -267,20 +267,20 @@ function ReportForm({ onSubmit, onCancel, address }: {
       <div>
         <label className="block text-sm text-[var(--text-muted)] mb-2">Location *</label>
         <input value={location} onChange={e => setLocation(e.target.value)} placeholder="e.g., Corner of Maple Ave and Oak St"
-          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
       </div>
 
       <div>
         <label className="block text-sm text-[var(--text-muted)] mb-2">Description *</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Describe what you observed — when, what you saw, any relevant details..."
-          rows={4} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+          rows={4} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none" />
       </div>
 
       <div>
         <label className="block text-sm text-[var(--text-muted)] mb-2">Date Observed</label>
         <input type="date" value={date} onChange={e => setDate(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
       </div>
 
       <label className="flex items-center gap-2 cursor-pointer">

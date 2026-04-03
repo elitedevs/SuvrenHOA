@@ -95,18 +95,18 @@ function AddImprovementModal({ onAdd, onClose }: { onAdd: (i: Improvement) => vo
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Project Name *</label>
             <input value={form.project} onChange={e => setForm({...form, project: e.target.value})} placeholder="Kitchen Renovation" required
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" />
             </div>
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Cost ($)</label>
               <input type="number" value={form.cost} onChange={e => setForm({...form, cost: e.target.value})} placeholder="5000"
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" />
             </div>
           </div>
           <div>
@@ -115,7 +115,7 @@ function AddImprovementModal({ onAdd, onClose }: { onAdd: (i: Improvement) => vo
               {(Object.entries(CATEGORY_ICONS) as [ImprovementCategory, string][]).map(([cat, icon]) => (
                 <button key={cat} type="button" onClick={() => setForm({...form, category: cat})}
                   className={`p-2 rounded-xl text-center transition-all cursor-pointer ${
-                    form.category === cat ? 'bg-[#B09B71]/15 border border-[#B09B71]/30' : 'bg-[rgba(245,240,232,0.02)] border border-[rgba(245,240,232,0.04)]'
+                    form.category === cat ? 'bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)]' : 'bg-[rgba(245,240,232,0.02)] border border-[rgba(245,240,232,0.04)]'
                   }`}>
                   <div className="text-lg">{icon}</div>
                   <div className={`text-[9px] mt-0.5 ${form.category === cat ? 'text-[#B09B71]' : 'text-[var(--text-disabled)]'}`}>{cat}</div>
@@ -126,12 +126,12 @@ function AddImprovementModal({ onAdd, onClose }: { onAdd: (i: Improvement) => vo
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Before Description</label>
             <textarea rows={2} value={form.beforeDesc} onChange={e => setForm({...form, beforeDesc: e.target.value})} placeholder="Original condition..."
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] resize-none" />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">After Description</label>
             <textarea rows={2} value={form.afterDesc} onChange={e => setForm({...form, afterDesc: e.target.value})} placeholder="Improvements made..."
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] resize-none" />
           </div>
           <div className="flex gap-3">
             <button type="button" onClick={onClose}
@@ -184,7 +184,7 @@ export function PropertyImprovements() {
     <div className="glass-card rounded-xl p-6 border border-[rgba(245,240,232,0.04)]">
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#B09B71]/15 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.15)] flex items-center justify-center">
             <Hammer className="w-5 h-5 text-[#B09B71]" />
           </div>
           <div>
@@ -197,14 +197,14 @@ export function PropertyImprovements() {
             <Share2 className="w-4 h-4" />
           </button>
           <button onClick={() => setShowAdd(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#B09B71]/15 text-[#B09B71] text-xs font-medium border border-[#B09B71]/25 hover:bg-[#B09B71]/25 transition-all cursor-pointer">
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[rgba(176,155,113,0.15)] text-[#B09B71] text-xs font-medium border border-[rgba(176,155,113,0.25)] hover:bg-[rgba(176,155,113,0.25)] transition-all cursor-pointer">
             <Plus className="w-3.5 h-3.5" /> Add
           </button>
         </div>
       </div>
 
       {/* Total Invested */}
-      <div className="flex items-center gap-3 p-4 rounded-xl bg-[#B09B71]/[0.06] border border-[#B09B71]/15 mb-4">
+      <div className="flex items-center gap-3 p-4 rounded-xl bg-[#B09B71]/[0.06] border border-[rgba(176,155,113,0.15)] mb-4">
         <TrendingUp className="w-5 h-5 text-[#B09B71]" />
         <div>
           <div className="text-xs text-[var(--text-disabled)]">Total Invested</div>

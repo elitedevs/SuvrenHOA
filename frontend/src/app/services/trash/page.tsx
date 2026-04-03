@@ -11,9 +11,9 @@ interface PickupDay {
 }
 
 const TYPE_CONFIG: Record<PickupType, { color: string; bg: string; border: string; emoji: string; label: string }> = {
-  trash:     { color: 'text-[#3A7D6F]',  bg: 'bg-[#3A7D6F]/20',  border: 'border-[rgba(42,93,79,0.30)]',  emoji: '', label: 'Trash' },
+  trash:     { color: 'text-[#3A7D6F]',  bg: 'bg-[rgba(58,125,111,0.20)]',  border: 'border-[rgba(42,93,79,0.30)]',  emoji: '', label: 'Trash' },
   recycling: { color: 'text-[var(--steel)]',   bg: 'bg-[var(--steel)]/20',   border: 'border-[rgba(90,122,154,0.30)]',   emoji: '', label: 'Recycling' },
-  yard:      { color: 'text-[#B09B71]',  bg: 'bg-[#B09B71]/20', border: 'border-[#B09B71]/30',  emoji: '', label: 'Yard Waste' },
+  yard:      { color: 'text-[#B09B71]',  bg: 'bg-[rgba(176,155,113,0.20)]', border: 'border-[rgba(176,155,113,0.30)]',  emoji: '', label: 'Yard Waste' },
 };
 
 // Pickup schedule: 0=Sun,1=Mon,...,6=Sat
@@ -140,7 +140,7 @@ export default function TrashSchedulePage() {
             <span className={`text-xs font-medium ${cfg.color}`}>{cfg.label}</span>
           </div>
         ))}
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#8B5A5A]/10 border border-[rgba(139,90,90,0.20)]">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[rgba(139,90,90,0.10)] border border-[rgba(139,90,90,0.20)]">
           <span className="text-sm"></span>
           <span className="text-xs font-medium text-[#8B5A5A]">Holiday (delayed +1 day)</span>
         </div>
@@ -148,7 +148,7 @@ export default function TrashSchedulePage() {
 
       {/* Next Pickups Countdown */}
       <div className="glass rounded-xl p-5 border border-[rgba(245,240,232,0.04)] mb-6">
-        <h2 className="text-sm font-medium text-[var(--text-body)] mb-4"> Upcoming Pickups</h2>
+        <h2 className="text-lg font-medium text-[var(--text-body)] mb-4"> Upcoming Pickups</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {nextPickups.map((pickup, i) => {
             const daysUntil = getDaysUntil(pickup.date);
@@ -202,7 +202,7 @@ export default function TrashSchedulePage() {
               <div
                 key={day}
                 className={`relative rounded-lg p-1 min-h-[52px] flex flex-col items-center ${
-                  isToday ? 'ring-1 ring-[#B09B71]/50 bg-[#B09B71]/5' : ''
+                  isToday ? 'ring-1 ring-[rgba(176,155,113,0.50)] bg-[rgba(176,155,113,0.05)]' : ''
                 }`}
               >
                 <span className={`text-[11px] font-medium mb-1 ${isToday ? 'text-[#B09B71]' : 'text-[var(--text-disabled)]'}`}>{day}</span>
@@ -216,7 +216,7 @@ export default function TrashSchedulePage() {
                     );
                   })}
                   {holiday && dayPickups.length > 0 && (
-                    <div className="text-[9px] text-center rounded px-0.5 bg-[#8B5A5A]/15 text-[#8B5A5A] font-medium leading-tight py-0.5"></div>
+                    <div className="text-[9px] text-center rounded px-0.5 bg-[rgba(139,90,90,0.15)] text-[#8B5A5A] font-medium leading-tight py-0.5"></div>
                   )}
                 </div>
               </div>
@@ -227,7 +227,7 @@ export default function TrashSchedulePage() {
 
       {/* Schedule Summary */}
       <div className="glass rounded-xl p-5 border border-[rgba(245,240,232,0.04)] mt-6">
-        <h2 className="text-sm font-medium text-[var(--text-body)] mb-3 flex items-center gap-2"><ClipboardList className="w-4 h-4 text-[#B09B71]" /> Weekly Schedule</h2>
+        <h2 className="text-lg font-medium text-[var(--text-body)] mb-3 flex items-center gap-2"><ClipboardList className="w-4 h-4 text-[#B09B71]" /> Weekly Schedule</h2>
         <div className="space-y-2">
           {[
             { day: 'Monday', pickups: [' Trash', ' Yard Waste (bi-weekly)'] },

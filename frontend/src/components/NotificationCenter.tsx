@@ -215,7 +215,7 @@ export function NotificationBell() {
                   onClick={() => setFilter(tab)}
                   className={`px-3 py-1 rounded-lg text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
                     filter === tab
-                      ? 'bg-[#B09B71]/15 text-[#D4C4A0] border border-[#B09B71]/25'
+                      ? 'bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] border border-[rgba(176,155,113,0.25)]'
                       : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'
                   }`}
                 >

@@ -56,7 +56,7 @@ function CheckRow({
     <label
       className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
         checked
-          ? 'border-[rgba(42,93,79,0.25)] bg-[#3A7D6F]/5'
+          ? 'border-[rgba(42,93,79,0.25)] bg-[rgba(58,125,111,0.05)]'
           : 'border-[rgba(245,240,232,0.06)] bg-[rgba(26,26,30,0.30)]'
       } ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`}
     >
@@ -134,8 +134,8 @@ function CheckoutWizard() {
           <div
             className={`p-4 rounded-xl border mb-4 ${
               isCurrent === false
-                ? 'border-[rgba(107,58,58,0.25)] bg-[#8B5A5A]/5'
-                : 'border-[rgba(42,93,79,0.25)] bg-[#3A7D6F]/5'
+                ? 'border-[rgba(107,58,58,0.25)] bg-[rgba(139,90,90,0.05)]'
+                : 'border-[rgba(42,93,79,0.25)] bg-[rgba(58,125,111,0.05)]'
             }`}
           >
             <div className="flex items-center justify-between">
@@ -228,8 +228,8 @@ function CheckoutWizard() {
           <div
             className={`p-5 rounded-xl border mb-6 ${
               isCurrent === false
-                ? 'border-[rgba(107,58,58,0.25)] bg-[#8B5A5A]/8'
-                : 'border-[rgba(42,93,79,0.25)] bg-[#3A7D6F]/5'
+                ? 'border-[rgba(107,58,58,0.25)] bg-[rgba(139,90,90,0.08)]'
+                : 'border-[rgba(42,93,79,0.25)] bg-[rgba(58,125,111,0.05)]'
             }`}
           >
             <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">
@@ -263,7 +263,7 @@ function CheckoutWizard() {
           </div>
 
           {/* Confirmation */}
-          <div className="border border-[rgba(176,155,113,0.20)] rounded-xl p-4 mb-7 bg-[#B09B71]/5">
+          <div className="border border-[rgba(176,155,113,0.20)] rounded-xl p-4 mb-7 bg-[rgba(176,155,113,0.05)]">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"

@@ -78,13 +78,13 @@ export default function DirectoryPage() {
         <div className="flex items-center bg-[rgba(245,240,232,0.05)] rounded-xl p-1 border border-[rgba(245,240,232,0.08)] shrink-0">
           <button
             onClick={() => setViewMode('list')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${viewMode === 'list' ? 'bg-[#B09B71]/20 text-[#D4C4A0]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${viewMode === 'list' ? 'bg-[rgba(176,155,113,0.20)] text-[#D4C4A0]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}
           >
             <List className="w-3.5 h-3.5" /> List
           </button>
           <button
             onClick={() => setViewMode('map')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${viewMode === 'map' ? 'bg-[#B09B71]/20 text-[#D4C4A0]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${viewMode === 'map' ? 'bg-[rgba(176,155,113,0.20)] text-[#D4C4A0]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}
           >
             <Map className="w-3.5 h-3.5" /> Map
           </button>
@@ -101,7 +101,7 @@ export default function DirectoryPage() {
       {/* Community Info */}
       <div className="glass-card rounded-xl hover-lift p-6 mb-8">
         <div className="flex items-center gap-4 mb-4">
-          <div className="w-14 h-14 rounded-xl bg-[#B09B71]/15 border border-[#B09B71]/20 flex items-center justify-center text-2xl">
+          <div className="w-14 h-14 rounded-xl bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center text-2xl">
             
           </div>
           <div>
@@ -178,7 +178,7 @@ export default function DirectoryPage() {
 }
 
 const TIER_LABELS: Record<number, { label: string; color: string; bg: string }> = {
-  1: { label: ' Founder', color: 'text-[#B09B71]', bg: 'bg-[#B09B71]/10 border-[#B09B71]/20' },
+  1: { label: ' Founder', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' },
   2: { label: ' Elder', color: 'text-[var(--steel)]', bg: 'bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' },
   3: { label: ' Resident', color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' },
   4: { label: ' New Owner', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' },
@@ -201,7 +201,7 @@ function ResidentProfileCard({ member, isBoard = false }: { member: any; isBoard
         {/* Avatar + name */}
         <div className="flex items-center gap-3 mb-4">
           <div className="relative">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#B09B71]/20 to-[var(--brass-deep)]/20 border border-[#B09B71]/30 flex items-center justify-center text-lg font-medium text-[#B09B71]">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[rgba(176,155,113,0.20)] to-[var(--brass-deep)]/20 border border-[rgba(176,155,113,0.30)] flex items-center justify-center text-lg font-medium text-[#B09B71]">
               {(member.name || '?').split(' ').map((n: string) => n[0]).join('').slice(0, 2)}
             </div>
             {isBoard && (
@@ -260,7 +260,7 @@ function ResidentProfileCard({ member, isBoard = false }: { member: any; isBoard
             <span>{vehicleCount} vehicle{vehicleCount !== 1 ? 's' : ''}</span>
           </div>
           {member.email && (
-            <a href={`mailto:${member.email}`} className="ml-auto text-[#B09B71]/60 hover:text-[#B09B71] transition-colors text-[11px]">
+            <a href={`mailto:${member.email}`} className="ml-auto text-[rgba(176,155,113,0.60)] hover:text-[#B09B71] transition-colors text-[11px]">
               
             </a>
           )}

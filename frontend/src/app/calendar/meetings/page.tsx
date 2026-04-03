@@ -64,7 +64,7 @@ export default function MeetingsPage() {
             onClick={() => setTab(t)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
               tab === t
-                ? 'bg-[#B09B71]/15 text-[#D4C4A0] border border-[#B09B71]/30'
+                ? 'bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] border border-[rgba(176,155,113,0.30)]'
                 : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'
             }`}
           >
@@ -178,7 +178,7 @@ function CreateMeetingForm({
   };
 
   return (
-    <div className="glass-card rounded-lg p-6 mb-6 border border-[#B09B71]/20">
+    <div className="glass-card rounded-lg p-6 mb-6 border border-[rgba(176,155,113,0.20)]">
       <h2 className="text-base font-medium text-[#D4C4A0] mb-5">Schedule New Meeting</h2>
 
       <div className="space-y-4">
@@ -189,7 +189,7 @@ function CreateMeetingForm({
             value={title}
             onChange={e => setTitle(e.target.value)}
             placeholder="Q2 2026 Board Meeting"
-            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none"
+            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
           />
         </div>
 
@@ -201,7 +201,7 @@ function CreateMeetingForm({
               value={date}
               onChange={e => setDate(e.target.value)}
               min={new Date().toISOString().split('T')[0]}
-              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
             />
           </div>
           <div>
@@ -210,7 +210,7 @@ function CreateMeetingForm({
               type="time"
               value={time}
               onChange={e => setTime(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none"
+              className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
             />
           </div>
         </div>
@@ -222,7 +222,7 @@ function CreateMeetingForm({
             value={location}
             onChange={e => setLocation(e.target.value)}
             placeholder="Faircroft Clubhouse, Room A"
-            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none"
+            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
           />
         </div>
 
@@ -233,7 +233,7 @@ function CreateMeetingForm({
             onChange={e => setAgenda(e.target.value)}
             placeholder="1. Call to order&#10;2. Review minutes&#10;3. Financial report..."
             rows={4}
-            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none"
+            className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none"
           />
         </div>
 

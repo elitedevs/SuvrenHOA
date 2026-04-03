@@ -144,8 +144,8 @@ export default function FitnessPage() {
       </div>
 
       {/* Current Challenge */}
-      <div className="glass rounded-xl p-6 border border-[#B09B71]/20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#B09B71]/5 to-transparent pointer-events-none" />
+      <div className="glass rounded-xl p-6 border border-[rgba(176,155,113,0.20)] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[rgba(176,155,113,0.05)] to-transparent pointer-events-none" />
         <div className="relative">
           <div className="flex items-start justify-between gap-3 mb-4">
             <div>
@@ -191,14 +191,14 @@ export default function FitnessPage() {
                 value={myLot}
                 onChange={e => setMyLot(e.target.value)}
                 placeholder="Your Lot # (e.g. Lot 5)"
-                className="flex-1 px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[#B09B71]/50"
+                className="flex-1 px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
               />
               <input
                 type="number"
                 value={checkInAmount}
                 onChange={e => setCheckInAmount(e.target.value)}
                 placeholder={`${CURRENT_CHALLENGE.unit} today`}
-                className="flex-1 px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[#B09B71]/50"
+                className="flex-1 px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
               />
               <button
                 onClick={handleCheckIn}
@@ -236,7 +236,7 @@ export default function FitnessPage() {
                       <span className="text-sm font-medium text-[#B09B71]">{entry.total.toLocaleString()}</span>
                     </div>
                     <div className="h-1.5 rounded-full bg-[rgba(245,240,232,0.06)] overflow-hidden">
-                      <div className="h-full rounded-full bg-[#B09B71]/60" style={{ width: `${pct}%` }} />
+                      <div className="h-full rounded-full bg-[rgba(176,155,113,0.60)]" style={{ width: `${pct}%` }} />
                     </div>
                   </div>
                   <span className="text-xs text-[var(--text-disabled)] w-10 text-right">{pct.toFixed(0)}%</span>
@@ -269,7 +269,7 @@ export default function FitnessPage() {
                   </div>
                 </div>
                 <div className="h-2 rounded-full bg-[rgba(245,240,232,0.06)] overflow-hidden">
-                  <div className={`h-full rounded-full ${pct >= 100 ? 'bg-[#3A7D6F]' : 'bg-[#B09B71]/60'}`} style={{ width: `${pct}%` }} />
+                  <div className={`h-full rounded-full ${pct >= 100 ? 'bg-[#3A7D6F]' : 'bg-[rgba(176,155,113,0.60)]'}`} style={{ width: `${pct}%` }} />
                 </div>
                 <div className="text-[10px] text-[var(--text-disabled)] mt-1">
                   {ch.achieved.toLocaleString()} / {ch.goal.toLocaleString()} {ch.unit}

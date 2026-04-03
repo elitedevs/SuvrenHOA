@@ -162,13 +162,13 @@ function SurveyCard({ survey }: { survey: any }) {
               className={`w-full text-left p-3 rounded-xl border transition-all relative overflow-hidden ${
                 hasVoted
                   ? 'border-[rgba(245,240,232,0.06)] bg-[rgba(20,20,22,0.50)] cursor-default'
-                  : 'border-[rgba(245,240,232,0.06)] bg-[rgba(20,20,22,0.50)] hover:border-[#B09B71]/30 cursor-pointer'
+                  : 'border-[rgba(245,240,232,0.06)] bg-[rgba(20,20,22,0.50)] hover:border-[rgba(176,155,113,0.30)] cursor-pointer'
               }`}
             >
               {/* Result bar (shown after voting) */}
               {(hasVoted || !isActive || isExpired) && (
                 <div
-                  className="absolute inset-y-0 left-0 bg-[#B09B71]/10 transition-all duration-700"
+                  className="absolute inset-y-0 left-0 bg-[rgba(176,155,113,0.10)] transition-all duration-700"
                   style={{ width: `${percent}%` }}
                 />
               )}
@@ -241,7 +241,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
           value={title}
           onChange={e => setTitle(e.target.value)}
           placeholder="What should we do about...?"
-          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
         />
       </div>
 
@@ -252,7 +252,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
           onChange={e => setDescription(e.target.value)}
           placeholder="Add context..."
           rows={2}
-          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none"
         />
       </div>
 
@@ -266,7 +266,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
                 value={opt}
                 onChange={e => updateOption(i, e.target.value)}
                 placeholder={`Option ${i + 1}`}
-                className="flex-1 px-4 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
+                className="flex-1 px-4 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
               />
               {options.length > 2 && (
                 <button onClick={() => removeOption(i)} className="px-3 text-[var(--text-disabled)] hover:text-[#8B5A5A] transition-colors"></button>
@@ -283,7 +283,7 @@ function CreateSurvey({ onClose }: { onClose: () => void }) {
           <select
             value={closesIn}
             onChange={e => setClosesIn(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none"
+            className="w-full px-4 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
           >
             <option value="1">1 day</option>
             <option value="3">3 days</option>

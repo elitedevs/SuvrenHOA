@@ -53,7 +53,7 @@ function MessageText({ text }: { text: string }) {
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-2 mb-3">
-      <div className="w-7 h-7 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-sm shrink-0">
+      <div className="w-7 h-7 rounded-full bg-[rgba(176,155,113,0.15)] flex items-center justify-center text-sm shrink-0">
         
       </div>
       <div className="bg-[rgba(245,240,232,0.06)] rounded-xl rounded-bl-sm px-4 py-3 flex items-center gap-1">
@@ -114,7 +114,7 @@ export function AIChatWidget() {
       >
         <div className="bg-[#111113] border border-[rgba(245,240,232,0.08)] rounded-xl rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[rgba(26,26,30,0.80)] to-[#222228]/80 border-b border-[rgba(245,240,232,0.06)] shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[rgba(26,26,30,0.80)] to-[rgba(34,34,40,0.80)] border-b border-[rgba(245,240,232,0.06)] shrink-0">
             <div className="flex items-center gap-2">
               <span className="text-xl"></span>
               <div>
@@ -151,7 +151,7 @@ export function AIChatWidget() {
                 className={`flex items-end gap-2 mb-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
               >
                 {msg.role === 'bot' && (
-                  <div className="w-7 h-7 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-sm shrink-0">
+                  <div className="w-7 h-7 rounded-full bg-[rgba(176,155,113,0.15)] flex items-center justify-center text-sm shrink-0">
                     
                   </div>
                 )}
@@ -177,7 +177,7 @@ export function AIChatWidget() {
                 key={a.label}
                 onClick={() => sendMessage(a.query)}
                 disabled={isTyping}
-                className="text-[11px] font-medium px-2.5 py-1.5 rounded-full bg-[#B09B71]/15 text-[#D4C4A0] hover:bg-[#B09B71]/20 hover:text-[#D4C4A0] transition-colors disabled:opacity-40 border border-[#B09B71]/20"
+                className="text-[11px] font-medium px-2.5 py-1.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] hover:bg-[rgba(176,155,113,0.20)] hover:text-[#D4C4A0] transition-colors disabled:opacity-40 border border-[rgba(176,155,113,0.20)]"
               >
                 {a.label}
               </button>
@@ -194,7 +194,7 @@ export function AIChatWidget() {
               onKeyDown={handleKeyDown}
               placeholder="Ask about dues, treasury, proposals..."
               disabled={isTyping}
-              className="flex-1 bg-[rgba(245,240,232,0.06)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:ring-1 focus:ring-[#B09B71]/50 disabled:opacity-50 transition-colors"
+              className="flex-1 bg-[rgba(245,240,232,0.06)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.50)] disabled:opacity-50 transition-colors"
             />
             <button
               onClick={handleSend}
@@ -213,7 +213,7 @@ export function AIChatWidget() {
       {/* Floating Trigger Button */}
       <button
         onClick={() => setIsOpen((v) => !v)}
-        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] shadow-lg shadow-[rgba(26,26,30,0.50)] flex items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-[#B09B71]/20 ${
+        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] shadow-lg shadow-[rgba(26,26,30,0.50)] flex items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-[rgba(176,155,113,0.20)] ${
           isOpen ? 'rotate-180' : ''
         }`}
         style={!isOpen ? { animation: 'chatPulse 2.5s ease-in-out infinite' } : undefined}

@@ -288,7 +288,7 @@ export function TransparencyDashboard() {
           {/* Treasury row */}
           <div className="mb-3">
             <p className="text-[11px] uppercase tracking-widest text-[var(--text-disabled)] font-medium mb-3 flex items-center gap-2">
-              <span className="inline-block w-3 h-px bg-[#B09B71]/50" />
+              <span className="inline-block w-3 h-px bg-[rgba(176,155,113,0.50)]" />
               Treasury
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -540,7 +540,7 @@ export function TransparencyDashboard() {
                                 href={BASESCAN_BASE + '/tx/' + event.txHash}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-[11px] text-[#B09B71]/70 hover:text-[#D4C4A0] flex items-center gap-1 transition-colors"
+                                className="text-[11px] text-[rgba(176,155,113,0.70)] hover:text-[#D4C4A0] flex items-center gap-1 transition-colors"
                               >
                                 View tx
                                 <ExternalLink className="w-3 h-3" />

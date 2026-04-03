@@ -82,7 +82,7 @@ export default function HealthPage() {
             {/* Center content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               {loading ? (
-                <div className="w-10 h-10 border-4 border-[#B09B71]/30 border-t-[#B09B71] rounded-full animate-spin" />
+                <div className="w-10 h-10 border-4 border-[rgba(176,155,113,0.30)] border-t-[#B09B71] rounded-full animate-spin" />
               ) : error ? (
                 <div className="text-center">
                   <p className="text-[#8B5A5A] text-sm">Error loading</p>
@@ -174,7 +174,7 @@ export default function HealthPage() {
         {!loading && !error && suggestions.length > 0 && (
           <div className="glass-card rounded-xl hover-lift p-6 mb-8 card-enter card-enter-delay-3">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center text-lg shrink-0">
+              <div className="w-9 h-9 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.25)] flex items-center justify-center text-lg shrink-0">
                 
               </div>
               <h2 className="text-xl font-medium text-[var(--parchment)]">What Can We Improve?</h2>
@@ -182,7 +182,7 @@ export default function HealthPage() {
             <div className="space-y-4">
               {suggestions.map((s, i) => (
                 <div key={s.name} className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/40 flex items-center justify-center text-xs font-medium text-[#B09B71] shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.40)] flex items-center justify-center text-xs font-medium text-[#B09B71] shrink-0 mt-0.5">
                     {i + 1}
                   </div>
                   <div>

@@ -53,7 +53,7 @@ export default function DocumentsPage() {
               className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-200 min-h-[44px] ${
                 showUpload
                   ? 'bg-[#B09B71] text-[var(--surface-2)]'
-                  : 'border border-[#B09B71]/30 text-[#B09B71] hover:bg-[#B09B71]/10'
+                  : 'border border-[rgba(176,155,113,0.30)] text-[#B09B71] hover:bg-[rgba(176,155,113,0.10)]'
               }`}
             >
               {showUpload ? ' Close Upload' : ' Upload Document'}
@@ -64,7 +64,7 @@ export default function DocumentsPage() {
             className={`px-5 py-3 rounded-xl text-sm font-medium transition-all duration-200 min-h-[44px] ${
               verifyMode
                 ? 'bg-[#B09B71] text-[var(--text-heading)]'
-                : 'border border-[rgba(245,240,232,0.08)] text-[var(--text-body)] hover:border-[#B09B71]/40 hover:text-[var(--text-heading)] hover:bg-[rgba(245,240,232,0.03)]'
+                : 'border border-[rgba(245,240,232,0.08)] text-[var(--text-body)] hover:border-[rgba(176,155,113,0.40)] hover:text-[var(--text-heading)] hover:bg-[rgba(245,240,232,0.03)]'
             }`}
           >
             {verifyMode ? '← Back to Documents' : ' Verify Document'}
@@ -108,14 +108,14 @@ export default function DocumentsPage() {
               placeholder="Search documents..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/20 transition-all text-[var(--parchment)]"
+              className="flex-1 px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.20)] transition-all text-[var(--parchment)]"
             />
             <div className="flex gap-2 overflow-x-auto pb-1">
               <button
                 onClick={() => setSelectedType(null)}
                 className={`px-4 py-2.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all min-h-[44px] ${
                   selectedType === null
-                    ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
+                    ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]'
                     : 'text-[var(--text-muted)] border border-[rgba(245,240,232,0.08)] hover:border-[rgba(245,240,232,0.10)] hover:text-[var(--text-body)]'
                 }`}
               >
@@ -127,7 +127,7 @@ export default function DocumentsPage() {
                   onClick={() => setSelectedType(Number(key))}
                   className={`px-4 py-2.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all min-h-[44px] ${
                     selectedType === Number(key)
-                      ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
+                      ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]'
                       : 'text-[var(--text-muted)] border border-[rgba(245,240,232,0.08)] hover:border-[rgba(245,240,232,0.10)] hover:text-[var(--text-body)]'
                   }`}
                 >
@@ -140,7 +140,7 @@ export default function DocumentsPage() {
           {/* Document List */}
           {documentCount === 0 ? (
             <div className="glass-card rounded-xl hover-lift p-14 text-center card-enter card-enter-delay-3">
-              <div className="w-20 h-20 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center text-4xl mx-auto mb-6">
+              <div className="w-20 h-20 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center text-4xl mx-auto mb-6">
                 
               </div>
               <h3 className="text-xl font-medium mb-3">No documents registered yet</h3>
@@ -232,7 +232,7 @@ function DocumentCard({
   }
 
   const color = getTypeColor(doc.docType);
-  const leftBorder = TYPE_LEFT_BORDERS[color] || 'border-l-[#B09B71]/60';
+  const leftBorder = TYPE_LEFT_BORDERS[color] || 'border-l-[rgba(176,155,113,0.60)]';
   const date = new Date(doc.timestamp * 1000);
 
   return (
@@ -311,7 +311,7 @@ function DocumentCard({
               href={`https://arweave.net/${doc.arweaveTxId}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 rounded-xl bg-[#B09B71]/8 border border-[#B09B71]/20 text-xs text-[#B09B71] hover:bg-[#B09B71]/15 transition-colors font-medium min-h-[44px] flex items-center"
+              className="px-4 py-2.5 rounded-xl bg-[rgba(176,155,113,0.08)] border border-[rgba(176,155,113,0.20)] text-xs text-[#B09B71] hover:bg-[rgba(176,155,113,0.15)] transition-colors font-medium min-h-[44px] flex items-center"
               onClick={(e) => e.stopPropagation()}
             >
                Download from Arweave
@@ -355,10 +355,10 @@ function VerifyPanel({
         className={`p-14 rounded-xl border-2 border-dashed text-center transition-all duration-300 cursor-pointer ${
           dragOver
             ? 'border-[#B09B71] bg-[rgba(26,26,30,0.50)] shadow-[0_0_40px_rgba(201,169,110,0.2)]'
-            : 'drop-zone-idle border-[rgba(245,240,232,0.08)] bg-[rgba(20,20,22,0.30)] hover:border-[#B09B71]/40 hover:bg-[rgba(26,26,30,0.30)]'
+            : 'drop-zone-idle border-[rgba(245,240,232,0.08)] bg-[rgba(20,20,22,0.30)] hover:border-[rgba(176,155,113,0.40)] hover:bg-[rgba(26,26,30,0.30)]'
         }`}
       >
-        <div className={`w-16 h-16 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center text-3xl mx-auto mb-5 transition-transform duration-300 ${dragOver ? 'scale-110' : ''}`}>
+        <div className={`w-16 h-16 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center text-3xl mx-auto mb-5 transition-transform duration-300 ${dragOver ? 'scale-110' : ''}`}>
           
         </div>
         <h3 className="text-xl font-medium mb-2 text-[var(--parchment)]">Drop a file to verify</h3>
@@ -382,7 +382,7 @@ function VerifyPanel({
         placeholder="0x..."
         value={hash}
         onChange={(e) => setHash(e.target.value)}
-        className="w-full px-4 py-4 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm font-mono placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/20 transition-all text-[var(--parchment)]"
+        className="w-full px-4 py-4 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm font-mono placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.20)] transition-all text-[var(--parchment)]"
       />
 
       {/* Hash result placeholder */}
@@ -391,7 +391,7 @@ function VerifyPanel({
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">Hash to verify</p>
           <p className="text-xs font-mono text-[var(--text-body)] break-all bg-[rgba(26,26,30,0.50)] p-3 rounded-xl border border-[rgba(245,240,232,0.06)] mb-4">{hash}</p>
           <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
-            <div className="w-4 h-4 border-2 border-[#B09B71]/40 border-t-[#B09B71] rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-[rgba(176,155,113,0.40)] border-t-[#B09B71] rounded-full animate-spin" />
             Checking on-chain registry...
           </div>
         </div>
@@ -409,7 +409,7 @@ function VerifyPanel({
             { n: 5, text: "If it doesn't match → the file has been modified or isn't registered" },
           ].map(({ n, text }) => (
             <div key={n} className="flex gap-3 items-start">
-              <div className="w-5 h-5 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/30 flex items-center justify-center text-[10px] font-medium text-[#B09B71] shrink-0 mt-0.5">
+              <div className="w-5 h-5 rounded-full bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)] flex items-center justify-center text-[10px] font-medium text-[#B09B71] shrink-0 mt-0.5">
                 {n}
               </div>
               <p className="text-xs text-[var(--text-muted)] leading-relaxed">{text}</p>
@@ -447,13 +447,13 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="glass-card rounded-xl p-6 mb-8 border border-[#B09B71]/20 page-enter">
+    <div className="glass-card rounded-xl p-6 mb-8 border border-[rgba(176,155,113,0.20)] page-enter">
       <div className="flex items-center justify-between mb-5">
         <div>
           <h2 className="text-lg font-medium">Upload Document</h2>
           <p className="text-xs text-[var(--text-disabled)] mt-0.5">Board members only · Arweave upload handled server-side</p>
         </div>
-        <span className="text-[10px] px-2 py-1 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20 font-medium">
+        <span className="text-[10px] px-2 py-1 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium">
            Board Access
         </span>
       </div>
@@ -475,7 +475,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
                 onChange={e => setTitle(e.target.value)}
                 placeholder="e.g. Board Meeting Minutes — March 2026"
                 required
-                className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none transition-all"
               />
             </div>
             <div>
@@ -483,7 +483,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
               <select
                 value={docType}
                 onChange={e => setDocType(Number(e.target.value))}
-                className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none transition-all"
               >
                 {Object.entries(DOC_TYPE_LABELS).map(([k, v]) => (
                   <option key={k} value={k}>{v}</option>
@@ -500,10 +500,10 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
             onClick={() => document.getElementById('doc-file-input')?.click()}
             className={`relative p-10 rounded-xl border-2 border-dashed text-center cursor-pointer transition-all duration-300 ${
               dragOver
-                ? 'border-[#B09B71] bg-[#B09B71]/5 shadow-[0_0_30px_rgba(201,169,110,0.15)]'
+                ? 'border-[#B09B71] bg-[rgba(176,155,113,0.05)] shadow-[0_0_30px_rgba(201,169,110,0.15)]'
                 : fileName
-                ? 'border-[rgba(42,93,79,0.30)] bg-[#3A7D6F]/5'
-                : 'border-[rgba(245,240,232,0.08)] hover:border-[#B09B71]/40 hover:bg-[rgba(26,26,30,0.20)]'
+                ? 'border-[rgba(42,93,79,0.30)] bg-[rgba(58,125,111,0.05)]'
+                : 'border-[rgba(245,240,232,0.08)] hover:border-[rgba(176,155,113,0.40)] hover:bg-[rgba(26,26,30,0.20)]'
             }`}
           >
             <input

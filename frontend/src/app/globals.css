@@ -414,6 +414,12 @@ pre,
   border: 1px solid rgba(245, 240, 232, 0.06);
 }
 
+/* ── RainbowKit global font override ── */
+[data-rk] button,
+[data-rk] [role="button"] {
+  font-family: var(--font-body) !important;
+}
+
 /* ── RainbowKit / MetaMask overrides (scoped to wallet wrapper) ── */
 .wallet-wrapper button,
 .wallet-wrapper [role="button"] {

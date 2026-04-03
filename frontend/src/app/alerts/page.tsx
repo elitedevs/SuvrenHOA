@@ -227,7 +227,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Gas leak at Building C — evacuate now"
                 maxLength={120}
-                className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.10)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[#B09B71]/50 focus:ring-1 focus:ring-[#B09B71]/30 transition"
+                className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.10)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] focus:ring-1 focus:ring-[rgba(176,155,113,0.30)] transition"
               />
             </div>
 
@@ -242,7 +242,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                 placeholder="Optional additional details..."
                 rows={3}
                 maxLength={500}
-                className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.10)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[#B09B71]/50 focus:ring-1 focus:ring-[#B09B71]/30 transition resize-none"
+                className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.10)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] focus:ring-1 focus:ring-[rgba(176,155,113,0.30)] transition resize-none"
               />
             </div>
 
@@ -259,7 +259,7 @@ function CreateAlertForm({ onCreated }: { onCreated: () => void }) {
                     onClick={() => setExpiresInHours(value)}
                     className={`px-3 py-2 rounded-xl text-sm font-medium border transition-all ${
                       expiresInHours === value
-                        ? 'border-[#B09B71]/50 bg-[#B09B71]/10 text-[#D4C4A0]'
+                        ? 'border-[rgba(176,155,113,0.50)] bg-[rgba(176,155,113,0.10)] text-[#D4C4A0]'
                         : 'border-[rgba(245,240,232,0.10)] text-[var(--text-disabled)] hover:border-[rgba(245,240,232,0.20)]'
                     }`}
                   >
@@ -361,7 +361,7 @@ export default function AlertsPage() {
 
         {/* Active Alerts */}
         <section className="mb-10">
-          <h2 className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-widest mb-4 flex items-center gap-2">
+          <h2 className="text-lg font-medium text-[var(--text-muted)] uppercase tracking-widest mb-4 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#8B5A5A] inline-block animate-pulse" />
             Active Alerts
             {sortedActive.length > 0 && (
@@ -395,7 +395,7 @@ export default function AlertsPage() {
 
         {/* History */}
         <section>
-          <h2 className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-widest mb-4 flex items-center gap-2">
+          <h2 className="text-lg font-medium text-[var(--text-muted)] uppercase tracking-widest mb-4 flex items-center gap-2">
             <Clock className="w-4 h-4" />
             Alert History
           </h2>

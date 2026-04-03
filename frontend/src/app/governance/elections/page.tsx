@@ -146,7 +146,7 @@ export default function ElectionsPage() {
                       {election.status === 'upcoming' && (
                         <button
                           onClick={() => { setActiveElection(election.id); setShowNominate(true); }}
-                          className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[var(--brass-deep)]/20 border border-[var(--brass-deep)]/40 text-[#B09B71] text-sm hover:bg-[var(--brass-deep)]/30 transition-colors"
+                          className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[rgba(176,155,113,0.20)] border border-[rgba(176,155,113,0.40)] text-[#B09B71] text-sm hover:bg-[var(--brass-deep)]/30 transition-colors"
                         >
                           <Plus className="w-3.5 h-3.5" /> Nominate
                         </button>
@@ -181,7 +181,7 @@ export default function ElectionsPage() {
                         const isExpanded = expandedCandidate === c.id;
                         const voted = election.myVote === c.id;
                         return (
-                          <div key={c.id} className={`rounded-xl border p-4 transition-all ${voted ? 'border-[var(--brass-deep)]/50 bg-[var(--brass-deep)]/10' : 'border-[rgba(245,240,232,0.08)] bg-[#1A1A1E]'}`}>
+                          <div key={c.id} className={`rounded-xl border p-4 transition-all ${voted ? 'border-[var(--brass-deep)]/50 bg-[rgba(176,155,113,0.10)]' : 'border-[rgba(245,240,232,0.08)] bg-[#1A1A1E]'}`}>
                             <div className="flex items-center justify-between gap-4 flex-wrap">
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 flex-wrap">

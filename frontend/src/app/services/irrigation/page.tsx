@@ -29,7 +29,7 @@ const DEMO_ZONES: Zone[] = [
 ];
 
 const STATUS_CONFIG = {
-  active: { label: 'Active', color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-[rgba(42,93,79,0.20)]', dot: 'bg-[#3A7D6F]' },
+  active: { label: 'Active', color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]', dot: 'bg-[#3A7D6F]' },
   paused: { label: 'Paused', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]', dot: 'bg-[#B09B71]' },
   off: { label: 'Off', color: 'text-[var(--text-disabled)]', bg: 'bg-[rgba(245,240,232,0.04)]', border: 'border-[rgba(245,240,232,0.08)]', dot: 'bg-[rgba(245,240,232,0.12)]' },
 };
@@ -169,7 +169,7 @@ export default function IrrigationPage() {
                     <button
                       key={`${ri}-${ci}`}
                       onClick={() => setSelectedZone(zone)}
-                      className={`aspect-square rounded-lg border ${cfg.border} ${cfg.bg} flex flex-col items-center justify-center gap-1 transition-all hover:scale-105 ${selectedZone?.id === zone.id ? 'ring-2 ring-[#B09B71]/50' : ''}`}
+                      className={`aspect-square rounded-lg border ${cfg.border} ${cfg.bg} flex flex-col items-center justify-center gap-1 transition-all hover:scale-105 ${selectedZone?.id === zone.id ? 'ring-2 ring-[rgba(176,155,113,0.50)]' : ''}`}
                     >
                       <div className={`w-2 h-2 rounded-full ${cfg.dot}`} />
                       <span className="text-[10px] font-medium text-[var(--text-heading)]">{zone.area}</span>
@@ -189,7 +189,7 @@ export default function IrrigationPage() {
           </div>
 
           {selectedZone && (
-            <div className="mt-4 glass-card rounded-xl p-4 border border-[#B09B71]/20">
+            <div className="mt-4 glass-card rounded-xl p-4 border border-[rgba(176,155,113,0.20)]">
               <h3 className="font-medium text-[var(--text-heading)] text-sm mb-3">{selectedZone.name}</h3>
               <div className="space-y-2 text-xs text-[var(--text-muted)]">
                 <div className="flex justify-between">
@@ -216,7 +216,7 @@ export default function IrrigationPage() {
               <button
                 onClick={() => toggleStatus(selectedZone.id)}
                 className={`mt-3 w-full px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                  selectedZone.status === 'active' ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] hover:bg-[rgba(176,155,113,0.30)]' : 'bg-[#3A7D6F]/20 text-[#3A7D6F] border border-[rgba(42,93,79,0.20)] hover:bg-[rgba(42,93,79,0.30)]'
+                  selectedZone.status === 'active' ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] hover:bg-[rgba(176,155,113,0.30)]' : 'bg-[rgba(58,125,111,0.20)] text-[#3A7D6F] border border-[rgba(42,93,79,0.20)] hover:bg-[rgba(42,93,79,0.30)]'
                 }`}
               >
                 {selectedZone.status === 'active' ? 'Pause Zone' : 'Activate Zone'}
@@ -234,7 +234,7 @@ export default function IrrigationPage() {
               return (
                 <div
                   key={zone.id}
-                  className={`glass-card rounded-xl p-4 border ${cfg.border} cursor-pointer hover:border-[#B09B71]/30 transition-all ${selectedZone?.id === zone.id ? 'border-[#B09B71]/40' : ''}`}
+                  className={`glass-card rounded-xl p-4 border ${cfg.border} cursor-pointer hover:border-[rgba(176,155,113,0.30)] transition-all ${selectedZone?.id === zone.id ? 'border-[rgba(176,155,113,0.40)]' : ''}`}
                   onClick={() => setSelectedZone(zone)}
                 >
                   <div className="flex items-center justify-between">

@@ -11,7 +11,7 @@ import { Wrench } from 'lucide-react';
 const STATUS_STYLES = {
   open: { color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]', label: ' Open' },
   'in-progress': { color: 'text-[var(--steel)]', bg: 'bg-[rgba(90,122,154,0.10)]', border: 'border-[rgba(90,122,154,0.20)]', label: ' In Progress' },
-  scheduled: { color: 'text-[#B09B71]', bg: 'bg-[#B09B71]/10', border: 'border-[#B09B71]/20', label: ' Scheduled' },
+  scheduled: { color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]', label: ' Scheduled' },
   resolved: { color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.10)]', border: 'border-[rgba(42,93,79,0.20)]', label: ' Resolved' },
 };
 
@@ -56,13 +56,13 @@ export default function MaintenancePage() {
           <div className="flex rounded-xl border border-[rgba(245,240,232,0.08)] overflow-hidden">
             <button
               onClick={() => setViewMode('kanban')}
-              className={`px-4 py-2.5 text-xs font-medium transition-all ${viewMode === 'kanban' ? 'bg-[#B09B71]/15 text-[#B09B71]' : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'}`}
+              className={`px-4 py-2.5 text-xs font-medium transition-all ${viewMode === 'kanban' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71]' : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'}`}
             >
                Kanban
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`px-4 py-2.5 text-xs font-medium transition-all ${viewMode === 'list' ? 'bg-[#B09B71]/15 text-[#B09B71]' : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'}`}
+              className={`px-4 py-2.5 text-xs font-medium transition-all ${viewMode === 'list' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71]' : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'}`}
             >
               ≡ List
             </button>
@@ -84,7 +84,7 @@ export default function MaintenancePage() {
             <button
               key={status}
               onClick={() => setFilter(filter === status ? 'all' : status)}
-              className={`glass-card rounded-xl hover-lift p-4 text-center transition-all ${filter === status ? 'ring-1 ring-[#B09B71]/30' : ''}`}
+              className={`glass-card rounded-xl hover-lift p-4 text-center transition-all ${filter === status ? 'ring-1 ring-[rgba(176,155,113,0.30)]' : ''}`}
             >
               <p className={`text-2xl font-medium ${style.color}`}>{count}</p>
               <p className="text-[10px] text-[var(--text-disabled)]">{style.label}</p>
@@ -158,7 +158,7 @@ function RequestCard({ request }: { request: any }) {
               <div className="space-y-2">
                 <p className="text-[10px] uppercase tracking-wider text-[var(--text-disabled)] font-medium">Updates</p>
                 {(request.hoa_maintenance_updates || []).map((update: any, i: number) => (
-                  <div key={i} className="pl-4 border-l-2 border-[#B09B71]/20">
+                  <div key={i} className="pl-4 border-l-2 border-[rgba(176,155,113,0.20)]">
                     <p className="text-xs text-[var(--text-muted)]">{update.text}</p>
                     <p className="text-[10px] text-[var(--text-disabled)] mt-1">
                       {update.updated_by} · {new Date(update.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
@@ -195,13 +195,13 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
           <label className="block text-sm text-[var(--text-muted)] mb-2">Title</label>
           <input type="text" value={title} onChange={e => setTitle(e.target.value)}
             placeholder="Brief description of the issue"
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none transition-all" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none transition-all" />
         </div>
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Location</label>
           <input type="text" value={location} onChange={e => setLocation(e.target.value)}
             placeholder="Where is the issue? (e.g., Oak Lane near Lot 42)"
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none transition-all" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none transition-all" />
         </div>
       </div>
 
@@ -209,7 +209,7 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Category</label>
           <select value={category} onChange={e => setCategory(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none transition-all">
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none transition-all">
             <option value="">Select category</option>
             {categories.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
@@ -220,7 +220,7 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
             {['low', 'medium', 'high', 'urgent'].map(p => (
               <button key={p} onClick={() => setPriority(p)}
                 className={`flex-1 py-2.5 rounded-xl text-xs font-medium capitalize transition-all ${
-                  priority === p ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
+                  priority === p ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'
                 }`}>
                 {p}
               </button>
@@ -234,7 +234,7 @@ function NewRequestForm({ onClose }: { onClose: () => void }) {
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="Provide details — what's the issue, how long has it been happening, any safety concerns?"
           rows={4}
-          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none transition-all resize-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none transition-all resize-none" />
       </div>
 
       <div className="flex gap-3">

@@ -36,8 +36,8 @@ function ParkingContent() {
 
   const spotColor = (status: string) => {
     if (status === 'available') return 'bg-[rgba(42,93,79,0.15)] border-[rgba(42,93,79,0.30)] text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.30)]';
-    if (status === 'assigned') return 'bg-[#B09B71]/20 border-[#B09B71]/40 text-[#B09B71] hover:bg-[#B09B71]/30';
-    return 'bg-[rgba(107,58,58,0.15)] border-[rgba(107,58,58,0.30)] text-[#8B5A5A] hover:bg-[#8B5A5A]/30';
+    if (status === 'assigned') return 'bg-[rgba(176,155,113,0.20)] border-[rgba(176,155,113,0.40)] text-[#B09B71] hover:bg-[rgba(176,155,113,0.30)]';
+    return 'bg-[rgba(107,58,58,0.15)] border-[rgba(107,58,58,0.30)] text-[#8B5A5A] hover:bg-[rgba(139,90,90,0.30)]';
   };
 
   return (
@@ -50,7 +50,7 @@ function ParkingContent() {
         <div className="flex gap-2">
           {(['map', 'passes'] as const).map(t => (
             <button key={t} onClick={() => setTab(t)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all capitalize ${tab === t ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all capitalize ${tab === t ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
               {t === 'map' ? ' Spot Map' : ` Passes (${activePasses.length})`}
             </button>
           ))}
@@ -80,7 +80,7 @@ function ParkingContent() {
           <div className="flex gap-2 mb-5 flex-wrap">
             {(['all', 'available', 'assigned', 'visitor'] as const).map(f => (
               <button key={f} onClick={() => setFilter(f)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${filter === f ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${filter === f ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
                 {f}
               </button>
             ))}
@@ -107,7 +107,7 @@ function ParkingContent() {
                 <h3 className="font-medium">Spot #{selected.number}</h3>
                 <span className={`text-xs px-2 py-1 rounded-full ${
                   selected.status === 'available' ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F]' :
-                  selected.status === 'assigned' ? 'bg-[#B09B71]/10 text-[#B09B71]' :
+                  selected.status === 'assigned' ? 'bg-[rgba(176,155,113,0.10)] text-[#B09B71]' :
                   'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A]'
                 }`}>{selected.status}</span>
               </div>
@@ -118,12 +118,12 @@ function ParkingContent() {
                     <div>
                       <label className="block text-xs text-[var(--text-muted)] mb-1">Lot Number</label>
                       <input value={assignForm.lotNumber} onChange={e => setAssignForm({ ...assignForm, lotNumber: e.target.value })}
-                        placeholder="e.g. 42" className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                        placeholder="e.g. 42" className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
                     </div>
                     <div>
                       <label className="block text-xs text-[var(--text-muted)] mb-1">Resident Name</label>
                       <input value={assignForm.name} onChange={e => setAssignForm({ ...assignForm, name: e.target.value })}
-                        placeholder="Full name" className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                        placeholder="Full name" className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
                     </div>
                   </div>
                   <div className="flex gap-2">
@@ -179,7 +179,7 @@ function ParkingContent() {
 
               {selected.status === 'visitor' && selected.visitorPass && (
                 <div>
-                  <div className="p-3 rounded-lg bg-[#8B5A5A]/5 border border-[rgba(139,90,90,0.10)] mb-3">
+                  <div className="p-3 rounded-lg bg-[rgba(139,90,90,0.05)] border border-[rgba(139,90,90,0.10)] mb-3">
                     <p className="text-sm text-[var(--text-body)]">Visitor: <span className="text-[#8B5A5A] font-medium">{selected.visitorPass.visitorName}</span></p>
                     {selected.visitorPass.licensePlate && <p className="text-xs text-[var(--text-disabled)]">Plate: {selected.visitorPass.licensePlate}</p>}
                     <p className="text-xs text-[var(--text-disabled)]">Expires: {new Date(selected.visitorPass.expiresAt).toLocaleString()}</p>

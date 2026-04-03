@@ -23,7 +23,7 @@ const NeighborhoodMap = dynamic(() => import('@/components/NeighborhoodMap'), {
       style={{ minHeight: 520 }}
     >
       <div className="flex flex-col items-center gap-3">
-        <div className="w-8 h-8 rounded-full border-2 border-[#B09B71]/40 border-t-[#B09B71] animate-spin" />
+        <div className="w-8 h-8 rounded-full border-2 border-[rgba(176,155,113,0.40)] border-t-[#B09B71] animate-spin" />
         <span className="text-sm text-[var(--text-disabled)]">Loading map…</span>
       </div>
     </div>
@@ -70,9 +70,9 @@ function LotCard({ lot, isSelected, onClick }: { lot: LotData; isSelected: boole
       className={[
         'relative glass-card rounded-xl hover-lift p-4 text-left cursor-pointer border-l-4',
         borderClass,
-        isSelected ? 'ring-2 ring-[#B09B71]/50 bg-[#B09B71]/5' : 'hover:bg-[rgba(245,240,232,0.06)]',
+        isSelected ? 'ring-2 ring-[rgba(176,155,113,0.50)] bg-[rgba(176,155,113,0.05)]' : 'hover:bg-[rgba(245,240,232,0.06)]',
         'hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200',
-        'focus:outline-none focus:ring-2 focus:ring-[#B09B71]/50 w-full',
+        'focus:outline-none focus:ring-2 focus:ring-[rgba(176,155,113,0.50)] w-full',
       ].join(' ')}
     >
       <div className="flex items-start justify-between gap-2 mb-2">
@@ -108,7 +108,7 @@ function LotDetailPanel({ lot, isBoard, onClose }: { lot: LotData; isBoard: bool
     <>
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40" onClick={onClose} aria-hidden="true" />
       <div
-        className="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 glass border-l border-[#B09B71]/15 flex flex-col overflow-y-auto"
+        className="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 glass border-l border-[rgba(176,155,113,0.15)] flex flex-col overflow-y-auto"
         role="dialog"
         aria-label={'Lot #' + lot.lotNumber + ' details'}
       >
@@ -180,7 +180,7 @@ function IncidentDetailPanel({
     <>
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40" onClick={onClose} aria-hidden="true" />
       <div
-        className="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 glass border-l border-[#B09B71]/15 flex flex-col overflow-y-auto"
+        className="fixed right-0 top-0 bottom-0 w-full max-w-md z-50 glass border-l border-[rgba(176,155,113,0.15)] flex flex-col overflow-y-auto"
         role="dialog"
         aria-label={'Incident: ' + incident.title}
       >
@@ -384,7 +384,7 @@ function ReportIncidentModal({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Brief summary of the incident"
-              className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-sm text-[var(--parchment)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[#B09B71]/50 focus:bg-[rgba(245,240,232,0.06)] transition-all"
+              className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-sm text-[var(--parchment)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] focus:bg-[rgba(245,240,232,0.06)] transition-all"
             />
           </div>
 
@@ -399,7 +399,7 @@ function ReportIncidentModal({
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Address or landmark (e.g. 100 Faircroft Dr)"
-              className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-sm text-[var(--parchment)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[#B09B71]/50 focus:bg-[rgba(245,240,232,0.06)] transition-all"
+              className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-sm text-[var(--parchment)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] focus:bg-[rgba(245,240,232,0.06)] transition-all"
             />
           </div>
 
@@ -414,7 +414,7 @@ function ReportIncidentModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Describe what happened or what you observed…"
-              className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-sm text-[var(--parchment)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[#B09B71]/50 focus:bg-[rgba(245,240,232,0.06)] transition-all resize-none"
+              className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-sm text-[var(--parchment)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] focus:bg-[rgba(245,240,232,0.06)] transition-all resize-none"
             />
           </div>
 
@@ -425,7 +425,7 @@ function ReportIncidentModal({
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 transition-all"
+              className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] transition-all"
             />
           </div>
 
@@ -444,7 +444,7 @@ function ReportIncidentModal({
           <button
             type="submit"
             disabled={submitting || !title.trim() || !location.trim() || !description.trim()}
-            className="w-full py-3 rounded-xl text-sm font-medium transition-all bg-[#B09B71]/15 border border-[#B09B71]/30 text-[#B09B71] hover:bg-[#B09B71]/25 hover:border-[#B09B71]/50 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full py-3 rounded-xl text-sm font-medium transition-all bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)] text-[#B09B71] hover:bg-[rgba(176,155,113,0.25)] hover:border-[rgba(176,155,113,0.50)] disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {submitting ? 'Submitting…' : ' Submit Report'}
           </button>
@@ -502,7 +502,7 @@ function ViewToggle({ view, onChange }: { view: ViewMode; onChange: (v: ViewMode
           className={[
             'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200',
             view === v
-              ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
+              ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]'
               : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]',
           ].join(' ')}
           aria-pressed={view === v}
@@ -533,7 +533,7 @@ function LayerToggle({ layer, onChange }: { layer: LayerMode; onChange: (l: Laye
           className={[
             'px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200',
             layer === key
-              ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
+              ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]'
               : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]',
           ].join(' ')}
         >
@@ -634,7 +634,7 @@ function IncidentsPanel({
             <button
               key={incident.id}
               onClick={() => onSelect(incident)}
-              className="glass-card rounded-xl hover-lift p-4 text-left transition-all duration-200 hover:bg-[rgba(245,240,232,0.06)] focus:outline-none focus:ring-2 focus:ring-[#B09B71]/50"
+              className="glass-card rounded-xl hover-lift p-4 text-left transition-all duration-200 hover:bg-[rgba(245,240,232,0.06)] focus:outline-none focus:ring-2 focus:ring-[rgba(176,155,113,0.50)]"
               style={{ borderLeft: `3px solid ${color}60` }}
             >
               <div className="flex items-start gap-3">
@@ -708,7 +708,7 @@ export default function MapPage() {
   );
 
   const filterButtons: { key: StatusFilter; label: string; activeClass: string }[] = [
-    { key: 'all', label: 'All', activeClass: 'bg-[#B09B71]/12 text-[#B09B71] border border-[#B09B71]/40' },
+    { key: 'all', label: 'All', activeClass: 'bg-[rgba(176,155,113,0.12)] text-[#B09B71] border border-[rgba(176,155,113,0.40)]' },
     { key: 'current', label: ' Current', activeClass: 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.30)]' },
     { key: 'overdue', label: ' Overdue', activeClass: 'bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] border border-[rgba(107,58,58,0.30)]' },
   ];
@@ -724,7 +724,7 @@ export default function MapPage() {
           </div>
           <button
             onClick={() => setShowReportModal(true)}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all bg-[#B09B71]/15 border border-[#B09B71]/30 text-[#B09B71] hover:bg-[#B09B71]/25 hover:border-[#B09B71]/50 hover-lift"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)] text-[#B09B71] hover:bg-[rgba(176,155,113,0.25)] hover:border-[rgba(176,155,113,0.50)] hover-lift"
           >
             <span></span>
             <span>Report Incident</span>
@@ -760,7 +760,7 @@ export default function MapPage() {
               placeholder="Search lot # or address…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2 text-sm text-[var(--parchment)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[#B09B71]/50 focus:bg-[rgba(245,240,232,0.06)] transition-all"
+              className="w-full bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2 text-sm text-[var(--parchment)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] focus:bg-[rgba(245,240,232,0.06)] transition-all"
             />
           </div>
           <button
@@ -790,10 +790,10 @@ export default function MapPage() {
 
         {/* Error */}
         {error && (
-          <div className="glass-card rounded-xl hover-lift p-6 border border-[#8B5A5A]/20 bg-[#8B5A5A]/5 mb-6">
+          <div className="glass-card rounded-xl hover-lift p-6 border border-[rgba(139,90,90,0.20)] bg-[rgba(139,90,90,0.05)] mb-6">
             <p className="text-[#8B5A5A] font-medium">Map data temporarily unavailable</p>
             <p className="text-[var(--text-disabled)] text-sm mt-1">Property data couldn&apos;t be loaded right now. The map will still display — try refreshing in a moment.</p>
-            <button onClick={refresh} className="mt-3 px-4 py-2 rounded-lg text-sm font-medium bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30 hover:bg-[#B09B71]/25 transition-all">
+            <button onClick={refresh} className="mt-3 px-4 py-2 rounded-lg text-sm font-medium bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)] hover:bg-[rgba(176,155,113,0.25)] transition-all">
               Retry
             </button>
           </div>

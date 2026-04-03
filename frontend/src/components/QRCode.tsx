@@ -137,7 +137,7 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
       <div
-        className="relative z-10 w-full max-w-xs rounded-xl border border-[#B09B71]/30 bg-[var(--obsidian)] shadow-2xl p-6 text-center"
+        className="relative z-10 w-full max-w-xs rounded-xl border border-[rgba(176,155,113,0.30)] bg-[var(--obsidian)] shadow-2xl p-6 text-center"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
@@ -166,7 +166,7 @@ export function QRModal({ tokenId, onClose }: QRModalProps) {
           onClick={() => {
             navigator.clipboard?.writeText(url);
           }}
-          className="w-full py-2.5 rounded-xl bg-[#B09B71]/15 border border-[#B09B71]/30 text-[#D4C4A0] text-sm font-medium hover:bg-[#B09B71]/25 transition-colors"
+          className="w-full py-2.5 rounded-xl bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)] text-[#D4C4A0] text-sm font-medium hover:bg-[rgba(176,155,113,0.25)] transition-colors"
         >
           Copy Link
         </button>

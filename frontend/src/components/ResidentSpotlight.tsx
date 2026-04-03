@@ -76,13 +76,13 @@ export function ResidentSpotlight() {
   const next = () => setCurrentIdx((i) => (i + 1) % spotlights.length);
 
   return (
-    <div className="glass-card rounded-xl p-5 border border-[#B09B71]/20 relative overflow-hidden">
+    <div className="glass-card rounded-xl p-5 border border-[rgba(176,155,113,0.20)] relative overflow-hidden">
       {/* Glow accent */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-[#B09B71]/5 blur-2xl rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-[rgba(176,155,113,0.05)] blur-2xl rounded-full pointer-events-none" />
 
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-[#B09B71]/15">
+          <div className="p-1.5 rounded-lg bg-[rgba(176,155,113,0.15)]">
             <Star className="w-4 h-4 text-[#B09B71]" />
           </div>
           <span className="text-xs font-medium uppercase tracking-wider text-[#B09B71]">Resident Spotlight</span>
@@ -101,18 +101,18 @@ export function ResidentSpotlight() {
       </div>
 
       <div className="flex items-start gap-3">
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#B09B71]/30 to-[var(--brass-deep)]/20 border border-[#B09B71]/30 flex items-center justify-center shrink-0">
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[rgba(176,155,113,0.30)] to-[var(--brass-deep)]/20 border border-[rgba(176,155,113,0.30)] flex items-center justify-center shrink-0">
           <Users className="w-6 h-6 text-[#B09B71]" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <h3 className="font-medium text-[var(--text-heading)] text-sm">{current.name}</h3>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-[#B09B71]/15 text-[#B09B71] font-medium border border-[#B09B71]/20">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#B09B71] font-medium border border-[rgba(176,155,113,0.20)]">
               Lot #{current.lot}
             </span>
           </div>
           <p className="text-xs text-[var(--text-muted)] mt-1 italic">"{current.funFact}"</p>
-          <div className="mt-2 p-2.5 rounded-lg bg-[rgba(26,26,30,0.60)] border border-[#B09B71]/10">
+          <div className="mt-2 p-2.5 rounded-lg bg-[rgba(26,26,30,0.60)] border border-[rgba(176,155,113,0.10)]">
             <p className="text-xs text-[var(--text-body)]">
               <span className="text-[#B09B71] font-medium">Community contribution: </span>
               {current.contribution}

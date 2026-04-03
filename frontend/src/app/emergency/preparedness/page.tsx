@@ -194,7 +194,7 @@ export default function PreparednessPage() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
               activeTab === tab.id
-                ? 'bg-[#B09B71]/15 text-[#D4C4A0] border border-[#B09B71]/25'
+                ? 'bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] border border-[rgba(176,155,113,0.25)]'
                 : 'glass text-[var(--text-muted)] border border-[rgba(245,240,232,0.04)] hover:text-[var(--parchment)]'
             }`}
           >
@@ -227,7 +227,7 @@ export default function PreparednessPage() {
                         onClick={() => toggleItem(item.id)}
                         className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all border ${
                           item.checked
-                            ? 'bg-[#B09B71]/[0.06] border-[#B09B71]/15 opacity-70'
+                            ? 'bg-[#B09B71]/[0.06] border-[rgba(176,155,113,0.15)] opacity-70'
                             : 'bg-[rgba(245,240,232,0.02)] border-[rgba(245,240,232,0.04)] hover:bg-[rgba(245,240,232,0.04)]'
                         }`}
                       >
@@ -285,14 +285,14 @@ export default function PreparednessPage() {
                 </div>
                 <a
                   href={`tel:${c.number.replace(/-/g, '')}`}
-                  className="px-3 py-1.5 rounded-lg bg-[#B09B71]/15 text-[#B09B71] text-sm font-medium border border-[#B09B71]/20 hover:bg-[#B09B71]/25 transition-all"
+                  className="px-3 py-1.5 rounded-lg bg-[rgba(176,155,113,0.15)] text-[#B09B71] text-sm font-medium border border-[rgba(176,155,113,0.20)] hover:bg-[rgba(176,155,113,0.25)] transition-all"
                 >
                   {c.number}
                 </a>
               </div>
             ))}
           </div>
-          <div className="p-4 rounded-xl bg-[#8B5A5A]/10 border border-[rgba(139,90,90,0.20)]">
+          <div className="p-4 rounded-xl bg-[rgba(139,90,90,0.10)] border border-[rgba(139,90,90,0.20)]">
             <p className="text-xs text-[#8B5A5A] font-medium"> In immediate danger: Call 911 first, always.</p>
           </div>
         </div>

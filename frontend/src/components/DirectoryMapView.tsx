@@ -67,7 +67,7 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
 
       <div className="p-4 flex flex-col lg:flex-row gap-4">
         {/* Map */}
-        <div className="relative flex-1 min-h-[280px] bg-[#0d1a0d]/30 rounded-xl border border-[rgba(42,93,79,0.30)] overflow-hidden">
+        <div className="relative flex-1 min-h-[280px] bg-[rgba(13,26,13,0.30)] rounded-xl border border-[rgba(42,93,79,0.30)] overflow-hidden">
           {/* Street labels */}
           <div className="absolute inset-x-0 top-1 text-center text-[9px] text-[var(--text-disabled)] font-medium uppercase tracking-widest">
             Faircroft Drive
@@ -129,7 +129,7 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
           {/* Tooltip */}
           {tooltip && (
             <div
-              className="absolute z-30 pointer-events-none bg-[var(--surface-2)] border border-[#B09B71]/30 rounded-lg px-2 py-1 text-[10px] text-[var(--text-body)]"
+              className="absolute z-30 pointer-events-none bg-[var(--surface-2)] border border-[rgba(176,155,113,0.30)] rounded-lg px-2 py-1 text-[10px] text-[var(--text-body)]"
               style={{
                 left: `${Math.min(tooltip.x + 3, 80)}%`,
                 top: `${Math.max(tooltip.y - 8, 5)}%`,
@@ -146,7 +146,7 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
         {/* Sidebar: selected or legend */}
         <div className="w-full lg:w-56 space-y-3">
           {selected ? (
-            <div className="glass-card rounded-xl p-4 border border-[#B09B71]/20">
+            <div className="glass-card rounded-xl p-4 border border-[rgba(176,155,113,0.20)]">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] flex items-center justify-center text-sm font-normal text-[var(--surface-2)] mb-3">
                 {selected.display_name?.charAt(0) || '?'}
               </div>

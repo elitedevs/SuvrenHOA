@@ -24,7 +24,7 @@ const CATEGORY_EMOJI: Record<MarketplaceCategory, string> = {
 
 function TypeBadge({ type }: { type: MarketplaceType }) {
   const styles: Record<MarketplaceType, string> = {
-    sale: 'bg-[#B09B71]/15 text-[#B09B71] border-[#B09B71]/25',
+    sale: 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border-[rgba(176,155,113,0.25)]',
     free: 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border-[rgba(42,93,79,0.25)]',
     wanted: 'bg-[rgba(90,122,154,0.12)] text-[var(--steel)] border-[rgba(90,122,154,0.25)]',
   };
@@ -61,7 +61,7 @@ function NewListingModal({ onClose, onSubmit }: { onClose: () => void; onSubmit:
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
-      <div className="bg-[var(--surface-1)] border border-[#B09B71]/25 rounded-xl p-6 w-full max-w-lg">
+      <div className="bg-[var(--surface-1)] border border-[rgba(176,155,113,0.25)] rounded-xl p-6 w-full max-w-lg">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-medium text-[#D4C4A0]">New Listing</h2>
           <button onClick={onClose} className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.05)]">
@@ -81,7 +81,7 @@ function NewListingModal({ onClose, onSubmit }: { onClose: () => void; onSubmit:
                   onClick={() => setForm(f => ({ ...f, type: t.value }))}
                   className={`flex-1 py-2 px-3 rounded-xl text-xs font-medium border transition-all ${
                     form.type === t.value
-                      ? 'bg-[#B09B71]/20 border-[#B09B71]/50 text-[#D4C4A0]'
+                      ? 'bg-[rgba(176,155,113,0.20)] border-[rgba(176,155,113,0.50)] text-[#D4C4A0]'
                       : 'border-[rgba(245,240,232,0.08)] text-[var(--text-disabled)] hover:border-[rgba(245,240,232,0.10)]'
                   }`}
                 >
@@ -98,7 +98,7 @@ function NewListingModal({ onClose, onSubmit }: { onClose: () => void; onSubmit:
               value={form.title}
               onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
               placeholder="What are you listing?"
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] focus:border-[#B09B71]/50 focus:outline-none text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)]"
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)]"
             />
           </div>
 
@@ -110,7 +110,7 @@ function NewListingModal({ onClose, onSubmit }: { onClose: () => void; onSubmit:
               onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
               placeholder="Describe the item, condition, pickup details..."
               rows={3}
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] focus:border-[#B09B71]/50 focus:outline-none text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] resize-none"
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)] resize-none"
             />
           </div>
 
@@ -125,7 +125,7 @@ function NewListingModal({ onClose, onSubmit }: { onClose: () => void; onSubmit:
                   onChange={e => setForm(f => ({ ...f, price: e.target.value }))}
                   placeholder="0.00"
                   min="0"
-                  className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] focus:border-[#B09B71]/50 focus:outline-none text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)]"
+                  className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.20)]"
                 />
               </div>
             )}
@@ -134,7 +134,7 @@ function NewListingModal({ onClose, onSubmit }: { onClose: () => void; onSubmit:
               <select
                 value={form.category}
                 onChange={e => setForm(f => ({ ...f, category: e.target.value as MarketplaceCategory }))}
-                className="w-full px-3 py-2 rounded-xl bg-[var(--surface-2)] border border-[rgba(245,240,232,0.08)] focus:border-[#B09B71]/50 focus:outline-none text-sm text-[var(--parchment)]"
+                className="w-full px-3 py-2 rounded-xl bg-[var(--surface-2)] border border-[rgba(245,240,232,0.08)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none text-sm text-[var(--parchment)]"
               >
                 {CATEGORIES.map(c => <option key={c} value={c}>{CATEGORY_EMOJI[c]} {c}</option>)}
               </select>
@@ -204,7 +204,7 @@ export default function MarketplacePage() {
         <div className="flex items-center gap-1 bg-[rgba(245,240,232,0.05)] rounded-xl p-1">
           <button
             onClick={() => setFilterType('all')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${filterType === 'all' ? 'bg-[#B09B71]/20 text-[#D4C4A0]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${filterType === 'all' ? 'bg-[rgba(176,155,113,0.20)] text-[#D4C4A0]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}
           >
             All
           </button>
@@ -212,7 +212,7 @@ export default function MarketplacePage() {
             <button
               key={t.value}
               onClick={() => setFilterType(t.value)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${filterType === t.value ? 'bg-[#B09B71]/20 text-[#D4C4A0]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${filterType === t.value ? 'bg-[rgba(176,155,113,0.20)] text-[#D4C4A0]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}
             >
               {t.emoji} {t.label}
             </button>
@@ -221,7 +221,7 @@ export default function MarketplacePage() {
         <select
           value={filterCat}
           onChange={e => setFilterCat(e.target.value as any)}
-          className="px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] focus:outline-none focus:border-[#B09B71]/40"
+          className="px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] focus:outline-none focus:border-[rgba(176,155,113,0.40)]"
         >
           <option value="all">All Categories</option>
           {CATEGORIES.map(c => <option key={c} value={c}>{CATEGORY_EMOJI[c]} {c}</option>)}
@@ -236,7 +236,7 @@ export default function MarketplacePage() {
           <p className="text-[var(--text-disabled)] text-sm mt-1">Be the first to post something!</p>
           <button
             onClick={() => setShowModal(true)}
-            className="mt-4 px-4 py-2 rounded-xl bg-[#B09B71]/15 border border-[#B09B71]/25 text-[#B09B71] text-sm font-medium hover:bg-[#B09B71]/25 transition-colors"
+            className="mt-4 px-4 py-2 rounded-xl bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.25)] text-[#B09B71] text-sm font-medium hover:bg-[rgba(176,155,113,0.25)] transition-colors"
           >
             + Create Listing
           </button>
@@ -244,7 +244,7 @@ export default function MarketplacePage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map(listing => (
-            <div key={listing.id} className="glass-card rounded-xl p-5 border border-[rgba(245,240,232,0.08)] hover:border-[#B09B71]/25 transition-all group">
+            <div key={listing.id} className="glass-card rounded-xl p-5 border border-[rgba(245,240,232,0.08)] hover:border-[rgba(176,155,113,0.25)] transition-all group">
               <div className="flex items-start justify-between mb-3">
                 <TypeBadge type={listing.type} />
                 {listing.postedBy.toLowerCase() === address?.toLowerCase() && (

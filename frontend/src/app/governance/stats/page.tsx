@@ -51,7 +51,7 @@ export default function GovernanceStatsPage() {
         ].map(stat => (
           <div key={stat.label} className="glass-card rounded-xl hover-lift p-5">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-9 h-9 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center">
+              <div className="w-9 h-9 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center">
                 {stat.icon}
               </div>
             </div>
@@ -89,7 +89,7 @@ export default function GovernanceStatsPage() {
             {MOCK_STATS.mostActiveVoters.map((voter, i) => (
               <div key={voter.address} className="flex items-center gap-3">
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium shrink-0 ${
-                  i === 0 ? 'bg-[#B09B71]/20 text-[#B09B71] border border-[#B09B71]/30' :
+                  i === 0 ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' :
                   i === 1 ? 'bg-[rgba(245,240,232,0.06)] text-[var(--text-body)] border border-[rgba(245,240,232,0.06)]' :
                   'bg-[rgba(26,26,30,0.40)] text-[var(--text-disabled)] border border-[rgba(245,240,232,0.06)]'
                 }`}>

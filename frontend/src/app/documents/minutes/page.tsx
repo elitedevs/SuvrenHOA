@@ -237,33 +237,33 @@ function AddMinutesModal({ onAdd, onClose }: { onAdd: (entry: MinutesEntry) => v
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" required />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" required />
             </div>
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Attendees</label>
               <input type="number" placeholder="0" value={form.attendeesCount} onChange={e => setForm({...form, attendeesCount: e.target.value})}
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" />
             </div>
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Meeting Title</label>
             <input type="text" placeholder="April Board Meeting" value={form.title} onChange={e => setForm({...form, title: e.target.value})}
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50" required />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]" required />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Key Decisions (one per line)</label>
             <textarea rows={4} placeholder="Approved budget for..." value={form.keyDecisions} onChange={e => setForm({...form, keyDecisions: e.target.value})}
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] resize-none" />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Action Items (task|assignee, one per line)</label>
             <textarea rows={3} placeholder="Send RFP|Treasurer" value={form.actionItems} onChange={e => setForm({...form, actionItems: e.target.value})}
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] resize-none" />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Notes (optional)</label>
             <textarea rows={2} placeholder="Additional context..." value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}
-              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[#B09B71]/50 resize-none" />
+              className="w-full px-3 py-2 rounded-xl bg-[rgba(245,240,232,0.04)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] resize-none" />
           </div>
           <div className="flex items-center gap-2">
             <input type="checkbox" id="quorum" checked={form.quorum} onChange={e => setForm({...form, quorum: e.target.checked})}

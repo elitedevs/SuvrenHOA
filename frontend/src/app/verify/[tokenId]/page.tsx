@@ -53,7 +53,7 @@ export default async function VerifyPropertyPage({ params }: Props) {
       </div>
 
       {/* Trust badge */}
-      <div className="glass-card rounded-xl p-5 mb-8 border border-[#B09B71]/20">
+      <div className="glass-card rounded-xl p-5 mb-8 border border-[rgba(176,155,113,0.20)]">
         <div className="flex items-start gap-3 text-left">
           <span className="text-xl"></span>
           <div>

@@ -34,11 +34,11 @@ export function CommunityPoll() {
       {showCreate && (
         <div className="mb-4 p-4 rounded-xl bg-[rgba(26,26,30,0.30)] border border-[rgba(245,240,232,0.08)] space-y-3">
           <input value={newQuestion} onChange={e => setNewQuestion(e.target.value)}
-            placeholder="Poll question..." className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            placeholder="Poll question..." className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
           {newOptions.map((opt, i) => (
             <div key={i} className="flex gap-2">
               <input value={opt} onChange={e => { const o = [...newOptions]; o[i] = e.target.value; setNewOptions(o); }}
-                placeholder={`Option ${i + 1}`} className="flex-1 px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder={`Option ${i + 1}`} className="flex-1 px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
               {newOptions.length > 2 && (
                 <button onClick={() => setNewOptions(newOptions.filter((_, idx) => idx !== i))} className="text-[var(--text-disabled)] hover:text-[#8B5A5A]"></button>
               )}
@@ -88,9 +88,9 @@ export function CommunityPoll() {
                       <button key={option.id} onClick={() => canVote && vote(poll.id, option.id, address!)}
                         disabled={!canVote}
                         className={`w-full text-left relative overflow-hidden rounded-lg transition-all ${
-                          canVote ? 'hover:border-[#B09B71]/30 cursor-pointer' : 'cursor-default'
+                          canVote ? 'hover:border-[rgba(176,155,113,0.30)] cursor-pointer' : 'cursor-default'
                         } border border-[rgba(245,240,232,0.06)] bg-[rgba(20,20,22,0.50)]`}>
-                        <div className="absolute inset-y-0 left-0 bg-[#B09B71]/10 transition-all duration-700 rounded-lg"
+                        <div className="absolute inset-y-0 left-0 bg-[rgba(176,155,113,0.10)] transition-all duration-700 rounded-lg"
                           style={{ width: `${pct}%` }} />
                         <div className="relative flex items-center justify-between px-3 py-2">
                           <span className="text-xs text-[var(--text-body)]">{option.label}</span>

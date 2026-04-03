@@ -10,8 +10,8 @@ const VOTING_TIERS = [
     name: 'Founder',
     votes: 4,
     color: 'text-[#B09B71]',
-    bg: 'bg-[#B09B71]/10',
-    border: 'border-[#B09B71]/30',
+    bg: 'bg-[rgba(176,155,113,0.10)]',
+    border: 'border-[rgba(176,155,113,0.30)]',
     bar: 'bg-gradient-to-r from-[var(--brass-deep)] to-[#B09B71]',
     description: 'Original community founders. Maximum governance influence.',
     criteria: 'Minted during the founding period (first 30 days)',
@@ -114,7 +114,7 @@ export default function VotingPowerPage() {
               key={tier.tier}
               className={`glass-card rounded-xl p-6 transition-all ${
                 isMyTier
-                  ? 'ring-1 ring-[#B09B71]/20'
+                  ? 'ring-1 ring-[rgba(176,155,113,0.20)]'
                   : ''
               }`}
             >
@@ -127,7 +127,7 @@ export default function VotingPowerPage() {
                     <div className="flex items-center gap-2">
                       <h3 className={`font-medium text-sm ${tier.color}`}>Tier {tier.tier} — {tier.name}</h3>
                       {isMyTier && (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30 font-medium">
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)] font-medium">
                           YOUR TIER
                         </span>
                       )}

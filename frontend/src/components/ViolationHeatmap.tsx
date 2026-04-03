@@ -65,7 +65,7 @@ export function ViolationHeatmap({ data = SAMPLE_DATA }: ViolationHeatmapProps) 
     <div className="glass-card rounded-xl p-6">
       <div className="flex items-start justify-between mb-6">
         <div>
-          <h2 className="text-sm font-medium text-[#D4C4A0]">Violation Heatmap</h2>
+          <h2 className="text-lg font-medium text-[#D4C4A0]">Violation Heatmap</h2>
           <p className="text-xs text-[var(--text-disabled)] mt-1">Density by type and month — darker = more violations</p>
         </div>
         {/* Legend */}
@@ -99,7 +99,7 @@ export function ViolationHeatmap({ data = SAMPLE_DATA }: ViolationHeatmapProps) 
           {MONTHS.map((month, mi) => (
             <div
               key={month}
-              className={`grid gap-1 mb-1 items-center ${mi === currentMonth ? 'ring-1 ring-[#B09B71]/30 rounded-lg' : ''}`}
+              className={`grid gap-1 mb-1 items-center ${mi === currentMonth ? 'ring-1 ring-[rgba(176,155,113,0.30)] rounded-lg' : ''}`}
               style={{ gridTemplateColumns: '48px repeat(7, 1fr) 40px' }}
             >
               <div className={`text-[10px] font-medium pr-2 text-right ${mi === currentMonth ? 'text-[#B09B71]' : 'text-[var(--text-disabled)]'}`}>

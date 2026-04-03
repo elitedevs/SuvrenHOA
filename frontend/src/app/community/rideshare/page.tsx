@@ -98,7 +98,7 @@ export default function RidesharePage() {
                   <div className="flex items-center gap-2 flex-wrap mb-2">
                     <h3 className="font-medium text-[#D4C4A0] text-lg">{ride.destination}</h3>
                     {ride.recurring !== 'none' && (
-                      <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-[var(--brass-deep)]/20 text-[#B09B71]">
+                      <span className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.20)] text-[#B09B71]">
                         <RotateCcw className="w-3 h-3" /> {ride.recurring}
                       </span>
                     )}

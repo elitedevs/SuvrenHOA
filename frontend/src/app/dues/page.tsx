@@ -75,11 +75,11 @@ function CommunityDuesStatus() {
 
       {/* Anonymous breakdown */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="rounded-xl bg-[#3A7D6F]/5 border border-[rgba(42,93,79,0.20)] p-4 text-center">
+        <div className="rounded-xl bg-[rgba(58,125,111,0.05)] border border-[rgba(42,93,79,0.20)] p-4 text-center">
           <p className="text-2xl font-normal text-[#3A7D6F]">{paidCount}</p>
           <p className="text-xs text-[var(--text-disabled)] mt-1 font-medium">Paid This Quarter</p>
         </div>
-        <div className="rounded-xl bg-[#8B5A5A]/5 border border-[rgba(107,58,58,0.20)] p-4 text-center">
+        <div className="rounded-xl bg-[rgba(139,90,90,0.05)] border border-[rgba(107,58,58,0.20)] p-4 text-center">
           <p className="text-2xl font-normal text-[#8B5A5A]">{unpaidCount}</p>
           <p className="text-xs text-[var(--text-disabled)] mt-1 font-medium">Still Outstanding</p>
         </div>
@@ -215,7 +215,7 @@ function DuesPanel() {
                       isDone
                         ? 'bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.30)] text-[#3A7D6F]'
                         : isActive
-                        ? 'bg-[#B09B71]/20 border border-[#B09B71]/50 text-[#D4C4A0] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
+                        ? 'bg-[rgba(176,155,113,0.20)] border border-[rgba(176,155,113,0.50)] text-[#D4C4A0] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
                         : 'bg-[var(--surface-2)] border border-[var(--divider)] text-[var(--text-disabled)]'
                     }`}>
                       {isDone ? '✓' : i + 1}
@@ -270,7 +270,7 @@ function DuesPanel() {
           ) : (
             <>
               <p className="text-2xl font-normal text-[#8B5A5A]">Payment Reminder</p>
-              <p className="text-xs text-[#8B5A5A]/70 mt-1">${amountOwed} owed</p>
+              <p className="text-xs text-[rgba(139,90,90,0.70)] mt-1">${amountOwed} owed</p>
             </>
           )}
         </div>
@@ -324,9 +324,9 @@ function DuesPanel() {
                       onClick={() => setSelectedQuarters(quarters)}
                       className={`w-full p-5 rounded-xl border text-left flex items-center gap-4 transition-all duration-200 min-h-[72px] ${
                         isSelected
-                          ? 'border-[#B09B71]/60 bg-[rgba(26,26,30,0.50)] shadow-[0_0_16px_rgba(201,169,110,0.12)]'
+                          ? 'border-[rgba(176,155,113,0.60)] bg-[rgba(26,26,30,0.50)] shadow-[0_0_16px_rgba(201,169,110,0.12)]'
                           : recommended
-                          ? 'border-[#B09B71]/20 bg-[rgba(26,26,30,0.30)] hover:border-[#B09B71]/40'
+                          ? 'border-[rgba(176,155,113,0.20)] bg-[rgba(26,26,30,0.30)] hover:border-[rgba(176,155,113,0.40)]'
                           : 'border-[var(--divider)] bg-[var(--surface-1)] hover:border-[var(--border-default)]'
                       }`}
                     >
@@ -346,7 +346,7 @@ function DuesPanel() {
                         <div className="flex items-center gap-2">
                           <p className="font-medium text-sm text-[var(--parchment)]">{label}</p>
                           {recommended && (
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/30 text-[#D4C4A0] font-medium">
+                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)] text-[#D4C4A0] font-medium">
                               {discount}% off
                             </span>
                           )}
@@ -371,12 +371,12 @@ function DuesPanel() {
 
           {/* Transaction state feedback */}
           {(isApprovePending) && (
-            <div className="mb-4 p-3 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#D4C4A0] text-sm">
+            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm">
               ⏳ Waiting for wallet confirmation...
             </div>
           )}
           {(isApproveConfirming && approveHash) && (
-            <div className="mb-4 p-3 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#D4C4A0] text-sm">
+            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm">
               🔄 Approve submitted. Confirming...{' '}
               <a
                 href={`https://sepolia.basescan.org/tx/${approveHash}`}
@@ -389,12 +389,12 @@ function DuesPanel() {
             </div>
           )}
           {(isPayPending) && (
-            <div className="mb-4 p-3 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#D4C4A0] text-sm">
+            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm">
               ⏳ Waiting for wallet confirmation...
             </div>
           )}
           {(isPayConfirming && payHash) && (
-            <div className="mb-4 p-3 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#D4C4A0] text-sm">
+            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm">
               🔄 Transaction submitted. Confirming...{' '}
               <a
                 href={`https://sepolia.basescan.org/tx/${payHash}`}

@@ -69,7 +69,7 @@ export default function CommunityPage() {
               onClick={() => setSelectedCategory(null)}
               className={`px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
                 selectedCategory === null
-                  ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
+                  ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]'
                   : 'glass-card text-[var(--text-muted)] hover:text-[var(--text-body)]'
               }`}
             >
@@ -81,7 +81,7 @@ export default function CommunityPage() {
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-4 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
                   selectedCategory === cat.id
-                    ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
+                    ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]'
                     : 'glass-card text-[var(--text-muted)] hover:text-[var(--text-body)]'
                 }`}
               >
@@ -159,7 +159,7 @@ function PostCard({ post }: { post: any }) {
     <div className="glass-card rounded-lg p-5 cursor-pointer group">
       <div className="flex items-start gap-4">
         {/* Author avatar */}
-        <div className="w-10 h-10 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/20 flex items-center justify-center text-xs font-medium text-[#B09B71] shrink-0">
+        <div className="w-10 h-10 rounded-full bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center text-xs font-medium text-[#B09B71] shrink-0">
           #{post.lot_number || 0}
         </div>
 
@@ -170,7 +170,7 @@ function PostCard({ post }: { post: any }) {
               {post.title}
             </h3>
             {post.pinned && (
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20">
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]">
                 Pinned
               </span>
             )}
@@ -238,7 +238,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
               onClick={() => setCategory(cat.id)}
               className={`p-2.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
                 category === cat.id
-                  ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30'
+                  ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]'
                   : 'glass-card text-[var(--text-muted)] hover:text-[var(--text-body)]'
               }`}
             >
@@ -255,7 +255,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
           value={title}
           onChange={e => setTitle(e.target.value)}
           placeholder="What's on your mind?"
-          className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B09B71]/20 transition-all"
+          className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(176,155,113,0.20)] transition-all"
         />
       </div>
 
@@ -266,7 +266,7 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
           onChange={e => setContent(e.target.value)}
           placeholder="Share details with your community..."
           rows={5}
-          className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B09B71]/20 transition-all resize-none"
+          className="w-full px-4 py-3 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgba(176,155,113,0.20)] transition-all resize-none"
         />
       </div>
 

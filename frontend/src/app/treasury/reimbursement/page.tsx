@@ -131,17 +131,17 @@ export default function ReimbursementPage() {
           {/* Tabs */}
           <div className="flex gap-2 mb-6">
             <button onClick={() => setActiveTab('mine')}
-              className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'mine' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+              className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'mine' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
               My Requests ({myRequests.length})
             </button>
             <button onClick={() => setActiveTab('all')}
-              className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'all' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+              className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${activeTab === 'all' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
               All Requests ({requests.length})
             </button>
           </div>
 
           {/* Policy note */}
-          <div className="p-3 rounded-xl bg-[#B09B71]/5 border border-[#B09B71]/15 mb-5">
+          <div className="p-3 rounded-xl bg-[rgba(176,155,113,0.05)] border border-[rgba(176,155,113,0.15)] mb-5">
             <p className="text-[11px] text-[var(--text-muted)]">
               <span className="text-[#B09B71] font-medium">Policy:</span>{' '}
               Reimbursements require pre-approval for expenses over $150. Keep original receipts for 3 years. Requests must be submitted within 60 days of purchase. For emergency expenses, notify the board within 24 hours.
@@ -200,7 +200,7 @@ function RequestCard({ request: r }: { request: ReimbursementRequest }) {
             <p className="text-sm text-[var(--text-muted)] leading-relaxed">{r.description}</p>
             <p className="text-xs text-[var(--text-disabled)]">Submitted by: {r.submittedBy.slice(0, 16)}...</p>
             {r.notes && (
-              <p className="text-xs text-[var(--text-muted)] italic border-l-2 border-[#B09B71]/30 pl-3">{r.notes}</p>
+              <p className="text-xs text-[var(--text-muted)] italic border-l-2 border-[rgba(176,155,113,0.30)] pl-3">{r.notes}</p>
             )}
           </div>
         )}
@@ -233,12 +233,12 @@ function ReimbursementForm({ onSubmit, onCancel }: {
           <label className="block text-sm text-[var(--text-muted)] mb-2">Amount ($) *</label>
           <input type="number" value={amountStr} onChange={e => setAmountStr(e.target.value)}
             placeholder="0.00" step="0.01" min="0"
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Category *</label>
           <select value={category} onChange={e => setCategory(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none">
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none">
             <option value="">Select category</option>
             {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
           </select>
@@ -248,18 +248,18 @@ function ReimbursementForm({ onSubmit, onCancel }: {
       <div>
         <label className="block text-sm text-[var(--text-muted)] mb-2">Receipt Reference # *</label>
         <input value={receiptRef} onChange={e => setReceiptRef(e.target.value)} placeholder="e.g., RCPT-2026-042 or store receipt number"
-          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+          className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
       </div>
 
       <div>
         <label className="block text-sm text-[var(--text-muted)] mb-2">Description *</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)}
           placeholder="What was purchased? Why was it needed? How does it benefit the community?"
-          rows={4} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+          rows={4} className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none" />
       </div>
 
       {parseFloat(amountStr) > 150 && (
-        <div className="p-3 rounded-xl bg-[#B09B71]/5 border border-[rgba(176,155,113,0.20)] text-xs text-[#B09B71]">
+        <div className="p-3 rounded-xl bg-[rgba(176,155,113,0.05)] border border-[rgba(176,155,113,0.20)] text-xs text-[#B09B71]">
           Expenses over $150 require prior board approval. If this was not pre-approved, your request may be rejected.
         </div>
       )}

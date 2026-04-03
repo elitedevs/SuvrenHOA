@@ -96,7 +96,7 @@ export default function ReservationsPage() {
             key={amenity.id}
             onClick={() => { setSelectedAmenity(amenity.id); setShowReserve(false); }}
             className={`glass-card rounded-xl p-5 text-left transition-all ${
-              selectedAmenity === amenity.id ? 'ring-1 ring-[#B09B71]/40 border-[#B09B71]/20' : ''
+              selectedAmenity === amenity.id ? 'ring-1 ring-[rgba(176,155,113,0.40)] border-[rgba(176,155,113,0.20)]' : ''
             }`}
           >
             <div className="flex items-center gap-3 mb-3">
@@ -206,12 +206,12 @@ function ReserveForm({ amenity, onClose }: { amenity: Amenity; onClose: () => vo
         <div>
           <label className="block text-xs text-[var(--text-muted)] mb-2">Date</label>
           <input type="date" value={date} onChange={e => setDate(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
         </div>
         <div>
           <label className="block text-xs text-[var(--text-muted)] mb-2">Time Slot</label>
           <select value={timeSlot} onChange={e => setTimeSlot(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none">
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none">
             <option value="">Select time</option>
             {timeSlots.map(s => <option key={s} value={s}>{s}</option>)}
           </select>

@@ -77,9 +77,9 @@ function MintPropertyCard() {
   return (
     <div className="glass-card rounded-xl overflow-hidden">
       {/* Section header */}
-      <div className="px-8 py-5 border-b border-[rgba(245,240,232,0.06)] bg-[#B09B71]/5">
+      <div className="px-8 py-5 border-b border-[rgba(245,240,232,0.06)] bg-[rgba(176,155,113,0.05)]">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center text-xl">
+          <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.25)] flex items-center justify-center text-xl">
             
           </div>
           <div>
@@ -118,7 +118,7 @@ function MintPropertyCard() {
                   value={owner}
                   onChange={(e) => setOwner(e.target.value)}
                   placeholder="0x..."
-                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm font-mono placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/20 transition-all text-[var(--parchment)] min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm font-mono placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.20)] transition-all text-[var(--parchment)] min-h-[52px]"
                 />
               </div>
               <div>
@@ -130,7 +130,7 @@ function MintPropertyCard() {
                   value={lotNumber}
                   onChange={(e) => setLotNumber(e.target.value)}
                   placeholder="1–150"
-                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/20 transition-all text-[var(--parchment)] min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.20)] transition-all text-[var(--parchment)] min-h-[52px]"
                 />
               </div>
             </div>
@@ -146,7 +146,7 @@ function MintPropertyCard() {
                   value={streetAddress}
                   onChange={(e) => setStreetAddress(e.target.value)}
                   placeholder="123 Faircroft Dr"
-                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/20 transition-all text-[var(--parchment)] min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.20)] transition-all text-[var(--parchment)] min-h-[52px]"
                 />
               </div>
               <div>
@@ -158,7 +158,7 @@ function MintPropertyCard() {
                   value={sqft}
                   onChange={(e) => setSqft(e.target.value)}
                   placeholder="2500"
-                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/20 transition-all text-[var(--parchment)] min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.20)] transition-all text-[var(--parchment)] min-h-[52px]"
                 />
               </div>
             </div>
@@ -262,7 +262,7 @@ function RegisterDocumentCard() {
                 className="w-full text-sm text-[var(--text-muted)] file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:bg-[var(--surface-2)] file:text-[var(--text-body)] file:text-sm file:font-medium hover:file:bg-[rgba(34,34,40,0.90)] file:cursor-pointer file:transition-colors"
               />
               {fileHash && (
-                <div className="mt-2 px-3 py-2 rounded-lg bg-[#3A7D6F]/5 border border-[rgba(42,93,79,0.15)]">
+                <div className="mt-2 px-3 py-2 rounded-lg bg-[rgba(58,125,111,0.05)] border border-[rgba(42,93,79,0.15)]">
                   <p className="text-[10px] text-[#3A7D6F] font-medium uppercase tracking-wide mb-0.5">Hash computed </p>
                   <p className="text-[10px] font-mono text-[var(--text-disabled)] break-all">{fileHash}</p>
                 </div>
@@ -278,7 +278,7 @@ function RegisterDocumentCard() {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Faircroft CC&Rs 2026"
-                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/20 transition-all text-[var(--parchment)] min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.20)] transition-all text-[var(--parchment)] min-h-[52px]"
                 />
               </div>
               <div>
@@ -286,7 +286,7 @@ function RegisterDocumentCard() {
                 <select
                   value={docType}
                   onChange={(e) => setDocType(Number(e.target.value))}
-                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/20 transition-all text-[var(--parchment)] min-h-[52px] appearance-none"
+                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.20)] transition-all text-[var(--parchment)] min-h-[52px] appearance-none"
                 >
                   {docTypes.map((t, i) => (
                     <option key={i} value={i}>{t}</option>
@@ -304,7 +304,7 @@ function RegisterDocumentCard() {
                   value={arweaveTxId}
                   onChange={(e) => setArweaveTxId(e.target.value)}
                   placeholder="arweave-transaction-id"
-                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm font-mono placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/20 transition-all text-[var(--parchment)] min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm font-mono placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.20)] transition-all text-[var(--parchment)] min-h-[52px]"
                 />
               </div>
               <div>
@@ -316,7 +316,7 @@ function RegisterDocumentCard() {
                   value={ipfsCid}
                   onChange={(e) => setIpfsCid(e.target.value)}
                   placeholder="bafybei..."
-                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm font-mono placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none focus:ring-1 focus:ring-[#B09B71]/20 transition-all text-[var(--parchment)] min-h-[52px]"
+                  className="w-full px-4 py-3.5 rounded-xl bg-[rgba(20,20,22,0.60)] border border-[rgba(245,240,232,0.08)] text-sm font-mono placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none focus:ring-1 focus:ring-[rgba(176,155,113,0.20)] transition-all text-[var(--parchment)] min-h-[52px]"
                 />
               </div>
             </div>
@@ -353,7 +353,7 @@ function CommunityStats() {
   return (
     <div className="glass-card rounded-xl overflow-hidden">
       {/* Section header */}
-      <div className="px-8 py-5 border-b border-[rgba(245,240,232,0.06)] bg-[#B09B71]/5">
+      <div className="px-8 py-5 border-b border-[rgba(245,240,232,0.06)] bg-[rgba(176,155,113,0.05)]">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.12)] border border-amber-500/25 flex items-center justify-center text-xl">
             
@@ -413,7 +413,7 @@ function BoardAccessCard() {
   }
 
   return (
-    <div className="glass-card rounded-xl p-6 border border-[#B09B71]/15">
+    <div className="glass-card rounded-xl p-6 border border-[rgba(176,155,113,0.15)]">
       <div className="flex items-start justify-between mb-4">
         <div>
           <h3 className="text-sm font-medium text-[#D4C4A0]">Board Member Access</h3>

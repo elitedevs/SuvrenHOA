@@ -84,7 +84,7 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
     <div className="glass-card rounded-xl hover-lift p-6 border border-[rgba(245,240,232,0.04)]">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#B09B71]/15 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.15)] flex items-center justify-center">
             <RefreshCw className="w-5 h-5 text-[#B09B71]" />
           </div>
           <div>
@@ -97,7 +97,7 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
           className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${
             settings.enabled
               ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border-[rgba(42,93,79,0.25)]'
-              : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)] border-[rgba(245,240,232,0.08)] hover:border-[#B09B71]/30 hover:text-[#B09B71]'
+              : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)] border-[rgba(245,240,232,0.08)] hover:border-[rgba(176,155,113,0.30)] hover:text-[#B09B71]'
           }`}
         >
           {settings.enabled ? (
@@ -179,8 +179,8 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
                     onClick={() => setSettings(prev => ({ ...prev, frequency: freq }))}
                     className={`p-3 rounded-xl cursor-pointer border transition-all ${
                       settings.frequency === freq
-                        ? 'bg-[#B09B71]/10 border-[#B09B71]/30'
-                        : 'bg-[rgba(245,240,232,0.02)] border-[rgba(245,240,232,0.04)] hover:border-[#B09B71]/15'
+                        ? 'bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.30)]'
+                        : 'bg-[rgba(245,240,232,0.02)] border-[rgba(245,240,232,0.04)] hover:border-[rgba(176,155,113,0.15)]'
                     }`}
                   >
                     <div className="flex items-center justify-between">

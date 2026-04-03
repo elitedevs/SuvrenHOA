@@ -68,9 +68,9 @@ const DEMO_POLICIES: Policy[] = [
 ];
 
 const STATUS_CONFIG = {
-  active: { label: 'Active', icon: CheckCircle, color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-[rgba(42,93,79,0.20)]' },
+  active: { label: 'Active', icon: CheckCircle, color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
   expiring: { label: 'Expiring Soon', icon: AlertTriangle, color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]' },
-  expired: { label: 'Expired', icon: X, color: 'text-[#8B5A5A]', bg: 'bg-[#8B5A5A]/10', border: 'border-[rgba(139,90,90,0.20)]' },
+  expired: { label: 'Expired', icon: X, color: 'text-[#8B5A5A]', bg: 'bg-[rgba(139,90,90,0.10)]', border: 'border-[rgba(139,90,90,0.20)]' },
 };
 
 function daysUntil(dateStr: string): number {
@@ -101,10 +101,10 @@ function PolicyCard({ policy, onEdit, onDelete }: { policy: Policy; onEdit: () =
             </div>
           </div>
           <div className="flex items-center gap-1 shrink-0">
-            <button onClick={onEdit} className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[#B09B71] hover:bg-[#B09B71]/10 transition-colors">
+            <button onClick={onEdit} className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[#B09B71] hover:bg-[rgba(176,155,113,0.10)] transition-colors">
               <Edit2 className="w-3.5 h-3.5" />
             </button>
-            <button onClick={onDelete} className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[#8B5A5A] hover:bg-[#8B5A5A]/10 transition-colors">
+            <button onClick={onDelete} className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[#8B5A5A] hover:bg-[rgba(139,90,90,0.10)] transition-colors">
               <Trash2 className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -193,7 +193,7 @@ function PolicyModal({ policy, onSave, onClose }: { policy: Partial<Policy>; onS
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-      <div className="glass-card rounded-xl p-6 w-full max-w-lg border border-[#B09B71]/20">
+      <div className="glass-card rounded-xl p-6 w-full max-w-lg border border-[rgba(176,155,113,0.20)]">
         <div className="flex items-center justify-between mb-5">
           <h2 className="text-lg font-medium">{form.id ? 'Edit Policy' : 'Add Policy'}</h2>
           <button onClick={onClose} className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[var(--text-heading)] hover:bg-[rgba(245,240,232,0.05)] transition-colors">
@@ -212,7 +212,7 @@ function PolicyModal({ policy, onSave, onClose }: { policy: Partial<Policy>; onS
                 value={(form as any)[key] ?? ''}
                 onChange={(e) => set(key as keyof Policy, e.target.value)}
                 placeholder={placeholder}
-                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
               />
             </div>
           ))}
@@ -224,7 +224,7 @@ function PolicyModal({ policy, onSave, onClose }: { policy: Partial<Policy>; onS
                 value={form.coverageAmount ?? ''}
                 onChange={(e) => set('coverageAmount', e.target.value)}
                 placeholder="2000000"
-                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
               />
             </div>
             <div>
@@ -234,7 +234,7 @@ function PolicyModal({ policy, onSave, onClose }: { policy: Partial<Policy>; onS
                 value={form.premium ?? ''}
                 onChange={(e) => set('premium', e.target.value)}
                 placeholder="4800"
-                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
               />
             </div>
           </div>
@@ -245,7 +245,7 @@ function PolicyModal({ policy, onSave, onClose }: { policy: Partial<Policy>; onS
                 type="date"
                 value={form.renewalDate ?? ''}
                 onChange={(e) => set('renewalDate', e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
               />
             </div>
             <div>
@@ -253,7 +253,7 @@ function PolicyModal({ policy, onSave, onClose }: { policy: Partial<Policy>; onS
               <select
                 value={form.status ?? 'active'}
                 onChange={(e) => set('status', e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[#B09B71]/50 focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
               >
                 <option value="active">Active</option>
                 <option value="expiring">Expiring Soon</option>
@@ -268,7 +268,7 @@ function PolicyModal({ policy, onSave, onClose }: { policy: Partial<Policy>; onS
               onChange={(e) => set('notes', e.target.value)}
               rows={2}
               placeholder="Coverage details, contact info, etc."
-              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none resize-none"
+              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none"
             />
           </div>
         </div>

@@ -17,7 +17,7 @@ export function ShortcutsOverlay({ onClose }: ShortcutsOverlayProps) {
 
       {/* Modal */}
       <div
-        className="relative z-10 w-full max-w-sm rounded-xl border border-[#B09B71]/30 bg-[var(--obsidian)] shadow-2xl p-6"
+        className="relative z-10 w-full max-w-sm rounded-xl border border-[rgba(176,155,113,0.30)] bg-[var(--obsidian)] shadow-2xl p-6"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
@@ -43,7 +43,7 @@ export function ShortcutsOverlay({ onClose }: ShortcutsOverlayProps) {
                 {keys.split(' ').map((k, i) => (
                   <span key={i} className={`inline-flex items-center justify-center min-w-[28px] h-7 px-2 rounded-md text-xs font-medium font-mono
                     ${i > 0 && keys.split(' ').length > 1 && i === keys.split(' ').length - 1
-                      ? 'bg-[#B09B71]/15 border border-[#B09B71]/30 text-[#D4C4A0]'
+                      ? 'bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)] text-[#D4C4A0]'
                       : 'bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-[var(--text-body)]'
                     }`}>
                     {k}

@@ -135,24 +135,24 @@ export default function NewsletterPage() {
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Title</label>
               <input value={form.title} onChange={e => setForm({...form, title: e.target.value})}
-                placeholder="Spring 2026 Newsletter" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="Spring 2026 Newsletter" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
           </div>
           <div>
             <label className="block text-xs text-[var(--text-muted)] mb-1">Summary (shown in list)</label>
             <input value={form.summary} onChange={e => setForm({...form, summary: e.target.value})}
-              placeholder="Brief one-sentence summary..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+              placeholder="Brief one-sentence summary..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
           </div>
           <div>
             <label className="block text-xs text-[var(--text-muted)] mb-1">Full Content</label>
             <textarea value={form.content} onChange={e => setForm({...form, content: e.target.value})}
               placeholder="Full newsletter content..." rows={10}
-              className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-y font-mono" />
+              className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-y font-mono" />
           </div>
           <div className="flex gap-3">
             <button onClick={() => setShowCreate(false)} className="flex-1 py-3 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
@@ -166,12 +166,12 @@ export default function NewsletterPage() {
 
       <div className="space-y-4">
         {sorted.map(nl => (
-          <div key={nl.id} className={`glass-card rounded-xl overflow-hidden ${nl.pinned ? 'border border-[#B09B71]/20' : ''}`}>
+          <div key={nl.id} className={`glass-card rounded-xl overflow-hidden ${nl.pinned ? 'border border-[rgba(176,155,113,0.20)]' : ''}`}>
             <div className="p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    {nl.pinned && <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20"> Current Issue</span>}
+                    {nl.pinned && <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]"> Current Issue</span>}
                     <span className="text-xs text-[var(--text-disabled)]">{new Date(nl.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>
                   <h3 className="font-medium text-base mb-2">{nl.title}</h3>
@@ -185,7 +185,7 @@ export default function NewsletterPage() {
                     </button>
                   )}
                   <button onClick={() => setExpanded(expanded === nl.id ? null : nl.id)}
-                    className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(245,240,232,0.08)] text-[var(--text-body)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors">
+                    className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(245,240,232,0.08)] text-[var(--text-body)] hover:border-[rgba(176,155,113,0.30)] hover:text-[#B09B71] transition-colors">
                     {expanded === nl.id ? 'Collapse' : 'Read'}
                   </button>
                 </div>

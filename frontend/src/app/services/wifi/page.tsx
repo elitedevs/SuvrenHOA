@@ -134,8 +134,8 @@ export default function WifiPage() {
       </div>
 
       {/* Network Info */}
-      <div className="glass-card rounded-xl p-4 border border-[#B09B71]/20 mb-6 flex items-center gap-4">
-        <div className="p-3 rounded-xl bg-[#B09B71]/15 border border-[#B09B71]/20">
+      <div className="glass-card rounded-xl p-4 border border-[rgba(176,155,113,0.20)] mb-6 flex items-center gap-4">
+        <div className="p-3 rounded-xl bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.20)]">
           <Wifi className="w-6 h-6 text-[#B09B71]" />
         </div>
         <div>
@@ -194,13 +194,13 @@ export default function WifiPage() {
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => setQrCode(qrCode?.id === code.id ? null : code)}
-                    className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[#B09B71] hover:bg-[#B09B71]/10 transition-colors text-xs font-medium"
+                    className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[#B09B71] hover:bg-[rgba(176,155,113,0.10)] transition-colors text-xs font-medium"
                   >
                     QR
                   </button>
                   <button
                     onClick={() => deleteCode(code.id)}
-                    className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[#8B5A5A] hover:bg-[#8B5A5A]/10 transition-colors"
+                    className="p-1.5 rounded-lg text-[var(--text-disabled)] hover:text-[#8B5A5A] hover:bg-[rgba(139,90,90,0.10)] transition-colors"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -261,7 +261,7 @@ export default function WifiPage() {
       {/* Create Modal */}
       {showCreate && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[#B09B71]/20">
+          <div className="glass-card rounded-xl p-6 w-full max-w-md border border-[rgba(176,155,113,0.20)]">
             <h2 className="text-lg font-medium mb-5">Generate Access Code</h2>
             <div className="space-y-4">
               <div>
@@ -270,7 +270,7 @@ export default function WifiPage() {
                   value={newLabel}
                   onChange={(e) => setNewLabel(e.target.value)}
                   placeholder="e.g. Weekend Guests"
-                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
                 />
               </div>
               <div>

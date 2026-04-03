@@ -209,7 +209,7 @@ function FullReminder({
 }: ReminderProps) {
   if (isCurrent) {
     return (
-      <div className="rounded-xl p-6 border border-[rgba(42,93,79,0.20)] bg-[#3A7D6F]/5 transition-all duration-300">
+      <div className="rounded-xl p-6 border border-[rgba(42,93,79,0.20)] bg-[rgba(58,125,111,0.05)] transition-all duration-300">
         <div className="flex items-start gap-4 mb-4">
           <div className="w-10 h-10 rounded-xl bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)] flex items-center justify-center text-xl shrink-0">
             
@@ -224,7 +224,7 @@ function FullReminder({
           </div>
         </div>
 
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-[#3A7D6F]/5 border border-[rgba(42,93,79,0.15)]">
+        <div className="flex items-center gap-4 p-4 rounded-xl bg-[rgba(58,125,111,0.05)] border border-[rgba(42,93,79,0.15)]">
           <div className="flex-1">
             <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Annual Plan Savings</p>
             <p className="text-xl font-normal text-[#3A7D6F]">${annualSavings}</p>
@@ -277,7 +277,7 @@ function FullReminder({
           </div>
         </div>
 
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-[#8B5A5A]/5 border border-[rgba(139,90,90,0.15)] mb-4">
+        <div className="flex items-center gap-4 p-4 rounded-xl bg-[rgba(139,90,90,0.05)] border border-[rgba(139,90,90,0.15)] mb-4">
           <div className="flex-1">
             <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Amount Owed</p>
             <p className="text-xl font-normal text-[#8B5A5A]">${amountOwed.toFixed(2)} USDC</p>
@@ -318,7 +318,7 @@ function FullReminder({
 
   // Upcoming / near-due state
   return (
-    <div className="rounded-xl p-6 border border-[rgba(176,155,113,0.20)] bg-[#B09B71]/5 transition-all duration-300">
+    <div className="rounded-xl p-6 border border-[rgba(176,155,113,0.20)] bg-[rgba(176,155,113,0.05)] transition-all duration-300">
       <div className="flex items-start gap-4 mb-4">
         <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.12)] border border-[rgba(176,155,113,0.25)] flex items-center justify-center text-xl shrink-0">
         </div>
@@ -338,7 +338,7 @@ function FullReminder({
         </div>
       </div>
 
-      <div className="flex items-center gap-4 p-4 rounded-xl bg-[#B09B71]/5 border border-[rgba(176,155,113,0.15)] mb-4">
+      <div className="flex items-center gap-4 p-4 rounded-xl bg-[rgba(176,155,113,0.05)] border border-[rgba(176,155,113,0.15)] mb-4">
         <div className="flex-1">
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Annual Savings</p>
           <p className="text-xl font-normal text-[#B09B71]">Save ${annualSavings}</p>

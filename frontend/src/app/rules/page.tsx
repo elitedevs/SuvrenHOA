@@ -169,7 +169,7 @@ export default function RulesPage() {
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search rules... e.g. 'fence height', 'quiet hours', 'rental'"
-          className="w-full pl-10 pr-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none"
+          className="w-full pl-10 pr-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
         />
         {search && (
           <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
@@ -184,7 +184,7 @@ export default function RulesPage() {
         <div className="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-none">
           {SECTIONS.map(s => (
             <a key={s.id} href={`#${s.id}`}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgba(26,26,30,0.40)] text-xs text-[var(--text-muted)] hover:text-[#B09B71] hover:bg-[#B09B71]/10 whitespace-nowrap transition-all">
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgba(26,26,30,0.40)] text-xs text-[var(--text-muted)] hover:text-[#B09B71] hover:bg-[rgba(176,155,113,0.10)] whitespace-nowrap transition-all">
               {s.icon} {s.title}
             </a>
           ))}
@@ -233,7 +233,7 @@ export default function RulesPage() {
                       </button>
                       {isOpen && (
                         <div className="px-5 pb-4">
-                          <p className="text-sm text-[var(--text-muted)] leading-relaxed border-l-2 border-[#B09B71]/30 pl-4">
+                          <p className="text-sm text-[var(--text-muted)] leading-relaxed border-l-2 border-[rgba(176,155,113,0.30)] pl-4">
                             {rule.answer}
                           </p>
                         </div>
@@ -255,7 +255,7 @@ export default function RulesPage() {
         </div>
       )}
 
-      <div className="mt-8 p-4 rounded-xl bg-[#B09B71]/5 border border-[#B09B71]/15">
+      <div className="mt-8 p-4 rounded-xl bg-[rgba(176,155,113,0.05)] border border-[rgba(176,155,113,0.15)]">
         <p className="text-xs text-[var(--text-muted)]">
           <span className="text-[#B09B71] font-medium"> Official Document:</span>{' '}
           These FAQs summarize the Faircroft CC&Rs and HOA Rules & Regulations. In case of discrepancy, the official recorded documents in the Documents section govern. Contact the board with any questions.

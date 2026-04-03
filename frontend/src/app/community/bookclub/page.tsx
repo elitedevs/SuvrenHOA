@@ -177,14 +177,14 @@ export default function BookClubPage() {
 
       {tab === 'current' && currentBook && (
         <div className="space-y-6">
-          <div className="glass-card rounded-xl p-6 border border-[#B09B71]/20">
+          <div className="glass-card rounded-xl p-6 border border-[rgba(176,155,113,0.20)]">
             <div className="flex gap-5">
               <div className={`w-24 h-32 rounded-xl bg-gradient-to-b ${currentBook.coverColor} border border-[rgba(245,240,232,0.10)] shrink-0 flex items-center justify-center`}>
                 <BookOpen className="w-8 h-8 text-[rgba(245,240,232,0.50)]" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-[#B09B71]/15 text-[#B09B71] font-medium border border-[#B09B71]/20">
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#B09B71] font-medium border border-[rgba(176,155,113,0.20)]">
                     {currentBook.month} {currentBook.year}
                   </span>
                   <Star className="w-4 h-4 text-[#B09B71] fill-[#B09B71]" />
@@ -243,20 +243,20 @@ export default function BookClubPage() {
 
       {tab === 'nominate' && (
         <div className="space-y-4">
-          <div className="glass-card rounded-xl p-4 border border-[#B09B71]/20">
+          <div className="glass-card rounded-xl p-4 border border-[rgba(176,155,113,0.20)]">
             <h3 className="text-sm font-medium text-[var(--text-heading)] mb-3">Nominate a Book</h3>
             <div className="grid grid-cols-2 gap-3">
               <input
                 value={newNomTitle}
                 onChange={(e) => setNewNomTitle(e.target.value)}
                 placeholder="Book title"
-                className="px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
+                className="px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
               />
               <input
                 value={newNomAuthor}
                 onChange={(e) => setNewNomAuthor(e.target.value)}
                 placeholder="Author"
-                className="px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[#B09B71]/50 focus:outline-none"
+                className="px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] placeholder-[rgba(245,240,232,0.20)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
               />
             </div>
             <button
@@ -279,7 +279,7 @@ export default function BookClubPage() {
                 <button
                   onClick={() => vote(nom.id)}
                   className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    hasVoted ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'border border-[rgba(245,240,232,0.10)] text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71]'
+                    hasVoted ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'border border-[rgba(245,240,232,0.10)] text-[var(--text-muted)] hover:border-[rgba(176,155,113,0.30)] hover:text-[#B09B71]'
                   }`}
                 >
                   <ThumbsUp className="w-3.5 h-3.5" />

@@ -26,7 +26,7 @@ export function PropertySelector({ properties, selectedIndex, onSelect }: Proper
           onClick={() => onSelect(i)}
           className={`shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 min-h-[40px] ${
             i === selectedIndex
-              ? 'bg-[#B09B71]/25 border border-[#B09B71]/40 text-[#D4C4A0] shadow-sm shadow-[#B09B71]/8'
+              ? 'bg-[rgba(176,155,113,0.25)] border border-[rgba(176,155,113,0.40)] text-[#D4C4A0] shadow-sm shadow-[rgba(176,155,113,0.08)]'
               : 'bg-[rgba(26,26,30,0.40)] border border-[rgba(245,240,232,0.06)] text-[var(--text-muted)] hover:bg-[rgba(245,240,232,0.06)] hover:text-[var(--text-body)]'
           }`}
         >

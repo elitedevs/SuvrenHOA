@@ -91,7 +91,7 @@ export function WeatherWidget() {
 
   if (error || !weather) {
     return (
-      <div className="glass-card rounded-xl p-4 border border-[#B09B71]/10">
+      <div className="glass-card rounded-xl p-4 border border-[rgba(176,155,113,0.10)]">
         <p className="text-xs text-[var(--text-disabled)]"> Raleigh, NC</p>
         <p className="text-xs text-[var(--text-disabled)] mt-1">Weather unavailable</p>
       </div>
@@ -101,7 +101,7 @@ export function WeatherWidget() {
   const emoji = getWeatherEmoji(weather.weatherCode);
 
   return (
-    <div className="glass-card rounded-xl p-5 border border-[#B09B71]/15">
+    <div className="glass-card rounded-xl p-5 border border-[rgba(176,155,113,0.15)]">
       <div className="flex items-start justify-between mb-2">
         <div>
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)]">Raleigh, NC</p>

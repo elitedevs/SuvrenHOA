@@ -122,7 +122,7 @@ export default function AnnualReportPage() {
       </div>
 
       {/* Cover */}
-      <div className="glass-card rounded-xl p-8 mb-6 bg-gradient-to-br from-[#B09B71]/10 to-transparent border border-[#B09B71]/20">
+      <div className="glass-card rounded-xl p-8 mb-6 bg-gradient-to-br from-[rgba(176,155,113,0.10)] to-transparent border border-[rgba(176,155,113,0.20)]">
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
             <p className="text-[11px] uppercase tracking-[0.15em] text-[#B09B71] font-medium mb-2">Annual Report</p>
@@ -135,7 +135,7 @@ export default function AnnualReportPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-[#B09B71]/10">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-[rgba(176,155,113,0.10)]">
           <StatBox label="Total Units" value={d.totalUnits.toString()} />
           <StatBox label="Occupancy Rate" value={`${Math.round(d.occupiedUnits / d.totalUnits * 100)}%`} />
           <StatBox label="New Residents" value={`+${d.newResidents}`} highlight />
@@ -265,7 +265,7 @@ export default function AnnualReportPage() {
       </Section>
 
       {/* Footer */}
-      <div className="mt-8 p-5 rounded-xl bg-[#B09B71]/5 border border-[#B09B71]/15 text-center">
+      <div className="mt-8 p-5 rounded-xl bg-[rgba(176,155,113,0.05)] border border-[rgba(176,155,113,0.15)] text-center">
         <p className="text-xs text-[var(--text-muted)]">
           {d.community} — {d.year} Annual Report · Generated {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
         </p>

@@ -85,7 +85,7 @@ export default function EmergencyPage() {
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search contacts..."
-          className="w-full pl-10 pr-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[#B09B71]/50 focus:outline-none"
+          className="w-full pl-10 pr-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm placeholder-[rgba(245,240,232,0.25)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
         />
       </div>
 
@@ -106,13 +106,13 @@ export default function EmergencyPage() {
                     key={contact.id}
                     className={`glass-card rounded-xl hover-lift p-4 border transition-all ${
                       contact.urgent
-                        ? 'border-[rgba(107,58,58,0.20)] bg-[#8B5A5A]/5'
-                        : 'border-[#B09B71]/10'
+                        ? 'border-[rgba(107,58,58,0.20)] bg-[rgba(139,90,90,0.05)]'
+                        : 'border-[rgba(176,155,113,0.10)]'
                     }`}
                   >
                     <div className="flex items-start gap-3">
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0 ${
-                        contact.urgent ? 'bg-[rgba(107,58,58,0.12)]' : 'bg-[#B09B71]/10'
+                        contact.urgent ? 'bg-[rgba(107,58,58,0.12)]' : 'bg-[rgba(176,155,113,0.10)]'
                       }`}>
                         {contact.icon}
                       </div>

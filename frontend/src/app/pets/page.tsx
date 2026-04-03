@@ -68,19 +68,19 @@ function PlaydatesTab() {
 
       {/* Add Form */}
       {showAdd && (
-        <div className="glass-card rounded-xl p-5 border border-[#B09B71]/20">
+        <div className="glass-card rounded-xl p-5 border border-[rgba(176,155,113,0.20)]">
           <h3 className="text-sm font-medium text-[var(--parchment)] mb-4">Schedule a Playdate</h3>
           <form onSubmit={handleSchedule} className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Date</label>
                 <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})} required
-                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
+                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
               </div>
               <div>
                 <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Time</label>
                 <input type="time" value={form.time} onChange={e => setForm({...form, time: e.target.value})}
-                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
+                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
               </div>
             </div>
             <div>
@@ -89,7 +89,7 @@ function PlaydatesTab() {
                 {(['Park', 'Yard', 'Common Area'] as const).map(loc => (
                   <button key={loc} type="button" onClick={() => setForm({...form, location: loc})}
                     className={`flex-1 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
-                      form.location === loc ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)] border border-[rgba(245,240,232,0.04)]'
+                      form.location === loc ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)] border border-[rgba(245,240,232,0.04)]'
                     }`}>
                     {LOCATION_ICONS[loc]} {loc}
                   </button>
@@ -100,18 +100,18 @@ function PlaydatesTab() {
               <div>
                 <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Your Lot #</label>
                 <input value={form.organizer} onChange={e => setForm({...form, organizer: e.target.value})} placeholder="Lot 5" required
-                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
+                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
               </div>
               <div>
                 <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Pets Invited (comma-sep)</label>
                 <input value={form.petsInvited} onChange={e => setForm({...form, petsInvited: e.target.value})} placeholder="Buddy, Luna"
-                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
+                  className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
               </div>
             </div>
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Description (optional)</label>
               <input value={form.description} onChange={e => setForm({...form, description: e.target.value})} placeholder="Casual morning play session!"
-                className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div className="flex gap-3">
               <button type="button" onClick={() => setShowAdd(false)}
@@ -128,7 +128,7 @@ function PlaydatesTab() {
         <div className="glass-card rounded-xl p-3 border border-[rgba(245,240,232,0.04)]">
           <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">Your name for RSVPs:</label>
           <input value={myName} onChange={e => setMyName(e.target.value)} placeholder="Lot 5 or your name"
-            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--parchment)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
         </div>
       )}
 
@@ -250,7 +250,7 @@ export default function PetsPage() {
           onClick={() => setActiveTab('registry')}
           className={`px-5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
             activeTab === 'registry'
-              ? 'bg-[#B09B71]/15 text-[#D4C4A0] border border-[#B09B71]/25'
+              ? 'bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] border border-[rgba(176,155,113,0.25)]'
               : 'glass text-[var(--text-muted)] border border-[rgba(245,240,232,0.04)] hover:text-[var(--parchment)]'
           }`}
         >
@@ -260,7 +260,7 @@ export default function PetsPage() {
           onClick={() => setActiveTab('playdates')}
           className={`px-5 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
             activeTab === 'playdates'
-              ? 'bg-[#B09B71]/15 text-[#D4C4A0] border border-[#B09B71]/25'
+              ? 'bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] border border-[rgba(176,155,113,0.25)]'
               : 'glass text-[var(--text-muted)] border border-[rgba(245,240,232,0.04)] hover:text-[var(--parchment)]'
           }`}
         >
@@ -276,7 +276,7 @@ export default function PetsPage() {
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-6">
             {['all', 'dog', 'cat', 'bird', 'fish', 'reptile'].map(s => (
               <button key={s} onClick={() => setFilter(s)}
-                className={`glass-card rounded-xl hover-lift p-3 text-center transition-all cursor-pointer ${filter === s ? 'ring-1 ring-[#B09B71]/30' : ''}`}>
+                className={`glass-card rounded-xl hover-lift p-3 text-center transition-all cursor-pointer ${filter === s ? 'ring-1 ring-[rgba(176,155,113,0.30)]' : ''}`}>
                 <p className="text-lg">{s === 'all' ? '' : SPECIES_ICONS[s]}</p>
                 <p className="text-[10px] text-[var(--text-disabled)] capitalize">{s === 'all' ? `All (${(pets || []).length})` : `${s === 'fish' ? 'Fish' : s + 's'} (${(pets || []).filter((p: any) => p.species === s).length})`}</p>
               </button>
@@ -287,13 +287,13 @@ export default function PetsPage() {
           {!showRegister && (pets || []).length > 0 && (() => {
             const potm = (pets || [])[0];
             return (
-              <div className="glass-card rounded-xl p-5 mb-6 border border-[#B09B71]/20 bg-gradient-to-br from-[#B09B71]/5 to-transparent">
+              <div className="glass-card rounded-xl p-5 mb-6 border border-[rgba(176,155,113,0.20)] bg-gradient-to-br from-[rgba(176,155,113,0.05)] to-transparent">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-lg"></span>
                   <p className="text-xs font-medium text-[#B09B71] uppercase tracking-widest">Pet of the Month</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/25 flex items-center justify-center text-3xl shadow-[0_0_16px_rgba(201,169,110,0.2)]">
+                  <div className="w-16 h-16 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.25)] flex items-center justify-center text-3xl shadow-[0_0_16px_rgba(201,169,110,0.2)]">
                     {SPECIES_ICONS[potm.species] || ''}
                   </div>
                   <div>
@@ -325,7 +325,7 @@ export default function PetsPage() {
                 {filtered.map((pet: any) => (
                   <div key={pet.id} className="glass-card rounded-xl hover-lift p-5">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="w-12 h-12 rounded-full bg-[#B09B71]/8 border border-[#B09B71]/20 flex items-center justify-center text-2xl">
+                      <div className="w-12 h-12 rounded-full bg-[rgba(176,155,113,0.08)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center text-2xl">
                         {SPECIES_ICONS[pet.species] || ''}
                       </div>
                       <div>
@@ -385,14 +385,14 @@ function RegisterPet({ onClose }: { onClose: () => void }) {
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Pet Name</label>
           <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Buddy"
-            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+            className="w-full px-4 py-3 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
         </div>
         <div>
           <label className="block text-sm text-[var(--text-muted)] mb-2">Species</label>
           <div className="flex gap-2">
             {Object.entries(SPECIES_ICONS).map(([s, icon]) => (
               <button key={s} onClick={() => setSpecies(s)}
-                className={`flex-1 py-2 rounded-xl text-xs transition-all cursor-pointer ${species === s ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+                className={`flex-1 py-2 rounded-xl text-xs transition-all cursor-pointer ${species === s ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
                 {icon}
               </button>
             ))}
@@ -402,16 +402,16 @@ function RegisterPet({ onClose }: { onClose: () => void }) {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div><label className="block text-xs text-[var(--text-muted)] mb-1">Breed</label>
           <input type="text" value={breed} onChange={e => setBreed(e.target.value)} placeholder="Lab mix"
-            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
+            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" /></div>
         <div><label className="block text-xs text-[var(--text-muted)] mb-1">Color</label>
           <input type="text" value={color} onChange={e => setColor(e.target.value)} placeholder="Golden"
-            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
+            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" /></div>
         <div><label className="block text-xs text-[var(--text-muted)] mb-1">Weight</label>
           <input type="text" value={weight} onChange={e => setWeight(e.target.value)} placeholder="65 lbs"
-            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
+            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" /></div>
         <div><label className="block text-xs text-[var(--text-muted)] mb-1">Age</label>
           <input type="text" value={age} onChange={e => setAge(e.target.value)} placeholder="3 years"
-            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" /></div>
+            className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" /></div>
       </div>
       <div className="flex gap-4">
         <label className="flex items-center gap-2 cursor-pointer">

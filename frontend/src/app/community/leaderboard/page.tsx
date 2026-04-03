@@ -64,7 +64,7 @@ function LeaderboardRow({ entry, statLabel, connectedAddress, prevRank }: {
   const isYou = connectedAddress && entry.address.toLowerCase() === connectedAddress.toLowerCase();
   const rankStyle = RANK_STYLES[entry.rank];
   const rowBg = isYou
-    ? 'bg-[#B09B71]/10 border-[#B09B71]/30'
+    ? 'bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.30)]'
     : rankStyle ? `${rankStyle.bg} ${rankStyle.border}` : 'bg-[rgba(245,240,232,0.02)] border-[rgba(245,240,232,0.04)]';
 
   return (
@@ -77,7 +77,7 @@ function LeaderboardRow({ entry, statLabel, connectedAddress, prevRank }: {
           <span className={`text-sm font-medium font-mono truncate ${isYou ? 'text-[#D4C4A0]' : rankStyle ? rankStyle.text : 'text-[var(--parchment)]'}`}>
             {isYou ? 'You' : truncateAddr(entry.address)}
           </span>
-          {isYou && <span className="text-[10px] font-medium bg-[#B09B71]/12 text-[#D4C4A0] px-1.5 py-0.5 rounded-full">YOU</span>}
+          {isYou && <span className="text-[10px] font-medium bg-[rgba(176,155,113,0.12)] text-[#D4C4A0] px-1.5 py-0.5 rounded-full">YOU</span>}
         </div>
         {entry.badge && <div className="text-[11px] text-[var(--text-disabled)] mt-0.5 truncate">{entry.badge}</div>}
       </div>
@@ -150,7 +150,7 @@ export default function LeaderboardPage() {
               onClick={() => setTimeRange(range)}
               className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                 timeRange === range
-                  ? 'bg-[#B09B71]/20 text-[#D4C4A0] border border-[#B09B71]/30'
+                  ? 'bg-[rgba(176,155,113,0.20)] text-[#D4C4A0] border border-[rgba(176,155,113,0.30)]'
                   : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'
               }`}
             >
@@ -253,7 +253,7 @@ export default function LeaderboardPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 cursor-pointer ${
                 activeTab === tab.id
-                  ? 'bg-[#B09B71]/12 text-[#D4C4A0] border border-[#B09B71]/30'
+                  ? 'bg-[rgba(176,155,113,0.12)] text-[#D4C4A0] border border-[rgba(176,155,113,0.30)]'
                   : 'text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.04)] border border-transparent'
               }`}
             >

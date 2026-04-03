@@ -174,7 +174,7 @@ export function CommandPalette() {
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       <div
-        className="relative z-10 w-full max-w-lg rounded-xl border border-[#B09B71]/30 bg-[var(--obsidian)] shadow-2xl overflow-hidden"
+        className="relative z-10 w-full max-w-lg rounded-xl border border-[rgba(176,155,113,0.30)] bg-[var(--obsidian)] shadow-2xl overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* Search input */}
@@ -212,7 +212,7 @@ export function CommandPalette() {
                   onClick={() => navigate(item.href)}
                   onMouseEnter={() => setSelectedIndex(i)}
                   className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
-                    selectedIndex === i ? 'bg-[#B09B71]/10' : 'hover:bg-[rgba(245,240,232,0.03)]'
+                    selectedIndex === i ? 'bg-[rgba(176,155,113,0.10)]' : 'hover:bg-[rgba(245,240,232,0.03)]'
                   }`}
                 >
                   <span className="text-lg w-7 flex-shrink-0 text-center">{item.icon}</span>

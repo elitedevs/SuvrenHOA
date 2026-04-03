@@ -25,8 +25,8 @@ interface CarpoolRoute {
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const TYPE_CONFIG = {
   school: { label: 'School Run', color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/10', border: 'border-[rgba(90,122,154,0.20)]' },
-  work: { label: 'Work Commute', color: 'text-[#B09B71]', bg: 'bg-[#B09B71]/10', border: 'border-[#B09B71]/20' },
-  errands: { label: 'Errands', color: 'text-[#3A7D6F]', bg: 'bg-[#3A7D6F]/10', border: 'border-[rgba(42,93,79,0.20)]' },
+  work: { label: 'Work Commute', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]' },
+  errands: { label: 'Errands', color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
 };
 
 const DEMO_ROUTES: CarpoolRoute[] = [
@@ -133,7 +133,7 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
             )}
           </div>
           {isDriver && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-[#B09B71]/15 text-[#B09B71] font-medium">You're driving</span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#B09B71] font-medium">You're driving</span>
           )}
           {isMember && !isDriver && (
             <button onClick={() => onLeave(route.id)} className="text-xs text-[#8B5A5A] hover:underline">Leave route</button>
@@ -157,7 +157,7 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
             <select
               value={selectedPickup}
               onChange={(e) => setSelectedPickup(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[#B09B71]/50 focus:outline-none"
+              className="w-full px-3 py-2 rounded-lg bg-[var(--surface-2)] border border-[rgba(245,240,232,0.10)] text-sm text-[var(--text-heading)] focus:border-[rgba(176,155,113,0.50)] focus:outline-none"
             >
               {route.pickupPoints.map((p) => <option key={p} value={p}>{p}</option>)}
             </select>

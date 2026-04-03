@@ -190,7 +190,7 @@ function GalleryCard({ item, onClick }: { item: GalleryItem; onClick: () => void
   return (
     <button
       onClick={onClick}
-      className={`glass-card rounded-xl p-4 text-left w-full hover:border-[#B09B71]/30 border transition-all group ${
+      className={`glass-card rounded-xl p-4 text-left w-full hover:border-[rgba(176,155,113,0.30)] border transition-all group ${
         item.approved ? 'border-[rgba(245,240,232,0.08)]' : 'border-[rgba(107,58,58,0.20)]'
       }`}
     >
@@ -214,7 +214,7 @@ function GalleryCard({ item, onClick }: { item: GalleryItem; onClick: () => void
       )}
       {!item.colors && (
         <div className={`h-16 rounded-lg flex items-center justify-center text-2xl ${
-          item.approved ? 'bg-[#B09B71]/5 border border-[#B09B71]/10' : 'bg-[#8B5A5A]/5 border border-[rgba(139,90,90,0.10)]'
+          item.approved ? 'bg-[rgba(176,155,113,0.05)] border border-[rgba(176,155,113,0.10)]' : 'bg-[rgba(139,90,90,0.05)] border border-[rgba(139,90,90,0.10)]'
         }`}>
           {item.approved ? '' : ''}
         </div>
@@ -227,7 +227,7 @@ function ItemDetailModal({ item, onClose }: { item: GalleryItem; onClose: () => 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={onClose}>
       <div
-        className="bg-[var(--surface-1)] border border-[#B09B71]/25 rounded-xl p-6 w-full max-w-md"
+        className="bg-[var(--surface-1)] border border-[rgba(176,155,113,0.25)] rounded-xl p-6 w-full max-w-md"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-4">
@@ -312,7 +312,7 @@ export default function ArchitecturalGalleryPage() {
           onClick={() => setActiveCategory('all')}
           className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${
             activeCategory === 'all'
-              ? 'bg-[#B09B71]/20 border border-[#B09B71]/40 text-[#D4C4A0]'
+              ? 'bg-[rgba(176,155,113,0.20)] border border-[rgba(176,155,113,0.40)] text-[#D4C4A0]'
               : 'bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] text-[var(--text-disabled)] hover:text-[var(--text-body)]'
           }`}
         >
@@ -324,7 +324,7 @@ export default function ArchitecturalGalleryPage() {
             onClick={() => setActiveCategory(cat.id)}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${
               activeCategory === cat.id
-                ? 'bg-[#B09B71]/20 border border-[#B09B71]/40 text-[#D4C4A0]'
+                ? 'bg-[rgba(176,155,113,0.20)] border border-[rgba(176,155,113,0.40)] text-[#D4C4A0]'
                 : 'bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] text-[var(--text-disabled)] hover:text-[var(--text-body)]'
             }`}
           >
@@ -349,7 +349,7 @@ export default function ArchitecturalGalleryPage() {
       ))}
 
       {/* CTA */}
-      <div className="mt-6 glass-card rounded-xl p-6 border border-[#B09B71]/15 text-center">
+      <div className="mt-6 glass-card rounded-xl p-6 border border-[rgba(176,155,113,0.15)] text-center">
         <p className="text-sm font-medium text-[#D4C4A0] mb-2">Ready to make changes to your property?</p>
         <p className="text-xs text-[var(--text-disabled)] mb-4">Submit an architectural review request — board responds within 30 days</p>
         <Link

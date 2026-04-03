@@ -9,22 +9,22 @@ import { useAnnouncements } from '@/hooks/useAnnouncements';
 const PRIORITY_STYLES = {
   critical: {
     border: 'border-l-[#6B3A3A]',
-    bg: 'bg-[#8B5A5A]/5',
+    bg: 'bg-[rgba(139,90,90,0.05)]',
     badge: 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border-[rgba(107,58,58,0.25)]',
     label: 'Critical',
     dot: 'bg-[#8B5A5A]',
   },
   urgent: {
     border: 'border-l-[#6B3A3A]',
-    bg: 'bg-[#8B5A5A]/5',
+    bg: 'bg-[rgba(139,90,90,0.05)]',
     badge: 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border-[rgba(107,58,58,0.25)]',
     label: 'Urgent',
     dot: 'bg-[#8B5A5A]',
   },
   important: {
     border: 'border-l-[#B09B71]',
-    bg: 'bg-[#B09B71]/5',
-    badge: 'bg-[#B09B71]/15 text-[#B09B71] border-[#B09B71]/30',
+    bg: 'bg-[rgba(176,155,113,0.05)]',
+    badge: 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border-[rgba(176,155,113,0.30)]',
     label: 'Important',
     dot: 'bg-[#B09B71]',
   },
@@ -136,7 +136,7 @@ export default function AnnouncementsPage() {
         </div>
         <div className="flex items-center gap-3">
           {unread > 0 && (
-            <span className="px-3 py-1 rounded-full bg-[#B09B71]/10 border border-[#B09B71]/20 text-[#B09B71] text-xs font-medium">
+            <span className="px-3 py-1 rounded-full bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#B09B71] text-xs font-medium">
               {unread} unread
             </span>
           )}
@@ -154,7 +154,7 @@ export default function AnnouncementsPage() {
           return (
             <button key={p} onClick={() => setPriorityFilter(p)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
-                priorityFilter === p ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'
+                priorityFilter === p ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'
               }`}>
               {style && <span className={`w-2 h-2 rounded-full ${style.dot}`} />}
               {p === 'all' ? 'All' : PRIORITY_STYLES[p as keyof typeof PRIORITY_STYLES]?.label}
@@ -166,11 +166,11 @@ export default function AnnouncementsPage() {
       {/* Tab */}
       <div className="flex gap-2 mb-6">
         <button onClick={() => setActiveTab('active')}
-          className={`px-4 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'active' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+          className={`px-4 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'active' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
           Active ({activeItems.length})
         </button>
         <button onClick={() => setActiveTab('archive')}
-          className={`px-4 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'archive' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+          className={`px-4 py-2 rounded-lg text-xs font-medium transition-all ${activeTab === 'archive' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
           Archive ({archiveItems.length})
         </button>
       </div>
@@ -242,7 +242,7 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
           <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={onPin}
-              className={`p-1.5 rounded-lg transition-colors ${isPinned ? 'text-[#B09B71] bg-[#B09B71]/10' : 'text-[var(--text-disabled)] hover:text-[var(--text-muted)]'}`}
+              className={`p-1.5 rounded-lg transition-colors ${isPinned ? 'text-[#B09B71] bg-[rgba(176,155,113,0.10)]' : 'text-[var(--text-disabled)] hover:text-[var(--text-muted)]'}`}
               title={isPinned ? 'Unpin' : 'Pin to top'}
             >
               {isPinned ? 'Unpin' : 'Pin'}
@@ -266,7 +266,7 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
         {/* Footer */}
         <div className="flex items-center justify-between pt-3 border-t border-[rgba(245,240,232,0.05)]">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-[#B09B71]/15 flex items-center justify-center text-[10px] font-medium text-[#B09B71]">
+            <div className="w-6 h-6 rounded-full bg-[rgba(176,155,113,0.15)] flex items-center justify-center text-[10px] font-medium text-[#B09B71]">
               {announcement.author_name?.[0] || 'H'}
             </div>
             <div>
@@ -278,7 +278,7 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
             <p className="text-[10px] text-[var(--text-disabled)]">Read by {readCount} of {TOTAL_RESIDENTS}</p>
             <div className="flex items-center gap-2 mt-0.5">
               <div className="w-16 h-1.5 rounded-full bg-[var(--surface-2)] overflow-hidden">
-                <div className="h-full rounded-full bg-[#B09B71]/60" style={{ width: `${readPct}%` }} />
+                <div className="h-full rounded-full bg-[rgba(176,155,113,0.60)]" style={{ width: `${readPct}%` }} />
               </div>
               <span className="text-[10px] text-[var(--text-muted)]">{readPct}%</span>
             </div>

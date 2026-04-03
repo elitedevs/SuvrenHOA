@@ -31,7 +31,7 @@ function AddressDisplay({ address, basescanUrl }: { address: string; basescanUrl
   const short = `${address.slice(0, 6)}...${address.slice(-4)}`;
   return (
     <div className="flex items-center gap-2">
-      <code className="text-xs font-mono text-[#B09B71] bg-[#B09B71]/10 px-2 py-1 rounded">{short}</code>
+      <code className="text-xs font-mono text-[#B09B71] bg-[rgba(176,155,113,0.10)] px-2 py-1 rounded">{short}</code>
       <CopyButton text={address} />
       <a href={basescanUrl} target="_blank" rel="noopener noreferrer" className="p-1 rounded text-[var(--text-disabled)] hover:text-[#B09B71] transition-colors">
         <ExternalLink className="w-3.5 h-3.5" />
@@ -153,10 +153,10 @@ function ContractCard({
   const [showFunctions, setShowFunctions] = useState(false);
 
   return (
-    <div className="glass-card rounded-xl p-6 border border-[#B09B71]/10 hover:border-[#B09B71]/25 transition-all duration-200">
+    <div className="glass-card rounded-xl p-6 border border-[rgba(176,155,113,0.10)] hover:border-[rgba(176,155,113,0.25)] transition-all duration-200">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center text-xl">
+          <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center text-xl">
             {emoji}
           </div>
           <div>
@@ -231,7 +231,7 @@ export default function ContractsPage() {
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Blockchain</p>
         <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Smart Contract Explorer</h1>
         <p className="text-[var(--text-muted)] text-sm mt-2">All SuvrenHOA contracts deployed on Base {isMainnet ? 'Mainnet' : 'Sepolia (testnet)'}</p>
-        <div className="inline-flex items-center gap-2 mt-3 px-3 py-1.5 rounded-full bg-[#B09B71]/10 border border-[#B09B71]/20 text-xs text-[#B09B71]">
+        <div className="inline-flex items-center gap-2 mt-3 px-3 py-1.5 rounded-full bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-xs text-[#B09B71]">
           <div className="w-1.5 h-1.5 rounded-full bg-[#B09B71] animate-pulse" />
           {isMainnet ? 'Base Mainnet' : 'Base Sepolia Testnet'} · Chain ID {chainId}
         </div>
@@ -245,7 +245,7 @@ export default function ContractsPage() {
       </div>
 
       {/* Info */}
-      <div className="mt-8 glass-card rounded-xl p-6 border border-[#B09B71]/10">
+      <div className="mt-8 glass-card rounded-xl p-6 border border-[rgba(176,155,113,0.10)]">
         <p className="text-xs font-medium text-[#D4C4A0] mb-2"> Read-Only Explorer</p>
         <p className="text-xs text-[var(--text-muted)] leading-relaxed">
           This explorer shows live on-chain data from deployed contracts. All data is fetched directly

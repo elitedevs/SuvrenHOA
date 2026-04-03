@@ -94,8 +94,8 @@ function QuickActionButton({ href, emoji, label, desc, urgent }: {
       href={href}
       className={`flex items-center gap-3 p-4 rounded-xl border transition-all group ${
         urgent
-          ? 'bg-[rgba(139,90,90,0.05)] border-[rgba(139,90,90,0.20)] hover:border-[#8B5A5A]/40'
-          : 'bg-[rgba(245,240,232,0.03)] border-[rgba(245,240,232,0.06)] hover:border-[#B09B71]/30'
+          ? 'bg-[rgba(139,90,90,0.05)] border-[rgba(139,90,90,0.20)] hover:border-[rgba(139,90,90,0.40)]'
+          : 'bg-[rgba(245,240,232,0.03)] border-[rgba(245,240,232,0.06)] hover:border-[rgba(176,155,113,0.30)]'
       }`}
     >
       <span className="text-xl group-hover:scale-110 transition-transform inline-block">{emoji}</span>
@@ -243,7 +243,7 @@ export default function BoardDashboardPage() {
             label="Monthly Activity"
             value={activity.length}
             sub="recent events"
-            color="border-l-[#B09B71]/50"
+            color="border-l-[rgba(176,155,113,0.50)]"
           />
         </div>
       </div>
@@ -252,7 +252,7 @@ export default function BoardDashboardPage() {
         {/* Activity Feed */}
         <div className="lg:col-span-2 glass-card rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-[rgba(245,240,232,0.06)] flex items-center justify-between">
-            <h2 className="text-sm font-medium text-[#D4C4A0]">Recent Activity</h2>
+            <h2 className="text-lg font-medium text-[#D4C4A0]">Recent Activity</h2>
             <Link href="/activity" className="text-xs text-[#B09B71] hover:text-[#D4C4A0] transition-colors">
               View all →
             </Link>
@@ -280,7 +280,7 @@ export default function BoardDashboardPage() {
         <div className="space-y-4">
           <div className="glass-card rounded-xl overflow-hidden">
             <div className="px-5 py-4 border-b border-[rgba(245,240,232,0.06)]">
-              <h2 className="text-sm font-medium text-[#D4C4A0]">Quick Actions</h2>
+              <h2 className="text-lg font-medium text-[#D4C4A0]">Quick Actions</h2>
             </div>
             <div className="p-4 space-y-2">
               <QuickActionButton href="/violations" emoji="" label="Review Violations" desc="3 pending response" urgent />
@@ -294,7 +294,7 @@ export default function BoardDashboardPage() {
 
           {/* Upcoming */}
           <div className="glass-card rounded-xl p-5">
-            <h2 className="text-sm font-medium text-[#D4C4A0] mb-3">Upcoming</h2>
+            <h2 className="text-lg font-medium text-[#D4C4A0] mb-3">Upcoming</h2>
             <div className="space-y-3">
               {[
                 { date: 'Apr 1', label: 'Q2 Dues Due', color: 'text-[#B09B71]' },

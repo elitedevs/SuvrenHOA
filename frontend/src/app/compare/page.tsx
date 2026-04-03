@@ -139,7 +139,7 @@ export default function ComparePage() {
             { title: 'Traditional HOA', items: ['Opaque financial records', 'Management company markup', 'Paper-only voting (low turnout)', 'Dispute takes months', 'Documents easily lost/altered'], bad: true },
             { title: 'SuvrenHOA', items: ['100% on-chain treasury transparency', 'No management company fees', 'Digital voting accessible 24/7', 'Smart contract dispute resolution', 'Immutable document storage on blockchain'], bad: false },
           ].map(({ title, items, bad }) => (
-            <div key={title} className={`p-6 rounded-xl border ${bad ? 'border-[rgba(139,90,90,0.30)] bg-[rgba(139,90,90,0.05)]' : 'border-[var(--brass-deep)]/30 bg-[#1A1A1E]'}`}>
+            <div key={title} className={`p-6 rounded-xl border ${bad ? 'border-[rgba(139,90,90,0.30)] bg-[rgba(139,90,90,0.05)]' : 'border-[rgba(176,155,113,0.30)] bg-[#1A1A1E]'}`}>
               <h3 className={`font-medium mb-4 ${bad ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>{title}</h3>
               <ul className="space-y-2">
                 {items.map((item, i) => (
@@ -157,7 +157,7 @@ export default function ComparePage() {
         <div className="flex justify-end">
           <button
             onClick={handleShare}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--brass-deep)]/50 text-[#B09B71] hover:bg-[var(--brass-deep)]/10 transition-colors font-medium"
+            className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[var(--brass-deep)]/50 text-[#B09B71] hover:bg-[rgba(176,155,113,0.10)] transition-colors font-medium"
           >
             <Share2 className="w-4 h-4" />
             {copied ? 'Copied to clipboard!' : 'Share Results'}

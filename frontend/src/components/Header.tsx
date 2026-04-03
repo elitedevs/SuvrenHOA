@@ -105,7 +105,7 @@ function NavDropdown({
       <button
         className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
           hasActive
-            ? 'text-[#D4C4A0] bg-[#B09B71]/10'
+            ? 'text-[#D4C4A0] bg-[rgba(176,155,113,0.10)]'
             : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
         }`}
         onClick={() => setOpen(!open)}
@@ -130,7 +130,7 @@ function NavDropdown({
                 onClick={() => setOpen(false)}
                 className={`flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium transition-colors duration-150 ${
                   active
-                    ? 'text-[#D4C4A0] bg-[#B09B71]/10'
+                    ? 'text-[#D4C4A0] bg-[rgba(176,155,113,0.10)]'
                     : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
                 }`}
               >
@@ -179,7 +179,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                 href={item.href}
                 onClick={onClose}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium transition-colors ${
-                  active ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
+                  active ? 'text-[#D4C4A0] bg-[rgba(176,155,113,0.10)]' : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
                 }`}
               >
                 <ItemIcon className="w-4 h-4" />
@@ -200,7 +200,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                 className="flex items-center justify-between w-full px-6 py-3 text-[13px] font-medium text-[var(--text-body)] hover:text-[var(--text-heading)] transition-colors"
               >
                 <span className="flex items-center gap-2">
-                  <GroupIcon className="w-4 h-4 text-[#B09B71]/70" />
+                  <GroupIcon className="w-4 h-4 text-[rgba(176,155,113,0.70)]" />
                   {group.label}
                 </span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
@@ -216,7 +216,7 @@ function MobileNav({ pathname, onClose }: { pathname: string; onClose: () => voi
                         href={item.href}
                         onClick={onClose}
                         className={`flex items-center gap-3 px-6 py-2 rounded-lg text-[13px] font-medium transition-colors ${
-                          active ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[var(--text-disabled)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
+                          active ? 'text-[#D4C4A0] bg-[rgba(176,155,113,0.10)]' : 'text-[var(--text-disabled)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
                         }`}
                       >
                         <ItemIcon className="w-3.5 h-3.5 opacity-60" />
@@ -286,7 +286,7 @@ export function Header() {
               <Link
                 href="/transparency"
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
-                  pathname.startsWith('/transparency') ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
+                  pathname.startsWith('/transparency') ? 'text-[#D4C4A0] bg-[rgba(176,155,113,0.10)]' : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
                 }`}
               >
                 <Eye className="w-4 h-4" />
@@ -295,7 +295,7 @@ export function Header() {
               <Link
                 href="/map"
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-200 ${
-                  pathname.startsWith('/map') ? 'text-[#D4C4A0] bg-[#B09B71]/10' : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
+                  pathname.startsWith('/map') ? 'text-[#D4C4A0] bg-[rgba(176,155,113,0.10)]' : 'text-[var(--text-muted)] hover:text-[var(--parchment)] hover:bg-[rgba(245,240,232,0.04)]'
                 }`}
               >
                 <Map className="w-4 h-4" />
@@ -334,7 +334,7 @@ export function Header() {
                   </Link>
                   <Link
                     href="/messages"
-                    className={`relative p-2 rounded-lg transition-colors ${pathname === '/messages' ? 'text-[#B09B71] bg-[#B09B71]/10' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.04)]'}`}
+                    className={`relative p-2 rounded-lg transition-colors ${pathname === '/messages' ? 'text-[#B09B71] bg-[rgba(176,155,113,0.10)]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.04)]'}`}
                     title="Messages"
                   >
                     <MessageCircle className="w-4 h-4" />

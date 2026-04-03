@@ -193,7 +193,7 @@ export default function SurveyBuilderPage() {
                 <div className="flex gap-2 shrink-0">
                   {s.status === 'published' && (
                     <button onClick={() => { setActiveResults(s); setView('results'); }}
-                      className="px-3 py-1.5 rounded-lg text-xs border border-[#B09B71]/30 text-[#B09B71] hover:bg-[#B09B71]/10 transition-colors">
+                      className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(176,155,113,0.30)] text-[#B09B71] hover:bg-[rgba(176,155,113,0.10)] transition-colors">
                       Results
                     </button>
                   )}
@@ -218,13 +218,13 @@ export default function SurveyBuilderPage() {
               <div>
                 <label className="block text-xs text-[var(--text-muted)] mb-1">Title</label>
                 <input value={draftForm.title} onChange={e => setDraftForm({...draftForm, title: e.target.value})}
-                  placeholder="Survey title..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                  placeholder="Survey title..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
               </div>
               <div>
                 <label className="block text-xs text-[var(--text-muted)] mb-1">Description</label>
                 <textarea value={draftForm.description} onChange={e => setDraftForm({...draftForm, description: e.target.value})}
                   placeholder="Brief explanation for respondents..." rows={2}
-                  className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+                  className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none" />
               </div>
               <button onClick={createDraft} disabled={!draftForm.title}
                 className="px-4 py-2 rounded-xl bg-[#B09B71] text-[var(--surface-2)] text-sm font-medium disabled:opacity-50 transition-all">
@@ -254,7 +254,7 @@ export default function SurveyBuilderPage() {
                       </div>
                     </div>
                     <input value={q.label} onChange={e => updateQuestion(q.id, { label: e.target.value })}
-                      placeholder="Question text..." className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                      placeholder="Question text..." className="w-full px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
                     {q.type === 'multiple_choice' && q.options && (
                       <div className="space-y-2">
                         {q.options.map((opt, oi) => (
@@ -263,7 +263,7 @@ export default function SurveyBuilderPage() {
                               const opts = [...q.options!]; opts[oi] = e.target.value;
                               updateQuestion(q.id, { options: opts });
                             }} placeholder={`Option ${oi + 1}`}
-                              className="flex-1 px-3 py-1.5 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                              className="flex-1 px-3 py-1.5 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
                             {q.options!.length > 2 && (
                               <button onClick={() => updateQuestion(q.id, { options: q.options!.filter((_, i) => i !== oi) })} className="text-[var(--text-disabled)] hover:text-[#8B5A5A] text-xs"></button>
                             )}
@@ -277,7 +277,7 @@ export default function SurveyBuilderPage() {
                         <span className="text-xs text-[var(--text-muted)]">Scale:</span>
                         {[3, 5, 10].map(n => (
                           <button key={n} onClick={() => updateQuestion(q.id, { scale: n })}
-                            className={`px-2 py-1 rounded text-xs ${q.scale === n ? 'bg-[#B09B71]/20 text-[#B09B71]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}>
+                            className={`px-2 py-1 rounded text-xs ${q.scale === n ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)]'}`}>
                             1–{n}
                           </button>
                         ))}
@@ -289,9 +289,9 @@ export default function SurveyBuilderPage() {
 
               {/* Add question */}
               <div className="flex gap-2 mt-4">
-                <button onClick={() => addQuestion('text')} className="flex-1 py-2 rounded-xl border border-dashed border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors"> Text</button>
-                <button onClick={() => addQuestion('multiple_choice')} className="flex-1 py-2 rounded-xl border border-dashed border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors"> Multiple Choice</button>
-                <button onClick={() => addQuestion('rating')} className="flex-1 py-2 rounded-xl border border-dashed border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] hover:border-[#B09B71]/30 hover:text-[#B09B71] transition-colors"> Rating</button>
+                <button onClick={() => addQuestion('text')} className="flex-1 py-2 rounded-xl border border-dashed border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] hover:border-[rgba(176,155,113,0.30)] hover:text-[#B09B71] transition-colors"> Text</button>
+                <button onClick={() => addQuestion('multiple_choice')} className="flex-1 py-2 rounded-xl border border-dashed border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] hover:border-[rgba(176,155,113,0.30)] hover:text-[#B09B71] transition-colors"> Multiple Choice</button>
+                <button onClick={() => addQuestion('rating')} className="flex-1 py-2 rounded-xl border border-dashed border-[rgba(245,240,232,0.08)] text-xs text-[var(--text-muted)] hover:border-[rgba(176,155,113,0.30)] hover:text-[#B09B71] transition-colors"> Rating</button>
               </div>
             </div>
           )}
@@ -301,7 +301,7 @@ export default function SurveyBuilderPage() {
               <button onClick={() => { setView('list'); setCurrent(null); setQuestions([]); }} className="py-3 px-5 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] transition-colors">Cancel</button>
               <button onClick={saveDraft} disabled={questions.length === 0} className="py-3 px-5 rounded-xl border border-[rgba(245,240,232,0.08)] text-sm font-medium hover:bg-[rgba(245,240,232,0.04)] disabled:opacity-50 transition-colors">Save Draft</button>
               <button onClick={() => setView('preview')} disabled={questions.length === 0}
-                className="py-3 px-5 rounded-xl border border-[#B09B71]/30 text-[#B09B71] text-sm font-medium hover:bg-[#B09B71]/10 disabled:opacity-50 transition-colors">
+                className="py-3 px-5 rounded-xl border border-[rgba(176,155,113,0.30)] text-[#B09B71] text-sm font-medium hover:bg-[rgba(176,155,113,0.10)] disabled:opacity-50 transition-colors">
                 Preview
               </button>
               <button onClick={publish} disabled={questions.length === 0}
@@ -351,7 +351,7 @@ function SurveyPreview({ survey, onBack, onSubmit, address }: { survey: Survey; 
           </p>
           {q.type === 'text' && (
             <textarea value={String(answers[q.id] || '')} onChange={e => setAnswers({...answers, [q.id]: e.target.value})}
-              placeholder="Your answer..." rows={3} className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+              placeholder="Your answer..." rows={3} className="w-full px-3 py-2 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none" />
           )}
           {q.type === 'multiple_choice' && q.options && (
             <div className="space-y-2">
@@ -369,7 +369,7 @@ function SurveyPreview({ survey, onBack, onSubmit, address }: { survey: Survey; 
               {Array.from({ length: q.scale || 5 }, (_, i) => i + 1).map(n => (
                 <button key={n} onClick={() => setAnswers({...answers, [q.id]: n})}
                   className={`w-10 h-10 rounded-xl text-sm font-medium border transition-all ${
-                    answers[q.id] === n ? 'bg-[#B09B71]/20 text-[#B09B71] border-[#B09B71]/40' : 'glass-card text-[var(--text-disabled)] border-[rgba(245,240,232,0.08)]'
+                    answers[q.id] === n ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border-[rgba(176,155,113,0.40)]' : 'glass-card text-[var(--text-disabled)] border-[rgba(245,240,232,0.08)]'
                   }`}>{n}</button>
               ))}
             </div>

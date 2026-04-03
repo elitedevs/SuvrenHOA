@@ -23,7 +23,7 @@ const STATE_STYLES: Record<string, { color: string; bg: string; border: string }
   Canceled: { color: 'text-[var(--text-muted)]', bg: 'bg-[rgba(245,240,232,0.04)]', border: 'border-[rgba(245,240,232,0.08)]' },
   Defeated: { color: 'text-[#8B5A5A]', bg: 'bg-[rgba(107,58,58,0.10)]', border: 'border-[rgba(107,58,58,0.20)]' },
   Succeeded: { color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
-  Queued: { color: 'text-[#B09B71]', bg: 'bg-[#B09B71]/10', border: 'border-[#B09B71]/20' },
+  Queued: { color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]' },
   Expired: { color: 'text-[var(--text-muted)]', bg: 'bg-[rgba(245,240,232,0.04)]', border: 'border-[rgba(245,240,232,0.08)]' },
   Executed: { color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
 };
@@ -98,7 +98,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
           <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${style.bg} ${style.color} ${style.border}`}>
             {stateLabel || 'Loading...'}
           </span>
-          <span className="text-xs px-2.5 py-1 rounded-full bg-[#B09B71]/10 text-[#B09B71] border border-[#B09B71]/20">
+          <span className="text-xs px-2.5 py-1 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]">
             {category.icon} {category.label}
           </span>
           <span className="text-xs text-[var(--text-disabled)]">
@@ -134,7 +134,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
           </div>
           <div className="h-2 rounded-full bg-[var(--surface-2)] overflow-hidden">
             <div
-              className={`h-full rounded-full transition-all duration-500 ${quorumPercent >= 100 ? 'bg-[#3A7D6F]' : 'bg-[#B09B71]/80'}`}
+              className={`h-full rounded-full transition-all duration-500 ${quorumPercent >= 100 ? 'bg-[#3A7D6F]' : 'bg-[rgba(176,155,113,0.80)]'}`}
               style={{ width: `${Math.min(quorumPercent, 100)}%` }}
             />
           </div>
@@ -290,7 +290,7 @@ function TimelineItem({ label, value, description, active }: {
 }) {
   return (
     <div className="flex items-start gap-3">
-      <div className={`w-3 h-3 rounded-full mt-1 shrink-0 ${active ? 'bg-[#B09B71]/80' : 'bg-[var(--surface-3)]'}`} />
+      <div className={`w-3 h-3 rounded-full mt-1 shrink-0 ${active ? 'bg-[rgba(176,155,113,0.80)]' : 'bg-[var(--surface-3)]'}`} />
       <div>
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">{label}</span>

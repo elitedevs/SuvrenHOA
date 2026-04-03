@@ -129,32 +129,32 @@ export default function VendorPaymentsPage() {
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Vendor Name</label>
               <input value={form.vendor} onChange={e => setForm({...form, vendor: e.target.value})}
-                placeholder="Company name" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="Company name" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Service / Description</label>
               <input value={form.service} onChange={e => setForm({...form, service: e.target.value})}
-                placeholder="Landscaping - March 2026" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="Landscaping - March 2026" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Amount ($)</label>
               <input type="number" value={form.amount} onChange={e => setForm({...form, amount: e.target.value})}
-                placeholder="0.00" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="0.00" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Due Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Invoice Reference</label>
               <input value={form.invoiceRef} onChange={e => setForm({...form, invoiceRef: e.target.value})}
-                placeholder="INV-2026-001" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="INV-2026-001" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Notes</label>
               <input value={form.notes} onChange={e => setForm({...form, notes: e.target.value})}
-                placeholder="Optional" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="Optional" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
           </div>
           <div className="flex gap-3">
@@ -171,7 +171,7 @@ export default function VendorPaymentsPage() {
       <div className="flex gap-2 mb-4 flex-wrap items-center">
         {(['all', 'pending', 'paid', 'overdue'] as const).map(f => (
           <button key={f} onClick={() => setFilter(f)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${filter === f ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all ${filter === f ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
             {f}
           </button>
         ))}

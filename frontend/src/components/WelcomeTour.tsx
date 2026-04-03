@@ -97,7 +97,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
 
       {/* Tour card */}
       <div
-        className="relative z-10 w-full max-w-sm rounded-xl border border-[#B09B71]/40 bg-[var(--obsidian)] shadow-[0_0_60px_rgba(201,169,110,0.15)] overflow-hidden"
+        className="relative z-10 w-full max-w-sm rounded-xl border border-[rgba(176,155,113,0.40)] bg-[var(--obsidian)] shadow-[0_0_60px_rgba(201,169,110,0.15)] overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* Gold accent bar */}
@@ -114,7 +114,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
                   i === step
                     ? 'w-6 h-2 bg-[#B09B71]'
                     : i < step
-                    ? 'w-2 h-2 bg-[#B09B71]/50'
+                    ? 'w-2 h-2 bg-[rgba(176,155,113,0.50)]'
                     : 'w-2 h-2 bg-[var(--surface-3)]'
                 }`}
               />
@@ -122,7 +122,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
           </div>
 
           {/* Icon */}
-          <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-[#B09B71]/20 to-[var(--brass-deep)]/10 border border-[#B09B71]/30 flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg">
+          <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-[rgba(176,155,113,0.20)] to-[var(--brass-deep)]/10 border border-[rgba(176,155,113,0.30)] flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg">
             {current.icon}
           </div>
 
@@ -131,7 +131,7 @@ export function WelcomeTour({ isConnected }: WelcomeTourProps) {
           <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-4">{current.description}</p>
 
           {current.hint && (
-            <div className="px-4 py-3 rounded-xl bg-[#B09B71]/8 border border-[#B09B71]/20 mb-6">
+            <div className="px-4 py-3 rounded-xl bg-[rgba(176,155,113,0.08)] border border-[rgba(176,155,113,0.20)] mb-6">
               <p className="text-xs text-[#B09B71] font-medium">{current.hint}</p>
             </div>
           )}

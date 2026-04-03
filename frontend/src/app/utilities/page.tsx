@@ -89,7 +89,7 @@ export default function UtilitiesPage() {
         <div className="flex gap-2">
           {(['overview', 'trend', 'breakdown'] as const).map(v => (
             <button key={v} onClick={() => setView(v)}
-              className={`px-3 py-2 rounded-xl text-xs font-medium capitalize transition-all ${view === v ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+              className={`px-3 py-2 rounded-xl text-xs font-medium capitalize transition-all ${view === v ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
               {v}
             </button>
           ))}
@@ -104,7 +104,7 @@ export default function UtilitiesPage() {
           const over = actual > budget;
           return (
             <button key={u.key} onClick={() => { setSelectedUtil(u.key); setView('trend'); }}
-              className={`glass-card rounded-xl p-4 text-left transition-all ${selectedUtil === u.key ? 'border-[#B09B71]/30 bg-[#B09B71]/5' : 'hover:border-[rgba(245,240,232,0.10)]'}`}>
+              className={`glass-card rounded-xl p-4 text-left transition-all ${selectedUtil === u.key ? 'border-[rgba(176,155,113,0.30)] bg-[rgba(176,155,113,0.05)]' : 'hover:border-[rgba(245,240,232,0.10)]'}`}>
               <p className="text-lg mb-1">{u.icon}</p>
               <p className="text-[10px] text-[var(--text-muted)]">{u.label}</p>
               <p className="text-base font-medium" style={{ color: u.color }}>${actual.toLocaleString()}</p>
@@ -236,7 +236,7 @@ export default function UtilitiesPage() {
               );
             })}
           </div>
-          <div className="mt-4 p-3 rounded-xl bg-[#B09B71]/5 border border-[#B09B71]/10">
+          <div className="mt-4 p-3 rounded-xl bg-[rgba(176,155,113,0.05)] border border-[rgba(176,155,113,0.10)]">
             <p className="text-xs text-[#B09B71] font-medium">Total per unit this month</p>
             <p className="text-xl font-medium text-[var(--text-heading)]">${(totalLatest / TOTAL_UNITS).toFixed(2)}</p>
           </div>

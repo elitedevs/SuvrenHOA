@@ -184,7 +184,7 @@ export function ProposalTemplates({ onUseTemplate }: Props) {
                 description: t.descriptionTemplate,
                 category: t.category,
               })}
-              className="text-left rounded-xl p-4 border border-[rgba(245,240,232,0.08)] bg-[rgba(26,26,30,0.30)] hover:border-[#B09B71]/30 hover:bg-[#B09B71]/5 transition-all group"
+              className="text-left rounded-xl p-4 border border-[rgba(245,240,232,0.08)] bg-[rgba(26,26,30,0.30)] hover:border-[rgba(176,155,113,0.30)] hover:bg-[rgba(176,155,113,0.05)] transition-all group"
             >
               <div className="flex items-start gap-3">
                 <span className="text-2xl">{t.icon}</span>

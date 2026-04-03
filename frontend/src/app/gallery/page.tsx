@@ -106,37 +106,37 @@ export default function GalleryPage() {
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Caption</label>
               <input value={form.caption} onChange={e => setForm({...form, caption: e.target.value})}
-                placeholder="Brief title..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="Brief title..." className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Date</label>
               <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})}
-                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
           </div>
           <div>
             <label className="block text-xs text-[var(--text-muted)] mb-1">Description</label>
             <textarea value={form.description} onChange={e => setForm({...form, description: e.target.value})}
               placeholder="Tell us about this photo..." rows={2}
-              className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none resize-none" />
+              className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none resize-none" />
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Category</label>
               <select value={form.category} onChange={e => setForm({...form, category: e.target.value})}
-                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none">
+                className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none">
                 {CATEGORIES.slice(1).map(c => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Your Lot #</label>
               <input value={form.postedBy} onChange={e => setForm({...form, postedBy: e.target.value})}
-                placeholder="e.g. 42" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="e.g. 42" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
             <div>
               <label className="block text-xs text-[var(--text-muted)] mb-1">Photo Emoji</label>
               <input value={form.emoji} onChange={e => setForm({...form, emoji: e.target.value})}
-                placeholder="" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[#B09B71]/50 focus:outline-none" />
+                placeholder="" className="w-full px-3 py-2.5 rounded-xl bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-sm focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
             </div>
           </div>
           <div className="p-3 rounded-xl bg-[rgba(26,26,30,0.30)] text-xs text-[var(--text-disabled)]">
@@ -156,7 +156,7 @@ export default function GalleryPage() {
       <div className="flex gap-2 mb-6 overflow-x-auto pb-1">
         {CATEGORIES.map(c => (
           <button key={c} onClick={() => setCategory(c)}
-            className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${category === c ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>
+            className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${category === c ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
             {c !== 'All' && CATEGORY_EMOJIS[c]} {c}
           </button>
         ))}
