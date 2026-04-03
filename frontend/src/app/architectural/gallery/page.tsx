@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
 import { ChevronLeft, X } from 'lucide-react';
 
@@ -280,12 +280,7 @@ export default function ArchitecturalGalleryPage() {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view architectural standards</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Architectural Review" description="Submit and track architectural modification requests for your property." />;
   }
 
   const categories = activeCategory === 'all'

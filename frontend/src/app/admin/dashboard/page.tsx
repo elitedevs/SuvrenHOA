@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useTreasury } from '@/hooks/useTreasury';
 import { useMaintenanceRequests } from '@/hooks/useMaintenance';
 import { useGovernorSettings } from '@/hooks/useProposals';
@@ -117,12 +117,7 @@ export default function BoardDashboardPage() {
   const activity = getRecentActivity();
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-body)] mb-4">Sign in to access the board dashboard</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Administration" description="Manage community settings, review reports, and oversee day-to-day operations." />;
   }
 
   if (!checked) {

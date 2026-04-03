@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useContracts } from '@/hooks/useContracts';
 import { useProperty } from '@/hooks/useProperty';
 import Link from 'next/link';
@@ -11,13 +11,7 @@ export default function AdminPage() {
   const { isConnected } = useAccount();
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2"></div>
-        <p className="text-[var(--text-muted)] text-base font-medium">Sign in with board wallet to access admin</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Administration" description="Manage community settings, review reports, and oversee day-to-day operations." />;
   }
 
   return (

@@ -567,8 +567,33 @@ select:focus-visible {
 
 /* ── Selection ────────────────────────────────────────────────────────────── */
 ::selection {
-  background: rgba(176, 155, 113, 0.20);
+  background: rgba(176, 155, 113, 0.30);
   color: #F5F0E8;
+}
+
+/* ── Firefox scrollbar ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(176, 155, 113, 0.2) transparent;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* ── Button press scale ── */
+button:active:not(:disabled),
+a[role="button"]:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 /* ── Hover lift utility ───────────────────────────────────────────────────── */

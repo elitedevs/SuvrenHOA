@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useReservations, useCreateReservation } from '@/hooks/useReservations';
 import { useProperty } from '@/hooks/useProperty';
 
@@ -67,12 +67,7 @@ export default function ReservationsPage() {
   const [showReserve, setShowReserve] = useState(false);
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view amenities and make reservations</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Amenities & Reservations" description="Book community amenities — pool, clubhouse, tennis courts, and more." />;
   }
 
   const { data: reservations } = useReservations(selectedAmenity);

@@ -210,7 +210,7 @@ function IncidentDetailPanel({
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium"
             style={{
-              background: isActive ? 'rgba(201,169,110,0.1)' : 'rgba(34,197,94,0.1)',
+              background: isActive ? 'rgba(201,169,110,0.1)' : 'rgba(42,93,79,0.10)',
               border: `1px solid ${isActive ? 'rgba(201,169,110,0.3)' : 'rgba(34,197,94,0.3)'}`,
               color: isActive ? '#B09B71' : '#3A7D6F',
             }}

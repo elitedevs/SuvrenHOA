@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAnnouncements } from '@/hooks/useAnnouncements';
 
 // Priority system: critical > important > info > fyi
@@ -84,12 +84,7 @@ export default function AnnouncementsPage() {
   }, []);
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to see announcements</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Announcements" description="Official community announcements from the board." />;
   }
 
   const { data: announcements, isLoading } = useAnnouncements();

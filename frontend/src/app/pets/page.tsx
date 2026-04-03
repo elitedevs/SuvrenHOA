@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useProperty } from '@/hooks/useProperty';
 import { usePetPlaydates, type PetPlaydate } from '@/hooks/usePetPlaydates';
@@ -219,12 +219,7 @@ export default function PetsPage() {
   });
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view the pet registry</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Pet Registry" description="Register your pets for community records and neighborhood awareness." />;
   }
 
   const filtered = filter === 'all' ? (pets || []) : (pets || []).filter((p: any) => p.species === filter);

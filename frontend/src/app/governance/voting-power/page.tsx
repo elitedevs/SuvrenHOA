@@ -1,7 +1,7 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useProperty } from '@/hooks/useProperty';
 
 const VOTING_TIERS = [
@@ -63,12 +63,7 @@ export default function VotingPowerPage() {
   const myTier = VOTING_TIERS.find(t => t.votes === currentVotes) ?? VOTING_TIERS[3];
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Connect to view voting power</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Governance" description="Vote on proposals, participate in elections, and shape community policy — all on-chain, all transparent." />;
   }
 
   return (

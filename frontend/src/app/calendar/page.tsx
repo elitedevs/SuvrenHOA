@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { CalendarDays } from 'lucide-react';
 
@@ -32,12 +32,7 @@ export default function CalendarPage() {
   });
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view the community calendar</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Community Calendar" description="Stay up to date with community events, meetings, and important dates." />;
   }
 
   // Group events by date

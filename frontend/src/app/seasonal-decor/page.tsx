@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
   Sparkles, CheckCircle, XCircle, Calendar, Upload, Sun, Snowflake,
   Leaf, Flower2, Clock, AlertTriangle, ChevronRight,
@@ -154,12 +154,7 @@ export default function SeasonalDecorPage() {
   };
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view decoration guidelines</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Seasonal Décor" description="Browse and vote on community seasonal decoration plans." />;
   }
 
   const STATUS_MAP = {

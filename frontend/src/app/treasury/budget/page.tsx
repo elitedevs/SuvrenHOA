@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 
@@ -107,12 +107,7 @@ export default function BudgetPlannerPage() {
   const [saved, setSaved] = useState(false);
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view the budget planner</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Community Treasury" description="Track every dollar — operating funds, reserves, expenditures, and budget allocations." />;
   }
 
   const total = budget.reduce((s, c) => s + c.thisYear, 0);

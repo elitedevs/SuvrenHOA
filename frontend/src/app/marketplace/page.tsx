@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useMarketplace, MarketplaceCategory, MarketplaceType } from '@/hooks/useMarketplace';
 import Link from 'next/link';
 import { Plus, X, Tag, ShoppingBag, Megaphone } from 'lucide-react';
@@ -163,12 +163,7 @@ export default function MarketplacePage() {
   const [filterCat, setFilterCat] = useState<MarketplaceCategory | 'all'>('all');
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to access the marketplace</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Marketplace" description="Buy, sell, and trade with your neighbors." />;
   }
 
   function handleSubmit(data: any) {

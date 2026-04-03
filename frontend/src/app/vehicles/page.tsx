@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useProperty } from '@/hooks/useProperty';
 import { Car, Truck, Bike, Bus, TicketCheck, Loader2 } from 'lucide-react';
@@ -20,12 +20,7 @@ export default function VehiclesPage() {
   });
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to manage vehicles</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Vehicle Registration" description="Register your vehicles for community parking and gate access." />;
   }
 
   const myVehicles = (vehicles || []).filter((v: any) => v.wallet_address === address?.toLowerCase());

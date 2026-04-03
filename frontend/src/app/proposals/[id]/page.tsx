@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useParams } from 'next/navigation';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useContracts } from '@/hooks/useContracts';
 import { useReadContract } from 'wagmi';
 import {
@@ -34,12 +34,7 @@ export default function ProposalDetailPage() {
   const { isConnected } = useAccount();
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view and vote on proposals</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Proposals" description="Browse active proposals, cast your vote, and track governance outcomes on the blockchain." />;
   }
 
   if (!proposalId) {

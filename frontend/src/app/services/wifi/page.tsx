@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
   Wifi, Plus, Copy, Trash2, Clock, CheckCircle, AlertTriangle, BarChart2, Shield, RefreshCw,
 } from 'lucide-react';
@@ -106,12 +106,7 @@ export default function WifiPage() {
   const totalUses = activeCodes.reduce((s, c) => s + c.uses, 0);
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to manage guest WiFi</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Services" description="Connect your wallet to access this section of SuvrenHOA." />;
   }
 
   return (

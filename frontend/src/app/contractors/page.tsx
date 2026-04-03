@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 interface Contractor {
   id: string;
@@ -68,12 +68,7 @@ export default function ContractorsPage() {
   }, []);
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view the contractor directory</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Contractors" description="Browse approved community contractors and service providers." />;
   }
 
   const filtered = contractors.filter(c => {

@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
   Wrench, Leaf, Laptop, ChefHat, Baby, PawPrint, Plus, X, Users, Handshake, Filter,
 } from 'lucide-react';
@@ -97,12 +97,7 @@ export default function SkillsExchangePage() {
   const requests = filtered.filter((l) => l.type === 'request');
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to join the skills exchange</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Community" description="Connect with your neighbors — discussions, events, recommendations, and local resources." />;
   }
 
   const ListingCard = ({ listing }: { listing: SkillListing }) => {

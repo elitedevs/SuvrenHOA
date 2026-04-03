@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
   Trophy, Star, Flower2, Heart, Leaf, Home, Vote, Crown, Archive, Plus, X, ThumbsUp,
 } from 'lucide-react';
@@ -168,12 +168,7 @@ export default function AwardsPage() {
   const pastYears = [...new Set(nominations.filter((n) => n.isWinner).map((n) => n.year))].sort((a, b) => b - a);
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to participate in Community Awards</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Community" description="Connect with your neighbors — discussions, events, recommendations, and local resources." />;
   }
 
   return (

@@ -113,9 +113,9 @@ function StatCard({
 }) {
   const colorMap = {
     gold: { icon: 'text-[#B09B71]', glow: 'var(--glow-gold)', bg: 'rgba(201,169,110,0.08)' },
-    green:  { icon: 'text-[#3A7D6F]',  glow: 'var(--glow-green)',  bg: 'rgba(34,197,94,0.08)' },
-    blue:   { icon: 'text-[var(--steel)]',   glow: 'var(--glow-blue)',   bg: 'rgba(59,130,246,0.08)' },
-    amber:  { icon: 'text-[#B09B71]',  glow: 'var(--glow-amber)',  bg: 'rgba(245,158,11,0.08)' },
+    green:  { icon: 'text-[#3A7D6F]',  glow: 'var(--glow-green)',  bg: 'rgba(42,93,79,0.10)' },
+    blue:   { icon: 'text-[var(--steel)]',   glow: 'var(--glow-blue)',   bg: 'rgba(90,122,154,0.10)' },
+    amber:  { icon: 'text-[#B09B71]',  glow: 'var(--glow-amber)',  bg: 'rgba(176,155,113,0.10)' },
   };
   const c = colorMap[color];
 
@@ -197,7 +197,7 @@ export function TransparencyDashboard() {
             className="absolute top-16 right-0 w-[400px] h-[400px] rounded-full opacity-10"
             style={{
               background:
-                'radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%)',
+                'radial-gradient(circle, rgba(90,122,154,0.4) 0%, transparent 70%)',
             }}
           />
           <div
@@ -280,7 +280,7 @@ export function TransparencyDashboard() {
 
           {stats.error && (
             <div className="mb-4 px-4 py-3 rounded-xl text-sm text-[#B09B71]"
-                 style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
+                 style={{ background: 'rgba(176,155,113,0.10)', border: '1px solid rgba(176,155,113,0.20)' }}>
                {stats.error} — showing cached values
             </div>
           )}
@@ -400,21 +400,21 @@ export function TransparencyDashboard() {
                     title: 'Arweave Permanent Storage',
                     desc: 'All documents are stored on Arweave — permanent, immutable, censorship-resistant.',
                     color: 'text-[#B09B71]',
-                    bg: 'rgba(245,158,11,0.1)',
+                    bg: 'rgba(176,155,113,0.10)',
                   },
                   {
                     icon: CheckCircle2,
                     title: 'Verified Smart Contracts',
                     desc: 'All contracts are open-source and verified on BaseScan. Read the code yourself.',
                     color: 'text-[#3A7D6F]',
-                    bg: 'rgba(34,197,94,0.1)',
+                    bg: 'rgba(42,93,79,0.10)',
                   },
                   {
                     icon: Lock,
                     title: 'Multi-Sig Treasury',
                     desc: 'No single party controls the treasury. All spending requires governance approval.',
                     color: 'text-[var(--steel)]',
-                    bg: 'rgba(59,130,246,0.1)',
+                    bg: 'rgba(90,122,154,0.10)',
                   },
                   {
                     icon: Shield,
@@ -563,7 +563,7 @@ export function TransparencyDashboard() {
             className="rounded-xl p-8 sm:p-10 text-center relative overflow-hidden"
             style={{
               background:
-                'linear-gradient(135deg, rgba(201,169,110,0.10) 0%, rgba(59,130,246,0.08) 100%)',
+                'linear-gradient(135deg, rgba(201,169,110,0.10) 0%, rgba(90,122,154,0.10) 100%)',
               border: '1px solid rgba(201,169,110,0.2)',
             }}
           >

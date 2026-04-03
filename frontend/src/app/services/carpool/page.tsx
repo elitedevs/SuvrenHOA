@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
   Car, Plus, MapPin, Clock, Users, Calendar, User, X, ChevronRight, Repeat,
 } from 'lucide-react';
@@ -225,12 +225,7 @@ export default function CarpoolPage() {
   const filteredRoutes = routes.filter((r) => r.days.includes(activeDay));
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to join the carpool network</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Services" description="Connect your wallet to access this section of SuvrenHOA." />;
   }
 
   return (

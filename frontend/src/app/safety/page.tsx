@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { ShieldCheck } from 'lucide-react';
 
 interface SafetyEntry {
@@ -64,12 +64,7 @@ export default function SafetyPage() {
   }, []);
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view or report safety concerns</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Neighborhood Watch" description="Report safety concerns, view incidents, and coordinate with neighbors." />;
   }
 
   const filtered = entries.filter(e => {

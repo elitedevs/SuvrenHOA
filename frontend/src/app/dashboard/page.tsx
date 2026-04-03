@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useProperty } from '@/hooks/useProperty';
 import { useDuesStatus } from '@/hooks/useTreasury';
 import { useMessages } from '@/hooks/useMessages';
@@ -115,13 +115,7 @@ export default function DashboardPage() {
   const { isConnected } = useAccount();
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <Home className="w-8 h-8 opacity-30 mb-2" />
-        <p className="text-[var(--text-disabled)] text-base">Sign in to view your property</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="My Property" description="View your lots, manage pets and vehicles, track inspections — all tied to your on-chain property NFT." />;
   }
 
   return <PropertyDashboard />;

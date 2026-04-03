@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useMemo } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useMaintenanceRequests, useCreateMaintenanceRequest } from '@/hooks/useMaintenance';
 import { useProperty } from '@/hooks/useProperty';
 import { Wrench } from 'lucide-react';
@@ -30,12 +30,7 @@ export default function MaintenancePage() {
   const [showNewRequest, setShowNewRequest] = useState(false);
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to submit maintenance requests</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Maintenance" description="Submit and track maintenance requests for community infrastructure and shared spaces." />;
   }
 
   const { data: apiRequests, isLoading } = useMaintenanceRequests(filter !== 'all' ? filter : null);

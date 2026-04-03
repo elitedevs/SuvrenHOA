@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useMeetings, type RSVPStatus } from '@/hooks/useMeetings';
 import Link from 'next/link';
 import { CalendarDays, ClipboardList } from 'lucide-react';
@@ -14,13 +14,7 @@ export default function MeetingsPage() {
   const [tab, setTab] = useState<'upcoming' | 'all'>('upcoming');
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <ClipboardList className="w-8 h-8 text-[var(--text-muted)] mb-2" />
-        <p className="text-[var(--text-muted)] text-base font-medium">Sign in to view board meetings</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Community Calendar" description="Stay up to date with community events, meetings, and important dates." />;
   }
 
   const displayedMeetings = tab === 'upcoming' ? upcomingMeetings : meetings;

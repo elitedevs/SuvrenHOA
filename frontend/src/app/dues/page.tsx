@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useProperty } from '@/hooks/useProperty';
 import { useTreasury, useDuesStatus } from '@/hooks/useTreasury';
 import { usePayDues, useUSDCBalance, useUSDCAllowance } from '@/hooks/usePayDues';
@@ -17,13 +17,7 @@ export default function DuesPage() {
   const { isConnected } = useAccount();
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <CreditCard className="w-8 h-8 text-[var(--text-muted)] mb-2" />
-        <p className="text-[var(--text-muted)] text-base font-medium">Sign in to pay dues</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Dues & Payments" description="View your dues balance, make payments, and track your payment history." />;
   }
 
   return <DuesPanel />;

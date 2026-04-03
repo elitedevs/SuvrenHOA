@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useMemo } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { ClipboardList } from 'lucide-react';
 
 interface Rule {
@@ -115,12 +115,7 @@ export default function RulesPage() {
   const [openRules, setOpenRules] = useState<Set<string>>(new Set());
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view community rules & FAQs</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Community Rules & FAQ" description="Review community guidelines, bylaws, and frequently asked questions." />;
   }
 
   const toggleSection = (id: string) => {

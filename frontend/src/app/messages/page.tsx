@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useRef, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useMessages, Conversation } from '@/hooks/useMessages';
 import { useDirectory } from '@/hooks/useDirectory';
 import { useProperty } from '@/hooks/useProperty';
@@ -258,13 +258,7 @@ export default function MessagesPage() {
   const { isConnected, address } = useAccount();
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <MessageSquare className="w-8 h-8 text-[var(--text-muted)] mb-2" />
-        <p className="text-[var(--text-muted)] text-base font-medium">Sign in to use messaging</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Messages" description="Direct messages with your neighbors and community management." />;
   }
 
   return <MessagingCenter address={address!} />;

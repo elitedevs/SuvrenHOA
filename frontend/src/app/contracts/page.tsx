@@ -1,7 +1,7 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useContracts } from '@/hooks/useContracts';
 import { useReadContract, useChainId } from 'wagmi';
 import { ExternalLink, Copy, CheckCheck } from 'lucide-react';
@@ -216,12 +216,7 @@ export default function ContractsPage() {
   const basescanBase = isMainnet ? 'https://basescan.org' : 'https://sepolia.basescan.org';
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view smart contracts</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Contracts" description="View active community service contracts and agreements." />;
   }
 
   return (

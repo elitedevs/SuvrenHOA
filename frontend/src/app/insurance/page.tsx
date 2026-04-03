@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
   Shield, Plus, Edit2, Trash2, AlertTriangle, CheckCircle, Clock,
   DollarSign, Calendar, Building2, X, ChevronDown, ChevronUp,
@@ -311,12 +311,7 @@ export default function InsurancePage() {
   };
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view insurance policies</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Insurance" description="View community insurance coverage and submit claims." />;
   }
 
   const totalCoverage = policies.reduce((s, p) => s + p.coverageAmount, 0);

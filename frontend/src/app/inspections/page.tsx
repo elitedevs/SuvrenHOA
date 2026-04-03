@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import {
   ClipboardCheck, CheckCircle, AlertTriangle, XCircle, Calendar, Clock,
   Plus, Building2, BarChart2, ChevronRight, X,
@@ -127,12 +127,7 @@ export default function InspectionsPage() {
   };
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view property inspections</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Inspections" description="View inspection schedules, results, and compliance status." />;
   }
 
   return (

@@ -1,7 +1,7 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { usePublicStats } from '@/hooks/usePublicData';
 
 const YEAR = 2025;
@@ -87,12 +87,7 @@ export default function AnnualReportPage() {
   const { totalProperties, totalTreasuryNum, documentsOnChain } = usePublicStats();
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view the annual report</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Reports" description="Connect your wallet to access this section of SuvrenHOA." />;
   }
 
   // Use real on-chain data where available; keep mock for operational metrics not yet on-chain

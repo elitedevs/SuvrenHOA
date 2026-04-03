@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useCallback } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
 import { useProperty } from '@/hooks/useProperty';
 import { useDuesStatus } from '@/hooks/useTreasury';
@@ -334,14 +334,7 @@ export default function CheckoutPage() {
   const { isConnected } = useAccount();
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <div className="text-5xl mb-2"></div>
-        <h2 className="text-xl font-medium">Move-Out Wizard</h2>
-        <p className="text-[var(--text-muted)] text-sm">Connect your wallet to begin</p>
-        <ConnectButton label="Connect Wallet" />
-      </div>
-    );
+    return <AuthWall title="Checkout" description="Connect your wallet to access this section of SuvrenHOA." />;
   }
 
   return <CheckoutWizard />;

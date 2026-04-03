@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useQuery } from '@tanstack/react-query';
 import { DirectoryMapView } from '@/components/DirectoryMapView';
 import { Map, List } from 'lucide-react';
@@ -29,12 +29,7 @@ export default function DirectoryPage() {
   const { isConnected } = useAccount();
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to view the community directory</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Community Directory" description="Find your neighbors, view lot information, and connect with fellow residents." />;
   }
 
   const { totalProperties } = usePublicStats();

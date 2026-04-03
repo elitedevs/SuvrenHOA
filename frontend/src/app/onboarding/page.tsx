@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect, useCallback } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useProperty } from '@/hooks/useProperty';
@@ -911,14 +911,7 @@ export default function OnboardingPage() {
   const [view, setView] = useState<'wizard' | 'checklist-in' | 'checklist-out'>('wizard');
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <Home className="w-10 h-10 text-[#B09B71] mb-2" />
-        <h2 className="text-xl font-medium">Move-In Setup</h2>
-        <p className="text-[var(--text-muted)] text-sm">Connect your wallet to begin</p>
-        <ConnectButton label="Connect Wallet" />
-      </div>
-    );
+    return <AuthWall title="Onboarding" description="Connect your wallet to access this section of SuvrenHOA." />;
   }
 
   return (

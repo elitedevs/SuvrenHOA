@@ -1,8 +1,8 @@
 'use client';
+import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 interface ReimbursementRequest {
   id: string;
@@ -63,12 +63,7 @@ export default function ReimbursementPage() {
   }, []);
 
   if (!isConnected) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <p className="text-[var(--text-muted)] mb-4">Sign in to submit reimbursement requests</p>
-        <ConnectButton label="Sign In" />
-      </div>
-    );
+    return <AuthWall title="Community Treasury" description="Track every dollar — operating funds, reserves, expenditures, and budget allocations." />;
   }
 
   const myRequests = requests.filter(r => r.submittedBy === address || r.submittedBy.startsWith(address?.slice(0, 8) || '___'));
