@@ -126,7 +126,7 @@ export default function AnnualReportPage() {
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
             <p className="text-[11px] uppercase tracking-[0.15em] text-[#B09B71] font-medium mb-2">Annual Report</p>
-            <h1 className="text-3xl sm:text-4xl font-medium text-[#D4C4A0] mb-1">{d.community}</h1>
+            <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm: text-[#D4C4A0] mb-1">{d.community}</h1>
             <p className="text-xl text-[var(--text-muted)]">Fiscal Year {d.year}</p>
           </div>
           <div className="text-right">

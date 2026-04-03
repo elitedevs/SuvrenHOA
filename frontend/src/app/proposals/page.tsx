@@ -23,7 +23,7 @@ export default function ProposalsPage() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Governance</p>
-          <h1 className="text-3xl font-normal">Proposals</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Proposals</h1>
           <p className="text-sm text-[var(--text-muted)] mt-2">
             Create, vote, and execute community governance proposals
           </p>

@@ -300,7 +300,7 @@ export default function ArchitecturalGalleryPage() {
           <ChevronLeft className="w-3 h-3" /> Back to Arch Review
         </Link>
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Standards Reference</p>
-        <h1 className="text-3xl font-normal tracking-tight">Architectural Standards Gallery</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Architectural Standards Gallery</h1>
         <p className="text-[var(--text-muted)] text-sm mt-2">
           Visual guide to approved styles — review before submitting an architectural request
         </p>

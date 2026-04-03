@@ -91,7 +91,7 @@ export default function AssistantPage() {
               
             </div>
             <div>
-              <h1 className="text-lg font-medium text-[var(--parchment)]">HOA Assistant</h1>
+              <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-lg text-[var(--parchment)]">HOA Assistant</h1>
               <p className="text-xs text-[#3A7D6F] flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#3A7D6F] inline-block" />
                 Online — answers HOA questions using live on-chain data

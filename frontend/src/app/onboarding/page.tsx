@@ -323,7 +323,7 @@ function OnboardingWizard() {
 
       {step < 6 && (
         <div className="mb-6">
-          <h1 className="text-2xl font-normal text-[var(--parchment)] mb-1">
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[var(--parchment)] mb-1">
             Move-In Setup
           </h1>
           <p className="text-sm text-[var(--text-disabled)]">Faircroft HOA · Property #{tokenId ?? "—"}</p>

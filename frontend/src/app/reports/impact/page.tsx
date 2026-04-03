@@ -78,7 +78,7 @@ export default function ImpactPage() {
               <Award className="w-7 h-7 text-[#B09B71]" />
               <span className="text-xs font-medium uppercase tracking-widest text-[var(--brass-deep)] bg-[var(--brass-deep)]/10 px-2 py-0.5 rounded-full">Community Impact Report</span>
             </div>
-            <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2">Faircroft HOA — Blockchain Impact</h1>
+            <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2">Faircroft HOA — Blockchain Impact</h1>
             <p className="text-[oklch(0.50_0.01_60)]">Measuring how on-chain governance has transformed our community since January 2025</p>
           </div>
           <button

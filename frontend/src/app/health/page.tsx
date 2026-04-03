@@ -34,7 +34,7 @@ export default function HealthPage() {
             </Link>
           </div>
           <p className="text-sm text-[var(--text-disabled)] font-medium uppercase tracking-widest mb-2">Community Health</p>
-          <h1 className="text-3xl sm:text-4xl font-normal tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm:">
             HOA <span className="gradient-text">Health Score</span>
           </h1>
           <p className="text-[var(--text-muted)] text-base mt-2 font-medium">

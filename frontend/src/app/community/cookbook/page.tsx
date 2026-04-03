@@ -356,7 +356,7 @@ export default function CookbookPage() {
     <main className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-3xl font-medium gradient-text">Community Cookbook</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Community Cookbook</h1>
           <p className="text-[var(--text-muted)] text-sm mt-1">Recipes shared by your neighbors </p>
         </div>
         <button onClick={() => setShowAdd(true)}

@@ -40,7 +40,7 @@ export default function ActivityPage() {
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">On-Chain Events</p>
-        <h1 className="text-3xl font-normal tracking-tight">Activity Log</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Activity Log</h1>
         <p className="text-sm text-[var(--text-muted)] mt-2">
           Unified feed of all on-chain events — newest first
           {lastFetched && (

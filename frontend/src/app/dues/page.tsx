@@ -181,7 +181,7 @@ function DuesPanel() {
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Payments</p>
-        <h1 className="text-3xl font-normal tracking-tight">Community Dues</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Community Dues</h1>
       </div>
 
       {/* Treasury / DuesStatus errors */}

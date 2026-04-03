@@ -76,7 +76,7 @@ export default function VotingPowerPage() {
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Governance</p>
-        <h1 className="text-3xl font-normal tracking-tight">Voting Power</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Voting Power</h1>
         <p className="text-sm text-[var(--text-muted)] mt-2">
           Faircroft HOA uses a 4-tier merit system. Consistent participation and dues payment increase your tier.
         </p>

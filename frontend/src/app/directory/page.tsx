@@ -70,7 +70,7 @@ export default function DirectoryPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="mb-8 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-medium">Community Directory</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm:">Community Directory</h1>
           <p className="text-sm text-[var(--text-muted)] mt-1">
             Board members, committees, and community information
           </p>

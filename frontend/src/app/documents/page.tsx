@@ -41,7 +41,7 @@ export default function DocumentsPage() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Community Records</p>
-          <h1 className="text-3xl font-normal tracking-tight">Documents</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Documents</h1>
           <p className="text-base text-[var(--text-muted)] mt-2 font-medium">
             Community records — verified and permanently stored
           </p>

@@ -104,7 +104,7 @@ export default function ForumPage() {
               </span>
             )}
           </div>
-          <h1 className="text-xl font-medium text-[var(--parchment)] mb-3">{selectedTopic.title}</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[var(--parchment)] mb-3">{selectedTopic.title}</h1>
           <p className="text-sm text-[var(--text-body)] leading-relaxed mb-4 whitespace-pre-wrap">{selectedTopic.content}</p>
           <div className="flex items-center gap-2 text-[11px] text-[var(--text-disabled)]">
             <span className="font-medium text-[#B09B71]">{selectedTopic.author}</span>
@@ -166,7 +166,7 @@ export default function ForumPage() {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
         <div>
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Community</p>
-          <h1 className="text-3xl font-normal tracking-tight flex items-center gap-2"><MessageSquare className="w-7 h-7 text-[#B09B71]" /> Discussion Forum</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text flex items-center gap-2"><MessageSquare className="w-7 h-7 text-[#B09B71]" /> Discussion Forum</h1>
           <p className="text-base text-[var(--text-muted)] mt-2">Community discussions, questions, and announcements</p>
         </div>
         {isConnected && (

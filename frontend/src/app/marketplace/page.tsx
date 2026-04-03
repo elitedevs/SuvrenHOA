@@ -188,7 +188,7 @@ export default function MarketplacePage() {
       <div className="mb-8 flex items-start justify-between gap-4">
         <div>
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Community</p>
-          <h1 className="text-3xl font-normal tracking-tight">Marketplace</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Marketplace</h1>
           <p className="text-[var(--text-muted)] text-sm mt-2">Buy, sell, or give away items within Faircroft</p>
         </div>
         <button

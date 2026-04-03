@@ -157,7 +157,7 @@ export default function SurveyBuilderPage() {
             <span className="text-[var(--text-disabled)]">/</span>
             <span className="text-sm text-[var(--text-body)]">Builder</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-medium">Survey Builder</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm:">Survey Builder</h1>
           <p className="text-sm text-[var(--text-muted)] mt-1">Create rich multi-question surveys for the community</p>
         </div>
         {view === 'list' && (

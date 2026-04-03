@@ -157,7 +157,7 @@ export default function RulesPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-medium mb-1 flex items-center gap-2"><ClipboardList className="w-7 h-7 text-[#B09B71]" /> Community Rules &amp; FAQ</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm: mb-1 flex items-center gap-2"><ClipboardList className="w-7 h-7 text-[#B09B71]" /> Community Rules &amp; FAQ</h1>
         <p className="text-sm text-[var(--text-muted)]">Official Faircroft HOA guidelines, organized and searchable</p>
       </div>
 

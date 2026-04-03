@@ -121,7 +121,7 @@ export default function TrashSchedulePage() {
     <main className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-3xl font-medium gradient-text">Trash & Recycling</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Trash & Recycling</h1>
           <p className="text-[var(--text-muted)] text-sm mt-1">Pickup schedule for Faircroft HOA</p>
         </div>
         <button

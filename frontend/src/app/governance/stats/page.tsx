@@ -37,7 +37,7 @@ export default function GovernanceStatsPage() {
       </div>
       <div className="mb-8">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Governance</p>
-        <h1 className="text-3xl font-normal tracking-tight">Stats Dashboard</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Stats Dashboard</h1>
         <p className="text-base text-[var(--text-muted)] mt-2">Aggregate metrics for community governance</p>
       </div>
 

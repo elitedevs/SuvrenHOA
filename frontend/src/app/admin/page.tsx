@@ -25,7 +25,7 @@ export default function AdminPage() {
       {/* Header */}
       <div className="mb-10">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Board Access</p>
-        <h1 className="text-3xl font-normal tracking-tight">Administration</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Administration</h1>
         <p className="text-base text-[var(--text-muted)] mt-2 font-medium">
           Mint properties, manage roles, and register documents on the network
         </p>

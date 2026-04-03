@@ -233,7 +233,7 @@ export default function PetsPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-2"><PawPrint className="w-7 h-7 text-[#B09B71]" /> Pet Registry</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm: flex items-center gap-2"><PawPrint className="w-7 h-7 text-[#B09B71]" /> Pet Registry</h1>
           <p className="text-sm text-[var(--text-muted)] mt-1">Register pets and schedule playdates</p>
         </div>
         {activeTab === 'registry' && (

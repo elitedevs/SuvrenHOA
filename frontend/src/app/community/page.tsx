@@ -46,7 +46,7 @@ export default function CommunityPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-medium">Community</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm:">Community</h1>
           <p className="text-sm text-[var(--text-muted)] mt-1">
             Connect with your neighbors — discussions, events, recommendations
           </p>

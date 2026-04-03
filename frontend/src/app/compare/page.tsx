@@ -65,7 +65,7 @@ export default function ComparePage() {
     <div className="min-h-screen bg-[var(--obsidian)] p-6 lg:p-10">
       <div className="max-w-4xl mx-auto">
         <div className="mb-10">
-          <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2">HOA Cost Comparison</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2">HOA Cost Comparison</h1>
           <p className="text-[oklch(0.50_0.01_60)]">See exactly how SuvrenHOA stacks up against traditional HOA management</p>
         </div>
 

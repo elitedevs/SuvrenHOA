@@ -86,7 +86,7 @@ export default function PackagesPage() {
       <div className="max-w-4xl mx-auto">
         <div className="mb-8 flex items-start justify-between flex-wrap gap-4">
           <div>
-            <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2 flex items-center gap-3">
+            <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2 flex items-center gap-3">
               <Package className="w-8 h-8 text-[#B09B71]" /> Package Delivery Log
             </h1>
             <p className="text-[oklch(0.50_0.01_60)]">Track deliveries for the community</p>

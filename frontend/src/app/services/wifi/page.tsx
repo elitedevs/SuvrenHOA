@@ -118,7 +118,7 @@ export default function WifiPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-3">
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm: flex items-center gap-3">
             <Wifi className="w-7 h-7 text-[#B09B71]" />
             Guest WiFi Portal
           </h1>

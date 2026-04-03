@@ -38,7 +38,7 @@ export default function TransferPage() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-10">
-          <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2">Property Transfer Wizard</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2">Property Transfer Wizard</h1>
           <p className="text-[oklch(0.50_0.01_60)]">Transfer your HOA membership NFT to the new property owner</p>
         </div>
 

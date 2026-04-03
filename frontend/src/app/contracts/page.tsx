@@ -229,7 +229,7 @@ export default function ContractsPage() {
       {/* Header */}
       <div className="mb-10">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Blockchain</p>
-        <h1 className="text-3xl font-normal tracking-tight">Smart Contract Explorer</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Smart Contract Explorer</h1>
         <p className="text-[var(--text-muted)] text-sm mt-2">All SuvrenHOA contracts deployed on Base {isMainnet ? 'Mainnet' : 'Sepolia (testnet)'}</p>
         <div className="inline-flex items-center gap-2 mt-3 px-3 py-1.5 rounded-full bg-[#B09B71]/10 border border-[#B09B71]/20 text-xs text-[#B09B71]">
           <div className="w-1.5 h-1.5 rounded-full bg-[#B09B71] animate-pulse" />

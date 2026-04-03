@@ -33,7 +33,7 @@ export default function TreasuryPage() {
       <div className="mb-10 flex items-start justify-between gap-4">
         <div>
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Community Finance</p>
-          <h1 className="text-3xl font-normal">Community Treasury</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Community Treasury</h1>
           <p className="text-sm text-[var(--text-muted)] mt-2">
             Every dollar publicly recorded and verifiable
           </p>

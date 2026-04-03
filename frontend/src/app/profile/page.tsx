@@ -162,7 +162,7 @@ function ProfileForm() {
           </button>
         </div>
       )}
-      <h1 className="text-2xl sm:text-3xl font-medium mb-2">Your Profile</h1>
+      <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm: mb-2">Your Profile</h1>
       <p className="text-sm text-[var(--text-muted)] mb-8">
         Set your display name so neighbors see a real name instead of a wallet address
       </p>

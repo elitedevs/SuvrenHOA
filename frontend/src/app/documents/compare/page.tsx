@@ -170,7 +170,7 @@ export default function DocumentComparePage() {
           <Link href="/documents" className="flex items-center gap-1.5 text-xs text-[oklch(0.45_0.01_60)] hover:text-[#B09B71] transition-colors mb-4">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Documents
           </Link>
-          <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2 flex items-center gap-3">
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2 flex items-center gap-3">
             <GitCompare className="w-8 h-8 text-[#B09B71]" /> Document Comparison
           </h1>
           <p className="text-[oklch(0.50_0.01_60)]">Side-by-side diff viewer for CC&R amendments and policy changes</p>

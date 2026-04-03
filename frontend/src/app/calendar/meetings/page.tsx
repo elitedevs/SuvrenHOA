@@ -31,7 +31,7 @@ export default function MeetingsPage() {
       <div className="flex items-center justify-between mb-2">
         <div>
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Board</p>
-          <h1 className="text-3xl font-normal tracking-tight">Meeting Scheduler</h1>
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Meeting Scheduler</h1>
         </div>
         <div className="flex items-center gap-3">
           <Link href="/calendar" className="text-xs text-[var(--text-disabled)] hover:text-[#B09B71] transition-colors">

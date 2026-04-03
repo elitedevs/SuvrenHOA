@@ -318,7 +318,7 @@ function MessagingCenter({ address }: { address: string }) {
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">
             Messages
           </p>
-          <h1 className="text-2xl font-normal tracking-tight flex items-center gap-2">
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text flex items-center gap-2">
             Neighbor Messaging
             {totalUnread > 0 && (
               <span className="text-sm font-medium px-2 py-0.5 rounded-full bg-[#B09B71] text-[var(--text-heading)]">

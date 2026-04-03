@@ -527,7 +527,7 @@ export default function LoansPage() {
           </span>
         </div>
         <h1
-          className="text-3xl font-normal mt-2 mb-1"
+          className="text-3xl sm:text-4xl font-medium gradient-text mt-2 mb-1"
           style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-heading)' }}
         >
           Payment Plans

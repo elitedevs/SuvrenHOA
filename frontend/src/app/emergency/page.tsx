@@ -62,7 +62,7 @@ export default function EmergencyPage() {
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Community</p>
-        <h1 className="text-3xl font-normal tracking-tight flex items-center gap-3">
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text flex items-center gap-3">
            Emergency Contacts
         </h1>
         <p className="text-base text-[var(--text-muted)] mt-2">Important contacts for the Faircroft community</p>

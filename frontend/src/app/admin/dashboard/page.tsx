@@ -181,7 +181,7 @@ export default function BoardDashboardPage() {
           <Shield className="w-4 h-4 text-[#B09B71]" />
           <p className="text-xs text-[#B09B71] font-medium uppercase tracking-widest">Board Member Portal</p>
         </div>
-        <h1 className="text-3xl font-normal">Board Dashboard</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Board Dashboard</h1>
         <p className="text-[var(--text-body)] text-sm mt-2">HOA operations overview — real-time status</p>
       </div>
 

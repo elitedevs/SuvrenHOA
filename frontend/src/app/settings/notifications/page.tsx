@@ -121,7 +121,7 @@ export default function NotificationPrefsPage() {
       )}
       <div className="mb-8">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Settings</p>
-        <h1 className="text-3xl font-normal tracking-tight flex items-center gap-2"><Bell className="w-7 h-7 text-[#B09B71]" /> Notifications</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text flex items-center gap-2"><Bell className="w-7 h-7 text-[#B09B71]" /> Notifications</h1>
         <p className="text-base text-[var(--text-muted)] mt-2">Choose which updates you want to receive</p>
       </div>
 

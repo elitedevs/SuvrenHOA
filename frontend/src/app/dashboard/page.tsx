@@ -164,7 +164,7 @@ function PropertyDashboard() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">My Property</p>
-            <h1 className="text-3xl font-normal">Property Not Found</h1>
+            <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Property Not Found</h1>
           </div>
         </div>
 
@@ -207,7 +207,7 @@ function PropertyDashboard() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">My Property</p>
-          <h1 className="text-3xl font-normal">
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text">
             Property Profile
           </h1>
         </div>

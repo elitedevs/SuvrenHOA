@@ -47,7 +47,7 @@ function Landing() {
 
         {/* Headline — 2x+ type jumps */}
         <div className="card-enter card-enter-delay-1">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-normal mb-5 tracking-tight leading-[1.05] text-glow">
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm:text-6xl lg:text-7xl mb-5 leading-[1.05] text-glow">
             Welcome to{' '}
             <span className="gradient-text text-glow">SuvrenHOA</span>
           </h1>
@@ -193,7 +193,7 @@ function Dashboard() {
         {/* Welcome header */}
         <div className="mb-10">
           <p className="text-sm text-[var(--text-disabled)] font-medium uppercase tracking-widest mb-2">Dashboard</p>
-          <h1 className="text-3xl sm:text-4xl font-normal tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm:">
             {hasProperty ? (
               <>
                 Welcome Back,{' '}

@@ -105,7 +105,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
             Quorum: {category.quorum} · Pass: {category.threshold}
           </span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-medium mb-2">
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text sm: mb-2">
           Proposal #{proposalId.toString().slice(0, 8)}...
         </h1>
         <p className="text-sm text-[var(--text-muted)] font-mono break-all">

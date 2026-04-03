@@ -143,7 +143,7 @@ export default function BudgetPlannerPage() {
           <ChevronLeft className="w-3 h-3" /> Back to Treasury
         </Link>
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Annual Planning</p>
-        <h1 className="text-3xl font-normal tracking-tight">Budget Planner</h1>
+        <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Budget Planner</h1>
         <p className="text-[var(--text-muted)] text-sm mt-2">Plan and allocate annual HOA budget — FY 2026</p>
       </div>
 
