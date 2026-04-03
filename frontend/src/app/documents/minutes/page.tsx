@@ -321,7 +321,7 @@ export default function MeetingMinutesPage() {
     <main className="max-w-3xl mx-auto px-4 py-8">
       <div className="flex items-start justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-medium text-[#D4C4A0]">Meeting Minutes</h1>
+          <h1 className="text-3xl font-medium gradient-text">Meeting Minutes</h1>
           <p className="text-[var(--text-muted)] text-sm mt-1">Board meeting records and decisions</p>
         </div>
         {isBoard && (

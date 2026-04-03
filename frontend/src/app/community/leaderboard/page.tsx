@@ -134,7 +134,7 @@ export default function LeaderboardPage() {
     <main className="max-w-3xl mx-auto px-4 py-8 space-y-8">
       {/* Header */}
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-medium text-[var(--text-heading)]">Community Leaderboard</h1>
+        <h1 className="text-3xl font-medium gradient-text">Community Leaderboard</h1>
         <p className="text-[var(--text-muted)] text-sm">Celebrating active community members</p>
         {lastFetched && (
           <p className="text-[var(--text-disabled)] text-xs">Last updated: {lastFetched.toLocaleTimeString()}</p>

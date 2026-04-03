@@ -333,7 +333,7 @@ export default function AlertsPage() {
           </p>
           <div className="flex items-center gap-3 mb-2">
             <Bell className="w-7 h-7 text-[#B09B71]" />
-            <h1 className="text-3xl sm:text-4xl font-normal tracking-tight text-[var(--text-heading)]">
+            <h1 className="text-3xl sm:text-4xl font-normal tracking-tight gradient-text">
               Emergency Alerts
             </h1>
           </div>

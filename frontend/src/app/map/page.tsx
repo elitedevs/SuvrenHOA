@@ -719,7 +719,7 @@ export default function MapPage() {
         {/* Page header */}
         <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-medium text-[var(--text-heading)] mb-2">Neighborhood Map</h1>
+            <h1 className="text-3xl sm:text-4xl font-medium gradient-text mb-2">Neighborhood Map</h1>
             <p className="text-[var(--text-muted)] text-sm">Community lot overview and incident reports</p>
           </div>
           <button
