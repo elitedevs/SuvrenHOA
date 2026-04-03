@@ -173,7 +173,7 @@ export default function BudgetPlannerPage() {
 
       {/* Categories table */}
       <div className="glass-card rounded-xl overflow-hidden mb-6">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[oklch(0.18_0.005_60)]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(245,240,232,0.06)]">
           <h2 className="text-sm font-medium text-[#D4C4A0]">Category Breakdown</h2>
           <div className="flex gap-2">
             {editing ? (
@@ -202,7 +202,7 @@ export default function BudgetPlannerPage() {
           </div>
         </div>
 
-        <div className="divide-y divide-[oklch(0.15_0.005_60)]">
+        <div className="divide-y divide-[rgba(245,240,232,0.05)]">
           {budget.map((cat, i) => {
             const pct = total > 0 ? (cat.thisYear / total) * 100 : 0;
             const yoyDiff = cat.thisYear - cat.lastYear;
@@ -238,7 +238,7 @@ export default function BudgetPlannerPage() {
           })}
         </div>
 
-        <div className="px-6 py-4 bg-[rgba(245,240,232,0.02)] border-t border-[oklch(0.18_0.005_60)] flex items-center justify-between">
+        <div className="px-6 py-4 bg-[rgba(245,240,232,0.02)] border-t border-[rgba(245,240,232,0.06)] flex items-center justify-between">
           <span className="text-sm font-medium text-[var(--text-body)]">Total Budget</span>
           <span className="text-lg font-normal text-[#B09B71]">${total.toLocaleString()}</span>
         </div>

@@ -53,7 +53,7 @@ export function DirectoryMapView({ residents, onClose }: DirectoryMapViewProps) 
 
   return (
     <div className="glass-card rounded-xl overflow-hidden">
-      <div className="px-5 py-4 border-b border-[oklch(0.18_0.005_60)] flex items-center justify-between">
+      <div className="px-5 py-4 border-b border-[rgba(245,240,232,0.06)] flex items-center justify-between">
         <div>
           <h3 className="text-sm font-medium text-[#D4C4A0]">Neighborhood Map View</h3>
           <p className="text-xs text-[var(--text-disabled)] mt-0.5">Click a lot to see resident info</p>

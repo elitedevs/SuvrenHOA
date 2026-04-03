@@ -205,7 +205,7 @@ export function TreasuryProjections() {
         <div className="mt-3 overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
-              <tr className="text-[var(--text-disabled)] border-b border-[oklch(0.15_0.005_60)]">
+              <tr className="text-[var(--text-disabled)] border-b border-[rgba(245,240,232,0.05)]">
                 <th className="text-left py-1 pr-3">Month</th>
                 <th className="text-right py-1 pr-3">Income</th>
                 <th className="text-right py-1 pr-3">Expenses</th>
@@ -214,7 +214,7 @@ export function TreasuryProjections() {
             </thead>
             <tbody>
               {projections.map((p, i) => (
-                <tr key={i} className={`border-b border-[oklch(0.12_0.005_60)] ${p.isBelowThreshold ? 'bg-[#6B3A3A]/5' : ''}`}>
+                <tr key={i} className={`border-b border-[rgba(245,240,232,0.04)] ${p.isBelowThreshold ? 'bg-[#6B3A3A]/5' : ''}`}>
                   <td className={`py-1.5 pr-3 font-medium ${p.isBelowThreshold ? 'text-[#6B3A3A]' : 'text-[var(--text-muted)]'}`}>{p.month}</td>
                   <td className="text-right py-1.5 pr-3" style={{ color: '#2A5D4F' }}>${(p.income / 1000).toFixed(1)}K</td>
                   <td className="text-right py-1.5 pr-3" style={{ color: '#6B3A3A' }}>${(p.expenses / 1000).toFixed(1)}K</td>

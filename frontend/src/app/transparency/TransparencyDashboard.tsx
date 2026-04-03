@@ -597,7 +597,7 @@ export function TransparencyDashboard() {
                   href="/dashboard"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm transition-all duration-200"
                   style={{
-                    background: 'linear-gradient(135deg, oklch(0.72 0.12 76) 0%, oklch(0.62 0.12 74) 100%)',
+                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
                     boxShadow: '0 0 24px rgba(201,169,110,0.25)',
                     color: 'white',
                   }}

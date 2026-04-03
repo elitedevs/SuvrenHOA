@@ -191,7 +191,7 @@ function GalleryCard({ item, onClick }: { item: GalleryItem; onClick: () => void
     <button
       onClick={onClick}
       className={`glass-card rounded-xl p-4 text-left w-full hover:border-[#B09B71]/30 border transition-all group ${
-        item.approved ? 'border-[oklch(0.20_0.005_60)]' : 'border-[rgba(107,58,58,0.20)]'
+        item.approved ? 'border-[rgba(245,240,232,0.08)]' : 'border-[rgba(107,58,58,0.20)]'
       }`}
     >
       <div className="flex items-start justify-between mb-2">
@@ -261,7 +261,7 @@ function ItemDetailModal({ item, onClose }: { item: GalleryItem; onClose: () => 
 
         <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-4">{item.details}</p>
 
-        <div className="pt-4 border-t border-[oklch(0.18_0.005_60)]">
+        <div className="pt-4 border-t border-[rgba(245,240,232,0.06)]">
           <p className="text-xs text-[var(--text-disabled)]">
             Need to submit for approval?{' '}
             <Link href="/architectural" className="text-[#B09B71] hover:text-[#D4C4A0]">

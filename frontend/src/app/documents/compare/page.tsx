@@ -167,13 +167,13 @@ export default function DocumentComparePage() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <Link href="/documents" className="flex items-center gap-1.5 text-xs text-[oklch(0.45_0.01_60)] hover:text-[#B09B71] transition-colors mb-4">
+          <Link href="/documents" className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-[#B09B71] transition-colors mb-4">
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Documents
           </Link>
           <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2 flex items-center gap-3">
             <GitCompare className="w-8 h-8 text-[#B09B71]" /> Document Comparison
           </h1>
-          <p className="text-[oklch(0.50_0.01_60)]">Side-by-side diff viewer for CC&R amendments and policy changes</p>
+          <p className="text-[rgba(245,240,232,0.45)]">Side-by-side diff viewer for CC&R amendments and policy changes</p>
         </div>
 
         {/* Doc selectors */}
@@ -183,11 +183,11 @@ export default function DocumentComparePage() {
             { label: 'New Version', val: docB, set: setDocB, color: 'border-[rgba(42,93,79,0.40)]' },
           ].map(({ label, val, set, color }) => (
             <div key={label}>
-              <label className="block text-xs text-[oklch(0.45_0.01_60)] mb-1.5 font-medium uppercase tracking-wide">{label}</label>
+              <label className="block text-xs text-[var(--text-muted)] mb-1.5 font-medium uppercase tracking-wide">{label}</label>
               <select
                 value={val}
                 onChange={e => set(e.target.value)}
-                className={`w-full bg-[oklch(0.12_0.005_60)] border-2 ${color} rounded-xl px-4 py-3 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71] transition-colors`}
+                className={`w-full bg-[#1A1A1E] border-2 ${color} rounded-xl px-4 py-3 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71] transition-colors`}
               >
                 {SAMPLE_DOCS.map(d => (
                   <option key={d.id} value={d.id}>{d.title} ({d.version}) — {d.date}</option>
@@ -207,9 +207,9 @@ export default function DocumentComparePage() {
               <Minus className="w-3.5 h-3.5" /> {removed} removed
             </span>
           </div>
-          <div className="flex gap-1.5 p-1 bg-[#1A1A1E] rounded-xl border border-[oklch(0.18_0.005_60)]">
+          <div className="flex gap-1.5 p-1 bg-[#1A1A1E] rounded-xl border border-[rgba(245,240,232,0.06)]">
             {(['unified', 'split'] as const).map(v => (
-              <button key={v} onClick={() => setView(v)} className={`px-4 py-1.5 rounded-lg text-xs font-medium capitalize transition-colors ${view === v ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'text-[oklch(0.50_0.01_60)] hover:text-[#D4C4A0]'}`}>{v}</button>
+              <button key={v} onClick={() => setView(v)} className={`px-4 py-1.5 rounded-lg text-xs font-medium capitalize transition-colors ${view === v ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'text-[rgba(245,240,232,0.45)] hover:text-[#D4C4A0]'}`}>{v}</button>
             ))}
           </div>
         </div>
@@ -217,8 +217,8 @@ export default function DocumentComparePage() {
         {/* Diff view */}
         {a && b && docA !== docB ? (
           view === 'unified' ? (
-            <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl overflow-hidden">
-              <div className="flex items-center gap-4 px-4 py-3 bg-[oklch(0.12_0.005_60)] border-b border-[oklch(0.18_0.005_60)] text-xs text-[oklch(0.45_0.01_60)]">
+            <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl overflow-hidden">
+              <div className="flex items-center gap-4 px-4 py-3 bg-[#1A1A1E] border-b border-[rgba(245,240,232,0.06)] text-xs text-[var(--text-muted)]">
                 <span className="text-[#8B5A5A] font-mono">--- {a.title} ({a.version})</span>
                 <span className="text-[#3A7D6F] font-mono">+++ {b.title} ({b.version})</span>
               </div>
@@ -231,14 +231,14 @@ export default function DocumentComparePage() {
                       : ''
                     }`}>
                       <span className={`w-5 shrink-0 text-center mr-3 ${
-                        line.type === 'added' ? 'text-[#3A7D6F]' : line.type === 'removed' ? 'text-[#8B5A5A]' : 'text-[oklch(0.30_0.005_60)]'
+                        line.type === 'added' ? 'text-[#3A7D6F]' : line.type === 'removed' ? 'text-[#8B5A5A]' : 'text-[rgba(245,240,232,0.18)]'
                       }`}>
                         {line.type === 'added' ? '+' : line.type === 'removed' ? '−' : ' '}
                       </span>
                       <span className={
                         line.type === 'added' ? 'text-[rgba(42,93,79,0.80)]'
                         : line.type === 'removed' ? 'text-[#8B5A5A] line-through'
-                        : 'text-[oklch(0.65_0.01_60)]'
+                        : 'text-[rgba(245,240,232,0.75)]'
                       }>{line.line || '\u00A0'}</span>
                     </div>
                   ))}
@@ -252,12 +252,12 @@ export default function DocumentComparePage() {
                 { doc: b, lines: diff.filter(d => d.type !== 'removed'), color: 'border-[rgba(42,93,79,0.30)]', label: 'New' },
               ].map(({ doc, lines, color, label }) => (
                 <div key={label} className={`bg-[#1A1A1E] border-2 ${color} rounded-xl overflow-hidden`}>
-                  <div className={`px-4 py-3 border-b ${color} bg-[oklch(0.12_0.005_60)] text-xs font-medium ${label === 'Original' ? 'text-[#8B5A5A]' : 'text-[#3A7D6F]'}`}>
+                  <div className={`px-4 py-3 border-b ${color} bg-[#1A1A1E] text-xs font-medium ${label === 'Original' ? 'text-[#8B5A5A]' : 'text-[#3A7D6F]'}`}>
                     {label}: {doc.title} ({doc.version})
                   </div>
                   <div className="overflow-x-auto p-4 font-mono text-xs space-y-0.5">
                     {lines.map((line, i) => (
-                      <div key={i} className={`px-2 py-0.5 rounded ${line.type === 'removed' ? 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] line-through' : line.type === 'added' ? 'bg-[rgba(42,93,79,0.10)] text-[rgba(42,93,79,0.80)]' : 'text-[oklch(0.60_0.01_60)]'}`}>
+                      <div key={i} className={`px-2 py-0.5 rounded ${line.type === 'removed' ? 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] line-through' : line.type === 'added' ? 'bg-[rgba(42,93,79,0.10)] text-[rgba(42,93,79,0.80)]' : 'text-[var(--text-body)]'}`}>
                         {line.line || '\u00A0'}
                       </div>
                     ))}
@@ -267,7 +267,7 @@ export default function DocumentComparePage() {
             </div>
           )
         ) : (
-          <div className="text-center py-16 bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl text-[oklch(0.40_0.01_60)]">
+          <div className="text-center py-16 bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl text-[rgba(245,240,232,0.25)]">
             {docA === docB ? 'Select two different document versions to compare' : 'Select documents above'}
           </div>
         )}

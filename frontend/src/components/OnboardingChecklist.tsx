@@ -91,7 +91,7 @@ export function OnboardingChecklist() {
   return (
     <div className="glass-card rounded-xl border border-[#B09B71]/20 overflow-hidden mb-6 page-enter">
       {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-[oklch(0.18_0.005_60)]">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-[rgba(245,240,232,0.06)]">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-[#B09B71]/10 border border-[#B09B71]/20 flex items-center justify-center text-base">
             

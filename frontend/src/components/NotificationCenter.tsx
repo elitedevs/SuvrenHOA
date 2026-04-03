@@ -181,7 +181,7 @@ export function NotificationBell() {
             onClick={() => setOpen(false)}
           />
           <div className="absolute top-0 right-0 h-full w-full sm:w-[400px] pointer-events-auto flex flex-col"
-            style={{ background: 'oklch(0.12 0.005 60)', borderLeft: '1px solid rgba(201,169,110,0.15)' }}
+            style={{ background: '#1A1A1E', borderLeft: '1px solid rgba(201,169,110,0.15)' }}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-[rgba(245,240,232,0.06)]">
@@ -238,7 +238,7 @@ export function NotificationBell() {
                   return (
                     <div key={groupName}>
                       <div className="px-5 py-2 text-[11px] font-medium text-[var(--text-disabled)] uppercase tracking-widest sticky top-0"
-                        style={{ background: 'oklch(0.12 0.005 60)' }}
+                        style={{ background: '#1A1A1E' }}
                       >
                         {groupName}
                       </div>

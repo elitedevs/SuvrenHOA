@@ -125,7 +125,7 @@ export function ViolationHeatmap({ data = SAMPLE_DATA }: ViolationHeatmapProps) 
           ))}
 
           {/* Footer: column totals */}
-          <div className="grid mt-2 pt-2 border-t border-[oklch(0.15_0.005_60)]" style={{ gridTemplateColumns: '48px repeat(7, 1fr) 40px' }}>
+          <div className="grid mt-2 pt-2 border-t border-[rgba(245,240,232,0.05)]" style={{ gridTemplateColumns: '48px repeat(7, 1fr) 40px' }}>
             <div className="text-[9px] text-[var(--text-disabled)] text-right pr-2 font-medium">Total</div>
             {typeTotals.map((t, i) => (
               <div key={i} className="text-[10px] text-[#B09B71] text-center font-medium">{t}</div>

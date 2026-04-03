@@ -106,7 +106,7 @@ export default function ElectionsPage() {
   const STATUS_BADGE: Record<string, string> = {
     upcoming: 'bg-[rgba(90,122,154,0.40)] text-[var(--steel)]',
     active: 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]',
-    completed: 'bg-[oklch(0.18_0.005_60)] text-[oklch(0.45_0.01_60)]',
+    completed: 'bg-[rgba(245,240,232,0.06)] text-[var(--text-muted)]',
   };
 
   return (
@@ -116,7 +116,7 @@ export default function ElectionsPage() {
           <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2 flex items-center gap-3">
             <Vote className="w-8 h-8 text-[#B09B71]" /> Board Elections
           </h1>
-          <p className="text-[oklch(0.50_0.01_60)]">On-chain democratic governance — nominate, campaign, and vote</p>
+          <p className="text-[rgba(245,240,232,0.45)]">On-chain democratic governance — nominate, campaign, and vote</p>
         </div>
 
         <div className="space-y-6">
@@ -127,17 +127,17 @@ export default function ElectionsPage() {
               : null;
 
             return (
-              <div key={election.id} className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl overflow-hidden">
+              <div key={election.id} className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl overflow-hidden">
                 {/* Election header */}
-                <div className="px-6 py-5 border-b border-[oklch(0.15_0.005_60)]">
+                <div className="px-6 py-5 border-b border-[rgba(245,240,232,0.05)]">
                   <div className="flex items-start justify-between gap-4 flex-wrap">
                     <div>
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
                         <h2 className="text-lg font-medium text-[#D4C4A0]">{election.title}</h2>
                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_BADGE[election.status]}`}>{election.status}</span>
                       </div>
-                      <p className="text-sm text-[oklch(0.55_0.01_60)]">{election.description}</p>
-                      <div className="flex gap-4 mt-2 text-xs text-[oklch(0.40_0.01_60)]">
+                      <p className="text-sm text-[var(--text-body)]">{election.description}</p>
+                      <div className="flex gap-4 mt-2 text-xs text-[rgba(245,240,232,0.25)]">
                         <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{election.startDate} – {election.endDate}</span>
                         <span className="flex items-center gap-1"><User className="w-3 h-3" />{election.totalVotes} votes cast</span>
                       </div>
@@ -153,7 +153,7 @@ export default function ElectionsPage() {
                       )}
                       <button
                         onClick={() => setActiveElection(isActive ? null : election.id)}
-                        className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[oklch(0.22_0.005_60)] text-[oklch(0.55_0.01_60)] hover:text-[#D4C4A0] text-sm transition-colors"
+                        className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[rgba(245,240,232,0.10)] text-[var(--text-body)] hover:text-[#D4C4A0] text-sm transition-colors"
                       >
                         {isActive ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                         {isActive ? 'Collapse' : 'View Details'}
@@ -164,7 +164,7 @@ export default function ElectionsPage() {
                     <div className="mt-3 flex items-center gap-2 text-sm">
                       <Trophy className="w-4 h-4 text-[#B09B71]" />
                       <span className="text-[#B09B71] font-medium">Winner: {winner.name}</span>
-                      <span className="text-[oklch(0.45_0.01_60)]">({winner.votes} votes, {Math.round((winner.votes / election.totalVotes) * 100)}%)</span>
+                      <span className="text-[var(--text-muted)]">({winner.votes} votes, {Math.round((winner.votes / election.totalVotes) * 100)}%)</span>
                     </div>
                   )}
                 </div>
@@ -172,7 +172,7 @@ export default function ElectionsPage() {
                 {/* Expanded candidates */}
                 {isActive && (
                   <div className="p-6">
-                    <h3 className="text-sm font-medium text-[oklch(0.55_0.01_60)] uppercase tracking-wide mb-4">
+                    <h3 className="text-sm font-medium text-[var(--text-body)] uppercase tracking-wide mb-4">
                       Candidates ({election.candidates.length})
                     </h3>
                     <div className="space-y-3">
@@ -181,23 +181,23 @@ export default function ElectionsPage() {
                         const isExpanded = expandedCandidate === c.id;
                         const voted = election.myVote === c.id;
                         return (
-                          <div key={c.id} className={`rounded-xl border p-4 transition-all ${voted ? 'border-[var(--brass-deep)]/50 bg-[var(--brass-deep)]/10' : 'border-[oklch(0.20_0.005_60)] bg-[oklch(0.12_0.005_60)]'}`}>
+                          <div key={c.id} className={`rounded-xl border p-4 transition-all ${voted ? 'border-[var(--brass-deep)]/50 bg-[var(--brass-deep)]/10' : 'border-[rgba(245,240,232,0.08)] bg-[#1A1A1E]'}`}>
                             <div className="flex items-center justify-between gap-4 flex-wrap">
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 flex-wrap">
                                   <p className="font-medium text-[#D4C4A0]">{c.name}</p>
-                                  <span className="text-xs text-[oklch(0.45_0.01_60)]">Lot {c.lot}</span>
+                                  <span className="text-xs text-[var(--text-muted)]">Lot {c.lot}</span>
                                   {voted && <CheckCircle className="w-4 h-4 text-[#B09B71]" />}
                                 </div>
                                 <div className="flex items-center gap-2 mt-2">
-                                  <div className="flex-1 bg-[oklch(0.18_0.005_60)] rounded-full h-1.5">
+                                  <div className="flex-1 bg-[rgba(245,240,232,0.06)] rounded-full h-1.5">
                                     <div className="bg-[var(--brass-deep)] h-1.5 rounded-full transition-all duration-700" style={{ width: `${pct}%` }} />
                                   </div>
-                                  <span className="text-xs text-[oklch(0.50_0.01_60)] font-mono w-16 text-right">{c.votes} votes ({pct}%)</span>
+                                  <span className="text-xs text-[rgba(245,240,232,0.45)] font-mono w-16 text-right">{c.votes} votes ({pct}%)</span>
                                 </div>
                               </div>
                               <div className="flex gap-2 shrink-0">
-                                <button onClick={() => setExpandedCandidate(isExpanded ? null : c.id)} className="text-xs text-[oklch(0.45_0.01_60)] hover:text-[#D4C4A0] transition-colors">
+                                <button onClick={() => setExpandedCandidate(isExpanded ? null : c.id)} className="text-xs text-[var(--text-muted)] hover:text-[#D4C4A0] transition-colors">
                                   {isExpanded ? 'Hide' : 'Statement'}
                                 </button>
                                 {(election.status === 'active' || election.status === 'upcoming') && !election.myVote && (
@@ -211,7 +211,7 @@ export default function ElectionsPage() {
                               </div>
                             </div>
                             {isExpanded && (
-                              <p className="mt-3 text-sm text-[oklch(0.55_0.01_60)] italic border-t border-[oklch(0.18_0.005_60)] pt-3">
+                              <p className="mt-3 text-sm text-[var(--text-body)] italic border-t border-[rgba(245,240,232,0.06)] pt-3">
                                 "{c.statement}"
                               </p>
                             )}
@@ -227,7 +227,7 @@ export default function ElectionsPage() {
         </div>
 
         {/* Election timeline */}
-        <div className="mt-8 bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
+        <div className="mt-8 bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl p-6">
           <h2 className="text-lg font-medium text-[#D4C4A0] mb-5 flex items-center gap-2">
             <Clock className="w-5 h-5 text-[#B09B71]" /> Election Timeline
           </h2>
@@ -241,17 +241,17 @@ export default function ElectionsPage() {
             ].map(({ phase, date, done, desc }, i) => (
               <div key={i} className="flex gap-4">
                 <div className="flex flex-col items-center">
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${done ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'border-2 border-[oklch(0.25_0.005_60)] text-[oklch(0.40_0.01_60)]'}`}>
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium ${done ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'border-2 border-[rgba(245,240,232,0.12)] text-[rgba(245,240,232,0.25)]'}`}>
                     {done ? '' : i + 1}
                   </div>
-                  {i < 4 && <div className="w-0.5 h-8 bg-[oklch(0.18_0.005_60)] mt-1" />}
+                  {i < 4 && <div className="w-0.5 h-8 bg-[rgba(245,240,232,0.06)] mt-1" />}
                 </div>
                 <div className="pb-4">
                   <div className="flex items-center gap-2">
-                    <p className={`font-medium text-sm ${done ? 'text-[#B09B71]' : 'text-[oklch(0.65_0.01_60)]'}`}>{phase}</p>
-                    <span className="text-xs text-[oklch(0.40_0.01_60)]">{date}</span>
+                    <p className={`font-medium text-sm ${done ? 'text-[#B09B71]' : 'text-[rgba(245,240,232,0.75)]'}`}>{phase}</p>
+                    <span className="text-xs text-[rgba(245,240,232,0.25)]">{date}</span>
                   </div>
-                  <p className="text-xs text-[oklch(0.45_0.01_60)] mt-0.5">{desc}</p>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5">{desc}</p>
                 </div>
               </div>
             ))}
@@ -262,10 +262,10 @@ export default function ElectionsPage() {
       {/* Nominate modal */}
       {showNominate && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.10)] rounded-xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-medium text-[#D4C4A0]">Nominate a Candidate</h3>
-              <button onClick={() => setShowNominate(false)}><X className="w-4 h-4 text-[oklch(0.45_0.01_60)]" /></button>
+              <button onClick={() => setShowNominate(false)}><X className="w-4 h-4 text-[var(--text-muted)]" /></button>
             </div>
             <div className="space-y-3">
               {[
@@ -274,13 +274,13 @@ export default function ElectionsPage() {
                 { label: 'Your Lot # (Nominator) *', key: 'nominatedBy', placeholder: '7' },
               ].map(({ label, key, placeholder }) => (
                 <div key={key}>
-                  <label className="block text-xs text-[oklch(0.45_0.01_60)] mb-1">{label}</label>
-                  <input value={(nomForm as any)[key]} onChange={e => setNomForm({ ...nomForm, [key]: e.target.value })} placeholder={placeholder} className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71]" />
+                  <label className="block text-xs text-[var(--text-muted)] mb-1">{label}</label>
+                  <input value={(nomForm as any)[key]} onChange={e => setNomForm({ ...nomForm, [key]: e.target.value })} placeholder={placeholder} className="w-full bg-[#222228] border border-[rgba(245,240,232,0.12)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71]" />
                 </div>
               ))}
               <div>
-                <label className="block text-xs text-[oklch(0.45_0.01_60)] mb-1">Campaign Statement *</label>
-                <textarea value={nomForm.statement} onChange={e => setNomForm({ ...nomForm, statement: e.target.value })} rows={4} placeholder="Why should residents vote for this candidate?" className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71] resize-none" />
+                <label className="block text-xs text-[var(--text-muted)] mb-1">Campaign Statement *</label>
+                <textarea value={nomForm.statement} onChange={e => setNomForm({ ...nomForm, statement: e.target.value })} rows={4} placeholder="Why should residents vote for this candidate?" className="w-full bg-[#222228] border border-[rgba(245,240,232,0.12)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71] resize-none" />
               </div>
               <button onClick={addNomination} disabled={!nomForm.name || !nomForm.lot || !nomForm.statement || !nomForm.nominatedBy} className="w-full py-2.5 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium disabled:opacity-40 hover:bg-[#B09B71] transition-colors">
                 Submit Nomination

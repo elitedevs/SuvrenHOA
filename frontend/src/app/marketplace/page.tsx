@@ -244,7 +244,7 @@ export default function MarketplacePage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map(listing => (
-            <div key={listing.id} className="glass-card rounded-xl p-5 border border-[oklch(0.20_0.005_60)] hover:border-[#B09B71]/25 transition-all group">
+            <div key={listing.id} className="glass-card rounded-xl p-5 border border-[rgba(245,240,232,0.08)] hover:border-[#B09B71]/25 transition-all group">
               <div className="flex items-start justify-between mb-3">
                 <TypeBadge type={listing.type} />
                 {listing.postedBy.toLowerCase() === address?.toLowerCase() && (
@@ -275,7 +275,7 @@ export default function MarketplacePage() {
                 )}
               </div>
 
-              <div className="mt-3 pt-3 border-t border-[oklch(0.15_0.005_60)] flex items-center justify-between">
+              <div className="mt-3 pt-3 border-t border-[rgba(245,240,232,0.05)] flex items-center justify-between">
                 <span className="text-[11px] text-[var(--text-disabled)]">
                   Lot #{listing.lotNumber ?? '?'}
                 </span>

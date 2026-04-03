@@ -27,7 +27,7 @@ function useCountUp(target: number, duration: number = 1500) {
 const METRICS = [
   { label: 'Documents Stored On-Chain', value: 6, suffix: '', icon: FileText, color: 'text-[var(--steel)]', bg: 'bg-[rgba(90,122,154,0.08)] border-[rgba(90,122,154,0.30)]', desc: 'CC&Rs, meeting minutes, financial reports — all immutable on Base' },
   { label: 'Treasury Transparency Score', value: 100, suffix: '%', icon: Landmark, color: 'text-[#B09B71]', bg: 'bg-amber-950/20 border-amber-700/30', desc: 'Every dollar trackable on-chain — verifiable by anyone, anytime' },
-  { label: 'Properties On-Chain', value: 16, suffix: '', icon: Shield, color: 'text-[#B09B71]', bg: 'bg-[oklch(0.12_0.01_60)] border-[oklch(0.22_0.01_60)]', desc: 'Homeowner NFTs minted — each representing one vote and one lot' },
+  { label: 'Properties On-Chain', value: 16, suffix: '', icon: Shield, color: 'text-[#B09B71]', bg: 'bg-[#1A1A1E] border-[rgba(245,240,232,0.10)]', desc: 'Homeowner NFTs minted — each representing one vote and one lot' },
   { label: 'Paper Eliminated', value: 100, suffix: '%', icon: Zap, color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.08)] border-[rgba(42,93,79,0.30)]', desc: 'All governance, voting, and dues processed on-chain — zero paper' },
 ];
 
@@ -51,7 +51,7 @@ function StatCard({ label, value, suffix, icon: Icon, color, bg, desc }: typeof 
       </div>
       <div>
         <p className={`font-medium text-sm ${color} mb-1`}>{label}</p>
-        <p className="text-xs text-[oklch(0.45_0.01_60)]">{desc}</p>
+        <p className="text-xs text-[var(--text-muted)]">{desc}</p>
       </div>
     </div>
   );
@@ -79,7 +79,7 @@ export default function ImpactPage() {
               <span className="text-xs font-medium uppercase tracking-widest text-[var(--brass-deep)] bg-[var(--brass-deep)]/10 px-2 py-0.5 rounded-full">Community Impact Report</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2">Faircroft HOA — Blockchain Impact</h1>
-            <p className="text-[oklch(0.50_0.01_60)]">Measuring how on-chain governance has transformed our community since January 2025</p>
+            <p className="text-[rgba(245,240,232,0.45)]">Measuring how on-chain governance has transformed our community since January 2025</p>
           </div>
           <button
             onClick={share}
@@ -91,9 +91,9 @@ export default function ImpactPage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1.5 mb-8 p-1 bg-[#1A1A1E] rounded-xl border border-[oklch(0.18_0.005_60)] w-fit">
+        <div className="flex gap-1.5 mb-8 p-1 bg-[#1A1A1E] rounded-xl border border-[rgba(245,240,232,0.06)] w-fit">
           {[['metrics', 'Impact Metrics', TrendingUp], ['timeline', 'Milestone Timeline', Shield]] .map(([key, label, Icon]: any) => (
-            <button key={key} onClick={() => setActiveTab(key)} className={`flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === key ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'text-[oklch(0.55_0.01_60)] hover:text-[#D4C4A0]'}`}>
+            <button key={key} onClick={() => setActiveTab(key)} className={`flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === key ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'text-[var(--text-body)] hover:text-[#D4C4A0]'}`}>
               <Icon className="w-3.5 h-3.5" /> {label}
             </button>
           ))}
@@ -107,7 +107,7 @@ export default function ImpactPage() {
             </div>
 
             {/* Community comparison */}
-            <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-6 mb-6">
+            <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl p-6 mb-6">
               <h2 className="text-lg font-medium text-[#D4C4A0] mb-5">Faircroft vs. National HOA Average</h2>
               <div className="space-y-4">
                 {[
@@ -120,15 +120,15 @@ export default function ImpactPage() {
                   const usWins = lowerBetter ? us < them : us > them;
                   return (
                     <div key={label}>
-                      <div className="flex justify-between text-xs text-[oklch(0.45_0.01_60)] mb-2">
+                      <div className="flex justify-between text-xs text-[var(--text-muted)] mb-2">
                         <span>{label}</span>
                         <div className="flex gap-4">
                           <span className="text-[#B09B71] font-medium">Faircroft: {us}{unit}</span>
                           <span>National avg: {them}{unit}</span>
                         </div>
                       </div>
-                      <div className="relative h-2 bg-[oklch(0.18_0.005_60)] rounded-full">
-                        <div className="absolute left-0 top-0 h-2 bg-[oklch(0.25_0.005_60)] rounded-full" style={{ width: `${Math.min(them, 100)}%` }} />
+                      <div className="relative h-2 bg-[rgba(245,240,232,0.06)] rounded-full">
+                        <div className="absolute left-0 top-0 h-2 bg-[rgba(245,240,232,0.10)] rounded-full" style={{ width: `${Math.min(them, 100)}%` }} />
                         <div className={`absolute left-0 top-0 h-2 rounded-full ${usWins ? 'bg-[var(--brass-deep)]' : 'bg-[#8B5A5A]'}`} style={{ width: `${Math.min(us, 100)}%` }} />
                       </div>
                     </div>
@@ -138,7 +138,7 @@ export default function ImpactPage() {
             </div>
 
             {/* Shareable card */}
-            <div className="bg-gradient-to-br from-[var(--surface-2)] via-[oklch(0.12_0.01_60)] to-[var(--surface-2)] border border-[var(--brass-deep)]/40 rounded-xl p-8 text-center">
+            <div className="bg-gradient-to-br from-[var(--surface-2)] via-[#1A1A1E] to-[var(--surface-2)] border border-[var(--brass-deep)]/40 rounded-xl p-8 text-center">
               <p className="text-xs uppercase tracking-widest text-[var(--brass-deep)] mb-3 font-medium">Faircroft HOA — Blockchain Community</p>
               <h3 className="text-2xl font-normal text-[#D4C4A0] mb-6">The Numbers Speak For Themselves</h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -150,17 +150,17 @@ export default function ImpactPage() {
                 ].map(({ n, label }) => (
                   <div key={label}>
                     <p className="text-3xl font-normal text-[#B09B71] number-reveal">{n}</p>
-                    <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">{label}</p>
+                    <p className="text-xs text-[var(--text-muted)] mt-1">{label}</p>
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-[oklch(0.35_0.01_60)] mt-6">Powered by SuvrenHOA • Base Blockchain • Since 2025</p>
+              <p className="text-xs text-[var(--text-disabled)] mt-6">Powered by SuvrenHOA • Base Blockchain • Since 2025</p>
             </div>
           </>
         )}
 
         {activeTab === 'timeline' && (
-          <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-8">
+          <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl p-8">
             <h2 className="text-lg font-medium text-[#D4C4A0] mb-8">Community Milestones</h2>
             <div className="space-y-0">
               {TIMELINE.map(({ date, event, type }, i) => (
@@ -173,7 +173,7 @@ export default function ImpactPage() {
                     }`}>
                       {type === 'milestone' ? <Award className="w-4 h-4" /> : type === 'vote' ? <Vote className="w-4 h-4" /> : <Landmark className="w-4 h-4" />}
                     </div>
-                    {i < TIMELINE.length - 1 && <div className="w-0.5 h-12 bg-[oklch(0.20_0.005_60)] my-1" />}
+                    {i < TIMELINE.length - 1 && <div className="w-0.5 h-12 bg-[rgba(245,240,232,0.08)] my-1" />}
                   </div>
                   <div className="pb-8 pt-2">
                     <span className="text-xs text-[var(--brass-deep)] font-medium">{date}</span>

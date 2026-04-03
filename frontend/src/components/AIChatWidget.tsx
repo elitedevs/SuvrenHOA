@@ -112,7 +112,7 @@ export function AIChatWidget() {
         aria-label="AI Community Assistant"
         aria-hidden={!isOpen}
       >
-        <div className="bg-[oklch(0.09_0.005_50)] border border-[rgba(245,240,232,0.08)] rounded-xl rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
+        <div className="bg-[#111113] border border-[rgba(245,240,232,0.08)] rounded-xl rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[rgba(26,26,30,0.80)] to-[#222228]/80 border-b border-[rgba(245,240,232,0.06)] shrink-0">
             <div className="flex items-center gap-2">

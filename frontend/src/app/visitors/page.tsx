@@ -82,7 +82,7 @@ export default function VisitorsPage() {
             <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2 flex items-center gap-3">
               <UserCheck className="w-8 h-8 text-[#B09B71]" /> Visitor Management
             </h1>
-            <p className="text-[oklch(0.50_0.01_60)]">Register expected visitors and generate access passes</p>
+            <p className="text-[rgba(245,240,232,0.45)]">Register expected visitors and generate access passes</p>
           </div>
           <button onClick={() => setShowForm(true)} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium hover:bg-[#B09B71] transition-colors">
             <Plus className="w-4 h-4" /> Register Visitor
@@ -95,28 +95,28 @@ export default function VisitorsPage() {
             <div>
               <p className="text-[#3A7D6F] font-medium text-sm mb-1"> Visitor Registered — Pass Code Generated</p>
               <p className="font-mono text-3xl text-[#D4C4A0] font-medium tracking-widest">{newPass}</p>
-              <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">Share this code with your visitor for gate entry</p>
+              <p className="text-xs text-[var(--text-muted)] mt-1">Share this code with your visitor for gate entry</p>
             </div>
-            <button onClick={() => setNewPass(null)}><X className="w-4 h-4 text-[oklch(0.45_0.01_60)]" /></button>
+            <button onClick={() => setNewPass(null)}><X className="w-4 h-4 text-[var(--text-muted)]" /></button>
           </div>
         )}
 
         {/* Stats */}
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
+          <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl p-4 text-center">
             <p className="text-2xl font-medium text-[#B09B71]">{active.length}</p>
-            <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">Active Passes Today</p>
+            <p className="text-xs text-[var(--text-muted)] mt-1">Active Passes Today</p>
           </div>
-          <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
-            <p className="text-2xl font-medium text-[oklch(0.65_0.01_60)]">{history.length}</p>
-            <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">Past Visitors</p>
+          <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl p-4 text-center">
+            <p className="text-2xl font-medium text-[rgba(245,240,232,0.75)]">{history.length}</p>
+            <p className="text-xs text-[var(--text-muted)] mt-1">Past Visitors</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1.5 mb-5 p-1 bg-[#1A1A1E] rounded-xl border border-[oklch(0.18_0.005_60)] w-fit">
+        <div className="flex gap-1.5 mb-5 p-1 bg-[#1A1A1E] rounded-xl border border-[rgba(245,240,232,0.06)] w-fit">
           {([['active', 'Active Passes', Clock], ['history', 'Past Visitors', History]] as const).map(([key, label, Icon]) => (
-            <button key={key} onClick={() => setTab(key)} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === key ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'text-[oklch(0.55_0.01_60)] hover:text-[#D4C4A0]'}`}>
+            <button key={key} onClick={() => setTab(key)} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === key ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'text-[var(--text-body)] hover:text-[#D4C4A0]'}`}>
               <Icon className="w-3.5 h-3.5" /> {label}
             </button>
           ))}
@@ -125,23 +125,23 @@ export default function VisitorsPage() {
         {/* List */}
         <div className="space-y-3">
           {(tab === 'active' ? active : history).map(v => (
-            <div key={v.id} className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
+            <div key={v.id} className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl p-5">
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <h3 className="font-medium text-[#D4C4A0]">{v.name}</h3>
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${v.active ? 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]' : 'bg-[oklch(0.15_0.005_60)] text-[oklch(0.40_0.01_60)]'}`}>
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${v.active ? 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]' : 'bg-[#1A1A1E] text-[rgba(245,240,232,0.25)]'}`}>
                       {v.active ? 'Active' : 'Expired'}
                     </span>
                   </div>
-                  <p className="text-xs text-[oklch(0.45_0.01_60)]">{v.date} • {v.duration} • Lot {v.hostLot}</p>
-                  <p className="text-xs text-[oklch(0.45_0.01_60)]">{v.vehicle}</p>
-                  <p className="text-xs text-[oklch(0.55_0.01_60)] mt-1 italic">{v.purpose}</p>
+                  <p className="text-xs text-[var(--text-muted)]">{v.date} • {v.duration} • Lot {v.hostLot}</p>
+                  <p className="text-xs text-[var(--text-muted)]">{v.vehicle}</p>
+                  <p className="text-xs text-[var(--text-body)] mt-1 italic">{v.purpose}</p>
                 </div>
                 <div className="flex flex-col items-end gap-2 shrink-0">
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-xl font-medium tracking-widest text-[#B09B71]">{v.passCode}</span>
-                    <button onClick={() => copyPass(v.id, v.passCode)} className="p-1.5 rounded-lg text-[oklch(0.45_0.01_60)] hover:text-[#B09B71] transition-colors">
+                    <button onClick={() => copyPass(v.id, v.passCode)} className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[#B09B71] transition-colors">
                       {copiedId === v.id ? <CheckCircle className="w-3.5 h-3.5 text-[#3A7D6F]" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                   </div>
@@ -155,7 +155,7 @@ export default function VisitorsPage() {
             </div>
           ))}
           {(tab === 'active' ? active : history).length === 0 && (
-            <div className="text-center py-16 text-[oklch(0.40_0.01_60)]">No {tab === 'active' ? 'active passes' : 'past visitors'}</div>
+            <div className="text-center py-16 text-[rgba(245,240,232,0.25)]">No {tab === 'active' ? 'active passes' : 'past visitors'}</div>
           )}
         </div>
       </div>
@@ -163,10 +163,10 @@ export default function VisitorsPage() {
       {/* Add visitor modal */}
       {showForm && (
         <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-          <div className="bg-[oklch(0.12_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.10)] rounded-xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-5">
               <h3 className="font-medium text-[#D4C4A0]">Register Visitor</h3>
-              <button onClick={() => setShowForm(false)}><X className="w-4 h-4 text-[oklch(0.45_0.01_60)]" /></button>
+              <button onClick={() => setShowForm(false)}><X className="w-4 h-4 text-[var(--text-muted)]" /></button>
             </div>
             <div className="space-y-3">
               {[
@@ -177,13 +177,13 @@ export default function VisitorsPage() {
                 { label: 'Your Lot # *', key: 'hostLot', type: 'text', placeholder: '12' },
               ].map(({ label, key, type, placeholder }) => (
                 <div key={key}>
-                  <label className="block text-xs text-[oklch(0.45_0.01_60)] mb-1">{label}</label>
-                  <input type={type} value={(form as any)[key]} onChange={e => setForm({ ...form, [key]: e.target.value })} placeholder={placeholder} className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71]" />
+                  <label className="block text-xs text-[var(--text-muted)] mb-1">{label}</label>
+                  <input type={type} value={(form as any)[key]} onChange={e => setForm({ ...form, [key]: e.target.value })} placeholder={placeholder} className="w-full bg-[#222228] border border-[rgba(245,240,232,0.12)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71]" />
                 </div>
               ))}
               <div>
-                <label className="block text-xs text-[oklch(0.45_0.01_60)] mb-1">Duration</label>
-                <select value={form.duration} onChange={e => setForm({ ...form, duration: e.target.value })} className="w-full bg-[oklch(0.16_0.005_60)] border border-[oklch(0.24_0.005_60)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71]">
+                <label className="block text-xs text-[var(--text-muted)] mb-1">Duration</label>
+                <select value={form.duration} onChange={e => setForm({ ...form, duration: e.target.value })} className="w-full bg-[#222228] border border-[rgba(245,240,232,0.12)] rounded-lg px-3 py-2 text-sm text-[#D4C4A0] focus:outline-none focus:border-[#B09B71]">
                   {['1 hour', '2 hours', '4 hours', 'All day', '2 days', 'Weekend', '1 week'].map(d => <option key={d}>{d}</option>)}
                 </select>
               </div>

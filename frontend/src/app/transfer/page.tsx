@@ -39,7 +39,7 @@ export default function TransferPage() {
         {/* Header */}
         <div className="mb-10">
           <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2">Property Transfer Wizard</h1>
-          <p className="text-[oklch(0.50_0.01_60)]">Transfer your HOA membership NFT to the new property owner</p>
+          <p className="text-[rgba(245,240,232,0.45)]">Transfer your HOA membership NFT to the new property owner</p>
         </div>
 
         {/* Warning banner */}
@@ -58,46 +58,46 @@ export default function TransferPage() {
               <div className={`flex flex-col items-center gap-1 flex-1`}>
                 <div className={`w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all ${
                   step > s.id ? 'bg-[var(--brass-deep)] border-[var(--brass-deep)] text-[var(--surface-2)]'
-                  : step === s.id ? 'border-[#B09B71] text-[#B09B71] bg-[oklch(0.12_0.01_60)]'
-                  : 'border-[oklch(0.25_0.01_60)] text-[oklch(0.40_0.01_60)] bg-transparent'
+                  : step === s.id ? 'border-[#B09B71] text-[#B09B71] bg-[#1A1A1E]'
+                  : 'border-[rgba(245,240,232,0.12)] text-[rgba(245,240,232,0.25)] bg-transparent'
                 }`}>
                   <s.icon className="w-4 h-4" />
                 </div>
-                <span className={`text-[10px] text-center hidden sm:block ${step >= s.id ? 'text-[#B09B71]' : 'text-[oklch(0.35_0.01_60)]'}`}>{s.label}</span>
+                <span className={`text-[10px] text-center hidden sm:block ${step >= s.id ? 'text-[#B09B71]' : 'text-[var(--text-disabled)]'}`}>{s.label}</span>
               </div>
               {i < STEPS.length - 1 && (
-                <div className={`h-0.5 w-8 mx-1 rounded ${step > s.id ? 'bg-[var(--brass-deep)]' : 'bg-[oklch(0.20_0.005_60)]'}`} />
+                <div className={`h-0.5 w-8 mx-1 rounded ${step > s.id ? 'bg-[var(--brass-deep)]' : 'bg-[rgba(245,240,232,0.08)]'}`} />
               )}
             </div>
           ))}
         </div>
 
         {/* Step panels */}
-        <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-8">
+        <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl p-8">
 
           {/* Step 0: Confirm Sale */}
           {step === 0 && (
             <div className="space-y-6">
               <h2 className="text-xl font-medium text-[#D4C4A0]">Confirm Your Sale</h2>
-              <p className="text-[oklch(0.55_0.01_60)] text-sm">Before proceeding, please confirm the details of your property sale.</p>
+              <p className="text-[var(--text-body)] text-sm">Before proceeding, please confirm the details of your property sale.</p>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs text-[oklch(0.50_0.01_60)] mb-1.5 font-medium uppercase tracking-wide">Sale Price (USD)</label>
+                  <label className="block text-xs text-[rgba(245,240,232,0.45)] mb-1.5 font-medium uppercase tracking-wide">Sale Price (USD)</label>
                   <input
                     type="number"
                     value={salePrice}
                     onChange={(e) => setSalePrice(e.target.value)}
                     placeholder="550000"
-                    className="w-full bg-[oklch(0.14_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-lg px-4 py-3 text-[#D4C4A0] placeholder-[oklch(0.35_0.01_60)] focus:outline-none focus:border-[#B09B71] transition-colors"
+                    className="w-full bg-[#1A1A1E] border border-[rgba(245,240,232,0.10)] rounded-lg px-4 py-3 text-[#D4C4A0] placeholder-[rgba(245,240,232,0.20)] focus:outline-none focus:border-[#B09B71] transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-[oklch(0.50_0.01_60)] mb-1.5 font-medium uppercase tracking-wide">Closing Date</label>
+                  <label className="block text-xs text-[rgba(245,240,232,0.45)] mb-1.5 font-medium uppercase tracking-wide">Closing Date</label>
                   <input
                     type="date"
                     value={closingDate}
                     onChange={(e) => setClosingDate(e.target.value)}
-                    className="w-full bg-[oklch(0.14_0.005_60)] border border-[oklch(0.22_0.005_60)] rounded-lg px-4 py-3 text-[#D4C4A0] focus:outline-none focus:border-[#B09B71] transition-colors"
+                    className="w-full bg-[#1A1A1E] border border-[rgba(245,240,232,0.10)] rounded-lg px-4 py-3 text-[#D4C4A0] focus:outline-none focus:border-[#B09B71] transition-colors"
                   />
                 </div>
                 <label className="flex items-start gap-3 cursor-pointer">
@@ -107,7 +107,7 @@ export default function TransferPage() {
                     onChange={(e) => setSaleConfirmed(e.target.checked)}
                     className="mt-1 accent-[#B09B71]"
                   />
-                  <span className="text-sm text-[oklch(0.55_0.01_60)]">I confirm that I have executed a valid purchase agreement for my property in Faircroft and am ready to transfer my HOA membership NFT to the buyer.</span>
+                  <span className="text-sm text-[var(--text-body)]">I confirm that I have executed a valid purchase agreement for my property in Faircroft and am ready to transfer my HOA membership NFT to the buyer.</span>
                 </label>
               </div>
               <button
@@ -124,21 +124,21 @@ export default function TransferPage() {
           {step === 1 && (
             <div className="space-y-6">
               <h2 className="text-xl font-medium text-[#D4C4A0]">Enter Buyer's Wallet Address</h2>
-              <p className="text-[oklch(0.55_0.01_60)] text-sm">The buyer must provide their Ethereum wallet address. The NFT will be transferred directly to this address.</p>
+              <p className="text-[var(--text-body)] text-sm">The buyer must provide their Ethereum wallet address. The NFT will be transferred directly to this address.</p>
               <div>
-                <label className="block text-xs text-[oklch(0.50_0.01_60)] mb-1.5 font-medium uppercase tracking-wide">Buyer Ethereum Address</label>
+                <label className="block text-xs text-[rgba(245,240,232,0.45)] mb-1.5 font-medium uppercase tracking-wide">Buyer Ethereum Address</label>
                 <input
                   type="text"
                   value={buyerWallet}
                   onChange={(e) => { setBuyerWallet(e.target.value); setWalletError(''); }}
                   placeholder="0x742d35Cc6634C0532925a3b8D4C9b8F3E9A1234"
-                  className={`w-full bg-[oklch(0.14_0.005_60)] border rounded-lg px-4 py-3 text-[#D4C4A0] font-mono text-sm placeholder-[oklch(0.35_0.01_60)] focus:outline-none transition-colors ${walletError ? 'border-[#8B5A5A]' : 'border-[oklch(0.22_0.005_60)] focus:border-[#B09B71]'}`}
+                  className={`w-full bg-[#1A1A1E] border rounded-lg px-4 py-3 text-[#D4C4A0] font-mono text-sm placeholder-[rgba(245,240,232,0.20)] focus:outline-none transition-colors ${walletError ? 'border-[#8B5A5A]' : 'border-[rgba(245,240,232,0.10)] focus:border-[#B09B71]'}`}
                 />
                 {walletError && <p className="text-[#8B5A5A] text-xs mt-1">{walletError}</p>}
               </div>
-              <div className="p-4 rounded-xl bg-[oklch(0.14_0.005_60)] border border-[oklch(0.22_0.005_60)]">
-                <p className="text-xs text-[oklch(0.45_0.01_60)] font-medium mb-2">What the buyer receives:</p>
-                <ul className="space-y-1 text-xs text-[oklch(0.55_0.01_60)]">
+              <div className="p-4 rounded-xl bg-[#1A1A1E] border border-[rgba(245,240,232,0.10)]">
+                <p className="text-xs text-[var(--text-muted)] font-medium mb-2">What the buyer receives:</p>
+                <ul className="space-y-1 text-xs text-[var(--text-body)]">
                   <li> HOA membership NFT (Token ID: #47)</li>
                   <li> Voting rights in community governance</li>
                   <li> Access to all community amenities</li>
@@ -146,7 +146,7 @@ export default function TransferPage() {
                 </ul>
               </div>
               <div className="flex gap-3">
-                <button onClick={() => setStep(0)} className="px-5 py-2.5 rounded-xl border border-[oklch(0.22_0.005_60)] text-[oklch(0.55_0.01_60)] hover:text-[#D4C4A0] transition-colors text-sm">Back</button>
+                <button onClick={() => setStep(0)} className="px-5 py-2.5 rounded-xl border border-[rgba(245,240,232,0.10)] text-[var(--text-body)] hover:text-[#D4C4A0] transition-colors text-sm">Back</button>
                 <button
                   onClick={() => { if (validateWallet(buyerWallet)) setStep(2); }}
                   className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium hover:bg-[#B09B71] transition-colors"
@@ -170,8 +170,8 @@ export default function TransferPage() {
                   { label: 'To (Buyer)', value: `${buyerWallet.slice(0, 10)}...${buyerWallet.slice(-8)}` },
                   { label: 'Estimated Gas', value: '~$8.40 USD' },
                 ].map(({ label, value }) => (
-                  <div key={label} className="flex justify-between items-center py-3 border-b border-[oklch(0.15_0.005_60)]">
-                    <span className="text-xs text-[oklch(0.45_0.01_60)] uppercase tracking-wide font-medium">{label}</span>
+                  <div key={label} className="flex justify-between items-center py-3 border-b border-[rgba(245,240,232,0.05)]">
+                    <span className="text-xs text-[var(--text-muted)] uppercase tracking-wide font-medium">{label}</span>
                     <span className="text-sm text-[#D4C4A0] font-mono">{value}</span>
                   </div>
                 ))}
@@ -181,7 +181,7 @@ export default function TransferPage() {
                 <p className="text-[#8B5A5A]/70 text-xs">This transfer requires board approval. You will lose all access immediately upon board confirmation. There is no undo.</p>
               </div>
               <div className="flex gap-3">
-                <button onClick={() => setStep(1)} className="px-5 py-2.5 rounded-xl border border-[oklch(0.22_0.005_60)] text-[oklch(0.55_0.01_60)] hover:text-[#D4C4A0] transition-colors text-sm">Back</button>
+                <button onClick={() => setStep(1)} className="px-5 py-2.5 rounded-xl border border-[rgba(245,240,232,0.10)] text-[var(--text-body)] hover:text-[#D4C4A0] transition-colors text-sm">Back</button>
                 <button
                   onClick={() => setStep(3)}
                   className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--brass-deep)] text-[var(--surface-2)] font-medium hover:bg-[#B09B71] transition-colors"
@@ -199,12 +199,12 @@ export default function TransferPage() {
                 <Clock className="w-8 h-8 text-[#B09B71]" />
               </div>
               <h2 className="text-xl font-medium text-[#D4C4A0]">Awaiting Board Approval</h2>
-              <p className="text-[oklch(0.55_0.01_60)] text-sm max-w-sm mx-auto">Your transfer request has been submitted. The HOA board must approve this transfer within 5 business days. You'll receive a notification when approved.</p>
-              <div className="p-4 rounded-xl bg-[oklch(0.14_0.005_60)] text-left space-y-2">
-                <p className="text-xs text-[oklch(0.45_0.01_60)] font-medium">Approval Checklist:</p>
+              <p className="text-[var(--text-body)] text-sm max-w-sm mx-auto">Your transfer request has been submitted. The HOA board must approve this transfer within 5 business days. You'll receive a notification when approved.</p>
+              <div className="p-4 rounded-xl bg-[#1A1A1E] text-left space-y-2">
+                <p className="text-xs text-[var(--text-muted)] font-medium">Approval Checklist:</p>
                 {['Verify purchase agreement on file', 'Confirm buyer identity', 'Check outstanding dues/violations', 'Board vote (3/5 required)'].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-[oklch(0.55_0.01_60)]">
-                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center text-[8px] ${i === 0 ? 'border-[#B09B71] bg-[var(--brass-deep)]/20 text-[#B09B71]' : 'border-[oklch(0.25_0.01_60)]'}`}>
+                  <div key={i} className="flex items-center gap-2 text-xs text-[var(--text-body)]">
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center text-[8px] ${i === 0 ? 'border-[#B09B71] bg-[var(--brass-deep)]/20 text-[#B09B71]' : 'border-[rgba(245,240,232,0.12)]'}`}>
                       {i === 0 ? '' : ''}
                     </div>
                     {item}
@@ -226,7 +226,7 @@ export default function TransferPage() {
               {!transferSubmitted ? (
                 <>
                   <h2 className="text-xl font-medium text-[#D4C4A0]">Execute On-Chain Transfer</h2>
-                  <p className="text-[oklch(0.55_0.01_60)] text-sm max-w-sm mx-auto">Board approval received. Click below to execute the NFT transfer on-chain. Your wallet will prompt you to confirm the transaction.</p>
+                  <p className="text-[var(--text-body)] text-sm max-w-sm mx-auto">Board approval received. Click below to execute the NFT transfer on-chain. Your wallet will prompt you to confirm the transaction.</p>
                   <button
                     onClick={handleExecute}
                     className="flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[var(--brass-deep)] to-[#B09B71] text-[var(--surface-2)] font-medium text-lg hover:opacity-90 transition-opacity mx-auto shadow-lg"
@@ -234,7 +234,7 @@ export default function TransferPage() {
                     <Send className="w-5 h-5" />
                     Execute Transfer
                   </button>
-                  <button onClick={() => setStep(3)} className="text-xs text-[oklch(0.40_0.01_60)] hover:text-[oklch(0.60_0.01_60)] transition-colors">Back</button>
+                  <button onClick={() => setStep(3)} className="text-xs text-[rgba(245,240,232,0.25)] hover:text-[var(--text-body)] transition-colors">Back</button>
                 </>
               ) : (
                 <>
@@ -242,10 +242,10 @@ export default function TransferPage() {
                     <CheckCircle className="w-10 h-10 text-[#3A7D6F]" />
                   </div>
                   <h2 className="text-2xl font-medium text-[#D4C4A0]">Transfer Complete!</h2>
-                  <p className="text-[oklch(0.55_0.01_60)] text-sm">NFT Token #47 has been transferred to {buyerWallet.slice(0, 10)}...{buyerWallet.slice(-8)}. Your resident access has been revoked. Thank you for being part of Faircroft HOA.</p>
-                  <div className="p-4 rounded-xl bg-[oklch(0.14_0.005_60)] text-left">
-                    <p className="text-xs text-[oklch(0.45_0.01_60)] font-mono">Tx: 0xf9a8b2c...4e7d1  Confirmed</p>
-                    <p className="text-xs text-[oklch(0.45_0.01_60)] font-mono mt-1">Block: 19,847,203</p>
+                  <p className="text-[var(--text-body)] text-sm">NFT Token #47 has been transferred to {buyerWallet.slice(0, 10)}...{buyerWallet.slice(-8)}. Your resident access has been revoked. Thank you for being part of Faircroft HOA.</p>
+                  <div className="p-4 rounded-xl bg-[#1A1A1E] text-left">
+                    <p className="text-xs text-[var(--text-muted)] font-mono">Tx: 0xf9a8b2c...4e7d1  Confirmed</p>
+                    <p className="text-xs text-[var(--text-muted)] font-mono mt-1">Block: 19,847,203</p>
                   </div>
                 </>
               )}

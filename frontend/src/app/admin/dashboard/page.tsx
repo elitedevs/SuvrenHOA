@@ -251,13 +251,13 @@ export default function BoardDashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Activity Feed */}
         <div className="lg:col-span-2 glass-card rounded-xl overflow-hidden">
-          <div className="px-6 py-4 border-b border-[oklch(0.18_0.005_60)] flex items-center justify-between">
+          <div className="px-6 py-4 border-b border-[rgba(245,240,232,0.06)] flex items-center justify-between">
             <h2 className="text-sm font-medium text-[#D4C4A0]">Recent Activity</h2>
             <Link href="/activity" className="text-xs text-[#B09B71] hover:text-[#D4C4A0] transition-colors">
               View all →
             </Link>
           </div>
-          <div className="divide-y divide-[oklch(0.13_0.005_60)]">
+          <div className="divide-y divide-[rgba(245,240,232,0.04)]">
             {activity.map(event => (
               <div key={event.id} className="flex items-start gap-3 px-6 py-4 hover:bg-[rgba(245,240,232,0.02)] transition-colors">
                 <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
@@ -279,7 +279,7 @@ export default function BoardDashboardPage() {
         {/* Quick Actions */}
         <div className="space-y-4">
           <div className="glass-card rounded-xl overflow-hidden">
-            <div className="px-5 py-4 border-b border-[oklch(0.18_0.005_60)]">
+            <div className="px-5 py-4 border-b border-[rgba(245,240,232,0.06)]">
               <h2 className="text-sm font-medium text-[#D4C4A0]">Quick Actions</h2>
             </div>
             <div className="p-4 space-y-2">
