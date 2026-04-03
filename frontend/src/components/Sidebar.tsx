@@ -282,8 +282,12 @@ function NavItem({
 
             <div className="space-y-0.5">
               {section.children!.map((child) => {
-                const childActive =
-                  pathname === child.href || pathname.startsWith(child.href + '/');
+                // Exact match for children that share parent href (e.g. /treasury)
+                // Prefix match only for children with unique paths
+                const isSharedHref = child.href === section.href;
+                const childActive = isSharedHref
+                  ? pathname === child.href
+                  : pathname === child.href || pathname.startsWith(child.href + '/');
                 return (
                   <Link
                     key={child.href}
