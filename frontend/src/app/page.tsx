@@ -196,7 +196,7 @@ function Dashboard() {
           <h1 className="text-3xl sm:text-4xl font-normal tracking-tight">
             {hasProperty ? (
               <>
-                Welcome back,{' '}
+                Welcome Back,{' '}
                 <span className="gradient-text text-glow">{displayName}</span>
               </>
             ) : (
