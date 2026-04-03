@@ -114,9 +114,15 @@ body {
 }
 
 /* FIX-08: Never below 13px for descriptive text */
-p, span:not([class*="text-[10px]"]):not([class*="text-[11px]"]):not([class*="text-[12px]"]), li, td, th {
+/* Exclude spans with gradient-text or inside headings */
+p, li, td, th {
   font-size: max(13px, 0.867rem);
 }
+span:not([class*="text-[10px]"]):not([class*="text-[11px]"]):not([class*="text-[12px]"]):not(.gradient-text):not(.text-glow) {
+  font-size: max(13px, 0.867rem);
+}
+/* Let heading children inherit their parent size */
+h1 span, h2 span, h3 span { font-size: inherit; }
 
 /* FIX-09: Lucide icons — recessive, not dominant */
 svg.lucide, [class*="lucide-"] {
