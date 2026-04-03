@@ -214,8 +214,19 @@ function DocumentCard({
 
   if (!doc) {
     return (
-      <div className="glass-card rounded-xl hover-lift p-4 border border-[rgba(245,240,232,0.06)] opacity-50">
-        <p className="text-xs text-[var(--text-disabled)] italic">Document #{docId} could not be loaded</p>
+      <div className="glass-card rounded-xl hover-lift p-4 border border-[rgba(245,240,232,0.06)]">
+        <div className="flex items-center justify-between gap-3">
+          <p className="font-serif italic text-[var(--text-muted)] text-sm">Document unavailable</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="text-xs shrink-0 transition-colors"
+            style={{ color: '#B09B71' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.7'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = '1'; }}
+          >
+            Retry
+          </button>
+        </div>
       </div>
     );
   }

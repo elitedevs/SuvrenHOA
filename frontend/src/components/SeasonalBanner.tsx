@@ -75,6 +75,7 @@ function getDismissKey(): string {
 export function SeasonalBanner() {
   const [visible, setVisible] = useState(false);
   const [season, setSeason] = useState<SeasonInfo | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const key = getDismissKey();
@@ -85,6 +86,14 @@ export function SeasonalBanner() {
     }
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const dismiss = () => {
     localStorage.setItem(getDismissKey(), '1');
     setVisible(false);
@@ -93,8 +102,15 @@ export function SeasonalBanner() {
   if (!visible || !season) return null;
 
   return (
-    <div className={`relative bg-gradient-to-r ${season.gradient} border-b border-[rgba(245,240,232,0.05)] px-4 sm:px-6 py-2`}>
-      <div className="max-w-6xl mx-auto flex items-center gap-3">
+    <div
+      className={`relative bg-gradient-to-r ${season.gradient} border-b border-[rgba(245,240,232,0.05)] px-4 sm:px-6 overflow-hidden`}
+      style={{
+        height: scrolled ? '28px' : '40px',
+        padding: scrolled ? '0 1rem' : '0.5rem 1rem',
+        transition: 'height 0.3s ease, padding 0.3s ease',
+      }}
+    >
+      <div className="max-w-6xl mx-auto flex items-center gap-3 h-full">
         <span className="text-lg shrink-0">{season.emoji}</span>
         <p className="flex-1" style={{
           fontFamily: '"Playfair Display", Georgia, serif',

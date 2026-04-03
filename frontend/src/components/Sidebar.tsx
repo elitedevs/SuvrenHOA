@@ -503,7 +503,13 @@ export function Sidebar() {
             padding: collapsed ? '6px 4px' : '8px 10px',
           }}
         >
-          <div className={collapsed ? 'flex justify-center scale-75' : ''}>
+          <div
+            className={collapsed ? 'flex justify-center scale-75' : ''}
+            style={{
+              fontFamily: 'var(--font-mono)',
+              color: 'rgba(245, 240, 232, 0.6)',
+            }}
+          >
             <ConnectButton
               label="Connect"
               showBalance={false}

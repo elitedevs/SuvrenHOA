@@ -41,7 +41,15 @@ export default function TreasuryPage() {
         <div className="flex flex-wrap items-center gap-2">
           <Link
             href="/treasury/budget"
-            className="no-print w-full sm:w-auto shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[rgba(176,155,113,0.08)] hover:bg-[rgba(176,155,113,0.14)] text-sm text-[#B09B71] hover:text-[var(--parchment)] transition-all"
+            className="no-print w-full sm:w-auto shrink-0 flex items-center gap-2 px-4 py-2.5 text-sm transition-all"
+            style={{
+              background: 'transparent',
+              border: '1px solid rgba(176, 155, 113, 0.3)',
+              color: '#B09B71',
+              borderRadius: '8px',
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(176, 155, 113, 0.05)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'transparent'; }}
           >
             <BarChart2 className="w-4 h-4 opacity-60" /> Budget Planner
           </Link>
@@ -74,7 +82,7 @@ export default function TreasuryPage() {
           <div className="flex items-start justify-between mb-4">
             <div>
               <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-2">Operating Fund</p>
-              <p className="text-3xl font-normal text-[#3A7D6F]">${operatingBalance}</p>
+              <p className="text-3xl font-normal" style={{ color: '#2A5D4F' }}>${operatingBalance}</p>
               <p className="text-xs text-[var(--text-disabled)] mt-1">USDC · Day-to-day expenses</p>
             </div>
           </div>
@@ -82,7 +90,7 @@ export default function TreasuryPage() {
           <div className="space-y-2">
             <div className="flex justify-between text-xs text-[var(--text-disabled)]">
               <span>80% of dues</span>
-              <span className="text-[#3A7D6F]">{operatingPct.toFixed(0)}%</span>
+              <span style={{ color: '#2A5D4F' }}>{operatingPct.toFixed(0)}%</span>
             </div>
             <div className="progress-bar-track">
               <div
@@ -98,7 +106,7 @@ export default function TreasuryPage() {
           <div className="flex items-start justify-between mb-4">
             <div>
               <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-2">Reserve Fund</p>
-              <p className="text-3xl font-normal text-[var(--steel)]">${reserveBalance}</p>
+              <p className="text-3xl font-normal" style={{ color: '#8B9BB0' }}>${reserveBalance}</p>
               <p className="text-xs text-[var(--text-disabled)] mt-1">USDC · Long-term reserves</p>
             </div>
           </div>
@@ -106,12 +114,12 @@ export default function TreasuryPage() {
           <div className="space-y-2">
             <div className="flex justify-between text-xs text-[var(--text-disabled)]">
               <span>20% of dues</span>
-              <span className="text-[var(--steel)]">{reservePct.toFixed(0)}%</span>
+              <span style={{ color: '#8B9BB0' }}>{reservePct.toFixed(0)}%</span>
             </div>
             <div className="progress-bar-track">
               <div
-                className="progress-bar-fill bg-gradient-to-r from-[var(--steel)] to-[var(--steel)]"
-                style={{ width: `${reservePct}%` }}
+                className="progress-bar-fill"
+                style={{ width: `${reservePct}%`, background: '#8B9BB0' }}
               />
             </div>
           </div>
@@ -127,18 +135,18 @@ export default function TreasuryPage() {
             style={{ width: `${operatingPct}%` }}
           />
           <div
-            className="bg-gradient-to-r from-[var(--steel)] to-[var(--steel)] transition-all duration-700"
-            style={{ width: `${reservePct}%` }}
+            className="transition-all duration-700"
+            style={{ width: `${reservePct}%`, background: '#8B9BB0' }}
           />
         </div>
         <div className="flex justify-between mt-3 text-xs text-[var(--text-disabled)]">
           <div className="flex items-center gap-1.5">
-            <div className="w-2 h-2 rounded-full bg-[#3A7D6F]" />
-            <span>Operating <span className="text-[#3A7D6F]">{operatingPct.toFixed(0)}%</span></span>
+            <div className="w-2 h-2 rounded-full" style={{ background: '#2A5D4F' }} />
+            <span>Operating <span style={{ color: '#2A5D4F' }}>{operatingPct.toFixed(0)}%</span></span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="w-2 h-2 rounded-full bg-[var(--steel)]" />
-            <span>Reserve <span className="text-[var(--steel)]">{reservePct.toFixed(0)}%</span></span>
+            <div className="w-2 h-2 rounded-full" style={{ background: '#8B9BB0' }} />
+            <span>Reserve <span style={{ color: '#8B9BB0' }}>{reservePct.toFixed(0)}%</span></span>
           </div>
         </div>
       </div>

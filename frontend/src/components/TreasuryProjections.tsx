@@ -81,8 +81,8 @@ function MiniLineChart({ data, threshold }: { data: Projection[]; threshold: num
       {showThreshold && (
         <>
           <line x1={PAD.left} y1={thresholdY} x2={W - PAD.right} y2={thresholdY}
-            stroke="#8B5A5A" strokeWidth={1} strokeDasharray="4 3" opacity={0.6} />
-          <text x={W - PAD.right - 2} y={thresholdY - 3} fill="#8B5A5A" fontSize={9} textAnchor="end" opacity={0.8}>
+            stroke="#6B3A3A" strokeWidth={1} strokeDasharray="4 3" opacity={0.6} />
+          <text x={W - PAD.right - 2} y={thresholdY - 3} fill="#6B3A3A" fontSize={9} textAnchor="end" opacity={0.8}>
             Reserve min
           </text>
         </>
@@ -96,8 +96,8 @@ function MiniLineChart({ data, threshold }: { data: Projection[]; threshold: num
         <circle
           key={i}
           cx={p.x} cy={p.y} r={3}
-          fill={p.isBelowThreshold ? '#8B5A5A' : '#B09B71'}
-          stroke={p.isBelowThreshold ? '#7f1d1d' : '#1A1A1E'}
+          fill={p.isBelowThreshold ? '#6B3A3A' : '#B09B71'}
+          stroke={p.isBelowThreshold ? '#4A2020' : '#1A1A1E'}
           strokeWidth={1.5}
         />
       ))}
@@ -149,8 +149,8 @@ export function TreasuryProjections() {
         </div>
         <div className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full ${
           change >= 0
-            ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border border-[rgba(42,93,79,0.20)]'
-            : 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border border-[rgba(107,58,58,0.20)]'
+            ? 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border border-[rgba(42,93,79,0.20)]'
+            : 'bg-[rgba(107,58,58,0.10)] text-[#6B3A3A] border border-[rgba(107,58,58,0.20)]'
         }`}>
           {change >= 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
           {change >= 0 ? '+' : ''}${Math.abs(change / 1000).toFixed(1)}K projected
@@ -159,11 +159,11 @@ export function TreasuryProjections() {
 
       {/* Warning */}
       {warningMonths.length > 0 && (
-        <div className="flex items-start gap-3 p-3 rounded-xl bg-[#8B5A5A]/5 border border-[rgba(107,58,58,0.20)] mb-5">
-          <AlertTriangle className="w-4 h-4 text-[#8B5A5A] shrink-0 mt-0.5" />
+        <div className="flex items-start gap-3 p-3 rounded-xl bg-[#6B3A3A]/5 border border-[rgba(107,58,58,0.20)] mb-5">
+          <AlertTriangle className="w-4 h-4 text-[#6B3A3A] shrink-0 mt-0.5" />
           <div>
-            <p className="text-xs font-medium text-[#8B5A5A]">Reserve Warning</p>
-            <p className="text-xs text-[#8B5A5A]/70 mt-0.5">
+            <p className="text-xs font-medium text-[#6B3A3A]">Reserve Warning</p>
+            <p className="text-xs text-[#6B3A3A]/70 mt-0.5">
               Balance projected below ${RESERVE_THRESHOLD.toLocaleString()} minimum in{' '}
               {warningMonths.map(m => m.month).join(', ')}
             </p>
@@ -184,13 +184,13 @@ export function TreasuryProjections() {
         </div>
         <div className="bg-[rgba(245,240,232,0.03)] rounded-xl p-3">
           <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wide font-medium mb-1">Projected End</p>
-          <p className={`text-sm font-normal ${endBalance < RESERVE_THRESHOLD ? 'text-[#8B5A5A]' : 'text-[#3A7D6F]'}`}>
+          <p className={`text-sm font-normal ${endBalance < RESERVE_THRESHOLD ? 'text-[#6B3A3A]' : 'text-[#2A5D4F]'}`}>
             ${(endBalance / 1000).toFixed(1)}K
           </p>
         </div>
         <div className="bg-[rgba(245,240,232,0.03)] rounded-xl p-3">
           <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wide font-medium mb-1">Min Balance</p>
-          <p className={`text-sm font-normal ${minBalance < RESERVE_THRESHOLD ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>
+          <p className={`text-sm font-normal ${minBalance < RESERVE_THRESHOLD ? 'text-[#6B3A3A]' : 'text-[#B09B71]'}`}>
             ${(minBalance / 1000).toFixed(1)}K
           </p>
         </div>
@@ -214,11 +214,11 @@ export function TreasuryProjections() {
             </thead>
             <tbody>
               {projections.map((p, i) => (
-                <tr key={i} className={`border-b border-[oklch(0.12_0.005_60)] ${p.isBelowThreshold ? 'bg-[#8B5A5A]/5' : ''}`}>
-                  <td className={`py-1.5 pr-3 font-medium ${p.isBelowThreshold ? 'text-[#8B5A5A]' : 'text-[var(--text-muted)]'}`}>{p.month}</td>
-                  <td className="text-right py-1.5 pr-3 text-[#3A7D6F]">${(p.income / 1000).toFixed(1)}K</td>
-                  <td className="text-right py-1.5 pr-3 text-[#8B5A5A]">${(p.expenses / 1000).toFixed(1)}K</td>
-                  <td className={`text-right py-1.5 font-medium ${p.isBelowThreshold ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>
+                <tr key={i} className={`border-b border-[oklch(0.12_0.005_60)] ${p.isBelowThreshold ? 'bg-[#6B3A3A]/5' : ''}`}>
+                  <td className={`py-1.5 pr-3 font-medium ${p.isBelowThreshold ? 'text-[#6B3A3A]' : 'text-[var(--text-muted)]'}`}>{p.month}</td>
+                  <td className="text-right py-1.5 pr-3" style={{ color: '#2A5D4F' }}>${(p.income / 1000).toFixed(1)}K</td>
+                  <td className="text-right py-1.5 pr-3" style={{ color: '#6B3A3A' }}>${(p.expenses / 1000).toFixed(1)}K</td>
+                  <td className={`text-right py-1.5 font-medium ${p.isBelowThreshold ? 'text-[#6B3A3A]' : 'text-[#B09B71]'}`}>
                     ${(p.balance / 1000).toFixed(1)}K
                     {p.isBelowThreshold && ' '}
                   </td>
