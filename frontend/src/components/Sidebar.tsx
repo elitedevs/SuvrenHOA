@@ -522,8 +522,8 @@ export function Sidebar() {
       <aside
         className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40"
         style={{
-          background: 'var(--surface-1, #141416)',
-          borderRight: '1px solid var(--divider, rgba(245,240,232,0.05))',
+          background: 'var(--surface-1, #151518)',
+          boxShadow: '1px 0 8px rgba(0,0,0,0.3)',
         }}
       >
         {sidebarContent}
@@ -532,7 +532,7 @@ export function Sidebar() {
       {/* Mobile hamburger */}
       <button
         className="lg:hidden fixed top-3 left-3 z-50 p-2 rounded-lg"
-        style={{ background: 'var(--surface-1, #141416)', color: 'var(--text-muted, rgba(245,240,232,0.45))' }}
+        style={{ background: 'var(--surface-1, #151518)', color: 'var(--text-muted, rgba(245,240,232,0.45))' }}
         onClick={() => setMobileOpen(true)}
       >
         <Menu size={20} />
@@ -545,8 +545,7 @@ export function Sidebar() {
           <aside
             className="absolute left-0 top-0 bottom-0 shadow-2xl"
             style={{
-              background: 'var(--surface-1, #141416)',
-              borderRight: '1px solid var(--divider, rgba(245,240,232,0.05))',
+              background: 'var(--surface-1, #151518)',
             }}
           >
             <div className="absolute top-3 right-3">

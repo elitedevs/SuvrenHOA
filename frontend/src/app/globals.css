@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
   --color-obsidian: var(--obsidian);
   --color-parchment: var(--parchment);
@@ -31,7 +31,7 @@
 
   /* ── Surface levels — tonal separation without borders ── */
   --surface-0:      #0C0C0E;   /* page background */
-  --surface-1:      #141416;   /* card surface */
+  --surface-1:      #151518;   /* card surface */
   --surface-2:      #1A1A1E;   /* elevated / hover */
   --surface-3:      #222228;   /* deepest elevation */
 
@@ -50,7 +50,7 @@
 
   /* ── Typography ── */
   --font-heading: var(--font-playfair), 'Playfair Display', Georgia, serif;
-  --font-body:    var(--font-dm-sans), 'DM Sans', system-ui, sans-serif;
+  --font-body:    var(--font-inter), 'Inter', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
   --font-sans:    var(--font-body);
 
@@ -81,6 +81,7 @@
 
   /* ── Extended palette tokens ── */
   --steel:              #5A7A9A;   /* info accent — slate blue */
+  --brass:             #B09B71;   /* alias for aged-brass */
   --brass-deep:         #b8942e;   /* dark gold variant */
 
   /* ── Border tokens (legacy) ── */
