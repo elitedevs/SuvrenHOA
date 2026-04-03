@@ -418,9 +418,14 @@ pre,
   animation: drop-zone-pulse 3s ease-in-out infinite;
 }
 
+/* ── Cursor audit ─────────────────────────────────────────────────────────── */
+button, a, [role="button"], .clickable, summary { cursor: pointer; }
+input, textarea, select { cursor: text; }
+input[type="checkbox"], input[type="radio"] { cursor: pointer; }
+
 /* ── Focus visible ────────────────────────────────────────────────────────── */
 :focus-visible {
-  outline: 1px solid rgba(176, 155, 113, 0.5);
+  outline: 2px solid rgba(176, 155, 113, 0.5);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -626,8 +631,8 @@ button {
   transition: transform 100ms ease, opacity 150ms ease;
 }
 
-button:active {
-  transform: scale(0.98);
+button:active:not(:disabled), [role="button"]:active {
+  transform: scale(0.97);
 }
 
 /* ── Input focus ─────────────────────────────────────────────────────────── */
