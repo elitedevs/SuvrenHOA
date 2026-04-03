@@ -89,7 +89,7 @@ export default function GardenPage() {
 
   return (
     <div className="min-h-screen bg-[var(--obsidian)] p-6 lg:p-10">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="mb-8 flex items-start justify-between flex-wrap gap-4">
           <div>
             <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2 flex items-center gap-3">

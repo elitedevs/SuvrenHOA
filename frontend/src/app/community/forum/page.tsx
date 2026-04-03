@@ -87,7 +87,7 @@ export default function ForumPage() {
 
   if (selectedTopic) {
     return (
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
         <button onClick={() => setSelectedTopic(null)} className="text-[var(--text-disabled)] hover:text-[#B09B71] text-sm transition-colors mb-4">
           ← Back to Forum
         </button>

@@ -510,7 +510,7 @@ function CommunityLendingStats() {
 // ── Main Page ──
 export default function LoansPage() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10 page-enter">
+    <div className="max-w-4xl mx-auto px-6 py-10 page-enter">
       {/* Header */}
       <div className="mb-8 card-enter">
         <div className="flex items-center gap-2 mb-1">

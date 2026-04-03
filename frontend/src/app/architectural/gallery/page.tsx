@@ -293,7 +293,7 @@ export default function ArchitecturalGalleryPage() {
     : GALLERY_CATEGORIES.filter(c => c.id === activeCategory);
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10 page-enter">
+    <div className="max-w-4xl mx-auto px-6 py-10 page-enter">
       {/* Header */}
       <div className="mb-8">
         <Link href="/architectural" className="flex items-center gap-1 text-xs text-[var(--text-disabled)] hover:text-[#B09B71] mb-4 transition-colors">

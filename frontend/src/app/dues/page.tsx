@@ -121,7 +121,7 @@ function DuesPanel() {
 
   if (!hasProperty) {
     return (
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-12 page-enter">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 page-enter">
         <div className="glass-card rounded-xl hover-lift p-12 text-center">
           <Home className="w-8 h-8 text-[#B09B71] mx-auto mb-4" />
           <h2 className="text-xl font-medium mb-3">No Property Found</h2>

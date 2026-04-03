@@ -36,7 +36,7 @@ export default function ActivityPage() {
   const hasMore = paginated.length < filtered.length;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 page-enter">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 page-enter">
       {/* Header */}
       <div className="mb-8">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">On-Chain Events</p>

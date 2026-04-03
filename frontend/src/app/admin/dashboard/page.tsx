@@ -174,7 +174,7 @@ export default function BoardDashboardPage() {
   const openIncidents = incidents.filter((i: any) => i.status === 'open' || i.status === 'active').length;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10 page-enter">
+    <div className="max-w-4xl mx-auto px-6 py-10 page-enter">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-1">

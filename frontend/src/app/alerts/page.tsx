@@ -325,7 +325,7 @@ export default function AlertsPage() {
     <div className="relative">
       <div className="absolute inset-0 bg-radial-glow pointer-events-none" />
 
-      <div className="relative max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
         {/* Header */}
         <div className="mb-10">
           <p className="text-sm text-[var(--text-disabled)] font-medium uppercase tracking-widest mb-2">

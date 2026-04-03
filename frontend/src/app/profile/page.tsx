@@ -110,7 +110,7 @@ function ProfileForm() {
 
   if (isLoading) {
     return (
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter animate-pulse">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter animate-pulse">
         <div className="h-8 w-40 bg-[rgba(245,240,232,0.08)] rounded mb-2" />
         <div className="h-4 w-64 bg-[rgba(245,240,232,0.06)] rounded mb-8" />
         <div className="glass-card rounded-lg p-5 mb-6">

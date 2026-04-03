@@ -19,7 +19,7 @@ export default function ProposalsPage() {
   const [showCreate, setShowCreate] = useState(false);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
           <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Governance</p>

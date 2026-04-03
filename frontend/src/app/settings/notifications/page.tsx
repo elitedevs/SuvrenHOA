@@ -110,7 +110,7 @@ export default function NotificationPrefsPage() {
   const enabledCount = Object.values(prefs).filter(Boolean).length;
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10 page-enter">
       {saveError && (
         <div className="flex items-center justify-between gap-3 mb-4 px-4 py-3 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(139,90,90,0.30)] text-[#8B5A5A] text-sm">
           <span>{saveError}</span>

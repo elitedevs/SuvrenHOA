@@ -715,7 +715,7 @@ export default function MapPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#0d0b14] to-[#080810]">
-      <div className="max-w-6xl mx-auto px-4 py-8 sm:px-6">
+      <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6">
         {/* Page header */}
         <div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
           <div>

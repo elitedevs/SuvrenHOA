@@ -353,7 +353,7 @@ export default function CookbookPage() {
     .filter(r => !search || r.title.toLowerCase().includes(search.toLowerCase()) || r.cuisine.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <main className="max-w-5xl mx-auto px-4 py-8">
+    <main className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
           <h1 className="text-3xl font-medium gradient-text">Community Cookbook</h1>

@@ -225,7 +225,7 @@ export default function ContractsPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10 page-enter">
+    <div className="max-w-4xl mx-auto px-6 py-10 page-enter">
       {/* Header */}
       <div className="mb-10">
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Blockchain</p>

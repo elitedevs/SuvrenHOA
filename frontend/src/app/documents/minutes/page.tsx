@@ -318,7 +318,7 @@ export default function MeetingMinutesPage() {
   const sorted = [...minutes].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-8">
+    <main className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex items-start justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-medium gradient-text">Meeting Minutes</h1>

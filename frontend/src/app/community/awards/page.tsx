@@ -177,7 +177,7 @@ export default function AwardsPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
       <div className="mb-8">
         <h1 className="text-2xl sm:text-3xl font-medium flex items-center gap-3">
           <Trophy className="w-7 h-7 text-[#B09B71]" />

@@ -51,7 +51,7 @@ function Landing() {
             Welcome to{' '}
             <span className="gradient-text text-glow">SuvrenHOA</span>
           </h1>
-          <p className="text-[var(--text-muted)] text-xl sm:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
+          <p className="text-[var(--text-muted)] text-xl sm:text-2xl max-w-4xl mx-auto mb-10 leading-relaxed font-medium">
             Transparent, immutable, democratic HOA governance on the blockchain.
             <br className="hidden sm:block" />
             <span className="text-[var(--text-disabled)] text-lg font-normal mt-2 block">No management companies. No hidden spending. No altered records.</span>

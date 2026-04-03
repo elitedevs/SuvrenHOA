@@ -924,7 +924,7 @@ export default function OnboardingPage() {
   return (
     <div className="page-enter">
       {/* View switcher */}
-      <div className="max-w-3xl mx-auto px-4 pt-6 sm:pt-8">
+      <div className="max-w-4xl mx-auto px-4 pt-6 sm:pt-8">
         <div className="flex gap-2 mb-6">
           <button onClick={() => setView('wizard')}
             className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[#B09B71]/15 text-[#B09B71] border border-[#B09B71]/30' : 'glass-card text-[var(--text-muted)]'}`}>

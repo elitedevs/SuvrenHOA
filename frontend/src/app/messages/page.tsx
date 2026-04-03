@@ -302,7 +302,7 @@ function MessagingCenter({ address }: { address: string }) {
 
   if (!hasProperty) {
     return (
-      <div className="max-w-2xl mx-auto px-6 py-12 text-center">
+      <div className="max-w-4xl mx-auto px-6 py-12 text-center">
         <Home className="w-8 h-8 text-[var(--text-muted)] mx-auto mb-4" />
         <h2 className="text-xl font-medium mb-2">No Property NFT Found</h2>
         <p className="text-[var(--text-muted)] text-sm">You need a Faircroft Property NFT to use messaging.</p>

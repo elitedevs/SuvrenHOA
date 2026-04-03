@@ -164,7 +164,7 @@ export default function DocumentComparePage() {
 
   return (
     <div className="min-h-screen bg-[var(--obsidian)] p-6 lg:p-10">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <Link href="/documents" className="flex items-center gap-1.5 text-xs text-[oklch(0.45_0.01_60)] hover:text-[#B09B71] transition-colors mb-4">

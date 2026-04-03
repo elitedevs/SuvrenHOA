@@ -36,7 +36,7 @@ export default function DocumentsPage() {
   }, []);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 page-enter">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>

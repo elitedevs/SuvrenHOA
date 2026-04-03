@@ -70,7 +70,7 @@ export default function ImpactPage() {
 
   return (
     <div className="min-h-screen bg-[var(--obsidian)] p-6 lg:p-10">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-10 flex items-start justify-between flex-wrap gap-4">
           <div>
