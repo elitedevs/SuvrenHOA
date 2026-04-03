@@ -61,7 +61,7 @@ export default function RidesharePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[oklch(0.06_0.005_60)] p-6 lg:p-10">
+    <div className="min-h-screen bg-[var(--obsidian)] p-6 lg:p-10">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8 flex items-start justify-between flex-wrap gap-4">
           <div>

@@ -48,7 +48,7 @@ export default function EnergyPage() {
   const solarPercent = Math.min(100, Math.round((solarSavings / currentBill) * 100));
 
   return (
-    <div className="min-h-screen bg-[oklch(0.06_0.005_60)] p-6 lg:p-10">
+    <div className="min-h-screen bg-[var(--obsidian)] p-6 lg:p-10">
       <div className="max-w-5xl mx-auto">
         <div className="mb-10">
           <h1 className="text-3xl font-medium text-[#D4C4A0] mb-2 flex items-center gap-3">
