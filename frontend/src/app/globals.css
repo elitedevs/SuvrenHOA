@@ -414,9 +414,9 @@ pre,
   border: 1px solid rgba(245, 240, 232, 0.06);
 }
 
-/* ── RainbowKit / MetaMask overrides ── */
-[data-rk] button,
-[data-rk] [role="button"] {
+/* ── RainbowKit / MetaMask overrides (scoped to wallet wrapper) ── */
+.wallet-wrapper button,
+.wallet-wrapper [role="button"] {
   background: rgba(245, 240, 232, 0.04) !important;
   color: rgba(245, 240, 232, 0.7) !important;
   border: 1px solid rgba(245, 240, 232, 0.08) !important;
@@ -425,12 +425,12 @@ pre,
   font-size: 13px !important;
   box-shadow: none !important;
 }
-[data-rk] button:hover,
-[data-rk] [role="button"]:hover {
+.wallet-wrapper button:hover,
+.wallet-wrapper [role="button"]:hover {
   background: rgba(245, 240, 232, 0.06) !important;
   color: rgba(245, 240, 232, 0.85) !important;
 }
-[data-rk] [class*="iekbcc0"] {
+.wallet-wrapper [class*="iekbcc0"] {
   background: transparent !important;
   box-shadow: none !important;
 }

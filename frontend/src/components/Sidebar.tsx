@@ -496,7 +496,7 @@ export function Sidebar() {
           }}
         >
           <div
-            className={collapsed ? 'flex justify-center scale-75' : ''}
+            className={`wallet-wrapper ${collapsed ? 'flex justify-center scale-75' : ''}`}
             style={{
               fontFamily: 'var(--font-mono)',
               color: 'rgba(245, 240, 232, 0.6)',
