@@ -65,7 +65,7 @@ export default function EnergyPage() {
             { label: 'CO₂ Reduced', val: '47t', sub: 'This year', icon: Leaf, color: 'text-[#3A7D6F]' },
             { label: 'Green Score', val: '72/100', sub: 'Community rating', icon: Zap, color: 'text-[#B09B71]' },
           ].map(({ label, val, sub, icon: Icon, color }) => (
-            <div key={label} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-4">
+            <div key={label} className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-4">
               <Icon className={`w-5 h-5 ${color} mb-2`} />
               <p className={`text-2xl font-medium ${color}`}>{val}</p>
               <p className="text-xs text-[oklch(0.45_0.01_60)] font-medium mt-0.5">{label}</p>
@@ -76,7 +76,7 @@ export default function EnergyPage() {
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
           {/* Seasonal Tips */}
-          <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
+          <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
             <h2 className="text-lg font-medium text-[#D4C4A0] mb-4">Seasonal Energy Tips</h2>
             <div className="flex gap-1.5 mb-5 p-1 bg-[oklch(0.08_0.005_60)] rounded-xl">
               {(['Summer', 'Winter', 'Spring', 'Fall'] as const).map(s => (
@@ -97,7 +97,7 @@ export default function EnergyPage() {
           </div>
 
           {/* Solar Calculator */}
-          <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
+          <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
             <h2 className="text-lg font-medium text-[#D4C4A0] mb-4 flex items-center gap-2">
               <Calculator className="w-5 h-5 text-[#B09B71]" /> Solar Potential Calculator
             </h2>
@@ -137,7 +137,7 @@ export default function EnergyPage() {
         </div>
 
         {/* Green Improvements Table */}
-        <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl overflow-hidden">
+        <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-[oklch(0.15_0.005_60)]">
             <h2 className="text-lg font-medium text-[#D4C4A0] flex items-center gap-2">
               <Leaf className="w-5 h-5 text-[#3A7D6F]" /> Green Improvements & ROI

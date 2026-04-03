@@ -106,7 +106,7 @@ export default function PackagesPage() {
             { label: 'Today\'s Deliveries', val: packages.filter(p => p.date === new Date().toISOString().split('T')[0]).length, color: 'text-[#B09B71]' },
             { label: 'Total Tracked', val: packages.length, color: 'text-[oklch(0.65_0.01_60)]' },
           ].map(({ label, val, color }) => (
-            <div key={label} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
               <p className={`text-2xl font-medium ${color}`}>{val}</p>
               <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">{label}</p>
             </div>
@@ -143,7 +143,7 @@ export default function PackagesPage() {
             <div className="text-center py-16 text-[oklch(0.40_0.01_60)]">No packages found</div>
           )}
           {visible.map(pkg => (
-            <div key={pkg.id} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl px-5 py-4 flex items-center gap-4 flex-wrap">
+            <div key={pkg.id} className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl px-5 py-4 flex items-center gap-4 flex-wrap">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${CARRIER_COLORS[pkg.carrier]}`}>{pkg.carrier}</span>

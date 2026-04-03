@@ -103,18 +103,18 @@ export default function VisitorsPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
+          <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
             <p className="text-2xl font-medium text-[#B09B71]">{active.length}</p>
             <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">Active Passes Today</p>
           </div>
-          <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
+          <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
             <p className="text-2xl font-medium text-[oklch(0.65_0.01_60)]">{history.length}</p>
             <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">Past Visitors</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1.5 mb-5 p-1 bg-[oklch(0.10_0.005_60)] rounded-xl border border-[oklch(0.18_0.005_60)] w-fit">
+        <div className="flex gap-1.5 mb-5 p-1 bg-[#1A1A1E] rounded-xl border border-[oklch(0.18_0.005_60)] w-fit">
           {([['active', 'Active Passes', Clock], ['history', 'Past Visitors', History]] as const).map(([key, label, Icon]) => (
             <button key={key} onClick={() => setTab(key)} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === key ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'text-[oklch(0.55_0.01_60)] hover:text-[#D4C4A0]'}`}>
               <Icon className="w-3.5 h-3.5" /> {label}
@@ -125,7 +125,7 @@ export default function VisitorsPage() {
         {/* List */}
         <div className="space-y-3">
           {(tab === 'active' ? active : history).map(v => (
-            <div key={v.id} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
+            <div key={v.id} className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1 flex-wrap">

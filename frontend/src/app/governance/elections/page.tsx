@@ -127,7 +127,7 @@ export default function ElectionsPage() {
               : null;
 
             return (
-              <div key={election.id} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl overflow-hidden">
+              <div key={election.id} className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl overflow-hidden">
                 {/* Election header */}
                 <div className="px-6 py-5 border-b border-[oklch(0.15_0.005_60)]">
                   <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -227,7 +227,7 @@ export default function ElectionsPage() {
         </div>
 
         {/* Election timeline */}
-        <div className="mt-8 bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
+        <div className="mt-8 bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
           <h2 className="text-lg font-medium text-[#D4C4A0] mb-5 flex items-center gap-2">
             <Clock className="w-5 h-5 text-[#B09B71]" /> Election Timeline
           </h2>

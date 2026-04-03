@@ -82,7 +82,7 @@ export default function RidesharePage() {
             { label: 'Open Seats', val: rides.reduce((a, r) => a + r.seatsLeft, 0), color: 'text-[#3A7D6F]' },
             { label: 'Recurring Routes', val: rides.filter(r => r.recurring !== 'none').length, color: 'text-[oklch(0.65_0.01_60)]' },
           ].map(({ label, val, color }) => (
-            <div key={label} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
+            <div key={label} className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-4 text-center">
               <p className={`text-2xl font-medium ${color}`}>{val}</p>
               <p className="text-xs text-[oklch(0.45_0.01_60)] mt-1">{label}</p>
             </div>
@@ -92,7 +92,7 @@ export default function RidesharePage() {
         {/* Rides */}
         <div className="space-y-4">
           {rides.map(ride => (
-            <div key={ride.id} className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
+            <div key={ride.id} className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-2">

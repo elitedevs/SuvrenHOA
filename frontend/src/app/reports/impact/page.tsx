@@ -91,7 +91,7 @@ export default function ImpactPage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1.5 mb-8 p-1 bg-[oklch(0.10_0.005_60)] rounded-xl border border-[oklch(0.18_0.005_60)] w-fit">
+        <div className="flex gap-1.5 mb-8 p-1 bg-[#1A1A1E] rounded-xl border border-[oklch(0.18_0.005_60)] w-fit">
           {[['metrics', 'Impact Metrics', TrendingUp], ['timeline', 'Milestone Timeline', Shield]] .map(([key, label, Icon]: any) => (
             <button key={key} onClick={() => setActiveTab(key)} className={`flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === key ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'text-[oklch(0.55_0.01_60)] hover:text-[#D4C4A0]'}`}>
               <Icon className="w-3.5 h-3.5" /> {label}
@@ -107,7 +107,7 @@ export default function ImpactPage() {
             </div>
 
             {/* Community comparison */}
-            <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-6 mb-6">
+            <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-6 mb-6">
               <h2 className="text-lg font-medium text-[#D4C4A0] mb-5">Faircroft vs. National HOA Average</h2>
               <div className="space-y-4">
                 {[
@@ -160,7 +160,7 @@ export default function ImpactPage() {
         )}
 
         {activeTab === 'timeline' && (
-          <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-8">
+          <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-8">
             <h2 className="text-lg font-medium text-[#D4C4A0] mb-8">Community Milestones</h2>
             <div className="space-y-0">
               {TIMELINE.map(({ date, event, type }, i) => (

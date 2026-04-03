@@ -73,7 +73,7 @@ export default function TransferPage() {
         </div>
 
         {/* Step panels */}
-        <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-8">
+        <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-8">
 
           {/* Step 0: Confirm Sale */}
           {step === 0 && (

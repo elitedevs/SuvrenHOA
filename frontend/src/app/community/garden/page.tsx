@@ -114,7 +114,7 @@ export default function GardenPage() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           {/* Garden grid */}
           <div className="xl:col-span-2">
-            <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
+            <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-6">
               <div className="grid grid-cols-8 gap-2">
                 {plots.map((plot) => (
                   <button
@@ -133,7 +133,7 @@ export default function GardenPage() {
           <div className="space-y-4">
             {/* Selected plot detail */}
             {selected ? (
-              <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
+              <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-medium text-[#D4C4A0]">
                     Plot {String.fromCharCode(65 + selected.row)}{selected.col + 1}
@@ -160,14 +160,14 @@ export default function GardenPage() {
                 </div>
               </div>
             ) : (
-              <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-5 text-center">
+              <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-5 text-center">
                 <Info className="w-8 h-8 text-[oklch(0.35_0.01_60)] mx-auto mb-2" />
                 <p className="text-sm text-[oklch(0.45_0.01_60)]">Click a plot to view details</p>
               </div>
             )}
 
             {/* Seasonal calendar */}
-            <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
+            <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl p-5">
               <h3 className="font-medium text-[#D4C4A0] mb-3 flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-[#B09B71]" /> {season} Planting Tips
               </h3>

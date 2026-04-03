@@ -70,7 +70,7 @@ export default function ComparePage() {
         </div>
 
         {/* Units slider */}
-        <div className="mb-8 p-6 bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl">
+        <div className="mb-8 p-6 bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl">
           <div className="flex items-center justify-between mb-3">
             <label className="text-sm font-medium text-[#D4C4A0]">Community Size</label>
             <span className="text-2xl font-medium text-[#B09B71]">{units} homes</span>
@@ -106,7 +106,7 @@ export default function ComparePage() {
         </div>
 
         {/* Comparison table */}
-        <div className="bg-[oklch(0.10_0.005_60)] border border-[oklch(0.18_0.005_60)] rounded-xl overflow-hidden mb-6">
+        <div className="bg-[#1A1A1E] border border-[oklch(0.18_0.005_60)] rounded-xl overflow-hidden mb-6">
           <div className="grid grid-cols-3 bg-[oklch(0.14_0.005_60)] px-6 py-4 text-xs font-medium uppercase tracking-widest text-[oklch(0.45_0.01_60)]">
             <div>Category</div>
             <div className="text-center">Traditional HOA</div>
