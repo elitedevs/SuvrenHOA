@@ -381,10 +381,9 @@ export function Sidebar() {
 
   const toggleSection = (label: string) => {
     setExpandedSections((prev) => {
-      const next = new Set(prev);
-      if (next.has(label)) next.delete(label);
-      else next.add(label);
-      return next;
+      // Accordion: only one section open at a time
+      if (prev.has(label)) return new Set<string>();
+      return new Set<string>([label]);
     });
   };
 
