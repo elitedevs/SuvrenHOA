@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 780" width="800" height="780">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="780" fill="white"/>
+  <rect x="4" y="4" width="792" height="772" fill="none" stroke="black" stroke-width="2.5"/>
+  <rect x="9" y="9" width="782" height="762" fill="none" stroke="black" stroke-width="0.75"/>
+
+  <!-- Title -->
+  <line x1="9" y1="58" x2="791" y2="58" stroke="black" stroke-width="1"/>
+  <text x="400" y="28" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold">FIG. 5</text>
+  <text x="400" y="49" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10">DOCUMENT REGISTRATION AND VERIFICATION WORKFLOW</text>
+
+  <!-- ===================== STEP 0: SOURCE ===================== -->
+  <text x="400" y="80" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">STEP 0 — DOCUMENT SOURCE</text>
+
+  <!-- 502: Source Document (parallelogram for I/O) -->
+  <polygon points="280,90 540,90 520,130 260,130" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="400" y="108" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">502 — SOURCE DOCUMENT</text>
+  <text x="400" y="122" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">CC&amp;R, minutes, budget, amendment, resolution (PDF/file)</text>
+
+  <!-- Admin label -->
+  <rect x="18" y="95" width="120" height="35" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="78" y="108" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">500 — ADMIN</text>
+  <text x="78" y="122" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">(uploads doc)</text>
+  <line x1="138" y1="112" x2="260" y2="112" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- Arrow down -->
+  <line x1="400" y1="130" x2="400" y2="168" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- ===================== STEP 1: HASH ===================== -->
+  <text x="400" y="163" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">STEP 1 — HASH COMPUTATION</text>
+
+  <!-- 504: SHA-256 (process box) -->
+  <rect x="255" y="170" width="290" height="65" fill="white" stroke="black" stroke-width="2"/>
+  <text x="259" y="182" font-family="Arial,Helvetica,sans-serif" font-size="8">504</text>
+  <text x="400" y="197" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">SHA-256 HASH COMPUTATION</text>
+  <text x="400" y="213" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">contentHash = SHA256(document_bytes)</text>
+  <text x="400" y="228" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">32-byte hash — deterministic, collision-resistant</text>
+
+  <!-- Arrow split to step 2a and 2b -->
+  <line x1="400" y1="235" x2="400" y2="258" stroke="black" stroke-width="1"/>
+  <line x1="240" y1="258" x2="560" y2="258" stroke="black" stroke-width="1"/>
+  <line x1="240" y1="258" x2="240" y2="280" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="560" y1="258" x2="560" y2="280" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- ===================== STEP 2a + 2b SIDE BY SIDE ===================== -->
+  <text x="240" y="276" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">STEP 2a</text>
+  <text x="560" y="276" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">STEP 2b</text>
+
+  <!-- 506: Arweave -->
+  <rect x="70" y="282" width="340" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="74" y="294" font-family="Arial,Helvetica,sans-serif" font-size="8">506</text>
+  <text x="240" y="310" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">ARWEAVE NETWORK</text>
+  <text x="240" y="326" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Permanent Storage</text>
+  <text x="240" y="342" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">• Upload raw document content</text>
+  <text x="240" y="358" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">• Receive Transaction ID (43-char base64)</text>
+  <text x="240" y="374" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">• Pay AR token once — permanent storage</text>
+
+  <!-- 508: IPFS -->
+  <rect x="390" y="282" width="340" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="394" y="294" font-family="Arial,Helvetica,sans-serif" font-size="8">508</text>
+  <text x="560" y="310" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">IPFS NETWORK</text>
+  <text x="560" y="326" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Fast Retrieval Cache</text>
+  <text x="560" y="342" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">• Pin document content</text>
+  <text x="560" y="358" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">• Receive CID v1 (content-addressed)</text>
+  <text x="560" y="374" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">• P2P distribution / fast access</text>
+
+  <!-- Arrows with labels converging to Step 3 -->
+  <line x1="240" y1="382" x2="240" y2="420" stroke="black" stroke-width="1"/>
+  <text x="255" y="405" font-family="Arial,Helvetica,sans-serif" font-size="8">arweaveTxId</text>
+  <line x1="560" y1="382" x2="560" y2="420" stroke="black" stroke-width="1"/>
+  <text x="575" y="405" font-family="Arial,Helvetica,sans-serif" font-size="8">ipfsCid</text>
+  <line x1="240" y1="420" x2="400" y2="420" stroke="black" stroke-width="1"/>
+  <line x1="560" y1="420" x2="400" y2="420" stroke="black" stroke-width="1"/>
+  <line x1="400" y1="420" x2="400" y2="445" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- ===================== STEP 3: ON-CHAIN REGISTRATION ===================== -->
+  <text x="400" y="442" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">STEP 3 — ON-CHAIN REGISTRATION</text>
+
+  <!-- 510: DocumentRegistry.registerDocument() -->
+  <rect x="60" y="448" width="680" height="120" fill="white" stroke="black" stroke-width="2"/>
+  <text x="64" y="460" font-family="Arial,Helvetica,sans-serif" font-size="8">510</text>
+  <text x="400" y="476" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">DocumentRegistry.registerDocument()</text>
+
+  <text x="80" y="494" font-family="Arial,Helvetica,sans-serif" font-size="8">Input: contentHash | arweaveTxId | ipfsCid | docType | title | supersedes</text>
+
+  <text x="80" y="512" font-family="Arial,Helvetica,sans-serif" font-size="8">Validates:</text>
+  <text x="95" y="525" font-family="Arial,Helvetica,sans-serif" font-size="8">contentHash != 0x0</text>
+  <text x="95" y="537" font-family="Arial,Helvetica,sans-serif" font-size="8">arweaveTxId not empty</text>
+  <text x="95" y="549" font-family="Arial,Helvetica,sans-serif" font-size="8">hash not already registered (immutability check)</text>
+
+  <text x="380" y="512" font-family="Arial,Helvetica,sans-serif" font-size="8">Stores (append-only — no delete, no modify):</text>
+  <text x="395" y="525" font-family="Arial,Helvetica,sans-serif" font-size="8">Document { contentHash, timestamp, supersedes,</text>
+  <text x="395" y="537" font-family="Arial,Helvetica,sans-serif" font-size="8">docType, uploadedBy, arweaveTxId, ipfsCid, title }</text>
+  <text x="395" y="549" font-family="Arial,Helvetica,sans-serif" font-size="8">Emits: DocumentRegistered(docId, contentHash, ...)</text>
+  <text x="395" y="562" font-family="Arial,Helvetica,sans-serif" font-size="8">512 — docId</text>
+
+  <!-- Arrow → Verification -->
+  <line x1="400" y1="568" x2="400" y2="605" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- ===================== STEP 4: VERIFICATION ===================== -->
+  <text x="400" y="602" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">STEP 4 — PUBLIC VERIFICATION (Anyone, Anytime)</text>
+
+  <!-- 514: Verification -->
+  <rect x="60" y="610" width="680" height="90" fill="white" stroke="black" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="64" y="622" font-family="Arial,Helvetica,sans-serif" font-size="8">514</text>
+  <text x="400" y="638" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">verifyDocument(contentHash) → (exists, docId, Document)</text>
+
+  <!-- Steps in verification -->
+  <line x1="100" y1="650" x2="220" y2="650" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+  <text x="150" y="645" font-family="Arial,Helvetica,sans-serif" font-size="8">download doc</text>
+  <!-- box: User downloads from Arweave -->
+  <rect x="60" y="655" width="155" height="38" fill="white" stroke="black" stroke-width="1"/>
+  <text x="137" y="669" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">User downloads</text>
+  <text x="137" y="683" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">from Arweave</text>
+
+  <line x1="220" y1="674" x2="310" y2="674" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="310" y="655" width="155" height="38" fill="white" stroke="black" stroke-width="1"/>
+  <text x="387" y="669" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Compute SHA-256</text>
+  <text x="387" y="683" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">client-side</text>
+
+  <line x1="465" y1="674" x2="545" y2="674" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+  <rect x="545" y="655" width="185" height="38" fill="white" stroke="black" stroke-width="1"/>
+  <text x="637" y="667" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Compare to on-chain hash</text>
+  <text x="637" y="679" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">= cryptographic authenticity proof</text>
+
+  <!-- Figure number -->
+  <text x="400" y="762" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-style="italic">FIG. 5 — Document Registration and Verification Workflow</text>
+</svg>

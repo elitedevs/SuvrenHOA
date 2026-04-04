@@ -1,6 +1,6 @@
 ---
 title: "SuvrenHOA Patent Drawings — FIG. 1–7"
-author: "[Ryan's full legal name]"
+author: "Ryan Shanahan"
 date: "2026-03-24"
 ---
 
@@ -17,7 +17,7 @@ date: "2026-03-24"
 
 # PATENT DRAWINGS
 ## Application: Blockchain-Based HOA Governance System
-### Inventor: [Ryan's full legal name] | Assignee: Suvren LLC [NC?]
+### Inventor: Ryan Shanahan | Assignee: Suvren LLC North Carolina
 
 ---
 
@@ -510,4 +510,4 @@ date: "2026-03-24"
 ---
 
 *All figures © 2026 Suvren LLC. Prepared in support of provisional patent application.*
-*Inventor: [Ryan's full legal name]*
+*Inventor: Ryan Shanahan*

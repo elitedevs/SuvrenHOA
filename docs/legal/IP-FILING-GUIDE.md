@@ -109,7 +109,7 @@ You qualify if ALL are true:
 | Field | Value |
 |-------|-------|
 | **Title of Invention** | Blockchain-Based Homeowners Association Governance System with Soulbound Property Tokens, Tiered Category-Specific Quorum Voting, Automated Treasury Allocation, Immutable Document Registry, and Composite Community Health Scoring |
-| **Inventor 1 Name** | [Ryan's full legal name] |
+| **Inventor 1 Name** | Ryan Shanahan |
 | **Inventor 1 Address** | [Ryan's address] |
 | **Inventor 1 Citizenship** | US |
 | **Correspondence Address** | [Same or LLC address] |

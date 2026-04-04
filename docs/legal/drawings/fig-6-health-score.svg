@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 780" width="800" height="780">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="780" fill="white"/>
+  <rect x="4" y="4" width="792" height="772" fill="none" stroke="black" stroke-width="2.5"/>
+  <rect x="9" y="9" width="782" height="762" fill="none" stroke="black" stroke-width="0.75"/>
+
+  <!-- Title -->
+  <line x1="9" y1="58" x2="791" y2="58" stroke="black" stroke-width="1"/>
+  <text x="400" y="28" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold">FIG. 6</text>
+  <text x="400" y="49" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10">COMMUNITY HEALTH SCORE COMPUTATION DIAGRAM</text>
+
+  <!-- ===================== INPUT SIGNALS ===================== -->
+  <text x="400" y="76" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">INPUT SIGNALS</text>
+
+  <!-- Signal 1: Dues Collection Rate -->
+  <rect x="18" y="83" width="365" height="85" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="22" y="95" font-family="Arial,Helvetica,sans-serif" font-size="8">602</text>
+  <text x="22" y="109" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">SIGNAL 1 — Dues Collection Rate</text>
+  <text x="22" y="124" font-family="Arial,Helvetica,sans-serif" font-size="8">Source: FaircroftTreasury.isDuesCurrent(tokenId)</text>
+  <text x="22" y="138" font-family="Arial,Helvetica,sans-serif" font-size="8">Formula: (lots current / total lots) × 100</text>
+  <text x="22" y="152" font-family="Arial,Helvetica,sans-serif" font-size="8">Range: 0–100</text>
+  <text x="350" y="138" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">Weight: 30%</text>
+
+  <!-- Signal 2: Governance Participation -->
+  <rect x="417" y="83" width="365" height="85" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="421" y="95" font-family="Arial,Helvetica,sans-serif" font-size="8">604</text>
+  <text x="421" y="109" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">SIGNAL 2 — Governance Participation Rate</text>
+  <text x="421" y="124" font-family="Arial,Helvetica,sans-serif" font-size="8">Source: FaircroftGovernor (proposal vote counts)</text>
+  <text x="421" y="138" font-family="Arial,Helvetica,sans-serif" font-size="8">Formula: (votes cast / eligible voters) × 100</text>
+  <text x="421" y="152" font-family="Arial,Helvetica,sans-serif" font-size="8">Range: 0–100</text>
+  <text x="770" y="138" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">Weight: 25%</text>
+
+  <!-- Signal 3: Reserve Fund Health -->
+  <rect x="18" y="178" width="365" height="85" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="22" y="190" font-family="Arial,Helvetica,sans-serif" font-size="8">606</text>
+  <text x="22" y="204" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">SIGNAL 3 — Reserve Fund Health</text>
+  <text x="22" y="219" font-family="Arial,Helvetica,sans-serif" font-size="8">Source: FaircroftTreasury.getTreasurySnapshot()</text>
+  <text x="22" y="233" font-family="Arial,Helvetica,sans-serif" font-size="8">Formula: (reserve balance / total balance) vs. 20% target</text>
+  <text x="22" y="247" font-family="Arial,Helvetica,sans-serif" font-size="8">Range: 0–100</text>
+  <text x="350" y="233" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">Weight: 25%</text>
+
+  <!-- Signal 4: Document Transparency -->
+  <rect x="417" y="178" width="365" height="85" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="421" y="190" font-family="Arial,Helvetica,sans-serif" font-size="8">608</text>
+  <text x="421" y="204" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">SIGNAL 4 — Document Transparency Index</text>
+  <text x="421" y="219" font-family="Arial,Helvetica,sans-serif" font-size="8">Source: DocumentRegistry.getDocumentCount()</text>
+  <text x="421" y="233" font-family="Arial,Helvetica,sans-serif" font-size="8">Formula: log-normalized count of registered documents</text>
+  <text x="421" y="247" font-family="Arial,Helvetica,sans-serif" font-size="8">Range: 0–100</text>
+  <text x="770" y="233" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">Weight: 10%</text>
+
+  <!-- Signal 5: Open Issues -->
+  <rect x="217" y="273" width="365" height="85" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="221" y="285" font-family="Arial,Helvetica,sans-serif" font-size="8">610</text>
+  <text x="221" y="299" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">SIGNAL 5 — Open Maintenance Issues</text>
+  <text x="221" y="314" font-family="Arial,Helvetica,sans-serif" font-size="8">Source: Supabase maintenance_requests table</text>
+  <text x="221" y="328" font-family="Arial,Helvetica,sans-serif" font-size="8">Formula: 100 − (open issues / total issues × 100)</text>
+  <text x="221" y="342" font-family="Arial,Helvetica,sans-serif" font-size="8">Range: 0–100</text>
+  <text x="565" y="328" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">Weight: 10%</text>
+
+  <!-- Arrows from signals to algorithm -->
+  <line x1="200" y1="125" x2="200" y2="458" stroke="black" stroke-width="0.75" stroke-dasharray="3,2"/>
+  <line x1="200" y1="458" x2="265" y2="458" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <line x1="599" y1="125" x2="599" y2="458" stroke="black" stroke-width="0.75" stroke-dasharray="3,2"/>
+  <line x1="599" y1="458" x2="534" y2="458" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <line x1="200" y1="220" x2="200" y2="460" stroke="black" stroke-width="0.75"/>
+  <line x1="599" y1="220" x2="599" y2="460" stroke="black" stroke-width="0.75"/>
+
+  <line x1="399" y1="358" x2="399" y2="450" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- ===================== FORMULA BLOCK ===================== -->
+  <text x="400" y="442" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">WEIGHTED AGGREGATION</text>
+
+  <!-- 612: Formula Box -->
+  <rect x="110" y="448" width="580" height="80" fill="white" stroke="black" stroke-width="2.5"/>
+  <text x="114" y="462" font-family="Arial,Helvetica,sans-serif" font-size="8">612 — COMPOSITE HEALTH SCORE FORMULA</text>
+  <text x="400" y="486" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="bold">H = (S1 × 0.30) + (S2 × 0.25) + (S3 × 0.25) + (S4 × 0.10) + (S5 × 0.10)</text>
+  <text x="400" y="507" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10">Range: 0 to 100 (integer)</text>
+  <text x="400" y="522" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">H = composite health score; S1–S5 = individual component scores (0–100)</text>
+
+  <!-- Arrow → Classification -->
+  <line x1="400" y1="528" x2="400" y2="562" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- ===================== OUTPUT: SCORE CLASSIFICATION ===================== -->
+  <text x="400" y="558" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">OUTPUT — SCORE CLASSIFICATION</text>
+
+  <!-- 614: EXCELLENT 90-100 -->
+  <rect x="110" y="565" width="580" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="115" y="582" font-family="Arial,Helvetica,sans-serif" font-size="8">614</text>
+  <text x="165" y="586" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">90 – 100</text>
+  <!-- bar -->
+  <rect x="230" y="570" width="290" height="18" fill="white" stroke="black" stroke-width="1"/>
+  <rect x="230" y="570" width="290" height="18" fill="none" stroke="none"/>
+  <!-- filled bar using lines -->
+  <line x1="230" y1="579" x2="520" y2="579" stroke="black" stroke-width="10"/>
+  <text x="540" y="586" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">EXCELLENT</text>
+  <text x="660" y="586" font-family="Arial,Helvetica,sans-serif" font-size="8">Exemplary governance</text>
+
+  <!-- 616: GOOD 75-89 -->
+  <rect x="110" y="597" width="580" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="115" y="614" font-family="Arial,Helvetica,sans-serif" font-size="8">616</text>
+  <text x="165" y="618" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">75 – 89</text>
+  <rect x="230" y="602" width="232" height="18" fill="none" stroke="black" stroke-width="1"/>
+  <line x1="230" y1="611" x2="462" y2="611" stroke="black" stroke-width="10"/>
+  <text x="540" y="618" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">GOOD</text>
+  <text x="660" y="618" font-family="Arial,Helvetica,sans-serif" font-size="8">Healthy community</text>
+
+  <!-- 618: FAIR 50-74 -->
+  <rect x="110" y="629" width="580" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="115" y="646" font-family="Arial,Helvetica,sans-serif" font-size="8">618</text>
+  <text x="165" y="650" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">50 – 74</text>
+  <line x1="230" y1="643" x2="433" y2="643" stroke="black" stroke-width="10"/>
+  <text x="540" y="650" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">FAIR</text>
+  <text x="660" y="650" font-family="Arial,Helvetica,sans-serif" font-size="8">Needs attention</text>
+
+  <!-- 620: POOR 25-49 -->
+  <rect x="110" y="661" width="580" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="115" y="678" font-family="Arial,Helvetica,sans-serif" font-size="8">620</text>
+  <text x="165" y="682" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">25 – 49</text>
+  <line x1="230" y1="675" x2="375" y2="675" stroke="black" stroke-width="10"/>
+  <text x="540" y="682" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">POOR</text>
+  <text x="660" y="682" font-family="Arial,Helvetica,sans-serif" font-size="8">Significant issues</text>
+
+  <!-- 622: CRITICAL 0-24 -->
+  <rect x="110" y="693" width="580" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="115" y="710" font-family="Arial,Helvetica,sans-serif" font-size="8">622</text>
+  <text x="165" y="714" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">0 – 24</text>
+  <line x1="230" y1="707" x2="317" y2="707" stroke="black" stroke-width="10"/>
+  <text x="540" y="714" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">CRITICAL</text>
+  <text x="660" y="714" font-family="Arial,Helvetica,sans-serif" font-size="8">Requires immediate action</text>
+
+  <!-- Scale labels -->
+  <text x="230" y="740" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="7">0</text>
+  <text x="520" y="740" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="7">100</text>
+  <line x1="230" y1="728" x2="520" y2="728" stroke="black" stroke-width="0.75"/>
+  <line x1="230" y1="724" x2="230" y2="732" stroke="black" stroke-width="0.75"/>
+  <line x1="520" y1="724" x2="520" y2="732" stroke="black" stroke-width="0.75"/>
+  <text x="375" y="740" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="7">SCORE SCALE</text>
+
+  <!-- Figure number -->
+  <text x="400" y="762" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-style="italic">FIG. 6 — Community Health Score Computation Diagram</text>
+</svg>

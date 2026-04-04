@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 760" width="800" height="760">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="760" fill="white"/>
+  <rect x="4" y="4" width="792" height="752" fill="none" stroke="black" stroke-width="2.5"/>
+  <rect x="9" y="9" width="782" height="742" fill="none" stroke="black" stroke-width="0.75"/>
+
+  <!-- Title -->
+  <line x1="9" y1="58" x2="791" y2="58" stroke="black" stroke-width="1"/>
+  <text x="400" y="28" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold">FIG. 4</text>
+  <text x="400" y="49" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10">TREASURY FUND FLOW DIAGRAM</text>
+
+  <!-- ===================== TOP: DUES ENTRY ===================== -->
+
+  <!-- 402: Homeowner -->
+  <rect x="40" y="78" width="130" height="65" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="44" y="90" font-family="Arial,Helvetica,sans-serif" font-size="8">402</text>
+  <text x="105" y="107" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">HOMEOWNER</text>
+  <text x="105" y="121" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">(Property Owner)</text>
+  <text x="105" y="134" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">holds PropertyNFT</text>
+
+  <!-- 404: USDC Token -->
+  <rect x="235" y="78" width="155" height="65" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="239" y="90" font-family="Arial,Helvetica,sans-serif" font-size="8">404</text>
+  <text x="312" y="107" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">USDC TOKEN</text>
+  <text x="312" y="121" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">ERC-20 stablecoin</text>
+  <text x="312" y="134" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">safeTransferFrom()</text>
+
+  <!-- 406: Treasury Contract -->
+  <rect x="460" y="68" width="200" height="85" fill="white" stroke="black" stroke-width="2"/>
+  <text x="464" y="80" font-family="Arial,Helvetica,sans-serif" font-size="8">406</text>
+  <text x="560" y="100" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">TREASURY CONTRACT</text>
+  <text x="560" y="116" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">payDues(tokenId, quarters)</text>
+  <text x="560" y="129" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">1 qtr: $200 USDC</text>
+  <text x="560" y="142" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">4 qtrs: $760 USDC (5% disc.) Late: +10%</text>
+
+  <!-- Arrow: Homeowner → USDC -->
+  <line x1="170" y1="110" x2="233" y2="110" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+  <text x="200" y="103" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">approve()</text>
+
+  <!-- Arrow: USDC → Treasury -->
+  <line x1="390" y1="110" x2="458" y2="110" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+  <text x="422" y="103" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">transfer</text>
+
+  <!-- ===================== AUTO-SPLIT ===================== -->
+
+  <!-- Arrow: Treasury → AutoSplit -->
+  <line x1="560" y1="153" x2="560" y2="195" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- 408: Auto-Split -->
+  <rect x="410" y="197" width="300" height="50" fill="white" stroke="black" stroke-width="2"/>
+  <text x="414" y="209" font-family="Arial,Helvetica,sans-serif" font-size="8">408</text>
+  <text x="560" y="225" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">AUTOMATED FUND SPLIT</text>
+  <text x="560" y="240" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">allocate(amount × 0.80, amount × 0.20)</text>
+
+  <!-- Arrow split left (80%) -->
+  <line x1="460" y1="247" x2="340" y2="295" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="375" y="272" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">80%</text>
+
+  <!-- Arrow split right (20%) -->
+  <line x1="660" y1="247" x2="680" y2="295" stroke="black" stroke-width="1.5" marker-end="url(#arr)"/>
+  <text x="675" y="272" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">20%</text>
+
+  <!-- 410: Operating Fund -->
+  <rect x="185" y="297" width="200" height="95" fill="white" stroke="black" stroke-width="2"/>
+  <text x="189" y="309" font-family="Arial,Helvetica,sans-serif" font-size="8">410</text>
+  <text x="285" y="326" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">OPERATING FUND</text>
+  <text x="285" y="342" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Day-to-day operations</text>
+  <text x="285" y="356" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Maintenance</text>
+  <text x="285" y="370" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Insurance</text>
+  <text x="285" y="384" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Management fees</text>
+
+  <!-- 412: Reserve Fund -->
+  <rect x="590" y="297" width="175" height="95" fill="white" stroke="black" stroke-width="2"/>
+  <text x="594" y="309" font-family="Arial,Helvetica,sans-serif" font-size="8">412</text>
+  <text x="677" y="326" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">RESERVE FUND</text>
+  <text x="677" y="342" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Capital expenditures</text>
+  <text x="677" y="356" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Emergency repairs</text>
+  <text x="677" y="370" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Long-term savings</text>
+  <text x="677" y="384" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Min 20% target</text>
+
+  <!-- ===================== WITHDRAWAL PATHS ===================== -->
+
+  <text x="400" y="430" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">WITHDRAWAL PATHS</text>
+  <line x1="20" y1="435" x2="780" y2="435" stroke="black" stroke-width="0.75" stroke-dasharray="4,3"/>
+
+  <!-- PATH A -->
+  <text x="25" y="455" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">PATH A — Board Emergency Spend (no proposal required)</text>
+
+  <!-- Arrow: Operating → Path A -->
+  <line x1="285" y1="392" x2="285" y2="465" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- 414: Treasurer Multisig -->
+  <rect x="40" y="467" width="175" height="50" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="44" y="479" font-family="Arial,Helvetica,sans-serif" font-size="8">414</text>
+  <text x="127" y="495" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">TREASURER MULTISIG</text>
+  <text x="127" y="508" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">emergencySpend()</text>
+
+  <!-- Arrow: Treasurer → Vendor A -->
+  <line x1="215" y1="492" x2="350" y2="492" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- 416: Vendor A -->
+  <rect x="352" y="467" width="150" height="50" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="356" y="479" font-family="Arial,Helvetica,sans-serif" font-size="8">416</text>
+  <text x="427" y="495" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">VENDOR / PAYEE</text>
+  <text x="427" y="508" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">e.g., contractor</text>
+
+  <!-- Limit note -->
+  <rect x="515" y="467" width="250" height="50" fill="white" stroke="black" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="639" y="485" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Limit: ≤ configured spend cap</text>
+  <text x="639" y="500" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">No governance vote required</text>
+  <text x="639" y="515" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Logged on-chain (proposalId = 0)</text>
+
+  <!-- PATH B -->
+  <text x="25" y="545" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">PATH B — Governance-Approved Expenditure (proposal required)</text>
+
+  <!-- 418: Governance Proposal step -->
+  <rect x="40" y="558" width="175" height="55" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="44" y="570" font-family="Arial,Helvetica,sans-serif" font-size="8">418</text>
+  <text x="127" y="585" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">GOVERNANCE PROPOSAL</text>
+  <text x="127" y="598" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Vote passed</text>
+  <text x="127" y="610" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Quorum + threshold met</text>
+
+  <!-- Arrow: Proposal → Timelock -->
+  <line x1="215" y1="585" x2="280" y2="585" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+  <text x="246" y="578" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">queue()</text>
+
+  <!-- 420: Timelock -->
+  <rect x="282" y="558" width="155" height="55" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="286" y="570" font-family="Arial,Helvetica,sans-serif" font-size="8">420</text>
+  <text x="359" y="585" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">TIMELOCK</text>
+  <text x="359" y="598" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Mandatory delay</text>
+  <text x="359" y="610" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">per tier (2–7 days)</text>
+
+  <!-- Arrow: Timelock → makeExpenditure -->
+  <line x1="437" y1="585" x2="510" y2="585" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+  <text x="473" y="578" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">execute()</text>
+
+  <!-- 422: makeExpenditure -->
+  <rect x="512" y="558" width="200" height="55" fill="white" stroke="black" stroke-width="2"/>
+  <text x="516" y="570" font-family="Arial,Helvetica,sans-serif" font-size="8">422</text>
+  <text x="612" y="585" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">makeExpenditure()</text>
+  <text x="612" y="600" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">vendor, amount, category,</text>
+  <text x="612" y="613" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">proposalId, description</text>
+
+  <!-- Arrow: makeExpenditure → Vendor B -->
+  <line x1="612" y1="613" x2="612" y2="643" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- 424: Vendor B -->
+  <rect x="512" y="645" width="200" height="45" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="516" y="657" font-family="Arial,Helvetica,sans-serif" font-size="8">424</text>
+  <text x="612" y="672" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">VENDOR / PAYEE</text>
+  <text x="612" y="685" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">linked to proposalId</text>
+
+  <!-- On-chain log note -->
+  <rect x="18" y="650" width="485" height="45" fill="white" stroke="black" stroke-width="1"/>
+  <text x="250" y="665" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">426 — ON-CHAIN EXPENDITURE LOG (ALL PATHS)</text>
+  <text x="250" y="680" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">vendor address + amount + category + timestamp + proposalId (0 = board emergency)</text>
+
+  <!-- Figure number -->
+  <text x="400" y="740" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-style="italic">FIG. 4 — Treasury Fund Flow Diagram</text>
+</svg>

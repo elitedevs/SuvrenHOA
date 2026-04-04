@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 820" width="800" height="820">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="black"/>
+    </marker>
+  </defs>
+
+  <rect width="800" height="820" fill="white"/>
+  <rect x="4" y="4" width="792" height="812" fill="none" stroke="black" stroke-width="2.5"/>
+  <rect x="9" y="9" width="782" height="802" fill="none" stroke="black" stroke-width="0.75"/>
+
+  <!-- Title -->
+  <line x1="9" y1="58" x2="791" y2="58" stroke="black" stroke-width="1"/>
+  <text x="400" y="28" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="bold">FIG. 7</text>
+  <text x="400" y="49" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10">FRONTEND APPLICATION ARCHITECTURE</text>
+
+  <!-- ===================== LAYER 1: BROWSER / APP ROUTER ===================== -->
+  <!-- Outer browser container dashed border -->
+  <rect x="18" y="65" width="764" height="170" fill="white" stroke="black" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="24" y="80" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="bold">700 — BROWSER / CLIENT LAYER</text>
+
+  <!-- 702: Next.js App Router -->
+  <rect x="30" y="85" width="740" height="55" fill="white" stroke="black" stroke-width="2"/>
+  <text x="34" y="98" font-family="Arial,Helvetica,sans-serif" font-size="8">702</text>
+  <text x="400" y="110" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">NEXT.JS APP ROUTER</text>
+  <text x="400" y="127" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">/dashboard  /proposals  /treasury  /documents  /health  /map  /profile  /neighbors</text>
+
+  <!-- Provider layer -->
+  <!-- 704: RainbowKit -->
+  <rect x="30" y="150" width="230" height="75" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="34" y="163" font-family="Arial,Helvetica,sans-serif" font-size="8">704</text>
+  <text x="145" y="179" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">RainbowKit</text>
+  <text x="145" y="193" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">ConnectButton</text>
+  <text x="145" y="207" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Wallet UX / Modal</text>
+
+  <!-- 706: wagmi WagmiProvider -->
+  <rect x="280" y="150" width="240" height="75" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="284" y="163" font-family="Arial,Helvetica,sans-serif" font-size="8">706</text>
+  <text x="400" y="179" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">WagmiProvider</text>
+  <text x="400" y="193" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Wallet connection management</text>
+  <text x="400" y="207" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Account state</text>
+
+  <!-- 708: TanStack Query -->
+  <rect x="540" y="150" width="230" height="75" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="544" y="163" font-family="Arial,Helvetica,sans-serif" font-size="8">708</text>
+  <text x="655" y="179" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="bold">TanStack Query</text>
+  <text x="655" y="193" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Caching + refetch</text>
+  <text x="655" y="207" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Mutation state</text>
+
+  <!-- ===================== LAYER 2: HOOKS ===================== -->
+  <line x1="400" y1="225" x2="400" y2="255" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- 710: Hooks Layer -->
+  <rect x="18" y="258" width="764" height="100" fill="white" stroke="black" stroke-width="2"/>
+  <text x="22" y="272" font-family="Arial,Helvetica,sans-serif" font-size="8">710</text>
+  <text x="400" y="280" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">HOOKS LAYER</text>
+
+  <!-- Hook boxes in grid -->
+  <rect x="30" y="288" width="160" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="110" y="308" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">712 — useProperty()</text>
+
+  <rect x="200" y="288" width="160" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="280" y="308" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">714 — useProposals()</text>
+
+  <rect x="370" y="288" width="160" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="450" y="308" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">716 — useTreasury()</text>
+
+  <rect x="540" y="288" width="160" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="620" y="308" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">718 — useDocuments()</text>
+
+  <rect x="30" y="326" width="160" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="110" y="346" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">720 — useCastVote()</text>
+
+  <rect x="200" y="326" width="160" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="280" y="346" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">722 — usePayDues()</text>
+
+  <rect x="370" y="326" width="160" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="450" y="346" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">724 — useHealthScore()</text>
+
+  <rect x="540" y="326" width="160" height="32" fill="white" stroke="black" stroke-width="1"/>
+  <text x="620" y="346" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">726 — useGovernance()</text>
+
+  <!-- ===================== LAYER 3: SPLIT TO THREE DATA PATHS ===================== -->
+  <line x1="400" y1="358" x2="400" y2="390" stroke="black" stroke-width="1"/>
+  <line x1="175" y1="390" x2="625" y2="390" stroke="black" stroke-width="1"/>
+  <line x1="175" y1="390" x2="175" y2="415" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="400" y1="390" x2="400" y2="415" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="625" y1="390" x2="625" y2="415" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- 728: viem publicClient -->
+  <rect x="22" y="418" width="305" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="26" y="432" font-family="Arial,Helvetica,sans-serif" font-size="8">728</text>
+  <text x="174" y="448" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">viem publicClient</text>
+  <text x="174" y="465" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">Wallet-less contract reads</text>
+  <text x="174" y="480" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">readContract() / multicall()</text>
+  <text x="174" y="495" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Public data / transparency page</text>
+  <text x="174" y="510" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">No wallet required</text>
+
+  <!-- 730: wagmi Hooks -->
+  <rect x="248" y="418" width="305" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="252" y="432" font-family="Arial,Helvetica,sans-serif" font-size="8">730</text>
+  <text x="400" y="448" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">wagmi Contract Hooks</text>
+  <text x="400" y="465" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">useReadContract()</text>
+  <text x="400" y="480" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">useWriteContract()</text>
+  <text x="400" y="495" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">useAccount() / useBalance()</text>
+  <text x="400" y="510" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Signed transactions / wallet state</text>
+
+  <!-- 732: Supabase Client -->
+  <rect x="473" y="418" width="305" height="100" fill="white" stroke="black" stroke-width="1.5"/>
+  <text x="477" y="432" font-family="Arial,Helvetica,sans-serif" font-size="8">732</text>
+  <text x="625" y="448" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">Supabase Client</text>
+  <text x="625" y="465" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">Off-chain database</text>
+  <text x="625" y="480" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Profiles / Vehicles / Pets</text>
+  <text x="625" y="495" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Posts / Reservations</text>
+  <text x="625" y="510" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Maintenance requests</text>
+
+  <!-- ===================== LAYER 4: BLOCKCHAIN ===================== -->
+  <!-- Arrows from viem + wagmi down to blockchain -->
+  <line x1="174" y1="518" x2="174" y2="558" stroke="black" stroke-width="1"/>
+  <line x1="400" y1="518" x2="400" y2="558" stroke="black" stroke-width="1"/>
+  <line x1="174" y1="558" x2="400" y2="558" stroke="black" stroke-width="1"/>
+  <line x1="287" y1="558" x2="287" y2="583" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- 734: Base L2 Network -->
+  <rect x="80" y="585" width="415" height="95" fill="white" stroke="black" stroke-width="2"/>
+  <text x="84" y="598" font-family="Arial,Helvetica,sans-serif" font-size="8">734</text>
+  <text x="287" y="615" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">BASE L2 NETWORK</text>
+  <text x="287" y="632" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9">https://sepolia.base.org (RPC)</text>
+
+  <!-- Contract name chips inside Base L2 box -->
+  <rect x="94" y="640" width="110" height="30" fill="white" stroke="black" stroke-width="1"/>
+  <text x="149" y="659" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">736 — PropertyNFT</text>
+
+  <rect x="213" y="640" width="150" height="30" fill="white" stroke="black" stroke-width="1"/>
+  <text x="288" y="659" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">738 — FaircroftGovernor</text>
+
+  <rect x="372" y="640" width="110" height="30" fill="white" stroke="black" stroke-width="1"/>
+  <text x="427" y="659" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">740 — Treasury</text>
+
+  <!-- Supabase DB -->
+  <line x1="625" y1="518" x2="625" y2="583" stroke="black" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- 742: Supabase DB -->
+  <rect x="520" y="585" width="250" height="95" fill="white" stroke="black" stroke-width="2"/>
+  <text x="524" y="598" font-family="Arial,Helvetica,sans-serif" font-size="8">742</text>
+  <text x="645" y="615" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="bold">SUPABASE DATABASE</text>
+  <text x="645" y="632" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">PostgreSQL (hosted)</text>
+  <text x="645" y="648" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">RLS policies + auth</text>
+  <text x="645" y="664" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Row Level Security</text>
+  <text x="645" y="680" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8">Realtime subscriptions</text>
+
+  <!-- DocumentRegistry chip inside Base L2 (add row) -->
+  <rect x="94" y="675" width="150" height="0" fill="none" stroke="none"/>
+  <!-- add DocumentRegistry chip below -->
+
+  <!-- Figure number -->
+  <text x="400" y="800" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-style="italic">FIG. 7 — Frontend Application Architecture</text>
+</svg>

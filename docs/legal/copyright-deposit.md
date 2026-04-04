@@ -32,9 +32,9 @@ date: "2026-03-24"
 
 **Date of First Use:** 2026-03-24
 
-**Author / Claimant:** Suvren LLC [NC?]
+**Author / Claimant:** Suvren LLC North Carolina
 
-**Inventor:** [Ryan's full legal name]
+**Inventor:** Ryan Shanahan
 
 <hr class="cover-rule">
 
@@ -1113,6 +1113,6 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 **This deposit represents first and last 25 pages (~1,250 lines each) of the SuvrenHOA codebase, prepared in compliance with U.S. Copyright Office deposit requirements for computer programs.**
 
-*© 2026 Suvren LLC [NC?] — All Rights Reserved*
-*Inventor / Author: [Ryan's full legal name]*
+*© 2026 Suvren LLC North Carolina — All Rights Reserved*
+*Inventor / Author: Ryan Shanahan*
 *Date of First Use / First Commit: 2026-03-24*
