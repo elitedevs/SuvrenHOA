@@ -2,7 +2,7 @@
 
 **Version:** 1.0
 **Date:** March 24, 2026
-**Author:** Ryan @ EliteDevs
+**Author:** Ryan @ Suvren
 **Status:** Pre-Development
 
 ---

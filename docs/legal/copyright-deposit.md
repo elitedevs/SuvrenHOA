@@ -1,6 +1,6 @@
 ---
 title: "SuvrenHOA Source Code Deposit"
-subtitle: "© 2026 EliteDevs LLC — All Rights Reserved"
+subtitle: "© 2026 Suvren LLC — All Rights Reserved"
 date: "2026-03-24"
 ---
 
@@ -22,7 +22,7 @@ date: "2026-03-24"
 
 <hr class="cover-rule">
 
-## © 2026 EliteDevs LLC — All Rights Reserved
+## © 2026 Suvren LLC — All Rights Reserved
 
 **Work Title:** SuvrenHOA: Blockchain-Based Homeowners Association Governance Platform
 
@@ -32,7 +32,7 @@ date: "2026-03-24"
 
 **Date of First Use:** 2026-03-24
 
-**Author / Claimant:** EliteDevs LLC [NC?]
+**Author / Claimant:** Suvren LLC [NC?]
 
 **Inventor:** [Ryan's full legal name]
 
@@ -1113,6 +1113,6 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 **This deposit represents first and last 25 pages (~1,250 lines each) of the SuvrenHOA codebase, prepared in compliance with U.S. Copyright Office deposit requirements for computer programs.**
 
-*© 2026 EliteDevs LLC [NC?] — All Rights Reserved*
+*© 2026 Suvren LLC [NC?] — All Rights Reserved*
 *Inventor / Author: [Ryan's full legal name]*
 *Date of First Use / First Commit: 2026-03-24*

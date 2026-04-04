@@ -85,9 +85,9 @@ All docs stored on Arweave → Permanent, tamper-proof, always accessible
 
 | Tier | Price | Included |
 |------|-------|----------|
-| 🌱 **Starter** | $49/mo | Up to 50 units, voting, docs |
-| 🏘️ **Community** | $99/mo | Up to 200 units, treasury mgmt |
-| 🏙️ **Enterprise** | $249/mo | Unlimited units, white-label, API |
+| 🌱 **Starter** | $49/mo | ≤50 units — voting, treasury, documents |
+| 🏠 **Professional** | $129/mo | ≤200 units — custom domain, advanced governance |
+| 🏙️ **Enterprise** | $249/mo | Unlimited — white-label, API, multi-community |
 
 - **Break-even:** 2–3 paying communities
 - **Year 1 target:** 20 communities = **$24K–$60K ARR**
@@ -156,11 +156,11 @@ We are seeking **pilot HOA communities** to participate in our Founding Member P
 ## CONTACT
 
 **Ryan Shanahan**  
-Founder, Suvren LLC / SuvrenHOA  
-📧 [contact information]  
-🌐 [website]  
+Founder & CEO, Suvren LLC  
+📧 ryan@suvren.co  
+🌐 hoa.suvren.co  
 📄 Technical whitepapers available upon request
 
 ---
 
-*SuvrenHOA is a product of Suvren LLC | Raleigh, NC | Provisional Patent Pending | Confidential*
+*© 2026 Suvren LLC · Raleigh, NC · Provisional Patent Pending · Confidential*

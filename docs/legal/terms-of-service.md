@@ -1,12 +1,11 @@
-# SuvrenHOA Terms of Service
+# SuvrenHOA — Terms of Service
 
-**Effective Date:** April 4, 2026  
-**Last Updated:** April 4, 2026  
-**Version:** 1.0
+**Suvren LLC** · Raleigh, North Carolina  
+**Effective Date:** April 4, 2026 · **Version 1.0**
 
 ---
 
-> **Plain English Summary:** SuvrenHOA is a blockchain-powered HOA governance platform. By using it, you agree to these terms. Because we use blockchain technology, some things work differently than traditional software — transactions are permanent, your wallet is your password, and certain records can't be deleted. Read the sections on wallet security and blockchain irreversibility carefully.
+> **The short version:** SuvrenHOA runs on blockchain — which means transactions are permanent, your wallet is your identity, and certain records can never be deleted. That's the point: *immutable transparency.* But it also means you should read the sections on wallet security and irreversibility carefully before you connect.
 
 ---
 
@@ -14,7 +13,7 @@
 
 By connecting a cryptocurrency wallet to SuvrenHOA (the "Platform") or using any feature of the Platform, you ("User," "you") agree to be bound by these Terms of Service ("Terms") and our Privacy Policy. If you don't agree, don't use the Platform.
 
-These Terms form a legally binding agreement between you and **EliteDevs LLC** ("EliteDevs," "we," "us," "our"), the company operating SuvrenHOA. If you're accessing the Platform on behalf of an HOA community or organization, you represent that you have authority to bind that organization to these Terms.
+These Terms form a legally binding agreement between you and **Suvren LLC** ("Suvren," "we," "us," "our"), the company operating SuvrenHOA. If you're accessing the Platform on behalf of an HOA community or organization, you represent that you have authority to bind that organization to these Terms.
 
 **By accessing the Platform, you confirm that you:**
 - Are at least 18 years old
@@ -35,7 +34,7 @@ SuvrenHOA is a software-as-a-service (SaaS) platform that provides blockchain-ba
 - **Track community health** through algorithmic scoring of governance participation, dues collection, and treasury health
 - **Communicate** through community posts, announcements, and profile pages
 
-The Platform is built on **Base**, an Ethereum Layer 2 network. Core governance and treasury operations are executed by smart contracts deployed on-chain. EliteDevs provides the frontend interface and off-chain services (database, notifications, community features) but does not control the smart contracts once deployed.
+The Platform is built on **Base**, an Ethereum Layer 2 network. Core governance and treasury operations are executed by smart contracts deployed on-chain. Suvren provides the frontend interface and off-chain services (database, notifications, community features) but does not control the smart contracts once deployed.
 
 ### 2.1 Who Uses SuvrenHOA
 
@@ -63,7 +62,7 @@ SuvrenHOA does not use usernames or passwords. **Your cryptocurrency wallet (Met
 **This is important. Read carefully.**
 
 - **You are solely responsible** for securing your wallet, private keys, seed phrases, and any hardware wallets
-- EliteDevs **cannot** recover your account, reset your access, or reverse transactions if you lose access to your wallet
+- Suvren **cannot** recover your account, reset your access, or reverse transactions if you lose access to your wallet
 - If your wallet is compromised, stolen, or lost, we **cannot** help you regain access to your account or undo any transactions made from that wallet
 - **Never share your private keys or seed phrase with anyone — including anyone claiming to be from SuvrenHOA.** We will never ask for them.
 
@@ -96,11 +95,11 @@ We will **never** initiate transactions without your explicit signature approval
 - Document registrations on-chain
 - Property NFT assignments and transfers
 
-EliteDevs **cannot** reverse, modify, or cancel any transaction that has been confirmed on Base. Before signing any transaction in your wallet, carefully review what you're approving. If you sign a transaction by mistake, we cannot help you undo it.
+Suvren **cannot** reverse, modify, or cancel any transaction that has been confirmed on Base. Before signing any transaction in your wallet, carefully review what you're approving. If you sign a transaction by mistake, we cannot help you undo it.
 
 ### 4.1 Gas Fees
 
-Blockchain transactions require small fees ("gas fees") paid in ETH on Base. Gas fees are paid to the Base network, not to EliteDevs, and are non-refundable regardless of the transaction outcome. SuvrenHOA's design on Base L2 keeps gas fees very low (typically fractions of a cent), but you are responsible for having sufficient ETH in your wallet to cover them.
+Blockchain transactions require small fees ("gas fees") paid in ETH on Base. Gas fees are paid to the Base network, not to Suvren, and are non-refundable regardless of the transaction outcome. SuvrenHOA's design on Base L2 keeps gas fees very low (typically fractions of a cent), but you are responsible for having sufficient ETH in your wallet to cover them.
 
 ### 4.2 Network Risks
 
@@ -173,7 +172,7 @@ Each tier has specific quorum and approval thresholds enforced by the smart cont
 
 ### 6.4 Governance Results Are Final
 
-Proposals that pass through the on-chain governance process are executed by smart contracts. EliteDevs **cannot** override, block, or reverse governance decisions once they have been executed on-chain. The smart contract is the authority — not EliteDevs, and not any individual board member.
+Proposals that pass through the on-chain governance process are executed by smart contracts. Suvren **cannot** override, block, or reverse governance decisions once they have been executed on-chain. The smart contract is the authority — not Suvren, and not any individual board member.
 
 ### 6.5 Timelock
 
@@ -186,7 +185,7 @@ You are responsible for:
 - Understanding the implications of your vote
 - Participating in your community's governance process
 
-EliteDevs does not provide legal, financial, or governance advice. Consult appropriate professionals for guidance on specific HOA matters.
+Suvren does not provide legal, financial, or governance advice. Consult appropriate professionals for guidance on specific HOA matters.
 
 ---
 
@@ -207,17 +206,17 @@ Treasury expenditures above community-defined thresholds require multi-signature
 
 ### 7.3 USDC and Stablecoin Risk
 
-SuvrenHOA uses USDC issued by Circle. While USDC is designed to maintain a 1:1 peg with the US Dollar, EliteDevs makes no guarantees regarding the stability, availability, or regulatory status of USDC or any other stablecoin. You accept any risks associated with stablecoin usage.
+SuvrenHOA uses USDC issued by Circle. While USDC is designed to maintain a 1:1 peg with the US Dollar, Suvren makes no guarantees regarding the stability, availability, or regulatory status of USDC or any other stablecoin. You accept any risks associated with stablecoin usage.
 
 ### 7.4 Dues Payments Are Final
 
-Once a dues payment is confirmed on-chain, it **cannot be reversed or refunded** by EliteDevs. Disputes about payment amounts, credits, or adjustments must be resolved through your HOA's governance process.
+Once a dues payment is confirmed on-chain, it **cannot be reversed or refunded** by Suvren. Disputes about payment amounts, credits, or adjustments must be resolved through your HOA's governance process.
 
 ### 7.5 Payment Responsibilities
 
 - You are responsible for paying dues on time per your community's schedule
-- Late fees and penalties are determined by your community's governance, not by EliteDevs
-- EliteDevs does not collect, hold, or have access to HOA treasury funds at any time
+- Late fees and penalties are determined by your community's governance, not by Suvren
+- Suvren does not collect, hold, or have access to HOA treasury funds at any time
 
 ---
 
@@ -225,7 +224,7 @@ Once a dues payment is confirmed on-chain, it **cannot be reversed or refunded**
 
 ### 8.1 Arweave Permanent Storage
 
-HOA documents (CC&Rs, bylaws, meeting minutes, financial reports, etc.) submitted to SuvrenHOA are stored on **Arweave**, a decentralized permanent storage network. Once uploaded to Arweave, documents **cannot be deleted, modified, or removed** — by anyone, including EliteDevs.
+HOA documents (CC&Rs, bylaws, meeting minutes, financial reports, etc.) submitted to SuvrenHOA are stored on **Arweave**, a decentralized permanent storage network. Once uploaded to Arweave, documents **cannot be deleted, modified, or removed** — by anyone, including Suvren.
 
 ### 8.2 Think Before You Submit
 
@@ -234,7 +233,7 @@ HOA documents (CC&Rs, bylaws, meeting minutes, financial reports, etc.) submitte
 - Confirm it does not contain sensitive personal information that shouldn't be permanently public
 - Understand that it will be publicly accessible and permanent
 
-EliteDevs is not responsible for documents submitted by community administrators or users.
+Suvren is not responsible for documents submitted by community administrators or users.
 
 ### 8.3 On-Chain Document Registry
 
@@ -242,7 +241,7 @@ A cryptographic hash of each document is registered in the `DocumentRegistry` sm
 
 ### 8.4 Document Responsibility
 
-The HOA community (specifically, authorized administrators) is responsible for ensuring that submitted documents are accurate, legally compliant, and appropriate for permanent public storage. EliteDevs does not review, validate, or endorse the content of submitted documents.
+The HOA community (specifically, authorized administrators) is responsible for ensuring that submitted documents are accurate, legally compliant, and appropriate for permanent public storage. Suvren does not review, validate, or endorse the content of submitted documents.
 
 ---
 
@@ -250,11 +249,11 @@ The HOA community (specifically, authorized administrators) is responsible for e
 
 ### 9.1 Community Posts and Profiles
 
-SuvrenHOA includes community features such as discussion posts, announcements, and profile pages (name, lot number, display preferences). This content ("User Content") is stored in EliteDevs' off-chain database (Supabase) and is subject to our control.
+SuvrenHOA includes community features such as discussion posts, announcements, and profile pages (name, lot number, display preferences). This content ("User Content") is stored in Suvren' off-chain database (Supabase) and is subject to our control.
 
 ### 9.2 Your License to Us
 
-By posting content on SuvrenHOA, you grant EliteDevs a non-exclusive, royalty-free license to store, display, and distribute that content to other members of your community through the Platform. We do not claim ownership of your content.
+By posting content on SuvrenHOA, you grant Suvren a non-exclusive, royalty-free license to store, display, and distribute that content to other members of your community through the Platform. We do not claim ownership of your content.
 
 ### 9.3 Content Standards
 
@@ -267,11 +266,11 @@ You agree not to post content that:
 
 ### 9.4 Content Removal
 
-Unlike blockchain records, off-chain community posts and profile information **can** be removed or modified. You may edit or delete your own posts. EliteDevs reserves the right to remove content that violates these Terms or that we reasonably believe is harmful.
+Unlike blockchain records, off-chain community posts and profile information **can** be removed or modified. You may edit or delete your own posts. Suvren reserves the right to remove content that violates these Terms or that we reasonably believe is harmful.
 
 ### 9.5 No Off-Chain Content Responsibility
 
-EliteDevs does not monitor all community content and is not responsible for content posted by other users. If you encounter content that violates these Terms, please report it to support@suvren.co.
+Suvren does not monitor all community content and is not responsible for content posted by other users. If you encounter content that violates these Terms, please report it to support@suvren.co.
 
 ---
 
@@ -279,13 +278,13 @@ EliteDevs does not monitor all community content and is not responsible for cont
 
 ### 10.1 Community Subscription Model
 
-SuvrenHOA operates on a community-level subscription — **the HOA community** (typically managed by the board) pays a monthly subscription fee to EliteDevs for access to the Platform. Individual homeowners do not pay subscription fees to EliteDevs.
+SuvrenHOA operates on a community-level subscription — **the HOA community** (typically managed by the board) pays a monthly subscription fee to Suvren for access to the Platform. Individual homeowners do not pay subscription fees to Suvren.
 
-Individual homeowners pay HOA dues to their community's smart contract treasury — those payments go to the HOA, not to EliteDevs.
+Individual homeowners pay HOA dues to their community's smart contract treasury — those payments go to the HOA, not to Suvren.
 
 ### 10.2 Subscription Fees
 
-Subscription fees are based on the pricing plan selected by the community administrator at the time of account setup. Current pricing is available at our website or upon request. EliteDevs reserves the right to change pricing with **30 days' notice** to community administrators.
+Subscription fees are based on the pricing plan selected by the community administrator at the time of account setup. Current pricing is available at our website or upon request. Suvren reserves the right to change pricing with **30 days' notice** to community administrators.
 
 ### 10.3 Billing
 
@@ -297,7 +296,7 @@ Subscription fees are generally non-refundable. If you believe you were charged 
 
 ### 10.5 Suspension for Non-Payment
 
-If a community's subscription lapses, EliteDevs may suspend access to the frontend platform and off-chain features. **Smart contracts on Base will continue to function independently** — governance, treasury, and document registry operations are not dependent on an active EliteDevs subscription.
+If a community's subscription lapses, Suvren may suspend access to the frontend platform and off-chain features. **Smart contracts on Base will continue to function independently** — governance, treasury, and document registry operations are not dependent on an active Suvren subscription.
 
 ### 10.6 Taxes
 
@@ -309,7 +308,7 @@ You are responsible for any taxes applicable to your use of the Platform.
 
 ### 11.1 Our Intellectual Property
 
-EliteDevs owns the Platform's frontend application, user interface, design, branding, and off-chain software. "SuvrenHOA," the SuvrenHOA logo, and related marks are trademarks of EliteDevs. You may not use them without written permission.
+Suvren owns the Platform's frontend application, user interface, design, branding, and off-chain software. "SuvrenHOA," the SuvrenHOA logo, and related marks are trademarks of Suvren. You may not use them without written permission.
 
 A provisional patent application has been filed covering aspects of SuvrenHOA's blockchain HOA governance system, including the soulbound Property NFT system, tiered governance model, automated treasury allocation, immutable document registry, and community health scoring algorithm.
 
@@ -319,7 +318,7 @@ SuvrenHOA uses open-source software components including OpenZeppelin smart cont
 
 ### 11.3 Smart Contracts
 
-The smart contracts deployed on Base are not proprietary software once deployed — they exist as public code on the blockchain. However, EliteDevs retains intellectual property rights in the smart contract source code, design, and documentation.
+The smart contracts deployed on Base are not proprietary software once deployed — they exist as public code on the blockchain. However, Suvren retains intellectual property rights in the smart contract source code, design, and documentation.
 
 ### 11.4 Your Content
 
@@ -367,7 +366,7 @@ Before filing any formal legal claim, you agree to contact us at legal@suvren.co
 
 ### 13.2 Binding Arbitration
 
-If informal resolution fails, **disputes between you and EliteDevs will be resolved by binding arbitration** — not in court (with limited exceptions below). Arbitration is less formal than a lawsuit, uses a neutral arbitrator instead of a judge, and is typically faster and less expensive.
+If informal resolution fails, **disputes between you and Suvren will be resolved by binding arbitration** — not in court (with limited exceptions below). Arbitration is less formal than a lawsuit, uses a neutral arbitrator instead of a judge, and is typically faster and less expensive.
 
 Arbitration will be conducted by the American Arbitration Association (AAA) under its Consumer Arbitration Rules. Arbitration may be conducted remotely. The arbitrator's decision is binding and final.
 
@@ -381,11 +380,11 @@ Either party may pursue claims in small claims court. Either party may seek emer
 
 ### 13.5 Governing Law
 
-These Terms are governed by the laws of the State of Delaware (or the state where EliteDevs LLC is formed), without regard to conflict of law principles.
+These Terms are governed by the laws of the State of North Carolina, without regard to conflict of law principles.
 
 ### 13.6 HOA Governance Disputes
 
-Disputes about HOA governance decisions (proposal outcomes, treasury expenditures, etc.) are not disputes with EliteDevs — they are community governance matters. Such disputes should be addressed through your community's governance process or applicable HOA law. EliteDevs is not a party to internal HOA governance disputes.
+Disputes about HOA governance decisions (proposal outcomes, treasury expenditures, etc.) are not disputes with Suvren — they are community governance matters. Such disputes should be addressed through your community's governance process or applicable HOA law. Suvren is not a party to internal HOA governance disputes.
 
 ---
 
@@ -405,7 +404,7 @@ Off-chain data (community posts, profile information, notification settings) is 
 
 ## 15. Modifications to These Terms
 
-EliteDevs may update these Terms from time to time. When we make material changes, we will:
+Suvren may update these Terms from time to time. When we make material changes, we will:
 - Post the updated Terms at suvren.co/terms
 - Update the "Last Updated" date at the top of this document
 - Notify community administrators via email or in-platform notification at least **14 days** before changes take effect
@@ -424,7 +423,7 @@ You may stop using the Platform at any time. Community administrators can cancel
 
 ### 16.2 We May Terminate for Cause
 
-EliteDevs may suspend or terminate your access to the Platform if:
+Suvren may suspend or terminate your access to the Platform if:
 - You violate these Terms
 - Your use of the Platform poses a security risk
 - You engage in fraudulent or illegal activity
@@ -436,7 +435,7 @@ We will give reasonable notice before termination except in cases of serious vio
 
 When access is terminated:
 - You lose access to the SuvrenHOA frontend and off-chain features
-- **Smart contracts on Base continue to function independently** — on-chain governance, treasury, and document registry are not controlled by EliteDevs and remain operational
+- **Smart contracts on Base continue to function independently** — on-chain governance, treasury, and document registry are not controlled by Suvren and remain operational
 - Blockchain records (votes, transactions, documents) are permanent and unaffected by termination
 - Off-chain community data (posts, profiles) may be retained per our Privacy Policy or deleted upon request
 
@@ -450,7 +449,7 @@ Sections that should logically survive termination do — including Sections 4 (
 
 ### 17.1 Entire Agreement
 
-These Terms, together with our Privacy Policy, constitute the entire agreement between you and EliteDevs regarding the Platform and supersede any prior agreements.
+These Terms, together with our Privacy Policy, constitute the entire agreement between you and Suvren regarding the Platform and supersede any prior agreements.
 
 ### 17.2 Severability
 
@@ -462,7 +461,7 @@ Our failure to enforce any provision doesn't waive our right to enforce it later
 
 ### 17.4 Assignment
 
-EliteDevs may assign these Terms in connection with a merger, acquisition, or sale of assets. You may not assign your rights under these Terms without our written consent.
+Suvren may assign these Terms in connection with a merger, acquisition, or sale of assets. You may not assign your rights under these Terms without our written consent.
 
 ### 17.5 Force Majeure
 
@@ -472,8 +471,9 @@ We're not liable for failures or delays caused by circumstances outside our reas
 
 ## 18. Contact Information
 
-**EliteDevs LLC**  
-Operating SuvrenHOA
+**Suvren LLC**  
+Operating SuvrenHOA  
+Raleigh, North Carolina
 
 - **General Support:** support@suvren.co  
 - **Billing:** billing@suvren.co  
@@ -484,6 +484,8 @@ For urgent security issues, please email legal@suvren.co with "SECURITY" in the 
 
 ---
 
-*SuvrenHOA — Transparent Governance for Modern Communities*
+---
 
-*These Terms of Service were last updated on April 4, 2026. By using SuvrenHOA, you acknowledge that you have read, understood, and agree to be bound by these Terms.*
+*SuvrenHOA is a product of Suvren LLC · Patent Pending · Built on Base*
+
+*These Terms were last updated April 4, 2026.*

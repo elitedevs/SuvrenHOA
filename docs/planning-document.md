@@ -2,7 +2,7 @@
 
 **Project:** Decentralized HOA Governance on Blockchain
 **Community:** Faircroft (Raleigh, NC area)
-**Author:** Generated for Ryan @ EliteDevs
+**Author:** Generated for Ryan @ Suvren
 **Date:** March 23, 2026
 
 ---

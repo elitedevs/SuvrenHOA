@@ -1,9 +1,7 @@
-# Privacy Policy
+# SuvrenHOA — Privacy Policy
 
-**SuvrenHOA — Blockchain HOA Governance Platform**  
-**Operated by EliteDevs** | North Carolina, USA  
-**Effective Date:** April 4, 2026  
-**Last Updated:** April 4, 2026
+**Suvren LLC** · Raleigh, North Carolina  
+**Effective Date:** April 4, 2026 · **Version 1.0**
 
 ---
 
@@ -181,11 +179,11 @@ By design, any data written to the Base blockchain is shared with the entire Bas
 
 ### 5.3 Legal Disclosures
 
-We may disclose information if required by law, court order, or government authority, or to protect the rights, property, or safety of EliteDevs, our users, or others. To the extent legally permitted, we will notify affected users before disclosing.
+We may disclose information if required by law, court order, or government authority, or to protect the rights, property, or safety of Suvren, our users, or others. To the extent legally permitted, we will notify affected users before disclosing.
 
 ### 5.4 Business Transfers
 
-If EliteDevs is acquired, merged, or undergoes a similar transaction, your data may be transferred as part of that transaction. We will notify users of any such change and your rights with respect to that data.
+If Suvren is acquired, merged, or undergoes a similar transaction, your data may be transferred as part of that transaction. We will notify users of any such change and your rights with respect to that data.
 
 ---
 
@@ -310,7 +308,7 @@ To submit a request, contact us at the information in [Section 13](#13-contact-u
 
 ## 11. International Users
 
-SuvrenHOA is operated by EliteDevs, a company based in North Carolina, United States. Our database infrastructure is hosted in the United States.
+SuvrenHOA is operated by Suvren, a company based in North Carolina, United States. Our database infrastructure is hosted in the United States.
 
 If you are accessing the platform from outside the United States — including from the European Economic Area (EEA), United Kingdom, Canada, or elsewhere — your data will be processed in the United States, which may have different data protection laws than your home country.
 
@@ -338,7 +336,7 @@ Your continued use of the platform after any changes to this policy constitutes 
 
 For privacy-related questions, data requests, or concerns:
 
-**EliteDevs**  
+**Suvren**  
 North Carolina, USA
 
 **Privacy requests:** Submit via the platform's support system, or contact us directly.
@@ -364,4 +362,8 @@ For general privacy questions, we aim to respond within 10 business days.
 
 ---
 
-*This Privacy Policy was last updated April 4, 2026. Questions? Contact EliteDevs through the platform's support system.*
+---
+
+*© 2026 Suvren LLC · Patent Pending · Built on Base*
+
+*This Privacy Policy was last updated April 4, 2026.*

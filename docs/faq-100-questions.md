@@ -201,7 +201,7 @@ Court orders are real-world legal instruments and the HOA board is obligated to 
 
 **45. Who's liable if a smart contract malfunctions and causes a financial loss?**
 
-This is an evolving area of law. The HOA carries insurance that covers certain technology-related losses, and the service agreement with EliteDevs (our development partner) includes warranties and liability provisions for contract defects. In practice, the audit process and extensive testing are designed to prevent malfunctions before they happen. If a bug caused a financial loss despite reasonable precautions, the HOA would work with insurance, legal counsel, and the development team to make homeowners whole. We're transparent about this risk — no technology is perfect — but we've taken substantial steps to minimize it.
+This is an evolving area of law. The HOA carries insurance that covers certain technology-related losses, and the service agreement with Suvren (our development partner) includes warranties and liability provisions for contract defects. In practice, the audit process and extensive testing are designed to prevent malfunctions before they happen. If a bug caused a financial loss despite reasonable precautions, the HOA would work with insurance, legal counsel, and the development team to make homeowners whole. We're transparent about this risk — no technology is perfect — but we've taken substantial steps to minimize it.
 
 **46. Do we still need to hold in-person meetings?**
 
@@ -221,7 +221,7 @@ CCPA (California Consumer Privacy Act) applies to California residents, and GDPR
 
 **50. Who owns the intellectual property — the code, the contracts, the platform?**
 
-The smart contracts deployed on Base are open-source and their bytecode is publicly visible on the blockchain — that's the nature of public blockchains. The SuvrenHOA platform code developed by EliteDevs is owned by the HOA under the terms of the development agreement, meaning the community owns its governance infrastructure. Arweave-stored documents are owned by the HOA and its members as always. Individual homeowners own their own data. No third party has a proprietary lock on the community's operations.
+The smart contracts deployed on Base are open-source and their bytecode is publicly visible on the blockchain — that's the nature of public blockchains. The SuvrenHOA platform code developed by Suvren is owned by the HOA under the terms of the development agreement, meaning the community owns its governance infrastructure. Arweave-stored documents are owned by the HOA and its members as always. Individual homeowners own their own data. No third party has a proprietary lock on the community's operations.
 
 ---
 
@@ -335,9 +335,9 @@ We're not — all testing happens on Base Sepolia with synthetic data. Real home
 
 Multiple layers: First, blockchain data is inherently distributed — there's no single server to lose. Second, all documents are on Arweave with traditional backups. Third, the app's front-end code is version-controlled and can be redeployed in hours. Fourth, all homeowner off-chain data (names, contact info, etc.) is backed up daily to encrypted off-site storage. In the absolute worst case scenario where everything needed to be rebuilt, the authoritative record on the blockchain would still exist and we could reconstruct the system from that.
 
-**76. What if EliteDevs (the development company) disappears?**
+**76. What if Suvren (the development company) disappears?**
 
-The smart contracts, once deployed, run on the blockchain independently — EliteDevs going dark wouldn't affect their operation. The HOA owns the front-end application code under the development agreement. The community can hire any competent blockchain developer to maintain or improve the system, or even switch to self-hosted open-source governance tools. We specifically chose to avoid vendor lock-in: no proprietary databases, no secret sauce. Everything is documented and the code is readable on the blockchain.
+The smart contracts, once deployed, run on the blockchain independently — Suvren going dark wouldn't affect their operation. The HOA owns the front-end application code under the development agreement. The community can hire any competent blockchain developer to maintain or improve the system, or even switch to self-hosted open-source governance tools. We specifically chose to avoid vendor lock-in: no proprietary databases, no secret sauce. Everything is documented and the code is readable on the blockchain.
 
 **77. Is there an uptime guarantee?**
 
@@ -447,4 +447,4 @@ Honestly, a few reasons: blockchain technology is still relatively new and most 
 
 *Have a question not answered here? Post it in the community forum or contact the board through the app. If it's a good one, it'll end up in the next version of this document.*
 
-*SuvrenHOA is governed by Raleigh, NC homeowners under NCGS Chapter 47F on Base (Ethereum L2). Built by EliteDevs.*
+*SuvrenHOA is governed by Raleigh, NC homeowners under NCGS Chapter 47F on Base (Ethereum L2). Built by Suvren.*

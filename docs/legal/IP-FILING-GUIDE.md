@@ -19,7 +19,7 @@
 |-------|-------|
 | **Mark** | SuvrenHOA |
 | **Mark Type** | Standard Character Mark (text only, no design) |
-| **Owner/Applicant** | EliteDevs LLC ⚠️ **Must be formed first — see Step 0 below** |
+| **Owner/Applicant** | Suvren LLC ⚠️ **Must be formed first — see Step 0 below** |
 | **Owner Type** | Limited Liability Company |
 | **State of Organization** | North Carolina (pending formation) |
 | **Owner Address** | [Your address — fill in after LLC formation] |
@@ -60,7 +60,7 @@ You need ONE of these:
 |-------|-------|
 | **Mark** | Suvren |
 | **Mark Type** | Standard Character Mark |
-| **Owner/Applicant** | EliteDevs LLC |
+| **Owner/Applicant** | Suvren LLC |
 | **Owner Type** | Limited Liability Company |
 | **State of Organization** | [Same as above] |
 | **Filing Basis** | Section 1(a) — Use in Commerce (Suvren dashboard is live) |
@@ -156,8 +156,8 @@ The **SuvrenHOA software application** (source code + UI)
 | **Title** | SuvrenHOA: Blockchain-Based Homeowners Association Governance Platform |
 | **Year of Completion** | 2026 |
 | **Date of First Publication** | [Date first publicly accessible, or "unpublished" if still private] |
-| **Author** | EliteDevs LLC (if work-for-hire) or [Ryan's name] |
-| **Claimant** | EliteDevs LLC |
+| **Author** | Suvren LLC (if work-for-hire) or [Ryan's name] |
+| **Claimant** | Suvren LLC |
 | **Rights & Permissions Contact** | [Your email] |
 
 ### Deposit (What to Upload)
@@ -184,7 +184,7 @@ I can generate this deposit file from the codebase if you want.
 
 ### Step 0: Form the LLC ($125)
 1. Go to https://www.sosnc.gov/online_services/start_a_business
-2. File Articles of Organization for "EliteDevs LLC" in North Carolina
+2. File Articles of Organization for "Suvren LLC" in North Carolina
 3. Cost: $125 online, ~1 business day processing
 4. You'll need: LLC name, registered agent (can be yourself), principal address
 5. Once approved, you'll get Articles of Organization — save the PDF

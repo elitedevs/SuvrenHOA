@@ -17,7 +17,7 @@ date: "2026-03-24"
 
 # PATENT DRAWINGS
 ## Application: Blockchain-Based HOA Governance System
-### Inventor: [Ryan's full legal name] | Assignee: EliteDevs LLC [NC?]
+### Inventor: [Ryan's full legal name] | Assignee: Suvren LLC [NC?]
 
 ---
 
@@ -509,5 +509,5 @@ date: "2026-03-24"
 
 ---
 
-*All figures © 2026 EliteDevs LLC. Prepared in support of provisional patent application.*
+*All figures © 2026 Suvren LLC. Prepared in support of provisional patent application.*
 *Inventor: [Ryan's full legal name]*
