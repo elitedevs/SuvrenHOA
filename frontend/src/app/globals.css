@@ -223,48 +223,48 @@ pre,
   backdrop-filter: blur(12px) saturate(130%);
   -webkit-backdrop-filter: blur(12px) saturate(130%);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  transition: box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1),
-              transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1),
+              transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .glass-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4),
-              0 8px 24px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1.5px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4),
+              0 10px 28px rgba(0, 0, 0, 0.28);
 }
 
 /* Card state variants — surface-tone only, no color borders */
 .glass-card-success {
   background: rgba(20, 26, 22, 0.9);
-  transition: box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1),
-              transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1),
+              transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .glass-card-success:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1.5px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.25);
 }
 
 .glass-card-danger {
   background: rgba(22, 16, 16, 0.9);
-  transition: box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1),
-              transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1),
+              transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .glass-card-danger:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1.5px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.25);
 }
 
 .glass-card-info {
   background: rgba(16, 18, 26, 0.9);
-  transition: box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1),
-              transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1),
+              transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .glass-card-info:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1.5px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.25);
 }
 
 /* ── Glow utilities — used sparingly for live indicators only ─────────────── */
@@ -398,7 +398,11 @@ pre,
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #1A1A1E 25%, #222226 50%, #1A1A1E 75%);
+  background: linear-gradient(90deg,
+    rgba(26, 26, 30, 0.6) 25%,
+    rgba(176, 155, 113, 0.07) 50%,
+    rgba(26, 26, 30, 0.6) 75%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 8px;
@@ -474,21 +478,21 @@ select:focus-visible {
 
 /* ── Scrollbar ────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--obsidian);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(176, 155, 113, 0.15);
-  border-radius: 2px;
+  background: rgba(176, 155, 113, 0.3);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(176, 155, 113, 0.30);
+  background: rgba(176, 155, 113, 0.5);
 }
 
 /* ── Nav active ───────────────────────────────────────────────────────────── */
@@ -598,13 +602,13 @@ a[role="button"]:active:not(:disabled) {
 
 /* ── Hover lift utility ───────────────────────────────────────────────────── */
 .hover-lift {
-  transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
-              box-shadow 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform 180ms cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .hover-lift:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.25);
+  transform: translateY(-1.5px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.25);
 }
 
 /* ── Text glow — only for live on-chain indicators ────────────────────────── */
@@ -686,11 +690,11 @@ a[role="button"]:active:not(:disabled) {
 
 /* ── Button press response ────────────────────────────────────────────────── */
 button {
-  transition: transform 100ms ease, opacity 150ms ease;
+  transition: transform 150ms cubic-bezier(0.23, 1, 0.32, 1), opacity 150ms ease;
 }
 
 button:active:not(:disabled), [role="button"]:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 /* ── Input focus ─────────────────────────────────────────────────────────── */
