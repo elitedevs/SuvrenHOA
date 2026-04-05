@@ -307,7 +307,7 @@ function AmenityBookingView({
         ) : (
           <div className="glass-card rounded-xl p-5 space-y-3">
             {myBookings.length === 0 ? (
-              <p className="text-sm text-[var(--text-disabled)] text-center py-4">No bookings yet</p>
+              <p className="text-sm text-center py-4" style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', color: 'var(--text-muted)' }}>Your calendar is open.</p>
             ) : (
               myBookings
                 .sort((a, b) => a.date.localeCompare(b.date))

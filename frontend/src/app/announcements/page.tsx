@@ -176,8 +176,10 @@ export default function AnnouncementsPage() {
         <ArchiveList items={archiveItems} readSet={readSet} />
       ) : filtered.length === 0 ? (
         <div className="glass-card rounded-lg hover-lift p-12 text-center">
-          <h3 className="font-medium mb-1">No announcements</h3>
-          <p className="text-sm text-[var(--text-muted)]">Board announcements will appear here</p>
+          <p className="text-xl mb-2" style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', fontWeight: 400, color: 'var(--text-heading)' }}>
+            The board hasn&rsquo;t posted yet.
+          </p>
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Announcements will appear here as they&rsquo;re published.</p>
         </div>
       ) : (
         <div className="space-y-4">

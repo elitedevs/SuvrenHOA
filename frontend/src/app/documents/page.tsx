@@ -216,13 +216,18 @@ function DocumentCard({
     return (
       <div className="glass-card rounded-xl hover-lift p-4 border border-[rgba(245,240,232,0.06)]">
         <div className="flex items-center justify-between gap-3">
-          <p className="font-serif italic text-[var(--text-muted)] text-sm">Document unavailable</p>
+          <p
+            className="font-serif italic text-sm"
+            style={{ color: 'rgba(107, 58, 58, 0.7)' }}
+          >
+            Document unavailable
+          </p>
           <button
             onClick={() => window.location.reload()}
-            className="text-xs shrink-0 transition-colors"
-            style={{ color: '#B09B71' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.7'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = '1'; }}
+            className="text-xs shrink-0 transition-opacity"
+            style={{ color: 'rgba(176, 155, 113, 0.6)' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = '1'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = '0.7'; }}
           >
             Retry
           </button>

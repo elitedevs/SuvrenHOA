@@ -81,8 +81,10 @@ export function NotificationBell() {
           </div>
 
           {notifications.length === 0 ? (
-            <div className="p-6 text-center text-sm text-[var(--text-disabled)]">
-              No notifications yet
+            <div className="p-8 text-center">
+              <p className="text-sm" style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', color: 'var(--text-muted)' }}>
+                Nothing to report.
+              </p>
             </div>
           ) : (
             <div className="divide-y divide-[rgba(245,240,232,0.05)]">

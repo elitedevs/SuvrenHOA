@@ -401,8 +401,10 @@ export default function AlertsPage() {
           </h2>
 
           {historyAlerts.length === 0 ? (
-            <div className="glass-card rounded-xl hover-lift p-6 text-center">
-              <p className="text-sm text-[var(--text-disabled)]">No past alerts yet.</p>
+            <div className="glass-card rounded-xl hover-lift p-8 text-center">
+              <p className="text-lg mb-1" style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', fontWeight: 400, color: 'var(--text-muted)' }}>
+                All quiet in the archive.
+              </p>
             </div>
           ) : (
             <div className="space-y-3">

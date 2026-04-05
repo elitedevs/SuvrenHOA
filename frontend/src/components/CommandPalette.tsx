@@ -197,7 +197,9 @@ export function CommandPalette() {
         <div className="max-h-80 overflow-y-auto">
           {filteredItems.length === 0 ? (
             <div className="px-4 py-8 text-center">
-              <p className="text-sm text-[var(--text-disabled)]">No results for &ldquo;{query}&rdquo;</p>
+              <p className="text-sm" style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', color: 'var(--text-muted)' }}>
+                Nothing found for &ldquo;{query}&rdquo;
+              </p>
             </div>
           ) : (
             <div className="py-2">

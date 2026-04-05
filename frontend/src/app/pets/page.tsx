@@ -307,9 +307,11 @@ export default function PetsPage() {
             <div className="text-center py-12 text-[var(--text-disabled)]">Loading pets...</div>
           ) : filtered.length === 0 ? (
             <div className="glass-card rounded-xl hover-lift p-12 text-center">
-              <p className="text-5xl mb-4"></p>
-              <h3 className="text-lg font-medium mb-2">No pets registered yet</h3>
-              <p className="text-sm text-[var(--text-muted)]">Register your pets so neighbors know who's who on walks!</p>
+              <p className="text-4xl mb-5"></p>
+              <p className="text-xl mb-2" style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', fontWeight: 400, color: 'var(--text-heading)' }}>
+                No furry neighbors yet.
+              </p>
+              <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Register your pets so the community knows who&rsquo;s who on walks.</p>
             </div>
           ) : (
             <>

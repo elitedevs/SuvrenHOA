@@ -252,9 +252,11 @@ export function PropertyImprovements() {
           </div>
         ))}
         {improvements.length === 0 && (
-          <div className="text-center py-8 text-[var(--text-disabled)]">
-            <p className="text-2xl mb-2"></p>
-            <p className="text-xs">No improvements logged yet</p>
+          <div className="text-center py-8">
+            <p className="text-2xl mb-3"></p>
+            <p className="text-sm" style={{ fontFamily: 'var(--font-heading)', fontStyle: 'italic', color: 'var(--text-muted)' }}>
+              No improvements on record yet.
+            </p>
           </div>
         )}
       </div>
