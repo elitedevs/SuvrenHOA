@@ -20,6 +20,8 @@ const inter = Inter({
   display: 'swap',
 });
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = { title: 'SuvrenHOA', description: 'Transparent. Immutable. Democratic. Blockchain-powered HOA governance.', manifest: '/manifest.json', appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: 'SuvrenHOA', },
 };
 
