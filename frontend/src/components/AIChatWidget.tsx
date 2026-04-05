@@ -213,10 +213,10 @@ export function AIChatWidget() {
       {/* Floating Trigger Button */}
       <button
         onClick={() => setIsOpen((v) => !v)}
-        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] shadow-lg shadow-[rgba(26,26,30,0.50)] flex items-center justify-center transition-all duration-200 hover:scale-105 hover:shadow-[rgba(176,155,113,0.20)] ${
+        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full shadow-lg shadow-[rgba(26,26,30,0.50)] flex items-center justify-center transition-all duration-200 hover:scale-105 ${
           isOpen ? 'rotate-180' : ''
         }`}
-        style={!isOpen ? { animation: 'chatPulse 2.5s ease-in-out infinite' } : undefined}
+        style={{ background: 'rgba(176, 155, 113, 0.8)' }}
         aria-label={isOpen ? 'Close assistant' : 'Open HOA assistant'}
       >
         {isOpen ? (

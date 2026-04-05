@@ -105,10 +105,17 @@ function ProposalsDashboard() {
         <div className="w-20 h-20 rounded-xl bg-[rgba(176,155,113,0.08)] flex items-center justify-center mx-auto mb-6">
           <VoteIcon className="w-8 h-8 text-[#B09B71] opacity-40" />
         </div>
-        <h3 className="text-xl font-normal mb-3 text-[var(--parchment)]">No proposals yet</h3>
-        <p className="text-sm text-[var(--text-disabled)] max-w-md mx-auto leading-relaxed mb-8">
-          Any homeowner with a verified property record can submit a proposal.
-          Once submitted, the community votes over a 7-day period.
+        <p
+          className="text-xl max-w-md mx-auto mb-8"
+          style={{
+            fontFamily: '"Playfair Display", Georgia, serif',
+            fontStyle: 'italic',
+            color: 'var(--parchment)',
+            lineHeight: '1.6',
+            opacity: 0.75,
+          }}
+        >
+          No proposals yet. When your board puts something to a vote, it appears here.
         </p>
 
         {/* Lifecycle timeline */}
