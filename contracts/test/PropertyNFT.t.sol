@@ -364,4 +364,96 @@ contract PropertyNFTTest is Test {
         vm.expectRevert(abi.encodeWithSelector(PropertyNFT.TokenDoesNotExist.selector, 999));
         nft.updateDuesStatus(999, uint128(block.timestamp));
     }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // Loan Lock (Sentinel Audit Fix 1)
+    // ═══════════════════════════════════════════════════════════════════════
+
+    function test_SetLoanLock() public {
+        nft.grantRole(nft.LENDING_ROLE(), deployer);
+        nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
+
+        nft.setLoanLock(1, true);
+        assertTrue(nft.loanLocked(1));
+
+        nft.setLoanLock(1, false);
+        assertFalse(nft.loanLocked(1));
+    }
+
+    function test_SetLoanLockEmitsEvent() public {
+        nft.grantRole(nft.LENDING_ROLE(), deployer);
+        nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
+
+        vm.expectEmit(true, false, false, true);
+        emit PropertyNFT.LoanLockChanged(1, true);
+        nft.setLoanLock(1, true);
+    }
+
+    function test_RevertSetLoanLockUnauthorized() public {
+        nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
+
+        vm.prank(unauthorized);
+        vm.expectRevert();
+        nft.setLoanLock(1, true);
+    }
+
+    function test_RevertSetLoanLockNonexistentToken() public {
+        nft.grantRole(nft.LENDING_ROLE(), deployer);
+
+        vm.expectRevert(abi.encodeWithSelector(PropertyNFT.TokenDoesNotExist.selector, 999));
+        nft.setLoanLock(999, true);
+    }
+
+    function test_LoanLockedTokenCannotBeTransferred() public {
+        nft.grantRole(nft.LENDING_ROLE(), deployer);
+        nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
+
+        // Lock the token
+        nft.setLoanLock(1, true);
+
+        // Approve transfer (board side)
+        nft.approveTransfer(1, bob);
+
+        // Transfer should revert even with approval
+        vm.prank(alice);
+        vm.expectRevert(abi.encodeWithSelector(PropertyNFT.TokenIsLoanLocked.selector, 1));
+        nft.safeTransferFrom(alice, bob, 1);
+    }
+
+    function test_LoanUnlockedTokenCanBeTransferred() public {
+        nft.grantRole(nft.LENDING_ROLE(), deployer);
+        nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
+
+        // Lock then unlock
+        nft.setLoanLock(1, true);
+        nft.setLoanLock(1, false);
+
+        // Approve and transfer
+        nft.approveTransfer(1, bob);
+        vm.prank(alice);
+        nft.safeTransferFrom(alice, bob, 1);
+        assertEq(nft.ownerOf(1), bob);
+    }
+
+    function test_LoanLockDoesNotBlockMint() public {
+        // Minting should work regardless of any loan lock state
+        // (loanLocked check only applies to non-mint/non-burn transfers)
+        nft.grantRole(nft.LENDING_ROLE(), deployer);
+        nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
+        assertEq(nft.ownerOf(1), alice);
+    }
+
+    function test_LoanLockWithFreeTransferMode() public {
+        // Even with transfersRequireApproval=false, loan lock should block
+        nft.grantRole(nft.GOVERNOR_ROLE(), deployer);
+        nft.grantRole(nft.LENDING_ROLE(), deployer);
+        nft.setTransfersRequireApproval(false);
+
+        nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
+        nft.setLoanLock(1, true);
+
+        vm.prank(alice);
+        vm.expectRevert(abi.encodeWithSelector(PropertyNFT.TokenIsLoanLocked.selector, 1));
+        nft.safeTransferFrom(alice, bob, 1);
+    }
 }

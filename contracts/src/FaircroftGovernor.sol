@@ -57,6 +57,9 @@ contract FaircroftGovernor is
     /// @notice Current count of active proposals
     uint256 public activeProposalCount;
 
+    /// @notice Tracks proposals that have already been cleaned up (decremented)
+    mapping(uint256 proposalId => bool) public proposalCleaned;
+
     // ── Events ───────────────────────────────────────────────────────────────
 
     event ProposalCategorized(
@@ -73,6 +76,8 @@ contract FaircroftGovernor is
 
     error TooManyActiveProposals(uint256 max);
     error InvalidBps(uint256 bps);
+    error ProposalStillActive(uint256 proposalId);
+    error ProposalAlreadyCleaned(uint256 proposalId);
 
     // ── Constructor ──────────────────────────────────────────────────────────
 
@@ -228,6 +233,27 @@ contract FaircroftGovernor is
         maxActiveProposals = newMax;
     }
 
+    /**
+     * @notice Decrement activeProposalCount for proposals that are no longer active.
+     *         Anyone can call this for proposals in Defeated, Expired, or Canceled state.
+     * @param proposalId The proposal to clean up
+     */
+    function cleanupProposal(uint256 proposalId) public {
+        if (proposalCleaned[proposalId]) revert ProposalAlreadyCleaned(proposalId);
+
+        ProposalState currentState = state(proposalId);
+        if (
+            currentState != ProposalState.Defeated &&
+            currentState != ProposalState.Canceled &&
+            currentState != ProposalState.Expired
+        ) {
+            revert ProposalStillActive(proposalId);
+        }
+
+        proposalCleaned[proposalId] = true;
+        activeProposalCount--;
+    }
+
     // ── EIP-6372: Timestamp Clock ────────────────────────────────────────────
 
     function clock()
@@ -304,6 +330,10 @@ contract FaircroftGovernor is
         internal override(Governor, GovernorTimelockControl)
     {
         super._executeOperations(proposalId, targets, values, calldatas, descriptionHash);
+        if (!proposalCleaned[proposalId]) {
+            proposalCleaned[proposalId] = true;
+            activeProposalCount--;
+        }
     }
 
     function _cancel(
@@ -315,7 +345,12 @@ contract FaircroftGovernor is
         internal override(Governor, GovernorTimelockControl)
         returns (uint256)
     {
-        return super._cancel(targets, values, calldatas, descriptionHash);
+        uint256 proposalId = super._cancel(targets, values, calldatas, descriptionHash);
+        if (!proposalCleaned[proposalId]) {
+            proposalCleaned[proposalId] = true;
+            activeProposalCount--;
+        }
+        return proposalId;
     }
 
     function _executor()

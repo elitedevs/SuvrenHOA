@@ -25,6 +25,9 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
     /// @notice Role for governance operations (Governor contract via Timelock)
     bytes32 public constant GOVERNOR_ROLE = keccak256("GOVERNOR_ROLE");
 
+    /// @notice Role for lending operations (DuesLending contract)
+    bytes32 public constant LENDING_ROLE = keccak256("LENDING_ROLE");
+
     // ── Immutables ───────────────────────────────────────────────────────────
 
     /// @notice Maximum number of lots in the community (set at deploy, cannot change)
@@ -55,6 +58,9 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
     /// @notice Pending transfer approvals: tokenId → approved buyer address
     mapping(uint256 tokenId => address approvedBuyer) public pendingTransfers;
 
+    /// @notice Whether a token is locked due to an active loan
+    mapping(uint256 tokenId => bool) public loanLocked;
+
     // ── Counters ─────────────────────────────────────────────────────────────
 
     /// @notice Total properties ever minted (never decremented)
@@ -84,6 +90,8 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
 
     event ConfigUpdated(string parameter, bool value);
 
+    event LoanLockChanged(uint256 indexed tokenId, bool locked);
+
     // ── Errors ───────────────────────────────────────────────────────────────
 
     error MaxLotsReached(uint256 maxLots);
@@ -92,6 +100,7 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
     error InvalidLotNumber(uint256 lotNumber);
     error ZeroAddress();
     error TokenDoesNotExist(uint256 tokenId);
+    error TokenIsLoanLocked(uint256 tokenId);
 
     // ── Constructor ──────────────────────────────────────────────────────────
 
@@ -205,6 +214,18 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
         emit ConfigUpdated("autoDelegateOnMint", value);
     }
 
+    /**
+     * @notice Lock or unlock a property NFT for lending purposes.
+     *         A loan-locked token cannot be transferred.
+     * @param tokenId The property token ID
+     * @param locked Whether to lock (true) or unlock (false)
+     */
+    function setLoanLock(uint256 tokenId, bool locked) external onlyRole(LENDING_ROLE) {
+        if (_ownerOf(tokenId) == address(0)) revert TokenDoesNotExist(tokenId);
+        loanLocked[tokenId] = locked;
+        emit LoanLockChanged(tokenId, locked);
+    }
+
     // ── View Functions ───────────────────────────────────────────────────────
 
     /// @notice Get full property info for a token
@@ -254,6 +275,11 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
         address auth
     ) internal virtual override(ERC721, ERC721Enumerable) returns (address) {
         address from = _ownerOf(tokenId);
+
+        // Loan-lock check: block transfers of loan-locked tokens (allow mint/burn)
+        if (from != address(0) && to != address(0) && loanLocked[tokenId]) {
+            revert TokenIsLoanLocked(tokenId);
+        }
 
         // Minting: no restriction
         if (from != address(0) && transfersRequireApproval) {

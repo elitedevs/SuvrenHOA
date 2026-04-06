@@ -453,4 +453,130 @@ contract FaircroftGovernorTest is TestSetup {
     function test_ProposalThresholdIs1() public view {
         assertEq(governor.proposalThreshold(), 1);
     }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // Active Proposal Count Fix (Sentinel Audit Fix 2)
+    // ═══════════════════════════════════════════════════════════════════════
+
+    function test_ActiveCountDecrementsOnExecute() public {
+        address[] memory targets = new address[](1);
+        uint256[] memory values = new uint256[](1);
+        bytes[] memory calldatas = new bytes[](1);
+        targets[0] = address(docRegistry);
+        calldatas[0] = abi.encodeWithSelector(DocumentRegistry.getDocumentCount.selector);
+        string memory description = "Count test execute";
+
+        vm.prank(alice);
+        uint256 proposalId = governor.proposeWithCategory(
+            targets, values, calldatas, description,
+            FaircroftGovernor.ProposalCategory.Routine, ""
+        );
+        assertEq(governor.activeProposalCount(), 1);
+
+        _skipVotingDelay();
+
+        // All vote for
+        vm.prank(alice); governor.castVote(proposalId, 1);
+        vm.prank(bob); governor.castVote(proposalId, 1);
+        vm.prank(carol); governor.castVote(proposalId, 1);
+
+        _skipVotingPeriod();
+
+        bytes32 descHash = keccak256(bytes(description));
+        governor.queue(targets, values, calldatas, descHash);
+        _skipTimelockDelay();
+        governor.execute(targets, values, calldatas, descHash);
+
+        assertEq(governor.activeProposalCount(), 0);
+    }
+
+    function test_ActiveCountDecrementsOnCancel() public {
+        address[] memory targets = new address[](1);
+        uint256[] memory values = new uint256[](1);
+        bytes[] memory calldatas = new bytes[](1);
+        targets[0] = address(governor);
+        string memory description = "Count test cancel";
+
+        vm.prank(alice);
+        governor.proposeWithCategory(
+            targets, values, calldatas, description,
+            FaircroftGovernor.ProposalCategory.Routine, ""
+        );
+        assertEq(governor.activeProposalCount(), 1);
+
+        // Board cancels
+        bytes32 descHash = keccak256(bytes(description));
+        vm.prank(boardMultisig);
+        governor.cancel(targets, values, calldatas, descHash);
+
+        assertEq(governor.activeProposalCount(), 0);
+    }
+
+    function test_CleanupDefeatedProposal() public {
+        uint256 proposalId = _createProposal("Cleanup test", FaircroftGovernor.ProposalCategory.Routine);
+        assertEq(governor.activeProposalCount(), 1);
+
+        _skipVotingDelay();
+
+        // All vote against
+        vm.prank(alice); governor.castVote(proposalId, 0);
+        vm.prank(bob); governor.castVote(proposalId, 0);
+        vm.prank(carol); governor.castVote(proposalId, 0);
+
+        _skipVotingPeriod();
+
+        assertEq(uint8(governor.state(proposalId)), uint8(IGovernor.ProposalState.Defeated));
+
+        // Anyone can cleanup
+        governor.cleanupProposal(proposalId);
+        assertEq(governor.activeProposalCount(), 0);
+    }
+
+    function test_RevertCleanupActiveProposal() public {
+        uint256 proposalId = _createProposal("Still active", FaircroftGovernor.ProposalCategory.Routine);
+
+        vm.expectRevert(abi.encodeWithSelector(FaircroftGovernor.ProposalStillActive.selector, proposalId));
+        governor.cleanupProposal(proposalId);
+    }
+
+    function test_RevertDoubleCleanup() public {
+        uint256 proposalId = _createProposal("Double cleanup", FaircroftGovernor.ProposalCategory.Routine);
+
+        _skipVotingDelay();
+        vm.prank(alice); governor.castVote(proposalId, 0);
+        vm.prank(bob); governor.castVote(proposalId, 0);
+        _skipVotingPeriod();
+
+        governor.cleanupProposal(proposalId);
+
+        vm.expectRevert(abi.encodeWithSelector(FaircroftGovernor.ProposalAlreadyCleaned.selector, proposalId));
+        governor.cleanupProposal(proposalId);
+    }
+
+    function test_NoDoSAfter10Proposals() public {
+        // Create 10 proposals, cancel all, then create an 11th — should not revert
+        for (uint i = 0; i < 10; i++) {
+            address[] memory targets = new address[](1);
+            uint256[] memory values = new uint256[](1);
+            bytes[] memory calldatas = new bytes[](1);
+            targets[0] = address(governor);
+            string memory desc = string(abi.encodePacked("Proposal ", vm.toString(i)));
+
+            vm.prank(alice);
+            governor.proposeWithCategory(
+                targets, values, calldatas, desc,
+                FaircroftGovernor.ProposalCategory.Routine, ""
+            );
+
+            // Cancel each via board
+            vm.prank(boardMultisig);
+            governor.cancel(targets, values, calldatas, keccak256(bytes(desc)));
+        }
+
+        assertEq(governor.activeProposalCount(), 0);
+
+        // 11th proposal should succeed
+        _createProposal("11th proposal works", FaircroftGovernor.ProposalCategory.Routine);
+        assertEq(governor.activeProposalCount(), 1);
+    }
 }
