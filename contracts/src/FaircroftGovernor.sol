@@ -114,7 +114,28 @@ contract FaircroftGovernor is
     // ── Core Functions ───────────────────────────────────────────────────────
 
     /**
-     * @notice Create a proposal with a specific governance category
+     * @notice Override base propose() to enforce maxActiveProposals rate limit.
+     *         All proposal paths (including proposeWithCategory) funnel through here,
+     *         so the limit cannot be bypassed via the inherited public function.
+     * @dev SC-02 fix: closes the direct propose() bypass.
+     */
+    function propose(
+        address[] memory targets,
+        uint256[] memory values,
+        bytes[] memory calldatas,
+        string memory description
+    ) public override returns (uint256) {
+        if (activeProposalCount >= maxActiveProposals) {
+            revert TooManyActiveProposals(maxActiveProposals);
+        }
+        uint256 proposalId = super.propose(targets, values, calldatas, description);
+        activeProposalCount++;
+        return proposalId;
+    }
+
+    /**
+     * @notice Create a proposal with a specific governance category.
+     *         Delegates limit enforcement and counting to the overridden propose().
      * @param targets Contract addresses to call on execution
      * @param values ETH values to send (usually 0 for USDC operations)
      * @param calldatas Encoded function calls
@@ -131,14 +152,10 @@ contract FaircroftGovernor is
         ProposalCategory category,
         string memory metadataUri
     ) public returns (uint256) {
-        if (activeProposalCount >= maxActiveProposals) {
-            revert TooManyActiveProposals(maxActiveProposals);
-        }
-
+        // propose() enforces the limit and increments activeProposalCount
         uint256 proposalId = propose(targets, values, calldatas, description);
         proposalCategories[proposalId] = category;
         proposalMetadataUri[proposalId] = metadataUri;
-        activeProposalCount++;
 
         emit ProposalCategorized(proposalId, category, metadataUri);
         return proposalId;
@@ -184,20 +201,23 @@ contract FaircroftGovernor is
 
     /**
      * @notice Check if a proposal has succeeded (threshold check)
-     * @dev Supports supermajority for Constitutional proposals
+     * @dev Supports supermajority for Constitutional proposals.
+     *      SC-07 fix: abstain votes are included in the denominator to prevent
+     *      a minority from passing proposals by having accomplices abstain to
+     *      reach quorum while only one member votes FOR.
      */
     function _voteSucceeded(uint256 proposalId)
         internal view override(Governor, GovernorCountingSimple)
         returns (bool)
     {
-        (uint256 againstVotes, uint256 forVotes, ) = proposalVotes(proposalId);
+        (uint256 againstVotes, uint256 forVotes, uint256 abstainVotes) = proposalVotes(proposalId);
         ProposalCategory category = proposalCategories[proposalId];
         uint256 thresholdBps = categoryThresholdBps[category];
 
-        uint256 totalCast = forVotes + againstVotes;
+        // Include abstain in denominator: a FOR vote must exceed threshold% of ALL votes cast
+        uint256 totalCast = forVotes + againstVotes + abstainVotes;
         if (totalCast == 0) return false;
 
-        // For > threshold% of (for + against) votes
         return (forVotes * 10000) > (thresholdBps * totalCast);
     }
 
@@ -251,7 +271,7 @@ contract FaircroftGovernor is
         }
 
         proposalCleaned[proposalId] = true;
-        activeProposalCount--;
+        if (activeProposalCount > 0) activeProposalCount--;
     }
 
     // ── EIP-6372: Timestamp Clock ────────────────────────────────────────────
@@ -330,7 +350,8 @@ contract FaircroftGovernor is
         internal override(Governor, GovernorTimelockControl)
     {
         super._executeOperations(proposalId, targets, values, calldatas, descriptionHash);
-        if (!proposalCleaned[proposalId]) {
+        // SC-03: guard against underflow if this proposal bypassed the counter somehow
+        if (!proposalCleaned[proposalId] && activeProposalCount > 0) {
             proposalCleaned[proposalId] = true;
             activeProposalCount--;
         }
@@ -346,7 +367,8 @@ contract FaircroftGovernor is
         returns (uint256)
     {
         uint256 proposalId = super._cancel(targets, values, calldatas, descriptionHash);
-        if (!proposalCleaned[proposalId]) {
+        // SC-03: guard against underflow
+        if (!proposalCleaned[proposalId] && activeProposalCount > 0) {
             proposalCleaned[proposalId] = true;
             activeProposalCount--;
         }

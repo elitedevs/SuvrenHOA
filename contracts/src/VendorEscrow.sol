@@ -159,6 +159,8 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
     error WorkOrderAlreadyCompleted(uint256 workOrderId);
     error CannotCancelAfterApproval(uint256 workOrderId);
     error NotBoardOrVendor(address caller);
+    /// @notice SC-11: vendor cannot be their own inspector
+    error InspectorCannotBeVendor();
 
     // ── Constructor ──────────────────────────────────────────────────────────
 
@@ -210,6 +212,8 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
     ) external nonReentrant onlyRole(BOARD_ROLE) returns (uint256 workOrderId) {
         if (vendor == address(0)) revert ZeroAddress();
         if (inspector == address(0)) revert ZeroAddress();
+        // SC-11: prevent vendor from acting as their own inspector (self-approval attack)
+        if (inspector == vendor) revert InspectorCannotBeVendor();
         if (bytes(title).length == 0) revert EmptyTitle();
         if (milestones.length == 0) revert EmptyMilestones();
 
@@ -350,7 +354,9 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
             usdc.safeTransfer(wo.vendor, amount);
         } else {
             ms.status = MilestoneStatus.Returned;
-            usdc.safeTransfer(treasury, amount);
+            // SC-05: credit treasury accounting, not raw transfer
+            usdc.approve(treasury, amount);
+            IFaircroftTreasury(treasury).creditFromEscrow(amount);
         }
 
         emit DisputeResolved(workOrderId, milestoneIndex, releaseToVendor, msg.sender);
@@ -383,7 +389,9 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
         // Refund all escrowed USDC — only non-released milestones still sit here
         // (releasedAmount == 0 means nothing left the escrow yet)
         uint256 refund = wo.totalAmount;
-        usdc.safeTransfer(treasury, refund);
+        // SC-05: credit treasury accounting, not raw transfer
+        usdc.approve(treasury, refund);
+        IFaircroftTreasury(treasury).creditFromEscrow(refund);
 
         emit WorkOrderCancelled(workOrderId, msg.sender, refund);
     }
@@ -507,4 +515,11 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
             ? WorkOrderStatus.Active
             : WorkOrderStatus.Created;
     }
+}
+
+// ── Interface ────────────────────────────────────────────────────────────────
+
+/// @dev Minimal interface to FaircroftTreasury — used for SC-05 accounting fix
+interface IFaircroftTreasury {
+    function creditFromEscrow(uint256 amount) external;
 }

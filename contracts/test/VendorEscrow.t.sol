@@ -6,6 +6,26 @@ import "../src/VendorEscrow.sol";
 import "./helpers/MockUSDC.sol";
 import "@openzeppelin/contracts/access/IAccessControl.sol";
 
+// ── SC-05 fix: MockTreasury supports creditFromEscrow for proper accounting ──────
+
+contract MockTreasury {
+    MockUSDC public immutable usdc;
+
+    constructor(MockUSDC _usdc) {
+        usdc = _usdc;
+    }
+
+    /// @dev Pre-authorise the escrow contract to pull USDC for work order creation
+    function approveEscrow(address escrow_, uint256 amount) external {
+        usdc.approve(escrow_, amount);
+    }
+
+    /// @dev Accept USDC refund from VendorEscrow (no role check needed in mock)
+    function creditFromEscrow(uint256 amount) external {
+        usdc.transferFrom(msg.sender, address(this), amount);
+    }
+}
+
 /**
  * @title VendorEscrowTest
  * @notice Comprehensive test suite for VendorEscrow.sol
@@ -24,15 +44,16 @@ contract VendorEscrowTest is Test {
 
     // ── Contracts ────────────────────────────────────────────────────────────
 
-    VendorEscrow public escrow;
-    MockUSDC     public usdc;
+    VendorEscrow  public escrow;
+    MockUSDC      public usdc;
+    MockTreasury  public mockTreasury;
 
     // ── Actors ───────────────────────────────────────────────────────────────
 
     address public deployer   = address(this);
     address public board      = address(0xB0A2D);
     address public governor   = address(0x60718);
-    address public treasury   = address(0x7EA5);
+    address public treasury;  // set in setUp() to point to MockTreasury
     address public vendor     = address(0xC04C);
     address public inspector  = address(0x1115);
     address public stranger   = address(0xBAD);
@@ -48,13 +69,15 @@ contract VendorEscrowTest is Test {
     // ── Setup ────────────────────────────────────────────────────────────────
 
     function setUp() public {
-        usdc   = new MockUSDC();
+        usdc         = new MockUSDC();
+        mockTreasury = new MockTreasury(usdc);
+        treasury     = address(mockTreasury);
+
         escrow = new VendorEscrow(address(usdc), treasury, board, governor);
 
         // Seed treasury with USDC and have it approve the escrow contract
         usdc.mint(treasury, 100_000e6);
-        vm.prank(treasury);
-        usdc.approve(address(escrow), type(uint256).max);
+        mockTreasury.approveEscrow(address(escrow), type(uint256).max);
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────────

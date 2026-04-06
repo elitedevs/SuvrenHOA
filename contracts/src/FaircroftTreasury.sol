@@ -28,6 +28,12 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     /// @notice Role for yield manager contract (TreasuryYield)
     bytes32 public constant YIELD_MANAGER_ROLE = keccak256("YIELD_MANAGER_ROLE");
 
+    /// @notice Role for DuesLending contract — can withdraw/deposit reserve and pay dues on behalf
+    bytes32 public constant LENDING_ROLE = keccak256("LENDING_ROLE");
+
+    /// @notice Role for VendorEscrow contract — can credit refunded funds back to accounting
+    bytes32 public constant ESCROW_ROLE = keccak256("ESCROW_ROLE");
+
     // ── Immutables ───────────────────────────────────────────────────────────
 
     /// @notice USDC token contract (6 decimals on Base)
@@ -130,6 +136,10 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     event ReserveTransfer(uint256 amount, bool toOperating);
     event ReserveReleasedForYield(address indexed to, uint256 amount);
     event YieldReturned(address indexed from, uint256 amount);
+    event LoanWithdrawn(address indexed lendingContract, uint256 amount);
+    event LoanRepaid(address indexed lendingContract, uint256 amount);
+    event DuesPaidForLoan(uint256 indexed tokenId, address indexed payer, uint256 amount, uint256 quarters);
+    event EscrowCreditReceived(address indexed escrowContract, uint256 amount);
 
     // ── Errors ───────────────────────────────────────────────────────────────
 
@@ -375,6 +385,102 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
         reserveBalance += amount;
 
         emit YieldReturned(msg.sender, amount);
+    }
+
+    // ── DuesLending Support ───────────────────────────────────────────────────
+
+    /**
+     * @notice Transfer reserve USDC to DuesLending so it can pay dues on a borrower's behalf.
+     *         Decrements reserveBalance; the lending contract will deposit payments back over time.
+     * @param amount USDC amount to release from reserve
+     */
+    function withdrawForLoan(uint256 amount)
+        external
+        nonReentrant
+        onlyRole(LENDING_ROLE)
+    {
+        if (amount == 0) revert ZeroAmount();
+        if (amount > reserveBalance) revert InsufficientReserveBalance(amount, reserveBalance);
+
+        reserveBalance -= amount;
+        usdc.safeTransfer(msg.sender, amount);
+
+        emit LoanWithdrawn(msg.sender, amount);
+    }
+
+    /**
+     * @notice Accept USDC installment repayment from DuesLending back into the reserve.
+     * @dev Caller (DuesLending) must approve this contract to spend `amount` USDC first.
+     * @param amount USDC being returned to the reserve
+     */
+    function depositFromLoan(uint256 amount)
+        external
+        nonReentrant
+        onlyRole(LENDING_ROLE)
+    {
+        if (amount == 0) revert ZeroAmount();
+
+        usdc.safeTransferFrom(msg.sender, address(this), amount);
+        reserveBalance += amount;
+
+        emit LoanRepaid(msg.sender, amount);
+    }
+
+    /**
+     * @notice Pay dues for a property on behalf of a borrower.
+     *         Called by DuesLending after withdrawing the principal; the lending
+     *         contract approves this contract to pull the USDC back and record
+     *         the dues as paid.
+     * @param tokenId Property lot number
+     * @param quarters Number of quarters to cover (1-4)
+     * @param payer   Address that holds the USDC (DuesLending contract)
+     */
+    function payDuesFor(uint256 tokenId, uint256 quarters, address payer)
+        external
+        nonReentrant
+        onlyRole(LENDING_ROLE)
+    {
+        if (quarters == 0 || quarters > 4) revert InvalidPaymentPeriod();
+
+        // No discount, no late fee — loan covers face-value dues
+        uint256 amount = quarterlyDuesAmount * quarters;
+
+        usdc.safeTransferFrom(payer, address(this), amount);
+
+        DuesRecord storage record = duesRecords[tokenId];
+        uint256 startDate = record.paidThrough > block.timestamp
+            ? record.paidThrough
+            : block.timestamp;
+        record.paidThrough = uint128(startDate + (quarters * 91 days));
+        record.totalPaid += uint128(amount);
+
+        uint256 toOperating = amount * operatingReserveSplitBps / 10000;
+        uint256 toReserve = amount - toOperating;
+        operatingBalance += toOperating;
+        reserveBalance += toReserve;
+
+        emit DuesPaidForLoan(tokenId, payer, amount, quarters);
+    }
+
+    // ── VendorEscrow Support ──────────────────────────────────────────────────
+
+    /**
+     * @notice Accept USDC refund from VendorEscrow and credit operating balance.
+     *         Called when a work order is cancelled or a dispute is resolved in Treasury's favour.
+     *         Caller (VendorEscrow) must approve this contract to spend `amount` USDC first.
+     * @param amount USDC being returned from escrow
+     */
+    function creditFromEscrow(uint256 amount)
+        external
+        nonReentrant
+        onlyRole(ESCROW_ROLE)
+    {
+        if (amount == 0) revert ZeroAmount();
+
+        usdc.safeTransferFrom(msg.sender, address(this), amount);
+        operatingBalance += amount;
+
+        emit EscrowCreditReceived(msg.sender, amount);
     }
 
     // ── View Functions ───────────────────────────────────────────────────────

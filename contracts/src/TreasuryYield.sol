@@ -192,9 +192,12 @@ contract TreasuryYield is AccessControl, ReentrancyGuard {
     {
         if (amount == 0) revert ZeroAmount();
 
-        // Enforce risk cap against current reserve BEFORE this deposit
-        uint256 currentReserve = treasury.reserveBalance();
-        uint256 maxAllowed = _maxDeployable(currentReserve);
+        // SC-06 fix: enforce risk cap against TOTAL community reserve (in-treasury + already
+        // deployed), not just the remaining in-treasury balance.  Using only reserveBalance()
+        // produces a shrinking denominator after each deposit, allowing the effective
+        // deployed-to-reserve ratio to exceed the configured cap.
+        uint256 totalCommunityReserve = treasury.reserveBalance() + depositedAmount;
+        uint256 maxAllowed = _maxDeployable(totalCommunityReserve);
         uint256 wouldDeposit = depositedAmount + amount;
 
         if (wouldDeposit > maxAllowed) {

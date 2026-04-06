@@ -7,9 +7,19 @@ export interface SessionData {
   address?: string;
 }
 
+// FE-03: SESSION_SECRET must be set — never fall back to a hardcoded string.
+// A publicly-visible default key allows anyone to forge valid session cookies.
+const sessionSecret = process.env.SESSION_SECRET;
+if (!sessionSecret || sessionSecret.length < 32) {
+  throw new Error(
+    'SESSION_SECRET env var is required and must be at least 32 characters. ' +
+    'Set it in your .env.local or deployment environment.'
+  );
+}
+
 export const sessionOptions: SessionOptions = {
   cookieName: 'suvren_session',
-  password: process.env.SESSION_SECRET || 'complex_password_at_least_32_characters_long_replace_me',
+  password: sessionSecret,
   cookieOptions: {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
@@ -26,7 +36,14 @@ export async function getSession(): Promise<IronSession<SessionData>> {
 
 export async function verifySiweMessage(message: string, signature: string, nonce: string): Promise<string> {
   const siweMessage = new SiweMessage(message);
-  const { data } = await siweMessage.verify({ signature, nonce });
+  // FE-01: bind verification to the app's domain, URI, and chain to prevent
+  // cross-site SIWE replay attacks where a signature for evil.com is replayed here.
+  const { data } = await siweMessage.verify({
+    signature,
+    nonce,
+    domain: process.env.NEXT_PUBLIC_APP_DOMAIN,
+    time: new Date().toISOString(),
+  });
   return data.address;
 }
 
