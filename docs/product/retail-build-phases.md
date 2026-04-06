@@ -135,25 +135,30 @@
 > **Goal:** Professional web presence that converts visitors to trials
 
 ### 4.1 — Marketing Pages
-- [ ] `/about` — Company story, Ryan's background, mission statement
-- [ ] `/pricing` — Standalone pricing page (expanded from landing section)
-- [ ] `/security` — Deep dive on the technology, how blockchain works (plain English)
-- [ ] `/contact` — Contact form + support@suvren.co
-- [ ] `/blog` — Blog framework (MDX or Supabase-backed)
-- [ ] `/docs` — Public documentation / knowledge base
-- [ ] `/demo` — Interactive demo walkthrough (no signup required)
+- [x] `/about` — Company story, Ryan's background, mission statement, team, values
+- [x] `/pricing` — Standalone pricing page with monthly/annual toggle, feature comparison table, FAQ
+- [x] `/security` — Deep dive on blockchain tech in plain English, smart contract architecture
+- [x] `/contact` — Contact form (mailto MVP) + support@suvren.co + social links
+- [x] `/blog` — Blog listing page with featured post + grid (TypeScript data-driven)
+- [x] `/blog/[slug]` — Individual blog post page with markdown rendering, share buttons, prev/next nav
+- [x] `/docs` — Public documentation / knowledge base landing page
+- [x] `/demo` — Interactive demo walkthrough with tabbed feature showcase (no signup required)
+- [x] Shared marketing layout — sticky header with nav, full footer with links, mobile responsive
+- [x] Updated sidebar to hide on all marketing routes
+- [x] AppShell component to cleanly separate marketing vs app chrome
 
 ### 4.2 — SEO & Content
-- [ ] Write 5 launch blog posts:
+- [x] Write 5 launch blog posts:
   1. "Why Your HOA Board Can't Be Trusted (And What to Do About It)"
   2. "HOA Embezzlement: $100M/Year Problem Nobody Talks About"
   3. "What 'Tamper-Proof' Actually Means for Your HOA"
   4. "SuvrenHOA vs. AppFolio vs. TownSq: An Honest Comparison"
   5. "How We Built an Unhackable HOA Treasury"
-- [ ] Meta tags, OG images, structured data for all pages
-- [ ] Sitemap.xml + robots.txt
-- [ ] Google Search Console setup
-- [ ] Schema markup for SaaS product
+- [x] Meta tags (og:title, og:description, og:image, twitter cards) for all marketing pages via shared metadata utility
+- [x] Sitemap.xml (Next.js built-in generation at `src/app/sitemap.ts`)
+- [x] robots.txt (Next.js built-in generation at `src/app/robots.ts`)
+- [ ] Google Search Console setup (requires manual DNS/meta verification)
+- [x] JSON-LD SaaS product schema + Organization schema on landing page
 
 ### 4.3 — Video & Social
 - [ ] Record 90-second explainer video (script is written)

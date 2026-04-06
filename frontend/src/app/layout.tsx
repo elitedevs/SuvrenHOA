@@ -2,12 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Playfair_Display, Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
-import { Sidebar } from '@/components/Sidebar';
-import { AlertBanner } from '@/components/AlertBanner';
-import { AIChatWidget } from '@/components/AIChatWidget';
-import { GlobalFeatures } from '@/components/GlobalFeatures';
-import { Breadcrumb } from '@/components/Breadcrumb';
-import { SeasonalBanner } from '@/components/SeasonalBanner';
+import { AppShell } from '@/components/AppShell';
 
 const playfairDisplay = Playfair_Display({ subsets: ['latin'], weight: ['400', '500', '600', '700'], style: ['normal', 'italic'], variable: '--font-playfair', display: 'swap',
 });
@@ -28,5 +23,14 @@ export const metadata: Metadata = { title: 'SuvrenHOA', description: 'Transparen
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#B09B71',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) { return ( <html lang="en" className={`dark ${playfairDisplay.variable} ${inter.variable}`}> <body className="font-sans antialiased bg-[var(--obsidian)] text-[var(--text-body)]"> <Providers> <Sidebar /> <div className="lg:pl-[var(--sidebar-width,240px)] min-h-screen flex flex-col transition-all duration-200"> <AlertBanner /> <SeasonalBanner /> <main className="flex-1 p-4 sm:p-6 lg:p-8"> <Breadcrumb /> {children} </main> <footer className="border-t border-[var(--divider)] py-5 px-6 text-center"> <p className="text-[11px] text-[var(--text-disabled)] font-medium"> © 2026 Suvren LLC. All rights reserved. SuvrenHOA™ is a trademark of Suvren LLC. </p> <p className="text-[10px] text-[var(--text-disabled)] mt-1"> Powered by Base blockchain · Smart contracts audited · Documents stored on Arweave </p> </footer> </div> <AIChatWidget /> <GlobalFeatures /> </Providers> </body> </html> );
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`dark ${playfairDisplay.variable} ${inter.variable}`}>
+      <body className="font-sans antialiased bg-[var(--obsidian)] text-[var(--text-body)]">
+        <Providers>
+          <AppShell>{children}</AppShell>
+        </Providers>
+      </body>
+    </html>
+  );
 }

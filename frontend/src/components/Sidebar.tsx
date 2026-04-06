@@ -411,10 +411,19 @@ export function Sidebar() {
     );
   }, [collapsed]);
 
-  // Hide sidebar on public routes (login, signup, landing, invite accept)
+  // Hide sidebar on public routes (login, signup, landing, invite accept, marketing pages)
   const publicRoutes = ['/', '/login', '/signup', '/invite/accept'];
-  const isPublicRoute = publicRoutes.includes(pathname);
-  if ((!isConnected && !user) || isPublicRoute) return null;
+  const publicPrefixes = ['/about', '/pricing', '/security', '/contact', '/blog', '/docs', '/demo'];
+  const isPublicRoute = publicRoutes.includes(pathname) || publicPrefixes.some(p => pathname.startsWith(p));
+  const shouldHide = (!isConnected && !user) || isPublicRoute;
+
+  useEffect(() => {
+    if (shouldHide) {
+      document.documentElement.style.setProperty('--sidebar-width', '0px');
+    }
+  }, [shouldHide]);
+
+  if (shouldHide) return null;
 
   const sidebarContent = (
     <div
