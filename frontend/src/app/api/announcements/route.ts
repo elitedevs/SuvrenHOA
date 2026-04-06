@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { withAuth } from '@/lib/apiAuth';
 
 export const dynamic = 'force-dynamic';
 
-// GET /api/announcements
+// GET /api/announcements — Public
 export async function GET() {
   const { data, error } = await supabaseAdmin
     .from('hoa_announcements')
@@ -13,10 +14,8 @@ export async function GET() {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  // Get total resident count for read percentage (use hoa_profiles or hardcode for now)
   const totalResidents = 150;
 
-  // Get read counts per announcement
   const enriched = await Promise.all(
     (data || []).map(async (a) => {
       const { count } = await supabaseAdmin
@@ -30,8 +29,8 @@ export async function GET() {
   return NextResponse.json(enriched);
 }
 
-// POST /api/announcements — Create announcement (board only)
-export async function POST(request: Request) {
+// POST /api/announcements — Authenticated (board only)
+export const POST = withAuth(async (request, { address }) => {
   const body = await request.json();
   const { title, content, author_name, author_role, priority } = body;
 
@@ -47,4 +46,4 @@ export async function POST(request: Request) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data, { status: 201 });
-}
+});

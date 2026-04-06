@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { withAuth } from '@/lib/apiAuth';
 
 export const dynamic = 'force-dynamic';
 
-// GET /api/maintenance — List maintenance requests
+// GET — Public
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const status = url.searchParams.get('status');
@@ -23,16 +24,15 @@ export async function GET(request: Request) {
   return NextResponse.json(data || []);
 }
 
-// POST /api/maintenance — Create maintenance request
-export async function POST(request: Request) {
+// POST — Authenticated
+export const POST = withAuth(async (request, { address }) => {
   const body = await request.json();
-  const { wallet_address, lot_number, title, description, category, location, priority } = body;
+  const { lot_number, title, description, category, location, priority } = body;
 
-  if (!wallet_address || !title || !description || !location) {
+  if (!title || !description || !location) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
-  // Generate request number
   const year = new Date().getFullYear();
   const { count } = await supabaseAdmin
     .from('hoa_maintenance_requests')
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     .from('hoa_maintenance_requests')
     .insert({
       request_number,
-      wallet_address,
+      wallet_address: address,
       lot_number,
       title,
       description,
@@ -57,4 +57,4 @@ export async function POST(request: Request) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data, { status: 201 });
-}
+});

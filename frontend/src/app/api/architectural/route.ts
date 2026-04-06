@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { withAuth } from '@/lib/apiAuth';
 
 export const dynamic = 'force-dynamic';
 
+// GET — Public
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const status = url.searchParams.get('status');
@@ -22,11 +24,12 @@ export async function GET(request: Request) {
   return NextResponse.json(data || []);
 }
 
-export async function POST(request: Request) {
+// POST — Authenticated, uses session address
+export const POST = withAuth(async (request, { address }) => {
   const body = await request.json();
-  const { wallet_address, lot_number, title, description, modification_type, estimated_cost, contractor_name, start_date, completion_date } = body;
+  const { lot_number, title, description, modification_type, estimated_cost, contractor_name, start_date, completion_date } = body;
 
-  if (!wallet_address || !lot_number || !title || !description || !modification_type) {
+  if (!lot_number || !title || !description || !modification_type) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
@@ -40,7 +43,7 @@ export async function POST(request: Request) {
   const { data, error } = await supabaseAdmin
     .from('hoa_architectural_requests')
     .insert({
-      request_number, wallet_address, lot_number, title, description, modification_type,
+      request_number, wallet_address: address, lot_number, title, description, modification_type,
       estimated_cost, contractor_name, start_date, completion_date,
     })
     .select()
@@ -48,11 +51,12 @@ export async function POST(request: Request) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data, { status: 201 });
-}
+});
 
-export async function PATCH(request: Request) {
+// PATCH — Authenticated (board review)
+export const PATCH = withAuth(async (request, { address }) => {
   const body = await request.json();
-  const { id, status, reviewer_notes, conditions, reviewed_by } = body;
+  const { id, status, reviewer_notes, conditions } = body;
 
   if (!id || !status) return NextResponse.json({ error: 'id and status required' }, { status: 400 });
 
@@ -62,7 +66,7 @@ export async function PATCH(request: Request) {
       status,
       reviewer_notes,
       conditions,
-      reviewed_by,
+      reviewed_by: address,
       reviewed_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     })
@@ -70,4 +74,4 @@ export async function PATCH(request: Request) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
-}
+});

@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { withAuth } from '@/lib/apiAuth';
 
 export const dynamic = 'force-dynamic';
 
-// GET /api/posts — List posts with optional category filter
+// GET — Public
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const category = url.searchParams.get('category');
@@ -25,21 +26,21 @@ export async function GET(request: Request) {
   return NextResponse.json(data || []);
 }
 
-// POST /api/posts — Create a new post
-export async function POST(request: Request) {
+// POST — Authenticated
+export const POST = withAuth(async (request, { address }) => {
   const body = await request.json();
-  const { wallet_address, lot_number, title, content, category } = body;
+  const { lot_number, title, content, category } = body;
 
-  if (!wallet_address || !title || !content) {
+  if (!title || !content) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
   const { data, error } = await supabaseAdmin
     .from('hoa_posts')
-    .insert({ wallet_address, lot_number, title, content, category: category || 'general' })
+    .insert({ wallet_address: address, lot_number, title, content, category: category || 'general' })
     .select()
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data, { status: 201 });
-}
+});
