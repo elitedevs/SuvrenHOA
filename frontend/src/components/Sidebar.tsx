@@ -180,6 +180,7 @@ const NAV_SECTIONS: NavSection[] = [
       { href: '/settings/wallet', label: 'Wallet' },
       { href: '/settings/notifications', label: 'Notifications' },
       { href: '/admin', label: 'Admin' },
+      { href: '/admin/properties', label: 'Properties' },
       { href: '/onboarding', label: 'Onboarding' },
       { href: '/checkout', label: 'Move Out' },
     ],

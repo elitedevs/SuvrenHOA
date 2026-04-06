@@ -1,25 +1,22 @@
 'use client';
-import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect, useCallback } from 'react';
-import { useAccount } from 'wagmi';
 import { useRouter } from 'next/navigation';
+import { useAccount } from 'wagmi';
+import { useSupabaseAuth } from '@/context/AuthContext';
+import { useSmartWallet } from '@/hooks/useSmartWallet';
+import { GettingStartedChecklist } from '@/components/GettingStartedChecklist';
 import Link from 'next/link';
-import { useProperty } from '@/hooks/useProperty';
 import {
-  useOnboarding,
-  PetEntry,
-  VehicleEntry,
-} from '@/hooks/useOnboarding';
-import { Home, CreditCard, MessageSquare, FileText, Car } from 'lucide-react';
+  Home, User, Wallet, Compass, CheckCircle2,
+  ChevronRight, ArrowLeft, Sparkles,
+  Vote, Landmark, BookOpen, Shield,
+} from 'lucide-react';
 
-// ── Confetti ─────────────────────────────────────────────────────────────────
+// ── Confetti ────────────────────────────────────────────────────────────────
 function Confetti() {
   const pieces = Array.from({ length: 60 }, (_, i) => i);
-  const colors = [
-    '#B09B71', '#D4C4A0', '#b8942e', '#3A7D6F', '#b8942e',
-    '#8B5A5A', '#5A7A9A', '#b8942e',
-  ];
+  const colors = ['#B09B71', '#D4C4A0', '#b8942e', '#3A7D6F', '#5A7A9A', '#8B5A5A'];
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden z-50">
       <style>{`
@@ -42,7 +39,7 @@ function Confetti() {
             width: `${6 + Math.random() * 8}px`,
             height: `${6 + Math.random() * 8}px`,
             backgroundColor: colors[i % colors.length],
-            borderRadius: Math.random() > 0.5 ? "50%" : "2px",
+            borderRadius: Math.random() > 0.5 ? '50%' : '2px',
             animationDuration: `${2 + Math.random() * 3}s`,
             animationDelay: `${Math.random() * 1.5}s`,
           }}
@@ -52,14 +49,8 @@ function Confetti() {
   );
 }
 
-// ── Step Indicator ────────────────────────────────────────────────────────────
-function StepIndicator({
-  current,
-  total,
-}: {
-  current: number;
-  total: number;
-}) {
+// ── Step Indicator ──────────────────────────────────────────────────────────
+function StepIndicator({ current, total }: { current: number; total: number }) {
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-2">
@@ -88,861 +79,452 @@ function StepIndicator({
   );
 }
 
-// ── Pet Card ─────────────────────────────────────────────────────────────────
-function PetCard({
-  pet,
-  onUpdate,
-  onRemove,
+// ── Feature Card (for tour) ─────────────────────────────────────────────────
+function FeatureCard({
+  icon: Icon,
+  title,
+  description,
+  color,
 }: {
-  pet: PetEntry;
-  onUpdate: (p: PetEntry) => void;
-  onRemove: () => void;
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  color: string;
 }) {
   return (
-    <div className="glass-card rounded-xl p-4 border border-[rgba(176,155,113,0.10)] mb-3">
-      <div className="flex justify-between items-start mb-3">
-        <span className="text-sm font-medium text-[#D4C4A0]">
-           Pet
-        </span>
-        <button
-          onClick={onRemove}
-          className="text-xs text-[#8B5A5A] hover:text-[#8B5A5A] transition-colors"
-        >
-          Remove
-        </button>
+    <div className="glass-card rounded-xl p-5 flex items-start gap-4">
+      <div
+        className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+        style={{ background: `${color}15`, border: `1px solid ${color}30` }}
+      >
+        <Icon className="w-5 h-5" style={{ color }} />
       </div>
-      <div className="grid grid-cols-2 gap-3">
-        <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] col-span-2"
-          placeholder="Pet name"
-          value={pet.name}
-          onChange={(e) => onUpdate({ ...pet, name: e.target.value })}
-        />
-        <select
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
-          value={pet.type}
-          onChange={(e) =>
-            onUpdate({ ...pet, type: e.target.value as PetEntry["type"] })
-          }
-        >
-          <option value="dog"> Dog</option>
-          <option value="cat"> Cat</option>
-          <option value="other"> Other</option>
-        </select>
-        <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
-          placeholder="Breed"
-          value={pet.breed}
-          onChange={(e) => onUpdate({ ...pet, breed: e.target.value })}
-        />
-        <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)] col-span-2"
-          placeholder="Weight (lbs)"
-          value={pet.weight}
-          onChange={(e) => onUpdate({ ...pet, weight: e.target.value })}
-        />
+      <div>
+        <p className="text-sm font-medium text-[var(--parchment)] mb-0.5">{title}</p>
+        <p className="text-xs text-[var(--text-muted)] leading-relaxed">{description}</p>
       </div>
     </div>
   );
 }
 
-// ── Vehicle Card ──────────────────────────────────────────────────────────────
-function VehicleCard({
-  vehicle,
-  onUpdate,
-  onRemove,
-}: {
-  vehicle: VehicleEntry;
-  onUpdate: (v: VehicleEntry) => void;
-  onRemove: () => void;
-}) {
-  return (
-    <div className="glass-card rounded-xl p-4 border border-[rgba(90,122,154,0.10)] mb-3">
-      <div className="flex justify-between items-start mb-3">
-        <span className="text-sm font-medium text-[var(--steel)] flex items-center gap-1.5"><Car className="w-4 h-4" /> Vehicle</span>
-        <button
-          onClick={onRemove}
-          className="text-xs text-[#8B5A5A] hover:text-[#8B5A5A] transition-colors"
-        >
-          Remove
-        </button>
-      </div>
-      <div className="grid grid-cols-2 gap-3">
-        <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(90,122,154,0.50)]"
-          placeholder="Make (e.g. Toyota)"
-          value={vehicle.make}
-          onChange={(e) => onUpdate({ ...vehicle, make: e.target.value })}
-        />
-        <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(90,122,154,0.50)]"
-          placeholder="Model (e.g. Camry)"
-          value={vehicle.model}
-          onChange={(e) => onUpdate({ ...vehicle, model: e.target.value })}
-        />
-        <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(90,122,154,0.50)]"
-          placeholder="Year"
-          value={vehicle.year}
-          onChange={(e) => onUpdate({ ...vehicle, year: e.target.value })}
-        />
-        <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(90,122,154,0.50)]"
-          placeholder="Color"
-          value={vehicle.color}
-          onChange={(e) => onUpdate({ ...vehicle, color: e.target.value })}
-        />
-        <input
-          className="bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-3 py-2.5 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(90,122,154,0.50)] col-span-2"
-          placeholder="License Plate"
-          value={vehicle.plate}
-          onChange={(e) => onUpdate({ ...vehicle, plate: e.target.value })}
-        />
-      </div>
-    </div>
-  );
-}
-
-// ── Main Wizard ───────────────────────────────────────────────────────────────
-function OnboardingWizard() {
-  const { propertyInfo, tokenId, hasProperty } = useProperty();
-  const { data, save, complete, isCompleted } = useOnboarding();
-  const [step, setStep] = useState(1);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [completing, setCompleting] = useState(false);
-  const [completeError, setCompleteError] = useState('');
-  const [stepError, setStepError] = useState('');
+// ── Main Page ───────────────────────────────────────────────────────────────
+export default function OnboardingPage() {
+  const { user, profile } = useSupabaseAuth();
   const router = useRouter();
 
-  const TOTAL_STEPS = 6;
-
-  // Local state for form fields
-  const [profile, setProfile] = useState(data.profile);
-  const [pets, setPets] = useState<PetEntry[]>(data.pets);
-  const [vehicles, setVehicles] = useState<VehicleEntry[]>(data.vehicles);
-  const [ccrAck, setCcrAck] = useState(data.ccrAcknowledged);
-
-  // Sync data -> local state on load
+  // Redirect unauthenticated users to login
   useEffect(() => {
-    setProfile(data.profile);
-    setPets(data.pets);
-    setVehicles(data.vehicles);
-    setCcrAck(data.ccrAcknowledged);
-  }, [data]);
+    if (!user && profile === null) {
+      // Allow brief loading period
+      const timeout = setTimeout(() => {
+        if (!user) router.push('/login');
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [user, profile, router]);
 
-  const validateStep = useCallback((): string => {
-    if (step === 2) {
-      if (profile.messagingOptIn && !profile.email && !profile.phone) {
-        return 'Please provide an email or phone number to receive messages, or opt out of messaging.';
-      }
-    }
-    if (step === 3) {
-      for (const pet of pets) {
-        if (!pet.name.trim()) return 'Each pet must have a name. Fill in or remove incomplete pets.';
-      }
-    }
-    if (step === 4) {
-      for (const v of vehicles) {
-        if (!v.make.trim() || !v.model.trim()) return 'Each vehicle must have a make and model. Fill in or remove incomplete vehicles.';
-        if (!v.plate.trim()) return 'Each vehicle must have a license plate. Fill in or remove incomplete vehicles.';
-      }
-    }
-    return '';
-  }, [step, profile, pets, vehicles]);
+  if (!user) {
+    return (
+      <div className="max-w-lg mx-auto px-4 py-20 text-center page-enter">
+        <div className="w-12 h-12 rounded-xl bg-[rgba(176,155,113,0.08)] flex items-center justify-center mx-auto mb-4 animate-pulse">
+          <Home className="w-6 h-6 text-[#B09B71] opacity-60" />
+        </div>
+        <p className="text-sm text-[var(--text-muted)]">Loading...</p>
+      </div>
+    );
+  }
+
+  return <OnboardingWizard />;
+}
+
+// ── Wizard ──────────────────────────────────────────────────────────────────
+function OnboardingWizard() {
+  const { user, profile, refreshProfile } = useSupabaseAuth();
+  const { isConnected } = useAccount();
+  const router = useRouter();
+
+  const [step, setStep] = useState(1);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const TOTAL_STEPS = 5;
+
+  // Profile form state
+  const [name, setName] = useState(profile?.full_name || '');
+  const [lotNumber, setLotNumber] = useState('');
+  const [phone, setPhone] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
+
+  // Sync profile data
+  useEffect(() => {
+    if (profile?.full_name) setName(profile.full_name);
+  }, [profile]);
 
   const goNext = useCallback(() => {
-    const err = validateStep();
-    if (err) { setStepError(err); return; }
-    setStepError('');
-    // Save progress
-    save({ profile, pets, vehicles, ccrAcknowledged: ccrAck });
-    if (step < TOTAL_STEPS) setStep((s) => s + 1);
-  }, [step, save, profile, pets, vehicles, ccrAck, validateStep]);
+    if (step < TOTAL_STEPS) setStep(s => s + 1);
+  }, [step]);
 
-  const goBack = () => {
-    setStepError('');
-    save({ profile, pets, vehicles, ccrAcknowledged: ccrAck });
-    setStep((s) => Math.max(1, s - 1));
-  };
+  const goBack = useCallback(() => {
+    if (step > 1) setStep(s => s - 1);
+  }, [step]);
 
-  const addPet = () => {
-    setPets((prev) => [
-      ...prev,
-      { id: crypto.randomUUID(), name: "", type: "dog", breed: "", weight: "" },
-    ]);
-  };
-
-  const updatePet = (id: string, updated: PetEntry) => {
-    setPets((prev) => prev.map((p) => (p.id === id ? updated : p)));
-  };
-
-  const removePet = (id: string) => {
-    setPets((prev) => prev.filter((p) => p.id !== id));
-  };
-
-  const addVehicle = () => {
-    setVehicles((prev) => [
-      ...prev,
-      { id: crypto.randomUUID(), make: "", model: "", year: "", color: "", plate: "" },
-    ]);
-  };
-
-  const updateVehicle = (id: string, updated: VehicleEntry) => {
-    setVehicles((prev) => prev.map((v) => (v.id === id ? updated : v)));
-  };
-
-  const removeVehicle = (id: string) => {
-    setVehicles((prev) => prev.filter((v) => v.id !== id));
-  };
-
-  const handleComplete = async () => {
-    save({ profile, pets, vehicles, ccrAcknowledged: ccrAck });
-    setCompleting(true);
-    setCompleteError('');
-    setStepError('');
+  // Save profile to Supabase
+  const handleSaveProfile = async () => {
+    setSaving(true);
+    setSaveError('');
     try {
-      await complete();
-      setShowConfetti(true);
-      setStep(6);
-      setTimeout(() => setShowConfetti(false), 5000);
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Failed to complete setup. Please try again.';
-      setCompleteError(msg);
+      const res = await fetch('/api/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          wallet_address: profile?.wallet_address || user?.id,
+          display_name: name,
+          lot_number: lotNumber ? parseInt(lotNumber, 10) : null,
+          phone: phone || null,
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to save profile');
+      await refreshProfile();
+      goNext();
+    } catch (e) {
+      setSaveError(e instanceof Error ? e.message : 'Failed to save');
     } finally {
-      setCompleting(false);
+      setSaving(false);
     }
   };
 
-  const lot = propertyInfo ? Number(propertyInfo.lotNumber) : null;
-  const address = propertyInfo?.streetAddress ?? "";
-  const sqft = propertyInfo ? Number(propertyInfo.squareFootage) : null;
+  // Complete onboarding
+  const handleComplete = () => {
+    setShowConfetti(true);
+    setTimeout(() => {
+      setShowConfetti(false);
+      router.push('/dashboard');
+    }, 3000);
+  };
 
   return (
     <div className="max-w-lg mx-auto px-4 py-10 page-enter">
       {showConfetti && <Confetti />}
 
-      {step < 6 && (
+      {/* Header */}
+      {step <= TOTAL_STEPS && (
         <div className="mb-6">
-          <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[var(--parchment)] mb-1">
-            Move-In Setup
+          <h1 className="text-3xl sm:text-4xl font-medium gradient-text mb-1">
+            Welcome to SuvrenHOA
           </h1>
-          <p className="text-sm text-[var(--text-disabled)]">Faircroft HOA · Property #{tokenId ?? "—"}</p>
+          <p className="text-sm text-[var(--text-disabled)]">
+            {user?.email || 'New Member'}
+          </p>
         </div>
       )}
 
-      {step < 6 && <StepIndicator current={step} total={TOTAL_STEPS} />}
+      {step <= TOTAL_STEPS && <StepIndicator current={step} total={TOTAL_STEPS} />}
 
-      {stepError && step < 6 && (
-        <div className="mb-4 px-4 py-3 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(139,90,90,0.30)] text-[#8B5A5A] text-sm">
-          {stepError}
-        </div>
-      )}
-
-      {/* ── Step 1: Welcome ── */}
+      {/* ── Step 1: Welcome + Community Info ── */}
       {step === 1 && (
         <div className="glass-card rounded-xl p-8 animate-fade-in">
-          <div className="flex justify-center mb-5"><Home className="w-10 h-10 text-[#B09B71]" /></div>
-          <h2 className="text-2xl font-normal text-center mb-2">
-            Welcome to Faircroft!
-          </h2>
-          <p className="text-[var(--text-muted)] text-center text-sm mb-7">
-            Let&apos;s get you set up as a homeowner. This takes about 2 minutes.
+          <div className="flex justify-center mb-5">
+            <div className="w-16 h-16 rounded-2xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center">
+              <Home className="w-8 h-8 text-[#B09B71]" />
+            </div>
+          </div>
+          <h2 className="text-2xl font-normal text-center mb-2">Welcome!</h2>
+          <p className="text-[var(--text-muted)] text-center text-sm mb-7 leading-relaxed">
+            You&apos;ve been invited to your community on SuvrenHOA — the modern, transparent
+            way to manage your homeowners association. Let&apos;s get you set up in just a few minutes.
           </p>
 
-          {hasProperty && propertyInfo ? (
-            <div className="bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] rounded-xl p-5 mb-7">
-              <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">
-                Your Property
-              </p>
-              <div className="space-y-2">
-                {address && (
-                  <div className="flex justify-between">
-                    <span className="text-sm text-[var(--text-disabled)]">Address</span>
-                    <span className="text-sm font-medium text-[var(--parchment)]">{address}</span>
-                  </div>
-                )}
-                {lot !== null && (
-                  <div className="flex justify-between">
-                    <span className="text-sm text-[var(--text-disabled)]">Lot #</span>
-                    <span className="text-sm font-medium text-[var(--parchment)]">{lot}</span>
-                  </div>
-                )}
-                {sqft !== null && (
-                  <div className="flex justify-between">
-                    <span className="text-sm text-[var(--text-disabled)]">Sq Ft</span>
-                    <span className="text-sm font-medium text-[var(--parchment)]">
-                      {sqft.toLocaleString()} sqft
-                    </span>
-                  </div>
-                )}
-              </div>
+          <div className="space-y-3 mb-7">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[rgba(245,240,232,0.03)]">
+              <Shield className="w-5 h-5 text-[#3A7D6F]" />
+              <p className="text-sm text-[var(--text-body)]">Tamper-proof governance on the blockchain</p>
             </div>
-          ) : (
-            <div className="bg-[rgba(176,155,113,0.08)] border border-[rgba(176,155,113,0.20)] rounded-xl p-4 mb-7 text-center">
-              <p className="text-sm text-[#B09B71]">
-                No property NFT detected. Contact the board if you&apos;re a homeowner.
-              </p>
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[rgba(245,240,232,0.03)]">
+              <Landmark className="w-5 h-5 text-[#B09B71]" />
+              <p className="text-sm text-[var(--text-body)]">Transparent treasury management</p>
             </div>
-          )}
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[rgba(245,240,232,0.03)]">
+              <Vote className="w-5 h-5 text-[#5A7A9A]" />
+              <p className="text-sm text-[var(--text-body)]">Direct democracy — every vote counts</p>
+            </div>
+          </div>
 
           <button
             onClick={goNext}
-            className="w-full py-3.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-[var(--text-heading)] font-medium text-sm transition-all duration-200 min-h-[44px]"
+            className="w-full py-3.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#0C0C0E] font-medium text-sm transition-all duration-200 min-h-[44px]"
           >
-            Let&apos;s get you set up →
+            Get Started <ChevronRight className="w-4 h-4 inline ml-1" />
           </button>
         </div>
       )}
 
-      {/* ── Step 2: Profile ── */}
+      {/* ── Step 2: Complete Profile ── */}
       {step === 2 && (
         <div className="glass-card rounded-xl p-7 animate-fade-in">
-          <h2 className="text-xl font-medium mb-1">Your Profile</h2>
-          <p className="text-sm text-[var(--text-disabled)] mb-6">
-            All fields optional — helps the community reach you.
-          </p>
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center">
+              <User className="w-5 h-5 text-[#B09B71]" />
+            </div>
+            <div>
+              <h2 className="text-xl font-medium">Complete Your Profile</h2>
+              <p className="text-xs text-[var(--text-disabled)]">Help your neighbors know who you are</p>
+            </div>
+          </div>
+
           <div className="space-y-4">
             <div>
               <label className="text-xs tracking-widest uppercase text-[var(--text-disabled)] block mb-1.5">
-                Display Name
+                Full Name
               </label>
               <input
                 className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
-                placeholder="How should neighbors know you?"
-                value={profile.displayName}
-                onChange={(e) =>
-                  setProfile((p) => ({ ...p, displayName: e.target.value }))
-                }
+                placeholder="Your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div>
               <label className="text-xs tracking-widest uppercase text-[var(--text-disabled)] block mb-1.5">
-                Email
+                Lot Number
               </label>
               <input
-                type="email"
+                type="number"
                 className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
-                placeholder="For HOA notifications"
-                value={profile.email}
-                onChange={(e) =>
-                  setProfile((p) => ({ ...p, email: e.target.value }))
-                }
+                placeholder="Your lot number (e.g., 42)"
+                value={lotNumber}
+                onChange={(e) => setLotNumber(e.target.value)}
               />
             </div>
             <div>
               <label className="text-xs tracking-widest uppercase text-[var(--text-disabled)] block mb-1.5">
-                Phone
+                Phone <span className="normal-case text-[var(--text-disabled)]">(optional)</span>
               </label>
               <input
                 type="tel"
                 className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-[rgba(176,155,113,0.50)]"
                 placeholder="For emergency alerts"
-                value={profile.phone}
-                onChange={(e) =>
-                  setProfile((p) => ({ ...p, phone: e.target.value }))
-                }
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
-            <div className="flex items-center justify-between py-3 px-4 bg-[rgba(26,26,30,0.40)] rounded-xl border border-[rgba(245,240,232,0.06)]">
-              <div>
-                <p className="text-sm font-medium text-[var(--parchment)]">
-                  Messaging Opt-In
-                </p>
-                <p className="text-xs text-[var(--text-disabled)]">
-                  Receive HOA announcements & alerts
-                </p>
-              </div>
-              <button
-                onClick={() =>
-                  setProfile((p) => ({ ...p, messagingOptIn: !p.messagingOptIn }))
-                }
-                className={`w-12 h-6 rounded-full transition-all duration-200 relative ${
-                  profile.messagingOptIn ? "bg-[#B09B71]" : "bg-[var(--surface-3)]"
-                }`}
-              >
-                <span
-                  className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-all duration-200 ${
-                    profile.messagingOptIn ? "left-6" : "left-0.5"
-                  }`}
-                />
-              </button>
-            </div>
           </div>
+
+          {saveError && (
+            <div className="mt-4 px-4 py-3 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(139,90,90,0.30)] text-[#8B5A5A] text-sm">
+              {saveError}
+            </div>
+          )}
 
           <div className="flex gap-3 mt-7">
             <button
               onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
+              className="flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
             >
-              ← Back
+              <ArrowLeft className="w-4 h-4" /> Back
             </button>
             <button
-              onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-[var(--text-heading)] font-medium text-sm transition-all"
+              onClick={handleSaveProfile}
+              disabled={saving}
+              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#0C0C0E] font-medium text-sm transition-all disabled:opacity-50"
             >
-              Continue →
+              {saving ? 'Saving...' : 'Continue'}
             </button>
           </div>
         </div>
       )}
 
-      {/* ── Step 3: Pets ── */}
+      {/* ── Step 3: Connect Wallet (Optional) ── */}
       {step === 3 && (
         <div className="glass-card rounded-xl p-7 animate-fade-in">
-          <h2 className="text-xl font-medium mb-1">Pet Registration</h2>
-          <p className="text-sm text-[var(--text-disabled)] mb-2">
-            Register your pets with the HOA.{" "}
-            <Link href="/pets" className="text-[#B09B71] hover:underline">
-              Manage later at /pets →
-            </Link>
-          </p>
-
-          <div className="mt-5">
-            {pets.map((pet) => (
-              <PetCard
-                key={pet.id}
-                pet={pet}
-                onUpdate={(updated) => updatePet(pet.id, updated)}
-                onRemove={() => removePet(pet.id)}
-              />
-            ))}
-            {pets.length === 0 && (
-              <p className="text-sm text-[var(--text-disabled)] text-center py-4">
-                No pets? That&apos;s okay! Skip to continue.
-              </p>
-            )}
-          </div>
-
-          <button
-            onClick={addPet}
-            className="w-full py-2.5 rounded-xl border border-dashed border-[rgba(176,155,113,0.30)] text-[#B09B71] hover:border-[rgba(176,155,113,0.50)] hover:bg-[rgba(176,155,113,0.05)] text-sm font-medium transition-all mt-3 mb-6"
-          >
-            + Add a Pet
-          </button>
-
-          <div className="flex gap-3">
-            <button
-              onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
-            >
-              ← Back
-            </button>
-            <button
-              onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-[var(--text-heading)] font-medium text-sm transition-all"
-            >
-              Continue →
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* ── Step 4: Vehicles ── */}
-      {step === 4 && (
-        <div className="glass-card rounded-xl p-7 animate-fade-in">
-          <h2 className="text-xl font-medium mb-1">Vehicle Registration</h2>
-          <p className="text-sm text-[var(--text-disabled)] mb-2">
-            Register vehicles for parking records.{" "}
-            <Link href="/vehicles" className="text-[var(--steel)] hover:underline">
-              Manage later at /vehicles →
-            </Link>
-          </p>
-
-          <div className="mt-5">
-            {vehicles.map((v) => (
-              <VehicleCard
-                key={v.id}
-                vehicle={v}
-                onUpdate={(updated) => updateVehicle(v.id, updated)}
-                onRemove={() => removeVehicle(v.id)}
-              />
-            ))}
-            {vehicles.length === 0 && (
-              <p className="text-sm text-[var(--text-disabled)] text-center py-4">
-                No vehicles? Skip to continue.
-              </p>
-            )}
-          </div>
-
-          <button
-            onClick={addVehicle}
-            className="w-full py-2.5 rounded-xl border border-dashed border-[rgba(90,122,154,0.25)] text-[var(--steel)] hover:border-[rgba(90,122,154,0.50)] hover:bg-[rgba(90,122,154,0.05)] text-sm font-medium transition-all mt-3 mb-6"
-          >
-            + Add a Vehicle
-          </button>
-
-          <div className="flex gap-3">
-            <button
-              onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
-            >
-              ← Back
-            </button>
-            <button
-              onClick={goNext}
-              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-[var(--text-heading)] font-medium text-sm transition-all"
-            >
-              Continue →
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* ── Step 5: Review ── */}
-      {step === 5 && (
-        <div className="glass-card rounded-xl p-7 animate-fade-in">
-          <h2 className="text-xl font-medium mb-5">Review & Confirm</h2>
-
-          {/* Profile summary */}
-          <div className="mb-5">
-            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-2">
-              Profile
-            </p>
-            <div className="bg-[rgba(26,26,30,0.40)] rounded-xl p-4 space-y-1.5">
-              {profile.displayName && (
-                <div className="flex justify-between">
-                  <span className="text-xs text-[var(--text-disabled)]">Name</span>
-                  <span className="text-xs text-[var(--text-body)]">{profile.displayName}</span>
-                </div>
-              )}
-              {profile.email && (
-                <div className="flex justify-between">
-                  <span className="text-xs text-[var(--text-disabled)]">Email</span>
-                  <span className="text-xs text-[var(--text-body)]">{profile.email}</span>
-                </div>
-              )}
-              {profile.phone && (
-                <div className="flex justify-between">
-                  <span className="text-xs text-[var(--text-disabled)]">Phone</span>
-                  <span className="text-xs text-[var(--text-body)]">{profile.phone}</span>
-                </div>
-              )}
-              <div className="flex justify-between">
-                <span className="text-xs text-[var(--text-disabled)]">Messaging</span>
-                <span className="text-xs text-[var(--text-body)]">
-                  {profile.messagingOptIn ? " Opted in" : " Opted out"}
-                </span>
-              </div>
-              {!profile.displayName && !profile.email && !profile.phone && (
-                <p className="text-xs text-[var(--text-disabled)]">No profile info entered</p>
-              )}
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-10 h-10 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] flex items-center justify-center">
+              <Wallet className="w-5 h-5 text-[#B09B71]" />
+            </div>
+            <div>
+              <h2 className="text-xl font-medium">Connect Your Wallet</h2>
+              <p className="text-xs text-[var(--text-disabled)]">Optional — required for voting and dues</p>
             </div>
           </div>
 
-          {/* Pets summary */}
-          <div className="mb-5">
-            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-2">
-              Pets ({pets.length})
-            </p>
-            {pets.length === 0 ? (
-              <p className="text-xs text-[var(--text-disabled)]">None registered</p>
-            ) : (
-              <div className="bg-[rgba(26,26,30,0.40)] rounded-xl p-4 space-y-1.5">
-                {pets.map((p) => (
-                  <div key={p.id} className="flex justify-between">
-                    <span className="text-xs text-[var(--text-body)]">{p.name || "Unnamed"}</span>
-                    <span className="text-xs text-[var(--text-disabled)]">
-                      {p.type} {p.breed && `· ${p.breed}`}
-                    </span>
-                  </div>
-                ))}
+          <p className="text-sm text-[var(--text-muted)] mb-6 leading-relaxed">
+            A wallet is your &ldquo;governance key&rdquo; — it lets you vote on proposals, pay dues,
+            and receive your property NFT. We recommend the Coinbase Smart Wallet for the easiest setup.
+          </p>
+
+          {isConnected ? (
+            <div className="px-4 py-4 rounded-xl bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)] mb-6">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-[#3A7D6F]" />
+                <p className="text-sm font-medium text-[#3A7D6F]">Wallet Connected</p>
               </div>
-            )}
-          </div>
-
-          {/* Vehicles summary */}
-          <div className="mb-6">
-            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-2">
-              Vehicles ({vehicles.length})
-            </p>
-            {vehicles.length === 0 ? (
-              <p className="text-xs text-[var(--text-disabled)]">None registered</p>
-            ) : (
-              <div className="bg-[rgba(26,26,30,0.40)] rounded-xl p-4 space-y-1.5">
-                {vehicles.map((v) => (
-                  <div key={v.id} className="flex justify-between">
-                    <span className="text-xs text-[var(--text-body)]">
-                      {[v.year, v.make, v.model].filter(Boolean).join(" ") || "Vehicle"}
-                    </span>
-                    <span className="text-xs text-[var(--text-disabled)]">{v.plate}</span>
+              <p className="text-xs text-[var(--text-disabled)] mt-1">
+                Your governance key is linked to your account.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-3 mb-6">
+              <Link
+                href="/settings/wallet"
+                className="flex items-center justify-between w-full px-5 py-4 rounded-xl bg-[rgba(176,155,113,0.08)] border border-[rgba(176,155,113,0.15)] hover:border-[rgba(176,155,113,0.30)] transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <Sparkles className="w-5 h-5 text-[#B09B71]" />
+                  <div>
+                    <p className="text-sm font-medium text-[var(--parchment)]">Smart Wallet</p>
+                    <p className="text-xs text-[var(--text-disabled)]">Easiest — uses your passkey, no app needed</p>
                   </div>
-                ))}
-              </div>
-            )}
-          </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[var(--text-disabled)] group-hover:text-[#B09B71] transition-colors" />
+              </Link>
 
-          {/* CC&Rs */}
-          <div className="border border-[rgba(176,155,113,0.20)] rounded-xl p-4 mb-4 bg-[rgba(176,155,113,0.05)]">
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={ccrAck}
-                onChange={(e) => setCcrAck(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded accent-[#B09B71]"
-              />
-              <span className="text-sm text-[var(--text-body)]">
-                I have read and agree to the{" "}
-                <Link
-                  href="/documents"
-                  target="_blank"
-                  className="text-[#B09B71] hover:underline"
-                >
-                  CC&Rs (Covenants, Conditions & Restrictions) →
-                </Link>
-              </span>
-            </label>
-          </div>
-
-          {completeError && (
-            <div className="mb-4 px-4 py-3 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(139,90,90,0.30)] text-[#8B5A5A] text-sm">
-              {completeError}
+              <Link
+                href="/settings/wallet"
+                className="flex items-center justify-between w-full px-5 py-4 rounded-xl bg-[rgba(245,240,232,0.03)] border border-[rgba(245,240,232,0.06)] hover:border-[rgba(245,240,232,0.12)] transition-all group"
+              >
+                <div className="flex items-center gap-3">
+                  <Wallet className="w-5 h-5 text-[var(--text-muted)]" />
+                  <div>
+                    <p className="text-sm font-medium text-[var(--parchment)]">MetaMask / WalletConnect</p>
+                    <p className="text-xs text-[var(--text-disabled)]">Use an existing wallet you already have</p>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-[var(--text-disabled)] group-hover:text-[var(--text-body)] transition-colors" />
+              </Link>
             </div>
           )}
 
           <div className="flex gap-3">
             <button
               onClick={goBack}
-              disabled={completing}
-              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all disabled:opacity-50"
+              className="flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
             >
-              ← Back
+              <ArrowLeft className="w-4 h-4" /> Back
+            </button>
+            <button
+              onClick={goNext}
+              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#0C0C0E] font-medium text-sm transition-all"
+            >
+              {isConnected ? 'Continue' : 'Skip for Now'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── Step 4: Tour of Key Features ── */}
+      {step === 4 && (
+        <div className="glass-card rounded-xl p-7 animate-fade-in">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-10 h-10 rounded-xl bg-[rgba(90,122,154,0.10)] border border-[rgba(90,122,154,0.20)] flex items-center justify-center">
+              <Compass className="w-5 h-5 text-[#5A7A9A]" />
+            </div>
+            <div>
+              <h2 className="text-xl font-medium">Key Features</h2>
+              <p className="text-xs text-[var(--text-disabled)]">Here&apos;s what you can do with SuvrenHOA</p>
+            </div>
+          </div>
+
+          <div className="space-y-3 mb-7">
+            <FeatureCard
+              icon={Vote}
+              title="Vote on Proposals"
+              description="Every resident gets a voice. Vote directly on community decisions — budgets, rules, improvements."
+              color="#5A7A9A"
+            />
+            <FeatureCard
+              icon={Landmark}
+              title="Transparent Treasury"
+              description="See exactly where every dollar goes. All transactions are recorded on the blockchain."
+              color="#B09B71"
+            />
+            <FeatureCard
+              icon={BookOpen}
+              title="Community Documents"
+              description="Access CC&Rs, meeting minutes, and bylaws — all tamper-proof and always available."
+              color="#3A7D6F"
+            />
+            <FeatureCard
+              icon={Shield}
+              title="Secure & Private"
+              description="Your data is protected. Governance is transparent, but personal info stays private."
+              color="#6B3A3A"
+            />
+          </div>
+
+          <div className="flex gap-3">
+            <button
+              onClick={goBack}
+              className="flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back
+            </button>
+            <button
+              onClick={goNext}
+              className="flex-1 py-3 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#0C0C0E] font-medium text-sm transition-all"
+            >
+              Almost Done <ChevronRight className="w-4 h-4 inline ml-1" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── Step 5: Getting Started Checklist ── */}
+      {step === 5 && (
+        <div className="animate-fade-in">
+          <div className="glass-card rounded-xl p-7 mb-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)] flex items-center justify-center">
+                <CheckCircle2 className="w-5 h-5 text-[#3A7D6F]" />
+              </div>
+              <div>
+                <h2 className="text-xl font-medium">You&apos;re All Set!</h2>
+                <p className="text-xs text-[var(--text-disabled)]">Complete these items to get the most out of your community</p>
+              </div>
+            </div>
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+              Your account is ready. Use the checklist below to explore your community
+              and unlock all features. You can always find this on your dashboard.
+            </p>
+          </div>
+
+          <GettingStartedChecklist
+            welcomeMessage="Welcome aboard! Take a few minutes to explore — every step brings you closer to full community participation."
+          />
+
+          {/* Sample proposal CTA */}
+          <div className="glass-card rounded-xl p-6 mb-6 border border-[rgba(90,122,154,0.15)]">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-[rgba(90,122,154,0.10)] border border-[rgba(90,122,154,0.20)] flex items-center justify-center shrink-0">
+                <Vote className="w-5 h-5 text-[#5A7A9A]" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-[var(--parchment)] mb-1">Cast Your First Vote</p>
+                <p className="text-xs text-[var(--text-muted)] leading-relaxed mb-3">
+                  There may be active proposals waiting for your input. Check the governance page to see
+                  what your community is deciding.
+                </p>
+                <Link
+                  href="/proposals"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[rgba(90,122,154,0.12)] hover:bg-[rgba(90,122,154,0.20)] text-sm text-[#5A7A9A] font-medium transition-all"
+                >
+                  View Proposals <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-3">
+            <button
+              onClick={goBack}
+              className="flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back
             </button>
             <button
               onClick={handleComplete}
-              disabled={!ccrAck || completing}
-              className="flex-1 py-3 rounded-xl bg-[#2A5D4F] hover:bg-[#3A7D6F] disabled:opacity-40 disabled:cursor-not-allowed text-[var(--text-heading)] font-medium text-sm transition-all"
+              className="flex-1 py-3.5 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[#0C0C0E] font-medium text-sm transition-all shadow-[0_0_20px_rgba(176,155,113,0.12)] hover:shadow-[0_0_28px_rgba(176,155,113,0.28)]"
             >
-              {completing ? 'Completing…' : 'Complete Setup '}
+              Go to Dashboard <ChevronRight className="w-4 h-4 inline ml-1" />
             </button>
           </div>
-        </div>
-      )}
-
-      {/* ── Step 6: All Done ── */}
-      {step === 6 && (
-        <div className="glass-card rounded-xl p-10 text-center animate-fade-in">
-          <div className="text-6xl mb-5"></div>
-          <h2 className="text-2xl font-normal mb-2">You&apos;re all set!</h2>
-          <p className="text-[var(--text-muted)] text-sm mb-8">
-            Welcome to the Faircroft community. Your setup is complete.
-          </p>
-          <div className="grid grid-cols-2 gap-3">
-            <Link
-              href="/dashboard"
-              className="glass-card rounded-xl p-4 text-center hover:border-[rgba(176,155,113,0.25)] transition-all"
-            >
-              <Home className="w-6 h-6 text-[#B09B71] mx-auto mb-1" />
-              <p className="text-sm font-medium text-[var(--text-body)]">Dashboard</p>
-            </Link>
-            <Link
-              href="/dues"
-              className="glass-card rounded-xl p-4 text-center hover:border-[rgba(42,93,79,0.25)] transition-all"
-            >
-              <CreditCard className="w-6 h-6 text-[#3A7D6F] mx-auto mb-1" />
-              <p className="text-sm font-medium text-[var(--text-body)]">Pay Dues</p>
-            </Link>
-            <Link
-              href="/community"
-              className="glass-card rounded-xl p-4 text-center hover:border-[rgba(90,122,154,0.25)] transition-all"
-            >
-              <MessageSquare className="w-6 h-6 text-[var(--steel)] mx-auto mb-1" />
-              <p className="text-sm font-medium text-[var(--text-body)]">Community</p>
-            </Link>
-            <Link
-              href="/documents"
-              className="glass-card rounded-xl p-4 text-center hover:border-amber-500/25 transition-all"
-            >
-              <FileText className="w-6 h-6 text-[#B09B71] mx-auto mb-1" />
-              <p className="text-sm font-medium text-[var(--text-body)]">Documents</p>
-            </Link>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ── Move-In/Move-Out Checklist ─────────────────────────────────────────────
-
-interface ChecklistItem {
-  id: string;
-  label: string;
-  description: string;
-  category: 'move-in' | 'move-out' | 'both';
-  required: boolean;
-}
-
-const CHECKLIST_ITEMS: ChecklistItem[] = [
-  { id: 'keys', label: 'Key Pickup', description: 'Collect property keys, mailbox key, and community access fobs from prior owner or management.', category: 'move-in', required: true },
-  { id: 'parking', label: 'Parking Assignment', description: 'Register your assigned parking spot(s) with the HOA management office. Update vehicle registration.', category: 'move-in', required: true },
-  { id: 'pets', label: 'Pet Registration', description: 'Register all pets in the HOA portal. Provide vaccination records and photos.', category: 'both', required: false },
-  { id: 'vehicles', label: 'Vehicle Registration', description: 'Register all vehicles (make, model, plate) in the HOA portal for parking enforcement.', category: 'both', required: true },
-  { id: 'emergency', label: 'Emergency Contacts', description: 'Add emergency contact information to your profile — at least two contacts with phone numbers.', category: 'both', required: true },
-  { id: 'utilities', label: 'Utility Transfers', description: 'Transfer electric, gas, water, and internet accounts to your name. Contact utility providers.', category: 'move-in', required: true },
-  { id: 'mailbox', label: 'Mailbox Setup', description: 'Obtain mailbox number and key. Set up mail forwarding if moving from previous address.', category: 'move-in', required: true },
-  { id: 'rules', label: 'Community Rules Acknowledgment', description: 'Read and acknowledge receipt of CC&Rs, HOA Rules & Regulations, and Welcome Packet.', category: 'move-in', required: true },
-  { id: 'insurance', label: 'Homeowner\'s Insurance', description: 'Provide proof of homeowner\'s insurance to management. Minimum coverage requirements apply.', category: 'both', required: true },
-  { id: 'directory', label: 'Community Directory', description: 'Add yourself to the community directory. Set display preferences for contact sharing.', category: 'move-in', required: false },
-  { id: 'inspection', label: 'Move-Out Inspection', description: 'Schedule and complete a move-out inspection with property management at least 7 days prior to departure.', category: 'move-out', required: true },
-  { id: 'dues', label: 'Dues Balance Clearance', description: 'Ensure all HOA dues, assessments, and fines are paid in full before transfer of title.', category: 'move-out', required: true },
-  { id: 'access-return', label: 'Return Access Credentials', description: 'Return all keys, fobs, and access cards to HOA management. Security codes will be reset.', category: 'move-out', required: true },
-];
-
-const LS_CHECKLIST = 'suvren_checklist_completed';
-
-function loadChecked(): Set<string> {
-  if (typeof window === 'undefined') return new Set();
-  try { return new Set(JSON.parse(localStorage.getItem(LS_CHECKLIST) || '[]')); }
-  catch (err) { console.error('[MoveChecklist] Failed to parse checklist state from localStorage:', err); return new Set(); }
-}
-
-function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
-  const [checked, setChecked] = useState<Set<string>>(new Set());
-
-  useEffect(() => { setChecked(loadChecked()); }, []);
-
-  const toggle = (id: string) => {
-    const next = new Set(checked);
-    next.has(id) ? next.delete(id) : next.add(id);
-    localStorage.setItem(LS_CHECKLIST, JSON.stringify([...next]));
-    setChecked(next);
-  };
-
-  const filtered = CHECKLIST_ITEMS.filter(i => i.category === mode || i.category === 'both');
-  const required = filtered.filter(i => i.required);
-  const optional = filtered.filter(i => !i.required);
-  const completedRequired = required.filter(i => checked.has(i.id)).length;
-  const totalRequired = required.length;
-  const pct = totalRequired > 0 ? Math.round((completedRequired / totalRequired) * 100) : 0;
-  const totalDone = filtered.filter(i => checked.has(i.id)).length;
-
-  return (
-    <div className="space-y-6">
-      {/* Progress */}
-      <div className="glass-card rounded-xl p-5">
-        <div className="flex items-center justify-between mb-3">
-          <div>
-            <h3 className="font-medium text-[#D4C4A0]">
-              {mode === 'move-in' ? <span className="flex items-center gap-1.5"><Home className="w-4 h-4" /> Move-In Checklist</span> : ' Move-Out Checklist'}
-            </h3>
-            <p className="text-xs text-[var(--text-muted)]">{completedRequired} of {totalRequired} required tasks complete</p>
-          </div>
-          <div className="text-right">
-            <div className={`text-2xl font-medium ${pct === 100 ? 'text-[#3A7D6F]' : pct >= 60 ? 'text-[#B09B71]' : 'text-[var(--text-body)]'}`}>
-              {pct}%
-            </div>
-            <div className="text-[10px] text-[var(--text-disabled)]">Complete</div>
-          </div>
-        </div>
-        <div className="h-2.5 rounded-full bg-[var(--surface-2)] overflow-hidden">
-          <div
-            className="h-full rounded-full transition-all duration-500"
-            style={{
-              width: `${pct}%`,
-              background: pct === 100 ? '#3A7D6F' : 'linear-gradient(90deg, #b8942e, #B09B71)',
-            }}
-          />
-        </div>
-        {pct === 100 && (
-          <p className="text-xs text-[#3A7D6F] mt-2"> All required tasks complete!</p>
-        )}
-      </div>
-
-      {/* Required tasks */}
-      <div>
-        <h4 className="text-xs font-medium uppercase tracking-wider text-[var(--text-disabled)] mb-3">Required ({completedRequired}/{totalRequired})</h4>
-        <div className="space-y-2">
-          {required.map(item => (
-            <ChecklistRow key={item.id} item={item} checked={checked.has(item.id)} onToggle={() => toggle(item.id)} />
-          ))}
-        </div>
-      </div>
-
-      {optional.length > 0 && (
-        <div>
-          <h4 className="text-xs font-medium uppercase tracking-wider text-[var(--text-disabled)] mb-3">Optional</h4>
-          <div className="space-y-2">
-            {optional.map(item => (
-              <ChecklistRow key={item.id} item={item} checked={checked.has(item.id)} onToggle={() => toggle(item.id)} />
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ChecklistRow({ item, checked, onToggle }: { item: ChecklistItem; checked: boolean; onToggle: () => void }) {
-  const [expanded, setExpanded] = useState(false);
-  return (
-    <div className={`glass-card rounded-xl overflow-hidden transition-all ${checked ? 'opacity-60' : ''}`}>
-      <div className="p-4 flex items-start gap-3">
-        <button
-          onClick={onToggle}
-          className={`mt-0.5 w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-all ${
-            checked ? 'bg-[#B09B71] border-[#B09B71] text-[var(--surface-2)]' : 'border-[rgba(245,240,232,0.10)] hover:border-[rgba(176,155,113,0.50)]'
-          }`}
-        >
-          {checked && <span className="text-[10px] font-medium"></span>}
-        </button>
-        <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setExpanded(!expanded)}>
-          <div className="flex items-center gap-2">
-            <span className={`text-sm font-medium ${checked ? 'line-through text-[var(--text-disabled)]' : 'text-[var(--parchment)]'}`}>
-              {item.label}
-            </span>
-            {item.required && !checked && (
-              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]">Required</span>
-            )}
-          </div>
-          {expanded && (
-            <p className="text-xs text-[var(--text-muted)] mt-2 leading-relaxed">{item.description}</p>
-          )}
-        </div>
-        <button onClick={() => setExpanded(!expanded)} className="text-[var(--text-disabled)] text-xs shrink-0">
-          {expanded ? '▲' : '▾'}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-export default function OnboardingPage() {
-  const { isConnected } = useAccount();
-  const [view, setView] = useState<'wizard' | 'checklist-in' | 'checklist-out'>('wizard');
-
-  if (!isConnected) {
-    return <AuthWall title="Onboarding" description="Connect your wallet to access this section of SuvrenHOA." />;
-  }
-
-  return (
-    <div className="page-enter">
-      {/* View switcher */}
-      <div className="max-w-4xl mx-auto px-4 pt-6 sm:pt-8">
-        <div className="flex gap-2 mb-6">
-          <button onClick={() => setView('wizard')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'wizard' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
-             Setup Wizard
-          </button>
-          <button onClick={() => setView('checklist-in')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-in' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
-            <span className="flex items-center gap-1.5"><Home className="w-3.5 h-3.5" /> Move-In Checklist</span>
-          </button>
-          <button onClick={() => setView('checklist-out')}
-            className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${view === 'checklist-out' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'}`}>
-             Move-Out Checklist
-          </button>
-        </div>
-      </div>
-
-      {view === 'wizard' ? (
-        <OnboardingWizard />
-      ) : view === 'checklist-in' ? (
-        <div className="max-w-3xl mx-auto px-4 pb-8">
-          <MoveChecklist mode="move-in" />
-        </div>
-      ) : (
-        <div className="max-w-3xl mx-auto px-4 pb-8">
-          <MoveChecklist mode="move-out" />
         </div>
       )}
     </div>

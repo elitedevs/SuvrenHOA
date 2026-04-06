@@ -11,6 +11,7 @@ import { useProfile } from '@/hooks/useProfile';
 import { PropertySelector } from '@/components/PropertySelector';
 import { QRModal } from '@/components/QRCode';
 import { PropertyImprovements } from '@/components/PropertyImprovements';
+import { GettingStartedChecklist } from '@/components/GettingStartedChecklist';
 import Link from 'next/link';
 import {
   Home, MessageSquare, ClipboardList, DollarSign, FileText, CreditCard,
@@ -332,6 +333,11 @@ function PropertyDashboard() {
 
       {/* Property Insights */}
       <PropertyInsights />
+
+      {/* Getting Started Checklist */}
+      <div className="card-enter card-enter-delay-3">
+        <GettingStartedChecklist welcomeMessage="Welcome to the community! Complete these steps to get the most out of your membership." />
+      </div>
 
       {/* Banners */}
       {hasProperty && !isCompleted && (

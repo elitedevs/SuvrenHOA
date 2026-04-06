@@ -104,28 +104,28 @@
 > **Goal:** Polish resident experience + NFT minting (core invite system moved to Phase 1)
 
 ### 3.1 — Invitation Enhancements
-- [ ] Invitation email template (Supabase edge function or Resend/SendGrid)
+- [x] Invitation email template (Resend integration)
 - [ ] QR code generator for in-person onboarding (encodes invite URL)
 - [ ] Printable invite card template (for board meetings)
 
 ### 3.2 — Resident Experience
-- [ ] Resident sees their community dashboard after login
-- [ ] "Getting Started" checklist widget:
-  - [ ] Complete your profile ✓
-  - [ ] Connect your governance key (optional) ✓
-  - [ ] Read the community rules ✓
-  - [ ] Cast your first vote ✓
-  - [ ] View the treasury ✓
-- [ ] Progress bar showing completion percentage
-- [ ] Sample/demo proposal for first vote experience
-- [ ] Welcome message from board (configurable)
+- [x] Resident sees their community dashboard after login
+- [x] "Getting Started" checklist widget:
+  - [x] Complete your profile ✓
+  - [x] Connect your governance key (optional) ✓
+  - [x] Read the community rules ✓
+  - [x] Cast your first vote ✓
+  - [x] View the treasury ✓
+- [x] Progress bar showing completion percentage
+- [x] Sample/demo proposal for first vote experience
+- [x] Welcome message from board (configurable)
 
 ### 3.3 — Property NFT Minting (Admin Action)
-- [ ] Admin page: "Assign Properties" — upload CSV of lot numbers + wallet addresses
-- [ ] Batch mint Property NFTs to resident wallets
-- [ ] Require resident to have linked wallet before NFT assignment
-- [ ] NFT assignment confirmation + notification to resident
-- [ ] Property list view with assignment status (assigned / unassigned / pending wallet)
+- [x] Admin page: "Assign Properties" — upload CSV of lot numbers + wallet addresses
+- [x] Batch mint Property NFTs to resident wallets
+- [x] Require resident to have linked wallet before NFT assignment
+- [x] NFT assignment confirmation + notification to resident
+- [x] Property list view with assignment status (assigned / unassigned / pending wallet)
 
 **Deliverable:** Full loop — board creates community, invites residents, residents join, connect wallets, get NFTs, can vote.
 
