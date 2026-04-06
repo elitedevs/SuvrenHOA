@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ── Frontend: lint, typecheck, build ───────────────────────────────────────
+  frontend:
+    name: Frontend (${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    strategy:
+      matrix:
+        node-version: ['20.x']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build
+        env:
+          # Minimal env for build — real secrets not needed at build time
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co' }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder_anon_key' }}
+          NEXT_PUBLIC_COINBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_COINBASE_PROJECT_ID || 'placeholder_project_id' }}
+          NEXT_PUBLIC_APP_URL: https://app.suvren.com
+          # Skip Sentry source map upload on PRs (no auth token)
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: suvren
+          SENTRY_PROJECT: suvren-hoa
+
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: frontend/.next/cache
+          key: nextjs-${{ runner.os }}-${{ hashFiles('frontend/package-lock.json') }}-${{ hashFiles('frontend/src/**') }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-${{ hashFiles('frontend/package-lock.json') }}-
+
+  # ── Smart contracts ────────────────────────────────────────────────────────
+  contracts:
+    name: Smart Contracts
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Cache Foundry artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            contracts/cache
+            contracts/out
+          key: foundry-${{ runner.os }}-${{ hashFiles('contracts/foundry.toml', 'contracts/src/**') }}
+          restore-keys: |
+            foundry-${{ runner.os }}-
+
+      - name: Install contract dependencies
+        run: forge install
+
+      - name: Build contracts
+        run: forge build --sizes
+
+      - name: Run contract tests
+        run: forge test -vvv
+
+      - name: Check gas snapshots
+        run: forge snapshot --check
+        continue-on-error: true  # non-blocking until baseline established

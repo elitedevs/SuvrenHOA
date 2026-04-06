@@ -17,7 +17,7 @@ export async function GET(request: Request) {
   let query = supabaseAnon.from('hoa_vehicles').select('*').order('created_at', { ascending: false }).limit(100);
   if (lot) query = query.eq('lot_number', parseInt(lot));
   const { data, error } = await query;
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json(data || []);
 }
 
@@ -38,6 +38,6 @@ export const POST = withAuth(async (request, { address }) => {
     .from('hoa_vehicles')
     .insert({ wallet_address: address, lot_number, make, model, year, color, license_plate, state: state || 'NC', vehicle_type: vehicle_type || 'car', is_guest, guest_name, valid_until })
     .select().single();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json(data, { status: 201 });
 });

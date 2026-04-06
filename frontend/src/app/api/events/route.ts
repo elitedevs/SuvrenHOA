@@ -19,7 +19,7 @@ export async function GET(request: Request) {
     .order('start_time', { ascending: true })
     .limit(50);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json(data || []);
 }
 
@@ -41,7 +41,7 @@ export const POST = withAuth(async (request, { address }) => {
     .insert({ title, description, location, event_type: event_type || 'community', start_time, end_time, all_day, created_by: address, max_attendees, rsvp_required })
     .select().single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json(data, { status: 201 });
 });
 
@@ -63,6 +63,6 @@ export const PATCH = withAuth(async (request, { address }) => {
     .upsert({ event_id, wallet_address: address, status: status || 'going' }, { onConflict: 'event_id,wallet_address' })
     .select().single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json(data);
 });

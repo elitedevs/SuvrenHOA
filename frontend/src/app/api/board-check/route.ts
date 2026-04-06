@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     .limit(1);
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   }
 
   return NextResponse.json({ isBoard: (data?.length ?? 0) > 0 });

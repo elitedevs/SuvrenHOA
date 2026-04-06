@@ -18,7 +18,7 @@ export const GET = withAuth(async (request, { address }) => {
     .single();
 
   if (error && error.code !== 'PGRST116') {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   }
 
   return NextResponse.json(data || { wallet_address: address, display_name: null });
@@ -52,6 +52,6 @@ export const POST = withAuth(async (request, { address }) => {
     .select()
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json(data);
 });

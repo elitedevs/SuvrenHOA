@@ -44,7 +44,7 @@ export const POST = withAuth(async (request, { address }) => {
     );
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   }
 
   return NextResponse.json({ linked: true, wallet_address: walletAddress });

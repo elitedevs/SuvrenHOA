@@ -26,7 +26,7 @@ export async function GET(request: Request) {
   if (lot) query = query.eq('accused_lot', parseInt(lot));
 
   const { data, error } = await query;
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json(data || []);
 }
 
@@ -86,7 +86,7 @@ export const POST = withAuth(async (request, { address }) => {
     .select()
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
 
   await supabaseAdmin.from('hoa_violation_updates').insert({
     violation_id: data.id,
@@ -133,7 +133,7 @@ export const PATCH = withAuth(async (request, { address }) => {
     .update(updates)
     .eq('id', id);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
 
   const statusMessages: Record<string, string> = {
     'under-review': 'Board is reviewing this violation report.',

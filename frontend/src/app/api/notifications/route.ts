@@ -19,7 +19,7 @@ export const GET = withAuth(async (request, { address }) => {
     .order('created_at', { ascending: false })
     .limit(50);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json(data || []);
 });
 
@@ -42,7 +42,7 @@ export const PATCH = withAuth(async (request, { address }) => {
     .eq('id', id)
     .eq('wallet_address', address);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
 });
 
@@ -65,6 +65,6 @@ export const POST = withAuth(async (request, { address }) => {
     .select()
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json(data, { status: 201 });
 });
