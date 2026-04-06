@@ -1,27 +1,24 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { withAuth } from '@/lib/apiAuth';
 
 export const dynamic = 'force-dynamic';
 
-// GET /api/notifications?wallet=0x...
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  const wallet = url.searchParams.get('wallet');
-  if (!wallet) return NextResponse.json({ error: 'wallet required' }, { status: 400 });
-
+// GET — Authenticated (user-specific)
+export const GET = withAuth(async (request, { address }) => {
   const { data, error } = await supabaseAdmin
     .from('hoa_notifications')
     .select('*')
-    .eq('wallet_address', wallet.toLowerCase())
+    .eq('wallet_address', address)
     .order('created_at', { ascending: false })
     .limit(50);
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data || []);
-}
+});
 
-// PATCH /api/notifications — Mark as read
-export async function PATCH(request: Request) {
+// PATCH — Authenticated
+export const PATCH = withAuth(async (request, { address }) => {
   const body = await request.json();
   const { id } = body;
 
@@ -30,14 +27,15 @@ export async function PATCH(request: Request) {
   const { error } = await supabaseAdmin
     .from('hoa_notifications')
     .update({ read: true })
-    .eq('id', id);
+    .eq('id', id)
+    .eq('wallet_address', address);
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });
-}
+});
 
-// POST /api/notifications — Create notification (internal use)
-export async function POST(request: Request) {
+// POST — Authenticated (create notification)
+export const POST = withAuth(async (request, { address }) => {
   const body = await request.json();
   const { wallet_address, type, title, message, link } = body;
 
@@ -53,4 +51,4 @@ export async function POST(request: Request) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data, { status: 201 });
-}
+});

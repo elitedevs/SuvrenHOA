@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { withAuth } from '@/lib/apiAuth';
 
 export const dynamic = 'force-dynamic';
 
-// GET /api/violations
+// GET — Public
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const status = url.searchParams.get('status');
@@ -23,16 +24,15 @@ export async function GET(request: Request) {
   return NextResponse.json(data || []);
 }
 
-// POST /api/violations — Report a violation
-export async function POST(request: Request) {
+// POST — Authenticated (report violation)
+export const POST = withAuth(async (request, { address }) => {
   const body = await request.json();
-  const { reported_by, reported_by_lot, accused_lot, category, title, description, location, ccr_section, anonymous_report } = body;
+  const { reported_by_lot, accused_lot, category, title, description, location, ccr_section, anonymous_report } = body;
 
-  if (!reported_by || !accused_lot || !title || !description || !category) {
+  if (!accused_lot || !title || !description || !category) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
-  // Generate violation number
   const year = new Date().getFullYear();
   const { count } = await supabaseAdmin
     .from('hoa_violations')
@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     .from('hoa_violations')
     .insert({
       violation_number,
-      reported_by: anonymous_report ? 'anonymous' : reported_by,
+      reported_by: anonymous_report ? 'anonymous' : address,
       reported_by_lot,
       accused_lot,
       category,
@@ -60,28 +60,26 @@ export async function POST(request: Request) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  // Create initial update
   await supabaseAdmin.from('hoa_violation_updates').insert({
     violation_id: data.id,
     action: 'status_change',
     new_status: 'reported',
     text: 'Violation reported and submitted for board review.',
-    updated_by: anonymous_report ? 'anonymous' : reported_by,
+    updated_by: anonymous_report ? 'anonymous' : address,
   });
 
   return NextResponse.json(data, { status: 201 });
-}
+});
 
-// PATCH /api/violations — Update violation status (board action)
-export async function PATCH(request: Request) {
+// PATCH — Authenticated (board action)
+export const PATCH = withAuth(async (request, { address }) => {
   const body = await request.json();
-  const { id, status, notes, updated_by, fine_amount, cure_days, hearing_date } = body;
+  const { id, status, notes, fine_amount, cure_days, hearing_date } = body;
 
-  if (!id || !status || !updated_by) {
-    return NextResponse.json({ error: 'id, status, and updated_by required' }, { status: 400 });
+  if (!id || !status) {
+    return NextResponse.json({ error: 'id and status required' }, { status: 400 });
   }
 
-  // Get current violation
   const { data: current } = await supabaseAdmin
     .from('hoa_violations')
     .select('status, violation_number')
@@ -105,7 +103,6 @@ export async function PATCH(request: Request) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  // Log the status change
   const statusMessages: Record<string, string> = {
     'under-review': 'Board is reviewing this violation report.',
     'dismissed': `Board dismissed this report. ${notes || ''}`,
@@ -131,8 +128,8 @@ export async function PATCH(request: Request) {
     old_status: current?.status,
     new_status: status,
     text: statusMessages[status] || `Status changed to ${status}.`,
-    updated_by,
+    updated_by: address,
   });
 
   return NextResponse.json({ ok: true, violation_number: current?.violation_number });
-}
+});

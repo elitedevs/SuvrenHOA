@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { withAuth } from '@/lib/apiAuth';
 
 export const dynamic = 'force-dynamic';
 
-// GET /api/surveys
+// GET — Public
 export async function GET() {
   const { data, error } = await supabaseAdmin
     .from('hoa_surveys')
@@ -15,10 +16,10 @@ export async function GET() {
   return NextResponse.json(data || []);
 }
 
-// POST /api/surveys — Create survey with options
-export async function POST(request: Request) {
+// POST — Authenticated
+export const POST = withAuth(async (request, { address }) => {
   const body = await request.json();
-  const { title, description, created_by, anonymous, closes_in_days, options } = body;
+  const { title, description, anonymous, closes_in_days, options } = body;
 
   if (!title || !options || options.length < 2) {
     return NextResponse.json({ error: 'Title and at least 2 options required' }, { status: 400 });
@@ -27,13 +28,12 @@ export async function POST(request: Request) {
   const closes_at = new Date();
   closes_at.setDate(closes_at.getDate() + (closes_in_days || 7));
 
-  // Create survey
   const { data: survey, error: surveyError } = await supabaseAdmin
     .from('hoa_surveys')
     .insert({
       title,
       description,
-      created_by: created_by || 'board',
+      created_by: address,
       anonymous: anonymous || false,
       closes_at: closes_at.toISOString(),
     })
@@ -42,7 +42,6 @@ export async function POST(request: Request) {
 
   if (surveyError) return NextResponse.json({ error: surveyError.message }, { status: 500 });
 
-  // Create options
   const optionRows = options.map((label: string, i: number) => ({
     survey_id: survey.id,
     label,
@@ -56,23 +55,22 @@ export async function POST(request: Request) {
   if (optError) return NextResponse.json({ error: optError.message }, { status: 500 });
 
   return NextResponse.json(survey, { status: 201 });
-}
+});
 
-// PATCH /api/surveys — Vote on a survey
-export async function PATCH(request: Request) {
+// PATCH — Authenticated (vote)
+export const PATCH = withAuth(async (request, { address }) => {
   const body = await request.json();
-  const { survey_id, option_id, wallet_address } = body;
+  const { survey_id, option_id } = body;
 
-  if (!survey_id || !option_id || !wallet_address) {
+  if (!survey_id || !option_id) {
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
   }
 
-  // Check if already voted
   const { data: existing } = await supabaseAdmin
     .from('hoa_survey_responses')
     .select('id')
     .eq('survey_id', survey_id)
-    .eq('wallet_address', wallet_address.toLowerCase())
+    .eq('wallet_address', address)
     .limit(1);
 
   if (existing && existing.length > 0) {
@@ -84,11 +82,11 @@ export async function PATCH(request: Request) {
     .insert({
       survey_id,
       option_id,
-      wallet_address: wallet_address.toLowerCase(),
+      wallet_address: address,
     })
     .select()
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json(data);
-}
+});

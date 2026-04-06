@@ -3,6 +3,7 @@ import { supabaseAdmin } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
 
+// GET — Public
 export async function GET() {
   const [boardRes, committeesRes] = await Promise.all([
     supabaseAdmin
