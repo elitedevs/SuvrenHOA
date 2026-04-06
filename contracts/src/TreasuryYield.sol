@@ -230,10 +230,10 @@ contract TreasuryYield is AccessControl, ReentrancyGuard {
             revert InsufficientDeposited(amount, depositedAmount);
         }
 
-        depositedAmount -= amount;
-
         // Withdraw from Aave directly to this contract
         uint256 received = aavePool.withdraw(address(usdc), amount, address(this));
+
+        depositedAmount -= received;
 
         // Return principal to Treasury
         usdc.forceApprove(address(treasury), received);
@@ -292,9 +292,9 @@ contract TreasuryYield is AccessControl, ReentrancyGuard {
 
             if (depositedAmount > newMax) {
                 uint256 excess = depositedAmount - newMax;
-                depositedAmount -= excess;
 
                 uint256 received = aavePool.withdraw(address(usdc), excess, address(this));
+                depositedAmount -= received;
                 usdc.forceApprove(address(treasury), received);
                 treasury.creditYieldReturn(received);
 

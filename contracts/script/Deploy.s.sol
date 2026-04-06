@@ -6,6 +6,7 @@ import "../src/PropertyNFT.sol";
 import "../src/DocumentRegistry.sol";
 import "../src/FaircroftGovernor.sol";
 import "../src/FaircroftTreasury.sol";
+import "../src/DuesLending.sol";
 import "@openzeppelin/contracts/governance/TimelockController.sol";
 
 /**
@@ -90,7 +91,20 @@ contract Deploy is Script {
         propertyNFT.grantRole(propertyNFT.REGISTRAR_ROLE(), boardMultisig);
         propertyNFT.grantRole(propertyNFT.GOVERNOR_ROLE(), address(timelock));
 
-        // ── 9. Transfer admin of ALL contracts to Timelock ──────────────
+        // ── 9. DuesLending ─────────────────────────────────────────────
+        DuesLending duesLending = new DuesLending(
+            usdcAddress,
+            address(propertyNFT),
+            address(treasury),
+            address(timelock),   // governor role
+            boardMultisig        // board role
+        );
+        console.log("DuesLending:", address(duesLending));
+
+        // Grant LENDING_ROLE on PropertyNFT to DuesLending
+        propertyNFT.grantRole(propertyNFT.LENDING_ROLE(), address(duesLending));
+
+        // ── 10. Transfer admin of ALL contracts to Timelock ─────────────
         // After this, only governance can change roles.
 
         bytes32 adminRole = propertyNFT.DEFAULT_ADMIN_ROLE();
@@ -107,6 +121,10 @@ contract Deploy is Script {
         treasury.grantRole(adminRole, address(timelock));
         treasury.renounceRole(adminRole, deployerAddr);
 
+        // DuesLending
+        duesLending.grantRole(adminRole, address(timelock));
+        duesLending.renounceRole(adminRole, deployerAddr);
+
         // Timelock itself
         timelock.grantRole(adminRole, address(timelock));
         timelock.renounceRole(adminRole, deployerAddr);
@@ -120,10 +138,11 @@ contract Deploy is Script {
         console.log("FaircroftGovernor: ", address(governor));
         console.log("DocumentRegistry:  ", address(docRegistry));
         console.log("FaircroftTreasury: ", address(treasury));
+        console.log("DuesLending:       ", address(duesLending));
         console.log("Board Multisig:    ", boardMultisig);
         console.log("USDC:              ", usdcAddress);
         console.log("Max Lots:          ", maxLots);
         console.log("\nAdmin transferred to Timelock. Deployer has NO remaining roles.");
-        console.log("Board multisig has: REGISTRAR, RECORDER, TREASURER, CANCELLER, GUARDIAN");
+        console.log("Board multisig has: REGISTRAR, RECORDER, TREASURER, CANCELLER, GUARDIAN, BOARD");
     }
 }
