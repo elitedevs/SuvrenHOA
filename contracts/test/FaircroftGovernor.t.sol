@@ -579,4 +579,95 @@ contract FaircroftGovernorTest is TestSetup {
         _createProposal("11th proposal works", FaircroftGovernor.ProposalCategory.Routine);
         assertEq(governor.activeProposalCount(), 1);
     }
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // GAP TESTS: Zero-weight voting, non-proposer cancel
+    // ═══════════════════════════════════════════════════════════════════════
+
+    function test_CastVote_ZeroWeight_Accepted() public {
+        // A wallet with no NFT (zero voting power) can cast a vote — it records 0 weight.
+        address nobody = address(0x9999);
+        uint256 proposalId = _createProposal("Vote weight test", FaircroftGovernor.ProposalCategory.Routine);
+        _skipVotingDelay();
+
+        vm.prank(nobody);
+        governor.castVote(proposalId, 1); // Should not revert
+
+        (uint256 against, uint256 forVotes, uint256 abstain) = governor.proposalVotes(proposalId);
+        assertEq(forVotes, 0);   // nobody contributed 0 votes
+        assertEq(against, 0);
+        assertEq(abstain, 0);
+    }
+
+    function test_CastVote_ZeroWeight_DoesNotAffectQuorum() public {
+        // Quorum is based on totalSupply snapshot; zero-weight votes don't help meet it.
+        address nobody = address(0x9999);
+        uint256 proposalId = _createProposal("Routine quorum", FaircroftGovernor.ProposalCategory.Routine);
+        _skipVotingDelay();
+
+        // Only nobody votes (zero weight)
+        vm.prank(nobody);
+        governor.castVote(proposalId, 1);
+        _skipVotingPeriod();
+
+        // Proposal should be Defeated (quorum not met)
+        assertEq(uint8(governor.state(proposalId)), uint8(IGovernor.ProposalState.Defeated));
+    }
+
+    function test_CancelProposal_RevertByNonProposer() public {
+        // Proposer is alice. Someone else trying to call the standard cancel should revert.
+        address[] memory targets = new address[](1);
+        uint256[] memory values  = new uint256[](1);
+        bytes[]   memory calldatas = new bytes[](1);
+        targets[0] = address(docRegistry);
+        string memory description = "Non-proposer cancel test";
+
+        vm.prank(alice);
+        governor.proposeWithCategory(
+            targets, values, calldatas, description,
+            FaircroftGovernor.ProposalCategory.Routine, ""
+        );
+
+        // bob (not the proposer) tries to cancel — should revert
+        vm.prank(bob);
+        vm.expectRevert();
+        governor.cancel(targets, values, calldatas, keccak256(bytes(description)));
+    }
+
+    function test_CancelProposal_ProposerCanCancel() public {
+        // The proposer (alice) can cancel their own proposal before it is queued.
+        address[] memory targets = new address[](1);
+        uint256[] memory values  = new uint256[](1);
+        bytes[]   memory calldatas = new bytes[](1);
+        targets[0] = address(docRegistry);
+        string memory description = "Proposer self-cancel";
+
+        vm.prank(alice);
+        governor.proposeWithCategory(
+            targets, values, calldatas, description,
+            FaircroftGovernor.ProposalCategory.Routine, ""
+        );
+
+        vm.prank(alice);
+        governor.cancel(targets, values, calldatas, keccak256(bytes(description)));
+
+        uint256 proposalId = governor.hashProposal(
+            targets, values, calldatas, keccak256(bytes(description))
+        );
+        assertEq(uint8(governor.state(proposalId)), uint8(IGovernor.ProposalState.Canceled));
+    }
+
+    function test_ActiveProposalCount_DecrementOnExpiry() public {
+        uint256 proposalId = _createProposal("Expiry cleanup", FaircroftGovernor.ProposalCategory.Routine);
+        assertEq(governor.activeProposalCount(), 1);
+
+        // Let voting period pass without quorum → Defeated
+        _skipVotingDelay();
+        _skipVotingPeriod();
+        assertEq(uint8(governor.state(proposalId)), uint8(IGovernor.ProposalState.Defeated));
+
+        // cleanupProposal should decrement count
+        governor.cleanupProposal(proposalId);
+        assertEq(governor.activeProposalCount(), 0);
+    }
 }
