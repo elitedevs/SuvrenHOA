@@ -6,6 +6,7 @@ import {
   ChevronRight, ArrowRight, Check, Mail, Building2, Send,
   Lock, Eye, BanknoteIcon, Wrench,
 } from 'lucide-react';
+import { SaaSProductJsonLd, OrganizationJsonLd } from '@/components/JsonLd';
 
 const FEATURES = [
   {
@@ -88,6 +89,8 @@ const FAQS = [
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[var(--obsidian)] text-[var(--parchment)]">
+      <SaaSProductJsonLd />
+      <OrganizationJsonLd />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
@@ -396,22 +399,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── FOOTER ───────────────────────────────────────────────────────── */}
-      <footer className="border-t border-[rgba(245,240,232,0.06)] py-10">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-[13px] font-medium text-[rgba(245,240,232,0.35)] mb-1">
-            SuvrenHOA — Governance your community can trust.
-          </p>
-          <p className="text-[11px] text-[rgba(245,240,232,0.20)]">
-            © 2026 Suvren LLC · Raleigh, NC · Patent Pending
-          </p>
-          <div className="flex justify-center gap-4 mt-3 text-[11px] text-[rgba(245,240,232,0.25)]">
-            <Link href="/terms" className="hover:text-[#B09B71] transition-colors">Terms</Link>
-            <Link href="/privacy" className="hover:text-[#B09B71] transition-colors">Privacy</Link>
-            <a href="mailto:support@suvren.co" className="hover:text-[#B09B71] transition-colors">Contact</a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
