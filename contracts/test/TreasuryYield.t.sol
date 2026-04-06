@@ -889,3 +889,121 @@ contract TreasuryYieldTest is Test {
         assertEq(aToken.balanceOf(address(yieldContract)), 0);
     }
 }
+
+// ── Reverting Aave Pool ────────────────────────────────────────────────────────
+
+/// @dev Aave pool that always reverts on supply and withdraw — simulates protocol failure.
+contract RevertingAavePool {
+    error AaveDown();
+    function supply(address, uint256, address, uint16) external pure { revert AaveDown(); }
+    function withdraw(address, uint256, address) external pure returns (uint256) { revert AaveDown(); }
+}
+
+/**
+ * @title TreasuryYieldAaveFailureTest
+ * @notice Tests for Aave integration failure modes.
+ *         A reverting Aave pool must cause clean reverts — never silent fund loss.
+ */
+contract TreasuryYieldAaveFailureTest is Test {
+    MockUSDC          public usdc;
+    MockAToken        public aToken;
+    RevertingAavePool public badPool;
+    FaircroftTreasury public treasuryContract;
+    TreasuryYield     public yieldContract;
+
+    address governor  = address(0x60704);
+    address treasurer = address(0x7EA5);
+
+    function _setReserveBalance(uint256 newBalance) internal {
+        vm.store(address(treasuryContract), bytes32(uint256(7)), bytes32(newBalance));
+    }
+
+    function setUp() public {
+        usdc    = new MockUSDC();
+        aToken  = new MockAToken();
+        badPool = new RevertingAavePool();
+
+        treasuryContract = new FaircroftTreasury(address(usdc), 200e6, 500, 1000e6);
+
+        yieldContract = new TreasuryYield(
+            address(usdc),
+            address(badPool),
+            address(aToken),
+            address(treasuryContract),
+            governor,
+            treasurer
+        );
+
+        treasuryContract.grantRole(treasuryContract.YIELD_MANAGER_ROLE(), address(yieldContract));
+        treasuryContract.grantRole(treasuryContract.GOVERNOR_ROLE(), governor);
+
+        // Seed 100k USDC in treasury reserve
+        usdc.mint(address(treasuryContract), 100_000e6);
+        _setReserveBalance(100_000e6);
+    }
+
+    /// @notice depositToAave must revert cleanly when Aave supply reverts.
+    ///         Funds must remain in treasury (not lost).
+    function test_DepositToAave_AaveReverts_CleanRevert() public {
+        uint256 reserveBefore = treasuryContract.reserveBalance();
+
+        vm.prank(treasurer);
+        vm.expectRevert(RevertingAavePool.AaveDown.selector);
+        yieldContract.depositToAave(10_000e6);
+
+        // Treasury reserve is unchanged — no funds lost
+        assertEq(treasuryContract.reserveBalance(), reserveBefore);
+        assertEq(yieldContract.depositedAmount(), 0);
+    }
+
+    /// @notice withdrawFromAave must revert with AaveDown when Aave is down.
+    ///         Pre-set depositedAmount via vm.store (slot 1) to bypass the
+    ///         InsufficientDeposited guard and reach the actual Aave call.
+    function test_WithdrawFromAave_AaveReverts_CleanRevert() public {
+        // depositedAmount is slot 1 in TreasuryYield (verified via forge inspect)
+        vm.store(address(yieldContract), bytes32(uint256(1)), bytes32(uint256(1e6)));
+        assertEq(yieldContract.depositedAmount(), 1e6);
+
+        vm.prank(treasurer);
+        vm.expectRevert(RevertingAavePool.AaveDown.selector);
+        yieldContract.withdrawFromAave(1e6);
+
+        // depositedAmount unchanged (revert rolled back any state changes)
+        assertEq(yieldContract.depositedAmount(), 1e6);
+    }
+
+    /// @notice emergencyWithdraw reverts with AaveDown when Aave is down and funds are deposited.
+    function test_EmergencyWithdraw_AaveReverts_CleanRevert() public {
+        // depositedAmount = slot 1; set to simulate prior deposit
+        vm.store(address(yieldContract), bytes32(uint256(1)), bytes32(uint256(10_000e6)));
+
+        vm.prank(treasurer);
+        vm.expectRevert(RevertingAavePool.AaveDown.selector);
+        yieldContract.emergencyWithdraw();
+
+        // depositedAmount unchanged after revert
+        assertEq(yieldContract.depositedAmount(), 10_000e6);
+    }
+
+    /// @notice harvestYield reverts with AaveDown when Aave is down and yield is available.
+    ///         We pre-load depositedAmount (slot 1) and mint aTokens to yieldContract
+    ///         so the contract sees yield > 0 and attempts to call aavePool.withdraw.
+    function test_HarvestYield_AaveReverts_NoSilentLoss() public {
+        uint256 principal = 5_000e6;
+        uint256 yield     = 100e6;
+
+        // Simulate prior deposit: set depositedAmount = principal
+        vm.store(address(yieldContract), bytes32(uint256(1)), bytes32(principal));
+
+        // Mint aTokens to yieldContract to simulate accrued yield (principal + yield)
+        aToken.mint(address(yieldContract), principal + yield);
+
+        // harvestYield now sees aToken.balance (5100e6) > depositedAmount (5000e6)
+        // and tries to call badPool.withdraw — which reverts with AaveDown
+        vm.expectRevert(RevertingAavePool.AaveDown.selector);
+        yieldContract.harvestYield();
+
+        // depositedAmount and aToken balance are unchanged (revert rolled back state)
+        assertEq(yieldContract.depositedAmount(), principal);
+    }
+}

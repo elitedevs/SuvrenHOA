@@ -104,6 +104,70 @@ contract PropertyNFTTest is Test {
         assertEq(nft.lotExists(1), true);
     }
 
+    function test_MintBothBoundaryLots() public {
+        // Lot 1 (min) and lot MAX_LOTS (max) should both be valid
+        nft.mintProperty(alice, 1,               "First Lot", 1000);
+        nft.mintProperty(bob,   uint64(MAX_LOTS), "Last Lot",  2000);
+        assertEq(nft.ownerOf(1),        alice);
+        assertEq(nft.ownerOf(MAX_LOTS), bob);
+        assertEq(nft.totalSupply(), 2);
+    }
+
+    function test_MintAllLots_ThenRejectDuplicate() public {
+        // Fill all 5 lots in a tiny community (redeploy with maxLots=5 for speed)
+        PropertyNFT smallNft = new PropertyNFT(5, "Mini HOA", "MINI");
+        address[5] memory owners = [alice, bob, carol, alice, bob]; // reuse wallets
+        for (uint64 i = 1; i <= 5; i++) {
+            smallNft.mintProperty(owners[i - 1], i, string(abi.encodePacked("Lot ", vm.toString(i))), 1000);
+        }
+        assertEq(smallNft.totalSupply(), 5);
+
+        // Lot 1 already minted — must revert
+        vm.expectRevert(abi.encodeWithSelector(PropertyNFT.LotAlreadyMinted.selector, 1));
+        smallNft.mintProperty(carol, 1, "Duplicate", 500);
+
+        // Lot 6 exceeds maxLots=5 — must revert
+        vm.expectRevert(abi.encodeWithSelector(PropertyNFT.InvalidLotNumber.selector, 6));
+        smallNft.mintProperty(carol, 6, "Out of range", 500);
+    }
+
+    function test_FreeTransferMode_AllowsTransferWithoutBoardApproval() public {
+        nft.grantRole(nft.GOVERNOR_ROLE(), deployer);
+        nft.setTransfersRequireApproval(false);
+
+        nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
+
+        vm.prank(alice);
+        nft.safeTransferFrom(alice, bob, 1);
+        assertEq(nft.ownerOf(1), bob);
+    }
+
+    function test_FreeTransferMode_ToggleBackToRestricted() public {
+        nft.grantRole(nft.GOVERNOR_ROLE(), deployer);
+        nft.setTransfersRequireApproval(false);
+        nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
+
+        // Re-enable restriction
+        nft.setTransfersRequireApproval(true);
+
+        vm.prank(alice);
+        vm.expectRevert(abi.encodeWithSelector(PropertyNFT.TransferNotApproved.selector, uint256(1)));
+        nft.safeTransferFrom(alice, bob, 1);
+    }
+
+    function test_BurnLockedToken_Reverts() public {
+        nft.grantRole(nft.LENDING_ROLE(), deployer);
+        nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
+        nft.setLoanLock(1, true);
+
+        // Loan-locked token should not be transferable (including burn = transfer to 0)
+        // Board approves transfer for completeness
+        nft.approveTransfer(1, bob);
+        vm.prank(alice);
+        vm.expectRevert(abi.encodeWithSelector(PropertyNFT.TokenIsLoanLocked.selector, 1));
+        nft.safeTransferFrom(alice, bob, 1);
+    }
+
     // ═══════════════════════════════════════════════════════════════════════
     // Transfers
     // ═══════════════════════════════════════════════════════════════════════
