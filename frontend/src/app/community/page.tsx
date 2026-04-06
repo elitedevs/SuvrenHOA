@@ -5,6 +5,11 @@ import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { usePosts, useCreatePost, type Post as PostType } from '@/hooks/usePosts';
 import { useProperty } from '@/hooks/useProperty';
+import Link from 'next/link';
+import {
+  Vote, DollarSign, FileText, Shield, MessageSquare,
+  ExternalLink, BookOpen, Users,
+} from 'lucide-react';
 
 
 const CATEGORIES = [
@@ -27,7 +32,7 @@ export default function CommunityPage() {
   const [showNewPost, setShowNewPost] = useState(false);
 
   if (!isConnected) {
-    return <AuthWall title="Community" description="Connect with your neighbors — discussions, events, recommendations, and local resources." />;
+    return <CommunityPublicPage />;
   }
 
   const { data: apiPosts, isLoading } = usePosts(selectedCategory);
@@ -286,6 +291,223 @@ function NewPostForm({ onClose }: { onClose: () => void }) {
           {createPost.isPending ? 'Posting...' : 'Post to Community'}
         </button>
       </div>
+    </div>
+  );
+}
+
+function CommunityPublicPage() {
+  const GOVERNANCE_PILLARS = [
+    {
+      icon: Vote,
+      title: 'Democratic Voting',
+      desc: 'Every proposal goes to a community-wide vote. Results are recorded on the blockchain the moment polls close — no one can alter them.',
+    },
+    {
+      icon: DollarSign,
+      title: 'Transparent Finances',
+      desc: 'Every dollar collected and spent is visible to every resident in real time. No off-books transactions. No hidden fees.',
+    },
+    {
+      icon: FileText,
+      title: 'Immutable Records',
+      desc: 'Meeting minutes, bylaws, and governing documents are stored on Arweave permanently. They can never be lost, edited, or deleted.',
+    },
+    {
+      icon: Shield,
+      title: 'Cryptographic Accountability',
+      desc: 'Board actions are tied to verified wallets. Every decision has a timestamped, on-chain audit trail — accountability by design.',
+    },
+  ];
+
+  const GUIDELINES = [
+    { rule: 'Be respectful', detail: 'Disagreement is fine. Personal attacks, harassment, or discrimination are not tolerated.' },
+    { rule: 'Stay on topic', detail: 'Keep posts relevant to your community. Off-topic content may be moved or removed.' },
+    { rule: 'No spam', detail: 'No commercial promotions, repeated posts, or unsolicited advertising.' },
+    { rule: 'Protect privacy', detail: "Don't share other residents' personal information without consent." },
+    { rule: "Report, don't retaliate", detail: "If you see rule violations, report them to your board. Don't escalate publicly." },
+    { rule: 'Be constructive', detail: 'If you raise a problem, try to suggest a solution. Community improvement is everyone\'s job.' },
+  ];
+
+  const TESTIMONIALS = [
+    {
+      quote: "Our last board president changed the meeting minutes three times in one year. With SuvrenHOA, that's impossible now.",
+      name: 'Sarah M.',
+      role: 'Board Member',
+      community: 'Oakwood Heights HOA',
+      initials: 'SM',
+    },
+    {
+      quote: "Residents finally trust where their dues are going. Participation in our annual vote went from 22% to 74% in one year.",
+      name: 'James R.',
+      role: 'Board President',
+      community: 'Lakeside Commons',
+      initials: 'JR',
+    },
+    {
+      quote: "Setup took less than an afternoon. Our documents are now permanent, our votes are now fair, and our neighbors are finally engaged.",
+      name: 'Patricia L.',
+      role: 'Property Manager',
+      community: 'Willow Creek HOA',
+      initials: 'PL',
+    },
+  ];
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero */}
+      <section className="py-16 px-4 border-b border-[var(--divider)]">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="font-playfair text-4xl md:text-5xl font-bold text-[#E8E4DC] mb-4">
+            Community Built on Trust
+          </h1>
+          <p className="text-lg text-[#C4BAA8] leading-relaxed mb-8">
+            SuvrenHOA is more than software — it's a new model for how neighbors govern together. Transparent by default. Democratic by design. Permanent by technology.
+          </p>
+          <div className="flex items-center justify-center gap-3 flex-wrap">
+            <Link
+              href="/signup"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#B09B71] to-[#8A7A55] text-[#0C0C0E] font-bold px-6 py-3 rounded-xl hover:from-[#C4B080] hover:to-[#9A8A65] transition-all"
+            >
+              Join Your Community
+            </Link>
+            <Link
+              href="/founding"
+              className="inline-flex items-center gap-2 border border-[#B09B71]/40 text-[#B09B71] px-6 py-3 rounded-xl hover:border-[#B09B71] transition-colors text-sm font-medium"
+            >
+              Founding Program →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Governance explainer */}
+      <section className="py-16 px-4 border-b border-[var(--divider)]">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-playfair text-3xl font-bold text-[#E8E4DC] mb-3">How Governance Works</h2>
+            <p className="text-[#8A8070] max-w-xl mx-auto">
+              Traditional HOAs run on spreadsheets and good intentions. SuvrenHOA runs on math.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {GOVERNANCE_PILLARS.map(p => (
+              <div key={p.title} className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6 hover:border-[#B09B71]/30 transition-colors">
+                <div className="w-10 h-10 rounded-lg bg-[#B09B71]/10 flex items-center justify-center mb-4">
+                  <p.icon className="w-5 h-5 text-[#B09B71]" />
+                </div>
+                <h3 className="font-semibold text-[#E8E4DC] mb-2">{p.title}</h3>
+                <p className="text-sm text-[#8A8070] leading-relaxed">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Discord / Community hub */}
+      <section className="py-16 px-4 border-b border-[var(--divider)]">
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-[#141416] border border-[#2A2A2E] rounded-2xl p-8 text-center">
+            <div className="w-14 h-14 rounded-2xl bg-[#5865F2]/10 border border-[#5865F2]/30 flex items-center justify-center mx-auto mb-5">
+              <MessageSquare className="w-7 h-7 text-[#5865F2]" />
+            </div>
+            <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-3">Join the Conversation</h2>
+            <p className="text-[#8A8070] leading-relaxed mb-6 max-w-lg mx-auto">
+              Our Discord community connects HOA board members, property managers, and residents who are reimagining community governance. Share experiences, get help, shape the product.
+            </p>
+            <div className="flex items-center justify-center gap-3 flex-wrap">
+              <a
+                href="https://discord.gg/suvren"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#5865F2] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#4752C4] transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Join Discord
+              </a>
+              <span className="text-sm text-[#4A4A52]">Coming soon — join waitlist to get notified</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Community guidelines */}
+      <section className="py-16 px-4 border-b border-[var(--divider)]">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex items-center gap-3 mb-8">
+            <BookOpen className="w-5 h-5 text-[#B09B71]" />
+            <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC]">Community Guidelines</h2>
+          </div>
+          <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl divide-y divide-[#2A2A2E]">
+            {GUIDELINES.map((g, i) => (
+              <div key={g.rule} className="flex items-start gap-4 px-5 py-4">
+                <span className="text-xs font-bold text-[#B09B71] font-mono mt-0.5 flex-shrink-0 w-5">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-[#E8E4DC] mb-0.5">{g.rule}</p>
+                  <p className="text-sm text-[#8A8070]">{g.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-[#4A4A52] mt-3">
+            Violations may result in post removal or account suspension. Board members moderate their own communities.
+          </p>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16 px-4 border-b border-[var(--divider)]">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-3 mb-8 justify-center">
+            <Users className="w-5 h-5 text-[#B09B71]" />
+            <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC]">What Communities Say</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {TESTIMONIALS.map(t => (
+              <div key={t.name} className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6 flex flex-col">
+                <p className="text-sm text-[#C4BAA8] leading-relaxed italic mb-6 flex-1">
+                  "{t.quote}"
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/30 flex items-center justify-center text-xs font-bold text-[#B09B71]">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-[#E8E4DC]">{t.name}</p>
+                    <p className="text-xs text-[#4A4A52]">{t.role} · {t.community}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-[#4A4A52] text-center mt-6">
+            Testimonials are representative placeholders — real community stories coming at launch.
+          </p>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 px-4 text-center">
+        <div className="max-w-xl mx-auto">
+          <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-4">Ready to Join?</h2>
+          <p className="text-[#8A8070] mb-8">Sign in with your community invite, or apply for the Founding Program.</p>
+          <div className="flex items-center justify-center gap-3 flex-wrap">
+            <Link
+              href="/login"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#B09B71] to-[#8A7A55] text-[#0C0C0E] font-bold px-6 py-3 rounded-xl hover:from-[#C4B080] hover:to-[#9A8A65] transition-all"
+            >
+              Sign In
+            </Link>
+            <Link
+              href="/founding"
+              className="inline-flex items-center gap-2 border border-[#2A2A2E] text-[#C4BAA8] px-6 py-3 rounded-xl hover:border-[#B09B71]/40 transition-colors text-sm font-medium"
+            >
+              Apply for Founding
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

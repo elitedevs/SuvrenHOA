@@ -685,6 +685,7 @@ function OnboardingWizard() {
                 <Link
                   href="/documents"
                   target="_blank"
+                rel="noopener noreferrer"
                   className="text-[#B09B71] hover:underline"
                 >
                   CC&Rs (Covenants, Conditions & Restrictions) →

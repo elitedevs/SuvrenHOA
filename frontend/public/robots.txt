@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /founding
+Allow: /launch
+Allow: /press
+Allow: /community
+Allow: /landing
+
+# Keep auth and app internals private
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /settings
+Disallow: /checkout
+Disallow: /invite/
+
+Sitemap: https://suvren.com/sitemap.xml
