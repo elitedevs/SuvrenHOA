@@ -6,11 +6,12 @@ import { usePathname } from 'next/navigation';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useMessages } from '@/hooks/useMessages';
+import { useSmartWallet } from '@/hooks/useSmartWallet';
 import {
   Home, Building2, Vote, Landmark, Users, FileText,
   Wrench, Settings, ChevronLeft, ChevronRight,
   ChevronDown, Menu, X, MessageCircle,
-  BookOpen, Megaphone, Eye,
+  BookOpen, Megaphone, Eye, Fingerprint, Wallet,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -164,6 +165,7 @@ const NAV_SECTIONS: NavSection[] = [
     icon: Settings,
     children: [
       { href: '/profile', label: 'Profile' },
+      { href: '/settings/wallet', label: 'Wallet' },
       { href: '/settings/notifications', label: 'Notifications' },
       { href: '/admin', label: 'Admin' },
       { href: '/onboarding', label: 'Onboarding' },
@@ -360,6 +362,7 @@ function NavItem({
 export function Sidebar() {
   const pathname = usePathname();
   const { isConnected } = useAccount();
+  const { walletType, isSmartWallet } = useSmartWallet();
   const { totalUnread: _totalUnread } = useMessages(); // reserved for future badge
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -494,6 +497,26 @@ export function Sidebar() {
             padding: collapsed ? '6px 4px' : '8px 10px',
           }}
         >
+          {/* Smart wallet badge when connected */}
+          {isConnected && !collapsed && (
+            <div className="flex items-center gap-1.5 mb-1.5 px-0.5">
+              {isSmartWallet ? (
+                <>
+                  <Fingerprint size={12} style={{ color: '#2A5D4F', opacity: 0.8 }} />
+                  <span className="text-[10px]" style={{ color: 'rgba(42,93,79,0.8)' }}>
+                    Smart Wallet
+                  </span>
+                </>
+              ) : walletType === 'eoa' ? (
+                <>
+                  <Wallet size={12} style={{ color: '#B09B71', opacity: 0.6 }} />
+                  <span className="text-[10px]" style={{ color: 'rgba(176,155,113,0.6)' }}>
+                    External Wallet
+                  </span>
+                </>
+              ) : null}
+            </div>
+          )}
           <div
             className={`wallet-wrapper ${collapsed ? 'flex justify-center scale-75' : ''}`}
             style={{
@@ -502,7 +525,7 @@ export function Sidebar() {
             }}
           >
             <ConnectButton
-              label="Connect"
+              label={collapsed ? 'Connect' : 'Create Free Wallet'}
               showBalance={false}
               chainStatus="none"
               accountStatus={collapsed ? 'avatar' : 'address'}
