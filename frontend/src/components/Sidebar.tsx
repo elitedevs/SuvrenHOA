@@ -7,11 +7,13 @@ import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useMessages } from '@/hooks/useMessages';
 import { useSmartWallet } from '@/hooks/useSmartWallet';
+import { useSupabaseAuth } from '@/context/AuthContext';
 import {
   Home, Building2, Vote, Landmark, Users, FileText,
   Wrench, Settings, ChevronLeft, ChevronRight,
   ChevronDown, Menu, X, MessageCircle,
   BookOpen, Megaphone, Eye, Fingerprint, Wallet,
+  Send, LogOut,
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
@@ -157,6 +159,16 @@ const NAV_SECTIONS: NavSection[] = [
       { href: '/surveys/builder', label: 'Survey Builder' },
       { href: '/reports/annual', label: 'Annual Report' },
       { href: '/complaints/noise', label: 'Noise Complaint' },
+    ],
+  },
+  {
+    href: '/invite',
+    label: 'Invitations',
+    icon: Send,
+    utility: true,
+    children: [
+      { href: '/invite', label: 'Send Invites' },
+      { href: '/invite/manage', label: 'Manage' },
     ],
   },
   {
@@ -363,6 +375,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const { isConnected } = useAccount();
   const { walletType, isSmartWallet } = useSmartWallet();
+  const { user, signOut: supabaseSignOut } = useSupabaseAuth();
   const { totalUnread: _totalUnread } = useMessages(); // reserved for future badge
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -398,7 +411,10 @@ export function Sidebar() {
     );
   }, [collapsed]);
 
-  if (!isConnected) return null;
+  // Hide sidebar on public routes (login, signup, landing, invite accept)
+  const publicRoutes = ['/', '/login', '/signup', '/invite/accept'];
+  const isPublicRoute = publicRoutes.includes(pathname);
+  if ((!isConnected && !user) || isPublicRoute) return null;
 
   const sidebarContent = (
     <div
@@ -532,6 +548,23 @@ export function Sidebar() {
             />
           </div>
         </div>
+
+        {/* Sign out — visible when authenticated via Supabase */}
+        {user && (
+          <button
+            onClick={supabaseSignOut}
+            className={`flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm transition-all ${
+              collapsed ? 'justify-center' : ''
+            }`}
+            style={{ color: 'rgba(245,240,232,0.35)' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(245,240,232,0.60)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(245,240,232,0.35)'; }}
+            title="Sign Out"
+          >
+            <LogOut size={16} strokeWidth={1.25} />
+            {!collapsed && <span>Sign Out</span>}
+          </button>
+        )}
       </div>
     </div>
   );
