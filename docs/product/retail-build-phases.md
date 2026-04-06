@@ -21,50 +21,61 @@
 
 ---
 
-## Phase 1: Foundation (Week 1-2)
-> **Goal:** Email auth works, landing page is the front door
+## Phase 1: Foundation + Invitations (Week 1-2)
+> **Goal:** Email auth works, landing page is the front door, board can invite residents
 
 ### 1.1 — Email-First Auth
-- [ ] Install Supabase Auth (email/password + magic links)
-- [ ] Create `/signup` page — email, password, name, role selector (board member / property manager / resident)
-- [ ] Create `/login` page — email/password + "Forgot password"
-- [ ] Email verification flow (Supabase sends verification link)
-- [ ] Session management — Supabase session + middleware
-- [ ] Create `profiles` table in Supabase (id, email, name, role, wallet_address nullable, avatar_url, created_at)
-- [ ] Auth context provider wrapping the app
-- [ ] Protected route middleware — redirect unauthenticated to /login
+- [x] Install Supabase Auth (@supabase/ssr — email/password + magic links)
+- [x] Create `/signup` page — email, password, name, role selector (board member / property manager / resident), invite token support
+- [x] Create `/login` page — email/password + magic link + "Forgot password"
+- [x] Email verification flow (Supabase sends verification link)
+- [x] Session management — Supabase session + middleware (`supabase-middleware.ts`)
+- [x] Create `profiles` table in Supabase (id, email, name, role, wallet_address nullable, avatar_url, created_at) — `001_profiles.sql`
+- [x] Auth context provider wrapping the app (`AuthContext.tsx` + `AuthProvider`)
+- [x] Protected route middleware — redirect unauthenticated to /login (`middleware.ts`)
 
 ### 1.2 — Landing Page as Homepage
-- [ ] Move current `/` (wallet dashboard) to `/dashboard`
-- [ ] Wire landing page as the new `/` for unauthenticated visitors
-- [ ] Authenticated users hitting `/` redirect to `/dashboard`
-- [ ] Update all internal links (/dashboard, not /)
-- [ ] Nav bar: show "Sign In" / "Start Free Trial" when logged out, show user menu when logged in
+- [x] Wire landing page as the new `/` for unauthenticated visitors
+- [x] Authenticated users hitting `/` redirect to `/dashboard` (middleware + client-side)
+- [x] Landing page CTA: "Start Free Trial" → /signup, "Sign In" → /login
+- [x] Sidebar: hidden on public routes (/login, /signup, /invite/accept)
+- [x] Sidebar: auth-aware — shows for Supabase or wallet users, includes sign-out
 
-### 1.3 — Wallet Linking (Separate from Auth)
-- [ ] New `/settings/wallet` page — "Connect Your Governance Key"
+### 1.3 — Community Creation (moved from Phase 2)
+- [x] Create `communities` table (`002_communities.sql`) with RLS
+- [x] Create `community_members` table (`003_community_members.sql`) with roles (admin/manager/member)
+- [x] `/create-community` page — name, address, city, state, zip, unit count
+- [x] Creator automatically becomes admin
+
+### 1.4 — Invitation System (moved from Phase 3)
+- [x] Create `invitations` table (`004_invitations.sql`) — token, expiry, status tracking, RLS
+- [x] Admin `/invite` page — single email invite + bulk CSV upload
+- [x] `/invite/accept` page — validates token, prompts signup/login, joins community via RPC
+- [x] `/invite/manage` page — view pending/accepted/expired, resend, revoke
+- [x] Sidebar: added Invitations section (Send Invites + Manage)
+- [x] RPC functions: `get_invitation_by_token()`, `accept_invitation()`
+
+### 1.5 — Wallet Linking (Separate from Auth)
+- [ ] New `/settings/wallet` page — "Connect Your Governance Key" (already exists from Smart Wallet merge)
 - [ ] Guided MetaMask/WalletConnect setup with plain-English explainer
 - [ ] "Skip for now" option — sets `wallet_linked: false` in profile
 - [ ] Wallet address stored in `profiles.wallet_address`
 - [ ] Persistent banner when wallet not linked: "Connect your governance key to vote and pay dues"
 - [ ] Feature gating: voting, dues, proposals require wallet. Forum, directory, docs, calendar don't.
 
-**Deliverable:** Someone can sign up with email, browse the app, and optionally connect a wallet later.
+**Deliverable:** Someone can sign up with email, create a community, invite residents, and optionally connect a wallet later.
 
 ---
 
-## Phase 2: Community & Billing (Week 3-4)
-> **Goal:** Board members can create a community and start a subscription
+## Phase 2: Billing & Community Polish (Week 3-4)
+> **Goal:** Stripe billing works, community features polished
 
-### 2.1 — Community Creation Flow
-- [ ] Create `communities` table (id, name, address, city, state, zip, unit_count, logo_url, created_by, plan, status, created_at)
-- [ ] Create `community_members` table (id, community_id, profile_id, role: admin/manager/member, joined_at)
-- [ ] `/create-community` page — name, address, unit count, upload logo
-- [ ] Creator automatically becomes admin
+### 2.1 — Community Polish (core tables moved to Phase 1)
 - [ ] Community dashboard at `/c/[community_id]/dashboard`
 - [ ] Community settings page (name, address, dues amount, meeting schedule)
 - [ ] Multi-community support — user can belong to multiple communities
 - [ ] Community switcher in sidebar header
+- [ ] Logo upload for communities
 
 ### 2.2 — Stripe Integration
 - [ ] Install Stripe SDK
@@ -90,16 +101,12 @@
 ---
 
 ## Phase 3: Resident Onboarding (Week 5-6)
-> **Goal:** Board can invite residents, residents can join and participate
+> **Goal:** Polish resident experience + NFT minting (core invite system moved to Phase 1)
 
-### 3.1 — Invitation System
-- [ ] Create `invitations` table (id, community_id, email, role, token, status: pending/accepted/expired, invited_by, created_at, expires_at)
-- [ ] Admin `/invite` page — single email invite + bulk CSV upload
+### 3.1 — Invitation Enhancements
 - [ ] Invitation email template (Supabase edge function or Resend/SendGrid)
-- [ ] Magic link: recipient clicks → lands on signup (pre-filled community + role)
 - [ ] QR code generator for in-person onboarding (encodes invite URL)
 - [ ] Printable invite card template (for board meetings)
-- [ ] Invitation management page — see pending, resend, revoke
 
 ### 3.2 — Resident Experience
 - [ ] Resident sees their community dashboard after login
@@ -228,9 +235,9 @@
 
 | Phase | Weeks | Focus | Key Deliverable |
 |-------|-------|-------|-----------------|
-| 1 | 1-2 | Email auth + landing page | Users can sign up |
-| 2 | 3-4 | Community creation + Stripe | Boards can create + subscribe |
-| 3 | 5-6 | Resident invites + NFT minting | Full community loop works |
+| 1 | 1-2 | Email auth + invitations + community creation | Users can sign up, create communities, invite members |
+| 2 | 3-4 | Stripe billing + community polish | Boards can subscribe + manage |
+| 3 | 5-6 | Resident experience + NFT minting | Full community loop works |
 | 4 | 7-8 | Marketing site + content | Professional web presence |
 | 5 | 9-10 | Mainnet + security + ops | Production-ready |
 | 6 | 11-12 | Founding communities + launch | First paying customers |

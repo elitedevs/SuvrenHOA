@@ -15,16 +15,26 @@ import { AnimatedNumber } from '@/components/AnimatedNumber';
 import { OnboardingChecklist } from '@/components/OnboardingChecklist';
 import { WeatherWidget } from '@/components/WeatherWidget';
 import { useProfile } from '@/hooks/useProfile';
+import { useSupabaseAuth } from '@/context/AuthContext';
 import {
   Home as HomeIcon, Vote, FileText, Settings,
   MessageSquare, Zap, Link2,
-  AlertTriangle,
+  AlertTriangle, ChevronRight,
 } from 'lucide-react';
 import { ResidentSpotlight } from '@/components/ResidentSpotlight';
 
 export default function Home() {
+  const { user, loading } = useSupabaseAuth();
   const { isConnected } = useAccount();
-  return isConnected ? <Dashboard /> : <Landing />;
+
+  // While loading auth state, show nothing to avoid flash
+  if (loading) return null;
+
+  // Authenticated users (via Supabase email auth OR wallet) see dashboard
+  // Middleware redirects auth users to /dashboard, but handle client-side too
+  if (user || isConnected) return <Dashboard />;
+
+  return <Landing />;
 }
 
 function Landing() {
@@ -58,8 +68,19 @@ function Landing() {
           </p>
         </div>
 
-        <div className="mb-16 card-enter card-enter-delay-2">
-          <ConnectButton label="Sign In to Get Started" />
+        <div className="mb-16 card-enter card-enter-delay-2 flex flex-col sm:flex-row items-center gap-4">
+          <Link
+            href="/signup"
+            className="px-8 py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4B08A] transition-colors"
+          >
+            Start Free Trial
+          </Link>
+          <Link
+            href="/login"
+            className="flex items-center gap-1.5 text-sm text-[var(--text-muted)] hover:text-[var(--parchment)] transition-colors"
+          >
+            Already have an account? <ChevronRight className="w-4 h-4" />
+          </Link>
         </div>
 
         {/* Stats grid */}
@@ -166,7 +187,12 @@ function Landing() {
           <p className="text-sm text-[var(--text-muted)] mb-6">
             No monthly fees. Just transparent governance on the blockchain.
           </p>
-          <ConnectButton label="Get Started" />
+          <Link
+            href="/signup"
+            className="inline-block px-8 py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4B08A] transition-colors"
+          >
+            Get Started
+          </Link>
         </div>
 
         <div className="h-16" /> {/* Bottom breathing room */}
