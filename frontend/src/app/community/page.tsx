@@ -26,11 +26,11 @@ export default function CommunityPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showNewPost, setShowNewPost] = useState(false);
 
+  const { data: apiPosts, isLoading } = usePosts(selectedCategory);
+
   if (!isConnected) {
     return <AuthWall title="Community" description="Connect with your neighbors — discussions, events, recommendations, and local resources." />;
   }
-
-  const { data: apiPosts, isLoading } = usePosts(selectedCategory);
   const posts = apiPosts || [];
 
   const pinnedPosts = posts.filter((p: any) => p.pinned);

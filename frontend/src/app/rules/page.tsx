@@ -114,6 +114,19 @@ export default function RulesPage() {
   const [openSections, setOpenSections] = useState<Set<string>>(new Set());
   const [openRules, setOpenRules] = useState<Set<string>>(new Set());
 
+  const filteredSections = useMemo(() => {
+    if (!search.trim()) return SECTIONS;
+    const q = search.toLowerCase();
+    return SECTIONS
+      .map(section => ({
+        ...section,
+        rules: section.rules.filter(r =>
+          r.question.toLowerCase().includes(q) || r.answer.toLowerCase().includes(q)
+        ),
+      }))
+      .filter(s => s.rules.length > 0 || s.title.toLowerCase().includes(q));
+  }, [search]);
+
   if (!isConnected) {
     return <AuthWall title="Community Rules & FAQ" description="Review community guidelines, bylaws, and frequently asked questions." />;
   }
@@ -133,19 +146,6 @@ export default function RulesPage() {
       return next;
     });
   };
-
-  const filteredSections = useMemo(() => {
-    if (!search.trim()) return SECTIONS;
-    const q = search.toLowerCase();
-    return SECTIONS
-      .map(section => ({
-        ...section,
-        rules: section.rules.filter(r =>
-          r.question.toLowerCase().includes(q) || r.answer.toLowerCase().includes(q)
-        ),
-      }))
-      .filter(s => s.rules.length > 0 || s.title.toLowerCase().includes(q));
-  }, [search]);
 
   const totalResults = filteredSections.reduce((acc, s) => acc + s.rules.length, 0);
 

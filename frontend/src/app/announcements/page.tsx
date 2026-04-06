@@ -83,11 +83,11 @@ export default function AnnouncementsPage() {
     setPinnedSet(getPinned());
   }, []);
 
+  const { data: announcements, isLoading } = useAnnouncements();
+
   if (!isConnected) {
     return <AuthWall title="Announcements" description="Official community announcements from the board." />;
   }
-
-  const { data: announcements, isLoading } = useAnnouncements();
   const items = (announcements || []) as any[];
 
   // Separate active from archive (older than 60 days)

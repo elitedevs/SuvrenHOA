@@ -27,11 +27,6 @@ const COMMUNITY_INFO = {
 
 export default function DirectoryPage() {
   const { isConnected } = useAccount();
-
-  if (!isConnected) {
-    return <AuthWall title="Community Directory" description="Find your neighbors, view lot information, and connect with fellow residents." />;
-  }
-
   const { totalProperties } = usePublicStats();
   const { data, isLoading } = useQuery({
     queryKey: ['directory'],
@@ -42,14 +37,17 @@ export default function DirectoryPage() {
     },
     staleTime: 60_000,
   });
+  const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
+
+  if (!isConnected) {
+    return <AuthWall title="Community Directory" description="Find your neighbors, view lot information, and connect with fellow residents." />;
+  }
 
   const BOARD_MEMBERS = data?.board || [];
   const COMMITTEES = (data?.committees || []).map((c: any) => ({
     ...c,
     members: (c.hoa_committee_members || []).map((m: any) => m.name),
   }));
-
-  const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
 
   // Build residents array for map view from board data + committees
   const mapResidents = [

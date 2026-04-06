@@ -76,11 +76,6 @@ export default function NoiseComplaintPage() {
     save(complaints.map(c => c.id === id ? { ...c, status, boardNote: note || c.boardNote } : c));
   };
 
-  const statusColor = (s: string) => {
-    if (s === 'received') return 'bg-[rgba(176,155,113,0.10)] text-[#B09B71] border-[rgba(176,155,113,0.20)]';
-    if (s === 'investigating') return 'bg-[rgba(90,122,154,0.10)] text-[var(--steel)] border-[rgba(90,122,154,0.20)]';
-    return 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]';
-  };
 
   if (!isConnected) return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
@@ -168,65 +163,80 @@ export default function NoiseComplaintPage() {
               <p className="text-lg font-medium mb-1">No complaints filed</p>
               <p className="text-sm text-[var(--text-muted)]">All quiet in the community!</p>
             </div>
-          ) : complaints.map(c => {
-            const [editNote, setEditNote] = useState('');
-            const [editing, setEditing] = useState(false);
-            return (
-              <div key={c.id} className="glass-card rounded-xl p-5">
-                <div className="flex items-start justify-between gap-3 flex-wrap mb-3">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs font-mono text-[var(--text-disabled)]">{c.id}</span>
-                      <span className={`text-xs px-2 py-0.5 rounded-full border ${statusColor(c.status)}`}>
-                        {c.status === 'received' ? ' Received' : c.status === 'investigating' ? ' Investigating' : ' Resolved'}
-                      </span>
-                      <span className="text-xs text-[var(--text-disabled)]">Severity: {''.repeat(c.severity)}{''.repeat(5-c.severity)}</span>
-                    </div>
-                    <p className="text-sm font-medium">{c.location}</p>
-                    <p className="text-xs text-[var(--text-disabled)]">{c.date} {c.time} · {c.duration} · {c.anonymous ? 'Anonymous' : c.submittedBy}</p>
-                  </div>
-                  {isBoard && (
-                    <div className="flex gap-2">
-                      {c.status !== 'investigating' && (
-                        <button onClick={() => updateStatus(c.id, 'investigating')}
-                          className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(90,122,154,0.25)] text-[var(--steel)] hover:bg-[rgba(90,122,154,0.10)] transition-colors">
-                          Investigate
-                        </button>
-                      )}
-                      {c.status !== 'resolved' && (
-                        <button onClick={() => updateStatus(c.id, 'resolved')}
-                          className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(42,93,79,0.25)] text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.10)] transition-colors">
-                          Resolve
-                        </button>
-                      )}
-                    </div>
-                  )}
-                </div>
-                <p className="text-sm text-[var(--text-muted)] mb-3">{c.description}</p>
-                {c.boardNote && (
-                  <div className="p-3 rounded-lg bg-[var(--steel)]/5 border border-[rgba(90,122,154,0.10)]">
-                    <p className="text-xs text-[var(--steel)] font-medium mb-0.5">Board Note:</p>
-                    <p className="text-xs text-[var(--text-muted)]">{c.boardNote}</p>
-                  </div>
-                )}
-                {isBoard && !editing && (
-                  <button onClick={() => { setEditNote(c.boardNote || ''); setEditing(true); }}
-                    className="text-xs text-[#B09B71] hover:underline mt-2">
-                    {c.boardNote ? 'Edit note' : '+ Add board note'}
-                  </button>
-                )}
-                {isBoard && editing && (
-                  <div className="mt-2 flex gap-2">
-                    <input value={editNote} onChange={e => setEditNote(e.target.value)}
-                      placeholder="Add a note..." className="flex-1 px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
-                    <button onClick={() => { updateStatus(c.id, c.status, editNote); setEditing(false); }}
-                      className="px-3 py-2 rounded-lg bg-[#B09B71] text-[var(--surface-2)] text-xs font-medium">Save</button>
-                    <button onClick={() => setEditing(false)} className="px-3 py-2 rounded-lg border border-[rgba(245,240,232,0.08)] text-xs">Cancel</button>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          ) : complaints.map(c => (
+            <ComplaintCard key={c.id} complaint={c} isBoard={isBoard} onUpdateStatus={updateStatus} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function statusColor(s: string) {
+  if (s === 'received') return 'bg-[rgba(176,155,113,0.10)] text-[#B09B71] border-[rgba(176,155,113,0.20)]';
+  if (s === 'investigating') return 'bg-[rgba(90,122,154,0.10)] text-[var(--steel)] border-[rgba(90,122,154,0.20)]';
+  return 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]';
+}
+
+function ComplaintCard({ complaint: c, isBoard, onUpdateStatus }: {
+  complaint: NoiseComplaint;
+  isBoard: boolean;
+  onUpdateStatus: (id: string, status: NoiseComplaint['status'], note?: string) => void;
+}) {
+  const [editNote, setEditNote] = useState('');
+  const [editing, setEditing] = useState(false);
+
+  return (
+    <div className="glass-card rounded-xl p-5">
+      <div className="flex items-start justify-between gap-3 flex-wrap mb-3">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-xs font-mono text-[var(--text-disabled)]">{c.id}</span>
+            <span className={`text-xs px-2 py-0.5 rounded-full border ${statusColor(c.status)}`}>
+              {c.status === 'received' ? ' Received' : c.status === 'investigating' ? ' Investigating' : ' Resolved'}
+            </span>
+            <span className="text-xs text-[var(--text-disabled)]">Severity: {''.repeat(c.severity)}{''.repeat(5-c.severity)}</span>
+          </div>
+          <p className="text-sm font-medium">{c.location}</p>
+          <p className="text-xs text-[var(--text-disabled)]">{c.date} {c.time} · {c.duration} · {c.anonymous ? 'Anonymous' : c.submittedBy}</p>
+        </div>
+        {isBoard && (
+          <div className="flex gap-2">
+            {c.status !== 'investigating' && (
+              <button onClick={() => onUpdateStatus(c.id, 'investigating')}
+                className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(90,122,154,0.25)] text-[var(--steel)] hover:bg-[rgba(90,122,154,0.10)] transition-colors">
+                Investigate
+              </button>
+            )}
+            {c.status !== 'resolved' && (
+              <button onClick={() => onUpdateStatus(c.id, 'resolved')}
+                className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(42,93,79,0.25)] text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.10)] transition-colors">
+                Resolve
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+      <p className="text-sm text-[var(--text-muted)] mb-3">{c.description}</p>
+      {c.boardNote && (
+        <div className="p-3 rounded-lg bg-[var(--steel)]/5 border border-[rgba(90,122,154,0.10)]">
+          <p className="text-xs text-[var(--steel)] font-medium mb-0.5">Board Note:</p>
+          <p className="text-xs text-[var(--text-muted)]">{c.boardNote}</p>
+        </div>
+      )}
+      {isBoard && !editing && (
+        <button onClick={() => { setEditNote(c.boardNote || ''); setEditing(true); }}
+          className="text-xs text-[#B09B71] hover:underline mt-2">
+          {c.boardNote ? 'Edit note' : '+ Add board note'}
+        </button>
+      )}
+      {isBoard && editing && (
+        <div className="mt-2 flex gap-2">
+          <input value={editNote} onChange={e => setEditNote(e.target.value)}
+            placeholder="Add a note..." className="flex-1 px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.80)] border border-[rgba(245,240,232,0.08)] text-xs focus:border-[rgba(176,155,113,0.50)] focus:outline-none" />
+          <button onClick={() => { onUpdateStatus(c.id, c.status, editNote); setEditing(false); }}
+            className="px-3 py-2 rounded-lg bg-[#B09B71] text-[var(--surface-2)] text-xs font-medium">Save</button>
+          <button onClick={() => setEditing(false)} className="px-3 py-2 rounded-lg border border-[rgba(245,240,232,0.08)] text-xs">Cancel</button>
         </div>
       )}
     </div>

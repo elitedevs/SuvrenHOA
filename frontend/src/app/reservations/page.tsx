@@ -66,11 +66,11 @@ export default function ReservationsPage() {
   const [selectedAmenity, setSelectedAmenity] = useState<string | null>(null);
   const [showReserve, setShowReserve] = useState(false);
 
+  const { data: reservations } = useReservations(selectedAmenity);
+
   if (!isConnected) {
     return <AuthWall title="Amenities & Reservations" description="Book community amenities — pool, clubhouse, tennis courts, and more." />;
   }
-
-  const { data: reservations } = useReservations(selectedAmenity);
   const selected = AMENITIES.find(a => a.id === selectedAmenity);
 
   return (

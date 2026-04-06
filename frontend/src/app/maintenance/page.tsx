@@ -29,13 +29,14 @@ export default function MaintenancePage() {
   const [filter, setFilter] = useState<string>('all');
   const [showNewRequest, setShowNewRequest] = useState(false);
 
+  const { data: apiRequests, isLoading } = useMaintenanceRequests(filter !== 'all' ? filter : null);
+  const [viewMode, setViewMode] = useState<'list' | 'kanban'>('kanban');
+
   if (!isConnected) {
     return <AuthWall title="Maintenance" description="Submit and track maintenance requests for community infrastructure and shared spaces." />;
   }
 
-  const { data: apiRequests, isLoading } = useMaintenanceRequests(filter !== 'all' ? filter : null);
   const allRequests = apiRequests || [];
-  const [viewMode, setViewMode] = useState<'list' | 'kanban'>('kanban');
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
