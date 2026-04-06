@@ -1,4 +1,5 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { coinbaseWallet } from '@rainbow-me/rainbowkit/wallets';
 import { base } from 'wagmi/chains';
 import { http } from 'wagmi';
 import { type Chain } from 'wagmi/chains';
@@ -25,5 +26,13 @@ export const config = getDefaultConfig({
     [baseSepolia.id]: http('https://base-sepolia-rpc.publicnode.com'),
     [base.id]: http('https://base-rpc.publicnode.com'),
   },
+  wallets: [
+    {
+      groupName: 'Recommended',
+      wallets: [
+        coinbaseWallet,
+      ],
+    },
+  ],
   ssr: true,
 });

@@ -23,6 +23,19 @@ export function useAuth() {
       .finally(() => setIsLoading(false));
   }, []);
 
+  // Auto-link: when a wallet connects for the first time, save it to the user's profile
+  useEffect(() => {
+    if (!walletAddress || !isAuthenticated) return;
+
+    fetch('/api/profile/link-wallet', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ wallet_address: walletAddress }),
+    }).catch(() => {
+      // Silent — linking is best-effort on connect
+    });
+  }, [walletAddress, isAuthenticated]);
+
   const authenticate = useCallback(async () => {
     if (!walletAddress) throw new Error('Wallet not connected');
 
