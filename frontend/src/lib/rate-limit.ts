@@ -1,6 +1,19 @@
 /**
  * Simple in-memory token-bucket rate limiter.
- * Replace with @upstash/ratelimit when Upstash is provisioned.
+ *
+ * FE-04 LIMITATION: This limiter is process-local.  Vercel serverless functions
+ * run in many parallel instances — each has its own `buckets` map.  An attacker
+ * making parallel requests to different instances gets the full quota per
+ * instance, effectively bypassing brute-force protection.
+ *
+ * TODO: Replace with a distributed rate limiter backed by Redis/Upstash KV:
+ *   import { Ratelimit } from '@upstash/ratelimit';
+ *   import { Redis } from '@upstash/redis';
+ *   const ratelimit = new Ratelimit({
+ *     redis: Redis.fromEnv(),
+ *     limiter: Ratelimit.slidingWindow(5, '1 m'),
+ *   });
+ * See https://github.com/upstash/ratelimit for setup instructions.
  */
 
 interface TokenBucket {

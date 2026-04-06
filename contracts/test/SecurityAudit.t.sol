@@ -217,6 +217,8 @@ contract SecurityAuditTest is Test {
     // disrupting the governance queue.
     // ─────────────────────────────────────────────────────────────────────────
 
+    // SC-02 FIX CONFIRMED: propose() now overridden to enforce maxActiveProposals.
+    // Direct propose() calls are subject to the same rate limit as proposeWithCategory().
     function test_SC02_GovernorProposalBypassesMaxActive() public {
         address[] memory targets  = new address[](1);
         uint256[] memory values   = new uint256[](1);
@@ -235,7 +237,10 @@ contract SecurityAuditTest is Test {
             );
         }
 
-        // Guarded path is now blocked
+        assertEq(governor.activeProposalCount(), maxActive,
+            "SC-02-FIX: counter incremented for every proposal via proposeWithCategory");
+
+        // proposeWithCategory is blocked
         vm.prank(alice);
         vm.expectRevert(abi.encodeWithSelector(
             FaircroftGovernor.TooManyActiveProposals.selector, maxActive
@@ -245,18 +250,16 @@ contract SecurityAuditTest is Test {
             FaircroftGovernor.ProposalCategory.Routine, ""
         );
 
-        // Unguarded propose() still accepts - bypass confirmed
+        // FIX: direct propose() is now ALSO blocked — bypass is closed
         vm.prank(alice);
-        uint256 bypassId = governor.propose(targets, values, calldata_, "Bypass");
-        assertEq(
-            uint8(governor.state(bypassId)),
-            uint8(IGovernor.ProposalState.Pending),
-            "SC-02: bypass proposal should be Pending"
-        );
+        vm.expectRevert(abi.encodeWithSelector(
+            FaircroftGovernor.TooManyActiveProposals.selector, maxActive
+        ));
+        governor.propose(targets, values, calldata_, "Bypass attempt - should revert");
 
-        // activeProposalCount was NOT incremented for the bypass proposal
+        // Counter unchanged
         assertEq(governor.activeProposalCount(), maxActive,
-            "SC-02: counter not incremented via direct propose() - bypass confirmed");
+            "SC-02-FIX: counter unchanged after failed bypass attempt");
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -269,21 +272,22 @@ contract SecurityAuditTest is Test {
     // proposal in Succeeded state.
     // ─────────────────────────────────────────────────────────────────────────
 
+    // SC-03 FIX CONFIRMED: propose() now increments activeProposalCount, and
+    // _executeOperations() has an underflow guard.  Execute no longer panics.
     function test_SC03_GovernorExecutionDoSViaCounterUnderflow() public {
-        // Precondition: no proposals exist yet (count = 0)
-        assertEq(governor.activeProposalCount(), 0, "SC-03: need count=0 to trigger underflow");
+        assertEq(governor.activeProposalCount(), 0, "SC-03: start from count=0");
 
         address[] memory targets  = new address[](1);
         uint256[] memory values   = new uint256[](1);
         bytes[]   memory calldata_ = new bytes[](1);
         targets[0]   = address(docRegistry);
         calldata_[0] = abi.encodeWithSelector(DocumentRegistry.getDocumentCount.selector);
-        string memory description = "Direct proposal - counter bypass DoS";
+        string memory description = "Direct proposal - should increment counter";
 
-        // Create without incrementing counter
+        // FIX: propose() increments the counter
         vm.prank(alice);
         uint256 pid = governor.propose(targets, values, calldata_, description);
-        assertEq(governor.activeProposalCount(), 0, "SC-03: count still 0 after direct propose()");
+        assertEq(governor.activeProposalCount(), 1, "SC-03-FIX: count incremented to 1");
 
         // Voting window
         vm.warp(block.timestamp + governor.votingDelay() + 1);
@@ -303,9 +307,10 @@ contract SecurityAuditTest is Test {
         governor.queue(targets, values, calldata_, descHash);
         vm.warp(block.timestamp + timelock.getMinDelay() + 1);
 
-        // Execute reverts: activeProposalCount-- underflows when count == 0
-        vm.expectRevert();
+        // FIX: execute succeeds — no underflow panic
         governor.execute(targets, values, calldata_, descHash);
+        assertEq(governor.activeProposalCount(), 0,
+            "SC-03-FIX: counter decremented to 0 after execution - no underflow");
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -421,6 +426,8 @@ contract SecurityAuditTest is Test {
     // The proposal passes with a single FOR vote from the entire community.
     // ─────────────────────────────────────────────────────────────────────────
 
+    // SC-07 FIX CONFIRMED: _voteSucceeded() now includes abstain in the denominator.
+    // A single FOR vote with abstain-padding no longer passes a Routine proposal.
     function test_SC07_AbstainQuorumSingleForVotePassesRoutine() public {
         address[] memory targets  = new address[](1);
         uint256[] memory values   = new uint256[](1);
@@ -430,13 +437,13 @@ contract SecurityAuditTest is Test {
 
         vm.prank(alice);
         uint256 pid = governor.proposeWithCategory(
-            targets, values, calldata_, "Abstain quorum exploit",
+            targets, values, calldata_, "Abstain quorum exploit attempt",
             FaircroftGovernor.ProposalCategory.Routine, ""
         );
 
         vm.warp(block.timestamp + governor.votingDelay() + 1);
 
-        // Alice votes FOR; Bob and Carol ABSTAIN
+        // Alice votes FOR; Bob and Carol ABSTAIN — quorum reached via abstains
         vm.prank(alice); governor.castVote(pid, 1); // FOR
         vm.prank(bob);   governor.castVote(pid, 2); // ABSTAIN
         vm.prank(carol); governor.castVote(pid, 2); // ABSTAIN
@@ -447,13 +454,15 @@ contract SecurityAuditTest is Test {
         uint256 quorumNeeded = governor.proposalQuorum(pid);
         uint256 totalVotes   = forVotes + against + abstain;
 
-        assertGe(totalVotes, quorumNeeded, "SC-07: quorum must be reached via abstains");
+        assertGe(totalVotes, quorumNeeded, "SC-07: quorum still reached via abstains");
         assertEq(forVotes, 1, "SC-07: only 1 FOR vote cast");
         assertEq(against,  0, "SC-07: no AGAINST votes");
+
+        // FIX: proposal is now DEFEATED — 1 FOR out of 3 total votes = 33% < 50% threshold
         assertEq(
             uint8(governor.state(pid)),
-            uint8(IGovernor.ProposalState.Succeeded),
-            "SC-07: 1 FOR + 2 ABSTAIN passes Routine proposal - minimal vote control"
+            uint8(IGovernor.ProposalState.Defeated),
+            "SC-07-FIX: 1 FOR + 2 ABSTAIN fails threshold when abstain counted in denominator"
         );
     }
 
@@ -580,16 +589,10 @@ contract SecurityAuditTest is Test {
     // and release all escrowed USDC to themselves without any independent review.
     // ─────────────────────────────────────────────────────────────────────────
 
+    // SC-11 FIX CONFIRMED: createWorkOrder() now rejects inspector == vendor.
     function test_SC11_VendorAsOwnInspectorSelfApprovesMilestones() public {
         uint256 milestoneAmt = 10_000e6;
 
-        // Fund escrow contract directly (bypasses treasury approval requirement)
-        usdc.mint(address(escrow), milestoneAmt);
-
-        // The board creates a work order.  Because there is NO inspector != vendor
-        // check, vendor is both recipient and approver.
-        // We demonstrate this by mocking the treasury pull: grant escrow as spender.
-        // First, mint USDC to treasury so the safeTransferFrom can succeed.
         usdc.mint(address(treasury), milestoneAmt);
         vm.prank(address(treasury));
         usdc.approve(address(escrow), milestoneAmt);
@@ -600,24 +603,16 @@ contract SecurityAuditTest is Test {
             amount: milestoneAmt
         });
 
-        // Board creates the work order with vendor == inspector
+        // FIX: board attempt to create work order with vendor == inspector now reverts
         vm.prank(boardMultisig);
-        uint256 wid = escrow.createWorkOrder(
-            vendor,       // vendor receives payment
+        vm.expectRevert(VendorEscrow.InspectorCannotBeVendor.selector);
+        escrow.createWorkOrder(
+            vendor,
             "Pool Work",
             "Resurface community pool",
             milestones,
-            vendor        // ← vendor is also the inspector: no revert
+            vendor   // ← inspector == vendor: must revert
         );
-
-        // Vendor self-approves milestone and receives funds
-        uint256 vendorBalBefore = usdc.balanceOf(vendor);
-        vm.prank(vendor);
-        escrow.approveMilestone(wid, 0);
-        uint256 vendorBalAfter = usdc.balanceOf(vendor);
-
-        assertEq(vendorBalAfter, vendorBalBefore + milestoneAmt,
-            "SC-11: vendor self-approved milestone and received full payment");
     }
 
     // ─────────────────────────────────────────────────────────────────────────

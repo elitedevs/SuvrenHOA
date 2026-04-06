@@ -257,7 +257,10 @@ contract DuesLending is AccessControl, ReentrancyGuard {
      */
     function makePayment(uint256 loanId, uint256 amount) external nonReentrant {
         Loan storage loan = loans[loanId];
-        if (loan.status != LoanStatus.Active && loan.status != LoanStatus.Defaulting) revert LoanNotActive();
+        // SC-04 fix: accept Restructured status — governance restructure must not freeze repayment
+        if (loan.status != LoanStatus.Active &&
+            loan.status != LoanStatus.Defaulting &&
+            loan.status != LoanStatus.Restructured) revert LoanNotActive();
 
         uint256 remaining = loan.totalOwed - loan.totalPaid;
         if (amount > remaining) amount = remaining; // Don't overpay past total
@@ -281,8 +284,8 @@ contract DuesLending is AccessControl, ReentrancyGuard {
         // Advance next due date
         loan.nextDueDate = uint48(block.timestamp + installmentPeriod);
 
-        // If defaulting, return to active on payment
-        if (loan.status == LoanStatus.Defaulting) {
+        // If defaulting or restructured, return to active on payment
+        if (loan.status == LoanStatus.Defaulting || loan.status == LoanStatus.Restructured) {
             loan.status = LoanStatus.Active;
         }
 
@@ -301,7 +304,10 @@ contract DuesLending is AccessControl, ReentrancyGuard {
      */
     function payOffLoan(uint256 loanId) external nonReentrant {
         Loan storage loan = loans[loanId];
-        if (loan.status != LoanStatus.Active && loan.status != LoanStatus.Defaulting) revert LoanNotActive();
+        // SC-04 fix: accept Restructured status — governance restructure must not freeze repayment
+        if (loan.status != LoanStatus.Active &&
+            loan.status != LoanStatus.Defaulting &&
+            loan.status != LoanStatus.Restructured) revert LoanNotActive();
 
         uint256 remaining = loan.totalOwed - loan.totalPaid;
 

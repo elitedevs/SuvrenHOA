@@ -15,8 +15,11 @@ export function escapeHtml(str: string): string {
  * Strips dangerous tags/attributes (scripts, event handlers, etc.).
  */
 export function sanitizeHtml(dirty: string): string {
+  // FE-06: 'style' attribute removed — inline styles can be abused for CSS-based
+  // data exfiltration, phishing overlays, or expression() injection (legacy IE).
+  // Use CSS classes for all styling instead.
   return DOMPurify.sanitize(dirty, {
     ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'span', 'br', 'p', 'div'],
-    ALLOWED_ATTR: ['style', 'class'],
+    ALLOWED_ATTR: ['class'],
   });
 }

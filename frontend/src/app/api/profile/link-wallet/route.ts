@@ -21,7 +21,10 @@ export const POST = withAuth(async (request, { address }) => {
     return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
   }
 
-  const walletAddress = normalizeAddress(parsed.data.wallet_address || address);
+  // FE-05: always use the authenticated wallet — ignore any wallet_address in the
+  // request body.  Accepting a caller-supplied address allows linking an arbitrary
+  // wallet (e.g. a board member's address) to the requester's profile.
+  const walletAddress = normalizeAddress(address);
 
   const { data: existing } = await supabaseAdmin
     .from('hoa_profiles')

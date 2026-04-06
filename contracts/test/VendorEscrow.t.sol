@@ -6,6 +6,26 @@ import "../src/VendorEscrow.sol";
 import "./helpers/MockUSDC.sol";
 import "@openzeppelin/contracts/access/IAccessControl.sol";
 
+// ── SC-05 fix: MockTreasury supports creditFromEscrow for proper accounting ──────
+
+contract MockTreasury {
+    MockUSDC public immutable usdc;
+
+    constructor(MockUSDC _usdc) {
+        usdc = _usdc;
+    }
+
+    /// @dev Pre-authorise the escrow contract to pull USDC for work order creation
+    function approveEscrow(address escrow_, uint256 amount) external {
+        usdc.approve(escrow_, amount);
+    }
+
+    /// @dev Accept USDC refund from VendorEscrow (no role check needed in mock)
+    function creditFromEscrow(uint256 amount) external {
+        usdc.transferFrom(msg.sender, address(this), amount);
+    }
+}
+
 /**
  * @title VendorEscrowTest
  * @notice Comprehensive test suite for VendorEscrow.sol
@@ -24,15 +44,16 @@ contract VendorEscrowTest is Test {
 
     // ── Contracts ────────────────────────────────────────────────────────────
 
-    VendorEscrow public escrow;
-    MockUSDC     public usdc;
+    VendorEscrow  public escrow;
+    MockUSDC      public usdc;
+    MockTreasury  public mockTreasury;
 
     // ── Actors ───────────────────────────────────────────────────────────────
 
     address public deployer   = address(this);
     address public board      = address(0xB0A2D);
     address public governor   = address(0x60718);
-    address public treasury   = address(0x7EA5);
+    address public treasury;  // set in setUp() to point to MockTreasury
     address public vendor     = address(0xC04C);
     address public inspector  = address(0x1115);
     address public stranger   = address(0xBAD);
@@ -48,13 +69,15 @@ contract VendorEscrowTest is Test {
     // ── Setup ────────────────────────────────────────────────────────────────
 
     function setUp() public {
-        usdc   = new MockUSDC();
+        usdc         = new MockUSDC();
+        mockTreasury = new MockTreasury(usdc);
+        treasury     = address(mockTreasury);
+
         escrow = new VendorEscrow(address(usdc), treasury, board, governor);
 
         // Seed treasury with USDC and have it approve the escrow contract
         usdc.mint(treasury, 100_000e6);
-        vm.prank(treasury);
-        usdc.approve(address(escrow), type(uint256).max);
+        mockTreasury.approveEscrow(address(escrow), type(uint256).max);
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────────
@@ -931,5 +954,121 @@ contract VendorEscrowTest is Test {
         // Complete order 1
         vm.prank(inspector); escrow.approveMilestone(id1, 0);
         assertEq(uint8(escrow.getWorkOrder(id1).status), uint8(VendorEscrow.WorkOrderStatus.Completed));
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // GAP TESTS: Insufficient treasury funds, zero-milestone edge cases,
+    //            partial milestone ordering, single-milestone work order
+    // ════════════════════════════════════════════════════════════════════════
+
+    function test_CreateWorkOrder_RevertInsufficientTreasuryBalance() public {
+        // Treasury has only 100 USDC but work order needs 1000 USDC
+        address poorTreasury = address(0xDEADBEEF);
+        usdc.mint(poorTreasury, 100e6);
+        vm.prank(poorTreasury);
+        usdc.approve(address(escrow), type(uint256).max);
+
+        VendorEscrow escrow2 = new VendorEscrow(address(usdc), poorTreasury, board, governor);
+
+        vm.prank(board);
+        vm.expectRevert(); // ERC20 transfer will fail
+        escrow2.createWorkOrder(vendor, "Big job", "desc", _threeMs(), inspector);
+    }
+
+    function test_CreateWorkOrder_RevertNoTreasuryApproval() public {
+        // Treasury has funds but has not approved the escrow contract
+        address stingyTreasury = address(0xBADCAFE);
+        usdc.mint(stingyTreasury, 100_000e6);
+        // No approval given
+
+        VendorEscrow escrow3 = new VendorEscrow(address(usdc), stingyTreasury, board, governor);
+
+        vm.prank(board);
+        vm.expectRevert(); // safeTransferFrom will revert without allowance
+        escrow3.createWorkOrder(vendor, "No allowance", "desc", _threeMs(), inspector);
+    }
+
+    function test_SingleMilestone_CreatesAndCompletes() public {
+        VendorEscrow.MilestoneInput[] memory ms = new VendorEscrow.MilestoneInput[](1);
+        ms[0] = VendorEscrow.MilestoneInput("Full payment", 1000e6);
+
+        vm.prank(board);
+        uint256 id = escrow.createWorkOrder(vendor, "Single milestone", "desc", ms, inspector);
+
+        vm.prank(inspector);
+        escrow.approveMilestone(id, 0);
+
+        VendorEscrow.WorkOrder memory wo = escrow.getWorkOrder(id);
+        assertEq(uint8(wo.status), uint8(VendorEscrow.WorkOrderStatus.Completed));
+        assertEq(usdc.balanceOf(vendor), 1000e6);
+    }
+
+    function test_ApproveMilestones_OutOfOrder() public {
+        uint256 id = _createOrder();
+
+        // Approve milestone 2 first (no ordering enforced by contract)
+        vm.prank(inspector); escrow.approveMilestone(id, 2);
+        vm.prank(inspector); escrow.approveMilestone(id, 0);
+        vm.prank(inspector); escrow.approveMilestone(id, 1);
+
+        assertEq(uint8(escrow.getWorkOrder(id).status), uint8(VendorEscrow.WorkOrderStatus.Completed));
+        assertEq(usdc.balanceOf(vendor), TOTAL);
+    }
+
+    function test_DisputeAllMilestones_ThenResolveRelease() public {
+        uint256 id = _createOrder();
+
+        // Dispute all 3 milestones
+        for (uint256 i = 0; i < 3; i++) {
+            vm.prank(board);
+            escrow.disputeMilestone(id, i, "Board disputes all");
+        }
+        assertEq(uint8(escrow.getWorkOrder(id).status), uint8(VendorEscrow.WorkOrderStatus.Disputed));
+
+        // Governance resolves all in vendor's favour
+        for (uint256 i = 0; i < 3; i++) {
+            vm.prank(governor);
+            escrow.resolveDispute(id, i, true); // release to vendor
+        }
+
+        assertEq(uint8(escrow.getWorkOrder(id).status), uint8(VendorEscrow.WorkOrderStatus.Completed));
+        assertEq(usdc.balanceOf(vendor), TOTAL);
+    }
+
+    function test_DisputeAllMilestones_ThenResolveReturn() public {
+        uint256 id = _createOrder();
+
+        for (uint256 i = 0; i < 3; i++) {
+            vm.prank(board);
+            escrow.disputeMilestone(id, i, "Rejected");
+        }
+
+        uint256 treasuryBefore = usdc.balanceOf(treasury);
+        for (uint256 i = 0; i < 3; i++) {
+            vm.prank(governor);
+            escrow.resolveDispute(id, i, false); // return to treasury
+        }
+
+        assertEq(usdc.balanceOf(treasury),         treasuryBefore + TOTAL);
+        assertEq(usdc.balanceOf(address(escrow)),  0);
+        assertEq(uint8(escrow.getWorkOrder(id).status), uint8(VendorEscrow.WorkOrderStatus.Completed));
+    }
+
+    /// @notice Fuzz: any non-zero milestone amounts should sum correctly and escrow exactly that.
+    function testFuzz_CreateWorkOrder_MilestoneAmounts(uint64 a1, uint64 a2, uint64 a3) public {
+        vm.assume(a1 > 0 && a2 > 0 && a3 > 0);
+        vm.assume(uint256(a1) + a2 + a3 <= usdc.balanceOf(treasury)); // treasury can fund it
+
+        VendorEscrow.MilestoneInput[] memory ms = new VendorEscrow.MilestoneInput[](3);
+        ms[0] = VendorEscrow.MilestoneInput("M1", a1);
+        ms[1] = VendorEscrow.MilestoneInput("M2", a2);
+        ms[2] = VendorEscrow.MilestoneInput("M3", a3);
+
+        vm.prank(board);
+        uint256 id = escrow.createWorkOrder(vendor, "Fuzz order", "desc", ms, inspector);
+
+        uint256 total = uint256(a1) + a2 + a3;
+        assertEq(escrow.getWorkOrder(id).totalAmount, total);
+        assertEq(usdc.balanceOf(address(escrow)),     total);
     }
 }

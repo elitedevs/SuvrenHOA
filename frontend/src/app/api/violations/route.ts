@@ -99,10 +99,24 @@ export const POST = withAuth(async (request, { address }) => {
   return NextResponse.json(data, { status: 201 });
 });
 
-// PATCH — Authenticated (board action)
+// PATCH — Board members only (FE-02: verify board membership before allowing status changes)
 export const PATCH = withAuth(async (request, { address }) => {
   const limited = applyRateLimit(request, 'violations:patch', RATE_LIMITS.write);
   if (limited) return limited;
+
+  // FE-02: only active board members may update violations — any authenticated
+  // homeowner could otherwise dismiss their own violation or erase their fine.
+  const { data: boardMember } = await supabaseAdmin
+    .from('hoa_board_members')
+    .select('id')
+    .eq('active', true)
+    .ilike('wallet_address', address)
+    .limit(1)
+    .single();
+
+  if (!boardMember) {
+    return NextResponse.json({ error: 'Board access required' }, { status: 403 });
+  }
 
   const body = await request.json();
   const parsed = violationPatchSchema.safeParse(body);
