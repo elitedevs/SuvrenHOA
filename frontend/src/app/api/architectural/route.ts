@@ -1,16 +1,22 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { supabaseAnon } from '@/lib/supabase-anon';
 import { withAuth } from '@/lib/apiAuth';
+import { architecturalCreateSchema, architecturalPatchSchema } from '@/lib/validation';
+import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // GET — Public
 export async function GET(request: Request) {
+  const limited = applyRateLimit(request, 'architectural:get', RATE_LIMITS.read);
+  if (limited) return limited;
+
   const url = new URL(request.url);
   const status = url.searchParams.get('status');
   const lot = url.searchParams.get('lot');
 
-  let query = supabaseAdmin
+  let query = supabaseAnon
     .from('hoa_architectural_requests')
     .select('*, hoa_architectural_comments(*)')
     .order('created_at', { ascending: false })
@@ -24,14 +30,18 @@ export async function GET(request: Request) {
   return NextResponse.json(data || []);
 }
 
-// POST — Authenticated, uses session address
+// POST — Authenticated
 export const POST = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { lot_number, title, description, modification_type, estimated_cost, contractor_name, start_date, completion_date } = body;
+  const limited = applyRateLimit(request, 'architectural:post', RATE_LIMITS.write);
+  if (limited) return limited;
 
-  if (!lot_number || !title || !description || !modification_type) {
-    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  const body = await request.json();
+  const parsed = architecturalCreateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
   }
+
+  const { lot_number, title, description, modification_type, estimated_cost, contractor_name, start_date, completion_date } = parsed.data;
 
   const year = new Date().getFullYear();
   const { count } = await supabaseAdmin
@@ -55,10 +65,16 @@ export const POST = withAuth(async (request, { address }) => {
 
 // PATCH — Authenticated (board review)
 export const PATCH = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { id, status, reviewer_notes, conditions } = body;
+  const limited = applyRateLimit(request, 'architectural:patch', RATE_LIMITS.write);
+  if (limited) return limited;
 
-  if (!id || !status) return NextResponse.json({ error: 'id and status required' }, { status: 400 });
+  const body = await request.json();
+  const parsed = architecturalPatchSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
+  }
+
+  const { id, status, reviewer_notes, conditions } = parsed.data;
 
   const { error } = await supabaseAdmin
     .from('hoa_architectural_requests')

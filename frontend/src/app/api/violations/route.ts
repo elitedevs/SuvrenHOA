@@ -1,16 +1,22 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { supabaseAnon } from '@/lib/supabase-anon';
 import { withAuth } from '@/lib/apiAuth';
+import { violationCreateSchema, violationPatchSchema } from '@/lib/validation';
+import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // GET — Public
 export async function GET(request: Request) {
+  const limited = applyRateLimit(request, 'violations:get', RATE_LIMITS.read);
+  if (limited) return limited;
+
   const url = new URL(request.url);
   const status = url.searchParams.get('status');
   const lot = url.searchParams.get('lot');
 
-  let query = supabaseAdmin
+  let query = supabaseAnon
     .from('hoa_violations')
     .select('*, hoa_violation_updates(*)')
     .order('created_at', { ascending: false })
@@ -25,12 +31,34 @@ export async function GET(request: Request) {
 }
 
 // POST — Authenticated (report violation)
+// Strict rate limit + spam detection for anonymous reporting abuse
 export const POST = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { reported_by_lot, accused_lot, category, title, description, location, ccr_section, anonymous_report } = body;
+  const limited = applyRateLimit(request, 'violations:post', RATE_LIMITS.strict);
+  if (limited) return limited;
 
-  if (!accused_lot || !title || !description || !category) {
-    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  const body = await request.json();
+  const parsed = violationCreateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
+  }
+
+  const { reported_by_lot, accused_lot, category, title, description, location, ccr_section, anonymous_report } = parsed.data;
+
+  // Spam detection: check for duplicate submissions from same user in last hour
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+  const { data: recent } = await supabaseAdmin
+    .from('hoa_violations')
+    .select('description')
+    .eq('reported_by', anonymous_report ? 'anonymous' : address)
+    .gte('created_at', oneHourAgo);
+
+  if (recent && recent.length >= 3) {
+    return NextResponse.json({ error: 'Too many violation reports. Please wait before submitting more.' }, { status: 429 });
+  }
+
+  // Reject if description is identical to a recent submission
+  if (recent?.some((r) => r.description === description)) {
+    return NextResponse.json({ error: 'Duplicate report detected' }, { status: 409 });
   }
 
   const year = new Date().getFullYear();
@@ -73,12 +101,16 @@ export const POST = withAuth(async (request, { address }) => {
 
 // PATCH — Authenticated (board action)
 export const PATCH = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { id, status, notes, fine_amount, cure_days, hearing_date } = body;
+  const limited = applyRateLimit(request, 'violations:patch', RATE_LIMITS.write);
+  if (limited) return limited;
 
-  if (!id || !status) {
-    return NextResponse.json({ error: 'id and status required' }, { status: 400 });
+  const body = await request.json();
+  const parsed = violationPatchSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
   }
+
+  const { id, status, notes, fine_amount, cure_days, hearing_date } = parsed.data;
 
   const { data: current } = await supabaseAdmin
     .from('hoa_violations')

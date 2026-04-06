@@ -1,12 +1,18 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { supabaseAnon } from '@/lib/supabase-anon';
 import { withAuth } from '@/lib/apiAuth';
+import { surveyCreateSchema, surveyVoteSchema } from '@/lib/validation';
+import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // GET — Public
-export async function GET() {
-  const { data, error } = await supabaseAdmin
+export async function GET(request: Request) {
+  const limited = applyRateLimit(request, 'surveys:get', RATE_LIMITS.read);
+  if (limited) return limited;
+
+  const { data, error } = await supabaseAnon
     .from('hoa_surveys')
     .select('*, hoa_survey_options(*), hoa_survey_responses(*)')
     .order('created_at', { ascending: false })
@@ -16,14 +22,18 @@ export async function GET() {
   return NextResponse.json(data || []);
 }
 
-// POST — Authenticated
+// POST — Authenticated (create survey)
 export const POST = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { title, description, anonymous, closes_in_days, options } = body;
+  const limited = applyRateLimit(request, 'surveys:post', RATE_LIMITS.write);
+  if (limited) return limited;
 
-  if (!title || !options || options.length < 2) {
-    return NextResponse.json({ error: 'Title and at least 2 options required' }, { status: 400 });
+  const body = await request.json();
+  const parsed = surveyCreateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
   }
+
+  const { title, description, anonymous, closes_in_days, options } = parsed.data;
 
   const closes_at = new Date();
   closes_at.setDate(closes_at.getDate() + (closes_in_days || 7));
@@ -58,14 +68,20 @@ export const POST = withAuth(async (request, { address }) => {
 });
 
 // PATCH — Authenticated (vote)
+// Uses session-verified address for deduplication — not user-supplied wallet
 export const PATCH = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { survey_id, option_id } = body;
+  const limited = applyRateLimit(request, 'surveys:patch', RATE_LIMITS.write);
+  if (limited) return limited;
 
-  if (!survey_id || !option_id) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+  const body = await request.json();
+  const parsed = surveyVoteSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
   }
 
+  const { survey_id, option_id } = parsed.data;
+
+  // Dedup using session-verified address (not user-supplied)
   const { data: existing } = await supabaseAdmin
     .from('hoa_survey_responses')
     .select('id')

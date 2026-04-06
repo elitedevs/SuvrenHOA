@@ -1,17 +1,21 @@
 import { NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase';
+import { supabaseAnon } from '@/lib/supabase-anon';
+import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // GET — Public
-export async function GET() {
+export async function GET(request: Request) {
+  const limited = applyRateLimit(request, 'directory:get', RATE_LIMITS.read);
+  if (limited) return limited;
+
   const [boardRes, committeesRes] = await Promise.all([
-    supabaseAdmin
+    supabaseAnon
       .from('hoa_board_members')
       .select('*')
       .eq('active', true)
       .order('sort_order', { ascending: true }),
-    supabaseAdmin
+    supabaseAnon
       .from('hoa_committees')
       .select('*, hoa_committee_members(*)')
       .eq('active', true),

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getAuthenticatedAddress } from '@/lib/auth';
+import { normalizeAddress } from '@/lib/address';
 
 type AuthenticatedHandler = (
   request: Request,
@@ -12,6 +13,6 @@ export function withAuth(handler: AuthenticatedHandler) {
     if (!address) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
-    return handler(request, { address });
+    return handler(request, { address: normalizeAddress(address) });
   };
 }

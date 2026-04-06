@@ -1,11 +1,17 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 import { withAuth } from '@/lib/apiAuth';
+import { notificationCreateSchema, notificationPatchSchema } from '@/lib/validation';
+import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
+import { normalizeAddress } from '@/lib/address';
 
 export const dynamic = 'force-dynamic';
 
 // GET — Authenticated (user-specific)
 export const GET = withAuth(async (request, { address }) => {
+  const limited = applyRateLimit(request, 'notifications:get', RATE_LIMITS.read);
+  if (limited) return limited;
+
   const { data, error } = await supabaseAdmin
     .from('hoa_notifications')
     .select('*')
@@ -19,10 +25,16 @@ export const GET = withAuth(async (request, { address }) => {
 
 // PATCH — Authenticated
 export const PATCH = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { id } = body;
+  const limited = applyRateLimit(request, 'notifications:patch', RATE_LIMITS.write);
+  if (limited) return limited;
 
-  if (!id) return NextResponse.json({ error: 'id required' }, { status: 400 });
+  const body = await request.json();
+  const parsed = notificationPatchSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
+  }
+
+  const { id } = parsed.data;
 
   const { error } = await supabaseAdmin
     .from('hoa_notifications')
@@ -36,16 +48,20 @@ export const PATCH = withAuth(async (request, { address }) => {
 
 // POST — Authenticated (create notification)
 export const POST = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { wallet_address, type, title, message, link } = body;
+  const limited = applyRateLimit(request, 'notifications:post', RATE_LIMITS.write);
+  if (limited) return limited;
 
-  if (!wallet_address || !title) {
-    return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+  const body = await request.json();
+  const parsed = notificationCreateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
   }
+
+  const { wallet_address, type, title, message, link } = parsed.data;
 
   const { data, error } = await supabaseAdmin
     .from('hoa_notifications')
-    .insert({ wallet_address: wallet_address.toLowerCase(), type: type || 'info', title, message: message || '', link })
+    .insert({ wallet_address: normalizeAddress(wallet_address), type: type || 'info', title, message: message || '', link })
     .select()
     .single();
 

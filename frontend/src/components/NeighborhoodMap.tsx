@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import type { LotData } from '@/hooks/useNeighborhoodMap';
 import type { Incident } from '@/hooks/useIncidents';
 import { geocodeAddress, NEIGHBORHOOD_CENTER, DEFAULT_ZOOM } from '@/utils/geocoding';
+import { escapeHtml } from '@/lib/sanitize';
 
 // ─────────────────────────────────────────
 // Types
@@ -161,7 +162,7 @@ function buildLotPopupHTML(lot: LotData, isBoard: boolean): string {
   const ownerRow = isBoard
     ? `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.07);">
         <div style="font-size:10px;color:rgba(245,240,232,0.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px;">Owner</div>
-        <div style="font-family:monospace;font-size:11px;color:rgba(245,240,232,0.45);word-break:break-all;">${lot.owner}</div>
+        <div style="font-family:monospace;font-size:11px;color:rgba(245,240,232,0.45);word-break:break-all;">${escapeHtml(lot.owner)}</div>
        </div>`
     : `<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.07);">
         <div style="font-size:11px;color:rgba(245,240,232,0.30);font-style:italic;"> Owner visible to board only</div>
@@ -172,11 +173,11 @@ function buildLotPopupHTML(lot: LotData, isBoard: boolean): string {
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;">
         <div>
           <div style="font-size:10px;color:rgba(245,240,232,0.35);text-transform:uppercase;letter-spacing:.08em;">Lot</div>
-          <div style="font-size:20px;font-weight:700;background:linear-gradient(135deg,#B09B71,#D4C4A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">#${lot.lotNumber}</div>
+          <div style="font-size:20px;font-weight:700;background:linear-gradient(135deg,#B09B71,#D4C4A0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">#${escapeHtml(String(lot.lotNumber))}</div>
         </div>
-        <div style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${color};white-space:nowrap;margin-top:2px;">${status}</div>
+        <div style="padding:3px 8px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${color};white-space:nowrap;margin-top:2px;">${escapeHtml(status)}</div>
       </div>
-      <div style="font-size:12px;color:rgba(245,240,232,0.75);font-weight:500;margin-bottom:4px;">${lot.streetAddress}</div>
+      <div style="font-size:12px;color:rgba(245,240,232,0.75);font-weight:500;margin-bottom:4px;">${escapeHtml(lot.streetAddress)}</div>
       ${lot.sqft > 0 ? `<div style="font-size:11px;color:rgba(245,240,232,0.35);">${lot.sqft.toLocaleString()} sq ft</div>` : ''}
       ${ownerRow}
     </div>
@@ -205,15 +206,15 @@ function buildIncidentPopupHTML(incident: Incident): string {
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
         <span style="font-size:16px;">${icon}</span>
         <div style="flex:1;min-width:0;">
-          <div style="font-size:10px;color:rgba(245,240,232,0.35);text-transform:uppercase;letter-spacing:.08em;">${label}</div>
-          <div style="font-size:13px;font-weight:700;color:#F5F0E8;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${incident.title}</div>
+          <div style="font-size:10px;color:rgba(245,240,232,0.35);text-transform:uppercase;letter-spacing:.08em;">${escapeHtml(label)}</div>
+          <div style="font-size:13px;font-weight:700;color:#F5F0E8;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(incident.title)}</div>
         </div>
         <div style="padding:2px 7px;border-radius:999px;font-size:10px;font-weight:600;background:${statusBg};border:1px solid ${statusBorder};color:${statusColor};white-space:nowrap;flex-shrink:0;">${statusText}</div>
       </div>
-      <div style="font-size:11px;color:rgba(245,240,232,0.45);margin-bottom:6px;">${truncated}</div>
+      <div style="font-size:11px;color:rgba(245,240,232,0.45);margin-bottom:6px;">${escapeHtml(truncated)}</div>
       <div style="display:flex;align-items:center;gap:8px;font-size:10px;color:rgba(245,240,232,0.35);">
-        <span> ${incident.location}</span>
-        <span style="margin-left:auto;">${incident.date}</span>
+        <span> ${escapeHtml(incident.location)}</span>
+        <span style="margin-left:auto;">${escapeHtml(incident.date)}</span>
       </div>
       <div style="margin-top:8px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.06);">
         <div style="width:100%;height:2px;border-radius:1px;background:linear-gradient(90deg,${color}60,transparent);"></div>

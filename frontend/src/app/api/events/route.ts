@@ -1,12 +1,18 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { supabaseAnon } from '@/lib/supabase-anon';
 import { withAuth } from '@/lib/apiAuth';
+import { eventCreateSchema, eventRsvpSchema } from '@/lib/validation';
+import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // GET — Public
-export async function GET() {
-  const { data, error } = await supabaseAdmin
+export async function GET(request: Request) {
+  const limited = applyRateLimit(request, 'events:get', RATE_LIMITS.read);
+  if (limited) return limited;
+
+  const { data, error } = await supabaseAnon
     .from('hoa_events')
     .select('*, hoa_event_rsvps(*)')
     .gte('start_time', new Date(Date.now() - 7 * 86400000).toISOString())
@@ -19,12 +25,16 @@ export async function GET() {
 
 // POST — Authenticated
 export const POST = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { title, description, location, event_type, start_time, end_time, all_day, max_attendees, rsvp_required } = body;
+  const limited = applyRateLimit(request, 'events:post', RATE_LIMITS.write);
+  if (limited) return limited;
 
-  if (!title || !start_time) {
-    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  const body = await request.json();
+  const parsed = eventCreateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
   }
+
+  const { title, description, location, event_type, start_time, end_time, all_day, max_attendees, rsvp_required } = parsed.data;
 
   const { data, error } = await supabaseAdmin
     .from('hoa_events')
@@ -35,12 +45,18 @@ export const POST = withAuth(async (request, { address }) => {
   return NextResponse.json(data, { status: 201 });
 });
 
-// PATCH — Authenticated (RSVP), uses session address
+// PATCH — Authenticated (RSVP)
 export const PATCH = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { event_id, status } = body;
+  const limited = applyRateLimit(request, 'events:patch', RATE_LIMITS.write);
+  if (limited) return limited;
 
-  if (!event_id) return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+  const body = await request.json();
+  const parsed = eventRsvpSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
+  }
+
+  const { event_id, status } = parsed.data;
 
   const { data, error } = await supabaseAdmin
     .from('hoa_event_rsvps')

@@ -1,15 +1,21 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
+import { supabaseAnon } from '@/lib/supabase-anon';
 import { withAuth } from '@/lib/apiAuth';
+import { maintenanceCreateSchema } from '@/lib/validation';
+import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 // GET — Public
 export async function GET(request: Request) {
+  const limited = applyRateLimit(request, 'maintenance:get', RATE_LIMITS.read);
+  if (limited) return limited;
+
   const url = new URL(request.url);
   const status = url.searchParams.get('status');
 
-  let query = supabaseAdmin
+  let query = supabaseAnon
     .from('hoa_maintenance_requests')
     .select('*, hoa_maintenance_updates(*)')
     .order('created_at', { ascending: false })
@@ -26,12 +32,16 @@ export async function GET(request: Request) {
 
 // POST — Authenticated
 export const POST = withAuth(async (request, { address }) => {
-  const body = await request.json();
-  const { lot_number, title, description, category, location, priority } = body;
+  const limited = applyRateLimit(request, 'maintenance:post', RATE_LIMITS.write);
+  if (limited) return limited;
 
-  if (!title || !description || !location) {
-    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  const body = await request.json();
+  const parsed = maintenanceCreateSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error.issues[0].message }, { status: 400 });
   }
+
+  const { lot_number, title, description, category, location, priority } = parsed.data;
 
   const year = new Date().getFullYear();
   const { count } = await supabaseAdmin

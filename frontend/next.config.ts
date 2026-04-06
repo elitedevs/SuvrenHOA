@@ -5,6 +5,15 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/api/(.*)',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, POST, PATCH, DELETE, OPTIONS' },
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type, Authorization' },
+          { key: 'Access-Control-Max-Age', value: '86400' },
+        ],
+      },
+      {
         source: '/(.*)',
         headers: [
           {
