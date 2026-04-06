@@ -3,6 +3,7 @@ import { AuthWall } from '@/components/AuthWall';
 
 import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
+import { useIsBoard } from '@/hooks/useIsBoard';
 import { useTreasury } from '@/hooks/useTreasury';
 import { useMaintenanceRequests } from '@/hooks/useMaintenance';
 import { useGovernorSettings } from '@/hooks/useProposals';
@@ -13,20 +14,8 @@ import {
   ArrowRight, Clock, CheckCircle2
 } from 'lucide-react';
 
-// Check if board member — in real app would use contract role check
-// For demo, use localStorage flag
 function useBoardMember() {
-  const { address } = useAccount();
-  const [isBoard, setIsBoard] = useState(false);
-  const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    if (!address) { setChecked(true); return; }
-    // Check localStorage flag (set by admin page)
-    const flag = localStorage.getItem(`suvren_board_${address.toLowerCase()}`);
-    setIsBoard(flag === 'true');
-    setChecked(true);
-  }, [address]);
+  const { isBoard, checked } = useIsBoard();
 
   return { isBoard, checked };
 }
@@ -141,26 +130,6 @@ export default function BoardDashboardPage() {
         <Link href="/admin" className="px-4 py-2 rounded-xl bg-[rgba(245,240,232,0.05)] border border-[rgba(245,240,232,0.08)] text-sm text-[var(--text-body)] hover:text-[var(--text-body)] transition-colors">
           → Go to Admin Panel
         </Link>
-        {/* Dev bypass */}
-        <button
-          onClick={() => {
-            const addr = window.localStorage;
-            // Allow dev access for demo
-            const keys = Object.keys(localStorage).filter(k => k.startsWith('suvren_board_'));
-            if (keys.length === 0) {
-              // Auto-enable for first visit in dev
-              const accounts = Object.keys(localStorage).filter(k => k.startsWith('suvren_onboarding_'));
-              if (accounts.length > 0) {
-                const addr2 = accounts[0].replace('suvren_onboarding_', '');
-                localStorage.setItem(`suvren_board_${addr2}`, 'true');
-                window.location.reload();
-              }
-            }
-          }}
-          className="mt-4 text-xs text-[var(--text-disabled)] hover:text-[var(--text-muted)]"
-        >
-          (Demo: enable board access via admin panel)
-        </button>
       </div>
     );
   }

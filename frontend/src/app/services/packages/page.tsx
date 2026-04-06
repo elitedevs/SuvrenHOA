@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Package, Plus, X, Bell, Filter } from 'lucide-react';
+import { useIsBoard } from '@/hooks/useIsBoard';
 
 type Carrier = 'USPS' | 'UPS' | 'FedEx' | 'Amazon' | 'DHL' | 'Other';
 type PackageStatus = 'delivered' | 'held' | 'picked-up';
@@ -72,7 +73,7 @@ export default function PackagesPage() {
     save(packages.map(p => p.id === id ? { ...p, status } : p));
   };
 
-  const isBoard = true; // TODO: connect to auth
+  const { isBoard } = useIsBoard();
   const visible = packages.filter(p => {
     const lotMatch = filterLot ? p.lot === filterLot : (isBoard ? true : p.lot === myLot);
     const statusMatch = filterStatus === 'all' || p.status === filterStatus;

@@ -446,7 +446,6 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('[DocumentUpload] Submitted:', { title, docType, fileName });
     setSubmitted(true);
     setTimeout(() => { setSubmitted(false); onClose(); }, 2000);
   };

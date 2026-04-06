@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { useContracts } from '@/hooks/useContracts';
 import { useProperty } from '@/hooks/useProperty';
+import { useIsBoard } from '@/hooks/useIsBoard';
 import Link from 'next/link';
 
 export default function AdminPage() {
@@ -391,34 +392,22 @@ function CommunityStats() {
 }
 
 function BoardAccessCard() {
-  const { address } = useAccount();
-  const [isBoard, setIsBoard] = useState(false);
+  const { isBoard, checked } = useIsBoard();
 
-  useEffect(() => {
-    if (!address) return;
-    setIsBoard(localStorage.getItem(`suvren_board_${address.toLowerCase()}`) === 'true');
-  }, [address]);
-
-  function toggle() {
-    if (!address) return;
-    const next = !isBoard;
-    localStorage.setItem(`suvren_board_${address.toLowerCase()}`, next ? 'true' : 'false');
-    setIsBoard(next);
-  }
+  if (!checked) return null;
 
   return (
     <div className="glass-card rounded-xl p-6 border border-[rgba(176,155,113,0.15)]">
       <div className="flex items-start justify-between mb-4">
         <div>
           <h3 className="text-sm font-medium text-[#D4C4A0]">Board Member Access</h3>
-          <p className="text-xs text-[var(--text-disabled)] mt-1">Enable board dashboard for your wallet</p>
+          <p className="text-xs text-[var(--text-disabled)] mt-1">
+            {isBoard ? 'You are a verified board member' : 'Board membership is verified via the HOA registry'}
+          </p>
         </div>
-        <button
-          onClick={toggle}
-          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isBoard ? 'bg-[#B09B71]' : 'bg-[var(--surface-3)]'}`}
-        >
-          <span className={`inline-block h-4 w-4 rounded-full bg-white shadow-md transform transition-transform ${isBoard ? 'translate-x-6' : 'translate-x-1'}`} />
-        </button>
+        <span className={`inline-flex h-6 items-center rounded-full px-2 text-xs ${isBoard ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71]' : 'bg-[var(--surface-3)] text-[var(--text-disabled)]'}`}>
+          {isBoard ? 'Active' : 'Not a member'}
+        </span>
       </div>
       {isBoard && (
         <Link
