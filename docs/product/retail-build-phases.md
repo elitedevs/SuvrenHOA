@@ -78,23 +78,27 @@
 - [ ] Logo upload for communities
 
 ### 2.2 — Stripe Integration
-- [ ] Install Stripe SDK
-- [ ] Create Stripe products matching 3 tiers (Starter $49, Professional $129, Enterprise $249)
-- [ ] Create `subscriptions` table (id, community_id, stripe_customer_id, stripe_subscription_id, plan, status, trial_end, current_period_end)
-- [ ] `/checkout` page — plan selection → Stripe Checkout session
-- [ ] 60-day free trial (no CC required) — Stripe trial period
-- [ ] Webhook handler: `checkout.session.completed`, `invoice.paid`, `invoice.payment_failed`, `customer.subscription.deleted`
-- [ ] Subscription status displayed in community settings
-- [ ] Grace period logic — 7 days after failed payment before access restricted
-- [ ] Annual billing option (Stripe price IDs for both monthly + annual)
+- [x] Install Stripe SDK (`stripe` + `@stripe/stripe-js`)
+- [x] Create Stripe products matching 3 tiers (Starter $49, Professional $129, Enterprise $249) — `/api/stripe/setup`
+- [x] Create `subscriptions` table (`005_subscriptions.sql` — id, community_id, stripe_customer_id, stripe_subscription_id, plan, billing_cycle, status, trial_end, current_period_end, RLS)
+- [x] `/checkout` page — plan selection with monthly/annual toggle → Stripe Checkout session
+- [x] 60-day free trial (no CC required) — `payment_method_collection: 'if_required'`
+- [x] Webhook handler: `checkout.session.completed`, `invoice.paid`, `invoice.payment_failed`, `customer.subscription.updated`, `customer.subscription.deleted`
+- [x] Subscription status displayed in `/settings/billing` page
+- [x] Grace period logic — 7 days after failed payment before read-only mode
+- [x] Annual billing option (6 Stripe prices: monthly + annual for each tier)
+- [x] Stripe Customer Portal integration (`/api/stripe/portal`)
+- [x] Checkout success + cancel pages
 
 ### 2.3 — Plan Enforcement
-- [ ] Middleware checks community plan + status on every request
-- [ ] Starter: max 50 property NFTs
-- [ ] Professional: max 200, unlocks health score, advanced reports, custom branding
-- [ ] Enterprise: unlimited, API access, white-label
-- [ ] Expired/cancelled: read-only mode (can view, can't create)
-- [ ] Upgrade/downgrade flow in community settings
+- [x] Server-side plan check utility (`lib/plan-check.ts`) with `withPlanCheck` wrapper
+- [x] Starter: max 50 properties
+- [x] Professional: max 200, unlocks health score, advanced reports, custom branding
+- [x] Enterprise: unlimited, API access, white-label
+- [x] Expired/cancelled: read-only mode (can view, can't create) — `isReadOnly` flag
+- [x] Upgrade/downgrade flow via Stripe Customer Portal
+- [x] Client-side `useSubscription` hook with feature checks
+- [x] Plan limits config (`lib/plan-limits.ts`)
 
 **Deliverable:** Board member signs up → creates community → picks plan → starts trial. Stripe handles billing.
 

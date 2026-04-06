@@ -1,3 +1,8 @@
 node_modules/
 .next/
 out/
+
+# Environment files (contain secrets)
+.env
+.env.local
+.env.*.local

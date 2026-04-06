@@ -1,341 +1,241 @@
 'use client';
-import { AuthWall } from '@/components/AuthWall';
 
-import { useState, useCallback } from 'react';
-import { useAccount } from 'wagmi';
-import Link from 'next/link';
-import { useProperty } from '@/hooks/useProperty';
-import { useDuesStatus } from '@/hooks/useTreasury';
-import { CheckCircle, Home } from 'lucide-react';
+import { useState } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { Check } from 'lucide-react';
+import { PLAN_CONFIGS, FEATURE_LABELS, TRIAL_DURATION_DAYS, type PlanTier, type PlanFeature } from '@/lib/plan-limits';
 
-// ── Step Indicator ────────────────────────────────────────────────────────────
-function StepIndicator({ current, total }: { current: number; total: number }) {
-  return (
-    <div className="mb-8">
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-xs tracking-widest uppercase text-[var(--text-disabled)]">
-          Step {current} of {total}
-        </span>
-        <span className="text-xs text-[#B09B71] font-medium">
-          {Math.round((current / total) * 100)}%
-        </span>
-      </div>
-      <div className="flex gap-1.5">
-        {Array.from({ length: total }, (_, i) => (
-          <div
-            key={i}
-            className="h-1.5 flex-1 rounded-full transition-all duration-500"
-            style={{
-              background:
-                i < current
-                  ? 'linear-gradient(90deg, #B09B71, #b8942e)'
-                  : 'rgba(255,255,255,0.08)',
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+const ALL_FEATURES: PlanFeature[] = [
+  'basic_governance',
+  'treasury_management',
+  'document_storage',
+  'community_forum',
+  'maintenance_tracking',
+  'health_score',
+  'advanced_reports',
+  'custom_branding',
+  'api_access',
+  'white_label',
+  'priority_support',
+  'bulk_operations',
+];
 
-// ── Checkbox Row ─────────────────────────────────────────────────────────────
-function CheckRow({
-  checked,
-  onChange,
-  label,
-  sublabel,
-  disabled,
-}: {
-  checked: boolean;
-  onChange: (v: boolean) => void;
-  label: string;
-  sublabel?: string;
-  disabled?: boolean;
-}) {
-  return (
-    <label
-      className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
-        checked
-          ? 'border-[rgba(42,93,79,0.25)] bg-[rgba(58,125,111,0.05)]'
-          : 'border-[rgba(245,240,232,0.06)] bg-[rgba(26,26,30,0.30)]'
-      } ${disabled ? 'opacity-60 cursor-not-allowed' : ''}`}
-    >
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-        disabled={disabled}
-        className="mt-0.5 w-4 h-4 rounded accent-green-500"
-      />
-      <div>
-        <p className="text-sm font-medium text-[var(--parchment)]">{label}</p>
-        {sublabel && <p className="text-xs text-[var(--text-disabled)] mt-0.5">{sublabel}</p>}
-      </div>
-    </label>
-  );
-}
-
-// ── Main Checkout Wizard ──────────────────────────────────────────────────────
-function CheckoutWizard() {
-  const { tokenId } = useProperty();
-  const { isCurrent, quartersOwed, amountOwed, error: duesError } = useDuesStatus(tokenId);
-  const [step, setStep] = useState(1);
-
-  // Step 1 state
-  const [keyFobReturned, setKeyFobReturned] = useState(false);
-  const [poolKeyReturned, setPoolKeyReturned] = useState(false);
-  const [forwardingAddress, setForwardingAddress] = useState('');
-
-  // Step 2 state
-  const [obligationsConfirmed, setObligationsConfirmed] = useState(false);
-
-  const TOTAL_STEPS = 3;
-
-  const step1Valid = keyFobReturned && poolKeyReturned;
-  const step2Valid = obligationsConfirmed && (isCurrent === true || isCurrent === undefined);
-
-  const goNext = useCallback(() => {
-    if (step < TOTAL_STEPS) setStep((s) => s + 1);
-  }, [step]);
-
-  const goBack = () => setStep((s) => Math.max(1, s - 1));
-
-  return (
-    <div className="max-w-lg mx-auto px-4 py-10 page-enter">
-      {step < TOTAL_STEPS && (
-        <div className="mb-6">
-          <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[var(--parchment)] mb-1">
-            Move-Out Checklist
-          </h1>
-          <p className="text-sm text-[var(--text-disabled)]">
-            Faircroft HOA · Property #{tokenId ?? '—'}
-          </p>
-        </div>
-      )}
-
-      {step < TOTAL_STEPS && <StepIndicator current={step} total={TOTAL_STEPS} />}
-
-      {/* ── Dues status error ── */}
-      {duesError && (
-        <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-          ⚠️ {duesError}
-        </div>
-      )}
-
-      {/* ── Step 1: Checklist ── */}
-      {step === 1 && (
-        <div className="glass-card rounded-xl p-7 animate-fade-in">
-          <h2 className="text-xl font-medium mb-1">Pre-Move Checklist</h2>
-          <p className="text-sm text-[var(--text-disabled)] mb-6">
-            Complete all items before proceeding.
-          </p>
-
-          {/* Dues status */}
-          <div
-            className={`p-4 rounded-xl border mb-4 ${
-              isCurrent === false
-                ? 'border-[rgba(107,58,58,0.25)] bg-[rgba(139,90,90,0.05)]'
-                : 'border-[rgba(42,93,79,0.25)] bg-[rgba(58,125,111,0.05)]'
-            }`}
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                {isCurrent !== false ? (
-                  <span className="text-[#3A7D6F] text-lg">✓</span>
-                ) : (
-                  <span className="text-[#8B5A5A] text-lg">⚠</span>
-                )}
-                <div>
-                  <p className="text-sm font-medium text-[var(--parchment)]">HOA Dues</p>
-                  {isCurrent === undefined ? (
-                    <div className="animate-pulse h-3 w-24 bg-[var(--surface-2)] rounded mt-1" />
-                  ) : (
-                    <p className="text-xs text-[var(--text-disabled)]">
-                      {isCurrent
-                        ? 'All dues are current'
-                        : `${quartersOwed} quarters owed · $${amountOwed}`}
-                    </p>
-                  )}
-                </div>
-              </div>
-              {isCurrent === false && (
-                <Link
-                  href="/dues"
-                  className="text-xs text-[#8B5A5A] hover:text-[#8B5A5A] underline"
-                >
-                  Pay now →
-                </Link>
-              )}
-            </div>
-          </div>
-
-          <div className="space-y-3 mb-7">
-            <CheckRow
-              checked={keyFobReturned}
-              onChange={setKeyFobReturned}
-              label="Key Fob Returned"
-              sublabel="Return to the HOA office or a board member"
-            />
-            <CheckRow
-              checked={poolKeyReturned}
-              onChange={setPoolKeyReturned}
-              label="Pool Key Returned"
-              sublabel="Drop in the key return box at the pool gate"
-            />
-          </div>
-
-          <div className="mb-7">
-            <label className="text-xs tracking-widest uppercase text-[var(--text-disabled)] block mb-1.5">
-              Forwarding Address
-            </label>
-            <input
-              className="w-full bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] rounded-xl px-4 py-3 text-sm text-[var(--parchment)] placeholder-[rgba(245,240,232,0.25)] focus:outline-none focus:border-amber-500/50"
-              placeholder="Where should we send final correspondence?"
-              value={forwardingAddress}
-              onChange={(e) => setForwardingAddress(e.target.value)}
-            />
-          </div>
-
-          <button
-            onClick={goNext}
-            disabled={!step1Valid || isCurrent === false}
-            className="w-full py-3.5 rounded-xl bg-amber-600 hover:bg-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed text-[var(--text-heading)] font-medium text-sm transition-all"
-          >
-            Continue →
-          </button>
-          {isCurrent === false && (
-            <p className="text-xs text-[#8B5A5A] text-center mt-3">
-              Outstanding dues must be paid before proceeding.
-            </p>
-          )}
-          {isCurrent !== false && !step1Valid && (
-            <p className="text-xs text-[var(--text-disabled)] text-center mt-3">
-              Complete all checklist items to continue.
-            </p>
-          )}
-        </div>
-      )}
-
-      {/* ── Step 2: Final Settlement ── */}
-      {step === 2 && (
-        <div className="glass-card rounded-xl p-7 animate-fade-in">
-          <h2 className="text-xl font-medium mb-1">Final Settlement</h2>
-          <p className="text-sm text-[var(--text-disabled)] mb-6">
-            Confirm all financial obligations are met.
-          </p>
-
-          {/* Outstanding dues */}
-          <div
-            className={`p-5 rounded-xl border mb-6 ${
-              isCurrent === false
-                ? 'border-[rgba(107,58,58,0.25)] bg-[rgba(139,90,90,0.08)]'
-                : 'border-[rgba(42,93,79,0.25)] bg-[rgba(58,125,111,0.05)]'
-            }`}
-          >
-            <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-3">
-              Outstanding Balance
-            </p>
-            {isCurrent === undefined ? (
-              <div className="animate-pulse h-8 w-32 bg-[var(--surface-2)] rounded-lg" />
-            ) : isCurrent === false ? (
-              <div>
-                <p className="text-2xl font-normal text-[#8B5A5A] mb-1">
-                  ${amountOwed}
-                </p>
-                <p className="text-sm text-[var(--text-muted)] mb-4">
-                  {quartersOwed} quarter{quartersOwed !== 1 ? 's' : ''} outstanding
-                </p>
-                <Link
-                  href="/dues"
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(107,58,58,0.25)] hover:bg-[rgba(139,90,90,0.30)] text-sm font-medium text-[#8B5A5A] transition-all"
-                >
-                  ⚠ Pay Outstanding Balance
-                </Link>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-6 h-6 text-[#3A7D6F]" />
-                <p className="text-lg font-medium text-[#3A7D6F]">
-                  No outstanding balance
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* Confirmation */}
-          <div className="border border-[rgba(176,155,113,0.20)] rounded-xl p-4 mb-7 bg-[rgba(176,155,113,0.05)]">
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={obligationsConfirmed}
-                onChange={(e) => setObligationsConfirmed(e.target.checked)}
-                disabled={isCurrent === false}
-                className="mt-0.5 w-4 h-4 rounded accent-amber-500"
-              />
-              <span className="text-sm text-[var(--text-body)]">
-                I confirm all HOA obligations have been met and I am ready to
-                transfer ownership of this property.
-              </span>
-            </label>
-          </div>
-
-          <div className="flex gap-3">
-            <button
-              onClick={goBack}
-              className="flex-1 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-muted)] hover:text-[var(--parchment)] font-medium text-sm transition-all"
-            >
-              ← Back
-            </button>
-            <button
-              onClick={goNext}
-              disabled={!step2Valid}
-              className="flex-1 py-3 rounded-xl bg-amber-600 hover:bg-[#B09B71] disabled:opacity-40 disabled:cursor-not-allowed text-[var(--text-heading)] font-medium text-sm transition-all"
-            >
-              Confirm →
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* ── Step 3: Confirmation ── */}
-      {step === 3 && (
-        <div className="glass-card rounded-xl p-10 text-center animate-fade-in">
-          <div className="flex justify-center mb-5"><Home className="w-12 h-12 text-[#B09B71]" /></div>
-          <h2 className="text-2xl font-normal mb-2">
-            Thank You, Neighbor
-          </h2>
-          <p className="text-[var(--text-muted)] text-sm mb-3 max-w-sm mx-auto">
-            Thank you for being part of the Faircroft community. We wish you
-            all the best in your new home.
-          </p>
-          <div className="bg-[var(--steel)]/8 border border-[rgba(90,122,154,0.20)] rounded-xl p-4 mb-8 text-left">
-            <p className="text-xs text-[var(--steel)] font-medium uppercase tracking-wide mb-1">
-              ℹ On-Chain Transfer
-            </p>
-            <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-              Property ownership transfer happens on-chain when the Property NFT
-              is transferred to the new owner&apos;s wallet. The board will
-              coordinate this step with you and the buyer.
-            </p>
-          </div>
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[rgba(26,26,30,0.60)] border border-[rgba(245,240,232,0.08)] text-[var(--text-body)] hover:text-[var(--text-heading)] font-medium text-sm transition-all"
-          >
-            ← Return to Dashboard
-          </Link>
-        </div>
-      )}
-    </div>
-  );
-}
+const TIERS: PlanTier[] = ['starter', 'professional', 'enterprise'];
 
 export default function CheckoutPage() {
-  const { isConnected } = useAccount();
+  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
+  const [loadingTier, setLoadingTier] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const communityId = searchParams.get('community');
 
-  if (!isConnected) {
-    return <AuthWall title="Checkout" description="Connect your wallet to access this section of SuvrenHOA." />;
+  async function handleSelectPlan(tier: PlanTier) {
+    if (!communityId) {
+      router.push('/create-community');
+      return;
+    }
+
+    setLoadingTier(tier);
+    setError(null);
+
+    try {
+      // First, ensure products exist in Stripe
+      const setupRes = await fetch('/api/stripe/setup', { method: 'POST' });
+      const setupData = await setupRes.json();
+
+      const tierData = setupData[tier];
+      if (!tierData) {
+        throw new Error('Plan not configured in Stripe. Run setup first.');
+      }
+
+      const priceId = billingCycle === 'annual' ? tierData.annualPriceId : tierData.monthlyPriceId;
+
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId, communityId, plan: tier, billingCycle }),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error(data.error || 'Failed to create checkout session');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong');
+      setLoadingTier(null);
+    }
   }
 
-  return <CheckoutWizard />;
+  return (
+    <div className="max-w-6xl mx-auto animate-fadeInUp">
+      {/* Header */}
+      <div className="text-center mb-12">
+        <h1 className="font-serif text-3xl sm:text-4xl text-[var(--text-heading)] mb-3">
+          Choose Your Plan
+        </h1>
+        <p className="text-[var(--text-body)] max-w-2xl mx-auto">
+          Start with a {TRIAL_DURATION_DAYS}-day free trial. No credit card required.
+          Cancel anytime.
+        </p>
+      </div>
+
+      {/* Error Banner */}
+      {error && (
+        <div className="max-w-md mx-auto mb-6 p-3 rounded-lg bg-[var(--glow-red)] border border-[rgba(107,58,58,0.25)] text-sm text-[var(--rosewood)]">
+          {error}
+        </div>
+      )}
+
+      {/* Billing Toggle */}
+      <div className="flex items-center justify-center gap-3 mb-10">
+        <button
+          onClick={() => setBillingCycle('monthly')}
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+            billingCycle === 'monthly'
+              ? 'bg-[var(--aged-brass-dim)] text-[var(--aged-brass)]'
+              : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'
+          }`}
+        >
+          Monthly
+        </button>
+        <button
+          onClick={() => setBillingCycle('annual')}
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+            billingCycle === 'annual'
+              ? 'bg-[var(--aged-brass-dim)] text-[var(--aged-brass)]'
+              : 'text-[var(--text-muted)] hover:text-[var(--text-body)]'
+          }`}
+        >
+          Annual
+          <span className="ml-2 text-xs text-[var(--verdigris)]">Save 2 months</span>
+        </button>
+      </div>
+
+      {/* Plan Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        {TIERS.map((tier) => {
+          const config = PLAN_CONFIGS[tier];
+          const price = billingCycle === 'monthly' ? config.monthlyPrice : config.annualPrice;
+          const isPopular = tier === 'professional';
+
+          return (
+            <div
+              key={tier}
+              className={`relative bg-[var(--surface-1)] rounded-lg p-6 flex flex-col ${
+                isPopular ? 'ring-1 ring-[var(--aged-brass)] ring-opacity-40' : ''
+              }`}
+            >
+              {isPopular && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="bg-[var(--aged-brass)] text-[var(--obsidian)] text-xs font-semibold px-3 py-1 rounded-full">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+
+              <div className="mb-6">
+                <h3 className="font-serif text-xl text-[var(--text-heading)] mb-1">
+                  {config.name}
+                </h3>
+                <p className="text-sm text-[var(--text-muted)] mb-4">
+                  {config.description}
+                </p>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-3xl font-serif text-[var(--text-heading)]">
+                    ${billingCycle === 'monthly' ? price : Math.round(price / 12)}
+                  </span>
+                  <span className="text-[var(--text-muted)] text-sm">/mo</span>
+                </div>
+                {billingCycle === 'annual' && (
+                  <p className="text-xs text-[var(--text-muted)] mt-1">
+                    ${price}/year billed annually
+                  </p>
+                )}
+                <p className="text-xs text-[var(--verdigris)] mt-2">
+                  Up to {config.maxProperties === Infinity ? 'unlimited' : config.maxProperties} properties
+                </p>
+              </div>
+
+              <ul className="space-y-2.5 mb-8 flex-1">
+                {config.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2.5 text-sm">
+                    <Check className="w-4 h-4 text-[var(--verdigris)] mt-0.5 shrink-0" />
+                    <span className="text-[var(--text-body)]">{FEATURE_LABELS[feature]}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                onClick={() => handleSelectPlan(tier)}
+                disabled={loadingTier !== null}
+                className={`w-full py-3 rounded-md text-sm font-semibold transition-all ${
+                  isPopular
+                    ? 'bg-[var(--aged-brass)] text-[var(--obsidian)] hover:opacity-90'
+                    : 'bg-[var(--surface-2)] text-[var(--text-heading)] hover:bg-[var(--surface-3)]'
+                } disabled:opacity-50 disabled:cursor-not-allowed`}
+              >
+                {loadingTier === tier ? 'Redirecting...' : 'Start Free Trial'}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Feature Comparison Table */}
+      <div className="bg-[var(--surface-1)] rounded-lg overflow-hidden">
+        <div className="p-6 border-b border-[var(--divider)]">
+          <h2 className="font-serif text-xl text-[var(--text-heading)]">
+            Feature Comparison
+          </h2>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-[var(--divider)]">
+                <th className="text-left p-4 text-sm font-medium text-[var(--text-muted)]">
+                  Feature
+                </th>
+                {TIERS.map((tier) => (
+                  <th
+                    key={tier}
+                    className="p-4 text-center text-sm font-medium text-[var(--text-heading)]"
+                  >
+                    {PLAN_CONFIGS[tier].name}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {ALL_FEATURES.map((feature) => (
+                <tr key={feature} className="border-b border-[var(--divider)] last:border-0">
+                  <td className="p-4 text-sm text-[var(--text-body)]">
+                    {FEATURE_LABELS[feature]}
+                  </td>
+                  {TIERS.map((tier) => (
+                    <td key={tier} className="p-4 text-center">
+                      {PLAN_CONFIGS[tier].features.includes(feature) ? (
+                        <Check className="w-4 h-4 text-[var(--verdigris)] mx-auto" />
+                      ) : (
+                        <span className="text-[var(--text-disabled)]">&mdash;</span>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+              <tr className="border-b border-[var(--divider)]">
+                <td className="p-4 text-sm text-[var(--text-body)]">Max Properties</td>
+                <td className="p-4 text-center text-sm text-[var(--text-body)]">50</td>
+                <td className="p-4 text-center text-sm text-[var(--text-body)]">200</td>
+                <td className="p-4 text-center text-sm text-[var(--text-body)]">Unlimited</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
 }
