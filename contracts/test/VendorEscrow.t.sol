@@ -221,13 +221,14 @@ contract VendorEscrowTest is Test {
     function test_ApproveMilestone_AllMilestones_AutoCompletes() public {
         uint256 id = _createOrder();
 
-        vm.expectEmit(true, true, false, true);
-        emit VendorEscrow.WorkOrderCompleted(id, TOTAL);
-
         vm.prank(inspector);
         escrow.approveMilestone(0, 0);
         vm.prank(inspector);
         escrow.approveMilestone(0, 1);
+
+        vm.expectEmit(true, true, false, true);
+        emit VendorEscrow.WorkOrderCompleted(id, TOTAL);
+
         vm.prank(inspector);
         escrow.approveMilestone(0, 2);
 
