@@ -356,7 +356,7 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
             ms.status = MilestoneStatus.Returned;
             // SC-05: credit treasury accounting, not raw transfer
             usdc.approve(treasury, amount);
-            IFaircroftTreasury(treasury).creditFromEscrow(amount);
+            IFaircroftTreasuryEscrow(treasury).creditFromEscrow(amount);
         }
 
         emit DisputeResolved(workOrderId, milestoneIndex, releaseToVendor, msg.sender);
@@ -391,7 +391,7 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
         uint256 refund = wo.totalAmount;
         // SC-05: credit treasury accounting, not raw transfer
         usdc.approve(treasury, refund);
-        IFaircroftTreasury(treasury).creditFromEscrow(refund);
+        IFaircroftTreasuryEscrow(treasury).creditFromEscrow(refund);
 
         emit WorkOrderCancelled(workOrderId, msg.sender, refund);
     }
@@ -520,6 +520,6 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
 // ── Interface ────────────────────────────────────────────────────────────────
 
 /// @dev Minimal interface to FaircroftTreasury — used for SC-05 accounting fix
-interface IFaircroftTreasury {
+interface IFaircroftTreasuryEscrow {
     function creditFromEscrow(uint256 amount) external;
 }

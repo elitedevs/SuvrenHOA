@@ -739,7 +739,8 @@ contract DuesLendingTest is Test {
 
     // NOTE: After restructureLoan, status = Restructured.
     // makePayment only accepts Active or Defaulting — this is a known contract behavior.
-    function test_RestructureLoan_RestructuredStatusBlocksPayment() public {
+    function test_RestructureLoan_RestructuredStatusAllowsPayment() public {
+        // SC-04: governance restructure must not freeze repayment — Restructured loans accept payments
         vm.prank(alice);
         lending.requestLoan(1, 1, 2);
 
@@ -749,9 +750,11 @@ contract DuesLendingTest is Test {
         assertEq(uint8(lending.getLoan(0).status), uint8(DuesLending.LoanStatus.Restructured));
 
         DuesLending.Loan memory loan = lending.getLoan(0);
-        vm.prank(alice);
-        vm.expectRevert(DuesLending.LoanNotActive.selector);
-        lending.makePayment(0, loan.installmentAmount);
+        deal(address(usdc), alice, loan.installmentAmount);
+        vm.startPrank(alice);
+        usdc.approve(address(lending), loan.installmentAmount);
+        lending.makePayment(0, loan.installmentAmount); // must not revert
+        vm.stopPrank();
     }
 
     // ─────────────────────────────────────────────────────────────────────────
