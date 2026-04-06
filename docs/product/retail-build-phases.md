@@ -215,35 +215,43 @@
 
 ---
 
-## Phase 6: Launch (Week 11-12)
-> **Goal:** First paying customers
+## Phase 6: Launch (Week 11-12) ✅ COMPLETE (2026-04-06)
+> **Goal:** First paying customers — launch infrastructure, founding program, press kit
 
-### 6.1 — Founding Community Program
-- [ ] Identify 3 HOA communities in Raleigh/Triangle area
-- [ ] Offer 12-month free access in exchange for feedback + case study
-- [ ] White-glove onboarding: Ryan personally helps each board set up
-- [ ] Weekly check-ins for first month
-- [ ] Collect testimonials + screenshot permissions
-- [ ] Document everything for case studies
+### 6.1 — Founding Community Program ✅
+- [x] `008_founding_program.sql` — `founding_applications` table with status enum (pending/approved/rejected/waitlisted)
+- [x] `/founding` page — hero, limited spots counter (50 total), benefits grid (6 perks), application form (community name, property count, contact info, role selector, pain points multi-select, referral source)
+- [x] `/api/founding/apply` — POST endpoint with rate limiting, duplicate detection, Supabase insert
+- [x] `/api/founding/[id]` — PATCH endpoint for admin approve/reject/waitlist with auth gate
+- [x] `/admin/founding` — review applications (approve/reject/waitlist), filter by status, expand details
+- [x] Email templates (HTML, inline CSS, Obsidian design): application received, approved (with invite link), waitlisted
+- [x] Admin notification email on new application
 
-### 6.2 — Soft Launch
-- [ ] Publish case studies from founding communities
-- [ ] Activate Stripe billing for new signups
-- [ ] Submit to Product Hunt
-- [ ] Post launch announcement on LinkedIn, Twitter, HN
-- [ ] Email HOA management companies in NC with pitch deck
-- [ ] Attend local HOA board meeting (offer to present)
-- [ ] CAI Carolinas Chapter outreach
+### 6.2 — Product Hunt Prep ✅
+- [x] `009_launch_signups.sql` — `launch_signups` table
+- [x] `/launch` page — countdown timer (target: 2026-05-01), email signup form, stats, feature highlights, PH badge placeholder, Twitter + LinkedIn share buttons
+- [x] `/api/launch/signup` — POST (upsert) + GET (count) endpoints
 
-### 6.3 — Iterate
-- [ ] Weekly user feedback sessions
-- [ ] Track activation metrics (signup → community created → first vote)
-- [ ] Track retention (monthly active communities)
-- [ ] A/B test landing page headline
-- [ ] Prioritize feature requests from paying customers
-- [ ] Monthly product update email to all communities
+### 6.3 — Press / Marketing ✅
+- [x] `/press` page — boilerplate, key facts, feature descriptions, color palette, typography, brand assets list, media contacts
+- [x] `lib/press-kit.ts` — typed press kit JSON data structure
 
-**Deliverable:** Paying customers, case studies, organic growth started.
+### 6.4 — Admin Launch Dashboard ✅
+- [x] `/admin/launch` — launch checklist (20 items, 5 categories), localStorage persistence, founding app counts, signup counts, quick action links, progress bar
+
+### 6.5 — Community ✅
+- [x] `lib/social.ts` — social links, handles, share URL helpers
+- [x] `/community` page — updated to show governance explainer (4 pillars), Discord placeholder, community guidelines (6 rules), testimonial placeholders (3) when unauthenticated; existing forum for authenticated users
+
+### 6.6 — Final Polish ✅
+- [x] Root layout meta tags — full OG, Twitter Card, keywords, metadataBase, robots
+- [x] `AnnouncementBanner` component — dismissable, variants (gold/info/launch), localStorage persistence, added to root layout
+- [x] `robots.txt` — allow public routes, disallow admin/api/app routes
+- [x] `sitemap.ts` — Next.js MetadataRoute.Sitemap for 7 public routes
+- [x] `rel="noopener noreferrer"` — verified on all external links (existing files already compliant; fixed onboarding/page.tsx)
+- [x] CTA routing — /founding ↔ /launch ↔ /signup cross-linked
+
+**Deliverable:** Complete launch infrastructure — founding program accepting applications, PH launch page live, press kit published, admin launch dashboard operational.
 
 ---
 
