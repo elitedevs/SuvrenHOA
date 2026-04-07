@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useAccount, useSignMessage } from 'wagmi';
-import { SiweMessage } from 'siwe';
+import { createSiweMessage } from 'viem/siwe';
 
 export function useAuth() {
   const { address: walletAddress, chain } = useAccount();
@@ -44,7 +44,7 @@ export function useAuth() {
     const { nonce } = await nonceRes.json();
 
     // 2. Create SIWE message
-    const message = new SiweMessage({
+    const messageString = createSiweMessage({
       domain: window.location.host,
       address: walletAddress,
       statement: 'Sign in to Faircroft DAO',
@@ -53,7 +53,6 @@ export function useAuth() {
       chainId: chain?.id ?? 84532,
       nonce,
     });
-    const messageString = message.prepareMessage();
 
     // 3. Sign
     const signature = await signMessageAsync({ message: messageString });

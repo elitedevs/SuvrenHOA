@@ -1,6 +1,7 @@
 import { getIronSession, type SessionOptions, type IronSession } from 'iron-session';
 import { cookies } from 'next/headers';
-import { SiweMessage } from 'siwe';
+import { parseSiweMessage } from 'viem/siwe';
+import { verifyMessage } from 'viem';
 
 export interface SessionData {
   nonce?: string;
@@ -35,16 +36,20 @@ export async function getSession(): Promise<IronSession<SessionData>> {
 }
 
 export async function verifySiweMessage(message: string, signature: string, nonce: string): Promise<string> {
-  const siweMessage = new SiweMessage(message);
+  const parsed = parseSiweMessage(message);
   // FE-01: bind verification to the app's domain, URI, and chain to prevent
   // cross-site SIWE replay attacks where a signature for evil.com is replayed here.
-  const { data } = await siweMessage.verify({
-    signature,
-    nonce,
-    domain: process.env.NEXT_PUBLIC_APP_DOMAIN,
-    time: new Date().toISOString(),
+  if (parsed.nonce !== nonce) throw new Error('Nonce mismatch');
+  if (process.env.NEXT_PUBLIC_APP_DOMAIN && parsed.domain !== process.env.NEXT_PUBLIC_APP_DOMAIN) {
+    throw new Error('Domain mismatch');
+  }
+  const isValid = await verifyMessage({
+    address: parsed.address as `0x${string}`,
+    message,
+    signature: signature as `0x${string}`,
   });
-  return data.address;
+  if (!isValid) throw new Error('Invalid SIWE signature');
+  return parsed.address!;
 }
 
 export async function getAuthenticatedAddress(): Promise<string | null> {
