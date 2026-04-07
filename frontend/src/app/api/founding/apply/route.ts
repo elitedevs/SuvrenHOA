@@ -6,6 +6,16 @@ import { Resend } from 'resend';
 
 export const dynamic = 'force-dynamic';
 
+/** H-07: Server-safe HTML escaping for email templates (no DOM required). */
+function esc(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
+
 function getResend() {
   return process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 }
@@ -61,7 +71,10 @@ export async function POST(request: Request) {
     .single();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message },
+      { status: 500 }
+    );
   }
 
   // Send confirmation email (non-blocking)
@@ -96,7 +109,7 @@ async function sendAdminNotificationEmail(data: z.infer<typeof applySchema>) {
       from: 'SuvrenHOA <founding@suvren.com>',
       to: process.env.ADMIN_EMAIL,
       subject: `New Founding Application: ${data.community_name}`,
-      html: `<p><strong>${data.contact_name}</strong> (${data.contact_email}) applied for the Founding Community Program on behalf of <strong>${data.community_name}</strong> (${data.property_count} units).</p><p>Role: ${data.role}</p><p>Pain points: ${data.pain_points.join(', ')}</p><p>Referral: ${data.referral_source || 'N/A'}</p><p>Notes: ${data.additional_notes || 'N/A'}</p><p><a href="https://app.suvren.com/admin/founding">Review in Admin →</a></p>`,
+      html: `<p><strong>${esc(data.contact_name)}</strong> (${esc(data.contact_email)}) applied for the Founding Community Program on behalf of <strong>${esc(data.community_name)}</strong> (${esc(String(data.property_count))} units).</p><p>Role: ${esc(data.role)}</p><p>Pain points: ${esc(data.pain_points.join(', '))}</p><p>Referral: ${esc(data.referral_source || 'N/A')}</p><p>Notes: ${esc(data.additional_notes || 'N/A')}</p><p><a href="https://app.suvren.com/admin/founding">Review in Admin →</a></p>`,
     });
   } catch (err) {
     console.error('[founding] admin notify failed:', err);

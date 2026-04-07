@@ -135,11 +135,21 @@ export async function rateLimit(key: string, config: RateLimitConfig): Promise<R
     };
   }
 
-  // Warn in non-production so misconfigured deployments surface early.
+  // H-01: Fail closed in production — in-memory buckets are per-instance and allow
+  // N×instances requests per window, defeating rate limiting across Vercel replicas.
   if (process.env.NODE_ENV === 'production') {
+    console.error(
+      '[rate-limit] H-01: UPSTASH_REDIS_REST_URL/TOKEN not set in production. ' +
+      'Denying request (fail-closed). Configure Upstash to restore rate limiting.'
+    );
+    return { allowed: false, remaining: 0, resetMs: 60_000 };
+  }
+
+  // Dev/CI: warn and fall back to in-memory token bucket.
+  if (process.env.NODE_ENV !== 'test') {
     console.warn(
-      '[rate-limit] FE-04: UPSTASH_REDIS_REST_URL/TOKEN not set — ' +
-      'falling back to in-memory limiter (not safe across multiple instances).'
+      '[rate-limit] UPSTASH_REDIS_REST_URL/TOKEN not set — ' +
+      'using in-memory fallback (not safe across multiple instances).'
     );
   }
 
