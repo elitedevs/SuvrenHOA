@@ -32,10 +32,32 @@ export async function updateSession(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Public routes that don't require auth
-  const publicRoutes = ['/login', '/signup', '/invite/accept', '/api/'];
+  const publicRoutes = [
+    // Auth flows
+    '/login',
+    '/signup',
+    '/invite/accept',
+    // API routes that are publicly accessible
+    '/api/health',
+    '/api/launch/signup',
+    '/api/founding/apply',
+    // Marketing / static pages
+    '/about',
+    '/pricing',
+    '/security',
+    '/contact',
+    '/blog',
+    '/docs',
+    '/demo',
+    '/founding',
+    '/launch',
+    '/press',
+    '/landing',
+    '/community',
+  ];
   const isPublicRoute =
     pathname === '/' ||
-    publicRoutes.some((route) => pathname.startsWith(route));
+    publicRoutes.some((route) => pathname === route || pathname.startsWith(route + '/'));
 
   // Redirect unauthenticated users to /login (except public routes)
   if (!user && !isPublicRoute) {
