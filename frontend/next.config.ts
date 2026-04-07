@@ -1,31 +1,9 @@
 import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
 
-const connectSrc = [
-  "'self'",
-  'https://*.supabase.co',
-  'wss://*.supabase.co',
-  'https://*.base.org',
-  'https://*.alchemy.com',
-  'https://*.infura.io',
-  'https://base-rpc.publicnode.com',
-  'https://base-sepolia-rpc.publicnode.com',
-  'https://*.sentry.io',
-  'https://*.ingest.sentry.io',
-  'https://*.coinbase.com',
-  'https://api.developer.coinbase.com',
-].join(' ');
-
-const csp = [
-  "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https:",
-  "font-src 'self' data: https://fonts.gstatic.com",
-  `connect-src ${connectSrc}`,
-  "worker-src 'self' blob:",
-  "frame-ancestors 'none'",
-].join('; ');
+// H-10: CSP is now generated per-request in supabase-middleware.ts using a nonce,
+// which eliminates unsafe-inline and unsafe-eval from script-src. The static headers
+// below handle non-CSP security headers and CORS (which don't need per-request values).
 
 const nextConfig: NextConfig = {
   output: 'standalone',
@@ -50,7 +28,7 @@ const nextConfig: NextConfig = {
       {
         source: '/(.*)',
         headers: [
-          { key: 'Content-Security-Policy', value: csp },
+          // CSP intentionally omitted here — set dynamically with nonce in middleware
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'X-Frame-Options', value: 'DENY' },
           { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },

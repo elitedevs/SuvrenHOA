@@ -82,6 +82,7 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
         uint48 createdAt;
         uint48 completedAt;
         address inspector;       // Signs off on milestones
+        bool fromReserve;        // H-05: true = funded from reserve, false = operating
         Milestone[] milestones;
     }
 
@@ -208,7 +209,8 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
         string calldata title,
         string calldata description,
         MilestoneInput[] calldata milestones,
-        address inspector
+        address inspector,
+        bool fromReserve
     ) external nonReentrant onlyRole(BOARD_ROLE) returns (uint256 workOrderId) {
         if (vendor == address(0)) revert ZeroAddress();
         if (inspector == address(0)) revert ZeroAddress();
@@ -235,6 +237,7 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
         wo.status      = WorkOrderStatus.Created;
         wo.createdAt   = uint48(block.timestamp);
         wo.inspector   = inspector;
+        wo.fromReserve = fromReserve;
 
         for (uint256 i; i < milestones.length; ++i) {
             wo.milestones.push(Milestone({
@@ -267,6 +270,8 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
         WorkOrder storage wo = _requireWorkOrder(workOrderId);
 
         if (msg.sender != wo.inspector) revert NotInspector(msg.sender, wo.inspector);
+        // SC-03: defence-in-depth — inspector must never be the vendor even if createWorkOrder check were bypassed
+        if (msg.sender == wo.vendor) revert InspectorCannotBeVendor();
         if (wo.status == WorkOrderStatus.Cancelled) revert WorkOrderAlreadyCancelled(workOrderId);
         if (wo.status == WorkOrderStatus.Completed)  revert WorkOrderAlreadyCompleted(workOrderId);
 
@@ -354,9 +359,9 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
             usdc.safeTransfer(wo.vendor, amount);
         } else {
             ms.status = MilestoneStatus.Returned;
-            // SC-05: credit treasury accounting, not raw transfer
+            // H-05: route refund to the correct fund (reserve or operating)
             usdc.approve(treasury, amount);
-            IFaircroftTreasuryEscrow(treasury).creditFromEscrow(amount);
+            IFaircroftTreasuryEscrow(treasury).creditRefundFromEscrow(amount, wo.fromReserve);
         }
 
         emit DisputeResolved(workOrderId, milestoneIndex, releaseToVendor, msg.sender);
@@ -389,9 +394,9 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
         // Refund all escrowed USDC — only non-released milestones still sit here
         // (releasedAmount == 0 means nothing left the escrow yet)
         uint256 refund = wo.totalAmount;
-        // SC-05: credit treasury accounting, not raw transfer
+        // H-05: route refund back to the original source fund
         usdc.approve(treasury, refund);
-        IFaircroftTreasuryEscrow(treasury).creditFromEscrow(refund);
+        IFaircroftTreasuryEscrow(treasury).creditRefundFromEscrow(refund, wo.fromReserve);
 
         emit WorkOrderCancelled(workOrderId, msg.sender, refund);
     }
@@ -519,7 +524,10 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
 
 // ── Interface ────────────────────────────────────────────────────────────────
 
-/// @dev Minimal interface to FaircroftTreasury — used for SC-05 accounting fix
+/// @dev Minimal interface to FaircroftTreasury — used for H-05 refund routing fix
 interface IFaircroftTreasuryEscrow {
-    function creditFromEscrow(uint256 amount) external;
+    /// @notice Route a refund to the correct fund based on the work order's source.
+    /// @param amount USDC amount being returned
+    /// @param isReserve true = credit reserveBalance, false = credit operatingBalance
+    function creditRefundFromEscrow(uint256 amount, bool isReserve) external;
 }

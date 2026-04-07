@@ -459,8 +459,11 @@ contract DuesLending is AccessControl, ReentrancyGuard {
     }
 
     function _loanPoolAvailable() internal view returns (uint256) {
-        uint256 reserveBalance = treasury.reserveBalance();
-        uint256 maxPool = (reserveBalance * maxLoanPoolBps) / 10000;
+        // SC-01: use (reserveBalance + totalOutstanding) as the base so the 15% cap is applied
+        // against the full effective reserve, not just the undeployed remainder. Without this,
+        // each new loan shrinks the denominator, allowing silent breaches of the lending limit.
+        uint256 effectiveReserve = treasury.reserveBalance() + totalOutstanding;
+        uint256 maxPool = (effectiveReserve * maxLoanPoolBps) / 10000;
         return maxPool > totalOutstanding ? maxPool - totalOutstanding : 0;
     }
 

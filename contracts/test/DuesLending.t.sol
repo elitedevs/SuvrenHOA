@@ -917,7 +917,15 @@ contract DuesLendingTest is Test {
         lending.requestLoan(1, 1, 2);
 
         uint256 afterLoan = lending.getLoanPoolAvailable();
-        assertEq(before - afterLoan, QUARTERLY_DUES);
+
+        // SC-01 fix: the pool base is (reserveBalance + totalOutstanding) so issuing a loan
+        // increases effectiveReserve by QUARTERLY_DUES (MockTreasury restores reserve via
+        // payDuesFor). The pool decreases by principal * (1 - maxLoanPoolBps/10000):
+        //   decrease = QUARTERLY_DUES - QUARTERLY_DUES * 1500/10000
+        //            = QUARTERLY_DUES * 8500/10000 = 170e6
+        uint256 maxLoanPoolBps = lending.maxLoanPoolBps();
+        uint256 expectedDecrease = QUARTERLY_DUES - (QUARTERLY_DUES * maxLoanPoolBps / 10000);
+        assertEq(before - afterLoan, expectedDecrease);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
