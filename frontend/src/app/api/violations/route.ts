@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 
 // GET — Public
 export async function GET(request: Request) {
-  const limited = applyRateLimit(request, 'violations:get', RATE_LIMITS.read);
+  const limited = await applyRateLimit(request, 'violations:get', RATE_LIMITS.read);
   if (limited) return limited;
 
   const url = new URL(request.url);
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
 // POST — Authenticated (report violation)
 // Strict rate limit + spam detection for anonymous reporting abuse
 export const POST = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'violations:post', RATE_LIMITS.strict);
+  const limited = await applyRateLimit(request, 'violations:post', RATE_LIMITS.strict);
   if (limited) return limited;
 
   const body = await request.json();
@@ -101,7 +101,7 @@ export const POST = withAuth(async (request, { address }) => {
 
 // PATCH — Board members only (FE-02: verify board membership before allowing status changes)
 export const PATCH = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'violations:patch', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'violations:patch', RATE_LIMITS.write);
   if (limited) return limited;
 
   // FE-02: only active board members may update violations — any authenticated

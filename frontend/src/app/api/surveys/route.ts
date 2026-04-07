@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 
 // GET — Public
 export async function GET(request: Request) {
-  const limited = applyRateLimit(request, 'surveys:get', RATE_LIMITS.read);
+  const limited = await applyRateLimit(request, 'surveys:get', RATE_LIMITS.read);
   if (limited) return limited;
 
   const { data, error } = await supabaseAnon
@@ -24,7 +24,7 @@ export async function GET(request: Request) {
 
 // POST — Authenticated (create survey)
 export const POST = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'surveys:post', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'surveys:post', RATE_LIMITS.write);
   if (limited) return limited;
 
   const body = await request.json();
@@ -70,7 +70,7 @@ export const POST = withAuth(async (request, { address }) => {
 // PATCH — Authenticated (vote)
 // Uses session-verified address for deduplication — not user-supplied wallet
 export const PATCH = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'surveys:patch', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'surveys:patch', RATE_LIMITS.write);
   if (limited) return limited;
 
   const body = await request.json();

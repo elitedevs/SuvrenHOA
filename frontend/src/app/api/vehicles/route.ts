@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 
 // GET — Public
 export async function GET(request: Request) {
-  const limited = applyRateLimit(request, 'vehicles:get', RATE_LIMITS.read);
+  const limited = await applyRateLimit(request, 'vehicles:get', RATE_LIMITS.read);
   if (limited) return limited;
 
   const url = new URL(request.url);
@@ -23,7 +23,7 @@ export async function GET(request: Request) {
 
 // POST — Authenticated
 export const POST = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'vehicles:post', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'vehicles:post', RATE_LIMITS.write);
   if (limited) return limited;
 
   const body = await request.json();

@@ -524,7 +524,7 @@ contract DuesLendingTest is Test {
 
     function test_PayOffLoan_UnlocksNFT_AllowsTransfer() public {
         // Setup: enable free transfers
-        nft.grantRole(nft.GOVERNOR_ROLE(), deployer);
+        nft.grantRole(nft.SOULBOUND_ADMIN_ROLE(), deployer);
         nft.setTransfersRequireApproval(false);
 
         vm.prank(alice);
@@ -1101,7 +1101,7 @@ contract DuesLendingTest is Test {
     }
 
     function test_LoanLock_UnblocksAfterWriteOff() public {
-        nft.grantRole(nft.GOVERNOR_ROLE(), deployer);
+        nft.grantRole(nft.SOULBOUND_ADMIN_ROLE(), deployer);
         nft.setTransfersRequireApproval(false);
 
         vm.prank(alice);

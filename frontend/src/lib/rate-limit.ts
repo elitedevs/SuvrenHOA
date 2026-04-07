@@ -1,56 +1,114 @@
 /**
- * Simple in-memory token-bucket rate limiter.
+ * FE-04 fix: Distributed rate limiter backed by Upstash Redis.
  *
- * FE-04 LIMITATION: This limiter is process-local.  Vercel serverless functions
- * run in many parallel instances — each has its own `buckets` map.  An attacker
- * making parallel requests to different instances gets the full quota per
- * instance, effectively bypassing brute-force protection.
+ * Vercel serverless functions run across many parallel instances; a process-local
+ * Map gives each instance its own independent quota, letting a single IP achieve
+ * `limit × N` requests per window.  This module uses @upstash/ratelimit (sliding
+ * window) when UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN are present so
+ * the quota is shared across all instances.
  *
- * TODO: Replace with a distributed rate limiter backed by Redis/Upstash KV:
- *   import { Ratelimit } from '@upstash/ratelimit';
- *   import { Redis } from '@upstash/redis';
- *   const ratelimit = new Ratelimit({
- *     redis: Redis.fromEnv(),
- *     limiter: Ratelimit.slidingWindow(5, '1 m'),
- *   });
- * See https://github.com/upstash/ratelimit for setup instructions.
+ * Graceful fallback: if the env vars are absent (local dev, CI) the module falls
+ * back to an in-memory token-bucket.  A warning is logged in non-production
+ * environments so misconfigured deployments are caught early.
+ *
+ * Setup: https://upstash.com/docs/redis/sdks/ratelimit-ts/overview
+ *   1. Create an Upstash Redis database.
+ *   2. Add UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN to Vercel env vars.
+ *   3. No code changes needed — this module detects the vars automatically.
  */
+
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
+
+// ── Distributed limiter (Upstash) ─────────────────────────────────────────────
+
+/**
+ * Returns an Upstash Ratelimit instance for the given window spec, or null if
+ * Upstash is not configured.  Instance is created lazily and memoised per spec.
+ */
+const _upstashCache = new Map<string, Ratelimit>();
+
+function getUpstashLimiter(limit: number, windowMs: number): Ratelimit | null {
+  const url   = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+
+  const key = `${limit}:${windowMs}`;
+  if (_upstashCache.has(key)) return _upstashCache.get(key)!;
+
+  const redis = new Redis({ url, token });
+  const limiter = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(limit, `${windowMs} ms`),
+    analytics: false,
+    prefix: '@faircroft/rl',
+  });
+  _upstashCache.set(key, limiter);
+  return limiter;
+}
+
+// ── In-memory fallback (single-instance only) ─────────────────────────────────
 
 interface TokenBucket {
   tokens: number;
   lastRefill: number;
 }
 
-const buckets = new Map<string, TokenBucket>();
+const _buckets = new Map<string, TokenBucket>();
 
-// Evict stale buckets every 5 minutes to prevent memory leaks
 const EVICT_INTERVAL = 5 * 60 * 1000;
-const BUCKET_TTL = 10 * 60 * 1000;
-let lastEviction = Date.now();
+const BUCKET_TTL     = 10 * 60 * 1000;
+let   _lastEviction  = Date.now();
 
-function evictStale() {
+function _evictStale() {
   const now = Date.now();
-  if (now - lastEviction < EVICT_INTERVAL) return;
-  lastEviction = now;
-  for (const [key, bucket] of buckets) {
-    if (now - bucket.lastRefill > BUCKET_TTL) buckets.delete(key);
+  if (now - _lastEviction < EVICT_INTERVAL) return;
+  _lastEviction = now;
+  for (const [k, b] of _buckets) {
+    if (now - b.lastRefill > BUCKET_TTL) _buckets.delete(k);
   }
 }
 
+function _inMemoryLimit(key: string, limit: number, windowMs: number): RateLimitResult {
+  _evictStale();
+  const now    = Date.now();
+  let   bucket = _buckets.get(key);
+
+  if (!bucket) {
+    bucket = { tokens: limit, lastRefill: now };
+    _buckets.set(key, bucket);
+  }
+
+  const elapsed = now - bucket.lastRefill;
+  const refill  = (elapsed / windowMs) * limit;
+  bucket.tokens   = Math.min(limit, bucket.tokens + refill);
+  bucket.lastRefill = now;
+
+  if (bucket.tokens < 1) {
+    const resetMs = ((1 - bucket.tokens) / limit) * windowMs;
+    return { allowed: false, remaining: 0, resetMs };
+  }
+
+  bucket.tokens -= 1;
+  return { allowed: true, remaining: Math.floor(bucket.tokens), resetMs: 0 };
+}
+
+// ── Public API ────────────────────────────────────────────────────────────────
+
 export interface RateLimitConfig {
-  /** Max tokens (requests) in the bucket */
+  /** Max tokens (requests) in the window */
   limit: number;
-  /** Window in milliseconds to fully refill */
+  /** Window duration in milliseconds */
   windowMs: number;
 }
 
 export const RATE_LIMITS = {
   /** 30 writes per minute */
-  write: { limit: 30, windowMs: 60_000 } satisfies RateLimitConfig,
+  write:  { limit: 30,  windowMs: 60_000 } satisfies RateLimitConfig,
   /** 100 reads per minute */
-  read: { limit: 100, windowMs: 60_000 } satisfies RateLimitConfig,
+  read:   { limit: 100, windowMs: 60_000 } satisfies RateLimitConfig,
   /** Strict limit for abuse-prone endpoints: 5 per minute */
-  strict: { limit: 5, windowMs: 60_000 } satisfies RateLimitConfig,
+  strict: { limit: 5,   windowMs: 60_000 } satisfies RateLimitConfig,
 };
 
 export interface RateLimitResult {
@@ -61,32 +119,31 @@ export interface RateLimitResult {
 
 /**
  * Check and consume a token from the rate limit bucket.
- * @param key   Unique key, typically `${route}:${ip}`
- * @param config  Rate limit configuration
+ * Uses Upstash Redis when configured; falls back to in-memory.
+ * @param key    Unique key, typically `${route}:${ip}`
+ * @param config Rate limit configuration
  */
-export function rateLimit(key: string, config: RateLimitConfig): RateLimitResult {
-  evictStale();
-  const now = Date.now();
-  let bucket = buckets.get(key);
+export async function rateLimit(key: string, config: RateLimitConfig): Promise<RateLimitResult> {
+  const upstash = getUpstashLimiter(config.limit, config.windowMs);
 
-  if (!bucket) {
-    bucket = { tokens: config.limit, lastRefill: now };
-    buckets.set(key, bucket);
+  if (upstash) {
+    const { success, remaining, reset } = await upstash.limit(key);
+    return {
+      allowed:   success,
+      remaining,
+      resetMs: success ? 0 : Math.max(0, reset - Date.now()),
+    };
   }
 
-  // Refill tokens proportionally to elapsed time
-  const elapsed = now - bucket.lastRefill;
-  const refill = (elapsed / config.windowMs) * config.limit;
-  bucket.tokens = Math.min(config.limit, bucket.tokens + refill);
-  bucket.lastRefill = now;
-
-  if (bucket.tokens < 1) {
-    const resetMs = ((1 - bucket.tokens) / config.limit) * config.windowMs;
-    return { allowed: false, remaining: 0, resetMs };
+  // Warn in non-production so misconfigured deployments surface early.
+  if (process.env.NODE_ENV === 'production') {
+    console.warn(
+      '[rate-limit] FE-04: UPSTASH_REDIS_REST_URL/TOKEN not set — ' +
+      'falling back to in-memory limiter (not safe across multiple instances).'
+    );
   }
 
-  bucket.tokens -= 1;
-  return { allowed: true, remaining: Math.floor(bucket.tokens), resetMs: 0 };
+  return _inMemoryLimit(key, config.limit, config.windowMs);
 }
 
 /**
@@ -102,15 +159,16 @@ export function getClientIp(request: Request): string {
 }
 
 /**
- * Apply rate limiting to a request. Returns a 429 Response if limited, or null if allowed.
+ * Apply rate limiting to a request.
+ * Returns a 429 Response if limited, null if allowed.
  */
-export function applyRateLimit(
+export async function applyRateLimit(
   request: Request,
   route: string,
   config: RateLimitConfig = RATE_LIMITS.write
-): Response | null {
-  const ip = getClientIp(request);
-  const result = rateLimit(`${route}:${ip}`, config);
+): Promise<Response | null> {
+  const ip     = getClientIp(request);
+  const result = await rateLimit(`${route}:${ip}`, config);
 
   if (!result.allowed) {
     return new Response(

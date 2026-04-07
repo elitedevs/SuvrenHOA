@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 
 // GET — Public
 export async function GET(request: Request) {
-  const limited = applyRateLimit(request, 'architectural:get', RATE_LIMITS.read);
+  const limited = await applyRateLimit(request, 'architectural:get', RATE_LIMITS.read);
   if (limited) return limited;
 
   const url = new URL(request.url);
@@ -32,7 +32,7 @@ export async function GET(request: Request) {
 
 // POST — Authenticated
 export const POST = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'architectural:post', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'architectural:post', RATE_LIMITS.write);
   if (limited) return limited;
 
   const body = await request.json();
@@ -65,7 +65,7 @@ export const POST = withAuth(async (request, { address }) => {
 
 // PATCH — Authenticated (board review)
 export const PATCH = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'architectural:patch', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'architectural:patch', RATE_LIMITS.write);
   if (limited) return limited;
 
   const body = await request.json();

@@ -13,7 +13,7 @@ const signupSchema = z.object({
 });
 
 export async function POST(request: Request) {
-  const limited = applyRateLimit(request, 'launch:signup', RATE_LIMITS.strict);
+  const limited = await applyRateLimit(request, 'launch:signup', RATE_LIMITS.strict);
   if (limited) return limited;
 
   let body: unknown;
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  const limited = applyRateLimit(request, 'launch:count', RATE_LIMITS.read);
+  const limited = await applyRateLimit(request, 'launch:count', RATE_LIMITS.read);
   if (limited) return limited;
 
   const { count, error } = await supabaseAdmin

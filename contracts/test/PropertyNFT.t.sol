@@ -132,7 +132,7 @@ contract PropertyNFTTest is Test {
     }
 
     function test_FreeTransferMode_AllowsTransferWithoutBoardApproval() public {
-        nft.grantRole(nft.GOVERNOR_ROLE(), deployer);
+        nft.grantRole(nft.SOULBOUND_ADMIN_ROLE(), deployer);
         nft.setTransfersRequireApproval(false);
 
         nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
@@ -143,7 +143,7 @@ contract PropertyNFTTest is Test {
     }
 
     function test_FreeTransferMode_ToggleBackToRestricted() public {
-        nft.grantRole(nft.GOVERNOR_ROLE(), deployer);
+        nft.grantRole(nft.SOULBOUND_ADMIN_ROLE(), deployer);
         nft.setTransfersRequireApproval(false);
         nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
 
@@ -358,7 +358,10 @@ contract PropertyNFTTest is Test {
     }
 
     function test_GovernorRoleCanUpdateConfig() public {
+        // setAutoDelegateOnMint still requires GOVERNOR_ROLE
         nft.grantRole(nft.GOVERNOR_ROLE(), bob);
+        // setTransfersRequireApproval requires SOULBOUND_ADMIN_ROLE (SC-08 fix)
+        nft.grantRole(nft.SOULBOUND_ADMIN_ROLE(), bob);
 
         vm.prank(bob);
         nft.setTransfersRequireApproval(false);
@@ -387,7 +390,7 @@ contract PropertyNFTTest is Test {
     }
 
     function test_TransfersWithoutApprovalWhenDisabled() public {
-        nft.grantRole(nft.GOVERNOR_ROLE(), deployer);
+        nft.grantRole(nft.SOULBOUND_ADMIN_ROLE(), deployer);
         nft.setTransfersRequireApproval(false);
 
         nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);
@@ -509,7 +512,7 @@ contract PropertyNFTTest is Test {
 
     function test_LoanLockWithFreeTransferMode() public {
         // Even with transfersRequireApproval=false, loan lock should block
-        nft.grantRole(nft.GOVERNOR_ROLE(), deployer);
+        nft.grantRole(nft.SOULBOUND_ADMIN_ROLE(), deployer);
         nft.grantRole(nft.LENDING_ROLE(), deployer);
         nft.setTransfersRequireApproval(false);
 

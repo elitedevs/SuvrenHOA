@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 
 // GET — Authenticated (user-specific)
 export const GET = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'notifications:get', RATE_LIMITS.read);
+  const limited = await applyRateLimit(request, 'notifications:get', RATE_LIMITS.read);
   if (limited) return limited;
 
   const { data, error } = await supabaseAdmin
@@ -25,7 +25,7 @@ export const GET = withAuth(async (request, { address }) => {
 
 // PATCH — Authenticated
 export const PATCH = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'notifications:patch', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'notifications:patch', RATE_LIMITS.write);
   if (limited) return limited;
 
   const body = await request.json();
@@ -48,7 +48,7 @@ export const PATCH = withAuth(async (request, { address }) => {
 
 // POST — Authenticated (create notification)
 export const POST = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'notifications:post', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'notifications:post', RATE_LIMITS.write);
   if (limited) return limited;
 
   const body = await request.json();
