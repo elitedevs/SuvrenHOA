@@ -41,6 +41,7 @@ export async function updateSession(request: NextRequest) {
     '/api/health',
     '/api/launch/signup',
     '/api/founding/apply',
+    '/api/newsletter',
     // Marketing / static pages
     '/about',
     '/pricing',
