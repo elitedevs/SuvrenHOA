@@ -40,42 +40,63 @@ export function useAIAssistant() {
   const { activeProposals, totalProperties } = usePublicStats();
   const dues = useDuesStatus(property.tokenId);
 
+  // FE-07: extract primitive/stable values before the useCallback dep array.
+  // Hook objects (property, dues, treasury, health) are new references each render;
+  // putting them directly in deps causes processQuery (and then sendMessage) to
+  // recreate on every render, triggering infinite re-render loops in consumers.
+  const hasProperty = property.hasProperty;
+  const tokenId = property.tokenId;
+  const totalSupply = property.totalSupply;
+  const isDuesCurrent = dues.isCurrent;
+  const quartersOwed = dues.quartersOwed;
+  const amountOwed = dues.amountOwed;
+  const totalBalance = treasury.totalBalance;
+  const operatingBalance = treasury.operatingBalance;
+  const reserveBalance = treasury.reserveBalance;
+  const annualDiscount = treasury.annualDiscount;
+  const quarterlyDues = treasury.quarterlyDues;
+  const annualAmount = treasury.annualAmount;
+  const healthLoading = health.loading;
+  const healthScore = health.score;
+  const healthGrade = health.grade;
+  const healthFactors = health.factors;
+
   const processQuery = useCallback(
     async (text: string): Promise<string> => {
       const q = text.toLowerCase().trim();
 
       // ── Dues queries ────────────────────────────────────────
       if (/my dues|how much do i owe|dues status|am i current|paid up/.test(q)) {
-        if (!property.hasProperty) {
+        if (!hasProperty) {
           return "I don't see a property linked to your wallet. Connect a wallet that holds a SuvrenHOA property token to check your dues status.";
         }
-        if (dues.isCurrent === true) {
+        if (isDuesCurrent === true) {
           return `✅ You're all paid up! Your dues are current. Next dues are due at the start of next quarter (${nextQuarterDate()}).`;
         }
-        if (dues.isCurrent === false) {
-          return `⚠️ You have **${dues.quartersOwed} quarter${dues.quartersOwed !== 1 ? 's' : ''}** of dues outstanding — **$${dues.amountOwed} USDC** total. Head to [Pay Dues](/dues) to get current.`;
+        if (isDuesCurrent === false) {
+          return `⚠️ You have **${quartersOwed} quarter${quartersOwed !== 1 ? 's' : ''}** of dues outstanding — **$${amountOwed} USDC** total. Head to [Pay Dues](/dues) to get current.`;
         }
         return "Loading your dues status... Please try again in a moment.";
       }
 
       // ── When are dues due ───────────────────────────────────
       if (/when.*dues|dues.*due|next.*quarter|quarter.*start/.test(q)) {
-        return `📅 Dues are collected **quarterly**. The next quarter starts **${nextQuarterDate()}**. You can pay annually for a ${treasury.annualDiscount}% discount! Visit [/dues](/dues) to pay.`;
+        return `📅 Dues are collected **quarterly**. The next quarter starts **${nextQuarterDate()}**. You can pay annually for a ${annualDiscount}% discount! Visit [/dues](/dues) to pay.`;
       }
 
       // ── How to pay dues ─────────────────────────────────────
       if (/how.*pay|pay.*dues|pay.*my|payment/.test(q)) {
-        return `💳 To pay your dues:\n1. Connect your wallet\n2. Go to [Dues page](/dues)\n3. Choose quarterly ($${treasury.quarterlyDues} USDC) or annual ($${treasury.annualAmount} USDC — saves ${treasury.annualDiscount}%)\n4. Approve USDC and confirm the transaction`;
+        return `💳 To pay your dues:\n1. Connect your wallet\n2. Go to [Dues page](/dues)\n3. Choose quarterly ($${quarterlyDues} USDC) or annual ($${annualAmount} USDC — saves ${annualDiscount}%)\n4. Approve USDC and confirm the transaction`;
       }
 
       // ── Treasury ────────────────────────────────────────────
       if (/treasury|how much.*fund|fund.*balance|operating|reserve|budget/.test(q)) {
-        return `💰 **Treasury Snapshot:**\n• Total Balance: **$${treasury.totalBalance} USDC**\n• Operating Fund: $${treasury.operatingBalance} USDC\n• Reserve Fund: $${treasury.reserveBalance} USDC\n\nSee the full breakdown at [/treasury](/treasury).`;
+        return `💰 **Treasury Snapshot:**\n• Total Balance: **$${totalBalance} USDC**\n• Operating Fund: $${operatingBalance} USDC\n• Reserve Fund: $${reserveBalance} USDC\n\nSee the full breakdown at [/treasury](/treasury).`;
       }
 
       // ── Properties / community size ─────────────────────────
       if (/how many.*prop|properties|community size|total.*home|home.*total|lots|units/.test(q)) {
-        const count = property.totalSupply || Number(totalProperties) || 0;
+        const count = totalSupply || Number(totalProperties) || 0;
         return `🏠 There are currently **${count} properties** registered in the SuvrenHOA community.`;
       }
 
@@ -95,11 +116,11 @@ export function useAIAssistant() {
 
       // ── Health score ────────────────────────────────────────
       if (/health.*score|score|community.*health|hoa.*score/.test(q)) {
-        if (health.loading) {
+        if (healthLoading) {
           return "⏳ Calculating the community health score... try again in a moment!";
         }
-        const factorLines = health.factors.map((f) => `• ${f.icon} ${f.name}: ${f.score}/${f.max}`).join('\n');
-        return `❤️ **Community Health Score: ${health.score}/100 (Grade ${health.grade})**\n\nKey factors:\n${factorLines}\n\nSee the full breakdown at [/health](/health).`;
+        const factorLines = healthFactors.map((f) => `• ${f.icon} ${f.name}: ${f.score}/${f.max}`).join('\n');
+        return `❤️ **Community Health Score: ${healthScore}/100 (Grade ${healthGrade})**\n\nKey factors:\n${factorLines}\n\nSee the full breakdown at [/health](/health).`;
       }
 
       // ── CC&Rs / Rules ───────────────────────────────────────
@@ -149,7 +170,14 @@ export function useAIAssistant() {
       // ── Fallback ────────────────────────────────────────────
       return `🤷 I don't have info on that yet. Try asking about:\n• Dues ("What are my dues?")\n• Treasury ("How much is in the treasury?")\n• Proposals ("Are there active proposals?")\n• Health score, amenities, or documents`;
     },
-    [property, dues, treasury, health, activeProposals, totalProperties]
+    // FE-07: stable primitives only — avoids recreating processQuery every render
+    [
+      hasProperty, tokenId, totalSupply,
+      isDuesCurrent, quartersOwed, amountOwed,
+      totalBalance, operatingBalance, reserveBalance, annualDiscount, quarterlyDues, annualAmount,
+      healthLoading, healthScore, healthGrade, healthFactors,
+      activeProposals, totalProperties,
+    ]
   );
 
   const sendMessage = useCallback(

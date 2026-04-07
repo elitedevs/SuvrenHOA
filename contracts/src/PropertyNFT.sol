@@ -70,10 +70,9 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
     /// @notice Whether a token is locked due to an active loan
     mapping(uint256 tokenId => bool) public loanLocked;
 
-    // ── Counters ─────────────────────────────────────────────────────────────
-
-    /// @notice Total properties ever minted (never decremented)
-    uint256 private _totalMinted;
+    // ── Counters — removed ────────────────────────────────────────────────────
+    // SC-09: _totalMinted was redundant with ERC721Enumerable.totalSupply().
+    // totalMinted() now delegates to totalSupply() directly.
 
     // ── Events ───────────────────────────────────────────────────────────────
 
@@ -156,7 +155,6 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
 
         uint256 tokenId = lotNumber;
         _safeMint(to, tokenId);
-        _totalMinted++;
 
         properties[tokenId] = PropertyInfo({
             lotNumber: lotNumber,
@@ -261,9 +259,10 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
         return (buyer != address(0), buyer);
     }
 
-    /// @notice Total properties currently minted (active)
+    /// @notice Total properties currently minted.
+    /// @dev SC-09: delegates to ERC721Enumerable.totalSupply() — _totalMinted was redundant.
     function totalMinted() external view returns (uint256) {
-        return _totalMinted;
+        return totalSupply();
     }
 
     /// @notice Check if a specific lot has been minted
@@ -325,9 +324,15 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
         // since we inherit Votes directly instead of ERC721Votes
         _transferVotingUnits(from, to, 1);
 
-        // Auto-delegate new owner AFTER transfer completes (not on mint — handled in mintProperty)
+        // SC-05: auto-delegate on transfer — but ONLY if the new owner has not already
+        // configured a delegation. Overriding an existing delegation silently loses the
+        // user's preference (e.g. they delegated to a proxy voter). We delegate to self
+        // only as a first-time convenience for new token recipients.
+        // Mints are handled separately in mintProperty(); we skip from==0 here.
         if (from != address(0) && to != address(0) && autoDelegateOnMint) {
-            _delegate(to, to);
+            if (delegates(to) == address(0)) {
+                _delegate(to, to);
+            }
         }
 
         return previousOwner;

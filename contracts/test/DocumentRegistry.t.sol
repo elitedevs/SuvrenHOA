@@ -43,10 +43,11 @@ contract DocumentRegistryTest is Test {
     }
 
     function test_RegisterDocumentFields() public {
+        string memory validCid = "bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi";
         registry.registerDocument(
             HASH_1,
             "arweave-tx-id-here",
-            "ipfs-cid-here",
+            validCid,
             DocumentRegistry.DocType.CCR,
             "Faircroft CC&Rs",
             0
@@ -55,11 +56,12 @@ contract DocumentRegistryTest is Test {
         DocumentRegistry.Document memory doc = registry.getDocument(0);
         assertEq(doc.contentHash, HASH_1);
         assertEq(doc.timestamp, uint48(block.timestamp));
-        assertEq(doc.supersedes, 0);
+        // SC-08: supersedes=0 (no supersession) is stored as SUPERSEDES_NONE sentinel
+        assertEq(doc.supersedes, registry.SUPERSEDES_NONE());
         assertEq(uint8(doc.docType), uint8(DocumentRegistry.DocType.CCR));
         assertEq(doc.uploadedBy, deployer);
         assertEq(keccak256(bytes(doc.arweaveTxId)), keccak256(bytes("arweave-tx-id-here")));
-        assertEq(keccak256(bytes(doc.ipfsCid)), keccak256(bytes("ipfs-cid-here")));
+        assertEq(keccak256(bytes(doc.ipfsCid)), keccak256(bytes(validCid)));
         assertEq(keccak256(bytes(doc.title)), keccak256(bytes("Faircroft CC&Rs")));
     }
 
@@ -155,7 +157,8 @@ contract DocumentRegistryTest is Test {
     // ═══════════════════════════════════════════════════════════════════════
 
     function test_VerifyRegisteredDocument() public {
-        registry.registerDocument(HASH_1, "tx1", "cid1", DocumentRegistry.DocType.CCR, "CC&Rs", 0);
+        // SC-15: ipfsCid must start with "bafy" (CIDv1 base32 prefix) when non-empty
+        registry.registerDocument(HASH_1, "tx1", "bafybeicid1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", DocumentRegistry.DocType.CCR, "CC&Rs", 0);
 
         (bool exists, uint256 docId, DocumentRegistry.Document memory doc) = registry.verifyDocument(HASH_1);
 
@@ -216,20 +219,29 @@ contract DocumentRegistryTest is Test {
         assertEq(registry.getLatestVersion(1), 3);
     }
 
-    function test_DocIdZeroCannotBeSuperseded() public {
-        // supersedes=0 means "no supersession" — this is a known design tradeoff.
-        // docId 0 can still be versioned via getLatestVersion forward scanning.
+    function test_DocIdZeroSupersedesAmbiguityFixed() public {
+        // SC-08: supersedes=0 in the API call means "no supersession".
+        // Internally stored as SUPERSEDES_NONE (type(uint48).max) to disambiguate
+        // from an actual reference to docId 0 (which is a valid document).
         registry.registerDocument(HASH_1, "tx1", "", DocumentRegistry.DocType.CCR, "v1", 0);
-        
+
         bytes32 h2 = keccak256("v2");
-        // This registers with supersedes=0 (no supersession link), but getLatestVersion
-        // won't chain them. This is acceptable — use placeholder at docId 0 in production.
+        // Passing supersedes=0 → stored as SUPERSEDES_NONE → no chain link created.
+        // To supersede docId 0 explicitly, pass supersedes=0 after it exists... which
+        // would be interpreted as "no supersession". Use a placeholder at docId 0 in
+        // production and start real chains at docId 1.
         registry.registerDocument(h2, "tx2", "", DocumentRegistry.DocType.Amendment, "v2", 0);
 
         assertEq(registry.getDocumentCount(), 2);
-        // These are independent documents (no chain)
+        // Independent documents — no chain
         assertEq(registry.getLatestVersion(0), 0);
         assertEq(registry.getLatestVersion(1), 1);
+
+        // Verify stored supersedes is SUPERSEDES_NONE for both
+        DocumentRegistry.Document memory d0 = registry.getDocument(0);
+        DocumentRegistry.Document memory d1 = registry.getDocument(1);
+        assertEq(d0.supersedes, registry.SUPERSEDES_NONE());
+        assertEq(d1.supersedes, registry.SUPERSEDES_NONE());
     }
 
     function test_SupersedesEmitsEvent() public {
@@ -282,17 +294,36 @@ contract DocumentRegistryTest is Test {
         registry.registerDocument(HASH_2, "tx2", "", DocumentRegistry.DocType.Minutes, "Minutes 1", 0);
         registry.registerDocument(HASH_3, "tx3", "", DocumentRegistry.DocType.Minutes, "Minutes 2", 0);
 
-        uint256[] memory minutesDocs = registry.getDocumentsByType(DocumentRegistry.DocType.Minutes);
+        // SC-07: getDocumentsByType now accepts (docType, offset, limit) and returns (ids, total)
+        (uint256[] memory minutesDocs, uint256 minutesTotal) = registry.getDocumentsByType(DocumentRegistry.DocType.Minutes, 0, 50);
+        assertEq(minutesTotal, 2);
         assertEq(minutesDocs.length, 2);
         assertEq(minutesDocs[0], 1);
         assertEq(minutesDocs[1], 2);
 
-        uint256[] memory ccrs = registry.getDocumentsByType(DocumentRegistry.DocType.CCR);
+        (uint256[] memory ccrs, uint256 ccrsTotal) = registry.getDocumentsByType(DocumentRegistry.DocType.CCR, 0, 50);
+        assertEq(ccrsTotal, 1);
         assertEq(ccrs.length, 1);
         assertEq(ccrs[0], 0);
 
-        uint256[] memory budgets = registry.getDocumentsByType(DocumentRegistry.DocType.Budget);
+        (uint256[] memory budgets, uint256 budgetsTotal) = registry.getDocumentsByType(DocumentRegistry.DocType.Budget, 0, 50);
+        assertEq(budgetsTotal, 0);
         assertEq(budgets.length, 0);
+    }
+
+    function test_GetDocumentsByTypePagination() public {
+        bytes32[] memory hashes = new bytes32[](5);
+        for (uint256 i = 0; i < 5; i++) {
+            hashes[i] = keccak256(abi.encodePacked("minutes", i));
+            registry.registerDocument(hashes[i], string(abi.encodePacked("tx", i)), "", DocumentRegistry.DocType.Minutes, "Minutes", 0);
+        }
+        // First page: offset=0, limit=3
+        (uint256[] memory page1, uint256 total) = registry.getDocumentsByType(DocumentRegistry.DocType.Minutes, 0, 3);
+        assertEq(total, 5);
+        assertEq(page1.length, 3);
+        // Second page: offset=3, limit=3 → only 2 remaining
+        (uint256[] memory page2, ) = registry.getDocumentsByType(DocumentRegistry.DocType.Minutes, 3, 3);
+        assertEq(page2.length, 2);
     }
 
     // ═══════════════════════════════════════════════════════════════════════

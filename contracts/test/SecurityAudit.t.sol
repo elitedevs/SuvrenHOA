@@ -537,7 +537,7 @@ contract SecurityAuditTest is Test {
         // Register doc 0
         bytes32 hash0 = keccak256("original CC&R text");
         docRegistry.registerDocument(
-            hash0, "arweaveTx0", "ipfs0",
+            hash0, "arweaveTx0", "bafybeiczsscdsbs7ffqz55asqdf3smv6klcw3gofszvwlyarci47bgf354",
             DocumentRegistry.DocType.CCR, "Original CC&Rs", 0
         );
 
@@ -545,7 +545,7 @@ contract SecurityAuditTest is Test {
         // Caller INTENDS this to be a new standalone document, not a supersession
         bytes32 hash1 = keccak256("revised CC&R text");
         docRegistry.registerDocument(
-            hash1, "arweaveTx1", "ipfs1",
+            hash1, "arweaveTx1", "bafybeiczsscdsbs7ffqz55asqdf3smv6klcw3gofszvwlyarci47bgf355",
             DocumentRegistry.DocType.CCR, "Revised CC&Rs", 0
         );
 

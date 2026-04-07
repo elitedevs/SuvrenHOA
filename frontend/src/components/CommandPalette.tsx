@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface SearchItem {
@@ -89,19 +89,44 @@ function scoreMatch(query: string, item: SearchItem): number {
   return 40;
 }
 
+// FE-12: deduplicate the static item list once at module load (not per-render).
+// SEARCH_ITEMS has duplicate ids ('violations', 'reservations') which cause React
+// key warnings and inflated result counts.
+const UNIQUE_SEARCH_ITEMS: SearchItem[] = (() => {
+  const seen = new Set<string>();
+  return SEARCH_ITEMS.filter((item) => {
+    if (seen.has(item.id)) return false;
+    seen.add(item.id);
+    return true;
+  });
+})();
+
 export function CommandPalette() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
+  // FE-12: debounce query to avoid running fuzzy search on every keystroke
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const filteredItems = query
-    ? SEARCH_ITEMS
-        .filter(item => fuzzyMatch(query, item))
-        .sort((a, b) => scoreMatch(query, b) - scoreMatch(query, a))
-        .slice(0, 8)
-    : SEARCH_ITEMS.slice(0, 8);
+  // FE-12: debounce — update debouncedQuery 200ms after the user stops typing
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedQuery(query), 200);
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  // FE-12: memoize filtered results — recompute only when debouncedQuery changes
+  const filteredItems = useMemo(
+    () =>
+      debouncedQuery
+        ? UNIQUE_SEARCH_ITEMS
+            .filter((item) => fuzzyMatch(debouncedQuery, item))
+            .sort((a, b) => scoreMatch(debouncedQuery, b) - scoreMatch(debouncedQuery, a))
+            .slice(0, 8)
+        : UNIQUE_SEARCH_ITEMS.slice(0, 8),
+    [debouncedQuery]
+  );
 
   const open = useCallback(() => {
     setIsOpen(true);

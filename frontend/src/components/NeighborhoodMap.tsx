@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { LotData } from '@/hooks/useNeighborhoodMap';
 import type { Incident } from '@/hooks/useIncidents';
 import { geocodeAddress, NEIGHBORHOOD_CENTER, DEFAULT_ZOOM } from '@/utils/geocoding';
@@ -334,6 +334,10 @@ export default function NeighborhoodMap({
   const infoWindowRef = useRef<google.maps.InfoWindow | null>(null);
   const lotMarkersRef = useRef<Map<number, google.maps.Marker>>(new Map());
   const incidentMarkersRef = useRef<Map<string, google.maps.Marker>>(new Map());
+  // FE-02: mapReady triggers re-render of marker effects after async map init.
+  // Without this, marker effects run once with mapRef.current=null and never re-run
+  // because their deps (lots, incidents) haven't changed since the map loaded.
+  const [mapReady, setMapReady] = useState(false);
 
   // ── Initialize map once ──
   useEffect(() => {
@@ -363,6 +367,8 @@ export default function NeighborhoodMap({
 
       mapRef.current = map;
       infoWindowRef.current = infoWindow;
+      // FE-02: signal that the map is ready so marker effects can run
+      setMapReady(true);
     });
 
     return () => {
@@ -379,9 +385,11 @@ export default function NeighborhoodMap({
   }, []);
 
   // ── Update lot markers ──
+  // FE-02: mapReady in deps ensures this runs once the async map init completes,
+  // even if lots/isBoard/showLots haven't changed since component mount.
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || typeof window === 'undefined' || !window.google?.maps) return;
+    if (!mapReady || !map || typeof window === 'undefined' || !window.google?.maps) return;
 
     // Remove stale markers
     const currentIds = new Set(lots.map((l) => l.tokenId));
@@ -454,12 +462,12 @@ export default function NeighborhoodMap({
       lotMarkersRef.current.set(lot.tokenId, marker);
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lots, isBoard, showLots]);
+  }, [lots, isBoard, showLots, mapReady]);
 
   // ── Update incident markers ──
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || typeof window === 'undefined' || !window.google?.maps) return;
+    if (!mapReady || !map || typeof window === 'undefined' || !window.google?.maps) return;
 
     // Remove all and re-render
     incidentMarkersRef.current.forEach((m) => m.setMap(null));
@@ -493,12 +501,12 @@ export default function NeighborhoodMap({
       incidentMarkersRef.current.set(incident.id, marker);
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [incidents, showIncidents]);
+  }, [incidents, showIncidents, mapReady]);
 
   // ── Highlight selected lot ──
   useEffect(() => {
     const map = mapRef.current;
-    if (!map || typeof window === 'undefined' || !window.google?.maps) return;
+    if (!mapReady || !map || typeof window === 'undefined' || !window.google?.maps) return;
 
     lotMarkersRef.current.forEach((marker, tokenId) => {
       const lot = lots.find((l) => l.tokenId === tokenId);
@@ -524,7 +532,7 @@ export default function NeighborhoodMap({
       }
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedLot, lots]);
+  }, [selectedLot, lots, mapReady]);
 
   return (
     <div

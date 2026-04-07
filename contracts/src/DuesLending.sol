@@ -40,6 +40,13 @@ contract DuesLending is AccessControl, ReentrancyGuard {
     /// @notice FaircroftTreasury — we pay dues on behalf of borrowers
     IFaircroftTreasury public immutable treasury;
 
+    // ── Constants ────────────────────────────────────────────────────────────
+
+    /// @notice SC-06: seconds in a Julian year (365.25 × 86400 = 31,557,600).
+    ///         Using 365 days (31,536,000) slightly overstates APR for short loans;
+    ///         365.25 days matches actuarial convention and compound-interest standards.
+    uint256 private constant YEAR_SECONDS = 31_557_600;
+
     // ── Loan Configuration (DAO-adjustable) ──────────────────────────────────
 
     /// @notice Annual interest rate in basis points (default: 500 = 5%)
@@ -99,6 +106,10 @@ contract DuesLending is AccessControl, ReentrancyGuard {
 
     /// @notice Total interest earned lifetime
     uint256 public totalInterestEarned;
+
+    /// @dev SC-01: per-loan tracker of how much has been decremented from totalOutstanding via
+    ///      proportional makePayment steps. _settleLoan uses this to absorb integer rounding dust.
+    mapping(uint256 loanId => uint256 principalDecremented) private _loanPrincipalDecremented;
 
     // ── Events ───────────────────────────────────────────────────────────────
 
@@ -198,9 +209,10 @@ contract DuesLending is AccessControl, ReentrancyGuard {
         uint256 principal = treasury.quarterlyDuesAmount() * quarters;
 
         // Calculate interest (simple interest based on loan duration)
-        // Duration in years = (installments * installmentPeriod) / 365 days
+        // Duration in years = (installments * installmentPeriod) / YEAR_SECONDS
+        // SC-06: use 365.25-day Julian year (YEAR_SECONDS) for actuarial accuracy
         uint256 durationSeconds = uint256(installments) * installmentPeriod;
-        uint256 interest = (principal * interestRateBps * durationSeconds) / (10000 * 365 days);
+        uint256 interest = (principal * interestRateBps * durationSeconds) / (10000 * YEAR_SECONDS);
 
         // Origination fee
         uint256 originationFee = (principal * originationFeeBps) / 10000;
@@ -273,6 +285,15 @@ contract DuesLending is AccessControl, ReentrancyGuard {
         usdc.approve(address(treasury), amount);
         treasury.depositFromLoan(amount);
 
+        // SC-01: decrement totalOutstanding proportionally so the loan pool
+        // calculation (which uses totalOutstanding as effective reserve) reflects
+        // the actual amount still outstanding rather than the full original principal.
+        // principalPortion = principal × (amount / totalOwed) — integer-safe ordering.
+        uint256 principalPortion = (uint256(loan.principal) * amount) / uint256(loan.totalOwed);
+        if (principalPortion > totalOutstanding) principalPortion = totalOutstanding;
+        totalOutstanding -= principalPortion;
+        _loanPrincipalDecremented[loanId] += principalPortion;
+
         loan.totalPaid += uint128(amount);
 
         // Count installments covered
@@ -315,6 +336,19 @@ contract DuesLending is AccessControl, ReentrancyGuard {
         usdc.approve(address(treasury), remaining);
         treasury.depositFromLoan(remaining);
 
+        // SC-01: payOffLoan bypasses the proportional decrement in makePayment.
+        // Subtract remaining outstanding principal in one shot (accounting for any
+        // proportional decrements already applied by prior makePayment calls).
+        uint256 alreadyDecremented = _loanPrincipalDecremented[loanId];
+        uint256 remainingPrincipal = loan.principal > alreadyDecremented
+            ? loan.principal - alreadyDecremented : 0;
+        if (remainingPrincipal <= totalOutstanding) {
+            totalOutstanding -= remainingPrincipal;
+        } else {
+            totalOutstanding = 0;
+        }
+        _loanPrincipalDecremented[loanId] = loan.principal;
+
         loan.totalPaid = loan.totalOwed;
         loan.installmentsPaid = loan.installmentsTotal;
         loan.missedPayments = 0;
@@ -329,9 +363,19 @@ contract DuesLending is AccessControl, ReentrancyGuard {
         Loan storage loan = loans[loanId];
         loan.status = LoanStatus.Settled;
 
-        uint256 interestEarned = loan.totalPaid - loan.principal;
+        uint256 interestEarned = loan.totalPaid > loan.principal
+            ? loan.totalPaid - loan.principal
+            : 0;
         totalInterestEarned += interestEarned;
-        totalOutstanding -= loan.principal;
+        // SC-01: absorb integer rounding dust left by proportional makePayment decrements.
+        // Each proportional decrement is floor(principal * amount / totalOwed), so the sum
+        // of all decrements is ≤ loan.principal. The difference is "dust" (≤ installments-1 wei).
+        uint256 decremented = _loanPrincipalDecremented[loanId];
+        uint256 dust = loan.principal > decremented ? loan.principal - decremented : 0;
+        if (dust > 0) {
+            if (dust <= totalOutstanding) { totalOutstanding -= dust; }
+            else { totalOutstanding = 0; }
+        }
 
         // Unlock property transfer
         propertyNFT.setLoanLock(loan.tokenId, false);
@@ -370,6 +414,8 @@ contract DuesLending is AccessControl, ReentrancyGuard {
     function restructureLoan(uint256 loanId, uint8 newInstallments) external onlyRole(GOVERNOR_ROLE) {
         Loan storage loan = loans[loanId];
         if (loan.status != LoanStatus.Active && loan.status != LoanStatus.Defaulting) revert LoanNotActive();
+        // SC-12: enforce installment bounds — restructure must not bypass maxInstallments cap
+        if (newInstallments < minInstallments || newInstallments > maxInstallments) revert InvalidInstallments();
         if (newInstallments <= loan.installmentsTotal) revert InvalidInstallments();
 
         uint256 remaining = loan.totalOwed - loan.totalPaid;
@@ -452,7 +498,8 @@ contract DuesLending is AccessControl, ReentrancyGuard {
     ) {
         principal = treasury.quarterlyDuesAmount() * quarters;
         uint256 durationSeconds = uint256(installments) * installmentPeriod;
-        interest = (principal * interestRateBps * durationSeconds) / (10000 * 365 days);
+        // SC-06: use 365.25-day Julian year (YEAR_SECONDS) for actuarial accuracy
+        interest = (principal * interestRateBps * durationSeconds) / (10000 * YEAR_SECONDS);
         originationFee = (principal * originationFeeBps) / 10000;
         totalOwed = principal + interest + originationFee;
         installmentAmount = totalOwed / installments;
