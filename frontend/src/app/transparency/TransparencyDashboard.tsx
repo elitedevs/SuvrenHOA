@@ -159,7 +159,8 @@ function relativeTime(ms: number): string {
   if (diff < 60_000) return 'just now';
   if (diff < 3_600_000) return Math.floor(diff / 60_000) + ' min ago';
   if (diff < 86_400_000) return Math.floor(diff / 3_600_000) + ' hr ago';
-  return Math.floor(diff / 86_400_000) + ' days ago';
+  const d = Math.floor(diff / 86_400_000);
+  return d + (d === 1 ? ' day ago' : ' days ago');
 }
 
 

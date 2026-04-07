@@ -49,6 +49,8 @@ export async function updateSession(request: NextRequest) {
     '/login',
     '/signup',
     '/invite/accept',
+    '/sitemap.xml',
+    '/robots.txt',
     // API routes — exact only: a prefix match on e.g. '/api/founding' would expose
     // '/api/founding/[id]' (board approval endpoint) as a public route
     '/api/health',
