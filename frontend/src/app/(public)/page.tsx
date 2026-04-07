@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { AnimatedNumber } from '@/components/AnimatedNumber';
+import { EmailCapture } from '@/components/EmailCapture';
 import {
   Vote, DollarSign, FileText, Shield, BarChart3, Users,
   Link2, ChevronRight, ArrowRight,
@@ -215,6 +216,11 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* ── Newsletter ────────────────────────────────────────────── */}
+      <section className="relative px-6 pb-20 max-w-2xl mx-auto">
+        <EmailCapture source="launch_page" />
       </section>
 
       <div className="h-8" />

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { EmailCapture } from '@/components/EmailCapture';
 
 const PRODUCT_LINKS = [
   { href: '/pricing', label: 'Pricing' },
@@ -27,6 +28,13 @@ export function MarketingFooter() {
   return (
     <footer className="border-t border-[rgba(245,240,232,0.06)]">
       <div className="max-w-6xl mx-auto px-6 py-16">
+        {/* Newsletter row */}
+        <div className="mb-12 pb-10 border-b border-[rgba(245,240,232,0.06)] max-w-sm">
+          <p className="text-[11px] uppercase tracking-widest text-[#B09B71] font-medium mb-1">Product Hunt Launch — May 1st</p>
+          <p className="text-[13px] text-[rgba(245,240,232,0.4)] leading-relaxed">Get notified when we go live and lock in founding member pricing.</p>
+          <EmailCapture variant="inline" source="launch_page" />
+        </div>
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
