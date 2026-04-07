@@ -2,19 +2,28 @@ import { z } from 'zod';
 
 // ─── Shared primitives ───
 const walletAddress = z.string().regex(/^0x[a-fA-F0-9]{40}$/, 'Invalid wallet address');
-const nonEmptyStr = z.string().min(1).max(5000);
-const shortStr = z.string().min(1).max(500);
-const optStr = z.string().max(5000).optional();
-const optShortStr = z.string().max(500).optional();
 const posInt = z.number().int().positive();
 const optPosInt = z.number().int().positive().optional();
 const isoDate = z.string().datetime().or(z.string().regex(/^\d{4}-\d{2}-\d{2}/));
 
+// M-10: per-field length limits rather than a single generic 5000-char cap.
+// Tighter limits reduce memory pressure, prevent log bloat, and reflect realistic
+// content sizes — a title is never legitimately 5000 characters.
+const titleStr    = z.string().min(1).max(200);    // titles, names, short labels
+const bodyStr     = z.string().min(1).max(2000);   // posts, maintenance descriptions
+const longBodyStr = z.string().min(1).max(5000);   // announcements, CC&R text, violations
+
+// Backward-compatible aliases used throughout this file
+const nonEmptyStr  = bodyStr;
+const shortStr     = titleStr;
+const optStr       = longBodyStr.optional();
+const optShortStr  = titleStr.optional();
+
 // ─── Announcements ───
 export const announcementCreateSchema = z.object({
-  title: shortStr,
-  content: nonEmptyStr,
-  author_name: shortStr,
+  title: titleStr,
+  content: longBodyStr,   // announcements may be up to 5000 chars
+  author_name: titleStr,
   author_role: optShortStr,
   priority: z.enum(['info', 'warning', 'urgent']).optional(),
 });

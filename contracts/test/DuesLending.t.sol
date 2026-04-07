@@ -266,7 +266,7 @@ contract DuesLendingTest is Test {
         // principal=200e6, rate=500bps, duration=2*30days, origFee=100bps
         uint256 principal  = QUARTERLY_DUES;
         uint256 duration   = 2 * 30 days;
-        uint256 interest   = (principal * 500 * duration) / (10000 * 365 days);
+        uint256 interest   = (principal * 500 * duration) / (10000 * 31_557_600);
         uint256 origFee    = (principal * 100) / 10000;
         uint256 totalOwed  = principal + interest + origFee;
 

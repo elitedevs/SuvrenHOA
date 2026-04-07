@@ -11,7 +11,10 @@ export function OPTIONS() {
 }
 
 export async function GET(request: Request) {
-  const limited = await applyRateLimit(request, 'auth:nonce', RATE_LIMITS.write);
+  // M-09: nonce is an auth endpoint — use strict limit (5/min) to match verify endpoint.
+  // The previous write limit (30/min) was 6× more permissive than verify (5/min),
+  // allowing an attacker to pre-generate many nonces without triggering rate limits.
+  const limited = await applyRateLimit(request, 'auth:nonce', RATE_LIMITS.strict);
   if (limited) return limited;
 
   const session = await getSession();

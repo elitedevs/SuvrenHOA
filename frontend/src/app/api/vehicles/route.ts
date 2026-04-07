@@ -13,9 +13,17 @@ export async function GET(request: Request) {
   if (limited) return limited;
 
   const url = new URL(request.url);
-  const lot = url.searchParams.get('lot');
+  const lotParam = url.searchParams.get('lot');
+  // M-13: validate query params — parseInt() without validation accepts arbitrary strings
+  // ("Infinity", negative numbers, NaN-producing values) and silently coerces them.
   let query = supabaseAnon.from('hoa_vehicles').select('*').order('created_at', { ascending: false }).limit(100);
-  if (lot) query = query.eq('lot_number', parseInt(lot));
+  if (lotParam !== null) {
+    const lotNumber = Number(lotParam);
+    if (!Number.isInteger(lotNumber) || lotNumber <= 0 || lotNumber > 999999) {
+      return NextResponse.json({ error: 'Invalid lot number' }, { status: 400 });
+    }
+    query = query.eq('lot_number', lotNumber);
+  }
   const { data, error } = await query;
   if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
   return NextResponse.json(data || []);

@@ -250,8 +250,11 @@ contract FaircroftGovernor is
 
     /**
      * @notice Update max active proposals (only via governance)
+     * @dev SC-14: bounded 1–100 to prevent governance DoS from an unreachable cap
+     *      or an unintended zero-value that permanently blocks all proposals.
      */
     function updateMaxActiveProposals(uint256 newMax) external onlyGovernance {
+        if (newMax == 0 || newMax > 100) revert InvalidBps(newMax);
         emit MaxActiveProposalsUpdated(maxActiveProposals, newMax);
         maxActiveProposals = newMax;
     }

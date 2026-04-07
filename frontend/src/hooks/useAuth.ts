@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAccount, useSignMessage } from 'wagmi';
 import { createSiweMessage } from 'viem/siwe';
+import * as Sentry from '@sentry/nextjs';
 
 export function useAuth() {
   const { address: walletAddress, chain } = useAccount();
@@ -19,7 +20,11 @@ export function useAuth() {
         setAddress(data.address);
         setIsAuthenticated(data.isAuthenticated);
       })
-      .catch(() => {})
+      .catch((err) => {
+        // FE-09: log session check failures so they're visible in Sentry rather than silently dropped.
+        // Non-fatal — user just starts unauthenticated.
+        Sentry.captureException(err, { tags: { context: 'useAuth.sessionCheck' } });
+      })
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -31,8 +36,9 @@ export function useAuth() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ wallet_address: walletAddress }),
-    }).catch(() => {
-      // Silent — linking is best-effort on connect
+    }).catch((err) => {
+      // FE-09: linking is best-effort but failures should be visible in Sentry
+      Sentry.captureException(err, { tags: { context: 'useAuth.linkWallet' } });
     });
   }, [walletAddress, isAuthenticated]);
 

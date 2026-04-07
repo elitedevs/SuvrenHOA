@@ -162,6 +162,8 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
     error NotBoardOrVendor(address caller);
     /// @notice SC-11: vendor cannot be their own inspector
     error InspectorCannotBeVendor();
+    /// @notice SC-13: milestone description exceeds max length
+    error MilestoneDescriptionTooLong(uint256 milestoneIndex, uint256 length);
 
     // ── Constructor ──────────────────────────────────────────────────────────
 
@@ -219,10 +221,13 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
         if (bytes(title).length == 0) revert EmptyTitle();
         if (milestones.length == 0) revert EmptyMilestones();
 
-        // Validate milestone amounts
+        // Validate milestone amounts and description lengths
         uint256 totalAmount;
         for (uint256 i; i < milestones.length; ++i) {
             if (milestones[i].amount == 0) revert ZeroAmount();
+            // SC-13: cap description to 1 KiB to prevent calldata bloat and DoS
+            uint256 descLen = bytes(milestones[i].description).length;
+            if (descLen > 1024) revert MilestoneDescriptionTooLong(i, descLen);
             totalAmount += milestones[i].amount;
         }
 
@@ -386,17 +391,35 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
 
         if (wo.status == WorkOrderStatus.Cancelled) revert WorkOrderAlreadyCancelled(workOrderId);
         if (wo.status == WorkOrderStatus.Completed)  revert WorkOrderAlreadyCompleted(workOrderId);
-        if (wo.releasedAmount > 0)                   revert CannotCancelAfterApproval(workOrderId);
+
+        // SC-06: guard on Approved milestones (USDC sent to vendor), not releasedAmount.
+        // releasedAmount > 0 incorrectly blocked cancellation when milestones were Returned
+        // (governance refunded them to Treasury — USDC already left escrow for Treasury,
+        // not for vendor) while allowing cancellation to double-refund Returned amounts.
+        // Instead: block cancel if any milestone has been approved (vendor received payment).
+        // Calculate the actual refundable amount (Pending + Disputed milestones only).
+        uint256 refund = 0;
+        for (uint256 i; i < wo.milestones.length; ++i) {
+            MilestoneStatus ms = wo.milestones[i].status;
+            if (ms == MilestoneStatus.Approved) {
+                // Vendor was already paid — cancel is too late
+                revert CannotCancelAfterApproval(workOrderId);
+            }
+            if (ms == MilestoneStatus.Pending || ms == MilestoneStatus.Disputed) {
+                // Still held in this escrow contract; include in refund
+                refund += wo.milestones[i].amount;
+            }
+            // MilestoneStatus.Returned: already sent back to Treasury via resolveDispute
+        }
 
         wo.status      = WorkOrderStatus.Cancelled;
         wo.completedAt = uint48(block.timestamp);
 
-        // Refund all escrowed USDC — only non-released milestones still sit here
-        // (releasedAmount == 0 means nothing left the escrow yet)
-        uint256 refund = wo.totalAmount;
-        // H-05: route refund back to the original source fund
-        usdc.approve(treasury, refund);
-        IFaircroftTreasuryEscrow(treasury).creditRefundFromEscrow(refund, wo.fromReserve);
+        // H-05: route refund back to the original source fund (only for funds still in escrow)
+        if (refund > 0) {
+            usdc.approve(treasury, refund);
+            IFaircroftTreasuryEscrow(treasury).creditRefundFromEscrow(refund, wo.fromReserve);
+        }
 
         emit WorkOrderCancelled(workOrderId, msg.sender, refund);
     }
