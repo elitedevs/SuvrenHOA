@@ -4,8 +4,8 @@ import { Download, ExternalLink, Mail, Copy, Palette, Type } from 'lucide-react'
 import { PRESS_KIT } from '@/lib/press-kit';
 
 export const metadata: Metadata = {
-  title: 'Press Kit — SuvrenHOA',
-  description: 'Press kit, brand assets, and media contact for SuvrenHOA.',
+  title: 'Press Kit | SuvrenHOA',
+  description: 'Download SuvrenHOA press assets, logos, and brand guidelines. Media inquiries and coverage resources for the first blockchain-powered HOA governance platform.',
 };
 
 export default function PressPage() {
