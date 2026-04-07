@@ -8,7 +8,7 @@ import { GlobalFeatures } from '@/components/GlobalFeatures';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { SeasonalBanner } from '@/components/SeasonalBanner';
 
-const MARKETING_PREFIXES = ['/about', '/pricing', '/security', '/contact', '/blog', '/docs', '/demo', '/landing'];
+const MARKETING_PREFIXES = ['/about', '/pricing', '/security', '/contact', '/blog', '/docs', '/demo', '/landing', '/founding', '/launch', '/press'];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
