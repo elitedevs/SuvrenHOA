@@ -52,6 +52,18 @@ export async function PATCH(
   const { id } = await params;
   const { status } = parsed.data;
 
+  // H-06: Verify the application exists before updating (IDOR guard).
+  // Prevents blind updates to guessed IDs and surfaces invalid references explicitly.
+  const { data: existing, error: fetchError } = await supabaseAdmin
+    .from('founding_applications')
+    .select('id')
+    .eq('id', id)
+    .single();
+
+  if (fetchError || !existing) {
+    return NextResponse.json({ error: 'Application not found' }, { status: 404 });
+  }
+
   const { data: application, error } = await supabaseAdmin
     .from('founding_applications')
     .update({ status, reviewed_by: user.id, reviewed_at: new Date().toISOString() })
@@ -59,7 +71,7 @@ export async function PATCH(
     .select('contact_email, contact_name, community_name')
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : error.message }, { status: 500 });
 
   // Send status email (non-blocking)
   if (status === 'approved') {

@@ -5,7 +5,7 @@ import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { config } from '@/config/wagmi';
-import { AuthProvider } from '@/context/AuthContext';
+import { AuthProviderWithBoundary } from '@/context/AuthContext';
 
 import '@rainbow-me/rainbowkit/styles.css';
 
@@ -21,9 +21,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
               borderRadius: 'medium',
             })}
           >
-            <AuthProvider>
+            <AuthProviderWithBoundary>
               {children}
-            </AuthProvider>
+            </AuthProviderWithBoundary>
           </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 import { supabaseAnon } from '@/lib/supabase-anon';
-import { withAuth } from '@/lib/apiAuth';
+import { withAuth, withBoardAuth } from '@/lib/apiAuth';
 import { architecturalCreateSchema, architecturalPatchSchema } from '@/lib/validation';
 import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
@@ -63,8 +63,8 @@ export const POST = withAuth(async (request, { address }) => {
   return NextResponse.json(data, { status: 201 });
 });
 
-// PATCH — Authenticated (board review)
-export const PATCH = withAuth(async (request, { address }) => {
+// PATCH — Board members only (review/approve/reject)
+export const PATCH = withBoardAuth(async (request, { address }) => {
   const limited = await applyRateLimit(request, 'architectural:patch', RATE_LIMITS.write);
   if (limited) return limited;
 

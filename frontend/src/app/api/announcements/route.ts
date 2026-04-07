@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 import { supabaseAnon } from '@/lib/supabase-anon';
-import { withAuth } from '@/lib/apiAuth';
+import { withBoardAuth } from '@/lib/apiAuth';
 import { announcementCreateSchema } from '@/lib/validation';
 import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
@@ -35,8 +35,8 @@ export async function GET(request: Request) {
   return NextResponse.json(enriched);
 }
 
-// POST /api/announcements — Authenticated (board only)
-export const POST = withAuth(async (request, { address }) => {
+// POST /api/announcements — Board members only
+export const POST = withBoardAuth(async (request, { address }) => {
   const limited = await applyRateLimit(request, 'announcements:post', RATE_LIMITS.write);
   if (limited) return limited;
 

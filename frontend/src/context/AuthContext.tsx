@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { Component, createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { createSupabaseBrowser } from '@/lib/supabase-browser';
 import type { User, Session } from '@supabase/supabase-js';
 
@@ -38,12 +38,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const fetchProfile = useCallback(
     async (userId: string) => {
-      const { data } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
-      setProfile(data as Profile | null);
+      try {
+        const { data } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', userId)
+          .single();
+        setProfile(data as Profile | null);
+      } catch (err) {
+        console.error('[AuthContext] fetchProfile error:', err);
+        setProfile(null);
+      }
     },
     [supabase]
   );
@@ -126,4 +131,43 @@ export function useSupabaseAuth() {
   const context = useContext(AuthContext);
   if (!context) throw new Error('useSupabaseAuth must be used within AuthProvider');
   return context;
+}
+
+/**
+ * FE-03: Error boundary so Supabase initialisation failures don't crash the
+ * entire React tree.  Children render without an auth context (unauthenticated)
+ * rather than showing a blank/broken page.
+ */
+class AuthErrorBoundary extends Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error('[AuthContext] Supabase error caught by boundary:', error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // Render children without auth — users will be treated as unauthenticated.
+      return this.props.children;
+    }
+    return this.props.children;
+  }
+}
+
+export function AuthProviderWithBoundary({ children }: { children: React.ReactNode }) {
+  return (
+    <AuthErrorBoundary>
+      <AuthProvider>{children}</AuthProvider>
+    </AuthErrorBoundary>
+  );
 }
