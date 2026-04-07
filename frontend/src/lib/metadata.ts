@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-const BASE_URL = 'https://suvren.co';
+const BASE_URL = 'https://hoa.suvren.co';
 
 export function createMetadata({
   title,

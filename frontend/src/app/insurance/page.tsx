@@ -132,10 +132,10 @@ function PolicyCard({ policy, onEdit, onDelete }: { policy: Policy; onEdit: () =
           </div>
           {days > 0 && days < 90 && (
             <div className={`text-xs font-medium ${days < 30 ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>
-              Renews in {days} days
+              Renews in {days} {days === 1 ? 'day' : 'days'}
             </div>
           )}
-          {days <= 0 && <div className="text-xs font-medium text-[#8B5A5A]">Expired {Math.abs(days)} days ago</div>}
+          {days <= 0 && <div className="text-xs font-medium text-[#8B5A5A]">Expired {Math.abs(days)} {Math.abs(days) === 1 ? 'day' : 'days'} ago</div>}
           <button
             onClick={() => setExpanded(!expanded)}
             className="p-1 rounded text-[var(--text-disabled)] hover:text-[var(--text-body)] transition-colors"
