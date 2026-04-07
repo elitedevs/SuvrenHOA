@@ -6,7 +6,7 @@ import "../src/VendorEscrow.sol";
 import "./helpers/MockUSDC.sol";
 import "@openzeppelin/contracts/access/IAccessControl.sol";
 
-// ── SC-05 fix: MockTreasury supports creditFromEscrow for proper accounting ──────
+// ── H-05 fix: MockTreasury supports creditRefundFromEscrow for proper accounting ──────
 
 contract MockTreasury {
     MockUSDC public immutable usdc;
@@ -20,8 +20,8 @@ contract MockTreasury {
         usdc.approve(escrow_, amount);
     }
 
-    /// @dev Accept USDC refund from VendorEscrow (no role check needed in mock)
-    function creditFromEscrow(uint256 amount) external {
+    /// @dev Accept USDC refund from VendorEscrow, routing to the correct fund (no accounting in mock)
+    function creditRefundFromEscrow(uint256 amount, bool /* isReserve */) external {
         usdc.transferFrom(msg.sender, address(this), amount);
     }
 }
@@ -93,7 +93,7 @@ contract VendorEscrowTest is Test {
     /// @dev Create the standard work order and return its id
     function _createOrder() internal returns (uint256 id) {
         vm.prank(board);
-        id = escrow.createWorkOrder(vendor, "Landscaping Q1", "Full front yard", _threeMs(), inspector);
+        id = escrow.createWorkOrder(vendor, "Landscaping Q1", "Full front yard", _threeMs(), inspector, false);
     }
 
     // ════════════════════════════════════════════════════════════════════════
@@ -166,7 +166,7 @@ contract VendorEscrowTest is Test {
         vm.prank(board);
         VendorEscrow.MilestoneInput[] memory ms = new VendorEscrow.MilestoneInput[](1);
         ms[0] = VendorEscrow.MilestoneInput("Roof repair", 800e6);
-        escrow.createWorkOrder(vendor2, "Roof job", "Fix shingles", ms, inspector);
+        escrow.createWorkOrder(vendor2, "Roof job", "Fix shingles", ms, inspector, false);
 
         uint256[] memory v1Orders = escrow.getVendorWorkOrders(vendor);
         uint256[] memory v2Orders = escrow.getVendorWorkOrders(vendor2);
@@ -180,32 +180,32 @@ contract VendorEscrowTest is Test {
     function test_CreateWorkOrder_RevertsNotBoard() public {
         vm.prank(stranger);
         vm.expectRevert();
-        escrow.createWorkOrder(vendor, "title", "desc", _threeMs(), inspector);
+        escrow.createWorkOrder(vendor, "title", "desc", _threeMs(), inspector, false);
     }
 
     function test_CreateWorkOrder_RevertsZeroVendor() public {
         vm.prank(board);
         vm.expectRevert(VendorEscrow.ZeroAddress.selector);
-        escrow.createWorkOrder(address(0), "title", "desc", _threeMs(), inspector);
+        escrow.createWorkOrder(address(0), "title", "desc", _threeMs(), inspector, false);
     }
 
     function test_CreateWorkOrder_RevertsZeroInspector() public {
         vm.prank(board);
         vm.expectRevert(VendorEscrow.ZeroAddress.selector);
-        escrow.createWorkOrder(vendor, "title", "desc", _threeMs(), address(0));
+        escrow.createWorkOrder(vendor, "title", "desc", _threeMs(), address(0), false);
     }
 
     function test_CreateWorkOrder_RevertsEmptyTitle() public {
         vm.prank(board);
         vm.expectRevert(VendorEscrow.EmptyTitle.selector);
-        escrow.createWorkOrder(vendor, "", "desc", _threeMs(), inspector);
+        escrow.createWorkOrder(vendor, "", "desc", _threeMs(), inspector, false);
     }
 
     function test_CreateWorkOrder_RevertsEmptyMilestones() public {
         vm.prank(board);
         VendorEscrow.MilestoneInput[] memory empty = new VendorEscrow.MilestoneInput[](0);
         vm.expectRevert(VendorEscrow.EmptyMilestones.selector);
-        escrow.createWorkOrder(vendor, "title", "desc", empty, inspector);
+        escrow.createWorkOrder(vendor, "title", "desc", empty, inspector, false);
     }
 
     function test_CreateWorkOrder_RevertsZeroMilestoneAmount() public {
@@ -214,7 +214,7 @@ contract VendorEscrowTest is Test {
         ms[0] = VendorEscrow.MilestoneInput("Good milestone", 500e6);
         ms[1] = VendorEscrow.MilestoneInput("Zero milestone", 0);
         vm.expectRevert(VendorEscrow.ZeroAmount.selector);
-        escrow.createWorkOrder(vendor, "title", "desc", ms, inspector);
+        escrow.createWorkOrder(vendor, "title", "desc", ms, inspector, false);
     }
 
     // ════════════════════════════════════════════════════════════════════════
@@ -798,11 +798,11 @@ contract VendorEscrowTest is Test {
     function test_AccessControl_OnlyBoardCanCreate() public {
         vm.prank(governor);
         vm.expectRevert();
-        escrow.createWorkOrder(vendor, "t", "d", _threeMs(), inspector);
+        escrow.createWorkOrder(vendor, "t", "d", _threeMs(), inspector, false);
 
         vm.prank(inspector);
         vm.expectRevert();
-        escrow.createWorkOrder(vendor, "t", "d", _threeMs(), inspector);
+        escrow.createWorkOrder(vendor, "t", "d", _threeMs(), inspector, false);
     }
 
     function test_AccessControl_OnlyGovernorCanResolve() public {
@@ -845,7 +845,7 @@ contract VendorEscrowTest is Test {
         vm.prank(board);
         VendorEscrow.MilestoneInput[] memory ms = new VendorEscrow.MilestoneInput[](1);
         ms[0] = VendorEscrow.MilestoneInput("Full plumbing repair", 1500e6);
-        uint256 id = escrow.createWorkOrder(vendor, "Plumbing", "Fix all pipes", ms, inspector);
+        uint256 id = escrow.createWorkOrder(vendor, "Plumbing", "Fix all pipes", ms, inspector, false);
 
         vm.expectEmit(true, true, false, true);
         emit VendorEscrow.WorkOrderCompleted(id, 1500e6);
@@ -941,7 +941,7 @@ contract VendorEscrowTest is Test {
         vm.prank(board);
         VendorEscrow.MilestoneInput[] memory ms = new VendorEscrow.MilestoneInput[](1);
         ms[0] = VendorEscrow.MilestoneInput("Roof", 400e6);
-        uint256 id1 = escrow.createWorkOrder(vendor2, "Roofing", "desc", ms, inspector);
+        uint256 id1 = escrow.createWorkOrder(vendor2, "Roofing", "desc", ms, inspector, false);
 
         // Cancel order 0
         vm.prank(board); escrow.cancelWorkOrder(id0);
@@ -971,7 +971,7 @@ contract VendorEscrowTest is Test {
 
         vm.prank(board);
         vm.expectRevert(); // ERC20 transfer will fail
-        escrow2.createWorkOrder(vendor, "Big job", "desc", _threeMs(), inspector);
+        escrow2.createWorkOrder(vendor, "Big job", "desc", _threeMs(), inspector, false);
     }
 
     function test_CreateWorkOrder_RevertNoTreasuryApproval() public {
@@ -984,7 +984,7 @@ contract VendorEscrowTest is Test {
 
         vm.prank(board);
         vm.expectRevert(); // safeTransferFrom will revert without allowance
-        escrow3.createWorkOrder(vendor, "No allowance", "desc", _threeMs(), inspector);
+        escrow3.createWorkOrder(vendor, "No allowance", "desc", _threeMs(), inspector, false);
     }
 
     function test_SingleMilestone_CreatesAndCompletes() public {
@@ -992,7 +992,7 @@ contract VendorEscrowTest is Test {
         ms[0] = VendorEscrow.MilestoneInput("Full payment", 1000e6);
 
         vm.prank(board);
-        uint256 id = escrow.createWorkOrder(vendor, "Single milestone", "desc", ms, inspector);
+        uint256 id = escrow.createWorkOrder(vendor, "Single milestone", "desc", ms, inspector, false);
 
         vm.prank(inspector);
         escrow.approveMilestone(id, 0);
@@ -1064,7 +1064,7 @@ contract VendorEscrowTest is Test {
         ms[2] = VendorEscrow.MilestoneInput("M3", a3);
 
         vm.prank(board);
-        uint256 id = escrow.createWorkOrder(vendor, "Fuzz order", "desc", ms, inspector);
+        uint256 id = escrow.createWorkOrder(vendor, "Fuzz order", "desc", ms, inspector, false);
 
         uint256 total = uint256(a1) + a2 + a3;
         assertEq(escrow.getWorkOrder(id).totalAmount, total);

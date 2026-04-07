@@ -71,6 +71,8 @@ contract FaircroftGovernor is
     event QuorumUpdated(ProposalCategory category, uint256 oldBps, uint256 newBps);
     event ThresholdUpdated(ProposalCategory category, uint256 oldBps, uint256 newBps);
     event MaxActiveProposalsUpdated(uint256 oldMax, uint256 newMax);
+    /// @notice H-08: emitted whenever activeProposalCount changes so indexers can detect desync
+    event ActiveProposalCountChanged(uint256 newCount);
 
     // ── Errors ───────────────────────────────────────────────────────────────
 
@@ -130,6 +132,7 @@ contract FaircroftGovernor is
         }
         uint256 proposalId = super.propose(targets, values, calldatas, description);
         activeProposalCount++;
+        emit ActiveProposalCountChanged(activeProposalCount);
         return proposalId;
     }
 
@@ -255,7 +258,8 @@ contract FaircroftGovernor is
 
     /**
      * @notice Decrement activeProposalCount for proposals that are no longer active.
-     *         Anyone can call this for proposals in Defeated, Expired, or Canceled state.
+     *         Anyone can call this for proposals in Defeated, Expired, Canceled, or Executed state.
+     *         H-08: Executed proposals are also terminal — without this they permanently consume slots.
      * @param proposalId The proposal to clean up
      */
     function cleanupProposal(uint256 proposalId) public {
@@ -265,13 +269,27 @@ contract FaircroftGovernor is
         if (
             currentState != ProposalState.Defeated &&
             currentState != ProposalState.Canceled &&
-            currentState != ProposalState.Expired
+            currentState != ProposalState.Expired &&
+            currentState != ProposalState.Executed
         ) {
             revert ProposalStillActive(proposalId);
         }
 
         proposalCleaned[proposalId] = true;
-        if (activeProposalCount > 0) activeProposalCount--;
+        if (activeProposalCount > 0) {
+            activeProposalCount--;
+            emit ActiveProposalCountChanged(activeProposalCount);
+        }
+    }
+
+    /**
+     * @notice Governance-only manual resync in case activeProposalCount drifts.
+     *         H-08: escape hatch if the counter ever desyncs despite the safeguards above.
+     * @param newCount The correct active proposal count
+     */
+    function resyncActiveCount(uint256 newCount) external onlyGovernance {
+        activeProposalCount = newCount;
+        emit ActiveProposalCountChanged(newCount);
     }
 
     // ── EIP-6372: Timestamp Clock ────────────────────────────────────────────
@@ -350,10 +368,11 @@ contract FaircroftGovernor is
         internal override(Governor, GovernorTimelockControl)
     {
         super._executeOperations(proposalId, targets, values, calldatas, descriptionHash);
-        // SC-03: guard against underflow if this proposal bypassed the counter somehow
+        // H-08: auto-decrement on execute so executed proposals never occupy slots indefinitely
         if (!proposalCleaned[proposalId] && activeProposalCount > 0) {
             proposalCleaned[proposalId] = true;
             activeProposalCount--;
+            emit ActiveProposalCountChanged(activeProposalCount);
         }
     }
 
@@ -367,10 +386,11 @@ contract FaircroftGovernor is
         returns (uint256)
     {
         uint256 proposalId = super._cancel(targets, values, calldatas, descriptionHash);
-        // SC-03: guard against underflow
+        // H-08: auto-decrement on cancel
         if (!proposalCleaned[proposalId] && activeProposalCount > 0) {
             proposalCleaned[proposalId] = true;
             activeProposalCount--;
+            emit ActiveProposalCountChanged(activeProposalCount);
         }
         return proposalId;
     }

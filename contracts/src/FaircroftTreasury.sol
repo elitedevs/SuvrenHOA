@@ -465,12 +465,14 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     // ── VendorEscrow Support ──────────────────────────────────────────────────
 
     /**
-     * @notice Accept USDC refund from VendorEscrow and credit operating balance.
+     * @notice Accept USDC refund from VendorEscrow and credit the correct fund.
      *         Called when a work order is cancelled or a dispute is resolved in Treasury's favour.
      *         Caller (VendorEscrow) must approve this contract to spend `amount` USDC first.
-     * @param amount USDC being returned from escrow
+     * @param amount     USDC being returned from escrow
+     * @param isReserve  H-05: true = credit reserveBalance (work order was funded from reserve),
+     *                   false = credit operatingBalance (work order was funded from operating)
      */
-    function creditFromEscrow(uint256 amount)
+    function creditRefundFromEscrow(uint256 amount, bool isReserve)
         external
         nonReentrant
         onlyRole(ESCROW_ROLE)
@@ -478,7 +480,11 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
         if (amount == 0) revert ZeroAmount();
 
         usdc.safeTransferFrom(msg.sender, address(this), amount);
-        operatingBalance += amount;
+        if (isReserve) {
+            reserveBalance += amount;
+        } else {
+            operatingBalance += amount;
+        }
 
         emit EscrowCreditReceived(msg.sender, amount);
     }

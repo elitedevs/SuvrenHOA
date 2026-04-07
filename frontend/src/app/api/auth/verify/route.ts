@@ -6,6 +6,11 @@ import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
+// M-07: handle CORS preflight
+export function OPTIONS() {
+  return new Response(null, { status: 204 });
+}
+
 export async function POST(request: Request) {
   const limited = await applyRateLimit(request, 'auth:verify', RATE_LIMITS.strict);
   if (limited) return limited;
@@ -21,6 +26,15 @@ export async function POST(request: Request) {
 
   if (!session.nonce) {
     return NextResponse.json({ error: 'No nonce found — request a nonce first' }, { status: 422 });
+  }
+
+  // FE-10: reject nonces older than 5 minutes to prevent replay attacks
+  const NONCE_TTL_MS = 5 * 60 * 1000;
+  if (!session.nonceCreatedAt || Date.now() - session.nonceCreatedAt > NONCE_TTL_MS) {
+    session.nonce = undefined;
+    session.nonceCreatedAt = undefined;
+    await session.save();
+    return NextResponse.json({ error: 'Nonce expired — request a new nonce' }, { status: 422 });
   }
 
   try {

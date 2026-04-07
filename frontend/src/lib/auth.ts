@@ -5,6 +5,7 @@ import { verifyMessage } from 'viem';
 
 export interface SessionData {
   nonce?: string;
+  nonceCreatedAt?: number; // FE-10: Unix ms timestamp — nonces older than 5 min are rejected
   address?: string;
 }
 

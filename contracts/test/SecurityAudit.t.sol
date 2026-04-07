@@ -635,7 +635,8 @@ contract SecurityAuditTest is Test {
             "Pool Work",
             "Resurface community pool",
             milestones,
-            vendor   // ← inspector == vendor: must revert
+            vendor,   // ← inspector == vendor: must revert
+            false
         );
     }
 

@@ -6,6 +6,11 @@ import { Resend } from 'resend';
 
 export const dynamic = 'force-dynamic';
 
+// M-07: handle CORS preflight
+export function OPTIONS() {
+  return new Response(null, { status: 204 });
+}
+
 /** H-07: Server-safe HTML escaping for email templates (no DOM required). */
 function esc(str: string): string {
   return str

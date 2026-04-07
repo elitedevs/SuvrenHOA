@@ -4,6 +4,11 @@ import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
+// M-07: handle CORS preflight
+export function OPTIONS() {
+  return new Response(null, { status: 204 });
+}
+
 export async function POST(request: Request) {
   const limited = await applyRateLimit(request, 'auth:logout', RATE_LIMITS.write);
   if (limited) return limited;
