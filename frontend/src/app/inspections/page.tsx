@@ -65,7 +65,7 @@ function InspectionCard({ inspection }: { inspection: Inspection }) {
               {new Date(inspection.scheduledDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
             {isUpcoming && daysAway > 0 && (
-              <p className="text-xs text-[var(--steel)] mt-1">In {daysAway} days</p>
+              <p className="text-xs text-[var(--steel)] mt-1">In {daysAway} {daysAway === 1 ? 'day' : 'days'}</p>
             )}
           </div>
         </div>

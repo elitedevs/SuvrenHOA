@@ -12,7 +12,7 @@ const MARKETING_PREFIXES = ['/about', '/pricing', '/security', '/contact', '/blo
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isMarketing = MARKETING_PREFIXES.some(p => pathname.startsWith(p));
+  const isMarketing = pathname === '/' || MARKETING_PREFIXES.some(p => pathname.startsWith(p));
 
   if (isMarketing) {
     return <>{children}</>;
