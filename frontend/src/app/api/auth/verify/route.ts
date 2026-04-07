@@ -7,7 +7,7 @@ import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
-  const limited = applyRateLimit(request, 'auth:verify', RATE_LIMITS.strict);
+  const limited = await applyRateLimit(request, 'auth:verify', RATE_LIMITS.strict);
   if (limited) return limited;
 
   const body = await request.json();

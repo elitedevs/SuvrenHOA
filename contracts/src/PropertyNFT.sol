@@ -28,6 +28,15 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
     /// @notice Role for lending operations (DuesLending contract)
     bytes32 public constant LENDING_ROLE = keccak256("LENDING_ROLE");
 
+    /// @notice Role required to modify the soulbound enforcement setting.
+    ///         NOT granted by default — must be explicitly assigned via a separate
+    ///         governance action (Constitutional category recommended).
+    ///         SC-08 fix: forces a two-proposal barrier before soulbound can be
+    ///         disabled: (1) governance grants this role, (2) governance calls
+    ///         setTransfersRequireApproval(false).  Each step is independently
+    ///         visible on-chain and gives the community two opportunities to resist.
+    bytes32 public constant SOULBOUND_ADMIN_ROLE = keccak256("SOULBOUND_ADMIN_ROLE");
+
     // ── Immutables ───────────────────────────────────────────────────────────
 
     /// @notice Maximum number of lots in the community (set at deploy, cannot change)
@@ -89,6 +98,11 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
     );
 
     event ConfigUpdated(string parameter, bool value);
+
+    /// @notice Emitted when soulbound enforcement is changed.
+    ///         SC-08: dedicated event so off-chain monitors can alert the community
+    ///         immediately when the transfer-approval requirement is toggled.
+    event SoulboundStatusChanged(bool transfersRequireApproval, address indexed changedBy);
 
     event LoanLockChanged(uint256 indexed tokenId, bool locked);
 
@@ -202,10 +216,17 @@ contract PropertyNFT is ERC721, ERC721Enumerable, Votes, AccessControl {
     }
 
     /**
-     * @notice Update contract configuration via governance
+     * @notice Enable or disable the soulbound transfer-approval requirement.
+     * @dev SC-08 fix: requires SOULBOUND_ADMIN_ROLE (not granted by default) instead
+     *      of GOVERNOR_ROLE.  The Timelock/Governor must first pass a Constitutional
+     *      proposal to grant SOULBOUND_ADMIN_ROLE before this setter can be called,
+     *      creating a mandatory two-proposal barrier and two on-chain warning events.
+     *      Emits SoulboundStatusChanged (prominent, named event) in addition to
+     *      ConfigUpdated for backwards-compat indexers.
      */
-    function setTransfersRequireApproval(bool value) external onlyRole(GOVERNOR_ROLE) {
+    function setTransfersRequireApproval(bool value) external onlyRole(SOULBOUND_ADMIN_ROLE) {
         transfersRequireApproval = value;
+        emit SoulboundStatusChanged(value, msg.sender);
         emit ConfigUpdated("transfersRequireApproval", value);
     }
 

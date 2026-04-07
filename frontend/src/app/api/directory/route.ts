@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 // GET — Public
 export async function GET(request: Request) {
-  const limited = applyRateLimit(request, 'directory:get', RATE_LIMITS.read);
+  const limited = await applyRateLimit(request, 'directory:get', RATE_LIMITS.read);
   if (limited) return limited;
 
   const [boardRes, committeesRes] = await Promise.all([

@@ -6,7 +6,7 @@ import { applyRateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
-  const limited = applyRateLimit(request, 'board-check:get', RATE_LIMITS.read);
+  const limited = await applyRateLimit(request, 'board-check:get', RATE_LIMITS.read);
   if (limited) return limited;
 
   const wallet = request.nextUrl.searchParams.get('wallet');

@@ -19,7 +19,7 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const limited = applyRateLimit(request, 'founding:update', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'founding:update', RATE_LIMITS.write);
   if (limited) return limited;
 
   // Verify admin session

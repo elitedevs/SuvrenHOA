@@ -23,7 +23,7 @@ const applySchema = z.object({
 });
 
 export async function POST(request: Request) {
-  const limited = applyRateLimit(request, 'founding:apply', RATE_LIMITS.strict);
+  const limited = await applyRateLimit(request, 'founding:apply', RATE_LIMITS.strict);
   if (limited) return limited;
 
   let body: unknown;

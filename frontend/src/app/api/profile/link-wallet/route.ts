@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
  * Auto-links a wallet address to the authenticated user's profile.
  */
 export const POST = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'link-wallet:post', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'link-wallet:post', RATE_LIMITS.write);
   if (limited) return limited;
 
   const body = await request.json();

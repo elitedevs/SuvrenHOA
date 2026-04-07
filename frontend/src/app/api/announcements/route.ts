@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 
 // GET /api/announcements — Public
 export async function GET(request: Request) {
-  const limited = applyRateLimit(request, 'announcements:get', RATE_LIMITS.read);
+  const limited = await applyRateLimit(request, 'announcements:get', RATE_LIMITS.read);
   if (limited) return limited;
 
   const { data, error } = await supabaseAnon
@@ -37,7 +37,7 @@ export async function GET(request: Request) {
 
 // POST /api/announcements — Authenticated (board only)
 export const POST = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'announcements:post', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'announcements:post', RATE_LIMITS.write);
   if (limited) return limited;
 
   const body = await request.json();

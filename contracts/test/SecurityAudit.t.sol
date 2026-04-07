@@ -467,12 +467,15 @@ contract SecurityAuditTest is Test {
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    // SC-08: Governance can disable soulbound transfers - MEDIUM
+    // SC-08: setTransfersRequireApproval requires SOULBOUND_ADMIN_ROLE - MEDIUM
     //
-    // If a governance proposal passes setTransfersRequireApproval(false),
-    // PropertyNFTs become freely-transferable ERC-721s.  An adversary receiving
-    // a transferred NFT gets immediate voting power without board vetting,
-    // enabling rapid governance capture before detection.
+    // SC-08 FIX CONFIRMED: setTransfersRequireApproval() now requires
+    // SOULBOUND_ADMIN_ROLE (not granted by default) instead of GOVERNOR_ROLE.
+    // Disabling soulbound now requires TWO sequential governance proposals:
+    //   1. Grant SOULBOUND_ADMIN_ROLE to the Timelock.
+    //   2. Call setTransfersRequireApproval(false).
+    // Each step emits an on-chain event giving the community two opportunities
+    // to detect and resist the attack before NFTs become freely transferable.
     // ─────────────────────────────────────────────────────────────────────────
 
     function test_SC08_DisablingSoulboundAllowsUnauthorisedTransfer() public {
@@ -483,18 +486,39 @@ contract SecurityAuditTest is Test {
         );
         propertyNFT.safeTransferFrom(alice, attacker, 1);
 
-        // b) Governance disables the protection
+        // b) FIX: Timelock does NOT hold SOULBOUND_ADMIN_ROLE by default.
+        //    setTransfersRequireApproval() reverts even for the Timelock.
         vm.prank(address(timelock));
+        vm.expectRevert(); // AccessControl: missing SOULBOUND_ADMIN_ROLE
         propertyNFT.setTransfersRequireApproval(false);
 
-        // c) Transfer now succeeds without board approval
+        // c) Soulbound is still enforced — transfer remains blocked
         vm.prank(alice);
+        vm.expectRevert(
+            abi.encodeWithSelector(PropertyNFT.TransferNotApproved.selector, 1)
+        );
         propertyNFT.safeTransferFrom(alice, attacker, 1);
 
+        assertEq(propertyNFT.ownerOf(1), alice,
+            "SC-08-FIX: alice still owns the NFT after failed attack");
+        assertEq(propertyNFT.getVotes(attacker), 0,
+            "SC-08-FIX: attacker has no voting power");
+
+        // d) Two-step attack path (documents the remaining barrier):
+        //    Step 1 — a separate governance proposal must grant the role.
+        //    Step 2 — only then can soulbound be disabled.
+        //    Emits SoulboundStatusChanged so off-chain monitors can alert.
+        propertyNFT.grantRole(propertyNFT.SOULBOUND_ADMIN_ROLE(), address(timelock));
+
+        vm.prank(address(timelock));
+        vm.expectEmit(true, false, false, true);
+        emit PropertyNFT.SoulboundStatusChanged(false, address(timelock));
+        propertyNFT.setTransfersRequireApproval(false);
+
+        vm.prank(alice);
+        propertyNFT.safeTransferFrom(alice, attacker, 1);
         assertEq(propertyNFT.ownerOf(1), attacker,
-            "SC-08: attacker owns the NFT without board approval");
-        assertGt(propertyNFT.getVotes(attacker), 0,
-            "SC-08: attacker has active voting power via auto-delegate");
+            "SC-08: two-step attack succeeds only after role is explicitly granted");
     }
 
     // ─────────────────────────────────────────────────────────────────────────

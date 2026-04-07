@@ -105,7 +105,8 @@ contract LendingFlowTest is Test {
         // Roles
         nft.grantRole(nft.LENDING_ROLE(),    address(lending));
         nft.grantRole(nft.REGISTRAR_ROLE(),  deployer);
-        nft.grantRole(nft.GOVERNOR_ROLE(),   deployer);
+        nft.grantRole(nft.GOVERNOR_ROLE(),        deployer);
+        nft.grantRole(nft.SOULBOUND_ADMIN_ROLE(), deployer);
 
         // Properties
         nft.mintProperty(alice, 1, "101 Faircroft Dr", 2500);

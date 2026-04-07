@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 // GET — Authenticated (user-specific)
 export const GET = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'profile:get', RATE_LIMITS.read);
+  const limited = await applyRateLimit(request, 'profile:get', RATE_LIMITS.read);
   if (limited) return limited;
 
   const { data, error } = await supabaseAdmin
@@ -26,7 +26,7 @@ export const GET = withAuth(async (request, { address }) => {
 
 // POST — Authenticated
 export const POST = withAuth(async (request, { address }) => {
-  const limited = applyRateLimit(request, 'profile:post', RATE_LIMITS.write);
+  const limited = await applyRateLimit(request, 'profile:post', RATE_LIMITS.write);
   if (limited) return limited;
 
   const body = await request.json();
