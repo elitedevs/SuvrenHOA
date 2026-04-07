@@ -13,24 +13,24 @@ export function createMetadata({
   path?: string;
   ogImage?: string;
 }): Metadata {
-  const fullTitle = title === 'SuvrenHOA' ? title : `${title} | SuvrenHOA`;
+  const ogTitle = title === 'SuvrenHOA' ? title : `${title} — SuvrenHOA`;
   const url = `${BASE_URL}${path}`;
   const image = ogImage || `${BASE_URL}/og-default.png`;
 
   return {
-    title: fullTitle,
+    title,
     description,
     openGraph: {
-      title: fullTitle,
+      title: ogTitle,
       description,
       url,
       siteName: 'SuvrenHOA',
       type: 'website',
-      images: [{ url: image, width: 1200, height: 630, alt: fullTitle }],
+      images: [{ url: image, width: 1200, height: 630, alt: ogTitle }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: fullTitle,
+      title: ogTitle,
       description,
       images: [image],
       creator: '@SuvrenHOA',
