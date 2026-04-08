@@ -271,9 +271,11 @@ export function Header() {
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#B09B71] to-[var(--brass-deep)] flex items-center justify-center font-medium text-sm text-[var(--text-heading)] group-hover:shadow-[0_0_16px_rgba(201,169,110,0.4)] transition-all duration-300 group-hover:scale-105">
-                S
-              </div>
+              <img
+                src="/logo-icon.svg"
+                alt="SuvrenHOA"
+                className="h-8 w-8 object-contain transition-all duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_rgba(201,169,110,0.4)]"
+              />
               <span className="text-[15px] font-medium hidden sm:block tracking-tight">
                 <span className="gradient-text">Suvren</span>
                 <span className="text-[var(--text-disabled)]">HOA</span>

@@ -22,10 +22,11 @@ export function MarketingHeader() {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-               style={{ background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)' }}>
-            <span className="text-sm font-bold text-[#0C0C0E]">S</span>
-          </div>
+          <img
+            src="/logo-icon.svg"
+            alt="SuvrenHOA"
+            className="h-8 w-8 object-contain transition-transform duration-300 group-hover:scale-105"
+          />
           <span className="text-lg font-medium text-[var(--parchment)] tracking-tight"
                 style={{ fontFamily: 'var(--font-heading)' }}>
             SuvrenHOA
