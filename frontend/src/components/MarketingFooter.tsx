@@ -40,7 +40,7 @@ export function MarketingFooter() {
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-                   style={{ background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)' }}>
+                   style={{ background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)' }}>
                 <span className="text-sm font-bold text-[#0C0C0E]">S</span>
               </div>
               <span className="text-lg font-medium text-[var(--parchment)] tracking-tight"

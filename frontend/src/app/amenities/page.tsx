@@ -266,7 +266,7 @@ function AmenityBookingView({
         {activeTab === 'book' ? (
           <div className="glass-card rounded-xl p-5 space-y-4">
             {success && (
-              <div className="p-3 rounded-lg bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)] text-xs text-[#3A7D6F]">
+              <div className="p-3 rounded-lg bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)] text-xs text-[#2A5D4F]">
                  Booking confirmed!
               </div>
             )}
@@ -315,7 +315,7 @@ function AmenityBookingView({
                   <div key={b.id} className="p-3 rounded-lg bg-[rgba(26,26,30,0.40)] space-y-1">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-medium text-[var(--parchment)]">{b.date} · {b.slot}</span>
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${b.status === 'confirmed' ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F]' : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-disabled)]'}`}>
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${b.status === 'confirmed' ? 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F]' : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-disabled)]'}`}>
                         {b.status}
                       </span>
                     </div>

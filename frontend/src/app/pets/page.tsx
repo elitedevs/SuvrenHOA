@@ -167,7 +167,7 @@ function PlaydatesTab() {
                   {pd.petsInvited.length > 0 && (
                     <span> {pd.petsInvited.join(', ')}</span>
                   )}
-                  <span className="flex items-center gap-1"><CheckCircle className="w-3 h-3 text-[#3A7D6F]" /> {yesCount} going</span>
+                  <span className="flex items-center gap-1"><CheckCircle className="w-3 h-3 text-[#2A5D4F]" /> {yesCount} going</span>
                 </div>
 
                 {/* RSVP buttons */}
@@ -179,7 +179,7 @@ function PlaydatesTab() {
                       disabled={!myName}
                       className={`flex-1 py-1.5 rounded-lg text-xs font-medium border transition-all cursor-pointer disabled:opacity-40 ${
                         myRsvp === status
-                          ? status === 'yes' ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border-[rgba(42,93,79,0.25)]'
+                          ? status === 'yes' ? 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border-[rgba(42,93,79,0.25)]'
                           : status === 'maybe' ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border-[rgba(176,155,113,0.30)]'
                           : 'bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] border-[rgba(107,58,58,0.25)]'
                           : 'bg-[rgba(245,240,232,0.03)] text-[var(--text-disabled)] border-[rgba(245,240,232,0.06)] hover:text-[var(--text-body)]'
@@ -336,7 +336,7 @@ export default function PetsPage() {
                       {pet.age && <div><span className="text-[var(--text-disabled)]">Age:</span> <span className="text-[var(--text-body)]">{pet.age}</span></div>}
                     </div>
                     <div className="flex gap-2 mt-3">
-                      {pet.vaccinated && <span className="text-[9px] px-1.5 py-0.5 rounded bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] flex items-center gap-0.5"><CheckCircle className="w-2.5 h-2.5" /> Vaccinated</span>}
+                      {pet.vaccinated && <span className="text-[9px] px-1.5 py-0.5 rounded bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] flex items-center gap-0.5"><CheckCircle className="w-2.5 h-2.5" /> Vaccinated</span>}
                       {pet.microchipped && <span className="text-[9px] px-1.5 py-0.5 rounded bg-[rgba(90,122,154,0.10)] text-[var(--steel)]"> Microchipped</span>}
                     </div>
                   </div>

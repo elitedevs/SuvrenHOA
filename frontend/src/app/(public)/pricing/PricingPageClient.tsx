@@ -188,7 +188,7 @@ const FAQS = [
 
 function CellValue({ value }: { value: FeatureValue }) {
   if (value === true)
-    return <Check className="w-4 h-4 text-[#3A7D6F] mx-auto" />;
+    return <Check className="w-4 h-4 text-[#2A5D4F] mx-auto" />;
   if (value === false)
     return <X className="w-4 h-4 text-[rgba(245,240,232,0.15)] mx-auto" />;
   return <span className="text-[13px] text-[rgba(245,240,232,0.55)]">{value}</span>;
@@ -261,7 +261,7 @@ export default function PricingPageClient() {
           {annual && (
             <span
               className="ml-1 px-2.5 py-1 rounded-full text-[11px] font-medium"
-              style={{ background: 'rgba(42,93,79,0.15)', color: '#3A7D6F', border: '1px solid rgba(42,93,79,0.25)' }}
+              style={{ background: 'rgba(42,93,79,0.15)', color: '#2A5D4F', border: '1px solid rgba(42,93,79,0.25)' }}
             >
               Save 20%
             </span>
@@ -317,7 +317,7 @@ export default function PricingPageClient() {
                   <ul className="space-y-2.5 mb-8 flex-1">
                     {features.map((f) => (
                       <li key={f} className="flex items-start gap-2.5 text-[13px] text-[rgba(245,240,232,0.55)]">
-                        <Check className="w-4 h-4 text-[#3A7D6F] shrink-0 mt-0.5" />
+                        <Check className="w-4 h-4 text-[#2A5D4F] shrink-0 mt-0.5" />
                         {f}
                       </li>
                     ))}
@@ -328,7 +328,7 @@ export default function PricingPageClient() {
                     className="w-full py-3.5 rounded-lg text-center font-medium text-sm transition-all duration-200 hover:scale-[1.01] block"
                     style={{
                       background: popular
-                        ? 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)'
+                        ? 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)'
                         : 'rgba(245,240,232,0.04)',
                       color: popular ? '#0C0C0E' : 'rgba(245,240,232,0.6)',
                       border: popular ? 'none' : '1px solid rgba(245,240,232,0.08)',
@@ -513,7 +513,7 @@ export default function PricingPageClient() {
                   href="/signup"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                   style={{
-                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                     color: '#0C0C0E',
                     boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                   }}

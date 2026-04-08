@@ -25,7 +25,7 @@ const CATEGORY_EMOJI: Record<MarketplaceCategory, string> = {
 function TypeBadge({ type }: { type: MarketplaceType }) {
   const styles: Record<MarketplaceType, string> = {
     sale: 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border-[rgba(176,155,113,0.25)]',
-    free: 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border-[rgba(42,93,79,0.25)]',
+    free: 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border-[rgba(42,93,79,0.25)]',
     wanted: 'bg-[rgba(90,122,154,0.12)] text-[var(--steel)] border-[rgba(90,122,154,0.25)]',
   };
   const labels: Record<MarketplaceType, string> = {
@@ -266,7 +266,7 @@ export default function MarketplacePage() {
                   <span className="text-sm font-normal text-[#B09B71]">${listing.price.toLocaleString()}</span>
                 )}
                 {listing.type === 'free' && (
-                  <span className="text-sm font-medium text-[#3A7D6F]">FREE</span>
+                  <span className="text-sm font-medium text-[#2A5D4F]">FREE</span>
                 )}
               </div>
 

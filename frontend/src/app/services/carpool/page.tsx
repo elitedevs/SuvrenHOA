@@ -26,7 +26,7 @@ const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const TYPE_CONFIG = {
   school: { label: 'School Run', color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/10', border: 'border-[rgba(90,122,154,0.20)]' },
   work: { label: 'Work Commute', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]' },
-  errands: { label: 'Errands', color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
+  errands: { label: 'Errands', color: 'text-[#2A5D4F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
 };
 
 const DEMO_ROUTES: CarpoolRoute[] = [
@@ -129,7 +129,7 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
             <Users className="w-4 h-4 text-[var(--text-disabled)]" />
             <span className="text-xs text-[var(--text-muted)]">{route.riders.length}/{route.maxRiders} riders</span>
             {spots > 0 && !isDriver && (
-              <span className="text-xs text-[#3A7D6F]">{spots} spot{spots > 1 ? 's' : ''} open</span>
+              <span className="text-xs text-[#2A5D4F]">{spots} spot{spots > 1 ? 's' : ''} open</span>
             )}
           </div>
           {isDriver && (
@@ -245,7 +245,7 @@ export default function CarpoolPage() {
         {[
           { label: 'Active Routes', value: routes.length, icon: Car, color: 'text-[#B09B71]' },
           { label: 'Total Riders', value: routes.reduce((s, r) => s + r.riders.length, 0), icon: Users, color: 'text-[var(--steel)]' },
-          { label: 'Open Spots', value: routes.reduce((s, r) => s + (r.maxRiders - r.riders.length), 0), icon: User, color: 'text-[#3A7D6F]' },
+          { label: 'Open Spots', value: routes.reduce((s, r) => s + (r.maxRiders - r.riders.length), 0), icon: User, color: 'text-[#2A5D4F]' },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="glass-card rounded-xl p-4 text-center">
             <Icon className={`w-5 h-5 ${color} mx-auto mb-2`} />

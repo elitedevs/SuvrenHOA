@@ -53,7 +53,7 @@ export function EmailCapture({
     if (variant === 'inline') {
       return (
         <div className="flex items-center gap-2 mt-4">
-          <CheckCircle className="w-4 h-4 text-[#3A7D6F] shrink-0" />
+          <CheckCircle className="w-4 h-4 text-[#2A5D4F] shrink-0" />
           <p className="text-[13px] text-[rgba(245,240,232,0.4)]">You&apos;re on the list — see you May 1st.</p>
         </div>
       );
@@ -61,7 +61,7 @@ export function EmailCapture({
     return (
       <div className="glass-card rounded-2xl p-10 text-center">
         <div className="w-12 h-12 rounded-xl bg-[rgba(42,93,79,0.12)] border border-[rgba(42,93,79,0.25)] flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-6 h-6 text-[#3A7D6F]" />
+          <CheckCircle className="w-6 h-6 text-[#2A5D4F]" />
         </div>
         <h2 className="text-xl font-medium text-[var(--parchment)] mb-2">You&apos;re on the list</h2>
         <p className="text-sm text-[var(--text-muted)]">We&apos;ll reach out before the May 1st launch.</p>
@@ -85,7 +85,7 @@ export function EmailCapture({
             type="submit"
             disabled={status === 'loading'}
             aria-label="Subscribe"
-            className="px-3 py-2 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium hover:bg-[#C4B08A] transition-colors disabled:opacity-50 shrink-0"
+            className="px-3 py-2 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium hover:bg-[#C4A96E] transition-colors disabled:opacity-50 shrink-0"
           >
             <ArrowRight className="w-4 h-4" />
           </button>
@@ -111,7 +111,7 @@ export function EmailCapture({
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="px-6 py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-semibold text-sm hover:bg-[#C4B08A] transition-colors disabled:opacity-50 flex items-center gap-2 justify-center shrink-0"
+          className="px-6 py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-semibold text-sm hover:bg-[#C4A96E] transition-colors disabled:opacity-50 flex items-center gap-2 justify-center shrink-0"
         >
           {status === 'loading' ? 'Saving…' : 'Notify Me'}
           {status !== 'loading' && <ArrowRight className="w-4 h-4" />}

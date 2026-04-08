@@ -322,7 +322,7 @@ export function Header() {
                 <>
                   <Link
                     href="/health"
-                    className={`p-2 rounded-lg transition-colors ${pathname === '/health' ? 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.04)]'}`}
+                    className={`p-2 rounded-lg transition-colors ${pathname === '/health' ? 'text-[#2A5D4F] bg-[rgba(42,93,79,0.10)]' : 'text-[var(--text-disabled)] hover:text-[var(--text-body)] hover:bg-[rgba(245,240,232,0.04)]'}`}
                     title="Health Score"
                   >
                     <Heart className="w-4 h-4" />

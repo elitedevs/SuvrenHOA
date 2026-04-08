@@ -79,7 +79,7 @@ export default function RidesharePage() {
         <div className="grid grid-cols-3 gap-4 mb-7">
           {[
             { label: 'Available Rides', val: rides.length, color: 'text-[#B09B71]' },
-            { label: 'Open Seats', val: rides.reduce((a, r) => a + r.seatsLeft, 0), color: 'text-[#3A7D6F]' },
+            { label: 'Open Seats', val: rides.reduce((a, r) => a + r.seatsLeft, 0), color: 'text-[#2A5D4F]' },
             { label: 'Recurring Routes', val: rides.filter(r => r.recurring !== 'none').length, color: 'text-[rgba(245,240,232,0.75)]' },
           ].map(({ label, val, color }) => (
             <div key={label} className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl p-4 text-center">

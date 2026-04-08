@@ -119,7 +119,7 @@ function SurveyCard({ survey }: { survey: any }) {
       <div className="flex items-center gap-2 flex-wrap mb-3">
         <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
           isActive && !isExpired
-            ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]'
+            ? 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border-[rgba(42,93,79,0.20)]'
             : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)] border-[rgba(245,240,232,0.08)]'
         }`}>
           {isActive && !isExpired ? ' Active' : ' Closed'}

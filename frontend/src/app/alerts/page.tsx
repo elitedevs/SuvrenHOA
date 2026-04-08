@@ -374,7 +374,7 @@ export default function AlertsPage() {
           {sortedActive.length === 0 ? (
             <div className="glass-card rounded-xl hover-lift p-8 text-center">
               <div className="w-12 h-12 rounded-xl bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)] flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-6 h-6 text-[#3A7D6F]" />
+                <CheckCircle className="w-6 h-6 text-[#2A5D4F]" />
               </div>
               <p className="font-medium text-[var(--text-body)] mb-1">All clear</p>
               <p className="text-sm text-[var(--text-disabled)]">No active alerts for your community.</p>

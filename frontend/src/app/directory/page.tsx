@@ -108,7 +108,7 @@ export default function DirectoryPage() {
             <p className="text-[10px] text-[var(--text-disabled)]">Total Lots</p>
           </div>
           <div className="p-3 rounded-lg bg-[rgba(26,26,30,0.30)]">
-            <p className="text-lg font-medium text-[#3A7D6F]">{COMMUNITY_INFO.annualBudget}</p>
+            <p className="text-lg font-medium text-[#2A5D4F]">{COMMUNITY_INFO.annualBudget}</p>
             <p className="text-[10px] text-[var(--text-disabled)]">Annual Budget</p>
           </div>
           <div className="p-3 rounded-lg bg-[rgba(26,26,30,0.30)]">
@@ -173,7 +173,7 @@ export default function DirectoryPage() {
 const TIER_LABELS: Record<number, { label: string; color: string; bg: string }> = {
   1: { label: ' Founder', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' },
   2: { label: ' Elder', color: 'text-[var(--steel)]', bg: 'bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' },
-  3: { label: ' Resident', color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' },
+  3: { label: ' Resident', color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' },
   4: { label: ' New Owner', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' },
 };
 
@@ -230,7 +230,7 @@ function ResidentProfileCard({ member, isBoard = false }: { member: any; isBoard
           {/* Dues status */}
           <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
             duesStatus
-              ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]'
+              ? 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border-[rgba(42,93,79,0.20)]'
               : 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border-[rgba(107,58,58,0.20)]'
           }`}>
             {duesStatus ? ' Dues Current' : ' Dues Overdue'}

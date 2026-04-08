@@ -102,7 +102,7 @@ export default function LandingPageClient() {
         <div className="relative z-10 max-w-4xl mx-auto px-6 py-24 md:py-36 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-[13px] font-medium"
                style={{ background: 'rgba(176,155,113,0.08)', border: '1px solid rgba(176,155,113,0.2)', color: '#B09B71' }}>
-            <div className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-[#2A5D4F] animate-pulse" />
             Now accepting founding communities
           </div>
 
@@ -122,7 +122,7 @@ export default function LandingPageClient() {
             <Link href="/signup"
                   className="px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                   style={{
-                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                     color: '#0C0C0E',
                     boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                   }}>
@@ -287,7 +287,7 @@ export default function LandingPageClient() {
                 <ul className="space-y-2 mb-6 flex-1">
                   {features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-[13px] text-[rgba(245,240,232,0.55)]">
-                      <Check className="w-4 h-4 text-[#3A7D6F] shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-[#2A5D4F] shrink-0 mt-0.5" />
                       {f}
                     </li>
                   ))}
@@ -328,7 +328,7 @@ export default function LandingPageClient() {
                    style={{ background: '#151518', border: '1px solid rgba(245,240,232,0.06)' }}>
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
                      style={{ background: 'rgba(42,93,79,0.1)' }}>
-                  <Icon className="w-5 h-5 text-[#3A7D6F]" />
+                  <Icon className="w-5 h-5 text-[#2A5D4F]" />
                 </div>
                 <div>
                   <h3 className="font-medium text-[var(--parchment)] mb-1">{title}</h3>
@@ -387,7 +387,7 @@ export default function LandingPageClient() {
               <Link href="/signup"
                     className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                     style={{
-                      background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                      background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                       color: '#0C0C0E',
                       boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                     }}>

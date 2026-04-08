@@ -225,7 +225,7 @@ export default function BoardDashboardPage() {
             {activity.map(event => (
               <div key={event.id} className="flex items-start gap-3 px-6 py-4 hover:bg-[rgba(245,240,232,0.02)] transition-colors">
                 <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
-                  event.severity === 'success' ? 'bg-[#3A7D6F]' :
+                  event.severity === 'success' ? 'bg-[#2A5D4F]' :
                   event.severity === 'warning' ? 'bg-[#B09B71]' :
                   'bg-[var(--steel)]'
                 }`} />

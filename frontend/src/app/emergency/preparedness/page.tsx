@@ -150,7 +150,7 @@ export default function PreparednessPage() {
             <p className="text-xs text-[var(--text-disabled)]">{checkedCount} of {totalCount} kit items ready</p>
           </div>
           <div className="text-right">
-            <div className={`text-3xl font-medium ${readinessPct >= 80 ? 'text-[#3A7D6F]' : readinessPct >= 50 ? 'text-[#B09B71]' : 'text-[#8B5A5A]'}`}>
+            <div className={`text-3xl font-medium ${readinessPct >= 80 ? 'text-[#2A5D4F]' : readinessPct >= 50 ? 'text-[#B09B71]' : 'text-[#8B5A5A]'}`}>
               {readinessPct}%
             </div>
             <div className="text-xs text-[var(--text-disabled)]">
@@ -163,7 +163,7 @@ export default function PreparednessPage() {
             className="h-full rounded-full transition-all duration-700"
             style={{
               width: `${readinessPct}%`,
-              background: readinessPct >= 80 ? '#3A7D6F' : readinessPct >= 50 ? '#B09B71' : '#8B5A5A',
+              background: readinessPct >= 80 ? '#2A5D4F' : readinessPct >= 50 ? '#B09B71' : '#8B5A5A',
             }}
           />
         </div>

@@ -113,7 +113,7 @@ function StatCard({
 }) {
   const colorMap = {
     gold: { icon: 'text-[#B09B71]', glow: 'var(--glow-gold)', bg: 'rgba(201,169,110,0.08)' },
-    green:  { icon: 'text-[#3A7D6F]',  glow: 'var(--glow-green)',  bg: 'rgba(42,93,79,0.10)' },
+    green:  { icon: 'text-[#2A5D4F]',  glow: 'var(--glow-green)',  bg: 'rgba(42,93,79,0.10)' },
     blue:   { icon: 'text-[var(--steel)]',   glow: 'var(--glow-blue)',   bg: 'rgba(90,122,154,0.10)' },
     amber:  { icon: 'text-[#B09B71]',  glow: 'var(--glow-amber)',  bg: 'rgba(176,155,113,0.10)' },
   };
@@ -214,7 +214,7 @@ export function TransparencyDashboard() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-[13px] font-medium"
                style={{ background: 'rgba(201,169,110,0.10)', border: '1px solid rgba(201,169,110,0.2)', color: 'rgba(201,169,110,1)' }}>
-            <div className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-[#2A5D4F] animate-pulse" />
             Live on Base Sepolia
           </div>
 
@@ -235,7 +235,7 @@ export function TransparencyDashboard() {
             <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-3 px-6 py-3 rounded-xl mx-auto"
                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
               <div className="flex items-center gap-2 text-sm">
-                <Shield className="w-4 h-4 text-[#3A7D6F]" />
+                <Shield className="w-4 h-4 text-[#2A5D4F]" />
                 <span className="text-[var(--text-muted)]">{stats.totalProperties} properties</span>
               </div>
               <div className="w-px h-4 bg-[rgba(245,240,232,0.10)] hidden sm:block" />
@@ -273,7 +273,7 @@ export function TransparencyDashboard() {
               {stats.loading ? (
                 <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#B09B71]" />
               ) : (
-                <div className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-[#2A5D4F] animate-pulse" />
               )}
               {stats.loading ? 'Loading…' : 'Auto-refreshes every 30s'}
             </div>
@@ -390,7 +390,7 @@ export function TransparencyDashboard() {
             {/* Trust indicators */}
             <section>
               <h2 className="text-xl font-medium text-[var(--text-heading)] flex items-center gap-2 mb-4">
-                <Shield className="w-5 h-5 text-[#3A7D6F]" />
+                <Shield className="w-5 h-5 text-[#2A5D4F]" />
                 Why Trust This?
               </h2>
 
@@ -407,7 +407,7 @@ export function TransparencyDashboard() {
                     icon: CheckCircle2,
                     title: 'Verified Smart Contracts',
                     desc: 'All contracts are open-source and verified on BaseScan. Read the code yourself.',
-                    color: 'text-[#3A7D6F]',
+                    color: 'text-[#2A5D4F]',
                     bg: 'rgba(42,93,79,0.10)',
                   },
                   {
@@ -598,7 +598,7 @@ export function TransparencyDashboard() {
                   href="/dashboard"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm transition-all duration-200"
                   style={{
-                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                     boxShadow: '0 0 24px rgba(201,169,110,0.25)',
                     color: 'white',
                   }}

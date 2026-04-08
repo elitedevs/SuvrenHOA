@@ -12,7 +12,7 @@ const STATUS_STYLES = {
   open: { color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]', label: ' Open' },
   'in-progress': { color: 'text-[var(--steel)]', bg: 'bg-[rgba(90,122,154,0.10)]', border: 'border-[rgba(90,122,154,0.20)]', label: ' In Progress' },
   scheduled: { color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]', label: ' Scheduled' },
-  resolved: { color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.10)]', border: 'border-[rgba(42,93,79,0.20)]', label: ' Resolved' },
+  resolved: { color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.10)]', border: 'border-[rgba(42,93,79,0.20)]', label: ' Resolved' },
 };
 
 const PRIORITY_STYLES = {

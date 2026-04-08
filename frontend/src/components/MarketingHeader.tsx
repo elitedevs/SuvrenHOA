@@ -52,7 +52,7 @@ export function MarketingHeader() {
           <Link href="/signup"
                 className="px-5 py-2.5 rounded-lg text-[13px] font-medium transition-all hover:scale-[1.02]"
                 style={{
-                  background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                  background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                   color: '#0C0C0E',
                 }}>
             Start Free Trial
@@ -84,7 +84,7 @@ export function MarketingHeader() {
             </Link>
             <Link href="/signup"
                   className="px-5 py-2.5 rounded-lg text-[13px] font-medium text-center"
-                  style={{ background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)', color: '#0C0C0E' }}>
+                  style={{ background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)', color: '#0C0C0E' }}>
               Start Free Trial
             </Link>
           </div>

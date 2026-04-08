@@ -30,7 +30,7 @@ const CATEGORIES = [
 const STATUS_STYLES = {
   pending: { label: 'Pending Review', color: 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' },
   approved: { label: 'Approved', color: 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' },
-  paid: { label: 'Paid', color: 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' },
+  paid: { label: 'Paid', color: 'text-[#2A5D4F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' },
   rejected: { label: 'Rejected', color: 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)] border-[rgba(107,58,58,0.20)]' },
 };
 
@@ -110,7 +110,7 @@ export default function ReimbursementPage() {
           <div className="text-[10px] text-[var(--text-disabled)]">Total Submitted</div>
         </div>
         <div className="glass-card rounded-xl p-4 text-center">
-          <div className="text-xl font-medium text-[#3A7D6F]">${(paidMine / 100).toFixed(2)}</div>
+          <div className="text-xl font-medium text-[#2A5D4F]">${(paidMine / 100).toFixed(2)}</div>
           <div className="text-[10px] text-[var(--text-disabled)]">Paid Out</div>
         </div>
         <div className="glass-card rounded-xl p-4 text-center">

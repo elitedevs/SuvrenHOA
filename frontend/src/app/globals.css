@@ -58,7 +58,7 @@
   --gold-50:   #F5F0E8;
   --gold-400:  #B09B71;
   --gold-500:  #9A8560;
-  --gold-600:  #8A7550;
+  --gold-600:  #8A7A5A;
   --champagne: #B09B71;
   --gold-light: rgba(176, 155, 113, 0.3);
   --gold-glow: rgba(176, 155, 113, 0.08);
@@ -80,7 +80,7 @@
   --glow-red:      rgba(107, 58, 58, 0.15);
 
   /* ── Extended palette tokens ── */
-  --steel:              #5A7A9A;   /* info accent — slate blue */
+  --steel:              #2C2C2E;   /* slate — V7 Lux audit: was #5A7A9A blue, blue does not belong in obsidian system */
   --brass:             #B09B71;   /* alias for aged-brass */
   --brass-deep:         #b8942e;   /* dark gold variant */
 

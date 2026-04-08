@@ -141,7 +141,7 @@ function CheckoutWizard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {isCurrent !== false ? (
-                  <span className="text-[#3A7D6F] text-lg">✓</span>
+                  <span className="text-[#2A5D4F] text-lg">✓</span>
                 ) : (
                   <span className="text-[#8B5A5A] text-lg">⚠</span>
                 )}
@@ -254,8 +254,8 @@ function CheckoutWizard() {
               </div>
             ) : (
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-6 h-6 text-[#3A7D6F]" />
-                <p className="text-lg font-medium text-[#3A7D6F]">
+                <CheckCircle className="w-6 h-6 text-[#2A5D4F]" />
+                <p className="text-lg font-medium text-[#2A5D4F]">
                   No outstanding balance
                 </p>
               </div>

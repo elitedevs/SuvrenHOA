@@ -136,7 +136,7 @@ export default function AnnouncementsPage() {
             </span>
           )}
           <div className="flex items-center gap-1.5 text-xs text-[var(--text-disabled)]">
-            <span className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#2A5D4F] animate-pulse" />
             {activeItems.length} active
           </div>
         </div>

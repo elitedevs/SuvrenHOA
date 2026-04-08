@@ -62,7 +62,7 @@ export default function EnergyPage() {
           {[
             { label: 'Avg Monthly Bill', val: '$163', sub: 'Community average', icon: TrendingDown, color: 'text-[#B09B71]' },
             { label: 'Solar Homes', val: '14', sub: 'Out of 16 homes', icon: Sun, color: 'text-[#B09B71]' },
-            { label: 'CO₂ Reduced', val: '47t', sub: 'This year', icon: Leaf, color: 'text-[#3A7D6F]' },
+            { label: 'CO₂ Reduced', val: '47t', sub: 'This year', icon: Leaf, color: 'text-[#2A5D4F]' },
             { label: 'Green Score', val: '72/100', sub: 'Community rating', icon: Zap, color: 'text-[#B09B71]' },
           ].map(({ label, val, sub, icon: Icon, color }) => (
             <div key={label} className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl p-4">
@@ -89,7 +89,7 @@ export default function EnergyPage() {
                   <span className="text-xl shrink-0">{tip.icon}</span>
                   <div>
                     <p className="text-sm text-[#D4C4A0]">{tip.tip}</p>
-                    <p className="text-xs text-[#3A7D6F] mt-0.5 font-medium">{tip.savings}</p>
+                    <p className="text-xs text-[#2A5D4F] mt-0.5 font-medium">{tip.savings}</p>
                   </div>
                 </div>
               ))}
@@ -122,14 +122,14 @@ export default function EnergyPage() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-[var(--text-muted)]">Estimated Annual Savings</span>
-                  <span className="text-sm font-medium text-[#3A7D6F]">${solarSavings.toLocaleString()}/yr</span>
+                  <span className="text-sm font-medium text-[#2A5D4F]">${solarSavings.toLocaleString()}/yr</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs text-[var(--text-muted)]">Bill Offset</span>
                   <span className="text-sm font-medium text-[#B09B71]">{solarPercent}%</span>
                 </div>
                 <div className="w-full bg-[rgba(245,240,232,0.06)] rounded-full h-2 mt-1">
-                  <div className="bg-gradient-to-r from-[#8A7550] to-[#B09B71] h-2 rounded-full transition-all duration-500" style={{ width: `${solarPercent}%` }} />
+                  <div className="bg-gradient-to-r from-[#8A7A5A] to-[#B09B71] h-2 rounded-full transition-all duration-500" style={{ width: `${solarPercent}%` }} />
                 </div>
               </div>
             </div>
@@ -140,7 +140,7 @@ export default function EnergyPage() {
         <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-[rgba(245,240,232,0.05)]">
             <h2 className="text-lg font-medium text-[#D4C4A0] flex items-center gap-2">
-              <Leaf className="w-5 h-5 text-[#3A7D6F]" /> Green Improvements & ROI
+              <Leaf className="w-5 h-5 text-[#2A5D4F]" /> Green Improvements & ROI
             </h2>
           </div>
           <div className="overflow-x-auto">
@@ -157,12 +157,12 @@ export default function EnergyPage() {
                   <tr key={i} className={`text-sm ${i % 2 === 0 ? '' : 'bg-[#111113]'}`}>
                     <td className="px-4 py-3 text-[#D4C4A0] font-medium">{item.name}</td>
                     <td className="px-4 py-3 text-[var(--text-body)]">${item.cost.toLocaleString()}</td>
-                    <td className="px-4 py-3 text-[#3A7D6F] font-medium">${item.annualSavings}/yr</td>
+                    <td className="px-4 py-3 text-[#2A5D4F] font-medium">${item.annualSavings}/yr</td>
                     <td className="px-4 py-3">
-                      <span className={`font-medium ${item.roi > 50 ? 'text-[#3A7D6F]' : item.roi > 20 ? 'text-[#B09B71]' : 'text-[var(--text-body)]'}`}>{item.roi}%</span>
+                      <span className={`font-medium ${item.roi > 50 ? 'text-[#2A5D4F]' : item.roi > 20 ? 'text-[#B09B71]' : 'text-[var(--text-body)]'}`}>{item.roi}%</span>
                     </td>
                     <td className="px-4 py-3 text-[var(--text-body)]">{item.payback}</td>
-                    <td className="px-4 py-3 text-[#3A7D6F] text-xs">{item.co2}</td>
+                    <td className="px-4 py-3 text-[#2A5D4F] text-xs">{item.co2}</td>
                   </tr>
                 ))}
               </tbody>

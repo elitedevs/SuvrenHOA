@@ -19,7 +19,7 @@ function getSeasonInfo(): SeasonInfo {
       emoji: '',
       message: 'Happy Holidays from Faircroft!',
       gradient: 'from-green-900/30 to-red-900/20',
-      textColor: 'text-[#3A7D6F]',
+      textColor: 'text-[#2A5D4F]',
     };
   }
   if (month === 10 && day >= 25) {

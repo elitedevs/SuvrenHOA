@@ -132,8 +132,8 @@ export default function HealthPage() {
             <h2 className="text-xl font-medium text-[var(--parchment)]">Score Breakdown</h2>
             {factors.map((factor) => {
               const pct = (factor.score / factor.max) * 100;
-              const factorColor = pct >= 71 ? '#3A7D6F' : pct >= 41 ? '#b8942e' : '#8B5A5A';
-              const factorColorClass = pct >= 71 ? 'text-[#3A7D6F]' : pct >= 41 ? 'text-[#B09B71]' : 'text-[#8B5A5A]';
+              const factorColor = pct >= 71 ? '#2A5D4F' : pct >= 41 ? '#b8942e' : '#8B5A5A';
+              const factorColorClass = pct >= 71 ? 'text-[#2A5D4F]' : pct >= 41 ? 'text-[#B09B71]' : 'text-[#8B5A5A]';
 
               return (
                 <div key={factor.name} className="glass-card rounded-xl hover-lift p-6">
@@ -204,7 +204,7 @@ export default function HealthPage() {
         {!loading && !error && suggestions.length === 0 && (
           <div className="glass-card-success rounded-xl p-6 mb-8 card-enter card-enter-delay-3 text-center">
             <p className="text-3xl mb-3"></p>
-            <h3 className="font-medium text-[#3A7D6F] text-lg mb-1">Perfect Score!</h3>
+            <h3 className="font-medium text-[#2A5D4F] text-lg mb-1">Perfect Score!</h3>
             <p className="text-sm text-[var(--text-muted)]">Your community has achieved the maximum health score across all categories.</p>
           </div>
         )}

@@ -239,7 +239,7 @@ export default function TransferPage() {
               ) : (
                 <>
                   <div className="w-20 h-20 rounded-full bg-[rgba(42,93,79,0.30)] border border-[rgba(42,93,79,0.30)]/40 flex items-center justify-center mx-auto">
-                    <CheckCircle className="w-10 h-10 text-[#3A7D6F]" />
+                    <CheckCircle className="w-10 h-10 text-[#2A5D4F]" />
                   </div>
                   <h2 className="text-2xl font-medium text-[#D4C4A0]">Transfer Complete!</h2>
                   <p className="text-[var(--text-body)] text-sm">NFT Token #47 has been transferred to {buyerWallet.slice(0, 10)}...{buyerWallet.slice(-8)}. Your resident access has been revoked. Thank you for being part of Faircroft HOA.</p>

@@ -93,7 +93,7 @@ export default function VisitorsPage() {
         {newPass && (
           <div className="mb-6 p-5 rounded-xl border border-[rgba(42,93,79,0.30)]/40 bg-[rgba(42,93,79,0.08)] flex items-center justify-between">
             <div>
-              <p className="text-[#3A7D6F] font-medium text-sm mb-1"> Visitor Registered — Pass Code Generated</p>
+              <p className="text-[#2A5D4F] font-medium text-sm mb-1"> Visitor Registered — Pass Code Generated</p>
               <p className="font-mono text-3xl text-[#D4C4A0] font-medium tracking-widest">{newPass}</p>
               <p className="text-xs text-[var(--text-muted)] mt-1">Share this code with your visitor for gate entry</p>
             </div>
@@ -130,7 +130,7 @@ export default function VisitorsPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <h3 className="font-medium text-[#D4C4A0]">{v.name}</h3>
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${v.active ? 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]' : 'bg-[#1A1A1E] text-[rgba(245,240,232,0.25)]'}`}>
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${v.active ? 'bg-[rgba(42,93,79,0.40)] text-[#2A5D4F]' : 'bg-[#1A1A1E] text-[rgba(245,240,232,0.25)]'}`}>
                       {v.active ? 'Active' : 'Expired'}
                     </span>
                   </div>
@@ -142,7 +142,7 @@ export default function VisitorsPage() {
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-xl font-medium tracking-widest text-[#B09B71]">{v.passCode}</span>
                     <button onClick={() => copyPass(v.id, v.passCode)} className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[#B09B71] transition-colors">
-                      {copiedId === v.id ? <CheckCircle className="w-3.5 h-3.5 text-[#3A7D6F]" /> : <Copy className="w-3.5 h-3.5" />}
+                      {copiedId === v.id ? <CheckCircle className="w-3.5 h-3.5 text-[#2A5D4F]" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                   </div>
                   {v.active && (

@@ -121,7 +121,7 @@ export default function MeetingsPage() {
                               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                                 isSelected
                                   ? status === 'attending'
-                                    ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)]'
+                                    ? 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.25)]'
                                     : status === 'maybe'
                                     ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.25)]'
                                     : 'bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] border border-[rgba(107,58,58,0.25)]'

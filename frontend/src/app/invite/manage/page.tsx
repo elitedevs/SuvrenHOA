@@ -113,7 +113,7 @@ export default function ManageInvitesPage() {
         </div>
         <Link
           href="/invite"
-          className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4B08A] transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4A96E] transition-colors"
         >
           <Plus className="w-4 h-4" /> Invite
         </Link>

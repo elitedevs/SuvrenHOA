@@ -303,7 +303,7 @@ function FinRow({ label, amount, budget, positive, bold }: { label: string; amou
         <span className={`text-sm ${bold ? 'text-[var(--parchment)]' : 'text-[var(--parchment)]'}`}>{fmt(amount)}</span>
         {budget && (
           <span className={`text-[10px] ml-2 ${
-            positive ? (!isOver ? 'text-[#3A7D6F]' : 'text-[#8B5A5A]') : (isOver ? 'text-[#8B5A5A]' : 'text-[#3A7D6F]')
+            positive ? (!isOver ? 'text-[#2A5D4F]' : 'text-[#8B5A5A]') : (isOver ? 'text-[#8B5A5A]' : 'text-[#2A5D4F]')
           }`}>
             {variance! > 0 ? '+' : ''}{fmt(variance!)}
           </span>
@@ -316,7 +316,7 @@ function FinRow({ label, amount, budget, positive, bold }: { label: string; amou
 function MetricCard({ label, value, color }: { label: string; value: number | string; color?: 'green' | 'red' }) {
   return (
     <div className="bg-[rgba(26,26,30,0.30)] rounded-xl p-3 text-center">
-      <div className={`text-2xl font-medium ${color === 'green' ? 'text-[#3A7D6F]' : color === 'red' ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>
+      <div className={`text-2xl font-medium ${color === 'green' ? 'text-[#2A5D4F]' : color === 'red' ? 'text-[#8B5A5A]' : 'text-[#B09B71]'}`}>
         {value}
       </div>
       <div className="text-[10px] text-[var(--text-disabled)]">{label}</div>
@@ -325,7 +325,7 @@ function MetricCard({ label, value, color }: { label: string; value: number | st
 }
 
 function ProgressItem({ label, value }: { label: string; value: number }) {
-  const color = value >= 90 ? 'bg-[#3A7D6F]' : value >= 70 ? 'bg-[#B09B71]' : value >= 50 ? 'bg-[#B09B71]' : 'bg-[#8B5A5A]';
+  const color = value >= 90 ? 'bg-[#2A5D4F]' : value >= 70 ? 'bg-[#B09B71]' : value >= 50 ? 'bg-[#B09B71]' : 'bg-[#8B5A5A]';
   return (
     <div>
       <div className="flex justify-between text-xs mb-1">

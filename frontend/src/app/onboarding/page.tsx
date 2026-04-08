@@ -17,8 +17,8 @@ import { Home, CreditCard, MessageSquare, FileText, Car } from 'lucide-react';
 function Confetti() {
   const pieces = Array.from({ length: 60 }, (_, i) => i);
   const colors = [
-    '#B09B71', '#D4C4A0', '#b8942e', '#3A7D6F', '#b8942e',
-    '#8B5A5A', '#5A7A9A', '#b8942e',
+    '#B09B71', '#D4C4A0', '#b8942e', '#2A5D4F', '#b8942e',
+    '#8B5A5A', '#2C2C2E', '#b8942e',
   ];
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden z-50">
@@ -711,7 +711,7 @@ function OnboardingWizard() {
             <button
               onClick={handleComplete}
               disabled={!ccrAck || completing}
-              className="flex-1 py-3 rounded-xl bg-[#2A5D4F] hover:bg-[#3A7D6F] disabled:opacity-40 disabled:cursor-not-allowed text-[var(--text-heading)] font-medium text-sm transition-all"
+              className="flex-1 py-3 rounded-xl bg-[#2A5D4F] hover:bg-[#2A5D4F] disabled:opacity-40 disabled:cursor-not-allowed text-[var(--text-heading)] font-medium text-sm transition-all"
             >
               {completing ? 'Completing…' : 'Complete Setup '}
             </button>
@@ -739,7 +739,7 @@ function OnboardingWizard() {
               href="/dues"
               className="glass-card rounded-xl p-4 text-center hover:border-[rgba(42,93,79,0.25)] transition-all"
             >
-              <CreditCard className="w-6 h-6 text-[#3A7D6F] mx-auto mb-1" />
+              <CreditCard className="w-6 h-6 text-[#2A5D4F] mx-auto mb-1" />
               <p className="text-sm font-medium text-[var(--text-body)]">Pay Dues</p>
             </Link>
             <Link
@@ -829,7 +829,7 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
             <p className="text-xs text-[var(--text-muted)]">{completedRequired} of {totalRequired} required tasks complete</p>
           </div>
           <div className="text-right">
-            <div className={`text-2xl font-medium ${pct === 100 ? 'text-[#3A7D6F]' : pct >= 60 ? 'text-[#B09B71]' : 'text-[var(--text-body)]'}`}>
+            <div className={`text-2xl font-medium ${pct === 100 ? 'text-[#2A5D4F]' : pct >= 60 ? 'text-[#B09B71]' : 'text-[var(--text-body)]'}`}>
               {pct}%
             </div>
             <div className="text-[10px] text-[var(--text-disabled)]">Complete</div>
@@ -840,12 +840,12 @@ function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {
             className="h-full rounded-full transition-all duration-500"
             style={{
               width: `${pct}%`,
-              background: pct === 100 ? '#3A7D6F' : 'linear-gradient(90deg, #b8942e, #B09B71)',
+              background: pct === 100 ? '#2A5D4F' : 'linear-gradient(90deg, #b8942e, #B09B71)',
             }}
           />
         </div>
         {pct === 100 && (
-          <p className="text-xs text-[#3A7D6F] mt-2"> All required tasks complete!</p>
+          <p className="text-xs text-[#2A5D4F] mt-2"> All required tasks complete!</p>
         )}
       </div>
 

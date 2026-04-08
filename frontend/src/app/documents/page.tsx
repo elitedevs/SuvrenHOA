@@ -90,7 +90,7 @@ export default function DocumentsPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 card-enter card-enter-delay-1">
             {[
               { value: documentCount, label: 'Total Documents', color: 'text-[#B09B71]' },
-              { value: '', label: 'All Verified', color: 'text-[#3A7D6F]' },
+              { value: '', label: 'All Verified', color: 'text-[#2A5D4F]' },
               { value: '∞', label: 'Permanent Storage', color: 'text-[var(--steel)]' },
               { value: '0', label: 'Can Be Altered', color: 'text-[#B09B71]' },
             ].map(({ value, label, color }) => (
@@ -258,7 +258,7 @@ function DocumentCard({
             <span className="text-[11px] px-2 py-0.5 rounded-lg bg-[rgba(176,155,113,0.08)] text-[#B09B71] border border-[rgba(176,155,113,0.15)]">
               {getTypeLabel(doc.docType)}
             </span>
-            <span className="text-[11px] px-2 py-0.5 rounded-lg bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border border-[rgba(42,93,79,0.20)]">
+            <span className="text-[11px] px-2 py-0.5 rounded-lg bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border border-[rgba(42,93,79,0.20)]">
               Verified
             </span>
             {doc.supersedes > 0 && (
@@ -464,8 +464,8 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
 
       {submitted ? (
         <div className="text-center py-8">
-          <CheckCircle className="w-8 h-8 text-[#3A7D6F] mx-auto mb-3" />
-          <p className="text-[#3A7D6F] font-medium">Upload queued successfully!</p>
+          <CheckCircle className="w-8 h-8 text-[#2A5D4F] mx-auto mb-3" />
+          <p className="text-[#2A5D4F] font-medium">Upload queued successfully!</p>
           <p className="text-xs text-[var(--text-disabled)] mt-1">Arweave transaction will be processed shortly.</p>
         </div>
       ) : (
@@ -521,7 +521,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
             </div>
             {fileName ? (
               <>
-                <p className="font-medium text-[#3A7D6F] text-sm">{fileName}</p>
+                <p className="font-medium text-[#2A5D4F] text-sm">{fileName}</p>
                 <p className="text-xs text-[var(--text-disabled)] mt-1">Click to change file</p>
               </>
             ) : (

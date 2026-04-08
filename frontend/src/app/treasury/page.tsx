@@ -94,7 +94,7 @@ export default function TreasuryPage() {
             </div>
             <div className="progress-bar-track">
               <div
-                className="progress-bar-fill bg-gradient-to-r from-[#2A5D4F] to-[#3A7D6F]"
+                className="progress-bar-fill bg-gradient-to-r from-[#2A5D4F] to-[#2A5D4F]"
                 style={{ width: `${operatingPct}%` }}
               />
             </div>
@@ -131,7 +131,7 @@ export default function TreasuryPage() {
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-4">Allocation Overview</p>
         <div className="h-2 rounded-full overflow-hidden flex">
           <div
-            className="bg-gradient-to-r from-[#2A5D4F] to-[#3A7D6F] transition-all duration-700"
+            className="bg-gradient-to-r from-[#2A5D4F] to-[#2A5D4F] transition-all duration-700"
             style={{ width: `${operatingPct}%` }}
           />
           <div
@@ -207,9 +207,9 @@ export default function TreasuryPage() {
 
 const SPENDING_CATEGORIES = [
   { label: 'Maintenance', pct: 40, color: '#B09B71', bg: 'bg-[#B09B71]' },
-  { label: 'Landscaping', pct: 25, color: '#5A7A9A', bg: 'bg-[var(--steel)]' },
-  { label: 'Reserves', pct: 20, color: '#3A7D6F', bg: 'bg-[#3A7D6F]' },
-  { label: 'Admin', pct: 15, color: '#8A7550', bg: 'bg-[#8A7550]' },
+  { label: 'Landscaping', pct: 25, color: '#2C2C2E', bg: 'bg-[var(--steel)]' },
+  { label: 'Reserves', pct: 20, color: '#2A5D4F', bg: 'bg-[#2A5D4F]' },
+  { label: 'Admin', pct: 15, color: '#8A7A5A', bg: 'bg-[#8A7A5A]' },
 ];
 
 function SpendingBreakdown() {

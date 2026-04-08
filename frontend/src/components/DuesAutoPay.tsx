@@ -96,7 +96,7 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
           onClick={toggleAutoPay}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${
             settings.enabled
-              ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border-[rgba(42,93,79,0.25)]'
+              ? 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border-[rgba(42,93,79,0.25)]'
               : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)] border-[rgba(245,240,232,0.08)] hover:border-[rgba(176,155,113,0.30)] hover:text-[#B09B71]'
           }`}
         >
@@ -111,10 +111,10 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
       {settings.enabled ? (
         <div className="space-y-3">
           {/* Active Status */}
-          <div className="p-4 rounded-xl bg-[#3A7D6F]/[0.07] border border-[rgba(42,93,79,0.20)]">
+          <div className="p-4 rounded-xl bg-[#2A5D4F]/[0.07] border border-[rgba(42,93,79,0.20)]">
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-2 h-2 rounded-full bg-[#3A7D6F] animate-pulse" />
-              <span className="text-xs font-medium text-[#3A7D6F]">Auto-Pay Active</span>
+              <span className="w-2 h-2 rounded-full bg-[#2A5D4F] animate-pulse" />
+              <span className="text-xs font-medium text-[#2A5D4F]">Auto-Pay Active</span>
             </div>
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div>
@@ -194,7 +194,7 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
                       </div>
                     </div>
                     {freq === 'annual' && (
-                      <div className="mt-1.5 text-[10px] text-[#3A7D6F] font-medium"> Save 5% vs quarterly</div>
+                      <div className="mt-1.5 text-[10px] text-[#2A5D4F] font-medium"> Save 5% vs quarterly</div>
                     )}
                   </div>
                 ))}

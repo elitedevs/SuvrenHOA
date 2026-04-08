@@ -56,10 +56,10 @@ function statusLabel(lot: LotData) {
 function LotCard({ lot, isSelected, onClick }: { lot: LotData; isSelected: boolean; onClick: () => void }) {
   const color = statusColor(lot);
   const borderClass =
-    color === 'green' ? 'border-l-[#3A7D6F]' : color === 'red' ? 'border-l-[#8B5A5A]' : 'border-l-[rgba(245,240,232,0.10)]';
+    color === 'green' ? 'border-l-[#2A5D4F]' : color === 'red' ? 'border-l-[#8B5A5A]' : 'border-l-[rgba(245,240,232,0.10)]';
   const badgeClass =
     color === 'green'
-      ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)]'
+      ? 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.25)]'
       : color === 'red'
       ? 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-[rgba(107,58,58,0.25)]'
       : 'bg-[rgba(245,240,232,0.06)] text-[var(--text-muted)] border border-[rgba(245,240,232,0.10)]';
@@ -97,12 +97,12 @@ function LotDetailPanel({ lot, isBoard, onClose }: { lot: LotData; isBoard: bool
   const color = statusColor(lot);
   const statusBadgeClass =
     color === 'green'
-      ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.30)]'
+      ? 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.30)]'
       : color === 'red'
       ? 'bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] border border-[rgba(107,58,58,0.30)]'
       : 'bg-[rgba(245,240,232,0.08)] text-[var(--text-body)] border border-[rgba(245,240,232,0.12)]';
   const dotClass =
-    color === 'green' ? 'bg-[#3A7D6F] animate-pulse' : color === 'red' ? 'bg-[#8B5A5A] animate-pulse' : 'bg-[var(--text-muted)]';
+    color === 'green' ? 'bg-[#2A5D4F] animate-pulse' : color === 'red' ? 'bg-[#8B5A5A] animate-pulse' : 'bg-[var(--text-muted)]';
 
   return (
     <>
@@ -212,10 +212,10 @@ function IncidentDetailPanel({
             style={{
               background: isActive ? 'rgba(201,169,110,0.1)' : 'rgba(42,93,79,0.10)',
               border: `1px solid ${isActive ? 'rgba(201,169,110,0.3)' : 'rgba(34,197,94,0.3)'}`,
-              color: isActive ? '#B09B71' : '#3A7D6F',
+              color: isActive ? '#B09B71' : '#2A5D4F',
             }}
           >
-            <span className={`w-2 h-2 rounded-full ${isActive ? 'animate-pulse' : ''}`} style={{ background: isActive ? '#B09B71' : '#3A7D6F' }} />
+            <span className={`w-2 h-2 rounded-full ${isActive ? 'animate-pulse' : ''}`} style={{ background: isActive ? '#B09B71' : '#2A5D4F' }} />
             {isActive ? 'Active' : 'Resolved'}
           </div>
 
@@ -256,7 +256,7 @@ function IncidentDetailPanel({
           <div className="p-6 border-t border-[rgba(245,240,232,0.06)]">
             <button
               onClick={() => { onResolve(incident.id); onClose(); }}
-              className="w-full py-3 rounded-xl text-sm font-medium transition-all bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)] text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.25)] hover:border-[rgba(42,93,79,0.50)]"
+              className="w-full py-3 rounded-xl text-sm font-medium transition-all bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)] text-[#2A5D4F] hover:bg-[rgba(42,93,79,0.25)] hover:border-[rgba(42,93,79,0.50)]"
             >
                Mark as Resolved
             </button>
@@ -470,7 +470,7 @@ function StatsBar({ lots, incidents, layerMode }: { lots: LotData[]; incidents: 
 
   const stats = [
     { label: 'Total Lots', value: String(total), color: 'text-[#B09B71]' },
-    { label: 'Dues Current', value: current + ' (' + paidPct + '%)', color: 'text-[#3A7D6F]' },
+    { label: 'Dues Current', value: current + ' (' + paidPct + '%)', color: 'text-[#2A5D4F]' },
     { label: 'Overdue', value: overdue + ' (' + overduePct + '%)', color: 'text-[#8B5A5A]' },
     ...(showIncidentStat
       ? [{ label: 'Active Incidents', value: String(activeIncidents), color: 'text-[#B09B71]' }]
@@ -549,7 +549,7 @@ function LayerToggle({ layer, onChange }: { layer: LayerMode; onChange: (l: Laye
 // ─────────────────────────────────────────
 function MapLegend({ showProperties, showIncidents }: { showProperties: boolean; showIncidents: boolean }) {
   const propertyItems = [
-    { color: '#3A7D6F', label: 'Dues Current' },
+    { color: '#2A5D4F', label: 'Dues Current' },
     { color: '#8B5A5A', label: 'Overdue' },
     { color: `rgba(245,240,232,0.35)`, label: 'Unknown' },
   ];
@@ -709,7 +709,7 @@ export default function MapPage() {
 
   const filterButtons: { key: StatusFilter; label: string; activeClass: string }[] = [
     { key: 'all', label: 'All', activeClass: 'bg-[rgba(176,155,113,0.12)] text-[#B09B71] border border-[rgba(176,155,113,0.40)]' },
-    { key: 'current', label: ' Current', activeClass: 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.30)]' },
+    { key: 'current', label: ' Current', activeClass: 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.30)]' },
     { key: 'overdue', label: ' Overdue', activeClass: 'bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] border border-[rgba(107,58,58,0.30)]' },
   ];
 

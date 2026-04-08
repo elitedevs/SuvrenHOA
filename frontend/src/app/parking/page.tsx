@@ -35,7 +35,7 @@ function ParkingContent() {
   };
 
   const spotColor = (status: string) => {
-    if (status === 'available') return 'bg-[rgba(42,93,79,0.15)] border-[rgba(42,93,79,0.30)] text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.30)]';
+    if (status === 'available') return 'bg-[rgba(42,93,79,0.15)] border-[rgba(42,93,79,0.30)] text-[#2A5D4F] hover:bg-[rgba(42,93,79,0.30)]';
     if (status === 'assigned') return 'bg-[rgba(176,155,113,0.20)] border-[rgba(176,155,113,0.40)] text-[#B09B71] hover:bg-[rgba(176,155,113,0.30)]';
     return 'bg-[rgba(107,58,58,0.15)] border-[rgba(107,58,58,0.30)] text-[#8B5A5A] hover:bg-[rgba(139,90,90,0.30)]';
   };
@@ -60,7 +60,7 @@ function ParkingContent() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-6">
         {[
-          { label: 'Available', count: counts.available, color: 'text-[#3A7D6F]', dot: 'bg-[#3A7D6F]' },
+          { label: 'Available', count: counts.available, color: 'text-[#2A5D4F]', dot: 'bg-[#2A5D4F]' },
           { label: 'Assigned', count: counts.assigned, color: 'text-[#B09B71]', dot: 'bg-[#B09B71]' },
           { label: 'Visitor', count: counts.visitor, color: 'text-[#8B5A5A]', dot: 'bg-[#8B5A5A]' },
         ].map(({ label, count, color, dot }) => (
@@ -106,7 +106,7 @@ function ParkingContent() {
               <div className="flex items-center justify-between">
                 <h3 className="font-medium">Spot #{selected.number}</h3>
                 <span className={`text-xs px-2 py-1 rounded-full ${
-                  selected.status === 'available' ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F]' :
+                  selected.status === 'available' ? 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F]' :
                   selected.status === 'assigned' ? 'bg-[rgba(176,155,113,0.10)] text-[#B09B71]' :
                   'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A]'
                 }`}>{selected.status}</span>

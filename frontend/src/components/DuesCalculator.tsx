@@ -125,7 +125,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
       {/* Savings vs traditional */}
       <div className="rounded-xl bg-[rgba(42,93,79,0.08)] border border-[rgba(42,93,79,0.20)] p-5">
         <div className="flex items-center gap-2 mb-3">
-          <p className="text-sm font-medium text-[#3A7D6F]">vs. Traditional HOA</p>
+          <p className="text-sm font-medium text-[#2A5D4F]">vs. Traditional HOA</p>
         </div>
         <div className="grid grid-cols-2 gap-3 mb-3">
           <div>
@@ -143,12 +143,12 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-[10px] text-[var(--text-disabled)]">Estimated Annual Savings</p>
-            <p className="text-2xl font-normal text-[#3A7D6F]">
+            <p className="text-2xl font-normal text-[#2A5D4F]">
               ${animatedSavings.toLocaleString()}
             </p>
           </div>
           <div className="px-3 py-1.5 rounded-full bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)]">
-            <span className="text-xs font-medium text-[#3A7D6F]">
+            <span className="text-xs font-medium text-[#2A5D4F]">
               {Math.round((savings / traditionalMid) * 100)}% saved
             </span>
           </div>

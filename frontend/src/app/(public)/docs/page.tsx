@@ -134,7 +134,7 @@ export default function DocsPage() {
               <div className="flex items-start gap-4 mb-5">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
                      style={{ background: 'rgba(42,93,79,0.1)' }}>
-                  <Icon className="w-5 h-5 text-[#3A7D6F]" />
+                  <Icon className="w-5 h-5 text-[#2A5D4F]" />
                 </div>
                 <div>
                   <h2 className="text-xl font-medium text-[var(--parchment)]"
@@ -163,7 +163,7 @@ export default function DocsPage() {
             <div className="flex items-start gap-4 mb-5">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
                    style={{ background: 'rgba(42,93,79,0.1)' }}>
-                <HelpCircle className="w-5 h-5 text-[#3A7D6F]" />
+                <HelpCircle className="w-5 h-5 text-[#2A5D4F]" />
               </div>
               <div>
                 <h2 className="text-xl font-medium text-[var(--parchment)]"
@@ -195,7 +195,7 @@ export default function DocsPage() {
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
                    style={{ background: 'rgba(42,93,79,0.1)' }}>
-                <Code className="w-5 h-5 text-[#3A7D6F]" />
+                <Code className="w-5 h-5 text-[#2A5D4F]" />
               </div>
               <div>
                 <div className="flex items-center gap-3 mb-1">
@@ -204,7 +204,7 @@ export default function DocsPage() {
                     API Reference
                   </h2>
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium tracking-wide uppercase"
-                        style={{ background: 'rgba(42,93,79,0.15)', color: '#3A7D6F', border: '1px solid rgba(42,93,79,0.25)' }}>
+                        style={{ background: 'rgba(42,93,79,0.15)', color: '#2A5D4F', border: '1px solid rgba(42,93,79,0.25)' }}>
                     Coming Soon
                   </span>
                 </div>
@@ -236,7 +236,7 @@ export default function DocsPage() {
             <Link href="/contact"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm transition-all hover:scale-[1.02]"
                   style={{
-                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                     color: '#0C0C0E',
                     boxShadow: '0 0 24px rgba(176,155,113,0.25)',
                   }}>

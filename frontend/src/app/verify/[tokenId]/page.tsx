@@ -11,7 +11,7 @@ export default async function VerifyPropertyPage({ params }: Props) {
     <div className="max-w-lg mx-auto px-6 py-16 page-enter text-center">
       {/* Logo */}
       <div className="relative mb-8 inline-block">
-        <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-[#B09B71] via-[var(--brass-deep)] to-[#8A7550] flex items-center justify-center shadow-2xl mx-auto">
+        <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-[#B09B71] via-[var(--brass-deep)] to-[#8A7A5A] flex items-center justify-center shadow-2xl mx-auto">
           <span className="text-4xl font-normal text-[var(--text-heading)]">S</span>
         </div>
       </div>

@@ -169,7 +169,7 @@ function EventCard({ event, walletAddress }: { event: any; walletAddress?: strin
                   disabled={rsvp.isPending}
                   className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-all ${
                     myRsvp?.status === status
-                      ? status === 'going' ? 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)]'
+                      ? status === 'going' ? 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.25)]'
                         : status === 'maybe' ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.25)]'
                         : 'bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] border border-[rgba(107,58,58,0.25)]'
                       : 'bg-[rgba(26,26,30,0.50)] text-[var(--text-disabled)] hover:text-[var(--text-body)]'

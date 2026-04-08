@@ -128,7 +128,7 @@ function ProposalsDashboard() {
               const stateColorMap: Record<string, string> = {
                 Pending: 'text-[var(--text-disabled)] border-[var(--border-default)] bg-[rgba(245,240,232,0.04)]',
                 Active: 'text-[var(--steel)] border-[rgba(90,122,154,0.30)] bg-[rgba(90,122,154,0.08)]',
-                Succeeded: 'text-[#3A7D6F] border-[rgba(58,125,111,0.30)] bg-[rgba(58,125,111,0.08)]',
+                Succeeded: 'text-[#2A5D4F] border-[rgba(58,125,111,0.30)] bg-[rgba(58,125,111,0.08)]',
                 Queued: 'text-[#B09B71] border-[rgba(176,155,113,0.30)] bg-[rgba(176,155,113,0.08)]',
                 Executed: 'text-[#B09B71] border-[rgba(176,155,113,0.40)] bg-[rgba(176,155,113,0.10)]',
               };
@@ -145,7 +145,7 @@ function ProposalsDashboard() {
 
           {/* Voting options */}
           <div className="flex items-center justify-center gap-3 mt-8">
-            <span className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border border-[rgba(42,93,79,0.20)]">
+            <span className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border border-[rgba(42,93,79,0.20)]">
               For
             </span>
             <span className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border border-[rgba(107,58,58,0.20)]">
@@ -199,9 +199,9 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
     return (
       <div className="glass-card-success rounded-xl p-12 text-center pulse-glow-green">
         <div className="w-16 h-16 rounded-xl bg-[rgba(42,93,79,0.12)] border border-[rgba(42,93,79,0.20)] flex items-center justify-center mx-auto mb-6">
-          <VoteIcon className="w-7 h-7 text-[#3A7D6F]" />
+          <VoteIcon className="w-7 h-7 text-[#2A5D4F]" />
         </div>
-        <h3 className="text-2xl font-normal text-[#3A7D6F] mb-3">Proposal Submitted</h3>
+        <h3 className="text-2xl font-normal text-[#2A5D4F] mb-3">Proposal Submitted</h3>
         <p className="text-sm text-[var(--text-disabled)] mb-6 max-w-sm mx-auto">
           Your proposal is in <strong className="text-[var(--text-body)]">Pending</strong> state. Voting opens after the 1-day review period.
         </p>
@@ -284,7 +284,7 @@ function CreateProposal({ onClose }: { onClose: () => void }) {
                   <div className="flex items-center gap-2 mb-1.5">
                     <span className="text-sm font-normal text-[var(--parchment)]">{cat.label}</span>
                     {category === cat.value && (
-                      <span className="ml-auto text-[10px] text-[#3A7D6F]">selected</span>
+                      <span className="ml-auto text-[10px] text-[#2A5D4F]">selected</span>
                     )}
                   </div>
                   <p className="text-[11px] text-[var(--text-disabled)]">

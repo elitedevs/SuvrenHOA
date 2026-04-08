@@ -108,7 +108,7 @@ export default function AcceptInvitePage() {
           <div className="space-y-3">
             <Link
               href={`/signup?token=${token}${invite?.email ? `&email=${encodeURIComponent(invite.email)}` : ''}`}
-              className="block w-full py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4B08A] transition-colors text-center"
+              className="block w-full py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4A96E] transition-colors text-center"
             >
               Create Account
             </Link>
@@ -150,7 +150,7 @@ export default function AcceptInvitePage() {
             </p>
             <button
               onClick={handleAccept}
-              className="w-full py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4B08A] transition-colors"
+              className="w-full py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4A96E] transition-colors"
             >
               Accept Invitation
             </button>

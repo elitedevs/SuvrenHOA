@@ -22,7 +22,7 @@ function CopyButton({ text }: { text: string }) {
   };
   return (
     <button onClick={copy} className="p-1 rounded text-[var(--text-disabled)] hover:text-[#B09B71] transition-colors">
-      {copied ? <CheckCheck className="w-3.5 h-3.5 text-[#3A7D6F]" /> : <Copy className="w-3.5 h-3.5" />}
+      {copied ? <CheckCheck className="w-3.5 h-3.5 text-[#2A5D4F]" /> : <Copy className="w-3.5 h-3.5" />}
     </button>
   );
 }

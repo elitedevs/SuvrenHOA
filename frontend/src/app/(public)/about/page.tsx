@@ -154,8 +154,8 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-16 page-enter">
             <div className="inline-flex items-center gap-2 mb-6">
-              <Shield className="w-4 h-4 text-[#3A7D6F]" />
-              <span className="text-[13px] uppercase tracking-[0.15em] text-[#3A7D6F] font-medium">
+              <Shield className="w-4 h-4 text-[#2A5D4F]" />
+              <span className="text-[13px] uppercase tracking-[0.15em] text-[#2A5D4F] font-medium">
                 The Solution
               </span>
             </div>
@@ -275,7 +275,7 @@ export default function AboutPage() {
               <div
                 className="w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-medium"
                 style={{
-                  background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                  background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                   color: '#0C0C0E',
                   boxShadow: '0 0 40px rgba(176,155,113,0.2)',
                 }}
@@ -325,7 +325,7 @@ export default function AboutPage() {
                   className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
                   style={{ background: 'rgba(42,93,79,0.1)', border: '1px solid rgba(42,93,79,0.15)' }}
                 >
-                  <Icon className="w-5 h-5 text-[#3A7D6F]" />
+                  <Icon className="w-5 h-5 text-[#2A5D4F]" />
                 </div>
                 <div>
                   <h3
@@ -371,7 +371,7 @@ export default function AboutPage() {
                 href="/signup"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                 style={{
-                  background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                  background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                   color: '#0C0C0E',
                   boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                 }}

@@ -183,7 +183,7 @@ export default function InvitePage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4B08A] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4A96E] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
               >
                 {loading ? 'Sending...' : <><Send className="w-4 h-4" /> Send Invitation</>}
               </button>
@@ -213,7 +213,7 @@ export default function InvitePage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4B08A] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4A96E] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
               >
                 {loading ? 'Sending...' : <><Upload className="w-4 h-4" /> Send All Invitations</>}
               </button>

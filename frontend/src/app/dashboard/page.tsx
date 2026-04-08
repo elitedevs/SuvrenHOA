@@ -75,7 +75,7 @@ function PropertyInsights() {
         <div>
           <p className="text-[10px] text-[var(--text-disabled)] mb-1">Estimated Value</p>
           <p className="text-2xl font-normal text-[#B09B71] number-reveal">${CURRENT_EST.toLocaleString()}</p>
-          <p className="text-[11px] text-[#3A7D6F] mt-0.5 flex items-center gap-1">
+          <p className="text-[11px] text-[#2A5D4F] mt-0.5 flex items-center gap-1">
             <TrendingUp className="w-3 h-3" />+{YOY_CHANGE}% YoY
           </p>
         </div>
@@ -262,7 +262,7 @@ function PropertyDashboard() {
               <div className="skeleton h-5 w-24 rounded" />
             ) : isCurrent ? (
               <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-[#3A7D6F]" />
+                <Check className="w-4 h-4 text-[#2A5D4F]" />
                 <span className="text-sm text-[var(--text-body)]">Fully paid</span>
               </div>
             ) : (
@@ -306,7 +306,7 @@ function PropertyDashboard() {
           <div className="flex items-center gap-2">
             <div className="progress-bar-track flex-1">
               <div
-                className="progress-bar-fill bg-gradient-to-r from-[#8A7550] to-[#B09B71]"
+                className="progress-bar-fill bg-gradient-to-r from-[#8A7A5A] to-[#B09B71]"
                 style={{ width: totalSupply > 0 ? `${(Number(votes) / Number(totalSupply)) * 100}%` : '0%' }}
               />
             </div>

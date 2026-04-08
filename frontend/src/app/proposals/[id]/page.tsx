@@ -22,7 +22,7 @@ const STATE_STYLES: Record<string, { color: string; bg: string; border: string }
   Active: { color: 'text-[var(--steel)]', bg: 'bg-[rgba(90,122,154,0.10)]', border: 'border-[rgba(90,122,154,0.20)]' },
   Canceled: { color: 'text-[var(--text-muted)]', bg: 'bg-[rgba(245,240,232,0.04)]', border: 'border-[rgba(245,240,232,0.08)]' },
   Defeated: { color: 'text-[#8B5A5A]', bg: 'bg-[rgba(107,58,58,0.10)]', border: 'border-[rgba(107,58,58,0.20)]' },
-  Succeeded: { color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
+  Succeeded: { color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
   Queued: { color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]' },
   Expired: { color: 'text-[var(--text-muted)]', bg: 'bg-[rgba(245,240,232,0.04)]', border: 'border-[rgba(245,240,232,0.08)]' },
   Executed: { color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
@@ -123,13 +123,13 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
         <div className="pt-4 border-t border-[rgba(245,240,232,0.05)]">
           <div className="flex items-center justify-between text-xs mb-2">
             <span className="text-[var(--text-muted)]">Quorum Progress</span>
-            <span className={quorumPercent >= 100 ? 'text-[#3A7D6F]' : 'text-[var(--text-muted)]'}>
+            <span className={quorumPercent >= 100 ? 'text-[#2A5D4F]' : 'text-[var(--text-muted)]'}>
               {totalVotes} / {quorumRequired} votes ({quorumPercent.toFixed(0)}%)
             </span>
           </div>
           <div className="h-2 rounded-full bg-[var(--surface-2)] overflow-hidden">
             <div
-              className={`h-full rounded-full transition-all duration-500 ${quorumPercent >= 100 ? 'bg-[#3A7D6F]' : 'bg-[rgba(176,155,113,0.80)]'}`}
+              className={`h-full rounded-full transition-all duration-500 ${quorumPercent >= 100 ? 'bg-[#2A5D4F]' : 'bg-[rgba(176,155,113,0.80)]'}`}
               style={{ width: `${Math.min(quorumPercent, 100)}%` }}
             />
           </div>
@@ -147,7 +147,7 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 
           {isSuccess ? (
             <div className="p-4 rounded-xl bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.25)] text-center">
-              <p className="text-[#3A7D6F] font-medium"> Vote submitted!</p>
+              <p className="text-[#2A5D4F] font-medium"> Vote submitted!</p>
               {hash && (
                 <a href={`https://sepolia.basescan.org/tx/${hash}`} target="_blank" rel="noopener noreferrer"
                   className="text-xs text-[#B09B71] hover:underline font-mono mt-2 block">
@@ -261,8 +261,8 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
 function VoteBar({ label, count, percent, color, icon }: {
   label: string; count: number; percent: number; color: string; icon: string;
 }) {
-  const colorClass = color === 'green' ? 'bg-[#3A7D6F]' : color === 'red' ? 'bg-[#8B5A5A]' : 'bg-[rgba(245,240,232,0.12)]';
-  const textClass = color === 'green' ? 'text-[#3A7D6F]' : color === 'red' ? 'text-[#8B5A5A]' : 'text-[var(--text-muted)]';
+  const colorClass = color === 'green' ? 'bg-[#2A5D4F]' : color === 'red' ? 'bg-[#8B5A5A]' : 'bg-[rgba(245,240,232,0.12)]';
+  const textClass = color === 'green' ? 'text-[#2A5D4F]' : color === 'red' ? 'text-[#8B5A5A]' : 'text-[var(--text-muted)]';
 
   return (
     <div>

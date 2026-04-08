@@ -99,7 +99,7 @@ export default function HomePage() {
         <div className="mb-16 card-enter card-enter-delay-2 flex flex-col sm:flex-row items-center gap-4">
           <Link
             href="/signup"
-            className="px-8 py-3.5 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-semibold text-sm hover:bg-[#C4B08A] transition-colors flex items-center gap-2"
+            className="px-8 py-3.5 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-semibold text-sm hover:bg-[#C4A96E] transition-colors flex items-center gap-2"
           >
             Start Free Trial
             <ArrowRight className="w-4 h-4" />
@@ -155,8 +155,8 @@ export default function HomePage() {
               }`}>
                 <Icon className={`w-5 h-5 ${
                   accent === 'gold' ? 'text-[#B09B71]' :
-                  accent === 'green' ? 'text-[#3A7D6F]' :
-                  'text-[#5A7A9A]'
+                  accent === 'green' ? 'text-[#2A5D4F]' :
+                  'text-[#2C2C2E]'
                 }`} />
               </div>
               <h3 className="font-medium text-base mb-2 text-[var(--parchment)]">{title}</h3>
@@ -203,7 +203,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/signup"
-              className="px-8 py-3.5 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-semibold text-sm hover:bg-[#C4B08A] transition-colors flex items-center gap-2"
+              className="px-8 py-3.5 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-semibold text-sm hover:bg-[#C4A96E] transition-colors flex items-center gap-2"
             >
               Start Free Trial
               <ArrowRight className="w-4 h-4" />

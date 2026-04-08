@@ -42,11 +42,11 @@ function generateSampleData(): UtilityMonth[] {
 }
 
 const UTIL_CONFIG = [
-  { key: 'water', label: 'Water', icon: '', color: '#5A7A9A' },
+  { key: 'water', label: 'Water', icon: '', color: '#2C2C2E' },
   { key: 'electric', label: 'Electric', icon: '', color: '#B09B71' },
   { key: 'gas', label: 'Gas', icon: '', color: '#b8942e' },
   { key: 'internet', label: 'Internet', icon: '', color: '#8B5A5A' },
-  { key: 'waste', label: 'Waste', icon: '', color: '#3A7D6F' },
+  { key: 'waste', label: 'Waste', icon: '', color: '#2A5D4F' },
 ];
 
 const TOTAL_UNITS = 50;
@@ -108,7 +108,7 @@ export default function UtilitiesPage() {
               <p className="text-lg mb-1">{u.icon}</p>
               <p className="text-[10px] text-[var(--text-muted)]">{u.label}</p>
               <p className="text-base font-medium" style={{ color: u.color }}>${actual.toLocaleString()}</p>
-              <p className={`text-[10px] ${over ? 'text-[#8B5A5A]' : 'text-[#3A7D6F]'}`}>
+              <p className={`text-[10px] ${over ? 'text-[#8B5A5A]' : 'text-[#2A5D4F]'}`}>
                 {over ? '↑' : '↓'} vs ${budget.toLocaleString()} budget
               </p>
             </button>
@@ -160,7 +160,7 @@ export default function UtilitiesPage() {
                   <div key={u.key} className="p-3 rounded-xl bg-[rgba(26,26,30,0.30)]">
                     <p className="text-xs text-[var(--text-muted)]">{u.icon} {u.label}</p>
                     <p className="text-sm font-medium mt-1">${thisTotal.toLocaleString()}</p>
-                    <p className={`text-[10px] ${delta < 0 ? 'text-[#3A7D6F]' : 'text-[#8B5A5A]'}`}>
+                    <p className={`text-[10px] ${delta < 0 ? 'text-[#2A5D4F]' : 'text-[#8B5A5A]'}`}>
                       {delta > 0 ? '+' : ''}{delta.toFixed(1)}% vs last year
                     </p>
                   </div>

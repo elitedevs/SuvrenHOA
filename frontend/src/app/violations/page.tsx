@@ -47,7 +47,7 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
   const APPEAL_STATUS_STYLES = {
     submitted: 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]',
     'under-review': 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]',
-    approved: 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]',
+    approved: 'text-[#2A5D4F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]',
     denied: 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)] border-[rgba(107,58,58,0.20)]',
   };
 
@@ -99,7 +99,7 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
           </div>
         ) : submitted ? (
           <div className="text-center py-6 space-y-3">
-            <CheckCircle className="w-8 h-8 text-[#3A7D6F] mx-auto" />
+            <CheckCircle className="w-8 h-8 text-[#2A5D4F] mx-auto" />
             <h3 className="font-medium">Appeal Submitted</h3>
             <p className="text-sm text-[var(--text-muted)]">Your appeal has been logged. The board will review within 5 business days.</p>
             <button onClick={onClose} className="px-6 py-2.5 rounded-xl bg-[#B09B71] text-[var(--surface-2)] text-sm font-medium">Done</button>
@@ -246,7 +246,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
   const statusGroups = [
     { key: 'active', label: 'Active', statuses: ['reported', 'under-review', 'notice-issued', 'cure-period', 'disputed', 'hearing'], color: 'text-[#B09B71]' },
     { key: 'fined', label: 'Fined/Appealed', statuses: ['fined', 'appealed', 'ruling-upheld', 'ruling-modified'], color: 'text-[#8B5A5A]' },
-    { key: 'resolved', label: 'Resolved', statuses: ['cured', 'resolved', 'dismissed', 'ruling-dismissed', 'appeal-overturned', 'closed'], color: 'text-[#3A7D6F]' },
+    { key: 'resolved', label: 'Resolved', statuses: ['cured', 'resolved', 'dismissed', 'ruling-dismissed', 'appeal-overturned', 'closed'], color: 'text-[#2A5D4F]' },
   ];
 
   return (
@@ -278,7 +278,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
         <div className="text-center py-12 text-[var(--text-disabled)]">Loading violations...</div>
       ) : !violations || violations.length === 0 ? (
         <div className="glass-card rounded-xl hover-lift p-12 text-center">
-          <CheckCircle className="w-8 h-8 text-[#3A7D6F] mx-auto mb-4" />
+          <CheckCircle className="w-8 h-8 text-[#2A5D4F] mx-auto mb-4" />
           <h3 className="text-lg font-medium mb-2">No violations</h3>
           <p className="text-sm text-[var(--text-muted)]">
             The community is in good standing. Violations will appear here when reported.
@@ -305,7 +305,7 @@ function ViolationCard({ violation }: { violation: any }) {
   const cat = CATEGORIES.find(c => c.id === violation.category);
   const updates = violation.hoa_violation_updates || [];
 
-  const colorClass = statusInfo.color === 'green' ? 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
+  const colorClass = statusInfo.color === 'green' ? 'text-[#2A5D4F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
     statusInfo.color === 'red' ? 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)] border-[rgba(107,58,58,0.20)]' :
     statusInfo.color === 'yellow' ? 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' :
     statusInfo.color === 'gold' ? 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' :
@@ -384,7 +384,7 @@ function ViolationCard({ violation }: { violation: any }) {
             {/* Actions based on status */}
             {(violation.status === 'cure-period' || violation.status === 'notice-issued') && (
               <div className="flex gap-2">
-                <button className="px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)] text-xs text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.30)]">
+                <button className="px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)] text-xs text-[#2A5D4F] hover:bg-[rgba(42,93,79,0.30)]">
                    Submit Compliance Proof
                 </button>
                 <button className="px-3 py-1.5 rounded-lg bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)] text-xs text-[#B09B71] hover:bg-[rgba(176,155,113,0.20)]">
@@ -410,7 +410,7 @@ function ViolationCard({ violation }: { violation: any }) {
                 </button>
                 {hasAppeal && (
                   <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
-                    appealRecord?.status === 'approved' ? 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
+                    appealRecord?.status === 'approved' ? 'text-[#2A5D4F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
                     appealRecord?.status === 'denied' ? 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)] border-[rgba(107,58,58,0.20)]' :
                     appealRecord?.status === 'under-review' ? 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' :
                     'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]'
