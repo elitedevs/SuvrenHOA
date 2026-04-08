@@ -30,7 +30,7 @@ export function MarketingFooter() {
       <div className="max-w-6xl mx-auto px-6 py-16">
         {/* Newsletter row */}
         <div className="mb-12 pb-10 border-b border-[rgba(245,240,232,0.06)] max-w-sm">
-          <p className="text-[11px] uppercase tracking-widest text-[#B09B71] font-medium mb-1">Product Hunt Launch — May 1st</p>
+          <p className="text-[11px] uppercase tracking-widest text-[#B09B71] font-medium mb-1">Product Hunt Launch — Oct 19th</p>
           <p className="text-[13px] text-[rgba(245,240,232,0.4)] leading-relaxed">Get notified when we go live and lock in founding member pricing.</p>
           <EmailCapture variant="inline" source="launch_page" />
         </div>
