@@ -105,7 +105,7 @@ export default function ElectionsPage() {
 
   const STATUS_BADGE: Record<string, string> = {
     upcoming: 'bg-[rgba(90,122,154,0.40)] text-[var(--steel)]',
-    active: 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]',
+    active: 'bg-[rgba(42,93,79,0.40)] text-[#2A5D4F]',
     completed: 'bg-[rgba(245,240,232,0.06)] text-[var(--text-muted)]',
   };
 

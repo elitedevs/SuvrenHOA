@@ -29,7 +29,7 @@ const DEMO_ZONES: Zone[] = [
 ];
 
 const STATUS_CONFIG = {
-  active: { label: 'Active', color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]', dot: 'bg-[#3A7D6F]' },
+  active: { label: 'Active', color: 'text-[#2A5D4F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]', dot: 'bg-[#2A5D4F]' },
   paused: { label: 'Paused', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]', dot: 'bg-[#B09B71]' },
   off: { label: 'Off', color: 'text-[var(--text-disabled)]', bg: 'bg-[rgba(245,240,232,0.04)]', border: 'border-[rgba(245,240,232,0.08)]', dot: 'bg-[rgba(245,240,232,0.12)]' },
 };
@@ -128,7 +128,7 @@ export default function IrrigationPage() {
         {[
           { label: 'Active Zones', value: String(zones.filter((z) => z.status === 'active').length), icon: Droplets, color: 'text-[var(--steel)]' },
           { label: 'Weekly Gallons', value: weeklyGallons.toLocaleString(), icon: BarChart2, color: 'text-[#B09B71]' },
-          { label: 'Monthly Est.', value: (monthlyGallons / 1000).toFixed(1) + 'K gal', icon: Leaf, color: 'text-[#3A7D6F]' },
+          { label: 'Monthly Est.', value: (monthlyGallons / 1000).toFixed(1) + 'K gal', icon: Leaf, color: 'text-[#2A5D4F]' },
           { label: 'Paused Zones', value: String(zones.filter((z) => z.status !== 'active').length), icon: AlertTriangle, color: 'text-[#B09B71]' },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="glass-card rounded-xl p-4">
@@ -211,7 +211,7 @@ export default function IrrigationPage() {
               <button
                 onClick={() => toggleStatus(selectedZone.id)}
                 className={`mt-3 w-full px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                  selectedZone.status === 'active' ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] hover:bg-[rgba(176,155,113,0.30)]' : 'bg-[rgba(58,125,111,0.20)] text-[#3A7D6F] border border-[rgba(42,93,79,0.20)] hover:bg-[rgba(42,93,79,0.30)]'
+                  selectedZone.status === 'active' ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] hover:bg-[rgba(176,155,113,0.30)]' : 'bg-[rgba(58,125,111,0.20)] text-[#2A5D4F] border border-[rgba(42,93,79,0.20)] hover:bg-[rgba(42,93,79,0.30)]'
                 }`}
               >
                 {selectedZone.status === 'active' ? 'Pause Zone' : 'Activate Zone'}

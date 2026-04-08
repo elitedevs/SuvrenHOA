@@ -92,7 +92,7 @@ export default function ContactPageClient() {
                       className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
                       style={{ backgroundColor: 'rgba(42,93,79,0.2)' }}
                     >
-                      <Send className="w-7 h-7 text-[#3A7D6F]" />
+                      <Send className="w-7 h-7 text-[#2A5D4F]" />
                     </div>
                     <h3
                       className="text-2xl font-semibold text-[rgba(245,240,232,0.9)] mb-3"

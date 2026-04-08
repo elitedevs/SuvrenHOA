@@ -23,7 +23,7 @@ interface Inspection {
 }
 
 const RESULT_CONFIG: Record<InspectionResult, { label: string; icon: React.ElementType; color: string; bg: string; border: string }> = {
-  pass: { label: 'Pass', icon: CheckCircle, color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
+  pass: { label: 'Pass', icon: CheckCircle, color: 'text-[#2A5D4F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
   'needs-attention': { label: 'Needs Attention', icon: AlertTriangle, color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]' },
   violation: { label: 'Violation', icon: XCircle, color: 'text-[#8B5A5A]', bg: 'bg-[rgba(139,90,90,0.10)]', border: 'border-[rgba(139,90,90,0.20)]' },
   pending: { label: 'Scheduled', icon: Clock, color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/10', border: 'border-[rgba(90,122,154,0.20)]' },
@@ -167,7 +167,7 @@ export default function InspectionsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[
           { label: 'Total', value: stats.total, color: 'text-[#B09B71]', icon: BarChart2 },
-          { label: 'Passed', value: stats.pass, color: 'text-[#3A7D6F]', icon: CheckCircle },
+          { label: 'Passed', value: stats.pass, color: 'text-[#2A5D4F]', icon: CheckCircle },
           { label: 'Needs Attention', value: stats.attention, color: 'text-[#B09B71]', icon: AlertTriangle },
           { label: 'Violations', value: stats.violations, color: 'text-[#8B5A5A]', icon: XCircle },
         ].map(({ label, value, color, icon: Icon }) => (

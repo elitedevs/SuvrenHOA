@@ -11,7 +11,7 @@ interface PickupDay {
 }
 
 const TYPE_CONFIG: Record<PickupType, { color: string; bg: string; border: string; emoji: string; label: string }> = {
-  trash:     { color: 'text-[#3A7D6F]',  bg: 'bg-[rgba(58,125,111,0.20)]',  border: 'border-[rgba(42,93,79,0.30)]',  emoji: '', label: 'Trash' },
+  trash:     { color: 'text-[#2A5D4F]',  bg: 'bg-[rgba(58,125,111,0.20)]',  border: 'border-[rgba(42,93,79,0.30)]',  emoji: '', label: 'Trash' },
   recycling: { color: 'text-[var(--steel)]',   bg: 'bg-[var(--steel)]/20',   border: 'border-[rgba(90,122,154,0.30)]',   emoji: '', label: 'Recycling' },
   yard:      { color: 'text-[#B09B71]',  bg: 'bg-[rgba(176,155,113,0.20)]', border: 'border-[rgba(176,155,113,0.30)]',  emoji: '', label: 'Yard Waste' },
 };

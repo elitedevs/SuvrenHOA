@@ -64,7 +64,7 @@ function StatusBadge({ status }: { status: string }) {
   const styles: Record<string, React.CSSProperties> = {
     paid: {
       background: 'rgba(42, 93, 79, 0.18)',
-      color: '#3A7D6F',
+      color: '#2A5D4F',
       border: '1px solid rgba(42, 93, 79, 0.25)',
     },
     upcoming: {
@@ -257,7 +257,7 @@ function ActiveLoanDashboard() {
           className="text-[10px] tracking-widest uppercase px-2 py-0.5 rounded-lg"
           style={{
             background: 'rgba(42, 93, 79, 0.12)',
-            color: '#3A7D6F',
+            color: '#2A5D4F',
             border: '1px solid rgba(42, 93, 79, 0.20)',
           }}
         >
@@ -294,7 +294,7 @@ function ActiveLoanDashboard() {
           </div>
           <div>
             <p className="text-[10px] tracking-widest uppercase mb-1" style={{ color: 'var(--text-disabled)' }}>Paid</p>
-            <p className="text-lg font-normal" style={{ color: '#3A7D6F' }}>${loan.totalPaid.toFixed(2)}</p>
+            <p className="text-lg font-normal" style={{ color: '#2A5D4F' }}>${loan.totalPaid.toFixed(2)}</p>
           </div>
           <div>
             <p className="text-[10px] tracking-widest uppercase mb-1" style={{ color: 'var(--text-disabled)' }}>Remaining</p>
@@ -317,7 +317,7 @@ function ActiveLoanDashboard() {
               className="progress-bar-fill"
               style={{
                 width: `${progressPct}%`,
-                background: 'linear-gradient(90deg, #8A7550, #B09B71)',
+                background: 'linear-gradient(90deg, #8A7A5A, #B09B71)',
               }}
             />
           </div>
@@ -373,7 +373,7 @@ function ActiveLoanDashboard() {
                   background: row.status === 'paid'
                     ? 'rgba(42, 93, 79, 0.14)'
                     : 'rgba(245, 240, 232, 0.04)',
-                  color: row.status === 'paid' ? '#3A7D6F' : 'var(--text-disabled)',
+                  color: row.status === 'paid' ? '#2A5D4F' : 'var(--text-disabled)',
                 }}
               >
                 {row.status === 'paid' ? <CheckCircle className="w-3.5 h-3.5" /> : row.n}
@@ -432,7 +432,7 @@ function CommunityLendingStats() {
               className="progress-bar-fill"
               style={{
                 width: `${poolPct}%`,
-                background: 'linear-gradient(90deg, #8A7550, #B09B71)',
+                background: 'linear-gradient(90deg, #8A7A5A, #B09B71)',
               }}
             />
           </div>
@@ -468,14 +468,14 @@ function CommunityLendingStats() {
             <p className="text-[10px] tracking-widest uppercase mb-1" style={{ color: 'var(--text-disabled)' }}>
               Interest Earned
             </p>
-            <p className="text-2xl font-normal" style={{ color: '#3A7D6F' }}>${s.interestEarned}</p>
+            <p className="text-2xl font-normal" style={{ color: '#2A5D4F' }}>${s.interestEarned}</p>
             <p className="text-xs mt-0.5" style={{ color: 'var(--text-disabled)' }}>returned to reserve</p>
           </div>
           <div>
             <p className="text-[10px] tracking-widest uppercase mb-1" style={{ color: 'var(--text-disabled)' }}>
               Default Rate
             </p>
-            <p className="text-2xl font-normal" style={{ color: '#3A7D6F' }}>{s.defaultRate}</p>
+            <p className="text-2xl font-normal" style={{ color: '#2A5D4F' }}>{s.defaultRate}</p>
             <p className="text-xs mt-0.5" style={{ color: 'var(--text-disabled)' }}>perfect record</p>
           </div>
           <div className="flex flex-col justify-center">
@@ -483,9 +483,9 @@ function CommunityLendingStats() {
               className="flex items-center gap-2 px-3 py-2 rounded-xl"
               style={{ background: 'rgba(42, 93, 79, 0.08)', border: '1px solid rgba(42, 93, 79, 0.15)' }}
             >
-              <BarChart3 className="w-4 h-4 shrink-0" style={{ color: '#3A7D6F' }} />
+              <BarChart3 className="w-4 h-4 shrink-0" style={{ color: '#2A5D4F' }} />
               <div>
-                <p className="text-[10px]" style={{ color: '#3A7D6F' }}>All-time healthy</p>
+                <p className="text-[10px]" style={{ color: '#2A5D4F' }}>All-time healthy</p>
                 <p className="text-[9px]" style={{ color: 'var(--text-disabled)' }}>No defaults recorded</p>
               </div>
             </div>

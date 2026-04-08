@@ -112,7 +112,7 @@ const CATEGORY_ICONS: Record<NotifCategory, React.ElementType> = {
 const CATEGORY_COLORS: Record<NotifCategory, string> = {
   Governance: 'text-[var(--steel)]',
   Dues: 'text-[#B09B71]',
-  Community: 'text-[#3A7D6F]',
+  Community: 'text-[#2A5D4F]',
   Safety: 'text-[#8B5A5A]',
 };
 

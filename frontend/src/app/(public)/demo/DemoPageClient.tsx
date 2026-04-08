@@ -33,7 +33,7 @@ function DashboardMock() {
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: 'Health Score', value: '87', color: '#3A7D6F' },
+          { label: 'Health Score', value: '87', color: '#2A5D4F' },
           { label: 'Residents', value: '142', color: '#B09B71' },
           { label: 'Open Proposals', value: '3', color: '#B09B71' },
         ].map(s => (
@@ -47,7 +47,7 @@ function DashboardMock() {
       <div className="rounded-lg p-4" style={{ background: 'rgba(245,240,232,0.03)', border: '1px solid rgba(245,240,232,0.06)' }}>
         <p className="text-[11px] text-[rgba(245,240,232,0.35)] mb-3 uppercase tracking-wide">Treasury Balance</p>
         <p className="text-2xl font-medium text-[var(--parchment)]">$284,750<span className="text-[14px] text-[rgba(245,240,232,0.35)]">.00</span></p>
-        <div className="flex items-center gap-1 mt-1 text-[11px] text-[#3A7D6F]">
+        <div className="flex items-center gap-1 mt-1 text-[11px] text-[#2A5D4F]">
           <TrendingUp className="w-3 h-3" /> +$12,400 this month
         </div>
       </div>
@@ -55,7 +55,7 @@ function DashboardMock() {
         <p className="text-[11px] text-[rgba(245,240,232,0.35)] mb-3 uppercase tracking-wide">Recent Activity</p>
         <div className="space-y-2">
           {[
-            { text: 'Pool Resurfacing proposal passed', time: '2h ago', icon: CheckCircle2, color: '#3A7D6F' },
+            { text: 'Pool Resurfacing proposal passed', time: '2h ago', icon: CheckCircle2, color: '#2A5D4F' },
             { text: 'Q1 financial report filed', time: '1d ago', icon: FileText, color: '#B09B71' },
             { text: 'New resident joined: Unit 204', time: '2d ago', icon: UserCheck, color: '#B09B71' },
           ].map(a => (
@@ -77,7 +77,7 @@ function VotingMock() {
     <div className="space-y-4">
       <div className="rounded-lg p-4" style={{ background: 'rgba(245,240,232,0.03)', border: '1px solid rgba(245,240,232,0.06)' }}>
         <div className="flex items-center justify-between mb-3">
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ background: 'rgba(42,93,79,0.15)', color: '#3A7D6F' }}>Active</span>
+          <span className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ background: 'rgba(42,93,79,0.15)', color: '#2A5D4F' }}>Active</span>
           <span className="text-[11px] text-[rgba(245,240,232,0.30)] flex items-center gap-1"><Clock className="w-3 h-3" /> 2 days left</span>
         </div>
         <h4 className="font-medium text-[var(--parchment)] mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
@@ -89,11 +89,11 @@ function VotingMock() {
         <div className="space-y-2">
           <div>
             <div className="flex justify-between text-[11px] mb-1">
-              <span className="text-[#3A7D6F]">For — {89} votes</span>
+              <span className="text-[#2A5D4F]">For — {89} votes</span>
               <span className="text-[rgba(245,240,232,0.35)]">{Math.round(89/total*100)}%</span>
             </div>
             <div className="h-2 rounded-full bg-[rgba(245,240,232,0.06)]">
-              <div className="h-full rounded-full bg-[#3A7D6F]" style={{ width: `${89/total*100}%` }} />
+              <div className="h-full rounded-full bg-[#2A5D4F]" style={{ width: `${89/total*100}%` }} />
             </div>
           </div>
           <div>
@@ -119,16 +119,16 @@ function VotingMock() {
       </div>
       <div className="rounded-lg p-3" style={{ background: 'rgba(245,240,232,0.03)', border: '1px solid rgba(245,240,232,0.06)' }}>
         <div className="flex items-center gap-2 text-[12px]">
-          <CheckCircle2 className="w-3.5 h-3.5 text-[#3A7D6F]" />
+          <CheckCircle2 className="w-3.5 h-3.5 text-[#2A5D4F]" />
           <span className="text-[rgba(245,240,232,0.50)]">Landscaping Contract Renewal</span>
-          <span className="ml-auto text-[10px] text-[#3A7D6F]">Passed 92-18</span>
+          <span className="ml-auto text-[10px] text-[#2A5D4F]">Passed 92-18</span>
         </div>
       </div>
       <div className="rounded-lg p-3" style={{ background: 'rgba(245,240,232,0.03)', border: '1px solid rgba(245,240,232,0.06)' }}>
         <div className="flex items-center gap-2 text-[12px]">
-          <CheckCircle2 className="w-3.5 h-3.5 text-[#3A7D6F]" />
+          <CheckCircle2 className="w-3.5 h-3.5 text-[#2A5D4F]" />
           <span className="text-[rgba(245,240,232,0.50)]">2026 Annual Budget Approval</span>
-          <span className="ml-auto text-[10px] text-[#3A7D6F]">Passed 104-8</span>
+          <span className="ml-auto text-[10px] text-[#2A5D4F]">Passed 104-8</span>
         </div>
       </div>
     </div>
@@ -164,7 +164,7 @@ function TreasuryMock() {
           ].map((t, i) => (
             <div key={i} className="flex items-center justify-between text-[12px]">
               <span className="text-[rgba(245,240,232,0.50)]">{t.desc}</span>
-              <span className={t.positive ? 'text-[#3A7D6F]' : 'text-[rgba(245,240,232,0.50)]'}>{t.amount}</span>
+              <span className={t.positive ? 'text-[#2A5D4F]' : 'text-[rgba(245,240,232,0.50)]'}>{t.amount}</span>
             </div>
           ))}
         </div>
@@ -395,7 +395,7 @@ export default function DemoPageClient() {
                 <Link href="/signup"
                       className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                       style={{
-                        background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                        background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                         color: '#0C0C0E',
                         boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                       }}>

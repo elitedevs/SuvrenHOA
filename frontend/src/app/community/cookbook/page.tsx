@@ -139,7 +139,7 @@ const SAMPLE_RECIPES: Recipe[] = [
 ];
 
 const DIFFICULTY_COLORS: Record<Difficulty, string> = {
-  Easy: 'text-[#3A7D6F] bg-[rgba(58,125,111,0.10)] border-[rgba(42,93,79,0.20)]',
+  Easy: 'text-[#2A5D4F] bg-[rgba(58,125,111,0.10)] border-[rgba(42,93,79,0.20)]',
   Medium: 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]',
   Hard: 'text-[#8B5A5A] bg-[rgba(139,90,90,0.10)] border-[rgba(139,90,90,0.20)]',
 };

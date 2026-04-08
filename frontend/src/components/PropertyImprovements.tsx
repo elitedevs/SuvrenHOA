@@ -212,7 +212,7 @@ export function PropertyImprovements() {
         </div>
         <div className="ml-auto text-right">
           <div className="text-xs text-[var(--text-disabled)]">{improvements.length} projects</div>
-          <div className="text-xs text-[#3A7D6F]">Est. +{((totalInvested * 0.7 / 447000) * 100).toFixed(1)}% value</div>
+          <div className="text-xs text-[#2A5D4F]">Est. +{((totalInvested * 0.7 / 447000) * 100).toFixed(1)}% value</div>
         </div>
       </div>
 

@@ -16,8 +16,8 @@ interface BudgetCategory {
 
 const DEFAULT_BUDGET: BudgetCategory[] = [
   { name: 'Maintenance', emoji: '', thisYear: 35000, lastYear: 32000, color: '#B09B71' },
-  { name: 'Landscaping', emoji: '', thisYear: 18000, lastYear: 16500, color: '#3A7D6F' },
-  { name: 'Insurance', emoji: '', thisYear: 22000, lastYear: 21000, color: '#5A7A9A' },
+  { name: 'Landscaping', emoji: '', thisYear: 18000, lastYear: 16500, color: '#2A5D4F' },
+  { name: 'Insurance', emoji: '', thisYear: 22000, lastYear: 21000, color: '#2C2C2E' },
   { name: 'Reserves', emoji: '', thisYear: 24000, lastYear: 24000, color: '#8B5A5A' },
   { name: 'Legal', emoji: '', thisYear: 8000, lastYear: 5000, color: '#b8942e' },
   { name: 'Admin', emoji: '', thisYear: 6000, lastYear: 5500, color: '#6B3A3A' },
@@ -154,7 +154,7 @@ export default function BudgetPlannerPage() {
         </div>
         <div className="glass-card rounded-xl p-5">
           <p className="text-xs text-[var(--text-disabled)] uppercase tracking-wide mb-2">YoY Change</p>
-          <p className={`text-2xl font-normal ${diff > 0 ? 'text-[#8B5A5A]' : diff < 0 ? 'text-[#3A7D6F]' : 'text-[var(--text-muted)]'}`}>
+          <p className={`text-2xl font-normal ${diff > 0 ? 'text-[#8B5A5A]' : diff < 0 ? 'text-[#2A5D4F]' : 'text-[var(--text-muted)]'}`}>
             {diff >= 0 ? '+' : ''}${diff.toLocaleString()}
           </p>
         </div>
@@ -218,7 +218,7 @@ export default function BudgetPlannerPage() {
                       ) : (
                         <span className="text-sm font-medium text-[#D4C4A0]">${cat.thisYear.toLocaleString()}</span>
                       )}
-                      <span className={`text-xs font-medium w-16 text-right ${yoyDiff > 0 ? 'text-[#8B5A5A]' : yoyDiff < 0 ? 'text-[#3A7D6F]' : 'text-[var(--text-disabled)]'}`}>
+                      <span className={`text-xs font-medium w-16 text-right ${yoyDiff > 0 ? 'text-[#8B5A5A]' : yoyDiff < 0 ? 'text-[#2A5D4F]' : 'text-[var(--text-disabled)]'}`}>
                         {yoyDiff >= 0 ? '+' : ''}${yoyDiff.toLocaleString()}
                       </span>
                       <span className="text-xs text-[var(--text-disabled)] w-10 text-right">{pct.toFixed(0)}%</span>

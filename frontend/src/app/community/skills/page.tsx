@@ -24,7 +24,7 @@ interface SkillListing {
 
 const CATEGORIES: { id: Category; icon: React.ElementType; color: string; bg: string; border: string }[] = [
   { id: 'Tech', icon: Laptop, color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/10', border: 'border-[rgba(90,122,154,0.20)]' },
-  { id: 'Garden', icon: Leaf, color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
+  { id: 'Garden', icon: Leaf, color: 'text-[#2A5D4F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
   { id: 'Home Repair', icon: Wrench, color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.40)]/20' },
   { id: 'Cooking', icon: ChefHat, color: 'text-[#8B5A5A]', bg: 'bg-[rgba(139,90,90,0.10)]', border: 'border-[rgba(139,90,90,0.20)]' },
   { id: 'Childcare', icon: Baby, color: 'text-pink-400', bg: 'bg-pink-400/10', border: 'border-pink-400/20' },
@@ -119,7 +119,7 @@ export default function SkillsExchangePage() {
             </div>
           </div>
           <div className="flex items-center gap-1">
-            <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${listing.type === 'offer' ? 'bg-[rgba(58,125,111,0.10)] text-[#3A7D6F]' : 'bg-[var(--steel)]/10 text-[var(--steel)]'}`}>
+            <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${listing.type === 'offer' ? 'bg-[rgba(58,125,111,0.10)] text-[#2A5D4F]' : 'bg-[var(--steel)]/10 text-[var(--steel)]'}`}>
               {listing.type === 'offer' ? 'CAN HELP' : 'NEEDS HELP'}
             </span>
             {isMine && (
@@ -165,7 +165,7 @@ export default function SkillsExchangePage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-6">
         {[
-          { label: 'Skills Offered', value: listings.filter((l) => l.type === 'offer').length, color: 'text-[#3A7D6F]' },
+          { label: 'Skills Offered', value: listings.filter((l) => l.type === 'offer').length, color: 'text-[#2A5D4F]' },
           { label: 'Skills Needed', value: listings.filter((l) => l.type === 'request').length, color: 'text-[var(--steel)]' },
           { label: 'Potential Matches', value: listings.filter((l) => findMatches(l, listings).length > 0).length, color: 'text-[#B09B71]' },
         ].map(({ label, value, color }) => (
@@ -200,8 +200,8 @@ export default function SkillsExchangePage() {
         {/* Offers */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-2 h-2 rounded-full bg-[#3A7D6F]" />
-            <h2 className="text-sm font-medium text-[#3A7D6F] uppercase tracking-wider">I Can Help ({offers.length})</h2>
+            <div className="w-2 h-2 rounded-full bg-[#2A5D4F]" />
+            <h2 className="text-sm font-medium text-[#2A5D4F] uppercase tracking-wider">I Can Help ({offers.length})</h2>
           </div>
           <div className="space-y-3">
             {offers.map((l) => <ListingCard key={l.id} listing={l} />)}

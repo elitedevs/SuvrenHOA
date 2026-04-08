@@ -181,10 +181,10 @@ function PostCard({ post }: { post: any }) {
             <span className={`flex items-center gap-1 ${
               cat?.color === 'gold' ? 'text-[#B09B71]' :
               cat?.color === 'red' ? 'text-[#8B5A5A]' :
-              cat?.color === 'green' ? 'text-[#3A7D6F]' :
+              cat?.color === 'green' ? 'text-[#2A5D4F]' :
               cat?.color === 'amber' ? 'text-[#B09B71]' :
               cat?.color === 'blue' ? 'text-[#B09B71]' :
-              cat?.color === 'emerald' ? 'text-[#3A7D6F]' :
+              cat?.color === 'emerald' ? 'text-[#2A5D4F]' :
               cat?.color === 'yellow' ? 'text-[#B09B71]' :
               'text-[#B09B71]'
             }`}>

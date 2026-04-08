@@ -28,7 +28,7 @@ const METRICS = [
   { label: 'Documents Stored On-Chain', value: 6, suffix: '', icon: FileText, color: 'text-[var(--steel)]', bg: 'bg-[rgba(90,122,154,0.08)] border-[rgba(90,122,154,0.30)]', desc: 'CC&Rs, meeting minutes, financial reports — all immutable on Base' },
   { label: 'Treasury Transparency Score', value: 100, suffix: '%', icon: Landmark, color: 'text-[#B09B71]', bg: 'bg-amber-950/20 border-amber-700/30', desc: 'Every dollar trackable on-chain — verifiable by anyone, anytime' },
   { label: 'Properties On-Chain', value: 16, suffix: '', icon: Shield, color: 'text-[#B09B71]', bg: 'bg-[#1A1A1E] border-[rgba(245,240,232,0.10)]', desc: 'Homeowner NFTs minted — each representing one vote and one lot' },
-  { label: 'Paper Eliminated', value: 100, suffix: '%', icon: Zap, color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.08)] border-[rgba(42,93,79,0.30)]', desc: 'All governance, voting, and dues processed on-chain — zero paper' },
+  { label: 'Paper Eliminated', value: 100, suffix: '%', icon: Zap, color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.08)] border-[rgba(42,93,79,0.30)]', desc: 'All governance, voting, and dues processed on-chain — zero paper' },
 ];
 
 const TIMELINE = [
@@ -169,7 +169,7 @@ export default function ImpactPage() {
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
                       type === 'milestone' ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]'
                       : type === 'vote' ? 'bg-[rgba(90,122,154,0.50)] border-2 border-[rgba(90,122,154,0.50)] text-[var(--steel)]'
-                      : 'bg-[rgba(42,93,79,0.50)] border-2 border-[rgba(42,93,79,0.30)]/50 text-[#3A7D6F]'
+                      : 'bg-[rgba(42,93,79,0.50)] border-2 border-[rgba(42,93,79,0.30)]/50 text-[#2A5D4F]'
                     }`}>
                       {type === 'milestone' ? <Award className="w-4 h-4" /> : type === 'vote' ? <Vote className="w-4 h-4" /> : <Landmark className="w-4 h-4" />}
                     </div>

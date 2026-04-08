@@ -104,7 +104,7 @@ function CompactReminder({
               
             </div>
             <div>
-              <p className="text-sm font-medium text-[#3A7D6F]">Dues Current</p>
+              <p className="text-sm font-medium text-[#2A5D4F]">Dues Current</p>
               <p className="text-xs text-[var(--text-disabled)] mt-0.5">
                 Save ${annualSavings} with annual plan ({annualDiscount}% off)
               </p>
@@ -215,7 +215,7 @@ function FullReminder({
             
           </div>
           <div className="flex-1">
-            <h3 className="text-base font-medium text-[#3A7D6F] mb-1">
+            <h3 className="text-base font-medium text-[#2A5D4F] mb-1">
               You&apos;re all paid up!
             </h3>
             <p className="text-sm text-[var(--text-muted)]">
@@ -227,12 +227,12 @@ function FullReminder({
         <div className="flex items-center gap-4 p-4 rounded-xl bg-[rgba(58,125,111,0.05)] border border-[rgba(42,93,79,0.15)]">
           <div className="flex-1">
             <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Annual Plan Savings</p>
-            <p className="text-xl font-normal text-[#3A7D6F]">${annualSavings}</p>
+            <p className="text-xl font-normal text-[#2A5D4F]">${annualSavings}</p>
             <p className="text-xs text-[var(--text-disabled)] mt-0.5">vs paying quarterly ({annualDiscount}% discount)</p>
           </div>
           <Link
             href="/dues"
-            className="px-5 py-2.5 rounded-xl bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)] text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.30)] text-sm font-medium transition-all whitespace-nowrap"
+            className="px-5 py-2.5 rounded-xl bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)] text-[#2A5D4F] hover:bg-[rgba(42,93,79,0.30)] text-sm font-medium transition-all whitespace-nowrap"
           >
             Switch to Annual →
           </Link>
@@ -382,7 +382,7 @@ function SocialProofBar({
       </div>
       <div className="w-full h-2 bg-[var(--surface-2)] rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-[#2A5D4F] to-[#3A7D6F] rounded-full transition-all duration-700"
+          className="h-full bg-gradient-to-r from-[#2A5D4F] to-[#2A5D4F] rounded-full transition-all duration-700"
           style={{ width: `${paidPercentage}%` }}
         />
       </div>

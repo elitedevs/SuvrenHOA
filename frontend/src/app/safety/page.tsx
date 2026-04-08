@@ -31,7 +31,7 @@ const REPORT_TYPES = [
 const STATUS_STYLES = {
   reported: { label: 'Reported', color: 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' },
   acknowledged: { label: 'Acknowledged', color: 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' },
-  resolved: { label: 'Resolved', color: 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' },
+  resolved: { label: 'Resolved', color: 'text-[#2A5D4F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' },
 };
 
 const LS_KEY = 'suvren_safety_log';
@@ -118,7 +118,7 @@ export default function SafetyPage() {
         {[
           { label: 'Reported', count: counts.reported, color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.05)] border-[rgba(176,155,113,0.20)]' },
           { label: 'Acknowledged', count: counts.acknowledged, color: 'text-[var(--steel)]', bg: 'bg-[var(--steel)]/5 border-[rgba(90,122,154,0.20)]' },
-          { label: 'Resolved', count: counts.resolved, color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.05)] border-[rgba(42,93,79,0.20)]' },
+          { label: 'Resolved', count: counts.resolved, color: 'text-[#2A5D4F]', bg: 'bg-[rgba(58,125,111,0.05)] border-[rgba(42,93,79,0.20)]' },
         ].map(s => (
           <div key={s.label} className={`glass-card rounded-xl p-3 text-center border ${s.bg}`}>
             <div className={`text-2xl font-medium ${s.color}`}>{s.count}</div>
@@ -212,7 +212,7 @@ function SafetyCard({ entry, onUpdateStatus }: { entry: SafetyEntry; onUpdateSta
                   </button>
                 )}
                 <button onClick={(e) => { e.stopPropagation(); onUpdateStatus(entry.id, 'resolved'); }}
-                  className="px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)] text-xs text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.15)]">
+                  className="px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.20)] text-xs text-[#2A5D4F] hover:bg-[rgba(42,93,79,0.15)]">
                    Mark Resolved
                 </button>
               </div>

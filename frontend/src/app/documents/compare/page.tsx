@@ -200,7 +200,7 @@ export default function DocumentComparePage() {
         {/* Stats & view toggle */}
         <div className="flex items-center justify-between flex-wrap gap-4 mb-5">
           <div className="flex gap-3 text-sm">
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.30)] text-[#3A7D6F]">
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.10)] border border-[rgba(42,93,79,0.30)] text-[#2A5D4F]">
               <Plus className="w-3.5 h-3.5" /> {added} added
             </span>
             <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgba(107,58,58,0.10)] border border-[rgba(139,90,90,0.30)] text-[#8B5A5A]">
@@ -220,7 +220,7 @@ export default function DocumentComparePage() {
             <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl overflow-hidden">
               <div className="flex items-center gap-4 px-4 py-3 bg-[#1A1A1E] border-b border-[rgba(245,240,232,0.06)] text-xs text-[var(--text-muted)]">
                 <span className="text-[#8B5A5A] font-mono">--- {a.title} ({a.version})</span>
-                <span className="text-[#3A7D6F] font-mono">+++ {b.title} ({b.version})</span>
+                <span className="text-[#2A5D4F] font-mono">+++ {b.title} ({b.version})</span>
               </div>
               <div className="overflow-x-auto">
                 <div className="font-mono text-xs">
@@ -231,7 +231,7 @@ export default function DocumentComparePage() {
                       : ''
                     }`}>
                       <span className={`w-5 shrink-0 text-center mr-3 ${
-                        line.type === 'added' ? 'text-[#3A7D6F]' : line.type === 'removed' ? 'text-[#8B5A5A]' : 'text-[rgba(245,240,232,0.18)]'
+                        line.type === 'added' ? 'text-[#2A5D4F]' : line.type === 'removed' ? 'text-[#8B5A5A]' : 'text-[rgba(245,240,232,0.18)]'
                       }`}>
                         {line.type === 'added' ? '+' : line.type === 'removed' ? '−' : ' '}
                       </span>
@@ -252,7 +252,7 @@ export default function DocumentComparePage() {
                 { doc: b, lines: diff.filter(d => d.type !== 'removed'), color: 'border-[rgba(42,93,79,0.30)]', label: 'New' },
               ].map(({ doc, lines, color, label }) => (
                 <div key={label} className={`bg-[#1A1A1E] border-2 ${color} rounded-xl overflow-hidden`}>
-                  <div className={`px-4 py-3 border-b ${color} bg-[#1A1A1E] text-xs font-medium ${label === 'Original' ? 'text-[#8B5A5A]' : 'text-[#3A7D6F]'}`}>
+                  <div className={`px-4 py-3 border-b ${color} bg-[#1A1A1E] text-xs font-medium ${label === 'Original' ? 'text-[#8B5A5A]' : 'text-[#2A5D4F]'}`}>
                     {label}: {doc.title} ({doc.version})
                   </div>
                   <div className="overflow-x-auto p-4 font-mono text-xs space-y-0.5">

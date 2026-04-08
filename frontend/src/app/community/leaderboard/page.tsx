@@ -52,7 +52,7 @@ function RankBadge({ rank, prevRank }: { rank: number; prevRank?: number }) {
       ) : (
         <span className="text-sm font-medium text-[var(--text-disabled)] w-8 text-center tabular-nums">#{rank}</span>
       )}
-      {change > 0 && <span className="text-[10px] text-[#3A7D6F] font-medium">+{change}</span>}
+      {change > 0 && <span className="text-[10px] text-[#2A5D4F] font-medium">+{change}</span>}
       {change < 0 && <span className="text-[10px] text-[#8B5A5A] font-medium">{change}</span>}
     </div>
   );

@@ -139,15 +139,15 @@ export default function WifiPage() {
           <p className="text-xs text-[var(--text-muted)]">WPA2 Protected · Guests need a code to connect</p>
         </div>
         <div className="ml-auto flex items-center gap-2">
-          <Shield className="w-4 h-4 text-[#3A7D6F]" />
-          <span className="text-xs text-[#3A7D6F] font-medium">Online</span>
+          <Shield className="w-4 h-4 text-[#2A5D4F]" />
+          <span className="text-xs text-[#2A5D4F] font-medium">Online</span>
         </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-8">
         {[
-          { label: 'Active Codes', value: activeCodes.length, icon: CheckCircle, color: 'text-[#3A7D6F]' },
+          { label: 'Active Codes', value: activeCodes.length, icon: CheckCircle, color: 'text-[#2A5D4F]' },
           { label: 'Total Uses Today', value: totalUses, icon: BarChart2, color: 'text-[#B09B71]' },
           { label: 'Expired Codes', value: expiredCodes.length, icon: AlertTriangle, color: 'text-[var(--text-disabled)]' },
         ].map(({ label, value, icon: Icon, color }) => (
@@ -181,7 +181,7 @@ export default function WifiPage() {
                     className="p-1 rounded text-[var(--text-disabled)] hover:text-[#B09B71] transition-colors"
                     title="Copy code"
                   >
-                    {copied === code.code ? <CheckCircle className="w-4 h-4 text-[#3A7D6F]" /> : <Copy className="w-4 h-4" />}
+                    {copied === code.code ? <CheckCircle className="w-4 h-4 text-[#2A5D4F]" /> : <Copy className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
@@ -210,7 +210,7 @@ export default function WifiPage() {
             <div className="mt-2">
               <div className="w-full h-1 bg-[var(--surface-2)] rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-[#3A7D6F] rounded-full transition-all"
+                  className="h-full bg-[#2A5D4F] rounded-full transition-all"
                   style={{ width: `${Math.min(100, (code.uses / code.maxUses) * 100)}%` }}
                 />
               </div>

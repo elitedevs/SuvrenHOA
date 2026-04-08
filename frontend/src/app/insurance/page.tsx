@@ -68,7 +68,7 @@ const DEMO_POLICIES: Policy[] = [
 ];
 
 const STATUS_CONFIG = {
-  active: { label: 'Active', icon: CheckCircle, color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
+  active: { label: 'Active', icon: CheckCircle, color: 'text-[#2A5D4F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]' },
   expiring: { label: 'Expiring Soon', icon: AlertTriangle, color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]' },
   expired: { label: 'Expired', icon: X, color: 'text-[#8B5A5A]', bg: 'bg-[rgba(139,90,90,0.10)]', border: 'border-[rgba(139,90,90,0.20)]' },
 };
@@ -155,7 +155,7 @@ function PolicyCard({ policy, onEdit, onDelete }: { policy: Policy; onEdit: () =
                 </div>
                 <div className="w-full h-1.5 bg-[var(--surface-2)] rounded-full overflow-hidden">
                   <div
-                    className={`h-full rounded-full transition-all ${days < 30 ? 'bg-[#8B5A5A]' : days < 60 ? 'bg-[#B09B71]' : 'bg-[#3A7D6F]'}`}
+                    className={`h-full rounded-full transition-all ${days < 30 ? 'bg-[#8B5A5A]' : days < 60 ? 'bg-[#B09B71]' : 'bg-[#2A5D4F]'}`}
                     style={{ width: `${Math.min(100, Math.max(0, (365 - days) / 365 * 100))}%` }}
                   />
                 </div>
@@ -341,7 +341,7 @@ export default function InsurancePage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[
           { label: 'Total Coverage', value: formatCurrency(totalCoverage), icon: Shield, color: 'text-[#B09B71]' },
-          { label: 'Annual Premium', value: formatCurrency(totalPremium), icon: DollarSign, color: 'text-[#3A7D6F]' },
+          { label: 'Annual Premium', value: formatCurrency(totalPremium), icon: DollarSign, color: 'text-[#2A5D4F]' },
           { label: 'Active Policies', value: String(policies.filter((p) => p.status === 'active').length), icon: CheckCircle, color: 'text-[var(--steel)]' },
           { label: 'Need Attention', value: String(expiring.length), icon: AlertTriangle, color: 'text-[#B09B71]' },
         ].map(({ label, value, icon: Icon, color }) => (

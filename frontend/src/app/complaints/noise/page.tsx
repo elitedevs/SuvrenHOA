@@ -175,7 +175,7 @@ export default function NoiseComplaintPage() {
 function statusColor(s: string) {
   if (s === 'received') return 'bg-[rgba(176,155,113,0.10)] text-[#B09B71] border-[rgba(176,155,113,0.20)]';
   if (s === 'investigating') return 'bg-[rgba(90,122,154,0.10)] text-[var(--steel)] border-[rgba(90,122,154,0.20)]';
-  return 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]';
+  return 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border-[rgba(42,93,79,0.20)]';
 }
 
 function ComplaintCard({ complaint: c, isBoard, onUpdateStatus }: {
@@ -210,7 +210,7 @@ function ComplaintCard({ complaint: c, isBoard, onUpdateStatus }: {
             )}
             {c.status !== 'resolved' && (
               <button onClick={() => onUpdateStatus(c.id, 'resolved')}
-                className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(42,93,79,0.25)] text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.10)] transition-colors">
+                className="px-3 py-1.5 rounded-lg text-xs border border-[rgba(42,93,79,0.25)] text-[#2A5D4F] hover:bg-[rgba(42,93,79,0.10)] transition-colors">
                 Resolve
               </button>
             )}

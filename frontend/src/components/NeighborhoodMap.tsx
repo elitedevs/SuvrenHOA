@@ -27,7 +27,7 @@ export const INCIDENT_COLORS: Record<Incident['type'], string> = {
   crime: '#8B5A5A',
   maintenance: '#b8942e',
   'road-closure': '#b8942e',
-  'community-event': '#5A7A9A',
+  'community-event': '#2C2C2E',
   hazard: '#B09B71',
   noise: '#8B5A5A',
   other: `rgba(245,240,232,0.35)`,
@@ -75,7 +75,7 @@ const DARK_MAP_STYLES: google.maps.MapTypeStyle[] = [
 // ─────────────────────────────────────────
 function markerColor(lot: LotData): string {
   if (lot.isDuesCurrent === null) return `rgba(245,240,232,0.35)`;
-  return lot.isDuesCurrent ? '#3A7D6F' : '#8B5A5A';
+  return lot.isDuesCurrent ? '#2A5D4F' : '#8B5A5A';
 }
 
 function statusLabel(lot: LotData): string {
@@ -194,7 +194,7 @@ function buildIncidentPopupHTML(incident: Incident): string {
   const isActive = incident.status === 'active';
   const statusBg = isActive ? 'rgba(201,169,110,0.12)' : 'rgba(34,197,94,0.12)';
   const statusBorder = isActive ? 'rgba(201,169,110,0.35)' : 'rgba(34,197,94,0.35)';
-  const statusColor = isActive ? '#B09B71' : '#3A7D6F';
+  const statusColor = isActive ? '#B09B71' : '#2A5D4F';
   const statusText = isActive ? 'Active' : 'Resolved';
 
   const truncated = incident.description.length > 80

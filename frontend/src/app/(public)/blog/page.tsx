@@ -95,7 +95,7 @@ export default function BlogPage() {
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-4">
                   <CategoryBadge category={featured.category} />
-                  <span className="text-[11px] font-medium tracking-wide uppercase text-[#3A7D6F]">Featured</span>
+                  <span className="text-[11px] font-medium tracking-wide uppercase text-[#2A5D4F]">Featured</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-medium text-[var(--parchment)] mb-3 group-hover:text-[#B09B71] transition-colors"
                     style={{ fontFamily: 'var(--font-heading)' }}>

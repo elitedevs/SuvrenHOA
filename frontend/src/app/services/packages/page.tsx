@@ -29,7 +29,7 @@ const CARRIER_COLORS: Record<Carrier, string> = {
 };
 
 const STATUS_COLORS: Record<PackageStatus, string> = {
-  delivered: 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]',
+  delivered: 'bg-[rgba(42,93,79,0.40)] text-[#2A5D4F]',
   held: 'bg-amber-900/40 text-[#B09B71]',
   'picked-up': 'bg-[rgba(245,240,232,0.06)] text-[var(--text-muted)]',
 };
@@ -158,7 +158,7 @@ export default function PackagesPage() {
                 {pkg.status !== 'picked-up' && (
                   <button
                     onClick={() => updateStatus(pkg.id, 'picked-up')}
-                    className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.30)] border border-[rgba(42,93,79,0.40)] text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.50)] transition-colors"
+                    className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.30)] border border-[rgba(42,93,79,0.40)] text-[#2A5D4F] hover:bg-[rgba(42,93,79,0.50)] transition-colors"
                   >
                     Mark Picked Up
                   </button>

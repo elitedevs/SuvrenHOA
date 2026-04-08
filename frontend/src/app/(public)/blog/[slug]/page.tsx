@@ -248,7 +248,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <Link href="/signup"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm transition-all hover:scale-[1.02]"
                 style={{
-                  background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                  background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                   color: '#0C0C0E',
                   boxShadow: '0 0 24px rgba(176,155,113,0.25)',
                 }}>

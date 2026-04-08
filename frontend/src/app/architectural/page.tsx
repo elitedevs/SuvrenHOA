@@ -74,7 +74,7 @@ const PIPELINE_STAGES = [
   { key: 'submitted', label: 'Submitted', icon: '', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' },
   { key: 'under-review', label: 'Under Review', icon: '', color: 'text-[var(--steel)]', bg: 'bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' },
   { key: 'info-requested', label: 'Info Needed', icon: '', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' },
-  { key: 'approved', label: 'Approved', icon: '', color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' },
+  { key: 'approved', label: 'Approved', icon: '', color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' },
   { key: 'denied', label: 'Denied', icon: '', color: 'text-[#8B5A5A]', bg: 'bg-[rgba(107,58,58,0.10)] border-[rgba(107,58,58,0.20)]' },
 ];
 
@@ -178,12 +178,12 @@ function RequestCard({ request }: { request: any }) {
   const modType = MOD_TYPES.find(m => m.id === request.modification_type);
   const comments = request.hoa_architectural_comments || [];
 
-  const colorClass = status.color === 'green' ? 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
+  const colorClass = status.color === 'green' ? 'text-[#2A5D4F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
     status.color === 'red' ? 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)] border-[rgba(107,58,58,0.20)]' :
     status.color === 'blue' ? 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' :
     status.color === 'yellow' ? 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' :
     status.color === 'amber' ? 'text-[#B09B71] bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' :
-    status.color === 'emerald' ? 'text-[#3A7D6F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
+    status.color === 'emerald' ? 'text-[#2A5D4F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
     'text-[var(--text-muted)] bg-[rgba(245,240,232,0.04)] border-[rgba(245,240,232,0.08)]';
 
   return (

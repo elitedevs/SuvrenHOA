@@ -57,11 +57,11 @@ function CommunityDuesStatus() {
           <p className="text-sm font-medium text-[var(--parchment)]">
             {paidCount} of {totalProperties} properties current
           </p>
-          <span className="text-sm font-medium text-[#3A7D6F]">{paidPercentage}%</span>
+          <span className="text-sm font-medium text-[#2A5D4F]">{paidPercentage}%</span>
         </div>
         <div className="w-full h-3 bg-[var(--surface-2)] rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#2A5D4F] to-[#3A7D6F] rounded-full transition-all duration-700"
+            className="h-full bg-gradient-to-r from-[#2A5D4F] to-[#2A5D4F] rounded-full transition-all duration-700"
             style={{ width: `${paidPercentage}%` }}
           />
         </div>
@@ -70,7 +70,7 @@ function CommunityDuesStatus() {
       {/* Anonymous breakdown */}
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-xl bg-[rgba(58,125,111,0.05)] border border-[rgba(42,93,79,0.20)] p-4 text-center">
-          <p className="text-2xl font-normal text-[#3A7D6F]">{paidCount}</p>
+          <p className="text-2xl font-normal text-[#2A5D4F]">{paidCount}</p>
           <p className="text-xs text-[var(--text-disabled)] mt-1 font-medium">Paid This Quarter</p>
         </div>
         <div className="rounded-xl bg-[rgba(139,90,90,0.05)] border border-[rgba(107,58,58,0.20)] p-4 text-center">
@@ -207,7 +207,7 @@ function DuesPanel() {
                   <div className="flex flex-col items-center gap-1.5">
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-300 ${
                       isDone
-                        ? 'bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.30)] text-[#3A7D6F]'
+                        ? 'bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.30)] text-[#2A5D4F]'
                         : isActive
                         ? 'bg-[rgba(176,155,113,0.20)] border border-[rgba(176,155,113,0.50)] text-[#D4C4A0] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
                         : 'bg-[var(--surface-2)] border border-[var(--divider)] text-[var(--text-disabled)]'
@@ -215,7 +215,7 @@ function DuesPanel() {
                       {isDone ? '✓' : i + 1}
                     </div>
                     <span className={`text-[11px] font-medium whitespace-nowrap ${
-                      isActive ? 'text-[#D4C4A0]' : isDone ? 'text-[#3A7D6F]' : 'text-[var(--text-disabled)]'
+                      isActive ? 'text-[#D4C4A0]' : isDone ? 'text-[#2A5D4F]' : 'text-[var(--text-disabled)]'
                     }`}>
                       {s.short}
                     </span>
@@ -260,7 +260,7 @@ function DuesPanel() {
           {isCurrent === undefined ? (
             <div className="animate-pulse h-7 w-20 bg-[var(--surface-2)] rounded-lg" />
           ) : isCurrent ? (
-            <p className="text-2xl font-normal text-[#3A7D6F]">Current</p>
+            <p className="text-2xl font-normal text-[#2A5D4F]">Current</p>
           ) : (
             <>
               <p className="text-2xl font-normal text-[#8B5A5A]">Payment Reminder</p>
@@ -276,7 +276,7 @@ function DuesPanel() {
           <div className="w-20 h-20 rounded-full bg-[rgba(42,93,79,0.15)] border-2 border-[rgba(42,93,79,0.25)] flex items-center justify-center text-4xl mx-auto mb-6">
             ✓
           </div>
-          <h3 className="text-2xl font-normal text-[#3A7D6F] mb-3">Payment Successful!</h3>
+          <h3 className="text-2xl font-normal text-[#2A5D4F] mb-3">Payment Successful!</h3>
           <p className="text-sm text-[var(--text-muted)] mb-2 max-w-sm mx-auto">
             Your dues have been paid. The treasury has been updated on the network.
           </p>
@@ -450,7 +450,7 @@ function DuesPanel() {
           <div className="mt-4 text-xs text-[var(--text-disabled)] text-center space-y-1">
             <p>Paid in USDC on Base. 80% → operating fund · 20% → reserve fund.</p>
             {allowanceAlreadySet && selectedOption && (
-              <p className="text-[#3A7D6F]">
+              <p className="text-[#2A5D4F]">
                 ✓ USDC already approved — no approval step needed.
               </p>
             )}

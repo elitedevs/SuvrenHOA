@@ -119,8 +119,8 @@ export function AIChatWidget() {
               <span className="text-xl"></span>
               <div>
                 <p className="text-sm font-medium text-[var(--parchment)]">HOA Assistant</p>
-                <p className="text-[11px] text-[#3A7D6F] flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#3A7D6F] inline-block" />
+                <p className="text-[11px] text-[#2A5D4F] flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2A5D4F] inline-block" />
                   Online
                 </p>
               </div>

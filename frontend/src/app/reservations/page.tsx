@@ -165,7 +165,7 @@ export default function ReservationsPage() {
                         <div className="flex items-center gap-2 text-[10px]">
                           <span className="text-[var(--text-disabled)]">Lot #{res.lot_number}</span>
                           <span className={`px-1.5 py-0.5 rounded ${
-                            res.status === 'confirmed' ? 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F]' : 'bg-[rgba(176,155,113,0.10)] text-[#B09B71]'
+                            res.status === 'confirmed' ? 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F]' : 'bg-[rgba(176,155,113,0.10)] text-[#B09B71]'
                           }`}>
                             {res.status}
                           </span>

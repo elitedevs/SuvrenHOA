@@ -81,7 +81,7 @@ export default function VendorPaymentsPage() {
   };
 
   const statusColor = (s: string) => {
-    if (s === 'paid') return 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]';
+    if (s === 'paid') return 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border-[rgba(42,93,79,0.20)]';
     if (s === 'overdue') return 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border-[rgba(107,58,58,0.20)]';
     return 'bg-[rgba(176,155,113,0.10)] text-[#B09B71] border-[rgba(176,155,113,0.20)]';
   };
@@ -112,7 +112,7 @@ export default function VendorPaymentsPage() {
       <div className="grid grid-cols-3 gap-4 mb-6">
         {[
           { label: 'Pending', amount: totals.pending, color: 'text-[#B09B71]' },
-          { label: 'Paid', amount: totals.paid, color: 'text-[#3A7D6F]' },
+          { label: 'Paid', amount: totals.paid, color: 'text-[#2A5D4F]' },
           { label: 'Overdue', amount: totals.overdue, color: 'text-[#8B5A5A]' },
         ].map(({ label, amount, color }) => (
           <div key={label} className="glass-card rounded-xl p-4 text-center">
@@ -219,7 +219,7 @@ export default function VendorPaymentsPage() {
                       <div className="flex gap-1">
                         {p.status !== 'paid' && (
                           <button onClick={() => updateStatus(p.id, 'paid')}
-                            className="px-2 py-1 rounded text-[10px] border border-[rgba(42,93,79,0.25)] text-[#3A7D6F] hover:bg-[rgba(42,93,79,0.10)] transition-colors">
+                            className="px-2 py-1 rounded text-[10px] border border-[rgba(42,93,79,0.25)] text-[#2A5D4F] hover:bg-[rgba(42,93,79,0.10)] transition-colors">
                             Mark Paid
                           </button>
                         )}

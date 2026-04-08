@@ -74,8 +74,8 @@ export default function GardenPage() {
   };
 
   const plotColor = (status: Plot['status']) => {
-    if (status === 'planted') return 'bg-[#2A5D4F] hover:bg-[#3A7D6F] border-[rgba(42,93,79,0.30)]';
-    if (status === 'reserved') return 'bg-[var(--brass-deep)] hover:bg-[#B09B71] border-[#8A7550]';
+    if (status === 'planted') return 'bg-[#2A5D4F] hover:bg-[#2A5D4F] border-[rgba(42,93,79,0.30)]';
+    if (status === 'reserved') return 'bg-[var(--brass-deep)] hover:bg-[#B09B71] border-[#8A7A5A]';
     return 'bg-[rgba(176,155,113,0.12)] hover:bg-[rgba(176,155,113,0.18)] border-[rgba(176,155,113,0.20)]';
   };
 
@@ -93,7 +93,7 @@ export default function GardenPage() {
         <div className="mb-8 flex items-start justify-between flex-wrap gap-4">
           <div>
             <h1 className="text-3xl sm:text-4xl font-medium gradient-text text-[#D4C4A0] mb-2 flex items-center gap-3">
-              <Sprout className="w-8 h-8 text-[#3A7D6F]" /> Community Garden
+              <Sprout className="w-8 h-8 text-[#2A5D4F]" /> Community Garden
             </h1>
             <p className="text-[rgba(245,240,232,0.45)]">8×8 shared garden — click a plot to view details or reserve</p>
           </div>
@@ -139,7 +139,7 @@ export default function GardenPage() {
                     Plot {String.fromCharCode(65 + selected.row)}{selected.col + 1}
                   </h3>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                    selected.status === 'planted' ? 'bg-[rgba(42,93,79,0.40)] text-[#3A7D6F]'
+                    selected.status === 'planted' ? 'bg-[rgba(42,93,79,0.40)] text-[#2A5D4F]'
                     : selected.status === 'reserved' ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71]'
                     : 'bg-[rgba(245,240,232,0.06)] text-[var(--text-body)]'
                   }`}>{selected.status}</span>
@@ -174,7 +174,7 @@ export default function GardenPage() {
               <ul className="space-y-2">
                 {SEASONAL_TIPS[season].map((tip, i) => (
                   <li key={i} className="flex items-start gap-2 text-xs text-[var(--text-body)]">
-                    <span className="text-[#3A7D6F] shrink-0"></span> {tip}
+                    <span className="text-[#2A5D4F] shrink-0"></span> {tip}
                   </li>
                 ))}
               </ul>

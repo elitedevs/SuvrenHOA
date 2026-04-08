@@ -135,7 +135,7 @@ function MinutesCard({ entry, isBoard, onUpdate }: { entry: MinutesEntry; isBoar
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-base font-medium text-[var(--parchment)]">{entry.title}</span>
               {entry.quorum && (
-                <span className="text-[10px] font-medium bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)] px-2 py-0.5 rounded-full">Quorum </span>
+                <span className="text-[10px] font-medium bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.25)] px-2 py-0.5 rounded-full">Quorum </span>
               )}
             </div>
             <div className="flex items-center gap-3 mt-1 text-xs text-[var(--text-disabled)]">

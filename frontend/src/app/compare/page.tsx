@@ -91,7 +91,7 @@ export default function ComparePage() {
         {/* Savings cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {[
-            { label: 'Annual Community Savings', value: annualSavings, prefix: '$', icon: TrendingDown, color: 'text-[#3A7D6F]', bg: 'bg-[rgba(42,93,79,0.08)] border-[rgba(42,93,79,0.30)]' },
+            { label: 'Annual Community Savings', value: annualSavings, prefix: '$', icon: TrendingDown, color: 'text-[#2A5D4F]', bg: 'bg-[rgba(42,93,79,0.08)] border-[rgba(42,93,79,0.30)]' },
             { label: 'Per Home Per Year', value: perHome, prefix: '$', icon: TrendingDown, color: 'text-[#B09B71]', bg: 'bg-[#1A1A1E] border-[rgba(245,240,232,0.10)]' },
             { label: 'Transparency Score', value: 100, suffix: '%', icon: CheckCircle, color: 'text-[#B09B71]', bg: 'bg-[#1A1A1E] border-[rgba(245,240,232,0.10)]' },
           ].map(({ label, value, prefix, suffix, icon: Icon, color, bg }) => (
@@ -120,7 +120,7 @@ export default function ComparePage() {
             return (
               <div key={i} className={`grid grid-cols-3 px-6 py-4 items-center ${i % 2 === 0 ? '' : 'bg-[#111113]'}`}>
                 <div className="text-sm text-[#D4C4A0]">{row.category}</div>
-                <div className={`text-center font-mono text-sm font-medium ${tradBetter ? 'text-[#3A7D6F]' : suvBetter ? 'text-[#8B5A5A]' : 'text-[var(--text-body)]'}`}>
+                <div className={`text-center font-mono text-sm font-medium ${tradBetter ? 'text-[#2A5D4F]' : suvBetter ? 'text-[#8B5A5A]' : 'text-[var(--text-body)]'}`}>
                   {row.unit === '$' ? `$${tradVal.toLocaleString()}` : `${tradVal}${row.unit}`}
                   {tradBetter ? <CheckCircle className="inline w-3.5 h-3.5 ml-1.5" /> : suvBetter ? <XCircle className="inline w-3.5 h-3.5 ml-1.5" /> : <Minus className="inline w-3.5 h-3.5 ml-1.5" />}
                 </div>
@@ -144,7 +144,7 @@ export default function ComparePage() {
               <ul className="space-y-2">
                 {items.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm">
-                    {bad ? <XCircle className="w-4 h-4 text-[#6B3A3A] shrink-0 mt-0.5" /> : <CheckCircle className="w-4 h-4 text-[#3A7D6F] shrink-0 mt-0.5" />}
+                    {bad ? <XCircle className="w-4 h-4 text-[#6B3A3A] shrink-0 mt-0.5" /> : <CheckCircle className="w-4 h-4 text-[#2A5D4F] shrink-0 mt-0.5" />}
                     <span className={bad ? 'text-[var(--text-body)]' : 'text-[rgba(245,240,232,0.80)]'}>{item}</span>
                   </li>
                 ))}

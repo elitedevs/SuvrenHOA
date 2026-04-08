@@ -122,15 +122,15 @@ export default function GovernanceStatsPage() {
         <div className="flex items-center gap-4 mb-3">
           <div className="flex-1 h-4 bg-[var(--surface-2)] rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-[#2A5D4F] to-[#3A7D6F] rounded-full transition-all duration-700"
+              className="h-full bg-gradient-to-r from-[#2A5D4F] to-[#2A5D4F] rounded-full transition-all duration-700"
               style={{ width: `${MOCK_STATS.passRate}%` }}
             />
           </div>
-          <span className="text-sm font-medium text-[#3A7D6F] shrink-0">{MOCK_STATS.passRate}%</span>
+          <span className="text-sm font-medium text-[#2A5D4F] shrink-0">{MOCK_STATS.passRate}%</span>
         </div>
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center">
-            <p className="text-xl font-medium text-[#3A7D6F]">{Math.round(MOCK_STATS.totalProposals * MOCK_STATS.passRate / 100)}</p>
+            <p className="text-xl font-medium text-[#2A5D4F]">{Math.round(MOCK_STATS.totalProposals * MOCK_STATS.passRate / 100)}</p>
             <p className="text-[10px] text-[var(--text-disabled)]">Passed</p>
           </div>
           <div className="text-center">

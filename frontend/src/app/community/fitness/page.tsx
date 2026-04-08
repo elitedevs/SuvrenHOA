@@ -151,7 +151,7 @@ export default function FitnessPage() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-3xl">{CURRENT_CHALLENGE.emoji}</span>
-                <span className="text-xs font-medium bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border border-[rgba(42,93,79,0.25)] px-2 py-0.5 rounded-full">ACTIVE</span>
+                <span className="text-xs font-medium bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.25)] px-2 py-0.5 rounded-full">ACTIVE</span>
               </div>
               <h2 className="text-xl font-medium text-[var(--parchment)]">{CURRENT_CHALLENGE.title}</h2>
               <p className="text-sm text-[var(--text-muted)] mt-1">{CURRENT_CHALLENGE.description}</p>
@@ -209,7 +209,7 @@ export default function FitnessPage() {
               </button>
             </div>
             {showSuccess && (
-              <div className="mt-3 text-sm text-[#3A7D6F] font-medium animate-pulse">
+              <div className="mt-3 text-sm text-[#2A5D4F] font-medium animate-pulse">
                  Logged! Keep it up!
               </div>
             )}
@@ -264,12 +264,12 @@ export default function FitnessPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className={`text-sm font-medium ${pct >= 100 ? 'text-[#3A7D6F]' : 'text-[#B09B71]'}`}>{pct.toFixed(0)}%</span>
+                    <span className={`text-sm font-medium ${pct >= 100 ? 'text-[#2A5D4F]' : 'text-[#B09B71]'}`}>{pct.toFixed(0)}%</span>
                     {pct >= 100 && <span className="ml-1 text-xs"></span>}
                   </div>
                 </div>
                 <div className="h-2 rounded-full bg-[rgba(245,240,232,0.06)] overflow-hidden">
-                  <div className={`h-full rounded-full ${pct >= 100 ? 'bg-[#3A7D6F]' : 'bg-[rgba(176,155,113,0.60)]'}`} style={{ width: `${pct}%` }} />
+                  <div className={`h-full rounded-full ${pct >= 100 ? 'bg-[#2A5D4F]' : 'bg-[rgba(176,155,113,0.60)]'}`} style={{ width: `${pct}%` }} />
                 </div>
                 <div className="text-[10px] text-[var(--text-disabled)] mt-1">
                   {ch.achieved.toLocaleString()} / {ch.goal.toLocaleString()} {ch.unit}

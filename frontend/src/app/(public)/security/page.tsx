@@ -137,7 +137,7 @@ export default function SecurityPage() {
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-24 md:py-36 text-center">
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-[13px] font-medium"
-            style={{ background: 'rgba(42,93,79,0.12)', border: '1px solid rgba(42,93,79,0.25)', color: '#3A7D6F' }}
+            style={{ background: 'rgba(42,93,79,0.12)', border: '1px solid rgba(42,93,79,0.25)', color: '#2A5D4F' }}
           >
             <Shield className="w-3.5 h-3.5" />
             Security Architecture
@@ -164,7 +164,7 @@ export default function SecurityPage() {
               href="/signup"
               className="px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
               style={{
-                background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                 color: '#0C0C0E',
                 boxShadow: '0 0 32px rgba(176,155,113,0.3)',
               }}
@@ -267,7 +267,7 @@ export default function SecurityPage() {
                 </div>
 
                 <div className="pb-10">
-                  <p className="text-[11px] text-[#3A7D6F] font-medium tracking-wider mb-1">STEP {num}</p>
+                  <p className="text-[11px] text-[#2A5D4F] font-medium tracking-wider mb-1">STEP {num}</p>
                   <h3 className="text-lg font-medium text-[var(--parchment)] mb-2">{title}</h3>
                   <p className="text-[13px] text-[rgba(245,240,232,0.45)] leading-relaxed">{desc}</p>
                 </div>
@@ -307,7 +307,7 @@ export default function SecurityPage() {
                       className="w-11 h-11 rounded-lg flex items-center justify-center shrink-0"
                       style={{ background: 'rgba(42,93,79,0.1)', border: '1px solid rgba(42,93,79,0.15)' }}
                     >
-                      <Icon className="w-5 h-5 text-[#3A7D6F]" />
+                      <Icon className="w-5 h-5 text-[#2A5D4F]" />
                     </div>
                     <div>
                       <div className="flex items-center gap-3 mb-1">
@@ -363,7 +363,7 @@ export default function SecurityPage() {
                     className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
                     style={{ background: 'rgba(42,93,79,0.1)' }}
                   >
-                    <Icon className="w-4 h-4 text-[#3A7D6F]" />
+                    <Icon className="w-4 h-4 text-[#2A5D4F]" />
                   </div>
                   <div>
                     <h3 className="font-medium text-[var(--parchment)] text-[15px] mb-1">{title}</h3>
@@ -426,7 +426,7 @@ export default function SecurityPage() {
               style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(42,93,79,0.15) 0%, transparent 60%)' }}
             />
             <div className="relative z-10">
-              <CheckCircle2 className="w-10 h-10 text-[#3A7D6F] mx-auto mb-5" />
+              <CheckCircle2 className="w-10 h-10 text-[#2A5D4F] mx-auto mb-5" />
               <h2
                 className="text-3xl sm:text-4xl font-medium text-[var(--parchment)] mb-4"
                 style={{ fontFamily: 'var(--font-heading)' }}
@@ -442,7 +442,7 @@ export default function SecurityPage() {
                   href="/signup"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                   style={{
-                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7550 100%)',
+                    background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                     color: '#0C0C0E',
                     boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                   }}

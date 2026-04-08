@@ -118,7 +118,7 @@ export default function LostFoundPage() {
               <button key={t} onClick={() => setForm({...form, type: t})}
                 className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize border transition-all ${
                   form.type === t
-                    ? t === 'lost' ? 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border-[rgba(107,58,58,0.25)]' : 'bg-[rgba(42,93,79,0.15)] text-[#3A7D6F] border-[rgba(42,93,79,0.25)]'
+                    ? t === 'lost' ? 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border-[rgba(107,58,58,0.25)]' : 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border-[rgba(42,93,79,0.25)]'
                     : 'glass-card text-[var(--text-muted)]'
                 }`}>
                 {t === 'lost' ? ' Lost Item' : ' Found Item'}
@@ -210,7 +210,7 @@ export default function LostFoundPage() {
               <div className="flex items-center gap-2 mb-2">
                 <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
                   item.status === 'claimed' ? 'bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)] border-[rgba(245,240,232,0.08)]' :
-                  item.type === 'lost' ? 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border-[rgba(107,58,58,0.20)]' : 'bg-[rgba(42,93,79,0.10)] text-[#3A7D6F] border-[rgba(42,93,79,0.20)]'
+                  item.type === 'lost' ? 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border-[rgba(107,58,58,0.20)]' : 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border-[rgba(42,93,79,0.20)]'
                 }`}>
                   {item.status === 'claimed' ? ' Claimed' : item.type === 'lost' ? ' Lost' : ' Found'}
                 </span>
@@ -225,7 +225,7 @@ export default function LostFoundPage() {
               </div>
               {item.status === 'active' && (
                 <button onClick={() => markClaimed(item.id)}
-                  className="mt-3 w-full py-2 rounded-xl border border-[rgba(42,93,79,0.25)] text-[#3A7D6F] text-xs font-medium hover:bg-[rgba(42,93,79,0.10)] transition-colors">
+                  className="mt-3 w-full py-2 rounded-xl border border-[rgba(42,93,79,0.25)] text-[#2A5D4F] text-xs font-medium hover:bg-[rgba(42,93,79,0.10)] transition-colors">
                   Mark as Claimed 
                 </button>
               )}

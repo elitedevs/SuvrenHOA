@@ -88,7 +88,7 @@ function MintPropertyCard() {
         {isSuccess ? (
           <div className="glass-card-success rounded-xl p-6 text-center">
             <div className="text-3xl mb-3"></div>
-            <p className="text-[#3A7D6F] font-medium text-base mb-1">Property #{lotNumber} Minted!</p>
+            <p className="text-[#2A5D4F] font-medium text-base mb-1">Property #{lotNumber} Minted!</p>
             {hash && (
               <a
                 href={`https://sepolia.basescan.org/tx/${hash}`}
@@ -232,7 +232,7 @@ function RegisterDocumentCard() {
         {isSuccess ? (
           <div className="glass-card-success rounded-xl p-6 text-center">
             <div className="text-3xl mb-3"></div>
-            <p className="text-[#3A7D6F] font-medium text-base mb-1">Document Registered on the network!</p>
+            <p className="text-[#2A5D4F] font-medium text-base mb-1">Document Registered on the network!</p>
             {hash && (
               <a
                 href={`https://sepolia.basescan.org/tx/${hash}`}
@@ -258,7 +258,7 @@ function RegisterDocumentCard() {
               />
               {fileHash && (
                 <div className="mt-2 px-3 py-2 rounded-lg bg-[rgba(58,125,111,0.05)] border border-[rgba(42,93,79,0.15)]">
-                  <p className="text-[10px] text-[#3A7D6F] font-medium uppercase tracking-wide mb-0.5">Hash computed </p>
+                  <p className="text-[10px] text-[#2A5D4F] font-medium uppercase tracking-wide mb-0.5">Hash computed </p>
                   <p className="text-[10px] font-mono text-[var(--text-disabled)] break-all">{fileHash}</p>
                 </div>
               )}
@@ -338,7 +338,7 @@ function CommunityStats() {
   const stats = [
     { value: totalSupply, label: 'Properties Minted', color: 'text-[#B09B71]', icon: '' },
     { value: 150, label: 'Max Lots', color: 'text-[var(--steel)]', icon: '' },
-    { value: totalSupply, label: 'Total Votes', color: 'text-[#3A7D6F]', icon: '' },
+    { value: totalSupply, label: 'Total Votes', color: 'text-[#2A5D4F]', icon: '' },
     { value: 150 - totalSupply, label: 'Lots Remaining', color: 'text-[#B09B71]', icon: '' },
   ];
 
@@ -380,7 +380,7 @@ function CommunityStats() {
           </div>
           <div className="progress-bar-track">
             <div
-              className="progress-bar-fill bg-gradient-to-r from-[#8A7550] to-[#B09B71]"
+              className="progress-bar-fill bg-gradient-to-r from-[#8A7A5A] to-[#B09B71]"
               style={{ width: `${fillPct}%` }}
             />
           </div>

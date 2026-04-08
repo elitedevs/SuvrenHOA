@@ -159,7 +159,7 @@ export default function SeasonalDecorPage() {
 
   const STATUS_MAP = {
     pending: { label: 'Pending Review', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]', icon: Clock },
-    approved: { label: 'Approved', color: 'text-[#3A7D6F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]', icon: CheckCircle },
+    approved: { label: 'Approved', color: 'text-[#2A5D4F]', bg: 'bg-[rgba(58,125,111,0.10)]', border: 'border-[rgba(42,93,79,0.20)]', icon: CheckCircle },
     rejected: { label: 'Rejected', color: 'text-[#8B5A5A]', bg: 'bg-[rgba(139,90,90,0.10)]', border: 'border-[rgba(139,90,90,0.20)]', icon: XCircle },
   };
 
@@ -245,13 +245,13 @@ export default function SeasonalDecorPage() {
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <CheckCircle className="w-4 h-4 text-[#3A7D6F]" />
-                  <span className="text-xs font-medium text-[#3A7D6F] uppercase tracking-wider">Approved</span>
+                  <CheckCircle className="w-4 h-4 text-[#2A5D4F]" />
+                  <span className="text-xs font-medium text-[#2A5D4F] uppercase tracking-wider">Approved</span>
                 </div>
                 <ul className="space-y-2">
                   {g.approved.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-xs text-[var(--text-body)]">
-                      <ChevronRight className="w-3 h-3 text-[#3A7D6F] mt-0.5 shrink-0" />
+                      <ChevronRight className="w-3 h-3 text-[#2A5D4F] mt-0.5 shrink-0" />
                       {item}
                     </li>
                   ))}
