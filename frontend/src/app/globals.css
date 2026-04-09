@@ -500,6 +500,10 @@ pre,
 button, a, [role="button"], .clickable, summary { cursor: pointer; }
 input, textarea, select { cursor: text; }
 input[type="checkbox"], input[type="radio"] { cursor: pointer; }
+button:disabled, a[aria-disabled="true"], [role="button"][aria-disabled="true"],
+button[disabled], input[disabled], select[disabled], textarea[disabled] {
+  cursor: not-allowed;
+}
 
 /* ── Focus visible ────────────────────────────────────────────────────────── */
 :focus-visible {

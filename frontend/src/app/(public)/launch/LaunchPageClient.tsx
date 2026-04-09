@@ -122,7 +122,7 @@ export default function LaunchPageClient() {
                   { value: seconds, label: 'Seconds' },
                 ].map((unit, i) => (
                   <div key={unit.label}>
-                    <div className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] px-4 sm:px-6 py-3 sm:py-4 min-w-[64px] sm:min-w-[80px] text-center">
+                    <div className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] px-4 sm:px-6 py-3 sm:py-4 min-w-[64px] sm:min-w-[80px] text-center">
                       <div className="font-playfair text-3xl sm:text-4xl font-bold text-[#B09B71] tabular-nums">
                         {String(unit.value).padStart(2, '0')}
                       </div>
@@ -214,7 +214,7 @@ export default function LaunchPageClient() {
           <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] text-center mb-8">Built for Trust</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {FEATURES_HIGHLIGHT.map(f => (
-              <div key={f.text} className="flex items-center gap-3 bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] px-5 py-4">
+              <div key={f.text} className="flex items-center gap-3 bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] px-5 py-4">
                 <div className="w-8 h-8 rounded-lg bg-[rgba(176,155,113,0.1)] flex items-center justify-center flex-shrink-0">
                   <f.icon className="w-4 h-4 text-[#B09B71]" />
                 </div>

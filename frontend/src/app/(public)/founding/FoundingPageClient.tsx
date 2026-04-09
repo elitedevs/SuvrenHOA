@@ -185,7 +185,7 @@ export default function FoundingPageClient() {
             {BENEFITS.map((b) => (
               <div
                 key={b.title}
-                className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] hover:shadow-[0_4px_16px_0_rgba(0,0,0,0.35),0_1px_2px_0_rgba(0,0,0,0.3)] hover:-translate-y-px p-6 transition-all duration-200"
+                className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] hover:shadow-[0_6px_20px_0_rgba(0,0,0,0.40),0_1px_2px_0_rgba(0,0,0,0.30)] hover:-translate-y-px p-6 transition-all duration-200"
               >
                 <div className="w-10 h-10 rounded-lg bg-[rgba(176,155,113,0.1)] flex items-center justify-center mb-4">
                   <b.icon className="w-5 h-5 text-[#B09B71]" />
@@ -208,7 +208,7 @@ export default function FoundingPageClient() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Community info */}
-            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6 space-y-4">
+            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] p-6 space-y-4">
               <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1">Community</legend>
 
               <div>
@@ -238,7 +238,7 @@ export default function FoundingPageClient() {
             </fieldset>
 
             {/* Contact info */}
-            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6 space-y-4">
+            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] p-6 space-y-4">
               <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1">Your Information</legend>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -295,7 +295,7 @@ export default function FoundingPageClient() {
             </fieldset>
 
             {/* Pain points */}
-            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6">
+            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] p-6">
               <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1 mb-4">What challenges does your community face? <span className="text-[#4A4A52] normal-case">(select all that apply)</span></legend>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {PAIN_POINT_OPTIONS.map(point => {
@@ -324,7 +324,7 @@ export default function FoundingPageClient() {
             </fieldset>
 
             {/* Additional */}
-            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6 space-y-4">
+            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] p-6 space-y-4">
               <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1">A Bit More</legend>
 
               <div>
@@ -420,7 +420,7 @@ export default function FoundingPageClient() {
                 a: "We'll email you within 2–3 business days with either an approval (including your setup link) or a waitlist notice.",
               },
             ].map(faq => (
-              <details key={faq.q} className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] group">
+              <details key={faq.q} className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] group">
                 <summary className="flex items-center justify-between px-6 py-4 cursor-pointer text-[#E8E4DC] font-medium select-none list-none">
                   {faq.q}
                   <ChevronRight className="w-4 h-4 text-[#8A8070] group-open:rotate-90 transition-transform flex-shrink-0" />

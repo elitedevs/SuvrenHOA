@@ -358,6 +358,11 @@ export default function PricingPageClient() {
             >
               Compare every feature.
             </h2>
+            <div
+              className="h-px w-24 mx-auto mb-5"
+              style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(176,155,113,0.55) 50%, transparent 100%)' }}
+              aria-hidden="true"
+            />
             <p className="text-[rgba(245,240,232,0.45)] max-w-xl mx-auto">
               See exactly what you get with each plan. No surprises, no hidden limits.
             </p>
@@ -458,11 +463,16 @@ export default function PricingPageClient() {
       <section className="border-t border-[rgba(245,240,232,0.06)] py-20 page-enter page-enter-delay-4" id="faq">
         <div className="max-w-3xl mx-auto px-6">
           <h2
-            className="text-3xl sm:text-4xl font-medium gradient-text text-center mb-14"
+            className="text-3xl sm:text-4xl font-medium gradient-text text-center mb-4"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             Pricing questions, answered.
           </h2>
+          <div
+            className="h-px w-24 mx-auto mb-14"
+            style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(176,155,113,0.55) 50%, transparent 100%)' }}
+            aria-hidden="true"
+          />
 
           <div className="space-y-3">
             {FAQS.map(({ q, a }) => (

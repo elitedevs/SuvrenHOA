@@ -1,12 +1,56 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { AnimatedNumber } from '@/components/AnimatedNumber';
 import { EmailCapture } from '@/components/EmailCapture';
 import {
   Vote, DollarSign, FileText, Shield, BarChart3, Users,
   Link2, ChevronRight, ArrowRight,
 } from 'lucide-react';
+
+/**
+ * Time-of-day hero orb palette.
+ * Returns radial-gradient backgrounds for the three hero orbs based on local hour.
+ * Restrained shifts — brass stays dominant, only the secondary accent drifts.
+ *
+ * Dawn  (5–8)   — brass warms into copper
+ * Day   (8–17)  — classic brass (baseline)
+ * Dusk  (17–20) — brass cools into rose-gold/amethyst
+ * Night (20–5)  — brass deepens into verdigris/indigo
+ */
+function getHeroOrbPalette(hour: number) {
+  if (hour >= 5 && hour < 8) {
+    // Dawn — copper warmth
+    return {
+      center:    'radial-gradient(circle, rgba(198,140,90,0.08) 0%, transparent 70%)',
+      topRight:  'radial-gradient(circle, rgba(198,140,90,0.05) 0%, transparent 65%)',
+      bottomLeft:'radial-gradient(circle, rgba(176,155,113,0.05) 0%, transparent 65%)',
+    };
+  }
+  if (hour >= 17 && hour < 20) {
+    // Dusk — rose-gold drift
+    return {
+      center:    'radial-gradient(circle, rgba(176,155,113,0.06) 0%, transparent 70%)',
+      topRight:  'radial-gradient(circle, rgba(176,105,120,0.035) 0%, transparent 65%)',
+      bottomLeft:'radial-gradient(circle, rgba(176,155,113,0.05) 0%, transparent 65%)',
+    };
+  }
+  if (hour >= 20 || hour < 5) {
+    // Night — verdigris depth
+    return {
+      center:    'radial-gradient(circle, rgba(176,155,113,0.04) 0%, transparent 70%)',
+      topRight:  'radial-gradient(circle, rgba(42,93,79,0.05) 0%, transparent 65%)',
+      bottomLeft:'radial-gradient(circle, rgba(176,155,113,0.03) 0%, transparent 65%)',
+    };
+  }
+  // Day — classic brass (matches the legacy static palette)
+  return {
+    center:    'radial-gradient(circle, rgba(176,155,113,0.05) 0%, transparent 70%)',
+    topRight:  'radial-gradient(circle, rgba(176,155,113,0.03) 0%, transparent 65%)',
+    bottomLeft:'radial-gradient(circle, rgba(176,155,113,0.04) 0%, transparent 65%)',
+  };
+}
 
 const FEATURES = [
   {
@@ -55,14 +99,29 @@ const STEPS = [
 ];
 
 export default function HomePage() {
+  // Hydration-safe: start with day palette (matches SSR), upgrade after mount.
+  const [orbPalette, setOrbPalette] = useState(() => getHeroOrbPalette(12));
+  useEffect(() => {
+    setOrbPalette(getHeroOrbPalette(new Date().getHours()));
+  }, []);
+
   return (
     <div className="relative overflow-hidden page-enter">
       {/* Background layers */}
       <div className="absolute inset-0 bg-grid opacity-60" />
       <div className="absolute inset-0 bg-radial-glow-strong" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[rgba(176,155,113,0.05)] blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute top-20 right-[20%] w-[400px] h-[400px] bg-[rgba(176,155,113,0.03)] blur-[150px] rounded-full bg-orb pointer-events-none" />
-      <div className="absolute bottom-20 left-[10%] w-[300px] h-[300px] bg-[rgba(176,155,113,0.04)] blur-[100px] rounded-full bg-orb-slow pointer-events-none" />
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] blur-[120px] rounded-full pointer-events-none transition-[background] duration-1000"
+        style={{ background: orbPalette.center }}
+      />
+      <div
+        className="absolute top-20 right-[20%] w-[400px] h-[400px] blur-[150px] rounded-full bg-orb pointer-events-none transition-[background] duration-1000"
+        style={{ background: orbPalette.topRight }}
+      />
+      <div
+        className="absolute bottom-20 left-[10%] w-[300px] h-[300px] blur-[100px] rounded-full bg-orb-slow pointer-events-none transition-[background] duration-1000"
+        style={{ background: orbPalette.bottomLeft }}
+      />
 
       {/* ── Hero ──────────────────────────────────────────────────── */}
       <section className="relative flex flex-col items-center justify-center min-h-[88vh] px-6 text-center">

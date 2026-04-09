@@ -203,6 +203,19 @@ export default function SignupPage() {
             </Link>
           </p>
         </div>
+
+        {/* Trust signals */}
+        <div className="mt-10 pt-8 border-t border-[rgba(176,155,113,0.12)] space-y-2 text-center">
+          <p className="font-serif italic text-[rgba(245,240,232,0.55)] text-sm" style={{ fontFamily: 'var(--font-heading)' }}>
+            End-to-end encrypted. Zero-knowledge. SOC 2 Type II in progress.
+          </p>
+          <p className="font-serif italic text-[rgba(245,240,232,0.40)] text-xs" style={{ fontFamily: 'var(--font-heading)' }}>
+            We never sell your data. We never train on your data.
+          </p>
+          <p className="font-serif italic text-[rgba(245,240,232,0.40)] text-xs" style={{ fontFamily: 'var(--font-heading)' }}>
+            Your HOA&apos;s records belong to your HOA.
+          </p>
+        </div>
       </div>
     </div>
   );

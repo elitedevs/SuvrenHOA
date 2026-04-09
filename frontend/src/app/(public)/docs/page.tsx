@@ -189,31 +189,38 @@ export default function DocsPage() {
             </div>
           </div>
 
-          {/* API — Coming Soon */}
-          <div className="rounded-xl p-6"
+          {/* API — Coming Soon (italic-serif empty state) */}
+          <div className="rounded-xl p-8 text-center"
                style={{ background: '#151518', border: '1px solid rgba(245,240,232,0.06)' }}>
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-                   style={{ background: 'rgba(42,93,79,0.1)' }}>
+            <div className="flex justify-center mb-5">
+              <div className="w-11 h-11 rounded-lg flex items-center justify-center"
+                   style={{ background: 'rgba(42,93,79,0.1)', border: '1px solid rgba(42,93,79,0.18)' }}>
                 <Code className="w-5 h-5 text-[#2A5D4F]" />
               </div>
-              <div>
-                <div className="flex items-center gap-3 mb-1">
-                  <h2 className="text-xl font-medium text-[var(--parchment)]"
-                      style={{ fontFamily: 'var(--font-heading)' }}>
-                    API Reference
-                  </h2>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium tracking-wide uppercase"
-                        style={{ background: 'rgba(42,93,79,0.15)', color: '#2A5D4F', border: '1px solid rgba(42,93,79,0.25)' }}>
-                    Coming Soon
-                  </span>
-                </div>
-                <p className="text-[13px] text-[rgba(245,240,232,0.40)] leading-relaxed max-w-lg">
-                  REST API for integrating SuvrenHOA with your existing tools and workflows.
-                  Programmatic access to voting, treasury, documents, and community management.
-                </p>
-              </div>
             </div>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <h2 className="text-xl font-medium text-[var(--parchment)]"
+                  style={{ fontFamily: 'var(--font-heading)' }}>
+                API Reference
+              </h2>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium tracking-wide uppercase"
+                    style={{ background: 'rgba(42,93,79,0.15)', color: '#2A5D4F', border: '1px solid rgba(42,93,79,0.25)' }}>
+                Coming Soon
+              </span>
+            </div>
+            <div
+              className="h-px w-16 mx-auto mb-5"
+              style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(176,155,113,0.45) 50%, transparent 100%)' }}
+              aria-hidden="true"
+            />
+            <p className="italic text-[15px] text-[rgba(245,240,232,0.55)] leading-[1.6] max-w-md mx-auto mb-2"
+               style={{ fontFamily: 'var(--font-heading)' }}>
+              Documentation without an API to document would be dishonest.
+            </p>
+            <p className="italic text-[13px] text-[rgba(245,240,232,0.40)] leading-relaxed max-w-md mx-auto"
+               style={{ fontFamily: 'var(--font-heading)' }}>
+              A REST surface for voting, treasury, documents, and community management is being built. We&apos;ll publish the reference when there&apos;s something real to reference.
+            </p>
           </div>
         </div>
       </section>

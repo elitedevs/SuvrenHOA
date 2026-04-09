@@ -240,13 +240,23 @@ export default function AboutPage() {
                 infrastructure. All the power of blockchain governance, wrapped in an
                 interface as simple as checking your email.
               </p>
-              <p className="text-[var(--parchment)] font-medium" style={{ fontFamily: 'var(--font-heading)' }}>
-                The result is a platform where fraud isn&apos;t prevented by policy — it&apos;s
-                prevented by physics. Where transparency isn&apos;t a promise — it&apos;s an
-                architectural guarantee. Where trust isn&apos;t required — because the math
-                speaks for itself.
-              </p>
             </div>
+
+            {/* Pull-quote */}
+            <figure className="mt-16 mb-4 relative page-enter-delay-2">
+              <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[rgba(176,155,113,0.45)] to-transparent" aria-hidden="true" />
+              <blockquote
+                className="pl-10 pr-4 italic text-[22px] sm:text-[26px] leading-[1.55] text-[rgba(245,240,232,0.78)]"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                Fraud isn&apos;t prevented by policy — it&apos;s prevented by physics.
+                Transparency isn&apos;t a promise — it&apos;s an architectural guarantee.
+                Trust isn&apos;t required — because the math speaks for itself.
+              </blockquote>
+              <figcaption className="pl-10 mt-5 text-[11px] uppercase tracking-[0.2em] text-[rgba(176,155,113,0.60)] font-medium not-italic">
+                — Ryan Shanahan, Founder
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>

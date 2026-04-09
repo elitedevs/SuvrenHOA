@@ -137,6 +137,37 @@ export default function BlogPage() {
           </div>
         </section>
       )}
+
+      {/* ── EMPTY STATE ───────────────────────────────────────────────────── */}
+      {posts.length === 0 && (
+        <section className="pb-32 page-enter page-enter-delay-1">
+          <div className="max-w-2xl mx-auto px-6 text-center">
+            <div
+              className="h-px w-24 mx-auto mb-10"
+              style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(176,155,113,0.55) 50%, transparent 100%)' }}
+              aria-hidden="true"
+            />
+            <p
+              className="italic text-[26px] sm:text-[30px] leading-[1.45] text-[rgba(245,240,232,0.72)] mb-6"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              The first essay is still being written.
+            </p>
+            <p className="italic text-[15px] text-[rgba(245,240,232,0.42)] leading-relaxed max-w-md mx-auto"
+               style={{ fontFamily: 'var(--font-heading)' }}>
+              When we have something worth saying, you&apos;ll find it here. Until then, the quiet is intentional.
+            </p>
+            <div className="mt-10">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-[13px] text-[#B09B71] hover:text-[#D4C4A0] transition-colors uppercase tracking-[0.15em]"
+              >
+                Return home <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

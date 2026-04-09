@@ -136,11 +136,16 @@ export default function SecurityPage() {
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-24 md:py-36 text-center">
           <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-[13px] font-medium"
+            className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-8 text-[13px] font-medium"
             style={{ background: 'rgba(42,93,79,0.12)', border: '1px solid rgba(42,93,79,0.25)', color: '#2A5D4F' }}
           >
+            <span className="relative inline-flex w-2 h-2" aria-hidden="true">
+              <span className="absolute inset-0 rounded-full bg-[#2A5D4F] opacity-75 animate-ping" />
+              <span className="relative inline-flex w-2 h-2 rounded-full bg-[#2A5D4F]" />
+            </span>
             <Shield className="w-3.5 h-3.5" />
             Security Architecture
+            <span className="text-[10px] uppercase tracking-[0.18em] opacity-70 ml-1">Live</span>
           </div>
 
           <h1
