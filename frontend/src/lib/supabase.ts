@@ -1,62 +1,43 @@
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js';
 
 /**
- * Lazy Supabase clients.
+ * Build-safe Supabase clients.
  *
- * We intentionally avoid creating clients (or throwing on missing env) at
- * module-import time. Next.js collects page data at build time and imports
- * every route module — if this file threw at import, any missing env var
- * would break `next build` even though the value is only needed at runtime.
+ * We intentionally avoid throwing at module-import time. Next.js collects
+ * page data at build by loading every route module, and Turbopack evaluates
+ * imported modules eagerly. If this file threw (or a Proxy's `get` trap
+ * threw), `next build` would die in environments where env vars only arrive
+ * at container runtime — e.g. multi-stage docker builds.
  *
- * Instead, we defer client creation until the first property access via a
- * Proxy. The throw for missing env still fires, but only when something
- * actually tries to talk to Supabase.
+ * When env vars are missing we fall through to a harmless placeholder URL
+ * so `createClient` can initialize. Any actual network call will then fail
+ * at runtime with a Supabase error the route can log or surface as a 500,
+ * which is the correct place for that failure to surface.
  */
 
-function readEnv(name: string): string {
-  const v = process.env[name];
-  if (!v) {
-    throw new Error(`Missing ${name} environment variable`);
-  }
-  return v;
+const BUILD_PLACEHOLDER_URL = 'https://build-placeholder.invalid';
+
+const SUPABASE_URL =
+  process.env.NEXT_PUBLIC_SUPABASE_URL || BUILD_PLACEHOLDER_URL;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+
+// Warn loudly in non-production if env is missing. In production we stay
+// quiet because the build phase also hits this path and we don't want the
+// log noise on every container start.
+if (
+  !process.env.NEXT_PUBLIC_SUPABASE_URL &&
+  process.env.NODE_ENV !== 'production' &&
+  process.env.NODE_ENV !== 'test'
+) {
+  console.warn(
+    '[supabase] NEXT_PUBLIC_SUPABASE_URL not set — using build placeholder. ' +
+      'Any database call will fail at runtime until env is configured.',
+  );
 }
 
-let _admin: SupabaseClient | null = null;
-function getAdmin(): SupabaseClient {
-  if (!_admin) {
-    _admin = createClient(
-      readEnv('NEXT_PUBLIC_SUPABASE_URL'),
-      process.env.SUPABASE_SERVICE_ROLE_KEY || '',
-    );
-  }
-  return _admin;
-}
+// Server-side client (service role — full access, use in API routes only)
+export const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
-let _anon: SupabaseClient | null = null;
-function getAnon(): SupabaseClient {
-  if (!_anon) {
-    _anon = createClient(
-      readEnv('NEXT_PUBLIC_SUPABASE_URL'),
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
-    );
-  }
-  return _anon;
-}
-
-// Proxies forward every property access to the real client, created on demand.
-// Consumers keep their existing `supabaseAdmin.from(...)` syntax unchanged.
-export const supabaseAdmin = new Proxy({} as SupabaseClient, {
-  get(_target, prop, receiver) {
-    const client = getAdmin();
-    const value = Reflect.get(client, prop, receiver);
-    return typeof value === 'function' ? value.bind(client) : value;
-  },
-});
-
-export const supabase = new Proxy({} as SupabaseClient, {
-  get(_target, prop, receiver) {
-    const client = getAnon();
-    const value = Reflect.get(client, prop, receiver);
-    return typeof value === 'function' ? value.bind(client) : value;
-  },
-});
+// Client-side client (anon key — RLS enforced)
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
