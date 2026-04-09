@@ -1,209 +1,204 @@
-'use client';
+import { redirect } from 'next/navigation';
+import type { Metadata } from 'next';
+import { createMetadata } from '@/lib/metadata';
+import { supabaseAdmin } from '@/lib/supabase';
+import SignupPageClient from './SignupPageClient';
 
-import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import { useSupabaseAuth } from '@/context/AuthContext';
-import { UserPlus, Mail, Lock, User, ChevronRight, Building2, Shield, Users } from 'lucide-react';
+/**
+ * /signup is a gated door.
+ *
+ * Ryan's stance (2026-04-09): the product is still in stabilization and we
+ * are NOT handing out public access. Only users holding a valid, unexpired
+ * invitation token — or a founding-program approval tied to their email —
+ * are allowed to land on this page and see the create-account form.
+ *
+ * Two invitation markers are accepted, and BOTH are validated against the
+ * database before the form is rendered:
+ *
+ *   1. `?token=...` — primary invitation path. We look up the token via
+ *      the `get_invitation_by_token` security-definer RPC (defined in
+ *      004_invitations.sql), then require:
+ *        • status = 'pending'
+ *        • expires_at > now()
+ *      A revoked, accepted, or expired token fails and is redirected to
+ *      /waitlist. On success the invited email is locked into the signup
+ *      form so the user cannot sign up under a different address than the
+ *      one the admin invited.
+ *
+ *   2. `?founding=true&email=<addr>` — founding-program path used by the
+ *      approval email in /api/founding/[id]/route.ts. We look up the
+ *      `founding_applications` row by `contact_email` and require:
+ *        • status = 'approved'
+ *      No approved application = redirect to /waitlist. We also pull the
+ *      contact_name to prefill the form.
+ *
+ * Anything else — no params, malformed token, founding flag without a
+ * matching approved application — bounces to /waitlist. The goal is that
+ * it should be impossible to land on the Create Your Account form without
+ * the database first confirming that the visitor is on the guest list.
+ *
+ * NOTE ON SERVICE ROLE: we use supabaseAdmin for both lookups here:
+ *   - For invitations, we call a security-definer RPC, so anon would
+ *     technically work too — but staying consistent on one client keeps
+ *     the gate logic uniform.
+ *   - For founding_applications, the RLS policy restricts SELECT to
+ *     authenticated board members, and this gate runs pre-auth, so we
+ *     need the elevated client to check approval status.
+ * This is read-only validation; no writes happen in this file.
+ */
 
-const ROLES = [
-  { value: 'board_member', label: 'Board Member', desc: 'Create & manage your HOA', icon: Shield },
-  { value: 'property_manager', label: 'Property Manager', desc: 'Manage multiple communities', icon: Building2 },
-  { value: 'resident', label: 'Resident', desc: 'Join your community', icon: Users },
-] as const;
+export const dynamic = 'force-dynamic';
 
-export default function SignupPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const inviteToken = searchParams.get('token');
-  const inviteEmail = searchParams.get('email');
-  const { signUp } = useSupabaseAuth();
+export function generateMetadata(): Metadata {
+  return {
+    ...createMetadata({
+      title: 'Create Your Account',
+      description:
+        'Create your SuvrenHOA account with your invitation token.',
+      path: '/signup',
+    }),
+    robots: { index: false, follow: false },
+  };
+}
 
-  const [email, setEmail] = useState(inviteEmail || '');
-  const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [role, setRole] = useState<string>(inviteToken ? 'resident' : 'board_member');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
+type SignupPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+function firstParam(value: string | string[] | undefined): string | undefined {
+  if (Array.isArray(value)) return value[0];
+  return value;
+}
 
-    if (password.length < 8) {
-      setError('Password must be at least 8 characters');
-      setLoading(false);
-      return;
-    }
+type ValidatedInvitation = {
+  kind: 'invitation';
+  token: string;
+  email: string;
+  role: string;
+  communityId: string;
+  communityName: string;
+};
 
-    const { error: signUpError } = await signUp(email, password, {
-      full_name: fullName,
-      role,
-      invite_token: inviteToken,
+type ValidatedFounding = {
+  kind: 'founding';
+  email: string;
+  fullName: string;
+  communityName: string;
+};
+
+type Validated = ValidatedInvitation | ValidatedFounding;
+
+async function validateInvitationToken(token: string): Promise<ValidatedInvitation | null> {
+  try {
+    const { data, error } = await supabaseAdmin.rpc('get_invitation_by_token', {
+      invite_token: token,
     });
 
-    setLoading(false);
-
-    if (signUpError) {
-      setError(signUpError.message);
-    } else {
-      setSuccess(true);
+    if (error) {
+      console.error('[signup gate] invitation rpc error:', error.message);
+      return null;
     }
-  };
+    // RPC returns a setof; supabase-js gives us an array.
+    const row = Array.isArray(data) ? data[0] : data;
+    if (!row) return null;
+    if (row.status !== 'pending') return null;
+    if (!row.expires_at || new Date(row.expires_at).getTime() <= Date.now()) {
+      return null;
+    }
+    if (!row.email || !row.community_id) return null;
 
-  if (success) {
+    return {
+      kind: 'invitation',
+      token,
+      email: row.email,
+      role: row.role ?? 'member',
+      communityId: row.community_id,
+      communityName: row.community_name ?? '',
+    };
+  } catch (err) {
+    console.error('[signup gate] invitation validation threw:', err);
+    return null;
+  }
+}
+
+async function validateFoundingApplication(email: string): Promise<ValidatedFounding | null> {
+  try {
+    const normalized = email.trim().toLowerCase();
+    if (!normalized || !normalized.includes('@')) return null;
+
+    const { data, error } = await supabaseAdmin
+      .from('founding_applications')
+      .select('contact_email, contact_name, community_name, status')
+      .ilike('contact_email', normalized)
+      .eq('status', 'approved')
+      .order('reviewed_at', { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (error) {
+      console.error('[signup gate] founding lookup error:', error.message);
+      return null;
+    }
+    if (!data) return null;
+
+    return {
+      kind: 'founding',
+      email: data.contact_email,
+      fullName: data.contact_name ?? '',
+      communityName: data.community_name ?? '',
+    };
+  } catch (err) {
+    console.error('[signup gate] founding validation threw:', err);
+    return null;
+  }
+}
+
+export default async function SignupPage({ searchParams }: SignupPageProps) {
+  const params = await searchParams;
+  const token = firstParam(params.token)?.trim();
+  const founding = firstParam(params.founding)?.trim().toLowerCase();
+  const emailParam = firstParam(params.email)?.trim();
+
+  let validated: Validated | null = null;
+
+  // Primary path: invitation token — validate against the invitations table
+  // via the security-definer RPC.
+  if (token && token.length > 0) {
+    validated = await validateInvitationToken(token);
+  }
+
+  // Secondary path: founding-program approval — validate the email against
+  // an approved founding_applications row.
+  if (!validated && founding === 'true' && emailParam) {
+    validated = await validateFoundingApplication(emailParam);
+  }
+
+  // Door is closed unless the visitor presents something the database
+  // confirms. No grace period, no "maybe later" — just bounce to waitlist.
+  if (!validated) {
+    redirect('/waitlist');
+  }
+
+  // Pass the validated identity down to the client. The client uses these
+  // to lock fields (email is non-editable for invitations) and to hide the
+  // role selector when the invitation already dictates a role.
+  if (validated.kind === 'invitation') {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="glass-card rounded-2xl p-10 max-w-md w-full text-center">
-          <div className="w-14 h-14 rounded-2xl bg-[rgba(42,93,79,0.12)] border border-[rgba(42,93,79,0.25)] flex items-center justify-center mx-auto mb-6">
-            <Mail className="w-7 h-7 text-[#2A5D4F]" />
-          </div>
-          <h1 className="text-2xl font-serif font-medium text-[var(--parchment)] mb-3">Check Your Email</h1>
-          <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
-            We sent a verification link to <span className="text-[var(--text-body)]">{email}</span>.
-            Click the link to activate your account.
-          </p>
-          <Link
-            href="/login"
-            className="inline-flex items-center gap-2 text-sm text-[#B09B71] hover:text-[#D4C4A0] transition-colors"
-          >
-            Go to Sign In <ChevronRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </div>
+      <SignupPageClient
+        inviteToken={validated.token}
+        lockedEmail={validated.email}
+        lockedRole={validated.role}
+        communityName={validated.communityName}
+      />
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="absolute inset-0 bg-grid opacity-40 pointer-events-none" />
-      <div className="absolute inset-0 bg-radial-glow pointer-events-none" />
-
-      <div className="relative glass-card rounded-2xl p-10 max-w-lg w-full">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.25)] flex items-center justify-center mx-auto mb-6">
-            <UserPlus className="w-7 h-7 text-[#B09B71]" />
-          </div>
-          <h1 className="text-2xl font-serif font-medium text-[var(--parchment)] mb-2">Create Your Account</h1>
-          <p className="text-sm text-[var(--text-muted)]">
-            {inviteToken
-              ? "You've been invited to join a community"
-              : 'Start managing your HOA on the blockchain'}
-          </p>
-        </div>
-
-        {error && (
-          <div className="mb-6 p-3 rounded-lg bg-[rgba(107,58,58,0.12)] border border-[rgba(107,58,58,0.25)] text-sm text-[#D4A0A0]">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Full Name */}
-          <div>
-            <label className="block text-xs uppercase tracking-widest text-[var(--text-disabled)] mb-2">Full Name</label>
-            <div className="relative">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-disabled)]" />
-              <input
-                type="text"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                required
-                placeholder="Jane Doe"
-                className="w-full pl-10 pr-4 py-3 rounded-lg bg-[var(--surface-2)] border border-[var(--divider)] text-[var(--text-body)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[rgba(176,155,113,0.40)] transition-colors text-sm"
-              />
-            </div>
-          </div>
-
-          {/* Email */}
-          <div>
-            <label className="block text-xs uppercase tracking-widest text-[var(--text-disabled)] mb-2">Email</label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-disabled)]" />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="you@example.com"
-                readOnly={!!inviteEmail}
-                className="w-full pl-10 pr-4 py-3 rounded-lg bg-[var(--surface-2)] border border-[var(--divider)] text-[var(--text-body)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[rgba(176,155,113,0.40)] transition-colors text-sm"
-              />
-            </div>
-          </div>
-
-          {/* Password */}
-          <div>
-            <label className="block text-xs uppercase tracking-widest text-[var(--text-disabled)] mb-2">Password</label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-disabled)]" />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={8}
-                placeholder="Min. 8 characters"
-                className="w-full pl-10 pr-4 py-3 rounded-lg bg-[var(--surface-2)] border border-[var(--divider)] text-[var(--text-body)] placeholder:text-[var(--text-disabled)] focus:outline-none focus:border-[rgba(176,155,113,0.40)] transition-colors text-sm"
-              />
-            </div>
-          </div>
-
-          {/* Role Selector — hidden when invite has a role */}
-          {!inviteToken && (
-            <div>
-              <label className="block text-xs uppercase tracking-widest text-[var(--text-disabled)] mb-3">I Am A</label>
-              <div className="grid grid-cols-1 gap-2">
-                {ROLES.map(({ value, label, desc, icon: Icon }) => (
-                  <button
-                    key={value}
-                    type="button"
-                    onClick={() => setRole(value)}
-                    className={`flex items-center gap-3 p-3 rounded-lg border text-left transition-all duration-150 ${
-                      role === value
-                        ? 'bg-[rgba(176,155,113,0.08)] border-[rgba(176,155,113,0.35)]'
-                        : 'bg-transparent border-[var(--divider)] hover:border-[rgba(245,240,232,0.12)]'
-                    }`}
-                  >
-                    <Icon
-                      className="w-5 h-5 shrink-0"
-                      style={{ color: role === value ? '#B09B71' : 'rgba(245,240,232,0.25)' }}
-                    />
-                    <div>
-                      <p className={`text-sm font-medium ${role === value ? 'text-[var(--parchment)]' : 'text-[var(--text-body)]'}`}>
-                        {label}
-                      </p>
-                      <p className="text-xs text-[var(--text-disabled)]">{desc}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Submit */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-medium text-sm hover:bg-[#C4A96E] disabled:opacity-50 transition-colors"
-          >
-            {loading ? 'Creating Account...' : 'Create Account'}
-          </button>
-        </form>
-
-        {/* Footer */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-[var(--text-muted)]">
-            Already have an account?{' '}
-            <Link href="/login" className="text-[#B09B71] hover:text-[#D4C4A0] transition-colors">
-              Sign In
-            </Link>
-          </p>
-        </div>
-      </div>
-    </div>
+    <SignupPageClient
+      lockedEmail={validated.email}
+      prefillName={validated.fullName}
+      communityName={validated.communityName}
+      foundingFlow
+    />
   );
 }

@@ -28,7 +28,7 @@ export function useAIAssistant() {
     {
       id: 'welcome',
       role: 'bot',
-      text: "Hi! I'm your SuvrenHOA assistant 🤖 I can help with dues, treasury, proposals, health scores, and more. What would you like to know?",
+      text: "Good to see you. I'm the SuvrenHOA concierge — I can help with dues, treasury, proposals, health scores, and more. What would you like to know?",
       timestamp: new Date(),
     },
   ]);
@@ -70,105 +70,106 @@ export function useAIAssistant() {
         if (!hasProperty) {
           return "I don't see a property linked to your wallet. Connect a wallet that holds a SuvrenHOA property token to check your dues status.";
         }
+        // V11 fix: emoji removed throughout — violates the "no emoji" design direction.
         if (isDuesCurrent === true) {
-          return `✅ You're all paid up! Your dues are current. Next dues are due at the start of next quarter (${nextQuarterDate()}).`;
+          return `You're all paid up. Your dues are current, and the next payment is due at the start of next quarter (${nextQuarterDate()}).`;
         }
         if (isDuesCurrent === false) {
-          return `⚠️ You have **${quartersOwed} quarter${quartersOwed !== 1 ? 's' : ''}** of dues outstanding — **$${amountOwed} USDC** total. Head to [Pay Dues](/dues) to get current.`;
+          return `You have **${quartersOwed} quarter${quartersOwed !== 1 ? 's' : ''}** of dues outstanding — **$${amountOwed} USDC** total. Head to [Pay Dues](/dues) to get current.`;
         }
-        return "Loading your dues status... Please try again in a moment.";
+        return "Loading your dues status. One moment.";
       }
 
       // ── When are dues due ───────────────────────────────────
       if (/when.*dues|dues.*due|next.*quarter|quarter.*start/.test(q)) {
-        return `📅 Dues are collected **quarterly**. The next quarter starts **${nextQuarterDate()}**. You can pay annually for a ${annualDiscount}% discount! Visit [/dues](/dues) to pay.`;
+        return `Dues are collected **quarterly**. The next quarter starts **${nextQuarterDate()}**. Annual payment is also available at a ${annualDiscount}% discount — visit [/dues](/dues) to pay.`;
       }
 
       // ── How to pay dues ─────────────────────────────────────
       if (/how.*pay|pay.*dues|pay.*my|payment/.test(q)) {
-        return `💳 To pay your dues:\n1. Connect your wallet\n2. Go to [Dues page](/dues)\n3. Choose quarterly ($${quarterlyDues} USDC) or annual ($${annualAmount} USDC — saves ${annualDiscount}%)\n4. Approve USDC and confirm the transaction`;
+        return `**To pay your dues:**\n\n1. Connect your wallet\n2. Go to [Dues](/dues)\n3. Choose quarterly ($${quarterlyDues} USDC) or annual ($${annualAmount} USDC — saves ${annualDiscount}%)\n4. Approve USDC and confirm the transaction`;
       }
 
       // ── Treasury ────────────────────────────────────────────
       if (/treasury|how much.*fund|fund.*balance|operating|reserve|budget/.test(q)) {
-        return `💰 **Treasury Snapshot:**\n• Total Balance: **$${totalBalance} USDC**\n• Operating Fund: $${operatingBalance} USDC\n• Reserve Fund: $${reserveBalance} USDC\n\nSee the full breakdown at [/treasury](/treasury).`;
+        return `**Treasury snapshot**\n\n• Total Balance — **$${totalBalance} USDC**\n• Operating Fund — $${operatingBalance} USDC\n• Reserve Fund — $${reserveBalance} USDC\n\nSee the full breakdown at [/treasury](/treasury).`;
       }
 
       // ── Properties / community size ─────────────────────────
       if (/how many.*prop|properties|community size|total.*home|home.*total|lots|units/.test(q)) {
         const count = totalSupply || Number(totalProperties) || 0;
-        return `🏠 There are currently **${count} properties** registered in the SuvrenHOA community.`;
+        return `There are currently **${count} properties** registered in the SuvrenHOA community.`;
       }
 
       // ── Proposals ───────────────────────────────────────────
       if (/proposal|active.*vote|vote.*active|governance|pending.*proposal/.test(q)) {
         const count = Number(activeProposals) || 0;
         if (count === 0) {
-          return `🗳️ There are currently **no active proposals**. Check [/proposals](/proposals) to see past proposals or create a new one.`;
+          return `There are currently **no active proposals**. Visit [/proposals](/proposals) to see past proposals or create a new one.`;
         }
-        return `🗳️ There are **${count} active proposal${count !== 1 ? 's' : ''}** open for voting right now! Head to [/proposals](/proposals) to review and cast your vote.`;
+        return `There are **${count} active proposal${count !== 1 ? 's' : ''}** open for voting. Head to [/proposals](/proposals) to review and cast your vote.`;
       }
 
       // ── How to vote ─────────────────────────────────────────
       if (/how.*vote|voting.*process|cast.*vote|vote.*how/.test(q)) {
-        return `🗳️ **How to Vote:**\n1. Connect your wallet (must hold a property NFT)\n2. Go to [Proposals](/proposals)\n3. Select an active proposal\n4. Choose For, Against, or Abstain\n5. Confirm the transaction\n\nVoting power = 1 vote per property. You can also delegate your vote.`;
+        return `**How to vote**\n\n1. Connect your wallet (must hold a property NFT)\n2. Go to [Proposals](/proposals)\n3. Select an active proposal\n4. Choose For, Against, or Abstain\n5. Confirm the transaction\n\nVoting power is one vote per property. Delegation is available.`;
       }
 
       // ── Health score ────────────────────────────────────────
       if (/health.*score|score|community.*health|hoa.*score/.test(q)) {
         if (healthLoading) {
-          return "⏳ Calculating the community health score... try again in a moment!";
+          return "Calculating the community health score. One moment.";
         }
-        const factorLines = healthFactors.map((f) => `• ${f.icon} ${f.name}: ${f.score}/${f.max}`).join('\n');
-        return `❤️ **Community Health Score: ${healthScore}/100 (Grade ${healthGrade})**\n\nKey factors:\n${factorLines}\n\nSee the full breakdown at [/health](/health).`;
+        const factorLines = healthFactors.map((f) => `• ${f.name} — ${f.score}/${f.max}`).join('\n');
+        return `**Community Health Score — ${healthScore}/100 (Grade ${healthGrade})**\n\nKey factors:\n\n${factorLines}\n\nSee the full breakdown at [/health](/health).`;
       }
 
       // ── CC&Rs / Rules ───────────────────────────────────────
       if (/cc&r|ccr|rules|bylaws|covenant|regulation|restriction/.test(q)) {
-        return `📄 **CC&Rs (Covenants, Conditions & Restrictions)** are the governing rules of your HOA. They cover architectural standards, pet policies, parking, and more.\n\nAll official documents are stored on-chain for transparency. Browse them at [/documents](/documents).`;
+        return `**CC&Rs** — the Covenants, Conditions & Restrictions — are the governing rules of your HOA. They cover architectural standards, pet policies, parking, and more.\n\nAll official documents are stored on-chain for transparency. Browse them at [/documents](/documents).`;
       }
 
       // ── Documents ───────────────────────────────────────────
       if (/document|docs|files|upload.*doc/.test(q)) {
-        return `📄 All HOA documents (CC&Rs, bylaws, meeting minutes) are stored on-chain. View them at [/documents](/documents).`;
+        return `All HOA documents — CC&Rs, bylaws, meeting minutes — are stored on-chain. View them at [/documents](/documents).`;
       }
 
       // ── Contact board ───────────────────────────────────────
       if (/contact|board|who.*manage|reach out|email|phone|president|secretary|treasurer/.test(q)) {
-        return `📬 **Board Contact Info:**\n• President: board@suvren.hoa\n• General inquiries: contact@suvren.hoa\n• Emergency maintenance: Use the [Maintenance portal](/maintenance)\n\nYou can also send a direct message via [/messages](/messages).`;
+        return `**Board contact**\n\n• President — board@suvren.hoa\n• General inquiries — contact@suvren.hoa\n• Emergency maintenance — use the [Maintenance portal](/maintenance)\n\nYou can also send a direct message via [/messages](/messages).`;
       }
 
       // ── Maintenance ─────────────────────────────────────────
       if (/maintenance|repair|fix|broken|submit.*request|request.*maintenance|issue/.test(q)) {
-        return `🔧 To submit a maintenance request:\n1. Go to [Maintenance](/maintenance)\n2. Describe the issue\n3. Add photos if helpful\n4. Submit — the board will follow up\n\nYou can track the status of your requests there too.`;
+        return `**To submit a maintenance request:**\n\n1. Go to [Maintenance](/maintenance)\n2. Describe the issue\n3. Add photos if helpful\n4. Submit — the board will follow up\n\nYou can track the status of your requests there.`;
       }
 
       // ── Pool / amenities ────────────────────────────────────
       if (/pool.*hour|pool.*time|pool.*open|pool.*close/.test(q)) {
-        return `🏊 **Pool Hours:**\n• Monday–Friday: 6 AM – 10 PM\n• Saturday–Sunday: 7 AM – 10 PM\n• Holidays: 8 AM – 8 PM\n\nReserve the pool for private events at [/reservations](/reservations).`;
+        return `**Pool hours**\n\n• Monday–Friday — 6 AM to 10 PM\n• Saturday–Sunday — 7 AM to 10 PM\n• Holidays — 8 AM to 8 PM\n\nReserve the pool for private events at [/reservations](/reservations).`;
       }
 
       if (/amenity|amenities|clubhouse|gym|fitness|tennis|facilities|rules.*amenity|amenity.*rules/.test(q)) {
-        return `🏊 **Amenity Guidelines:**\n• Residents may bring up to 3 guests\n• No glass containers in pool area\n• Quiet hours after 9 PM\n• Reservations required for private events\n\nBook at [/reservations](/reservations).`;
+        return `**Amenity guidelines**\n\n• Residents may bring up to three guests\n• No glass containers in the pool area\n• Quiet hours after 9 PM\n• Reservations required for private events\n\nBook at [/reservations](/reservations).`;
       }
 
       // ── Reservations ────────────────────────────────────────
       if (/reserv|book.*space|book.*room|clubhouse.*book/.test(q)) {
-        return `📅 Book community spaces (pool, clubhouse, etc.) at [/reservations](/reservations). Reserve up to 90 days in advance.`;
+        return `Book community spaces — pool, clubhouse, and more — at [/reservations](/reservations). Reserve up to 90 days in advance.`;
       }
 
       // ── Directory ───────────────────────────────────────────
       if (/directory|neighbor|who.*live|resident.*list/.test(q)) {
-        return `👥 The resident directory is available at [/directory](/directory) — connect your wallet to see your neighbors.`;
+        return `The resident directory is at [/directory](/directory). Connect your wallet to see your neighbors.`;
       }
 
       // ── Help / what can you do ──────────────────────────────
       if (/help|what can you|what do you know|commands|topics|about you|who are you/.test(q)) {
-        return `🤖 I can answer questions about:\n• **Dues** — status, how to pay, deadlines\n• **Treasury** — balances and funds\n• **Proposals** — active votes and governance\n• **Health Score** — community metrics\n• **Documents** — CC&Rs and bylaws\n• **Maintenance** — how to submit requests\n• **Amenities** — pool hours and rules\n• **Contact** — how to reach the board\n\nJust ask naturally!`;
+        return `I can answer questions about:\n\n• **Dues** — status, how to pay, deadlines\n• **Treasury** — balances and funds\n• **Proposals** — active votes and governance\n• **Health Score** — community metrics\n• **Documents** — CC&Rs and bylaws\n• **Maintenance** — how to submit requests\n• **Amenities** — pool hours and rules\n• **Contact** — how to reach the board\n\nAsk naturally.`;
       }
 
       // ── Fallback ────────────────────────────────────────────
-      return `🤷 I don't have info on that yet. Try asking about:\n• Dues ("What are my dues?")\n• Treasury ("How much is in the treasury?")\n• Proposals ("Are there active proposals?")\n• Health score, amenities, or documents`;
+      return `I don't have information on that yet. Try asking about:\n\n• Dues — "What are my dues?"\n• Treasury — "How much is in the treasury?"\n• Proposals — "Are there active proposals?"\n• Health score, amenities, or documents`;
     },
     // FE-07: stable primitives only — avoids recreating processQuery every render
     [

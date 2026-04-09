@@ -210,9 +210,17 @@ export default function PricingPageClient() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-24 md:py-32 text-center">
+          {/* V11 fix: Pricing H1 was rendering at 60px on desktop — a 12px
+              short of the home/about/security H1 scale (72px). Bumped the
+              top breakpoint to text-7xl so the serif scale is coherent
+              across marketing surfaces. */}
           <h1
-            className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight mb-6 leading-[1.1]"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            className="text-4xl sm:text-5xl md:text-7xl mb-6 leading-[1.05]"
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontWeight: 400,
+              letterSpacing: '-0.02em',
+            }}
           >
             <span className="gradient-text">Simple, honest pricing.</span>
           </h1>
@@ -324,7 +332,7 @@ export default function PricingPageClient() {
                   </ul>
 
                   <Link
-                    href="/checkout"
+                    href="/waitlist"
                     className="w-full py-3.5 rounded-lg text-center font-medium text-sm transition-all duration-200 hover:scale-[1.01] block"
                     style={{
                       background: popular
@@ -335,7 +343,7 @@ export default function PricingPageClient() {
                       boxShadow: popular ? '0 0 24px rgba(176,155,113,0.25)' : 'none',
                     }}
                   >
-                    Start Free Trial
+                    Reserve Your Seat
                   </Link>
                 </div>
               );
@@ -358,6 +366,11 @@ export default function PricingPageClient() {
             >
               Compare every feature.
             </h2>
+            <div
+              className="h-px w-24 mx-auto mb-5"
+              style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(176,155,113,0.55) 50%, transparent 100%)' }}
+              aria-hidden="true"
+            />
             <p className="text-[rgba(245,240,232,0.45)] max-w-xl mx-auto">
               See exactly what you get with each plan. No surprises, no hidden limits.
             </p>
@@ -458,11 +471,16 @@ export default function PricingPageClient() {
       <section className="border-t border-[rgba(245,240,232,0.06)] py-20 page-enter page-enter-delay-4" id="faq">
         <div className="max-w-3xl mx-auto px-6">
           <h2
-            className="text-3xl sm:text-4xl font-medium gradient-text text-center mb-14"
+            className="text-3xl sm:text-4xl font-medium gradient-text text-center mb-4"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             Pricing questions, answered.
           </h2>
+          <div
+            className="h-px w-24 mx-auto mb-14"
+            style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(176,155,113,0.55) 50%, transparent 100%)' }}
+            aria-hidden="true"
+          />
 
           <div className="space-y-3">
             {FAQS.map(({ q, a }) => (
@@ -510,7 +528,7 @@ export default function PricingPageClient() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
-                  href="/signup"
+                  href="/waitlist"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                   style={{
                     background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
@@ -518,7 +536,7 @@ export default function PricingPageClient() {
                     boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                   }}
                 >
-                  Start Free Trial
+                  Reserve Your Seat
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link

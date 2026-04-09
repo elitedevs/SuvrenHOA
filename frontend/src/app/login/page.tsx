@@ -98,7 +98,20 @@ export default function LoginPage() {
           <Link href="/" className="inline-block mb-6">
             <img src="/logo-full.svg" alt="SuvrenHOA" className="h-10 w-auto mx-auto" />
           </Link>
-          <h1 className="text-2xl font-serif font-medium text-[var(--parchment)] mb-2">{title}</h1>
+          {/* V11 fix: H1 was 24px (text-2xl) — too small for the luxury
+              register. Bumped to 32px with tight negative tracking to match
+              /about, /security, and the rest of the serif scale. */}
+          <h1
+            className="font-serif mb-2 text-[var(--parchment)]"
+            style={{
+              fontSize: '2rem',
+              fontWeight: 400,
+              letterSpacing: '-0.015em',
+              lineHeight: 1.15,
+            }}
+          >
+            {title}
+          </h1>
           <p className="text-sm text-[var(--text-muted)]">{subtitle}</p>
         </div>
 
@@ -204,12 +217,25 @@ export default function LoginPage() {
 
           <div className="text-center pt-2">
             <p className="text-sm text-[var(--text-muted)]">
-              Don&apos;t have an account?{' '}
-              <Link href="/signup" className="text-[#B09B71] hover:text-[#D4C4A0] transition-colors">
-                Create Account
+              Don&apos;t have an invitation?{' '}
+              <Link href="/waitlist" className="text-[#B09B71] hover:text-[#D4C4A0] transition-colors">
+                Reserve Your Seat
               </Link>
             </p>
           </div>
+        </div>
+
+        {/* Trust signals */}
+        <div className="mt-10 pt-8 border-t border-[rgba(176,155,113,0.12)] space-y-2 text-center">
+          <p className="font-serif italic text-[rgba(245,240,232,0.55)] text-sm" style={{ fontFamily: 'var(--font-heading)' }}>
+            End-to-end encrypted. Zero-knowledge. SOC 2 Type II in progress.
+          </p>
+          <p className="font-serif italic text-[rgba(245,240,232,0.40)] text-xs" style={{ fontFamily: 'var(--font-heading)' }}>
+            We never sell your data. We never train on your data.
+          </p>
+          <p className="font-serif italic text-[rgba(245,240,232,0.40)] text-xs" style={{ fontFamily: 'var(--font-heading)' }}>
+            Your HOA&apos;s records belong to your HOA.
+          </p>
         </div>
       </div>
     </div>

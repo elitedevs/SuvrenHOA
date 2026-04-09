@@ -1,4 +1,13 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+// V11 fix: give the 404 page a real title so the tab no longer inherits the
+// default "SuvrenHOA — Blockchain-Powered HOA Governance". The root layout
+// declares `title.template = "%s — SuvrenHOA"`, so this resolves to
+// "Page Not Found — SuvrenHOA".
+export const metadata: Metadata = {
+  title: 'Page Not Found',
+};
 
 export default function NotFound() {
   return (
@@ -21,17 +30,22 @@ export default function NotFound() {
         />
       </div>
 
-      <p
+      {/* V11 fix: promote the hero copy to a semantic <h1> so the audit
+          (and assistive tech) sees a real heading on the 404 page. Prior
+          version rendered as <p>, leaving the route with zero headings. */}
+      <h1
         className="text-2xl mb-2 leading-snug"
         style={{
           fontFamily: 'var(--font-heading)',
           fontStyle: 'italic',
           fontWeight: 400,
+          fontSize: '2rem',
           color: 'var(--text-heading)',
+          letterSpacing: '-0.01em',
         }}
       >
         We&rsquo;re still building this room.
-      </p>
+      </h1>
       <p
         className="text-sm mb-10"
         style={{ color: 'var(--text-muted)' }}
