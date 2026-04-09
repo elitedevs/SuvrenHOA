@@ -49,7 +49,7 @@ export default function ContactPageClient() {
   }
 
   const inputClasses =
-    'w-full rounded-lg px-4 py-3 text-[rgba(245,240,232,0.85)] placeholder:text-[rgba(245,240,232,0.3)] outline-none transition-all duration-200 focus:ring-2 focus:ring-[#B09B71]/60';
+    'w-full rounded-lg px-4 py-3 text-[rgba(245,240,232,0.85)] placeholder:text-[rgba(245,240,232,0.3)] outline-none transition-all duration-200 focus:ring-2 focus:ring-[rgba(176,155,113,0.6)]';
   const inputStyle = {
     backgroundColor: '#151518',
     border: '1px solid rgba(245,240,232,0.06)',

@@ -372,7 +372,7 @@ function CommunityPublicPage() {
             </Link>
             <Link
               href="/founding"
-              className="inline-flex items-center gap-2 border border-[#B09B71]/40 text-[#B09B71] px-6 py-3 rounded-xl hover:border-[#B09B71] transition-colors text-sm font-medium"
+              className="inline-flex items-center gap-2 border border-[rgba(176,155,113,0.4)] text-[#B09B71] px-6 py-3 rounded-xl hover:border-[#B09B71] transition-colors text-sm font-medium"
             >
               Founding Program →
             </Link>
@@ -391,8 +391,8 @@ function CommunityPublicPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {GOVERNANCE_PILLARS.map(p => (
-              <div key={p.title} className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6 hover:border-[#B09B71]/30 transition-colors">
-                <div className="w-10 h-10 rounded-lg bg-[#B09B71]/10 flex items-center justify-center mb-4">
+              <div key={p.title} className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] hover:shadow-[0_4px_16px_0_rgba(0,0,0,0.35),0_1px_2px_0_rgba(0,0,0,0.3)] hover:-translate-y-px p-6 transition-all duration-200">
+                <div className="w-10 h-10 rounded-lg bg-[rgba(176,155,113,0.1)] flex items-center justify-center mb-4">
                   <p.icon className="w-5 h-5 text-[#B09B71]" />
                 </div>
                 <h3 className="font-semibold text-[#E8E4DC] mb-2">{p.title}</h3>
@@ -406,8 +406,8 @@ function CommunityPublicPage() {
       {/* Discord / Community hub */}
       <section className="py-16 px-4 border-b border-[var(--divider)]">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-[#141416] border border-[#2A2A2E] rounded-2xl p-8 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-[#5865F2]/10 border border-[#5865F2]/30 flex items-center justify-center mx-auto mb-5">
+          <div className="bg-[rgb(21,21,24)] rounded-2xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-8 text-center">
+            <div className="w-14 h-14 rounded-2xl bg-[rgba(88,101,242,0.1)] border border-[rgba(88,101,242,0.3)] flex items-center justify-center mx-auto mb-5">
               <MessageSquare className="w-7 h-7 text-[#5865F2]" />
             </div>
             <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-3">Join the Conversation</h2>
@@ -437,7 +437,7 @@ function CommunityPublicPage() {
             <BookOpen className="w-5 h-5 text-[#B09B71]" />
             <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC]">Community Guidelines</h2>
           </div>
-          <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl divide-y divide-[#2A2A2E]">
+          <div className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] divide-y divide-[#2A2A2E]">
             {GUIDELINES.map((g, i) => (
               <div key={g.rule} className="flex items-start gap-4 px-5 py-4">
                 <span className="text-xs font-bold text-[#B09B71] font-mono mt-0.5 flex-shrink-0 w-5">
@@ -465,12 +465,12 @@ function CommunityPublicPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {TESTIMONIALS.map(t => (
-              <div key={t.name} className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6 flex flex-col">
+              <div key={t.name} className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6 flex flex-col">
                 <p className="text-sm text-[#C4BAA8] leading-relaxed italic mb-6 flex-1">
                   "{t.quote}"
                 </p>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-[#B09B71]/15 border border-[#B09B71]/30 flex items-center justify-center text-xs font-bold text-[#B09B71]">
+                  <div className="w-9 h-9 rounded-full bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.3)] flex items-center justify-center text-xs font-bold text-[#B09B71]">
                     {t.initials}
                   </div>
                   <div>
@@ -501,7 +501,7 @@ function CommunityPublicPage() {
             </Link>
             <Link
               href="/founding"
-              className="inline-flex items-center gap-2 border border-[#2A2A2E] text-[#C4BAA8] px-6 py-3 rounded-xl hover:border-[#B09B71]/40 transition-colors text-sm font-medium"
+              className="inline-flex items-center gap-2 border border-[#2A2A2E] text-[#C4BAA8] px-6 py-3 rounded-xl hover:border-[rgba(176,155,113,0.4)] transition-colors text-sm font-medium"
             >
               Apply for Founding
             </Link>

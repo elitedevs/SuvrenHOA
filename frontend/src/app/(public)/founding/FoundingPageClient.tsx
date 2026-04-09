@@ -124,7 +124,7 @@ export default function FoundingPageClient() {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center">
-          <div className="w-20 h-20 rounded-full bg-[#B09B71]/10 border border-[#B09B71]/30 flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 rounded-full bg-[rgba(176,155,113,0.1)] border border-[rgba(176,155,113,0.3)] flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-10 h-10 text-[#B09B71]" />
           </div>
           <h1 className="font-playfair text-3xl font-bold text-[#E8E4DC] mb-4">Application Received</h1>
@@ -148,7 +148,7 @@ export default function FoundingPageClient() {
       {/* Hero */}
       <section className="py-20 px-4 text-center border-b border-[var(--divider)]">
         <div className="max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-[#B09B71]/10 border border-[#B09B71]/30 rounded-full px-4 py-1.5 mb-6">
+          <div className="inline-flex items-center gap-2 bg-[rgba(176,155,113,0.1)] border border-[rgba(176,155,113,0.3)] rounded-full px-4 py-1.5 mb-6">
             <Award className="w-4 h-4 text-[#B09B71]" />
             <span className="text-[#B09B71] text-sm font-medium">Limited — {spotsRemaining} spots remaining</span>
           </div>
@@ -185,9 +185,9 @@ export default function FoundingPageClient() {
             {BENEFITS.map((b) => (
               <div
                 key={b.title}
-                className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6 hover:border-[#B09B71]/40 transition-colors"
+                className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] hover:shadow-[0_4px_16px_0_rgba(0,0,0,0.35),0_1px_2px_0_rgba(0,0,0,0.3)] hover:-translate-y-px p-6 transition-all duration-200"
               >
-                <div className="w-10 h-10 rounded-lg bg-[#B09B71]/10 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-lg bg-[rgba(176,155,113,0.1)] flex items-center justify-center mb-4">
                   <b.icon className="w-5 h-5 text-[#B09B71]" />
                 </div>
                 <h3 className="font-semibold text-[#E8E4DC] mb-2">{b.title}</h3>
@@ -208,7 +208,7 @@ export default function FoundingPageClient() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Community info */}
-            <fieldset className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6 space-y-4">
+            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6 space-y-4">
               <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1">Community</legend>
 
               <div>
@@ -238,7 +238,7 @@ export default function FoundingPageClient() {
             </fieldset>
 
             {/* Contact info */}
-            <fieldset className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6 space-y-4">
+            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6 space-y-4">
               <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1">Your Information</legend>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -295,7 +295,7 @@ export default function FoundingPageClient() {
             </fieldset>
 
             {/* Pain points */}
-            <fieldset className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6">
+            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6">
               <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1 mb-4">What challenges does your community face? <span className="text-[#4A4A52] normal-case">(select all that apply)</span></legend>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {PAIN_POINT_OPTIONS.map(point => {
@@ -307,7 +307,7 @@ export default function FoundingPageClient() {
                       onClick={() => togglePainPoint(point)}
                       className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border text-left text-sm transition-all ${
                         selected
-                          ? 'border-[#B09B71]/60 bg-[#B09B71]/10 text-[#E8E4DC]'
+                          ? 'border-[rgba(176,155,113,0.6)] bg-[rgba(176,155,113,0.1)] text-[#E8E4DC]'
                           : 'border-[#2A2A2E] text-[#8A8070] hover:border-[#3A3A3E] hover:text-[#C4BAA8]'
                       }`}
                     >
@@ -324,7 +324,7 @@ export default function FoundingPageClient() {
             </fieldset>
 
             {/* Additional */}
-            <fieldset className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6 space-y-4">
+            <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6 space-y-4">
               <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1">A Bit More</legend>
 
               <div>
@@ -363,7 +363,7 @@ export default function FoundingPageClient() {
             >
               {state === 'submitting' ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-[#0C0C0E]/30 border-t-[#0C0C0E] rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-[rgba(12,12,14,0.3)] border-t-[#0C0C0E] rounded-full animate-spin" />
                   Submitting…
                 </>
               ) : (
@@ -384,7 +384,7 @@ export default function FoundingPageClient() {
             <div className="flex items-center gap-3 justify-center">
               <div className="flex -space-x-2">
                 {[...Array(5)].map((_, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full bg-[#B09B71]/20 border border-[#B09B71]/30 flex items-center justify-center text-xs text-[#B09B71] font-semibold">
+                  <div key={i} className="w-8 h-8 rounded-full bg-[rgba(176,155,113,0.2)] border border-[rgba(176,155,113,0.3)] flex items-center justify-center text-xs text-[#B09B71] font-semibold">
                     {['O', 'M', 'P', 'G', 'L'][i]}
                   </div>
                 ))}
@@ -420,7 +420,7 @@ export default function FoundingPageClient() {
                 a: "We'll email you within 2–3 business days with either an approval (including your setup link) or a waitlist notice.",
               },
             ].map(faq => (
-              <details key={faq.q} className="bg-[#141416] border border-[#2A2A2E] rounded-xl group">
+              <details key={faq.q} className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] group">
                 <summary className="flex items-center justify-between px-6 py-4 cursor-pointer text-[#E8E4DC] font-medium select-none list-none">
                   {faq.q}
                   <ChevronRight className="w-4 h-4 text-[#8A8070] group-open:rotate-90 transition-transform flex-shrink-0" />

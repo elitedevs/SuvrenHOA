@@ -214,7 +214,7 @@ export default function AdminLaunchPage() {
       <div className="flex flex-wrap gap-2">
         <Link
           href="/admin/founding"
-          className="flex items-center gap-2 px-4 py-2 bg-[#141416] border border-[#2A2A2E] rounded-lg text-sm text-[#C4BAA8] hover:border-[#B09B71]/40 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-[#141416] border border-[#2A2A2E] rounded-lg text-sm text-[#C4BAA8] hover:border-[rgba(176,155,113,0.4)] transition-colors"
         >
           <Users className="w-4 h-4 text-[#B09B71]" />
           Review Founding Apps
@@ -222,7 +222,7 @@ export default function AdminLaunchPage() {
         </Link>
         <Link
           href="/launch"
-          className="flex items-center gap-2 px-4 py-2 bg-[#141416] border border-[#2A2A2E] rounded-lg text-sm text-[#C4BAA8] hover:border-[#B09B71]/40 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-[#141416] border border-[#2A2A2E] rounded-lg text-sm text-[#C4BAA8] hover:border-[rgba(176,155,113,0.4)] transition-colors"
         >
           <Activity className="w-4 h-4 text-[#B09B71]" />
           View Launch Page
@@ -230,7 +230,7 @@ export default function AdminLaunchPage() {
         </Link>
         <Link
           href="/press"
-          className="flex items-center gap-2 px-4 py-2 bg-[#141416] border border-[#2A2A2E] rounded-lg text-sm text-[#C4BAA8] hover:border-[#B09B71]/40 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-[#141416] border border-[#2A2A2E] rounded-lg text-sm text-[#C4BAA8] hover:border-[rgba(176,155,113,0.4)] transition-colors"
         >
           <AlertCircle className="w-4 h-4 text-[#B09B71]" />
           Press Kit

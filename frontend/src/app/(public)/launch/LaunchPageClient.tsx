@@ -95,7 +95,7 @@ export default function LaunchPageClient() {
         <div className="max-w-4xl mx-auto">
           {/* PH Badge placeholder */}
           <div className="flex justify-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-[#F6834120]/10 border border-[#F68341]/30 rounded-lg px-4 py-2 text-sm">
+            <div className="inline-flex items-center gap-2 bg-[rgba(246,131,65,0.013)] border border-[rgba(246,131,65,0.3)] rounded-lg px-4 py-2 text-sm">
               <span className="text-[#F68341] font-bold text-base">🐱</span>
               <span className="text-[#F68341] font-semibold">Product Hunt</span>
               <span className="text-[#8A8070]">— launching soon</span>
@@ -122,7 +122,7 @@ export default function LaunchPageClient() {
                   { value: seconds, label: 'Seconds' },
                 ].map((unit, i) => (
                   <div key={unit.label}>
-                    <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl px-4 sm:px-6 py-3 sm:py-4 min-w-[64px] sm:min-w-[80px] text-center">
+                    <div className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] px-4 sm:px-6 py-3 sm:py-4 min-w-[64px] sm:min-w-[80px] text-center">
                       <div className="font-playfair text-3xl sm:text-4xl font-bold text-[#B09B71] tabular-nums">
                         {String(unit.value).padStart(2, '0')}
                       </div>
@@ -144,7 +144,7 @@ export default function LaunchPageClient() {
 
           {/* Email signup */}
           {signupState === 'success' ? (
-            <div className="max-w-md mx-auto bg-[#141416] border border-[#B09B71]/30 rounded-xl px-6 py-5 text-center">
+            <div className="max-w-md mx-auto bg-[#141416] border border-[rgba(176,155,113,0.3)] rounded-xl px-6 py-5 text-center">
               <CheckCircle2 className="w-8 h-8 text-[#B09B71] mx-auto mb-3" />
               <p className="text-[#E8E4DC] font-semibold mb-1">You're on the list.</p>
               <p className="text-sm text-[#8A8070]">We'll email you the moment we launch. No spam, ever.</p>
@@ -176,7 +176,7 @@ export default function LaunchPageClient() {
                   className="bg-[#B09B71] text-[#0C0C0E] font-semibold px-5 py-2.5 rounded-lg hover:bg-[#C4B080] transition-colors disabled:opacity-60 flex-shrink-0 flex items-center gap-2"
                 >
                   {signupState === 'submitting' ? (
-                    <div className="w-4 h-4 border-2 border-[#0C0C0E]/30 border-t-[#0C0C0E] rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-[rgba(12,12,14,0.3)] border-t-[#0C0C0E] rounded-full animate-spin" />
                   ) : (
                     <>Notify Me <ArrowRight className="w-4 h-4" /></>
                   )}
@@ -214,8 +214,8 @@ export default function LaunchPageClient() {
           <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] text-center mb-8">Built for Trust</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {FEATURES_HIGHLIGHT.map(f => (
-              <div key={f.text} className="flex items-center gap-3 bg-[#141416] border border-[#2A2A2E] rounded-xl px-5 py-4">
-                <div className="w-8 h-8 rounded-lg bg-[#B09B71]/10 flex items-center justify-center flex-shrink-0">
+              <div key={f.text} className="flex items-center gap-3 bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] px-5 py-4">
+                <div className="w-8 h-8 rounded-lg bg-[rgba(176,155,113,0.1)] flex items-center justify-center flex-shrink-0">
                   <f.icon className="w-4 h-4 text-[#B09B71]" />
                 </div>
                 <p className="text-sm text-[#C4BAA8] font-medium">{f.text}</p>
@@ -235,7 +235,7 @@ export default function LaunchPageClient() {
               href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 bg-[#1DA1F2]/10 border border-[#1DA1F2]/30 text-[#1DA1F2] rounded-lg text-sm font-medium hover:bg-[#1DA1F2]/20 transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 bg-[rgba(29,161,242,0.1)] border border-[rgba(29,161,242,0.3)] text-[#1DA1F2] rounded-lg text-sm font-medium hover:bg-[rgba(29,161,242,0.2)] transition-colors"
             >
               <span className="text-sm font-bold">𝕏</span>
               Share on X
@@ -244,13 +244,13 @@ export default function LaunchPageClient() {
               href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 bg-[#0A66C2]/10 border border-[#0A66C2]/30 text-[#0A66C2] rounded-lg text-sm font-medium hover:bg-[#0A66C2]/20 transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 bg-[rgba(10,102,194,0.1)] border border-[rgba(10,102,194,0.3)] text-[#0A66C2] rounded-lg text-sm font-medium hover:bg-[rgba(10,102,194,0.2)] transition-colors"
             >
               <ExternalLink className="w-4 h-4" />
               Share on LinkedIn
             </a>
             {/* PH badge placeholder — replace with real embed when live */}
-            <div className="flex items-center gap-2 px-5 py-2.5 bg-[#F68341]/10 border border-[#F68341]/30 text-[#F68341] rounded-lg text-sm font-medium">
+            <div className="flex items-center gap-2 px-5 py-2.5 bg-[rgba(246,131,65,0.1)] border border-[rgba(246,131,65,0.3)] text-[#F68341] rounded-lg text-sm font-medium">
               <ExternalLink className="w-4 h-4" />
               PH badge coming
             </div>

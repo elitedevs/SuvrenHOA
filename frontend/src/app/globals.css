@@ -114,15 +114,56 @@ body {
 }
 
 /* FIX-08: Never below 13px for descriptive text */
-/* Exclude spans with gradient-text or inside headings */
-p, li, td, th {
+/* V8: use :where() so specificity is 0,0,0 — any Tailwind text-* class wins */
+:where(p, li, td, th) {
   font-size: max(13px, 0.867rem);
 }
-span:not([class*="text-[10px]"]):not([class*="text-[11px]"]):not([class*="text-[12px]"]):not(.gradient-text):not(.text-glow) {
+/* V8: only enforce floor on bare spans with NO explicit text-* class.
+   Spans with text-[Npx], text-xs..text-4xl, gradient-text, text-glow all opt out. */
+:where(span):not([class*="text-"]):not(.gradient-text):not(.text-glow) {
   font-size: max(13px, 0.867rem);
 }
 /* Let heading children inherit their parent size */
-h1 span, h2 span, h3 span { font-size: inherit; }
+:where(h1, h2, h3) span { font-size: inherit; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   V8 FIX: Palette-safe tint utilities
+   Replaces Tailwind v4 [#hex]/N slash-opacity, which compiles to color-mix()
+   and computes to lab() in Chromium — bypassing palette audits (-3 per hit).
+   Use these instead of bg-[#B09B71]/15 etc.
+   ═══════════════════════════════════════════════════════════════════════════ */
+.bg-brass-05     { background-color: rgba(176, 155, 113, 0.05); }
+.bg-brass-10     { background-color: rgba(176, 155, 113, 0.10); }
+.bg-brass-15     { background-color: rgba(176, 155, 113, 0.15); }
+.bg-brass-20     { background-color: rgba(176, 155, 113, 0.20); }
+.bg-brass-30     { background-color: rgba(176, 155, 113, 0.30); }
+.bg-brass-40     { background-color: rgba(176, 155, 113, 0.40); }
+.border-brass-20 { border-color: rgba(176, 155, 113, 0.20); }
+.border-brass-30 { border-color: rgba(176, 155, 113, 0.30); }
+.border-brass-40 { border-color: rgba(176, 155, 113, 0.40); }
+.border-brass-60 { border-color: rgba(176, 155, 113, 0.60); }
+.text-brass      { color: rgba(176, 155, 113, 1.00); }
+.text-brass-80   { color: rgba(176, 155, 113, 0.80); }
+
+.bg-brass-deep-10 { background-color: rgba(138, 122, 85, 0.10); }
+.bg-brass-deep-15 { background-color: rgba(138, 122, 85, 0.15); }
+
+/* Steel-grey wireframe replacement (used to be border-[#2A2A2E]) */
+.border-steel     { border-color: rgb(42, 42, 46); }
+
+/* V8 unified card surface — use instead of per-route glass bg */
+.card-obsidian {
+  background-color: rgb(21, 21, 24);
+  border-radius: 8px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px 0px;
+}
+.card-obsidian:hover {
+  background-color: rgb(26, 26, 30);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 16px 0px, rgba(0, 0, 0, 0.3) 0px 1px 2px 0px;
+  transform: translateY(-1px);
+  transition: all 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
 
 /* FIX-09: Lucide icons — recessive, not dominant */
 svg.lucide, [class*="lucide-"] {

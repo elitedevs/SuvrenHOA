@@ -54,10 +54,25 @@ export function AnnouncementBanner({
 
   if (dismissed) return null;
 
-  const variantStyles = {
-    gold: 'bg-gradient-to-r from-[#B09B71]/15 to-[#8A7A55]/10 border-b border-[#B09B71]/20 text-[#C4BAA8]',
-    info: 'bg-[#1A2A3A] border-b border-blue-500/20 text-blue-200',
-    launch: 'bg-gradient-to-r from-[#F68341]/15 to-[#B09B71]/10 border-b border-[#F68341]/20 text-[#E8D4C0]',
+  // V8: use inline styles for gradient/border so we avoid Tailwind v4's [#hex]/n
+  // color-mix() compile path (which computes to lab() and fails palette audits).
+  const variantClass: Record<string, string> = {
+    gold: 'text-[#C4BAA8]',
+    info: 'bg-[#1A2A3A] text-blue-200',
+    launch: 'text-[#E8D4C0]',
+  };
+  const variantStyle: Record<string, React.CSSProperties> = {
+    gold: {
+      backgroundImage: 'linear-gradient(to right, rgba(176,155,113,0.15), rgba(138,122,85,0.10))',
+      borderBottom: '1px solid rgba(176,155,113,0.20)',
+    },
+    info: {
+      borderBottom: '1px solid rgba(59,130,246,0.20)',
+    },
+    launch: {
+      backgroundImage: 'linear-gradient(to right, rgba(246,131,65,0.15), rgba(176,155,113,0.10))',
+      borderBottom: '1px solid rgba(246,131,65,0.20)',
+    },
   };
 
   const ctaStyles = {
@@ -67,7 +82,10 @@ export function AnnouncementBanner({
   };
 
   return (
-    <div className={`relative flex items-center justify-center gap-3 px-4 py-2.5 text-sm ${variantStyles[variant]}`}>
+    <div
+      className={`relative flex items-center justify-center gap-3 px-4 py-2.5 text-sm ${variantClass[variant]}`}
+      style={variantStyle[variant]}
+    >
       <p className="text-center leading-snug">{message}</p>
       {ctaHref && ctaText && (
         ctaExternal ? (

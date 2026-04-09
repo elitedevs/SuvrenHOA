@@ -43,49 +43,100 @@ export async function updateSession(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const nonce = generateNonce();
 
-  // M-04: separate exact-match routes from prefix-match routes to avoid accidentally
-  // exposing sub-paths of protected routes. API routes must always be exact matches.
+  // V8: Inverted routing model — use a protected-prefix DENYLIST instead of a
+  // public-prefix allowlist. Unknown paths (e.g. /foo-bar-typo) now fall through
+  // to Next.js which renders the styled not-found.tsx with a proper 404 status,
+  // instead of silently redirecting to /login.
+  //
+  // Everything listed here requires authentication; everything else is either a
+  // marketing page, a public API endpoint (allowlisted below), or a 404.
+  const protectedPrefixes = [
+    '/dashboard',
+    '/activity',
+    '/admin',
+    '/alerts',
+    '/amenities',
+    '/announcements',
+    '/architectural',
+    '/assistant',
+    '/calendar',
+    '/checkout',
+    '/compare',
+    '/complaints',
+    '/contractors',
+    '/contracts',
+    '/create-community',
+    '/directory',
+    '/documents',
+    '/dues',
+    '/emergency',
+    '/energy',
+    '/gallery',
+    '/governance',
+    '/health',
+    '/inspections',
+    '/insurance',
+    '/loans',
+    '/lost-found',
+    '/maintenance',
+    '/map',
+    '/marketplace',
+    '/messages',
+    '/newsletter',
+    '/onboarding',
+    '/parking',
+    '/pets',
+    '/profile',
+    '/proposals',
+    '/reports',
+    '/reservations',
+    '/rules',
+    '/safety',
+    '/seasonal-decor',
+    '/services',
+    '/settings',
+    '/surveys',
+    '/transfer',
+    '/transparency',
+    '/treasury',
+    '/utilities',
+    '/vehicles',
+    '/verify',
+    '/violations',
+    '/visitors',
+  ];
+
+  // Public API endpoints — exact-match only. Other /api/* routes are protected.
   const publicExactRoutes = new Set([
     '/login',
     '/signup',
     '/invite/accept',
     '/sitemap.xml',
     '/robots.txt',
-    // API routes — exact only: a prefix match on e.g. '/api/founding' would expose
-    // '/api/founding/[id]' (board approval endpoint) as a public route
     '/api/health',
     '/api/launch/signup',
     '/api/founding/apply',
     '/api/newsletter',
   ]);
 
-  // Marketing page prefixes — sub-pages (e.g. /blog/post-slug) should also be public
-  const publicPrefixes = [
-    '/about',
-    '/pricing',
-    '/security',
-    '/contact',
-    '/blog',
-    '/docs',
-    '/demo',
-    '/founding',
-    '/launch',
-    '/press',
-    '/landing',
-    '/community',
-  ];
+  const isProtectedApi =
+    pathname.startsWith('/api/') && !publicExactRoutes.has(pathname);
 
-  const isPublicRoute =
-    publicExactRoutes.has(pathname) ||
-    publicPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix + '/'));
+  const isProtected =
+    isProtectedApi ||
+    protectedPrefixes.some(
+      (prefix) => pathname === prefix || pathname.startsWith(prefix + '/'),
+    );
 
-  // Short-circuit for public routes — no Supabase call needed.
-  // This guarantees public API endpoints like /api/newsletter are never blocked
-  // even if Supabase is unreachable or env vars are missing.
-  if (isPublicRoute) {
+  // Root "/" is special: public, but authenticated users get redirected to
+  // /dashboard. Needs a Supabase call but should NOT redirect unauth users.
+  const isRoot = pathname === '/';
+
+  // Non-protected AND not root: marketing pages, public APIs, unknown paths that
+  // should resolve to 404. No Supabase call needed.
+  if (!isProtected && !isRoot) {
     const res = NextResponse.next({ request });
     res.headers.set('Content-Security-Policy', buildCsp(nonce));
-    // Pass nonce to layout/components via request header (Next.js App Router convention)
     res.headers.set('x-nonce', nonce);
     return res;
   }

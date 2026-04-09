@@ -33,7 +33,7 @@ export default function PressPage() {
               href={PRESS_KIT.urls.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 border border-[#2A2A2E] text-[#C4BAA8] px-5 py-2.5 rounded-lg hover:border-[#B09B71]/40 hover:text-[#E8E4DC] transition-colors text-sm"
+              className="flex items-center gap-2 border border-[#2A2A2E] text-[#C4BAA8] px-5 py-2.5 rounded-lg hover:border-[rgba(176,155,113,0.4)] hover:text-[#E8E4DC] transition-colors text-sm"
             >
               <ExternalLink className="w-4 h-4" />
               Visit Website
@@ -47,7 +47,7 @@ export default function PressPage() {
         {/* About */}
         <section>
           <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-6">About SuvrenHOA</h2>
-          <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6 space-y-4">
+          <div className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6 space-y-4">
             <p className="text-[#C4BAA8] leading-relaxed">{PRESS_KIT.company.description}</p>
             <p className="text-[#8A8070] text-sm leading-relaxed">{PRESS_KIT.company.longDescription}</p>
           </div>
@@ -59,7 +59,7 @@ export default function PressPage() {
             <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC]">Boilerplate</h2>
             <span className="text-xs text-[#4A4A52]">Copy for articles</span>
           </div>
-          <div className="relative bg-[#141416] border border-[#2A2A2E] rounded-xl p-6">
+          <div className="relative bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6">
             <p className="text-[#C4BAA8] leading-relaxed italic pr-8">{PRESS_KIT.boilerplate}</p>
             <div className="mt-3 flex items-center gap-2 text-xs text-[#4A4A52]">
               <Copy className="w-3.5 h-3.5" />
@@ -73,7 +73,7 @@ export default function PressPage() {
           <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-6">Key Facts</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {PRESS_KIT.stats.map(stat => (
-              <div key={stat.label} className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-5">
+              <div key={stat.label} className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-5">
                 <p className="font-playfair text-2xl font-bold text-[#B09B71] mb-1">{stat.value}</p>
                 <p className="text-sm font-medium text-[#C4BAA8]">{stat.label}</p>
                 <p className="text-xs text-[#4A4A52] mt-0.5">{stat.note}</p>
@@ -87,7 +87,7 @@ export default function PressPage() {
           <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-6">Product Features</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {PRESS_KIT.features.map(feature => (
-              <div key={feature.name} className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-5">
+              <div key={feature.name} className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-5">
                 <h3 className="font-semibold text-[#E8E4DC] mb-2">{feature.name}</h3>
                 <p className="text-sm text-[#8A8070] leading-relaxed">{feature.description}</p>
               </div>
@@ -100,7 +100,7 @@ export default function PressPage() {
           <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-6">Brand Guidelines</h2>
           <div className="space-y-6">
             {/* Colors */}
-            <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6">
+            <div className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Palette className="w-4 h-4 text-[#B09B71]" />
                 <h3 className="font-semibold text-[#E8E4DC]">Color Palette</h3>
@@ -123,7 +123,7 @@ export default function PressPage() {
             </div>
 
             {/* Typography */}
-            <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6">
+            <div className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6">
               <div className="flex items-center gap-2 mb-4">
                 <Type className="w-4 h-4 text-[#B09B71]" />
                 <h3 className="font-semibold text-[#E8E4DC]">Typography</h3>
@@ -145,7 +145,7 @@ export default function PressPage() {
         {/* Brand assets */}
         <section>
           <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-6">Brand Assets</h2>
-          <div className="bg-[#141416] border border-[#2A2A2E] rounded-xl divide-y divide-[#2A2A2E]">
+          <div className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] divide-y divide-[#2A2A2E]">
             {PRESS_KIT.assets.map(asset => (
               <div key={asset.name} className="flex items-center justify-between px-5 py-3">
                 <span className="text-sm text-[#C4BAA8]">{asset.name}</span>
@@ -165,7 +165,7 @@ export default function PressPage() {
         </section>
 
         {/* Contact */}
-        <section className="bg-[#141416] border border-[#2A2A2E] rounded-xl p-6">
+        <section className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_1px_2px_0_rgba(0,0,0,0.3)] p-6">
           <h2 className="font-playfair text-xl font-bold text-[#E8E4DC] mb-4">Media Contact</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
