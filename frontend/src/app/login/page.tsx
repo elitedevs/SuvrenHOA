@@ -98,7 +98,20 @@ export default function LoginPage() {
           <Link href="/" className="inline-block mb-6">
             <img src="/logo-full.svg" alt="SuvrenHOA" className="h-10 w-auto mx-auto" />
           </Link>
-          <h1 className="text-2xl font-serif font-medium text-[var(--parchment)] mb-2">{title}</h1>
+          {/* V11 fix: H1 was 24px (text-2xl) — too small for the luxury
+              register. Bumped to 32px with tight negative tracking to match
+              /about, /security, and the rest of the serif scale. */}
+          <h1
+            className="font-serif mb-2 text-[var(--parchment)]"
+            style={{
+              fontSize: '2rem',
+              fontWeight: 400,
+              letterSpacing: '-0.015em',
+              lineHeight: 1.15,
+            }}
+          >
+            {title}
+          </h1>
           <p className="text-sm text-[var(--text-muted)]">{subtitle}</p>
         </div>
 

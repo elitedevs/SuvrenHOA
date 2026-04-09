@@ -210,9 +210,17 @@ export default function PricingPageClient() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-24 md:py-32 text-center">
+          {/* V11 fix: Pricing H1 was rendering at 60px on desktop — a 12px
+              short of the home/about/security H1 scale (72px). Bumped the
+              top breakpoint to text-7xl so the serif scale is coherent
+              across marketing surfaces. */}
           <h1
-            className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight mb-6 leading-[1.1]"
-            style={{ fontFamily: 'var(--font-heading)' }}
+            className="text-4xl sm:text-5xl md:text-7xl mb-6 leading-[1.05]"
+            style={{
+              fontFamily: 'var(--font-heading)',
+              fontWeight: 400,
+              letterSpacing: '-0.02em',
+            }}
           >
             <span className="gradient-text">Simple, honest pricing.</span>
           </h1>

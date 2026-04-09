@@ -60,7 +60,18 @@ export default function SignupPage() {
           <div className="w-14 h-14 rounded-2xl bg-[rgba(42,93,79,0.12)] border border-[rgba(42,93,79,0.25)] flex items-center justify-center mx-auto mb-6">
             <Mail className="w-7 h-7 text-[#2A5D4F]" />
           </div>
-          <h1 className="text-2xl font-serif font-medium text-[var(--parchment)] mb-3">Check Your Email</h1>
+          {/* V11 fix: bumped to 32px to match the rest of the serif scale */}
+          <h1
+            className="font-serif mb-3 text-[var(--parchment)]"
+            style={{
+              fontSize: '2rem',
+              fontWeight: 400,
+              letterSpacing: '-0.015em',
+              lineHeight: 1.15,
+            }}
+          >
+            Check Your Email
+          </h1>
           <p className="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
             We sent a verification link to <span className="text-[var(--text-body)]">{email}</span>.
             Click the link to activate your account.
@@ -87,7 +98,18 @@ export default function SignupPage() {
           <div className="w-14 h-14 rounded-2xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.25)] flex items-center justify-center mx-auto mb-6">
             <UserPlus className="w-7 h-7 text-[#B09B71]" />
           </div>
-          <h1 className="text-2xl font-serif font-medium text-[var(--parchment)] mb-2">Create Your Account</h1>
+          {/* V11 fix: bumped to 32px to match the rest of the serif scale */}
+          <h1
+            className="font-serif mb-2 text-[var(--parchment)]"
+            style={{
+              fontSize: '2rem',
+              fontWeight: 400,
+              letterSpacing: '-0.015em',
+              lineHeight: 1.15,
+            }}
+          >
+            Create Your Account
+          </h1>
           <p className="text-sm text-[var(--text-muted)]">
             {inviteToken
               ? "You've been invited to join a community"
