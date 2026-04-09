@@ -249,7 +249,7 @@ export function NotificationBell() {
                             key={notif.id}
                             onClick={() => markRead(notif.id)}
                             className={`flex gap-3 px-5 py-4 border-b border-[rgba(245,240,232,0.03)] cursor-pointer transition-colors hover:bg-[rgba(245,240,232,0.03)] ${
-                              !notif.read ? 'bg-[#B09B71]/[0.04]' : ''
+                              !notif.read ? 'bg-[rgba(176,155,113,0.04)]' : ''
                             }`}
                           >
                             <div className="relative shrink-0">

@@ -62,7 +62,7 @@ export default function HomePage() {
       <div className="absolute inset-0 bg-radial-glow-strong" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[rgba(176,155,113,0.05)] blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute top-20 right-[20%] w-[400px] h-[400px] bg-[rgba(176,155,113,0.03)] blur-[150px] rounded-full bg-orb pointer-events-none" />
-      <div className="absolute bottom-20 left-[10%] w-[300px] h-[300px] bg-[#B09B71]/[0.04] blur-[100px] rounded-full bg-orb-slow pointer-events-none" />
+      <div className="absolute bottom-20 left-[10%] w-[300px] h-[300px] bg-[rgba(176,155,113,0.04)] blur-[100px] rounded-full bg-orb-slow pointer-events-none" />
 
       {/* ── Hero ──────────────────────────────────────────────────── */}
       <section className="relative flex flex-col items-center justify-center min-h-[88vh] px-6 text-center">

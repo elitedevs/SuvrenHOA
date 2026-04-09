@@ -227,7 +227,7 @@ export default function PreparednessPage() {
                         onClick={() => toggleItem(item.id)}
                         className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all border ${
                           item.checked
-                            ? 'bg-[#B09B71]/[0.06] border-[rgba(176,155,113,0.15)] opacity-70'
+                            ? 'bg-[rgba(176,155,113,0.06)] border-[rgba(176,155,113,0.15)] opacity-70'
                             : 'bg-[rgba(245,240,232,0.02)] border-[rgba(245,240,232,0.04)] hover:bg-[rgba(245,240,232,0.04)]'
                         }`}
                       >

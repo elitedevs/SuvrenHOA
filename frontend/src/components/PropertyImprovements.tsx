@@ -204,7 +204,7 @@ export function PropertyImprovements() {
       </div>
 
       {/* Total Invested */}
-      <div className="flex items-center gap-3 p-4 rounded-xl bg-[#B09B71]/[0.06] border border-[rgba(176,155,113,0.15)] mb-4">
+      <div className="flex items-center gap-3 p-4 rounded-xl bg-[rgba(176,155,113,0.06)] border border-[rgba(176,155,113,0.15)] mb-4">
         <TrendingUp className="w-5 h-5 text-[#B09B71]" />
         <div>
           <div className="text-xs text-[var(--text-disabled)]">Total Invested</div>
