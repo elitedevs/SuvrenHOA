@@ -19,15 +19,15 @@ export function MarketingHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[rgba(245,240,232,0.06)]"
             style={{ background: 'rgba(12,12,14,0.85)', backdropFilter: 'blur(20px) saturate(1.4)' }}>
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
+      <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+        {/* Logo — scaled to flow with hero (56px) and H1 (72px) cascade */}
+        <Link href="/" className="flex items-center gap-2.5 group">
           <img
             src="/logo-icon.svg"
             alt="SuvrenHOA"
-            className="h-8 w-8 object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-10 w-10 object-contain transition-transform duration-300 group-hover:scale-105"
           />
-          <span className="text-lg font-medium text-[var(--parchment)] tracking-tight"
+          <span className="text-xl font-medium text-[var(--parchment)] tracking-tight"
                 style={{ fontFamily: 'var(--font-heading)' }}>
             SuvrenHOA
           </span>
@@ -37,7 +37,7 @@ export function MarketingHeader() {
         <nav className="hidden md:flex items-center gap-1">
           {NAV_LINKS.map(({ href, label }) => (
             <Link key={href} href={href}
-                  className="px-3 py-2 text-[13px] font-medium text-[rgba(245,240,232,0.5)] hover:text-[var(--parchment)] transition-colors rounded-lg hover:bg-[rgba(245,240,232,0.04)]">
+                  className="px-3.5 py-2 text-[14px] font-medium text-[rgba(245,240,232,0.5)] hover:text-[var(--parchment)] transition-colors rounded-lg hover:bg-[rgba(245,240,232,0.04)]">
               {label}
             </Link>
           ))}
@@ -46,11 +46,11 @@ export function MarketingHeader() {
         {/* Desktop CTAs */}
         <div className="hidden md:flex items-center gap-3">
           <Link href="/login"
-                className="px-4 py-2 text-[13px] font-medium text-[rgba(245,240,232,0.5)] hover:text-[var(--parchment)] transition-colors">
+                className="px-4 py-2 text-[14px] font-medium text-[rgba(245,240,232,0.5)] hover:text-[var(--parchment)] transition-colors">
             Sign In
           </Link>
           <Link href="/signup"
-                className="px-5 py-2.5 rounded-lg text-[13px] font-medium transition-all hover:scale-[1.02]"
+                className="px-5 py-2.5 rounded-lg text-[14px] font-medium transition-all hover:scale-[1.02]"
                 style={{
                   background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                   color: '#0C0C0E',
