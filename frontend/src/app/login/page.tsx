@@ -98,13 +98,13 @@ export default function LoginPage() {
           <Link href="/" className="inline-block mb-6">
             <img src="/logo-full.svg" alt="SuvrenHOA" className="h-10 w-auto mx-auto" />
           </Link>
-          {/* V11 fix: H1 was 24px (text-2xl) — too small for the luxury
-              register. Bumped to 32px with tight negative tracking to match
-              /about, /security, and the rest of the serif scale. */}
+          {/* V12 fix (Lux V11 audit): 32px still below the 36px luxury
+              threshold. Raised to 48px (3rem) Playfair 400 to match the
+              /launch and /founding hero scale. */}
           <h1
             className="font-serif mb-2 text-[var(--parchment)]"
             style={{
-              fontSize: '2rem',
+              fontSize: '3rem',
               fontWeight: 400,
               letterSpacing: '-0.015em',
               lineHeight: 1.15,

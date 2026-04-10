@@ -100,9 +100,15 @@ export default function LaunchPageClient() {
             </div>
           </div>
 
+          {/* V12 fix (Lux V11 audit): explicit whitespace between the two
+              lines so textContent reads "HOA Governance, Finally Honest."
+              for a11y/SEO, and the brass span carries text-5xl/md:text-7xl
+              so Tailwind's color-only arbitrary value can't collapse the
+              computed font-size on the child. */}
           <h1 className="font-playfair text-5xl md:text-7xl font-bold text-[#E8E4DC] mb-6 leading-tight">
-            HOA Governance,<br />
-            <span className="text-[#B09B71]">Finally Honest.</span>
+            <span>HOA Governance,</span>{' '}
+            <br />
+            <span className="text-[#B09B71] text-5xl md:text-7xl">Finally Honest.</span>
           </h1>
           <p className="text-xl text-[#C4BAA8] leading-relaxed mb-12 max-w-2xl mx-auto">
             SuvrenHOA puts your community's votes, finances, and documents on the blockchain — permanently transparent, mathematically tamper-proof.
@@ -120,13 +126,16 @@ export default function LaunchPageClient() {
                   { value: seconds, label: 'Seconds' },
                 ].map((unit, i) => (
                   <div key={unit.label}>
-                    <div className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] px-4 sm:px-6 py-3 sm:py-4 min-w-[64px] sm:min-w-[80px] text-center">
-                      <div className="font-playfair text-3xl sm:text-4xl font-bold text-[#B09B71] tabular-nums">
+                    <div
+                      className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] px-4 sm:px-6 py-3 sm:py-4 min-w-[64px] sm:min-w-[80px] text-center"
+                      aria-label={`${unit.value} ${unit.label}`}
+                    >
+                      <div className="font-playfair text-3xl sm:text-4xl font-bold text-[#B09B71] tabular-nums" aria-hidden="true">
                         {String(unit.value).padStart(2, '0')}
                       </div>
-                      <div className="text-xs text-[#4A4A52] mt-1 font-medium">{unit.label}</div>
+                      <div className="text-xs text-[#4A4A52] mt-1 font-medium" aria-hidden="true">{unit.label}</div>
                     </div>
-                    {i < 3 && <span className="text-2xl text-[#2A2A2E] font-bold mx-0.5 sm:mx-1">:</span>}
+                    {i < 3 && <span className="text-2xl text-[#2A2A2E] font-bold mx-0.5 sm:mx-1" aria-hidden="true">:</span>}
                   </div>
                 ))}
               </div>

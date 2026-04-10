@@ -143,13 +143,18 @@ export default function SecurityPage() {
             Security Architecture
           </div>
 
+          {/* V12 fix (Lux V11 audit): explicit whitespace between line spans
+              so textContent reads as a proper sentence. Prior JSX had each
+              span touching the next <br /> with no space, producing
+              "securedby the same technology thatprotects billions" for
+              screen readers and SEO. */}
           <h1
             className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight mb-6 leading-[1.1]"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            <span className="gradient-text">Your HOA's finances are secured</span>
+            <span className="gradient-text">Your HOA&apos;s finances are secured</span>{' '}
             <br />
-            <span className="gradient-text">by the same technology that</span>
+            <span className="gradient-text">by the same technology that</span>{' '}
             <br />
             <span className="gradient-text">protects billions.</span>
           </h1>

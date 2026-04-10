@@ -113,15 +113,17 @@ body {
   letter-spacing: 0.01em;
 }
 
-/* FIX-08: Never below 13px for descriptive text */
-/* V8: use :where() so specificity is 0,0,0 — any Tailwind text-* class wins */
-:where(p, li, td, th) {
-  font-size: max(13px, 0.867rem);
-}
-/* V8: only enforce floor on bare spans with NO explicit text-* class.
-   Spans with text-[Npx], text-xs..text-4xl, gradient-text, text-glow all opt out. */
+/* V12 FIX: inherit body size (15px) instead of clamping to 13.872px.
+   The prior rule `font-size: max(13px, 0.867rem)` always resolved to
+   13.872px (0.867rem == 13.872px > 13px) and hard-overrode the body's
+   15px inheritance on every bare <p>/<li>/<td>/<th>. Lux V11 flagged
+   this as the sitewide "13.872px fallback-metric bug". It was never a
+   next/font fallback issue — it was this rule. We drop the floor
+   entirely; the body's explicit 15px above is the real floor, and
+   Tailwind text-* utilities remain free to go smaller where needed. */
+:where(p, li, td, th) { font-size: inherit; }
 :where(span):not([class*="text-"]):not(.gradient-text):not(.text-glow) {
-  font-size: max(13px, 0.867rem);
+  font-size: inherit;
 }
 /* Let heading children inherit their parent size */
 :where(h1, h2, h3) span { font-size: inherit; }

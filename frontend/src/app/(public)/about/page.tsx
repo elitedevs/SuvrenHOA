@@ -77,8 +77,11 @@ export default function AboutPage() {
           >
             Our Mission
           </p>
+          {/* V12 fix (Lux V11 audit): raise base H1 from text-4xl (36px) to
+              text-5xl (48px) so small-viewport renders match /launch and
+              /founding. Desktop scale (lg:text-7xl = 72px) unchanged. */}
           <h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-8 leading-[1.08] gradient-text"
+            className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-8 leading-[1.08] gradient-text"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             Governance Your Community Can Trust
@@ -204,11 +207,17 @@ export default function AboutPage() {
             <p className="text-[13px] uppercase tracking-[0.15em] text-[#B09B71] font-medium mb-6">
               Our Story
             </p>
+            {/* V12 fix (Lux V11 audit): insert explicit whitespace between
+                the two lines so textContent reads "Born from Frustration.
+                Built with Purpose." for a11y/SEO. Prior JSX had adjacent
+                string literals separated only by <br />, which joined
+                without a space. */}
             <h2
               className="text-3xl sm:text-4xl font-medium gradient-text mb-10"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
-              Born from Frustration.<br />Built with Purpose.
+              Born from Frustration.{' '}
+              <br />Built with Purpose.
             </h2>
 
             <div className="space-y-6 text-[rgba(245,240,232,0.55)] text-[16px] leading-[1.8] page-enter-delay-1">
