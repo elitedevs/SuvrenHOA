@@ -127,14 +127,14 @@ export default function FoundingPageClient() {
           <div className="w-20 h-20 rounded-full bg-[rgba(176,155,113,0.1)] border border-[rgba(176,155,113,0.3)] flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-10 h-10 text-[#B09B71]" />
           </div>
-          <h1 className="font-playfair text-3xl font-bold text-[#E8E4DC] mb-4">Application Received</h1>
-          <p className="text-[#C4BAA8] text-lg leading-relaxed mb-6">
+          <h1 className="font-playfair text-3xl font-normal text-[#F5F0E8] mb-4">Application Received</h1>
+          <p className="text-[rgba(245,240,232,0.75)] text-lg leading-relaxed mb-6">
             Thank you for applying. We review every application personally and will reach out within 2–3 business days.
           </p>
-          <p className="text-[#8A8070] text-sm mb-8">Check your inbox — we sent a confirmation to your email.</p>
+          <p className="text-[rgba(245,240,232,0.55)] text-sm mb-8">Check your inbox — we sent a confirmation to your email.</p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-[#B09B71] hover:text-[#C4B080] font-medium transition-colors"
+            className="inline-flex items-center gap-2 text-[#B09B71] hover:text-[#D4C4A0] font-medium transition-colors"
           >
             Back to home <ArrowRight className="w-4 h-4" />
           </Link>
@@ -152,35 +152,35 @@ export default function FoundingPageClient() {
             <Award className="w-4 h-4 text-[#B09B71]" />
             <span className="text-[#B09B71] text-sm font-medium">Limited — {spotsRemaining} spots remaining</span>
           </div>
-          <h1 className="font-playfair text-5xl md:text-6xl font-bold text-[#E8E4DC] mb-6 leading-tight">
+          <h1 className="font-playfair text-5xl md:text-6xl font-normal text-[#F5F0E8] mb-6 leading-tight">
             Be Among the First
           </h1>
-          <p className="text-xl text-[#C4BAA8] leading-relaxed mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-[rgba(245,240,232,0.75)] leading-relaxed mb-8 max-w-2xl mx-auto">
             The SuvrenHOA Founding Community Program is open to{' '}
             <span className="text-[#B09B71] font-semibold">{TOTAL_SPOTS} communities</span> who want to be part of something historic — the first HOAs to govern with blockchain transparency.
           </p>
 
           {/* Spots meter */}
           <div className="max-w-sm mx-auto mb-4">
-            <div className="flex justify-between text-sm text-[#8A8070] mb-2">
+            <div className="flex justify-between text-sm text-[rgba(245,240,232,0.55)] mb-2">
               <span>{TAKEN_SPOTS} of {TOTAL_SPOTS} spots claimed</span>
               <span>{spotsRemaining} remaining</span>
             </div>
-            <div className="h-2 bg-[#1E1E22] rounded-full overflow-hidden">
+            <div className="h-2 bg-[#151518] rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-[#B09B71] to-[#8A7A55] rounded-full transition-all duration-500"
+                className="h-full bg-[#B09B71] rounded-full transition-all duration-500"
                 style={{ width: `${pctFilled}%` }}
               />
             </div>
           </div>
-          <p className="text-xs text-[#4A4A52]">Spots are filled on a first-approved basis</p>
+          <p className="text-xs text-[rgba(245,240,232,0.40)]">Spots are filled on a first-approved basis</p>
         </div>
       </section>
 
       {/* Benefits grid */}
       <section className="py-16 px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-playfair text-3xl font-bold text-[#E8E4DC] text-center mb-12">Founding Community Benefits</h2>
+          <h2 className="font-playfair text-3xl font-normal text-[#F5F0E8] text-center mb-12">Founding Community Benefits</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {BENEFITS.map((b) => (
               <div
@@ -190,8 +190,8 @@ export default function FoundingPageClient() {
                 <div className="w-10 h-10 rounded-lg bg-[rgba(176,155,113,0.1)] flex items-center justify-center mb-4">
                   <b.icon className="w-5 h-5 text-[#B09B71]" />
                 </div>
-                <h3 className="font-semibold text-[#E8E4DC] mb-2">{b.title}</h3>
-                <p className="text-sm text-[#8A8070] leading-relaxed">{b.desc}</p>
+                <h3 className="font-semibold text-[#F5F0E8] mb-2">{b.title}</h3>
+                <p className="text-sm text-[rgba(245,240,232,0.55)] leading-relaxed">{b.desc}</p>
               </div>
             ))}
           </div>
@@ -202,8 +202,8 @@ export default function FoundingPageClient() {
       <section className="py-16 px-4 border-t border-[var(--divider)]">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="font-playfair text-3xl font-bold text-[#E8E4DC] mb-4">Apply Now</h2>
-            <p className="text-[#8A8070]">Tell us about your community. We review every application personally.</p>
+            <h2 className="font-playfair text-3xl font-normal text-[#F5F0E8] mb-4">Apply Now</h2>
+            <p className="text-[rgba(245,240,232,0.55)]">Tell us about your community. We review every application personally.</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -212,19 +212,19 @@ export default function FoundingPageClient() {
               <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1">Community</legend>
 
               <div>
-                <label className="block text-sm font-medium text-[#C4BAA8] mb-1.5">Community Name *</label>
+                <label className="block text-sm font-medium text-[rgba(245,240,232,0.75)] mb-1.5">Community Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="Oakwood Heights HOA"
                   value={form.community_name}
                   onChange={e => setForm(f => ({ ...f, community_name: e.target.value }))}
-                  className="w-full bg-[#0C0C0E] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[#4A4A52] focus:outline-none focus:border-[#B09B71] transition-colors"
+                  className="w-full bg-[#0C0C0E] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-[#F5F0E8] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#C4BAA8] mb-1.5">Number of Properties *</label>
+                <label className="block text-sm font-medium text-[rgba(245,240,232,0.75)] mb-1.5">Number of Properties *</label>
                 <input
                   type="number"
                   required
@@ -232,7 +232,7 @@ export default function FoundingPageClient() {
                   placeholder="e.g. 120"
                   value={form.property_count}
                   onChange={e => setForm(f => ({ ...f, property_count: e.target.value }))}
-                  className="w-full bg-[#0C0C0E] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[#4A4A52] focus:outline-none focus:border-[#B09B71] transition-colors"
+                  className="w-full bg-[#0C0C0E] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-[#F5F0E8] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors"
                 />
               </div>
             </fieldset>
@@ -243,47 +243,47 @@ export default function FoundingPageClient() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-[#C4BAA8] mb-1.5">Your Name *</label>
+                  <label className="block text-sm font-medium text-[rgba(245,240,232,0.75)] mb-1.5">Your Name *</label>
                   <input
                     type="text"
                     required
                     placeholder="Jane Smith"
                     value={form.contact_name}
                     onChange={e => setForm(f => ({ ...f, contact_name: e.target.value }))}
-                    className="w-full bg-[#0C0C0E] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[#4A4A52] focus:outline-none focus:border-[#B09B71] transition-colors"
+                    className="w-full bg-[#0C0C0E] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-[#F5F0E8] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#C4BAA8] mb-1.5">Email *</label>
+                  <label className="block text-sm font-medium text-[rgba(245,240,232,0.75)] mb-1.5">Email *</label>
                   <input
                     type="email"
                     required
                     placeholder="jane@hoaexample.com"
                     value={form.contact_email}
                     onChange={e => setForm(f => ({ ...f, contact_email: e.target.value }))}
-                    className="w-full bg-[#0C0C0E] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[#4A4A52] focus:outline-none focus:border-[#B09B71] transition-colors"
+                    className="w-full bg-[#0C0C0E] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-[#F5F0E8] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-[#C4BAA8] mb-1.5">Phone <span className="text-[#4A4A52]">(optional)</span></label>
+                  <label className="block text-sm font-medium text-[rgba(245,240,232,0.75)] mb-1.5">Phone <span className="text-[rgba(245,240,232,0.40)]">(optional)</span></label>
                   <input
                     type="tel"
                     placeholder="+1 (555) 000-0000"
                     value={form.contact_phone}
                     onChange={e => setForm(f => ({ ...f, contact_phone: e.target.value }))}
-                    className="w-full bg-[#0C0C0E] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[#4A4A52] focus:outline-none focus:border-[#B09B71] transition-colors"
+                    className="w-full bg-[#0C0C0E] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-[#F5F0E8] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#C4BAA8] mb-1.5">Your Role *</label>
+                  <label className="block text-sm font-medium text-[rgba(245,240,232,0.75)] mb-1.5">Your Role *</label>
                   <select
                     required
                     value={form.role}
                     onChange={e => setForm(f => ({ ...f, role: e.target.value }))}
-                    className="w-full bg-[#0C0C0E] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] focus:outline-none focus:border-[#B09B71] transition-colors"
+                    className="w-full bg-[#0C0C0E] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-[#F5F0E8] focus:outline-none focus:border-[#B09B71] transition-colors"
                   >
                     <option value="" disabled>Select role</option>
                     {ROLE_OPTIONS.map(r => (
@@ -296,7 +296,7 @@ export default function FoundingPageClient() {
 
             {/* Pain points */}
             <fieldset className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] p-6">
-              <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1 mb-4">What challenges does your community face? <span className="text-[#4A4A52] normal-case">(select all that apply)</span></legend>
+              <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1 mb-4">What challenges does your community face? <span className="text-[rgba(245,240,232,0.40)] normal-case">(select all that apply)</span></legend>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {PAIN_POINT_OPTIONS.map(point => {
                   const selected = form.pain_points.includes(point);
@@ -307,12 +307,12 @@ export default function FoundingPageClient() {
                       onClick={() => togglePainPoint(point)}
                       className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border text-left text-sm transition-all ${
                         selected
-                          ? 'border-[rgba(176,155,113,0.6)] bg-[rgba(176,155,113,0.1)] text-[#E8E4DC]'
-                          : 'border-[#2A2A2E] text-[#8A8070] hover:border-[#3A3A3E] hover:text-[#C4BAA8]'
+                          ? 'border-[rgba(176,155,113,0.6)] bg-[rgba(176,155,113,0.1)] text-[#F5F0E8]'
+                          : 'border-[rgba(245,240,232,0.08)] text-[rgba(245,240,232,0.55)] hover:border-[rgba(245,240,232,0.12)] hover:text-[rgba(245,240,232,0.75)]'
                       }`}
                     >
                       <div className={`w-4 h-4 rounded border flex-shrink-0 flex items-center justify-center ${
-                        selected ? 'border-[#B09B71] bg-[#B09B71]' : 'border-[#3A3A3E]'
+                        selected ? 'border-[#B09B71] bg-[#B09B71]' : 'border-[rgba(245,240,232,0.12)]'
                       }`}>
                         {selected && <CheckCircle2 className="w-3 h-3 text-[#0C0C0E]" />}
                       </div>
@@ -328,24 +328,24 @@ export default function FoundingPageClient() {
               <legend className="text-xs font-semibold text-[#B09B71] uppercase tracking-widest px-1">A Bit More</legend>
 
               <div>
-                <label className="block text-sm font-medium text-[#C4BAA8] mb-1.5">How did you hear about us? <span className="text-[#4A4A52]">(optional)</span></label>
+                <label className="block text-sm font-medium text-[rgba(245,240,232,0.75)] mb-1.5">How did you hear about us? <span className="text-[rgba(245,240,232,0.40)]">(optional)</span></label>
                 <input
                   type="text"
                   placeholder="Twitter, Google, a neighbor, etc."
                   value={form.referral_source}
                   onChange={e => setForm(f => ({ ...f, referral_source: e.target.value }))}
-                  className="w-full bg-[#0C0C0E] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[#4A4A52] focus:outline-none focus:border-[#B09B71] transition-colors"
+                  className="w-full bg-[#0C0C0E] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-[#F5F0E8] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#C4BAA8] mb-1.5">Anything else we should know? <span className="text-[#4A4A52]">(optional)</span></label>
+                <label className="block text-sm font-medium text-[rgba(245,240,232,0.75)] mb-1.5">Anything else we should know? <span className="text-[rgba(245,240,232,0.40)]">(optional)</span></label>
                 <textarea
                   rows={3}
                   placeholder="Tell us about your community's situation, timeline, or specific needs..."
                   value={form.additional_notes}
                   onChange={e => setForm(f => ({ ...f, additional_notes: e.target.value }))}
-                  className="w-full bg-[#0C0C0E] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[#4A4A52] focus:outline-none focus:border-[#B09B71] transition-colors resize-none"
+                  className="w-full bg-[#0C0C0E] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-[#F5F0E8] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors resize-none"
                 />
               </div>
             </fieldset>
@@ -359,7 +359,7 @@ export default function FoundingPageClient() {
             <button
               type="submit"
               disabled={state === 'submitting'}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#B09B71] to-[#8A7A55] text-[#0C0C0E] font-bold text-base py-4 rounded-xl hover:from-[#C4B080] hover:to-[#9A8A65] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full flex items-center justify-center gap-2 bg-[#B09B71] text-[#0C0C0E] font-semibold text-base py-4 rounded-xl hover:bg-[#D4C4A0] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {state === 'submitting' ? (
                 <>
@@ -374,7 +374,7 @@ export default function FoundingPageClient() {
               )}
             </button>
 
-            <p className="text-center text-xs text-[#4A4A52]">
+            <p className="text-center text-xs text-[rgba(245,240,232,0.40)]">
               No credit card required. We review within 2–3 business days.
             </p>
           </form>
@@ -389,8 +389,8 @@ export default function FoundingPageClient() {
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-[#8A8070]">
-                <span className="text-[#C4BAA8] font-medium">{TAKEN_SPOTS} communities</span> already applied
+              <p className="text-sm text-[rgba(245,240,232,0.55)]">
+                <span className="text-[rgba(245,240,232,0.75)] font-medium">{TAKEN_SPOTS} communities</span> already applied
               </p>
             </div>
           </div>
@@ -400,7 +400,7 @@ export default function FoundingPageClient() {
       {/* FAQ */}
       <section className="py-16 px-4 border-t border-[var(--divider)]">
         <div className="max-w-2xl mx-auto">
-          <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-8 text-center">Common Questions</h2>
+          <h2 className="font-playfair text-2xl font-normal text-[#F5F0E8] mb-8 text-center">Common Questions</h2>
           <div className="space-y-4">
             {[
               {
@@ -421,11 +421,11 @@ export default function FoundingPageClient() {
               },
             ].map(faq => (
               <details key={faq.q} className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] group">
-                <summary className="flex items-center justify-between px-6 py-4 cursor-pointer text-[#E8E4DC] font-medium select-none list-none">
+                <summary className="flex items-center justify-between px-6 py-4 cursor-pointer text-[#F5F0E8] font-medium select-none list-none">
                   {faq.q}
-                  <ChevronRight className="w-4 h-4 text-[#8A8070] group-open:rotate-90 transition-transform flex-shrink-0" />
+                  <ChevronRight className="w-4 h-4 text-[rgba(245,240,232,0.55)] group-open:rotate-90 transition-transform flex-shrink-0" />
                 </summary>
-                <p className="px-6 pb-4 text-[#8A8070] text-sm leading-relaxed">{faq.a}</p>
+                <p className="px-6 pb-4 text-[rgba(245,240,232,0.55)] text-sm leading-relaxed">{faq.a}</p>
               </details>
             ))}
           </div>
@@ -434,9 +434,9 @@ export default function FoundingPageClient() {
 
       {/* Bottom CTA */}
       <section className="py-12 px-4 border-t border-[var(--divider)] text-center">
-        <p className="text-[#8A8070] text-sm">
+        <p className="text-[rgba(245,240,232,0.55)] text-sm">
           Not ready to apply?{' '}
-          <Link href="/launch" className="text-[#B09B71] hover:text-[#C4B080] transition-colors">
+          <Link href="/launch" className="text-[#B09B71] hover:text-[#D4C4A0] transition-colors">
             Sign up for launch updates →
           </Link>
         </p>
