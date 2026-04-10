@@ -5,7 +5,7 @@ import { Providers } from './providers';
 import { AppShell } from '@/components/AppShell';
 import { AnnouncementBanner } from '@/components/AnnouncementBanner';
 
-const playfairDisplay = Playfair_Display({ subsets: ['latin'], weight: ['400', '500', '600', '700'], style: ['normal', 'italic'], variable: '--font-playfair', display: 'swap',
+const playfairDisplay = Playfair_Display({ subsets: ['latin'], weight: ['400', '500', '600', '700'], style: ['normal', 'italic'], variable: '--font-playfair', display: 'swap', adjustFontFallback: false,
 });
 
 const inter = Inter({
@@ -14,6 +14,7 @@ const inter = Inter({
   style: ['normal'],
   variable: '--font-inter',
   display: 'swap',
+  adjustFontFallback: false,
 });
 
 export const dynamic = 'force-dynamic';

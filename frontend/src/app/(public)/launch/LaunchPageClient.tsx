@@ -6,9 +6,7 @@ import {
   ArrowRight, CheckCircle2, Users,
   Building2, Vote, FileText, ExternalLink,
 } from 'lucide-react';
-
-// Set your launch date here
-const LAUNCH_DATE = new Date('2026-05-01T12:00:00Z');
+import { LAUNCH_DATE } from '@/lib/launch';
 
 const STATS = [
   { value: '80+', label: 'App screens' },
