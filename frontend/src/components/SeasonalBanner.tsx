@@ -1,6 +1,22 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+
+// Defense in depth: even if AppShell accidentally renders SeasonalBanner on
+// an unauthenticated route (signup, login, invite accept, waitlist, etc.),
+// the banner should self-bail. The "Spring at Faircroft" message is a
+// community-specific flavor line that makes zero sense to a stranger
+// looking at the signup form — they haven't joined Faircroft (or any
+// community) yet.
+const HIDDEN_ON_PATHS = [
+  '/login',
+  '/signup',
+  '/invite',
+  '/waitlist',
+  '/forgot-password',
+  '/reset-password',
+];
 
 // V11 fix: Replaced Tailwind gradient classes (from-*-900/20 to-*-900/10) with
 // explicit inline rgba gradients. Tailwind v4 compiles `from-*/*` gradient
@@ -85,18 +101,27 @@ function getDismissKey(): string {
 }
 
 export function SeasonalBanner() {
+  const pathname = usePathname();
+  const isHiddenRoute = HIDDEN_ON_PATHS.some(
+    (p) => pathname === p || pathname?.startsWith(p + '/'),
+  );
+
   const [visible, setVisible] = useState(false);
   const [season, setSeason] = useState<SeasonInfo | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    if (isHiddenRoute) {
+      setVisible(false);
+      return;
+    }
     const key = getDismissKey();
     const dismissed = localStorage.getItem(key);
     if (!dismissed) {
       setSeason(getSeasonInfo());
       setVisible(true);
     }
-  }, []);
+  }, [isHiddenRoute]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,7 +136,7 @@ export function SeasonalBanner() {
     setVisible(false);
   };
 
-  if (!visible || !season) return null;
+  if (isHiddenRoute || !visible || !season) return null;
 
   return (
     <div

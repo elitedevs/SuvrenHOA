@@ -332,7 +332,7 @@ export default function PricingPageClient() {
                   </ul>
 
                   <Link
-                    href="/checkout"
+                    href="/waitlist"
                     className="w-full py-3.5 rounded-lg text-center font-medium text-sm transition-all duration-200 hover:scale-[1.01] block"
                     style={{
                       background: popular
@@ -343,7 +343,7 @@ export default function PricingPageClient() {
                       boxShadow: popular ? '0 0 24px rgba(176,155,113,0.25)' : 'none',
                     }}
                   >
-                    Start Free Trial
+                    Reserve Your Seat
                   </Link>
                 </div>
               );
@@ -528,7 +528,7 @@ export default function PricingPageClient() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
-                  href="/signup"
+                  href="/waitlist"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                   style={{
                     background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
@@ -536,7 +536,7 @@ export default function PricingPageClient() {
                     boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                   }}
                 >
-                  Start Free Trial
+                  Reserve Your Seat
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link

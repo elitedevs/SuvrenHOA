@@ -251,7 +251,7 @@ export default function PrivacyPolicyPage() {
       <section className="max-w-3xl mx-auto px-6 py-20">
         <div className="space-y-14">
           {SECTIONS.map((section, idx) => (
-            <div key={section.title}>
+            <div key={section.title} className="legal-section">
               <div
                 className="mb-6 flex items-baseline gap-4"
                 style={{ color: 'rgba(176,155,113,0.5)' }}
@@ -280,7 +280,7 @@ export default function PrivacyPolicyPage() {
               >
                 {section.title}
               </h2>
-              <div className="space-y-4">
+              <div className="space-y-4 legal-body">
                 {section.body.map((para, i) => (
                   <p
                     key={i}

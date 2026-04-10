@@ -217,9 +217,9 @@ export default function LoginPage() {
 
           <div className="text-center pt-2">
             <p className="text-sm text-[var(--text-muted)]">
-              Don&apos;t have an account?{' '}
-              <Link href="/signup" className="text-[#B09B71] hover:text-[#D4C4A0] transition-colors">
-                Create Account
+              Don&apos;t have an invitation?{' '}
+              <Link href="/waitlist" className="text-[#B09B71] hover:text-[#D4C4A0] transition-colors">
+                Reserve Your Seat
               </Link>
             </p>
           </div>

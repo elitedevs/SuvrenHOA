@@ -1132,3 +1132,240 @@ html.light .gradient-border::before {
     size: letter portrait;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   V12 — Path to 60: refinements layered on V11 baseline
+   These rules INTENTIONALLY come after the V11 block so cascade order picks
+   them up. None of them touch existing selectors — they extend or sharpen.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── V12.B1 — Selection: brass wash + crisp parchment text + soft glow ──── */
+::selection {
+  background: rgba(176, 155, 113, 0.36);
+  color: #FBF6EC;
+  text-shadow: 0 0 16px rgba(176, 155, 113, 0.45);
+}
+
+::-moz-selection {
+  background: rgba(176, 155, 113, 0.36);
+  color: #FBF6EC;
+  text-shadow: 0 0 16px rgba(176, 155, 113, 0.45);
+}
+
+/* Headings get a slightly heavier brass wash on selection */
+h1::selection, h2::selection, h3::selection {
+  background: rgba(176, 155, 113, 0.44);
+  color: #FBF6EC;
+  text-shadow: 0 0 24px rgba(176, 155, 113, 0.55);
+}
+
+/* ── V12.B2 — Focus-visible: tighter brass ring with soft outer halo ───── */
+:focus-visible {
+  outline: 1px solid rgba(176, 155, 113, 0.85);
+  outline-offset: 3px;
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 2px rgba(12, 12, 14, 0.95),
+    0 0 0 4px rgba(176, 155, 113, 0.18),
+    0 0 24px rgba(176, 155, 113, 0.10);
+  transition:
+    outline-offset 180ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 1px solid rgba(176, 155, 113, 0.85);
+  outline-offset: 3px;
+}
+
+/* Caret is a quiet brass tick, never pure white */
+input, textarea, [contenteditable] {
+  caret-color: rgba(176, 155, 113, 0.85);
+}
+
+/* ── V12.B3 — Scrollbar: 8px, brass gradient thumb, hover deepens ─────── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(8, 8, 10, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(176, 155, 113, 0.32) 0%,
+    rgba(138, 122, 90, 0.42) 50%,
+    rgba(176, 155, 113, 0.32) 100%
+  );
+  border-radius: 4px;
+  border: 1px solid rgba(8, 8, 10, 0.4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(176, 155, 113, 0.55) 0%,
+    rgba(196, 169, 110, 0.65) 50%,
+    rgba(176, 155, 113, 0.55) 100%
+  );
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(8, 8, 10, 0.6);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(176, 155, 113, 0.32) rgba(8, 8, 10, 0.6);
+}
+
+/* ── V12.C1 — Drop caps for editorial prose (privacy / terms / legal) ─── */
+/*
+  Drop the first letter of the first paragraph after each .legal-section
+  H2 — Hermès / NYT-magazine treatment, in Playfair, brass, 4 lines tall.
+  Floats left, generous right margin, slight optical baseline lift.
+*/
+.legal-section h2 + .legal-body > p:first-of-type::first-letter,
+.legal-section h2 + p:first-of-type::first-letter {
+  font-family: var(--font-heading), 'Playfair Display', Georgia, serif;
+  font-size: 4.6em;
+  line-height: 0.85;
+  float: left;
+  padding: 0.18em 0.16em 0 0;
+  margin: 0.05em 0.06em 0 -0.02em;
+  color: #B09B71;
+  font-weight: 400;
+  font-style: normal;
+  background: linear-gradient(180deg, #D4C4A0 0%, #B09B71 60%, #8A7A5A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  font-feature-settings: "lnum", "kern";
+}
+
+/* Disable drop cap when reduced motion / small screens — risk of bad reflow */
+@media (max-width: 640px) {
+  .legal-section h2 + .legal-body > p:first-of-type::first-letter,
+  .legal-section h2 + p:first-of-type::first-letter {
+    font-size: 3.4em;
+    line-height: 0.85;
+  }
+}
+
+/* ── V12.C2 — Ornamental brass diamond above each legal H2 ───────────── */
+.legal-section {
+  position: relative;
+}
+
+.legal-section::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  margin: 0 0 1.25rem 0;
+  background: linear-gradient(135deg, #D4C4A0 0%, #B09B71 50%, #8A7A5A 100%);
+  transform: rotate(45deg);
+  border-radius: 1px;
+  box-shadow:
+    0 0 12px rgba(176, 155, 113, 0.30),
+    0 0 0 3px rgba(176, 155, 113, 0.06);
+}
+
+/* ── V12.D1 — Hero ambient shimmer: pure CSS, no JS, no Tailwind ────── */
+/*
+  A slow horizontal "candlelight breath" across the hero — uses a wide
+  radial gradient that drifts on a 22s loop. Reads as warmth, not motion.
+  Sits behind everything in the hero, never blocks pointer events.
+*/
+@keyframes hero-ambient-breath {
+  0% {
+    transform: translateX(-12%) translateY(-2%) scale(1.0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateX(8%) translateY(2%) scale(1.06);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(-12%) translateY(-2%) scale(1.0);
+    opacity: 0.55;
+  }
+}
+
+.hero-ambient {
+  position: absolute;
+  inset: -10% -10% -10% -10%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 65% 50% at 50% 30%,
+      rgba(176, 155, 113, 0.085) 0%,
+      rgba(176, 155, 113, 0.040) 28%,
+      rgba(176, 155, 113, 0.012) 55%,
+      transparent 78%
+    );
+  filter: blur(40px);
+  mix-blend-mode: screen;
+  animation: hero-ambient-breath 22s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* A second, slower drift in the opposite direction for parallax depth */
+.hero-ambient-2 {
+  position: absolute;
+  inset: -10% -10% -10% -10%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 45% 40% at 65% 60%,
+      rgba(176, 155, 113, 0.06) 0%,
+      rgba(176, 155, 113, 0.022) 40%,
+      transparent 75%
+    );
+  filter: blur(50px);
+  mix-blend-mode: screen;
+  animation: hero-ambient-breath 36s ease-in-out infinite reverse;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-ambient,
+  .hero-ambient-2 {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* ── V12.A1 — Refined nav-active treatment ────────────────────────────── */
+/*
+  V11 has .nav-active::after as a centered brass underline. V12 makes it
+  thicker on the active link, slightly brighter, and tightens the gradient
+  so it reads as an architectural detail rather than a hover state.
+*/
+.nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(176, 155, 113, 0.85) 30%,
+    #D4C4A0 50%,
+    rgba(176, 155, 113, 0.85) 70%,
+    transparent 100%
+  );
+  border-radius: 1px;
+  opacity: 0.95;
+  box-shadow: 0 0 12px rgba(176, 155, 113, 0.30);
+}

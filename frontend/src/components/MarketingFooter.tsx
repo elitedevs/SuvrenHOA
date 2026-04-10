@@ -30,7 +30,7 @@ export function MarketingFooter() {
       <div className="max-w-6xl mx-auto px-6 py-16">
         {/* Newsletter row */}
         <div className="mb-12 pb-10 border-b border-[rgba(245,240,232,0.06)] max-w-sm">
-          <p className="text-[11px] uppercase tracking-widest text-[#B09B71] font-medium mb-1">Founding Program — Now Open</p>
+          <p className="text-[11px] uppercase tracking-widest text-[#B09B71] font-medium mb-1">Product Hunt Launch — May 1st</p>
           <p className="text-[13px] text-[rgba(245,240,232,0.4)] leading-relaxed">Get notified when we go live and lock in founding member pricing.</p>
           <EmailCapture variant="inline" source="launch_page" />
         </div>
@@ -39,7 +39,10 @@ export function MarketingFooter() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <img src="/logo-icon.svg" alt="" aria-hidden="true" className="w-8 h-8" />
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+                   style={{ background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)' }}>
+                <span className="text-sm font-bold text-[#0C0C0E]">S</span>
+              </div>
               <span className="text-lg font-medium text-[var(--parchment)] tracking-tight"
                     style={{ fontFamily: 'var(--font-heading)' }}>
                 SuvrenHOA

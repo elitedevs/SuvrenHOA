@@ -111,7 +111,7 @@ export function DuesAutoPay({ walletAddress }: { walletAddress?: string }) {
       {settings.enabled ? (
         <div className="space-y-3">
           {/* Active Status */}
-          <div className="p-4 rounded-xl bg-[rgba(42,93,79,0.07)] border border-[rgba(42,93,79,0.20)]">
+          <div className="p-4 rounded-xl bg-[#2A5D4F]/[0.07] border border-[rgba(42,93,79,0.20)]">
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-[#2A5D4F] animate-pulse" />
               <span className="text-xs font-medium text-[#2A5D4F]">Auto-Pay Active</span>
