@@ -77,29 +77,33 @@ export function AnnouncementBanner({
 
   // V8: use inline styles for gradient/border so we avoid Tailwind v4's [#hex]/n
   // color-mix() compile path (which computes to lab() and fails palette audits).
+  // V14.2 Lux sweep: all three variants now use canonical OBSIDIAN tokens.
+  // Differentiation comes from gradient direction and border weight, not from
+  // off-palette third-party colors (no Tailwind blue, no PH orange, no warm grays).
   const variantClass: Record<string, string> = {
-    gold: 'text-[#C4BAA8]',
-    info: 'bg-[#1A2A3A] text-blue-200',
-    launch: 'text-[#E8D4C0]',
+    gold:   'text-[rgba(245,240,232,0.75)]',
+    info:   'text-[rgba(245,240,232,0.75)]',
+    launch: 'text-[rgba(245,240,232,0.85)]',
   };
   const variantStyle: Record<string, React.CSSProperties> = {
     gold: {
-      backgroundImage: 'linear-gradient(to right, rgba(176,155,113,0.15), rgba(138,122,85,0.10))',
+      backgroundImage: 'linear-gradient(to right, rgba(176,155,113,0.15), rgba(176,155,113,0.06))',
       borderBottom: '1px solid rgba(176,155,113,0.20)',
     },
     info: {
-      borderBottom: '1px solid rgba(59,130,246,0.20)',
+      backgroundImage: 'linear-gradient(to right, rgba(176,155,113,0.08), rgba(176,155,113,0.04))',
+      borderBottom: '1px solid rgba(176,155,113,0.16)',
     },
     launch: {
-      backgroundImage: 'linear-gradient(to right, rgba(246,131,65,0.15), rgba(176,155,113,0.10))',
-      borderBottom: '1px solid rgba(246,131,65,0.20)',
+      backgroundImage: 'linear-gradient(to right, rgba(176,155,113,0.20), rgba(176,155,113,0.10))',
+      borderBottom: '1px solid rgba(176,155,113,0.28)',
     },
   };
 
   const ctaStyles = {
-    gold: 'text-[#B09B71] hover:text-[#C4B080]',
-    info: 'text-blue-400 hover:text-blue-300',
-    launch: 'text-[#F68341] hover:text-[#F09040]',
+    gold:   'text-[#B09B71] hover:text-[#D4C4A0]',
+    info:   'text-[#B09B71] hover:text-[#D4C4A0]',
+    launch: 'text-[#D4C4A0] hover:text-[#F5F0E8]',
   };
 
   return (
@@ -133,7 +137,7 @@ export function AnnouncementBanner({
         <button
           onClick={dismiss}
           aria-label="Dismiss announcement"
-          className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-[#4A4A52] hover:text-[#8A8070] transition-colors rounded"
+          className="absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-[rgba(245,240,232,0.35)] hover:text-[rgba(245,240,232,0.65)] transition-colors rounded"
         >
           <X className="w-4 h-4" />
         </button>

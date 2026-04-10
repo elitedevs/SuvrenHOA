@@ -61,13 +61,21 @@ export const PRESS_KIT = {
       description: 'Powered by Coinbase Smart Wallet (ERC-4337). No seed phrases. Passkey-based auth with gas sponsorship.',
     },
   ],
+  // Canonical OBSIDIAN palette — source of truth is
+  // /docs/lux-agent-profile.md (PALETTE LIBRARY).
+  // Secondary/muted text uses parchment at reduced alpha rather than
+  // separate solid hexes, which is the house pattern across the entire app
+  // (Header, Sidebar, CommandPalette, NotificationCenter, etc.).
   brandColors: [
-    { name: 'Obsidian', hex: '#0C0C0E', usage: 'Primary background' },
-    { name: 'Brass', hex: '#B09B71', usage: 'Primary accent, CTAs, headings' },
-    { name: 'Parchment', hex: '#E8E4DC', usage: 'Primary text' },
-    { name: 'Warm Gray', hex: '#C4BAA8', usage: 'Secondary text' },
-    { name: 'Muted', hex: '#8A8070', usage: 'Captions, labels' },
-    { name: 'Deep Muted', hex: '#4A4A52', usage: 'Disabled, meta text' },
+    { name: 'Obsidian',     hex: '#0C0C0E', usage: 'Primary background' },
+    { name: 'Surface',      hex: '#141416', usage: 'Card / elevated surface' },
+    { name: 'Card Surface', hex: '#151518', usage: 'Sidebar / nested card surface' },
+    { name: 'Brass',        hex: '#B09B71', usage: 'Primary accent, CTAs, headings' },
+    { name: 'Brass Hover',  hex: '#D4C4A0', usage: 'Brass hover / highlight' },
+    { name: 'Parchment',    hex: '#F5F0E8', usage: 'Primary text' },
+    { name: 'Verdigris',    hex: '#2A5D4F', usage: 'Positive / approved' },
+    { name: 'Rosewood',     hex: '#6B3A3A', usage: 'Negative / rejected' },
+    { name: 'Amber',        hex: '#A08050', usage: 'Warning / pending' },
   ],
   typography: {
     headings: 'Playfair Display (Google Fonts)',

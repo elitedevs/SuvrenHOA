@@ -109,12 +109,12 @@ export default function LaunchPageClient() {
               computed font-size on the child.
               V13 fix: removed font-bold — Playfair at 400 is the hierarchy
               rule, Rule 3 in the Lux sin ledger. */}
-          <h1 className="font-playfair text-5xl md:text-7xl font-normal text-[#E8E4DC] mb-6 leading-tight">
+          <h1 className="font-playfair text-5xl md:text-7xl font-normal text-[#F5F0E8] mb-6 leading-tight">
             <span>HOA Governance,</span>{' '}
             <br />
             <span className="text-[#B09B71] text-5xl md:text-7xl">Finally Honest.</span>
           </h1>
-          <p className="text-xl text-[#C4BAA8] leading-relaxed mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-[rgba(245,240,232,0.75)] leading-relaxed mb-12 max-w-2xl mx-auto">
             SuvrenHOA puts your community's votes, finances, and documents on the blockchain — permanently transparent, mathematically tamper-proof.
           </p>
 
@@ -167,8 +167,8 @@ export default function LaunchPageClient() {
           {signupState === 'success' ? (
             <div className="max-w-md mx-auto bg-[#141416] border border-[rgba(176,155,113,0.3)] rounded-xl px-6 py-5 text-center">
               <CheckCircle2 className="w-8 h-8 text-[#B09B71] mx-auto mb-3" />
-              <p className="text-[#E8E4DC] font-semibold mb-1">You're on the list.</p>
-              <p className="text-sm text-[#8A8070]">We'll email you the moment we launch. No spam, ever.</p>
+              <p className="text-[#F5F0E8] font-semibold mb-1">You're on the list.</p>
+              <p className="text-sm text-[rgba(245,240,232,0.55)]">We'll email you the moment we launch. No spam, ever.</p>
             </div>
           ) : (
             <form onSubmit={handleSignup} className="max-w-md mx-auto">
@@ -179,7 +179,7 @@ export default function LaunchPageClient() {
                   placeholder="Your name (optional)"
                   value={name}
                   onChange={e => setName(e.target.value)}
-                  className="flex-1 bg-[#141416] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors text-sm"
+                  className="flex-1 bg-[#141416] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-[#F5F0E8] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors text-sm"
                 />
               </div>
               <div className="flex gap-2">
@@ -189,12 +189,12 @@ export default function LaunchPageClient() {
                   placeholder="your@email.com"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  className="flex-1 bg-[#141416] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors"
+                  className="flex-1 bg-[#141416] border border-[rgba(245,240,232,0.08)] rounded-lg px-4 py-2.5 text-[#F5F0E8] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors"
                 />
                 <button
                   type="submit"
                   disabled={signupState === 'submitting'}
-                  className="bg-[#B09B71] text-[#0C0C0E] font-semibold px-5 py-2.5 rounded-lg hover:bg-[#C4B080] transition-colors disabled:opacity-60 flex-shrink-0 flex items-center gap-2"
+                  className="bg-[#B09B71] text-[#0C0C0E] font-semibold px-5 py-2.5 rounded-lg hover:bg-[#D4C4A0] transition-colors disabled:opacity-60 flex-shrink-0 flex items-center gap-2"
                 >
                   {signupState === 'submitting' ? (
                     <div className="w-4 h-4 border-2 border-[rgba(12,12,14,0.3)] border-t-[#0C0C0E] rounded-full animate-spin" />
@@ -211,7 +211,7 @@ export default function LaunchPageClient() {
 
           {signupCount !== null && signupCount > 0 && (
             <p className="text-sm text-[rgba(245,240,232,0.40)] mt-4">
-              <span className="text-[#8A8070] font-medium">{signupCount.toLocaleString()}</span> people already signed up
+              <span className="text-[rgba(245,240,232,0.55)] font-medium">{signupCount.toLocaleString()}</span> people already signed up
             </p>
           )}
         </div>
@@ -223,7 +223,7 @@ export default function LaunchPageClient() {
           {STATS.map(s => (
             <div key={s.label}>
               <p className="font-playfair text-3xl font-normal text-[#B09B71]">{s.value}</p>
-              <p className="text-xs text-[#8A8070] mt-1">{s.label}</p>
+              <p className="text-xs text-[rgba(245,240,232,0.55)] mt-1">{s.label}</p>
             </div>
           ))}
         </div>
@@ -232,14 +232,14 @@ export default function LaunchPageClient() {
       {/* Feature highlights */}
       <section className="py-16 px-4 border-b border-[var(--divider)]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-playfair text-3xl font-normal text-[#E8E4DC] text-center mb-8">Built for Trust</h2>
+          <h2 className="font-playfair text-3xl font-normal text-[#F5F0E8] text-center mb-8">Built for Trust</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {FEATURES_HIGHLIGHT.map(f => (
               <div key={f.text} className="flex items-center gap-3 bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] px-5 py-4">
                 <div className="w-8 h-8 rounded-lg bg-[rgba(176,155,113,0.1)] flex items-center justify-center flex-shrink-0">
                   <f.icon className="w-4 h-4 text-[#B09B71]" />
                 </div>
-                <p className="text-sm text-[#C4BAA8] font-medium">{f.text}</p>
+                <p className="text-sm text-[rgba(245,240,232,0.75)] font-medium">{f.text}</p>
               </div>
             ))}
           </div>
@@ -249,8 +249,8 @@ export default function LaunchPageClient() {
       {/* Share + PH */}
       <section className="py-16 px-4 border-b border-[var(--divider)]">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-playfair text-3xl font-normal text-[#E8E4DC] mb-4">Help Us Launch</h2>
-          <p className="text-[#8A8070] mb-8">If you know someone dealing with HOA drama, share this. It helps more than you know.</p>
+          <h2 className="font-playfair text-3xl font-normal text-[#F5F0E8] mb-4">Help Us Launch</h2>
+          <p className="text-[rgba(245,240,232,0.55)] mb-8">If you know someone dealing with HOA drama, share this. It helps more than you know.</p>
           {/* V13 Lux fix: unified share buttons on a single parchment/brass surface
               — removed #1DA1F2 Twitter blue, #0A66C2 LinkedIn blue, and #F68341 PH
               orange (all off-palette). The 𝕏 mathematical glyph was replaced with
@@ -283,11 +283,11 @@ export default function LaunchPageClient() {
       {/* CTA */}
       <section className="py-16 px-4 text-center">
         <div className="max-w-xl mx-auto">
-          <h2 className="font-playfair text-3xl font-normal text-[#E8E4DC] mb-4">Don't Wait for Launch</h2>
-          <p className="text-[#8A8070] mb-8">Apply for the Founding Community Program and lock in 20% off forever.</p>
+          <h2 className="font-playfair text-3xl font-normal text-[#F5F0E8] mb-4">Don't Wait for Launch</h2>
+          <p className="text-[rgba(245,240,232,0.55)] mb-8">Apply for the Founding Community Program and lock in 20% off forever.</p>
           <Link
             href="/founding"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#B09B71] to-[#8A7A55] text-[#0C0C0E] font-bold px-8 py-4 rounded-xl hover:from-[#C4B080] hover:to-[#9A8A65] transition-all"
+            className="inline-flex items-center gap-2 bg-[#B09B71] text-[#0C0C0E] font-semibold px-8 py-4 rounded-xl hover:bg-[#D4C4A0] transition-colors"
           >
             Apply for Founding Status <ArrowRight className="w-5 h-5" />
           </Link>
