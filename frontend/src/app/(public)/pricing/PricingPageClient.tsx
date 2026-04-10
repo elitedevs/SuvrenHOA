@@ -187,11 +187,34 @@ const FAQS = [
 /* ── Component ───────────────────────────────────────────────────────────── */
 
 function CellValue({ value }: { value: FeatureValue }) {
+  // V13 Lux fix (2026-04-10): the previous ✓/✗ treatment used
+  // text-[#2A5D4F] (dark verdigris) at globals.css opacity 0.4, which
+  // rendered at ~3% luminance on obsidian and failed WCAG AA contrast
+  // for graphical elements (2.4:1, needs 3:1). Worse: the red/green
+  // traffic-light metaphor doesn't fit a luxury aesthetic.
+  //
+  // New treatment follows the Aesop / Bottega pricing-table convention:
+  //   presence → parchment ✓ at 85% (reads as "checked, included")
+  //   absence  → thin em-dash "—" at 20% (reads as "gracefully absent")
+  // No red, no green. Luxury is binary presence, not a verdict.
   if (value === true)
-    return <Check className="w-4 h-4 text-[#2A5D4F] mx-auto" />;
+    return (
+      <Check
+        className="lux-icon-full w-4 h-4 text-[rgba(245,240,232,0.85)] mx-auto"
+        strokeWidth={2}
+        aria-label="Included"
+      />
+    );
   if (value === false)
-    return <X className="w-4 h-4 text-[rgba(245,240,232,0.15)] mx-auto" />;
-  return <span className="text-[13px] text-[rgba(245,240,232,0.55)]">{value}</span>;
+    return (
+      <span
+        className="text-[rgba(245,240,232,0.20)] text-sm"
+        aria-label="Not included"
+      >
+        —
+      </span>
+    );
+  return <span className="text-[13px] text-[rgba(245,240,232,0.65)]">{value}</span>;
 }
 
 export default function PricingPageClient() {
@@ -322,10 +345,15 @@ export default function PricingPageClient() {
                     )}
                   </div>
 
+                  {/* V13 Lux fix: feature-list ✓ icons used the same dark
+                      verdigris that failed contrast in the compare table.
+                      Switched to brass at 65% — readable, brand-aligned,
+                      and consistent with the rest of the parchment/brass
+                      typographic system. */}
                   <ul className="space-y-2.5 mb-8 flex-1">
                     {features.map((f) => (
                       <li key={f} className="flex items-start gap-2.5 text-[13px] text-[rgba(245,240,232,0.55)]">
-                        <Check className="w-4 h-4 text-[#2A5D4F] shrink-0 mt-0.5" />
+                        <Check className="lux-icon-full w-4 h-4 text-[rgba(176,155,113,0.85)] shrink-0 mt-0.5" strokeWidth={2} aria-hidden="true" />
                         {f}
                       </li>
                     ))}

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import {
   ArrowRight, CheckCircle2, Users,
-  Building2, Vote, FileText, ExternalLink,
+  Building2, Vote, FileText, ExternalLink, Share2,
 } from 'lucide-react';
 import { LAUNCH_DATE } from '@/lib/launch';
 
@@ -91,21 +91,25 @@ export default function LaunchPageClient() {
       {/* Hero + countdown */}
       <section className="py-20 px-4 text-center border-b border-[var(--divider)]">
         <div className="max-w-4xl mx-auto">
-          {/* PH Badge placeholder */}
+          {/* Launch eyebrow — neutral parchment, no third-party brand color.
+              V13 Lux fix: removed 🐱 emoji (Rule 2) and #F68341 orange (palette leak).
+              The Product Hunt association will be re-added as a proper SVG badge
+              when the PH listing goes live. */}
           <div className="flex justify-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-[rgba(246,131,65,0.013)] border border-[rgba(246,131,65,0.3)] rounded-lg px-4 py-2 text-sm">
-              <span className="text-[#F68341] font-bold text-base">🐱</span>
-              <span className="text-[#F68341] font-semibold">Product Hunt</span>
-              <span className="text-[#8A8070]">— launching soon</span>
-            </div>
+            <span className="inline-flex items-center gap-3 rounded-full border border-[rgba(176,155,113,0.24)] bg-[rgba(176,155,113,0.06)] px-4 py-1.5 text-xs font-medium tracking-[0.14em] uppercase text-[rgba(245,240,232,0.72)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B09B71] animate-pulse" aria-hidden="true" />
+              Launching Soon
+            </span>
           </div>
 
           {/* V12 fix (Lux V11 audit): explicit whitespace between the two
               lines so textContent reads "HOA Governance, Finally Honest."
               for a11y/SEO, and the brass span carries text-5xl/md:text-7xl
               so Tailwind's color-only arbitrary value can't collapse the
-              computed font-size on the child. */}
-          <h1 className="font-playfair text-5xl md:text-7xl font-bold text-[#E8E4DC] mb-6 leading-tight">
+              computed font-size on the child.
+              V13 fix: removed font-bold — Playfair at 400 is the hierarchy
+              rule, Rule 3 in the Lux sin ledger. */}
+          <h1 className="font-playfair text-5xl md:text-7xl font-normal text-[#E8E4DC] mb-6 leading-tight">
             <span>HOA Governance,</span>{' '}
             <br />
             <span className="text-[#B09B71] text-5xl md:text-7xl">Finally Honest.</span>
@@ -114,28 +118,38 @@ export default function LaunchPageClient() {
             SuvrenHOA puts your community's votes, finances, and documents on the blockchain — permanently transparent, mathematically tamper-proof.
           </p>
 
-          {/* Countdown */}
+          {/* Countdown
+              V13 Lux fix: (1) font-bold → font-normal on Playfair digit cells
+              (Rule 3 — never bold a serif heading); (2) hardcoded #4A4A52 label
+              color replaced with parchment @ 40% to match the /about eyebrow
+              tokens; (3) colon separators deleted entirely — luxury countdowns
+              on Aesop, Aman, and Bottega don't use them, and the previous
+              rgb(42,42,46) colons were invisible anyway; (4) single container
+              aria-label reads the remaining time so screen readers don't
+              announce four separate digit groups. */}
           {!launched ? (
             <div className="mb-12">
-              <p className="text-xs font-semibold text-[#4A4A52] uppercase tracking-widest mb-6">Launching in</p>
-              <div className="flex items-center justify-center gap-3 sm:gap-6">
+              <p className="text-[11px] text-[rgba(245,240,232,0.40)] uppercase tracking-[0.12em] mb-6">Launching in</p>
+              <div
+                className="flex items-center justify-center gap-3 sm:gap-5"
+                role="timer"
+                aria-label={`${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds until launch`}
+              >
                 {[
                   { value: days, label: 'Days' },
                   { value: hours, label: 'Hours' },
                   { value: minutes, label: 'Minutes' },
                   { value: seconds, label: 'Seconds' },
-                ].map((unit, i) => (
-                  <div key={unit.label}>
-                    <div
-                      className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] px-4 sm:px-6 py-3 sm:py-4 min-w-[64px] sm:min-w-[80px] text-center"
-                      aria-label={`${unit.value} ${unit.label}`}
-                    >
-                      <div className="font-playfair text-3xl sm:text-4xl font-bold text-[#B09B71] tabular-nums" aria-hidden="true">
-                        {String(unit.value).padStart(2, '0')}
-                      </div>
-                      <div className="text-xs text-[#4A4A52] mt-1 font-medium" aria-hidden="true">{unit.label}</div>
+                ].map((unit) => (
+                  <div
+                    key={unit.label}
+                    className="bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] px-4 sm:px-6 py-3 sm:py-4 min-w-[64px] sm:min-w-[80px] text-center"
+                    aria-hidden="true"
+                  >
+                    <div className="font-playfair text-3xl sm:text-4xl font-normal text-[#B09B71] tabular-nums">
+                      {String(unit.value).padStart(2, '0')}
                     </div>
-                    {i < 3 && <span className="text-2xl text-[#2A2A2E] font-bold mx-0.5 sm:mx-1" aria-hidden="true">:</span>}
+                    <div className="text-[11px] text-[rgba(245,240,232,0.40)] mt-1 uppercase tracking-[0.12em]">{unit.label}</div>
                   </div>
                 ))}
               </div>
@@ -165,7 +179,7 @@ export default function LaunchPageClient() {
                   placeholder="Your name (optional)"
                   value={name}
                   onChange={e => setName(e.target.value)}
-                  className="flex-1 bg-[#141416] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[#4A4A52] focus:outline-none focus:border-[#B09B71] transition-colors text-sm"
+                  className="flex-1 bg-[#141416] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors text-sm"
                 />
               </div>
               <div className="flex gap-2">
@@ -175,7 +189,7 @@ export default function LaunchPageClient() {
                   placeholder="your@email.com"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  className="flex-1 bg-[#141416] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[#4A4A52] focus:outline-none focus:border-[#B09B71] transition-colors"
+                  className="flex-1 bg-[#141416] border border-[#2A2A2E] rounded-lg px-4 py-2.5 text-[#E8E4DC] placeholder-[rgba(245,240,232,0.40)] focus:outline-none focus:border-[#B09B71] transition-colors"
                 />
                 <button
                   type="submit"
@@ -196,19 +210,19 @@ export default function LaunchPageClient() {
           )}
 
           {signupCount !== null && signupCount > 0 && (
-            <p className="text-sm text-[#4A4A52] mt-4">
+            <p className="text-sm text-[rgba(245,240,232,0.40)] mt-4">
               <span className="text-[#8A8070] font-medium">{signupCount.toLocaleString()}</span> people already signed up
             </p>
           )}
         </div>
       </section>
 
-      {/* Stats */}
+      {/* Stats — V13 Lux fix: font-bold removed from Playfair per Rule 3. */}
       <section className="py-12 px-4 border-b border-[var(--divider)]">
         <div className="max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
           {STATS.map(s => (
             <div key={s.label}>
-              <p className="font-playfair text-3xl font-bold text-[#B09B71]">{s.value}</p>
+              <p className="font-playfair text-3xl font-normal text-[#B09B71]">{s.value}</p>
               <p className="text-xs text-[#8A8070] mt-1">{s.label}</p>
             </div>
           ))}
@@ -218,7 +232,7 @@ export default function LaunchPageClient() {
       {/* Feature highlights */}
       <section className="py-16 px-4 border-b border-[var(--divider)]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] text-center mb-8">Built for Trust</h2>
+          <h2 className="font-playfair text-3xl font-normal text-[#E8E4DC] text-center mb-8">Built for Trust</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {FEATURES_HIGHLIGHT.map(f => (
               <div key={f.text} className="flex items-center gap-3 bg-[rgb(21,21,24)] rounded-xl shadow-[0_2px_8px_0_rgba(0,0,0,0.20),0_1px_2px_0_rgba(0,0,0,0.30)] px-5 py-4">
@@ -235,32 +249,33 @@ export default function LaunchPageClient() {
       {/* Share + PH */}
       <section className="py-16 px-4 border-b border-[var(--divider)]">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-4">Help Us Launch</h2>
+          <h2 className="font-playfair text-3xl font-normal text-[#E8E4DC] mb-4">Help Us Launch</h2>
           <p className="text-[#8A8070] mb-8">If you know someone dealing with HOA drama, share this. It helps more than you know.</p>
+          {/* V13 Lux fix: unified share buttons on a single parchment/brass surface
+              — removed #1DA1F2 Twitter blue, #0A66C2 LinkedIn blue, and #F68341 PH
+              orange (all off-palette). The 𝕏 mathematical glyph was replaced with
+              a proper Lucide Share2 icon. The "PH badge coming" placeholder was
+              deleted — it will be re-added as a real PH embed when the listing
+              goes live, not as TODO copy in production. */}
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
               href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 bg-[rgba(29,161,242,0.1)] border border-[rgba(29,161,242,0.3)] text-[#1DA1F2] rounded-lg text-sm font-medium hover:bg-[rgba(29,161,242,0.2)] transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 bg-[rgba(176,155,113,0.06)] border border-[rgba(176,155,113,0.24)] text-[rgba(245,240,232,0.72)] rounded-lg text-sm font-medium hover:bg-[rgba(176,155,113,0.12)] hover:text-[#F5F0E8] transition-colors"
             >
-              <span className="text-sm font-bold">𝕏</span>
+              <Share2 className="w-4 h-4" aria-hidden="true" />
               Share on X
             </a>
             <a
               href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 bg-[rgba(10,102,194,0.1)] border border-[rgba(10,102,194,0.3)] text-[#0A66C2] rounded-lg text-sm font-medium hover:bg-[rgba(10,102,194,0.2)] transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 bg-[rgba(176,155,113,0.06)] border border-[rgba(176,155,113,0.24)] text-[rgba(245,240,232,0.72)] rounded-lg text-sm font-medium hover:bg-[rgba(176,155,113,0.12)] hover:text-[#F5F0E8] transition-colors"
             >
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-4 h-4" aria-hidden="true" />
               Share on LinkedIn
             </a>
-            {/* PH badge placeholder — replace with real embed when live */}
-            <div className="flex items-center gap-2 px-5 py-2.5 bg-[rgba(246,131,65,0.1)] border border-[rgba(246,131,65,0.3)] text-[#F68341] rounded-lg text-sm font-medium">
-              <ExternalLink className="w-4 h-4" />
-              PH badge coming
-            </div>
           </div>
         </div>
       </section>
@@ -268,7 +283,7 @@ export default function LaunchPageClient() {
       {/* CTA */}
       <section className="py-16 px-4 text-center">
         <div className="max-w-xl mx-auto">
-          <h2 className="font-playfair text-2xl font-bold text-[#E8E4DC] mb-4">Don't Wait for Launch</h2>
+          <h2 className="font-playfair text-3xl font-normal text-[#E8E4DC] mb-4">Don't Wait for Launch</h2>
           <p className="text-[#8A8070] mb-8">Apply for the Founding Community Program and lock in 20% off forever.</p>
           <Link
             href="/founding"
@@ -276,7 +291,7 @@ export default function LaunchPageClient() {
           >
             Apply for Founding Status <ArrowRight className="w-5 h-5" />
           </Link>
-          <p className="text-xs text-[#4A4A52] mt-3">50 spots · No credit card</p>
+          <p className="text-xs text-[rgba(245,240,232,0.40)] mt-3">50 spots · No credit card</p>
         </div>
       </section>
     </div>

@@ -184,6 +184,27 @@ h1 svg, h2 svg {
   display: none;
 }
 
+/* V13 Lux fix (2026-04-10, SuvrenHOA-V13-Lux-Audit.md post-mortem):
+   The global 40% dimming above was catching ✓/✗ icons inside the
+   /pricing comparison <table>, rendering them at roughly 3% luminance
+   against the obsidian background and making the decision surface
+   unreadable. Icons inside data tables and state banners need full
+   presence because they carry binary information, not decoration.
+   A new Lux eye check (eye_09_decision_surface.py) was added to
+   catch any icon < 40% luminance inside a <table>, <button>, or
+   element with role="status" / role="alert". */
+table svg.lucide,
+table [class*="lucide-"],
+[role="status"] [class*="lucide-"],
+[role="alert"] [class*="lucide-"],
+.lucide-check-circle-2,
+.lucide-alert-triangle,
+.lucide-alert-circle,
+.lux-icon-full,
+.lux-icon-full [class*="lucide-"] {
+  opacity: 1;
+}
+
 /* FIX-11: Border radius — more restrained, less playful */
 .glass-card,
 .glass-card-success,

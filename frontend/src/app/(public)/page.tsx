@@ -120,9 +120,14 @@ export default function HomePage() {
         {/* Stats */}
         <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl w-full mb-16 card-enter card-enter-delay-2">
           {[
+            // V13 Lux fix: suffix changed from " days" to "-day" so every
+            // frame of the AnimatedNumber reads grammatically ("1-day",
+            // "7-day") rather than "1 days". Combined with the "Voting Period"
+            // label it renders as "7-day Voting Period" — the concierge tone
+            // the rest of the site carries.
             { label: 'Monthly Cost', sub: 'vs $15K–50K mgmt co', numVal: 0.35, prefix: '$', decimals: 2 },
             { label: 'Doc Storage', sub: 'Lifetime, permanent', numVal: 2.00, prefix: '$', decimals: 2 },
-            { label: 'Voting Period', sub: 'Fair + transparent', numVal: 7, prefix: '', suffix: ' days', decimals: 0 },
+            { label: 'Voting Period', sub: 'Fair + transparent', numVal: 7, prefix: '', suffix: '-day', decimals: 0 },
             { label: 'Can Be Altered', sub: 'Documents or votes', numVal: 0, prefix: '', decimals: 0 },
           ].map(({ label, sub, numVal, prefix, suffix, decimals }) => (
             <div key={label} className="glass-card rounded-xl p-6 text-center">
@@ -198,7 +203,7 @@ export default function HomePage() {
           <div className="w-12 h-12 rounded-xl bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.25)] flex items-center justify-center mx-auto mb-6">
             <Link2 className="w-6 h-6 text-[#B09B71]" />
           </div>
-          <h2 className="text-2xl font-medium gradient-text mb-3">
+          <h2 className="text-2xl sm:text-3xl font-medium gradient-text mb-3">
             Ready to bring real transparency to your HOA?
           </h2>
           <p className="text-[var(--text-muted)] text-base mb-8 max-w-md mx-auto leading-relaxed">
