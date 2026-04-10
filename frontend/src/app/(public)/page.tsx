@@ -48,8 +48,8 @@ const FEATURES = [
 ];
 
 const STEPS = [
-  { step: '1', title: 'Sign Up', desc: 'Just your email. 30 seconds. No credit card, no crypto knowledge needed.' },
-  { step: '2', title: 'Set Up Your Community', desc: 'Name, address, unit count. Import your existing documents.' },
+  { step: '1', title: 'Reserve Your Seat', desc: 'Submit your community for a founding spot. We review every applicant by hand.' },
+  { step: '2', title: 'Onboard Your Community', desc: 'Name, address, unit count. Import your existing documents.' },
   { step: '3', title: 'Invite Residents', desc: 'Email invites or a QR code at your next board meeting.' },
   { step: '4', title: 'Govern Transparently', desc: 'Every vote, every dollar, every document — permanently on-chain.' },
 ];
@@ -67,22 +67,26 @@ export default function HomePage() {
       {/* ── Hero ──────────────────────────────────────────────────── */}
       <section className="relative flex flex-col items-center justify-center min-h-[88vh] px-6 text-center">
 
+        {/* V12: hero ambient — pure CSS, breathes warmth across the hero */}
+        <div className="hero-ambient" aria-hidden="true" />
+        <div className="hero-ambient-2" aria-hidden="true" />
+
         {/* Launch badge */}
-        <div className="mb-8 card-enter card-enter-delay-1">
+        <div className="relative z-10 mb-8 card-enter card-enter-delay-1">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[rgba(176,155,113,0.30)] bg-[rgba(176,155,113,0.08)] text-[#B09B71] text-xs font-medium tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-[#B09B71] animate-pulse" />
-            Now accepting founding communities — apply for lifetime pricing
+            By invitation only — founding communities now under review
           </span>
         </div>
 
         {/* Logo */}
-        <div className="relative mb-8 card-enter card-enter-delay-1">
+        <div className="relative z-10 mb-8 card-enter card-enter-delay-1">
           <div className="absolute inset-0 blur-2xl opacity-25 bg-[rgba(176,155,113,0.80)] rounded-full scale-[2]" />
           <img src="/logo-full.svg" alt="SuvrenHOA" className="relative h-14 w-auto" />
         </div>
 
         {/* Headline */}
-        <div className="card-enter card-enter-delay-1">
+        <div className="relative z-10 card-enter card-enter-delay-1">
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-medium gradient-text mb-5 leading-[1.05] text-glow">
             Finally, an HOA you can{' '}
             <span className="gradient-text text-glow">actually trust</span>
@@ -96,24 +100,25 @@ export default function HomePage() {
         </div>
 
         {/* CTAs */}
-        <div className="mb-16 card-enter card-enter-delay-2 flex flex-col sm:flex-row items-center gap-4">
+        <div className="relative z-10 mb-16 card-enter card-enter-delay-2 flex flex-col sm:flex-row items-center gap-4">
           <Link
-            href="/signup"
+            href="/founding"
             className="px-8 py-3.5 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-semibold text-sm hover:bg-[#C4A96E] transition-colors flex items-center gap-2"
+            style={{ boxShadow: '0 1px 0 rgba(255,255,255,0.12) inset, 0 8px 28px rgba(176,155,113,0.22)' }}
           >
-            Start Free Trial
+            Reserve Your Seat
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
-            href="/founding"
+            href="/about"
             className="px-8 py-3.5 rounded-lg border border-[rgba(176,155,113,0.30)] text-[#B09B71] font-medium text-sm hover:bg-[rgba(176,155,113,0.08)] transition-colors"
           >
-            Join Founding Program
+            Read the Manifesto
           </Link>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl w-full mb-16 card-enter card-enter-delay-2">
+        <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl w-full mb-16 card-enter card-enter-delay-2">
           {[
             { label: 'Monthly Cost', sub: 'vs $15K–50K mgmt co', numVal: 0.35, prefix: '$', decimals: 2 },
             { label: 'Doc Storage', sub: 'Lifetime, permanent', numVal: 2.00, prefix: '$', decimals: 2 },
@@ -197,22 +202,23 @@ export default function HomePage() {
             Ready to bring real transparency to your HOA?
           </h2>
           <p className="text-[var(--text-muted)] text-base mb-8 max-w-md mx-auto leading-relaxed">
-            Join the founding program and lock in lifetime pricing before our public launch.
-            60-day free trial, no credit card required.
+            We&rsquo;re onboarding founding communities by invitation. Reserve your seat,
+            and we&rsquo;ll be in touch when your spot opens.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/signup"
+              href="/founding"
               className="px-8 py-3.5 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-semibold text-sm hover:bg-[#C4A96E] transition-colors flex items-center gap-2"
+              style={{ boxShadow: '0 1px 0 rgba(255,255,255,0.12) inset, 0 8px 28px rgba(176,155,113,0.22)' }}
             >
-              Start Free Trial
+              Reserve Your Seat
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/founding"
+              href="/about"
               className="flex items-center gap-1.5 text-sm text-[var(--text-muted)] hover:text-[var(--parchment)] transition-colors"
             >
-              Learn about the Founding Program <ChevronRight className="w-4 h-4" />
+              Learn how it works <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
