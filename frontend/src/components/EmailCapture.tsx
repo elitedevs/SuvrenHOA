@@ -15,7 +15,7 @@ export function EmailCapture({
   variant = 'card',
   source = 'launch_page',
   heading = 'Get notified at launch',
-  subtext = "We're launching on Product Hunt May 1st. Join the list for early access and founding member pricing.",
+  subtext = "We're launching on Product Hunt Oct 19th. Join the list for early access and founding member pricing.",
 }: EmailCaptureProps) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -54,7 +54,7 @@ export function EmailCapture({
       return (
         <div className="flex items-center gap-2 mt-4">
           <CheckCircle className="w-4 h-4 text-[#2A5D4F] shrink-0" />
-          <p className="text-[13px] text-[rgba(245,240,232,0.4)]">You&apos;re on the list — see you May 1st.</p>
+          <p className="text-[13px] text-[rgba(245,240,232,0.4)]">You&apos;re on the list — see you Oct 19th.</p>
         </div>
       );
     }
@@ -64,7 +64,7 @@ export function EmailCapture({
           <CheckCircle className="w-6 h-6 text-[#2A5D4F]" />
         </div>
         <h2 className="text-xl font-medium text-[var(--parchment)] mb-2">You&apos;re on the list</h2>
-        <p className="text-sm text-[var(--text-muted)]">We&apos;ll reach out before the May 1st launch.</p>
+        <p className="text-sm text-[var(--text-muted)]">We&apos;ll reach out before the Oct 19th launch.</p>
       </div>
     );
   }

@@ -21,7 +21,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/community`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${BASE_URL}/press`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE_URL}/login`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${BASE_URL}/signup`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
+    // /signup is gated (invite-only) — intentionally omitted from sitemap.
+    // Public retail CTAs land on /waitlist, which is the indexable entry point.
+    { url: `${BASE_URL}/waitlist`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
   ];
 
   const blogPosts = getAllSlugs().map(slug => ({

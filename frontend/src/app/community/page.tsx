@@ -365,10 +365,10 @@ function CommunityPublicPage() {
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <Link
-              href="/signup"
+              href="/waitlist"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-[#B09B71] to-[#8A7A55] text-[#0C0C0E] font-bold px-6 py-3 rounded-xl hover:from-[#C4B080] hover:to-[#9A8A65] transition-all"
             >
-              Join Your Community
+              Reserve Your Seat
             </Link>
             <Link
               href="/founding"

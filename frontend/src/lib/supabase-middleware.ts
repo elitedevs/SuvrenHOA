@@ -141,12 +141,40 @@ export async function updateSession(request: NextRequest) {
     return res;
   }
 
+  // Build-safety / misconfig guard: if Supabase env vars are missing or still
+  // the build-time placeholder, we cannot call createServerClient (the @supabase/ssr
+  // client validates format and throws "URL and Key are required" at request time,
+  // crashing the Edge runtime middleware on every request). Degrade gracefully:
+  // treat every request as unauthenticated. Root "/" still renders; protected routes
+  // redirect to /login. The misconfiguration surfaces in logs once, not on every hit.
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const isSupabaseConfigured =
+    !!supabaseUrl &&
+    !!supabaseAnonKey &&
+    supabaseUrl !== 'https://build-placeholder.invalid' &&
+    supabaseAnonKey !== 'build-placeholder-key';
+
+  if (!isSupabaseConfigured) {
+    if (pathname === '/') {
+      const res = NextResponse.next({ request });
+      res.headers.set('Content-Security-Policy', buildCsp(nonce));
+      res.headers.set('x-nonce', nonce);
+      return res;
+    }
+    // Protected route with no auth backend — send to /login.
+    const url = request.nextUrl.clone();
+    url.pathname = '/login';
+    url.searchParams.set('redirect', pathname);
+    return NextResponse.redirect(url);
+  }
+
   // For / and all protected routes, initialize Supabase and check auth
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl!,
+    supabaseAnonKey!,
     {
       cookies: {
         getAll() {

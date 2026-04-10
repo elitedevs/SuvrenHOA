@@ -11,12 +11,28 @@ export interface SessionData {
 
 // FE-03: SESSION_SECRET must be set — never fall back to a hardcoded string.
 // A publicly-visible default key allows anyone to forge valid session cookies.
-const sessionSecret = process.env.SESSION_SECRET;
-if (!sessionSecret || sessionSecret.length < 32) {
-  throw new Error(
-    'SESSION_SECRET env var is required and must be at least 32 characters. ' +
-    'Set it in your .env.local or deployment environment.'
-  );
+//
+// Build-safety: we intentionally do NOT throw at import time. Next.js collects
+// page data at build by loading every route module, and a throw here would
+// crash any build that doesn't bake SESSION_SECRET into the build stage
+// (e.g. docker multi-stage where env arrives at container-run time). We use
+// a 32-character placeholder for build; getSession() below re-validates at
+// request time so a misconfigured deployment still fails loudly — at the
+// request, not the build.
+const BUILD_PLACEHOLDER_SECRET = 'build-placeholder-secret-32chars!';
+const sessionSecret =
+  (process.env.SESSION_SECRET && process.env.SESSION_SECRET.length >= 32)
+    ? process.env.SESSION_SECRET
+    : BUILD_PLACEHOLDER_SECRET;
+
+function assertRealSecretAtRequestTime() {
+  const real = process.env.SESSION_SECRET;
+  if (!real || real.length < 32) {
+    throw new Error(
+      'SESSION_SECRET env var is required and must be at least 32 characters. ' +
+      'Set it in your .env.local or deployment environment.'
+    );
+  }
 }
 
 export const sessionOptions: SessionOptions = {
@@ -32,6 +48,7 @@ export const sessionOptions: SessionOptions = {
 };
 
 export async function getSession(): Promise<IronSession<SessionData>> {
+  assertRealSecretAtRequestTime();
   const cookieStore = await cookies();
   return getIronSession<SessionData>(cookieStore, sessionOptions);
 }

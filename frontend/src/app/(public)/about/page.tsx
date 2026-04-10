@@ -374,11 +374,11 @@ export default function AboutPage() {
                 Ready to bring real transparency<br />to your HOA?
               </h2>
               <p className="text-[rgba(245,240,232,0.50)] max-w-lg mx-auto mb-10 leading-relaxed">
-                Join the founding communities building the future of accountable
-                governance. 60 days free. No credit card. No blockchain knowledge required.
+                We&apos;re opening our doors slowly, by invitation, to a small
+                cohort of founding communities building the future of accountable governance.
               </p>
               <Link
-                href="/signup"
+                href="/waitlist"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                 style={{
                   background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
@@ -386,7 +386,7 @@ export default function AboutPage() {
                   boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                 }}
               >
-                Get Started Free
+                Reserve Your Seat
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

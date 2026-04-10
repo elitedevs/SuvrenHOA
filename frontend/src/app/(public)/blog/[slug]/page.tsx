@@ -243,16 +243,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             Ready to bring transparency to your HOA?
           </h3>
           <p className="text-[13px] text-[rgba(245,240,232,0.45)] mb-5">
-            60-day free trial. No credit card required. Setup in under 5 minutes.
+            Invitation only. A small cohort of founding communities. Leave your details and we&apos;ll reach out when the next seat opens.
           </p>
-          <Link href="/signup"
+          <Link href="/waitlist"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-sm transition-all hover:scale-[1.02]"
                 style={{
                   background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                   color: '#0C0C0E',
                   boxShadow: '0 0 24px rgba(176,155,113,0.25)',
                 }}>
-            Start Free Trial
+            Reserve Your Seat
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

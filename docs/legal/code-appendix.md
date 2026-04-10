@@ -1,7 +1,7 @@
 # CODE APPENDIX — SuvrenHOA Smart Contracts
 
-**Inventor:** Ryan Shanahan  
-**Assignee:** Suvren LLC  
+**Inventor:** Ryan Shanahan, Raleigh, North Carolina, United States  
+**Applicant:** Ryan Shanahan (pro se micro entity)  
 **Application:** Blockchain-Based Homeowners Association Governance System  
 **Date Prepared:** April 2026
 

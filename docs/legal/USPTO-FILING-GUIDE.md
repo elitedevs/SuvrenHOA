@@ -2,7 +2,7 @@
 ## SuvrenHOA — Blockchain-Based HOA Governance System
 
 **Inventor:** Ryan Shanahan, Raleigh, NC  
-**Applicant:** Suvren LLC (or Ryan Shanahan if LLC not yet formed)  
+**Applicant:** Ryan Shanahan (pro se micro entity)  
 **Date Prepared:** April 2026
 
 ---
@@ -17,11 +17,11 @@
 ### Verify Micro Entity Status
 You qualify as a **micro entity** if ALL of the following are true:
 - [ ] You haven't been named as an inventor on more than **4 prior U.S. patent applications**
-- [ ] Your gross income in the prior calendar year was **under ~$230,000** (adjusted periodically by USPTO — verify current threshold at filing time)
+- [ ] Your gross income in the prior calendar year was **under $251,190** (effective September 9, 2025 per 37 CFR 1.29(c))
 - [ ] You have **not assigned, granted, conveyed, or licensed** (and are not obligated to assign) rights in the invention to an entity with gross income over the threshold
 - [ ] The entity claiming micro entity status is not a large entity
 
-✅ Filing as micro entity saves **50%** on fees: **$160 instead of $320**.
+✅ Filing as micro entity saves **50%** on fees: **$65 instead of $130** (provisional application per 37 CFR 1.16(d)).
 
 ### Documents to Have Ready
 | File | Description |
@@ -35,7 +35,7 @@ You qualify as a **micro entity** if ALL of the following are true:
 ## Filing Steps
 
 ### Step 1 — Log Into Patent Center
-- URL: **https://patentcenter.uspto.gov**
+- URL: **https://patentcenter.uspto.gov** (all provisional applications must be filed via Patent Center since EFS-Web retirement in November 2023)
 - Sign in with your USPTO.gov credentials
 
 ### Step 2 — Start New Submission
@@ -55,16 +55,10 @@ You qualify as a **micro entity** if ALL of the following are true:
 > Add additional inventors if applicable. For SuvrenHOA, Ryan Shanahan is the sole inventor.
 
 ### Step 4 — Enter Applicant Information
-**If Suvren LLC is formed:**
-- Applicant Type: **Assignee (Legal Entity)**
-- Entity Name: **Suvren LLC**
-- City/State: Raleigh, NC
-- Entity Size: **Micro Entity** (see certification below)
-
-**If Suvren LLC is NOT yet formed:**
 - Applicant Type: **Inventor**
 - Name: **Ryan Shanahan**
-- You can assign to Suvren LLC after it's formed — the provisional establishes priority, not ownership
+- Filing as **pro se micro entity** (individual inventor filing without attorney)
+- Raleigh, NC, USA
 
 ### Step 5 — Upload Specification
 - Click **"Add Document"** → **"Specification"**
@@ -100,7 +94,7 @@ You qualify as a **micro entity** if ALL of the following are true:
 > ⚠️ False micro entity certification is fraud. If unsure, file as **small entity** (~$320) or consult an attorney.
 
 ### Step 9 — Pay Filing Fee
-- Fee: **$160** (micro entity provisional application, 2025 fee schedule — verify current amount)
+- Fee: **$65** (micro entity provisional application per 37 CFR 1.16(d), effective 2026)
 - Payment: Credit card accepted in Patent Center
 - Review order summary before submitting
 
@@ -160,8 +154,8 @@ The key patentable novelty in SuvrenHOA includes:
 4. Automated USDC yield generation (Aave integration) governed by risk tolerance levels
 5. Immutable document registry with cryptographic hash verification
 
-### Entity Formation
-If Suvren LLC is not yet formed at time of filing, file as individual inventor (Ryan Shanahan). After LLC formation, file an **Assignment** document with the USPTO transferring the provisional application to Suvren LLC. This is standard practice and preserves the priority date.
+### Sole Inventor Pro Se Filing
+Ryan Shanahan files as sole inventor without any corporate assignment. The priority date is established immediately upon filing. No separate assignment is required unless the inventor chooses to assign rights to an entity after priority is established.
 
 ### Confidentiality After Filing
 Once filed, do **not** publicly disclose the full patent specification before the non-provisional publishes (typically 18 months after non-provisional filing). NDAs should cover any third parties you show the technology to in the interim.
@@ -172,12 +166,12 @@ Once filed, do **not** publicly disclose the full patent specification before th
 
 | Fee Type | Micro Entity | Small Entity | Large Entity |
 |----------|-------------|--------------|--------------|
-| Provisional Application | ~$160 | ~$320 | ~$640 |
-| Non-Provisional Basic | ~$420 | ~$840 | ~$1,680 |
-| Search Fee | ~$285 | ~$570 | ~$1,140 |
-| Examination Fee | ~$185 | ~$370 | ~$740 |
+| Provisional Application | $65 | $130 | $260 |
+| Non-Provisional Basic | $420 | $840 | $1,680 |
+| Search Fee | $285 | $570 | $1,140 |
+| Examination Fee | $185 | $370 | ~$740 |
 
-> Fees are set by USPTO and adjusted periodically. Always verify at **https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule** before filing.
+> Micro-entity fees per 37 CFR 1.16(d); income threshold $251,190 effective Sep 9, 2025. Always verify at **https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule** before filing.
 
 ---
 

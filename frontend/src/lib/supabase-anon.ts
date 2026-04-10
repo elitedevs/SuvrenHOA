@@ -2,10 +2,12 @@ import { createClient } from '@supabase/supabase-js';
 
 // See lib/supabase.ts for the rationale on why we don't throw at import time.
 const BUILD_PLACEHOLDER_URL = 'https://build-placeholder.invalid';
+const BUILD_PLACEHOLDER_KEY = 'build-placeholder-key';
 
 const SUPABASE_URL =
   process.env.NEXT_PUBLIC_SUPABASE_URL || BUILD_PLACEHOLDER_URL;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const SUPABASE_ANON_KEY =
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || BUILD_PLACEHOLDER_KEY;
 
 /**
  * Server-side Supabase client using the anon key.

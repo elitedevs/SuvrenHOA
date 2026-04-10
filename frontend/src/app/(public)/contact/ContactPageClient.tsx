@@ -23,7 +23,7 @@ const CONTACT_INFO = [
 ];
 
 const QUICK_LINKS = [
-  { label: 'Start a free trial', href: '/signup' },
+  { label: 'Reserve your seat', href: '/waitlist' },
   { label: 'See our pricing', href: '/pricing' },
   { label: 'Read our security docs', href: '/security' },
   { label: 'Explore the demo', href: '/demo' },

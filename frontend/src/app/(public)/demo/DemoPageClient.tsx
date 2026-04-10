@@ -389,17 +389,17 @@ export default function DemoPageClient() {
                 Ready to try it yourself?
               </h2>
               <p className="text-[rgba(245,240,232,0.50)] max-w-lg mx-auto mb-8">
-                60 days free. No credit card. No blockchain knowledge required.
+                Invitation only. We&apos;re opening doors slowly to a small cohort of founding communities.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/signup"
+                <Link href="/waitlist"
                       className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                       style={{
                         background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                         color: '#0C0C0E',
                         boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                       }}>
-                  Start Free Trial
+                  Reserve Your Seat
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link href="/pricing"

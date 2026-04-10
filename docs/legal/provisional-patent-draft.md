@@ -1,700 +1,1049 @@
-# PROVISIONAL PATENT APPLICATION
+<!-- Source of truth restored from v7 PDF on 2026-04-09. Previous MD was stale by 12 claims. -->
 
----
-
-**IN THE UNITED STATES PATENT AND TRADEMARK OFFICE**
-
----
-
-## TITLE OF INVENTION
-
-**BLOCKCHAIN-BASED HOMEOWNERS ASSOCIATION GOVERNANCE SYSTEM WITH SOULBOUND PROPERTY TOKENS, TIERED CATEGORY-SPECIFIC QUORUM VOTING, AUTOMATED TREASURY ALLOCATION, IMMUTABLE DOCUMENT REGISTRY, AND COMPOSITE COMMUNITY HEALTH SCORING**
-
----
-
-## CROSS-REFERENCE TO RELATED APPLICATIONS
-
-This application does not claim priority to any prior application. This is an original provisional patent application.
-
----
+# SuvrenHOA Provisional Patent Application
 
 ## FIELD OF THE INVENTION
 
-The present invention relates generally to decentralized governance systems, and more particularly to a blockchain-based platform for homeowners association (HOA) management that employs soulbound non-fungible tokens (NFTs) as property ownership credentials and governance instruments, tiered category-specific quorum thresholds enforced via smart contracts, automated treasury allocation mechanisms, an immutable document registry integrated with permanent decentralized storage, and a composite algorithmic community health scoring system operating on a Layer 2 Ethereum-compatible blockchain network.
-
----
+The present invention relates to decentralized governance systems, and more particularly to
+blockchain-based homeowners association (HOA) management platforms utilizing soulbound
+non-fungible tokens (NFTs), tiered category-specific quorum voting mechanisms, automated
+treasury fund allocation with multiple spending pathways, immutable decentralized document
+registries, community micro-lending programs, and composite health scoring algorithms
+deployed on Layer 2 blockchain networks.
 
 ## BACKGROUND OF THE INVENTION
 
-Homeowners associations in the United States collectively manage over 358,000 communities representing more than 74 million residents and trillions of dollars in real estate value. Despite their scale and significance, traditional HOA governance systems suffer from systemic deficiencies that result in financial misconduct, record manipulation, disenfranchisement of homeowners, and lack of transparency.
+Traditional homeowners associations suffer from seven major systemic problems that limit
+their effectiveness:
+1. Opacity and Centralized Control. Governance decisions are made behind closed doors by
+board members with limited community oversight. Voting records, financial disclosures, and
+decision rationales are often unavailable or buried in paper archives. HOA members have no
+verifiable way to confirm that their votes were counted.
+2. Inflexible Voting Mechanisms. Most HOAs use simple majority voting for all decisions,
+treating a routine maintenance vote the same as a constitutional change. This fails to capture
+the differential urgency and risk profiles of different decision classes.
+3. Inefficient Treasury Management. HOA funds are often commingled across operational
+and reserve accounts, making it difficult to audit spending or enforce spending limits. There
+are no mechanisms for automated, transparent fund segregation or for community-based yield
+optimization.
+4. Document Management Fragmentation. Critical documents (CC&Rs, meeting minutes,
+budgets, resolutions) are scattered across paper files, email attachments, and multiple digital
+repositories. Verification of document authenticity and determination of supersession chains
+are manual and error-prone.
+5. Lack of Financial Flexibility for Dues Payments. HOA members facing temporary
+financial hardship have no option other than paying full dues in advance or accruing liens and
+penalties. There is no community-based lending mechanism to bridge short-term payment
+gaps.
+6. Inability to Assess Community Health Longitudinally. HOAs lack quantitative metrics to
+measure governance health, financial stability, and member satisfaction over time.
+Decision-making is reactive rather than data-driven.
+7. Poor Integration of Modern Technology. Most HOAs rely on legacy software that does
+not leverage blockchain, cryptographic verification, or decentralized networks. This leaves
+HOAs vulnerable to data loss, vendor lock-in, and inability to prove historical accuracy.
+Prior art in blockchain governance (e.g., Compound, Aave) addresses voting and treasury
+management, but does not solve the HOA-specific problems of property identity verification,
+soulbound ownership transfers, tiered governance categories, immutable document
+registration, dues-based lending, or composite health scoring integrated with on-chain treasury
+5
 
-**Problem 1: Financial Mismanagement and Embezzlement.** HOA financial fraud and embezzlement represent losses estimated to exceed $300 billion annually across the United States. Traditional HOA treasury management relies on paper checks, manual bookkeeping, and management company intermediaries who exercise unilateral control over association funds. Homeowners typically have no real-time visibility into dues collection rates, expenditure approvals, or fund balances. Reserve funds, intended for long-term capital expenditures such as roof replacement and pavement repair, are routinely co-mingled with or raided from operating accounts. Audits are periodic and expensive, and internal controls are often absent in smaller associations.
-
-**Problem 2: Document Manipulation and Record Alteration.** HOA management companies and boards have been documented altering, destroying, or selectively disclosing governing documents including Covenants, Conditions and Restrictions (CC&Rs), meeting minutes, contracts, and financial statements. Homeowners disputing enforcement actions frequently discover that the documents produced by management differ from versions they previously received. No immutable, verifiable record of community documents exists in conventional HOA management systems. This creates an environment of asymmetric information where management holds informational advantage over homeowners.
-
-**Problem 3: Governance Manipulation Through Low-Participation Quorum Exploitation.** Traditional HOA bylaws commonly establish single flat quorum thresholds (typically 10-20% of members) for all proposal categories, regardless of the significance of the matter being voted upon. This design flaw enables boards and management to push through consequential changes — including CC&R amendments, special assessments, and board composition changes — with minimal homeowner participation, often by holding votes at inconvenient times or with inadequate notice. Constitutional amendments affecting fundamental property rights may pass with the same threshold as routine maintenance approvals.
-
-**Problem 4: Proxy Vote Accumulation and Governance Capture.** In associations using traditional voting mechanisms, a single actor may accumulate unlimited proxy votes, enabling governance capture by well-resourced parties such as developers, management companies, or investor landlords. This violates the fundamental HOA principle of proportional democratic representation among property owners.
-
-**Problem 5: Lack of Objective Community Health Metrics.** Prospective homebuyers, lenders, and current residents have no standardized, objective metric for evaluating the governance quality or financial health of an HOA community. Current tools require access to manually compiled financial documents, audits, and meeting minutes that may be incomplete, outdated, or deliberately obscured.
-
-**Problem 6: Inefficiencies in Dues Collection and Allocation.** Manual dues collection processes are inefficient, error-prone, and susceptible to delayed allocation between operating and reserve funds. Automated payment processing with guaranteed, rules-based fund allocation does not exist in conventional HOA management systems.
-
-Prior art in blockchain voting systems has addressed some aspects of governance transparency but has not provided an integrated, HOA-specific system that combines property ownership tokenization with governance rights, tiered category-specific quorum enforcement, automated treasury management, permanent document registration, and community health scoring within a single coherent platform deployed on a production blockchain network.
-
-Accordingly, there exists a need in the art for a comprehensive blockchain-based HOA governance platform that addresses the foregoing deficiencies.
-
----
+data.
 
 ## SUMMARY OF THE INVENTION
 
-The present invention provides a blockchain-based homeowners association governance and management platform comprising five integrated inventive systems deployed on a Layer 2 Ethereum-compatible blockchain network.
+The SuvrenHOA platform is a comprehensive blockchain-based governance system designed
+specifically for homeowners associations. It consists of seven integrated inventive subsystems:
+1. Soulbound Property NFT System (PropertyNFT Contract). Each property is represented
+by a soulbound (non-transferable except through board-approved sales) ERC-721 token
+(tokenId = lotNumber). The token carries one voting power unit, ensuring one-lot-one-vote
+governance. Property metadata (lot number, street address, square footage, dues payment
+history) is stored on-chain. Transfer restrictions use a two-step approval mechanism: board
+approves a transfer, then the new owner executes the transfer transaction.
+2. Tiered Governance with Category-Specific Quorums (FaircroftGovernor Contract).
+Proposals are classified into four categories: Routine (15% quorum, simple majority, 2-day
+timelock), Financial (33% quorum, simple majority, 4-day timelock), Governance (51%
+quorum, simple majority, 4-day timelock), and Constitutional (67% quorum, 2/3
+supermajority, 7-day timelock). Quorum percentages, pass thresholds, and timelock delays are
+independently configurable per category. Rate limiting prevents proposal spam (max 10 active
+proposals at any time).
+3. Automated Treasury Management with Configurable Fund Segregation
+(FaircroftTreasury Contract). The Treasury maintains two internal ledgers: operating
+balance (80% by default, configurable via governance) and reserve balance. Dues are collected
+with automatic late fees (10% by default) and grace periods (30 days by default). Annual
+discount (5% by default) applies when members pay all four quarterly dues at once. Two
+expenditure paths exist: governance-gated (via Timelock) for planned spending, and
+emergency spending (TREASURER_ROLE only, per-period limit) for urgent costs.
+4. Immutable Document Registry with Dual Storage (DocumentRegistry Contract).
+Documents are registered with SHA-256 content hashes and stored on Arweave (permanent
+storage) and IPFS (decentralized access). Documents are categorized into 10 types (CC&Rs,
+Minutes, Budget, Amendment, Resolution, Financial, Architectural, Notice, Election, Other).
+Supersession chains are tracked, allowing the registry to identify the latest version of any
+document.
+5. Community Micro-Loan Program (DuesLending Contract). The Treasury reserve funds
+a community lending program for members facing temporary payment hardship. Loans are
+originated by the board, carry 5% annual interest (configurable), and are repaid in 2-12
+monthly installments. Loans pay dues directly to the Treasury on behalf of borrowers. During
+active loans, property tokens are locked to prevent transfer. Defaults are handled through
+governance, never through automated liquidation.
+7
 
-In a first aspect, the invention provides a soulbound property NFT governance system wherein each residential lot within a governed community is represented by a unique ERC-721 non-fungible token ("Property NFT") that simultaneously serves as a proof-of-ownership credential and a governance voting instrument. The Property NFT is "soulbound" in that token transfers are restricted by role-based access controls requiring explicit approval from authorized governance actors, preventing unauthorized transfer or accumulation of voting rights. Each Property NFT carries exactly one (1) unit of voting weight, implementing a one-lot-one-vote governance model that prevents whale accumulation. Property metadata including lot number, street address, and parcel square footage is stored immutably on-chain within the token's data structures.
-
-In a second aspect, the invention provides a tiered governance system with category-specific quorum thresholds and approval requirements. The system defines four (4) proposal categories — Routine, Financial, Governance, and Constitutional — each associated with distinct minimum quorum percentages and approval threshold percentages enforced at the smart contract level. Constitutional proposals require a supermajority quorum of sixty-seven percent (67%) and a supermajority approval threshold of sixty-six point seven percent (66.7%), while Routine proposals require a fifteen percent (15%) quorum with simple majority approval. A timelock mechanism delays execution of passed proposals, providing a review window and preventing flash governance attacks.
-
-In a third aspect, the invention provides an automated treasury management system that receives HOA dues payments in a U.S. Dollar-pegged stablecoin (USDC), automatically allocates incoming payments between an operating fund and a reserve fund according to a configurable split ratio (defaulting to 80% operating / 20% reserve), and enforces that all expenditures from treasury funds be authorized through the governance proposal system. The system supports both quarterly and annual payment schedules with a discount for annual prepayment.
-
-In a fourth aspect, the invention provides an immutable document registry wherein HOA governing documents are registered on-chain via a cryptographic content hash, with the full document content stored on a permanent, decentralized storage network (Arweave). The registry enables any party to verify whether a document file they possess matches the version registered on-chain by computing and comparing its hash. The registry supports document versioning and supersession relationships, maintaining a complete, tamper-evident audit trail of all community documents.
-
-In a fifth aspect, the invention provides a composite community health scoring algorithm that computes a real-time numerical health score between zero (0) and one hundred (100) for a governed community by weighting and combining five on-chain metrics: dues collection rate, treasury health ratio, governance participation rate, document compliance rate, and community size indicator.
-
----
+6. Treasury Yield Management Integration (TreasuryYield Contract). A
+YIELD_MANAGER_ROLE can deploy reserve funds to external yield-bearing protocols
+(e.g., Aave V3) and return yield to the Treasury. This allows the community to earn passive
+income on idle reserves while maintaining governance control. Risk tolerance levels
+(Conservative 30%, Moderate 50%, Aggressive 80%) cap the maximum percentage of reserves
+that may be deployed, and are configurable via governance vote.
+7. Composite Community Health Scoring Algorithm (HealthScorer Module). A
+computational module (implemented as an on-chain view function or off-chain data pipeline)
+calculates a composite health score from five weighted metrics: (a) Financial Health (40%):
+reserve-to-annual-dues ratio; (b) Governance Health (25%): proposal participation rate; (c)
+Compliance Health (20%): dues delinquency rate; (d) Member Retention (10%): membership
+churn rate; (e) Treasury Efficiency (5%): expenditure-to-budget variance. The health score
+trends over time provide early warning signals for financial stress or governance breakdown.
+Together, these seven subsystems enable HOA communities to transparently manage property
+ownership, make tiered governance decisions with category-appropriate quorum thresholds,
+allocate treasury funds flexibly, maintain immutable historical documents, provide financial
+relief through community lending, optimize idle capital through yield management, and assess
+community health longitudinally through quantitative scoring.
+8
 
 ## BRIEF DESCRIPTION OF THE DRAWINGS
 
-The accompanying drawings, which are incorporated in and constitute a part of this specification, illustrate preferred embodiments of the invention.
+FIG. 1 is a system architecture overview diagram showing the seven core smart contract
+modules deployed on Base Layer 2: PropertyNFT, FaircroftGovernor, FaircroftTreasury,
+DocumentRegistry, DuesLending, TreasuryYield, and HealthScorer, with external
+dependencies on Arweave, IPFS, and optional yield protocols.
+FIG. 2 is a PropertyNFT Lifecycle State Diagram showing the lifecycle of a property token
+from minting through active ownership, pending transfer, transfer approval, loan lock, and
+eventual transfer completion.
+FIG. 3 is a Governance Proposal State Machine diagram for the FaircroftGovernor contract,
+illustrating the four proposal categories (Routine, Financial, Governance, Constitutional) with
+their respective quorum thresholds, voting periods, and timelock delays.
+FIG. 4 is a Treasury Fund Flow Diagram showing the two-ledger structure (operating and
+reserve) with automatic dues splitting at configurable basis-point ratios, late fee application,
+annual discount mechanics, and two expenditure paths (governance-gated and emergency).
+FIG. 5 is a Document Registration and Verification Workflow diagram illustrating the
+hash-based on-chain storage with SHA-256 hashes, full documents on both Arweave
+(permanent) and IPFS (decentralized access), and the supersession tracking mechanism for
+document versioning.
+FIG. 6 is a Community Health Score Computation Diagram showing the calculation of the
+composite health score from five weighted metrics: Financial Health (40%), Governance
+Health (25%), Compliance Health (20%), Member Retention (10%), and Treasury Efficiency
+(5%), with interpretation bands.
+FIG. 7 is a Frontend Application Architecture diagram showing the Next.js App Router-based
+user interface for property management, governance participation, treasury access, document
+registry browsing, and health score monitoring.
+FIG. 8 is a DuesLending Loan Lifecycle State Machine diagram showing loan origination,
+payment-to-treasury routing, property token locking, repayment milestones, and default
+handling through governance.
+FIG. 9 is a TreasuryYield Deployment and Yield Cycle diagram showing deployment of
+reserve funds to external yield-bearing protocols, risk tolerance level configuration, yield
+harvesting, and crediting of returns to the reserve ledger.
+9
 
-**FIG. 1** is a system architecture diagram illustrating the five primary smart contract components (PropertyNFT, FaircroftGovernor, FaircroftTreasury, DocumentRegistry, and HealthScorer), their relationships to one another, their integration with the Base Layer 2 blockchain network, and the Arweave permanent storage network.
+## DETAILED DESCRIPTION OF THE INVENTION
 
-**FIG. 2** is a data flow diagram illustrating the lifecycle of a Property NFT from initial minting by an authorized administrator through metadata storage, voting power delegation, governance participation, and the restricted transfer process requiring board approval.
+I. SYSTEM OVERVIEW AND BLOCKCHAIN DEPLOYMENT CONTEXT
+The SuvrenHOA system is a comprehensive blockchain-based homeowners association
+management platform designed to operate on the Base Layer 2 network, an
+Ethereum-compatible optimistic rollup that provides high throughput and low transaction costs
+while maintaining security through Ethereum's mainnet. The platform comprises seven core
+smart contract modules written in Solidity ^0.8.24 that collectively implement the governance,
+treasury, property ownership, document management, lending, yield, and scoring subsystems
+described herein.
+A critical technical consideration for Layer 2 deployment is the unreliability of block.number
+for timing purposes. Unlike Ethereum mainnet, where block height increments predictably at
+12-second intervals, optimistic rollups like Base batch transactions and commit them to
+Ethereum at irregular intervals, making block.number unsuitable as a time reference. The
+system therefore implements EIP-6372 (Governor clock abstraction), which uses
+block.timestamp (the on-chain timestamp) as the authoritative timing clock for governance
+voting checkpoints, proposal deadlines, and timelock expirations. This ensures precise,
+deterministic timing semantics on Layer 2 networks.
+All basis-point calculations (percentages, thresholds, ratios) are performed using integer
+arithmetic in units of 1/100th of one percent (10,000 basis points = 100%), enabling exact
+results on blockchain virtual machines without floating-point operations. This is critical for
+security and auditability, as it eliminates rounding errors and enables deterministic
+reproducibility across different client implementations.
+10
 
-**FIG. 3** is a state machine diagram illustrating the lifecycle of a governance proposal through states: Pending, Active, Canceled, Defeated, Succeeded, Queued, Executed, and Expired, with transitions annotated by category-specific quorum and threshold conditions.
+II. SOULBOUND PROPERTY NFT SYSTEM (PROPERTYNFT CONTRACT)
+A. Overview and Role-Based Access Control
+The PropertyNFT contract is an ERC-721 non-fungible token (NFT) contract that represents
+property ownership within the HOA community. Each property is minted as a unique token
+with tokenId equal to the property's lot number, ensuring a 1:1 mapping between properties
+and tokens. Each token grants exactly one unit of voting power in governance proposals.
+The contract implements role-based access control (RBAC) following the OpenZeppelin
+AccessControl pattern. Key roles include: (1) REGISTRAR_ROLE, which can mint new
+property tokens and approve transfers from sellers to buyers; (2) GOVERNOR_ROLE, which
+can update governance parameters (such as whether soulbound restrictions are enabled); and
+(3) DEFAULT_ADMIN_ROLE, which can grant or revoke roles.
+In an alternative embodiment, the PropertyNFT contract defines additional specialized roles: a
+LENDING_ROLE held by the DuesLending contract for lock/unlock operations during active
+loans, and a SOULBOUND_ADMIN_ROLE (not granted by default; requires a Constitutional
+governance proposal to grant) for enabling or disabling the soulbound transfer restriction. In
+the preferred embodiment described herein, loan-lock operations are performed by the
+DuesLending contract via direct setLoanLock() function calls authorized at the contract level,
+and transfer-restriction configuration is managed through the GOVERNOR_ROLE via
+setTransfersRequireApproval().
+B. Soulbound Transfer Mechanism
+A defining feature of the PropertyNFT contract is the soulbound transfer restriction, which
+prevents property tokens from being transferred except through a board-approved process.
+This addresses the legal requirement that property sales require HOA approval (as commonly
+found in HOA CC&Rs) and ensures the HOA has an opportunity to enforce architectural
+guidelines, perform due diligence, or levy transfer fees on new owners.
+The transfer mechanism operates as a two-step process: (1) Seller initiates a transfer request,
+specifying the recipient address and agreed-upon transfer price; (2) The REGISTRAR_ROLE
+(typically a board-controlled address or automated oracle) reviews the request and, if
+approved, calls approvePendingTransfer() to authorize the transfer; (3) The recipient then calls
+completePendingTransfer() to finalize the transfer and receive the token.
+Internally, the contract maintains a pendingTransfers mapping that stores pending transfer
+requests as structs containing the current owner, new owner, expiration timestamp, and any
+associated metadata. This approach maintains compatibility with the standard ERC-721
+transfer interface while enforcing the soulbound restriction at the contract level.
+11
 
-**FIG. 4** is a data flow diagram illustrating the automated treasury allocation process: USDC payment receipt, the 80/20 operating/reserve fund split computation, fund segregation into separate accounting balances within the treasury contract, and the governance-gated expenditure withdrawal flow.
+C. Property Metadata and On-Chain Data Storage
+Each property token is associated with on-chain metadata stored as a PropertyInfo struct in a
+propertyData mapping (mapping(uint256 => PropertyInfo) propertyData), keyed by tokenId.
+The PropertyInfo struct includes the following fields: (1) lotNumber: the unique identifier
+matching the tokenId; (2) streetAddress: the property's physical address; (3) squareFootage:
+the size of the property; (4) duesAmount: the monthly or quarterly dues owed by this property;
+(5) paymentHistory: a chronological array of on-chain payment records. As used herein, the
+terms "PropertyInfo struct" and "propertyData mapping entry" are interchangeable, the former
+referring to the data type and the latter to the storage location.
+The on-chain metadata enables the governance system to make property-aware decisions (e.g.,
+tiering dues amounts by property size or location) and provides a complete, verifiable history
+of property ownership and payment compliance that is immutable once recorded on the
+blockchain.
+D. Voting Power Delegation and ERC-5805 Compliance
+The PropertyNFT contract implements the ERC-5805 standard (Extended Voting Delegation)
+to enable voting power management. Each token holder has voting power equal to 1
+(representing one property), and voting power can be delegated to another address via the
+delegate() function. This enables scenarios where a property owner may authorize a family
+member, property manager, or a designated representative to vote on their behalf.
+A critical UX improvement in the preferred embodiment is automatic delegation: when a
+property token is minted, voting power is automatically delegated to the property owner (via
+_delegateTokens(owner, 1)), and when a token is transferred to a new owner, voting power is
+automatically delegated to that new owner if the new owner has not previously configured a
+custom delegation. This eliminates the requirement for non-crypto-native users to manually
+call a delegate() function before their voting power becomes active in governance proposals.
+12
 
-**FIG. 5** is a diagram illustrating the document registration and verification workflow: document upload, SHA-256 hash computation, on-chain registration transaction, Arweave content upload, and the drag-and-drop client-side verification process that computes and compares a file hash against the on-chain record.
+III. TIERED GOVERNANCE WITH CATEGORY-SPECIFIC QUORUMS
+(FAIRCROFTGOVERNOR CONTRACT)
+A. Governance Categories and Quorum Thresholds
+The FaircroftGovernor contract implements a multi-category governance system that classifies
+proposals into four tiers based on their impact and urgency. Each category has independent
+quorum percentages, pass thresholds, voting delays, and timelock periods, enabling
+appropriate governance weight calibration.
+Category 1: Routine Proposals. Examples include minor maintenance approvals, community
+event scheduling, and operational decisions of limited financial or constitutional impact.
+Quorum requirement: 15% of total voting power (i.e., 15% of minted properties must vote).
+Voting threshold: simple majority (>50% of votes cast must be affirmative). Voting period: 2
+days. Timelock delay: 2 days. Rate limit: maximum 10 active proposals at any time.
+Category 2: Financial Proposals. Examples include annual budget approvals, expenditures
+exceeding a threshold (e.g., $10,000), reserve fund allocation, and treasurer appointment.
+Quorum requirement: 33% of total voting power. Voting threshold: simple majority. Voting
+period: 3 days. Timelock delay: 4 days.
+Category 3: Governance Proposals. Examples include architectural guideline amendments,
+enforcement policy changes, and rule modifications that do not alter the CC&Rs. Quorum
+requirement: 51% of total voting power. Voting threshold: simple majority. Voting period: 3
+days. Timelock delay: 4 days.
+Category 4: Constitutional Proposals. Examples include amendments to CC&Rs, changes to
+governance structure, dissolution of the HOA, and changes to the voting system itself. Quorum
+requirement: 67% of total voting power. Voting threshold: 2/3 supermajority (≥66.67% of
+votes cast must be affirmative). Voting period: 5 days. Timelock delay: 7 days.
+B. Voting Mechanics and Checkpoint-Based Voting Power Calculation
+When a proposal is created, a voting checkpoint is recorded at block.timestamp (per
+EIP-6372). All voting power calculations use the checkpoint timestamp to determine each
+voter's delegation state at the moment the proposal was created. This prevents double-voting
+and ensures voting power cannot be transferred after a proposal begins voting.
+Voting is conducted via the castVote() function, which accepts three possible votes per
+address: For (support = 1), Against (support = 0), and Abstain (support = 2). Votes are
+weighted by the voter's delegated voting power at the checkpoint timestamp. A voter cannot
+13
 
-**FIG. 6** is a scoring algorithm diagram showing the five weighted input metrics, their individual calculation formulas, the application of weighting coefficients, and the summation producing the composite community health score.
+vote multiple times.
+C. Proposal Execution and Timelock Integration
+Once a proposal passes voting (quorum met and threshold exceeded), it enters a timelock
+period before execution is permitted. The timelock is implemented via integration with a
+TimelockController contract (following OpenZeppelin's governance patterns), which queues
+the proposal transactions and enforces a delay before execution is possible.
+Only after the timelock delay expires can anyone call execute() on the proposal to trigger the
+queued transactions. This delay provides a period for community members to exit (by selling
+their property) if they strongly disagree with the proposal outcome, and provides time for
+emergency mechanisms (such as a Guardian role holding a multisig) to cancel erroneous
+proposals.
+D. Proposal Guardian and Emergency Cancellation
+In one embodiment, the FaircroftGovernor contract implements a Guardian mechanism via a
+GovernorProposalGuardian interface. A designated multisig address (e.g., 2-of-3 board
+members) can unilaterally cancel governance proposals after vote passage but before timelock
+execution. This provides an emergency kill-switch for proposals discovered to be erroneous or
+malicious, and prevents a coordinated attack in which a temporary quorum coalition passes a
+destructive proposal.
+The Guardian role is intentionally limited: it can only cancel proposals after they have passed
+voting (i.e., it cannot suppress unpopular proposals before voting occurs), and it operates only
+during the timelock delay period. This design balances safety with democratic principles.
+E. Rate Limiting and Proposal Spam Prevention
+To prevent proposal spam and denial-of-service attacks, the system enforces a rate limit: no
+more than 10 proposals may be in an active state (voting or queued for execution) at any time.
+Attempts to create a proposal when this limit is reached are rejected. This ensures governance
+resources remain focused and prevents voter fatigue.
+14
 
-**FIG. 7** is a block diagram of the frontend application architecture illustrating Next.js server and client component boundaries, wagmi/viem blockchain interaction hooks, RainbowKit wallet connection interface, and the data fetching patterns for on-chain state.
+IV. AUTOMATED TREASURY MANAGEMENT (FAIRCROFTTREASURY
+CONTRACT)
+A. Two-Ledger Accounting Structure
+The FaircroftTreasury contract maintains two internal ledgers representing distinct fund
+categories: (1) Operating Balance: funds allocated for regular operational expenses
+(maintenance, management, utilities); (2) Reserve Balance: funds designated for long-term
+capital projects, emergency repairs, and community lending programs.
+The default allocation is 80% to operating balance and 20% to reserve balance, configurable
+via governance vote. This structure provides transparency, enables different fiscal policies for
+different fund categories, and prevents commingling that complicates auditing.
+B. Dues Collection, Late Fees, Grace Periods, and Annual Discount
+Dues collection is automated via the collectDues() function, which processes payments from
+property owners. Each property has a configurable duesAmount (stored in PropertyNFT
+metadata) that may be paid on a monthly or quarterly basis.
+The system implements automatic late fee assessment: payments received after the due date
+incur a late fee equal to 10% of the dues amount (configurable via governance). Additionally, a
+grace period of 30 days (configurable) is provided before late fees are assessed, allowing
+members reasonable time to catch up on payments.
+An important feature is annual payment incentives: members who pay all four quarterly dues at
+once (or all 12 monthly dues at once) receive an automatic 5% discount (configurable) off the
+total dues amount. This incentivizes full-year commitments and improves cash flow
+predictability for the HOA.
+C. Automated Fund Splitting with Basis-Point Ratios
+When dues are collected, the Treasury immediately splits the payment between operating and
+reserve ledgers using the configurable basis-point ratio (default: 8000 basis points to operating,
+2000 basis points to reserve, totaling 10000 basis points = 100%). This automatic split occurs
+atomically in a single transaction, reducing transaction count and gas costs compared to
+multi-transaction approaches.
+For example, when $1,000 in dues is collected with the default 80/20 split: $800 is credited to
+operating balance and $200 to reserve balance. The split ratio is configurable via governance
+vote, enabling the community to dynamically adjust fund allocation policies.
+15
 
----
+D. Expenditure Pathways: Governance-Gated vs. Emergency Spending
+The Treasury implements two distinct expenditure pathways with different control
+mechanisms:
+Governance-Gated Expenditures. Planned expenses (maintenance projects, vendor
+contracts, capital improvements) require approval via a governance proposal that has passed
+voting and executed through the Timelock contract. This ensures community oversight and
+prevents unilateral executive spending.
+Emergency Expenditures. The TREASURER_ROLE (typically a board-appointed treasurer
+or automated oracle) has authority to spend funds for urgent, unforeseen costs (emergency
+repairs, temporary contractors) without awaiting governance approval. However, this authority
+is limited by per-period spending caps enforced by an emergencySpendingLimit parameter
+(configurable via governance) and a rolling period window. For example, if the emergency
+spending limit is set to $5,000 per calendar month, the treasurer can approve up to $5,000 in
+emergency spending in any given month, but exceeding that requires a governance vote.
+The spending period automatically resets when expired (e.g., at the end of each month),
+tracked by emergencyPeriodStart and emergencyPeriodDuration parameters. This design
+balances operational flexibility with democratic accountability.
+16
 
-## DETAILED DESCRIPTION OF PREFERRED EMBODIMENTS
+V. IMMUTABLE DOCUMENT REGISTRY WITH DUAL STORAGE
+(DOCUMENTREGISTRY CONTRACT)
+A. Hash-Based On-Chain Storage with Off-Chain Content
+The DocumentRegistry contract maintains an immutable registry of HOA documents (CC&Rs,
+meeting minutes, budgets, resolutions, architectural guidelines) without storing the full
+document content on-chain. Instead, each document is registered with a SHA-256 content
+hash, which requires only 32 bytes of storage per document.
+The actual document content is stored off-chain in a dual-storage architecture: (1) Arweave: a
+permanent, immutable storage network where documents are stored indefinitely; (2) IPFS: a
+decentralized peer-to-peer file system where documents are pinned for rapid, decentralized
+access. Both storage mechanisms provide cryptographic proof that the retrieved content
+matches the on-chain hash, ensuring authenticity.
+B. Document Categories and Metadata
+Each document is categorized into one of 10 types: (1) CC&Rs (Covenants, Conditions, and
+Restrictions); (2) Minutes (meeting minutes); (3) Budget (annual or quarterly budgets); (4)
+Amendment (amendments to governing documents); (5) Resolution (board or member
+resolutions); (6) Financial (financial statements, audit reports); (7) Architectural (architectural
+guidelines, design standards); (8) Notice (legal notices, correspondence); (9) Election (election
+materials, voting records); (10) Other (documents not fitting other categories).
+Document metadata stored on-chain includes: (1) contentHash: SHA-256 hash of the
+document; (2) documentType: category from the list above; (3) timestamp: the block
+timestamp at which the document was registered; (4) registrant: the address that registered the
+document; (5) arweaveId: the permanent Arweave transaction ID; (6) ipfsHash: the IPFS
+content identifier; (7) supersedes: the hash of the previous version (if this is an updated
+version).
+C. Supersession Chains and Version History
+To manage document versioning, the contract tracks supersession chains: when registering a
+new version of a document, the registrant specifies the hash of the previous version in the
+supersedes field. This creates a linked list of document versions, enabling the registry to
+identify the currently active version via a getLatestVersion() function that traverses the
+supersession chain.
+17
 
-The following detailed description sets forth specific embodiments of the invention. Those skilled in the art will recognize that the invention may be embodied in other forms without departing from the spirit of the disclosure.
+Example: CC&R v1.0 (hash A1) is registered. When amended, CC&R v2.0 (hash A2,
+supersedes A1) is registered. When further amended, CC&R v3.0 (hash A3, supersedes A2) is
+registered. Calling getLatestVersion(A1) traverses the chain and returns A3, identifying the
+current governing CC&Rs.
+D. Access Control and Registration Authority
+Documents may be registered by addresses holding a REGISTRAR_ROLE (typically board
+members or an automated document oracle). In alternative embodiments, governance
+proposals may authorize registration of documents, creating a fully democratic document
+management process where important documents require community voting before they
+become part of the official registry.
+18
 
-### I. SYSTEM OVERVIEW
+VI. COMMUNITY MICRO-LOAN PROGRAM (DUESLENDING CONTRACT)
+A. Loan Origination and Underwriting
+The DuesLending contract enables HOA members facing temporary financial hardship to
+borrow from the Treasury reserve to cover dues payments. This addresses a key problem in
+traditional HOAs where members unable to pay full dues immediately face liens, penalties,
+and potential foreclosure, even if their financial situation is temporary.
+Loans are originated by addresses holding a LOAN_ORIGINATOR_ROLE (typically board
+members or an approved lending committee). The originator creates a loan by specifying: (1)
+borrowerAddress: the property owner requesting the loan; (2) principal: the loan amount (in
+stablecoin or native currency); (3) termMonths: the repayment period (2-12 months); (4)
+interestRateBps: the annual interest rate in basis points (default 5%, = 500 bps). Once
+originated, the loan is funded from the Treasury reserve and begins accruing interest
+immediately.
+B. Payment-to-Treasury Routing and Automatic Dues Crediting
+A critical feature is that loan payments are routed directly to the Treasury on behalf of the
+borrower, not to the borrower for manual payment. When a borrower makes a monthly loan
+payment, the payment amount is automatically credited to the borrower's dues account in the
+Treasury. This prevents default-through-negligence and ensures that borrowed funds reliably
+translate to dues payments.
+Example: A member borrows $3,000 to cover 3 months of $1,000 monthly dues. In month 1,
+the borrower pays $1,100 (principal + interest). The Treasury credits $1,000 to the member's
+dues account (satisfying month 1 dues) and $100 to the reserve balance (as interest). The
+process repeats for months 2 and 3.
+C. Property Token Locking During Active Loans
+While a loan is active (not fully repaid), the borrower's property token is locked, preventing
+transfer. This protects the HOA's collateral interest: the HOA cannot pursue dues collection
+against a new owner after the property is sold, so the original owner must remain in place to
+complete repayment.
+Loan-lock operations are performed by the DuesLending contract via direct setLoanLock()
+function calls authorized at the contract level. When a loan is originated,
+setLoanLock(propertyTokenId, true) is called on the PropertyNFT contract, locking the token.
+When the loan is fully repaid, setLoanLock(propertyTokenId, false) is called to unlock the
+19
 
-The inventive system, referred to herein as the "SuvrenHOA Platform" or the "Platform," comprises a collection of Solidity smart contracts deployed on the Base blockchain network (a Layer 2 Ethereum-compatible network operated by Coinbase, Inc.) and a web frontend application. The smart contracts are written in Solidity version 0.8.24 and compiled with optimizer settings enabled. The frontend is built with Next.js version 16, React version 19, and utilizes the wagmi library (version 2.x) for Ethereum state management, the viem library for low-level contract interactions, and the RainbowKit library for wallet connection interfaces.
+token, enabling transfer.
+D. Default Handling Through Governance
+If a borrower fails to make scheduled payments, the loan is considered in default. However, the
+system does not implement automated liquidation (e.g., automatic foreclosure or asset seizure).
+Instead, default handling is managed entirely through governance. A Governance proposal is
+created to determine the appropriate remedy (payment plan restructuring, loan forgiveness,
+etc.), ensuring community oversight and preventing harsh unilateral penalties.
+E. Lending Exposure Limits
+The DuesLending contract limits total lending exposure via a maxLoanPoolBps parameter that
+caps outstanding loan principal as a percentage of the Treasury's reserve balance. For example,
+if maxLoanPoolBps is set to 5000 (50%) and the reserve balance is $100,000, total outstanding
+loan principal cannot exceed $50,000. This prevents over-allocation of community reserves to
+lending operations and maintains reserves for capital projects and emergencies.
+20
 
-The five primary smart contracts of the system are:
+VII. TREASURY YIELD MANAGEMENT INTEGRATION (TREASURYYIELD
+CONTRACT)
+A. Deployment to External Yield Protocols
+Reserve funds held by the Treasury may sit idle if not actively needed for operations or
+lending. The TreasuryYield contract provides a mechanism to deploy idle reserves to external
+yield-bearing protocols (e.g., Aave V3 lending markets) to earn passive income while
+maintaining governance control over risk exposure.
+A YIELD_MANAGER_ROLE (held by an automated oracle or trusted operator) can initiate
+deployments to approved yield protocols. Each deployment specifies: (1) protocol: the target
+protocol address (e.g., Aave V3 LendingPool); (2) amount: the reserve amount to deploy; (3)
+parameters: protocol-specific parameters (e.g., aToken to receive on Aave).
+B. Risk Tolerance Levels and Governance-Controlled Caps
+Deployments are subject to governance-controlled risk tolerance levels that cap the maximum
+percentage of reserves that may be deployed at any time. Three risk levels are defined:
+Conservative (30%): Maximum 30% of reserve balance may be deployed. Suitable for
+risk-averse communities or those with limited operational history.
+Moderate (50%): Maximum 50% of reserve balance may be deployed. Suitable for mature
+communities with established governance.
+Aggressive (80%): Maximum 80% of reserve balance may be deployed. Suitable for
+communities with strong financial positions and high yield-seeking strategies.
+Risk tolerance levels are configurable via governance vote, enabling the community to
+dynamically adjust yield strategy as circumstances change.
+C. Yield Harvesting and Return Crediting
+When yield accrues on deployed reserves, the YIELD_MANAGER_ROLE can harvest the
+yield by calling harvestYield() on the deployed protocol (or the protocol's harvesting
+mechanism) and receive the accrued interest or rewards. These returns are credited back to the
+Treasury reserve balance via a creditYieldReturn() function, increasing the total reserve pool
+for future use.
+21
 
-1. **PropertyNFT** — ERC-721 non-fungible token contract implementing the soulbound property ownership and governance credential system.
-2. **FaircroftGovernor** — OpenZeppelin Governor-derived contract implementing the tiered category-specific quorum governance system.
-3. **FaircroftTreasury** — USDC payment processing and automated fund allocation contract.
-4. **DocumentRegistry** — On-chain document hash registry with Arweave integration.
-5. **HealthScorer** — Composite community health score computation contract (or off-chain computation reading on-chain state).
+Example: The Treasury deploys $50,000 to Aave at 50% risk tolerance. Over 3 months, $500
+in interest accrues. The yield manager harvests this interest and credits it to the reserve,
+increasing the reserve from $100,000 to $100,500 (assuming no other reserve changes).
+D. Governance Oversight and Withdrawal Mechanisms
+Although the YIELD_MANAGER_ROLE has operational authority to deploy and manage
+yield, governance retains oversight authority. A governance proposal can vote to (1) withdraw
+deployed reserves from a protocol; (2) change the active protocol or strategy; (3) lower the risk
+tolerance level to reduce yield-taking; or (4) establish new yield allocation policies.
+22
 
-### II. INVENTION 1: SOULBOUND PROPERTY NFT GOVERNANCE SYSTEM
+VIII. COMPOSITE COMMUNITY HEALTH SCORING (HEALTHSCORER
+MODULE)
+A. Five-Metric Scoring Framework
+Traditional HOAs lack quantitative metrics to measure governance health, financial stability,
+and member satisfaction over time. The HealthScorer smart contract computes a composite
+health score from five weighted metrics:
+Financial Health (40% weighting): Measured by the reserve-to-annual-dues ratio. The ratio
+is calculated as (reserveBalance / annualDuesRequired), where annualDuesRequired is the
+total dues owed by all properties over 12 months. A reserve equal to 1 year of dues is
+considered healthy. The score is capped at 10,000 basis points (100%) to prevent
+overweighting of over-capitalized reserves.
+Governance Health (25% weighting): Measured by proposal participation rate. The
+participation rate is (total votes cast / (total voting power * number of proposals)) over a
+rolling 12-month period. Communities where members actively vote are deemed healthier than
+those with low participation.
+Compliance Health (20% weighting): Measured by dues delinquency rate. The delinquency
+rate is (number of delinquent properties / total properties). A delinquency rate above a
+threshold (e.g., 5%) signals financial stress or governance breakdown.
+Member Retention (10% weighting): Measured by membership churn rate. The churn rate is
+(properties sold / total properties) over a rolling 12-month period. High churn can signal
+dissatisfaction or deteriorating community conditions.
+Treasury Efficiency (5% weighting): Measured by expenditure-to-budget variance. The
+variance is (actual expenditures - budgeted expenditures) / budgeted expenditures. A variance
+near 0% indicates efficient resource utilization; significant variance (positive or negative)
+signals planning or execution problems.
+B. Score Computation and Interpretation Bands
+The composite health score is computed by multiplying each metric score (0-10,000 basis
+points) by its weighting percentage and summing the results:
+HealthScore = (financialHealth * 4000 + governanceHealth * 2500 +
+complianceHealth * 2000 + retentionHealth * 1000 + efficiencyHealth * 500) /
+10000
+23
 
-#### A. Contract Architecture
+The resulting score ranges from 0-10,000 basis points, representing 0%-100.00%. Four
+interpretation bands provide qualitative guidance:
+Excellent (9000-10000): The community is financially healthy, members are engaged in
+governance, compliance is strong, retention is high, and budget execution is precise. No
+immediate concerns.
+Good (7500-8900): The community is in good standing with minor areas for improvement.
+Monitoring is recommended.
+Fair (6000-7400): The community faces moderate challenges (e.g., declining participation,
+rising delinquency). Proactive governance action is recommended.
+Poor (below 6000): The community faces significant challenges (e.g., reserve depletion, high
+delinquency, governance breakdown). Urgent corrective action is needed.
+C. Implementation as On-Chain View Function or Off-Chain Pipeline
+In one embodiment, the HealthScorer is implemented as a Solidity view contract that reads
+on-chain state from the Treasury and PropertyNFT contracts:
+function getHealthScore() external view returns (uint256) {
+    // Financial Health (40% weight)
+    uint256 annualDuesRequired = propertyNFT.totalMinted() * averageDuesAmount *
+12;
+    uint256 financialHealth = annualDuesRequired > 0
+        ? (treasury.reserveBalance() * 10000) / annualDuesRequired
+        : 10000;
+    if (financialHealth > 10000) financialHealth = 10000;
+    
+    // Governance Health (25% weight)
+    uint256 totalProposals = governor.proposalCount();
+    uint256 totalVotesCast = governor.totalVotesCast();
+    uint256 totalMembers = propertyNFT.totalMinted();
+    uint256 governanceHealth = (totalProposals > 0 && totalMembers > 0)
+        ? (totalVotesCast * 10000) / (totalMembers * totalProposals)
+        : 0;
+    if (governanceHealth > 10000) governanceHealth = 10000;
+    
+    // Compliance Health (20% weight)
+    uint256 delinquent = treasury.countDelinquentMembers();
+    uint256 complianceHealth = totalMembers > 0
+        ? ((totalMembers - delinquent) * 10000) / totalMembers
+        : 0;
+    
+    // Member Retention (10% weight)
+    uint256 propertiesSold = propertyNFT.transferCountLast12Months();
+    uint256 retentionHealth = totalMembers > 0
+        ? ((totalMembers - propertiesSold) * 10000) / totalMembers
+        : 10000;
+    if (retentionHealth > 10000) retentionHealth = 10000;
+24
 
-The PropertyNFT contract inherits from the following OpenZeppelin base contracts: `ERC721`, `ERC721Enumerable`, `ERC721URIStorage`, `EIP712`, `ERC721Votes`, and `AccessControl`. The combined inheritance provides ERC-721 token functionality, enumerable token indexing, per-token URI metadata storage, EIP-712 typed structured data hashing for permit-style signatures, and the ERC-5805 Votes extension that enables checkpoint-based vote delegation compatible with the OpenZeppelin Governor framework.
-
-The contract defines the following roles using the `AccessControl` role-based permission system:
-
-```solidity
-bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-bytes32 public constant TRANSFER_APPROVER_ROLE = keccak256("TRANSFER_APPROVER_ROLE");
-bytes32 public constant METADATA_UPDATER_ROLE = keccak256("METADATA_UPDATER_ROLE");
-```
-
-`DEFAULT_ADMIN_ROLE` (inherited from `AccessControl`) is assigned to the deploying governance multisig address.
-
-#### B. Property Metadata Storage
-
-Each property is associated with a `PropertyData` struct stored in a contract-level mapping:
-
-```solidity
-struct PropertyData {
-    uint256 lotNumber;
-    string streetAddress;
-    uint256 squareFootage;
-    bool isActive;
-    uint256 mintTimestamp;
+    
+    // Treasury Efficiency (5% weight)
+    uint256 budgeted = treasury.annualBudget();
+    uint256 actual = treasury.annualExpenditures();
+    uint256 variance = budgeted > 0
+        ? (abs(actual - budgeted) * 10000) / budgeted
+        : 0;
+    uint256 efficiencyHealth = variance < 10000 ? 10000 - variance : 0;
+    
+    // Weighted composite
+    uint256 score = (financialHealth * 4000 + governanceHealth * 2500 +
+        complianceHealth * 2000 + retentionHealth * 1000 + efficiencyHealth *
+500) / 10000;
+    return score;
 }
-
-mapping(uint256 tokenId => PropertyData) public propertyData;
-```
-
-Property metadata is redundantly stored both in the `PropertyData` struct (for on-chain query efficiency) and encoded in a JSON metadata document conforming to the ERC-721 metadata standard, with the `tokenURI` pointing to an Arweave-hosted immutable JSON file. The `tokenURI` value is set at mint time and may be updated by `METADATA_UPDATER_ROLE` to reflect property data corrections, with update events emitted for auditability.
-
-#### C. Soulbound Transfer Restriction
-
-The soulbound property of Property NFTs is implemented by overriding the `_update` function (the internal transfer hook in OpenZeppelin ERC721 v5.x), which is invoked on all token transfers, mints, and burns:
-
-```solidity
-function _update(
-    address to,
-    uint256 tokenId,
-    address auth
-) internal override(ERC721, ERC721Enumerable, ERC721Votes) returns (address) {
-    address from = _ownerOf(tokenId);
-    
-    // Allow mints (from == address(0)) and burns (to == address(0))
-    // For transfers between non-zero addresses, require TRANSFER_APPROVER_ROLE
-    if (from != address(0) && to != address(0)) {
-        if (!hasRole(TRANSFER_APPROVER_ROLE, msg.sender)) {
-            revert TransferNotApproved(tokenId, from, to);
-        }
-    }
-    
-    return super._update(to, tokenId, auth);
-}
-```
-
-This override ensures that Property NFTs cannot be transferred on secondary markets, cannot be used as collateral (preventing forced liquidation transfers), and cannot be accumulated by any actor without explicit board approval. The only actors that may call the transfer function with effect are those holding the `TRANSFER_APPROVER_ROLE`, which is managed through the governance process itself, creating a self-reinforcing governance loop.
-
-#### D. One-Lot-One-Vote Enforcement
-
-The `ERC721Votes` base contract implements vote weight as the count of tokens held by an address. Because Property NFTs are soulbound, each property owner address holds exactly one (1) Property NFT (one lot), resulting in exactly one (1) unit of voting weight per household. This is further enforced by the minting function:
-
-```solidity
-function mintProperty(
-    address to,
-    uint256 lotNumber,
-    string calldata streetAddress,
-    uint256 squareFootage,
-    string calldata tokenURI_
-) external onlyRole(MINTER_ROLE) returns (uint256) {
-    require(balanceOf(to) == 0, "Address already holds a Property NFT");
-    
-    uint256 tokenId = _nextTokenId++;
-    _safeMint(to, tokenId);
-    _setTokenURI(tokenId, tokenURI_);
-    
-    propertyData[tokenId] = PropertyData({
-        lotNumber: lotNumber,
-        streetAddress: streetAddress,
-        squareFootage: squareFootage,
-        isActive: true,
-        mintTimestamp: block.timestamp
-    });
-    
-    emit PropertyMinted(tokenId, to, lotNumber, streetAddress);
-    return tokenId;
-}
-```
-
-The `require(balanceOf(to) == 0)` check prevents minting a second Property NFT to any address that already holds one, enforcing the one-lot-one-vote invariant at the smart contract level.
-
-#### E. Vote Delegation
-
-Voting power under the `ERC721Votes` extension must be actively delegated to be counted in governance proposals. A property owner delegates their voting weight by calling `delegate(address delegatee)` or `delegateBySig(...)` for gasless delegation. Owners may delegate to themselves (the typical case) or to another address (proxy voting). Because the system is soulbound, delegated voting power cannot exceed one (1) per property, preventing the accumulation of voting power through token purchase.
-
-### III. INVENTION 2: TIERED GOVERNANCE WITH CATEGORY-SPECIFIC QUORUMS
-
-#### A. Proposal Category System
-
-The `FaircroftGovernor` contract extends OpenZeppelin's `Governor`, `GovernorSettings`, `GovernorCountingSimple`, `GovernorVotes`, `GovernorVotesQuorumFraction`, and `GovernorTimelockControl` base contracts, with custom overrides implementing the category-specific quorum system.
-
-The four proposal categories are defined as an enumeration:
-
-```solidity
-enum ProposalCategory {
-    Routine,       // 0: Maintenance, minor decisions
-    Financial,     // 1: Budget items, expenditures
-    Governance,    // 2: Rule changes, board composition
-    Constitutional // 3: CC&R amendments, fundamental changes
-}
-```
-
-Each category is associated with a `CategoryConfig` struct:
-
-```solidity
-struct CategoryConfig {
-    uint256 quorumNumerator;      // Quorum as percentage numerator (basis points /100)
-    uint256 approvalThreshold;    // Required approval percentage (basis points /100)
-    uint256 timelockDelay;        // Seconds between passage and execution
-    string description;
-}
-```
-
-The default category configurations at deployment are:
-
-| Category       | Quorum Numerator | Approval Threshold | Timelock Delay |
-|----------------|------------------|--------------------|----------------|
-| Routine        | 15               | 51                 | 1 day          |
-| Financial      | 33               | 51                 | 2 days         |
-| Governance     | 51               | 51                 | 3 days         |
-| Constitutional | 67               | 67                 | 7 days         |
-
-A mapping associates each proposal ID with its category at creation time:
-
-```solidity
-mapping(uint256 proposalId => ProposalCategory) public proposalCategories;
-```
-
-#### B. Proposal Creation with Category Assignment
-
-The `propose` function is overridden to accept an additional `ProposalCategory` parameter:
-
-```solidity
-function proposeWithCategory(
-    address[] memory targets,
-    uint256[] memory values,
-    bytes[] memory calldatas,
-    string memory description,
-    ProposalCategory category
-) public returns (uint256) {
-    uint256 proposalId = super.propose(targets, values, calldatas, description);
-    proposalCategories[proposalId] = category;
-    emit ProposalCategorySet(proposalId, category);
-    return proposalId;
-}
-```
-
-#### C. Category-Specific Quorum Override
-
-The `quorum(uint256 blockNumber)` function is overridden to return the category-appropriate quorum for each proposal:
-
-```solidity
-function quorum(uint256 proposalId) public view returns (uint256) {
-    ProposalCategory category = proposalCategories[proposalId];
-    CategoryConfig memory config = categoryConfigs[category];
-    uint256 totalSupply = token().getPastTotalSupply(proposalSnapshot(proposalId));
-    return (totalSupply * config.quorumNumerator) / 100;
-}
-```
-
-This override replaces the flat quorum fraction used by `GovernorVotesQuorumFraction` with a per-proposal lookup that enforces the category-appropriate minimum participation threshold.
-
-#### D. Category-Specific Approval Threshold Override
-
-The `_voteSucceeded` function is overridden to enforce category-specific approval thresholds:
-
-```solidity
-function _voteSucceeded(uint256 proposalId) internal view override returns (bool) {
-    ProposalCategory category = proposalCategories[proposalId];
-    CategoryConfig memory config = categoryConfigs[category];
-    
-    (uint256 againstVotes, uint256 forVotes, ) = proposalVotes(proposalId);
-    uint256 totalVotes = forVotes + againstVotes;
-    
-    if (totalVotes == 0) return false;
-    
-    // Check approval threshold (forVotes / totalVotes >= approvalThreshold / 100)
-    return (forVotes * 100) >= (totalVotes * config.approvalThreshold);
-}
-```
-
-#### E. Quorum Satisfaction Check Override
-
-The `_quorumReached` function is overridden to use the proposal-category-specific quorum:
-
-```solidity
-function _quorumReached(uint256 proposalId) internal view override returns (bool) {
-    (, uint256 forVotes, uint256 abstainVotes) = proposalVotes(proposalId);
-    return quorum(proposalId) <= forVotes + abstainVotes;
-}
-```
-
-#### F. Timelock Integration
-
-The `FaircroftGovernor` integrates with OpenZeppelin's `TimelockController` contract. Upon proposal passage, the governor queues the proposal's call data with a minimum delay corresponding to the category's `timelockDelay`. The timelock delay provides a window during which homeowners can observe passed proposals before execution and, if governance rules allow, contest or cancel execution. For Constitutional proposals, a seven-day delay is enforced, providing substantial review time for changes to foundational community rules.
-
-### IV. INVENTION 3: AUTOMATED TREASURY MANAGEMENT WITH SPLIT ALLOCATION
-
-#### A. Contract Architecture
-
-The `FaircroftTreasury` contract manages all HOA financial flows. It interacts with the USDC ERC-20 token contract (USDC deployed on Base at a known address) and enforces the automated allocation split, payment schedule logic, and governance-gated expenditure system.
-
-#### B. Fund Segregation
-
-The treasury maintains separate internal accounting balances for two funds:
-
-```solidity
-uint256 public operatingFundBalance;
-uint256 public reserveFundBalance;
-```
-
-These balances are internal accounting variables maintained within a single contract that holds the actual USDC token balance, providing logical fund segregation without requiring separate contract deployments or token transfers between accounts.
-
-#### C. Automated 80/20 Allocation
-
-The `payDues` function processes incoming USDC payments and automatically allocates them between funds:
-
-```solidity
-uint256 public constant OPERATING_SPLIT_BPS = 8000;  // 80.00%
-uint256 public constant RESERVE_SPLIT_BPS = 2000;     // 20.00%
-uint256 public constant BPS_DENOMINATOR = 10000;
-
-function payDues(bool isAnnual) external nonReentrant {
-    uint256 amount;
-    
-    if (isAnnual) {
-        amount = ANNUAL_DUES_AMOUNT;  // 5% discount applied at constant definition
-    } else {
-        amount = QUARTERLY_DUES_AMOUNT;
-    }
-    
-    // Transfer USDC from payer to treasury
-    usdc.safeTransferFrom(msg.sender, address(this), amount);
-    
-    // Compute split
-    uint256 operatingPortion = (amount * OPERATING_SPLIT_BPS) / BPS_DENOMINATOR;
-    uint256 reservePortion = amount - operatingPortion;  // Remainder prevents rounding loss
-    
-    // Update internal accounting
-    operatingFundBalance += operatingPortion;
-    reserveFundBalance += reservePortion;
-    
-    // Record payment
-    paymentRecords[msg.sender].push(PaymentRecord({
-        amount: amount,
-        timestamp: block.timestamp,
-        isAnnual: isAnnual,
-        periodCovered: _currentPeriod()
-    }));
-    
-    emit DuesPaid(msg.sender, amount, operatingPortion, reservePortion, isAnnual);
-}
-```
-
-The use of basis points (BPS) arithmetic ensures integer arithmetic precision. The reserve portion is computed as `amount - operatingPortion` rather than `(amount * RESERVE_SPLIT_BPS) / BPS_DENOMINATOR` to prevent any rounding discrepancy from resulting in unaccounted USDC within the contract.
-
-#### D. Payment Schedule and Discount
-
-Annual dues are set at a five percent (5%) discount relative to four quarterly payments:
-
-```solidity
-uint256 public constant QUARTERLY_DUES_AMOUNT = 200e6;    // $200.00 USDC (6 decimals)
-uint256 public constant ANNUAL_DUES_AMOUNT = 760e6;       // $760.00 USDC (5% discount)
-// 4 × $200 = $800; 5% discount: $800 × 0.95 = $760
-```
-
-The contract tracks payment status per property owner address, enabling querying of delinquency status for both health scoring and enforcement purposes.
-
-#### E. Governance-Gated Expenditures
-
-All expenditures from treasury funds require an executed governance proposal. The `executeExpenditure` function is callable only by the `TimelockController` address (i.e., only upon successful governance execution):
-
-```solidity
-function executeExpenditure(
-    address recipient,
-    uint256 amount,
-    FundType fundType,
-    string calldata description
-) external onlyRole(EXECUTOR_ROLE) nonReentrant {
-    if (fundType == FundType.Operating) {
-        require(operatingFundBalance >= amount, "Insufficient operating funds");
-        operatingFundBalance -= amount;
-    } else {
-        require(reserveFundBalance >= amount, "Insufficient reserve funds");
-        reserveFundBalance -= amount;
-    }
-    
-    usdc.safeTransfer(recipient, amount);
-    
-    emit ExpenditureExecuted(recipient, amount, fundType, description, block.timestamp);
-}
-```
-
-The `EXECUTOR_ROLE` is held exclusively by the `TimelockController` contract address, ensuring that no human actor can directly withdraw funds regardless of their role level. Every expenditure generates an immutable on-chain event log entry.
-
-### V. INVENTION 4: IMMUTABLE DOCUMENT REGISTRY WITH ARWEAVE INTEGRATION
-
-#### A. Document Data Structures
-
-The `DocumentRegistry` contract stores document registration records using the following data structures:
-
-```solidity
-struct DocumentRecord {
-    bytes32 contentHash;          // SHA-256 hash of document content
-    string arweaveTransactionId;  // Arweave TxID where full document is stored
-    string documentTitle;
-    DocumentCategory category;
-    uint256 registrationTimestamp;
-    address registeredBy;
-    uint256 supersededBy;         // Token ID of superseding document (0 if current)
-    uint256 supersedes;           // Token ID of document this one supersedes (0 if original)
-    bool isActive;
-}
-
-mapping(uint256 documentId => DocumentRecord) public documents;
-uint256 private _nextDocumentId;
-```
-
-The `DocumentCategory` enumeration classifies documents:
-
-```solidity
-enum DocumentCategory {
-    CCR,              // Covenants, Conditions & Restrictions
-    Bylaws,
-    MeetingMinutes,
-    Budget,
-    AnnualReport,
-    Contract,
-    Amendment,
-    Resolution,
-    Other
-}
-```
-
-#### B. Document Registration
-
-Documents are registered by authorized roles (board members, management) by submitting a content hash and Arweave transaction ID:
-
-```solidity
-function registerDocument(
-    bytes32 contentHash,
-    string calldata arweaveTxId,
-    string calldata title,
-    DocumentCategory category,
-    uint256 supersedes
-) external onlyRole(REGISTRAR_ROLE) returns (uint256) {
-    require(contentHash != bytes32(0), "Invalid content hash");
-    require(bytes(arweaveTxId).length > 0, "Arweave TxID required");
-    
-    uint256 documentId = _nextDocumentId++;
-    
-    documents[documentId] = DocumentRecord({
-        contentHash: contentHash,
-        arweaveTransactionId: arweaveTxId,
-        documentTitle: title,
-        category: category,
-        registrationTimestamp: block.timestamp,
-        registeredBy: msg.sender,
-        supersededBy: 0,
-        supersedes: supersedes,
-        isActive: true
-    });
-    
-    // If this supersedes a prior document, mark it as superseded
-    if (supersedes != 0) {
-        require(documents[supersedes].isActive, "Prior document not active");
-        documents[supersedes].supersededBy = documentId;
-        documents[supersedes].isActive = false;
-        emit DocumentSuperseded(supersedes, documentId);
-    }
-    
-    emit DocumentRegistered(documentId, contentHash, arweaveTxId, category, msg.sender);
-    return documentId;
-}
-```
-
-The content hash is computed client-side using the SubtleCrypto Web API (`crypto.subtle.digest('SHA-256', fileBuffer)`) before submission, ensuring the hash matches what a third-party verifier would independently compute from the document file.
-
-#### C. Document Verification
-
-Any party may verify a document by calling:
-
-```solidity
-function verifyDocument(
-    uint256 documentId,
-    bytes32 claimedHash
-) external view returns (bool matches, DocumentRecord memory record) {
-    record = documents[documentId];
-    matches = (record.contentHash == claimedHash);
-}
-```
-
-The frontend implements a drag-and-drop verification interface: a user drags a document file onto the verification widget, the browser computes the SHA-256 hash client-side (no server upload required), and the application queries the contract to determine whether the hash matches any registered document record. This enables any homeowner to instantly verify whether a document they hold matches the version registered on-chain, without requiring technical blockchain knowledge.
-
-#### D. Arweave Permanent Storage Integration
-
-Documents are stored on the Arweave network, a blockchain-based permanent storage protocol that guarantees data persistence through an endowment-based economic model. The Arweave transaction ID stored on-chain enables any user to retrieve the full document from the Arweave gateway network (`https://arweave.net/{txId}`). Because the document content hash is registered on-chain simultaneously, the combination of (Arweave TxID → document content) + (on-chain contentHash → verified hash) provides a two-layer verifiability guarantee: the document retrieved from Arweave can be independently verified against the immutable on-chain hash.
-
-### VI. INVENTION 5: COMPOSITE COMMUNITY HEALTH SCORING ALGORITHM
-
-#### A. Algorithm Overview
-
-The Community Health Scoring system computes a normalized score in the range [0, 100] representing the overall governance quality and financial health of a governed HOA community. The score is computed from five weighted component metrics, each derived entirely from on-chain state, enabling trustless, real-time computation without dependence on off-chain oracles or manual data entry.
-
-#### B. Component Metrics and Weighting
-
-The five components and their weights are:
-
-| Component             | Weight | Max Points |
-|-----------------------|--------|------------|
-| Dues Collection Rate  | 0.30   | 30         |
-| Treasury Health       | 0.25   | 25         |
-| Governance Participation | 0.20 | 20        |
-| Document Compliance   | 0.15   | 15         |
-| Community Size        | 0.10   | 10         |
-
-#### C. Component Calculation Formulas
-
-**Dues Collection Rate (max 30 points):**
-
-```
-duesScore = (activePayingMembers / totalActiveMembers) × 30
-```
-
-Where `activePayingMembers` is the count of Property NFT holders whose payment records indicate a payment within the current or immediately prior period, and `totalActiveMembers` is the count of active (non-burned) Property NFTs.
-
-**Treasury Health (max 25 points):**
-
-```
-reserveRatio = reserveFundBalance / (reserveFundBalance + operatingFundBalance)
-treasuryScore = min(reserveRatio / targetReserveRatio, 1.0) × 25
-```
-
-Where `targetReserveRatio` is a governance-configurable parameter (default: 0.20, representing the 20% reserve allocation target).
-
-**Governance Participation Rate (max 20 points):**
-
-```
-recentProposals = proposals voted on in last 90 days
-avgParticipation = mean(participationRate(p) for p in recentProposals)
-participationScore = avgParticipation × 20
-```
-
-Where `participationRate(p) = (forVotes(p) + againstVotes(p) + abstainVotes(p)) / totalSupplyAtProposalSnapshot(p)`.
-
-**Document Compliance Rate (max 15 points):**
-
-```
-requiredDocTypes = [CCR, Bylaws, MeetingMinutes, Budget]
-presentDocTypes = count(requiredDocTypes where activeDocument exists)
-documentScore = (presentDocTypes / len(requiredDocTypes)) × 15
-```
-
-The system checks whether at least one active document of each required category exists in the DocumentRegistry.
-
-**Community Size (max 10 points):**
-
-```
-memberCount = totalSupply() of PropertyNFT
-sizeScore = min(memberCount / scalingTarget, 1.0) × 10
-```
-
-Where `scalingTarget` is a configurable constant (default: 50 properties), reflecting that larger communities with more voting participants have more robust governance.
-
-#### D. Composite Score Computation
-
-```solidity
-function computeHealthScore(
-    address propertyNFT,
-    address treasury,
-    address governor,
-    address documentRegistry
-) external view returns (uint256 score, ComponentScores memory components) {
-    components.duesScore = _computeDuesScore(propertyNFT, treasury);
-    components.treasuryScore = _computeTreasuryScore(treasury);
-    components.participationScore = _computeParticipationScore(governor, propertyNFT);
-    components.documentScore = _computeDocumentScore(documentRegistry);
-    components.sizeScore = _computeSizeScore(propertyNFT);
-    
-    score = components.duesScore
-          + components.treasuryScore
-          + components.participationScore
-          + components.documentScore
-          + components.sizeScore;
-    
-    // score is in range [0, 100] by construction
-}
-```
-
-The composite score is bounded to [0, 100] by construction, as each component is bounded to its respective maximum and the maximum components sum to 100.
-
-### VII. FRONTEND APPLICATION ARCHITECTURE
-
-The frontend application is built with Next.js version 16 utilizing the App Router architecture, implementing React Server Components for data fetching and static rendering and React Client Components for interactive blockchain interactions.
-
-Blockchain state is accessed through wagmi hooks (`useReadContract`, `useWriteContract`, `useWaitForTransactionReceipt`) that wrap viem's contract read/write primitives. The RainbowKit library provides the wallet connection UI supporting MetaMask, Coinbase Wallet, WalletConnect, and other EIP-1193-compatible browser wallets.
-
-The application implements thirty-one (31) or more distinct routes covering governance proposal creation and voting, property registration management, treasury dashboards, document registration and verification, and community health score display.
-
----
-
-## CLAIMS
-
-**Claim 1.** A computer-implemented system for blockchain-based homeowners association governance, the system comprising:
-a non-fungible token (NFT) contract deployed on a blockchain network, the NFT contract configured to mint unique property tokens, each property token representing a distinct residential lot, wherein each property token carries exactly one unit of voting weight;
-a transfer restriction mechanism within the NFT contract that prevents transfer of property tokens without authorization from a designated role, rendering the property tokens soulbound;
-a governance contract deployed on the blockchain network, the governance contract configured to receive votes cast using voting weight derived from held and delegated property tokens and to tally votes to determine proposal outcomes; and
-a treasury contract deployed on the blockchain network, the treasury contract configured to receive due payments and automatically allocate received payments between an operating fund and a reserve fund according to a predefined split ratio.
-
-**Claim 2.** The system of Claim 1, wherein the NFT contract further comprises on-chain property metadata storage including at least a lot number, a street address, and a parcel square footage associated with each property token.
-
-**Claim 3.** The system of Claim 1, wherein the transfer restriction mechanism comprises an override of the ERC-721 token transfer internal function that reverts any transfer transaction not executed by an address holding a designated transfer approver role in an access control registry.
-
-**Claim 4.** The system of Claim 1, wherein the governance contract is further configured to classify each governance proposal into one of a plurality of proposal categories, each proposal category associated with a distinct minimum quorum threshold and a distinct minimum approval threshold.
-
-**Claim 5.** The system of Claim 4, wherein the plurality of proposal categories comprises at least: a routine category associated with a first quorum threshold of approximately fifteen percent (15%) of total voting supply; a financial category associated with a second quorum threshold of approximately thirty-three percent (33%) of total voting supply; a governance category associated with a third quorum threshold of approximately fifty-one percent (51%) of total voting supply; and a constitutional category associated with a fourth quorum threshold of approximately sixty-seven percent (67%) of total voting supply.
-
-**Claim 6.** The system of Claim 5, wherein the constitutional category is further associated with an approval threshold requiring that affirmative votes represent at least sixty-six point seven percent (66.7%) of all votes cast on a constitutional proposal.
-
-**Claim 7.** The system of Claim 4, wherein the governance contract further comprises a timelock mechanism that enforces a minimum delay period between the passage of a governance proposal and the execution of the proposal's encoded on-chain actions, wherein the minimum delay period varies by proposal category.
-
-**Claim 8.** The system of Claim 1, wherein the split ratio is eighty percent (80%) to the operating fund and twenty percent (20%) to the reserve fund, and wherein the operating and reserve fund balances are maintained as separate internal accounting variables within a single treasury contract that holds actual token balances.
-
-**Claim 9.** The system of Claim 1, wherein the treasury contract is further configured to accept due payments in a U.S. Dollar-pegged stablecoin token, and wherein the treasury contract supports at least two payment schedule options comprising a quarterly payment option and an annual payment option, and wherein the annual payment option is associated with a discount relative to the aggregate of four quarterly payments.
-
-**Claim 10.** The system of Claim 1, further comprising a document registry contract deployed on the blockchain network, the document registry contract configured to store a cryptographic content hash of a governance document on-chain and to store a reference to a location on a permanent decentralized storage network where the full document content is accessible.
-
-**Claim 11.** The system of Claim 10, wherein the document registry contract is further configured to associate each registered document with a document category, and to maintain versioning relationships between documents through supersession references that identify a prior document superseded by a current document.
-
-**Claim 12.** The system of Claim 10, wherein the permanent decentralized storage network is the Arweave network, and wherein the reference stored on-chain comprises an Arweave transaction identifier.
-
-**Claim 13.** The system of Claim 10, further comprising a client-side document verification interface configured to: receive a document file provided by a user; compute a cryptographic hash of the document file entirely within a user's browser environment without uploading the document to a server; and compare the computed hash against a content hash stored in the document registry contract to determine whether the provided document matches the registered version.
-
-**Claim 14.** The system of Claim 1, further comprising a health scoring module configured to compute a composite numerical health score for the governed community by: computing a dues collection component score based on a ratio of current-period paying members to total active property token holders; computing a treasury health component score based on a ratio of the reserve fund balance to a target reserve fund allocation; computing a governance participation component score based on an average voter turnout across recent governance proposals; computing a document compliance component score based on a presence of required document categories in a document registry; computing a community size component score based on a count of active property tokens relative to a scaling target; and summing the component scores, each multiplied by a predefined weighting coefficient, to produce the composite health score in a range of zero to one hundred.
-
-**Claim 15.** The system of Claim 14, wherein the weighting coefficients are: thirty percent (30%) for the dues collection component; twenty-five percent (25%) for the treasury health component; twenty percent (20%) for the governance participation component; fifteen percent (15%) for the document compliance component; and ten percent (10%) for the community size component.
-
-**Claim 16.** The system of Claim 1, wherein all voting operations, proposal submissions, treasury transactions, and document registrations are recorded as immutable transaction log entries on the blockchain network, creating a tamper-evident audit trail accessible to any party.
-
-**Claim 17.** The system of Claim 1, wherein the governance contract further comprises an enforcement mechanism that prevents any individual address from accumulating voting weight exceeding one unit per represented property, and wherein voting weight may be delegated to another address but the delegated weight is bounded by the number of soulbound property tokens held by the delegating address.
-
-**Claim 18.** A computer-implemented method for tokenized homeowners association governance, the method comprising:
-minting, by a smart contract executing on a blockchain, a non-fungible property token associated with a residential lot, the property token encoding property metadata on-chain and carrying one unit of voting weight;
-restricting, by the smart contract, transfer of the property token such that the token may only be transferred upon authorization by an address holding a designated transfer approval role;
-receiving, by a governance smart contract, a governance proposal associated with a proposal category selected from a plurality of predefined categories;
-applying, by the governance smart contract, a quorum threshold and an approval threshold corresponding to the assigned proposal category to evaluate whether the proposal succeeds; and
-automatically allocating, by a treasury smart contract, an incoming dues payment between an operating fund balance and a reserve fund balance according to a predefined split ratio without requiring manual intervention.
-
-**Claim 19.** The method of Claim 18, further comprising:
-computing a cryptographic hash of a governance document;
-storing the cryptographic hash in a document registry smart contract on the blockchain;
-storing the document content at a permanent decentralized storage address; and
-verifying, in response to a user-provided file, whether the file's computed hash matches a hash stored in the document registry.
-
-**Claim 20.** The method of Claim 18, further comprising:
-reading, from one or more smart contracts on the blockchain, current values of dues collection rate, treasury reserve ratio, governance proposal participation rate, document category coverage, and active property token count; and
-computing, from the read values and predefined weighting coefficients, a composite community health score bounded between zero and one hundred.
-
-**Claim 21.** A non-transitory computer-readable medium storing smart contract bytecode that, when executed by a blockchain virtual machine, implements:
-a property token registry maintaining a one-to-one mapping between residential lot identifiers and non-fungible token identifiers, wherein each token carries one unit of voting weight and wherein transfers of tokens between non-zero addresses are reverted unless the transaction originates from an authorized transfer approver address;
-a governance proposal system that associates each submitted proposal with a category and enforces category-specific minimum participation thresholds and minimum approval thresholds independently of other proposal categories; and
-a treasury allocation system that, upon receipt of a stablecoin payment, immediately and automatically partitions the payment between an operating fund accounting variable and a reserve fund accounting variable at a predetermined ratio.
-
-**Claim 22.** The non-transitory computer-readable medium of Claim 21, wherein the property token registry further maintains on-chain structured data for each token comprising at least a lot number field of unsigned integer type, a street address field of string type, and a square footage field of unsigned integer type.
-
-**Claim 23.** The non-transitory computer-readable medium of Claim 21, wherein the governance proposal system further implements a timelock delay between proposal passage and proposal execution, the timelock delay being a function of the proposal's assigned category, with higher-impact categories associated with longer timelock delays.
-
-**Claim 24.** The non-transitory computer-readable medium of Claim 21, wherein expenditures from the treasury are executable only upon receipt of an execution call from a timelock controller contract whose execution is gated by successful completion of a governance vote, such that no human actor may unilaterally withdraw funds from the treasury.
-
----
-
-## ABSTRACT
-
-A blockchain-based homeowners association (HOA) governance platform deployed on a Layer 2 Ethereum-compatible network comprises five integrated inventive components. First, a soulbound property NFT system mints ERC-721 tokens representing individual residential lots, wherein each token carries one unit of voting weight, transfers require role-based board approval preventing unauthorized accumulation, and property metadata is stored on-chain. Second, a tiered governance system classifies proposals into Routine (15% quorum), Financial (33% quorum), Governance (51% quorum), and Constitutional (67% quorum, 66.7% approval) categories, enforcing category-specific participation and approval thresholds at the smart contract level with category-variable timelock delays. Third, an automated treasury management system receives HOA dues in USDC stablecoin and immediately allocates payments at an 80%/20% operating/reserve split, with all expenditures gated by governance execution, creating complete financial transparency and eliminating embezzlement risk. Fourth, an immutable document registry stores cryptographic content hashes of HOA documents on-chain while referencing full document content stored on the Arweave permanent decentralized storage network, with a browser-side drag-and-drop verification interface enabling any party to instantly verify document authenticity. Fifth, a composite community health scoring algorithm computes a real-time score from zero to one hundred by weighting five on-chain metrics: dues collection rate (30%), treasury health (25%), governance participation (20%), document compliance (15%), and community size (10%), providing a single objective metric for community governance quality.
-
----
-
-*This provisional patent application is filed for the purpose of establishing a priority date. It is not examined and does not by itself result in the grant of a patent. A corresponding non-provisional application must be filed within twelve (12) months of this provisional application's filing date to claim the benefit of this filing date.*
-
----
-
-**Inventors:** [To be identified in non-provisional application]  
-**Filing Date:** [Date of filing]  
-**Docket No.:** SUVREN-HOA-001-PROV
-
----
-
-*DISCLAIMER: This document is a draft provisional patent application prepared for internal review purposes. It should be reviewed and filed by a licensed patent attorney or patent agent. The claims and disclosure herein reflect the inventors' understanding of the inventions and should be professionally evaluated for patentability, prior art clearance, and claim scope before filing.*
+Alternatively, in an off-chain embodiment, the HealthScorer is implemented as a data
+aggregation pipeline (using Chainlink Functions, Gelato, or similar oracle infrastructure) that
+reads on-chain state, computes metrics off-chain, and publishes the health score to the
+blockchain via an oracle contract. The off-chain approach enables more complex computations
+(e.g., rolling averages over historical data) without incurring high on-chain gas costs.
+D. Longitudinal Trending and Early Warning Signals
+The true power of the health score emerges from longitudinal trending. By computing and
+recording the health score monthly (or quarterly), the community gains visibility into whether
+health is improving or deteriorating. A sharp drop in health score (e.g., from Excellent to Good
+in a single period) signals an emerging problem that warrants investigation.
+Example: A community's health score has been Excellent (9500) for 12 months. In month 13,
+it drops to 8200 (Good). Investigating this drop, the board discovers that delinquency has risen
+from 2% to 8%, suggesting members are facing economic hardship. The board can proactively
+offer dues restructuring or activate the community lending program before the situation
+escalates.
+25
+
+CLAIMS
+What is claimed is:
+1. A homeowners association governance and treasury management system, comprising: a
+Layer 2 optimistic rollup network executing a plurality of interoperating smart contracts as
+recited herein; a PropertyNFT smart contract implementing ERC-721 soulbound property
+tokens with one voting power unit per property and two-step governance-approved transfer
+mechanisms via a pendingTransfers mapping; a FaircroftGovernor smart contract
+implementing four proposal categories (Routine, Financial, Governance, Constitutional) with
+independently configurable basis-point quorum percentages and basis-point voting thresholds,
+and including a GovernorProposalGuardian interface that can cancel a passed proposal during
+a timelock window prior to execution; a FaircroftTreasury smart contract maintaining two
+internal ledgers (operating and reserve) with automatic dues splitting at configurable
+basis-point ratios, late fee assessment, grace periods, and two expenditure pathways
+comprising a governance-gated path and an emergency path with per-period spending limits; a
+DocumentRegistry smart contract storing SHA-256 document hashes on-chain with full
+content on both Arweave and IPFS, document-type categorization, and supersession-chain
+tracking that links each new document to the prior version it replaces; a DuesLending smart
+contract originating community micro-loans with direct payment routing to the
+FaircroftTreasury smart contract and locking the borrower's property token via a
+setLoanLock() call to the PropertyNFT smart contract during an active loan term; a
+TreasuryYield smart contract enabling reserve-balance deployment to an external Aave V3
+yield protocol with governance-controlled risk tolerance levels comprising a Conservative
+level, a Moderate level, and an Aggressive level corresponding to maximum deployment caps
+in basis points; and a HealthScorer smart contract computing a composite community health
+score from five weighted metrics comprising Financial weighted at 40%, Governance
+weighted at 25%, Compliance weighted at 20%, Retention weighted at 10%, and Efficiency
+weighted at 5%, the score being persisted on-chain and queryable via a view function.
+2. The system of claim 1, wherein the PropertyNFT smart contract further comprises: a
+REGISTRAR_ROLE that can mint property tokens and approve transfers from sellers to
+buyers; a GOVERNOR_ROLE that can update governance parameters; and wherein loan-lock
+operations during active loans are performed by the DuesLending smart contract via direct
+setLoanLock() function calls authorized at the contract level.
+3. The system of claim 1, wherein the FaircroftGovernor contract implements voting
+checkpoints using EIP-6372 timestamp-based clocks to accommodate Layer 2 networks where
+block.number is unreliable, and wherein voting power at the checkpoint timestamp determines
+each voter's weight in governance proposals.
+26
+
+4. The system of claim 1, wherein the FaircroftGovernor contract enforces rate limiting of
+maximum 10 active proposals at any time to prevent proposal spam and denial-of-service
+attacks.
+5. The system of claim 1, wherein the FaircroftTreasury contract implements automatic late fee
+assessment of 10% (configurable) applied after a grace period of 30 days (configurable) when
+dues payments are received after the due date.
+6. The system of claim 1, wherein the FaircroftTreasury contract implements annual payment
+incentives providing a 5% discount (configurable) when members pay all four quarterly dues
+at once, incentivizing full-year commitments and improving cash flow predictability.
+7. The system of claim 1, wherein the FaircroftTreasury contract implements emergency
+spending authority for a TREASURER_ROLE within per-period limits enforced by an
+emergencySpendingLimit parameter and a rolling period window that automatically resets
+when expired.
+8. The system of claim 1, wherein the DocumentRegistry contract maintains supersession
+chains enabling version tracking of documents such that getLatestVersion() traverses a
+supersession chain to identify the currently active version.
+9. The system of claim 1, wherein the DocumentRegistry contract categorizes documents into
+10 types: CC&Rs (Covenants, Conditions, and Restrictions), Minutes, Budget, Amendment,
+Resolution, Financial, Architectural, Notice, Election, and Other.
+10. The system of claim 1, wherein the DuesLending contract originates loans specifying
+principal amount, repayment term in months (2-12), and annual interest rate in basis points,
+and wherein the contract automatically credits loan payments to the Treasury dues account on
+behalf of the borrower.
+11. The system of claim 1, wherein the DuesLending contract limits total lending exposure via
+a maxLoanPoolBps parameter capping outstanding principal as a percentage of the Treasury
+reserve balance.
+12. The system of claim 1, wherein default handling on loans in the DuesLending contract is
+managed entirely through governance proposals rather than automated liquidation, ensuring
+community oversight of remedy determination.
+13. The system of claim 1, wherein the TreasuryYield contract implements three risk tolerance
+levels (Conservative 30%, Moderate 50%, Aggressive 80%) that cap the maximum percentage
+of reserves deployable to external yield protocols.
+27
+
+14. The system of claim 1, wherein yield harvested from deployed reserves in the
+TreasuryYield contract is credited back to the reserve balance, increasing the total pool for
+future use.
+15. The system of claim 1, wherein the HealthScorer smart contract computes Financial Health
+as the reserve-to-annual-dues ratio, capped at 10,000 basis points.
+16. The system of claim 1, wherein the HealthScorer smart contract computes Governance
+Health as the proposal participation rate measured over a rolling 12-month period.
+17. The system of claim 1, wherein the HealthScorer smart contract computes Compliance
+Health as the inverse of the dues delinquency rate.
+18. The system of claim 1, wherein the TreasuryYield smart contract deploys reserve funds to
+external yield-bearing protocols, wherein governance-controlled risk tolerance levels
+(Conservative capping deployment at 30% of reserves, Moderate at 50%, Aggressive at 80%)
+define maximum deployment percentages of reserve funds, and wherein yield earned is
+credited back to the reserve balance via a creditYieldReturn() function.
+19. The system of claim 1, wherein the FaircroftGovernor smart contract implements a
+Guardian mechanism via a GovernorProposalGuardian interface, granting a designated
+multisig address the ability to unilaterally cancel governance proposals after vote passage but
+before timelock execution, providing an emergency kill-switch for proposals discovered to be
+erroneous or malicious.
+20. The system of claim 1, wherein the DuesLending smart contract limits total lending
+exposure via a maxLoanPoolBps parameter that caps outstanding loan principal as a
+percentage of the FaircroftTreasury reserve balance, preventing over-allocation of community
+reserves to lending operations.
+21. The system of claim 1, wherein the PropertyNFT smart contract further defines a
+LENDING_ROLE held by the DuesLending smart contract for lock/unlock operations during
+active loans, and a SOULBOUND_ADMIN_ROLE for enabling or disabling soulbound
+transfer restrictions, providing finer-grained role-based access control separation between
+lending operations, soulbound administration, and general registration functions.
+28
+
+22. A computer-implemented method, comprising: executing, on a Layer 2 optimistic rollup
+network, a set of smart contracts to perform the operations recited herein; minting property
+tokens via a PropertyNFT smart contract, with each token representing one property and one
+voting power unit, and recording the resulting balances in a soulbound ERC-721 ledger;
+classifying governance proposals into four categories with independent basis-point quorum
+thresholds and category-specific voting delays via a FaircroftGovernor smart contract;
+collecting member dues and automatically splitting the received funds between operating and
+reserve ledgers of a FaircroftTreasury smart contract at configurable basis-point ratios;
+applying late fees after a grace period and offering annual discounts for pre-paid annual dues;
+registering governing documents with SHA-256 content hashes stored on-chain via a
+DocumentRegistry smart contract and storing full content on both Arweave and IPFS;
+originating community micro-loans via a DuesLending smart contract with repayment routed
+directly to the FaircroftTreasury and the borrower's property token locked via a setLoanLock()
+call to the PropertyNFT smart contract during an active loan term; deploying a portion of
+reserve-ledger funds to an external Aave V3 yield protocol via a TreasuryYield smart contract
+subject to a governance-selected risk tolerance level; and computing, by a HealthScorer smart
+contract, a composite community health score from five weighted metrics comprising
+Financial, Governance, Compliance, Retention, and Efficiency.
+23. The method of claim 22, further comprising tracking document version history via a
+supersedes field in each Document struct, wherein registering a new version of a document
+creates a linked list of document versions, and wherein a getLatestVersion() function traverses
+the supersession chain to identify the currently active version.
+24. The method of claim 22, further comprising automatically delegating voting power to the
+property owner upon minting via an autoDelegateOnMint configuration, and automatically
+delegating voting power to new recipients upon transfer if the recipient has not previously
+configured a custom delegation, thereby eliminating the requirement for non-crypto-native
+users to manually call a delegate() function.
+25. The method of claim 22, further comprising managing emergency expenditures via a
+TREASURER_ROLE within per-period spending limits enforced by an
+emergencySpendingLimit parameter and a rolling period window tracked by
+emergencyPeriodStart and emergencyPeriodDuration, wherein the spending period
+automatically resets when expired.
+26. The method of claim 22, further comprising deploying a portion of the reserve ledger
+balance to an external yield-bearing protocol pursuant to a governance-configured risk
+tolerance level that caps the deployable portion at one of three values selected from a
+Conservative cap of 30%, a Moderate cap of 50%, and an Aggressive cap of 80%, harvesting
+accrued yield from the external protocol, and crediting harvested yield back to the reserve
+ledger balance.
+29
+
+27. A non-transitory computer-readable medium storing instructions that, when executed by a
+processor, cause the processor to: deploy, on a Layer 2 optimistic rollup network, a
+PropertyNFT smart contract implementing soulbound ERC-721 tokens with role-based access
+control for minting and two-step governance-approved transfer via a pendingTransfers
+mapping; deploy a FaircroftGovernor smart contract implementing four proposal categories
+with independent basis-point quorum and voting threshold parameters and a
+GovernorProposalGuardian interface that can cancel a passed proposal during a timelock
+window; deploy a FaircroftTreasury smart contract maintaining two ledgers (operating and
+reserve) with automatic basis-point dues splitting, late fee assessment, grace periods, and an
+emergency expenditure path with per-period spending limits; deploy a DocumentRegistry
+smart contract storing SHA-256 document hashes on-chain with full content stored on both
+Arweave and IPFS and supersession-chain tracking; deploy a DuesLending smart contract
+originating community micro-loans with automatic Treasury payment routing and property
+token locking via a setLoanLock() call to the PropertyNFT smart contract during an active loan
+term; deploy a TreasuryYield smart contract enabling reserve-balance deployment to an
+external Aave V3 yield protocol with governance-controlled risk tolerance levels comprising
+Conservative, Moderate, and Aggressive; and deploy a HealthScorer smart contract computing
+a composite community health score from five weighted metrics comprising Financial
+weighted at 40%, Governance weighted at 25%, Compliance weighted at 20%, Retention
+weighted at 10%, and Efficiency weighted at 5%.
+28. The medium of claim 27, wherein the instructions further cause the processor to implement
+voting checkpoints using EIP-6372 timestamp-based clocks to accommodate Layer 2 networks
+where block.number is unreliable.
+29. The medium of claim 27, wherein the instructions further cause the processor to implement
+automatic late fee assessment of 10% (configurable) applied after a grace period of 30 days
+(configurable) on overdue dues payments.
+30. The medium of claim 27, wherein the instructions further cause the processor to implement
+annual payment incentives providing a 5% discount (configurable) for members paying all
+quarterly dues at once.
+31. The medium of claim 27, wherein the instructions further cause the processor to implement
+emergency spending authority for a TREASURER_ROLE within per-period limits enforced
+by an emergencySpendingLimit parameter and a rolling period window tracked by
+emergencyPeriodStart and emergencyPeriodDuration.
+32. The medium of claim 27, wherein the instructions further cause the processor to maintain
+supersession chains for documents, enabling identification of the currently active version via
+traversal of a supersession chain.
+30
+
+33. The medium of claim 27, wherein the instructions further cause the processor to lock
+property tokens during active loans and unlock them upon full repayment, preventing transfer
+of properties encumbered by community lending.
+34. The medium of claim 27, wherein the instructions further cause the processor to compute a
+composite health score from five weighted metrics (Financial 40%, Governance 25%,
+Compliance 20%, Retention 10%, Efficiency 5%), providing longitudinal visibility into
+community health trends.
+35. The medium of claim 27, wherein the instructions further cause the processor to: deploy
+reserve funds to an external yield protocol with governance-controlled risk tolerance levels
+that cap maximum deployment as a percentage of total reserves, harvest accrued yield, and
+credit returns to the reserve balance.
+36. The medium of claim 27, wherein the instructions further cause the processor to designate
+a guardian address capable of unilaterally canceling queued governance proposals before
+timelock execution, providing a safety mechanism against erroneous or malicious proposals
+that have passed the voting process.
+31
+
+ABSTRACT
+SuvrenHOA is a blockchain-based homeowners association governance platform combining
+seven integrated subsystems: soulbound property NFTs (PropertyNFT), tiered
+category-specific quorum voting (FaircroftGovernor), automated treasury management with
+configurable fund segregation (FaircroftTreasury), immutable document registry with
+Arweave/IPFS storage (DocumentRegistry), community micro-loan program for dues relief
+(DuesLending), treasury yield management integration (TreasuryYield), and composite
+community health scoring (HealthScorer). Deployed on Layer 2 (Base) using Solidity ^0.8.24,
+EIP-6372 timestamp-based clocks for L2 compatibility, and role-based AccessControl for
+governance. The system enables transparent, efficient HOA governance with member
+participation, flexible treasury management, and financial relief mechanisms.
+32
+
+PROVISIONAL PATENT APPLICATION FILING NOTICE
+This is a provisional patent application filed under 35 U.S.C. Section 111(b). This application
+establishes an effective filing date but is not examined. Within 12 months, a non-provisional
+application must be filed to establish final patent rights. The claims in a subsequent
+non-provisional application may be broader or narrower than those presented herein.
+INVENTOR DECLARATION
+The undersigned sole inventor declares that he has reviewed the foregoing specification and
+authorizes the filing of this provisional patent application. To the best of his knowledge and
+belief, this application accurately describes the invention claimed and the manner and process
+of making and using it. The inventor further declares that he believes himself to be the original
+inventor of the subject matter claimed and that he has not previously assigned, granted,
+conveyed, or licensed any rights in this invention to any other party.
+BEST MODE STATEMENT
+The Detailed Description of Preferred Embodiments above sets forth the best mode
+contemplated by the inventor for carrying out the invention as of the filing date. Where
+alternative embodiments are described, they are presented as functional equivalents and not as
+preferred over the embodiments expressly identified as preferred. The inventor reserves the
+right to amend the claims in any subsequent non-provisional application to recite either the
+preferred embodiment or any disclosed alternative.
+DOCKET NUMBER: SUVREN-HOA-001-PROV
+INVENTOR AND APPLICANT: Ryan Shanahan, Raleigh, North Carolina (pro se)
+SIGNED: ____________________________ DATE: ______________
+33
+
+## What is claimed is:
+
+1. A homeowners association governance and treasury management system, comprising: a
+Layer 2 optimistic rollup network executing a plurality of interoperating smart contracts as
+recited herein; a PropertyNFT smart contract implementing ERC-721 soulbound property
+tokens with one (1) integer unit of voting power per property and two-step governance-approved transfer
+mechanisms via a pendingTransfers mapping; a FaircroftGovernor smart contract
+implementing four proposal categories (Routine, Financial, Governance, Constitutional) with
+independently configurable basis-point quorum percentages and basis-point voting thresholds,
+and including a GovernorProposalGuardian interface that can cancel a passed proposal during
+a timelock window prior to execution; a FaircroftTreasury smart contract maintaining two
+internal ledgers (operating and reserve) with automatic dues splitting at configurable
+basis-point ratios, late fee assessment, grace periods, and two expenditure pathways
+comprising a governance-gated path and an emergency path with per-period spending limits; a
+DocumentRegistry smart contract storing SHA-256 document hashes on-chain with full
+content on both Arweave and IPFS, document-type categorization, and supersession-chain
+tracking that links each new document to the prior version it replaces; a DuesLending smart
+contract originating community micro-loans with direct payment routing to the
+FaircroftTreasury smart contract and locking the borrower's property token via a
+setLoanLock() call to the PropertyNFT smart contract during an active loan term; a
+TreasuryYield smart contract enabling reserve-balance deployment to an external Aave V3
+yield protocol with governance-controlled risk tolerance levels comprising a Conservative
+level, a Moderate level, and an Aggressive level corresponding to maximum deployment caps
+in basis points; and a HealthScorer smart contract computing a composite community health
+score from five weighted metrics comprising Financial weighted at 40%, Governance
+weighted at 25%, Compliance weighted at 20%, Retention weighted at 10%, and Efficiency
+weighted at 5%, the score being persisted on-chain and queryable via a view function.
+
+2. The system of claim 1, wherein the PropertyNFT smart contract further comprises: a
+REGISTRAR_ROLE that can mint property tokens and approve transfers from sellers to
+buyers; a GOVERNOR_ROLE that can update governance parameters; and wherein loan-lock
+operations during active loans are performed by the DuesLending smart contract via direct
+setLoanLock() function calls authorized at the contract level.
+
+3. The system of claim 1, wherein the FaircroftGovernor contract implements voting
+checkpoints using EIP-6372 timestamp-based clocks to accommodate Layer 2 networks where
+block.number is unreliable, and wherein voting power at the checkpoint timestamp determines
+each voter's weight in governance proposals.
+26
+
+4. The system of claim 1, wherein the FaircroftGovernor contract enforces rate limiting of
+maximum 10 active proposals at any time to prevent proposal spam and denial-of-service
+attacks.
+
+5. The system of claim 1, wherein the FaircroftTreasury contract implements automatic late fee
+assessment of 10% (configurable) applied after a grace period of 30 days (configurable) when
+dues payments are received after the due date.
+
+6. The system of claim 1, wherein the FaircroftTreasury contract implements annual payment
+incentives providing a 5% discount (configurable) when members pay all four quarterly dues
+at once, incentivizing full-year commitments and improving cash flow predictability.
+
+7. The system of claim 1, wherein the FaircroftTreasury contract implements emergency
+spending authority for a TREASURER_ROLE within per-period limits enforced by an
+emergencySpendingLimit parameter and a rolling period window that automatically resets
+when expired.
+
+8. The system of claim 1, wherein the DocumentRegistry contract maintains supersession
+chains enabling version tracking of documents such that getLatestVersion() traverses a
+supersession chain to identify the currently active version.
+
+9. The system of claim 1, wherein the DocumentRegistry contract categorizes documents into
+10 types: CC&Rs (Covenants, Conditions, and Restrictions), Minutes, Budget, Amendment,
+Resolution, Financial, Architectural, Notice, Election, and Other.
+
+10. The system of claim 1, wherein the DuesLending contract originates loans specifying
+principal amount, repayment term in months (2-12), and annual interest rate in basis points,
+and wherein the contract automatically credits loan payments to the Treasury dues account on
+behalf of the borrower.
+
+11. The system of claim 1, wherein the DuesLending contract limits total lending exposure via
+a maxLoanPoolBps parameter capping outstanding principal as a percentage of the Treasury
+reserve balance.
+
+12. The system of claim 1, wherein default handling on loans in the DuesLending contract is
+managed entirely through governance proposals rather than automated liquidation, ensuring
+community oversight of remedy determination.
+
+13. The system of claim 1, wherein the TreasuryYield contract implements three risk tolerance
+levels (Conservative 30%, Moderate 50%, Aggressive 80%) that cap the maximum percentage
+of reserves deployable to external yield protocols.
+27
+
+14. The system of claim 1, wherein yield harvested from deployed reserves in the
+TreasuryYield contract is credited back to the reserve balance, increasing the total pool for
+future use.
+
+15. The system of claim 1, wherein the HealthScorer smart contract computes Financial Health
+as the reserve-to-annual-dues ratio, capped at 10,000 basis points.
+
+16. The system of claim 1, wherein the HealthScorer smart contract computes Governance
+Health as the proposal participation rate measured over a rolling 12-month period.
+
+17. The system of claim 1, wherein the HealthScorer smart contract computes Compliance
+Health as the inverse of the dues delinquency rate.
+
+18. The system of claim 1, wherein the TreasuryYield smart contract deploys reserve funds to
+external yield-bearing protocols, wherein governance-controlled risk tolerance levels
+(Conservative capping deployment at 30% of reserves, Moderate at 50%, Aggressive at 80%)
+define maximum deployment percentages of reserve funds, and wherein yield earned is
+credited back to the reserve balance via a creditYieldReturn() function.
+
+19. The system of claim 1, wherein the FaircroftGovernor smart contract implements a
+Guardian interface via a GovernorProposalGuardian Solidity interface, granting a designated
+multisig address the ability to unilaterally cancel governance proposals after vote passage but
+before timelock execution, providing an emergency kill-switch for proposals discovered to be
+erroneous or malicious.
+
+20. The system of claim 1, wherein the DuesLending smart contract limits total lending
+exposure via a maxLoanPoolBps parameter that caps outstanding loan principal as a
+percentage of the FaircroftTreasury reserve balance, preventing over-allocation of community
+reserves to lending operations.
+
+21. The system of claim 1, wherein the PropertyNFT smart contract further defines a
+LENDING_ROLE held by the DuesLending smart contract for lock/unlock operations during
+active loans, and a SOULBOUND_ADMIN_ROLE for enabling or disabling soulbound
+transfer restrictions, providing finer-grained role-based access control separation between
+lending operations, soulbound administration, and general registration functions.
+28
+
+22. A computer-implemented method, comprising: executing, on a Layer 2 optimistic rollup
+network, a set of smart contracts to perform the operations recited herein; minting property
+tokens via a PropertyNFT smart contract, with each token representing one property and one
+voting power unit, and recording the resulting balances in a soulbound ERC-721 ledger;
+classifying governance proposals into four categories with independent basis-point quorum
+thresholds and category-specific voting delays via a FaircroftGovernor smart contract;
+collecting member dues and automatically splitting the received funds between operating and
+reserve ledgers of a FaircroftTreasury smart contract at configurable basis-point ratios;
+applying late fees after a grace period and offering annual discounts for pre-paid annual dues;
+registering governing documents with SHA-256 content hashes stored on-chain via a
+DocumentRegistry smart contract and storing full content on both Arweave and IPFS;
+originating community micro-loans via a DuesLending smart contract with repayment routed
+directly to the FaircroftTreasury and the borrower's property token locked via a setLoanLock()
+call to the PropertyNFT smart contract during an active loan term; deploying a portion of
+reserve-ledger funds to an external Aave V3 yield protocol via a TreasuryYield smart contract
+subject to a governance-selected risk tolerance level; and computing, by a HealthScorer smart
+contract, a composite community health score from five weighted metrics comprising
+Financial, Governance, Compliance, Retention, and Efficiency.
+
+23. The method of claim 22, further comprising tracking document version history via a
+supersedes field in each Document struct, wherein registering a new version of a document
+creates a linked list of document versions, and wherein a getLatestVersion() function traverses
+the supersession chain to identify the currently active version.
+
+24. The method of claim 22, further comprising automatically delegating voting power to the
+property owner upon minting via an autoDelegateOnMint configuration, and automatically
+delegating voting power to new recipients upon transfer if the recipient has not previously
+configured a custom delegation, thereby eliminating the requirement for non-crypto-native
+users to manually call a delegate() function.
+
+25. The method of claim 22, further comprising managing emergency expenditures via a
+TREASURER_ROLE within per-period spending limits enforced by an
+emergencySpendingLimit parameter and a rolling period window tracked by
+emergencyPeriodStart and emergencyPeriodDuration, wherein the spending period
+automatically resets when expired.
+
+26. The method of claim 22, further comprising deploying a portion of the reserve ledger
+balance to an external yield-bearing protocol pursuant to a governance-configured risk
+tolerance level that caps the deployable portion at one of three values selected from a
+Conservative cap of 30%, a Moderate cap of 50%, and an Aggressive cap of 80%, harvesting
+accrued yield from the external protocol, and crediting harvested yield back to the reserve
+ledger balance.
+29
+
+27. A non-transitory computer-readable medium storing instructions that, when executed by a
+processor, cause the processor to: deploy, on a Layer 2 optimistic rollup network, a
+PropertyNFT smart contract implementing soulbound ERC-721 tokens with role-based access
+control for minting and two-step governance-approved transfer via a pendingTransfers
+mapping; deploy a FaircroftGovernor smart contract implementing four proposal categories
+with independent basis-point quorum and voting threshold parameters and a
+GovernorProposalGuardian interface that can cancel a passed proposal during a timelock
+window; deploy a FaircroftTreasury smart contract maintaining two ledgers (operating and
+reserve) with automatic basis-point dues splitting, late fee assessment, grace periods, and an
+emergency expenditure path with per-period spending limits; deploy a DocumentRegistry
+smart contract storing SHA-256 document hashes on-chain with full content stored on both
+Arweave and IPFS and supersession-chain tracking; deploy a DuesLending smart contract
+originating community micro-loans with automatic Treasury payment routing and property
+token locking via a setLoanLock() call to the PropertyNFT smart contract during an active loan
+term; deploy a TreasuryYield smart contract enabling reserve-balance deployment to an
+external Aave V3 yield protocol with governance-controlled risk tolerance levels comprising
+Conservative, Moderate, and Aggressive; and deploy a HealthScorer smart contract computing
+a composite community health score from five weighted metrics comprising Financial
+weighted at 40%, Governance weighted at 25%, Compliance weighted at 20%, Retention
+weighted at 10%, and Efficiency weighted at 5%.
+
+28. The medium of claim 27, wherein the instructions further cause the processor to implement
+voting checkpoints using EIP-6372 timestamp-based clocks to accommodate Layer 2 networks
+where block.number is unreliable.
+
+29. The medium of claim 27, wherein the instructions further cause the processor to implement
+automatic late fee assessment of 10% (configurable) applied after a grace period of 30 days
+(configurable) on overdue dues payments.
+
+30. The medium of claim 27, wherein the instructions further cause the processor to implement
+annual payment incentives providing a 5% discount (configurable) for members paying all
+quarterly dues at once.
+
+31. The medium of claim 27, wherein the instructions further cause the processor to implement
+emergency spending authority for a TREASURER_ROLE within per-period limits enforced
+by an emergencySpendingLimit parameter and a rolling period window tracked by
+emergencyPeriodStart and emergencyPeriodDuration.
+
+32. The medium of claim 27, wherein the instructions further cause the processor to maintain
+supersession chains for documents, enabling identification of the currently active version via
+traversal of a supersession chain.
+30
+
+33. The medium of claim 27, wherein the instructions further cause the processor to lock
+property tokens during active loans and unlock them upon full repayment, preventing transfer
+of properties encumbered by community lending.
+
+34. The medium of claim 27, wherein the instructions further cause the processor to compute a
+composite health score from five weighted metrics (Financial 40%, Governance 25%,
+Compliance 20%, Retention 10%, Efficiency 5%), providing longitudinal visibility into
+community health trends.
+
+35. The medium of claim 27, wherein the instructions further cause the processor to: deploy
+reserve funds to an external yield protocol with governance-controlled risk tolerance levels
+that cap maximum deployment as a percentage of total reserves, harvest accrued yield, and
+credit returns to the reserve balance.
+
+36. The medium of claim 27, wherein the instructions further cause the processor to designate
+a guardian address capable of unilaterally canceling queued governance proposals before
+timelock execution, providing a safety check implemented by the GovernorProposalGuardian interface against erroneous or malicious proposals
+that have passed the voting process.
+31

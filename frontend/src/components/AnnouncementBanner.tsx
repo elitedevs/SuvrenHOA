@@ -2,7 +2,21 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { X, ArrowRight } from 'lucide-react';
+
+// Hide the global "Founding Community Program is open" announcement on
+// unauthenticated auth-flow pages. Someone trying to log in or accept an
+// invitation shouldn't be pitched a separate founding-program CTA on top
+// of the one they're already in the middle of.
+const HIDDEN_ON_PATHS = [
+  '/login',
+  '/signup',
+  '/invite',
+  '/waitlist',
+  '/forgot-password',
+  '/reset-password',
+];
 
 export interface AnnouncementBannerProps {
   id: string;
@@ -34,6 +48,11 @@ export function AnnouncementBanner({
   dismissable = true,
   variant = 'gold',
 }: Partial<AnnouncementBannerProps> = {}) {
+  const pathname = usePathname();
+  const isHiddenRoute = HIDDEN_ON_PATHS.some(
+    (p) => pathname === p || pathname?.startsWith(p + '/'),
+  );
+
   const [dismissed, setDismissed] = useState(true); // default hidden on SSR
 
   useEffect(() => {
@@ -44,6 +63,8 @@ export function AnnouncementBanner({
       setDismissed(false);
     }
   }, [id]);
+
+  if (isHiddenRoute) return null;
 
   function dismiss() {
     try {

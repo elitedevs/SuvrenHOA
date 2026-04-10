@@ -161,7 +161,7 @@ export default function SecurityPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/signup"
+              href="/waitlist"
               className="px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
               style={{
                 background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
@@ -169,7 +169,7 @@ export default function SecurityPage() {
                 boxShadow: '0 0 32px rgba(176,155,113,0.3)',
               }}
             >
-              Start Free Trial
+              Reserve Your Seat
               <ArrowRight className="inline-block w-4 h-4 ml-2" />
             </Link>
             <Link
@@ -439,7 +439,7 @@ export default function SecurityPage() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
-                  href="/signup"
+                  href="/waitlist"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                   style={{
                     background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
@@ -447,7 +447,7 @@ export default function SecurityPage() {
                     boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                   }}
                 >
-                  Start Free Trial
+                  Reserve Your Seat
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link

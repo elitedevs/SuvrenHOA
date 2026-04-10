@@ -74,11 +74,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, [supabase, fetchProfile]);
 
+  // NOTE: We pin emailRedirectTo to the current browser origin so that magic
+  // links and email-confirmation links come back to the same host the user
+  // signed up from (e.g. https://hoa.suvren.co). Without this, Supabase falls
+  // back to the project-level "Site URL" in the dashboard, which was pointing
+  // at suvren.co and breaking the flow for the HOA app. The target host must
+  // also be on the Supabase "Redirect URLs" allow-list.
+  const authRedirectUrl =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}/dashboard`
+      : undefined;
+
   const signUp = async (email: string, password: string, metadata?: Record<string, unknown>) => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: metadata },
+      options: {
+        data: metadata,
+        emailRedirectTo: authRedirectUrl,
+      },
     });
     return { error: error as Error | null };
   };
@@ -89,7 +103,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signInWithMagicLink = async (email: string) => {
-    const { error } = await supabase.auth.signInWithOtp({ email });
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: authRedirectUrl,
+      },
+    });
     return { error: error as Error | null };
   };
 

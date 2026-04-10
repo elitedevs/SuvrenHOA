@@ -119,14 +119,14 @@ export default function LandingPageClient() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <Link href="/signup"
+            <Link href="/waitlist"
                   className="px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                   style={{
                     background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                     color: '#0C0C0E',
                     boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                   }}>
-              Start Free Trial — 60 Days Free
+              Reserve Your Seat
               <ArrowRight className="inline-block w-4 h-4 ml-2" />
             </Link>
             <button className="px-6 py-4 rounded-xl font-medium text-base text-[rgba(245,240,232,0.6)] hover:text-[var(--parchment)] transition-colors"
@@ -292,14 +292,14 @@ export default function LandingPageClient() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/signup"
+                <Link href="/waitlist"
                       className="w-full py-3 rounded-lg text-center font-medium text-sm transition-all"
                       style={{
                         background: popular ? '#B09B71' : 'rgba(245,240,232,0.04)',
                         color: popular ? '#0C0C0E' : 'rgba(245,240,232,0.6)',
                         border: popular ? 'none' : '1px solid rgba(245,240,232,0.08)',
                       }}>
-                  Start Free Trial
+                  Reserve Your Seat
                 </Link>
               </div>
             ))}
@@ -384,14 +384,14 @@ export default function LandingPageClient() {
                 Join the founding communities building the future of transparent HOA governance.
                 60 days free. No credit card. No blockchain knowledge required.
               </p>
-              <Link href="/signup"
+              <Link href="/waitlist"
                     className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-base transition-all duration-200 hover:scale-[1.02]"
                     style={{
                       background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)',
                       color: '#0C0C0E',
                       boxShadow: '0 0 32px rgba(176,155,113,0.3)',
                     }}>
-                Start Your Free Trial
+                Reserve Your Seat
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
