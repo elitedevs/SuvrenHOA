@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { LotData } from '@/hooks/useNeighborhoodMap';
 import type { Incident } from '@/hooks/useIncidents';
-import { geocodeAddress, NEIGHBORHOOD_CENTER, DEFAULT_ZOOM } from '@/utils/geocoding';
+import { geocodeAddressAsync, NEIGHBORHOOD_CENTER, DEFAULT_ZOOM } from '@/utils/geocoding';
 import { escapeHtml } from '@/lib/sanitize';
 
 // ─────────────────────────────────────────
@@ -402,65 +402,86 @@ export default function NeighborhoodMap({
 
     if (!showLots) return;
 
-    lots.forEach((lot, i) => {
-      const { lat, lng } = geocodeAddress(lot.streetAddress, i, lots.length);
-      const isSelected = selectedLot?.tokenId === lot.tokenId;
-      const color = markerColor(lot);
-      const svg = lotMarkerSVG(color, isSelected);
+    // Resolve all lot coordinates in parallel through the full geocoding stack
+    // (static lookup → session cache → /api/geocode → grid fallback). The async
+    // util never throws — any upstream failure collapses to the grid fallback
+    // so the map always renders. We guard against setting state after unmount
+    // with a local `cancelled` flag; if the effect re-fires mid-flight we drop
+    // the stale results on the floor.
+    let cancelled = false;
 
-      const existing = lotMarkersRef.current.get(lot.tokenId);
-      if (existing) {
-        // Update icon if selection changed
-        existing.setIcon({
-          url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
-          scaledSize: new window.google.maps.Size(36, 36),
-          anchor: new window.google.maps.Point(18, 18),
+    (async () => {
+      const coords = await Promise.all(
+        lots.map((lot, i) =>
+          geocodeAddressAsync(lot.streetAddress, i, lots.length),
+        ),
+      );
+      if (cancelled) return;
+
+      lots.forEach((lot, i) => {
+        const { lat, lng } = coords[i];
+        const isSelected = selectedLot?.tokenId === lot.tokenId;
+        const color = markerColor(lot);
+        const svg = lotMarkerSVG(color, isSelected);
+
+        const existing = lotMarkersRef.current.get(lot.tokenId);
+        if (existing) {
+          // Update icon if selection changed
+          existing.setIcon({
+            url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
+            scaledSize: new window.google.maps.Size(36, 36),
+            anchor: new window.google.maps.Point(18, 18),
+          });
+          existing.setPosition({ lat, lng });
+          return;
+        }
+
+        const marker = new window.google.maps.Marker({
+          position: { lat, lng },
+          map,
+          icon: {
+            url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
+            scaledSize: new window.google.maps.Size(36, 36),
+            anchor: new window.google.maps.Point(18, 18),
+          },
+          title: `Lot #${lot.lotNumber}`,
+          cursor: 'pointer',
+          zIndex: isSelected ? 100 : 10,
         });
-        existing.setPosition({ lat, lng });
-        return;
-      }
 
-      const marker = new window.google.maps.Marker({
-        position: { lat, lng },
-        map,
-        icon: {
-          url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`,
-          scaledSize: new window.google.maps.Size(36, 36),
-          anchor: new window.google.maps.Point(18, 18),
-        },
-        title: `Lot #${lot.lotNumber}`,
-        cursor: 'pointer',
-        zIndex: isSelected ? 100 : 10,
-      });
-
-      marker.addListener('click', () => {
-        if (!infoWindowRef.current) return;
-        infoWindowRef.current.setContent(buildLotPopupHTML(lot, isBoard));
-        infoWindowRef.current.open(map, marker);
-        onSelectLot(lot);
-      });
-
-      marker.addListener('mouseover', () => {
-        const hoveredSvg = lotMarkerSVG(color, true);
-        marker.setIcon({
-          url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(hoveredSvg)}`,
-          scaledSize: new window.google.maps.Size(40, 40),
-          anchor: new window.google.maps.Point(20, 20),
+        marker.addListener('click', () => {
+          if (!infoWindowRef.current) return;
+          infoWindowRef.current.setContent(buildLotPopupHTML(lot, isBoard));
+          infoWindowRef.current.open(map, marker);
+          onSelectLot(lot);
         });
-      });
 
-      marker.addListener('mouseout', () => {
-        const sel = selectedLot?.tokenId === lot.tokenId;
-        const normalSvg = lotMarkerSVG(color, sel);
-        marker.setIcon({
-          url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(normalSvg)}`,
-          scaledSize: new window.google.maps.Size(36, 36),
-          anchor: new window.google.maps.Point(18, 18),
+        marker.addListener('mouseover', () => {
+          const hoveredSvg = lotMarkerSVG(color, true);
+          marker.setIcon({
+            url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(hoveredSvg)}`,
+            scaledSize: new window.google.maps.Size(40, 40),
+            anchor: new window.google.maps.Point(20, 20),
+          });
         });
-      });
 
-      lotMarkersRef.current.set(lot.tokenId, marker);
-    });
+        marker.addListener('mouseout', () => {
+          const sel = selectedLot?.tokenId === lot.tokenId;
+          const normalSvg = lotMarkerSVG(color, sel);
+          marker.setIcon({
+            url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(normalSvg)}`,
+            scaledSize: new window.google.maps.Size(36, 36),
+            anchor: new window.google.maps.Point(18, 18),
+          });
+        });
+
+        lotMarkersRef.current.set(lot.tokenId, marker);
+      });
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lots, isBoard, showLots, mapReady]);
 
@@ -523,8 +544,14 @@ export default function NeighborhoodMap({
       marker.setZIndex(isSelected ? 100 : 10);
 
       if (isSelected) {
-        const { lat, lng } = geocodeAddress(lot.streetAddress, lots.indexOf(lot), lots.length);
-        map.panTo({ lat, lng });
+        // Pan to the marker's own position — this is the coordinate resolved
+        // by the render effect above (static / session-cache / API / fallback)
+        // and mirrored into marker.setPosition(), so it's always current.
+        // No need to re-run geocoding here.
+        const position = marker.getPosition();
+        if (position) {
+          map.panTo(position);
+        }
         if (infoWindowRef.current) {
           infoWindowRef.current.setContent(buildLotPopupHTML(lot, isBoard));
           infoWindowRef.current.open(map, marker);

@@ -8,25 +8,48 @@
 
 ## 30-Second Summary
 
-We've built a complete HOA governance platform with 31+ routes, 5 smart contracts, and every feature from basic governance to AI-powered community assistance. The next 4 weeks take this from "impressive demo" to "real HOA running real governance on-chain."
+We've built a complete HOA governance platform with 31+ routes, 5 smart contracts, and every feature from basic governance to AI-powered community assistance. The path to mainnet is now **strictly serialized** on the advice of the Council (Atlas audit, 2026-04-10): contracts cannot deploy until audit is clean, mainnet cannot go live until DEPLOY_V2 is in place, and the first real HOA pilot cannot start until mainnet has had a stabilization window. Running these in parallel is what "fast" founders do to produce slow launches.
 
 ```
-Week 1: Polish → Demo-ready
-Week 2: Backend → Production-grade data
-Week 3: Mainnet → Real money, real security
-Week 4: Launch → Real users, real HOA
+Phase A  CONTRACTS_AUDIT   ──►  all 5 contracts clean, 0 High/Critical open
+Phase B  DEPLOY_V2         ──►  GHA → GHCR → self-hosted runners on xrpburner
+Phase C  MAINNET_LAUNCH    ──►  mainnet deploy, USDC rails live, Gnosis Safe owning roles
+Phase D  STABILIZATION     ──►  14-day zero-P0 watch window on mainnet
+Phase E  FIRST_HOA_PILOT   ──►  onboard the first real HOA (deferred behind D)
 ```
+
+Each phase is a **hard gate**. You do not start phase N+1 until phase N's exit criteria are met. No exceptions, not even under pressure.
 
 ---
 
-## Weekly Milestones
+## Phase Gates
 
-| Week | Theme | Key Deliverable | Done When... |
-|------|-------|-----------------|--------------|
-| **Week 1** | Polish & QA | Demo-ready build on Base Sepolia | Full demo flow runs without interruption; mobile-responsive |
-| **Week 2** | Backend Infra | Supabase integration + email system | Zero localStorage for persistent data; emails deliver |
-| **Week 3** | Mainnet & Security | Contracts live on Base mainnet | All 5 contracts verified; USDC payment works; audit done |
-| **Week 4** | Launch | Real HOA using the app | 10+ homeowners onboarded; v1.0.0 tagged; announced |
+The phases replace the old Week 1/2/3/4 shape. Weeks are still useful as budgeting units inside a phase, but week labels no longer govern what we do next — phase exit criteria do.
+
+| Phase | Name | Exit Criteria (ALL must be green) | Blocks |
+|-------|------|-----------------------------------|--------|
+| **A** | CONTRACTS_AUDIT | • Foundry invariant suite green (26 tests, 851k+ state transitions, 0 reverts)<br>• External Nemesis security pass: 0 HIGH, 0 CRITICAL<br>• Hephaestus code-quality pass on contracts dir<br>• Apollo test-truthfulness pass on contracts dir<br>• All 5 contracts verified on Base Sepolia with deploy transcripts archived | B, C, D, E |
+| **B** | DEPLOY_V2 | • GitHub Actions pipeline builds to GHCR on every merge to main<br>• Self-hosted runner on xrpburner (canary) healthy for 72h<br>• Self-hosted runner on new prod VM healthy for 72h<br>• jenny-kush retired or demoted to read-only mirror<br>• Rollback drill executed end-to-end (deploy → revert → verify within 10 min) | C, D, E |
+| **C** | MAINNET_LAUNCH | • All 5 contracts deployed to Base mainnet and verified on BaseScan<br>• Gnosis Safe (3-of-5) owns BOARD + GOVERNOR roles on every contract<br>• USDC payment rail tested with ≥10 real mainnet transactions<br>• Emergency pause drill executed and timed (target < 5 min)<br>• Sentry alerting wired to on-call rotation | D, E |
+| **D** | STABILIZATION | • 14 consecutive days on mainnet with 0 P0 incidents<br>• Zero contract state-corruption alerts<br>• Zero unresolved security findings older than 72h<br>• Sentry error rate below threshold baseline for 7 consecutive days | E |
+| **E** | FIRST_HOA_PILOT | • Phase D closed<br>• Onboarding runbook executed with 1 real HOA board (≥3 board members on mainnet wallets)<br>• First dues payment settled on mainnet<br>• First governance proposal voted and executed on mainnet<br>• NPS ≥ 7 from pilot users at 14-day mark | — |
+
+**Deferred from old Week 4:** FIRST_HOA_PILOT was previously slotted parallel to mainnet launch. Atlas flagged this as the single largest schedule risk in the project — putting a real HOA on unstabilized infrastructure is how platforms lose trust they never recover. Phase E is now hard-gated behind Phase D.
+
+---
+
+## Weekly Milestones (intra-phase budgeting)
+
+Weeks are retained as budgeting units so we can still say "we're in Week 2 of Phase C" and have it mean something. They do NOT override phase gates.
+
+| Week | Phase | Theme | Done When... |
+|------|-------|-------|--------------|
+| **Week 1** | A | Polish & QA, invariant coverage, audit remediation | Phase A exit criteria green |
+| **Week 2** | B | DEPLOY_V2 rollout, runner migration, rollback drill | Phase B exit criteria green |
+| **Week 3** | C | Mainnet deploy, Safe handoff, USDC rail hardening | Phase C exit criteria green |
+| **Week 4** | D (begin) | Stabilization watch begins | D clock starts ticking |
+| **Week 5-6** | D | Stabilization watch continues | 14 days zero-P0 |
+| **Week 7+** | E | First HOA pilot onboarding | Phase E exit criteria green |
 
 ---
 
@@ -70,40 +93,73 @@ Week 4: Launch → Real users, real HOA
 ## Timeline & Dependencies
 
 ```
-Week 1 ──────────────────────────────────────────────
-  └── No external dependencies (internal QA work)
-  └── OUTPUTS: Staging URL, Bug inventory, Demo script
-
-Week 2 ──────────────────────────────────────────────
-  └── REQUIRES: Week 1 complete (stable codebase)
-  └── REQUIRES: Supabase project, Resend account
-  └── OUTPUTS: Data persistence, email system, verified contracts
-
-Week 3 ──────────────────────────────────────────────
-  └── REQUIRES: Week 2 complete (Supabase live)
-  └── REQUIRES: ETH for mainnet deployment (~0.05 ETH)
-  └── REQUIRES: USDC for payment testing (~$10)
-  └── REQUIRES: Gnosis Safe setup (3 signers available)
-  └── OUTPUTS: Mainnet contracts, security audit report, USDC payment flow
-
-Week 4 ──────────────────────────────────────────────
-  └── REQUIRES: Week 3 complete (mainnet deployed)
-  └── REQUIRES: Production domain (~$15/yr)
-  └── REQUIRES: 3-5 board members willing to UAT
-  └── OUTPUTS: Live app, beta users, v1.0.0
+Phase A  CONTRACTS_AUDIT ──────────────────────────────
+  └── No external dependencies
+  └── INPUTS:  Foundry toolchain, Nemesis/Hephaestus/Apollo agents
+  └── OUTPUTS: Invariant suite green, audit report signed, contracts
+               verified on Base Sepolia with deploy transcripts
+                               │
+                               ▼
+Phase B  DEPLOY_V2 ────────────────────────────────────
+  └── REQUIRES: Phase A complete
+  └── INPUTS:   New prod VM provisioned, GHCR access, SSH keys
+  └── OUTPUTS:  GHA → GHCR pipeline live, self-hosted runners on
+                xrpburner + new VM, jenny-kush retired, rollback
+                drill evidence archived
+                               │
+                               ▼
+Phase C  MAINNET_LAUNCH ───────────────────────────────
+  └── REQUIRES: Phase B complete
+  └── INPUTS:   ~0.1 ETH mainnet gas, ~$50 USDC test float,
+                Gnosis Safe (3-of-5 signers confirmed available)
+  └── OUTPUTS:  Mainnet contracts verified, Safe ownership handoff
+                executed, USDC payment rail proven on mainnet,
+                pause drill timed
+                               │
+                               ▼
+Phase D  STABILIZATION ────────────────────────────────
+  └── REQUIRES: Phase C complete
+  └── INPUTS:   On-call rotation staffed, Sentry alerting wired
+  └── OUTPUTS:  14-day zero-P0 watch window closed cleanly,
+                baseline error-rate envelope established
+                               │
+                               ▼
+Phase E  FIRST_HOA_PILOT ──────────────────────────────
+  └── REQUIRES: Phase D complete (NOT negotiable)
+  └── INPUTS:   1 real HOA board recruited, production domain,
+                onboarding runbook dry-run completed
+  └── OUTPUTS:  First real dues payment on mainnet, first real
+                proposal voted and executed, NPS baseline
 ```
 
 ---
 
 ## Critical Path
 
-The items below will **block launch** if delayed. Everything else can slip.
+The phases themselves ARE the critical path. Slipping any gate shifts every downstream phase by the same amount — there is no longer a "parallel track" that can absorb delay. Inside each phase the items below are the long poles:
 
-1. **Security audit (Week 3, Tue)** — Cannot deploy to mainnet without this. If critical issues found, delays cascade.
-2. **Supabase RLS (Week 2, Mon)** — Must be correct before real user data goes in. Cannot shortcut.
-3. **Board member UAT (Week 4, Wed)** — If board is unavailable, soft launch can't happen on schedule.
-4. **Gnosis Safe setup (Week 3, Thu)** — Contracts without multisig admin = unacceptable risk. Block launch.
-5. **Production domain (Week 4, Mon)** — No real launch without real domain. Buy it early.
+### Phase A — CONTRACTS_AUDIT
+1. **External security pass (Nemesis)** — 0 HIGH, 0 CRITICAL required. Budget 2 days to triage + fix.
+2. **Foundry invariant suite** — DONE ✅ (26 tests, 851k+ state transitions, 0 reverts, 2026-04-10).
+3. **Geocoding remediation** — DONE ✅ (Nominatim + cache + 20 unit tests, 2026-04-10).
+
+### Phase B — DEPLOY_V2
+1. **New prod VM provisioning** — blocks GHCR runner registration.
+2. **Rollback drill** — must be executed end-to-end, not simulated. 10-minute target.
+3. **jenny-kush retirement** — do not skip; leaving old infra alive creates a split-brain deploy surface.
+
+### Phase C — MAINNET_LAUNCH
+1. **Gnosis Safe ownership handoff** — contracts without multisig admin = unacceptable risk.
+2. **USDC rail stress test** — 10+ real mainnet transactions before opening to any user.
+3. **Emergency pause drill** — must be timed. Un-drilled emergency paths are indistinguishable from broken ones.
+
+### Phase D — STABILIZATION
+1. **14-day zero-P0 clock** — non-compressible. The point of the window is that it can't be rushed.
+2. **On-call rotation** — if there's no one watching, the clock is lying.
+
+### Phase E — FIRST_HOA_PILOT (DEFERRED)
+1. **Board recruitment** — can run in background during Phase D but cannot onboard until D closes.
+2. **Onboarding runbook dry-run** — do a dress rehearsal with internal team before touching a real HOA.
 
 ---
 
@@ -202,4 +258,4 @@ These items were deferred during feature development. Address post-launch or in 
 
 ---
 
-*Last updated: Week 1 start — update this doc as milestones are hit.*
+*Last updated: 2026-04-10 — Atlas remediation. Roadmap re-sequenced into strict phase gates (A → B → C → D → E). FIRST_HOA_PILOT deferred behind a 14-day mainnet stabilization window. Parallel-track tolerance reduced to zero.*
