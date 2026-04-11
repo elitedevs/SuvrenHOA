@@ -65,42 +65,54 @@ export default function HomePage() {
       <div className="absolute bottom-20 left-[10%] w-[300px] h-[300px] blur-[100px] rounded-full bg-orb-slow pointer-events-none" style={{ background: "rgba(176,155,113,0.04)" }} />
 
       {/* ── Hero ──────────────────────────────────────────────────── */}
-      <section className="relative flex flex-col items-center justify-center min-h-[88vh] px-6 text-center">
+      {/*
+        Lane 3 editorial pivot (Lux council-lux consult, 2026-04-10):
+          - killed the rounded-full SaaS pill; replaced with a parchment-ruled
+            eyebrow (two hairlines + small-caps + diamond) — invitation card
+            register, not product announcement register.
+          - removed the redundant hero wordmark + blur halo; the marketing nav
+            already carries the brand, so showing it twice read as "not sure
+            you noticed yet" (anti-luxe).
+          - bumped headline scale (lg:text-7xl → lg:text-8xl) and tightened
+            leading so the H1 carries the full viewport instead of competing
+            with secondary brand cues.
+          - min-h lowered to 82vh so the stat row clears the fold on 1440×900.
+          - added a single centered hairline divider above the stat row to
+            frame it as editorial data rather than a tile grid.
+      */}
+      <section className="relative flex flex-col items-center justify-center min-h-[82vh] px-6 text-center">
 
         {/* V12: hero ambient — pure CSS, breathes warmth across the hero */}
         <div className="hero-ambient" aria-hidden="true" />
         <div className="hero-ambient-2" aria-hidden="true" />
 
-        {/* Launch badge */}
-        <div className="relative z-10 mb-8 card-enter card-enter-delay-1">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[rgba(176,155,113,0.30)] bg-[rgba(176,155,113,0.08)] text-[#B09B71] text-xs font-medium tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#B09B71] animate-pulse" />
-            By invitation only — founding communities now under review
+        {/* Eyebrow — parchment-ruled invitation stamp (replaces rounded-full pill) */}
+        <div className="relative z-10 mb-10 card-enter card-enter-delay-1 flex items-center justify-center gap-4">
+          <span aria-hidden="true" className="h-px w-16 bg-[rgba(245,240,232,0.20)]" />
+          <span className="text-[10px] tracking-[0.28em] uppercase text-[rgba(245,240,232,0.60)] font-medium">
+            By Invitation Only
+            <span aria-hidden="true" className="mx-3 text-[rgba(176,155,113,0.70)]">◆</span>
+            Founding Communities Under Review
           </span>
-        </div>
-
-        {/* Logo */}
-        <div className="relative z-10 mb-8 card-enter card-enter-delay-1">
-          <div className="absolute inset-0 blur-2xl opacity-25 bg-[rgba(176,155,113,0.80)] rounded-full scale-[2]" />
-          <img src="/logo-full.svg" alt="SuvrenHOA" className="relative h-14 w-auto" />
+          <span aria-hidden="true" className="h-px w-16 bg-[rgba(245,240,232,0.20)]" />
         </div>
 
         {/* Headline */}
         <div className="relative z-10 card-enter card-enter-delay-1">
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-medium gradient-text mb-5 leading-[1.05] text-glow">
+          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-medium gradient-text mb-6 leading-[1.02] text-glow">
             Finally, an HOA you can{' '}
             <span className="gradient-text text-glow">actually trust</span>
           </h1>
           <p className="text-[var(--text-muted)] text-xl sm:text-2xl max-w-3xl mx-auto mb-4 leading-relaxed font-medium">
             Blockchain-powered governance for HOAs — transparent voting, immutable records, and a treasury no board member can touch alone.
           </p>
-          <p className="text-[var(--text-disabled)] text-base max-w-2xl mx-auto mb-10">
+          <p className="text-[var(--text-disabled)] text-base max-w-2xl mx-auto mb-12">
             No management companies. No hidden spending. No altered records. Just math.
           </p>
         </div>
 
         {/* CTAs */}
-        <div className="relative z-10 mb-16 card-enter card-enter-delay-2 flex flex-col sm:flex-row items-center gap-4">
+        <div className="relative z-10 mb-14 card-enter card-enter-delay-2 flex flex-col sm:flex-row items-center gap-4">
           <Link
             href="/founding"
             className="px-8 py-3.5 rounded-lg bg-[#B09B71] text-[#0C0C0E] font-semibold text-sm hover:bg-[#C4A96E] transition-colors flex items-center gap-2"
@@ -117,33 +129,36 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Stats */}
-        <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl w-full mb-16 card-enter card-enter-delay-2">
-          {[
-            // V13 Lux fix: suffix changed from " days" to "-day" so every
-            // frame of the AnimatedNumber reads grammatically ("1-day",
-            // "7-day") rather than "1 days". Combined with the "Voting Period"
-            // label it renders as "7-day Voting Period" — the concierge tone
-            // the rest of the site carries.
-            { label: 'Monthly Cost', sub: 'vs $15K–50K mgmt co', numVal: 0.35, prefix: '$', decimals: 2 },
-            { label: 'Doc Storage', sub: 'Lifetime, permanent', numVal: 2.00, prefix: '$', decimals: 2 },
-            { label: 'Voting Period', sub: 'Fair + transparent', numVal: 7, prefix: '', suffix: '-day', decimals: 0 },
-            { label: 'Can Be Altered', sub: 'Documents or votes', numVal: 0, prefix: '', decimals: 0 },
-          ].map(({ label, sub, numVal, prefix, suffix, decimals }) => (
-            <div key={label} className="glass-card rounded-xl p-6 text-center">
-              <p className="text-2xl sm:text-3xl font-normal gradient-text mb-1">
-                <AnimatedNumber
-                  value={numVal}
-                  prefix={prefix}
-                  suffix={suffix}
-                  decimals={decimals}
-                  duration={900}
-                />
-              </p>
-              <p className="text-xs font-medium text-[var(--text-body)] uppercase tracking-wide">{label}</p>
-              <p className="text-[11px] text-[var(--text-disabled)] mt-1">{sub}</p>
-            </div>
-          ))}
+        {/* Stats — editorial data row, framed by a single centered hairline */}
+        <div className="relative z-10 w-full max-w-2xl card-enter card-enter-delay-2 mb-12">
+          <div aria-hidden="true" className="h-px w-24 bg-[rgba(245,240,232,0.14)] mx-auto mb-8" />
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[
+              // V13 Lux fix: suffix changed from " days" to "-day" so every
+              // frame of the AnimatedNumber reads grammatically ("1-day",
+              // "7-day") rather than "1 days". Combined with the "Voting Period"
+              // label it renders as "7-day Voting Period" — the concierge tone
+              // the rest of the site carries.
+              { label: 'Monthly Cost', sub: 'vs $15K–50K mgmt co', numVal: 0.35, prefix: '$', decimals: 2 },
+              { label: 'Doc Storage', sub: 'Lifetime, permanent', numVal: 2.00, prefix: '$', decimals: 2 },
+              { label: 'Voting Period', sub: 'Fair + transparent', numVal: 7, prefix: '', suffix: '-day', decimals: 0 },
+              { label: 'Can Be Altered', sub: 'Documents or votes', numVal: 0, prefix: '', decimals: 0 },
+            ].map(({ label, sub, numVal, prefix, suffix, decimals }) => (
+              <div key={label} className="glass-card rounded-xl p-6 text-center">
+                <p className="text-2xl sm:text-3xl font-normal gradient-text mb-1">
+                  <AnimatedNumber
+                    value={numVal}
+                    prefix={prefix}
+                    suffix={suffix}
+                    decimals={decimals}
+                    duration={900}
+                  />
+                </p>
+                <p className="text-xs font-medium text-[var(--text-body)] uppercase tracking-wide">{label}</p>
+                <p className="text-[11px] text-[var(--text-disabled)] mt-1">{sub}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

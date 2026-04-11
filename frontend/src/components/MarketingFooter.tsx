@@ -38,11 +38,18 @@ export function MarketingFooter() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
+            {/*
+              Lane 3 editorial pivot (2026-04-10): the old footer brand lockup
+              used a rounded-lg square cartouche with a bold "S" glyph on a
+              brass linear-gradient. Read as a SaaS app icon, not a crest —
+              the nav already uses the shield logo so mismatched brand marks
+              in the same viewport was an anti-luxe tell. Swapped in the same
+              /logo-icon.svg shield that MarketingHeader uses so header and
+              footer speak with one voice.
+            */}
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-                   style={{ background: 'linear-gradient(135deg, #B09B71 0%, #8A7A5A 100%)' }}>
-                <span className="text-sm font-bold text-[#0C0C0E]">S</span>
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo-icon.svg" alt="SuvrenHOA" className="h-8 w-8 object-contain" />
               <span className="text-lg font-medium text-[var(--parchment)] tracking-tight"
                     style={{ fontFamily: 'var(--font-heading)' }}>
                 SuvrenHOA

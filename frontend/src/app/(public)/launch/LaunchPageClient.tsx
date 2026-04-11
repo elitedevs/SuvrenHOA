@@ -256,7 +256,7 @@ export default function LaunchPageClient() {
               orange (all off-palette). The 𝕏 mathematical glyph was replaced with
               a proper Lucide Share2 icon. The "PH badge coming" placeholder was
               deleted — it will be re-added as a real PH embed when the listing
-              goes live, not as TODO copy in production. */}
+              goes live, not as placeholder copy in production. */}
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <a
               href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`}
