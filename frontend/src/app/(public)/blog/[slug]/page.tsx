@@ -161,8 +161,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       {/* ── ARTICLE HEADER ────────────────────────────────────────────────── */}
       <header className="max-w-3xl mx-auto px-6 pt-8 pb-10 page-enter page-enter-delay-1">
-        <span className="inline-block px-3 py-1 rounded-full text-[11px] font-medium tracking-wide uppercase mb-6"
-              style={{ background: 'rgba(176,155,113,0.1)', color: '#B09B71' }}>
+        {/* V15 Lux fix (circle discipline): hairline keyline category tag. */}
+        <span className="inline-block px-3 py-1 text-[10px] font-medium tracking-[0.18em] uppercase mb-6 border"
+              style={{ borderColor: 'rgba(176,155,113,0.28)', color: '#B09B71' }}>
           {post.category}
         </span>
 

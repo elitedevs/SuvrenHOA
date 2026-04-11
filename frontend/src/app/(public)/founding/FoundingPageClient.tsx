@@ -124,7 +124,10 @@ export default function FoundingPageClient() {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center">
-          <div className="w-20 h-20 rounded-full bg-[rgba(176,155,113,0.1)] border border-[rgba(176,155,113,0.3)] flex items-center justify-center mx-auto mb-6">
+          {/* V15 Lux fix (circle discipline): square keyline cartouche
+              instead of rounded-full icon halo. Reads as an editorial
+              success stamp rather than an app notification toast. */}
+          <div className="w-20 h-20 border border-[rgba(176,155,113,0.30)] bg-[rgba(176,155,113,0.06)] flex items-center justify-center mx-auto mb-6">
             <CheckCircle2 className="w-10 h-10 text-[#B09B71]" />
           </div>
           <h1 className="font-playfair text-3xl font-normal text-[#F5F0E8] mb-4">Application Received</h1>
@@ -148,9 +151,18 @@ export default function FoundingPageClient() {
       {/* Hero */}
       <section className="py-20 px-4 text-center border-b border-[var(--divider)]">
         <div className="max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-[rgba(176,155,113,0.1)] border border-[rgba(176,155,113,0.3)] rounded-full px-4 py-1.5 mb-6">
-            <Award className="w-4 h-4 text-[#B09B71]" />
-            <span className="text-[#B09B71] text-sm font-medium">Limited — {spotsRemaining} spots remaining</span>
+          {/* V15 Lux fix (circle discipline): replaced rounded-full
+              SaaS announcement pill with parchment-ruled eyebrow.
+              Reserved spots counter now reads as an invitation stamp
+              instead of a product-hunt launch capsule. */}
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span aria-hidden="true" className="h-px w-16 bg-[rgba(176,155,113,0.24)]" />
+            <span className="text-[10px] tracking-[0.28em] uppercase text-[rgba(176,155,113,0.85)] font-medium">
+              Limited
+              <span aria-hidden="true" className="mx-3 text-[rgba(176,155,113,0.70)]">◆</span>
+              {spotsRemaining} Seats Remaining
+            </span>
+            <span aria-hidden="true" className="h-px w-16 bg-[rgba(176,155,113,0.24)]" />
           </div>
           <h1 className="font-playfair text-5xl md:text-6xl font-normal text-[#F5F0E8] mb-6 leading-tight">
             Be Among the First

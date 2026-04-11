@@ -290,9 +290,10 @@ export default function PricingPageClient() {
           </span>
 
           {annual && (
+            /* V15 Lux fix (circle discipline): hairline keyline save badge. */
             <span
-              className="ml-1 px-2.5 py-1 rounded-full text-[11px] font-medium"
-              style={{ background: 'rgba(42,93,79,0.15)', color: '#2A5D4F', border: '1px solid rgba(42,93,79,0.25)' }}
+              className="ml-1 px-2.5 py-1 text-[10px] font-medium tracking-[0.18em] uppercase"
+              style={{ color: '#2A5D4F', border: '1px solid rgba(42,93,79,0.45)' }}
             >
               Save 20%
             </span>
@@ -322,7 +323,9 @@ export default function PricingPageClient() {
                   }}
                 >
                   {popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-medium bg-[#B09B71] text-[#0C0C0E]">
+                    /* V15 Lux fix (circle discipline): flat editorial ribbon,
+                       small-caps tracking, no rounded-full. */
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-[10px] font-medium tracking-[0.18em] uppercase bg-[#B09B71] text-[#0C0C0E]">
                       Most Popular
                     </span>
                   )}

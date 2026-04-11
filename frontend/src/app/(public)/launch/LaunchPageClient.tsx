@@ -91,15 +91,21 @@ export default function LaunchPageClient() {
       {/* Hero + countdown */}
       <section className="py-20 px-4 text-center border-b border-[var(--divider)]">
         <div className="max-w-4xl mx-auto">
-          {/* Launch eyebrow — neutral parchment, no third-party brand color.
+          {/* Launch eyebrow — parchment-ruled invitation stamp.
               V13 Lux fix: removed 🐱 emoji (Rule 2) and #F68341 orange (palette leak).
-              The Product Hunt association will be re-added as a proper SVG badge
+              V15 Lux fix (circle discipline): replaced the rounded-full SaaS
+              pill with two h-px hairlines framing a small-caps line, matching
+              the homepage hero eyebrow. rounded-full is forbidden for
+              announcement pills on the public surface — reserve for orbs,
+              status dots, avatars, progress bars, and toggles only. The
+              Product Hunt association will be re-added as a proper SVG badge
               when the PH listing goes live. */}
-          <div className="flex justify-center mb-8">
-            <span className="inline-flex items-center gap-3 rounded-full border border-[rgba(176,155,113,0.24)] bg-[rgba(176,155,113,0.06)] px-4 py-1.5 text-xs font-medium tracking-[0.14em] uppercase text-[rgba(245,240,232,0.72)]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#B09B71] animate-pulse" aria-hidden="true" />
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <span aria-hidden="true" className="h-px w-16 bg-[rgba(245,240,232,0.20)]" />
+            <span className="text-[10px] tracking-[0.28em] uppercase text-[rgba(245,240,232,0.60)] font-medium">
               Launching Soon
             </span>
+            <span aria-hidden="true" className="h-px w-16 bg-[rgba(245,240,232,0.20)]" />
           </div>
 
           {/* V12 fix (Lux V11 audit): explicit whitespace between the two
@@ -155,10 +161,16 @@ export default function LaunchPageClient() {
               </div>
             </div>
           ) : (
+            /* V15 Lux fix (circle discipline + palette): the old post-launch
+               confirmation was a rounded-full emerald-500 pill — both
+               off-palette (tailwind emerald-500 is not on the OBSIDIAN ramp)
+               and a forbidden circle-use. Replaced with a hairline keyline
+               cartouche in verdigris (#2A5D4F, the canonical green on the
+               ramp) with square corners. */
             <div className="mb-12">
-              <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full px-6 py-3">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                <span className="text-emerald-400 font-semibold text-lg">We've launched!</span>
+              <div className="inline-flex items-center gap-3 border border-[rgba(42,93,79,0.45)] bg-[rgba(42,93,79,0.08)] px-6 py-3">
+                <CheckCircle2 className="w-5 h-5 text-[#2A5D4F]" />
+                <span className="text-[#2A5D4F] font-medium tracking-[0.02em] text-lg">We've launched.</span>
               </div>
             </div>
           )}

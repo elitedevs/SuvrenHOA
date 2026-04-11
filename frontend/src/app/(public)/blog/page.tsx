@@ -19,9 +19,10 @@ function formatDate(dateStr: string) {
 }
 
 function CategoryBadge({ category }: { category: string }) {
+  // V15 Lux fix (circle discipline): hairline keyline tag, no rounded-full.
   return (
-    <span className="inline-block px-3 py-1 rounded-full text-[11px] font-medium tracking-wide uppercase"
-          style={{ background: 'rgba(176,155,113,0.1)', color: '#B09B71' }}>
+    <span className="inline-block px-3 py-1 text-[10px] font-medium tracking-[0.18em] uppercase border"
+          style={{ borderColor: 'rgba(176,155,113,0.28)', color: '#B09B71' }}>
       {category}
     </span>
   );

@@ -135,12 +135,15 @@ export default function SecurityPage() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-24 md:py-36 text-center">
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-[13px] font-medium"
-            style={{ background: 'rgba(42,93,79,0.12)', border: '1px solid rgba(42,93,79,0.25)', color: '#2A5D4F' }}
-          >
-            <Shield className="w-3.5 h-3.5" />
-            Security Architecture
+          {/* V15 Lux fix (circle discipline): parchment-ruled eyebrow in
+              verdigris, replacing the rounded-full announcement pill. */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <span aria-hidden="true" className="h-px w-16 bg-[rgba(42,93,79,0.35)]" />
+            <span className="text-[10px] tracking-[0.28em] uppercase text-[rgba(42,93,79,1)] font-medium flex items-center gap-3">
+              <Shield className="w-3 h-3" aria-hidden="true" />
+              Security Architecture
+            </span>
+            <span aria-hidden="true" className="h-px w-16 bg-[rgba(42,93,79,0.35)]" />
           </div>
 
           {/* V12 fix (Lux V11 audit): explicit whitespace between line spans
@@ -317,9 +320,11 @@ export default function SecurityPage() {
                     <div>
                       <div className="flex items-center gap-3 mb-1">
                         <h3 className="font-medium text-[var(--parchment)]">{name}</h3>
+                        {/* V15 Lux fix (circle discipline): hairline keyline
+                            role tag, no rounded-full. */}
                         <span
-                          className="text-[11px] px-2 py-0.5 rounded-full"
-                          style={{ background: 'rgba(176,155,113,0.08)', color: '#B09B71' }}
+                          className="text-[10px] tracking-[0.14em] uppercase px-2 py-0.5 border"
+                          style={{ borderColor: 'rgba(176,155,113,0.24)', color: '#B09B71' }}
                         >
                           {role}
                         </span>

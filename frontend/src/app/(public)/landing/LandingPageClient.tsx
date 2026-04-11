@@ -100,10 +100,16 @@ export default function LandingPageClient() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 py-24 md:py-36 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-[13px] font-medium"
-               style={{ background: 'rgba(176,155,113,0.08)', border: '1px solid rgba(176,155,113,0.2)', color: '#B09B71' }}>
-            <div className="w-2 h-2 rounded-full bg-[#2A5D4F] animate-pulse" />
-            Now accepting founding communities
+          {/* V15 Lux fix (circle discipline): replaced rounded-full
+              announcement pill with parchment-ruled eyebrow. */}
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <span aria-hidden="true" className="h-px w-16 bg-[rgba(245,240,232,0.20)]" />
+            <span className="text-[10px] tracking-[0.28em] uppercase text-[rgba(245,240,232,0.60)] font-medium">
+              Now Accepting
+              <span aria-hidden="true" className="mx-3 text-[rgba(176,155,113,0.70)]">◆</span>
+              Founding Communities
+            </span>
+            <span aria-hidden="true" className="h-px w-16 bg-[rgba(245,240,232,0.20)]" />
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight mb-6 leading-[1.1]"
@@ -273,7 +279,10 @@ export default function LandingPageClient() {
                      boxShadow: popular ? '0 0 32px rgba(176,155,113,0.08)' : 'none',
                    }}>
                 {popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-medium bg-[#B09B71] text-[#0C0C0E]">
+                  /* V15 Lux fix (circle discipline): flat brass ribbon, not
+                     a rounded-full pill. Editorial "plate" aesthetic with
+                     small-caps tracking. */
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-[10px] font-medium tracking-[0.18em] uppercase bg-[#B09B71] text-[#0C0C0E]">
                     Most Popular
                   </span>
                 )}

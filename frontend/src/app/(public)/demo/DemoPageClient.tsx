@@ -77,7 +77,8 @@ function VotingMock() {
     <div className="space-y-4">
       <div className="rounded-lg p-4" style={{ background: 'rgba(245,240,232,0.03)', border: '1px solid rgba(245,240,232,0.06)' }}>
         <div className="flex items-center justify-between mb-3">
-          <span className="px-2 py-0.5 rounded-full text-[10px] font-medium" style={{ background: 'rgba(42,93,79,0.15)', color: '#2A5D4F' }}>Active</span>
+          {/* V15 Lux fix (circle discipline): hairline keyline status tag. */}
+          <span className="px-2 py-0.5 text-[9px] font-medium tracking-[0.18em] uppercase border" style={{ borderColor: 'rgba(42,93,79,0.45)', color: '#2A5D4F' }}>Active</span>
           <span className="text-[11px] text-[rgba(245,240,232,0.30)] flex items-center gap-1"><Clock className="w-3 h-3" /> 2 days left</span>
         </div>
         <h4 className="font-medium text-[var(--parchment)] mb-1" style={{ fontFamily: 'var(--font-heading)' }}>

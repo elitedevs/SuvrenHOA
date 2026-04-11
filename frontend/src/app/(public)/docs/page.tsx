@@ -203,8 +203,10 @@ export default function DocsPage() {
                       style={{ fontFamily: 'var(--font-heading)' }}>
                     API Reference
                   </h2>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium tracking-wide uppercase"
-                        style={{ background: 'rgba(42,93,79,0.15)', color: '#2A5D4F', border: '1px solid rgba(42,93,79,0.25)' }}>
+                  {/* V15 Lux fix (circle discipline): square keyline tag,
+                      no rounded-full on the public surface. */}
+                  <span className="px-2.5 py-0.5 text-[10px] font-medium tracking-[0.18em] uppercase border"
+                        style={{ borderColor: 'rgba(42,93,79,0.45)', color: '#2A5D4F' }}>
                     Coming Soon
                   </span>
                 </div>
