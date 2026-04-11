@@ -5,6 +5,7 @@ import {
   Shield, DollarSign, Vote, FileText, Users, BarChart3,
   ChevronRight, ArrowRight, Check, Mail, Building2, Send,
   Lock, Eye, BanknoteIcon, Wrench,
+  TrendingDown, ShieldAlert, FileX,
 } from 'lucide-react';
 import { SaaSProductJsonLd, OrganizationJsonLd } from '@/components/JsonLd';
 
@@ -154,15 +155,23 @@ export default function LandingPageClient() {
             Sound familiar?
           </p>
 
+          {/* V15.1 Lux fix: swapped emoji glyphs (money / ballot-box /
+              page) for lucide SVG icons drawn in brass on a parchment-
+              wash square keyline cartouche — matches the Features and
+              HowItWorks icon treatment below, and clears the
+              eye_06_emoji_and_icons finding on /landing. */}
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { emoji: '💸', title: 'Missing Money', quote: '"Where did $480,000 in HOA dues actually go?"', desc: 'A 47-tab spreadsheet nobody can read, managed by someone who left the board three years ago.' },
-              { emoji: '🗳️', title: 'Rigged Votes', quote: '"Board elections with no audit trail."', desc: 'Paper ballots counted behind closed doors. No independent verification. No way to prove the results.' },
-              { emoji: '📄', title: 'Lost Documents', quote: '"Your CC&Rs from 2019? Gone."', desc: 'The board president\'s laptop died. The Google Drive got deleted. Nobody has a backup.' },
-            ].map(({ emoji, title, quote, desc }) => (
+              { icon: TrendingDown, title: 'Missing Money', quote: '"Where did $480,000 in HOA dues actually go?"', desc: 'A 47-tab spreadsheet nobody can read, managed by someone who left the board three years ago.' },
+              { icon: ShieldAlert, title: 'Rigged Votes', quote: '"Board elections with no audit trail."', desc: 'Paper ballots counted behind closed doors. No independent verification. No way to prove the results.' },
+              { icon: FileX, title: 'Lost Documents', quote: '"Your CC&Rs from 2019? Gone."', desc: 'The board president\'s laptop died. The Google Drive got deleted. Nobody has a backup.' },
+            ].map(({ icon: Icon, title, quote, desc }) => (
               <div key={title} className="rounded-xl p-6 text-center"
                    style={{ background: '#151518', border: '1px solid rgba(245,240,232,0.06)' }}>
-                <span className="text-3xl mb-4 block">{emoji}</span>
+                <div className="mx-auto mb-4 w-10 h-10 rounded-lg flex items-center justify-center"
+                     style={{ background: 'rgba(176,155,113,0.08)' }}>
+                  <Icon className="w-5 h-5 text-[#B09B71]" />
+                </div>
                 <h3 className="text-lg font-medium text-[var(--parchment)] mb-2">{title}</h3>
                 <p className="text-[14px] text-[#B09B71] italic mb-3">{quote}</p>
                 <p className="text-[13px] text-[rgba(245,240,232,0.45)] leading-relaxed">{desc}</p>
