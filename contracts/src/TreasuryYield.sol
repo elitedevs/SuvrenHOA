@@ -289,9 +289,13 @@ contract TreasuryYield is AccessControl, ReentrancyGuard {
         uint256 excessWithdrawn = 0;
 
         // Check if current deployment exceeds the new cap
+        // CR-07: use totalCommunityReserve (reserveBalance + depositedAmount) consistent
+        // with depositToAave's SC-06 fix — bare reserveBalance() shrinks the denominator
+        // because deployed funds have already left the treasury, producing a cap that is
+        // lower than intended and triggering unnecessary auto-withdrawals.
         if (depositedAmount > 0) {
-            uint256 currentReserve = treasury.reserveBalance();
-            uint256 newMax = _maxDeployable(currentReserve);
+            uint256 totalCommunityReserve = treasury.reserveBalance() + depositedAmount;
+            uint256 newMax = _maxDeployable(totalCommunityReserve);
 
             if (depositedAmount > newMax) {
                 uint256 excess = depositedAmount - newMax;
@@ -321,6 +325,7 @@ contract TreasuryYield is AccessControl, ReentrancyGuard {
     {
         if (depositedAmount == 0) revert NothingDeposited();
 
+        uint256 preDepositedAmount = depositedAmount; // CR-08: snapshot before zeroing
         uint256 totalAave = aUsdc.balanceOf(address(this));
 
         // Use type(uint256).max to pull everything
@@ -333,8 +338,11 @@ contract TreasuryYield is AccessControl, ReentrancyGuard {
         usdc.forceApprove(address(treasury), received);
         treasury.creditYieldReturn(received);
 
+        // CR-08: yield = aToken balance - principal deposited (not received - totalAave,
+        // which is always 0 since received ≤ totalAave). Capture before zeroing depositedAmount.
+        uint256 yieldPortion = totalAave > preDepositedAmount ? totalAave - preDepositedAmount : 0;
         emit EmergencyWithdrawal(msg.sender, received);
-        emit YieldHarvested(msg.sender, received > totalAave ? received - totalAave : 0, block.timestamp);
+        emit YieldHarvested(msg.sender, yieldPortion, block.timestamp);
     }
 
     // ── Views ──────────────────────────────────────────────────────────────────

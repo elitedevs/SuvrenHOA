@@ -40,10 +40,6 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     /// @notice USDC token contract (6 decimals on Base)
     IERC20 public immutable usdc;
 
-    /// @notice PropertyNFT contract — used to validate token existence on payDues.
-    ///         CR-04: set post-deploy via setPropertyNFT(); zero-address means no guard.
-    IERC721 public propertyNft;
-
     // ── Dues Configuration ───────────────────────────────────────────────────
 
     /// @notice Quarterly dues in USDC (6 decimals). e.g., 200e6 = $200
@@ -107,6 +103,11 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     /// @notice Duration of emergency spending period (default: 30 days)
     uint256 public emergencyPeriodDuration;
 
+    /// @notice PropertyNFT contract — used to validate token existence on payDues.
+    ///         CR-04: set post-deploy via setPropertyNFT(); zero-address means no guard.
+    ///         Placed at end of storage to preserve existing slot layout.
+    IERC721 public propertyNft;
+
     // ── Events ───────────────────────────────────────────────────────────────
 
     event DuesPaid(
@@ -158,6 +159,7 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     error EmergencyLimitExceeded(uint256 requested, uint256 remaining);
     error InvalidBps(uint256 bps);
     error TokenDoesNotExist(uint256 tokenId);
+    error ValueOutOfRange(uint256 value, uint256 max);
 
     // ── Constructor ──────────────────────────────────────────────────────────
 
@@ -202,19 +204,22 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
             }
         }
 
+        // CR-10: compute late fee on face-value dues BEFORE applying annual discount,
+        // so annual payers who are late don't get a discounted penalty too.
+        uint256 faceValue = quarterlyDuesAmount * quarters;
+
         uint256 amount;
         if (quarters == 4) {
             // Annual payment with discount
-            uint256 annual = quarterlyDuesAmount * 4;
-            amount = annual - (annual * annualDuesDiscount / 10000);
+            amount = faceValue - (faceValue * annualDuesDiscount / 10000);
         } else {
-            amount = quarterlyDuesAmount * quarters;
+            amount = faceValue;
         }
 
-        // Check for late fee
+        // Check for late fee (computed on face value, not discounted amount)
         DuesRecord storage record = duesRecords[tokenId];
         if (record.paidThrough > 0 && block.timestamp > record.paidThrough + gracePeriod) {
-            uint256 lateFee = amount * lateFeePercent / 10000;
+            uint256 lateFee = faceValue * lateFeePercent / 10000;
             amount += lateFee;
             emit LateFeeCharged(tokenId, lateFee);
         }
@@ -335,7 +340,9 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
 
     // ── Governance Config Updates ────────────────────────────────────────────
 
+    /// @dev CR-09: bounded to prevent governance accidents (0 = free, 50k USDC ceiling)
     function setQuarterlyDues(uint256 newAmount) external onlyRole(GOVERNOR_ROLE) {
+        if (newAmount > 50_000e6) revert ValueOutOfRange(newAmount, 50_000e6);
         emit DuesAmountUpdated(quarterlyDuesAmount, newAmount);
         quarterlyDuesAmount = newAmount;
     }
@@ -360,7 +367,9 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
         lateFeePercent = newBps;
     }
 
+    /// @dev CR-09: min 7 days, max 365 days — prevents accidental 0 or absurdly long grace
     function setGracePeriod(uint256 newPeriod) external onlyRole(GOVERNOR_ROLE) {
+        if (newPeriod < 7 days || newPeriod > 365 days) revert ValueOutOfRange(newPeriod, 365 days);
         gracePeriod = newPeriod;
     }
 

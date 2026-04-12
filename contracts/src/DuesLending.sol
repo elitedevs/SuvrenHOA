@@ -441,7 +441,20 @@ contract DuesLending is AccessControl, ReentrancyGuard {
 
         uint128 outstanding = loan.totalOwed - loan.totalPaid;
         loan.status = LoanStatus.WrittenOff;
-        totalOutstanding -= loan.principal > loan.totalPaid ? loan.principal - loan.totalPaid : 0;
+
+        // CR-06: use _loanPrincipalDecremented (consistent with payOffLoan/_settleLoan)
+        // instead of naïve principal-minus-totalPaid, which double-subtracts principal
+        // that makePayment already decremented and ignores the interest portion of
+        // totalPaid — leaving totalOutstanding inflated after writeoff.
+        uint256 alreadyDecremented = _loanPrincipalDecremented[loanId];
+        uint256 remainingPrincipal = loan.principal > alreadyDecremented
+            ? loan.principal - alreadyDecremented : 0;
+        if (remainingPrincipal <= totalOutstanding) {
+            totalOutstanding -= remainingPrincipal;
+        } else {
+            totalOutstanding = 0;
+        }
+        _loanPrincipalDecremented[loanId] = loan.principal;
 
         // Unlock property transfer
         propertyNFT.setLoanLock(loan.tokenId, false);
