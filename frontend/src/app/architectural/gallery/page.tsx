@@ -198,7 +198,7 @@ function GalleryCard({ item, onClick }: { item: GalleryItem; onClick: () => void
         <h4 className="text-sm font-medium text-[var(--parchment)] group-hover:text-[#D4C4A0] transition-colors leading-tight">
           {item.title}
         </h4>
-        <span className={`shrink-0 ml-2 text-[10px] font-medium px-2 py-0.5 rounded-full ${
+        <span className={`shrink-0 ml-2 text-[10px] font-medium px-2 py-0.5 rounded-lg ${
           item.approved
             ? 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.25)]'
             : 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-[rgba(139,90,90,0.25)]'
@@ -237,7 +237,7 @@ function ItemDetailModal({ item, onClose }: { item: GalleryItem; onClose: () => 
           </button>
         </div>
 
-        <div className={`inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full mb-4 ${
+        <div className={`inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-lg mb-4 ${
           item.approved
             ? 'bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.25)]'
             : 'bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-[rgba(139,90,90,0.25)]'

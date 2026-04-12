@@ -147,7 +147,7 @@ export function DuesCalculator({ baseQuarterlyRate = 450 }: Props) {
               ${animatedSavings.toLocaleString()}
             </p>
           </div>
-          <div className="px-3 py-1.5 rounded-full bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)]">
+          <div className="px-3 py-1.5 rounded-lg bg-[rgba(42,93,79,0.15)] border border-[rgba(42,93,79,0.25)]">
             <span className="text-xs font-medium text-[#2A5D4F]">
               {Math.round((savings / traditionalMid) * 100)}% saved
             </span>

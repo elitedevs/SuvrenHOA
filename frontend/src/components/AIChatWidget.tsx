@@ -112,7 +112,7 @@ export function AIChatWidget() {
         aria-label="AI Community Assistant"
         aria-hidden={!isOpen}
       >
-        <div className="bg-[#111113] border border-[rgba(245,240,232,0.08)] rounded-xl rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
+        <div className="bg-[#111114] border border-[rgba(245,240,232,0.08)] rounded-xl rounded-br-lg shadow-2xl flex flex-col overflow-hidden" style={{ height: '500px' }}>
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[rgba(26,26,30,0.80)] to-[rgba(34,34,40,0.80)] border-b border-[rgba(245,240,232,0.06)] shrink-0">
             <div className="flex items-center gap-2">
@@ -177,7 +177,7 @@ export function AIChatWidget() {
                 key={a.label}
                 onClick={() => sendMessage(a.query)}
                 disabled={isTyping}
-                className="text-[11px] font-medium px-2.5 py-1.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] hover:bg-[rgba(176,155,113,0.20)] hover:text-[#D4C4A0] transition-colors disabled:opacity-40 border border-[rgba(176,155,113,0.20)]"
+                className="text-[11px] font-medium px-2.5 py-1.5 rounded-lg bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] hover:bg-[rgba(176,155,113,0.20)] hover:text-[#D4C4A0] transition-colors disabled:opacity-40 border border-[rgba(176,155,113,0.20)]"
               >
                 {a.label}
               </button>

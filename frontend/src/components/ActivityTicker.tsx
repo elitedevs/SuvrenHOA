@@ -127,7 +127,7 @@ export function ActivityTicker({ className = '', maxHeight = '480px' }: Activity
             </span>
           )}
           {events.length > 0 && (
-            <span className="text-[10px] text-[var(--text-disabled)] bg-[rgba(245,240,232,0.05)] px-2 py-0.5 rounded-full border border-[rgba(245,240,232,0.08)]">
+            <span className="text-[10px] text-[var(--text-disabled)] bg-[rgba(245,240,232,0.05)] px-2 py-0.5 rounded-lg border border-[rgba(245,240,232,0.08)]">
               {events.length} events
             </span>
           )}

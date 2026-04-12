@@ -147,7 +147,7 @@ export function TreasuryProjections() {
           <h2 className="text-lg font-medium text-[#D4C4A0]">12-Month Projections</h2>
           <p className="text-xs text-[var(--text-disabled)] mt-1">Based on current income/expense trends</p>
         </div>
-        <div className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full ${
+        <div className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg ${
           change >= 0
             ? 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border border-[rgba(42,93,79,0.20)]'
             : 'bg-[rgba(107,58,58,0.10)] text-[#6B3A3A] border border-[rgba(107,58,58,0.20)]'
