@@ -15,9 +15,17 @@ import type { NextRequest } from 'next/server';
  *   https://hoa.suvren.co/auth/callback
  */
 export async function GET(request: NextRequest) {
-  const { searchParams, origin } = new URL(request.url);
+  const { searchParams } = new URL(request.url);
   const code = searchParams.get('code');
   const next = searchParams.get('next') ?? '/dashboard';
+
+  // Derive the public origin from forwarded headers (Cloudflare / reverse proxy)
+  // so we don't redirect to the Docker container's internal hostname.
+  const forwardedHost = request.headers.get('x-forwarded-host') ?? request.headers.get('host');
+  const forwardedProto = request.headers.get('x-forwarded-proto') ?? 'https';
+  const origin = forwardedHost
+    ? `${forwardedProto}://${forwardedHost}`
+    : (process.env.NEXT_PUBLIC_APP_URL ?? new URL(request.url).origin);
 
   if (code) {
     const cookieStore = await cookies();
