@@ -12,3 +12,16 @@
 # OS
 .DS_Store
 Thumbs.db
+
+# Cowork / Claude worktree snapshots — stale copies of the repo that
+# Cowork creates per-session. Must not be committed; the council runner
+# also excludes this path from audits (see ../Code/run_council_audit.py
+# EXCLUDED_SEGMENTS). Never remove this line.
+.claude/
+
+# TypeScript incremental build cache — generated per-build, should never
+# have been tracked. Untracked here; history still contains the old blob.
+*.tsbuildinfo
+
+# Stale deploy/migration reference files marked for deletion
+*.stale
