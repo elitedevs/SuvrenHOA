@@ -225,12 +225,11 @@ contract Deploy is Script {
         d.treasury.grantRole(adminRole, address(d.timelock));
         d.treasury.renounceRole(adminRole, cfg.deployerAddr);
 
-        // DuesLending
-        d.duesLending.grantRole(adminRole, address(d.timelock));
-        d.duesLending.renounceRole(adminRole, cfg.deployerAddr);
-
-        // TreasuryYield: admin was granted directly to the timelock in the
+        // DuesLending: admin was granted directly to the timelock in the
         // constructor — the deployer never held it. Do not add to this loop.
+
+        // TreasuryYield: same pattern as DuesLending — admin granted directly
+        // to the timelock in the constructor. Do not add to this loop.
 
         // VendorEscrow
         d.vendorEscrow.grantRole(adminRole, address(d.timelock));
