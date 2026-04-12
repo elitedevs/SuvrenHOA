@@ -14,6 +14,8 @@ type Profile = {
   created_at: string;
 };
 
+type OAuthProvider = 'google' | 'github';
+
 type AuthContextValue = {
   user: User | null;
   session: Session | null;
@@ -21,7 +23,7 @@ type AuthContextValue = {
   loading: boolean;
   signUp: (email: string, password: string, metadata?: Record<string, unknown>) => Promise<{ error: Error | null }>;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
-  signInWithMagicLink: (email: string) => Promise<{ error: Error | null }>;
+  signInWithOAuth: (provider: OAuthProvider) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: Error | null }>;
   refreshProfile: () => Promise<void>;
@@ -74,15 +76,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe();
   }, [supabase, fetchProfile]);
 
-  // NOTE: We pin emailRedirectTo to the current browser origin so that magic
-  // links and email-confirmation links come back to the same host the user
-  // signed up from (e.g. https://hoa.suvren.co). Without this, Supabase falls
-  // back to the project-level "Site URL" in the dashboard, which was pointing
-  // at suvren.co and breaking the flow for the HOA app. The target host must
-  // also be on the Supabase "Redirect URLs" allow-list.
+  // Pin emailRedirectTo to the current browser origin so that email-confirmation
+  // links come back to the same host (e.g. https://hoa.suvren.co). The target
+  // host must also be on the Supabase "Redirect URLs" allow-list.
   const authRedirectUrl =
     typeof window !== 'undefined'
-      ? `${window.location.origin}/dashboard`
+      ? `${window.location.origin}/auth/callback`
       : undefined;
 
   const signUp = async (email: string, password: string, metadata?: Record<string, unknown>) => {
@@ -102,11 +101,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error: error as Error | null };
   };
 
-  const signInWithMagicLink = async (email: string) => {
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
+  const signInWithOAuth = async (provider: OAuthProvider) => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
       options: {
-        emailRedirectTo: authRedirectUrl,
+        redirectTo: authRedirectUrl,
       },
     });
     return { error: error as Error | null };
@@ -135,7 +134,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         loading,
         signUp,
         signIn,
-        signInWithMagicLink,
+        signInWithOAuth,
         signOut,
         resetPassword,
         refreshProfile,
@@ -176,7 +175,6 @@ class AuthErrorBoundary extends Component<
 
   render() {
     if (this.state.hasError) {
-      // Render children without auth — users will be treated as unauthenticated.
       return this.props.children;
     }
     return this.props.children;
