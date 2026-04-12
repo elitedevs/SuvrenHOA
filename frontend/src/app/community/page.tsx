@@ -6,7 +6,7 @@ import { useAccount } from 'wagmi';
 import { usePosts, useCreatePost, type Post as PostType } from '@/hooks/usePosts';
 import { useProperty } from '@/hooks/useProperty';
 import Link from 'next/link';
-import { Users } from 'lucide-react';
+import { Users, MessageSquare } from 'lucide-react';
 
 
 const CATEGORIES = [
@@ -110,7 +110,7 @@ export default function CommunityPage() {
           {!isLoading && posts.length === 0 && (
             <div className="glass-card rounded-xl p-10 text-center mt-4">
               <div className="w-14 h-14 rounded-xl bg-[rgba(176,155,113,0.08)] flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">💬</span>
+                <MessageSquare className="w-7 h-7 text-[var(--brass)]" strokeWidth={1.25} />
               </div>
               <h3 className="text-lg font-medium text-[var(--text-heading)] mb-2">No posts yet</h3>
               <p className="text-sm text-[var(--text-muted)] max-w-md mx-auto mb-5">

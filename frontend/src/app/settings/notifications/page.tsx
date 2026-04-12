@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Bell, X } from 'lucide-react';
+import { Bell, X, Check } from 'lucide-react';
 
 interface NotifPref {
   id: string;
@@ -210,7 +210,7 @@ export default function NotificationPrefsPage() {
         onClick={handleSave}
         className="w-full py-3.5 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] text-sm font-medium transition-all shadow-[0_0_20px_rgba(201,169,110,0.2)]"
       >
-        {saved ? '✓ Preferences Saved' : hasUnsaved ? 'Save Preferences *' : 'Save Preferences'}
+        {saved ? <><Check className="w-4 h-4 inline mr-1" /> Preferences Saved</> : hasUnsaved ? 'Save Preferences *' : 'Save Preferences'}
       </button>
 
       <p className="text-[11px] text-[var(--text-disabled)] text-center mt-4">

@@ -33,7 +33,7 @@ export default function GovernancePage() {
 
       {/* Quick Links */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        <Link href="/governance/voting-power" className="group p-4 rounded-xl bg-[var(--surface-2,#1A1A1E)] hover:bg-[var(--surface-3,#222226)] transition-all">
+        <Link href="/governance/voting-power" className="group p-4 rounded-xl bg-[var(--surface-2,#1A1A1E)] hover:bg-[var(--surface-3,#222228)] transition-all">
           <div className="flex items-center gap-3">
             <Users className="w-5 h-5 text-[var(--brass)]" strokeWidth={1.25} />
             <div>
@@ -42,7 +42,7 @@ export default function GovernancePage() {
             </div>
           </div>
         </Link>
-        <Link href="/governance/elections" className="group p-4 rounded-xl bg-[var(--surface-2,#1A1A1E)] hover:bg-[var(--surface-3,#222226)] transition-all">
+        <Link href="/governance/elections" className="group p-4 rounded-xl bg-[var(--surface-2,#1A1A1E)] hover:bg-[var(--surface-3,#222228)] transition-all">
           <div className="flex items-center gap-3">
             <Vote className="w-5 h-5 text-[var(--brass)]" strokeWidth={1.25} />
             <div>
@@ -51,7 +51,7 @@ export default function GovernancePage() {
             </div>
           </div>
         </Link>
-        <Link href="/governance/stats" className="group p-4 rounded-xl bg-[var(--surface-2,#1A1A1E)] hover:bg-[var(--surface-3,#222226)] transition-all">
+        <Link href="/governance/stats" className="group p-4 rounded-xl bg-[var(--surface-2,#1A1A1E)] hover:bg-[var(--surface-3,#222228)] transition-all">
           <div className="flex items-center gap-3">
             <TrendingUp className="w-5 h-5 text-[var(--brass)]" strokeWidth={1.25} />
             <div>

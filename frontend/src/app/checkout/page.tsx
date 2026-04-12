@@ -6,7 +6,7 @@ import { useAccount } from 'wagmi';
 import Link from 'next/link';
 import { useProperty } from '@/hooks/useProperty';
 import { useDuesStatus } from '@/hooks/useTreasury';
-import { CheckCircle, Home } from 'lucide-react';
+import { CheckCircle, Home, AlertCircle, Check } from 'lucide-react';
 
 // ── Step Indicator ────────────────────────────────────────────────────────────
 function StepIndicator({ current, total }: { current: number; total: number }) {
@@ -118,7 +118,7 @@ function CheckoutWizard() {
       {/* ── Dues status error ── */}
       {duesError && (
         <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-          ⚠️ {duesError}
+          <AlertCircle className="w-4 h-4 inline mr-1.5 shrink-0" /> {duesError}
         </div>
       )}
 
@@ -141,9 +141,9 @@ function CheckoutWizard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {isCurrent !== false ? (
-                  <span className="text-[#2A5D4F] text-lg">✓</span>
+                  <Check className="w-5 h-5 text-[#2A5D4F]" strokeWidth={1.5} />
                 ) : (
-                  <span className="text-[#8B5A5A] text-lg">⚠</span>
+                  <AlertCircle className="w-5 h-5 text-[#8B5A5A]" strokeWidth={1.5} />
                 )}
                 <div>
                   <p className="text-sm font-medium text-[var(--parchment)]">HOA Dues</p>
@@ -249,7 +249,7 @@ function CheckoutWizard() {
                   href="/dues"
                   className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[rgba(107,58,58,0.15)] border border-[rgba(107,58,58,0.25)] hover:bg-[rgba(139,90,90,0.30)] text-sm font-medium text-[#8B5A5A] transition-all"
                 >
-                  ⚠ Pay Outstanding Balance
+                  <AlertCircle className="w-4 h-4 shrink-0" /> Pay Outstanding Balance
                 </Link>
               </div>
             ) : (

@@ -8,7 +8,7 @@ import { useTreasury, useDuesStatus } from '@/hooks/useTreasury';
 import { usePayDues, useUSDCBalance, useUSDCAllowance } from '@/hooks/usePayDues';
 import { DuesReminder } from '@/components/DuesReminder';
 import { useDuesSocialProof } from '@/hooks/useDuesSocialProof';
-import { CreditCard, Home } from 'lucide-react';
+import { CreditCard, Home, AlertCircle, Check, Loader2 } from 'lucide-react';
 import { DuesPaymentChart } from '@/components/DuesPaymentChart';
 import { DuesCalculator } from '@/components/DuesCalculator';
 import { DuesAutoPay } from '@/components/DuesAutoPay';
@@ -181,7 +181,7 @@ function DuesPanel() {
       {/* Treasury / DuesStatus errors */}
       {(treasuryError || duesStatusError) && (
         <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-          ⚠️ {treasuryError ?? duesStatusError}
+          <AlertCircle className="w-4 h-4 inline mr-1.5 shrink-0" /> {treasuryError ?? duesStatusError}
         </div>
       )}
 
@@ -212,7 +212,7 @@ function DuesPanel() {
                         ? 'bg-[rgba(176,155,113,0.20)] border border-[rgba(176,155,113,0.50)] text-[#D4C4A0] shadow-[0_0_12px_rgba(201,169,110,0.25)]'
                         : 'bg-[var(--surface-2)] border border-[var(--divider)] text-[var(--text-disabled)]'
                     }`}>
-                      {isDone ? '✓' : i + 1}
+                      {isDone ? <Check className="w-4 h-4" /> : i + 1}
                     </div>
                     <span className={`text-[11px] font-medium whitespace-nowrap ${
                       isActive ? 'text-[#D4C4A0]' : isDone ? 'text-[#2A5D4F]' : 'text-[var(--text-disabled)]'
@@ -273,8 +273,8 @@ function DuesPanel() {
       {/* Done State */}
       {step === 'done' ? (
         <div className="glass-card-success rounded-xl p-12 text-center pulse-glow-green page-enter">
-          <div className="w-20 h-20 rounded-full bg-[rgba(42,93,79,0.15)] border-2 border-[rgba(42,93,79,0.25)] flex items-center justify-center text-4xl mx-auto mb-6">
-            ✓
+          <div className="w-20 h-20 rounded-full bg-[rgba(42,93,79,0.15)] border-2 border-[rgba(42,93,79,0.25)] flex items-center justify-center mx-auto mb-6">
+            <Check className="w-10 h-10 text-[#2A5D4F]" strokeWidth={1.5} />
           </div>
           <h3 className="text-2xl font-normal text-[#2A5D4F] mb-3">Payment Successful!</h3>
           <p className="text-sm text-[var(--text-muted)] mb-2 max-w-sm mx-auto">
@@ -365,13 +365,13 @@ function DuesPanel() {
 
           {/* Transaction state feedback */}
           {(isApprovePending) && (
-            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm">
-              ⏳ Waiting for wallet confirmation...
+            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm flex items-center gap-2">
+              <Loader2 className="w-4 h-4 animate-spin shrink-0" /> Waiting for wallet confirmation...
             </div>
           )}
           {(isApproveConfirming && approveHash) && (
-            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm">
-              🔄 Approve submitted. Confirming...{' '}
+            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm flex items-center gap-2">
+              <Loader2 className="w-4 h-4 animate-spin shrink-0" /> Approve submitted. Confirming...{' '}
               <a
                 href={`https://sepolia.basescan.org/tx/${approveHash}`}
                 target="_blank"
@@ -383,13 +383,13 @@ function DuesPanel() {
             </div>
           )}
           {(isPayPending) && (
-            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm">
-              ⏳ Waiting for wallet confirmation...
+            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm flex items-center gap-2">
+              <Loader2 className="w-4 h-4 animate-spin shrink-0" /> Waiting for wallet confirmation...
             </div>
           )}
           {(isPayConfirming && payHash) && (
-            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm">
-              🔄 Transaction submitted. Confirming...{' '}
+            <div className="mb-4 p-3 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#D4C4A0] text-sm flex items-center gap-2">
+              <Loader2 className="w-4 h-4 animate-spin shrink-0" /> Transaction submitted. Confirming...{' '}
               <a
                 href={`https://sepolia.basescan.org/tx/${payHash}`}
                 target="_blank"
@@ -404,14 +404,14 @@ function DuesPanel() {
           {/* Hook errors */}
           {error && (
             <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-              ⚠️ {error}
+              <AlertCircle className="w-4 h-4 inline mr-1.5 shrink-0" /> {error}
             </div>
           )}
 
           {/* Insufficient balance warning */}
           {selectedOption && hasInsufficientBalance && (
             <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-              ⚠️ Insufficient USDC balance. You need ${selectedOption.amount.toFixed(2)} but have ${usdcBalance.toFixed(2)}.
+              <AlertCircle className="w-4 h-4 inline mr-1.5 shrink-0" /> Insufficient USDC balance. You need ${selectedOption.amount.toFixed(2)} but have ${usdcBalance.toFixed(2)}.
             </div>
           )}
 
@@ -436,10 +436,10 @@ function DuesPanel() {
             }
             className="w-full py-4 rounded-xl bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 disabled:cursor-not-allowed text-base font-medium transition-all duration-200 active:scale-[0.98] min-h-[56px]"
           >
-            {isApprovePending ? '⏳ Waiting for wallet...' :
-             isApproveConfirming ? '🔄 Confirming approval...' :
-             isPayPending ? '⏳ Waiting for wallet...' :
-             isPayConfirming ? '🔄 Confirming payment...' :
+            {isApprovePending ? <><Loader2 className="w-4 h-4 inline mr-1.5 animate-spin" /> Waiting for wallet...</> :
+             isApproveConfirming ? <><Loader2 className="w-4 h-4 inline mr-1.5 animate-spin" /> Confirming approval...</> :
+             isPayPending ? <><Loader2 className="w-4 h-4 inline mr-1.5 animate-spin" /> Waiting for wallet...</> :
+             isPayConfirming ? <><Loader2 className="w-4 h-4 inline mr-1.5 animate-spin" /> Confirming payment...</> :
              !selectedQuarters ? 'Select a payment option' :
              hasInsufficientBalance ? 'Insufficient USDC balance' :
              selectedOption ? `Pay $${selectedOption.amount.toFixed(2)} USDC` :
@@ -451,7 +451,7 @@ function DuesPanel() {
             <p>Paid in USDC on Base. 80% → operating fund · 20% → reserve fund.</p>
             {allowanceAlreadySet && selectedOption && (
               <p className="text-[#2A5D4F]">
-                ✓ USDC already approved — no approval step needed.
+                <Check className="w-3.5 h-3.5 inline mr-1" /> USDC already approved — no approval step needed.
               </p>
             )}
           </div>

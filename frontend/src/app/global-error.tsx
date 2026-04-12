@@ -22,7 +22,7 @@ export default function GlobalError({
       <body
         style={{
           background: '#0C0C0E',
-          color: '#E8E3DC',
+          color: '#E8E4DC',
           fontFamily: 'system-ui, sans-serif',
           display: 'flex',
           flexDirection: 'column',
@@ -37,7 +37,7 @@ export default function GlobalError({
           style={{
             fontSize: '1.5rem',
             fontStyle: 'italic',
-            color: '#E8E3DC',
+            color: '#E8E4DC',
             marginBottom: '0.5rem',
           }}
         >

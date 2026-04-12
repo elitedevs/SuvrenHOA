@@ -122,7 +122,7 @@ export default function LoginPage() {
         )}
 
         {message && (
-          <div className="mb-6 p-3 rounded-lg bg-[rgba(42,93,79,0.12)] border border-[rgba(42,93,79,0.25)] text-sm text-[#7FBFAB]">
+          <div className="mb-6 p-3 rounded-lg bg-[rgba(42,93,79,0.12)] border border-[rgba(42,93,79,0.25)] text-sm text-[#F5F0E8]">
             {message}
           </div>
         )}

@@ -118,7 +118,7 @@ export default function ComparePage() {
             const tradBetter = row.higherIsBetter ? tradVal > suvVal : tradVal < suvVal;
             const suvBetter = row.higherIsBetter ? suvVal > tradVal : suvVal < tradVal;
             return (
-              <div key={i} className={`grid grid-cols-3 px-6 py-4 items-center ${i % 2 === 0 ? '' : 'bg-[#111113]'}`}>
+              <div key={i} className={`grid grid-cols-3 px-6 py-4 items-center ${i % 2 === 0 ? '' : 'bg-[#0c0c0e]'}`}>
                 <div className="text-sm text-[#D4C4A0]">{row.category}</div>
                 <div className={`text-center font-mono text-sm font-medium ${tradBetter ? 'text-[#2A5D4F]' : suvBetter ? 'text-[#8B5A5A]' : 'text-[var(--text-body)]'}`}>
                   {row.unit === '$' ? `$${tradVal.toLocaleString()}` : `${tradVal}${row.unit}`}

@@ -7,7 +7,7 @@ import { useProfile, useUpdateProfile } from '@/hooks/useProfile';
 import { useProperty } from '@/hooks/useProperty';
 import { useBadges } from '@/hooks/useBadges';
 import { useDuesStatus } from '@/hooks/useTreasury';
-import { X } from 'lucide-react';
+import { X, AlertCircle, Check } from 'lucide-react';
 
 export default function ProfilePage() {
   const { isConnected } = useAccount();
@@ -143,8 +143,8 @@ function ProfileForm() {
       {/* Hook error banner */}
       {profileError && !dismissedHookError && (
         <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center justify-between">
-          <span>⚠️ {profileError}</span>
-          <button onClick={() => setDismissedHookError(true)} className="text-red-400/60 hover:text-red-400">✕</button>
+          <span className="flex items-center gap-1.5"><AlertCircle className="w-4 h-4 shrink-0" /> {profileError}</span>
+          <button onClick={() => setDismissedHookError(true)} className="text-red-400/60 hover:text-red-400"><X className="w-3.5 h-3.5" /></button>
         </div>
       )}
 
@@ -281,7 +281,7 @@ function ProfileForm() {
           disabled={updateProfile.isPending || !!emailError}
           className="w-full py-3 rounded-lg bg-[#B09B71] hover:bg-[#D4C4A0] text-[var(--surface-2)] disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium transition-all"
         >
-          {updateProfile.isPending ? 'Saving…' : saved ? '✓ Saved' : 'Save Profile'}
+          {updateProfile.isPending ? 'Saving…' : saved ? <><Check className="w-4 h-4 inline mr-1" /> Saved</> : 'Save Profile'}
         </button>
       </div>
 

@@ -78,7 +78,7 @@ export default function EnergyPage() {
           {/* Seasonal Tips */}
           <div className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl p-6">
             <h2 className="text-lg font-medium text-[#D4C4A0] mb-4">Seasonal Energy Tips</h2>
-            <div className="flex gap-1.5 mb-5 p-1 bg-[#111113] rounded-xl">
+            <div className="flex gap-1.5 mb-5 p-1 bg-[#0c0c0e] rounded-xl">
               {(['Summer', 'Winter', 'Spring', 'Fall'] as const).map(s => (
                 <button key={s} onClick={() => setSeason(s)} className={`flex-1 py-1.5 rounded-lg text-xs font-medium transition-colors ${season === s ? 'bg-[var(--brass-deep)] text-[var(--surface-2)]' : 'text-[rgba(245,240,232,0.45)] hover:text-[#D4C4A0]'}`}>{s}</button>
               ))}
@@ -154,7 +154,7 @@ export default function EnergyPage() {
               </thead>
               <tbody>
                 {GREEN_IMPROVEMENTS.map((item, i) => (
-                  <tr key={i} className={`text-sm ${i % 2 === 0 ? '' : 'bg-[#111113]'}`}>
+                  <tr key={i} className={`text-sm ${i % 2 === 0 ? '' : 'bg-[#0c0c0e]'}`}>
                     <td className="px-4 py-3 text-[#D4C4A0] font-medium">{item.name}</td>
                     <td className="px-4 py-3 text-[var(--text-body)]">${item.cost.toLocaleString()}</td>
                     <td className="px-4 py-3 text-[#2A5D4F] font-medium">${item.annualSavings}/yr</td>

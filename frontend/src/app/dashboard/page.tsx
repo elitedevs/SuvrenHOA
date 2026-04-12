@@ -192,8 +192,8 @@ function PropertyDashboard() {
       {/* Error banner */}
       {pageError && !dismissedError && (
         <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center justify-between">
-          <span>⚠️ {pageError}</span>
-          <button onClick={() => setDismissedError(true)} className="text-red-400/60 hover:text-red-400">✕</button>
+          <span className="flex items-center gap-1.5"><AlertCircle className="w-4 h-4 shrink-0" /> {pageError}</span>
+          <button onClick={() => setDismissedError(true)} className="text-red-400/60 hover:text-red-400"><X className="w-3.5 h-3.5" /></button>
         </div>
       )}
 
