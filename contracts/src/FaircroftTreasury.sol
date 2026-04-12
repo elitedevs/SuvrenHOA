@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 /**
  * @title FaircroftTreasury
@@ -38,6 +39,10 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
 
     /// @notice USDC token contract (6 decimals on Base)
     IERC20 public immutable usdc;
+
+    /// @notice PropertyNFT contract — used to validate token existence on payDues.
+    ///         CR-04: set post-deploy via setPropertyNFT(); zero-address means no guard.
+    IERC721 public propertyNft;
 
     // ── Dues Configuration ───────────────────────────────────────────────────
 
@@ -140,6 +145,8 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     event LoanRepaid(address indexed lendingContract, uint256 amount);
     event DuesPaidForLoan(uint256 indexed tokenId, address indexed payer, uint256 amount, uint256 quarters);
     event EscrowCreditReceived(address indexed escrowContract, uint256 amount);
+    event DonationReconciled(uint256 amount, address indexed reconciledBy);
+    event PropertyNFTSet(address indexed oldAddr, address indexed newAddr);
 
     // ── Errors ───────────────────────────────────────────────────────────────
 
@@ -150,6 +157,7 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     error InsufficientReserveBalance(uint256 requested, uint256 available);
     error EmergencyLimitExceeded(uint256 requested, uint256 remaining);
     error InvalidBps(uint256 bps);
+    error TokenDoesNotExist(uint256 tokenId);
 
     // ── Constructor ──────────────────────────────────────────────────────────
 
@@ -184,6 +192,15 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
      */
     function payDues(uint256 tokenId, uint256 quarters) external nonReentrant {
         if (quarters == 0 || quarters > 4) revert InvalidPaymentPeriod();
+
+        // CR-05: reject payments for non-existent lots (ghost-lot griefing).
+        // When propertyNft is set, ownerOf reverts for unminted tokenIds via
+        // OZ ERC721NonexistentToken — we catch and rethrow with our own error.
+        if (address(propertyNft) != address(0)) {
+            try propertyNft.ownerOf(tokenId) returns (address) {} catch {
+                revert TokenDoesNotExist(tokenId);
+            }
+        }
 
         uint256 amount;
         if (quarters == 4) {
@@ -347,6 +364,21 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
         gracePeriod = newPeriod;
     }
 
+    /**
+     * @notice Set the PropertyNFT contract address.
+     * @dev CR-04: enables ownerOf guard in payDues/payDuesFor. Set post-deploy
+     *      via governance. When non-zero, paying dues for a non-existent lot reverts.
+     *
+     *      Future: once PropertyNFT grants a TREASURY_ROLE, this contract can also
+     *      call propertyNFT.updateDuesStatus() to keep the NFT's lastDuesTimestamp
+     *      in sync with Treasury's duesRecords. That requires a PropertyNFT upgrade
+     *      + governance role-grant and is tracked separately.
+     */
+    function setPropertyNFT(address _nft) external onlyRole(GOVERNOR_ROLE) {
+        emit PropertyNFTSet(address(propertyNft), _nft);
+        propertyNft = IERC721(_nft);
+    }
+
     // ── Yield Management ─────────────────────────────────────────────────────
 
     /**
@@ -442,6 +474,13 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
     {
         if (quarters == 0 || quarters > 4) revert InvalidPaymentPeriod();
 
+        // CR-05: same ghost-lot guard as payDues
+        if (address(propertyNft) != address(0)) {
+            try propertyNft.ownerOf(tokenId) returns (address) {} catch {
+                revert TokenDoesNotExist(tokenId);
+            }
+        }
+
         // No discount, no late fee — loan covers face-value dues
         uint256 amount = quarterlyDuesAmount * quarters;
 
@@ -487,6 +526,31 @@ contract FaircroftTreasury is AccessControl, ReentrancyGuard {
         }
 
         emit EscrowCreditReceived(msg.sender, amount);
+    }
+
+    // ── Donation / Reconciliation ─────────────────────────────────────────────
+
+    /**
+     * @notice Sweep untracked USDC (direct transfers, accidental sends, donations)
+     *         into the reserve fund so it shows up in accounting.
+     * @dev    CR-03: usdc.balanceOf(this) can exceed operatingBalance + reserveBalance
+     *         when someone calls usdc.transfer() directly instead of payDues(). Without
+     *         reconciliation those funds are invisible to on-chain accounting and drift
+     *         forever.  Board (TREASURER_ROLE) or governance (GOVERNOR_ROLE) can sweep.
+     */
+    function reconcileDonations() external nonReentrant {
+        if (!hasRole(TREASURER_ROLE, msg.sender) && !hasRole(GOVERNOR_ROLE, msg.sender)) {
+            revert AccessControlUnauthorizedAccount(msg.sender, TREASURER_ROLE);
+        }
+
+        uint256 actual = usdc.balanceOf(address(this));
+        uint256 tracked = operatingBalance + reserveBalance;
+        if (actual <= tracked) return; // nothing to sweep (rounding / zero case)
+
+        uint256 surplus = actual - tracked;
+        reserveBalance += surplus;
+
+        emit DonationReconciled(surplus, msg.sender);
     }
 
     // ── View Functions ───────────────────────────────────────────────────────
