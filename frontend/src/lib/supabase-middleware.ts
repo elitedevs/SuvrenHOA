@@ -61,6 +61,7 @@ export async function updateSession(request: NextRequest) {
     '/assistant',
     '/calendar',
     '/checkout',
+    '/community',
     '/compare',
     '/complaints',
     '/contractors',
