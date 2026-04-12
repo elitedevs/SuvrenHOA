@@ -111,7 +111,7 @@ export function useOnboarding() {
           }),
         });
       } catch (e) {
-        console.error('[onboarding] Failed to sync pet:', e);
+        // Sync failure is non-blocking
       }
     }
 
@@ -133,7 +133,7 @@ export function useOnboarding() {
           }),
         });
       } catch (e) {
-        console.error('[onboarding] Failed to sync vehicle:', e);
+        // Sync failure is non-blocking
       }
     }
 

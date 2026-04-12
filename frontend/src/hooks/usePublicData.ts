@@ -131,7 +131,6 @@ export function usePublicStats(): PublicStats {
         error: null,
       });
     } catch (err) {
-      console.error('[usePublicStats]', err);
       setStats((prev) => ({ ...prev, loading: false, error: 'Unable to load on-chain data' }));
     }
   }, []);

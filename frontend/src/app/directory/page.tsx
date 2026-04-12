@@ -8,6 +8,44 @@ import { DirectoryMapView } from '@/components/DirectoryMapView';
 import { Map, List } from 'lucide-react';
 import { usePublicStats } from '@/hooks/usePublicData';
 
+interface BoardMember {
+  name: string;
+  role: string;
+  lotNumber?: number;
+  tier?: number;
+  duesCurrent?: boolean;
+  petCount?: number;
+  vehicleCount?: number;
+  address?: string;
+  since?: string;
+  email?: string;
+}
+
+interface CommitteeMember {
+  name: string;
+}
+
+interface Committee {
+  name: string;
+  chair: string;
+  description: string;
+  meetingSchedule: string;
+  icon: string;
+  hoa_committee_members?: CommitteeMember[];
+}
+
+interface DirectoryData {
+  board?: BoardMember[];
+  committees?: Committee[];
+}
+
+interface MapResident {
+  id: string;
+  lot_number: number;
+  display_name: string;
+  board_role?: string;
+}
+
 
 
 
@@ -43,15 +81,15 @@ export default function DirectoryPage() {
     return <AuthWall title="Community Directory" description="Find your neighbors, view lot information, and connect with fellow residents." />;
   }
 
-  const BOARD_MEMBERS = data?.board || [];
-  const COMMITTEES = (data?.committees || []).map((c: any) => ({
+  const BOARD_MEMBERS = (data as DirectoryData)?.board || [];
+  const COMMITTEES = ((data as DirectoryData)?.committees || []).map((c: Committee) => ({
     ...c,
-    members: (c.hoa_committee_members || []).map((m: any) => m.name),
+    members: (c.hoa_committee_members || []).map((m: CommitteeMember) => m.name),
   }));
 
   // Build residents array for map view from board data + committees
-  const mapResidents = [
-    ...BOARD_MEMBERS.map((m: any) => ({
+  const mapResidents: MapResident[] = [
+    ...BOARD_MEMBERS.map((m: BoardMember) => ({
       id: m.name,
       lot_number: m.lotNumber || 0,
       display_name: m.name,
@@ -127,7 +165,7 @@ export default function DirectoryPage() {
         <span className="text-xl"></span> Board of Directors
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        {BOARD_MEMBERS.map((member: any) => (
+        {BOARD_MEMBERS.map((member: BoardMember) => (
           <ResidentProfileCard key={member.name} member={member} isBoard />
         ))}
       </div>
@@ -137,7 +175,7 @@ export default function DirectoryPage() {
         <span className="text-xl"></span> Committees
       </h2>
       <div className="space-y-4">
-        {COMMITTEES.map((committee: any) => (
+        {COMMITTEES.map((committee: Committee & { members: string[] }) => (
           <div key={committee.name} className="glass-card rounded-xl hover-lift p-5">
             <div className="flex items-center gap-3 mb-3">
               <span className="text-2xl">{committee.icon}</span>
@@ -148,7 +186,7 @@ export default function DirectoryPage() {
             </div>
             <p className="text-xs text-[var(--text-muted)] mb-3">{committee.description}</p>
             <div className="flex items-center gap-2 flex-wrap mb-2">
-              {committee.members.map((m: any) => (
+              {committee.members.map((m: string) => (
                 <span key={m} className="text-[10px] px-2 py-1 rounded-lg bg-[rgba(26,26,30,0.50)] text-[var(--text-muted)]">{m}</span>
               ))}
             </div>
@@ -177,7 +215,7 @@ const TIER_LABELS: Record<number, { label: string; color: string; bg: string }> 
   4: { label: ' New Owner', color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)] border-[rgba(176,155,113,0.20)]' },
 };
 
-function ResidentProfileCard({ member, isBoard = false }: { member: any; isBoard?: boolean }) {
+function ResidentProfileCard({ member, isBoard = false }: { member: BoardMember; isBoard?: boolean }) {
   // Derive mock data for demo (in production these come from DB)
   const tier = member.tier || (isBoard ? 1 : Math.floor(Math.random() * 3) + 2);
   const tierInfo = TIER_LABELS[tier] ?? TIER_LABELS[4];

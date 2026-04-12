@@ -794,7 +794,7 @@ const LS_CHECKLIST = 'suvren_checklist_completed';
 function loadChecked(): Set<string> {
   if (typeof window === 'undefined') return new Set();
   try { return new Set(JSON.parse(localStorage.getItem(LS_CHECKLIST) || '[]')); }
-  catch (err) { console.error('[MoveChecklist] Failed to parse checklist state from localStorage:', err); return new Set(); }
+  catch (err) { return new Set(); }
 }
 
 function MoveChecklist({ mode }: { mode: 'move-in' | 'move-out' }) {

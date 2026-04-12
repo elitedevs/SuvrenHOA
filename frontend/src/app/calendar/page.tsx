@@ -6,6 +6,24 @@ import { useAccount } from 'wagmi';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { CalendarDays } from 'lucide-react';
 
+interface EventRsvp {
+  status: 'going' | 'not-going' | 'maybe';
+  wallet_address: string;
+}
+
+interface Event {
+  id: string;
+  title: string;
+  start_time: string;
+  end_time?: string;
+  event_type: string;
+  description?: string;
+  location?: string;
+  all_day?: boolean;
+  rsvp_required?: boolean;
+  hoa_event_rsvps?: EventRsvp[];
+}
+
 const EVENT_TYPES = [
   { id: 'community', label: 'Community', icon: '', color: 'gold' },
   { id: 'board-meeting', label: 'Board Meeting', icon: '', color: 'brass' },
@@ -36,8 +54,8 @@ export default function CalendarPage() {
   }
 
   // Group events by date
-  const eventsByDate: Record<string, any[]> = {};
-  (events || []).forEach((e: any) => {
+  const eventsByDate: Record<string, Event[]> = {};
+  (events || []).forEach((e: Event) => {
     const date = new Date(e.start_time).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
     if (!eventsByDate[date]) eventsByDate[date] = [];
     eventsByDate[date].push(e);
@@ -96,7 +114,7 @@ export default function CalendarPage() {
                 {date}
               </h3>
               <div className="space-y-2">
-                {dayEvents.map((event: any) => (
+                {dayEvents.map((event: Event) => (
                   <EventCard key={event.id} event={event} walletAddress={address} />
                 ))}
               </div>
@@ -108,12 +126,12 @@ export default function CalendarPage() {
   );
 }
 
-function EventCard({ event, walletAddress }: { event: any; walletAddress?: string }) {
+function EventCard({ event, walletAddress }: { event: Event; walletAddress?: string }) {
   const qc = useQueryClient();
   const type = EVENT_TYPES.find(t => t.id === event.event_type) || EVENT_TYPES[0];
   const rsvps = event.hoa_event_rsvps || [];
-  const goingCount = rsvps.filter((r: any) => r.status === 'going').length;
-  const myRsvp = rsvps.find((r: any) => r.wallet_address === walletAddress?.toLowerCase());
+  const goingCount = rsvps.filter((r: EventRsvp) => r.status === 'going').length;
+  const myRsvp = rsvps.find((r: EventRsvp) => r.wallet_address === walletAddress?.toLowerCase());
 
   const rsvp = useMutation({
     mutationFn: async (status: string) => {

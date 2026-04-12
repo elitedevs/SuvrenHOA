@@ -35,7 +35,6 @@ export async function POST(req: NextRequest) {
     if (error.code === '23505') {
       return Response.json({ message: 'Already signed up' }, { status: 200 });
     }
-    console.error('[newsletter] insert error:', error.message);
     return Response.json({ error: 'Failed to save. Please try again.' }, { status: 500 });
   }
 

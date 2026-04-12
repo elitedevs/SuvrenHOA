@@ -95,7 +95,7 @@ async function sendApprovedEmail(email: string, name: string, communityName: str
       html: approvedHtml(name, communityName, inviteLink),
     });
   } catch (err) {
-    console.error('[founding] approved email failed:', err);
+    // Non-blocking; email send failure doesn't affect response
   }
 }
 
@@ -110,7 +110,7 @@ async function sendWaitlistedEmail(email: string, name: string, communityName: s
       html: waitlistedHtml(name, communityName),
     });
   } catch (err) {
-    console.error('[founding] waitlisted email failed:', err);
+    // Non-blocking; email send failure doesn't affect response
   }
 }
 

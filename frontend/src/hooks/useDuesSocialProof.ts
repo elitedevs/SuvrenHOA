@@ -75,31 +75,29 @@ export function useDuesSocialProof(): DuesSocialProof {
         }
 
         // Get all token IDs via tokenByIndex (multicall)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const indexCalls: any[] = Array.from({ length: total }, (_, i) => ({
+        const indexCalls = Array.from({ length: total }, (_, i: number) => ({
           address: contracts.propertyNFT as `0x${string}`,
           abi: PropertyNFTAbi,
           functionName: 'tokenByIndex',
           args: [BigInt(i)],
         }));
 
-        const tokenIdResults = await publicClient.multicall({ contracts: indexCalls });
+        const tokenIdResults = await publicClient.multicall({ contracts: indexCalls as unknown as any });
         const tokenIds = tokenIdResults
-          .filter((r) => r.status === 'success')
-          .map((r) => r.result as bigint);
+          .filter((r: any) => r.status === 'success')
+          .map((r: any) => r.result as bigint);
 
         // Batch-check isDuesCurrent for each token
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const dueCalls: any[] = tokenIds.map((id) => ({
+        const dueCalls = tokenIds.map((id: bigint) => ({
           address: contracts.treasury as `0x${string}`,
           abi: FaircroftTreasuryAbi,
           functionName: 'isDuesCurrent',
           args: [id],
         }));
 
-        const dueResults = await publicClient.multicall({ contracts: dueCalls });
+        const dueResults = await publicClient.multicall({ contracts: dueCalls as unknown as any });
         const paidCount = dueResults.filter(
-          (r) => r.status === 'success' && r.result === true
+          (r: any) => r.status === 'success' && r.result === true
         ).length;
 
         if (!cancelled) {
@@ -114,7 +112,6 @@ export function useDuesSocialProof(): DuesSocialProof {
           });
         }
       } catch (err) {
-        console.error('useDuesSocialProof error:', err);
         if (!cancelled) {
           setData((prev) => ({ ...prev, loading: false }));
         }

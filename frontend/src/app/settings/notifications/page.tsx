@@ -61,7 +61,7 @@ function loadPrefs(): Record<string, boolean> {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw);
-  } catch (err) { console.error('[NotificationPrefs] Failed to parse stored preferences:', err); }
+  } catch (err) { /* Silent fallback to defaults */ }
   // defaults: all on except...
   return Object.fromEntries(PREFS.map(p => [p.id, true]));
 }

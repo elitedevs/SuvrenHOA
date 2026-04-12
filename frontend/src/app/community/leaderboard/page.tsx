@@ -302,7 +302,7 @@ export default function LeaderboardPage() {
             { address: '0xaBcD...1234', rank: 1, score: 12, badge: 'Perfect Payer' },
             { address: '0x9F2e...5678', rank: 2, score: 9, badge: 'Reliable' },
             { address: '0x3A4b...9012', rank: 3, score: 7, badge: 'Consistent' },
-          ]).map((entry: any, idx) => {
+          ]).map((entry: { address: string; rank: number; score: number; badge?: string }, idx) => {
             const streak = getStreak(entry.address);
             return (
               <div key={idx} className="p-3 rounded-lg bg-[rgba(245,240,232,0.02)] border border-[rgba(245,240,232,0.04)] text-center">

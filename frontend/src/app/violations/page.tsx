@@ -19,6 +19,30 @@ interface AppealRecord {
   status: 'submitted' | 'under-review' | 'approved' | 'denied';
 }
 
+interface Violation {
+  id: string;
+  title: string;
+  violation_number: string;
+  status: string;
+  created_at: string;
+  category: string;
+  accused_lot: number;
+  fine_amount: number;
+  description: string;
+  ccr_section?: string;
+  cure_deadline?: string;
+  hearing_date?: string;
+  severity?: 'minor' | 'major' | 'critical';
+  hoa_violation_updates?: ViolationUpdate[];
+}
+
+interface ViolationUpdate {
+  id: string;
+  text: string;
+  created_at: string;
+  updated_by: string;
+}
+
 const APPEALS_LS_KEY = 'suvren_violation_appeals';
 
 function loadAppeals(): AppealRecord[] {
@@ -31,7 +55,7 @@ function saveAppeals(appeals: AppealRecord[]) {
   localStorage.setItem(APPEALS_LS_KEY, JSON.stringify(appeals));
 }
 
-function AppealModal({ violation, onClose }: { violation: any; onClose: () => void }) {
+function AppealModal({ violation, onClose }: { violation: Violation; onClose: () => void }) {
   const [reason, setReason] = useState('');
   const [evidence, setEvidence] = useState('');
   const [desiredResolution, setDesiredResolution] = useState('');
@@ -269,7 +293,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
               filter === g.key ? 'bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)]' : 'glass-card text-[var(--text-muted)]'
             }`}
           >
-            <span className={g.color}>{(violations || []).filter((v: any) => g.statuses.includes(v.status)).length}</span> {g.label}
+            <span className={g.color}>{(violations || []).filter((v: Violation) => g.statuses.includes(v.status)).length}</span> {g.label}
           </button>
         ))}
       </div>
@@ -286,7 +310,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
         </div>
       ) : (
         <div className="space-y-4">
-          {violations.map((v: any) => (
+          {violations.map((v: Violation) => (
             <ViolationCard key={v.id} violation={v} />
           ))}
         </div>
@@ -295,7 +319,7 @@ function ViolationsList({ filter, setFilter }: { filter: string; setFilter: (f: 
   );
 }
 
-function ViolationCard({ violation }: { violation: any }) {
+function ViolationCard({ violation }: { violation: Violation }) {
   const [expanded, setExpanded] = useState(false);
   const [showAppeal, setShowAppeal] = useState(false);
   const appeals = typeof window !== 'undefined' ? loadAppeals() : [];
@@ -370,7 +394,7 @@ function ViolationCard({ violation }: { violation: any }) {
             {updates.length > 0 && (
               <div className="space-y-2">
                 <p className="text-[10px] uppercase tracking-wider text-[var(--text-disabled)] font-medium">History</p>
-                {updates.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((u: any) => (
+                {updates.sort((a: ViolationUpdate, b: ViolationUpdate) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((u: ViolationUpdate) => (
                   <div key={u.id} className="pl-4 border-l-2 border-[rgba(176,155,113,0.20)]">
                     <p className="text-xs text-[var(--text-muted)]">{u.text}</p>
                     <p className="text-[10px] text-[var(--text-disabled)] mt-0.5">

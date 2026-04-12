@@ -8,6 +8,18 @@ import { useProperty } from '@/hooks/useProperty';
 import Link from 'next/link';
 import { Users, MessageSquare } from 'lucide-react';
 
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+  category: string;
+  lot_number: number | null;
+  created_at: string;
+  pinned?: boolean;
+  likes_count?: number;
+  replies_count?: number;
+}
+
 
 const CATEGORIES = [
   { id: 'general', label: 'General', icon: '', color: 'gold' },
@@ -35,8 +47,8 @@ export default function CommunityPage() {
   }
   const posts = apiPosts || [];
 
-  const pinnedPosts = posts.filter((p: any) => p.pinned);
-  const regularPosts = posts.filter((p: any) => !p.pinned);
+  const pinnedPosts = posts.filter((p: Post) => p.pinned === true);
+  const regularPosts = posts.filter((p: Post) => p.pinned !== true);
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 page-enter">
@@ -148,7 +160,7 @@ export default function CommunityPage() {
   );
 }
 
-function PostCard({ post }: { post: any }) {
+function PostCard({ post }: { post: Post }) {
   const cat = CATEGORIES.find(c => c.id === post.category);
   const timeAgo = getTimeAgo(new Date(post.created_at));
 

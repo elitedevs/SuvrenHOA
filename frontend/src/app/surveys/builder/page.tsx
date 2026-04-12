@@ -461,7 +461,7 @@ function SurveyResults({ survey, onBack }: { survey: Survey; onBack: () => void 
                 {(answers as string[]).filter(a => a.trim()).map((a, i) => (
                   <div key={i} className="px-3 py-2 rounded-lg bg-[rgba(26,26,30,0.30)] text-sm text-[var(--text-body)] italic">"{a}"</div>
                 ))}
-                {answers.filter((a: any) => a.trim()).length === 0 && <p className="text-xs text-[var(--text-disabled)]">No text responses yet</p>}
+                {(answers as string[]).filter((a: string) => a.trim()).length === 0 && <p className="text-xs text-[var(--text-disabled)]">No text responses yet</p>}
               </div>
             )}
           </div>

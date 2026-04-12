@@ -258,7 +258,6 @@ export function useHealthScore(): HealthScoreData {
         error: null,
       });
     } catch (err) {
-      console.error('[useHealthScore]', err);
       setData((prev) => ({ ...prev, loading: false, error: 'Unable to compute health score' }));
     }
   }, []);

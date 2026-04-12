@@ -200,7 +200,7 @@ export default function AwardsPage() {
         ].map(({ id, label, icon: Icon }) => (
           <button
             key={id}
-            onClick={() => setTab(id as any)}
+            onClick={() => setTab(id as 'vote' | 'past')}
             className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg text-sm font-medium transition-all ${tab === id ? 'bg-[#B09B71] text-[var(--surface-2)]' : 'text-[var(--text-muted)] hover:text-[var(--text-heading)]'}`}
           >
             <Icon className="w-4 h-4" />

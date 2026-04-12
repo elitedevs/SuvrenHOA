@@ -95,7 +95,6 @@ async function validateInvitationToken(token: string): Promise<ValidatedInvitati
     });
 
     if (error) {
-      console.error('[signup gate] invitation rpc error:', error.message);
       return null;
     }
     // RPC returns a setof; supabase-js gives us an array.
@@ -116,7 +115,6 @@ async function validateInvitationToken(token: string): Promise<ValidatedInvitati
       communityName: row.community_name ?? '',
     };
   } catch (err) {
-    console.error('[signup gate] invitation validation threw:', err);
     return null;
   }
 }
@@ -136,7 +134,6 @@ async function validateFoundingApplication(email: string): Promise<ValidatedFoun
       .maybeSingle();
 
     if (error) {
-      console.error('[signup gate] founding lookup error:', error.message);
       return null;
     }
     if (!data) return null;
@@ -148,7 +145,6 @@ async function validateFoundingApplication(email: string): Promise<ValidatedFoun
       communityName: data.community_name ?? '',
     };
   } catch (err) {
-    console.error('[signup gate] founding validation threw:', err);
     return null;
   }
 }

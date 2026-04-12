@@ -55,7 +55,6 @@ export function useSmartWallet() {
       // This would call the CoinbaseSmartWallet.addOwnerAddress(signerAddress)
       // via a user operation. For now, return the intent — the actual contract
       // call requires the smart wallet's ABI and a writeContract call.
-      console.log(`[SmartWallet] Adding external signer: ${signerAddress}`);
       return signerAddress;
     },
     [isSmartWallet]

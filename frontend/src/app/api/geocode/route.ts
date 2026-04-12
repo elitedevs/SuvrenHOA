@@ -104,7 +104,6 @@ export async function POST(request: Request): Promise<Response> {
     .maybeSingle();
 
   if (cacheError) {
-    console.error('[geocode] cache read failed:', cacheError.message);
     // Fall through to upstream — a cache miss is recoverable.
   }
 
@@ -140,7 +139,6 @@ export async function POST(request: Request): Promise<Response> {
       signal: AbortSignal.timeout(8000),
     });
   } catch (err) {
-    console.error('[geocode] upstream fetch failed:', err);
     return NextResponse.json(
       { error: 'upstream geocoder unavailable' },
       { status: 502 },
@@ -148,11 +146,6 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   if (!upstreamResponse.ok) {
-    console.error(
-      '[geocode] upstream returned',
-      upstreamResponse.status,
-      upstreamResponse.statusText,
-    );
     return NextResponse.json(
       { error: 'upstream geocoder error' },
       { status: 502 },
@@ -173,7 +166,6 @@ export async function POST(request: Request): Promise<Response> {
   try {
     results = (await upstreamResponse.json()) as NominatimResult[];
   } catch (err) {
-    console.error('[geocode] upstream returned non-JSON:', err);
     return NextResponse.json(
       { error: 'upstream geocoder returned invalid data' },
       { status: 502 },
@@ -220,8 +212,7 @@ export async function POST(request: Request): Promise<Response> {
     );
 
   if (insertError) {
-    // Log but don't fail the request — the caller still gets a usable answer.
-    console.error('[geocode] cache write failed:', insertError.message);
+    // Cache failure is non-critical — the caller still gets a usable answer.
   }
 
   return NextResponse.json({

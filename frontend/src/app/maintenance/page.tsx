@@ -7,6 +7,26 @@ import { useMaintenanceRequests, useCreateMaintenanceRequest } from '@/hooks/use
 import { useProperty } from '@/hooks/useProperty';
 import { Wrench } from 'lucide-react';
 
+interface MaintenanceUpdate {
+  text: string;
+  created_at: string;
+  updated_by: string;
+}
+
+interface MaintenanceRequest {
+  id: string;
+  title: string;
+  description: string;
+  status: 'open' | 'in-progress' | 'scheduled' | 'resolved' | 'closed';
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  created_at: string;
+  location: string;
+  lot_number?: number | null;
+  assignedTo?: string;
+  estimatedCompletion?: string;
+  hoa_maintenance_updates?: MaintenanceUpdate[];
+}
+
 
 const STATUS_STYLES = {
   open: { color: 'text-[#B09B71]', bg: 'bg-[rgba(176,155,113,0.10)]', border: 'border-[rgba(176,155,113,0.20)]', label: ' Open' },
@@ -75,7 +95,7 @@ export default function MaintenancePage() {
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         {Object.entries(STATUS_STYLES).map(([status, style]) => {
-          const count = allRequests.filter((r: any) => r.status === status).length;
+          const count = allRequests.filter((r: MaintenanceRequest) => r.status === status).length;
           return (
             <button
               key={status}
@@ -95,7 +115,7 @@ export default function MaintenancePage() {
         <KanbanBoard requests={allRequests} />
       ) : (
         <div className="space-y-4">
-          {allRequests.map((request: any) => (
+          {allRequests.map((request: MaintenanceRequest) => (
             <RequestCard key={request.id} request={request} />
           ))}
         </div>
@@ -104,7 +124,7 @@ export default function MaintenancePage() {
   );
 }
 
-function RequestCard({ request }: { request: any }) {
+function RequestCard({ request }: { request: MaintenanceRequest }) {
   const [expanded, setExpanded] = useState(false);
   const style = STATUS_STYLES[request.status as keyof typeof STATUS_STYLES] || STATUS_STYLES.open;
   const timeAgo = getTimeAgo(new Date(request.created_at));
@@ -150,10 +170,10 @@ function RequestCard({ request }: { request: any }) {
               </div>
             )}
 
-            {request.hoa_maintenance_updates || [].length > 0 && (
+            {(request.hoa_maintenance_updates || []).length > 0 && (
               <div className="space-y-2">
                 <p className="text-[10px] uppercase tracking-wider text-[var(--text-disabled)] font-medium">Updates</p>
-                {(request.hoa_maintenance_updates || []).map((update: any, i: number) => (
+                {(request.hoa_maintenance_updates || []).map((update: MaintenanceUpdate, i: number) => (
                   <div key={i} className="pl-4 border-l-2 border-[rgba(176,155,113,0.20)]">
                     <p className="text-xs text-[var(--text-muted)]">{update.text}</p>
                     <p className="text-[10px] text-[var(--text-disabled)] mt-1">
@@ -271,7 +291,7 @@ const KANBAN_COLUMNS = [
   { id: 'resolved', label: 'Completed', emoji: '', style: STATUS_STYLES.resolved },
 ];
 
-function KanbanBoard({ requests }: { requests: any[] }) {
+function KanbanBoard({ requests }: { requests: MaintenanceRequest[] }) {
   const columns = useMemo(() => {
     return KANBAN_COLUMNS.map(col => ({
       ...col,
@@ -311,7 +331,7 @@ function KanbanBoard({ requests }: { requests: any[] }) {
                 <p className="text-[11px] text-[var(--text-disabled)]">No items</p>
               </div>
             ) : (
-              col.items.map((request: any) => (
+              col.items.map((request: MaintenanceRequest) => (
                 <KanbanCard key={request.id} request={request} />
               ))
             )}
@@ -322,7 +342,7 @@ function KanbanBoard({ requests }: { requests: any[] }) {
   );
 }
 
-function KanbanCard({ request }: { request: any }) {
+function KanbanCard({ request }: { request: MaintenanceRequest }) {
   const priority = PRIORITY_STYLES[request.priority as keyof typeof PRIORITY_STYLES] || 'text-[var(--text-muted)]';
   const timeAgo = getTimeAgo(new Date(request.created_at));
 

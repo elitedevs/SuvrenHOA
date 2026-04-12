@@ -242,7 +242,6 @@ export function useLeaderboard(): LeaderboardData {
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Failed to load leaderboard';
       setError(msg);
-      console.error('[useLeaderboard] error:', err);
     } finally {
       setIsLoading(false);
     }

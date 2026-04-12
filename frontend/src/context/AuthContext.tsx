@@ -48,7 +48,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           .single();
         setProfile(data as Profile | null);
       } catch (err) {
-        console.error('[AuthContext] fetchProfile error:', err);
         setProfile(null);
       }
     },
@@ -170,7 +169,7 @@ class AuthErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
-    console.error('[AuthContext] Supabase error caught by boundary:', error, info);
+    // Error boundary caught; children render without auth context
   }
 
   render() {

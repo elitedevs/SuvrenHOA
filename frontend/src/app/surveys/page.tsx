@@ -6,6 +6,27 @@ import { useAccount } from 'wagmi';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { BarChart3 } from 'lucide-react';
 
+interface SurveyOption {
+  id: string;
+  label: string;
+  sort_order: number;
+}
+
+interface SurveyResponse {
+  option_id: string;
+  wallet_address: string;
+}
+
+interface Survey {
+  id: string;
+  title: string;
+  description?: string;
+  status: string;
+  closes_at?: string;
+  hoa_survey_options?: SurveyOption[];
+  hoa_survey_responses?: SurveyResponse[];
+}
+
 export default function SurveysPage() {
   const { isConnected } = useAccount();
   const [showCreate, setShowCreate] = useState(false);
@@ -82,20 +103,20 @@ function SurveyList() {
 
   return (
     <div className="space-y-4">
-      {surveys.map((survey: any) => (
+      {surveys.map((survey: Survey) => (
         <SurveyCard key={survey.id} survey={survey} />
       ))}
     </div>
   );
 }
 
-function SurveyCard({ survey }: { survey: any }) {
+function SurveyCard({ survey }: { survey: Survey }) {
   const { address } = useAccount();
   const qc = useQueryClient();
   const options = survey.hoa_survey_options || [];
   const responses = survey.hoa_survey_responses || [];
   const totalVotes = responses.length;
-  const hasVoted = responses.some((r: any) => r.wallet_address === address?.toLowerCase());
+  const hasVoted = responses.some((r: SurveyResponse) => r.wallet_address === address?.toLowerCase());
 
   const vote = useMutation({
     mutationFn: async (optionId: string) => {
@@ -141,8 +162,8 @@ function SurveyCard({ survey }: { survey: any }) {
 
       {/* Options */}
       <div className="space-y-2">
-        {options.sort((a: any, b: any) => a.sort_order - b.sort_order).map((option: any) => {
-          const optionVotes = responses.filter((r: any) => r.option_id === option.id).length;
+        {options.sort((a: SurveyOption, b: SurveyOption) => a.sort_order - b.sort_order).map((option: SurveyOption) => {
+          const optionVotes = responses.filter((r: SurveyResponse) => r.option_id === option.id).length;
           const percent = totalVotes > 0 ? (optionVotes / totalVotes) * 100 : 0;
 
           return (

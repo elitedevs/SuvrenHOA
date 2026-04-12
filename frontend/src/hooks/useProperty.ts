@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useAccount, useReadContract, useReadContracts } from 'wagmi';
+import type { UseReadContractsReturnType } from 'wagmi';
 import { useContracts } from './useContracts';
 
 export interface PropertyData {
@@ -66,7 +67,7 @@ export function useProperty() {
   }, [address, balanceNum, propertyNFT]);
 
   const { data: tokenIdResults, isLoading: tokenIdsLoading } = useReadContracts({
-    contracts: tokenIdCalls as any,
+    contracts: tokenIdCalls as unknown as any,
     query: { enabled: tokenIdCalls.length > 0 },
   });
 
@@ -74,8 +75,8 @@ export function useProperty() {
   const tokenIds = useMemo(() => {
     if (!tokenIdResults) return [];
     return tokenIdResults
-      .filter((r) => r.status === 'success' && r.result !== undefined)
-      .map((r) => Number(r.result));
+      .filter((r: any) => r.status === 'success' && r.result !== undefined)
+      .map((r: any) => Number(r.result));
   }, [tokenIdResults]);
 
   // Batch-fetch property info for ALL token IDs
@@ -90,7 +91,7 @@ export function useProperty() {
   }, [tokenIds, propertyNFT]);
 
   const { data: propertyInfoResults, isLoading: propertyInfoLoading } = useReadContracts({
-    contracts: propertyInfoCalls as any,
+    contracts: propertyInfoCalls as unknown as any,
     query: { enabled: propertyInfoCalls.length > 0 },
   });
 
@@ -98,7 +99,7 @@ export function useProperty() {
   const properties: PropertyData[] = useMemo(() => {
     if (!propertyInfoResults || tokenIds.length === 0) return [];
     return propertyInfoResults
-      .map((r, i) => {
+      .map((r: any, i: number) => {
         if (r.status !== 'success' || !r.result) return null;
         const info = r.result as {
           lotNumber: bigint;
@@ -114,7 +115,7 @@ export function useProperty() {
           streetAddress: info.streetAddress,
         };
       })
-      .filter((p): p is PropertyData => p !== null);
+      .filter((p: PropertyData | null): p is PropertyData => p !== null);
   }, [propertyInfoResults, tokenIds]);
 
   // Clamp selected index

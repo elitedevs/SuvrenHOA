@@ -102,7 +102,7 @@ async function sendApplicationReceivedEmail(email: string, name: string, communi
       html: foundingReceivedHtml(name, communityName),
     });
   } catch (err) {
-    console.error('[founding] email send failed:', err);
+    // Non-blocking; email send failure doesn't affect response
   }
 }
 
@@ -117,7 +117,7 @@ async function sendAdminNotificationEmail(data: z.infer<typeof applySchema>) {
       html: `<p><strong>${esc(data.contact_name)}</strong> (${esc(data.contact_email)}) applied for the Founding Community Program on behalf of <strong>${esc(data.community_name)}</strong> (${esc(String(data.property_count))} units).</p><p>Role: ${esc(data.role)}</p><p>Pain points: ${esc(data.pain_points.join(', '))}</p><p>Referral: ${esc(data.referral_source || 'N/A')}</p><p>Notes: ${esc(data.additional_notes || 'N/A')}</p><p><a href="https://app.suvren.com/admin/founding">Review in Admin →</a></p>`,
     });
   } catch (err) {
-    console.error('[founding] admin notify failed:', err);
+    // Non-blocking; notification failure doesn't affect response
   }
 }
 

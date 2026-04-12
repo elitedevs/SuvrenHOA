@@ -269,7 +269,6 @@ export function useActivityFeed() {
       }
       setLastFetched(new Date());
     } catch (err) {
-      console.error('[useActivityFeed] error:', err);
     } finally {
       setIsLoading(false);
     }
