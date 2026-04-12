@@ -365,7 +365,7 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
         } else {
             ms.status = MilestoneStatus.Returned;
             // H-05: route refund to the correct fund (reserve or operating)
-            usdc.approve(treasury, amount);
+            usdc.forceApprove(treasury, amount);
             IFaircroftTreasuryEscrow(treasury).creditRefundFromEscrow(amount, wo.fromReserve);
         }
 
@@ -417,7 +417,7 @@ contract VendorEscrow is AccessControl, ReentrancyGuard {
 
         // H-05: route refund back to the original source fund (only for funds still in escrow)
         if (refund > 0) {
-            usdc.approve(treasury, refund);
+            usdc.forceApprove(treasury, refund);
             IFaircroftTreasuryEscrow(treasury).creditRefundFromEscrow(refund, wo.fromReserve);
         }
 

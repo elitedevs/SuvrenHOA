@@ -253,7 +253,7 @@ contract DuesLending is AccessControl, ReentrancyGuard {
         treasury.withdrawForLoan(principal);
 
         // Approve treasury to pull USDC for dues payment
-        usdc.approve(address(treasury), principal);
+        usdc.forceApprove(address(treasury), principal);
         treasury.payDuesFor(tokenId, quarters, address(this));
 
         emit LoanRequested(loanId, tokenId, msg.sender, uint128(principal), uint128(totalOwed), installments);
@@ -282,7 +282,7 @@ contract DuesLending is AccessControl, ReentrancyGuard {
         usdc.safeTransferFrom(msg.sender, address(this), amount);
 
         // Return funds to treasury reserve
-        usdc.approve(address(treasury), amount);
+        usdc.forceApprove(address(treasury), amount);
         treasury.depositFromLoan(amount);
 
         // SC-01: decrement totalOutstanding proportionally so the loan pool
@@ -333,7 +333,7 @@ contract DuesLending is AccessControl, ReentrancyGuard {
         uint256 remaining = loan.totalOwed - loan.totalPaid;
 
         usdc.safeTransferFrom(msg.sender, address(this), remaining);
-        usdc.approve(address(treasury), remaining);
+        usdc.forceApprove(address(treasury), remaining);
         treasury.depositFromLoan(remaining);
 
         // SC-01: payOffLoan bypasses the proportional decrement in makePayment.
