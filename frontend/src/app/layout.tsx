@@ -50,6 +50,9 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: 'SuvrenHOA' },
   robots: { index: true, follow: true },
+  other: {
+    'base:app_id': '69dbbf322c63bda0567316d0',
+  },
 };
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#B09B71',
