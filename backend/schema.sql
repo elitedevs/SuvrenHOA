@@ -1,10 +1,26 @@
 -- ═══════════════════════════════════════════════════════════════════════════
 -- SuvrenHOA — Off-Chain Database Schema (Supabase/Postgres)
--- 
--- On-chain: Governance, treasury, documents, property NFTs (smart contracts)
--- Off-chain: Forum, maintenance, reservations, announcements, profiles
 --
--- All tables use wallet_address as the user identifier (links to on-chain identity)
+-- ⚠  THIS FILE IS HISTORICAL — it documents the original wallet-based
+--    hoa_* tables that predate the Supabase-auth redesign. The live database
+--    has diverged significantly from what's defined below.
+--
+--    The canonical authoritative schema is now the union of:
+--      • this file (legacy hoa_* tables — see wallet_address caveat below)
+--      • backend/migrations/2026-04-11_schema_sweep.sql (new public tables,
+--        RLS policies, SECURITY DEFINER helpers, function search_path fixes)
+--
+--    Any future schema change MUST be written as a new migration file under
+--    backend/migrations/<date>_<slug>.sql and NEVER inlined into this file.
+--
+-- On-chain: Governance, treasury, documents, property NFTs (smart contracts)
+-- Off-chain: Forum, maintenance, reservations, announcements, profiles,
+--            communities, invitations, waitlist, geocode cache (see migration)
+--
+-- Legacy hoa_* tables identify users via wallet_address (the pre-Supabase-auth
+-- on-chain-first design). There is no mapping from auth.users.id → wallet yet,
+-- so RLS on those tables can only enforce "authenticated readers, service_role
+-- writers" — see the migration header for the full caveat.
 -- ═══════════════════════════════════════════════════════════════════════════
 
 -- ── Community Forum ──────────────────────────────────────────────────────
