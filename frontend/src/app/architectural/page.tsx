@@ -193,7 +193,7 @@ function RequestCard({ request }: { request: any }) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1.5">
               <span className="text-[10px] font-mono text-[var(--text-disabled)]">{request.request_number}</span>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${colorClass}`}>
+              <span className={`text-[10px] px-2 py-0.5 rounded-lg border font-medium ${colorClass}`}>
                 {status.label}
               </span>
               <span className="text-[10px] text-[var(--text-disabled)]">{modType?.icon} {modType?.label}</span>

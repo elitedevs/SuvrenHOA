@@ -122,7 +122,7 @@ export default function VotingPowerPage() {
                     <div className="flex items-center gap-2">
                       <h3 className={`font-medium text-sm ${tier.color}`}>Tier {tier.tier} — {tier.name}</h3>
                       {isMyTier && (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)] font-medium">
+                        <span className="text-[10px] px-2 py-0.5 rounded-lg bg-[rgba(176,155,113,0.15)] text-[#B09B71] border border-[rgba(176,155,113,0.30)] font-medium">
                           YOUR TIER
                         </span>
                       )}

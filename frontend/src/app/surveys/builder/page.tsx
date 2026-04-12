@@ -180,7 +180,7 @@ export default function SurveyBuilderPage() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className={`text-[10px] px-2 py-0.5 rounded-full border ${
+                    <span className={`text-[10px] px-2 py-0.5 rounded-lg border ${
                       s.status === 'published' ? 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border-[rgba(42,93,79,0.20)]' : 'bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)] border-[rgba(245,240,232,0.08)]'
                     }`}>
                       {s.status === 'published' ? ' Published' : ' Draft'}
@@ -337,7 +337,7 @@ function SurveyPreview({ survey, onBack, onSubmit, address }: { survey: Survey; 
     <div className="space-y-5">
       <div className="glass-card rounded-xl p-5">
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(90,122,154,0.10)] text-[var(--steel)] border border-[rgba(90,122,154,0.20)]"> Preview Mode</span>
+          <span className="text-[10px] px-2 py-0.5 rounded-lg bg-[rgba(90,122,154,0.10)] text-[var(--steel)] border border-[rgba(90,122,154,0.20)]"> Preview Mode</span>
         </div>
         <h2 className="text-lg font-medium mb-1">{survey.title}</h2>
         <p className="text-sm text-[var(--text-muted)]">{survey.description}</p>

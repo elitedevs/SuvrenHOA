@@ -130,7 +130,7 @@ export default function VisitorsPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
                     <h3 className="font-medium text-[#D4C4A0]">{v.name}</h3>
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${v.active ? 'bg-[rgba(42,93,79,0.40)] text-[#2A5D4F]' : 'bg-[#1A1A1E] text-[rgba(245,240,232,0.25)]'}`}>
+                    <span className={`text-xs px-2 py-0.5 rounded-lg ${v.active ? 'bg-[rgba(42,93,79,0.40)] text-[#2A5D4F]' : 'bg-[#1A1A1E] text-[rgba(245,240,232,0.25)]'}`}>
                       {v.active ? 'Active' : 'Expired'}
                     </span>
                   </div>

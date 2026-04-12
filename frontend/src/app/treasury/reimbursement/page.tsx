@@ -173,7 +173,7 @@ function RequestCard({ request: r }: { request: ReimbursementRequest }) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1">
               <span className="font-mono text-xs text-[var(--text-disabled)]">{r.receiptRef}</span>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${statusStyle.color}`}>
+              <span className={`text-[10px] px-2 py-0.5 rounded-lg border font-medium ${statusStyle.color}`}>
                 {statusStyle.label}
               </span>
               <span className="text-[10px] text-[var(--text-disabled)]">{cat?.label}</span>

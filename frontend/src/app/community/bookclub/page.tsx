@@ -179,7 +179,7 @@ export default function BookClubPage() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#B09B71] font-medium border border-[rgba(176,155,113,0.20)]">
+                  <span className="text-xs px-2 py-0.5 rounded-lg bg-[rgba(176,155,113,0.15)] text-[#B09B71] font-medium border border-[rgba(176,155,113,0.20)]">
                     {currentBook.month} {currentBook.year}
                   </span>
                   <Star className="w-4 h-4 text-[#B09B71] fill-[#B09B71]" />

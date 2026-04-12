@@ -340,7 +340,7 @@ function DuesPanel() {
                         <div className="flex items-center gap-2">
                           <p className="font-medium text-sm text-[var(--parchment)]">{label}</p>
                           {recommended && (
-                            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)] text-[#D4C4A0] font-medium">
+                            <span className="text-[10px] px-2 py-0.5 rounded-lg bg-[rgba(176,155,113,0.15)] border border-[rgba(176,155,113,0.30)] text-[#D4C4A0] font-medium">
                               {discount}% off
                             </span>
                           )}

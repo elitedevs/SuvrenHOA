@@ -34,7 +34,7 @@ function TypeBadge({ type }: { type: MarketplaceType }) {
     wanted: ' Wanted',
   };
   return (
-    <span className={`inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full border ${styles[type]}`}>
+    <span className={`inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-lg border ${styles[type]}`}>
       {labels[type]}
     </span>
   );

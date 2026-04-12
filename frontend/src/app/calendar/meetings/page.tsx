@@ -90,7 +90,7 @@ export default function MeetingsPage() {
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className="font-medium text-[var(--parchment)]">{meeting.title}</h3>
                       {isPast && (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-[var(--surface-3)] text-[var(--text-muted)]">Past</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-lg bg-[var(--surface-3)] text-[var(--text-muted)]">Past</span>
                       )}
                     </div>
 

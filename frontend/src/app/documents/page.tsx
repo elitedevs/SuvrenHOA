@@ -457,7 +457,7 @@ function DocumentUploadForm({ onClose }: { onClose: () => void }) {
           <h2 className="text-lg font-medium">Upload Document</h2>
           <p className="text-xs text-[var(--text-disabled)] mt-0.5">Board members only · Arweave upload handled server-side</p>
         </div>
-        <span className="text-[10px] px-2 py-1 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium">
+        <span className="text-[10px] px-2 py-1 rounded-lg bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium">
            Board Access
         </span>
       </div>

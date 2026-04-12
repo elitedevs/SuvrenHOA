@@ -208,7 +208,7 @@ export default function LostFoundPage() {
             </div>
             <div className="p-4">
               <div className="flex items-center gap-2 mb-2">
-                <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
+                <span className={`text-[10px] px-2 py-0.5 rounded-lg border font-medium ${
                   item.status === 'claimed' ? 'bg-[rgba(245,240,232,0.04)] text-[var(--text-muted)] border-[rgba(245,240,232,0.08)]' :
                   item.type === 'lost' ? 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border-[rgba(107,58,58,0.20)]' : 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border-[rgba(42,93,79,0.20)]'
                 }`}>

@@ -131,7 +131,7 @@ export default function AnnouncementsPage() {
         </div>
         <div className="flex items-center gap-3">
           {unread > 0 && (
-            <span className="px-3 py-1 rounded-full bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#B09B71] text-xs font-medium">
+            <span className="px-3 py-1 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-[#B09B71] text-xs font-medium">
               {unread} unread
             </span>
           )}
@@ -228,7 +228,7 @@ function AnnouncementCard({ announcement, isPinned, isRead, onPin, onRead }: {
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1">
-              <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${style.badge}`}>
+              <span className={`text-[10px] px-2 py-0.5 rounded-lg border font-medium ${style.badge}`}>
                 {style.label}
               </span>
               <span className="text-[10px] text-[var(--text-disabled)]">{timeAgo}</span>
@@ -305,7 +305,7 @@ function ArchiveList({ items, readSet }: { items: any[]; readSet: Set<string> })
         return (
           <div key={a.id} className={`glass-card rounded-lg border-l-4 ${style.border} p-4 opacity-70`}>
             <div className="flex items-center gap-2 flex-wrap mb-1">
-              <span className={`text-[10px] px-2 py-0.5 rounded-full border ${style.badge}`}>{style.label}</span>
+              <span className={`text-[10px] px-2 py-0.5 rounded-lg border ${style.badge}`}>{style.label}</span>
               <span className="text-[10px] text-[var(--text-disabled)]">{new Date(a.created_at).toLocaleDateString()}</span>
             </div>
             <h4 className="text-sm font-medium text-[var(--text-body)]">{a.title}</h4>

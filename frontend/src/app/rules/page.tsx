@@ -202,7 +202,7 @@ export default function RulesPage() {
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                <span className="text-[10px] text-[var(--text-disabled)] bg-[rgba(26,26,30,0.50)] px-2 py-0.5 rounded-full">
+                <span className="text-[10px] text-[var(--text-disabled)] bg-[rgba(26,26,30,0.50)] px-2 py-0.5 rounded-lg">
                   {section.rules.length} rule{section.rules.length !== 1 ? 's' : ''}
                 </span>
                 <span className={`text-[var(--text-disabled)] transition-transform text-sm ${openSections.has(section.id) ? 'rotate-180' : ''}`}>▾</span>

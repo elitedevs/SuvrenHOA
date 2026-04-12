@@ -77,7 +77,7 @@ function LeaderboardRow({ entry, statLabel, connectedAddress, prevRank }: {
           <span className={`text-sm font-medium font-mono truncate ${isYou ? 'text-[#D4C4A0]' : rankStyle ? rankStyle.text : 'text-[var(--parchment)]'}`}>
             {isYou ? 'You' : truncateAddr(entry.address)}
           </span>
-          {isYou && <span className="text-[10px] font-medium bg-[rgba(176,155,113,0.12)] text-[#D4C4A0] px-1.5 py-0.5 rounded-full">YOU</span>}
+          {isYou && <span className="text-[10px] font-medium bg-[rgba(176,155,113,0.12)] text-[#D4C4A0] px-1.5 py-0.5 rounded-lg">YOU</span>}
         </div>
         {entry.badge && <div className="text-[11px] text-[var(--text-disabled)] mt-0.5 truncate">{entry.badge}</div>}
       </div>
@@ -265,7 +265,7 @@ export default function LeaderboardPage() {
 
         <div className="flex items-center gap-2 mb-4">
           <h2 className="text-lg font-medium text-[var(--parchment)]">{currentTab.label}</h2>
-          <span className="text-xs text-[var(--text-disabled)] ml-auto bg-[rgba(245,240,232,0.03)] px-2 py-0.5 rounded-full">
+          <span className="text-xs text-[var(--text-disabled)] ml-auto bg-[rgba(245,240,232,0.03)] px-2 py-0.5 rounded-lg">
             {timeRange === 'monthly' ? 'This Month' : 'All Time'}
           </span>
         </div>

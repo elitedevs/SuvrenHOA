@@ -383,7 +383,7 @@ function PropertyDashboard() {
               <span className="group-hover:scale-105 transition-transform duration-200">{icon}</span>
               <p className="text-sm text-[var(--text-muted)] group-hover:text-[var(--parchment)] transition-colors duration-200">{label}</p>
               {href === '/messages' && totalUnread > 0 && (
-                <span className="absolute top-2 right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-[#B09B71] text-[#0C0C0E] text-[10px] font-medium flex items-center justify-center">
+                <span className="absolute top-2 right-2 min-w-[18px] h-[18px] px-1 rounded-lg bg-[#B09B71] text-[#0C0C0E] text-[10px] font-medium flex items-center justify-center">
                   {totalUnread > 9 ? '9+' : totalUnread}
                 </span>
               )}

@@ -138,7 +138,7 @@ export default function GardenPage() {
                   <h3 className="font-medium text-[#D4C4A0]">
                     Plot {String.fromCharCode(65 + selected.row)}{selected.col + 1}
                   </h3>
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                  <span className={`text-xs px-2 py-0.5 rounded-lg font-medium ${
                     selected.status === 'planted' ? 'bg-[rgba(42,93,79,0.40)] text-[#2A5D4F]'
                     : selected.status === 'reserved' ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71]'
                     : 'bg-[rgba(245,240,232,0.06)] text-[var(--text-body)]'

@@ -102,7 +102,7 @@ function AlertCard({
           <span className={s.text}>{s.icon}</span>
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1">
-              <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${s.badge}`}>
+              <span className={`text-xs font-medium px-2 py-0.5 rounded-lg ${s.badge}`}>
                 {alert.type.toUpperCase()}
               </span>
               <Countdown expiresAt={alert.expiresAt} />
@@ -365,7 +365,7 @@ export default function AlertsPage() {
             <span className="w-2 h-2 rounded-full bg-[#8B5A5A] inline-block animate-pulse" />
             Active Alerts
             {sortedActive.length > 0 && (
-              <span className="ml-1 px-2 py-0.5 rounded-full bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] text-xs font-medium border border-[rgba(107,58,58,0.20)]">
+              <span className="ml-1 px-2 py-0.5 rounded-lg bg-[rgba(107,58,58,0.15)] text-[#8B5A5A] text-xs font-medium border border-[rgba(107,58,58,0.20)]">
                 {sortedActive.length}
               </span>
             )}

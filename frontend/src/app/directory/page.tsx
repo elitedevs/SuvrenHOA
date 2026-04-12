@@ -228,7 +228,7 @@ function ResidentProfileCard({ member, isBoard = false }: { member: any; isBoard
         {/* Badges */}
         <div className="flex flex-wrap gap-1.5 mb-4">
           {/* Dues status */}
-          <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
+          <span className={`text-[10px] px-2 py-0.5 rounded-lg border font-medium ${
             duesStatus
               ? 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F] border-[rgba(42,93,79,0.20)]'
               : 'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A] border-[rgba(107,58,58,0.20)]'
@@ -237,7 +237,7 @@ function ResidentProfileCard({ member, isBoard = false }: { member: any; isBoard
           </span>
 
           {/* Voting tier */}
-          <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${tierInfo.bg} ${tierInfo.color}`}>
+          <span className={`text-[10px] px-2 py-0.5 rounded-lg border font-medium ${tierInfo.bg} ${tierInfo.color}`}>
             {tierInfo.label}
           </span>
         </div>

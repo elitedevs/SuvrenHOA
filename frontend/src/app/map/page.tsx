@@ -80,7 +80,7 @@ function LotCard({ lot, isSelected, onClick }: { lot: LotData; isSelected: boole
           <span className="text-[11px] text-[var(--text-disabled)] uppercase tracking-wider font-medium">Lot</span>
           <div className="text-xl font-medium gradient-text leading-none">{'#' + lot.lotNumber}</div>
         </div>
-        <span className={'text-[10px] font-medium px-2 py-0.5 rounded-full shrink-0 mt-1 ' + badgeClass}>
+        <span className={'text-[10px] font-medium px-2 py-0.5 rounded-lg shrink-0 mt-1 ' + badgeClass}>
           {statusLabel(lot)}
         </span>
       </div>

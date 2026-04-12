@@ -96,7 +96,7 @@ export default function AdminFoundingPage() {
         </div>
         <button
           onClick={loadApplications}
-          className="flex items-center gap-2 px-4 py-2 border border-[#2A2A2E] rounded-lg text-[#8A8070] hover:text-[#C4BAA8] hover:border-[#3A3A3E] transition-colors text-sm"
+          className="flex items-center gap-2 px-4 py-2 border border-[#2A2A2E] rounded-lg text-[#8A8070] hover:text-[#C4BAA8] hover:border-[#4A4A52] transition-colors text-sm"
         >
           <RefreshCw className="w-4 h-4" />
           Refresh
@@ -172,7 +172,7 @@ export default function AdminFoundingPage() {
                       <span>·</span>
                       <span>{new Date(app.created_at).toLocaleDateString()}</span>
                     </div>
-                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-medium flex-shrink-0 ${cfg.bg} ${cfg.color}`}>
+                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-medium flex-shrink-0 ${cfg.bg} ${cfg.color}`}>
                       <StatusIcon className="w-3 h-3" />
                       {cfg.label}
                     </span>
@@ -207,7 +207,7 @@ export default function AdminFoundingPage() {
                         <p className="text-[#4A4A52] text-xs mb-2">Pain Points</p>
                         <div className="flex flex-wrap gap-1.5">
                           {app.pain_points.map(p => (
-                            <span key={p} className="text-xs px-2.5 py-1 bg-[#1E1E22] border border-[#2A2A2E] rounded-full text-[#8A8070]">{p}</span>
+                            <span key={p} className="text-xs px-2.5 py-1 bg-[#1a1a1e] border border-[#2A2A2E] rounded-lg text-[#8A8070]">{p}</span>
                           ))}
                         </div>
                       </div>
@@ -249,7 +249,7 @@ export default function AdminFoundingPage() {
                         </button>
                         <a
                           href={`mailto:${app.contact_email}`}
-                          className="ml-auto flex items-center gap-2 px-3 py-2 border border-[#2A2A2E] text-[#8A8070] rounded-lg text-sm hover:text-[#C4BAA8] hover:border-[#3A3A3E] transition-colors"
+                          className="ml-auto flex items-center gap-2 px-3 py-2 border border-[#2A2A2E] text-[#8A8070] rounded-lg text-sm hover:text-[#C4BAA8] hover:border-[#4A4A52] transition-colors"
                         >
                           <Mail className="w-4 h-4" />
                           Email
@@ -262,7 +262,7 @@ export default function AdminFoundingPage() {
                         <button
                           onClick={() => updateStatus(app.id, 'pending')}
                           disabled={updating === app.id}
-                          className="flex items-center gap-2 px-3 py-1.5 border border-[#2A2A2E] text-[#8A8070] rounded-lg text-xs hover:text-[#C4BAA8] hover:border-[#3A3A3E] transition-colors"
+                          className="flex items-center gap-2 px-3 py-1.5 border border-[#2A2A2E] text-[#8A8070] rounded-lg text-xs hover:text-[#C4BAA8] hover:border-[#4A4A52] transition-colors"
                         >
                           <Clock className="w-3 h-3" />
                           Reset to Pending

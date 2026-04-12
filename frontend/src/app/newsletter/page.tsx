@@ -171,7 +171,7 @@ export default function NewsletterPage() {
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    {nl.pinned && <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]"> Current Issue</span>}
+                    {nl.pinned && <span className="text-[10px] px-2 py-0.5 rounded-lg bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]"> Current Issue</span>}
                     <span className="text-xs text-[var(--text-disabled)]">{new Date(nl.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>
                   <h3 className="font-medium text-base mb-2">{nl.title}</h3>

@@ -105,7 +105,7 @@ function ParkingContent() {
             <div className="glass-card rounded-xl p-5 space-y-4">
               <div className="flex items-center justify-between">
                 <h3 className="font-medium">Spot #{selected.number}</h3>
-                <span className={`text-xs px-2 py-1 rounded-full ${
+                <span className={`text-xs px-2 py-1 rounded-lg ${
                   selected.status === 'available' ? 'bg-[rgba(42,93,79,0.10)] text-[#2A5D4F]' :
                   selected.status === 'assigned' ? 'bg-[rgba(176,155,113,0.10)] text-[#B09B71]' :
                   'bg-[rgba(107,58,58,0.10)] text-[#8B5A5A]'

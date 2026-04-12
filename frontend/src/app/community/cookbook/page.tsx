@@ -161,8 +161,8 @@ function RecipeCard({ recipe, onClick }: { recipe: Recipe; onClick: () => void }
       <h3 className="text-base font-medium text-[var(--parchment)] mb-1">{recipe.title}</h3>
       <p className="text-xs text-[var(--text-disabled)] mb-3 line-clamp-2">{recipe.description}</p>
       <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-[11px] text-[var(--text-disabled)] bg-[rgba(245,240,232,0.04)] px-2 py-0.5 rounded-full">{recipe.cuisine}</span>
-        <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full border ${DIFFICULTY_COLORS[recipe.difficulty]}`}>
+        <span className="text-[11px] text-[var(--text-disabled)] bg-[rgba(245,240,232,0.04)] px-2 py-0.5 rounded-lg">{recipe.cuisine}</span>
+        <span className={`text-[11px] font-medium px-2 py-0.5 rounded-lg border ${DIFFICULTY_COLORS[recipe.difficulty]}`}>
           {recipe.difficulty}
         </span>
         <span className="text-[11px] text-[var(--text-disabled)] flex items-center gap-1">
@@ -184,7 +184,7 @@ function RecipeModal({ recipe, onClose }: { recipe: Recipe; onClose: () => void 
             <div>
               <h2 className="text-base font-medium text-[var(--parchment)]">{recipe.title}</h2>
               <div className="flex items-center gap-2 mt-0.5">
-                <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full border ${DIFFICULTY_COLORS[recipe.difficulty]}`}>{recipe.difficulty}</span>
+                <span className={`text-[11px] font-medium px-2 py-0.5 rounded-lg border ${DIFFICULTY_COLORS[recipe.difficulty]}`}>{recipe.difficulty}</span>
                 <span className="text-[11px] text-[var(--text-disabled)]">{recipe.cuisine}</span>
                 <span className="text-[11px] text-[var(--text-disabled)]">{formatPrepTime(recipe.prepTime)}</span>
               </div>

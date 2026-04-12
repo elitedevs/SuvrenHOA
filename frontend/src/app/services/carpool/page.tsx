@@ -93,7 +93,7 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
               </p>
             </div>
           </div>
-          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${cfg.bg} ${cfg.color} border ${cfg.border}`}>
+          <span className={`text-xs px-2 py-0.5 rounded-lg font-medium ${cfg.bg} ${cfg.color} border ${cfg.border}`}>
             {cfg.label}
           </span>
         </div>
@@ -133,7 +133,7 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
             )}
           </div>
           {isDriver && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#B09B71] font-medium">You're driving</span>
+            <span className="text-xs px-2 py-0.5 rounded-lg bg-[rgba(176,155,113,0.15)] text-[#B09B71] font-medium">You're driving</span>
           )}
           {isMember && !isDriver && (
             <button onClick={() => onLeave(route.id)} className="text-xs text-[#8B5A5A] hover:underline">Leave route</button>
@@ -180,7 +180,7 @@ function RouteCard({ route, myLot, onJoin, onLeave }: {
             <p className="text-[10px] text-[var(--text-disabled)] uppercase tracking-wider mb-2">Riders</p>
             <div className="flex flex-wrap gap-2">
               {route.riders.map((r) => (
-                <span key={r.lot} className="text-xs px-2 py-0.5 rounded-full bg-[rgba(245,240,232,0.05)] text-[var(--text-muted)]">
+                <span key={r.lot} className="text-xs px-2 py-0.5 rounded-lg bg-[rgba(245,240,232,0.05)] text-[var(--text-muted)]">
                   Lot #{r.lot} · {r.pickup.split('(')[0].trim()}
                 </span>
               ))}

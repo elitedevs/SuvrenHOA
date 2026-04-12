@@ -147,9 +147,9 @@ export default function PackagesPage() {
             <div key={pkg.id} className="bg-[#1A1A1E] border border-[rgba(245,240,232,0.06)] rounded-xl px-5 py-4 flex items-center gap-4 flex-wrap">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${CARRIER_COLORS[pkg.carrier]}`}>{pkg.carrier}</span>
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[pkg.status]}`}>{pkg.status}</span>
-                  {!pkg.notified && <span className="text-xs px-2 py-0.5 rounded-full bg-[rgba(139,90,90,0.40)] text-[#8B5A5A] flex items-center gap-1"><Bell className="w-3 h-3" /> Notify</span>}
+                  <span className={`text-xs px-2 py-0.5 rounded-lg font-medium ${CARRIER_COLORS[pkg.carrier]}`}>{pkg.carrier}</span>
+                  <span className={`text-xs px-2 py-0.5 rounded-lg font-medium ${STATUS_COLORS[pkg.status]}`}>{pkg.status}</span>
+                  {!pkg.notified && <span className="text-xs px-2 py-0.5 rounded-lg bg-[rgba(139,90,90,0.40)] text-[#8B5A5A] flex items-center gap-1"><Bell className="w-3 h-3" /> Notify</span>}
                 </div>
                 <p className="text-sm font-mono text-[#D4C4A0] truncate">{pkg.tracking}</p>
                 <p className="text-xs text-[var(--text-muted)] mt-0.5">Lot {pkg.lot} • {pkg.recipient} • {pkg.date}</p>

@@ -126,7 +126,7 @@ function PolicyCard({ policy, onEdit, onDelete }: { policy: Policy; onEdit: () =
         </div>
 
         <div className="flex items-center justify-between mt-3">
-          <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cfg.bg} ${cfg.color} border ${cfg.border}`}>
+          <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium ${cfg.bg} ${cfg.color} border ${cfg.border}`}>
             <Icon className="w-3 h-3" />
             {cfg.label}
           </div>

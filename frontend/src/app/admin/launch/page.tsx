@@ -65,7 +65,7 @@ const CATEGORY_LABELS: Record<ChecklistItem['category'], string> = {
 const CATEGORY_COLORS: Record<ChecklistItem['category'], string> = {
   infrastructure: 'text-blue-400',
   product: 'text-emerald-400',
-  marketing: 'text-[#F68341]',
+  marketing: 'text-[#D4C4A0]',
   content: 'text-purple-400',
   legal: 'text-amber-400',
 };
@@ -156,9 +156,9 @@ export default function AdminLaunchPage() {
           <span className="text-sm font-medium text-[#C4BAA8]">Launch Readiness</span>
           <span className="text-sm font-bold text-[#B09B71]">{pct}%</span>
         </div>
-        <div className="h-2.5 bg-[#1E1E22] rounded-full overflow-hidden">
+        <div className="h-2.5 bg-[#1a1a1e] rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#B09B71] to-[#8A7A55] rounded-full transition-all duration-500"
+            className="h-full bg-gradient-to-r from-[#B09B71] to-[#b8942e] rounded-full transition-all duration-500"
             style={{ width: `${pct}%` }}
           />
         </div>
@@ -253,7 +253,7 @@ export default function AdminLaunchPage() {
                 </div>
                 <span className="text-xs text-[#4A4A52]">{catDone} / {items.length}</span>
               </div>
-              <div className="divide-y divide-[#1E1E22]">
+              <div className="divide-y divide-[#1a1a1e]">
                 {items.map(item => (
                   <button
                     key={item.id}
@@ -264,7 +264,7 @@ export default function AdminLaunchPage() {
                       {item.done ? (
                         <CheckCircle2 className="w-5 h-5 text-emerald-400" />
                       ) : (
-                        <Circle className="w-5 h-5 text-[#3A3A3E] group-hover:text-[#5A5A62] transition-colors" />
+                        <Circle className="w-5 h-5 text-[#4A4A52] group-hover:text-[#8A8070] transition-colors" />
                       )}
                     </div>
                     <div className="min-w-0">

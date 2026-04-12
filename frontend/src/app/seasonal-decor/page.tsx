@@ -286,7 +286,7 @@ export default function SeasonalDecorPage() {
             <div key={sub.id} className={`glass-card rounded-xl p-4 border ${cfg.border}`}>
               <div className="flex items-start justify-between gap-3">
                 <p className="text-sm text-[var(--text-body)]">{sub.description}</p>
-                <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cfg.bg} ${cfg.color} border ${cfg.border} shrink-0`}>
+                <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium ${cfg.bg} ${cfg.color} border ${cfg.border} shrink-0`}>
                   <Icon className="w-3 h-3" />
                   {cfg.label}
                 </div>

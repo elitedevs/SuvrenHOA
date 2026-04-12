@@ -192,7 +192,7 @@ function ComplaintCard({ complaint: c, isBoard, onUpdateStatus }: {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xs font-mono text-[var(--text-disabled)]">{c.id}</span>
-            <span className={`text-xs px-2 py-0.5 rounded-full border ${statusColor(c.status)}`}>
+            <span className={`text-xs px-2 py-0.5 rounded-lg border ${statusColor(c.status)}`}>
               {c.status === 'received' ? ' Received' : c.status === 'investigating' ? ' Investigating' : ' Resolved'}
             </span>
             <span className="text-xs text-[var(--text-disabled)]">Severity: {''.repeat(c.severity)}{''.repeat(5-c.severity)}</span>

@@ -184,7 +184,7 @@ function ContractorCard({ contractor: c }: { contractor: Contractor }) {
             <div className="flex items-center gap-2 flex-wrap mb-1">
               <h3 className="font-medium text-sm">{c.name}</h3>
               {c.verified && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium">
+                <span className="text-[10px] px-1.5 py-0.5 rounded-lg bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium">
                    Verified
                 </span>
               )}

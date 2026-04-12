@@ -405,7 +405,7 @@ function BoardAccessCard() {
             {isBoard ? 'You are a verified board member' : 'Board membership is verified via the HOA registry'}
           </p>
         </div>
-        <span className={`inline-flex h-6 items-center rounded-full px-2 text-xs ${isBoard ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71]' : 'bg-[var(--surface-3)] text-[var(--text-disabled)]'}`}>
+        <span className={`inline-flex h-6 items-center rounded-lg px-2 text-xs ${isBoard ? 'bg-[rgba(176,155,113,0.20)] text-[#B09B71]' : 'bg-[var(--surface-3)] text-[var(--text-disabled)]'}`}>
           {isBoard ? 'Active' : 'Not a member'}
         </span>
       </div>

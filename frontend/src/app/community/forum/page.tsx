@@ -95,11 +95,11 @@ export default function ForumPage() {
         {/* Topic header */}
         <div className="glass-card rounded-lg p-6 mb-4">
           <div className="flex items-start gap-3 mb-3">
-            <span className="text-[10px] px-2 py-1 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium shrink-0">
+            <span className="text-[10px] px-2 py-1 rounded-lg bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium shrink-0">
               {selectedTopic.category}
             </span>
             {selectedTopic.pinned && (
-              <span className="text-[10px] px-2 py-1 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium shrink-0">
+              <span className="text-[10px] px-2 py-1 rounded-lg bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)] font-medium shrink-0">
                 Pinned
               </span>
             )}
@@ -273,7 +273,7 @@ export default function ForumPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                     {topic.pinned && <span className="text-[10px] text-[#B09B71]">Pinned</span>}
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.15)] font-medium">
+                    <span className="text-[10px] px-2 py-0.5 rounded-lg bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.15)] font-medium">
                       {topic.category}
                     </span>
                   </div>

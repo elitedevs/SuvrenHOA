@@ -226,7 +226,7 @@ export default function ContractsPage() {
         <p className="text-xs tracking-widest uppercase text-[var(--text-disabled)] mb-1">Blockchain</p>
         <h1 className="text-3xl sm:text-4xl font-medium gradient-text">Smart Contract Explorer</h1>
         <p className="text-[var(--text-muted)] text-sm mt-2">All SuvrenHOA contracts deployed on Base {isMainnet ? 'Mainnet' : 'Sepolia (testnet)'}</p>
-        <div className="inline-flex items-center gap-2 mt-3 px-3 py-1.5 rounded-full bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-xs text-[#B09B71]">
+        <div className="inline-flex items-center gap-2 mt-3 px-3 py-1.5 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)] text-xs text-[#B09B71]">
           <div className="w-1.5 h-1.5 rounded-full bg-[#B09B71] animate-pulse" />
           {isMainnet ? 'Base Mainnet' : 'Base Sepolia Testnet'} · Chain ID {chainId}
         </div>

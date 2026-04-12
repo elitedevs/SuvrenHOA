@@ -134,7 +134,7 @@ export default function ElectionsPage() {
                     <div>
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
                         <h2 className="text-lg font-medium text-[#D4C4A0]">{election.title}</h2>
-                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_BADGE[election.status]}`}>{election.status}</span>
+                        <span className={`text-xs px-2 py-0.5 rounded-lg font-medium ${STATUS_BADGE[election.status]}`}>{election.status}</span>
                       </div>
                       <p className="text-sm text-[var(--text-body)]">{election.description}</p>
                       <div className="flex gap-4 mt-2 text-xs text-[rgba(245,240,232,0.25)]">

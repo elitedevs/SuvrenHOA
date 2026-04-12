@@ -84,7 +84,7 @@ function AppealModal({ violation, onClose }: { violation: any; onClose: () => vo
 
         {existingAppeal ? (
           <div className="space-y-3">
-            <div className={`inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full border font-medium ${APPEAL_STATUS_STYLES[existingAppeal.status]}`}>
+            <div className={`inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border font-medium ${APPEAL_STATUS_STYLES[existingAppeal.status]}`}>
               {existingAppeal.status === 'submitted' ? ' Appeal Submitted' :
                existingAppeal.status === 'under-review' ? ' Under Review' :
                existingAppeal.status === 'approved' ? ' Appeal Approved' : ' Appeal Denied'}
@@ -321,7 +321,7 @@ function ViolationCard({ violation }: { violation: any }) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1.5">
               <span className="text-[10px] font-mono text-[var(--text-disabled)]">{violation.violation_number}</span>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${colorClass}`}>
+              <span className={`text-[10px] px-2 py-0.5 rounded-lg border font-medium ${colorClass}`}>
                 {statusInfo.label}
               </span>
               <span className="text-[10px] text-[var(--text-disabled)]">{cat?.icon} {cat?.label}</span>
@@ -409,7 +409,7 @@ function ViolationCard({ violation }: { violation: any }) {
                    File Appeal
                 </button>
                 {hasAppeal && (
-                  <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${
+                  <span className={`text-[10px] px-2 py-0.5 rounded-lg border font-medium ${
                     appealRecord?.status === 'approved' ? 'text-[#2A5D4F] bg-[rgba(42,93,79,0.10)] border-[rgba(42,93,79,0.20)]' :
                     appealRecord?.status === 'denied' ? 'text-[#8B5A5A] bg-[rgba(107,58,58,0.10)] border-[rgba(107,58,58,0.20)]' :
                     appealRecord?.status === 'under-review' ? 'text-[var(--steel)] bg-[rgba(90,122,154,0.10)] border-[rgba(90,122,154,0.20)]' :

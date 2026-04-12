@@ -192,7 +192,7 @@ function ProfileForm() {
             <h3 className="text-xs uppercase tracking-wider text-[var(--text-disabled)] font-medium">Resident Achievements</h3>
             <p className="text-[10px] text-[var(--text-disabled)] mt-0.5">{earnedCount} of {badges.length} earned</p>
           </div>
-          <div className="px-3 py-1 rounded-full bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)]">
+          <div className="px-3 py-1 rounded-lg bg-[rgba(176,155,113,0.10)] border border-[rgba(176,155,113,0.20)]">
             <span className="text-xs font-medium text-[#B09B71]">{earnedCount}/{badges.length}</span>
           </div>
         </div>

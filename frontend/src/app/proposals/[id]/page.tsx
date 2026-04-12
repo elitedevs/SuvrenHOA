@@ -90,10 +90,10 @@ function ProposalDetail({ proposalId }: { proposalId: bigint }) {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 flex-wrap mb-3">
-          <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${style.bg} ${style.color} ${style.border}`}>
+          <span className={`text-xs px-2.5 py-1 rounded-lg border font-medium ${style.bg} ${style.color} ${style.border}`}>
             {stateLabel || 'Loading...'}
           </span>
-          <span className="text-xs px-2.5 py-1 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]">
+          <span className="text-xs px-2.5 py-1 rounded-lg bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]">
             {category.icon} {category.label}
           </span>
           <span className="text-xs text-[var(--text-disabled)]">

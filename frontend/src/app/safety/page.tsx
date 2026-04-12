@@ -185,7 +185,7 @@ function SafetyCard({ entry, onUpdateStatus }: { entry: SafetyEntry; onUpdateSta
             <div className="flex items-center gap-2 flex-wrap mb-1">
               <span className="text-base">{typeInfo.icon}</span>
               <span className="font-medium text-sm">{typeInfo.label}</span>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${statusStyle.color}`}>
+              <span className={`text-[10px] px-2 py-0.5 rounded-lg border font-medium ${statusStyle.color}`}>
                 {statusStyle.label}
               </span>
             </div>

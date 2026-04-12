@@ -58,7 +58,7 @@ function InspectionCard({ inspection }: { inspection: Inspection }) {
           <div>
             <div className="flex items-center gap-2 flex-wrap">
               <p className="text-sm font-medium text-[var(--text-heading)]">{TYPE_LABELS[inspection.type]} Inspection</p>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${cfg.bg} ${cfg.color} border ${cfg.border}`}>{cfg.label}</span>
+              <span className={`text-[10px] px-2 py-0.5 rounded-lg font-medium ${cfg.bg} ${cfg.color} border ${cfg.border}`}>{cfg.label}</span>
             </div>
             <p className="text-xs text-[var(--text-disabled)] mt-0.5 flex items-center gap-1">
               <Calendar className="w-3 h-3" />
@@ -217,7 +217,7 @@ export default function InspectionsPage() {
                 <p className="text-xs text-[var(--text-muted)]">{TYPE_LABELS[i.type]} · {new Date(i.scheduledDate).toLocaleDateString()}</p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--steel)]/10 text-[var(--steel)] border border-[rgba(90,122,154,0.20)]">Lot #{i.lot}</span>
+                <span className="text-xs px-2 py-0.5 rounded-lg bg-[var(--steel)]/10 text-[var(--steel)] border border-[rgba(90,122,154,0.20)]">Lot #{i.lot}</span>
               </div>
             </div>
           ))}
@@ -242,7 +242,7 @@ export default function InspectionsPage() {
                   <p className="text-xs text-[var(--text-muted)]">{TYPE_LABELS[i.type]} · {new Date(i.scheduledDate).toLocaleDateString()}</p>
                   {i.notes && <p className="text-xs text-[var(--text-disabled)] mt-1 truncate max-w-xs">{i.notes}</p>}
                 </div>
-                <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cfg.bg} ${cfg.color} border ${cfg.border}`}>
+                <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium ${cfg.bg} ${cfg.color} border ${cfg.border}`}>
                   <Icon className="w-3 h-3" />
                   {cfg.label}
                 </div>

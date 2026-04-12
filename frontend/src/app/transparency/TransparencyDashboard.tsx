@@ -212,7 +212,7 @@ export function TransparencyDashboard() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-20 md:py-28 text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-[13px] font-medium"
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg mb-6 text-[13px] font-medium"
                style={{ background: 'rgba(201,169,110,0.10)', border: '1px solid rgba(201,169,110,0.2)', color: 'rgba(201,169,110,1)' }}>
             <div className="w-2 h-2 rounded-full bg-[#2A5D4F] animate-pulse" />
             Live on Base Sepolia

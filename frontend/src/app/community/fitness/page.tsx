@@ -151,7 +151,7 @@ export default function FitnessPage() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-3xl">{CURRENT_CHALLENGE.emoji}</span>
-                <span className="text-xs font-medium bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.25)] px-2 py-0.5 rounded-full">ACTIVE</span>
+                <span className="text-xs font-medium bg-[rgba(42,93,79,0.15)] text-[#2A5D4F] border border-[rgba(42,93,79,0.25)] px-2 py-0.5 rounded-lg">ACTIVE</span>
               </div>
               <h2 className="text-xl font-medium text-[var(--parchment)]">{CURRENT_CHALLENGE.title}</h2>
               <p className="text-sm text-[var(--text-muted)] mt-1">{CURRENT_CHALLENGE.description}</p>

@@ -119,7 +119,7 @@ export default function SkillsExchangePage() {
             </div>
           </div>
           <div className="flex items-center gap-1">
-            <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${listing.type === 'offer' ? 'bg-[rgba(58,125,111,0.10)] text-[#2A5D4F]' : 'bg-[var(--steel)]/10 text-[var(--steel)]'}`}>
+            <span className={`text-[10px] px-2 py-0.5 rounded-lg font-medium ${listing.type === 'offer' ? 'bg-[rgba(58,125,111,0.10)] text-[#2A5D4F]' : 'bg-[var(--steel)]/10 text-[var(--steel)]'}`}>
               {listing.type === 'offer' ? 'CAN HELP' : 'NEEDS HELP'}
             </span>
             {isMine && (

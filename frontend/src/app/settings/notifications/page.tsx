@@ -175,7 +175,7 @@ export default function NotificationPrefsPage() {
                       {pref.label}
                     </p>
                     {pref.urgent && (
-                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-[rgba(107,58,58,0.20)] font-medium">
+                      <span className="text-[9px] px-1.5 py-0.5 rounded-lg bg-[rgba(107,58,58,0.12)] text-[#8B5A5A] border border-[rgba(107,58,58,0.20)] font-medium">
                         CRITICAL
                       </span>
                     )}

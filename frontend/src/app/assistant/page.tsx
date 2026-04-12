@@ -143,7 +143,7 @@ export default function AssistantPage() {
                 key={a.label}
                 onClick={() => sendMessage(a.query)}
                 disabled={isTyping}
-                className="text-xs font-medium px-3 py-1.5 rounded-full bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] hover:bg-[rgba(176,155,113,0.20)] hover:text-[#D4C4A0] transition-colors disabled:opacity-40 border border-[rgba(176,155,113,0.20)]"
+                className="text-xs font-medium px-3 py-1.5 rounded-lg bg-[rgba(176,155,113,0.15)] text-[#D4C4A0] hover:bg-[rgba(176,155,113,0.20)] hover:text-[#D4C4A0] transition-colors disabled:opacity-40 border border-[rgba(176,155,113,0.20)]"
               >
                 {a.label}
               </button>

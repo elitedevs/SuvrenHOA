@@ -892,7 +892,7 @@ function ChecklistRow({ item, checked, onToggle }: { item: ChecklistItem; checke
               {item.label}
             </span>
             {item.required && !checked && (
-              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]">Required</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded-lg bg-[rgba(176,155,113,0.10)] text-[#B09B71] border border-[rgba(176,155,113,0.20)]">Required</span>
             )}
           </div>
           {expanded && (

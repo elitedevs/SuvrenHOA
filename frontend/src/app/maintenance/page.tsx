@@ -116,7 +116,7 @@ function RequestCard({ request }: { request: any }) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap mb-1">
               <span className="text-[10px] font-mono text-[var(--text-disabled)]">{request.id}</span>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${style.bg} ${style.color} ${style.border}`}>
+              <span className={`text-[10px] px-2 py-0.5 rounded-lg border font-medium ${style.bg} ${style.color} ${style.border}`}>
                 {style.label}
               </span>
               <span className={`text-[10px] font-medium ${PRIORITY_STYLES[request.priority as keyof typeof PRIORITY_STYLES] || 'text-[var(--text-muted)]'}`}>
