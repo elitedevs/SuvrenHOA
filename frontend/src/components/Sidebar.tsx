@@ -403,25 +403,22 @@ export function Sidebar() {
     });
   };
 
-  // Sync sidebar width to CSS custom property so layout.tsx can react
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      '--sidebar-width',
-      collapsed ? '64px' : '240px'
-    );
-  }, [collapsed]);
-
   // Hide sidebar on public routes (login, signup, landing, invite accept, marketing pages)
   const publicRoutes = ['/', '/login', '/signup', '/invite/accept'];
   const publicPrefixes = ['/about', '/pricing', '/security', '/contact', '/blog', '/docs', '/demo'];
   const isPublicRoute = publicRoutes.includes(pathname) || publicPrefixes.some(p => pathname.startsWith(p));
   const shouldHide = (!isConnected && !user) || isPublicRoute;
 
+  // Sync sidebar width to CSS custom property so AppShell can offset content.
+  // Single effect handles both hide→show and collapse transitions — the old
+  // split into two effects caused a race: shouldHide set 0px, but the collapsed
+  // effect never re-fired to restore 240px because collapsed hadn't changed.
   useEffect(() => {
-    if (shouldHide) {
-      document.documentElement.style.setProperty('--sidebar-width', '0px');
-    }
-  }, [shouldHide]);
+    document.documentElement.style.setProperty(
+      '--sidebar-width',
+      shouldHide ? '0px' : collapsed ? '64px' : '240px'
+    );
+  }, [shouldHide, collapsed]);
 
   if (shouldHide) return null;
 
