@@ -20,8 +20,12 @@ export function withAuth(handler: AuthenticatedHandler) {
 
 /**
  * H-02/H-03: Like withAuth but additionally verifies the wallet address belongs to
- * a board_member. Use for any endpoint that performs board-only write actions
+ * an active board member. Use for any endpoint that performs board-only write actions
  * (creating announcements, reviewing architectural requests, etc.).
+ *
+ * CR-02: queries `hoa_board_members` (the actual source of truth for board membership)
+ * instead of `profiles.wallet_address` which does not exist in the live schema.
+ * The old query always returned null → every board route silently 403'd for everyone.
  */
 export function withBoardAuth(handler: AuthenticatedHandler) {
   return async (request: Request) => {
@@ -32,13 +36,14 @@ export function withBoardAuth(handler: AuthenticatedHandler) {
 
     const normalizedAddress = normalizeAddress(address);
 
-    const { data: profile } = await supabaseAdmin
-      .from('profiles')
-      .select('role')
+    const { data: boardMember } = await supabaseAdmin
+      .from('hoa_board_members')
+      .select('id')
       .eq('wallet_address', normalizedAddress)
+      .eq('active', true)
       .single();
 
-    if (!profile || profile.role !== 'board_member') {
+    if (!boardMember) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 

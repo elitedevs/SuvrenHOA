@@ -58,7 +58,16 @@ export async function verifySiweMessage(message: string, signature: string, nonc
   // FE-01: bind verification to the app's domain, URI, and chain to prevent
   // cross-site SIWE replay attacks where a signature for evil.com is replayed here.
   if (parsed.nonce !== nonce) throw new Error('Nonce mismatch');
-  if (process.env.NEXT_PUBLIC_APP_DOMAIN && parsed.domain !== process.env.NEXT_PUBLIC_APP_DOMAIN) {
+
+  // CR-01: fail-closed — reject if NEXT_PUBLIC_APP_DOMAIN is unset rather than
+  // silently skipping the domain check (previously allowed any domain in that case).
+  const expectedDomain = process.env.NEXT_PUBLIC_APP_DOMAIN;
+  if (!expectedDomain) {
+    throw new Error(
+      'NEXT_PUBLIC_APP_DOMAIN env var must be set for SIWE domain verification'
+    );
+  }
+  if (parsed.domain !== expectedDomain) {
     throw new Error('Domain mismatch');
   }
   const isValid = await verifyMessage({
