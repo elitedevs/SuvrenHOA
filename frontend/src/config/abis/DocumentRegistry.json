@@ -19,6 +19,19 @@
   },
   {
     "type": "function",
+    "name": "IPFS_CID_PREFIX",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "RECORDER_ROLE",
     "inputs": [],
     "outputs": [
@@ -26,6 +39,19 @@
         "name": "",
         "type": "bytes32",
         "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "SUPERSEDES_NONE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint48",
+        "internalType": "uint48"
       }
     ],
     "stateMutability": "view"
@@ -166,13 +192,28 @@
         "name": "docType",
         "type": "uint8",
         "internalType": "enum DocumentRegistry.DocType"
+      },
+      {
+        "name": "offset",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "limit",
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
     "outputs": [
       {
-        "name": "",
+        "name": "ids",
         "type": "uint256[]",
         "internalType": "uint256[]"
+      },
+      {
+        "name": "total",
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
     "stateMutability": "view"
@@ -211,6 +252,30 @@
         "name": "",
         "type": "bytes32",
         "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getSupersedes",
+    "inputs": [
+      {
+        "name": "docId",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "hasSupersedesFlag",
+        "type": "bool",
+        "internalType": "bool"
+      },
+      {
+        "name": "supersededDocId",
+        "type": "uint256",
+        "internalType": "uint256"
       }
     ],
     "stateMutability": "view"
@@ -657,6 +722,17 @@
         "name": "docId",
         "type": "uint256",
         "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "InvalidIpfsCid",
+    "inputs": [
+      {
+        "name": "ipfsCid",
+        "type": "string",
+        "internalType": "string"
       }
     ]
   },
